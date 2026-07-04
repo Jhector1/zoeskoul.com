@@ -1,0 +1,242 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "viewing-file-contents": {
+          "label": "Viewing File Contents",
+          "summary": "Read text files with cat, preview long files with head and tail, and count lines with wc -l.",
+          "cards": {
+            "sketch0": {
+              "title": "Use `cat` for a small file"
+            },
+            "sketch1": {
+              "title": "Use `head` and `tail` for previews"
+            },
+            "sketch2": {
+              "title": "Use `wc -l` to count lines"
+            },
+            "quiz": {
+              "title": "Practice check"
+            }
+          },
+          "practice": {
+            "sc-cat-use": {
+              "title": "Best command for a short note",
+              "prompt": "Which command prints a whole short file?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "cat",
+                "b": "mkdir",
+                "c": "cd",
+                "d": "rm"
+              }
+            },
+            "mc-preview-long-file": {
+              "title": "Preview a long file",
+              "prompt": "Which commands help preview a long file without reading every line?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "head",
+                "b": "tail",
+                "c": "touch",
+                "d": "pwd"
+              }
+            },
+            "sc-wc-lines": {
+              "title": "Count lines",
+              "prompt": "Which command counts lines in `names.txt`?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "wc -l names.txt",
+                "b": "cat -l names.txt",
+                "c": "mkdir names.txt",
+                "d": "cd names.txt"
+              }
+            },
+            "dr-inspect-file": {
+              "title": "Inspect a file carefully",
+              "prompt": "Put the file-inspection flow in order.",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "tokens": {
+                "t1": "Use `ls` to confirm the file name",
+                "t2": "Use `cat`, `head`, or `tail` to inspect content",
+                "t3": "Use `wc -l` if line count matters"
+              }
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "exercises": {
+              "viewing-file-contents-try-it-1": {
+                "title": "Read a visitor welcome note",
+                "prompt": "You are at the visitor desk. Use `cat welcome-note.txt` to read the short note.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `cat welcome-note.txt` to read the note."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "visitor_desk_welcome_note_txt": {
+                    "content": "Welcome table opens at 9:00.\n"
+                  }
+                }
+              },
+              "viewing-file-contents-try-it-2": {
+                "title": "Preview a delivery log",
+                "prompt": "The dispatch folder has a longer `delivery-log.txt`. Use `head delivery-log.txt`, then `tail delivery-log.txt`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `head delivery-log.txt` to see the beginning."
+                    },
+                    "1": {
+                      "message": "Use `tail delivery-log.txt` to see the end."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "dispatch_delivery_log_txt": {
+                    "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Signs arrived\n09:10 Water arrived\n09:30 Radios arrived\n10:00 Lunch arrived\n"
+                  }
+                }
+              },
+              "viewing-file-contents-try-it-3": {
+                "title": "Count meal requests",
+                "prompt": "The kitchen keeps one meal request per line. Use `wc -l meal-requests.txt` to count them.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `wc -l meal-requests.txt` to count the lines."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "kitchen_meal_requests_txt": {
+                    "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n"
+                  }
+                }
+              }
+            },
+            "try_viewing_file_contents_sketch0": {
+              "title": "Read a visitor welcome note",
+              "prompt": "Use `cat` on a new short file."
+            },
+            "try_viewing_file_contents_sketch1": {
+              "title": "Preview a delivery log",
+              "prompt": "Preview a different long file."
+            },
+            "try_viewing_file_contents_sketch2": {
+              "title": "Count meal requests",
+              "prompt": "Count lines in a different list."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "viewing-file-contents": {
+          "cat-whole-file": {
+            "title": "Use `cat` for a small file",
+            "bodyMarkdown": "`cat` prints the whole file. It is best for short notes.\n\n```bash\ncat agenda.txt\n```\n\nIf the file is long, the output may be too much to read comfortably."
+          },
+          "head-tail-preview": {
+            "title": "Use `head` and `tail` for previews",
+            "bodyMarkdown": "`head` shows the beginning of a file. `tail` shows the end.\n\n```bash\nhead event-log.txt\ntail event-log.txt\n```\n\nThese are helpful when a file has many lines and you only need a quick check."
+          },
+          "wc-line-count": {
+            "title": "Use `wc -l` to count lines",
+            "bodyMarkdown": "`wc -l` counts lines in a file.\n\n```bash\nwc -l guest-list.txt\n```\n\nFor checklists, logs, and lists of names, line count is a fast way to confirm that the file is roughly the size you expect."
+          }
+        }
+      }
+    }
+  }
+}

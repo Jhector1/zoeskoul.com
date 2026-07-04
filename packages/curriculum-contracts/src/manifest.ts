@@ -172,7 +172,7 @@ export type ManifestSketch =
 export type ManifestBaseExercise = {
   id: string;
   kind: ExerciseKind;
-  purpose?: "quiz" | "project";
+  purpose?: "quiz" | "project" | "try_it" | "practice" | "capstone";
   weight?: number;
   messageBase: string;
   runtime?: ManifestRuntimeDefaults | null;

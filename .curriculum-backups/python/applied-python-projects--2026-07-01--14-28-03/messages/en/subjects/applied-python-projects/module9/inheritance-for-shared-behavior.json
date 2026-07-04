@@ -1,0 +1,222 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "inheritance-for-shared-behavior": {
+          "label": "Inheritance for Shared Behavior",
+          "summary": "Create subclasses that reuse a base class instead of copying shared code.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Inheritance"
+            },
+            "sketch1": {
+              "title": "Using the `super()` Function"
+            },
+            "sketch2": {
+              "title": "Polymorphism in Action"
+            },
+            "sketch3": {
+              "title": "Try it yourself"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_inheritance_for_shared_behavior_sketch0": {
+              "title": "Create a Base and Subclass",
+              "prompt": "Create a base class `Vehicle` with an attribute `wheels` and a method `describe()`. Then, create a subclass `Car` that inherits from `Vehicle` and overrides the `describe()` method to include the number of doors.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "class Vehicle:\n    def __init__(self, wheels):\n        self.wheels = wheels\n\n    def describe(self):\n        return f\"This vehicle has {self.wheels} wheels.\"\n\n# Define the Car class here"
+            },
+            "try_inheritance_for_shared_behavior_sketch1": {
+              "title": "Override a Method",
+              "prompt": "Create a base class `Animal` with a method `speak()`. Then, create a subclass `Dog` that overrides the `speak()` method to return 'Woof!'.",
+              "hint": "Read the task \"Override a Method\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Override a Method\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\n# Define the Dog class here"
+            },
+            "try_inheritance_for_shared_behavior_sketch2": {
+              "title": "Polymorphism with Mixed Objects",
+              "prompt": "Create a base class `Shape` with a method `area()`. Then, create subclasses `Circle` and `Square` that override the `area()` method. Demonstrate polymorphism by calculating the area of a list of mixed `Shape` objects.",
+              "hint": "Read the task \"Polymorphism with Mixed Objects\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Polymorphism with Mixed Objects\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "import math\n\nclass Shape:\n    def area(self):\n        pass\n\n# Define Circle and Square classes here\n\nshapes = [Circle(5), Square(4)]\n# Calculate and print areas of shapes"
+            },
+            "try_inheritance_for_shared_behavior_sketch3": {
+              "title": "Using `super()` in Subclasses",
+              "prompt": "Create a base class `Person` with attributes `name` and `age`. Then, create a subclass `Student` that inherits from `Person` and adds an attribute `student_id`. Use `super()` to initialize the `name` and `age` attributes in `Student`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\n# Define the Student class here"
+            }
+          },
+          "practice": {
+            "ci-inheritance-for-shared-behavior-4": {
+              "title": "Abstract Base Class Example",
+              "prompt": "Create an abstract base class `Appliance` with an abstract method `operate()`. Then, create subclasses `WashingMachine` and `Refrigerator` that implement the `operate()` method.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "from abc import ABC, abstractmethod\n\nclass Appliance(ABC):\n    @abstractmethod\n    def operate(self):\n        pass\n\n# Define WashingMachine and Refrigerator classes here"
+            },
+            "ci-inheritance-for-shared-behavior-5": {
+              "title": "Service with Polymorphic Behavior",
+              "prompt": "Create a base class `Employee` with a method `work()`. Then, create subclasses `Manager` and `Developer` that override the `work()` method. Implement a function `assign_tasks()` that takes a list of `Employee` objects and calls `work()` on each.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "class Employee:\n    def work(self):\n        pass\n\n# Define Manager and Developer classes here\n\n# Implement assign_tasks function"
+            },
+            "fb-inheritance-for-shared-behavior-0": {
+              "title": "Identify the Correct Keyword",
+              "prompt": "In Python, the keyword used to call a method from a parent class is [blank1].",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "In Python, the keyword used to call a method from a parent class is [blank1].",
+              "choices": [
+                "super",
+                "parent",
+                "base",
+                "inherit"
+              ]
+            },
+            "fb-inheritance-for-shared-behavior-1": {
+              "title": "Understanding Method Overriding",
+              "prompt": "When a subclass provides a specific implementation of a method that is already defined in its superclass, it is called [blank1].",
+              "hint": "This term describes the process of redefining a method in a subclass.",
+              "help": {
+                "concept": "Method the missing term allows a subclass to provide a specific implementation of a method that is already defined in its superclass.",
+                "hint_1": "This process allows a subclass to change the behavior of a method.",
+                "hint_2": "It is a key feature of polymorphism."
+              },
+              "template": "When a subclass provides a specific implementation of a method that is already defined in its superclass, it is called [blank1].",
+              "choices": [
+                "overriding",
+                "overloading",
+                "inheriting",
+                "extending"
+              ]
+            },
+            "sc-inheritance-for-shared-behavior-0": {
+              "title": "Purpose of Inheritance",
+              "prompt": "What is the primary purpose of inheritance in object-oriented programming?",
+              "hint": "Think about how inheritance helps in code reuse and organization.",
+              "help": {
+                "concept": "Inheritance allows a class to inherit attributes and methods from another class, promoting code reuse and organization.",
+                "hint_1": "Inheritance helps avoid code duplication by reusing existing code.",
+                "hint_2": "It creates a hierarchical relationship between classes."
+              },
+              "options": {
+                "a": "To allow a class to inherit attributes and methods from another class",
+                "b": "To create multiple instances of a class",
+                "c": "To define a class without any methods",
+                "d": "To execute code in parallel"
+              }
+            },
+            "sc-inheritance-for-shared-behavior-1": {
+              "title": "Role of `super()`",
+              "prompt": "What is the role of the `super()` function in Python?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "To call methods from a parent class",
+                "b": "To create a new class",
+                "c": "To delete an object",
+                "d": "To override a method"
+              }
+            },
+            "mc-inheritance-for-shared-behavior-0": {
+              "title": "Features of Polymorphism",
+              "prompt": "Which of the following are features of polymorphism in object-oriented programming? Select all that apply.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Allows methods to be used interchangeably on different objects",
+                "b": "Enables a single function to work with different types of objects",
+                "c": "Requires all classes to have the same attributes",
+                "d": "Forces all subclasses to override methods"
+              }
+            },
+            "dr-inheritance-for-shared-behavior-0": {
+              "title": "Order of Class Definition",
+              "prompt": "Arrange the steps to define a subclass in Python.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Define the base class with attributes and methods",
+                "t2": "Use the `class` keyword to define the subclass",
+                "t3": "Use inheritance to extend the base class",
+                "t4": "Override methods if necessary"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "inheritance-for-shared-behavior": {
+          "sketch1": {
+            "title": "Understanding Inheritance",
+            "bodyMarkdown": "Inheritance allows a class to inherit attributes and methods from another class. This helps in reusing code and creating a hierarchical class structure. For example, consider a base class `Animal` with a method `speak()`. A subclass `Dog` can inherit from `Animal` and override the `speak()` method to provide a specific implementation."
+          },
+          "sketch2": {
+            "title": "Using the `super()` Function",
+            "bodyMarkdown": "The `super()` function allows you to call methods from a parent class in a child class. This is useful when you want to extend or modify the behavior of a parent class method. For instance, if `Dog` inherits from `Animal`, you can use `super().speak()` within `Dog` to call the `Animal`'s `speak()` method."
+          },
+          "sketch3": {
+            "title": "Polymorphism in Action",
+            "bodyMarkdown": "Polymorphism allows methods to do different things based on the object it is acting upon, even if they share the same name. For example, if both `Dog` and `Cat` inherit from `Animal` and override the `speak()` method, a function that calls `speak()` on an `Animal` object will execute the appropriate method based on the actual object type."
+          },
+          "try-it-yourself": {
+            "title": "Try it yourself",
+            "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+          }
+        }
+      }
+    }
+  }
+}

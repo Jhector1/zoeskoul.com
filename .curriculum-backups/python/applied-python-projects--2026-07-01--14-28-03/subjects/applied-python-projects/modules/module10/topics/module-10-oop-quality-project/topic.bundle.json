@@ -1,0 +1,2030 @@
+{
+  "topicId": "module-10-oop-quality-project",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-10-testing-debugging-oop-projects",
+  "sectionSlug": "applied-python-projects-python-10-module-project",
+  "prefix": "py10",
+  "minutes": 36,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.label",
+    "summaryKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.cards.sketch0.title",
+      "sketchId": "project-story",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.cards.quiz.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 1,
+        "min": 1,
+        "max": 7,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.cards.project.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "quality_project_step_1_baseline",
+            "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.projectSteps.quality_project_step_1_baseline.title",
+            "exerciseKey": "quality-project-step-1-baseline",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "quality_project_step_2_model_tests",
+            "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.projectSteps.quality_project_step_2_model_tests.title",
+            "exerciseKey": "quality-project-step-2-model-tests",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "quality_project_step_3_service_tests",
+            "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.projectSteps.quality_project_step_3_service_tests.title",
+            "exerciseKey": "quality-project-step-3-service-tests",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "quality_project_step_4_polymorphic_tests",
+            "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.projectSteps.quality_project_step_4_polymorphic_tests.title",
+            "exerciseKey": "quality-project-step-4-polymorphic-tests",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "quality_project_step_5_storage_tests",
+            "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.projectSteps.quality_project_step_5_storage_tests.title",
+            "exerciseKey": "quality-project-step-5-storage-tests",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "quality_project_step_6_final_regression",
+            "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.projectSteps.quality_project_step_6_final_regression.title",
+            "exerciseKey": "quality-project-step-6-final-regression",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "project-story",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.project-story.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.project-story.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "quality-project-step-1-baseline",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.quiz.quality-project-step-1-baseline",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: Python by Ana\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIHNlcnZpY2VzLmNhdGFsb2cgaW1wb3J0IGNhdGFsb2dfbGluZXMKCml0ZW1zID0gW0Jvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMildCmZvciBsaW5lIGluIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcHJpbnQobGluZSkK',\n    'models/catalog_item.py': 'Y2xhc3MgQ2F0YWxvZ0l0ZW06CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQoKICAgIGRlZiBmZWUoc2VsZik6CiAgICAgICAgcmFpc2UgTm90SW1wbGVtZW50ZWRFcnJvcigiU3ViY2xhc3NlcyBtdXN0IGltcGxlbWVudCBmZWUiKQo=',\n    'models/book_item.py': 'ZnJvbSBtb2RlbHMuY2F0YWxvZ19pdGVtIGltcG9ydCBDYXRhbG9nSXRlbQoKY2xhc3MgQm9va0l0ZW0oQ2F0YWxvZ0l0ZW0pOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBhdXRob3IsIGxhdGVfZGF5cz0wKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlKQogICAgICAgIHNlbGYuYXV0aG9yID0gYXV0aG9yCiAgICAgICAgc2VsZi5sYXRlX2RheXMgPSBsYXRlX2RheXMKCiAgICBkZWYgbGFiZWwoc2VsZik6CiAgICAgICAgcmV0dXJuIGYiQm9vazoge3NlbGYudGl0bGV9IGJ5IHtzZWxmLmF1dGhvcn0iCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAyCg==',\n    'services/catalog.py': 'ZGVmIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcmV0dXJuIFtpdGVtLmxhYmVsKCkgZm9yIGl0ZW0gaW4gaXRlbXNdCg==',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "services"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/book_item.py",
+            "models/catalog_item.py",
+            "services/__init__.py",
+            "services/catalog.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "services"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/book_item.py",
+          "models/catalog_item.py",
+          "services/__init__.py",
+          "services/catalog.py"
+        ]
+      }
+    },
+    {
+      "id": "quality-project-step-2-model-tests",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.quiz.quality-project-step-2-model-tests",
+      "language": "python",
+      "entryFilePath": "tests/check_book_item.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+          "language": "python"
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_book_item.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "book tests passed\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIHNlcnZpY2VzLmNhdGFsb2cgaW1wb3J0IGNhdGFsb2dfbGluZXMKCml0ZW1zID0gW0Jvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMildCmZvciBsaW5lIGluIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcHJpbnQobGluZSkK',\n    'models/catalog_item.py': 'Y2xhc3MgQ2F0YWxvZ0l0ZW06CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQoKICAgIGRlZiBmZWUoc2VsZik6CiAgICAgICAgcmFpc2UgTm90SW1wbGVtZW50ZWRFcnJvcigiU3ViY2xhc3NlcyBtdXN0IGltcGxlbWVudCBmZWUiKQo=',\n    'models/book_item.py': 'ZnJvbSBtb2RlbHMuY2F0YWxvZ19pdGVtIGltcG9ydCBDYXRhbG9nSXRlbQoKY2xhc3MgQm9va0l0ZW0oQ2F0YWxvZ0l0ZW0pOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBhdXRob3IsIGxhdGVfZGF5cz0wKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlKQogICAgICAgIHNlbGYuYXV0aG9yID0gYXV0aG9yCiAgICAgICAgc2VsZi5sYXRlX2RheXMgPSBsYXRlX2RheXMKCiAgICBkZWYgbGFiZWwoc2VsZik6CiAgICAgICAgcmV0dXJuIGYiQm9vazoge3NlbGYudGl0bGV9IGJ5IHtzZWxmLmF1dGhvcn0iCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAyCg==',\n    'services/catalog.py': 'ZGVmIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcmV0dXJuIFtpdGVtLmxhYmVsKCkgZm9yIGl0ZW0gaW4gaXRlbXNdCg==',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n    'tests/check_book_item.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQoKYm9vayA9IEJvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMikKYXNzZXJ0IGJvb2subGFiZWwoKSA9PSAiQm9vazogUHl0aG9uIGJ5IEFuYSIKYXNzZXJ0IGJvb2suZmVlKCkgPT0gNApwcmludCgiYm9vayB0ZXN0cyBwYXNzZWQiKQo=',\n    'tests/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('tests/check_book_item.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "tests/check_book_item.py",
+        "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "services",
+            "tests"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/book_item.py",
+            "models/catalog_item.py",
+            "services/__init__.py",
+            "services/catalog.py",
+            "tests/__init__.py",
+            "tests/check_book_item.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "services",
+          "tests"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/book_item.py",
+          "models/catalog_item.py",
+          "services/__init__.py",
+          "services/catalog.py",
+          "tests/__init__.py",
+          "tests/check_book_item.py"
+        ]
+      }
+    },
+    {
+      "id": "quality-project-step-3-service-tests",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.quiz.quality-project-step-3-service-tests",
+      "language": "python",
+      "entryFilePath": "tests/check_catalog_service.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+          "language": "python"
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_book_item.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+          "language": "python"
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_book_item.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_catalog_service.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), BookItem(\"SQL\", \"Ben\", 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Book: SQL by Ben\"]\nassert total_fees(items) == 6\nprint(\"catalog service tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "catalog service tests passed\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIHNlcnZpY2VzLmNhdGFsb2cgaW1wb3J0IGNhdGFsb2dfbGluZXMsIHRvdGFsX2ZlZXMKCml0ZW1zID0gW0Jvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMildCmZvciBsaW5lIGluIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcHJpbnQobGluZSkKcHJpbnQodG90YWxfZmVlcyhpdGVtcykpCg==',\n    'models/catalog_item.py': 'Y2xhc3MgQ2F0YWxvZ0l0ZW06CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQoKICAgIGRlZiBmZWUoc2VsZik6CiAgICAgICAgcmFpc2UgTm90SW1wbGVtZW50ZWRFcnJvcigiU3ViY2xhc3NlcyBtdXN0IGltcGxlbWVudCBmZWUiKQo=',\n    'models/book_item.py': 'ZnJvbSBtb2RlbHMuY2F0YWxvZ19pdGVtIGltcG9ydCBDYXRhbG9nSXRlbQoKY2xhc3MgQm9va0l0ZW0oQ2F0YWxvZ0l0ZW0pOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBhdXRob3IsIGxhdGVfZGF5cz0wKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlKQogICAgICAgIHNlbGYuYXV0aG9yID0gYXV0aG9yCiAgICAgICAgc2VsZi5sYXRlX2RheXMgPSBsYXRlX2RheXMKCiAgICBkZWYgbGFiZWwoc2VsZik6CiAgICAgICAgcmV0dXJuIGYiQm9vazoge3NlbGYudGl0bGV9IGJ5IHtzZWxmLmF1dGhvcn0iCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAyCg==',\n    'services/catalog.py': 'ZGVmIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcmV0dXJuIFtpdGVtLmxhYmVsKCkgZm9yIGl0ZW0gaW4gaXRlbXNdCgpkZWYgdG90YWxfZmVlcyhpdGVtcyk6CiAgICByZXR1cm4gc3VtKGl0ZW0uZmVlKCkgZm9yIGl0ZW0gaW4gaXRlbXMpCg==',\n    'tests/check_book_item.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQoKYm9vayA9IEJvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMikKYXNzZXJ0IGJvb2subGFiZWwoKSA9PSAiQm9vazogUHl0aG9uIGJ5IEFuYSIKYXNzZXJ0IGJvb2suZmVlKCkgPT0gNApwcmludCgiYm9vayB0ZXN0cyBwYXNzZWQiKQo=',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n    'tests/__init__.py': '',\n    'tests/check_catalog_service.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIHNlcnZpY2VzLmNhdGFsb2cgaW1wb3J0IGNhdGFsb2dfbGluZXMsIHRvdGFsX2ZlZXMKCml0ZW1zID0gW0Jvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMiksIEJvb2tJdGVtKCJTUUwiLCAiQmVuIiwgMSldCmFzc2VydCBjYXRhbG9nX2xpbmVzKGl0ZW1zKSA9PSBbIkJvb2s6IFB5dGhvbiBieSBBbmEiLCAiQm9vazogU1FMIGJ5IEJlbiJdCmFzc2VydCB0b3RhbF9mZWVzKGl0ZW1zKSA9PSA2CnByaW50KCJjYXRhbG9nIHNlcnZpY2UgdGVzdHMgcGFzc2VkIikK',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('tests/check_catalog_service.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_catalog_service.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), BookItem(\"SQL\", \"Ben\", 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Book: SQL by Ben\"]\nassert total_fees(items) == 6\nprint(\"catalog service tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "tests/check_catalog_service.py",
+        "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_catalog_service.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), BookItem(\"SQL\", \"Ben\", 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Book: SQL by Ben\"]\nassert total_fees(items) == 6\nprint(\"catalog service tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "services",
+            "tests"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/book_item.py",
+            "models/catalog_item.py",
+            "services/__init__.py",
+            "services/catalog.py",
+            "tests/__init__.py",
+            "tests/check_book_item.py",
+            "tests/check_catalog_service.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "services",
+          "tests"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/book_item.py",
+          "models/catalog_item.py",
+          "services/__init__.py",
+          "services/catalog.py",
+          "tests/__init__.py",
+          "tests/check_book_item.py",
+          "tests/check_catalog_service.py"
+        ]
+      }
+    },
+    {
+      "id": "quality-project-step-4-polymorphic-tests",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.quiz.quality-project-step-4-polymorphic-tests",
+      "language": "python",
+      "entryFilePath": "tests/check_catalog_service.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+          "language": "python"
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_book_item.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_catalog_service.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), BookItem(\"SQL\", \"Ben\", 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Book: SQL by Ben\"]\nassert total_fees(items) == 6\nprint(\"catalog service tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+          "language": "python"
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_book_item.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_catalog_service.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), VideoItem(\"OOP\", 9, 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Video: OOP (9 min)\"]\nassert total_fees(items) == 7\nprint(\"mixed service tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "models/video_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "mixed service tests passed\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIHNlcnZpY2VzLmNhdGFsb2cgaW1wb3J0IGNhdGFsb2dfbGluZXMsIHRvdGFsX2ZlZXMKCml0ZW1zID0gW0Jvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMildCmZvciBsaW5lIGluIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcHJpbnQobGluZSkKcHJpbnQodG90YWxfZmVlcyhpdGVtcykpCg==',\n    'models/catalog_item.py': 'Y2xhc3MgQ2F0YWxvZ0l0ZW06CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQoKICAgIGRlZiBmZWUoc2VsZik6CiAgICAgICAgcmFpc2UgTm90SW1wbGVtZW50ZWRFcnJvcigiU3ViY2xhc3NlcyBtdXN0IGltcGxlbWVudCBmZWUiKQo=',\n    'models/book_item.py': 'ZnJvbSBtb2RlbHMuY2F0YWxvZ19pdGVtIGltcG9ydCBDYXRhbG9nSXRlbQoKY2xhc3MgQm9va0l0ZW0oQ2F0YWxvZ0l0ZW0pOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBhdXRob3IsIGxhdGVfZGF5cz0wKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlKQogICAgICAgIHNlbGYuYXV0aG9yID0gYXV0aG9yCiAgICAgICAgc2VsZi5sYXRlX2RheXMgPSBsYXRlX2RheXMKCiAgICBkZWYgbGFiZWwoc2VsZik6CiAgICAgICAgcmV0dXJuIGYiQm9vazoge3NlbGYudGl0bGV9IGJ5IHtzZWxmLmF1dGhvcn0iCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAyCg==',\n    'services/catalog.py': 'ZGVmIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcmV0dXJuIFtpdGVtLmxhYmVsKCkgZm9yIGl0ZW0gaW4gaXRlbXNdCgpkZWYgdG90YWxfZmVlcyhpdGVtcyk6CiAgICByZXR1cm4gc3VtKGl0ZW0uZmVlKCkgZm9yIGl0ZW0gaW4gaXRlbXMpCg==',\n    'tests/check_book_item.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQoKYm9vayA9IEJvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMikKYXNzZXJ0IGJvb2subGFiZWwoKSA9PSAiQm9vazogUHl0aG9uIGJ5IEFuYSIKYXNzZXJ0IGJvb2suZmVlKCkgPT0gNApwcmludCgiYm9vayB0ZXN0cyBwYXNzZWQiKQo=',\n    'tests/check_catalog_service.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIG1vZGVscy52aWRlb19pdGVtIGltcG9ydCBWaWRlb0l0ZW0KZnJvbSBzZXJ2aWNlcy5jYXRhbG9nIGltcG9ydCBjYXRhbG9nX2xpbmVzLCB0b3RhbF9mZWVzCgppdGVtcyA9IFtCb29rSXRlbSgiUHl0aG9uIiwgIkFuYSIsIDIpLCBWaWRlb0l0ZW0oIk9PUCIsIDksIDEpXQphc3NlcnQgY2F0YWxvZ19saW5lcyhpdGVtcykgPT0gWyJCb29rOiBQeXRob24gYnkgQW5hIiwgIlZpZGVvOiBPT1AgKDkgbWluKSJdCmFzc2VydCB0b3RhbF9mZWVzKGl0ZW1zKSA9PSA3CnByaW50KCJtaXhlZCBzZXJ2aWNlIHRlc3RzIHBhc3NlZCIpCg==',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n    'tests/__init__.py': '',\n    'models/video_item.py': 'ZnJvbSBtb2RlbHMuY2F0YWxvZ19pdGVtIGltcG9ydCBDYXRhbG9nSXRlbQoKY2xhc3MgVmlkZW9JdGVtKENhdGFsb2dJdGVtKToKICAgIGRlZiBfX2luaXRfXyhzZWxmLCB0aXRsZSwgbWludXRlcywgbGF0ZV9kYXlzPTApOgogICAgICAgIHN1cGVyKCkuX19pbml0X18odGl0bGUpCiAgICAgICAgc2VsZi5taW51dGVzID0gbWludXRlcwogICAgICAgIHNlbGYubGF0ZV9kYXlzID0gbGF0ZV9kYXlzCgogICAgZGVmIGxhYmVsKHNlbGYpOgogICAgICAgIHJldHVybiBmIlZpZGVvOiB7c2VsZi50aXRsZX0gKHtzZWxmLm1pbnV0ZXN9IG1pbikiCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAzCg==',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('tests/check_catalog_service.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_catalog_service.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), VideoItem(\"OOP\", 9, 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Video: OOP (9 min)\"]\nassert total_fees(items) == 7\nprint(\"mixed service tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "models/video_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), BookItem(\"SQL\", \"Ben\", 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Book: SQL by Ben\"]\nassert total_fees(items) == 6\nprint(\"catalog service tests passed\")\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "tests/check_catalog_service.py",
+        "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), BookItem(\"SQL\", \"Ben\", 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Book: SQL by Ben\"]\nassert total_fees(items) == 6\nprint(\"catalog service tests passed\")\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_catalog_service.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), BookItem(\"SQL\", \"Ben\", 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Book: SQL by Ben\"]\nassert total_fees(items) == 6\nprint(\"catalog service tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_catalog_service.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), VideoItem(\"OOP\", 9, 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Video: OOP (9 min)\"]\nassert total_fees(items) == 7\nprint(\"mixed service tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "models/video_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "services",
+            "tests"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/book_item.py",
+            "models/catalog_item.py",
+            "models/video_item.py",
+            "services/__init__.py",
+            "services/catalog.py",
+            "tests/__init__.py",
+            "tests/check_book_item.py",
+            "tests/check_catalog_service.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "services",
+          "tests"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/book_item.py",
+          "models/catalog_item.py",
+          "models/video_item.py",
+          "services/__init__.py",
+          "services/catalog.py",
+          "tests/__init__.py",
+          "tests/check_book_item.py",
+          "tests/check_catalog_service.py"
+        ]
+      }
+    },
+    {
+      "id": "quality-project-step-5-storage-tests",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.quiz.quality-project-step-5-storage-tests",
+      "language": "python",
+      "entryFilePath": "tests/check_storage.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+          "language": "python"
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_book_item.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/video_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_catalog_service.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), VideoItem(\"OOP\", 9, 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Video: OOP (9 min)\"]\nassert total_fees(items) == 7\nprint(\"mixed service tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+          "language": "python"
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_book_item.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/video_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_catalog_service.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), VideoItem(\"OOP\", 9, 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Video: OOP (9 min)\"]\nassert total_fees(items) == 7\nprint(\"mixed service tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/storage.py",
+          "content": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\n\ndef parse_item(row):\n    kind, title, detail, late_days = row.strip().split(\"|\")\n    if kind == \"book\":\n        return BookItem(title, detail, int(late_days))\n    return VideoItem(title, int(detail), int(late_days))\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_storage.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import parse_item\n\nbook = parse_item(\"book|Python|Ana|2\")\nvideo = parse_item(\"video|OOP|9|1\")\nassert book.label() == \"Book: Python by Ana\"\nassert video.label() == \"Video: OOP (9 min)\"\nprint(\"storage tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "storage tests passed\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIHNlcnZpY2VzLmNhdGFsb2cgaW1wb3J0IGNhdGFsb2dfbGluZXMsIHRvdGFsX2ZlZXMKCml0ZW1zID0gW0Jvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMildCmZvciBsaW5lIGluIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcHJpbnQobGluZSkKcHJpbnQodG90YWxfZmVlcyhpdGVtcykpCg==',\n    'models/catalog_item.py': 'Y2xhc3MgQ2F0YWxvZ0l0ZW06CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQoKICAgIGRlZiBmZWUoc2VsZik6CiAgICAgICAgcmFpc2UgTm90SW1wbGVtZW50ZWRFcnJvcigiU3ViY2xhc3NlcyBtdXN0IGltcGxlbWVudCBmZWUiKQo=',\n    'models/book_item.py': 'ZnJvbSBtb2RlbHMuY2F0YWxvZ19pdGVtIGltcG9ydCBDYXRhbG9nSXRlbQoKY2xhc3MgQm9va0l0ZW0oQ2F0YWxvZ0l0ZW0pOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBhdXRob3IsIGxhdGVfZGF5cz0wKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlKQogICAgICAgIHNlbGYuYXV0aG9yID0gYXV0aG9yCiAgICAgICAgc2VsZi5sYXRlX2RheXMgPSBsYXRlX2RheXMKCiAgICBkZWYgbGFiZWwoc2VsZik6CiAgICAgICAgcmV0dXJuIGYiQm9vazoge3NlbGYudGl0bGV9IGJ5IHtzZWxmLmF1dGhvcn0iCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAyCg==',\n    'services/catalog.py': 'ZGVmIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcmV0dXJuIFtpdGVtLmxhYmVsKCkgZm9yIGl0ZW0gaW4gaXRlbXNdCgpkZWYgdG90YWxfZmVlcyhpdGVtcyk6CiAgICByZXR1cm4gc3VtKGl0ZW0uZmVlKCkgZm9yIGl0ZW0gaW4gaXRlbXMpCg==',\n    'tests/check_book_item.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQoKYm9vayA9IEJvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMikKYXNzZXJ0IGJvb2subGFiZWwoKSA9PSAiQm9vazogUHl0aG9uIGJ5IEFuYSIKYXNzZXJ0IGJvb2suZmVlKCkgPT0gNApwcmludCgiYm9vayB0ZXN0cyBwYXNzZWQiKQo=',\n    'models/video_item.py': 'ZnJvbSBtb2RlbHMuY2F0YWxvZ19pdGVtIGltcG9ydCBDYXRhbG9nSXRlbQoKY2xhc3MgVmlkZW9JdGVtKENhdGFsb2dJdGVtKToKICAgIGRlZiBfX2luaXRfXyhzZWxmLCB0aXRsZSwgbWludXRlcywgbGF0ZV9kYXlzPTApOgogICAgICAgIHN1cGVyKCkuX19pbml0X18odGl0bGUpCiAgICAgICAgc2VsZi5taW51dGVzID0gbWludXRlcwogICAgICAgIHNlbGYubGF0ZV9kYXlzID0gbGF0ZV9kYXlzCgogICAgZGVmIGxhYmVsKHNlbGYpOgogICAgICAgIHJldHVybiBmIlZpZGVvOiB7c2VsZi50aXRsZX0gKHtzZWxmLm1pbnV0ZXN9IG1pbikiCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAzCg==',\n    'tests/check_catalog_service.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIG1vZGVscy52aWRlb19pdGVtIGltcG9ydCBWaWRlb0l0ZW0KZnJvbSBzZXJ2aWNlcy5jYXRhbG9nIGltcG9ydCBjYXRhbG9nX2xpbmVzLCB0b3RhbF9mZWVzCgppdGVtcyA9IFtCb29rSXRlbSgiUHl0aG9uIiwgIkFuYSIsIDIpLCBWaWRlb0l0ZW0oIk9PUCIsIDksIDEpXQphc3NlcnQgY2F0YWxvZ19saW5lcyhpdGVtcykgPT0gWyJCb29rOiBQeXRob24gYnkgQW5hIiwgIlZpZGVvOiBPT1AgKDkgbWluKSJdCmFzc2VydCB0b3RhbF9mZWVzKGl0ZW1zKSA9PSA3CnByaW50KCJtaXhlZCBzZXJ2aWNlIHRlc3RzIHBhc3NlZCIpCg==',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n    'tests/__init__.py': '',\n    'services/storage.py': 'ZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIG1vZGVscy52aWRlb19pdGVtIGltcG9ydCBWaWRlb0l0ZW0KCmRlZiBwYXJzZV9pdGVtKHJvdyk6CiAgICBraW5kLCB0aXRsZSwgZGV0YWlsLCBsYXRlX2RheXMgPSByb3cuc3RyaXAoKS5zcGxpdCgifCIpCiAgICBpZiBraW5kID09ICJib29rIjoKICAgICAgICByZXR1cm4gQm9va0l0ZW0odGl0bGUsIGRldGFpbCwgaW50KGxhdGVfZGF5cykpCiAgICByZXR1cm4gVmlkZW9JdGVtKHRpdGxlLCBpbnQoZGV0YWlsKSwgaW50KGxhdGVfZGF5cykpCg==',\n    'tests/check_storage.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBzZXJ2aWNlcy5zdG9yYWdlIGltcG9ydCBwYXJzZV9pdGVtCgpib29rID0gcGFyc2VfaXRlbSgiYm9va3xQeXRob258QW5hfDIiKQp2aWRlbyA9IHBhcnNlX2l0ZW0oInZpZGVvfE9PUHw5fDEiKQphc3NlcnQgYm9vay5sYWJlbCgpID09ICJCb29rOiBQeXRob24gYnkgQW5hIgphc3NlcnQgdmlkZW8ubGFiZWwoKSA9PSAiVmlkZW86IE9PUCAoOSBtaW4pIgpwcmludCgic3RvcmFnZSB0ZXN0cyBwYXNzZWQiKQo=',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('tests/check_storage.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/video_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_catalog_service.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), VideoItem(\"OOP\", 9, 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Video: OOP (9 min)\"]\nassert total_fees(items) == 7\nprint(\"mixed service tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/storage.py",
+            "content": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\n\ndef parse_item(row):\n    kind, title, detail, late_days = row.strip().split(\"|\")\n    if kind == \"book\":\n        return BookItem(title, detail, int(late_days))\n    return VideoItem(title, int(detail), int(late_days))\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_storage.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import parse_item\n\nbook = parse_item(\"book|Python|Ana|2\")\nvideo = parse_item(\"video|OOP|9|1\")\nassert book.label() == \"Book: Python by Ana\"\nassert video.label() == \"Video: OOP (9 min)\"\nprint(\"storage tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "tests/check_storage.py",
+        "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/video_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_catalog_service.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), VideoItem(\"OOP\", 9, 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Video: OOP (9 min)\"]\nassert total_fees(items) == 7\nprint(\"mixed service tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/video_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_catalog_service.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), VideoItem(\"OOP\", 9, 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Video: OOP (9 min)\"]\nassert total_fees(items) == 7\nprint(\"mixed service tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/storage.py",
+            "content": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\n\ndef parse_item(row):\n    kind, title, detail, late_days = row.strip().split(\"|\")\n    if kind == \"book\":\n        return BookItem(title, detail, int(late_days))\n    return VideoItem(title, int(detail), int(late_days))\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_storage.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import parse_item\n\nbook = parse_item(\"book|Python|Ana|2\")\nvideo = parse_item(\"video|OOP|9|1\")\nassert book.label() == \"Book: Python by Ana\"\nassert video.label() == \"Video: OOP (9 min)\"\nprint(\"storage tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "services",
+            "tests"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/book_item.py",
+            "models/catalog_item.py",
+            "models/video_item.py",
+            "services/__init__.py",
+            "services/catalog.py",
+            "services/storage.py",
+            "tests/__init__.py",
+            "tests/check_book_item.py",
+            "tests/check_storage.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "services",
+          "tests"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/book_item.py",
+          "models/catalog_item.py",
+          "models/video_item.py",
+          "services/__init__.py",
+          "services/catalog.py",
+          "services/storage.py",
+          "tests/__init__.py",
+          "tests/check_book_item.py",
+          "tests/check_storage.py"
+        ]
+      }
+    },
+    {
+      "id": "quality-project-step-6-final-regression",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.quiz.quality-project-step-6-final-regression",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+          "language": "python"
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_book_item.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/video_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+          "language": "python"
+        },
+        {
+          "path": "services/storage.py",
+          "content": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\n\ndef parse_item(row):\n    kind, title, detail, late_days = row.strip().split(\"|\")\n    if kind == \"book\":\n        return BookItem(title, detail, int(late_days))\n    return VideoItem(title, int(detail), int(late_days))\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_storage.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import parse_item\n\nbook = parse_item(\"book|Python|Ana|2\")\nvideo = parse_item(\"video|OOP|9|1\")\nassert book.label() == \"Book: Python by Ana\"\nassert video.label() == \"Video: OOP (9 min)\"\nprint(\"storage tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from services.storage import parse_item\nfrom services.catalog import catalog_lines, total_fees\n\nitems = []\nwith open(\"data/catalog.txt\", \"r\") as source:\n    for line in source:\n        if line.strip():\n            items.append(parse_item(line))\n\nfor line in catalog_lines(items):\n    print(line)\nprint(f\"Fees: ${total_fees(items)}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/book_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_book_item.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/video_item.py",
+          "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+          "language": "python"
+        },
+        {
+          "path": "services/storage.py",
+          "content": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\n\ndef parse_item(row):\n    kind, title, detail, late_days = row.strip().split(\"|\")\n    if kind == \"book\":\n        return BookItem(title, detail, int(late_days))\n    return VideoItem(title, int(detail), int(late_days))\n",
+          "language": "python"
+        },
+        {
+          "path": "tests/check_storage.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import parse_item\n\nbook = parse_item(\"book|Python|Ana|2\")\nvideo = parse_item(\"video|OOP|9|1\")\nassert book.label() == \"Book: Python by Ana\"\nassert video.label() == \"Video: OOP (9 min)\"\nprint(\"storage tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "data/catalog.txt",
+          "content": "book|Python|Ana|2\nvideo|OOP|9|1\n",
+          "language": "text"
+        },
+        {
+          "path": "README.md",
+          "content": "# Catalog Quality Project\n\nA tested multi-file OOP app using inheritance and polymorphism.\n",
+          "language": "markdown"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: Python by Ana\nVideo: OOP (9 min)\nFees: $7\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBzZXJ2aWNlcy5zdG9yYWdlIGltcG9ydCBwYXJzZV9pdGVtCmZyb20gc2VydmljZXMuY2F0YWxvZyBpbXBvcnQgY2F0YWxvZ19saW5lcywgdG90YWxfZmVlcwoKaXRlbXMgPSBbXQp3aXRoIG9wZW4oImRhdGEvY2F0YWxvZy50eHQiLCAiciIpIGFzIHNvdXJjZToKICAgIGZvciBsaW5lIGluIHNvdXJjZToKICAgICAgICBpZiBsaW5lLnN0cmlwKCk6CiAgICAgICAgICAgIGl0ZW1zLmFwcGVuZChwYXJzZV9pdGVtKGxpbmUpKQoKZm9yIGxpbmUgaW4gY2F0YWxvZ19saW5lcyhpdGVtcyk6CiAgICBwcmludChsaW5lKQpwcmludChmIkZlZXM6ICR7dG90YWxfZmVlcyhpdGVtcyl9IikK',\n    'models/catalog_item.py': 'Y2xhc3MgQ2F0YWxvZ0l0ZW06CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQoKICAgIGRlZiBmZWUoc2VsZik6CiAgICAgICAgcmFpc2UgTm90SW1wbGVtZW50ZWRFcnJvcigiU3ViY2xhc3NlcyBtdXN0IGltcGxlbWVudCBmZWUiKQo=',\n    'models/book_item.py': 'ZnJvbSBtb2RlbHMuY2F0YWxvZ19pdGVtIGltcG9ydCBDYXRhbG9nSXRlbQoKY2xhc3MgQm9va0l0ZW0oQ2F0YWxvZ0l0ZW0pOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBhdXRob3IsIGxhdGVfZGF5cz0wKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlKQogICAgICAgIHNlbGYuYXV0aG9yID0gYXV0aG9yCiAgICAgICAgc2VsZi5sYXRlX2RheXMgPSBsYXRlX2RheXMKCiAgICBkZWYgbGFiZWwoc2VsZik6CiAgICAgICAgcmV0dXJuIGYiQm9vazoge3NlbGYudGl0bGV9IGJ5IHtzZWxmLmF1dGhvcn0iCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAyCg==',\n    'services/catalog.py': 'ZGVmIGNhdGFsb2dfbGluZXMoaXRlbXMpOgogICAgcmV0dXJuIFtpdGVtLmxhYmVsKCkgZm9yIGl0ZW0gaW4gaXRlbXNdCgpkZWYgdG90YWxfZmVlcyhpdGVtcyk6CiAgICByZXR1cm4gc3VtKGl0ZW0uZmVlKCkgZm9yIGl0ZW0gaW4gaXRlbXMpCg==',\n    'tests/check_book_item.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQoKYm9vayA9IEJvb2tJdGVtKCJQeXRob24iLCAiQW5hIiwgMikKYXNzZXJ0IGJvb2subGFiZWwoKSA9PSAiQm9vazogUHl0aG9uIGJ5IEFuYSIKYXNzZXJ0IGJvb2suZmVlKCkgPT0gNApwcmludCgiYm9vayB0ZXN0cyBwYXNzZWQiKQo=',\n    'models/video_item.py': 'ZnJvbSBtb2RlbHMuY2F0YWxvZ19pdGVtIGltcG9ydCBDYXRhbG9nSXRlbQoKY2xhc3MgVmlkZW9JdGVtKENhdGFsb2dJdGVtKToKICAgIGRlZiBfX2luaXRfXyhzZWxmLCB0aXRsZSwgbWludXRlcywgbGF0ZV9kYXlzPTApOgogICAgICAgIHN1cGVyKCkuX19pbml0X18odGl0bGUpCiAgICAgICAgc2VsZi5taW51dGVzID0gbWludXRlcwogICAgICAgIHNlbGYubGF0ZV9kYXlzID0gbGF0ZV9kYXlzCgogICAgZGVmIGxhYmVsKHNlbGYpOgogICAgICAgIHJldHVybiBmIlZpZGVvOiB7c2VsZi50aXRsZX0gKHtzZWxmLm1pbnV0ZXN9IG1pbikiCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAzCg==',\n    'services/storage.py': 'ZnJvbSBtb2RlbHMuYm9va19pdGVtIGltcG9ydCBCb29rSXRlbQpmcm9tIG1vZGVscy52aWRlb19pdGVtIGltcG9ydCBWaWRlb0l0ZW0KCmRlZiBwYXJzZV9pdGVtKHJvdyk6CiAgICBraW5kLCB0aXRsZSwgZGV0YWlsLCBsYXRlX2RheXMgPSByb3cuc3RyaXAoKS5zcGxpdCgifCIpCiAgICBpZiBraW5kID09ICJib29rIjoKICAgICAgICByZXR1cm4gQm9va0l0ZW0odGl0bGUsIGRldGFpbCwgaW50KGxhdGVfZGF5cykpCiAgICByZXR1cm4gVmlkZW9JdGVtKHRpdGxlLCBpbnQoZGV0YWlsKSwgaW50KGxhdGVfZGF5cykpCg==',\n    'tests/check_storage.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBzZXJ2aWNlcy5zdG9yYWdlIGltcG9ydCBwYXJzZV9pdGVtCgpib29rID0gcGFyc2VfaXRlbSgiYm9va3xQeXRob258QW5hfDIiKQp2aWRlbyA9IHBhcnNlX2l0ZW0oInZpZGVvfE9PUHw5fDEiKQphc3NlcnQgYm9vay5sYWJlbCgpID09ICJCb29rOiBQeXRob24gYnkgQW5hIgphc3NlcnQgdmlkZW8ubGFiZWwoKSA9PSAiVmlkZW86IE9PUCAoOSBtaW4pIgpwcmludCgic3RvcmFnZSB0ZXN0cyBwYXNzZWQiKQo=',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n    'tests/__init__.py': '',\n    'data/catalog.txt': 'Ym9va3xQeXRob258QW5hfDIKdmlkZW98T09QfDl8MQo=',\n    'README.md': 'IyBDYXRhbG9nIFF1YWxpdHkgUHJvamVjdAoKQSB0ZXN0ZWQgbXVsdGktZmlsZSBPT1AgYXBwIHVzaW5nIGluaGVyaXRhbmNlIGFuZCBwb2x5bW9ycGhpc20uCg==',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from services.storage import parse_item\nfrom services.catalog import catalog_lines, total_fees\n\nitems = []\nwith open(\"data/catalog.txt\", \"r\") as source:\n    for line in source:\n        if line.strip():\n            items.append(parse_item(line))\n\nfor line in catalog_lines(items):\n    print(line)\nprint(f\"Fees: ${total_fees(items)}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/video_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          },
+          {
+            "path": "services/storage.py",
+            "content": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\n\ndef parse_item(row):\n    kind, title, detail, late_days = row.strip().split(\"|\")\n    if kind == \"book\":\n        return BookItem(title, detail, int(late_days))\n    return VideoItem(title, int(detail), int(late_days))\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_storage.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import parse_item\n\nbook = parse_item(\"book|Python|Ana|2\")\nvideo = parse_item(\"video|OOP|9|1\")\nassert book.label() == \"Book: Python by Ana\"\nassert video.label() == \"Video: OOP (9 min)\"\nprint(\"storage tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "data/catalog.txt",
+            "content": "book|Python|Ana|2\nvideo|OOP|9|1\n",
+            "language": "text"
+          },
+          {
+            "path": "README.md",
+            "content": "# Catalog Quality Project\n\nA tested multi-file OOP app using inheritance and polymorphism.\n",
+            "language": "markdown"
+          }
+        ]
+      },
+      "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n",
+            "language": "python"
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/video_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          },
+          {
+            "path": "services/storage.py",
+            "content": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\n\ndef parse_item(row):\n    kind, title, detail, late_days = row.strip().split(\"|\")\n    if kind == \"book\":\n        return BookItem(title, detail, int(late_days))\n    return VideoItem(title, int(detail), int(late_days))\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_storage.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import parse_item\n\nbook = parse_item(\"book|Python|Ana|2\")\nvideo = parse_item(\"video|OOP|9|1\")\nassert book.label() == \"Book: Python by Ana\"\nassert video.label() == \"Video: OOP (9 min)\"\nprint(\"storage tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from services.storage import parse_item\nfrom services.catalog import catalog_lines, total_fees\n\nitems = []\nwith open(\"data/catalog.txt\", \"r\") as source:\n    for line in source:\n        if line.strip():\n            items.append(parse_item(line))\n\nfor line in catalog_lines(items):\n    print(line)\nprint(f\"Fees: ${total_fees(items)}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def fee(self):\n        raise NotImplementedError(\"Subclasses must implement fee\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/book_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass BookItem(CatalogItem):\n    def __init__(self, title, author, late_days=0):\n        super().__init__(title)\n        self.author = author\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def catalog_lines(items):\n    return [item.label() for item in items]\n\ndef total_fees(items):\n    return sum(item.fee() for item in items)\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_book_item.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\", 2)\nassert book.label() == \"Book: Python by Ana\"\nassert book.fee() == 4\nprint(\"book tests passed\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/video_item.py",
+            "content": "from models.catalog_item import CatalogItem\n\nclass VideoItem(CatalogItem):\n    def __init__(self, title, minutes, late_days=0):\n        super().__init__(title)\n        self.minutes = minutes\n        self.late_days = late_days\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          },
+          {
+            "path": "services/storage.py",
+            "content": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\n\ndef parse_item(row):\n    kind, title, detail, late_days = row.strip().split(\"|\")\n    if kind == \"book\":\n        return BookItem(title, detail, int(late_days))\n    return VideoItem(title, int(detail), int(late_days))\n",
+            "language": "python"
+          },
+          {
+            "path": "tests/check_storage.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import parse_item\n\nbook = parse_item(\"book|Python|Ana|2\")\nvideo = parse_item(\"video|OOP|9|1\")\nassert book.label() == \"Book: Python by Ana\"\nassert video.label() == \"Video: OOP (9 min)\"\nprint(\"storage tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "data/catalog.txt",
+            "content": "book|Python|Ana|2\nvideo|OOP|9|1\n",
+            "language": "text"
+          },
+          {
+            "path": "README.md",
+            "content": "# Catalog Quality Project\n\nA tested multi-file OOP app using inheritance and polymorphism.\n",
+            "language": "markdown"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data",
+            "models",
+            "services",
+            "tests"
+          ],
+          "requiredFiles": [
+            "README.md",
+            "data/catalog.txt",
+            "main.py",
+            "models/__init__.py",
+            "models/book_item.py",
+            "models/catalog_item.py",
+            "models/video_item.py",
+            "services/__init__.py",
+            "services/catalog.py",
+            "services/storage.py",
+            "tests/__init__.py",
+            "tests/check_book_item.py",
+            "tests/check_storage.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data",
+          "models",
+          "services",
+          "tests"
+        ],
+        "requiredFiles": [
+          "README.md",
+          "data/catalog.txt",
+          "main.py",
+          "models/__init__.py",
+          "models/book_item.py",
+          "models/catalog_item.py",
+          "models/video_item.py",
+          "services/__init__.py",
+          "services/catalog.py",
+          "services/storage.py",
+          "tests/__init__.py",
+          "tests/check_book_item.py",
+          "tests/check_storage.py"
+        ]
+      }
+    },
+    {
+      "id": "sc-module-10-oop-quality-project-project-design",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.quiz.sc-module-10-oop-quality-project-project-design",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

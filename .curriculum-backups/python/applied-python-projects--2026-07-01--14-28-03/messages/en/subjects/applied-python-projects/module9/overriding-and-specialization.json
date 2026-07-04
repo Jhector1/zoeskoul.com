@@ -1,0 +1,177 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "overriding-and-specialization": {
+          "label": "Overriding and Specialization",
+          "summary": "Override a parent method when a subclass needs a different result.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Method Overriding"
+            },
+            "sketch1": {
+              "title": "Using `super()` in Overriding"
+            },
+            "sketch2": {
+              "title": "Try it yourself"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_overriding_and_specialization_sketch0": {
+              "title": "Override a Method in a Subclass",
+              "prompt": "Create a subclass `Cat` that overrides the `speak()` method of the `Animal` class to return \"Meow!\".",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\n# Define the Cat class here"
+            },
+            "try_overriding_and_specialization_sketch1": {
+              "title": "Use `super()` in Overriding",
+              "prompt": "Modify the `Dog` class to use `super()` in its `speak()` method to include the sound from `Animal`.",
+              "hint": "Read the task \"Use `super()` in Overriding\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Use `super()` in Overriding\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        # Use super() here\n        return \"Woof!\""
+            },
+            "try_overriding_and_specialization_sketch2": {
+              "title": "Polymorphism with Overridden Methods",
+              "prompt": "Create a list of `Animal` objects, including `Dog` and `Cat`, and iterate over them to call their `speak()` methods, demonstrating polymorphism.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"\n\n# Create a list of Animal objects\nanimals = []\n\n# Iterate over the list and call speak()"
+            }
+          },
+          "practice": {
+            "ci-overriding-and-specialization-0": {
+              "title": "Purpose of Method Overriding",
+              "prompt": "What is the primary purpose of method overriding in object-oriented programming?",
+              "hint": "Consider how subclasses can change behavior.",
+              "help": {
+                "concept": "Method overriding allows subclasses to provide specific implementations for methods defined in their superclasses.",
+                "hint_1": "Think about how a subclass might need to change a method's behavior.",
+                "hint_2": "Overriding is used when a subclass needs a different implementation than its superclass."
+              },
+              "options": {
+                "a": "To allow subclasses to inherit methods without changes.",
+                "b": "To enable subclasses to provide specific implementations for inherited methods.",
+                "c": "To prevent subclasses from accessing superclass methods.",
+                "d": "To make all methods in a class final."
+              }
+            },
+            "ci-overriding-and-specialization-1": {
+              "title": "Using `super()`",
+              "prompt": "In Python, the `super()` function is used to call a method from the [blank1] class.",
+              "hint": "`super()` is used to access methods from the class above the current one.",
+              "help": {
+                "concept": "`super()` is used to call methods from a the missing term.",
+                "hint_1": "`super()` accesses methods from the class that the current class inherits from.",
+                "hint_2": "The class above the current one in the hierarchy is the the missing term."
+              },
+              "template": "In Python, the `super()` function is used to call a method from the [blank1] class.",
+              "choices": [
+                "subclass",
+                "superclass",
+                "current",
+                "base"
+              ]
+            },
+            "ci-overriding-and-specialization-2": {
+              "title": "Benefits of Method Overriding",
+              "prompt": "Which of the following are benefits of method overriding? Select all that apply.",
+              "hint": "Consider how overriding affects code flexibility and reuse.",
+              "help": {
+                "concept": "Method overriding allows for flexibility and reuse by enabling subclasses to modify inherited behavior.",
+                "hint_1": "Overriding can make code more adaptable to specific needs.",
+                "hint_2": "It allows subclasses to change behavior without altering the superclass."
+              },
+              "options": {
+                "a": "Increases code flexibility.",
+                "b": "Prevents code duplication.",
+                "c": "Makes code less readable.",
+                "d": "Allows subclasses to modify inherited behavior."
+              }
+            },
+            "ci-overriding-and-specialization-3": {
+              "title": "Order of Method Calls with `super()`",
+              "prompt": "Arrange the steps in the order they occur when a method is called using `super()` in a subclass.",
+              "hint": "Think about the sequence of method calls from subclass to superclass.",
+              "help": {
+                "concept": "Using `super()` calls the method from the superclass, then returns to the subclass method.",
+                "hint_1": "The subclass method is called first, then `super()` calls the superclass method.",
+                "hint_2": "After the superclass method, control returns to the subclass method."
+              },
+              "tokens": {
+                "t1": "Subclass method starts",
+                "t2": "`super()` calls superclass method",
+                "t3": "Superclass method executes",
+                "t4": "Control returns to subclass method"
+              }
+            },
+            "ci-overriding-and-specialization-4": {
+              "title": "Overriding Syntax",
+              "prompt": "To override a method in Python, you define a method with the same [blank1] in the subclass.",
+              "hint": "Consider what must match between the superclass and subclass methods.",
+              "help": {
+                "concept": "Overriding requires the subclass method to have the same the missing term as the superclass method.",
+                "hint_1": "The method the missing term must be the same in both the superclass and subclass.",
+                "hint_2": "The method signature, including the the missing term, must match."
+              },
+              "template": "To override a method in Python, you define a method with the same [blank1] in the subclass.",
+              "choices": [
+                "name",
+                "parameters",
+                "return type",
+                "documentation"
+              ]
+            },
+            "ci-overriding-and-specialization-6": {
+              "title": "Specialized Behavior in Subclasses",
+              "prompt": "Define a subclass `Bird` that overrides the `speak()` method to return \"Chirp!\" and demonstrate it in a list of `Animal` objects.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"\n\n# Define the Bird class here\n\n# Create a list of Animal objects\nanimals = [Dog(), Cat()]\n\n# Iterate over the list and call speak()"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "overriding-and-specialization": {
+          "overriding-and-specialization-sketch0": {
+            "title": "Understanding Method Overriding",
+            "bodyMarkdown": "In object-oriented programming, method overriding allows a subclass to provide a specific implementation of a method that is already defined in its superclass. This is useful when the subclass needs to modify or extend the behavior of the method to suit its own needs.\n\nFor example, consider a base class `Animal` with a method `speak()`. A subclass `Dog` might override this method to provide a specific implementation:\n\n```python\nclass Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"\n```\n\nIn this example, calling `speak()` on an instance of `Dog` will return \"Woof!\", while calling it on an instance of `Animal` will return \"Some sound\". This demonstrates how overriding allows subclasses to specialize behavior.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "overriding-and-specialization-sketch1": {
+            "title": "Using `super()` in Overriding",
+            "bodyMarkdown": "When overriding a method, you might still want to use the functionality of the superclass method. This is where `super()` comes in handy. It allows you to call the method from the superclass within the overridden method.\n\nConsider the following example:\n\n```python\nclass Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        original_sound = super().speak()\n        return f\"{original_sound} Woof!\"\n```\n\nIn this case, the `Dog` class overrides the `speak()` method but also calls the superclass's `speak()` method using `super()`. This allows the `Dog` class to extend the behavior of the `Animal` class's `speak()` method.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "try-it-yourself": {
+            "title": "Try it yourself",
+            "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,707 @@
+{
+  "topicId": "polymorphic-collections",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-polymorphism-and-abstraction",
+  "prefix": "py9",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch0.title",
+      "sketchId": "concept",
+      "height": 420,
+      "tryIt": {
+        "id": "try-polymorphic-collections-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.prompt",
+        "exerciseKey": "try-polymorphic-collections-sketch0",
+        "difficulty": "medium",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch1.title",
+      "sketchId": "multifile-shape",
+      "height": 420,
+      "tryIt": {
+        "id": "try-polymorphic-collections-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.prompt",
+        "exerciseKey": "try-polymorphic-collections-sketch1",
+        "difficulty": "medium",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch2.title",
+      "sketchId": "graded-habit",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.quiz.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.project.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_notification_polymorphism_practice",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.projectSteps.ci_notification_polymorphism_practice.title",
+            "exerciseKey": "ci-notification-polymorphism-practice",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "concept",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.concept.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.concept.bodyMarkdown"
+    },
+    {
+      "id": "multifile-shape",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.multifile-shape.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.multifile-shape.bodyMarkdown"
+    },
+    {
+      "id": "graded-habit",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.graded-habit.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.graded-habit.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-polymorphic-collections-sketch0",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.quiz.try-polymorphic-collections-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Python\", \"Ana\"), Video(\"OOP\", 8)]\nfor item in items:\n    print(item.label())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/video.py",
+          "content": "class Video:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n\n    def label(self):\n        pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Python\", \"Ana\"), Video(\"OOP\", 8)]\nfor item in items:\n    print(item.label())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/video.py",
+          "content": "class Video:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: Python by Ana\nVideo: OOP (8 min)\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYm9vayBpbXBvcnQgQm9vawpmcm9tIG1vZGVscy52aWRlbyBpbXBvcnQgVmlkZW8KCml0ZW1zID0gW0Jvb2soIlB5dGhvbiIsICJBbmEiKSwgVmlkZW8oIk9PUCIsIDgpXQpmb3IgaXRlbSBpbiBpdGVtczoKICAgIHByaW50KGl0ZW0ubGFiZWwoKSkK',\n    'models/book.py': 'Y2xhc3MgQm9vazoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCB0aXRsZSwgYXV0aG9yKToKICAgICAgICBzZWxmLnRpdGxlID0gdGl0bGUKICAgICAgICBzZWxmLmF1dGhvciA9IGF1dGhvcgoKICAgIGRlZiBsYWJlbChzZWxmKToKICAgICAgICByZXR1cm4gZiJCb29rOiB7c2VsZi50aXRsZX0gYnkge3NlbGYuYXV0aG9yfSIK',\n    'models/video.py': 'Y2xhc3MgVmlkZW86CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUsIG1pbnV0ZXMpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQogICAgICAgIHNlbGYubWludXRlcyA9IG1pbnV0ZXMKCiAgICBkZWYgbGFiZWwoc2VsZik6CiAgICAgICAgcmV0dXJuIGYiVmlkZW86IHtzZWxmLnRpdGxlfSAoe3NlbGYubWludXRlc30gbWluKSIK',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Python\", \"Ana\"), Video(\"OOP\", 8)]\nfor item in items:\n    print(item.label())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/video.py",
+            "content": "class Video:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Python\", \"Ana\"), Video(\"OOP\", 8)]\nfor item in items:\n    print(item.label())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Python\", \"Ana\"), Video(\"OOP\", 8)]\nfor item in items:\n    print(item.label())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Python\", \"Ana\"), Video(\"OOP\", 8)]\nfor item in items:\n    print(item.label())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/video.py",
+            "content": "class Video:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n\n    def label(self):\n        pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Python\", \"Ana\"), Video(\"OOP\", 8)]\nfor item in items:\n    print(item.label())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/video.py",
+            "content": "class Video:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n\n    def label(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/book.py",
+            "models/video.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/book.py",
+          "models/video.py"
+        ]
+      }
+    },
+    {
+      "id": "try-polymorphic-collections-sketch1",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.quiz.try-polymorphic-collections-sketch1",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.physical_book import PhysicalBook\nfrom models.dvd import DVD\nfrom services.catalog import total_fees\n\nitems = [PhysicalBook(\"SQL\", 2), DVD(\"History\", 3)]\nprint(total_fees(items))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/physical_book.py",
+          "content": "class PhysicalBook:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "models/dvd.py",
+          "content": "class DVD:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 3\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def total_fees(items):\n    return 0\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.physical_book import PhysicalBook\nfrom models.dvd import DVD\nfrom services.catalog import total_fees\n\nitems = [PhysicalBook(\"SQL\", 2), DVD(\"History\", 3)]\nprint(total_fees(items))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/physical_book.py",
+          "content": "class PhysicalBook:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "models/dvd.py",
+          "content": "class DVD:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 3\n",
+          "language": "python"
+        },
+        {
+          "path": "services/catalog.py",
+          "content": "def total_fees(items):\n    total = 0\n    for item in items:\n        total += item.fee()\n    return total\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "13\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMucGh5c2ljYWxfYm9vayBpbXBvcnQgUGh5c2ljYWxCb29rCmZyb20gbW9kZWxzLmR2ZCBpbXBvcnQgRFZECmZyb20gc2VydmljZXMuY2F0YWxvZyBpbXBvcnQgdG90YWxfZmVlcwoKaXRlbXMgPSBbUGh5c2ljYWxCb29rKCJTUUwiLCAyKSwgRFZEKCJIaXN0b3J5IiwgMyldCnByaW50KHRvdGFsX2ZlZXMoaXRlbXMpKQo=',\n    'models/physical_book.py': 'Y2xhc3MgUGh5c2ljYWxCb29rOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBsYXRlX2RheXMpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQogICAgICAgIHNlbGYubGF0ZV9kYXlzID0gbGF0ZV9kYXlzCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAyCg==',\n    'models/dvd.py': 'Y2xhc3MgRFZEOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBsYXRlX2RheXMpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQogICAgICAgIHNlbGYubGF0ZV9kYXlzID0gbGF0ZV9kYXlzCgogICAgZGVmIGZlZShzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5sYXRlX2RheXMgKiAzCg==',\n    'services/catalog.py': 'ZGVmIHRvdGFsX2ZlZXMoaXRlbXMpOgogICAgdG90YWwgPSAwCiAgICBmb3IgaXRlbSBpbiBpdGVtczoKICAgICAgICB0b3RhbCArPSBpdGVtLmZlZSgpCiAgICByZXR1cm4gdG90YWwK',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.physical_book import PhysicalBook\nfrom models.dvd import DVD\nfrom services.catalog import total_fees\n\nitems = [PhysicalBook(\"SQL\", 2), DVD(\"History\", 3)]\nprint(total_fees(items))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/physical_book.py",
+            "content": "class PhysicalBook:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "models/dvd.py",
+            "content": "class DVD:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def total_fees(items):\n    total = 0\n    for item in items:\n        total += item.fee()\n    return total\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.physical_book import PhysicalBook\nfrom models.dvd import DVD\nfrom services.catalog import total_fees\n\nitems = [PhysicalBook(\"SQL\", 2), DVD(\"History\", 3)]\nprint(total_fees(items))\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.physical_book import PhysicalBook\nfrom models.dvd import DVD\nfrom services.catalog import total_fees\n\nitems = [PhysicalBook(\"SQL\", 2), DVD(\"History\", 3)]\nprint(total_fees(items))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.physical_book import PhysicalBook\nfrom models.dvd import DVD\nfrom services.catalog import total_fees\n\nitems = [PhysicalBook(\"SQL\", 2), DVD(\"History\", 3)]\nprint(total_fees(items))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/physical_book.py",
+            "content": "class PhysicalBook:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "models/dvd.py",
+            "content": "class DVD:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def total_fees(items):\n    return 0\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.physical_book import PhysicalBook\nfrom models.dvd import DVD\nfrom services.catalog import total_fees\n\nitems = [PhysicalBook(\"SQL\", 2), DVD(\"History\", 3)]\nprint(total_fees(items))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/physical_book.py",
+            "content": "class PhysicalBook:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "models/dvd.py",
+            "content": "class DVD:\n    def __init__(self, title, late_days):\n        self.title = title\n        self.late_days = late_days\n\n    def fee(self):\n        return self.late_days * 3\n",
+            "language": "python"
+          },
+          {
+            "path": "services/catalog.py",
+            "content": "def total_fees(items):\n    total = 0\n    for item in items:\n        total += item.fee()\n    return total\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "services"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/dvd.py",
+            "models/physical_book.py",
+            "services/__init__.py",
+            "services/catalog.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "services"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/dvd.py",
+          "models/physical_book.py",
+          "services/__init__.py",
+          "services/catalog.py"
+        ]
+      }
+    },
+    {
+      "id": "ci-notification-polymorphism-practice",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.quiz.ci-notification-polymorphism-practice",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.email_notice import EmailNotice\nfrom models.sms_notice import SmsNotice\n\nnotices = [EmailNotice(\"Ava\", \"Welcome\"), SmsNotice(\"555-0101\", \"Ready\")]\nfor notice in notices:\n    print(notice.send())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/email_notice.py",
+          "content": "class EmailNotice:\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/sms_notice.py",
+          "content": "class SmsNotice:\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.email_notice import EmailNotice\nfrom models.sms_notice import SmsNotice\n\nnotices = [EmailNotice(\"Ava\", \"Welcome\"), SmsNotice(\"555-0101\", \"Ready\")]\nfor notice in notices:\n    print(notice.send())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/email_notice.py",
+          "content": "class EmailNotice:\n    def __init__(self, user, message):\n        self.user = user\n        self.message = message\n\n    def send(self):\n        return f\"Email to {self.user}: {self.message}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/sms_notice.py",
+          "content": "class SmsNotice:\n    def __init__(self, phone, message):\n        self.phone = phone\n        self.message = message\n\n    def send(self):\n        return f\"SMS to {self.phone}: {self.message}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Email to Ava: Welcome\nSMS to 555-0101: Ready\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuZW1haWxfbm90aWNlIGltcG9ydCBFbWFpbE5vdGljZQpmcm9tIG1vZGVscy5zbXNfbm90aWNlIGltcG9ydCBTbXNOb3RpY2UKCm5vdGljZXMgPSBbRW1haWxOb3RpY2UoIkF2YSIsICJXZWxjb21lIiksIFNtc05vdGljZSgiNTU1LTAxMDEiLCAiUmVhZHkiKV0KZm9yIG5vdGljZSBpbiBub3RpY2VzOgogICAgcHJpbnQobm90aWNlLnNlbmQoKSkK',\n    'models/email_notice.py': 'Y2xhc3MgRW1haWxOb3RpY2U6CiAgICBkZWYgX19pbml0X18oc2VsZiwgdXNlciwgbWVzc2FnZSk6CiAgICAgICAgc2VsZi51c2VyID0gdXNlcgogICAgICAgIHNlbGYubWVzc2FnZSA9IG1lc3NhZ2UKCiAgICBkZWYgc2VuZChzZWxmKToKICAgICAgICByZXR1cm4gZiJFbWFpbCB0byB7c2VsZi51c2VyfToge3NlbGYubWVzc2FnZX0iCg==',\n    'models/sms_notice.py': 'Y2xhc3MgU21zTm90aWNlOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHBob25lLCBtZXNzYWdlKToKICAgICAgICBzZWxmLnBob25lID0gcGhvbmUKICAgICAgICBzZWxmLm1lc3NhZ2UgPSBtZXNzYWdlCgogICAgZGVmIHNlbmQoc2VsZik6CiAgICAgICAgcmV0dXJuIGYiU01TIHRvIHtzZWxmLnBob25lfToge3NlbGYubWVzc2FnZX0iCg==',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.email_notice import EmailNotice\nfrom models.sms_notice import SmsNotice\n\nnotices = [EmailNotice(\"Ava\", \"Welcome\"), SmsNotice(\"555-0101\", \"Ready\")]\nfor notice in notices:\n    print(notice.send())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/email_notice.py",
+            "content": "class EmailNotice:\n    def __init__(self, user, message):\n        self.user = user\n        self.message = message\n\n    def send(self):\n        return f\"Email to {self.user}: {self.message}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/sms_notice.py",
+            "content": "class SmsNotice:\n    def __init__(self, phone, message):\n        self.phone = phone\n        self.message = message\n\n    def send(self):\n        return f\"SMS to {self.phone}: {self.message}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.email_notice import EmailNotice\nfrom models.sms_notice import SmsNotice\n\nnotices = [EmailNotice(\"Ava\", \"Welcome\"), SmsNotice(\"555-0101\", \"Ready\")]\nfor notice in notices:\n    print(notice.send())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.email_notice import EmailNotice\nfrom models.sms_notice import SmsNotice\n\nnotices = [EmailNotice(\"Ava\", \"Welcome\"), SmsNotice(\"555-0101\", \"Ready\")]\nfor notice in notices:\n    print(notice.send())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.email_notice import EmailNotice\nfrom models.sms_notice import SmsNotice\n\nnotices = [EmailNotice(\"Ava\", \"Welcome\"), SmsNotice(\"555-0101\", \"Ready\")]\nfor notice in notices:\n    print(notice.send())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/email_notice.py",
+            "content": "class EmailNotice:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/sms_notice.py",
+            "content": "class SmsNotice:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.email_notice import EmailNotice\nfrom models.sms_notice import SmsNotice\n\nnotices = [EmailNotice(\"Ava\", \"Welcome\"), SmsNotice(\"555-0101\", \"Ready\")]\nfor notice in notices:\n    print(notice.send())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/email_notice.py",
+            "content": "class EmailNotice:\n    def __init__(self, user, message):\n        self.user = user\n        self.message = message\n\n    def send(self):\n        return f\"Email to {self.user}: {self.message}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/sms_notice.py",
+            "content": "class SmsNotice:\n    def __init__(self, phone, message):\n        self.phone = phone\n        self.message = message\n\n    def send(self):\n        return f\"SMS to {self.phone}: {self.message}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/email_notice.py",
+            "models/sms_notice.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/email_notice.py",
+          "models/sms_notice.py"
+        ]
+      }
+    },
+    {
+      "id": "sc-polymorphic-collections-design",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.quiz.sc-polymorphic-collections-design",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

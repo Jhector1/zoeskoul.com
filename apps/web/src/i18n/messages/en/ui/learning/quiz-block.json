@@ -3,13 +3,11 @@
     "unlockHint": "Answer the previous question correctly to unlock this one.",
     "noQuestions": "No questions.",
     "autoAdvance": "Auto-advance",
-    "tolerance": "± {n}",
     "buttons": {
       "next": "Next →",
       "finish": "Finish →",
       "checkQuestion": "Check this question",
       "checkAnswer": "Check this answer",
-      "help": "Help",
       "reveal": "Reveal",
       "resetQuiz": "Reset quiz",
       "skip": "Skip",
@@ -33,11 +31,7 @@
       "loadingExercise": "Loading exercise…",
       "noExercise": "No exercise.",
       "checking": "Checking…",
-      "refreshing": "Refreshing…",
       "attempts": "Attempts: {n}/{max}"
-    },
-    "progress": {
-      "question": "Question {current} of {total}"
     },
     "footer": {
       "summary": "Checked: {checked}/{total} • Correct: {correct}/{total} • Score: {score}%",

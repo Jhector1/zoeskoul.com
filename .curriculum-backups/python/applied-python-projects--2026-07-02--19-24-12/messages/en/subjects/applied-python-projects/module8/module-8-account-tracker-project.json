@@ -1,0 +1,215 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "module-8-account-tracker-project": {
+          "label": "Module 8 Account Tracker Project",
+          "summary": "Build an independent two-file Account tracker for a small club by carrying one working version forward through class shell, constructor, methods, validation, and summary.",
+          "cards": {
+            "sketch0": {
+              "title": "Project overview"
+            },
+            "project": {
+              "title": "Account Tracker Build"
+            }
+          },
+          "projectSteps": {
+            "try_module_8_account_tracker_project_sketch0": {
+              "title": "Create the Account class shell"
+            },
+            "account_tracker_step_2_constructor_attributes": {
+              "title": "Add a constructor and attributes"
+            },
+            "account_tracker_step_3_add_methods": {
+              "title": "Add deposit and withdraw methods"
+            },
+            "account_tracker_step_4_validation_summary": {
+              "title": "Add validation and a summary method"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_8_account_tracker_project_sketch0": {
+                "title": "Create the Account class shell",
+                "prompt": "A small after-school club wants a tiny account tracker for member balances. Start with the smallest working version. In `models/account.py`, define an `Account` class with `pass` inside it. In `main.py`, import `Account` from `models.account` and create one object with `account = Account()`. Do not add a constructor yet. Do not print attributes yet. This first project step is only about the class file, the clean import, and creating one object.",
+                "hint": "Create the class shell first, then import it in `main.py` and create one object.",
+                "help": {
+                  "concept": "This project is independent from the lesson examples. It uses the same OOP pattern in a new real-world setting: a club account tracker.",
+                  "hint_1": "Put the class definition in `models/account.py`.",
+                  "hint_2": "Keep `main.py` focused on importing the class and creating one object."
+                },
+                "starterCode": "from models.account import Account\n\n# Step 1: create one Account object.",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\n# Step 1: create one Account object."
+                  },
+                  "models_account_py": {
+                    "content": "# Step 1: define the Account class shell below.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount = Account()"
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    pass"
+                  }
+                },
+                "solutionCode": "from models.account import Account\n\naccount = Account()",
+                "checks": {
+                  "0": {
+                    "message": "Define an Account class in models/account.py."
+                  },
+                  "1": {
+                    "message": "The class shell should still be constructible with no arguments in this step."
+                  },
+                  "2": {
+                    "message": "Create one Account object in main.py."
+                  }
+                }
+              },
+              "account_tracker_step_2_constructor_attributes": {
+                "title": "Add a constructor and attributes",
+                "prompt": "Continue the club account tracker from the previous working step. Replace the empty class shell with `__init__(self, owner, balance)`. Store `owner` on `self.owner` and `balance` on `self.balance`. In `main.py`, create `Account(\"Ava\", 125)`, then print exactly two lines: the owner on the first line and the balance on the second line.",
+                "hint": "This step teaches the constructor and the first stored attributes.",
+                "help": {
+                  "concept": "A constructor gives each new object its starting state.",
+                  "hint_1": "Replace `Account()` with `Account(\"Ava\", 125)` in `main.py`.",
+                  "hint_2": "Store the incoming values on `self.owner` and `self.balance`."
+                },
+                "starterCode": "from models.account import Account\n\naccount = Account()\n\n# Step 2: update this object after Account accepts owner and balance.",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount = Account()\n\n# Step 2: update this object after Account accepts owner and balance."
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    pass"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.owner)\nprint(account.balance)"
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance"
+                  }
+                },
+                "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.owner)\nprint(account.balance)",
+                "checks": {
+                  "0": {
+                    "message": "Keep the Account class defined."
+                  },
+                  "1": {
+                    "message": "Add a constructor that accepts owner and balance."
+                  },
+                  "2": {
+                    "message": "Store owner and balance on the object."
+                  },
+                  "3": {
+                    "message": "Create one Account object with Ava and 125."
+                  },
+                  "4": {
+                    "message": "Print the owner and balance on separate lines."
+                  }
+                }
+              },
+              "account_tracker_step_3_add_methods": {
+                "title": "Add deposit and withdraw methods",
+                "prompt": "Continue from the working constructor version. Add `deposit(self, amount)` and `withdraw(self, amount)` to the `Account` class. `deposit` should increase the balance and return the new balance. `withdraw` should decrease the balance and return the new balance. In `main.py`, create Ava's account, call `deposit(25)`, call `withdraw(40)`, then print the owner, the balance after the deposit, and the balance after the withdrawal.",
+                "hint": "This step is about methods owning the balance changes.",
+                "help": {
+                  "concept": "Methods keep state changes on the object instead of spreading balance math through `main.py`.",
+                  "hint_1": "Use `self.balance += amount` in `deposit`.",
+                  "hint_2": "Use `self.balance -= amount` in `withdraw`."
+                },
+                "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.owner)\nprint(account.balance)\n\n# Step 3: add deposit and withdraw, then print the returned balances.",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.owner)\nprint(account.balance)\n\n# Step 3: add deposit and withdraw, then print the returned balances."
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nbalance_after_deposit = account.deposit(25)\nbalance_after_withdraw = account.withdraw(40)\n\nprint(account.owner)\nprint(balance_after_deposit)\nprint(balance_after_withdraw)"
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance"
+                  }
+                },
+                "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nbalance_after_deposit = account.deposit(25)\nbalance_after_withdraw = account.withdraw(40)\n\nprint(account.owner)\nprint(balance_after_deposit)\nprint(balance_after_withdraw)",
+                "checks": {
+                  "0": {
+                    "message": "Keep the Account class defined."
+                  },
+                  "1": {
+                    "message": "deposit should return the updated balance."
+                  },
+                  "2": {
+                    "message": "withdraw should run after the deposit and return the new balance."
+                  },
+                  "3": {
+                    "message": "Print the owner, deposit result, and withdrawal result."
+                  }
+                }
+              },
+              "account_tracker_step_4_validation_summary": {
+                "title": "Add validation and a summary method",
+                "prompt": "Finish the club account tracker. Add validation so `deposit` ignores amounts less than or equal to 0, and `withdraw` ignores amounts less than or equal to 0 or larger than the current balance. Add `summary(self)` so the account returns a line like `Ava: $110.00`. In `main.py`, create Ava's account, call `deposit(25)`, call `withdraw(40)`, and print `account.summary()`.",
+                "hint": "Validation belongs in the class, and the final main.py should stay small.",
+                "help": {
+                  "concept": "This final step combines validation and reporting into one clean Account class.",
+                  "hint_1": "Invalid deposits and withdrawals should leave the balance unchanged.",
+                  "hint_2": "Format the final balance with two decimal places in `summary()`."
+                },
+                "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nbalance_after_deposit = account.deposit(25)\nbalance_after_withdraw = account.withdraw(40)\n\nprint(account.owner)\nprint(balance_after_deposit)\nprint(balance_after_withdraw)\n\n# Step 4: add validation and print a final summary instead.",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nbalance_after_deposit = account.deposit(25)\nbalance_after_withdraw = account.withdraw(40)\n\nprint(account.owner)\nprint(balance_after_deposit)\nprint(balance_after_withdraw)\n\n# Step 4: add validation and print a final summary instead."
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\n\nprint(account.summary())"
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance:.2f}\""
+                  }
+                },
+                "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\n\nprint(account.summary())",
+                "checks": {
+                  "0": {
+                    "message": "deposit should ignore amounts less than or equal to 0."
+                  },
+                  "1": {
+                    "message": "summary should reflect only the valid balance changes."
+                  },
+                  "2": {
+                    "message": "Print the final summary from main.py."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "module-8-account-tracker-project": {
+          "module-8-account-tracker-project-sketch-0": {
+            "title": "A club account tracker project",
+            "bodyMarkdown": "A small after-school club needs a simple way to track member balances. They do not need a big app yet. They need one clean object that knows:\n\n- who owns the account\n- how much money is in the account\n- how to deposit money\n- how to withdraw money safely\n- how to report the current balance\n\nYou will build that idea as a small two-file project:\n\n- `models/account.py` holds the `Account` class.\n- `main.py` imports the class, creates an account object, and prints results.\n\nThe project is cumulative. Each new step starts from the previous working version:\n\n1. Create the class shell with `pass`.\n2. Add the constructor and the first attributes.\n3. Add `deposit()` and `withdraw()` methods.\n4. Add validation and a final `summary()` method.\n\nThe project uses the same OOP pattern you practiced in the lessons, but it is its own real-world build. The lesson examples explained the idea. The embedded Try Its practiced it with another class. This project asks you to transfer the pattern to an account tracker."
+          }
+        }
+      }
+    }
+  }
+}

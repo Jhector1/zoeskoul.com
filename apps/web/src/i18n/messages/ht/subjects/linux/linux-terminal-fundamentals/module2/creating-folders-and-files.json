@@ -3,38 +3,38 @@
     "linux-terminal-fundamentals": {
       "linux-module-2-files-and-folders": {
         "creating-folders-and-files": {
-          "label": "Kreye katab ak fichye",
-          "summary": "Sèvi ak mkdir, mkdir -p, ak touch pou bati yon estrikti pwojè ki pwòp nan tèminal Linux la.",
+          "label": "Kreye Dosye ak Fichye",
+          "summary": "Sèvi ak mkdir, mkdir -p, ak touch pou konstwi yon estrikti pwojè pwòp nan tèminal Linux la.",
           "cards": {
             "sketch0": {
-              "title": "Kreye yon katab avèk mkdir"
+              "title": "Kreye yon dosye ak mkdir"
             },
             "sketch1": {
-              "title": "Kreye katab ki andedan lòt katab avèk mkdir -p"
+              "title": "Kreye dosye anbreye ak mkdir -p"
             },
             "sketch2": {
-              "title": "Kreye fichye vid avèk touch"
+              "title": "Kreye fichye vid ak touch"
             },
             "quiz": {
               "title": "Tcheke pratik"
             },
             "project": {
-              "title": "Òganize espas travay etid Maya a"
+              "title": "Òganize espas etid Maya a"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "exercises": {
               "creating-folders-and-files-try-it-1": {
-                "title": "Travay tèminal: kreye yon katab avèk mkdir",
-                "prompt": "Set up a katab for class notes. Kouri `mkdir school-notes`.",
-                "hint": "Sèvi ak katab ak non fichye egzak ki nan enstriksyon an, apre sa kouri ls, cat oswa find pou verifye travay ou.",
+                "title": "Travay final: kreye yon dosye ak mkdir",
+                "prompt": "Kreye yon dosye pou nòt klas la. Lanse `mkdir school-notes`.",
+                "hint": "Sèvi ak katab ak non fichye egzak ki nan kòmand lan, epi kouri ls, cat, oswa find pou verifye travay ou.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach 'Eseye li' pèmèt ou pratike kòmand ki soti nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Tcheke."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -43,21 +43,21 @@
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 }
               },
               "creating-folders-and-files-try-it-2": {
-                "title": "Travay tèminal: kreye katab andedan katab avèk mkdir -p",
-                "prompt": "Set up a simple project skeleton. Kouri `mkdir -p project-kit/src project-kit/docs`.",
-                "hint": "Sèvi ak katab ak non fichye egzak ki nan enstriksyon an, apre sa kouri ls, cat oswa find pou verifye travay ou.",
+                "title": "Travay final: kreye dosye anbreye ak mkdir -p",
+                "prompt": "Konfigire yon eskelèt pwojè senp. Kouri `mkdir -p project-kit/src project-kit/docs`.",
+                "hint": "Sèvi ak katab ak non fichye egzak ki nan kòmand lan, epi kouri ls, cat, oswa find pou verifye travay ou.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Check."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -66,21 +66,21 @@
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 }
               },
               "creating-folders-and-files-try-it-3": {
-                "title": "Travay tèminal: kreye fichye vid avèk touch",
-                "prompt": "The `touch-lab` katab se ready for two planning fichyes. Kouri `touch touch-lab/todo.txt touch-lab/agenda.txt`.",
-                "hint": "Sèvi ak katab ak non fichye egzak ki nan enstriksyon an, apre sa kouri ls, cat oswa find pou verifye travay ou.",
+                "title": "Travay final: kreye fichye vid ak touch",
+                "prompt": "Dosye `touch-lab` la pare pou de fichye planifikasyon. Kouri `touch touch-lab/todo.txt touch-lab/agenda.txt`.",
+                "hint": "Sèvi ak katab ak non fichye egzak ki nan kòmand lan, epi kouri ls, cat, oswa find pou verifye travay ou.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Check."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
@@ -89,55 +89,55 @@
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "touch_lab_readme_txt": {
-                    "content": "This katab se ready for touch practice.\n"
+                    "content": "This folder is ready for touch practice.\n"
                   }
                 }
               }
             },
             "try_creating_folders_and_files_sketch0": {
-              "title": "Eseye li ou menm: kreye yon katab avèk mkdir",
-              "prompt": "Kouri `mkdir school-notes` pou kreye one katab."
+              "title": "Eseye li poukont ou: kreye yon dosye ak mkdir",
+              "prompt": "Kouri `mkdir school-notes` pou kreye yon dosye."
             },
             "try_creating_folders_and_files_sketch1": {
-              "title": "Eseye li ou menm: kreye katab andedan katab avèk mkdir -p",
-              "prompt": "Kouri `mkdir -p project-kit/src project-kit/docs` pou kreye nested katabs nan one etap."
+              "title": "Eseye l poukont ou: kreye dosye anbreye ak mkdir -p",
+              "prompt": "Kouri `mkdir -p project-kit/src project-kit/docs` pou kreye dosye anbreye an yon sèl etap."
             },
             "try_creating_folders_and_files_sketch2": {
-              "title": "Eseye li ou menm: kreye fichye vid avèk touch",
-              "prompt": "Kouri `touch touch-lab/todo.txt touch-lab/agenda.txt` pou add two empty fichyes pou the existing katab."
+              "title": "Eseye l poukont ou: kreye fichye vid ak touch",
+              "prompt": "Kouri `touch touch-lab/todo.txt touch-lab/agenda.txt` pou ajoute de fichye vid nan dosye ki egziste deja a."
             }
           },
           "practice": {
             "sc-mkdir-basic-purpose": {
-              "title": "Idantifye objektif kòmand lan",
-              "prompt": "Kisa the main job of `mkdir` nan the Linux tèminal?",
-              "hint": "Panse ak whether li kreyes a katab, kreyes a fichye, oswa montres existing items.",
+              "title": "Idantifye objektif kòmandman an",
+              "prompt": "Ki travay prensipal `mkdir` la nan tèminal Linux la?",
+              "hint": "Panse si li kreye yon dosye, kreye yon fichye, oswa montre atik ki egziste deja.",
               "help": {
-                "concept": "`mkdir` stands for make directory, ak a directory se another name for a katab.",
-                "hint_1": "This kòmand changes the espas travay structure by adding a container for fichyes.",
-                "hint_2": "It fè not display kontni ak li fè not kreye a regular text fichye."
+                "concept": "`mkdir` Sa vle di kreye repètwa, epi yon repètwa se yon lòt non pou yon dosye.",
+                "hint_1": "Kòmand sa a chanje estrikti espas travay la lè li ajoute yon kontenè pou fichye.",
+                "hint_2": "Li pa afiche kontni yo e li pa kreye yon fichye tèks òdinè."
               },
               "options": {
-                "a": "Create a new katab",
-                "b": "Create an empty fichye",
-                "c": "List fichyes nan the katab aktyèl la",
-                "d": "Move into a different katab"
+                "a": "Kreye yon nouvo dosye",
+                "b": "Kreye yon fichye vid",
+                "c": "Lis fichye yo nan dosye aktyèl la",
+                "d": "Mouvman nan yon lòt dosye"
               }
             },
             "mc-when-to-use-mkdir-p": {
-              "title": "Chwazi pi bon itilizasyon pou mkdir -p",
-              "prompt": "Ki kòmands correctly use `mkdir -p` pou kreye nested katabs for a class project? Chwazi tout sa ki mache.",
-              "hint": "Chèche kòmands that kreye a path avèk parent katabs included.",
+              "title": "Chwazi pi bon fason pou itilize mkdir -p",
+              "prompt": "Ki kòmand ki itilize kòrèkteman `mkdir -p` pou kreye dosye anndan dosye pou yon pwojè klas? Chwazi tout sa ki aplike.",
+              "hint": "Chèche kòmand ki kreye yon chemen ki gen ladan dosye paran yo.",
               "help": {
-                "concept": "`mkdir -p` se used when ou want pou kreye a full katab path, including parent katabs that may not exist yet.",
-                "hint_1": "A nested path has slashes, such as `course/week1/notes`.",
-                "hint_2": "Chwazi kòmands where one kòmand can kreye multiple katab levels an sekiritely."
+                "concept": "`mkdir -p` Yo itilize l lè ou vle kreye yon chemen dosye konplè, ki gen ladan l dosye paran ki ka poko egziste.",
+                "hint_1": "Yon chemen anbrete gen barèt, tankou `course/week1/notes`.",
+                "hint_2": "Chwazi kòmand yo kote yon sèl kòmand ka kreye plizyè nivo dosye san danje."
               },
               "options": {
                 "a": "mkdir -p school/math/week1",
@@ -147,13 +147,13 @@
               }
             },
             "mc-valid-project-setup": {
-              "title": "Chwazi kòmand ki mete fichye ak katab yo kòrèkteman",
-              "prompt": "Ou se starting a reading project. Ki kòmands would correctly kreye the requested items? Chwazi tout sa ki mache.",
-              "hint": "Chèche kòmands that match the item type: katabs avèk one kòmand, fichyes avèk another.",
+              "title": "Chwazi kòmand ki mete fichye ak dosye yo kòrèkteman.",
+              "prompt": "Ou ap kòmanse yon pwojè lekti. Ki kòmand ki ta kreye atik yo mande yo kòrèkteman? Chwazi tout sa ki aplike.",
+              "hint": "Chèche kòmand ki koresponn ak tip atik la: dosye ak yon kòmand, fichye ak yon lòt.",
               "help": {
-                "concept": "Sèvi ak `mkdir` oswa `mkdir -p` for katabs ak `touch` for fichyes. Matching the kòmand pou the item type se the key idea.",
-                "hint_1": "A katab like `reading` needs a directory kòmand.",
-                "hint_2": "A fichye like `reading/list.txt` can be kreyed avèk `touch` once the katab path exists, oswa by using a full path apre kreye the katab."
+                "concept": "Sèvi ak `mkdir` oswa `mkdir -p` pou dosye yo ak `touch` pou fichye yo. Korespondans ant kòmand la ak tip atik la se lide kle a.",
+                "hint_1": "Yon dosye tankou `reading` bezwen yon kòmand repètwa.",
+                "hint_2": "Yon fichye tankou `reading/list.txt` ka kreye ak `touch` yon fwa chemen dosye a egziste, oswa lè w itilize yon chemen konplè apre w fin kreye dosye a."
               },
               "options": {
                 "a": "mkdir reading",
@@ -163,13 +163,13 @@
               }
             },
             "dr-folder-setup-order": {
-              "title": "Mete etap preparasyon yo nan lòd",
-              "prompt": "Mete sa yo tèminal actions nan yon lòd ki fè sans for kreye a new notes espas travay ak tchekeing it.",
-              "hint": "Create the katab anvan moving into it, ak kreye the fichye apre ou se inside the katab.",
+              "title": "Kòmande etap enstalasyon yo",
+              "prompt": "Mete aksyon final sa yo nan yon lòd ki fè sans pou kreye yon nouvo espas travay nòt epi verifye li.",
+              "hint": "Kreye dosye a anvan ou deplase ladan l, epi kreye fichye a apre ou fin antre ladan l.",
               "help": {
-                "concept": "A an sekirite tèminal workflow se pou kreye a katab, deplase into li if needed, kreye fichyes there, ak then enspekte the rezilta.",
-                "hint_1": "You cannot kreye `todo.txt` inside `notes` until `notes` exists oswa ou specify a full path.",
-                "hint_2": "The verification etap belongs at the end, apre the katab ak fichye have been kreyed."
+                "concept": "Yon pwosesis travay ki an sekirite nan tèminal la se kreye yon dosye, antre ladan l si sa nesesè, kreye fichye ladan l, epi enspekte rezilta a.",
+                "hint_1": "Ou pa ka kreye yon `todo.txt` andedan yon `notes` jiskaske yon `notes` egziste oswa ou presize yon chemen konplè.",
+                "hint_2": "Etap verifikasyon an dwe fèt nan fen an, apre dosye a ak fichye a fin kreye."
               },
               "tokens": {
                 "t1": "mkdir notes",
@@ -179,32 +179,32 @@
               }
             },
             "ci-create-single-folder": {
-              "title": "Kreye yon katab pwojè",
-              "prompt": "You kreye a `projects` katab nan the tèminal ak want pou prove li worked. Ki follow-up action makes the rezilta visible?",
-              "hint": "Choose the action that montres the new katab apre ou kreye it.",
+              "title": "Kreye yon dosye pwojè",
+              "prompt": "Ou kreye yon dosye \"`projects`\" nan tèminal la epi ou vle pwouve li te mache. Ki aksyon swivan ki fè rezilta a vizib?",
+              "hint": "Chwazi aksyon ki montre nouvo dosye a apre ou fin kreye li.",
               "help": {
-                "concept": "`mkdir` kreyes a katab nan the repètwa aktyèl la, ak `ls` se a quick way pou konfime the katab now appears nan the espas travay.",
-                "hint_1": "Create exactly one katab named `projects` where ou se now.",
-                "hint_2": "After kreye `projects`, run a lising kòmand nan the same kote so the tchekeer can see that ou verified it."
+                "concept": "`mkdir` Kreye yon dosye nan repètwa aktyèl la, epi ``ls`` se yon fason rapid pou konfime ke dosye a parèt kounye a nan espas travay la.",
+                "hint_1": "Kreye egzakteman yon sèl dosye ki rele `projects` kote ou ye kounye a.",
+                "hint_2": "Apre ou fin kreye `projects` la, egzekite yon kòmand lis nan menm kote a pou verifyè a ka wè ke ou verifye li."
               },
-              "template": "After kreye a katab, li helps pou ____ so ou can verify the change.",
+              "template": "Apre ou fin kreye yon dosye, li itil pou ____ pou ou ka verifye chanjman an.",
               "choices": [
-                "enprime yon rezilta ou ka wè",
-                "kache tout rezilta",
-                "efase fichye a touswit",
-                "sote pwogram nan"
+                "Enprime yon rezilta obsèvab",
+                "Kache tout sòti",
+                "Efase fichye a imedyatman",
+                "Sote pwogram nan"
               ]
             },
             "fb-touch-purpose": {
-              "title": "Konplete lide kòmand lan",
-              "prompt": "Ranpli kòmand ki manke a so the sentence matches Linux tèminal behavior.",
-              "hint": "Sèvi ak the kòmand that kreyes an empty fichye if li fè not already exist.",
+              "title": "Konplete lide kòmandman an",
+              "prompt": "Ranpli kòmand ki manke a pou fraz la matche ak konpòtman tèminal Linux la.",
+              "hint": "Itilize kòmand ki kreye yon fichye vid si li pa egziste deja.",
               "help": {
-                "concept": "`the missing term` se commonly used pou kreye empty fichyes quickly depi the tèminal.",
-                "hint_1": "This kòmand works on fichyes, not katabs.",
-                "hint_2": "It se the kòmand ou would use for something like `notes.txt` oswa `todo.txt`."
+                "concept": "`the missing term` Yo itilize l souvan pou kreye fichye vid rapidman apati de tèminal la.",
+                "hint_1": "Kòmand sa a mache sou fichye, pa sou dosye.",
+                "hint_2": "Se kòmand ou ta itilize pou yon bagay tankou `notes.txt` oswa `todo.txt`."
               },
-              "template": "To kreye an empty fichye named `notes.txt`, use `[blank1] notes.txt`.",
+              "template": "Pou kreye yon fichye vid ki rele `notes.txt`, sèvi ak `[blank1] notes.txt`.",
               "choices": [
                 "mkdir",
                 "touch",
@@ -222,16 +222,16 @@
       "linux-module-2-files-and-folders": {
         "creating-folders-and-files": {
           "sketch-1": {
-            "title": "Kreye yon katab avèk mkdir",
-            "bodyMarkdown": "`mkdir` kreyes a new katab nan ou current kote. This se useful when ou want pou start organizing a project instead of keeping everything nan one place.\n\nFor example, if ou se setting up school notes, ou might kreye a katab named `notes`:\n\n```bash\nmkdir notes\nls\n```\n\nStep by etap:\n- `mkdir notes` kreyes a katab called `notes`.\n- `ls` liss what se nan the katab aktyèl la so ou can konfime that `notes` now exists.\n\nIf `notes` appears nan the lis, the kòmand worked. A common abitid se pou run `ls` right apre kreye something so ou can verify the espas travay changed the way ou expected."
+            "title": "Kreye yon dosye ak mkdir",
+            "bodyMarkdown": "`mkdir` creates a new folder in your current location. This is useful when you want to start organizing a project instead of keeping everything in one place.\n\nFor example, if you are setting up school notes, you might create a folder named `notes`:\n\n```bash\nmkdir notes\nls\n```\n\nStep by step:\n- `mkdir notes` creates a folder called `notes`.\n- `ls` lists what is in the current folder so you can confirm that `notes` now exists.\n\nIf `notes` appears in the list, the command worked. A common habit is to run `ls` right after creating something so you can verify the workspace changed the way you expected."
           },
           "sketch-2": {
-            "title": "Kreye katab ki andedan lòt katab avèk mkdir -p",
-            "bodyMarkdown": "Sometimes ou need several katabs inside each other. `mkdir -p` kreyes the whole path at once.\n\nExample:\n\n```bash\nmkdir -p school/history/week1\nls school\n```\n\nStep by etap:\n- `mkdir -p school/history/week1` kreyes `school`, then `history` inside it, then `week1` inside that.\n- The `-p` option prevents ou depi having pou kreye each level one by one.\n- `ls school` lets ou enspekte the first katab nan that path.\n\nWithout `-p`, trying pou kreye a deep path all at once usually fails if the parent katabs fè not exist yet."
+            "title": "Kreye dosye anbrete ak mkdir -p",
+            "bodyMarkdown": "Sometimes you need several folders inside each other. `mkdir -p` creates the whole path at once.\n\nExample:\n\n```bash\nmkdir -p school/history/week1\nls school\n```\n\nStep by step:\n- `mkdir -p school/history/week1` creates `school`, then `history` inside it, then `week1` inside that.\n- The `-p` option prevents you from having to create each level one by one.\n- `ls school` lets you inspect the first folder in that path.\n\nWithout `-p`, trying to create a deep path all at once usually fails if the parent folders do not exist yet."
           },
           "sketch-3": {
-            "title": "Kreye fichye vid avèk touch",
-            "bodyMarkdown": "`touch` kreyes an empty fichye when that fichye fè not already exist. This se a fast way pou set up placeholders such as notes, drafts, oswa tchekeliss.\n\nExample:\n\n```bash\ntouch todo.txt ideas.txt\nls\n```\n\nStep by etap:\n- `touch todo.txt ideas.txt` kreyes two empty fichyes.\n- `ls` montres both fichye names nan the katab aktyèl la.\n\nYou can also combine katabs ak fichyes nan a small project setup. For example, apre kreye a `school` katab, ou might kreye `school/reading-list.txt` so the katab already contains a fichye ou plan pou use."
+            "title": "Kreye fichye vid ak touch",
+            "bodyMarkdown": "`touch` creates an empty file when that file does not already exist. This is a fast way to set up placeholders such as notes, drafts, or checklists.\n\nExample:\n\n```bash\ntouch todo.txt ideas.txt\nls\n```\n\nStep by step:\n- `touch todo.txt ideas.txt` creates two empty files.\n- `ls` shows both file names in the current folder.\n\nYou can also combine folders and files in a small project setup. For example, after creating a `school` folder, you might create `school/reading-list.txt` so the folder already contains a file you plan to use."
           }
         }
       }

@@ -1,0 +1,237 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "class-files-and-instances": {
+          "label": "Class Files and Instances",
+          "summary": "Create a class in its own file, import it, and make separate objects from it.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Class Files"
+            },
+            "sketch1": {
+              "title": "Creating Instances"
+            },
+            "sketch2": {
+              "title": "Encapsulation and Methods"
+            },
+            "sketch3": {
+              "title": "Try it yourself"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_class_files_and_instances_sketch0": {
+              "title": "Create a Car Class",
+              "prompt": "Define a `Car` class in a file named `car.py` with attributes `make`, `model`, and `year`. Implement a method `display_info` that returns a formatted string of the car's details. Then, create an instance in `main.py` and print its information.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# car.py\n\n# main.py\nfrom car import Car\n\n# Create an instance and print its info",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from car import Car\n\n# Create an instance and print its info"
+                }
+              }
+            },
+            "try_class_files_and_instances_sketch1": {
+              "title": "Multiple Car Instances",
+              "prompt": "Create two instances of the `Car` class in `main.py` with different attributes. Print the information for both cars using the `display_info` method.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "class Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def display_info(self):\n        return f\"{self.year} {self.make} {self.model}\"\n\n    def update_year(self, new_year):\n        self.year = new_year\n\nfrom car import Car\n\n# Create two instances and print their info",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from car import Car\n\n# Create two instances and print their info"
+                }
+              }
+            },
+            "try_class_files_and_instances_sketch2": {
+              "title": "Encapsulation with Methods",
+              "prompt": "Modify the `Car` class to include a method `update_year` that updates the car's year. Demonstrate this method in `main.py` by updating a car's year and printing the updated information.",
+              "hint": "Read the task \"Encapsulation with Methods\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Encapsulation with Methods\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# car.py\n\n# main.py\nfrom car import Car\n\n# Create an instance, update its year, and print the info",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from car import Car\n\n# Create an instance, update its year, and print the info"
+                }
+              }
+            },
+            "try_class_files_and_instances_sketch3": {
+              "title": "Print whether a number is positive",
+              "prompt": "Read one integer. Print `True` when the number is greater than 0 and `False` otherwise.",
+              "hint": "Use a conditional check and return a boolean result.",
+              "help": {
+                "concept": "A conditional can decide which boolean value to print based on a comparison.",
+                "hint_1": "Compare the number with zero inside an if statement.",
+                "hint_2": "Print True when the condition passes; otherwise print False."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            }
+          },
+          "practice": {
+            "ci-class-files-and-instances-0": {
+              "title": "Purpose of the __init__ Method",
+              "prompt": "What is the purpose of the `__init__` method in a Python class?",
+              "hint": "Consider what happens when you create a new instance of a class.",
+              "help": {
+                "concept": "The `__init__` method initializes a new object with specific attributes.",
+                "hint_1": "The `__init__` method is called automatically when a new object is created.",
+                "hint_2": "It sets up the initial state of the object."
+              },
+              "options": {
+                "a": "To define a class method",
+                "b": "To initialize a new object",
+                "c": "To delete an object",
+                "d": "To print object details"
+              }
+            },
+            "ci-class-files-and-instances-1": {
+              "title": "Attributes of a Class",
+              "prompt": "Which of the following are attributes of a class? Select all that apply.",
+              "hint": "Attributes are variables that belong to an object.",
+              "help": {
+                "concept": "Attributes store data for each object instance.",
+                "hint_1": "Attributes are defined within the `__init__` method.",
+                "hint_2": "They represent the state of an object."
+              },
+              "options": {
+                "a": "Methods",
+                "b": "Variables inside `__init__`",
+                "c": "Functions",
+                "d": "Variables outside any method"
+              }
+            },
+            "ci-class-files-and-instances-2": {
+              "title": "Benefits of Encapsulation",
+              "prompt": "What are the benefits of encapsulation in object-oriented programming? Select all that apply.",
+              "hint": "Think about how encapsulation affects data access and modification.",
+              "help": {
+                "concept": "Encapsulation restricts direct access to some of an object's components.",
+                "hint_1": "Encapsulation helps protect the internal state of an object.",
+                "hint_2": "It allows controlled access through methods."
+              },
+              "options": {
+                "a": "Improves code readability",
+                "b": "Protects object state",
+                "c": "Allows direct access to attributes",
+                "d": "Enables controlled access"
+              }
+            },
+            "ci-class-files-and-instances-3": {
+              "title": "Steps to Create and Use a Class",
+              "prompt": "Arrange the steps to create and use a class in Python in the correct order.",
+              "hint": "Start from defining the class to using its methods.",
+              "help": {
+                "concept": "Creating and using a class involves defining it, creating instances, and using its methods.",
+                "hint_1": "Begin with defining the class and its methods.",
+                "hint_2": "End with creating an instance and calling its methods."
+              },
+              "tokens": {
+                "t1": "Define the class",
+                "t2": "Create an instance",
+                "t3": "Call a method",
+                "t4": "Import the class"
+              }
+            },
+            "ci-class-files-and-instances-4": {
+              "title": "Importing a Class",
+              "prompt": "To use a class defined in another file, you need to [blank1] it.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "To use a class defined in another file, you need to [blank1] it.",
+              "choices": [
+                "import",
+                "define",
+                "delete",
+                "print"
+              ]
+            },
+            "ci-class-files-and-instances-5": {
+              "title": "Creating an Instance",
+              "prompt": "To create an instance of a class, you call its [blank1] method.",
+              "hint": "This method is automatically called when a new object is created.",
+              "help": {
+                "concept": "The `the missing term` method initializes a new object.",
+                "hint_1": "The method is defined within the class and sets up the object.",
+                "hint_2": "It is called when you use the class name followed by parentheses."
+              },
+              "template": "To create an instance of a class, you call its [blank1] method.",
+              "choices": [
+                "__init__",
+                "display_info",
+                "update_year",
+                "main"
+              ]
+            },
+            "policy_code_input_2": {
+              "title": "Print whether a number is even",
+              "prompt": "Read one integer. Print `True` when the number is even and `False` when it is odd.",
+              "hint": "Use the remainder after dividing by 2.",
+              "help": {
+                "concept": "Even numbers have remainder 0 when divided by 2.",
+                "hint_1": "Use % 2 to check the remainder.",
+                "hint_2": "Print True only for the even case."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            },
+            "policy_code_input_3": {
+              "title": "Print whether a number is negative",
+              "prompt": "Read one integer. Print `True` when the number is less than 0 and `False` otherwise.",
+              "hint": "Compare the value with zero.",
+              "help": {
+                "concept": "A less-than comparison can detect negative numbers.",
+                "hint_1": "Use < 0 inside an if statement.",
+                "hint_2": "Print False for zero or positive values."
+              },
+              "starterCode": "n = int(input())\n# Your code here"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "class-files-and-instances": {
+          "class-files-and-instances-sketch0": {
+            "title": "Understanding Class Files",
+            "bodyMarkdown": "In Python, a class is a blueprint for creating objects. To keep your code organized, it's a good practice to define each class in its own file. This way, you can easily import the class into other files and use it to create objects.\n\nFor example, consider a `Car` class:\n\n```python\nclass Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def display_info(self):\n        return f\"{self.year} {self.make} {self.model}\"\n```\n\nThis class can be saved in a file named `the code editor`. You can then import and use it in another file, like `the code editor`:\n\n```python\nfrom car import Car\n\nmy_car = Car(\"Toyota\", \"Corolla\", 2020)\nprint(my_car.display_info())\n```\n\nThis code creates an instance of `Car` and prints its information.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "class-files-and-instances-sketch1": {
+            "title": "Creating Instances",
+            "bodyMarkdown": "Once you have a class defined, you can create multiple instances of it. Each instance represents a separate object with its own state.\n\nContinuing with the `Car` class example, you can create multiple car objects:\n\n```python\ncar1 = Car(\"Honda\", \"Civic\", 2019)\ncar2 = Car(\"Ford\", \"Mustang\", 2021)\n\nprint(car1.display_info())  # Outputs: 2019 Honda Civic\nprint(car2.display_info())  # Outputs: 2021 Ford Mustang\n```\n\nEach `Car` object has its own `make`, `model`, and `year` attributes, demonstrating how instances maintain their own state.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "class-files-and-instances-sketch2": {
+            "title": "Encapsulation and Methods",
+            "bodyMarkdown": "Encapsulation is a fundamental concept in object-oriented programming. It involves bundling the data (attributes) and methods that operate on the data into a single unit, or class.\n\nIn the `Car` class, the `display_info` method is an example of encapsulation. It operates on the `make`, `model`, and `year` attributes to return a formatted string.\n\n```python\nclass Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n    def display_info(self):\n        return f\"{self.year} {self.make} {self.model}\"\n```\n\nBy using methods, you can control how the data is accessed and modified, ensuring that the object's state remains consistent.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "try-it-yourself": {
+            "title": "Try it yourself",
+            "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+          }
+        }
+      }
+    }
+  }
+}

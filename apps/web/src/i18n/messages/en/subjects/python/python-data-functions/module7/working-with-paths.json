@@ -171,7 +171,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass"
+              "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+              "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/input.txt to read the nested file."
+                }
+              }
             },
             "ci-copy-between-paths": {
               "title": "Copy text to another relative path",
@@ -182,7 +188,19 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text"
+              "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+              "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read from data/source.txt."
+                },
+                "1": {
+                  "message": "Write to data/copy.txt."
+                },
+                "2": {
+                  "message": "Use file.write() to create the copy."
+                }
+              }
             },
             "ci-count-lines-in-folder": {
               "title": "Count lines from a file path",
@@ -193,7 +211,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass"
+              "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+              "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/items.txt to count its lines."
+                }
+              }
             },
             "try-working-with-paths-checkpoint": {
               "title": "Use a relative path",
@@ -204,7 +228,29 @@
                 "hint_1": "Create the path with `Path(\"data\") / \"names.txt\"`.",
                 "hint_2": "Read that path and print the file text without extra characters."
               },
-              "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n"
+              "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+              "starterFiles": {
+                "data_names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n"
+                },
+                "data_names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Use Path(...) to build the path."
+                },
+                "1": {
+                  "message": "Build the path with Path('data') / 'names.txt'."
+                }
+              },
+              "solutionCode": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n"
             },
             "try-working-with-paths-sketch0": {
               "title": "Build a relative path",
@@ -215,7 +261,13 @@
                 "hint_1": "Use the `folder` variable first, then `/`, then `filename`.",
                 "hint_2": "Print the finished path string `data/scores.txt`."
               },
-              "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n"
+              "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+              "solutionCode": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Build the path from folder and filename instead of typing the final path."
+                }
+              }
             },
             "try-working-with-paths-sketch1": {
               "title": "Use pathlib for a path",
@@ -226,7 +278,16 @@
                 "hint_1": "Create a variable like `path = Path(\"data\") / \"scores.txt\"`.",
                 "hint_2": "Print the path variable after you build it."
               },
-              "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n"
+              "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+              "solutionCode": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use Path(...) to build the path."
+                },
+                "1": {
+                  "message": "Build the path with Path('data') / 'scores.txt'."
+                }
+              }
             },
             "try-working-with-paths-sketch2": {
               "title": "Read from a folder path",
@@ -237,7 +298,26 @@
                 "hint_1": "Open `data/message.txt` inside a `with open(...)` block.",
                 "hint_2": "Read the file text and print only that text."
               },
-              "starterCode": "# Open data/message.txt and print its text.\n"
+              "starterCode": "# Open data/message.txt and print its text.\n",
+              "starterFiles": {
+                "data_message_txt": {
+                  "content": "Nested hello\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n"
+                },
+                "data_message_txt": {
+                  "content": "Nested hello\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/message.txt instead of typing Nested hello."
+                }
+              },
+              "solutionCode": "with open('data/message.txt') as file:\n    print(file.read().strip())\n"
             }
           },
           "tryIt": {

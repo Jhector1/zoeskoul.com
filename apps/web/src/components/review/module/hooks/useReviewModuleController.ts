@@ -37,6 +37,7 @@ import {
     buildModuleCompletedProgress,
     buildNormalizedTopicsProgress,
     buildTopicCompletedProgress,
+    type QuizResetTarget,
 } from "../actions";
 
 
@@ -1357,7 +1358,11 @@ export function useReviewModuleController({
         const embeddedTryIt = getEmbeddedTryIt(activeCard);
         if (embeddedTryIt && embeddedTryIt.required !== false) {
             return {
-                quizCardId: embeddedTryIt.id,
+                resetTarget: {
+                    progressId: embeddedTryIt.id,
+                    runtimeCardId: activeCard.id,
+                    cardProgressKeys: [activeCard.id, embeddedTryIt.id],
+                } satisfies QuizResetTarget,
                 menuLabel: "This exercise",
                 menuDescription: "Clear the current Try it yourself answer and editor state.",
                 dialogTitle: "Reset this exercise?",
@@ -1369,7 +1374,11 @@ export function useReviewModuleController({
         if (!isQuizLikeCard(activeCard)) return null;
 
         return {
-            quizCardId: activeCard.id,
+            resetTarget: {
+                progressId: activeCard.id,
+                runtimeCardId: activeCard.id,
+                cardProgressKeys: [activeCard.id],
+            } satisfies QuizResetTarget,
             menuLabel: activeCard.type === "project" ? "This project" : "This quiz",
             menuDescription:
                 activeCard.type === "project"
@@ -1394,11 +1403,18 @@ export function useReviewModuleController({
     const applyResetCurrentCard = useCallback(() => {
         if (!activeCardResetTarget) return;
 
-        useReviewRuntimeStore.getState().clearRuntimeForCard(viewTid, activeCardResetTarget.quizCardId);
+        const resetTarget = activeCardResetTarget.resetTarget;
+
+        useReviewRuntimeStore
+            .getState()
+            .clearRuntimeForCard(
+                viewTid,
+                resetTarget.runtimeCardId ?? resetTarget.progressId,
+            );
         clearReviewWorkspaceDrafts();
 
         setProgress((prev: ReviewProgressState) => {
-            const next = buildQuizResetProgress(prev, viewTid, activeCardResetTarget.quizCardId);
+            const next = buildQuizResetProgress(prev, viewTid, resetTarget);
             queueMicrotask(() => flushNow(next));
             return next;
         });
@@ -1547,11 +1563,14 @@ export function useReviewModuleController({
                 sectionSlug: routeTarget?.sectionSlug ?? sectionSlug,
             });
 
+            await flushAll();
+
             await navigateToResolvedTarget(nextTarget, "push", {
                 bypassProgressiveLock: true,
             });
         },
         [
+            flushAll,
             mod,
             moduleSlug,
             navigateToResolvedTarget,
@@ -2057,6 +2076,7 @@ export function useReviewModuleController({
             viewCards,
             viewTid,
             activeCardIndex,
+            unlockAll,
             navModes: resolvedNavModes,
             maxUnlockedCardIndex,
             progressiveLockMessage,

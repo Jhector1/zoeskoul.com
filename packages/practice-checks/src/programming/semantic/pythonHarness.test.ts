@@ -1,4 +1,7 @@
 import { spawnSync } from "node:child_process";
+import { mkdtempSync, mkdirSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
 import { describe, expect, it } from "vitest";
 import {
     buildPythonSemanticHarness,
@@ -8,10 +11,13 @@ import {
 function runHarness(args: {
     userCode: string;
     semanticChecks: Parameters<typeof buildPythonSemanticHarness>[0]["semanticChecks"];
+    semanticModuleNames?: string[];
+    cwd?: string;
 }) {
     const source = buildPythonSemanticHarness(args);
 
     const result = spawnSync("python3", ["-c", source], {
+        cwd: args.cwd,
         encoding: "utf8",
     });
 
@@ -220,4 +226,134 @@ describe("buildPythonSemanticHarness", () => {
             userStdout: "",
         });
     });
+
+    it("checks state after a sequence of method calls", () => {
+        const result = runHarness({
+            userCode: [
+                "class BankAccount:",
+                "    def __init__(self, initial_balance):",
+                "        self._balance = initial_balance",
+                "",
+                "    def deposit(self, amount):",
+                "        if amount > 0:",
+                "            self._balance += amount",
+                "",
+                "    def get_balance(self):",
+                "        return self._balance",
+            ].join("\n"),
+            semanticChecks: [
+                {
+                    type: "method_sequence_returns",
+                    className: "BankAccount",
+                    constructorArgs: [100],
+                    calls: [
+                        {
+                            methodName: "deposit",
+                            methodArgs: [50],
+                        },
+                    ],
+                    methodName: "get_balance",
+                    methodArgs: [],
+                    expected: 150,
+                },
+            ],
+        });
+
+        expect(result).toEqual({
+            ok: true,
+            userStdout: "",
+        });
+    });
+
+
+    it("preloads solution modules and coerces class-discriminated semantic fixtures", () => {
+        const cwd = mkdtempSync(path.join(tmpdir(), "zoe-semantic-modules-"));
+        mkdirSync(path.join(cwd, "models"));
+        mkdirSync(path.join(cwd, "services"));
+        writeFileSync(path.join(cwd, "models", "book.py"), [
+            "class BaseItem:",
+            "    def __init__(self, title):",
+            "        self.title = title",
+            "",
+            "    def display_line(self):",
+            "        return self.title",
+            "",
+            "class Book(BaseItem):",
+            "    def __init__(self, title, author):",
+            "        super().__init__(title)",
+            "        self.author = author",
+            "",
+            "    def display_line(self):",
+            "        return f'Book: {self.title} by {self.author}'",
+        ].join("\n"));
+        writeFileSync(path.join(cwd, "services", "report_service.py"), [
+            "def build_report(items):",
+            "    return [item.display_line() for item in items]",
+        ].join("\n"));
+
+        const result = runHarness({
+            cwd,
+            userCode: "from services.report_service import build_report",
+            semanticModuleNames: ["models.book", "services.report_service"],
+            semanticChecks: [
+                {
+                    type: "defines_class",
+                    className: "BaseItem",
+                },
+                {
+                    type: "function_returns",
+                    functionName: "build_report",
+                    args: [
+                        [
+                            [
+                                ["class", "Book"],
+                                ["title", "Clean Code"],
+                                ["author", "Robert C. Martin"],
+                            ],
+                        ],
+                    ],
+                    argKinds: ["list_of_dict_entries"],
+                    expected: ["Book: Clean Code by Robert C. Martin"],
+                    expectedKind: "value",
+                },
+            ],
+        });
+
+        expect(result).toEqual({
+            ok: true,
+            userStdout: "",
+        });
+    });
+
+    it("treats accidental singleton primitive expected lists as the primitive value", () => {
+        const result = runHarness({
+            userCode: [
+                "class Account:",
+                "    def __init__(self, owner, balance):",
+                "        self.owner = owner",
+                "        self.balance = balance",
+                "",
+                "    def deposit(self, amount):",
+                "        self.balance += amount",
+                "        return self.balance",
+            ].join("\n"),
+            semanticChecks: [
+                {
+                    type: "attribute_sequence_equals",
+                    className: "Account",
+                    constructorArgs: ["Rae", 70],
+                    calls: [{ methodName: "deposit", methodArgs: [25] }],
+                    attributeName: "balance",
+                    expected: [95],
+                    expectedKind: "value",
+                },
+            ],
+        });
+
+        expect(result).toEqual({
+            ok: true,
+            userStdout: "",
+        });
+    });
+
 });

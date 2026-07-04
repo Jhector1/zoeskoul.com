@@ -8,6 +8,7 @@ import type {
     SemanticValidationReport,
 } from "@zoeskoul/curriculum-profiles";
 import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
+import type { CompileValidationState } from "../compile/validationState.js";
 
 export type TopicReportBundle = {
     subjectSlug: string;
@@ -31,6 +32,7 @@ export type TopicReportBundle = {
     goldenReport?: GoldenValidationReport;
     topicBundle?: unknown;
     qualityReport?: CurriculumQualityReport;
+    validationState?: CompileValidationState;
 };
 
 async function pathExists(filePath: string) {
@@ -83,6 +85,7 @@ export async function readTopicReports(args: {
         goldenReport: await readJsonIfExists(path.join(baseDir, "golden-report.json")),
         topicBundle: await readJsonIfExists(path.join(baseDir, "emitted-topic-bundle.json")),
         qualityReport: await readJsonIfExists(path.join(baseDir, "quality-report.json")),
+        validationState: await readJsonIfExists(path.join(baseDir, "validation-state.json")),
     };
 }
 

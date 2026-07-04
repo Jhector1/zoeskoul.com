@@ -1,0 +1,138 @@
+{
+  "topicId": "capstone-tests-and-polish",
+  "repairs": [
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-capstone-tests-and-polish-sketch0",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-capstone-tests-and-polish-sketch0",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-capstone-tests-and-polish-sketch0",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step1-service-tests",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step1-service-tests",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step1-service-tests",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step2-fix-service-workflow",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step2-fix-service-workflow",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step2-fix-service-workflow",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step6-final-tests",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "capstone-tests-and-polish-step6-final-tests",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step5-final-polish",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "capstone-tests-and-polish-step5-final-polish",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step4-readme",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "capstone-tests-and-polish-step4-readme",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
+    },
+    {
+      "code": "PYTHON_GOLDEN_TESTS_ALIGNED_WITH_SOLUTION",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step3-report-file",
+      "message": "Regenerated Python code_input expected stdout from solutionCode after applying file fixtures so golden validation matches the published tests."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "recipe",
+      "severity": "low",
+      "field": "capstone-tests-and-polish-step3-report-file",
+      "message": "This fixed_tests exercise does not read stdin, so the repair step cannot safely invent a second meaningful test without faking duplicate coverage."
+    },
+    {
+      "code": "PYTHON_POLICY_EXTRA_EXERCISE_DROPPED",
+      "category": "other",
+      "severity": "medium",
+      "field": "capstone-tests-and-polish-step6-final-tests",
+      "message": "Dropped extra code_input exercise to satisfy the planned exercise mix for \"capstone-tests-and-polish\"."
+    },
+    {
+      "code": "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+      "category": "other",
+      "severity": "medium",
+      "field": "sketchBlocks",
+      "message": "Added a Try it yourself learner action required by programming teaching validation."
+    }
+  ]
+}

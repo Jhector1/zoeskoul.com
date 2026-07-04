@@ -1,0 +1,227 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-11-oop-capstone-project": {
+        "capstone-storage-and-reports": {
+          "label": "Capstone Storage and Reports",
+          "summary": "Finish the Smart Task Tracker by loading task data from workspace files, turning rows into task objects, generating a report service, adding assertions, and documenting the final deliverable.",
+          "cards": {
+            "sketch0": {
+              "title": "Final capstone brief: Smart Task Tracker storage and reporting"
+            },
+            "project": {
+              "title": "Smart Task Tracker Final Capstone"
+            }
+          },
+          "projectSteps": {
+            "try_capstone_storage_and_reports_sketch0": {
+              "title": "Set up the capstone workspace and core task models"
+            },
+            "capstone_storage_step_2_loader": {
+              "title": "Load task objects from a CSV data file"
+            },
+            "capstone_storage_step_3_report_service": {
+              "title": "Generate a polymorphic summary report"
+            },
+            "capstone_storage_step_4_save_report": {
+              "title": "Write the report to an output file and print it"
+            },
+            "capstone_storage_step_5_assert_checks": {
+              "title": "Add assertion-based checks for loader and report behavior"
+            },
+            "capstone_storage_step_6_readme_handoff": {
+              "title": "Add a README handoff and final project polish"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "try_capstone_storage_and_reports_sketch0": {
+                "title": "Set up the capstone workspace and core task models",
+                "prompt": "Start the final capstone project. In step 1 of 6, Build the first working version of the Smart Task Tracker. In `models/base_task.py`, define a `BaseTask` class with `title`, `points`, and `done` attributes. Use encapsulation by validating `points` so negative values become `0`. Add methods `mark_done()` and `summary_line()`. In `models/bug_task.py` and `models/feature_task.py`, create subclasses that inherit from `BaseTask`, call `super().__init__`, store `severity` or `area`, and override `summary_line()` with type-specific text. In `main.py`, create one `BugTask` and one `FeatureTask`, mark the bug done, and print both summary lines. Expected output should show one BUG line and one FEATURE line. This step matters because the later storage and report services will depend on this shared base-class contract.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Click Run and compare the output panel with the expected result."
+                },
+                "starterCode": "# Open the workspace files and complete the TODOs.",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Open the workspace files and complete the TODOs."
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self.done = None\n\n    def summary_line(self):\n        pass"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def summary_line(self):\n        pass"
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def summary_line(self):\n        pass"
+                  }
+                }
+              },
+              "capstone_storage_step_2_loader": {
+                "title": "Load task objects from a CSV data file",
+                "prompt": "Continue the final capstone project from the previous working step. In step 2 of 6, Continue from the previous working capstone. Add a storage service in `services/storage.py` with a function `load_tasks(path)` that reads `data/tasks.csv`, skips the header row, and returns a list of task objects. Each row has `kind,title,points,extra,done`. Create `BugTask` objects when `kind` is `bug` and `FeatureTask` objects when `kind` is `feature`. Use the `extra` column for severity or area. If `done` is `yes`, mark the task done. Update `main.py` to load the tasks from the file and print each task's `summary_line()`. This step matters because the app now turns stored text data into real objects that the rest of the capstone can use.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Capstone step 2: Load task objects from a CSV data file\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Capstone step 2: Load task objects from a CSV data file\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self.done = None\n\n    def summary_line(self):\n        return f\"{self.title} [open] - 0 pts\""
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def summary_line(self):\n        return f\"BUG {self.value_3}: {self.value_1} [open] - {self.value_2} pts\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE {self.value_3}: {self.value_1} [open] - {self.value_2} pts\""
+                  }
+                }
+              },
+              "capstone_storage_step_3_report_service": {
+                "title": "Generate a polymorphic summary report",
+                "prompt": "Continue the final capstone project from the previous working step. In step 3 of 6, Continue from the previous working capstone. Add `services/reporting.py` with a function `build_report(tasks)` that returns a multi-line string. The report should include: a first line `SMART TASK TRACKER REPORT`, a second line with `Total tasks: X`, a third line with `Done tasks: Y`, a fourth line with `Open tasks: Z`, and then one summary line for each task. Use polymorphism by looping through the mixed task list and calling each object's `summary_line()` method instead of checking the class name. Update `main.py` to load tasks and print the full report. This step matters because the report service should work with any subclass that follows the base-class contract.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Continue building the Smart Task Tracker.\n# Capstone step 3: Generate a polymorphic summary report\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Continue building the Smart Task Tracker.\n# Capstone step 3: Generate a polymorphic summary report\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = max(0, points)\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"{self.title} [{status}] - {self.points} pts\""
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, points, severity):\n        super().__init__(title, points)\n        self.severity = severity\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"BUG {self.severity}: {self.title} [{status}] - {self.points} pts\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, points, area):\n        super().__init__(title, points)\n        self.area = area\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"FEATURE {self.area}: {self.title} [{status}] - {self.points} pts\""
+                  },
+                  "services_storage_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\n# TODO: write load_tasks(path)"
+                  }
+                }
+              },
+              "capstone_storage_step_4_save_report": {
+                "title": "Write the report to an output file and print it",
+                "prompt": "Continue the final capstone project from the previous working step. In step 4 of 6, Continue from the previous working capstone. Add a function `save_report(path, report_text)` in `services/reporting.py` that writes the report string to a file. Update `main.py` so it loads tasks, builds the report, saves it to `reports/summary.txt`, and then prints the same report to the output panel. Keep the report-building logic separate from file-writing logic. This step matters because a polished capstone should both display results and store them for handoff.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Capstone step 4: Write the report to an output file and print it\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Capstone step 4: Write the report to an output file and print it\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = max(0, points)\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"{self.title} [{status}] - {self.points} pts\""
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, points, severity):\n        super().__init__(title, points)\n        self.severity = severity\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"BUG {self.severity}: {self.title} [{status}] - {self.points} pts\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, points, area):\n        super().__init__(title, points)\n        self.area = area\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"FEATURE {self.area}: {self.title} [{status}] - {self.points} pts\""
+                  },
+                  "services_storage_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, \"r\") as file:\n        rows = file.read().strip().splitlines()\n\n    for row in rows[1:]:\n        kind, title, points_text, extra, done_text = row.split(\",\")\n        points = int(points_text)\n\n        if kind == \"bug\":\n            task = BugTask(title, points, extra)\n        else:\n            task = FeatureTask(title, points, extra)\n\n        if done_text == \"yes\":\n            task.mark_done()\n\n        tasks.append(task)\n\n    return tasks"
+                  },
+                  "services_reporting_py": {
+                    "content": "# TODO: write build_report(tasks)"
+                  }
+                }
+              },
+              "capstone_storage_step_5_assert_checks": {
+                "title": "Add assertion-based checks for loader and report behavior",
+                "prompt": "Continue the final capstone project from the previous working step. In step 5 of 6, Continue from the previous working capstone. Create `tests/check_tracker.py` with assertion-based checks that verify two things: `load_tasks(\"data/tasks.csv\")` returns the expected number and types of task objects, and `build_report(tasks)` includes the correct totals and at least one BUG and one FEATURE summary line. Update `main.py` so it still prints the saved report, but also imports and runs the checks after the report is generated. This step matters because a final capstone should prove that storage and reporting still work as the project grows.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Capstone step 5: Add assertion-based checks for loader and report behavior\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Capstone step 5: Add assertion-based checks for loader and report behavior\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = max(0, points)\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"{self.title} [{status}] - {self.points} pts\""
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, points, severity):\n        super().__init__(title, points)\n        self.severity = severity\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"BUG {self.severity}: {self.title} [{status}] - {self.points} pts\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, points, area):\n        super().__init__(title, points)\n        self.area = area\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"FEATURE {self.area}: {self.title} [{status}] - {self.points} pts\""
+                  },
+                  "services_storage_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, \"r\") as file:\n        rows = file.read().strip().splitlines()\n\n    for row in rows[1:]:\n        kind, title, points_text, extra, done_text = row.split(\",\")\n        points = int(points_text)\n\n        if kind == \"bug\":\n            task = BugTask(title, points, extra)\n        else:\n            task = FeatureTask(title, points, extra)\n\n        if done_text == \"yes\":\n            task.mark_done()\n\n        tasks.append(task)\n\n    return tasks"
+                  },
+                  "services_reporting_py": {
+                    "content": "# TODO: write build_report(tasks)"
+                  }
+                }
+              },
+              "capstone_storage_step_6_readme_handoff": {
+                "title": "Add a README handoff and final project polish",
+                "prompt": "Continue the final capstone project from the previous working step. In step 6 of 6, Continue from the previous working capstone. Create a `README.md` file that explains the project goal, the workspace file structure, how storage works, how reporting works, and how the assertion checks help validate the app. Then update `main.py` so the final run prints the report, runs the checks, and prints a final handoff line: `Capstone ready for review.` This step matters because a polished capstone should be understandable to another developer, not just runnable.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Capstone step 6: Add a README handoff and final project polish\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbaseTask_1 = BaseTask(\"Write tests\", 3)\nbaseTask_1.mark_done()\nbaseTask_1.summary_line()\nbaseTask_2 = BaseTask(\"Write tests\", -2)\nbaseTask_2.summary_line()\nbugTask_1 = BugTask(\"Fix login\", 5, \"high\")\nbugTask_1.summary_line()\nfeatureTask_1 = FeatureTask(\"Add export\", 8, \"reports\")\nfeatureTask_1.summary_line()\nprint(baseTask_1.summary_line())\nprint(baseTask_2.summary_line())\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Continue building the Smart Task Tracker.\n# Capstone step 6: Add a README handoff and final project polish\n# Keep the working code above from the previous step.\n# Next, Continue from the previous working capstone\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = max(0, points)\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"{self.title} [{status}] - {self.points} pts\""
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, points, severity):\n        super().__init__(title, points)\n        self.severity = severity\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"BUG {self.severity}: {self.title} [{status}] - {self.points} pts\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, points, area):\n        super().__init__(title, points)\n        self.area = area\n\n    def summary_line(self):\n        status = \"done\" if self.done else \"open\"\n        return f\"FEATURE {self.area}: {self.title} [{status}] - {self.points} pts\""
+                  },
+                  "services_storage_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, \"r\") as file:\n        rows = file.read().strip().splitlines()\n\n    for row in rows[1:]:\n        kind, title, points_text, extra, done_text = row.split(\",\")\n        points = int(points_text)\n\n        if kind == \"bug\":\n            task = BugTask(title, points, extra)\n        else:\n            task = FeatureTask(title, points, extra)\n\n        if done_text == \"yes\":\n            task.mark_done()\n\n        tasks.append(task)\n\n    return tasks"
+                  },
+                  "services_reporting_py": {
+                    "content": "# TODO: write build_report(tasks)"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-11-oop-capstone-project": {
+        "capstone-storage-and-reports": {
+          "capstone-storage-and-reports-sketch-0": {
+            "title": "Final capstone brief: Smart Task Tracker storage and reporting",
+            "bodyMarkdown": "You are finishing a **Smart Task Tracker** for a small product team. The app already uses object-oriented design ideas: a base task type, specialized task subclasses, and methods that let each object describe itself. In this final capstone topic, your job is to make the project feel complete by adding **storage**, **reporting**, **tests**, and a short **README handoff**.\n\nThe finished deliverable should read task data from workspace files, build task objects, summarize them in a report, and show that the project is tested and documented. This is where the four OOP pillars come together:\n\n- **Encapsulation**: each task object keeps and validates its own state.\n- **Inheritance**: `BugTask` and `FeatureTask` reuse shared behavior from `BaseTask`.\n- **Polymorphism**: the report can loop through mixed task objects and call the same method on each one.\n- **Abstraction**: the base class defines the shared contract that subclasses follow.\n\nA small example of the kind of object behavior your report will rely on looks like this:\n\n```python\nclass BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = max(0, points)\n\n    def summary_line(self):\n        return f\"{self.title} ({self.points} pts)\"\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n```\n\nLine by line:\n\n- `BaseTask` stores shared task data.\n- `summary_line()` gives every task a common reporting method.\n- `BugTask` inherits from `BaseTask`.\n- `BugTask` overrides `summary_line()` so the report can call the same method on different objects and still get type-specific output.\n\nBy the end of this capstone, your workspace should include model files, service files, data files, a report runner, checks with `assert`, and a README that explains the project structure and final output."
+          }
+        }
+      }
+    }
+  }
+}

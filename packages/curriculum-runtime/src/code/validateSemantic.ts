@@ -6,6 +6,7 @@ export async function validateSemanticCode(args: {
     solutionCode: string;
     expected: ProgrammingExpected;
     files?: Array<{ path: string; content: string }>;
+    semanticModuleNames?: string[];
 }): Promise<
     | { ok: true }
     | {
@@ -27,6 +28,7 @@ export async function validateSemanticCode(args: {
                 expected: args.expected,
                 solutionCode: args.solutionCode,
                 files: args.files,
+                semanticModuleNames: args.semanticModuleNames,
             });
         default:
             return {

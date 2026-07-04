@@ -78,7 +78,7 @@ docker compose -f docker-compose.prod.yml logs -f runner
 
 
 
-pnpm curr:course -- publish sql sql-v2 --live-subject sql-v2  --force
+pnpm curr:course -- publish linux linux-terminal-fundamentals --live-subject  linux-terminal-fundamentals  --force
 
 
 
@@ -156,7 +156,7 @@ sudo docker compose up -d judge0 worker
 
 
 
-RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens sql sql-v2
+RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens python applied-python-projects
 
 sudo scp -r deploy@5.78.159.224:/opt/edge-proxy ~/Downloads/
 
@@ -192,14 +192,14 @@ Opt-in suites:
   pnpm --filter @zoeskoul/web test:e2e:legacy
 
 
-pnpm curr:course -- check linux linux-terminal-fundamentals --resume
+pnpm curr:course -- check python applied-python-projects --resume
 
 ssh deploy@5.78.227.155
 
 
 
 pnpm --filter @zoeskoul/curriculum-cli exec node dist/index.js compile-course \
-  sql sql-2 \
+  python python-data-functions \
   --draft-only \
   --rebuild-from-drafts \
   --prefer-current-draft-output
@@ -208,10 +208,42 @@ pnpm --filter @zoeskoul/curriculum-cli exec node dist/index.js compile-course \
 
 
 
+# backup current draft
+pnpm curr:course -- backup-course-draft python applied-python-projects
+
+# list backups
+pnpm curr:course -- list-course-backups python applied-python-projects
+
+# restore one backup into draft
+pnpm curr:course -- restore-course-draft python applied-python-projects --backup-key <backupKey>
+
+# restore even if a draft already exists
+# this first backs up the existing draft automatically
+pnpm curr:course -- restore-course-draft python applied-python-projects --backup-key <backupKey> --force
 
 
+
+vi ~/.zshrc
+# press i, edit
+# press Esc
+# type :wq then Enter
+
+source ~/.zshrc
 
 Resume the curriculum draft work from where we left off.
+pnpm --filter @zoeskoul/web i18n:generate
+
+
+
+
+pnpm curr:translate -- linux linux-terminal-fundamentals \
+  --locale fr \
+  --translation-provider deepl \
+  --translation-model deepl-free \
+  --module module1 \
+  --topic where-am-i \
+  --unsafe-skip-validation
+
 
 First:
 - inspect the current authoring course, draft subject, draft messages, and any recent changes before editing

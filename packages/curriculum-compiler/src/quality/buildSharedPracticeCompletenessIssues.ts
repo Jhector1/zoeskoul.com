@@ -5,7 +5,8 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import type { CritiqueIssue } from "@zoeskoul/curriculum-profiles";
 import { getCurriculumProfile } from "@zoeskoul/curriculum-profiles";
-import { isProjectTopic } from "../emit/exerciseMessageBase.js";
+import { resolveTopicProjectKind } from "../emit/exerciseMessageBase.js";
+import { applyProgressiveProjectFlow } from "../emit/progressiveProjectFlow.js";
 import {
     resolveTryItExerciseIdForSketch,
     resolveTryItSketchIndexes,
@@ -47,6 +48,15 @@ const STORY_CONTEXT_PATTERNS = [
     /\bcoordinator\b/i,
     /\breport\b/i,
     /\bdeliverable\b/i,
+    /\bapplication\b/i,
+    /\btracker\b/i,
+    /\baccount\b/i,
+    /\bworkflow\b/i,
+    /\bdashboard\b/i,
+    /\bservice\b/i,
+    /\boperations team\b/i,
+    /\blearner role\b/i,
+    /\byou will build\b/i,
 ] as const;
 
 type DraftExercise = TopicAuthoringDraft["quizDraft"][number];
@@ -164,6 +174,77 @@ function pathSetForStarter(exercise: DraftCodeInput) {
         paths.add(normalizeText(exercise.entryFilePath));
     }
     return paths;
+}
+
+function orderedProjectCodeInputs(args: {
+    draft: TopicAuthoringDraft;
+    codeInputs: DraftCodeInput[];
+}) {
+    const byId = new Map(args.codeInputs.map((exercise) => [exercise.id, exercise]));
+    const orderedIds = Array.isArray(args.draft.projectDraft?.stepIds)
+        ? args.draft.projectDraft.stepIds
+            .map(normalizeText)
+            .filter((id) => byId.has(id))
+        : [];
+
+    const seen = new Set<string>();
+    const ordered: DraftCodeInput[] = [];
+    for (const id of orderedIds) {
+        const exercise = byId.get(id);
+        if (exercise && !seen.has(id)) {
+            seen.add(id);
+            ordered.push(exercise);
+        }
+    }
+
+    for (const exercise of args.codeInputs) {
+        if (!seen.has(exercise.id)) {
+            seen.add(exercise.id);
+            ordered.push(exercise);
+        }
+    }
+
+    return ordered;
+}
+
+function projectStepIdsForDraft(args: {
+    draft: TopicAuthoringDraft;
+    codeInputs: DraftCodeInput[];
+}) {
+    return orderedProjectCodeInputs(args).map((exercise) => exercise.id);
+}
+
+function effectiveProjectCodeInputs(args: {
+    draft: TopicAuthoringDraft;
+    seed: TopicSeed;
+    profile: ReturnType<typeof getCurriculumProfile>;
+    codeInputs: DraftCodeInput[];
+}) {
+    const topicKind = resolveTopicProjectKind(args.seed);
+    if (!topicKind) return args.codeInputs;
+
+    const orderedCodeInputs = orderedProjectCodeInputs({
+        draft: args.draft,
+        codeInputs: args.codeInputs,
+    });
+    const projectConfig = args.profile.project?.getProjectConfig({
+        seed: args.seed,
+        topicKind,
+    });
+    if (!projectConfig) return orderedCodeInputs;
+
+    const projectStepIds = projectStepIdsForDraft({
+        draft: args.draft,
+        codeInputs: args.codeInputs,
+    });
+    if (projectStepIds.length < 1) return orderedCodeInputs;
+
+    return applyProgressiveProjectFlow({
+        exercises: orderedCodeInputs,
+        projectStepIds,
+        projectConfig,
+        seed: args.seed,
+    }).filter(isCodeInput);
 }
 
 function buildProgressiveProjectIssues(args: {
@@ -317,13 +398,13 @@ export function buildSharedPracticeCompletenessIssues(args: {
         args.seed.sectionRole === "capstone" ||
         args.seed.moduleRole === "capstone"
     ) {
-        if (Array.isArray(args.draft.sketchBlocks) && args.draft.sketchBlocks.length !== 1) {
+        if (!Array.isArray(args.draft.sketchBlocks) || args.draft.sketchBlocks.length < 1) {
             issues.push({
                 code: "PROJECT_SYNOPSIS_SKETCH_COUNT",
                 category: "pedagogy",
                 severity: "error",
                 message:
-                    "Module projects and final capstones must have exactly one teaching sketch that introduces the project synopsis. The actual work must be represented as project steps, not multiple lesson sketches or embedded Try It cards.",
+                    "Module projects and final capstones must have one teaching sketch that introduces the project synopsis. The emitter keeps only the first synopsis sketch and represents the actual work as project steps.",
             });
         }
 
@@ -369,7 +450,17 @@ export function buildSharedPracticeCompletenessIssues(args: {
             });
         }
 
-        issues.push(...buildProgressiveProjectIssues({ seed: args.seed, codeInputs }));
+        const projectCodeInputs = effectiveProjectCodeInputs({
+            draft: args.draft,
+            seed: args.seed,
+            profile,
+            codeInputs,
+        });
+
+        issues.push(...buildProgressiveProjectIssues({
+            seed: args.seed,
+            codeInputs: projectCodeInputs,
+        }));
     }
 
     return issues;

@@ -1,0 +1,320 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-10-testing-debugging-oop-projects": {
+        "debugging-imports-and-state": {
+          "label": "Debugging Imports and State",
+          "summary": "Debug OOP code by tracing the path: the file Python imports, the object that owns the state, and the method that changes it.",
+          "cards": {
+            "sketch0": {
+              "title": "Trace import errors to the file and name Python is actually loading"
+            },
+            "sketch1": {
+              "title": "Watch out for shared mutable defaults"
+            },
+            "sketch2": {
+              "title": "Debug object state by checking what changes after each method call"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_debugging_imports_and_state_sketch0": {
+              "title": "Fix the broken model import",
+              "prompt": "The lesson used a shipping app to trace import paths. Now fix a library app. `main.py` imports the model from the wrong place. Correct the import so the program creates the `Book` object and prints its summary.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+              },
+              "starterCode": "# main.py\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())"
+                },
+                "book_py": {
+                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        # return a readable summary string\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n"
+                },
+                "book_py": {
+                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\""
+                }
+              },
+              "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
+              "checks": {
+                "0": {
+                  "message": "Define the Book class in book.py."
+                },
+                "1": {
+                  "message": "Book should be constructible with a title and author."
+                },
+                "2": {
+                  "message": "summary() should return the title and author in a readable format."
+                },
+                "3": {
+                  "message": "Program should print the book summary."
+                }
+              }
+            },
+            "try_debugging_imports_and_state_sketch1": {
+              "title": "Stop two reading lists from sharing one list",
+              "prompt": "The lesson used team rosters to show shared-list bugs. Now fix a reading club app. Two `ReadingList` objects should not share the same list. Update the constructor so each object gets its own `books` list when no list is provided.",
+              "hint": "Read the task \"Stop two reading lists from sharing one list\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Stop two reading lists from sharing one list\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)"
+                },
+                "models_reading_list_py": {
+                  "content": "class ReadingList:\n    def __init__(self, value_1):\n        pass\n\n    def count(self):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nprint(reading_list.count())\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())"
+                },
+                "models_reading_list_py": {
+                  "content": "class ReadingList:\n    def __init__(self, owner):\n        self.owner = owner\n        self.books = []\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)"
+                }
+              },
+              "solutionCode": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nprint(reading_list.count())\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())",
+              "checks": {
+                "0": {
+                  "message": "Define the ReadingList class."
+                },
+                "1": {
+                  "message": "ReadingList should be constructible with an owner."
+                },
+                "2": {
+                  "message": "A new reading list should start empty."
+                },
+                "3": {
+                  "message": "Adding one book should change only that instance's count."
+                }
+              }
+            },
+            "try_debugging_imports_and_state_sketch2": {
+              "title": "Fix stock state changes after sales",
+              "prompt": "The lesson used a vending machine to trace state changes. Now fix a stationery shop model. Complete `sell()` so it subtracts the amount only when enough stock is available and otherwise leaves quantity unchanged.",
+              "hint": "Read the task \"Fix stock state changes after sales\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix stock state changes after sales\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        # update quantity only when the sale is valid\n        pass\n\n    def get_quantity(self):\n        return self.quantity",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        # update quantity only when the sale is valid\n        pass\n\n    def get_quantity(self):\n        return self.quantity"
+                },
+                "models_stock_item_py": {
+                  "content": "class StockItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def get_quantity(self):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())\nprint(StockItem(\"Pen\", 5).sell(10))"
+                },
+                "models_stock_item_py": {
+                  "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        if amount <= self.quantity:\n            self.quantity -= amount\n        return self.quantity\n\n    def get_quantity(self):\n        return self.quantity"
+                }
+              },
+              "solutionCode": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())\nprint(StockItem(\"Pen\", 5).sell(10))",
+              "checks": {
+                "0": {
+                  "message": "Define the StockItem class."
+                },
+                "1": {
+                  "message": "A valid sale should reduce quantity."
+                },
+                "2": {
+                  "message": "An invalid sale should leave quantity unchanged."
+                }
+              }
+            }
+          },
+          "practice": {
+            "q-debugging-imports-state-single-1": {
+              "title": "Spot the import mismatch",
+              "prompt": "`main.py` contains `from models.catalog_item import CatalogItem`, but the actual file is `models/item.py` and it defines `class CatalogItem`. Which change fixes the import?",
+              "hint": "Match the module name to the real file name.",
+              "help": {
+                "concept": "The module part of an import comes from the file path, while the imported name comes from the class or function defined inside that file.",
+                "hint_1": "The class name is already correct, so focus on the file after `models.`.",
+                "hint_2": "Use the file name without `.py` as the module name in the import path."
+              },
+              "options": {
+                "a": "from models.catalog_item import CatalogItem",
+                "b": "from models.item import CatalogItem",
+                "c": "from item.models import CatalogItem",
+                "d": "from CatalogItem import models.item"
+              }
+            },
+            "q-debugging-imports-state-multi-1": {
+              "title": "Choose signs of a shared-list bug",
+              "prompt": "A class uses `def __init__(self, tags=[])`. Which outcomes are real warning signs that instances are sharing state? Choose all that apply.",
+              "hint": "Think about what happens when two objects use the same default list.",
+              "help": {
+                "concept": "A mutable default can be reused across instances, so changing one object's list can unexpectedly change another object's list too.",
+                "hint_1": "Look for behavior where one instance changes even though you only called a method on another instance.",
+                "hint_2": "Pick the options that describe cross-instance list changes, not normal independent updates."
+              },
+              "options": {
+                "a": "Adding a tag to one object makes another object's tag list grow too",
+                "b": "Two new objects start with different empty lists before any method calls",
+                "c": "Printing one object's tags shows items added through a different object",
+                "d": "A method appends to `self.tags` and only that same object changes"
+              }
+            },
+            "q-debugging-imports-state-multi-2": {
+              "title": "Pick good state-debugging checks",
+              "prompt": "You are debugging a `borrow()` method on a `LibraryBook` object. Which checks best help you confirm whether object state changes correctly? Choose all that apply.",
+              "hint": "Look for checks that compare state before and after the method call.",
+              "help": {
+                "concept": "State debugging works best when you inspect the relevant attributes around a specific method call instead of only looking at final printed output.",
+                "hint_1": "Choose checks that verify attribute values after calling `borrow()`.",
+                "hint_2": "Good checks include the starting value, the method call, and the expected new value or unchanged value."
+              },
+              "options": {
+                "a": "Check whether `available` changes from `True` to `False` after one valid borrow",
+                "b": "Check whether a second borrow leaves `available` unchanged when the book is already unavailable",
+                "c": "Only check that the program prints one line somewhere",
+                "d": "Rename the class file and see whether the output panel stays blank"
+              }
+            },
+            "q-debugging-imports-state-fill-1": {
+              "title": "Complete a safe default parameter",
+              "prompt": "Fill in the missing default value so the constructor avoids a shared mutable list.",
+              "hint": "Use a non-mutable placeholder instead of `[]`.",
+              "help": {
+                "concept": "Using `the missing term` as the default lets the constructor create a fresh list for each instance.",
+                "hint_1": "The blank should not be a list literal.",
+                "hint_2": "Choose the special Python value commonly used to mean 'no value was passed'."
+              },
+              "template": "def __init__(self, books=[blank1]):",
+              "choices": [
+                "None",
+                "[]",
+                "{}",
+                "0"
+              ]
+            },
+            "q-debugging-imports-state-fill-2": {
+              "title": "Complete the package import",
+              "prompt": "Fill in the missing module name for this import from a `models` package.",
+              "hint": "Use the file name that contains the `the missing term` class.",
+              "help": {
+                "concept": "In `from package.module import Name`, the module part is the file name without `.py`.",
+                "hint_1": "The class is `the missing term`, but the blank is for the module path part.",
+                "hint_2": "If the file is `models/the missing term.py`, the missing module name matches that file name."
+              },
+              "template": "from models.[blank1] import Book",
+              "choices": [
+                "book",
+                "Lesson notes panel",
+                "models",
+                "import"
+              ]
+            },
+            "q-debugging-imports-state-order-1": {
+              "title": "Order a state-debugging workflow",
+              "prompt": "Put these steps in a sensible order for debugging a method that changes object state.",
+              "hint": "Start by observing the initial state before calling the method.",
+              "help": {
+                "concept": "A clear debugging workflow checks the starting state, performs one action, then verifies the resulting state so you can isolate where the bug appears.",
+                "hint_1": "The method call belongs in the middle, between the before-check and after-check.",
+                "hint_2": "Finish by comparing the actual new state with the expected rule for that method."
+              },
+              "tokens": {
+                "t1": "Create the object with a known starting value",
+                "t2": "Check the relevant attribute before the method call",
+                "t3": "Call the state-changing method once",
+                "t4": "Check the attribute again after the call"
+              }
+            },
+            "ci-debugging-imports-and-state-4": {
+              "title": "Fix a service import and keep the report working",
+              "prompt": "A classroom catalog app has a report service that should import `CatalogItem` from the models package and format one line of text. Fix the broken import in `services/report_service.py` so `main.py` prints `Marker: 8`. Keep the existing function and class names.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                }
+              }
+            },
+            "ci-debugging-imports-and-state-5": {
+              "title": "Repair independent cart state in a model file",
+              "prompt": "A snack shop app stores cart items in a `Cart` class inside `models/cart.py`. Right now two carts share the same default list. Fix the constructor so separate carts keep separate state, and keep the existing `add_item` and `item_count` methods.",
+              "hint": "The bug starts in the constructor parameter list.",
+              "help": {
+                "concept": "Each object should own its own mutable state unless you intentionally pass in a shared object.",
+                "hint_1": "Avoid using `[]` directly as the default parameter value.",
+                "hint_2": "Use a placeholder default, then create a fresh list inside `__init__` when needed."
+              },
+              "starterCode": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)"
+                }
+              }
+            },
+            "ci-debugging-imports-and-state-6": {
+              "title": "Fix a state-changing method in a task model",
+              "prompt": "A project tracker has a `Task` class with a `complete()` method. Right now the method returns `True` but forgets to update the object's `done` attribute. Fix the method so the object's state changes correctly and repeated calls still leave it completed.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+              },
+              "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done",
+              "starterFiles": {
+                "main_py": {
+                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-10-testing-debugging-oop-projects": {
+        "debugging-imports-and-state": {
+          "debugging-imports-and-state-sketch-1": {
+            "title": "Trace the import path before changing code randomly",
+            "bodyMarkdown": "Import errors are easier to fix when you read the path carefully.\n\nImagine this file layout:\n\n```text\nmodels/\n  shipment.py\nmain.py\n```\n\nIf `shipment.py` defines `class Shipment`, the import should name both the package path and the class:\n\n```python\nfrom models.shipment import Shipment\n```\n\nWhen an import breaks, check three things in order:\n\n1. Does the folder name match?\n2. Does the file name match?\n3. Does the class or function name inside the file match?\n\nDo that before rewriting the model."
+          },
+          "debugging-imports-and-state-sketch-2": {
+            "title": "Shared mutable defaults make objects leak state",
+            "bodyMarkdown": "A sneaky object bug happens when separate objects accidentally share one list.\n\n```python\nclass TeamRoster:\n    def __init__(self, players=[]):\n        self.players = players\n```\n\nThat default list is created once, so two rosters can accidentally point at the same list.\n\nSafer pattern:\n\n```python\nclass TeamRoster:\n    def __init__(self, players=None):\n        self.players = [] if players is None else players\n```\n\nNow each new object gets its own list unless a list is passed in intentionally."
+          },
+          "debugging-imports-and-state-sketch-3": {
+            "title": "Debug state by checking each change",
+            "bodyMarkdown": "When a method changes object state, inspect the state after each call.\n\n```python\nitem = VendingItem(\"Water\", 5)\nprint(item.quantity)\nitem.sell(2)\nprint(item.quantity)\nitem.sell(10)\nprint(item.quantity)\n```\n\nThis tells the story of the object: starting value, valid change, invalid change.\n\nIf the final value is wrong, the step-by-step checks show which method call caused the problem."
+          }
+        }
+      }
+    }
+  }
+}

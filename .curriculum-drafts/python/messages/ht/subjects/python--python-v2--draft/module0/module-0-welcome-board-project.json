@@ -1,0 +1,210 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-0": {
+        "module-0-welcome-board-project": {
+          "label": "Pwojè Modil: Konstwi yon Panno Byenveni",
+          "summary": "Yon responsab klib bezwen yon panno byenveni ki vin yon ti jan pi byen fèt nan chak etap. Kontinye amelyore menm pwogram nan jiskaske tout panno a pare.",
+          "cards": {
+            "sketch0": {
+              "title": "Premye kliyan ou: yon responsab klib ak yon panno byenveni vid"
+            },
+            "project": {
+              "title": "Konstriktè Panno Byenveni"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Mete tit evènman an"
+            },
+            "mp_2": {
+              "title": "Ajoute liy lè a"
+            },
+            "mp_3": {
+              "title": "Ajoute kantite èd yo"
+            },
+            "mp_4": {
+              "title": "Fini panno byenveni an"
+            }
+          },
+          "quiz": {
+            "mp-1-print-event-title": {
+              "title": "Mete tit evènman an",
+              "prompt": "Kòmanse vrè panno byenveni an. Ranplase liy aperçu a ak yon liy ki enprime egzakteman `Code Club Open House`.",
+              "hint": "Ou bezwen sèlman yon liy print nan etap sa a.",
+              "help": {
+                "concept": "Pwojè a kounye a soti nan aperçu a pou antre nan vrè panno a. Kenbe li senp epi fè tit la kòrèk an premye.",
+                "hint_1": "Retire tèks aperçu a epi enprime tit evènman an pito.",
+                "hint_2": "Fè majiskil yo ak espas yo matche egzakteman."
+              },
+              "starterCode": "print(\"Welcome to Python Club\")\n\n# Replace the preview line with the real event title.\n"
+            },
+            "mp-2-print-agenda-lines": {
+              "title": "Ajoute liy lè a",
+              "prompt": "Kenbe liy tit la depi etap anvan an. Anba li, ajoute yon nouvo liy ki enprime egzakteman `Doors open at 4 PM`.",
+              "hint": "Kite tit la kote li ye a epi ajoute yon lòt liy print anba li.",
+              "help": {
+                "concept": "Etap sa a pwolonje menm pwogram nan olye pou li rekòmanse. Kenbe liy ki deja mache a, epi ajoute pwochen detay la.",
+                "hint_1": "Kounye a pwodiksyon an gen de liy.",
+                "hint_2": "Tit la ta dwe toujou enprime an premye."
+              },
+              "starterCode": "print(\"Code Club Open House\")\n\n# Keep the title line.\n# Add the time line under it.\n"
+            },
+            "mp-3-show-seat-count": {
+              "title": "Ajoute kantite èd yo",
+              "prompt": "Kenbe de liy panno ou deja genyen yo. Ajoute yon twazyèm liy ki enprime egzakteman `Helpers ready: 6`, epi kalkile `6` la ak `2 * 3` olye pou ou tape li dirèkteman.",
+              "hint": "Ajoute yon lòt liy print epi kite Python evalye `2 * 3`.",
+              "help": {
+                "concept": "Kounye a panno a melanje tèks ak yon ti ekspresyon. Sa fè pwogram nan fasil pou li pandan li toujou kite Python fè travay nimewo a.",
+                "hint_1": "Kenbe de premye liy yo egzakteman jan yo ye a.",
+                "hint_2": "Nouvo liy la ta dwe enprime etikèt la an premye epi valè kalkile a an dezyèm."
+              },
+              "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n\n# Keep the lines above.\n# Add the helper count with the expression 2 * 3.\n"
+            },
+            "mp-4-build-full-welcome-board": {
+              "title": "Fini panno byenveni an",
+              "prompt": "Kenbe panno ou te konstwi jiskaprezan an. Ajoute yon dènye liy anba li ki enprime egzakteman `Bring your questions!`.",
+              "hint": "Pa reekri liy ki te vini anvan yo. Jis ajoute liy final la anba a.",
+              "help": {
+                "concept": "Dènye etap la se yon ti etap polisaj, pa yon rekòmansman. Kenbe panno ki deja mache a epi ajoute mesaj final la pou tout pwogram nan santi li fini.",
+                "hint_1": "Pwodiksyon final la gen kat liy.",
+                "hint_2": "Nouvo liy la dwe vini apre kantite èd yo."
+              },
+              "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n\n# Keep the board above.\n# Add one last line that says Bring your questions!\n"
+            },
+            "try-module-0-welcome-board-project-sketch0": {
+              "title": "Gade aperçu panno byenveni an",
+              "prompt": "Kòmanse panno a ak yon liy amikal: enprime egzakteman `Welcome to Python Club`.",
+              "hint": "Sèvi ak yon deklarasyon print.",
+              "help": {
+                "concept": "Aperçu rapid sa a montre kalite pwodiksyon pwòp pwojè a pral konstwi.",
+                "hint_1": "Ou bezwen sèlman yon liy tèks pou aperçu sa a.",
+                "hint_2": "Fè mo yo matche egzakteman."
+              },
+              "starterCode": "# Print the first welcome line\n"
+            }
+          },
+          "tryIt": {
+            "try_module_0_welcome_board_project_sketch0": {
+              "title": "Eseye li ou menm",
+              "prompt": "Kòmanse panno a ak yon liy amikal: enprime egzakteman `Welcome to Python Club`."
+            },
+            "allowReveal": true
+          }
+        }
+      },
+      "python-v2-0": {
+        "module-0-welcome-board-project": {
+          "label": "Pwojè Modil: Konstwi yon Panno Byenveni",
+          "summary": "Yon responsab klib bezwen yon panno byenveni ki vin yon ti jan pi byen fèt nan chak etap. Kontinye amelyore menm pwogram nan jiskaske tout panno a pare.",
+          "cards": {
+            "sketch0": {
+              "title": "Premye kliyan ou: yon responsab klib ak yon panno byenveni vid"
+            },
+            "project": {
+              "title": "Konstriktè Panno Byenveni"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Mete tit evènman an"
+            },
+            "mp_2": {
+              "title": "Ajoute liy lè a"
+            },
+            "mp_3": {
+              "title": "Ajoute kantite èd yo"
+            },
+            "mp_4": {
+              "title": "Fini panno byenveni an"
+            }
+          },
+          "quiz": {
+            "mp-1-print-event-title": {
+              "title": "Mete tit evènman an",
+              "prompt": "Kòmanse vrè panno byenveni an. Ranplase liy aperçu a ak yon liy ki enprime egzakteman `Code Club Open House`.",
+              "hint": "Ou bezwen sèlman yon liy print nan etap sa a.",
+              "help": {
+                "concept": "Pwojè a kounye a soti nan aperçu a pou antre nan vrè panno a. Kenbe li senp epi fè tit la kòrèk an premye.",
+                "hint_1": "Retire tèks aperçu a epi enprime tit evènman an pito.",
+                "hint_2": "Fè majiskil yo ak espas yo matche egzakteman."
+              },
+              "starterCode": "print(\"Welcome to Python Club\")\n\n# Replace the preview line with the real event title.\n"
+            },
+            "mp-2-print-agenda-lines": {
+              "title": "Ajoute liy lè a",
+              "prompt": "Kenbe liy tit la depi etap anvan an. Anba li, ajoute yon nouvo liy ki enprime egzakteman `Doors open at 4 PM`.",
+              "hint": "Kite tit la kote li ye a epi ajoute yon lòt liy print anba li.",
+              "help": {
+                "concept": "Etap sa a pwolonje menm pwogram nan olye pou li rekòmanse. Kenbe liy ki deja mache a, epi ajoute pwochen detay la.",
+                "hint_1": "Kounye a pwodiksyon an gen de liy.",
+                "hint_2": "Tit la ta dwe toujou enprime an premye."
+              },
+              "starterCode": "print(\"Code Club Open House\")\n\n# Keep the title line.\n# Add the time line under it.\n"
+            },
+            "mp-3-show-seat-count": {
+              "title": "Ajoute kantite èd yo",
+              "prompt": "Kenbe de liy panno ou deja genyen yo. Ajoute yon twazyèm liy ki enprime egzakteman `Helpers ready: 6`, epi kalkile `6` la ak `2 * 3` olye pou ou tape li dirèkteman.",
+              "hint": "Ajoute yon lòt liy print epi kite Python evalye `2 * 3`.",
+              "help": {
+                "concept": "Kounye a panno a melanje tèks ak yon ti ekspresyon. Sa fè pwogram nan fasil pou li pandan li toujou kite Python fè travay nimewo a.",
+                "hint_1": "Kenbe de premye liy yo egzakteman jan yo ye a.",
+                "hint_2": "Nouvo liy la ta dwe enprime etikèt la an premye epi valè kalkile a an dezyèm."
+              },
+              "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\n\n# Keep the lines above.\n# Add the helper count with the expression 2 * 3.\n"
+            },
+            "mp-4-build-full-welcome-board": {
+              "title": "Fini panno byenveni an",
+              "prompt": "Kenbe panno ou te konstwi jiskaprezan an. Ajoute yon dènye liy anba li ki enprime egzakteman `Bring your questions!`.",
+              "hint": "Pa reekri liy ki te vini anvan yo. Jis ajoute liy final la anba a.",
+              "help": {
+                "concept": "Dènye etap la se yon ti etap polisaj, pa yon rekòmansman. Kenbe panno ki deja mache a epi ajoute mesaj final la pou tout pwogram nan santi li fini.",
+                "hint_1": "Pwodiksyon final la gen kat liy.",
+                "hint_2": "Nouvo liy la dwe vini apre kantite èd yo."
+              },
+              "starterCode": "print(\"Code Club Open House\")\nprint(\"Doors open at 4 PM\")\nprint(\"Helpers ready:\", 2 * 3)\n\n# Keep the board above.\n# Add one last line that says Bring your questions!\n"
+            },
+            "try-module-0-welcome-board-project-sketch0": {
+              "title": "Gade aperçu panno byenveni an",
+              "prompt": "Kòmanse panno a ak yon liy amikal: enprime egzakteman `Welcome to Python Club`.",
+              "hint": "Sèvi ak yon deklarasyon print.",
+              "help": {
+                "concept": "Aperçu rapid sa a montre kalite pwodiksyon pwòp pwojè a pral konstwi.",
+                "hint_1": "Ou bezwen sèlman yon liy tèks pou aperçu sa a.",
+                "hint_2": "Fè mo yo matche egzakteman."
+              },
+              "starterCode": "# Print the first welcome line\n"
+            }
+          },
+          "tryIt": {
+            "try_module_0_welcome_board_project_sketch0": {
+              "title": "Eseye li ou menm",
+              "prompt": "Kòmanse panno a ak yon liy amikal: enprime egzakteman `Welcome to Python Club`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-0": {
+        "module-0-welcome-board-project": {
+          "sketch-1": {
+            "title": "Premye kliyan ou: yon responsab klib ak yon panno byenveni vid",
+            "bodyMarkdown": "Yon responsab klib ap prepare premye rankont Python nan epi li vle yon panno byenveni senp sou ekran an anvan elèv yo antre. Panno a poko bezwen karakteristik sofistike. Li jis bezwen grandi pwòp, yon liy itil alafwa.\n\nPwojè modil sa a fèt pou li santi tankou yon ti konstriksyon sèl. Chak etap kòmanse ak pwogram nan soti nan etap anvan an, epi apre sa li ajoute yon amelyorasyon klè pou panno final la grandi natirèlman."
+          }
+        }
+      },
+      "python-v2-0": {
+        "module-0-welcome-board-project": {
+          "sketch-1": {
+            "title": "Premye kliyan ou: yon responsab klib ak yon panno byenveni vid",
+            "bodyMarkdown": "Yon responsab klib ap prepare premye rankont Python nan epi li vle yon panno byenveni senp sou ekran an anvan elèv yo antre. Panno a poko bezwen karakteristik sofistike. Li jis bezwen grandi pwòp, yon liy itil alafwa.\n\nPwojè modil sa a fèt pou li santi tankou yon ti konstriksyon sèl. Chak etap kòmanse ak pwogram nan soti nan etap anvan an, epi apre sa li ajoute yon amelyorasyon klè pou panno final la grandi natirèlman."
+          }
+        }
+      }
+    }
+  }
+}

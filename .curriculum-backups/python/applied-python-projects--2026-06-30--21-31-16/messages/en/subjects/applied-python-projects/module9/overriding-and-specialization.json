@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "overriding-and-specialization": {
+          "label": "Overriding and Specialization",
+          "summary": "Override a method when a subclass needs the same message name but a different implementation.",
+          "cards": {
+            "sketch0": {
+              "title": "Overriding and Specialization: the idea"
+            },
+            "sketch1": {
+              "title": "Overriding and Specialization: the file shape"
+            },
+            "sketch2": {
+              "title": "Overriding and Specialization: what the grader checks"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "ci_equipment_override_practice": {
+              "title": "Specialize equipment checkout labels"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_overriding_and_specialization_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Complete `PhysicalBook.fee()` so this subclass has its own fee rule."
+            },
+            "try_overriding_and_specialization_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Complete `BugTicket.label()` by reusing base initialization and returning a specialized label."
+            }
+          },
+          "quiz": {
+            "ci-equipment-override-practice": {
+              "title": "Specialize equipment checkout labels",
+              "prompt": "Complete `Laptop.checkout_label()` so it overrides the base equipment label.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.laptop import Laptop\n\nlaptop = Laptop(\"MacBook\", \"M-22\")\nprint(laptop.checkout_label())\n"
+            },
+            "sc-overriding-and-specialization-design": {
+              "title": "Check the design choice",
+              "prompt": "Which choice best matches the lesson goal for overriding and specialization?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Override a method when a subclass needs the same message name but a different implementation.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Put every class in main.py so imports are never needed.",
+                "b": "Give each class or service a focused responsibility and import it where needed.",
+                "c": "Avoid methods so every object exposes all of its data directly.",
+                "d": "Copy the same logic into each subclass to avoid shared code."
+              }
+            },
+            "try-overriding-and-specialization-sketch0": {
+              "title": "Override a fee method",
+              "prompt": "Complete `PhysicalBook.fee()` so this subclass has its own fee rule.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.physical_book import PhysicalBook\n\nbook = PhysicalBook(\"Databases\", 2)\nprint(book.fee())\n"
+            },
+            "try-overriding-and-specialization-sketch1": {
+              "title": "Use super and specialize a label",
+              "prompt": "Complete `BugTicket.label()` by reusing base initialization and returning a specialized label.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.bug_ticket import BugTicket\n\nticket = BugTicket(\"Login broken\", \"high\")\nprint(ticket.label())\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "overriding-and-specialization": {
+          "concept": {
+            "title": "Overriding and Specialization: the idea",
+            "bodyMarkdown": "**Overriding and Specialization** is not just syntax. In this course it is practiced inside small projects where one file owns one clear part of the program. Override a method when a subclass needs the same message name but a different implementation."
+          },
+          "multifile-shape": {
+            "title": "Overriding and Specialization: the file shape",
+            "bodyMarkdown": "The file layout matters. Models hold object state and behavior, services coordinate groups of objects, tests verify behavior, and `main.py` stays thin enough to read."
+          },
+          "graded-habit": {
+            "title": "Overriding and Specialization: what the grader checks",
+            "bodyMarkdown": "The grader checks behavior from the running project. A strong answer keeps imports working, keeps all files present, and proves the object behavior through output or assertions."
+          }
+        }
+      }
+    }
+  }
+}

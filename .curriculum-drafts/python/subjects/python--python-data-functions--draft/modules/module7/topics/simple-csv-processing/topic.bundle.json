@@ -306,11 +306,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -319,11 +319,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -369,11 +369,11 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -383,13 +383,13 @@
           {
             "type": "source_contains",
             "pattern": "csv.DictReader",
-            "message": "Use csv.DictReader to read scores.csv.",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "source_contains",
             "pattern": "scores.csv",
-            "message": "Open scores.csv for this step.",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.sourceChecks.1.message",
             "normalizeWhitespace": true
           }
         ]
@@ -397,7 +397,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -407,13 +407,13 @@
         {
           "type": "source_contains",
           "pattern": "csv.DictReader",
-          "message": "Use csv.DictReader to read scores.csv.",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "source_contains",
           "pattern": "scores.csv",
-          "message": "Open scores.csv for this step.",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-checkpoint.sourceChecks.1.message",
           "normalizeWhitespace": true
         }
       ],
@@ -431,11 +431,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names",
       "language": "python",
-      "starterCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -444,11 +444,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -500,11 +500,11 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -514,14 +514,14 @@
           {
             "type": "uses_method",
             "method": "strip",
-            "message": "Strip each CSV name before printing it."
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.sourceChecks.0.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -531,7 +531,7 @@
         {
           "type": "uses_method",
           "method": "strip",
-          "message": "Strip each CSV name before printing it."
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-print-clean-names.sourceChecks.0.message"
         }
       ]
     },
@@ -542,11 +542,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores",
       "language": "python",
-      "starterCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -555,11 +555,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -611,11 +611,11 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -625,19 +625,19 @@
           {
             "type": "source_regex",
             "pattern": "\\btry\\s*:",
-            "message": "Use try/except for invalid score values."
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.sourceChecks.0.message"
           },
           {
             "type": "uses_call",
             "functionName": "int",
-            "message": "Convert score text with int()."
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.sourceChecks.1.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -647,12 +647,12 @@
         {
           "type": "source_regex",
           "pattern": "\\btry\\s*:",
-          "message": "Use try/except for invalid score values."
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.sourceChecks.0.message"
         },
         {
           "type": "uses_call",
           "functionName": "int",
-          "message": "Convert score text with int()."
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-sum-valid-scores.sourceChecks.1.message"
         }
       ]
     },
@@ -663,11 +663,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file",
       "language": "python",
-      "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -676,11 +676,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -739,11 +739,11 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -753,12 +753,12 @@
           {
             "type": "source_regex",
             "pattern": "\\btry\\s*:",
-            "message": "Use try/except for invalid score values."
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.sourceChecks.0.message"
           },
           {
             "type": "source_contains",
             "pattern": "summary.txt",
-            "message": "Write the summary to summary.txt.",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.sourceChecks.1.message",
             "normalizeWhitespace": true
           }
         ]
@@ -766,7 +766,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -780,12 +780,12 @@
         {
           "type": "source_regex",
           "pattern": "\\btry\\s*:",
-          "message": "Use try/except for invalid score values."
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.sourceChecks.0.message"
         },
         {
           "type": "source_contains",
           "pattern": "summary.txt",
-          "message": "Write the summary to summary.txt.",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.ci-write-summary-file.sourceChecks.1.message",
           "normalizeWhitespace": true
         }
       ]
@@ -797,11 +797,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0",
       "language": "python",
-      "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -810,7 +810,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -819,11 +819,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -869,11 +869,11 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -883,13 +883,13 @@
           {
             "type": "source_contains",
             "pattern": "csv.DictReader",
-            "message": "Use csv.DictReader to read the row.",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "uses_method",
             "method": "strip",
-            "message": "Strip spaces from the CSV values."
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message"
           }
         ]
       },
@@ -897,13 +897,13 @@
         {
           "type": "source_contains",
           "pattern": "csv.DictReader",
-          "message": "Use csv.DictReader to read the row.",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "uses_method",
           "method": "strip",
-          "message": "Strip spaces from the CSV values."
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch0.sourceChecks.1.message"
         }
       ],
       "workspaceExpectations": {
@@ -920,11 +920,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1",
       "language": "python",
-      "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -933,7 +933,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -942,11 +942,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -992,11 +992,11 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1006,13 +1006,13 @@
           {
             "type": "source_contains",
             "pattern": "csv.DictReader",
-            "message": "Use csv.DictReader to read the rows.",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "uses_for_loop",
             "iterable": "reader",
-            "message": "Loop through the CSV rows instead of hard-coding the output."
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.1.message"
           }
         ]
       },
@@ -1020,13 +1020,13 @@
         {
           "type": "source_contains",
           "pattern": "csv.DictReader",
-          "message": "Use csv.DictReader to read the rows.",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "uses_for_loop",
           "iterable": "reader",
-          "message": "Loop through the CSV rows instead of hard-coding the output."
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch1.sourceChecks.1.message"
         }
       ],
       "workspaceExpectations": {
@@ -1043,11 +1043,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2",
       "language": "python",
-      "starterCode": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1056,7 +1056,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1065,11 +1065,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1115,11 +1115,11 @@
             ]
           }
         ],
-        "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1129,23 +1129,23 @@
           {
             "type": "source_contains",
             "pattern": "csv.DictReader",
-            "message": "Use csv.DictReader to read the rows.",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "uses_for_loop",
             "iterable": "reader",
-            "message": "Loop through the CSV rows instead of hard-coding the total."
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.1.message"
           },
           {
             "type": "uses_call",
             "functionName": "int",
-            "message": "Convert the score text with int()."
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.2.message"
           },
           {
             "type": "source_regex",
             "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(|=\\s*total\\s*\\+\\s*int\\s*\\()",
-            "message": "Add each numeric score into total."
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.3.message"
           }
         ]
       },
@@ -1153,23 +1153,23 @@
         {
           "type": "source_contains",
           "pattern": "csv.DictReader",
-          "message": "Use csv.DictReader to read the rows.",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "uses_for_loop",
           "iterable": "reader",
-          "message": "Loop through the CSV rows instead of hard-coding the total."
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.1.message"
         },
         {
           "type": "uses_call",
           "functionName": "int",
-          "message": "Convert the score text with int()."
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.2.message"
         },
         {
           "type": "source_regex",
           "pattern": "\\btotal\\s*(\\+=\\s*int\\s*\\(|=\\s*total\\s*\\+\\s*int\\s*\\()",
-          "message": "Add each numeric score into total."
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.simple-csv-processing.quiz.try-simple-csv-processing-sketch2.sourceChecks.3.message"
         }
       ],
       "workspaceExpectations": {

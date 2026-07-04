@@ -171,7 +171,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass"
+              "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+              "solutionCode": "def update_score(scores, name, new_score):\n    scores[name] = new_score\n    return scores"
             },
             "ci-remove-key": {
               "title": "Remove a key if it exists",
@@ -182,7 +183,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass"
+              "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+              "solutionCode": "def remove_item(data, key_name):\n    if key_name in data:\n        del data[key_name]\n    return data"
             },
             "ci-format-items": {
               "title": "Build lines from dictionary pairs",
@@ -193,7 +195,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result"
+              "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+              "solutionCode": "def format_inventory(items):\n    result = []\n    for name, count in items.items():\n        result.append(f\"{name}: {count}\")\n    return result"
             },
             "try-updating-and-looping-dictionaries-checkpoint": {
               "title": "Update and loop through scores",
@@ -204,7 +207,13 @@
                 "hint_1": "Assign to `scores[\"Mia\"]`, then loop with `.items()`.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "scores = {\"Ava\": 88, \"Mia\": 79}\n\n# Update Mia to 91.\n# Print each name and score.\n"
+              "starterCode": "scores = {\"Ava\": 88, \"Mia\": 79}\n\n# Update Mia to 91.\n# Print each name and score.\n",
+              "solutionCode": "scores = {\"Ava\": 88, \"Mia\": 79}\nscores[\"Mia\"] = 91\nfor name, score in scores.items():\n    print(f\"{name}: {score}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Update scores['Mia'] to 91 instead of printing the final result directly."
+                }
+              }
             },
             "try-updating-and-looping-dictionaries-sketch0": {
               "title": "Update a count",
@@ -215,7 +224,13 @@
                 "hint_1": "Increase apples by 3, then print counts.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "counts = {'apples': 2, 'bananas': 1}\n\n# Increase apples by 3.\n# Then print counts.\n"
+              "starterCode": "counts = {'apples': 2, 'bananas': 1}\n\n# Increase apples by 3.\n# Then print counts.\n",
+              "solutionCode": "counts = {'apples': 2, 'bananas': 1}\ncounts['apples'] += 3\nprint(counts)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Increase counts['apples'] by 3 instead of replacing the final dictionary."
+                }
+              }
             },
             "try-updating-and-looping-dictionaries-sketch1": {
               "title": "Print inventory lines",
@@ -226,7 +241,13 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "inventory = {'pens': 3, 'markers': 2}\n\n# Loop through inventory and print lines like: pens: 3\n"
+              "starterCode": "inventory = {'pens': 3, 'markers': 2}\n\n# Loop through inventory and print lines like: pens: 3\n",
+              "solutionCode": "inventory = {'pens': 3, 'markers': 2}\nfor item, count in inventory.items():\n    print(f'{item}: {count}')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through inventory instead of typing the inventory lines directly."
+                }
+              }
             },
             "try-updating-and-looping-dictionaries-sketch2": {
               "title": "Build a length dictionary",
@@ -237,7 +258,19 @@
                 "hint_1": "Store each word's length in lengths, then print lengths.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "words = ['red', 'blue']\nlengths = {}\n\n# Store each word's length in lengths.\n# Then print lengths.\n"
+              "starterCode": "words = ['red', 'blue']\nlengths = {}\n\n# Store each word's length in lengths.\n# Then print lengths.\n",
+              "solutionCode": "words = ['red', 'blue']\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through words instead of typing the final lengths dictionary."
+                },
+                "1": {
+                  "message": "Use len(word) to calculate each word length."
+                },
+                "2": {
+                  "message": "Store each length with lengths[word] = len(word)."
+                }
+              }
             }
           },
           "tryIt": {

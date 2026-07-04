@@ -173,7 +173,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass"
+              "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
+              "solutionCode": "def clean_name(name):\n    return name.strip().title()"
             },
             "ci-2": {
               "title": "Build a summary with helpers",
@@ -184,7 +185,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass"
+              "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
+              "solutionCode": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\""
             },
             "ci-3": {
               "title": "Refactor repeated math into helpers",
@@ -195,7 +197,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass"
+              "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
+              "solutionCode": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)"
             },
             "try-decomposition-and-refactoring-checkpoint": {
               "title": "Use a helper function",
@@ -206,7 +209,8 @@
                 "hint_1": "Use `.strip().title()` inside a helper function.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n"
+              "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+              "solutionCode": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n"
             },
             "try-decomposition-and-refactoring-sketch0": {
               "title": "Clean text with a helper",
@@ -217,7 +221,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n"
+              "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+              "solutionCode": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n"
             },
             "try-decomposition-and-refactoring-sketch1": {
               "title": "Split a full name",
@@ -228,7 +233,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n"
+              "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+              "solutionCode": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n"
             },
             "try-decomposition-and-refactoring-sketch2": {
               "title": "Combine two helpers",
@@ -239,7 +245,13 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n"
+              "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+              "solutionCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use clean(name) inside badge instead of hard-coding one example."
+                }
+              }
             }
           },
           "tryIt": {

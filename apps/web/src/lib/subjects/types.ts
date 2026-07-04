@@ -46,6 +46,8 @@ export type ReviewQuizSpec = {
     topic?: string;
     difficulty?: "easy" | "medium" | "hard";
     n?: number;
+    /** Exact authored non-code quiz exercise keys for this quiz card. */
+    exerciseKeys?: string[];
     allowReveal?: boolean;
     preferKind?: PracticeKind | null;
     maxAttempts?: number | null;

@@ -1,0 +1,483 @@
+{
+  "topicId": "testing-inheritance-and-polymorphism",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-testing-debugging-oop-projects",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-testing-oop-behavior",
+  "prefix": "py10",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.sketch0.title",
+      "sketchId": "testing-inheritance-and-polymorphism-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-inheritance-and-polymorphism-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.prompt",
+        "exerciseKey": "try-testing-inheritance-and-polymorphism-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.sketch1.title",
+      "sketchId": "testing-inheritance-and-polymorphism-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-inheritance-and-polymorphism-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.prompt",
+        "exerciseKey": "try-testing-inheritance-and-polymorphism-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.sketch2.title",
+      "sketchId": "testing-inheritance-and-polymorphism-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-inheritance-and-polymorphism-sketch2",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.prompt",
+        "exerciseKey": "try-testing-inheritance-and-polymorphism-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "testing-inheritance-and-polymorphism-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-0.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "testing-inheritance-and-polymorphism-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "testing-inheritance-and-polymorphism-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-testing-inheritance-and-polymorphism-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/base_item.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def __init__(self):\n        pass\n\n    def label(self):\n        return \"book test passed\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true,
+          "readOnly": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/base_item.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/base_item.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class CatalogItem:\n    def __init__(self):\n        pass\n\n    def label(self):\n        return \"book test passed\"",
+        "solutionFiles": [
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def __init__(self):\n        pass\n\n    def label(self):\n        return \"book test passed\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true,
+            "readOnly": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "CatalogItem",
+            "message": "Define or import the CatalogItem class for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "CatalogItem",
+            "constructorArgs": [],
+            "message": "CatalogItem should be constructible with the example arguments."
+          },
+          {
+            "type": "method_returns",
+            "className": "CatalogItem",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "book test passed",
+            "message": "CatalogItem.label() should return the expected value."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Print at least 1 non-empty output line(s)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "policy_single_choice_1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_single_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "policy_multi_choice_1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_multi_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "policy_drag_reorder_1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_drag_reorder_1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_fill_blank_choice_1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "if"
+      }
+    },
+    {
+      "id": "try-testing-inheritance-and-polymorphism-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "5\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\nif n > 0:\n    print(True)\nelse:\n    print(False)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-testing-inheritance-and-polymorphism-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\nif n % 2 == 0:\n    print(True)\nelse:\n    print(False)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "8\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nif n % 2 == 0:\n    print(True)\nelse:\n    print(False)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\nif n % 2 == 0:\n    print(True)\nelse:\n    print(False)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "policy_code_input_3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_code_input_3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "-2\n",
+            "stdout": "True\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "3\n",
+            "stdout": "False\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\nif n < 0:\n    print(True)\nelse:\n    print(False)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    }
+  ]
+}

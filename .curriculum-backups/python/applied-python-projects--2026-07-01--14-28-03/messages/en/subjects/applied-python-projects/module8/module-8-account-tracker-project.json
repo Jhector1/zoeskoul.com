@@ -1,0 +1,167 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "module-8-account-tracker-project": {
+          "label": "Module 8 Account Tracker Project",
+          "summary": "Create a multifile account tracker with a model file, formatting helper, data file, and thin main script.",
+          "cards": {
+            "sketch0": {
+              "title": "Project Overview"
+            },
+            "project": {
+              "title": "Account Tracker Project"
+            }
+          },
+          "projectSteps": {
+            "module_8_account_tracker_step1": {
+              "title": "Define the Account Class"
+            },
+            "module_8_account_tracker_step2": {
+              "title": "Add Deposit Method"
+            },
+            "module_8_account_tracker_step3": {
+              "title": "Add Withdraw Method with Validation"
+            },
+            "module_8_account_tracker_step4": {
+              "title": "Create a Helper for Formatting"
+            },
+            "module_8_account_tracker_step5": {
+              "title": "Integrate Helper in Account Class"
+            },
+            "module_8_account_tracker_step6": {
+              "title": "Create Main Script to Test Account"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module_8_account_tracker_step1": {
+                "title": "Define the Account Class",
+                "prompt": "Start the module project. In step 1 of 6, Create a class `Account` in a file named `models/account.py`. The class should have an `__init__` method that initializes `name` and `balance` attributes. Ensure the class encapsulates these attributes properly.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Click Run and compare the output panel with the expected result."
+                },
+                "starterCode": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        # Initialize attributes\n        pass",
+                "starterFiles": {
+                  "models_account_py": {
+                    "content": "\nclass Account:\n    def __init__(self, name, balance):\n        # Initialize attributes\n        pass"
+                  }
+                }
+              },
+              "module_8_account_tracker_step2": {
+                "title": "Add Deposit Method",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 6, Enhance the `Account` class by adding a `deposit` method that increases the account balance. The method should take an amount as a parameter and update the balance accordingly.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n# Project step 2: Add Deposit Method\n# Keep the working code above from the previous step.\n# Next, Enhance the `Account` class by adding a `deposit` method that increases the account balance\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "models_account_py": {
+                    "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n# Project step 2: Add Deposit Method\n# Keep the working code above from the previous step.\n# Next, Enhance the `Account` class by adding a `deposit` method that increases the account balance\n# Add only the focused change for this step below or inside the existing work."
+                  }
+                }
+              },
+              "module_8_account_tracker_step3": {
+                "title": "Add Withdraw Method with Validation",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 6, Add a `withdraw` method to the `Account` class that decreases the balance. Ensure the method checks if the balance is sufficient before withdrawing.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n# Project step 3: Add Withdraw Method with Validation\n# Keep the working code above from the previous step.\n# Next, Add a `withdraw` method to the `Account` class that decreases the balance\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "models_account_py": {
+                    "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n# Project step 3: Add Withdraw Method with Validation\n# Keep the working code above from the previous step.\n# Next, Add a `withdraw` method to the `Account` class that decreases the balance\n# Add only the focused change for this step below or inside the existing work."
+                  }
+                }
+              },
+              "module_8_account_tracker_step4": {
+                "title": "Create a Helper for Formatting",
+                "prompt": "Continue the same module project from the previous working step. In step 4 of 6, Create a helper function `format_currency` in a file named `helpers/formatting.py`. This function should take a number and return it formatted as a currency string, e.g., `$100.00`.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# Project step 4: Create a Helper for Formatting\n# Keep the working code above from the previous step.\n# Next, Create a helper function `format_currency` in a file named `helpers/formatting.py`\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# Project step 4: Create a Helper for Formatting\n# Keep the working code above from the previous step.\n# Next, Create a helper function `format_currency` in a file named `helpers/formatting.py`\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_account_py": {
+                    "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount"
+                  }
+                }
+              },
+              "module_8_account_tracker_step5": {
+                "title": "Integrate Helper in Account Class",
+                "prompt": "Continue the same module project from the previous working step. In step 5 of 6, Modify the `Account` class to use the `format_currency` helper for displaying the balance. Update the `__str__` method to return the account details with the formatted balance.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# helpers/formatting.py\n\ndef format_currency(amount):\n    return f\"${amount:.2f}\"\n# Project step 5: Integrate Helper in Account Class\n# Keep the working code above from the previous step.\n# Next, Modify the `Account` class to use the `format_currency` helper for displaying the balance\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# helpers/formatting.py\n\ndef format_currency(amount):\n    return f\"${amount:.2f}\"\n"
+                  },
+                  "models_account_py": {
+                    "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount"
+                  },
+                  "helpers_formatting_py": {
+                    "content": "\ndef format_currency(amount):\n    return f\"${amount:.2f}\""
+                  }
+                }
+              },
+              "module_8_account_tracker_step6": {
+                "title": "Create Main Script to Test Account",
+                "prompt": "Continue the same module project from the previous working step. In step 6 of 6, Create a main script `main.py` that creates an `Account` instance, performs some deposits and withdrawals, and prints the account details.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# helpers/formatting.py\n\ndef format_currency(amount):\n    return f\"${amount:.2f}\"\n# models/account.py\n\nfrom helpers.formatting import format_currency\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n\n    def __str__(self):\n        return f\"Account({self.name}, {format_currency(self.balance)})\"\n# Project step 6: Create Main Script to Test Account\n# Keep the working code above from the previous step.\n# Next, Create a main script `main.py` that creates an `Account` instance, performs some deposits and withdrawals, and prints the account details\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# helpers/formatting.py\n\ndef format_currency(amount):\n    return f\"${amount:.2f}\"\n# models/account.py\n\nfrom helpers.formatting import format_currency\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n\n    def __str__(self):\n        return f\"Account({self.name}, {format_currency(self.balance)})\"\n# Project step 6: Create Main Script to Test Account\n# Keep the working code above from the previous step.\n# Next, Create a main script `main.py` that creates an `Account` instance, performs some deposits and withdrawals, and prints the account details\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_account_py": {
+                    "content": "\nfrom helpers.formatting import format_currency\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n\n    def __str__(self):\n        return f\"Account({self.name}, {format_currency(self.balance)})\""
+                  },
+                  "helpers_formatting_py": {
+                    "content": "\ndef format_currency(amount):\n    return f\"${amount:.2f}\""
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "module-8-account-tracker-project": {
+          "module-8-account-tracker-project-sketch0": {
+            "title": "Project Overview",
+            "bodyMarkdown": "In this project, you'll build a multifile account tracker application. The project will involve creating a model file for account data, a helper file for formatting, and a main script to tie everything together. You'll learn how to define classes, use constructors, and apply encapsulation to manage object state effectively. This project will help you understand the importance of organizing code into separate files and using imports to maintain a clean and scalable codebase."
+          }
+        }
+      }
+    }
+  }
+}

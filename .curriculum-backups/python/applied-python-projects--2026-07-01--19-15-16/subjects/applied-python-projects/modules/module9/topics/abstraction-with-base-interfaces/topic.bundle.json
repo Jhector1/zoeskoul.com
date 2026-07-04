@@ -1,0 +1,808 @@
+{
+  "topicId": "abstraction-with-base-interfaces",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-polymorphism-and-abstraction",
+  "prefix": "py9",
+  "minutes": 32,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.sketch0.title",
+      "sketchId": "abstraction-with-base-interfaces-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-abstraction-with-base-interfaces-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.prompt",
+        "exerciseKey": "try-abstraction-with-base-interfaces-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.sketch1.title",
+      "sketchId": "abstraction-with-base-interfaces-sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-abstraction-with-base-interfaces-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.prompt",
+        "exerciseKey": "try-abstraction-with-base-interfaces-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.sketch2.title",
+      "sketchId": "abstraction-with-base-interfaces-sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-abstraction-with-base-interfaces-sketch2",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.prompt",
+        "exerciseKey": "try-abstraction-with-base-interfaces-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "abstraction-with-base-interfaces-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.abstraction-with-base-interfaces-sketch0.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.abstraction-with-base-interfaces-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "abstraction-with-base-interfaces-sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.abstraction-with-base-interfaces-sketch1.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.abstraction-with-base-interfaces-sketch1.bodyMarkdown"
+    },
+    {
+      "id": "abstraction-with-base-interfaces-sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.abstraction-with-base-interfaces-sketch2.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.abstraction-with-base-interfaces-sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-abstraction-with-base-interfaces-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0",
+      "language": "python",
+      "starterCode": "# main.py\nfrom models.book import Book\n\nitem = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nprint(item.display_line())\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        # store the shared title\n        pass\n\n    def display_line(self):\n        # return the title for a generic item\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        # reuse the base setup, then store author\n        pass\n\n    def display_line(self):\n        # return: Book: <title> by <author>\n        pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.book import Book\n\nitem = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nprint(item.display_line())\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        # store the shared title\n        pass\n\n    def display_line(self):\n        # return the title for a generic item\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        # reuse the base setup, then store author\n        pass\n\n    def display_line(self):\n        # return: Book: <title> by <author>\n        pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def display_line(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# main.py\nfrom models.book import Book\n\nitem = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nprint(item.display_line())\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        # store the shared title\n        pass\n\n    def display_line(self):\n        # return the title for a generic item\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        # reuse the base setup, then store author\n        pass\n\n    def display_line(self):\n        # return: Book: <title> by <author>\n        pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# main.py\nfrom models.book import Book\n\nitem = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nprint(item.display_line())\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        # store the shared title\n        pass\n\n    def display_line(self):\n        # return the title for a generic item\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        # reuse the base setup, then store author\n        pass\n\n    def display_line(self):\n        # return: Book: <title> by <author>\n        pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def display_line(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BaseItem",
+            "message": "Define the BaseItem class."
+          },
+          {
+            "type": "constructible",
+            "className": "BaseItem",
+            "constructorArgs": [
+              "Sample"
+            ],
+            "message": "BaseItem should be constructible with a title."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "BaseItem",
+            "constructorArgs": [
+              "Sample"
+            ],
+            "attributes": [
+              "title"
+            ],
+            "message": "BaseItem should store a title attribute."
+          },
+          {
+            "type": "method_returns",
+            "className": "BaseItem",
+            "constructorArgs": [
+              "Sample"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "display_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Sample",
+            "expectedKind": "value",
+            "message": "BaseItem.display_line() should return the title."
+          },
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define the Book class."
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "The Hobbit",
+              "J.R.R. Tolkien"
+            ],
+            "message": "Book should be constructible with title and author."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "The Hobbit",
+              "J.R.R. Tolkien"
+            ],
+            "attributes": [
+              "title",
+              "author"
+            ],
+            "message": "Book should store both title and author."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "The Hobbit",
+              "J.R.R. Tolkien"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "display_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Book: The Hobbit by J.R.R. Tolkien",
+            "expectedKind": "value",
+            "message": "Book.display_line() should return the formatted summary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-abstraction-with-base-interfaces-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1",
+      "language": "python",
+      "starterCode": "# main.py\nfrom models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Deep Work\", \"Cal Newport\"), Video(\"Python Basics\", 42)]\nfor item in items:\n    print(item.storage_label())\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def storage_label(self):\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def storage_label(self):\n        pass\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        pass\n\n    def storage_label(self):\n        pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Deep Work\", \"Cal Newport\"), Video(\"Python Basics\", 42)]\nfor item in items:\n    print(item.storage_label())\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def storage_label(self):\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def storage_label(self):\n        pass\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        pass\n\n    def storage_label(self):\n        pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class BaseItem:\n    def __init__(self, title):\n        pass\n\n    def storage_label(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, priority):\n        pass\n\n    def storage_label(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "class Video:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n\n    def storage_label(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def storage_label(self):\n        return self.title\n\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def storage_label(self):\n        return f\"BOOK::{self.title}\"\n\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def storage_label(self):\n        return f\"VIDEO::{self.title}\"\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def storage_label(self):\n        return self.title",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def storage_label(self):\n        return f\"BOOK::{self.title}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def storage_label(self):\n        return f\"VIDEO::{self.title}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# main.py\nfrom models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Deep Work\", \"Cal Newport\"), Video(\"Python Basics\", 42)]\nfor item in items:\n    print(item.storage_label())\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def storage_label(self):\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def storage_label(self):\n        pass\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        pass\n\n    def storage_label(self):\n        pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# main.py\nfrom models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Deep Work\", \"Cal Newport\"), Video(\"Python Basics\", 42)]\nfor item in items:\n    print(item.storage_label())\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def storage_label(self):\n        pass\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def storage_label(self):\n        pass\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        pass\n\n    def storage_label(self):\n        pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class BaseItem:\n    def __init__(self, title):\n        pass\n\n    def storage_label(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, priority):\n        pass\n\n    def storage_label(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "class Video:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n\n    def storage_label(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def storage_label(self):\n        return self.title\n\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def storage_label(self):\n        return f\"BOOK::{self.title}\"\n\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def storage_label(self):\n        return f\"VIDEO::{self.title}\"\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def storage_label(self):\n        return self.title\n\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def storage_label(self):\n        return f\"BOOK::{self.title}\"\n\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def storage_label(self):\n        return f\"VIDEO::{self.title}\"\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def storage_label(self):\n        return self.title",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def storage_label(self):\n        return f\"BOOK::{self.title}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def storage_label(self):\n        return f\"VIDEO::{self.title}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "BaseItem",
+            "constructorArgs": [
+              "Generic"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "storage_label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Generic",
+            "expectedKind": "value",
+            "message": "BaseItem.storage_label() should return the title."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Deep Work",
+              "Cal Newport"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "storage_label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "BOOK::Deep Work",
+            "expectedKind": "value",
+            "message": "Book.storage_label() should return the book label format."
+          },
+          {
+            "type": "defines_class",
+            "className": "Video",
+            "message": "Define the Video class."
+          },
+          {
+            "type": "constructible",
+            "className": "Video",
+            "constructorArgs": [
+              "Python Basics",
+              42
+            ],
+            "message": "Video should be constructible with title and minutes."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Video",
+            "constructorArgs": [
+              "Python Basics",
+              42
+            ],
+            "attributes": [
+              "title",
+              "minutes"
+            ],
+            "message": "Video should store title and minutes."
+          },
+          {
+            "type": "method_returns",
+            "className": "Video",
+            "constructorArgs": [
+              "Python Basics",
+              42
+            ],
+            "constructorArgKinds": [],
+            "methodName": "storage_label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "VIDEO::Python Basics",
+            "expectedKind": "value",
+            "message": "Video.storage_label() should return the video label format."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-abstraction-with-base-interfaces-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2",
+      "language": "python",
+      "starterCode": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Clean Code\", \"Robert C. Martin\"),\n    Video(\"Loops Lesson\", 18)\n]\n\nfor line in build_report(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n# services/report_service.py\ndef build_report(items):\n    # return a list of display_line() results\n    pass",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Clean Code\", \"Robert C. Martin\"),\n    Video(\"Loops Lesson\", 18)\n]\n\nfor line in build_report(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n# services/report_service.py\ndef build_report(items):\n    # return a list of display_line() results\n    pass",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_report(accounts):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_report(items):\n    return [\n        \"Book: Clean Code by Robert C. Martin\",\n        \"Video: Loops Lesson (18 min)\",\n    ]\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Clean Code\", \"Robert C. Martin\"),\n    Video(\"Loops Lesson\", 18)\n]\n\nfor line in build_report(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n# services/report_service.py\ndef build_report(items):\n    # return a list of display_line() results\n    pass",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# main.py\nfrom models.book import Book\nfrom models.video import Video\nfrom services.report_service import build_report\n\nitems = [\n    Book(\"Clean Code\", \"Robert C. Martin\"),\n    Video(\"Loops Lesson\", 18)\n]\n\nfor line in build_report(items):\n    print(line)\n\n# models/base_item.py\nclass BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title\n\n# models/book.py\nfrom models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"\n\n# models/video.py\nfrom models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"\n\n# services/report_service.py\ndef build_report(items):\n    # return a list of display_line() results\n    pass",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_report(accounts):\n    pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def build_report(items):\n    return [\n        \"Book: Clean Code by Robert C. Martin\",\n        \"Video: Loops Lesson (18 min)\",\n    ]\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_report(items):\n    return [\n        \"Book: Clean Code by Robert C. Martin\",\n        \"Video: Loops Lesson (18 min)\",\n    ]\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.display_line())\n    return lines",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class BaseItem:\n    def __init__(self, title):\n        self.title = title\n\n    def display_line(self):\n        return self.title",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "from models.base_item import BaseItem\n\nclass Book(BaseItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def display_line(self):\n        return f\"Book: {self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "from models.base_item import BaseItem\n\nclass Video(BaseItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def display_line(self):\n        return f\"Video: {self.title} ({self.minutes} min)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_report",
+            "args": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Clean Code"
+                  ],
+                  [
+                    "author",
+                    "Robert C. Martin"
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Video"
+                  ],
+                  [
+                    "title",
+                    "Loops Lesson"
+                  ],
+                  [
+                    "minutes",
+                    18
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "Book: Clean Code by Robert C. Martin",
+              "Video: Loops Lesson (18 min)"
+            ],
+            "expectedKind": "value",
+            "message": "build_report() should return one display line per item in order."
+          },
+          {
+            "type": "no_stdout",
+            "message": "build_report() should return data instead of printing it directly."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sc-abstraction-contract-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.sc-abstraction-contract-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "fb-base-contract-method-name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.fb-base-contract-method-name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "display_line"
+      }
+    },
+    {
+      "id": "mc-polymorphic-loop-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.mc-polymorphic-loop-benefits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "sc-abstraction-vs-type-checks",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.sc-abstraction-vs-type-checks",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "fb-super-shared-setup",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.fb-super-shared-setup",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "super().__init__(title)"
+      }
+    },
+    {
+      "id": "dr-build-polymorphic-service",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.practice.dr-build-polymorphic-service",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    }
+  ]
+}

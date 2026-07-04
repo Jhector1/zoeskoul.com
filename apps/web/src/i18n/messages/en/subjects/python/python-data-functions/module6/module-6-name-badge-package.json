@@ -37,7 +37,30 @@
                 "hint_1": "In `tools/names.py`, define `clean_name(text)` and return `text.strip().title()`.",
                 "hint_2": "In `main.py`, import `clean_name`, read input, and print the cleaned name."
               },
-              "starterCode": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n"
+              "starterCode": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Import from tools.names."
+                },
+                "1": {
+                  "message": "Define clean_name(text) inside tools/names.py."
+                },
+                "2": {
+                  "message": "clean_name should strip whitespace."
+                },
+                "3": {
+                  "message": "clean_name should title-case the name."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
             },
             "mp-2-add-badge-helper": {
               "title": "Add the badge helper module",
@@ -48,7 +71,41 @@
                 "hint_1": "Create `tools/badges.py` with `make_badge(name, role)`.",
                 "hint_2": "In `main.py`, clean the name first, then pass `name` and `role` into `make_badge(...)`."
               },
-              "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n"
+              "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": ""
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "# Add make_badge(name, role) here.\n# Return one formatted string for the badge.\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Import from tools.badges."
+                },
+                "1": {
+                  "message": "Define make_badge in tools/badges.py."
+                },
+                "2": {
+                  "message": "make_badge should uppercase the role."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
             },
             "mp-3-document-badge-helper": {
               "title": "Document and clean the badge helper",
@@ -59,7 +116,41 @@
                 "hint_1": "Add a triple-quoted docstring under `def make_badge(name, role):`.",
                 "hint_2": "Store `role.strip().upper()` in a variable before returning the badge text."
               },
-              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n"
+              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": ""
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    # Add a docstring that explains what this helper returns.\n    # Then clean role before uppercasing it so extra spaces do not reach the badge.\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Add a docstring to make_badge in tools/badges.py."
+                },
+                "1": {
+                  "message": "Clean the role before uppercasing it."
+                },
+                "2": {
+                  "message": "Uppercase the role in make_badge."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
             },
             "mp-4-package-welcome-message": {
               "title": "Print the final welcome badge",
@@ -70,7 +161,38 @@
                 "hint_1": "Use `badge = make_badge(name, role)` after cleaning the name.",
                 "hint_2": "Print one line that starts with `Welcome!` and includes the badge text."
               },
-              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n"
+              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": ""
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Build the badge with make_badge() instead of hard-coding the final text."
+                },
+                "1": {
+                  "message": "Print the final welcome message."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n"
             },
             "try-module-6-name-badge-package-sketch0": {
               "title": "Create the first badge helper file",
@@ -81,7 +203,30 @@
                 "hint_1": "In `tools/names.py`, return `text.strip().title()` from `clean_name(text)`.",
                 "hint_2": "In `main.py`, import `clean_name` and print `clean_name(\"  ava  \")`."
               },
-              "starterCode": "# Create a folder named tools.\n# Create tools/names.py with clean_name(text).\n# Then import clean_name from tools.names and print clean_name(\"  ava  \").\n"
+              "starterCode": "# Create a folder named tools.\n# Create tools/names.py with clean_name(text).\n# Then import clean_name from tools.names and print clean_name(\"  ava  \").\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Import clean_name from tools.names."
+                },
+                "1": {
+                  "message": "Define clean_name in tools/names.py."
+                },
+                "2": {
+                  "message": "clean_name should strip spaces."
+                },
+                "3": {
+                  "message": "clean_name should title-case the name."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
             }
           },
           "tryIt": {

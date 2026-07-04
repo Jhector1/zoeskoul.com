@@ -115,11 +115,6 @@ export default function SingleChoiceExerciseUI({
                 })}
             </div>
 
-            <div className="ui-meta">
-                {ui.t("storedAsPrefix", {}, "Stored as")}{" "}
-                <span className="font-mono">optionId</span>{" "}
-                {ui.t("storedAsSuffix", {}, "for submit.")}
-            </div>
         </div>
     );
 }

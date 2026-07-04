@@ -1,0 +1,486 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-1": {
+        "f-strings-and-formatting": {
+          "label": "F-Strings ak Fòmatay",
+          "summary": "Kreye yon sòti ki fasil pou li ak f-strings ak valè ki fòmate.",
+          "cards": {
+            "sketch0": {
+              "title": "Kisa yon f-string fè"
+            },
+            "sketch1": {
+              "title": "Poukisa fòmatay ede lizibilite"
+            },
+            "sketch2": {
+              "title": "Fòmate nimewo anndan f-strings"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Pratik Sòti Fòmate"
+            }
+          },
+          "projectSteps": {
+            "ci_print_profile_line": {
+              "title": "Enprime yon liy pwofil senp"
+            },
+            "ci_format_price_two_decimals": {
+              "title": "Fòmate yon pri"
+            },
+            "ci_input_greeting": {
+              "title": "Fòmate antre a kòm yon salitasyon"
+            },
+            "ci_input_name_city": {
+              "title": "Konstwi yon liy entwodiksyon fòmate"
+            },
+            "ci_average_one_decimal": {
+              "title": "Montre yon mwayèn ak yon sèl chif desimal"
+            }
+          },
+          "quiz": {
+            "sc_fstring_prefix": {
+              "title": "Chwazi kòmansman f-string ki kòrèk la",
+              "prompt": "Ki liy ki kòmanse yon f-string kòrèkteman nan Python?",
+              "hint": "Chèche string ki mete `f` dirèkteman anvan premye sitasyon an.",
+              "help": {
+                "concept": "Yon f-string dwe kòmanse ak lèt `f` la imedyatman anvan sitasyon an pou Python konnen li dwe ranplase valè ki anndan `{}`.",
+                "hint_1": "Se yon sèl opsyon ki itilize prefiks `f` la nan bon plas anvan string nan.",
+                "hint_2": "Verifye si liy la ta pèmèt `{name}` entèprete kòm valè yon varyab olye de tèks senp."
+              },
+              "options": {
+                "a": "print(\"Hello {name}\")",
+                "b": "print(f\"Hello {name}\")",
+                "c": "print(f Hello {name})"
+              }
+            },
+            "sc_decimal_places": {
+              "title": "Idantifye de plas desimal",
+              "prompt": "Ki ekspresyon f-string ki fòmate `price` pou montre egzakteman 2 plas desimal?",
+              "hint": "Chèche pati fòma a ki itilize `.2f` anndan akolad yo.",
+              "help": {
+                "concept": "Anndan yon f-string, `:.2f` fòmate yon nimewo kòm yon valè pwen fiks ak de chif apre pwen desimal la.",
+                "hint_1": "Enstriksyon fòmatay la dwe anndan `{}` apre non varyab la ak yon kolon.",
+                "hint_2": "Jwenn opsyon kote `price` swiv pa `:.2f`, pa deyò akolad yo epi pa ak move ponktiyasyon an."
+              },
+              "options": {
+                "a": "f\"{price.2f}\"",
+                "b": "Yon kòmand"
+              }
+            },
+            "mc_fstring_benefits": {
+              "title": "Chwazi deklarasyon ki vre sou f-strings",
+              "prompt": "Ki deklarasyon sou f-strings ki kòrèk? Chwazi tout sa ki aplikab.",
+              "hint": "Reflechi sou kijan f-strings mete valè varyab yo epi amelyore yon sòti ki fasil pou li.",
+              "help": {
+                "concept": "Yo itilize f-strings pou konstwi string ki fasil pou li lè yo mete ekspresyon oswa valè varyab dirèkteman anndan tèks ak `{}`.",
+                "hint_1": "Chèche deklarasyon ki dekri mete valè nan tèks epi fè sòti a pi fasil pou li.",
+                "hint_2": "Rejte nenpòt deklarasyon ki di akolad yo pa nesesè oswa prefiks `f` la opsyonèl."
+              },
+              "options": {
+                "a": "Yo ka mete valè varyab dirèkteman anndan yon string.",
+                "b": "Yo itilize akolad boukle alantou valè oswa ekspresyon.",
+                "c": "Yo mache sèlman ak valè tèks, pa ak nimewo.",
+                "d": "Yo ka fè sòti a pi fasil pou li."
+              }
+            },
+            "mc_output_formatting_examples": {
+              "title": "Jwenn egzanp fòmatay ki valab",
+              "prompt": "Ki liy ki fason valab pou pwodui yon sòti fòmate ki fasil pou li nan sijè sa a? Chwazi tout sa ki aplikab.",
+              "hint": "Chèche liy ki itilize kòrèkteman swa yon f-string oswa yon koneksyon string nòmal ak valè ki deja konvèti an string.",
+              "help": {
+                "concept": "Yon sòti ki fasil pou li ka konstwi ak f-strings oswa ak konkatenasyon string lè moso yo se string ki valab.",
+                "hint_1": "Yon f-string bezwen prefiks `f` la, epi konkatenasyon ak `+` bezwen moso string sou toude bò yo.",
+                "hint_2": "Verifye si chak liy ta mache ak yon varyab string tankou `name` epi si sentaks la konplè."
+              },
+              "options": {
+                "a": "print(f\"Name: {name}\")",
+                "b": "print(\"Name: \" + name)",
+                "c": "print(\"Name: {name}\")",
+                "d": "print(f\"Name: \" + {name})"
+              }
+            },
+            "dr_build_simple_fstring": {
+              "title": "Mete pati yon f-string senp nan lòd",
+              "prompt": "Ranje token yo pou fè yon liy valab ki enprime yon etikèt ak valè yon varyab.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso depandan yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "print(",
+                "t2": "f\"Name: {name}\"",
+                "t3": ")"
+              }
+            },
+            "dr_profile_output_order": {
+              "title": "Mete etap yo nan lòd pou sòti fòmate",
+              "prompt": "Mete etap sa yo nan pi bon lòd pou montre yon liy pwofil fòmate ak yon f-string.",
+              "hint": "Ou bezwen valè yo an premye, apre sa liy print fòmate a.",
+              "help": {
+                "concept": "Pou enprime yon sòti fòmate, varyab yo dwe resevwa valè anvan yo itilize yo anndan yon f-string.",
+                "hint_1": "Yon varyab pa ka mete nan yon f-string anvan li gen yon valè.",
+                "hint_2": "Toude afektasyon yo vini anvan deklarasyon print la, epi deklarasyon print la vini an dènye."
+              },
+              "tokens": {
+                "t1": "name = \"Lina\"",
+                "t2": "age = 12",
+                "t3": "print(f\"{name} is {age} years old\")"
+              }
+            },
+            "fb_missing_prefix": {
+              "title": "Ranpli prefiks ki manke a",
+              "prompt": "Konplete liy la pou Python trete li kòm yon f-string.",
+              "hint": "Konsantre sou konsèp ki manke a olye de tèm egzak ki manke a.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Reflechi sou sa pati ki manke a bezwen fè nan deklarasyon an.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fòmilasyon repons lan."
+              },
+              "template": "print([blank1]\"Hello {name}\")",
+              "choices": [
+                "f",
+                "p",
+                "x",
+                "s"
+              ]
+            },
+            "fb_decimal_format": {
+              "title": "Ranpli fòma nimewo a",
+              "prompt": "Chwazi kòd fòma ki manke a pou montre `price` ak 2 plas desimal.",
+              "hint": "Gade espas vid la, apre sa chwazi mo oswa senbòl ki fè lide a kòrèk.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki fè deklarasyon an egzak.",
+                "hint_1": "Gade mo ki anvan ak apre espas vid la pou dedwi ki kalite tèm ki nesesè.",
+                "hint_2": "Chwazi opsyon ki konplete deklarasyon an ak sans ki pi klè a."
+              },
+              "template": "print(f\"Price: ${price[blank1]}\")",
+              "choices": [
+                ":.2f",
+                ".2f",
+                ":2",
+                "::2f"
+              ]
+            },
+            "ci_print_profile_line": {
+              "title": "Enprime yon liy pwofil senp",
+              "prompt": "Ekri kòd Python ki estoke non `Mila` ak laj `13`, epi apre sa enprime egzakteman: `Mila is 13 years old` lè w itilize yon f-string.",
+              "hint": "Li travay la \"Enprime yon liy pwofil senp\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Enprime yon liy pwofil senp\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "# TODO: store the values in variables\n# TODO: print the sentence with an f-string"
+            },
+            "ci_format_price_two_decimals": {
+              "title": "Fòmate yon pri",
+              "prompt": "Ekri kòd Python ki estoke `price = 4.5` epi enprime egzakteman: `Price: $4.50` lè w itilize yon f-string ak fòmatay nimewo.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fòmilasyon kesyon sa a pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fòmilasyon repons lan."
+              },
+              "starterCode": "price = 4.5\n# TODO: print the formatted price"
+            },
+            "ci_input_greeting": {
+              "title": "Fòmate antre a kòm yon salitasyon",
+              "prompt": "Ekri kòd Python ki li yon non nan antre epi enprime `Hello, NAME!` lè w itilize yon f-string.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fòmilasyon kesyon sa a pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fòmilasyon repons lan."
+              },
+              "starterCode": "# Read a name\nname = input()\n\n# TODO: print the greeting with an f-string"
+            },
+            "ci_input_name_city": {
+              "title": "Konstwi yon liy entwodiksyon fòmate",
+              "prompt": "Ekri kòd Python ki li yon non ak yon vil sou liy separe, epi apre sa enprime egzakteman: `NAME lives in CITY` lè w itilize yon f-string.",
+              "hint": "Li travay la \"Konstwi yon liy entwodiksyon fòmate\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Konstwi yon liy entwodiksyon fòmate\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "# Read the name and city\nname = input()\ncity = input()\n\n# TODO: print the formatted sentence"
+            },
+            "ci_average_one_decimal": {
+              "title": "Montre yon mwayèn ak yon sèl chif desimal",
+              "prompt": "Ekri kòd Python ki li de nonb antye, kalkile mwayèn yo, epi enprime egzakteman nan fòma sa a: `Average: X.X` lè w itilize yon f-string.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fòmilasyon kesyon sa a pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fòmilasyon repons lan."
+              },
+              "starterCode": "# Read two whole numbers\nfirst = int(input())\nsecond = int(input())\n\n# TODO: calculate the average\n# TODO: print it as Average: X.X"
+            }
+          }
+        }
+      },
+      "python-v2-1": {
+        "f-strings-and-formatting": {
+          "label": "F-Strings ak Fòmatay",
+          "summary": "Kreye yon sòti ki fasil pou li ak f-strings ak valè ki fòmate.",
+          "cards": {
+            "sketch0": {
+              "title": "Kisa yon f-string fè"
+            },
+            "sketch1": {
+              "title": "Poukisa fòmatay ede lizibilite"
+            },
+            "sketch2": {
+              "title": "Fòmate nimewo anndan f-strings"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Pratik Sòti Fòmate"
+            }
+          },
+          "projectSteps": {
+            "ci_print_profile_line": {
+              "title": "Enprime yon liy pwofil senp"
+            },
+            "ci_format_price_two_decimals": {
+              "title": "Fòmate yon pri"
+            },
+            "ci_input_greeting": {
+              "title": "Fòmate antre a kòm yon salitasyon"
+            },
+            "ci_input_name_city": {
+              "title": "Konstwi yon liy entwodiksyon fòmate"
+            },
+            "ci_average_one_decimal": {
+              "title": "Montre yon mwayèn ak yon sèl chif desimal"
+            }
+          },
+          "quiz": {
+            "sc_fstring_prefix": {
+              "title": "Chwazi kòmansman f-string ki kòrèk la",
+              "prompt": "Ki liy ki kòmanse yon f-string kòrèkteman nan Python?",
+              "hint": "Chèche string ki mete `f` dirèkteman anvan premye sitasyon an.",
+              "help": {
+                "concept": "Yon f-string dwe kòmanse ak lèt `f` la imedyatman anvan sitasyon an pou Python konnen li dwe ranplase valè ki anndan `{}`.",
+                "hint_1": "Se yon sèl opsyon ki itilize prefiks `f` la nan bon plas anvan string nan.",
+                "hint_2": "Verifye si liy la ta pèmèt `{name}` entèprete kòm valè yon varyab olye de tèks senp."
+              },
+              "options": {
+                "a": "print(\"Hello {name}\")",
+                "b": "print(f\"Hello {name}\")",
+                "c": "print(f Hello {name})"
+              }
+            },
+            "sc_decimal_places": {
+              "title": "Idantifye de plas desimal",
+              "prompt": "Ki ekspresyon f-string ki fòmate `price` pou montre egzakteman 2 plas desimal?",
+              "hint": "Chèche pati fòma a ki itilize `.2f` anndan akolad yo.",
+              "help": {
+                "concept": "Anndan yon f-string, `:.2f` fòmate yon nimewo kòm yon valè pwen fiks ak de chif apre pwen desimal la.",
+                "hint_1": "Enstriksyon fòmatay la dwe anndan `{}` apre non varyab la ak yon kolon.",
+                "hint_2": "Jwenn opsyon kote `price` swiv pa `:.2f`, pa deyò akolad yo epi pa ak move ponktiyasyon an."
+              },
+              "options": {
+                "a": "f\"{price.2f}\"",
+                "b": "Yon kòmand"
+              }
+            },
+            "mc_fstring_benefits": {
+              "title": "Chwazi deklarasyon ki vre sou f-strings",
+              "prompt": "Ki deklarasyon sou f-strings ki kòrèk? Chwazi tout sa ki aplikab.",
+              "hint": "Reflechi sou kijan f-strings mete valè varyab yo epi amelyore yon sòti ki fasil pou li.",
+              "help": {
+                "concept": "Yo itilize f-strings pou konstwi string ki fasil pou li lè yo mete ekspresyon oswa valè varyab dirèkteman anndan tèks ak `{}`.",
+                "hint_1": "Chèche deklarasyon ki dekri mete valè nan tèks epi fè sòti a pi fasil pou li.",
+                "hint_2": "Rejte nenpòt deklarasyon ki di akolad yo pa nesesè oswa prefiks `f` la opsyonèl."
+              },
+              "options": {
+                "a": "Yo ka mete valè varyab dirèkteman anndan yon string.",
+                "b": "Yo itilize akolad boukle alantou valè oswa ekspresyon.",
+                "c": "Yo mache sèlman ak valè tèks, pa ak nimewo.",
+                "d": "Yo ka fè sòti a pi fasil pou li."
+              }
+            },
+            "mc_output_formatting_examples": {
+              "title": "Jwenn egzanp fòmatay ki valab",
+              "prompt": "Ki liy ki fason valab pou pwodui yon sòti fòmate ki fasil pou li nan sijè sa a? Chwazi tout sa ki aplikab.",
+              "hint": "Chèche liy ki itilize kòrèkteman swa yon f-string oswa yon koneksyon string nòmal ak valè ki deja konvèti an string.",
+              "help": {
+                "concept": "Yon sòti ki fasil pou li ka konstwi ak f-strings oswa ak konkatenasyon string lè moso yo se string ki valab.",
+                "hint_1": "Yon f-string bezwen prefiks `f` la, epi konkatenasyon ak `+` bezwen moso string sou toude bò yo.",
+                "hint_2": "Verifye si chak liy ta mache ak yon varyab string tankou `name` epi si sentaks la konplè."
+              },
+              "options": {
+                "a": "print(f\"Name: {name}\")",
+                "b": "print(\"Name: \" + name)",
+                "c": "print(\"Name: {name}\")",
+                "d": "print(f\"Name: \" + {name})"
+              }
+            },
+            "dr_build_simple_fstring": {
+              "title": "Mete pati yon f-string senp nan lòd",
+              "prompt": "Ranje token yo pou fè yon liy valab ki enprime yon etikèt ak valè yon varyab.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso depandan yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "print(",
+                "t2": "f\"Name: {name}\"",
+                "t3": ")"
+              }
+            },
+            "dr_profile_output_order": {
+              "title": "Mete etap yo nan lòd pou sòti fòmate",
+              "prompt": "Mete etap sa yo nan pi bon lòd pou montre yon liy pwofil fòmate ak yon f-string.",
+              "hint": "Ou bezwen valè yo an premye, apre sa liy print fòmate a.",
+              "help": {
+                "concept": "Pou enprime yon sòti fòmate, varyab yo dwe resevwa valè anvan yo itilize yo anndan yon f-string.",
+                "hint_1": "Yon varyab pa ka mete nan yon f-string anvan li gen yon valè.",
+                "hint_2": "Toude afektasyon yo vini anvan deklarasyon print la, epi deklarasyon print la vini an dènye."
+              },
+              "tokens": {
+                "t1": "name = \"Lina\"",
+                "t2": "age = 12",
+                "t3": "print(f\"{name} is {age} years old\")"
+              }
+            },
+            "fb_missing_prefix": {
+              "title": "Ranpli prefiks ki manke a",
+              "prompt": "Konplete liy la pou Python trete li kòm yon f-string.",
+              "hint": "Konsantre sou konsèp ki manke a olye de tèm egzak ki manke a.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Reflechi sou sa pati ki manke a bezwen fè nan deklarasyon an.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fòmilasyon repons lan."
+              },
+              "template": "print([blank1]\"Hello {name}\")",
+              "choices": [
+                "f",
+                "p",
+                "x",
+                "s"
+              ]
+            },
+            "fb_decimal_format": {
+              "title": "Ranpli fòma nimewo a",
+              "prompt": "Chwazi kòd fòma ki manke a pou montre `price` ak 2 plas desimal.",
+              "hint": "Gade espas vid la, apre sa chwazi mo oswa senbòl ki fè lide a kòrèk.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki fè deklarasyon an egzak.",
+                "hint_1": "Gade mo ki anvan ak apre espas vid la pou dedwi ki kalite tèm ki nesesè.",
+                "hint_2": "Chwazi opsyon ki konplete deklarasyon an ak sans ki pi klè a."
+              },
+              "template": "print(f\"Price: ${price[blank1]}\")",
+              "choices": [
+                ":.2f",
+                ".2f",
+                ":2",
+                "::2f"
+              ]
+            },
+            "ci_print_profile_line": {
+              "title": "Enprime yon liy pwofil senp",
+              "prompt": "Ekri kòd Python ki estoke non `Mila` ak laj `13`, epi apre sa enprime egzakteman: `Mila is 13 years old` lè w itilize yon f-string.",
+              "hint": "Li travay la \"Enprime yon liy pwofil senp\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Enprime yon liy pwofil senp\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "# TODO: store the values in variables\n# TODO: print the sentence with an f-string"
+            },
+            "ci_format_price_two_decimals": {
+              "title": "Fòmate yon pri",
+              "prompt": "Ekri kòd Python ki estoke `price = 4.5` epi enprime egzakteman: `Price: $4.50` lè w itilize yon f-string ak fòmatay nimewo.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fòmilasyon kesyon sa a pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fòmilasyon repons lan."
+              },
+              "starterCode": "price = 4.5\n# TODO: print the formatted price"
+            },
+            "ci_input_greeting": {
+              "title": "Fòmate antre a kòm yon salitasyon",
+              "prompt": "Ekri kòd Python ki li yon non nan antre epi enprime `Hello, NAME!` lè w itilize yon f-string.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fòmilasyon kesyon sa a pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fòmilasyon repons lan."
+              },
+              "starterCode": "# Read a name\nname = input()\n\n# TODO: print the greeting with an f-string"
+            },
+            "ci_input_name_city": {
+              "title": "Konstwi yon liy entwodiksyon fòmate",
+              "prompt": "Ekri kòd Python ki li yon non ak yon vil sou liy separe, epi apre sa enprime egzakteman: `NAME lives in CITY` lè w itilize yon f-string.",
+              "hint": "Li travay la \"Konstwi yon liy entwodiksyon fòmate\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Konstwi yon liy entwodiksyon fòmate\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "# Read the name and city\nname = input()\ncity = input()\n\n# TODO: print the formatted sentence"
+            },
+            "ci_average_one_decimal": {
+              "title": "Montre yon mwayèn ak yon sèl chif desimal",
+              "prompt": "Ekri kòd Python ki li de nonb antye, kalkile mwayèn yo, epi enprime egzakteman nan fòma sa a: `Average: X.X` lè w itilize yon f-string.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fòmilasyon kesyon sa a pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fòmilasyon orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fòmilasyon repons lan."
+              },
+              "starterCode": "# Read two whole numbers\nfirst = int(input())\nsecond = int(input())\n\n# TODO: calculate the average\n# TODO: print it as Average: X.X"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-1": {
+        "f-strings-and-formatting": {
+          "fstrings_intro": {
+            "title": "Kisa yon f-string fè",
+            "bodyMarkdown": "Yon **f-string** pèmèt ou mete valè varyab dirèkteman anndan yon string. Ou kòmanse string nan ak `f` epi ou mete non varyab yo anndan akolad boukle `{}`.\n\n```python\nname = \"Maya\"\nscore = 9\nprint(f\"{name} scored {score} points\")\n```\n\nSa enprime:\n\n```python\nMaya scored 9 points\n```\n\nAnn pase ladan l etap pa etap:\n- `name` estoke `\"Maya\"`\n- `score` estoke `9`\n- Nan f-string nan, `{name}` vin `Maya`\n- `{score}` vin `9`\n\nSa souvan pi fasil pou li pase kole anpil string ansanm."
+          },
+          "fstrings_vs_concat": {
+            "title": "Poukisa fòmatay ede lizibilite",
+            "bodyMarkdown": "Ou ka konstwi sòti nan diferan fason, men f-strings anjeneral se fason ki pi klè pou debutan yo.\n\n```python\ncity = \"Lima\"\ntemp = 24\nprint(\"City: \" + city)\nprint(f\"Temperature: {temp}C\")\n```\n\nEgzanp detaye:\n- Premye liy la itilize `+` pou kole string yo.\n- Dezyèm liy la itilize yon f-string.\n- Toude yo valab, men f-string nan pi fasil pou li lè ou gen plizyè valè.\n\nOu ka mete etikèt tou pou fè sòti a pi klè:\n\n```python\nname = \"Ava\"\nage = 14\nprint(f\"Name: {name}\")\nprint(f\"Age: {age}\")\n```\n\nKalite fòmatay sa a itil pou kat pwofil, rezime, ak rapò."
+          },
+          "formatted_values": {
+            "title": "Fòmate nimewo anndan f-strings",
+            "bodyMarkdown": "F-strings ka fòmate nimewo tou nan yon fason espesifik. Yon egzanp debutan ki komen se montre yon kantite plas desimal fiks.\n\n```python\nprice = 3.5\nprint(f\"Price: ${price:.2f}\")\n```\n\nSa enprime:\n\n```python\nPrice: $3.50\n```\n\nAnn pase ladan l etap pa etap:\n- `price = 3.5` estoke yon nimewo.\n- `{price:.2f}` vle di: montre `price` kòm yon nimewo desimal ak **2 chif apre pwen desimal la**.\n- Kidonk `3.5` vin `3.50` nan sòti a.\n\nYon lòt egzanp:\n\n```python\nratio = 7 / 3\nprint(f\"Ratio: {ratio:.3f}\")\n```\n\nSa montre valè a ak 3 plas desimal."
+          }
+        }
+      },
+      "python-v2-1": {
+        "f-strings-and-formatting": {
+          "fstrings_intro": {
+            "title": "Kisa yon f-string fè",
+            "bodyMarkdown": "Yon **f-string** pèmèt ou mete valè varyab dirèkteman anndan yon string. Ou kòmanse string nan ak `f` epi ou mete non varyab yo anndan akolad boukle `{}`.\n\n```python\nname = \"Maya\"\nscore = 9\nprint(f\"{name} scored {score} points\")\n```\n\nSa enprime:\n\n```python\nMaya scored 9 points\n```\n\nAnn pase ladan l etap pa etap:\n- `name` estoke `\"Maya\"`\n- `score` estoke `9`\n- Nan f-string nan, `{name}` vin `Maya`\n- `{score}` vin `9`\n\nSa souvan pi fasil pou li pase kole anpil string ansanm."
+          },
+          "fstrings_vs_concat": {
+            "title": "Poukisa fòmatay ede lizibilite",
+            "bodyMarkdown": "Ou ka konstwi sòti nan diferan fason, men f-strings anjeneral se fason ki pi klè pou debutan yo.\n\n```python\ncity = \"Lima\"\ntemp = 24\nprint(\"City: \" + city)\nprint(f\"Temperature: {temp}C\")\n```\n\nEgzanp detaye:\n- Premye liy la itilize `+` pou kole string yo.\n- Dezyèm liy la itilize yon f-string.\n- Toude yo valab, men f-string nan pi fasil pou li lè ou gen plizyè valè.\n\nOu ka mete etikèt tou pou fè sòti a pi klè:\n\n```python\nname = \"Ava\"\nage = 14\nprint(f\"Name: {name}\")\nprint(f\"Age: {age}\")\n```\n\nKalite fòmatay sa a itil pou kat pwofil, rezime, ak rapò."
+          },
+          "formatted_values": {
+            "title": "Fòmate nimewo anndan f-strings",
+            "bodyMarkdown": "F-strings ka fòmate nimewo tou nan yon fason espesifik. Yon egzanp debutan ki komen se montre yon kantite plas desimal fiks.\n\n```python\nprice = 3.5\nprint(f\"Price: ${price:.2f}\")\n```\n\nSa enprime:\n\n```python\nPrice: $3.50\n```\n\nAnn pase ladan l etap pa etap:\n- `price = 3.5` estoke yon nimewo.\n- `{price:.2f}` vle di: montre `price` kòm yon nimewo desimal ak **2 chif apre pwen desimal la**.\n- Kidonk `3.5` vin `3.50` nan sòti a.\n\nYon lòt egzanp:\n\n```python\nratio = 7 / 3\nprint(f\"Ratio: {ratio:.3f}\")\n```\n\nSa montre valè a ak 3 plas desimal."
+          }
+        }
+      }
+    }
+  }
+}

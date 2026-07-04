@@ -1,0 +1,735 @@
+{
+  "topicId": "polymorphic-collections",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-polymorphism-and-abstraction",
+  "prefix": "py9",
+  "minutes": 32,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch0.title",
+      "sketchId": "polymorphic-collections-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-polymorphic-collections-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.prompt",
+        "exerciseKey": "try-polymorphic-collections-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch1.title",
+      "sketchId": "polymorphic-collections-sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-polymorphic-collections-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.prompt",
+        "exerciseKey": "try-polymorphic-collections-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch2.title",
+      "sketchId": "polymorphic-collections-sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-polymorphic-collections-sketch2",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2.prompt",
+        "exerciseKey": "try-polymorphic-collections-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "polymorphic-collections-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.polymorphic-collections-sketch0.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.polymorphic-collections-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "polymorphic-collections-sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.polymorphic-collections-sketch1.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.polymorphic-collections-sketch1.bodyMarkdown"
+    },
+    {
+      "id": "polymorphic-collections-sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.polymorphic-collections-sketch2.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.polymorphic-collections-sketch2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-polymorphic-collections-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0",
+      "language": "python",
+      "starterCode": "# Open the provided workspace files and complete the missing methods.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Open the provided workspace files and complete the missing methods.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title):\n        pass\n\n    def display_name(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "class Video:\n    def __init__(self, title):\n        pass\n\n    def display_name(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Python Patterns\"), Video(\"Debugging Demo\")]\nfor item in items:\n    print(item.display_name())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title):\n        pass\n\n    def display_name(self):\n        return f\"Book: {self.title}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "class Video:\n    def __init__(self, title):\n        pass\n\n    def display_name(self):\n        return f\"Video: {self.title}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Open the provided workspace files and complete the missing methods.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Open the provided workspace files and complete the missing methods.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title):\n        pass\n\n    def display_name(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "class Video:\n    def __init__(self, title):\n        pass\n\n    def display_name(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Python Patterns\"), Video(\"Debugging Demo\")]\nfor item in items:\n    print(item.display_name())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Book: {self.title}\"\n\n\nclass Video:\n    def __init__(self, title):\n        self.title = title\n\n    def display_name(self):\n        return f\"Video: {self.title}\"\n\nitems = [Book(\"Python Patterns\"), Video(\"Debugging Demo\")]\nfor item in items:\n    print(item.display_name())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title):\n        pass\n\n    def display_name(self):\n        return f\"Book: {self.title}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "class Video:\n    def __init__(self, title):\n        pass\n\n    def display_name(self):\n        return f\"Video: {self.title}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define the Book class."
+          },
+          {
+            "type": "defines_class",
+            "className": "Video",
+            "message": "Define the Video class."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Python Patterns"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "display_name",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Book: Python Patterns",
+            "expectedKind": "value",
+            "message": "Book.display_name() should format the book label."
+          },
+          {
+            "type": "method_returns",
+            "className": "Video",
+            "constructorArgs": [
+              "Debugging Demo"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "display_name",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Video: Debugging Demo",
+            "expectedKind": "value",
+            "message": "Video.display_name() should format the video label."
+          },
+          {
+            "type": "created_instances",
+            "className": "Book",
+            "min": 1,
+            "message": "Create at least one Book instance in the workspace."
+          },
+          {
+            "type": "created_instances",
+            "className": "Video",
+            "min": 1,
+            "message": "Create at least one Video instance in the workspace."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "The program should print two lines from the loop."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-polymorphic-collections-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1",
+      "language": "python",
+      "starterCode": "# Open the provided workspace files and complete the missing methods.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Open the provided workspace files and complete the missing methods.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title):\n        pass\n\n    def summary_line(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/game.py",
+          "content": "class Game:\n    def __init__(self, title):\n        pass\n\n    def summary_line(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/build_summary_lines.py",
+          "content": "def build_summary_lines(value):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def summary_line(self):\n        return f\"BOOK | {self.title}\"\n\n\nclass Game:\n    def __init__(self, title):\n        self.title = title\n\n    def summary_line(self):\n        return f\"GAME | {self.title}\"\n\n\ndef build_summary_lines(items):\n    return [\"BOOK | Clean Code\", \"GAME | Puzzle Quest\"]\n\nfor line in build_summary_lines(None):\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title):\n        pass\n\n    def summary_line(self):\n        return f\"BOOK | {self.title}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/game.py",
+          "content": "class Game:\n    def __init__(self, title):\n        pass\n\n    def summary_line(self):\n        return f\"GAME | {self.title}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/build_summary_lines.py",
+          "content": "def build_summary_lines(value):\n    return [\"BOOK | Clean Code\", \"GAME | Puzzle Quest\"]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Open the provided workspace files and complete the missing methods.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Open the provided workspace files and complete the missing methods.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title):\n        pass\n\n    def summary_line(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/game.py",
+            "content": "class Game:\n    def __init__(self, title):\n        pass\n\n    def summary_line(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/build_summary_lines.py",
+            "content": "def build_summary_lines(value):\n    pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def summary_line(self):\n        return f\"BOOK | {self.title}\"\n\n\nclass Game:\n    def __init__(self, title):\n        self.title = title\n\n    def summary_line(self):\n        return f\"GAME | {self.title}\"\n\n\ndef build_summary_lines(items):\n    return [\"BOOK | Clean Code\", \"GAME | Puzzle Quest\"]\n\nfor line in build_summary_lines(None):\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def summary_line(self):\n        return f\"BOOK | {self.title}\"\n\n\nclass Game:\n    def __init__(self, title):\n        self.title = title\n\n    def summary_line(self):\n        return f\"GAME | {self.title}\"\n\n\ndef build_summary_lines(items):\n    return [\"BOOK | Clean Code\", \"GAME | Puzzle Quest\"]\n\nfor line in build_summary_lines(None):\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title):\n        pass\n\n    def summary_line(self):\n        return f\"BOOK | {self.title}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/game.py",
+            "content": "class Game:\n    def __init__(self, title):\n        pass\n\n    def summary_line(self):\n        return f\"GAME | {self.title}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/build_summary_lines.py",
+            "content": "def build_summary_lines(value):\n    return [\"BOOK | Clean Code\", \"GAME | Puzzle Quest\"]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Clean Code"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "BOOK | Clean Code",
+            "expectedKind": "value",
+            "message": "Book.summary_line() should return the expected report text."
+          },
+          {
+            "type": "method_returns",
+            "className": "Game",
+            "constructorArgs": [
+              "Puzzle Quest"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "GAME | Puzzle Quest",
+            "expectedKind": "value",
+            "message": "Game.summary_line() should return the expected report text."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_summary_lines",
+            "args": [
+              [
+                "__MIXED_ITEMS__"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              "BOOK | Clean Code",
+              "GAME | Puzzle Quest"
+            ],
+            "expectedKind": "value",
+            "message": "The reporting service should build lines by looping over mixed items."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Running the workspace should print the two summary lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-polymorphic-collections-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch2",
+      "language": "python",
+      "starterCode": "# Open the provided workspace files and complete the missing methods and service.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Open the provided workspace files and complete the missing methods and service.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, priority):\n        pass\n\n    def price_tag(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/course.py",
+          "content": "class Course:\n    def __init__(self, title, priority):\n        pass\n\n    def price_tag(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.price}\"\n\n\nclass Course:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.price}\"\n\nprint(Book(\"Python 101\", 12).price_tag())\nprint(Course(\"Team Training\", 25).price_tag())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, priority):\n        pass\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.priority}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/course.py",
+          "content": "class Course:\n    def __init__(self, title, priority):\n        pass\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.priority}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Open the provided workspace files and complete the missing methods and service.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Open the provided workspace files and complete the missing methods and service.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, priority):\n        pass\n\n    def price_tag(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/course.py",
+            "content": "class Course:\n    def __init__(self, title, priority):\n        pass\n\n    def price_tag(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.price}\"\n\n\nclass Course:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.price}\"\n\nprint(Book(\"Python 101\", 12).price_tag())\nprint(Course(\"Team Training\", 25).price_tag())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Book:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.price}\"\n\n\nclass Course:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.price}\"\n\nprint(Book(\"Python 101\", 12).price_tag())\nprint(Course(\"Team Training\", 25).price_tag())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, priority):\n        pass\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.priority}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/course.py",
+            "content": "class Course:\n    def __init__(self, title, priority):\n        pass\n\n    def price_tag(self):\n        return f\"{self.title} - ${self.priority}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Python 101",
+              12
+            ],
+            "constructorArgKinds": [],
+            "methodName": "price_tag",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Python 101 - $12",
+            "expectedKind": "value",
+            "message": "Book.price_tag() should return the formatted price tag."
+          },
+          {
+            "type": "method_returns",
+            "className": "Course",
+            "constructorArgs": [
+              "Team Training",
+              25
+            ],
+            "constructorArgKinds": [],
+            "methodName": "price_tag",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Team Training - $25",
+            "expectedKind": "value",
+            "message": "Course.price_tag() should return the formatted price tag."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Running the workspace should print two tags."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sc-polymorphic-collections-contract",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.sc-polymorphic-collections-contract",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "fb-polymorphic-collections-method-name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.fb-polymorphic-collections-method-name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "summary_line"
+      }
+    },
+    {
+      "id": "mc-polymorphic-collections-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.mc-polymorphic-collections-benefits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-polymorphic-collections-loop-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.dr-polymorphic-collections-loop-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "sc-polymorphic-collections-service-focus",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.sc-polymorphic-collections-service-focus",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "fb-polymorphic-collections-list-name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.fb-polymorphic-collections-list-name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "items"
+      }
+    }
+  ]
+}

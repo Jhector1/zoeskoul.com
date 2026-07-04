@@ -3,47 +3,47 @@
     "linux--linux-terminal-fundamentals--draft": {
       "linux-module-1-terminal-navigation": {
         "what-the-terminal-is": {
-          "label": "Ce qu’est le terminal",
-          "summary": "Understand the terminal as a place pour type commandes et see the computer respond.",
+          "label": "Qu'est-ce que le Terminal ?",
+          "summary": "Considérez le terminal comme un endroit où l'on tape des commandes et où l'on voit l'ordinateur y répondre.",
           "cards": {
             "sketch0": {
-              "title": "Le terminal est une conversation avec votre ordinateur"
+              "title": "Le terminal, c'est comme une conversation avec votre ordinateur"
             },
             "sketch1": {
-              "title": "Les commandes sont des instructions, et la sortie est la réponse"
+              "title": "Les commandes sont des instructions, et la sortie correspond à la réponse"
             },
             "sketch2": {
-              "title": "Pourquoi les gens utilisent le terminal"
+              "title": "Pourquoi les gens utilisent-ils le terminal ?"
             },
             "quiz": {
-              "title": "Pratique"
+              "title": "Entraînement"
             }
           },
           "practice": {
             "sc-terminal-purpose": {
-              "title": "Ce que fait le terminal",
-              "prompt": "Vous êtes helping organize a club espace de travail avec dossiers et fichiers. Quel best describes the terminal?",
-              "hint": "Pensez à whether the terminal est a place pour type instructions ou a place that stores fichiers by itself.",
+              "title": "Fonctionnalités du terminal",
+              "prompt": "Vous participez à l'organisation de l'espace de travail d'un club à l'aide de dossiers et de fichiers. Quelle description correspond le mieux au répertoire ?",
+              "hint": "Demandez-vous si le terminal est un endroit où l'on tape des commandes ou un espace de stockage de fichiers à part entière.",
               "help": {
-                "concept": "The terminal est an interface for entering commandes et seeing the computer's responses. It est not the same thing as a dossier, fichier, ou operating system.",
-                "hint_1": "Decide which choice describes interaction: vous type something, et the computer responds.",
-                "hint_2": "Cherchez the option that describes a text-based tool for running commandes."
+                "concept": "Le terminal est une interface permettant de saisir des commandes et de visualiser les réponses de l'ordinateur. Il ne s'agit pas d'un dossier, d'un fichier ou d'un système d'exploitation.",
+                "hint_1": "Choisissez l'option qui décrit le mieux cette interaction : vous tapez quelque chose et l'ordinateur répond.",
+                "hint_2": "Recherchez l'option qui décrit un outil en mode texte permettant d'exécuter des commandes."
               },
               "options": {
-                "a": "A text-based place pour type commandes et see the computer respond",
-                "b": "A dossier that automatically stores every fichier vous créer",
-                "c": "A special fichier that listers all commandes on the computer",
-                "d": "A background process that runs sans user input"
+                "a": "Un environnement en mode texte permettant de saisir des commandes et de voir la réaction de l'ordinateur",
+                "b": "Un dossier qui enregistre automatiquement tous les fichiers que vous créez",
+                "c": "Un fichier spécial qui répertorie toutes les commandes de l'ordinateur",
+                "d": "Un processus d'arrière-plan qui s'exécute sans intervention de l'utilisateur"
               }
             },
             "sc-pwd-vs-ls": {
-              "title": "Choisir le bon objectif de commande",
-              "prompt": "Un apprenant types a commande because they want pour know which dossier they sont currently dans avant listering fichiers. Quelle commandee matches that objectif?",
-              "hint": "Utilisez l’explication de la leçon et la formulation de cette question pour réduire les choix.",
+              "title": "Choisissez l'objectif de commande approprié",
+              "prompt": "Un apprenant tape une commande car il souhaite savoir dans quel dossier il se trouve actuellement avant d'afficher la liste des fichiers. Quelle commande correspond à cet objectif ?",
+              "hint": "Servez-vous de l'explication donnée dans la leçon et de la formulation de cette question pour affiner votre réponse.",
               "help": {
-                "concept": "Ce texte d’aide a été corrigé parce que la formulation originale révélait la réponse trop directement.",
-                "hint_1": "Compare the question pour the lesson example et redéplacer details that faire not match the requested concept.",
-                "hint_2": "Utilisez le rôle ou les indices nommés dans l’énoncé au lieu de vous appuyer sur la formulation des réponses."
+                "concept": "Ce texte d'aide a été modifié, car la formulation initiale révélait la réponse de manière trop directe.",
+                "hint_1": "Comparez la question à l'exemple donné dans la leçon et supprimez les détails qui ne correspondent pas au concept demandé.",
+                "hint_2": "Utilisez le rôle ou l'élément de preuve mentionné dans l'énoncé plutôt que de vous fier à la formulation de la réponse."
               },
               "options": {
                 "a": "pwd",
@@ -53,46 +53,46 @@
               }
             },
             "mc-terminal-workflow": {
-              "title": "Ce qui fait partie d’un flux de travail de base dans le terminal",
-              "prompt": "Choisissez toutes les actions that fit the idea of using the terminal pour inspecter a espace de travail sûrly at the start of a task.",
-              "hint": "Pensez à commandes that help vous vérifier votre emplacement et see what est dans the dossier actuel.",
+              "title": "Quels sont les éléments indispensables d'un flux de travail de base dans un terminal ?",
+              "prompt": "Sélectionnez toutes les actions qui correspondent à l'idée d'utiliser le terminal pour inspecter un espace de travail en toute sécurité au début d'une tâche.",
+              "hint": "Réfléchissez aux commandes qui vous permettent de vérifier votre emplacement et de voir ce que contient le dossier actuel.",
               "help": {
-                "concept": "Early terminal workflow often starts avec inspecterion commandes such as `pwd` et `ls` so vous understand votre current emplacement et contenu avant making changes.",
-                "hint_1": "Cherchez actions that help vous orient yourself avant création de, moving, ou deleting anything.",
-                "hint_2": "Two of these choices sont direct vérifiers: one affichers votre dossier actuel et one listers items dans it."
+                "concept": "Les premières étapes d'un workflow en terminal commencent souvent par des commandes d'inspection telles que « `pwd` » et « `ls` », afin que vous puissiez vous faire une idée de votre emplacement actuel et du contenu avant d'effectuer des modifications.",
+                "hint_1": "Recherchez les actions qui vous aident à vous repérer avant de créer, déplacer ou supprimer quoi que ce soit.",
+                "hint_2": "Deux de ces options permettent d'accéder directement à ces informations : l'une affiche le dossier dans lequel vous vous trouvez actuellement, et l'autre répertorie les éléments qu'il contient."
               },
               "options": {
-                "a": "Exécutez `pwd` pour confirmer the dossier actuel",
-                "b": "Exécutez `ls` pour see fichiers et dossiers dans le/la actuel(le) emplacement",
-                "c": "Utilisez `sudo` pour get full control avant vérifiering anything",
-                "d": "Install a package so the terminal can afficher dossier names"
+                "a": "Exécutez la commande « `pwd` » pour vérifier le dossier actuel.",
+                "b": "Exécutez la commande « `ls` » pour afficher les fichiers et dossiers de l'emplacement actuel.",
+                "c": "Utilisez « `sudo` » pour prendre le contrôle total avant de cocher quoi que ce soit",
+                "d": "Installez un paquet pour que le terminal puisse afficher les noms des dossiers"
               }
             },
             "dr-terminal-check-sequence": {
-              "title": "Mettre une vérification simple du terminal dans l’ordre",
-              "prompt": "Mettez ces étapes dans le meilleur order for a débutant who opens the terminal et wants pour understand the espace de travail avant doing anything else.",
-              "hint": "Lisez chaque élément et placez-les dans l’ordre où l’énoncé doit être compris.",
+              "title": "Demander un simple contrôle du terminal",
+              "prompt": "Classez ces étapes dans l'ordre le plus approprié pour un débutant qui ouvre le terminal et souhaite se familiariser avec l'environnement de travail avant toute autre chose.",
+              "hint": "Lisez chaque élément et classez-les dans l'ordre dans lequel l'énoncé doit être compris.",
               "help": {
-                "concept": "Les éléments doivent former un énoncé valide dans un ordre logique.",
-                "hint_1": "Commencez par l’élément qui introduit l’idée ou l’action.",
-                "hint_2": "Placez les éléments dépendants après la partie qu’ils décrivent ou complètent."
+                "concept": "Les éléments doivent former un ensemble cohérent, présenté dans un ordre logique.",
+                "hint_1": "Commencez par le passage qui présente l'idée ou l'action.",
+                "hint_2": "Placez les pièces liées à un emplacement précis après l'élément qu'elles décrivent ou complètent."
               },
               "tokens": {
-                "t1": "Open the terminal",
-                "t2": "Exécutez `pwd`",
-                "t3": "Exécutez `ls`"
+                "t1": "Ouvrez le terminal",
+                "t2": "Exécutez la commande « `pwd` »",
+                "t3": "Exécutez la commande « `ls` »"
               }
             },
             "fb-pwd-meaning": {
-              "title": "Compléter le sens de la commande",
-              "prompt": "Complétez la commandee manquante for this situation: vous want the terminal pour afficher votre dossier actuel emplacement.",
-              "hint": "Choose the commande that affiche the répertoire de travail.",
+              "title": "Complétez la signification de la commande",
+              "prompt": "Complétez la commande manquante dans cette situation : vous souhaitez que le terminal affiche l'emplacement de votre dossier actuel.",
+              "hint": "Choisissez la commande qui affiche le répertoire de travail.",
               "help": {
-                "concept": "`the missing term` est the commande used pour display le/la actuel(le) répertoire de travail dans the terminal.",
-                "hint_1": "This commande est short for print répertoire de travail.",
-                "hint_2": "It est the commande vous use when vous want the terminal pour answer “Where am I?”"
+                "concept": "`the missing term` est la commande qui permet d'afficher le répertoire de travail actuel dans le terminal.",
+                "hint_1": "Cette commande est l'abréviation de « afficher le répertoire de travail ».",
+                "hint_2": "C'est la commande à utiliser lorsque vous voulez que le terminal réponde à la question « Où suis-je ? »"
               },
-              "template": "To afficher votre dossier actuel emplacement, type `[blank1]`.",
+              "template": "Pour afficher l'emplacement du dossier dans lequel vous vous trouvez actuellement, tapez « `[blank1]` ».",
               "choices": [
                 "pwd",
                 "ls",
@@ -101,15 +101,15 @@
               ]
             },
             "fb-ls-purpose": {
-              "title": "Compléter le but de la commande",
-              "prompt": "Complétez la commandee manquante for this situation: vous sont inside a project dossier et want pour see the names of fichiers et dossiers there.",
-              "hint": "Choisissez le commande that listers items dans the répertoire actuel.",
+              "title": "Précisez l'objectif de la commande",
+              "prompt": "Complétez la commande manquante dans cette situation : vous vous trouvez dans un dossier de projet et vous souhaitez afficher les noms des fichiers et des dossiers qu'il contient.",
+              "hint": "Choisissez la commande qui affiche la liste des éléments du répertoire actuel.",
               "help": {
-                "concept": "`the missing term` listers the contenu of the répertoire actuel, such as fichiers et dossiers.",
-                "hint_1": "This commande helps vous answer “Qu’est-ce que here?”",
-                "hint_2": "It est not the commande for affichering votre emplacement; cela est the one for listering names."
+                "concept": "`the missing term` affiche le contenu du répertoire actuel, notamment les fichiers et les dossiers.",
+                "hint_1": "Cette commande vous aide à répondre à la question « Qu'y a-t-il ici ? »",
+                "hint_2": "Ce n'est pas la commande qui permet d'afficher votre position ; c'est celle qui permet d'afficher la liste des noms."
               },
-              "template": "To lister the names of fichiers et dossiers dans the répertoire actuel, type `[blank1]`.",
+              "template": "Pour afficher la liste des noms des fichiers et des dossiers du répertoire actuel, tapez « `[blank1]` ».",
               "choices": [
                 "pwd",
                 "touch",
@@ -121,29 +121,29 @@
           "tryIt": {
             "exercises": {
               "what-the-terminal-is-try-it-1": {
-                "prompt": "Vous venez d’ouvrir a shared espace de travail. Exécutez `pwd` pour see where vous sont starting.",
-                "title": "Tâche terminal : exécuter pwd"
+                "prompt": "Vous venez de créer un espace de travail partagé. Lancez la commande « `pwd` » pour voir où vous en êtes.",
+                "title": "Tâche du terminal : exécuter pwd"
               },
               "what-the-terminal-is-try-it-2": {
-                "title": "Tâche terminal : exécuter ls",
-                "prompt": "Take a quick look around. Exécutez `ls` pour see what est dans the dossier actuel."
+                "title": "Tâche du terminal : exécuter la commande « ls »",
+                "prompt": "Jetez un coup d'œil rapide autour de vous. Exécutez la commande « `ls` » pour voir ce que contient le dossier actuel."
               },
               "what-the-terminal-is-try-it-3": {
-                "title": "Tâche terminal : demander où et quoi",
-                "prompt": "Before vous change anything, get oriented. Exécutez `pwd`, then `ls`."
+                "title": "Tâche finale : demander où et quoi",
+                "prompt": "Avant de modifier quoi que ce soit, commencez par vous familiariser avec le système. Exécutez la commande « `pwd` », puis « `ls` »."
               }
             },
             "try_what_the_terminal_is_sketch0": {
-              "title": "Essayez vous-même : exécuter pwd",
-              "prompt": "Exécutez `pwd` pour see votre dossier actuel."
+              "title": "Essayez vous-même : lancez la commande « pwd »",
+              "prompt": "Exécutez la commande « `pwd` » pour afficher le dossier dans lequel vous vous trouvez actuellement."
             },
             "try_what_the_terminal_is_sketch1": {
-              "title": "Essayez vous-même : exécuter ls",
-              "prompt": "Exécutez `ls` pour lister what est dans the dossier actuel."
+              "title": "Essayez vous-même : lancez la commande « ls »",
+              "prompt": "Exécutez la commande « `ls` » pour afficher la liste des fichiers et dossiers contenus dans le dossier actuel."
             },
             "try_what_the_terminal_is_sketch2": {
-              "title": "Essayez vous-même : exécuter pwd puis ls",
-              "prompt": "Exécutez `pwd`, then `ls`, pour see where vous sont avant vous start working."
+              "title": "Essayez vous-même : lancez la commande « pwd », puis « ls »",
+              "prompt": "Exécutez la commande « `pwd` », puis « `ls` », pour connaître votre position avant de commencer à travailler."
             }
           }
         }
@@ -152,47 +152,47 @@
     "linux-terminal-fundamentals": {
       "linux-module-1-terminal-navigation": {
         "what-the-terminal-is": {
-          "label": "Ce qu’est le terminal",
-          "summary": "Understand the terminal as a place pour type commandes et see the computer respond.",
+          "label": "Qu'est-ce que le Terminal ?",
+          "summary": "Considérez le terminal comme un endroit où l'on tape des commandes et où l'on voit l'ordinateur y répondre.",
           "cards": {
             "sketch0": {
-              "title": "Le terminal est une conversation avec votre ordinateur"
+              "title": "Le terminal, c'est un dialogue avec votre ordinateur"
             },
             "sketch1": {
-              "title": "Les commandes sont des instructions, et la sortie est la réponse"
+              "title": "Les commandes sont des instructions, et la sortie correspond à la réponse"
             },
             "sketch2": {
-              "title": "Pourquoi les gens utilisent le terminal"
+              "title": "Pourquoi les gens utilisent-ils le terminal ?"
             },
             "quiz": {
-              "title": "Pratique"
+              "title": "Entraînement"
             }
           },
           "practice": {
             "sc-terminal-purpose": {
-              "title": "Ce que fait le terminal",
-              "prompt": "Vous êtes helping organize a club espace de travail avec dossiers et fichiers. Quel best describes the terminal?",
-              "hint": "Pensez à whether the terminal est a place pour type instructions ou a place that stores fichiers by itself.",
+              "title": "Fonctionnalités du terminal",
+              "prompt": "Vous participez à l'organisation de l'espace de travail d'un club à l'aide de dossiers et de fichiers. Quelle description correspond le mieux au répertoire ?",
+              "hint": "Demandez-vous si le terminal est un endroit où l'on tape des commandes ou un espace de stockage de fichiers à part entière.",
               "help": {
-                "concept": "The terminal est an interface for entering commandes et seeing the computer's responses. It est not the same thing as a dossier, fichier, ou operating system.",
-                "hint_1": "Decide which choice describes interaction: vous type something, et the computer responds.",
-                "hint_2": "Cherchez the option that describes a text-based tool for running commandes."
+                "concept": "Le terminal est une interface permettant de saisir des commandes et de visualiser les réponses de l'ordinateur. Il ne s'agit pas d'un dossier, d'un fichier ou d'un système d'exploitation.",
+                "hint_1": "Choisissez l'option qui décrit le mieux cette interaction : vous tapez quelque chose et l'ordinateur répond.",
+                "hint_2": "Recherchez l'option qui décrit un outil en mode texte permettant d'exécuter des commandes."
               },
               "options": {
-                "a": "A text-based place pour type commandes et see the computer respond",
-                "b": "A dossier that automatically stores every fichier vous créer",
-                "c": "A special fichier that listers all commandes on the computer",
-                "d": "A background process that runs sans user input"
+                "a": "Un environnement en mode texte permettant de saisir des commandes et de voir la réaction de l'ordinateur",
+                "b": "Un dossier qui enregistre automatiquement tous les fichiers que vous créez",
+                "c": "Un fichier spécial qui répertorie toutes les commandes de l'ordinateur",
+                "d": "Un processus d'arrière-plan qui s'exécute sans intervention de l'utilisateur"
               }
             },
             "sc-pwd-vs-ls": {
-              "title": "Choisir le bon objectif de commande",
-              "prompt": "Un apprenant types a commande because they want pour know which dossier they sont currently dans avant listering fichiers. Quelle commandee matches that objectif?",
-              "hint": "Utilisez l’explication de la leçon et la formulation de cette question pour réduire les choix.",
+              "title": "Choisissez l'objectif de commande approprié",
+              "prompt": "Un apprenant tape une commande car il souhaite savoir dans quel dossier il se trouve actuellement avant d'afficher la liste des fichiers. Quelle commande correspond à cet objectif ?",
+              "hint": "Servez-vous de l'explication donnée dans la leçon et de la formulation de cette question pour affiner votre réponse.",
               "help": {
-                "concept": "Ce texte d’aide a été corrigé parce que la formulation originale révélait la réponse trop directement.",
-                "hint_1": "Compare the question pour the lesson example et redéplacer details that faire not match the requested concept.",
-                "hint_2": "Utilisez le rôle ou les indices nommés dans l’énoncé au lieu de vous appuyer sur la formulation des réponses."
+                "concept": "Ce texte d'aide a été modifié, car la formulation initiale révélait la réponse de manière trop directe.",
+                "hint_1": "Comparez la question à l'exemple donné dans la leçon et supprimez les détails qui ne correspondent pas au concept demandé.",
+                "hint_2": "Utilisez le rôle ou l'élément de preuve mentionné dans l'énoncé plutôt que de vous fier à la formulation de la réponse."
               },
               "options": {
                 "a": "pwd",
@@ -202,46 +202,46 @@
               }
             },
             "mc-terminal-workflow": {
-              "title": "Ce qui fait partie d’un flux de travail de base dans le terminal",
-              "prompt": "Choisissez toutes les actions that fit the idea of using the terminal pour inspecter a espace de travail sûrly at the start of a task.",
-              "hint": "Pensez à commandes that help vous vérifier votre emplacement et see what est dans the dossier actuel.",
+              "title": "Quels sont les éléments indispensables d'un flux de travail de base dans un terminal ?",
+              "prompt": "Sélectionnez toutes les actions qui correspondent à l'idée d'utiliser le terminal pour vérifier en toute sécurité un espace de travail au début d'une tâche.",
+              "hint": "Réfléchissez aux commandes qui vous permettent de vérifier votre emplacement et de voir ce que contient le dossier actuel.",
               "help": {
-                "concept": "Early terminal workflow often starts avec inspecterion commandes such as `pwd` et `ls` so vous understand votre current emplacement et contenu avant making changes.",
-                "hint_1": "Cherchez actions that help vous orient yourself avant création de, moving, ou deleting anything.",
-                "hint_2": "Two of these choices sont direct vérifiers: one affichers votre dossier actuel et one listers items dans it."
+                "concept": "Les premières étapes d'un workflow en terminal commencent souvent par des commandes d'inspection telles que « `pwd` » et « `ls` », afin que vous puissiez vous faire une idée de votre emplacement actuel et du contenu avant d'effectuer des modifications.",
+                "hint_1": "Recherchez les actions qui vous aident à vous repérer avant de créer, déplacer ou supprimer quoi que ce soit.",
+                "hint_2": "Deux de ces options permettent d'accéder directement à ces informations : l'une affiche le dossier dans lequel vous vous trouvez actuellement, et l'autre répertorie les éléments qu'il contient."
               },
               "options": {
-                "a": "Exécutez `pwd` pour confirmer the dossier actuel",
-                "b": "Exécutez `ls` pour see fichiers et dossiers dans le/la actuel(le) emplacement",
-                "c": "Utilisez `sudo` pour get full control avant vérifiering anything",
-                "d": "Install a package so the terminal can afficher dossier names"
+                "a": "Exécutez la commande « `pwd` » pour vérifier le dossier actuel.",
+                "b": "Exécutez la commande « `ls` » pour afficher les fichiers et dossiers de l'emplacement actuel.",
+                "c": "Utilisez « `sudo` » pour prendre le contrôle total avant de cocher quoi que ce soit",
+                "d": "Installez un paquet pour que le terminal puisse afficher les noms des dossiers"
               }
             },
             "dr-terminal-check-sequence": {
-              "title": "Mettre une vérification simple du terminal dans l’ordre",
-              "prompt": "Mettez ces étapes dans le meilleur order for a débutant who opens the terminal et wants pour understand the espace de travail avant doing anything else.",
-              "hint": "Lisez chaque élément et placez-les dans l’ordre où l’énoncé doit être compris.",
+              "title": "Demander un simple contrôle du terminal",
+              "prompt": "Classez ces étapes dans l'ordre le plus approprié pour un débutant qui ouvre le terminal et souhaite se familiariser avec l'environnement de travail avant toute autre chose.",
+              "hint": "Lisez chaque élément et classez-les dans l'ordre dans lequel l'énoncé doit être compris.",
               "help": {
-                "concept": "Les éléments doivent former un énoncé valide dans un ordre logique.",
-                "hint_1": "Commencez par l’élément qui introduit l’idée ou l’action.",
-                "hint_2": "Placez les éléments dépendants après la partie qu’ils décrivent ou complètent."
+                "concept": "Les éléments doivent former un ensemble cohérent, présenté dans un ordre logique.",
+                "hint_1": "Commencez par le passage qui présente l'idée ou l'action.",
+                "hint_2": "Placez les pièces liées à un emplacement précis après l'élément qu'elles décrivent ou complètent."
               },
               "tokens": {
-                "t1": "Open the terminal",
-                "t2": "Exécutez `pwd`",
-                "t3": "Exécutez `ls`"
+                "t1": "Ouvrez le terminal",
+                "t2": "Exécutez la commande « `pwd` »",
+                "t3": "Exécutez la commande « `ls` »"
               }
             },
             "fb-pwd-meaning": {
-              "title": "Compléter le sens de la commande",
-              "prompt": "Complétez la commandee manquante for this situation: vous want the terminal pour afficher votre dossier actuel emplacement.",
-              "hint": "Choose the commande that affiche the répertoire de travail.",
+              "title": "Complétez la signification de la commande",
+              "prompt": "Complétez la commande manquante dans cette situation : vous souhaitez que le terminal affiche l'emplacement de votre dossier actuel.",
+              "hint": "Choisissez la commande qui affiche le répertoire de travail.",
               "help": {
-                "concept": "`the missing term` est the commande used pour display le/la actuel(le) répertoire de travail dans the terminal.",
-                "hint_1": "This commande est short for print répertoire de travail.",
-                "hint_2": "It est the commande vous use when vous want the terminal pour answer “Where am I?”"
+                "concept": "`the missing term` est la commande qui permet d'afficher le répertoire de travail actuel dans le terminal.",
+                "hint_1": "Cette commande est l'abréviation de « print working directory » (afficher le répertoire de travail).",
+                "hint_2": "C'est la commande à utiliser lorsque vous voulez que le terminal réponde à la question « Où suis-je ? »"
               },
-              "template": "To afficher votre dossier actuel emplacement, type `[blank1]`.",
+              "template": "Pour afficher l'emplacement du dossier dans lequel vous vous trouvez actuellement, tapez « `[blank1]` ».",
               "choices": [
                 "pwd",
                 "ls",
@@ -250,15 +250,15 @@
               ]
             },
             "fb-ls-purpose": {
-              "title": "Compléter le but de la commande",
-              "prompt": "Complétez la commandee manquante for this situation: vous sont inside a project dossier et want pour see the names of fichiers et dossiers there.",
-              "hint": "Choisissez le commande that listers items dans the répertoire actuel.",
+              "title": "Précisez l'objectif de la commande",
+              "prompt": "Complétez la commande manquante dans cette situation : vous vous trouvez dans un dossier de projet et vous souhaitez afficher les noms des fichiers et des dossiers qu'il contient.",
+              "hint": "Choisissez la commande qui affiche la liste des éléments du répertoire actuel.",
               "help": {
-                "concept": "`the missing term` listers the contenu of the répertoire actuel, such as fichiers et dossiers.",
-                "hint_1": "This commande helps vous answer “Qu’est-ce que here?”",
-                "hint_2": "It est not the commande for affichering votre emplacement; cela est the one for listering names."
+                "concept": "`the missing term` affiche le contenu du répertoire actuel, notamment les fichiers et les dossiers.",
+                "hint_1": "Cette commande vous aide à répondre à la question « Qu'y a-t-il ici ? »",
+                "hint_2": "Ce n'est pas la commande qui permet d'afficher votre position ; c'est celle qui permet d'afficher la liste des noms."
               },
-              "template": "To lister the names of fichiers et dossiers dans the répertoire actuel, type `[blank1]`.",
+              "template": "Pour afficher la liste des noms des fichiers et des dossiers du répertoire actuel, tapez « `[blank1]` ».",
               "choices": [
                 "pwd",
                 "touch",
@@ -270,38 +270,38 @@
           "tryIt": {
             "exercises": {
               "what-the-terminal-is-try-it-1": {
-                "prompt": "Vous venez d’ouvrir a shared espace de travail. Exécutez `pwd` pour see where vous sont starting.",
-                "title": "Tâche terminal : exécuter pwd",
+                "prompt": "Vous venez de créer un espace de travail partagé. Lancez la commande « `pwd` » pour voir où vous en êtes.",
+                "title": "Tâche du terminal : exécuter pwd",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `pwd` pour print le/la actuel(le) répertoire de travail."
+                      "message": "Exécutez la commande « `pwd` » pour afficher le répertoire de travail actuel."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
                 "starterFiles": {
                   "terminal_tour_location_readme_txt": {
-                    "content": "Exécutez pwd pour ask the terminal where vous are.\n"
+                    "content": "Run pwd to ask the terminal where you are.\n"
                   }
                 }
               },
               "what-the-terminal-is-try-it-2": {
-                "title": "Tâche terminal : exécuter ls",
-                "prompt": "Take a quick look around. Exécutez `ls` pour see what est dans the dossier actuel.",
+                "title": "Tâche du terminal : exécuter la commande « ls »",
+                "prompt": "Jetez un coup d'œil rapide autour de vous. Exécutez la commande « `ls` » pour voir ce que contient le dossier actuel.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `ls` pour lister what est dans the dossier actuel."
+                      "message": "Exécutez la commande « `ls` » pour afficher la liste des fichiers et dossiers contenus dans le dossier actuel."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
@@ -310,25 +310,25 @@
                     "content": "notes\n"
                   },
                   "terminal_tour_photos_readme_txt": {
-                    "content": "photo dossier\n"
+                    "content": "photo folder\n"
                   }
                 }
               },
               "what-the-terminal-is-try-it-3": {
-                "title": "Tâche terminal : demander où et quoi",
-                "prompt": "Before vous change anything, get oriented. Exécutez `pwd`, then `ls`.",
+                "title": "Tâche finale : demander où et quoi",
+                "prompt": "Avant de modifier quoi que ce soit, commencez par vous familiariser avec le système. Exécutez d'abord la commande « `pwd` », puis « `ls` ».",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `pwd` first."
+                      "message": "Lancez d'abord la commande « `pwd` »."
                     },
                     "1": {
-                      "message": "Exécutez `ls` après pwd."
+                      "message": "Exécutez la commande « `ls` » après avoir changé de répertoire."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
@@ -343,16 +343,16 @@
               }
             },
             "try_what_the_terminal_is_sketch0": {
-              "title": "Essayez vous-même : exécuter pwd",
-              "prompt": "Exécutez `pwd` pour see votre dossier actuel."
+              "title": "Essayez vous-même : lancez la commande « pwd »",
+              "prompt": "Exécutez la commande « `pwd` » pour afficher le dossier dans lequel vous vous trouvez actuellement."
             },
             "try_what_the_terminal_is_sketch1": {
-              "title": "Essayez vous-même : exécuter ls",
-              "prompt": "Exécutez `ls` pour lister what est dans the dossier actuel."
+              "title": "Essayez vous-même : lancez la commande « ls »",
+              "prompt": "Exécutez la commande « `ls` » pour afficher la liste des fichiers et dossiers contenus dans le dossier actuel."
             },
             "try_what_the_terminal_is_sketch2": {
-              "title": "Essayez vous-même : exécuter pwd puis ls",
-              "prompt": "Exécutez `pwd`, then `ls`, pour see where vous sont avant vous start working."
+              "title": "Essayez vous-même : lancez la commande « pwd », puis « ls »",
+              "prompt": "Exécutez la commande « `pwd` », puis « `ls` », pour connaître votre position avant de commencer à travailler."
             }
           }
         }
@@ -364,16 +364,16 @@
       "linux-module-1-terminal-navigation": {
         "what-the-terminal-is": {
           "terminal-basics": {
-            "title": "Le terminal est une conversation avec votre ordinateur",
-            "bodyMarkdown": "The terminal est a text-based place where vous **type commandes** et the computer **responds avec sortie**. Instead of clicking dossiers et buttons, vous tell the computer what pour faire avec short instructions.\n\nA commande usually has two parts:\n\n1. the commande name\n2. the résultat the computer affichers back pour you\n\nFor example:\n\n```bash\npwd\n```\n\nIf vous run `pwd`, the computer affiche votre current emplacement dans the espace de travail. Line by line, here est what est happening:\n\n- `pwd` est the commande vous type\n- cela stands for **print répertoire de travail**\n- the terminal responds by affichering the dossier vous sont currently in\n\nAnother example:\n\n```bash\nls\n```\n\n- `ls` est the commande vous type\n- cela listers what est dans the dossier actuel\n- the terminal responds avec fichier et dossier names\n\nImagine vous sont helping organize a small project dossier for a school club. In a fichier explorer, vous might click around pour see where vous are. In the terminal, vous can ask directly avec `pwd` et `ls`. The terminal est not magic—it est just a faster, text-based way pour inspecter et control votre espace de travail."
+            "title": "Le terminal, c'est comme une conversation avec votre ordinateur",
+            "bodyMarkdown": "The terminal is a text-based place where you **type commands** and the computer **responds with output**. Instead of clicking folders and buttons, you tell the computer what to do with short instructions.\n\nA command usually has two parts:\n\n1. the command name\n2. the result the computer shows back to you\n\nFor example:\n\n```bash\npwd\n```\n\nIf you run `pwd`, the computer prints your current location in the workspace. Line by line, here is what is happening:\n\n- `pwd` is the command you type\n- it stands for **print working directory**\n- the terminal responds by showing the folder you are currently in\n\nAnother example:\n\n```bash\nls\n```\n\n- `ls` is the command you type\n- it lists what is in the current folder\n- the terminal responds with file and folder names\n\nImagine you are helping organize a small project folder for a school club. In a file explorer, you might click around to see where you are. In the terminal, you can ask directly with `pwd` and `ls`. The terminal is not magic—it is just a faster, text-based way to inspect and control your workspace."
           },
           "commands-and-output": {
-            "title": "Les commandes sont des instructions, et la sortie est la réponse",
-            "bodyMarkdown": "When vous use the terminal, vous sont giving the computer a specific instruction. The computer then affichers a résultat, often as text.\n\nHere est a simple worked example:\n\n```bash\nls\n```\n\nSuppose the dossier actuel contains two items named `notes.txt` et `photos`. The terminal sortie might look like this:\n\n```bash\nnotes.txt\nphotos\n```\n\nThat means:\n\n- vous typed `ls`\n- the computer vérifiered the dossier actuel\n- cela printed the names of the items inside it\n\nNow compare that with:\n\n```bash\npwd\n```\n\nPossible sortie:\n\n```bash\n/home/learner/project\n```\n\nThis tells vous **where vous are**, not **what est inside**. That difference matters:\n\n- `pwd` answers: “Quel dossier am I in?”\n- `ls` answers: “Qu’est-ce que dans this dossier?”\n\nIf vous sont organizing a newsletter espace de travail, `pwd` helps vous confirmer vous sont dans the `drafts` dossier, while `ls` helps vous see whether fichiers like `intro.txt` ou `outline.txt` sont there."
+            "title": "Les commandes sont des instructions, et la sortie correspond à la réponse",
+            "bodyMarkdown": "When you use the terminal, you are giving the computer a specific instruction. The computer then shows a result, often as text.\n\nHere is a simple worked example:\n\n```bash\nls\n```\n\nSuppose the current folder contains two items named `notes.txt` and `photos`. The terminal output might look like this:\n\n```bash\nnotes.txt\nphotos\n```\n\nThat means:\n\n- you typed `ls`\n- the computer checked the current folder\n- it printed the names of the items inside it\n\nNow compare that with:\n\n```bash\npwd\n```\n\nPossible output:\n\n```bash\n/home/learner/project\n```\n\nThis tells you **where you are**, not **what is inside**. That difference matters:\n\n- `pwd` answers: “What folder am I in?”\n- `ls` answers: “What is in this folder?”\n\nIf you are organizing a newsletter workspace, `pwd` helps you confirm you are in the `drafts` folder, while `ls` helps you see whether files like `intro.txt` or `outline.txt` are there."
           },
           "why-terminal-matters": {
-            "title": "Pourquoi les gens utilisent le terminal",
-            "bodyMarkdown": "People use the terminal because cela gives clear, direct control over fichiers et dossiers. It est especially useful when vous want pour inspecter a espace de travail quickly ou repeat the same kinds of actions.\n\nFor a débutant, the most important idea est this: the terminal helps vous **navigate** et **inspecter** votre espace de travail avec commandes.\n\nHere est a short sequence:\n\n```bash\npwd\nls\n```\n\nStep by étape:\n\n- `pwd` affichers votre dossier actuel\n- `ls` affichers what est inside that dossier\n\nTogether, these commandes help vous stay oriented.\n\nImagine vous sont a junior assistant preparing dossiers for an event team. You might need pour confirmer that vous sont inside `event-plan` avant vérifiering whether `schedule.txt` et `guests.txt` exist. In the terminal, that workflow est quick et precise.\n\nThe terminal fait not replace thinking. You still decide what vous want pour inspecter ou change. The terminal est simply the tool that carries out votre commandes et reports back."
+            "title": "Pourquoi les gens utilisent-ils le terminal ?",
+            "bodyMarkdown": "People use the terminal because it gives clear, direct control over files and folders. It is especially useful when you want to inspect a workspace quickly or repeat the same kinds of actions.\n\nFor a beginner, the most important idea is this: the terminal helps you **navigate** and **inspect** your workspace with commands.\n\nHere is a short sequence:\n\n```bash\npwd\nls\n```\n\nStep by step:\n\n- `pwd` shows your current folder\n- `ls` shows what is inside that folder\n\nTogether, these commands help you stay oriented.\n\nImagine you are a junior assistant preparing folders for an event team. You might need to confirm that you are inside `event-plan` before checking whether `schedule.txt` and `guests.txt` exist. In the terminal, that workflow is quick and precise.\n\nThe terminal does not replace thinking. You still decide what you want to inspect or change. The terminal is simply the tool that carries out your commands and reports back."
           }
         }
       }
@@ -382,16 +382,16 @@
       "linux-module-1-terminal-navigation": {
         "what-the-terminal-is": {
           "terminal-basics": {
-            "title": "Le terminal est une conversation avec votre ordinateur",
-            "bodyMarkdown": "The terminal est a text-based place where vous **type commandes** et the computer **responds avec sortie**. Instead of clicking dossiers et buttons, vous tell the computer what pour faire avec short instructions.\n\nA commande usually has two parts:\n\n1. the commande name\n2. the résultat the computer affichers back pour you\n\nFor example:\n\n```bash\npwd\n```\n\nIf vous run `pwd`, the computer affiche votre current emplacement dans the espace de travail. Line by line, here est what est happening:\n\n- `pwd` est the commande vous type\n- cela stands for **print répertoire de travail**\n- the terminal responds by affichering the dossier vous sont currently in\n\nAnother example:\n\n```bash\nls\n```\n\n- `ls` est the commande vous type\n- cela listers what est dans the dossier actuel\n- the terminal responds avec fichier et dossier names\n\nImagine vous sont helping organize a small project dossier for a school club. In a fichier explorer, vous might click around pour see where vous are. In the terminal, vous can ask directly avec `pwd` et `ls`. The terminal est not magic—it est just a faster, text-based way pour inspecter et control votre espace de travail."
+            "title": "Le terminal, c'est comme une conversation avec votre ordinateur",
+            "bodyMarkdown": "The terminal is a text-based place where you **type commands** and the computer **responds with output**. Instead of clicking folders and buttons, you tell the computer what to do with short instructions.\n\nA command usually has two parts:\n\n1. the command name\n2. the result the computer shows back to you\n\nFor example:\n\n```bash\npwd\n```\n\nIf you run `pwd`, the computer prints your current location in the workspace. Line by line, here is what is happening:\n\n- `pwd` is the command you type\n- it stands for **print working directory**\n- the terminal responds by showing the folder you are currently in\n\nAnother example:\n\n```bash\nls\n```\n\n- `ls` is the command you type\n- it lists what is in the current folder\n- the terminal responds with file and folder names\n\nImagine you are helping organize a small project folder for a school club. In a file explorer, you might click around to see where you are. In the terminal, you can ask directly with `pwd` and `ls`. The terminal is not magic—it is just a faster, text-based way to inspect and control your workspace."
           },
           "commands-and-output": {
-            "title": "Les commandes sont des instructions, et la sortie est la réponse",
-            "bodyMarkdown": "When vous use the terminal, vous sont giving the computer a specific instruction. The computer then affichers a résultat, often as text.\n\nHere est a simple worked example:\n\n```bash\nls\n```\n\nSuppose the dossier actuel contains two items named `notes.txt` et `photos`. The terminal sortie might look like this:\n\n```bash\nnotes.txt\nphotos\n```\n\nThat means:\n\n- vous typed `ls`\n- the computer vérifiered the dossier actuel\n- cela printed the names of the items inside it\n\nNow compare that with:\n\n```bash\npwd\n```\n\nPossible sortie:\n\n```bash\n/home/learner/project\n```\n\nThis tells vous **where vous are**, not **what est inside**. That difference matters:\n\n- `pwd` answers: “Quel dossier am I in?”\n- `ls` answers: “Qu’est-ce que dans this dossier?”\n\nIf vous sont organizing a newsletter espace de travail, `pwd` helps vous confirmer vous sont dans the `drafts` dossier, while `ls` helps vous see whether fichiers like `intro.txt` ou `outline.txt` sont there."
+            "title": "Les commandes sont des instructions, et la sortie correspond à la réponse",
+            "bodyMarkdown": "When you use the terminal, you are giving the computer a specific instruction. The computer then shows a result, often as text.\n\nHere is a simple worked example:\n\n```bash\nls\n```\n\nSuppose the current folder contains two items named `notes.txt` and `photos`. The terminal output might look like this:\n\n```bash\nnotes.txt\nphotos\n```\n\nThat means:\n\n- you typed `ls`\n- the computer checked the current folder\n- it printed the names of the items inside it\n\nNow compare that with:\n\n```bash\npwd\n```\n\nPossible output:\n\n```bash\n/home/learner/project\n```\n\nThis tells you **where you are**, not **what is inside**. That difference matters:\n\n- `pwd` answers: “What folder am I in?”\n- `ls` answers: “What is in this folder?”\n\nIf you are organizing a newsletter workspace, `pwd` helps you confirm you are in the `drafts` folder, while `ls` helps you see whether files like `intro.txt` or `outline.txt` are there."
           },
           "why-terminal-matters": {
-            "title": "Pourquoi les gens utilisent le terminal",
-            "bodyMarkdown": "People use the terminal because cela gives clear, direct control over fichiers et dossiers. It est especially useful when vous want pour inspecter a espace de travail quickly ou repeat the same kinds of actions.\n\nFor a débutant, the most important idea est this: the terminal helps vous **navigate** et **inspecter** votre espace de travail avec commandes.\n\nHere est a short sequence:\n\n```bash\npwd\nls\n```\n\nStep by étape:\n\n- `pwd` affichers votre dossier actuel\n- `ls` affichers what est inside that dossier\n\nTogether, these commandes help vous stay oriented.\n\nImagine vous sont a junior assistant preparing dossiers for an event team. You might need pour confirmer that vous sont inside `event-plan` avant vérifiering whether `schedule.txt` et `guests.txt` exist. In the terminal, that workflow est quick et precise.\n\nThe terminal fait not replace thinking. You still decide what vous want pour inspecter ou change. The terminal est simply the tool that carries out votre commandes et reports back."
+            "title": "Pourquoi les gens utilisent-ils le terminal ?",
+            "bodyMarkdown": "People use the terminal because it gives clear, direct control over files and folders. It is especially useful when you want to inspect a workspace quickly or repeat the same kinds of actions.\n\nFor a beginner, the most important idea is this: the terminal helps you **navigate** and **inspect** your workspace with commands.\n\nHere is a short sequence:\n\n```bash\npwd\nls\n```\n\nStep by step:\n\n- `pwd` shows your current folder\n- `ls` shows what is inside that folder\n\nTogether, these commands help you stay oriented.\n\nImagine you are a junior assistant preparing folders for an event team. You might need to confirm that you are inside `event-plan` before checking whether `schedule.txt` and `guests.txt` exist. In the terminal, that workflow is quick and precise.\n\nThe terminal does not replace thinking. You still decide what you want to inspect or change. The terminal is simply the tool that carries out your commands and reports back."
           }
         }
       }

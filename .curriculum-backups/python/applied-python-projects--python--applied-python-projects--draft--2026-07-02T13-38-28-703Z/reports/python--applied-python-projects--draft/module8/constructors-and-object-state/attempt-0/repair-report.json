@@ -1,0 +1,89 @@
+{
+  "topicId": "constructors-and-object-state",
+  "repairs": [
+    {
+      "code": "PYTHON_BROWSER_TRACEBACK_FILENAME_REMOVED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.constructors-and-object-state-sketch-2.bodyMarkdown",
+      "message": "Replaced .py filename traceback wording with browser code editor wording."
+    },
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.constructors-and-object-state-sketch-2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-constructors-and-object-state-sketch0",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-constructors-and-object-state-sketch1",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-constructors-and-object-state-sketch2",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_ENTRY_SOLUTION_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-constructors-and-object-state-sketch2",
+      "message": "Synthesized a complete runnable entry-file solution from semantic OOP checks when the generated main file only contained imports, comments, or placeholders."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-constructors-and-object-state-add-method",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-constructors-and-object-state-transaction-model",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-constructors-and-object-state-deposit-method",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-constructors-and-object-state-helper-summary",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_POLICY_EXTRA_EXERCISE_DROPPED",
+      "category": "other",
+      "severity": "medium",
+      "field": "ci-constructors-and-object-state-helper-summary",
+      "message": "Dropped extra code_input exercise to satisfy the planned exercise mix for \"constructors-and-object-state\"."
+    },
+    {
+      "code": "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+      "category": "other",
+      "severity": "medium",
+      "field": "sketchBlocks",
+      "message": "Added a Try it yourself learner action required by programming teaching validation."
+    }
+  ]
+}

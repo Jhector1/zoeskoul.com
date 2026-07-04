@@ -4,7 +4,7 @@ import {ReviewQuizRequestSpec} from "@/lib/review/api/quiz/schemas";
 
 export function buildReviewQuizKey(spec: ReviewQuizRequestSpec) {
     const mode = spec.mode ?? "quiz";
-    const selectionVersion = "purpose-v3";
+    const selectionVersion = "purpose-v4-explicit";
 
     const base = [
         "review-quiz",
@@ -16,6 +16,7 @@ export function buildReviewQuizKey(spec: ReviewQuizRequestSpec) {
         `difficulty=${spec.difficulty ?? ""}`,
         `allowReveal=${spec.allowReveal ? 1 : 0}`,
         `preferKind=${spec.preferKind ?? ""}`,
+        `exerciseKeys=${stableJsonHash((spec as any).exerciseKeys ?? [])}`,
         `maxAttempts=${spec.maxAttempts ?? 1}`,
     ];
 

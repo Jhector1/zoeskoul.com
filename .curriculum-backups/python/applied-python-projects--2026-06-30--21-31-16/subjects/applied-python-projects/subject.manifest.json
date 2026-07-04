@@ -1,0 +1,389 @@
+{
+  "subject": {
+    "slug": "applied-python-projects",
+    "profileId": "python",
+    "catalogSlug": "python",
+    "genKey": "python_part1",
+    "order": 30,
+    "accessPolicy": "paid",
+    "status": "active",
+    "imagePublicId": null,
+    "imageAlt": null,
+    "titleKey": "subjects.applied-python-projects.title",
+    "descriptionKey": "subjects.applied-python-projects.description",
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 4,
+        "isTerminalRelease": false,
+        "moreComingMessageKey": "subjects.applied-python-projects.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      },
+      "versioning": {
+        "family": "python",
+        "version": 2,
+        "status": "active",
+        "defaultForNewEnrollments": true,
+        "supersedes": "python",
+        "supersededBy": null
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "python-8-object-oriented-foundations",
+      "prefix": "py8",
+      "order": 8,
+      "titleKey": "modules.applied-python-projects.python-8-object-oriented-foundations.title",
+      "descriptionKey": "modules.applied-python-projects.python-8-object-oriented-foundations.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 180,
+        "prereqKeys": [
+          "modules.applied-python-projects.python-7.title"
+        ],
+        "outcomeKeys": [
+          "modules.applied-python-projects.python-8-object-oriented-foundations.outcomes.0",
+          "modules.applied-python-projects.python-8-object-oriented-foundations.outcomes.1",
+          "modules.applied-python-projects.python-8-object-oriented-foundations.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.applied-python-projects.python-8-object-oriented-foundations.why.0",
+          "modules.applied-python-projects.python-8-object-oriented-foundations.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "applied-python-projects-python-8-object-foundations",
+          "order": 1,
+          "titleKey": "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-object-foundations.title",
+          "descriptionKey": "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-object-foundations.description",
+          "meta": {
+            "module": 8,
+            "weeksKey": "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-object-foundations.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-object-foundations.bullets.0",
+              "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-object-foundations.bullets.1"
+            ]
+          },
+          "topics": [
+            "class-files-and-instances",
+            "constructors-and-object-state"
+          ]
+        },
+        {
+          "slug": "applied-python-projects-python-8-encapsulation-and-services",
+          "order": 2,
+          "titleKey": "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-encapsulation-and-services.title",
+          "descriptionKey": "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-encapsulation-and-services.description",
+          "meta": {
+            "module": 8,
+            "weeksKey": "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-encapsulation-and-services.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-encapsulation-and-services.bullets.0",
+              "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-encapsulation-and-services.bullets.1"
+            ]
+          },
+          "topics": [
+            "methods-and-responsibility",
+            "encapsulation-and-validation"
+          ]
+        },
+        {
+          "slug": "applied-python-projects-python-8-module-project",
+          "order": 3,
+          "titleKey": "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-module-project.title",
+          "descriptionKey": "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-module-project.description",
+          "meta": {
+            "module": 8,
+            "weeksKey": "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-module-project.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-8-object-oriented-foundations.applied-python-projects-python-8-module-project.bullets.0"
+            ]
+          },
+          "topics": [
+            "module-8-account-tracker-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-9-inheritance-polymorphism-and-abstraction",
+      "prefix": "py9",
+      "order": 9,
+      "titleKey": "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.title",
+      "descriptionKey": "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 180,
+        "prereqKeys": [
+          "modules.applied-python-projects.python-8.title"
+        ],
+        "outcomeKeys": [
+          "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.outcomes.0",
+          "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.outcomes.1",
+          "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.why.0",
+          "modules.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "applied-python-projects-python-9-inheritance-and-overrides",
+          "order": 1,
+          "titleKey": "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-inheritance-and-overrides.title",
+          "descriptionKey": "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-inheritance-and-overrides.description",
+          "meta": {
+            "module": 9,
+            "weeksKey": "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-inheritance-and-overrides.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-inheritance-and-overrides.bullets.0",
+              "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-inheritance-and-overrides.bullets.1"
+            ]
+          },
+          "topics": [
+            "inheritance-for-shared-behavior",
+            "overriding-and-specialization"
+          ]
+        },
+        {
+          "slug": "applied-python-projects-python-9-polymorphism-and-abstraction",
+          "order": 2,
+          "titleKey": "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-polymorphism-and-abstraction.title",
+          "descriptionKey": "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-polymorphism-and-abstraction.description",
+          "meta": {
+            "module": 9,
+            "weeksKey": "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-polymorphism-and-abstraction.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-polymorphism-and-abstraction.bullets.0",
+              "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-polymorphism-and-abstraction.bullets.1"
+            ]
+          },
+          "topics": [
+            "polymorphic-collections",
+            "abstraction-with-base-interfaces"
+          ]
+        },
+        {
+          "slug": "applied-python-projects-python-9-module-project",
+          "order": 3,
+          "titleKey": "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-module-project.title",
+          "descriptionKey": "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-module-project.description",
+          "meta": {
+            "module": 9,
+            "weeksKey": "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-module-project.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.applied-python-projects-python-9-module-project.bullets.0"
+            ]
+          },
+          "topics": [
+            "module-9-catalog-polymorphism-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-10-testing-debugging-oop-projects",
+      "prefix": "py10",
+      "order": 10,
+      "titleKey": "modules.applied-python-projects.python-10-testing-debugging-oop-projects.title",
+      "descriptionKey": "modules.applied-python-projects.python-10-testing-debugging-oop-projects.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 180,
+        "prereqKeys": [
+          "modules.applied-python-projects.python-9.title"
+        ],
+        "outcomeKeys": [
+          "modules.applied-python-projects.python-10-testing-debugging-oop-projects.outcomes.0",
+          "modules.applied-python-projects.python-10-testing-debugging-oop-projects.outcomes.1",
+          "modules.applied-python-projects.python-10-testing-debugging-oop-projects.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.applied-python-projects.python-10-testing-debugging-oop-projects.why.0",
+          "modules.applied-python-projects.python-10-testing-debugging-oop-projects.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "applied-python-projects-python-10-testing-oop-behavior",
+          "order": 1,
+          "titleKey": "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-testing-oop-behavior.title",
+          "descriptionKey": "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-testing-oop-behavior.description",
+          "meta": {
+            "module": 10,
+            "weeksKey": "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-testing-oop-behavior.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-testing-oop-behavior.bullets.0",
+              "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-testing-oop-behavior.bullets.1"
+            ]
+          },
+          "topics": [
+            "testing-object-state",
+            "testing-inheritance-and-polymorphism"
+          ]
+        },
+        {
+          "slug": "applied-python-projects-python-10-debugging-and-refactoring",
+          "order": 2,
+          "titleKey": "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-debugging-and-refactoring.title",
+          "descriptionKey": "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-debugging-and-refactoring.description",
+          "meta": {
+            "module": 10,
+            "weeksKey": "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-debugging-and-refactoring.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-debugging-and-refactoring.bullets.0",
+              "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-debugging-and-refactoring.bullets.1"
+            ]
+          },
+          "topics": [
+            "debugging-imports-and-state",
+            "refactoring-oop-services"
+          ]
+        },
+        {
+          "slug": "applied-python-projects-python-10-module-project",
+          "order": 3,
+          "titleKey": "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-module-project.title",
+          "descriptionKey": "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-module-project.description",
+          "meta": {
+            "module": 10,
+            "weeksKey": "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-module-project.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-10-testing-debugging-oop-projects.applied-python-projects-python-10-module-project.bullets.0"
+            ]
+          },
+          "topics": [
+            "module-10-oop-quality-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-11-oop-capstone-project",
+      "prefix": "py11",
+      "order": 11,
+      "titleKey": "modules.applied-python-projects.python-11-oop-capstone-project.title",
+      "descriptionKey": "modules.applied-python-projects.python-11-oop-capstone-project.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 210,
+        "prereqKeys": [
+          "modules.applied-python-projects.python-10.title"
+        ],
+        "outcomeKeys": [
+          "modules.applied-python-projects.python-11-oop-capstone-project.outcomes.0",
+          "modules.applied-python-projects.python-11-oop-capstone-project.outcomes.1",
+          "modules.applied-python-projects.python-11-oop-capstone-project.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.applied-python-projects.python-11-oop-capstone-project.why.0",
+          "modules.applied-python-projects.python-11-oop-capstone-project.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "applied-python-projects-python-11-capstone-architecture",
+          "order": 1,
+          "titleKey": "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-architecture.title",
+          "descriptionKey": "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-architecture.description",
+          "meta": {
+            "module": 11,
+            "weeksKey": "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-architecture.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-architecture.bullets.0",
+              "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-architecture.bullets.1"
+            ]
+          },
+          "topics": [
+            "capstone-scope-and-architecture",
+            "capstone-domain-model"
+          ]
+        },
+        {
+          "slug": "applied-python-projects-python-11-capstone-services-and-polish",
+          "order": 2,
+          "titleKey": "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-services-and-polish.title",
+          "descriptionKey": "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-services-and-polish.description",
+          "meta": {
+            "module": 11,
+            "weeksKey": "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-services-and-polish.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-services-and-polish.bullets.0",
+              "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-capstone-services-and-polish.bullets.1"
+            ]
+          },
+          "topics": [
+            "capstone-storage-and-reports",
+            "capstone-tests-and-polish"
+          ]
+        },
+        {
+          "slug": "applied-python-projects-python-11-final-capstone",
+          "order": 3,
+          "titleKey": "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-final-capstone.title",
+          "descriptionKey": "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-final-capstone.description",
+          "meta": {
+            "module": 11,
+            "weeksKey": "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-final-capstone.weeks",
+            "bulletKeys": [
+              "sections.applied-python-projects.python-11-oop-capstone-project.applied-python-projects-python-11-final-capstone.bullets.0"
+            ]
+          },
+          "topics": [
+            "module-11-final-oop-capstone"
+          ]
+        }
+      ]
+    }
+  ]
+}

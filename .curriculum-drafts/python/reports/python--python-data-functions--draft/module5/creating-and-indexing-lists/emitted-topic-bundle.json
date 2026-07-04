@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch0.title",
       "sketchId": "list-creation-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-creating-and-indexing-lists-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch0.prompt",
+        "exerciseKey": "try-creating-and-indexing-lists-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch1.title",
       "sketchId": "indexing-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-creating-and-indexing-lists-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch1.prompt",
+        "exerciseKey": "try-creating-and-indexing-lists-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.cards.sketch2.title",
       "sketchId": "using-lists-in-small-programs",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-creating-and-indexing-lists-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.tryIt.try_creating_and_indexing_lists_sketch2.prompt",
+        "exerciseKey": "try-creating-and-indexing-lists-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -264,17 +300,18 @@
       }
     },
     {
-      "id": "ci-print-first-last",
+      "id": "try-creating-and-indexing-lists-checkpoint",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint",
       "language": "python",
-      "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -283,11 +320,135 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 2
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bnames\\s*=\\s*\\[\\s*['\\\"]Ava['\\\"]\\s*,\\s*['\\\"]Mia['\\\"]\\s*,\\s*['\\\"]Zoe['\\\"]\\s*\\]",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.0.message"
+          },
+          {
+            "type": "source_contains",
+            "pattern": "names[0]",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.1.message",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains_any",
+            "patterns": [
+              "names[-1]",
+              "names[2]"
+            ],
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.2.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bnames\\s*=\\s*\\[\\s*['\\\"]Ava['\\\"]\\s*,\\s*['\\\"]Mia['\\\"]\\s*,\\s*['\\\"]Zoe['\\\"]\\s*\\]",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.0.message"
+        },
+        {
+          "type": "source_contains",
+          "pattern": "names[0]",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.1.message",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains_any",
+          "patterns": [
+            "names[-1]",
+            "names[2]"
+          ],
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.2.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "ci-print-first-last",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -309,8 +470,58 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_subscript",
+            "index": 0,
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.0.message"
+          },
+          {
+            "type": "source_contains_any",
+            "patterns": [
+              "[-1]",
+              "[2]"
+            ],
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.1.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_subscript",
+          "index": 0,
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.0.message"
+        },
+        {
+          "type": "source_contains_any",
+          "patterns": [
+            "[-1]",
+            "[2]"
+          ],
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.1.message",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "ci-print-second-number",
@@ -319,11 +530,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number",
       "language": "python",
-      "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -332,11 +543,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -358,8 +578,40 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_subscript",
+            "index": 1,
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.sourceChecks.0.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_subscript",
+          "index": 1,
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.sourceChecks.0.message"
+        }
+      ]
     },
     {
       "id": "ci-build-and-show-list",
@@ -368,11 +620,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list",
       "language": "python",
-      "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -381,11 +633,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -407,8 +668,328 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\[\\s*color1\\s*,\\s*color2\\s*,\\s*color3\\s*\\]",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.sourceChecks.0.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\[\\s*color1\\s*,\\s*color2\\s*,\\s*color3\\s*\\]",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "try-creating-and-indexing-lists-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "red\ngreen\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "items[0]",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains_any",
+            "patterns": [
+              "items[-1]",
+              "items[2]"
+            ],
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "items[0]",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains_any",
+          "patterns": [
+            "items[-1]",
+            "items[2]"
+          ],
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "try-creating-and-indexing-lists-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "9\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "numbers[1]",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "numbers[1]",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "try-creating-and-indexing-lists-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['Ava', 'Mia']\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "names",
+            "expected": [
+              "Ava",
+              "Mia"
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.0.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.0.message"
+        }
+      ]
     }
   ]
 }

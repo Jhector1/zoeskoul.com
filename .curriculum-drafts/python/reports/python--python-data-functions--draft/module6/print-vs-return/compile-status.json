@@ -1,6 +1,37 @@
 {
-  "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/reports/python--python-data-functions--draft/module6/print-vs-return",
+  "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/reports/python--python-data-functions--draft/module6/print-vs-return",
   "status": "success",
-  "attempts": 1,
-  "finalAttempt": 0
+  "attempts": 0,
+  "finalAttempt": 0,
+  "mode": "rebuild-from-drafts",
+  "sourceDraft": "current-draft-output",
+  "validationState": {
+    "unsafeSkipValidation": false,
+    "requested": {
+      "skipQualityGates": false,
+      "skipSemantic": false,
+      "skipGolden": false,
+      "unsafeSkipValidation": false
+    },
+    "structural": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "qualityGates": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "semantic": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "golden": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    }
+  }
 }

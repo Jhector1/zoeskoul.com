@@ -1,0 +1,646 @@
+import type {
+  AiProvider,
+  GenerateJsonArgs,
+  GeneratedJsonResult,
+  TranslatedEntries,
+} from "../types.js";
+import {
+  buildGeneratedJsonResult,
+  generatedJsonMetadata,
+  JSON_PROVIDER_DEFAULT_TEMPERATURE,
+} from "./jsonProviderUtils.js";
+import { getDefaultModelForProvider } from "./providerCatalog.js";
+
+export type DeepLProviderOptions = {
+  model?: string;
+  apiKey?: string;
+  baseUrl?: string;
+};
+
+type DeepLTranslateResponse = {
+  translations?: Array<{
+    detected_source_language?: string;
+    text?: string;
+  }>;
+};
+
+type TranslationPayload = {
+  sourceLocale?: string;
+  targetLocale?: string;
+  entries?: Array<{
+    key: string;
+    value: string;
+  }>;
+};
+
+const DEEPL_BATCH_SIZE = 50;
+
+const DEEPL_TARGET_LANGUAGE_BY_LOCALE: Record<string, string> = {
+  en: "EN-US",
+  fr: "FR",
+  es: "ES",
+  ht: "HT",
+};
+
+const DEEPL_SOURCE_LANGUAGE_BY_LOCALE: Record<string, string> = {
+  en: "EN",
+  fr: "FR",
+  es: "ES",
+  ht: "HT",
+};
+
+const MODEL_TYPE_BY_MODEL: Record<string, string | undefined> = {
+  "deepl-free": undefined,
+  deepl: undefined,
+  prefer_quality_optimized: "prefer_quality_optimized",
+  quality_optimized: "quality_optimized",
+  latency_optimized: "latency_optimized",
+};
+
+function getDeepLApiKey(apiKey?: string): string {
+  const value = apiKey ?? process.env.DEEPL_API_KEY;
+
+  if (!value?.trim()) {
+    throw new Error("Missing DEEPL_API_KEY");
+  }
+
+  return value;
+}
+
+function getDeepLBaseUrl(baseUrl?: string): string {
+  return (
+    baseUrl ??
+    process.env.DEEPL_BASE_URL ??
+    process.env.DEEPL_API_BASE_URL ??
+    "https://api-free.deepl.com"
+  ).replace(/\/+$/, "");
+}
+
+function localeToDeepLTarget(locale: string): string {
+  const envKey = `DEEPL_TARGET_LANG_${locale.toUpperCase().replace(/[^A-Z0-9]/g, "_")}`;
+  return (
+    process.env[envKey]?.trim() ??
+    DEEPL_TARGET_LANGUAGE_BY_LOCALE[locale.toLowerCase()] ??
+    locale.toUpperCase()
+  );
+}
+
+function localeToDeepLSource(locale: string): string | undefined {
+  const envKey = `DEEPL_SOURCE_LANG_${locale.toUpperCase().replace(/[^A-Z0-9]/g, "_")}`;
+  return (
+    process.env[envKey]?.trim() ??
+    DEEPL_SOURCE_LANGUAGE_BY_LOCALE[locale.toLowerCase()]
+  );
+}
+
+function getModelType(model: string): string | undefined {
+  const fromEnv = process.env.DEEPL_MODEL_TYPE?.trim();
+  if (fromEnv) return fromEnv;
+
+  return MODEL_TYPE_BY_MODEL[model];
+}
+
+function parseTranslationPayload(args: GenerateJsonArgs): TranslationPayload {
+  if (args.schemaName !== "TranslatedEntries") {
+    throw new Error(
+      [
+        "DeepL provider only supports curriculum message translation.",
+        `Unsupported schemaName: ${args.schemaName}`,
+        "Use OpenAI, Gemini, Claude, or DeepSeek for generation schemas.",
+      ].join("\n"),
+    );
+  }
+
+  try {
+    const parsed = JSON.parse(args.user) as TranslationPayload;
+
+    if (!Array.isArray(parsed.entries)) {
+      throw new Error("payload.entries is missing");
+    }
+
+    return parsed;
+  } catch (error) {
+    throw new Error(
+      `DeepL provider could not parse TranslatedEntries prompt payload: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+    );
+  }
+}
+
+
+function isNarrativeMarkdownOrProseKey(key: string): boolean {
+  return (
+    key.endsWith("/bodymarkdown") ||
+    key.endsWith("/body") ||
+    key.endsWith("/summary") ||
+    key.endsWith("/prompt") ||
+    key.endsWith("/hint") ||
+    key.endsWith("/title") ||
+    key.includes("/help/") ||
+    key.includes("/cards/") ||
+    key.includes("/sketches/")
+  );
+}
+
+
+
+function isSyntheticCodeCommentKey(key: string): boolean {
+  return key.toLowerCase().includes("__zscodecomment");
+}
+
+function isCodeContentKey(key: string): boolean {
+  const normalized = key.toLowerCase();
+
+  return (
+    normalized.includes("startercode") ||
+    normalized.includes("solutioncode") ||
+    normalized.includes("starterfiles") ||
+    normalized.includes("solutionfiles") ||
+    normalized.includes(".startercode") ||
+    normalized.includes(".solutioncode") ||
+    normalized.includes(".starterfiles.") ||
+    normalized.includes(".solutionfiles.")
+  );
+}
+
+type CodeCommentSegment = {
+  lineIndex: number;
+  start: number;
+  text: string;
+};
+
+function findLineCommentStart(line: string): number {
+  let quote: '"' | "'" | "`" | null = null;
+  let escaped = false;
+
+  for (let index = 0; index < line.length; index += 1) {
+    const char = line[index];
+    const next = line[index + 1];
+
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+
+    if (quote) {
+      if (char === "\\") {
+        escaped = true;
+        continue;
+      }
+
+      if (char === quote) {
+        quote = null;
+      }
+
+      continue;
+    }
+
+    if (char === '"' || char === "'" || char === "`") {
+      quote = char;
+      continue;
+    }
+
+    if (char === "#" && next !== "!") {
+      return index;
+    }
+
+    if (char === "/" && next === "/") {
+      return index;
+    }
+
+    if (char === "-" && next === "-") {
+      return index;
+    }
+  }
+
+  return -1;
+}
+
+function getCommentPrefix(line: string, start: number): string {
+  const marker = line.slice(start, start + 2);
+
+  if (marker === "//" || marker === "--") {
+    const afterMarker = line[start + 2] === " " ? " " : "";
+    return line.slice(0, start + 2) + afterMarker;
+  }
+
+  const afterHash = line[start + 1] === " " ? " " : "";
+  return line.slice(0, start + 1) + afterHash;
+}
+
+function getCommentText(line: string, start: number): string {
+  const marker = line.slice(start, start + 2);
+
+  if (marker === "//" || marker === "--") {
+    return line.slice(start + 2).replace(/^\s/, "");
+  }
+
+  return line.slice(start + 1).replace(/^\s/, "");
+}
+
+function shouldTranslateCommentText(text: string): boolean {
+  const value = text.trim();
+
+  if (!value) return false;
+  if (value.startsWith("@:")) return false;
+  if (/^noqa\b|^type:\s*ignore\b|^eslint\b|^prettier\b/i.test(value)) {
+    return false;
+  }
+  if (/^(TODO|FIXME|NOTE)\s*:?$/i.test(value)) return false;
+  if (/^[A-Za-z_][A-Za-z0-9_]*$/.test(value)) return false;
+
+  return /[A-Za-z]/.test(value);
+}
+
+function extractCodeCommentSegments(value: string): {
+  lines: string[];
+  newline: string;
+  segments: CodeCommentSegment[];
+} {
+  const newline = value.includes("\r\n") ? "\r\n" : "\n";
+  const lines = value.split(/\r?\n/);
+  const segments: CodeCommentSegment[] = [];
+
+  lines.forEach((line, lineIndex) => {
+    const start = findLineCommentStart(line);
+    if (start < 0) return;
+
+    const commentText = getCommentText(line, start);
+    if (!shouldTranslateCommentText(commentText)) return;
+
+    segments.push({
+      lineIndex,
+      start,
+      text: commentText,
+    });
+  });
+
+  return { lines, newline, segments };
+}
+
+
+function hasTranslatableCodeComments(value: string): boolean {
+  return extractCodeCommentSegments(value).segments.length > 0;
+}
+
+function shouldTranslateCodeCommentsForEntry(entry: { key: string; value: string }): boolean {
+  const key = entry.key.toLowerCase();
+
+  // bodyMarkdown/prose is translated as prose. Do not separately mutate fenced
+  // code examples inside lesson markdown.
+  if (isNarrativeMarkdownOrProseKey(key)) {
+    return false;
+  }
+
+  return isCodeContentKey(key) || hasTranslatableCodeComments(entry.value);
+}
+
+function rebuildCodeWithTranslatedComments(args: {
+  lines: string[];
+  newline: string;
+  segments: CodeCommentSegment[];
+  translatedComments: string[];
+}): string {
+  const lines = [...args.lines];
+
+  args.segments.forEach((segment, index) => {
+    const originalLine = lines[segment.lineIndex] ?? "";
+    const prefix = getCommentPrefix(originalLine, segment.start);
+    const translated = args.translatedComments[index]?.trim() ?? segment.text;
+    lines[segment.lineIndex] = prefix + translated;
+  });
+
+  return lines.join(args.newline);
+}
+
+async function translateCodeCommentsWithDeepL(args: {
+  apiKey: string;
+  baseUrl: string;
+  sourceLocale: string;
+  targetLocale: string;
+  model: string;
+  value: string;
+}): Promise<string> {
+  const extracted = extractCodeCommentSegments(args.value);
+
+  if (extracted.segments.length === 0) {
+    return args.value;
+  }
+
+  const targetLang = localeToDeepLTarget(args.targetLocale);
+  const sourceLang = localeToDeepLSource(args.sourceLocale);
+  const translatedComments: string[] = [];
+
+  for (let start = 0; start < extracted.segments.length; start += DEEPL_BATCH_SIZE) {
+    const batch = extracted.segments.slice(start, start + DEEPL_BATCH_SIZE);
+    const masked = batch.map((segment) => maskProtectedFragments(segment.text));
+
+    const translated = await postDeepLTranslate({
+      apiKey: args.apiKey,
+      baseUrl: args.baseUrl,
+      sourceLang,
+      targetLang,
+      model: args.model,
+      texts: masked.map((item) => item.text),
+    });
+
+    translated.forEach((value, index) => {
+      translatedComments.push(masked[index].restore(value));
+    });
+  }
+
+  return rebuildCodeWithTranslatedComments({
+    lines: extracted.lines,
+    newline: extracted.newline,
+    segments: extracted.segments,
+    translatedComments,
+  });
+}
+
+function shouldKeepEntryUntranslated(entry: { key: string; value: string }): boolean {
+  const key = entry.key.toLowerCase();
+  const value = entry.value.trim();
+
+  if (!value) return true;
+
+  if (isSyntheticCodeCommentKey(key)) {
+    return false;
+  }
+  if (value.startsWith("@:")) return true;
+
+  if (
+    isCodeContentKey(key) ||
+    key.includes("/path") ||
+    key.endsWith("/id") ||
+    key.includes("/exerciseid") ||
+    key.includes("/slug")
+  ) {
+    return true;
+  }
+
+  // bodyMarkdown and other narrative fields often contain fenced shell/Python
+  // examples. Those examples must be protected, but the surrounding lesson
+  // prose still needs translation. maskProtectedFragments() already protects
+  // fenced code blocks, inline code, refs, and paths before calling DeepL.
+  if (isNarrativeMarkdownOrProseKey(key)) {
+    return false;
+  }
+
+  return looksLikeExecutableCode(value);
+}
+
+function looksLikeExecutableCode(value: string): boolean {
+  const trimmed = value.trim();
+
+  if (!trimmed) return false;
+
+  const codePatterns = [
+    /^from\s+[\w.]+\s+import\s+/m,
+    /^import\s+[\w.]+/m,
+    /^class\s+\w+/m,
+    /^def\s+\w+/m,
+    /^print\s*\(/m,
+    /^if\s+__name__\s*==/m,
+    /\bSELECT\b[\s\S]+\bFROM\b/i,
+    /^\s*(mkdir|touch|cd|ls|pwd|cat|cp|mv|rm)\b/m,
+    /^#!\//,
+  ];
+
+  if (codePatterns.some((pattern) => pattern.test(trimmed))) return true;
+
+  const lines = trimmed.split(/\r?\n/);
+  const codeLikeLines = lines.filter((line) =>
+    /^\s{2,}\S/.test(line) ||
+    /[{}()[\];]/.test(line) ||
+    /^\s*#/.test(line),
+  );
+
+  return lines.length >= 3 && codeLikeLines.length / lines.length >= 0.5;
+}
+
+function maskProtectedFragments(value: string): {
+  text: string;
+  restore(translated: string): string;
+} {
+  const fragments: string[] = [];
+  let text = value;
+
+  function mask(pattern: RegExp) {
+    text = text.replace(pattern, (match) => {
+      const index = fragments.push(match) - 1;
+      return `<ph id="${index}"/>`;
+    });
+  }
+
+  mask(/```[\s\S]*?```/g);
+  mask(/`[^`\n]+`/g);
+  mask(/@:[A-Za-z0-9_.:/-]+/g);
+  mask(/\b(?:[\w.-]+\/)+[\w.-]+\b/g);
+
+  return {
+    text,
+    restore(translated: string) {
+      return translated.replace(/<ph\s+id=["'](\d+)["']\s*\/>/g, (_match, id) => {
+        const fragment = fragments[Number(id)];
+        return fragment ?? "";
+      });
+    },
+  };
+}
+
+async function postDeepLTranslate(args: {
+  apiKey: string;
+  baseUrl: string;
+  sourceLang?: string;
+  targetLang: string;
+  model: string;
+  texts: string[];
+}): Promise<string[]> {
+  const body: Record<string, unknown> = {
+    text: args.texts,
+    target_lang: args.targetLang,
+    preserve_formatting: true,
+    tag_handling: "xml",
+    ignore_tags: ["ph"],
+  };
+
+  if (args.sourceLang) {
+    body.source_lang = args.sourceLang;
+  }
+
+  const modelType = getModelType(args.model);
+  if (modelType) {
+    body.model_type = modelType;
+  }
+
+  const fetchImpl = (globalThis as any).fetch;
+  if (typeof fetchImpl !== "function") {
+    throw new Error("DeepL provider requires global fetch. Use Node 18+.");
+  }
+
+  const response = await fetchImpl(`${args.baseUrl}/v2/translate`, {
+    method: "POST",
+    headers: {
+      Authorization: `DeepL-Auth-Key ${args.apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  if (!response.ok) {
+    const text = await response.text().catch(() => "");
+    throw new Error(
+      `DeepL translate failed with ${response.status} ${response.statusText}${
+        text ? `: ${text}` : ""
+      }`,
+    );
+  }
+
+  const payload = (await response.json()) as DeepLTranslateResponse;
+  const translations = payload.translations ?? [];
+
+  if (translations.length !== args.texts.length) {
+    throw new Error(
+      `DeepL returned ${translations.length} translations for ${args.texts.length} inputs`,
+    );
+  }
+
+  return translations.map((translation) => String(translation.text ?? ""));
+}
+
+async function translateEntriesWithDeepL(args: {
+  apiKey: string;
+  baseUrl: string;
+  sourceLocale: string;
+  targetLocale: string;
+  model: string;
+  entries: Array<{ key: string; value: string }>;
+}): Promise<TranslatedEntries> {
+  const targetLang = localeToDeepLTarget(args.targetLocale);
+  const sourceLang = localeToDeepLSource(args.sourceLocale);
+
+  const output = args.entries.map((entry) => ({
+    key: String(entry.key),
+    value: String(entry.value),
+  }));
+
+  const protectedCodeEntries = output
+    .map((entry, index) => ({ entry, index }))
+    .filter(({ entry }) => shouldTranslateCodeCommentsForEntry(entry));
+
+  if (process.env.DEEPL_DEBUG_CODE_COMMENTS === "1") {
+    const segmentCount = protectedCodeEntries.reduce(
+      (count, { entry }) => count + extractCodeCommentSegments(entry.value).segments.length,
+      0,
+    );
+    const syntheticCommentCount = output.filter((entry) =>
+      isSyntheticCodeCommentKey(entry.key),
+    ).length;
+    const sampleKeys = protectedCodeEntries
+      .slice(0, 8)
+      .map(({ entry }) => entry.key)
+      .join(", ");
+
+    console.log(`DeepL code-comment entries: ${protectedCodeEntries.length}`);
+    console.log(`DeepL code-comment segments: ${segmentCount}`);
+    console.log(`DeepL synthetic code-comment entries: ${syntheticCommentCount}`);
+    if (sampleKeys) {
+      console.log(`DeepL code-comment sample keys: ${sampleKeys}`);
+    }
+  }
+
+  for (const { entry, index } of protectedCodeEntries) {
+    output[index].value = await translateCodeCommentsWithDeepL({
+      apiKey: args.apiKey,
+      baseUrl: args.baseUrl,
+      sourceLocale: args.sourceLocale,
+      targetLocale: args.targetLocale,
+      model: args.model,
+      value: entry.value,
+    });
+  }
+
+  const translatable = output
+    .map((entry, index) => ({
+      index,
+      entry,
+      masked: maskProtectedFragments(entry.value),
+    }))
+    .filter(({ entry }) => !shouldKeepEntryUntranslated(entry));
+
+  for (let start = 0; start < translatable.length; start += DEEPL_BATCH_SIZE) {
+    const batch = translatable.slice(start, start + DEEPL_BATCH_SIZE);
+    const texts = batch.map((item) => item.masked.text);
+
+    const translated = await postDeepLTranslate({
+      apiKey: args.apiKey,
+      baseUrl: args.baseUrl,
+      sourceLang,
+      targetLang,
+      model: args.model,
+      texts,
+    });
+
+    translated.forEach((value, index) => {
+      const item = batch[index];
+      output[item.index].value = item.masked.restore(value);
+    });
+  }
+
+  return { entries: output };
+}
+
+export function createDeepLProvider(options: DeepLProviderOptions = {}): AiProvider {
+  const model = options.model?.trim() || getDefaultModelForProvider("deepl");
+  const apiKey = getDeepLApiKey(options.apiKey);
+  const baseUrl = getDeepLBaseUrl(options.baseUrl);
+
+  const provider: AiProvider = {
+    providerId: "deepl",
+    model,
+
+    async generateJsonDetailed<T>(
+      args: GenerateJsonArgs,
+    ): Promise<GeneratedJsonResult<T>> {
+      const metadata = generatedJsonMetadata({
+        provider: "deepl",
+        model,
+        schemaName: args.schemaName,
+        strictSchema: false,
+      });
+
+      const payload = parseTranslationPayload(args);
+      const translated = await translateEntriesWithDeepL({
+        apiKey,
+        baseUrl,
+        model,
+        sourceLocale: String(payload.sourceLocale ?? "en"),
+        targetLocale: String(payload.targetLocale ?? "en"),
+        entries: payload.entries!.map((entry) => ({
+          key: String(entry.key),
+          value: String(entry.value),
+        })),
+      });
+
+      const rawText = JSON.stringify(translated);
+
+      return buildGeneratedJsonResult<T>({
+        metadata: {
+          ...metadata,
+          temperature: JSON_PROVIDER_DEFAULT_TEMPERATURE,
+        },
+        rawText,
+        parsedJson: translated,
+        schemaName: args.schemaName,
+      });
+    },
+
+    async generateJson<T>(args: GenerateJsonArgs): Promise<T> {
+      const result = await provider.generateJsonDetailed!<T>(args);
+      return result.value;
+    },
+  };
+
+  return provider;
+}

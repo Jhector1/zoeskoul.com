@@ -3,50 +3,50 @@
     "linux-terminal-fundamentals": {
       "linux-module-2-files-and-folders": {
         "module-2-notes-organizer-project": {
-          "label": "Pwojè: òganizatè nòt",
-          "summary": "Òganize yon katab ki an dezòd an nòt, devwa, kòd, ak kopi sekirite avèk kòmand debaz tèminal Linux.",
+          "label": "Pwojè: Òganizatè Nòt",
+          "summary": "Òganize yon dosye dezòdone an nòt, devwa, kòd, ak kopi sekirite lè w itilize kòmand prensipal tèminal Linux yo.",
           "cards": {
             "sketch0": {
-              "title": "Rezime òganizatè nòt gwoup etid la"
+              "title": "Rezime Òganizatè Nòt Gwoup Etid"
             },
             "project": {
-              "title": "Òganizatè nòt gwoup etid la"
+              "title": "Òganizatè Nòt Gwoup Etid"
             }
           },
           "moduleProject": {
             "steps": {
               "module-2-notes-organizer-project-terminal-task-1": {
-                "title": "Kreye katab pou resevwa nòt yo",
-                "prompt": "A study group se dropping off two raw note fichyes for sorting. Create `student-notes-organizer/inbox/math.txt` ak `student-notes-organizer/inbox/history.txt` so both notes se ready nan the intake katab.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Kreye dosye pou resevwa nòt yo",
+                "prompt": "Yon gwoup etid ap depoze de fichye nòt brit pou triye. Kreye \"`student-notes-organizer/inbox/math.txt`\" ak \"`student-notes-organizer/inbox/history.txt`\" pou tou de nòt yo pare nan dosye resepsyon an.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Etap pwojè yo konekte. Kenbe livrab ki te fèt anvan yo epi ajoute yon nouvo travay ki itil.",
+                  "concept": "Etap pwojè yo konekte. Konsève livrabl ki te fèt deja epi ajoute yon nouvo travay itil.",
                   "hint_1": "Sèvi ak ls oswa find pou tcheke espas travay aktyèl la anvan ou chanje li.",
-                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo sof si enstriksyon an mande klèman pou netwaye yon fichye tanporè."
+                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo, sof si mesaj la mande w klèman pou w netwaye yon fichye tanporè."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 }
               },
               "module-2-notes-organizer-project-terminal-task-2": {
-                "title": "Triye nòt yo epi kreye yon kopi sekirite",
-                "prompt": "The study group wants the notes fichyed anvan handoff. Move `math.txt` ak `history.txt` out of `student-notes-organizer/inbox` ak into `student-notes-organizer/classes`, then make a backup kopye of `history.txt` at `student-notes-organizer/backups/history.txt`.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Klase nòt yo epi kreye yon kopi sekou.",
+                "prompt": "Gwoup etid la vle nòt yo depoze anvan remiz la. Deplase `math.txt` ak `history.txt` soti nan `student-notes-organizer/inbox` epi mete yo nan `student-notes-organizer/classes`, apre sa fè yon kopi sekou `history.txt` nan `student-notes-organizer/backups/history.txt`.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Etap pwojè yo konekte. Kenbe livrab ki te fèt anvan yo epi ajoute yon nouvo travay ki itil.",
-                  "hint_1": "Sèvi ak ls oswa find pou tcheke espas travay aktyèl la anvan ou chanje li.",
-                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo sof si enstriksyon an mande klèman pou netwaye yon fichye tanporè."
+                  "concept": "Etap pwojè yo konekte. Konsève livrabl ki te fèt deja epi ajoute yon nouvo travay itil.",
+                  "hint_1": "Sèvi ak ls oswa find pou verifye espas travay aktyèl la anvan ou chanje li.",
+                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo, sof si mesaj la mande w klèman pou w netwaye yon fichye tanporè."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
@@ -60,19 +60,19 @@
                 }
               },
               "module-2-notes-organizer-project-terminal-task-3": {
-                "title": "Fini remèt òganizatè a",
-                "prompt": "The notes se sorted ak backed up. Leave a clear handoff marker by kreye `student-notes-organizer/handoff/notes-ready.txt` while keeping the class notes ak backup nan place.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Konplete remiz òganizatè a",
+                "prompt": "Nòt yo klase epi yo fè kopi sekou.  Kite yon makè tranzisyon klè lè w kreye yon dosye \"`student-notes-organizer/handoff/notes-ready.txt`\", pandan w kenbe nòt klas la ak kopi sekou a an plas.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Etap pwojè yo konekte. Kenbe livrab ki te fèt anvan yo epi ajoute yon nouvo travay ki itil.",
+                  "concept": "Etap pwojè yo konekte. Konsève livrabl ki te fèt deja epi ajoute yon nouvo travay itil.",
                   "hint_1": "Sèvi ak ls oswa find pou tcheke espas travay aktyèl la anvan ou chanje li.",
-                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo sof si enstriksyon an mande klèman pou netwaye yon fichye tanporè."
+                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo, sof si mesaj la mande w klèman pou w netwaye yon fichye tanporè."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
@@ -99,8 +99,8 @@
       "linux-module-2-files-and-folders": {
         "module-2-notes-organizer-project": {
           "project-synopsis": {
-            "title": "Òganizatè nòt gwoup etid la",
-            "bodyMarkdown": "Ou se preparing a clean fichye handoff for a study group. Build an intake area, sort notes into class katabs, preserve a backup, ak leave a ready marker.\n\nYou will complete this as connected project etaps. Each etap starts depi the previous working espas travay, so fè not efase earlier deliverables."
+            "title": "Òganizatè Nòt Gwoup Etid",
+            "bodyMarkdown": "W ap prepare yon transfè dosye pwòp pou yon gwoup etid. Kreye yon zòn pou anrejistreman, triye nòt yo nan dosye klas yo, konsève yon kopi sekirite, epi kite yon makè ki pare.\n\nW ap konplete sa a kòm etap pwojè konekte. Chak etap kòmanse apati espas travay anvan an, kidonk pa efase livrezon ki te fèt anvan yo."
           }
         }
       }

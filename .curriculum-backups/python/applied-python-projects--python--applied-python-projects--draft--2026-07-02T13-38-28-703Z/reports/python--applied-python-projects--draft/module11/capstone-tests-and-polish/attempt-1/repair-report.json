@@ -1,0 +1,68 @@
+{
+  "topicId": "capstone-tests-and-polish",
+  "repairs": [
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-capstone-tests-and-polish-sketch0",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "try-capstone-tests-and-polish-sketch0",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step4-readme",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "capstone-tests-and-polish-step4-readme",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step5-final-polish",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "capstone-tests-and-polish-step5-final-polish",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-tests-and-polish-step6-final-handoff",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "capstone-tests-and-polish-step6-final-handoff",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+      "category": "other",
+      "severity": "medium",
+      "field": "sketchBlocks",
+      "message": "Added a Try it yourself learner action required by programming teaching validation."
+    }
+  ]
+}

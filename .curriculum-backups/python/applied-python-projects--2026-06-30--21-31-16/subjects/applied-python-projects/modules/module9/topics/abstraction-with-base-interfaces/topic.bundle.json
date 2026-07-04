@@ -1,0 +1,736 @@
+{
+  "topicId": "abstraction-with-base-interfaces",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-polymorphism-and-abstraction",
+  "prefix": "py9",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.sketch0.title",
+      "sketchId": "concept",
+      "height": 420,
+      "tryIt": {
+        "id": "try-abstraction-with-base-interfaces-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.prompt",
+        "exerciseKey": "try-abstraction-with-base-interfaces-sketch0",
+        "difficulty": "medium",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.sketch1.title",
+      "sketchId": "multifile-shape",
+      "height": 420,
+      "tryIt": {
+        "id": "try-abstraction-with-base-interfaces-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.prompt",
+        "exerciseKey": "try-abstraction-with-base-interfaces-sketch1",
+        "difficulty": "medium",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.sketch2.title",
+      "sketchId": "graded-habit",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.quiz.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.cards.project.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_shipping_interface_practice",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.projectSteps.ci_shipping_interface_practice.title",
+            "exerciseKey": "ci-shipping-interface-practice",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "concept",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.concept.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.concept.bodyMarkdown"
+    },
+    {
+      "id": "multifile-shape",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.multifile-shape.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.multifile-shape.bodyMarkdown"
+    },
+    {
+      "id": "graded-habit",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.graded-habit.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.graded-habit.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-abstraction-with-base-interfaces-sketch0",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.quiz.try-abstraction-with-base-interfaces-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.metric_item import MetricItem\n\nitem = MetricItem(\"Open tasks\", 4)\nprint(item.render())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/report_item.py",
+          "content": "class ReportItem:\n    def render(self):\n        pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/metric_item.py",
+          "content": "from models.report_item import ReportItem\n\nclass MetricItem(ReportItem):\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.metric_item import MetricItem\n\nitem = MetricItem(\"Open tasks\", 4)\nprint(item.render())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/report_item.py",
+          "content": "class ReportItem:\n    def render(self):\n        raise NotImplementedError(\"Subclasses must implement render\")\n",
+          "language": "python"
+        },
+        {
+          "path": "models/metric_item.py",
+          "content": "from models.report_item import ReportItem\n\nclass MetricItem(ReportItem):\n    def __init__(self, label, value):\n        self.label = label\n        self.value = value\n\n    def render(self):\n        return f\"{self.label}: {self.value}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Open tasks: 4\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMubWV0cmljX2l0ZW0gaW1wb3J0IE1ldHJpY0l0ZW0KCml0ZW0gPSBNZXRyaWNJdGVtKCJPcGVuIHRhc2tzIiwgNCkKcHJpbnQoaXRlbS5yZW5kZXIoKSkK',\n    'models/report_item.py': 'Y2xhc3MgUmVwb3J0SXRlbToKICAgIGRlZiByZW5kZXIoc2VsZik6CiAgICAgICAgcmFpc2UgTm90SW1wbGVtZW50ZWRFcnJvcigiU3ViY2xhc3NlcyBtdXN0IGltcGxlbWVudCByZW5kZXIiKQo=',\n    'models/metric_item.py': 'ZnJvbSBtb2RlbHMucmVwb3J0X2l0ZW0gaW1wb3J0IFJlcG9ydEl0ZW0KCmNsYXNzIE1ldHJpY0l0ZW0oUmVwb3J0SXRlbSk6CiAgICBkZWYgX19pbml0X18oc2VsZiwgbGFiZWwsIHZhbHVlKToKICAgICAgICBzZWxmLmxhYmVsID0gbGFiZWwKICAgICAgICBzZWxmLnZhbHVlID0gdmFsdWUKCiAgICBkZWYgcmVuZGVyKHNlbGYpOgogICAgICAgIHJldHVybiBmIntzZWxmLmxhYmVsfToge3NlbGYudmFsdWV9Igo=',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.metric_item import MetricItem\n\nitem = MetricItem(\"Open tasks\", 4)\nprint(item.render())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/report_item.py",
+            "content": "class ReportItem:\n    def render(self):\n        raise NotImplementedError(\"Subclasses must implement render\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/metric_item.py",
+            "content": "from models.report_item import ReportItem\n\nclass MetricItem(ReportItem):\n    def __init__(self, label, value):\n        self.label = label\n        self.value = value\n\n    def render(self):\n        return f\"{self.label}: {self.value}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.metric_item import MetricItem\n\nitem = MetricItem(\"Open tasks\", 4)\nprint(item.render())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.metric_item import MetricItem\n\nitem = MetricItem(\"Open tasks\", 4)\nprint(item.render())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.metric_item import MetricItem\n\nitem = MetricItem(\"Open tasks\", 4)\nprint(item.render())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/report_item.py",
+            "content": "class ReportItem:\n    def render(self):\n        pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/metric_item.py",
+            "content": "from models.report_item import ReportItem\n\nclass MetricItem(ReportItem):\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.metric_item import MetricItem\n\nitem = MetricItem(\"Open tasks\", 4)\nprint(item.render())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/report_item.py",
+            "content": "class ReportItem:\n    def render(self):\n        raise NotImplementedError(\"Subclasses must implement render\")\n",
+            "language": "python"
+          },
+          {
+            "path": "models/metric_item.py",
+            "content": "from models.report_item import ReportItem\n\nclass MetricItem(ReportItem):\n    def __init__(self, label, value):\n        self.label = label\n        self.value = value\n\n    def render(self):\n        return f\"{self.label}: {self.value}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/metric_item.py",
+            "models/report_item.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/metric_item.py",
+          "models/report_item.py"
+        ]
+      }
+    },
+    {
+      "id": "try-abstraction-with-base-interfaces-sketch1",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.quiz.try-abstraction-with-base-interfaces-sketch1",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.metric_item import MetricItem\nfrom services.reports import render_report\n\nitems = [MetricItem(\"Done\", 3), MetricItem(\"Open\", 2)]\nprint(render_report(items))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/metric_item.py",
+          "content": "class MetricItem:\n    def __init__(self, label, value):\n        self.label = label\n        self.value = value\n\n    def render(self):\n        return f\"{self.label}: {self.value}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "services/reports.py",
+          "content": "def render_report(items):\n    return \"\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.metric_item import MetricItem\nfrom services.reports import render_report\n\nitems = [MetricItem(\"Done\", 3), MetricItem(\"Open\", 2)]\nprint(render_report(items))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/metric_item.py",
+          "content": "class MetricItem:\n    def __init__(self, label, value):\n        self.label = label\n        self.value = value\n\n    def render(self):\n        return f\"{self.label}: {self.value}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "services/reports.py",
+          "content": "def render_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.render())\n    return \"\\n\".join(lines)\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Done: 3\nOpen: 2\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMubWV0cmljX2l0ZW0gaW1wb3J0IE1ldHJpY0l0ZW0KZnJvbSBzZXJ2aWNlcy5yZXBvcnRzIGltcG9ydCByZW5kZXJfcmVwb3J0CgppdGVtcyA9IFtNZXRyaWNJdGVtKCJEb25lIiwgMyksIE1ldHJpY0l0ZW0oIk9wZW4iLCAyKV0KcHJpbnQocmVuZGVyX3JlcG9ydChpdGVtcykpCg==',\n    'models/metric_item.py': 'Y2xhc3MgTWV0cmljSXRlbToKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBsYWJlbCwgdmFsdWUpOgogICAgICAgIHNlbGYubGFiZWwgPSBsYWJlbAogICAgICAgIHNlbGYudmFsdWUgPSB2YWx1ZQoKICAgIGRlZiByZW5kZXIoc2VsZik6CiAgICAgICAgcmV0dXJuIGYie3NlbGYubGFiZWx9OiB7c2VsZi52YWx1ZX0iCg==',\n    'services/reports.py': 'ZGVmIHJlbmRlcl9yZXBvcnQoaXRlbXMpOgogICAgbGluZXMgPSBbXQogICAgZm9yIGl0ZW0gaW4gaXRlbXM6CiAgICAgICAgbGluZXMuYXBwZW5kKGl0ZW0ucmVuZGVyKCkpCiAgICByZXR1cm4gIlxuIi5qb2luKGxpbmVzKQo=',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.metric_item import MetricItem\nfrom services.reports import render_report\n\nitems = [MetricItem(\"Done\", 3), MetricItem(\"Open\", 2)]\nprint(render_report(items))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/metric_item.py",
+            "content": "class MetricItem:\n    def __init__(self, label, value):\n        self.label = label\n        self.value = value\n\n    def render(self):\n        return f\"{self.label}: {self.value}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "services/reports.py",
+            "content": "def render_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.render())\n    return \"\\n\".join(lines)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.metric_item import MetricItem\nfrom services.reports import render_report\n\nitems = [MetricItem(\"Done\", 3), MetricItem(\"Open\", 2)]\nprint(render_report(items))\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.metric_item import MetricItem\nfrom services.reports import render_report\n\nitems = [MetricItem(\"Done\", 3), MetricItem(\"Open\", 2)]\nprint(render_report(items))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.metric_item import MetricItem\nfrom services.reports import render_report\n\nitems = [MetricItem(\"Done\", 3), MetricItem(\"Open\", 2)]\nprint(render_report(items))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/metric_item.py",
+            "content": "class MetricItem:\n    def __init__(self, label, value):\n        self.label = label\n        self.value = value\n\n    def render(self):\n        return f\"{self.label}: {self.value}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "services/reports.py",
+            "content": "def render_report(items):\n    return \"\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.metric_item import MetricItem\nfrom services.reports import render_report\n\nitems = [MetricItem(\"Done\", 3), MetricItem(\"Open\", 2)]\nprint(render_report(items))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/metric_item.py",
+            "content": "class MetricItem:\n    def __init__(self, label, value):\n        self.label = label\n        self.value = value\n\n    def render(self):\n        return f\"{self.label}: {self.value}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "services/reports.py",
+            "content": "def render_report(items):\n    lines = []\n    for item in items:\n        lines.append(item.render())\n    return \"\\n\".join(lines)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "services"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/metric_item.py",
+            "services/__init__.py",
+            "services/reports.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "services"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/metric_item.py",
+          "services/__init__.py",
+          "services/reports.py"
+        ]
+      }
+    },
+    {
+      "id": "ci-shipping-interface-practice",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.quiz.ci-shipping-interface-practice",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.ground_shipping import GroundShipping\nfrom models.express_shipping import ExpressShipping\nfrom services.shipping import total_shipping\n\noptions = [GroundShipping(4), ExpressShipping(4)]\nprint(total_shipping(options))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/ground_shipping.py",
+          "content": "class GroundShipping:\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/express_shipping.py",
+          "content": "class ExpressShipping:\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "services/shipping.py",
+          "content": "def total_shipping(options):\n    return 0\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.ground_shipping import GroundShipping\nfrom models.express_shipping import ExpressShipping\nfrom services.shipping import total_shipping\n\noptions = [GroundShipping(4), ExpressShipping(4)]\nprint(total_shipping(options))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/ground_shipping.py",
+          "content": "class GroundShipping:\n    def __init__(self, pounds):\n        self.pounds = pounds\n\n    def cost(self):\n        return self.pounds * 2\n",
+          "language": "python"
+        },
+        {
+          "path": "models/express_shipping.py",
+          "content": "class ExpressShipping:\n    def __init__(self, pounds):\n        self.pounds = pounds\n\n    def cost(self):\n        return self.pounds * 5\n",
+          "language": "python"
+        },
+        {
+          "path": "services/shipping.py",
+          "content": "def total_shipping(options):\n    total = 0\n    for option in options:\n        total += option.cost()\n    return total\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "28\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuZ3JvdW5kX3NoaXBwaW5nIGltcG9ydCBHcm91bmRTaGlwcGluZwpmcm9tIG1vZGVscy5leHByZXNzX3NoaXBwaW5nIGltcG9ydCBFeHByZXNzU2hpcHBpbmcKZnJvbSBzZXJ2aWNlcy5zaGlwcGluZyBpbXBvcnQgdG90YWxfc2hpcHBpbmcKCm9wdGlvbnMgPSBbR3JvdW5kU2hpcHBpbmcoNCksIEV4cHJlc3NTaGlwcGluZyg0KV0KcHJpbnQodG90YWxfc2hpcHBpbmcob3B0aW9ucykpCg==',\n    'models/ground_shipping.py': 'Y2xhc3MgR3JvdW5kU2hpcHBpbmc6CiAgICBkZWYgX19pbml0X18oc2VsZiwgcG91bmRzKToKICAgICAgICBzZWxmLnBvdW5kcyA9IHBvdW5kcwoKICAgIGRlZiBjb3N0KHNlbGYpOgogICAgICAgIHJldHVybiBzZWxmLnBvdW5kcyAqIDIK',\n    'models/express_shipping.py': 'Y2xhc3MgRXhwcmVzc1NoaXBwaW5nOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHBvdW5kcyk6CiAgICAgICAgc2VsZi5wb3VuZHMgPSBwb3VuZHMKCiAgICBkZWYgY29zdChzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5wb3VuZHMgKiA1Cg==',\n    'services/shipping.py': 'ZGVmIHRvdGFsX3NoaXBwaW5nKG9wdGlvbnMpOgogICAgdG90YWwgPSAwCiAgICBmb3Igb3B0aW9uIGluIG9wdGlvbnM6CiAgICAgICAgdG90YWwgKz0gb3B0aW9uLmNvc3QoKQogICAgcmV0dXJuIHRvdGFsCg==',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.ground_shipping import GroundShipping\nfrom models.express_shipping import ExpressShipping\nfrom services.shipping import total_shipping\n\noptions = [GroundShipping(4), ExpressShipping(4)]\nprint(total_shipping(options))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/ground_shipping.py",
+            "content": "class GroundShipping:\n    def __init__(self, pounds):\n        self.pounds = pounds\n\n    def cost(self):\n        return self.pounds * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "models/express_shipping.py",
+            "content": "class ExpressShipping:\n    def __init__(self, pounds):\n        self.pounds = pounds\n\n    def cost(self):\n        return self.pounds * 5\n",
+            "language": "python"
+          },
+          {
+            "path": "services/shipping.py",
+            "content": "def total_shipping(options):\n    total = 0\n    for option in options:\n        total += option.cost()\n    return total\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.ground_shipping import GroundShipping\nfrom models.express_shipping import ExpressShipping\nfrom services.shipping import total_shipping\n\noptions = [GroundShipping(4), ExpressShipping(4)]\nprint(total_shipping(options))\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.ground_shipping import GroundShipping\nfrom models.express_shipping import ExpressShipping\nfrom services.shipping import total_shipping\n\noptions = [GroundShipping(4), ExpressShipping(4)]\nprint(total_shipping(options))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.ground_shipping import GroundShipping\nfrom models.express_shipping import ExpressShipping\nfrom services.shipping import total_shipping\n\noptions = [GroundShipping(4), ExpressShipping(4)]\nprint(total_shipping(options))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/ground_shipping.py",
+            "content": "class GroundShipping:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/express_shipping.py",
+            "content": "class ExpressShipping:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "services/shipping.py",
+            "content": "def total_shipping(options):\n    return 0\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.ground_shipping import GroundShipping\nfrom models.express_shipping import ExpressShipping\nfrom services.shipping import total_shipping\n\noptions = [GroundShipping(4), ExpressShipping(4)]\nprint(total_shipping(options))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/ground_shipping.py",
+            "content": "class GroundShipping:\n    def __init__(self, pounds):\n        self.pounds = pounds\n\n    def cost(self):\n        return self.pounds * 2\n",
+            "language": "python"
+          },
+          {
+            "path": "models/express_shipping.py",
+            "content": "class ExpressShipping:\n    def __init__(self, pounds):\n        self.pounds = pounds\n\n    def cost(self):\n        return self.pounds * 5\n",
+            "language": "python"
+          },
+          {
+            "path": "services/shipping.py",
+            "content": "def total_shipping(options):\n    total = 0\n    for option in options:\n        total += option.cost()\n    return total\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "services"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/express_shipping.py",
+            "models/ground_shipping.py",
+            "services/__init__.py",
+            "services/shipping.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "services"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/express_shipping.py",
+          "models/ground_shipping.py",
+          "services/__init__.py",
+          "services/shipping.py"
+        ]
+      }
+    },
+    {
+      "id": "sc-abstraction-with-base-interfaces-design",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.quiz.sc-abstraction-with-base-interfaces-design",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

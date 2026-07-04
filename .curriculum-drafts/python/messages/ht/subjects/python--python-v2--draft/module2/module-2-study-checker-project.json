@@ -1,0 +1,210 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "module-2-study-checker-project": {
+          "label": "Pwojè Modil: Bati yon Verifikatè Etid",
+          "summary": "Yon antrenè etid vle yon sèl verifikatè ki vin pi entelijan etap pa etap. Kontinye ajoute règ nan menm pwogram nan jiskaske li ka jere kòd ki manke, move nòt, ak mesaj estati final yo.",
+          "cards": {
+            "sketch0": {
+              "title": "Premye kliyan ou ki baze sou règ"
+            },
+            "project": {
+              "title": "Konstriktè Verifikatè Etid"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Kòmanse règ nòt la"
+            },
+            "mp_2": {
+              "title": "Ajoute règ antre a"
+            },
+            "mp_3": {
+              "title": "Jere yon kòd ki manke"
+            },
+            "mp_4": {
+              "title": "Fini verifikatè konplè a"
+            }
+          },
+          "quiz": {
+            "mp-1-check-pass-fail": {
+              "title": "Kòmanse règ nòt la",
+              "prompt": "Kòmanse verifikatè etid la ak yon sèl règ senp. Li yon nòt antye. Enprime `Pass` si nòt la omwen 70. Sinon enprime `Try again`.",
+              "hint": "Konvèti antre a, apre sa chwazi ant de sòti.",
+              "help": {
+                "concept": "Pwojè a kòmanse ak règ itil ki pi senp la: li yon nòt epi chwazi youn nan de mesaj.",
+                "hint_1": "Sèvi ak `int(input())` pou konparezon an sèvi ak nimewo.",
+                "hint_2": "Se yon sèl mesaj ki dwe enprime."
+              },
+              "starterCode": "# Read one score and print Pass or Try again.\n"
+            },
+            "mp-2-check-join-rule": {
+              "title": "Ajoute règ antre a",
+              "prompt": "Kenbe lide verifikatè ki baze sou nòt la, men ajoute yon lòt règ. Li `member` ak `input()`. Enprime `Join` sèlman lè nòt la omwen 70 epi `member` egzakteman `yes`. Sinon enprime `Wait`.",
+              "hint": "Sèvi ak `and` pou toude kondisyon yo dwe vre.",
+              "help": {
+                "concept": "Etap sa a elaji menm verifikatè a ak yon dezyèm kondisyon olye pou kòmanse yon nouvo egzèsis depi nan kòmansman.",
+                "hint_1": "Nòt la toujou enpòtan, men kounye a manm lan enpòtan tou.",
+                "hint_2": "Si youn nan pati yo echwe, sòti a dwe `Wait`."
+              },
+              "starterCode": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n\n# Keep the score rule idea.\n# Read member with input().\n# Print Join only when the score is at least 70 and member is yes.\n"
+            },
+            "mp-3-handle-missing-text": {
+              "title": "Jere yon kòd ki manke",
+              "prompt": "Kenbe verifikatè Join/Wait ou deja bati a. Ajoute yon lòt antre ki rele `code`. Si `code` se yon chèn vid, enprime `Missing code` anvan ou tcheke règ nòmal Join/Wait la.",
+              "hint": "Tcheke ka kòd ki manke a an premye, apre sa pase nan règ anvan an.",
+              "help": {
+                "concept": "Yon verifikatè ki konekte grandi lè li jere ka espesyal yo anvan règ pi laj la ki deja mache.",
+                "hint_1": "Chèn vid la ekri konsa `\"\"`.",
+                "hint_2": "Si kòd la manke, okenn lòt mesaj pa dwe enprime."
+              },
+              "starterCode": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the Join/Wait rule.\n# Read one more input named code.\n# If code is empty, print Missing code before the normal rule.\n"
+            },
+            "mp-4-build-final-study-checker": {
+              "title": "Fini verifikatè konplè a",
+              "prompt": "Kenbe menm twa antre yo nan menm lòd la: score, member, code. Kounye a fini verifikatè a ak règ sa yo:\n- `Missing code` si `code` vid\n- `Invalid score` si nòt la pi piti pase 0\n- `Join club first` si `member` pa `yes`\n- `Excellent` si nòt la omwen 90\n- `Passing` si nòt la omwen 70\n- `Needs practice` sinon",
+              "hint": "Kenbe ka espesyal yo an premye, apre sa fini ak entèval nòt nòmal yo.",
+              "help": {
+                "concept": "Vèsyon final la kenbe menm estrikti verifikatè a epi ajoute branch ki pi klè nan lòd yon pwogram reyèl ta bezwen yo.",
+                "hint_1": "Sèvi ak yon sèl chèn `if` / `elif` / `else` pou se yon sèl rezilta ki enprime.",
+                "hint_2": "Branch kòd ki manke ak nòt ki pa valab yo dwe vini anvan branch estati yo."
+              },
+              "starterCode": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the same inputs.\n# Add invalid-score and not-a-member checks before the normal score results.\n# Then print the final status message.\n"
+            },
+            "try-module-2-study-checker-project-sketch0": {
+              "title": "Gade verifikatè a davans",
+              "prompt": "Li yon nòt. Enprime `Ready` si li omwen 50. Sinon enprime `Keep going`.",
+              "hint": "Sèvi ak `int(input())` ak yon chwa `if` / `else`.",
+              "help": {
+                "concept": "Ti apèsi rapid sa a montre modèl debaz ki dèyè pi gwo pwojè a: li yon valè, teste yon règ, epi enprime yon rezilta ki koresponn.",
+                "hint_1": "Gen sèlman de sòti posib.",
+                "hint_2": "Konpare nòt la ak 50."
+              },
+              "starterCode": "# Read one score and print Ready or Keep going.\n"
+            }
+          },
+          "tryIt": {
+            "try_module_2_study_checker_project_sketch0": {
+              "title": "Eseye li ou menm",
+              "prompt": "Li yon nòt. Enprime `Ready` si li omwen 50. Sinon enprime `Keep going`."
+            },
+            "allowReveal": true
+          }
+        }
+      },
+      "python-v2-2": {
+        "module-2-study-checker-project": {
+          "label": "Pwojè Modil: Bati yon Verifikatè Etid",
+          "summary": "Yon antrenè etid vle yon sèl verifikatè ki vin pi entelijan etap pa etap. Kontinye ajoute règ nan menm pwogram nan jiskaske li ka jere kòd ki manke, move nòt, ak mesaj estati final yo.",
+          "cards": {
+            "sketch0": {
+              "title": "Premye kliyan ou ki baze sou règ"
+            },
+            "project": {
+              "title": "Konstriktè Verifikatè Etid"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Kòmanse règ nòt la"
+            },
+            "mp_2": {
+              "title": "Ajoute règ antre a"
+            },
+            "mp_3": {
+              "title": "Jere yon kòd ki manke"
+            },
+            "mp_4": {
+              "title": "Fini verifikatè konplè a"
+            }
+          },
+          "quiz": {
+            "mp-1-check-pass-fail": {
+              "title": "Kòmanse règ nòt la",
+              "prompt": "Kòmanse verifikatè etid la ak yon sèl règ senp. Li yon nòt antye. Enprime `Pass` si nòt la omwen 70. Sinon enprime `Try again`.",
+              "hint": "Konvèti antre a, apre sa chwazi ant de sòti.",
+              "help": {
+                "concept": "Pwojè a kòmanse ak règ itil ki pi senp la: li yon nòt epi chwazi youn nan de mesaj.",
+                "hint_1": "Sèvi ak `int(input())` pou konparezon an sèvi ak nimewo.",
+                "hint_2": "Se yon sèl mesaj ki dwe enprime."
+              },
+              "starterCode": "# Read one score and print Pass or Try again.\n"
+            },
+            "mp-2-check-join-rule": {
+              "title": "Ajoute règ antre a",
+              "prompt": "Kenbe lide verifikatè ki baze sou nòt la, men ajoute yon lòt règ. Li `member` ak `input()`. Enprime `Join` sèlman lè nòt la omwen 70 epi `member` egzakteman `yes`. Sinon enprime `Wait`.",
+              "hint": "Sèvi ak `and` pou toude kondisyon yo dwe vre.",
+              "help": {
+                "concept": "Etap sa a elaji menm verifikatè a ak yon dezyèm kondisyon olye pou kòmanse yon nouvo egzèsis depi nan kòmansman.",
+                "hint_1": "Nòt la toujou enpòtan, men kounye a manm lan enpòtan tou.",
+                "hint_2": "Si youn nan pati yo echwe, sòti a dwe `Wait`."
+              },
+              "starterCode": "score = int(input())\nif score >= 70:\n    print(\"Pass\")\nelse:\n    print(\"Try again\")\n\n# Keep the score rule idea.\n# Read member with input().\n# Print Join only when the score is at least 70 and member is yes.\n"
+            },
+            "mp-3-handle-missing-text": {
+              "title": "Jere yon kòd ki manke",
+              "prompt": "Kenbe verifikatè Join/Wait ou deja bati a. Ajoute yon lòt antre ki rele `code`. Si `code` se yon chèn vid, enprime `Missing code` anvan ou tcheke règ nòmal Join/Wait la.",
+              "hint": "Tcheke ka kòd ki manke a an premye, apre sa pase nan règ anvan an.",
+              "help": {
+                "concept": "Yon verifikatè ki konekte grandi lè li jere ka espesyal yo anvan règ pi laj la ki deja mache.",
+                "hint_1": "Chèn vid la ekri konsa `\"\"`.",
+                "hint_2": "Si kòd la manke, okenn lòt mesaj pa dwe enprime."
+              },
+              "starterCode": "score = int(input())\nmember = input()\nif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the Join/Wait rule.\n# Read one more input named code.\n# If code is empty, print Missing code before the normal rule.\n"
+            },
+            "mp-4-build-final-study-checker": {
+              "title": "Fini verifikatè konplè a",
+              "prompt": "Kenbe menm twa antre yo nan menm lòd la: score, member, code. Kounye a fini verifikatè a ak règ sa yo:\n- `Missing code` si `code` vid\n- `Invalid score` si nòt la pi piti pase 0\n- `Join club first` si `member` pa `yes`\n- `Excellent` si nòt la omwen 90\n- `Passing` si nòt la omwen 70\n- `Needs practice` sinon",
+              "hint": "Kenbe ka espesyal yo an premye, apre sa fini ak entèval nòt nòmal yo.",
+              "help": {
+                "concept": "Vèsyon final la kenbe menm estrikti verifikatè a epi ajoute branch ki pi klè nan lòd yon pwogram reyèl ta bezwen yo.",
+                "hint_1": "Sèvi ak yon sèl chèn `if` / `elif` / `else` pou se yon sèl rezilta ki enprime.",
+                "hint_2": "Branch kòd ki manke ak nòt ki pa valab yo dwe vini anvan branch estati yo."
+              },
+              "starterCode": "score = int(input())\nmember = input()\ncode = input()\nif code == \"\":\n    print(\"Missing code\")\nelif score >= 70 and member == \"yes\":\n    print(\"Join\")\nelse:\n    print(\"Wait\")\n\n# Keep the same inputs.\n# Add invalid-score and not-a-member checks before the normal score results.\n# Then print the final status message.\n"
+            },
+            "try-module-2-study-checker-project-sketch0": {
+              "title": "Gade verifikatè a davans",
+              "prompt": "Li yon nòt. Enprime `Ready` si li omwen 50. Sinon enprime `Keep going`.",
+              "hint": "Sèvi ak `int(input())` ak yon chwa `if` / `else`.",
+              "help": {
+                "concept": "Ti apèsi rapid sa a montre modèl debaz ki dèyè pi gwo pwojè a: li yon valè, teste yon règ, epi enprime yon rezilta ki koresponn.",
+                "hint_1": "Gen sèlman de sòti posib.",
+                "hint_2": "Konpare nòt la ak 50."
+              },
+              "starterCode": "# Read one score and print Ready or Keep going.\n"
+            }
+          },
+          "tryIt": {
+            "try_module_2_study_checker_project_sketch0": {
+              "title": "Eseye li ou menm",
+              "prompt": "Li yon nòt. Enprime `Ready` si li omwen 50. Sinon enprime `Keep going`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "module-2-study-checker-project": {
+          "sketch-1": {
+            "title": "Premye kliyan ou ki baze sou règ",
+            "bodyMarkdown": "Yon antrenè etid kontinye ap pran menm desizyon yo alamen: èske yon nòt ase wo, èske yon kòd manke, oswa èske yon elèv bezwen yon lòt pwochen etap? Li vle yon ti verifikatè Python ki vin yon ti jan pi entelijan chak fwa ou amelyore li.\n\nPwojè modil sa a fèt pou bay yon sans koneksyon. Ou kòmanse ak yon sèl règ, apre sa ou kenbe menm verifikatè a epi ajoute plis branch jiskaske vèsyon final la jere ka reyèl yo aklè."
+          }
+        }
+      },
+      "python-v2-2": {
+        "module-2-study-checker-project": {
+          "sketch-1": {
+            "title": "Premye kliyan ou ki baze sou règ",
+            "bodyMarkdown": "Yon antrenè etid kontinye ap pran menm desizyon yo alamen: èske yon nòt ase wo, èske yon kòd manke, oswa èske yon elèv bezwen yon lòt pwochen etap? Li vle yon ti verifikatè Python ki vin yon ti jan pi entelijan chak fwa ou amelyore li.\n\nPwojè modil sa a fèt pou bay yon sans koneksyon. Ou kòmanse ak yon sèl règ, apre sa ou kenbe menm verifikatè a epi ajoute plis branch jiskaske vèsyon final la jere ka reyèl yo aklè."
+          }
+        }
+      }
+    }
+  }
+}

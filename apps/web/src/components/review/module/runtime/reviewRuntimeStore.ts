@@ -22,6 +22,7 @@ import {reviewDebug, summarizeWorkspace} from "./reviewDebug";
 import {exerciseDebug, summarizeExercisePatch, summarizeExerciseWorkspace} from "./exerciseDebug";
 import {reviewSaveDebug, summarizeWorkspaceForSave} from "./reviewSaveDebug";
 import {languagesCompatible} from "@/components/review/module/utils";
+import {normalizeTopicProgressKey} from "@/lib/review/progressTopicKeys";
 import {normalizeWorkspaceLanguage} from "./workspaceCodeSource";
 import {
     hasStarterIntentValue,
@@ -242,6 +243,38 @@ function parseRuntimeOwnerKey(ownerKey: string) {
         cardId: parts[4] ?? "general",
         exerciseId: parts.slice(5).join(":") || parts[parts.length - 1] || ownerKey,
     };
+}
+
+
+function sameResetTopicId(a: unknown, b: unknown) {
+    const rawA = String(a ?? "").trim();
+    const rawB = String(b ?? "").trim();
+    if (!rawA || !rawB) return false;
+    return rawA === rawB || normalizeTopicProgressKey(rawA) === normalizeTopicProgressKey(rawB);
+}
+
+function sameResetCardId(a: unknown, b: unknown) {
+    const rawA = String(a ?? "").trim();
+    const rawB = String(b ?? "").trim();
+    return Boolean(rawA && rawB && rawA === rawB);
+}
+
+function runtimeEntryMatchesTopic(entry: unknown, ownerKey: string, topicId: string) {
+    const record = asRecord(entry);
+    const parsed = parseRuntimeOwnerKey(ownerKey);
+    return sameResetTopicId(record?.topicId, topicId) || sameResetTopicId(parsed.topicId, topicId);
+}
+
+function runtimeEntryMatchesCard(entry: unknown, ownerKey: string, topicId: string, cardId: string) {
+    if (!runtimeEntryMatchesTopic(entry, ownerKey, topicId)) return false;
+
+    const record = asRecord(entry);
+    const parsed = parseRuntimeOwnerKey(ownerKey);
+
+    return (
+        sameResetCardId(record?.cardId, cardId) ||
+        sameResetCardId(parsed.cardId, cardId)
+    );
 }
 
 function workspaceContentKey(workspace: WorkspaceStateV2 | null | undefined) {
@@ -2577,110 +2610,117 @@ export const useReviewRuntimeStore = create<InternalStore>((set, get) => ({
         });
     },
     clearRuntimeForTopic: (topicId) => {
-        set((state) => ({
-            activeExerciseKey:
+        set((state) => {
+            const activeMatches = Boolean(
                 state.activeExerciseKey &&
-                state.exercises[state.activeExerciseKey]?.topicId === topicId
-                    ? null
-                    : state.activeExerciseKey,
+                runtimeEntryMatchesTopic(
+                    state.exercises[state.activeExerciseKey],
+                    state.activeExerciseKey,
+                    topicId,
+                ),
+            );
 
-            boundToolWorkspace:
-                state.activeExerciseKey &&
-                state.exercises[state.activeExerciseKey]?.topicId === topicId
-                    ? null
-                    : state.boundToolWorkspace,
+            const boundExerciseMatches = Boolean(
+                state.tool.boundExerciseKey &&
+                runtimeEntryMatchesTopic(
+                    state.exercises[state.tool.boundExerciseKey],
+                    state.tool.boundExerciseKey,
+                    topicId,
+                ),
+            );
 
-            exercises: Object.fromEntries(
-                Object.entries(state.exercises).filter(([, value]) => {
-                    return String((value as any)?.topicId ?? "") !== topicId;
-                }),
-            ),
+            return {
+                activeExerciseKey: activeMatches ? null : state.activeExerciseKey,
+                boundToolWorkspace: activeMatches ? null : state.boundToolWorkspace,
 
-            cards: Object.fromEntries(
-                Object.entries(state.cards).filter(([, value]) => {
-                    return String((value as any)?.topicId ?? "") !== topicId;
-                }),
-            ),
+                exercises: Object.fromEntries(
+                    Object.entries(state.exercises).filter(([key, value]) => {
+                        return !runtimeEntryMatchesTopic(value, key, topicId);
+                    }),
+                ),
 
-            editorRuntimes: Object.fromEntries(
-                Object.entries(state.editorRuntimes).filter(([, value]) => {
-                    return String((value as any)?.topicId ?? "") !== topicId;
-                }),
-            ),
+                cards: Object.fromEntries(
+                    Object.entries(state.cards).filter(([key, value]) => {
+                        return !runtimeEntryMatchesTopic(value, key, topicId);
+                    }),
+                ),
 
-            tool: {
-                ...state.tool,
-                boundExerciseKey:
-                    state.tool.boundExerciseKey &&
-                    state.exercises[state.tool.boundExerciseKey]?.topicId === topicId
-                        ? null
-                        : state.tool.boundExerciseKey,
-            },
-            persistence: {
-                dirty: false,
-                pendingExerciseKeys: new Set(),
-                pendingCardKeys: new Set(),
-            },
-        }));
+                editorRuntimes: Object.fromEntries(
+                    Object.entries(state.editorRuntimes).filter(([key, value]) => {
+                        const ownerKey = String((value as {ownerKey?: string} | undefined)?.ownerKey ?? key);
+                        return !runtimeEntryMatchesTopic(value, ownerKey, topicId);
+                    }),
+                ),
+
+                tool: {
+                    ...state.tool,
+                    boundExerciseKey: boundExerciseMatches ? null : state.tool.boundExerciseKey,
+                },
+                persistence: {
+                    dirty: false,
+                    pendingExerciseKeys: new Set(),
+                    pendingCardKeys: new Set(),
+                },
+            };
+        });
     },
 
     clearRuntimeForCard: (topicId, cardId) => {
-        set((state) => ({
-            activeExerciseKey:
+        set((state) => {
+            const activeMatches = Boolean(
                 state.activeExerciseKey &&
-                state.exercises[state.activeExerciseKey]?.topicId === topicId &&
-                state.exercises[state.activeExerciseKey]?.cardId === cardId
-                    ? null
-                    : state.activeExerciseKey,
+                runtimeEntryMatchesCard(
+                    state.exercises[state.activeExerciseKey],
+                    state.activeExerciseKey,
+                    topicId,
+                    cardId,
+                ),
+            );
 
-            boundToolWorkspace:
-                state.activeExerciseKey &&
-                state.exercises[state.activeExerciseKey]?.topicId === topicId &&
-                state.exercises[state.activeExerciseKey]?.cardId === cardId
-                    ? null
-                    : state.boundToolWorkspace,
+            const boundExerciseMatches = Boolean(
+                state.tool.boundExerciseKey &&
+                runtimeEntryMatchesCard(
+                    state.exercises[state.tool.boundExerciseKey],
+                    state.tool.boundExerciseKey,
+                    topicId,
+                    cardId,
+                ),
+            );
 
-            exercises: Object.fromEntries(
-                Object.entries(state.exercises).filter(([, value]) => {
-                    return !(
-                        String((value as any)?.topicId ?? "") === topicId &&
-                        String((value as any)?.cardId ?? "") === cardId
-                    );
-                }),
-            ),
+            return {
+                activeExerciseKey: activeMatches ? null : state.activeExerciseKey,
+                boundToolWorkspace: activeMatches ? null : state.boundToolWorkspace,
 
-            cards: Object.fromEntries(
-                Object.entries(state.cards).filter(([, value]) => {
-                    return !(
-                        String((value as any)?.topicId ?? "") === topicId &&
-                        String((value as any)?.cardId ?? "") === cardId
-                    );
-                }),
-            ),
+                exercises: Object.fromEntries(
+                    Object.entries(state.exercises).filter(([key, value]) => {
+                        return !runtimeEntryMatchesCard(value, key, topicId, cardId);
+                    }),
+                ),
 
-            editorRuntimes: Object.fromEntries(
-                Object.entries(state.editorRuntimes).filter(([, value]) => {
-                    return !(
-                        String((value as any)?.topicId ?? "") === topicId &&
-                        String((value as any)?.cardId ?? "") === cardId
-                    );
-                }),
-            ),
+                cards: Object.fromEntries(
+                    Object.entries(state.cards).filter(([key, value]) => {
+                        return !runtimeEntryMatchesCard(value, key, topicId, cardId);
+                    }),
+                ),
 
-            tool: {
-                ...state.tool,
-                boundExerciseKey:
-                    state.tool.boundExerciseKey &&
-                    state.exercises[state.tool.boundExerciseKey]?.topicId === topicId &&
-                    state.exercises[state.tool.boundExerciseKey]?.cardId === cardId
-                        ? null
-                        : state.tool.boundExerciseKey,
-            }, persistence: {
-                dirty: false,
-                pendingExerciseKeys: new Set(),
-                pendingCardKeys: new Set(),
-            },
-        }));
+                editorRuntimes: Object.fromEntries(
+                    Object.entries(state.editorRuntimes).filter(([key, value]) => {
+                        const ownerKey = String((value as {ownerKey?: string} | undefined)?.ownerKey ?? key);
+                        return !runtimeEntryMatchesCard(value, ownerKey, topicId, cardId);
+                    }),
+                ),
+
+                tool: {
+                    ...state.tool,
+                    boundExerciseKey: boundExerciseMatches ? null : state.tool.boundExerciseKey,
+                },
+                persistence: {
+                    dirty: false,
+                    pendingExerciseKeys: new Set(),
+                    pendingCardKeys: new Set(),
+                },
+            };
+        });
     },
 
     clearRuntimeForModule: () => {

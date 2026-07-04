@@ -1,0 +1,40 @@
+{
+  "ok": true,
+  "profileId": "python",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "courseSlug": "applied-python-projects",
+  "topicId": "capstone-storage-and-reports",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 6,
+    "exerciseKinds": {
+      "code_input": 6
+    },
+    "codeInputs": 6,
+    "projects": 6,
+    "capstones": 6,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 1,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 1,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-services-and-polish/capstone-storage-and-reports",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-storage-and-reports",
+      "message": "Topic \"capstone-storage-and-reports\" has no learning goals on its seed metadata."
+    }
+  ]
+}

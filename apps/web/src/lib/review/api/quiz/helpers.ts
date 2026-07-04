@@ -3,6 +3,27 @@ import { PracticeKind } from "@zoeskoul/db";
 
 export type ReviewExercisePurpose = "quiz" | "project";
 
+export function normalizeReviewExercisePurpose(
+    value: unknown,
+    kind?: unknown,
+    fallback?: ReviewExercisePurpose | null,
+): ReviewExercisePurpose | null {
+    const raw = String(value ?? "").trim().toLowerCase();
+    const normalizedKind = String(kind ?? "").trim();
+
+    if (raw === "quiz") return "quiz";
+    if (raw === "project" || raw === "try_it" || raw === "try-it" || raw === "practice" || raw === "capstone") {
+        return "project";
+    }
+
+    if (!raw) {
+        if (normalizedKind === "code_input") return "project";
+        return fallback ?? null;
+    }
+
+    return null;
+}
+
 export type PoolItem = {
     key: string;
     w: number;
@@ -22,8 +43,12 @@ export function stableJsonHash(v: unknown) {
     return shortHash(JSON.stringify(v ?? null));
 }
 
-function normalizePurpose(value: unknown): ReviewExercisePurpose {
-    return value === "project" ? "project" : "quiz";
+function normalizePurpose(
+    value: unknown,
+    kind?: unknown,
+    fallback: ReviewExercisePurpose = "quiz",
+): ReviewExercisePurpose | null {
+    return normalizeReviewExercisePurpose(value, kind, fallback);
 }
 
 function asRecord(value: unknown): Record<string, unknown> | null {
@@ -46,7 +71,7 @@ export function readPoolFromTopicMeta(meta: unknown): PoolItem[] {
                 kind: item?.kind ? String(item.kind).trim() : undefined,
             // Legacy DB rows may be missing purpose; keep those quiz-safe and
             // rely on curriculum sync to refresh stale PracticeTopic.meta.pool.
-                purpose: item?.purpose ? String(item.purpose).trim() : "quiz",
+                purpose: normalizeReviewExercisePurpose(item?.purpose, item?.kind, item?.kind === "code_input" ? "project" : "quiz") ?? "quiz",
             };
         })
         .filter((p) => p.key && Number.isFinite(p.w) && p.w > 0);
@@ -58,8 +83,10 @@ export function filterPoolByPurpose(
 ) {
     if (!purpose) return pool;
 
-    const wanted = normalizePurpose(purpose);
-    return pool.filter((p) => normalizePurpose(p.purpose) === wanted);
+    const wanted = normalizePurpose(purpose, null, "quiz");
+    if (!wanted) return [];
+
+    return pool.filter((p) => normalizePurpose(p.purpose, p.kind, "quiz") === wanted);
 }
 
 export function filterPoolByPreferKind(

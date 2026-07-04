@@ -3,47 +3,47 @@
     "linux-terminal-fundamentals": {
       "linux-module-2-files-and-folders": {
         "copy-move-rename": {
-          "label": "Kopye, deplase, ak chanje non",
-          "summary": "Sèvi ak cp ak mv pou fè kopi, òganize, epi chanje non fichye an sekirite.",
+          "label": "Kopi, Deplase, ak Chanje Non",
+          "summary": "Sèvi ak cp ak mv pou kopye, òganize, ak renome fichye yo an sekirite.",
           "cards": {
             "sketch0": {
-              "title": "Kopye fichye avèk cp"
+              "title": "Kopi dosye ak cp"
             },
             "sketch1": {
-              "title": "Deplase fichye ak katab avèk mv"
+              "title": "Deplase fichye ak dosye avèk mv"
             },
             "sketch2": {
-              "title": "Chanje non avèk mv"
+              "title": "Chanje non ak mv"
             },
             "quiz": {
               "title": "Tcheke pratik"
             },
             "project": {
-              "title": "Òganize fichye etid yon elèv"
+              "title": "Òganize dosye etid yon etidyan"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "exercises": {
               "copy-move-rename-try-it-1": {
-                "title": "Travay tèminal: kopye avèk cp",
-                "prompt": "The destination katab already exists. Sèvi ak `cp` pou kopye `sample-inbox/agenda.txt` pou `warmup/backups/agenda.txt` while keeping the original.",
-                "hint": "Sèvi ak katab ak non fichye egzak ki nan enstriksyon an, apre sa kouri ls, cat oswa find pou verifye travay ou.",
+                "title": "Travay terminal: kopye ak cp",
+                "prompt": "Dosye destinasyon an deja egziste. Sèvi ak `cp` pou kopye `sample-inbox/agenda.txt` nan `warmup/backups/agenda.txt` pandan w ap kenbe orijinal la.",
+                "hint": "Sèvi ak katab ak non fichye egzak ki nan kòmand lan, epi kouri ls, cat, oswa find pou verifye travay ou.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Check."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Kouri the cp kòmand montren nan the enstriksyon."
+                      "message": "Egzekite kòmand cp ki parèt nan prompt la."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
@@ -57,30 +57,30 @@
                 }
               },
               "copy-move-rename-try-it-2": {
-                "title": "Travay tèminal: deplase avèk mv",
-                "prompt": "The destination katab already exists. Sèvi ak `mv` pou deplase `sample-inbox/guest-list.txt` pou `warmup/guests/guest-list.txt`.",
-                "hint": "Sèvi ak katab ak non fichye egzak ki nan enstriksyon an, apre sa kouri ls, cat oswa find pou verifye travay ou.",
+                "title": "Travay tèminal: deplase ak mv",
+                "prompt": "Dosye destinasyon an deja egziste. Sèvi ak `mv` pou deplase `sample-inbox/guest-list.txt` nan `warmup/guests/guest-list.txt`.",
+                "hint": "Sèvi ak katab ak non fichye egzak ki nan kòmand lan, epi kouri ls, cat, oswa find pou verifye travay ou.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Check."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Kouri the mv kòmand montren nan the enstriksyon."
+                      "message": "Egzekite kòmand mv ki parèt nan prompt la."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "sample_inbox_guest_list_txt": {
-                    "content": "Lis envite\n"
+                    "content": "Guest list\n"
                   },
                   "warmup_guests_keep": {
                     "content": ""
@@ -88,24 +88,24 @@
                 }
               },
               "copy-move-rename-try-it-3": {
-                "title": "Travay tèminal: chanje non avèk mv",
-                "prompt": "Sèvi ak `mv` pou chanje non `sample-inbox/draft-report.txt` pou `sample-inbox/final-report.txt` nan the same katab.",
-                "hint": "Sèvi ak katab ak non fichye egzak ki nan enstriksyon an, apre sa kouri ls, cat oswa find pou verifye travay ou.",
+                "title": "Travay tèminal: chanje non ak mv",
+                "prompt": "Sèvi ak `mv` pou chanje non `sample-inbox/draft-report.txt` pou `sample-inbox/final-report.txt` nan menm dosye a.",
+                "hint": "Sèvi ak katab ak non fichye egzak ki nan kòmand lan, epi kouri ls, cat, oswa find pou verifye travay ou.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Check."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Kouri the mv chanje non kòmand montren nan the enstriksyon."
+                      "message": "Egzekite kòmand mv pou chanje non ki parèt nan prompt la."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
@@ -117,27 +117,27 @@
               }
             },
             "try_copy_move_rename_sketch0": {
-              "title": "Eseye li ou menm: kopye avèk cp",
-              "prompt": "Kouri `cp sample-inbox/agenda.txt warmup/backups/agenda.txt` pou practice kopyeing while keeping the original fichye."
+              "title": "Eseye l poukont ou: kopye ak cp",
+              "prompt": "Kouri `cp sample-inbox/agenda.txt warmup/backups/agenda.txt` pou pratike kopi pandan w ap kenbe fichye orijinal la."
             },
             "try_copy_move_rename_sketch1": {
-              "title": "Eseye li ou menm: deplase avèk mv",
-              "prompt": "Kouri `mv sample-inbox/guest-list.txt warmup/guests/guest-list.txt` pou practice moving a fichye."
+              "title": "Eseye l poukont ou: deplase ak mv",
+              "prompt": "Kouri `mv sample-inbox/guest-list.txt warmup/guests/guest-list.txt` pou pratike deplase yon fichye."
             },
             "try_copy_move_rename_sketch2": {
-              "title": "Eseye li ou menm: chanje non avèk mv",
-              "prompt": "Kouri `mv sample-inbox/draft-report.txt sample-inbox/final-report.txt` pou practice renaming avèk mv."
+              "title": "Eseye li poukont ou: chanje non ak mv",
+              "prompt": "Kouri `mv sample-inbox/draft-report.txt sample-inbox/final-report.txt` pou pratike chanje non ak mv."
             }
           },
           "practice": {
             "sc-which-command-renames": {
-              "title": "Idantifye kòmand pou chanje non an",
-              "prompt": "Ki kòmand chanje nons `plan.txt` pou `project-plan.txt` nan the same katab?",
-              "hint": "Renaming uses the same kòmand as moving.",
+              "title": "Idantifye kòmand pou chanje non an.",
+              "prompt": "Ki kòmand ki renome `plan.txt` pou `project-plan.txt` nan menm dosye a?",
+              "hint": "Chanje non itilize menm kòmandman ak deplase.",
               "help": {
-                "concept": "Linux uses `mv` for both moving ak renaming because both actions change a fichye's path.",
-                "hint_1": "A kopye kòmand would leave two fichyes behind, which se not a chanje non.",
-                "hint_2": "Choose the kòmand that changes the old name into the new name directly."
+                "concept": "Linux itilize `mv` pou deplase ak renome paske toude aksyon sa yo chanje chemen yon fichye.",
+                "hint_1": "Yon kòmand kopi ta kite de fichye dèyè, sa pa yon chanje non.",
+                "hint_2": "Chwazi kòmand ki chanje ansyen non an dirèkteman an nouvo non an."
               },
               "options": {
                 "a": "cp plan.txt project-plan.txt",
@@ -147,29 +147,29 @@
               }
             },
             "mc-copy-vs-move": {
-              "title": "Chwazi deklarasyon ki vre sou cp ak mv",
-              "prompt": "Ki deklarasyon ki kòrèk? Chwazi tout sa ki mache.",
-              "hint": "One kòmand duplicates a fichye, ak the other changes its kote oswa name.",
+              "title": "Chwazi deklarasyon ki kòrèk sou cp ak mv.",
+              "prompt": "Ki deklarasyon ki kòrèk? Chwazi tout sa ki aplike.",
+              "hint": "Yon kòmand kopye yon fichye, epi lòt la chanje kote li oswa non li.",
               "help": {
-                "concept": "`cp` kreyes an additional kopye, while `mv` changes the fichye's path so the original kote oswa name no longer remains the same.",
-                "hint_1": "Chèche statements that match what happens pou the original fichye apre each kòmand.",
-                "hint_2": "A correct choice should describe either duplication avèk `cp` oswa rekote/renaming avèk `mv`."
+                "concept": "`cp` Kreye yon kopi anplis, tandiske '`mv`' chanje chemen fichye a, konsa kote oswa non orijinal la pa rete menm jan ankò.",
+                "hint_1": "Chèche deklarasyon ki koresponn ak sa k rive dosye orijinal la apre chak kòmand.",
+                "hint_2": "Yon chwa kòrèk ta dwe dekri swa duplikasyon ak `cp` oswa relocation/renaming ak `mv`."
               },
               "options": {
-                "a": "`cp notes.txt backup.txt` leaves `notes.txt` nan place ak kreyes `backup.txt`.",
-                "b": "`mv draft.txt final.txt` can chanje non a fichye nan the same katab.",
-                "c": "`cp report.txt archive/` redeplases `report.txt` depi its original katab.",
-                "d": "`mv essay.txt folder/` kreyes two copies of `essay.txt`."
+                "a": "`cp notes.txt backup.txt` Li kite `notes.txt` an plas epi li kreye `backup.txt`.",
+                "b": "`mv draft.txt final.txt` ka chanje non yon fichye nan menm dosye a.",
+                "c": "`cp report.txt archive/` Eliye dosye orijinal la.",
+                "d": "`mv essay.txt folder/` Kreye de kopi de \"`essay.txt`\"."
               }
             },
             "mc-safe-command-choice": {
-              "title": "Chwazi kòmand ki matche ak objektif la",
-              "prompt": "Ou vle pou keep the original fichye `notes.txt` ak also kreye another version avèk a different name. Ki kòmands would achieve that objektif? Chwazi tout sa ki mache.",
-              "hint": "Ou bezwen kòmands that kopye, not deplase.",
+              "title": "Chwazi kòmand ki matche ak objektif la.",
+              "prompt": "Ou vle kenbe fichye orijinal la `notes.txt` epi tou kreye yon lòt vèsyon ak yon non diferan. Ki kòmand ki ta reyalize objektif sa a? Chwazi tout sa ki aplike.",
+              "hint": "Ou bezwen kòmand ki kopye, pa deplase.",
               "help": {
-                "concept": "When the original must remain, use `cp`. A chanje non oswa deplase avèk `mv` changes the original path instead of preserving it.",
-                "hint_1": "Any correct kòmand should leave `notes.txt` still existing apre li runs.",
-                "hint_2": "Chèche `cp` kòmands that use `notes.txt` as the source ak a different destination path oswa name."
+                "concept": "Lè orijinal la dwe rete, itilize `cp`. Yon chanje non oswa deplase ak `mv` chanje chemen orijinal la olye pou l prezève li.",
+                "hint_1": "Nenpòt kòmandman kòrèk ta dwe kite `notes.txt` toujou egziste apre li fin kouri.",
+                "hint_2": "Chèche kòmand `cp` ki itilize `notes.txt` kòm sous la ak yon chemen oswa non destinasyon diferan."
               },
               "options": {
                 "a": "`cp notes.txt notes-copy.txt`",
@@ -179,53 +179,53 @@
               }
             },
             "dr-copy-then-rename-flow": {
-              "title": "Mete fason travay ak fichye a nan lòd",
-              "prompt": "Mete sa yo etaps nan bon lòd for making a backup kopye of `outline.txt` ak then renaming the kopye pou `outline-final.txt`.",
-              "hint": "First make the duplicate, then chanje non the duplicate.",
+              "title": "Kòmande workflow fichye a",
+              "prompt": "Mete etap sa yo nan lòd kòrèk pou fè yon kopi sekou `outline.txt` epi chanje non kopi a pou `outline-final.txt`.",
+              "hint": "Premyeman fè kopi a, apre sa chanje non kopi a.",
               "help": {
-                "concept": "A multi-etap fichye workflow depends on what exists apre each kòmand. You cannot chanje non the copied fichye until the kopye has been kreyed.",
-                "hint_1": "The backup fichye must exist anvan li can receive a new name.",
-                "hint_2": "Start avèk the original fichye, kreye a kopye, then chanje non that copied fichye."
+                "concept": "Yon pwosesis dosye ki gen plizyè etap depann de sa ki egziste apre chak kòmand. Ou pa ka chanje non dosye ki kopye a jiskaske kopi a fin kreye.",
+                "hint_1": "Fichye sovgad la dwe egziste anvan li ka resevwa yon nouvo non.",
+                "hint_2": "Kòmanse ak fichye orijinal la, kreye yon kopi, epi chanje non fichye kopi a."
               },
               "tokens": {
-                "t1": "Start avèk `outline.txt` nan the katab.",
+                "t1": "Kòmanse ak \"`outline.txt`\" nan dosye a.",
                 "t2": "Kouri `cp outline.txt outline-copy.txt`.",
                 "t3": "Kouri `mv outline-copy.txt outline-final.txt`.",
-                "t4": "End avèk both `outline.txt` ak `outline-final.txt`."
+                "t4": "Fini ak toude `outline.txt` ak `outline-final.txt`."
               }
             },
             "ci-copy-class-notes": {
               "title": "Kopye yon fichye nòt klas",
-              "prompt": "Ou vle a backup anvan editing class notes. Ki outcome montres that `cp` was used correctly?",
-              "hint": "Sèvi ak `cp` avèk the original fichye first ak the backup name second.",
+              "prompt": "Ou vle fè yon kopi sekou anvan ou modifye nòt klas la. Ki rezilta ki montre ke yo te itilize`cp` kòrèkteman?",
+              "hint": "Itiliz`cp`, mete non fichye orijinal la an premye epi non sovgad la an dezyèm.",
               "help": {
-                "concept": "`cp` duplicates a fichye. The source stays nan place, ak a new fichye se kreyed at the destination path.",
-                "hint_1": "Ou bezwen two fichyes at the end: the original `class-notes.txt` ak a new `class-notes-backup.txt`.",
-                "hint_2": "Kouri a kopye kòmand where `class-notes.txt` se the source ak `class-notes-backup.txt` se the destination name."
+                "concept": "`cp` Dupike yon fichye. Sous la rete kote li ye a, epi yo kreye yon nouvo fichye nan chemen destinasyon an.",
+                "hint_1": "Ou bezwen de fichye nan fen an: orijinal `class-notes.txt` la ak yon nouvo `class-notes-backup.txt`.",
+                "hint_2": "Egzekite yon kòmand kopi kote `class-notes.txt` se sous la epi `class-notes-backup.txt` se non destinasyon an."
               },
-              "template": "A correct backup etap should ____ so ou can see both the original ak the kopye.",
+              "template": "Yon etap sovgad kòrèk ta dwe ____ pou ou ka wè ni orijinal la ni kopi a.",
               "choices": [
-                "enprime yon rezilta ou ka wè",
-                "kache tout rezilta",
-                "efase fichye a touswit",
-                "sote pwogram nan"
+                "Enprime yon rezilta obsèvab",
+                "Kache tout sòti",
+                "Efase fichye a imedyatman",
+                "Sote pwogram nan"
               ]
             },
             "ci-move-report-into-folder": {
-              "title": "Deplase yon rapò nan bon katab la",
-              "prompt": "A report belongs nan `submissions`, not nan the katab aktyèl la. Ki rezilta montres that `mv` was used correctly?",
-              "hint": "Sèvi ak `mv` avèk the fichye name ak the destination katab.",
+              "title": "Mete yon rapò nan bon dosye a.",
+              "prompt": "Yon rapò dwe nan `submissions`, pa nan dosye aktyèl la. Ki rezilta ki montre ke `mv` te itilize kòrèkteman?",
+              "hint": "Itilize `mv` ak non fichye a ak katab destinasyon an.",
               "help": {
-                "concept": "`mv` relocates a fichye oswa katab. After moving, the item exists nan the new kote instead of the old one.",
-                "hint_1": "The destination katab already exists, so ou fè not need pou kreye it.",
-                "hint_2": "Move `report.txt` so the final path becomes `submissions/report.txt`."
+                "concept": "`mv` Li deplase yon fichye oswa yon dosye. Apre deplasman an, atik la egziste nan nouvo kote a olye de ansyen an.",
+                "hint_1": "Dosye destinasyon an deja egziste, kidonk ou pa bezwen kreye li.",
+                "hint_2": "Mouv`report.txt` pou chemen final la vin `submissions/report.txt`."
               },
-              "template": "After moving a fichye, pi bon tcheke se pou ____ so the new kote se visible.",
+              "template": "Apre ou fin deplase yon fichye, pi bon verifikasyon an se ____ pou nouvo kote a parèt.",
               "choices": [
-                "enprime yon rezilta ou ka wè",
-                "kache tout rezilta",
-                "efase fichye a touswit",
-                "sote pwogram nan"
+                "Enprime yon rezilta obsèvab",
+                "Kache tout sòti",
+                "Efase fichye a imedyatman",
+                "Sote pwogram nan"
               ]
             }
           }
@@ -238,16 +238,16 @@
       "linux-module-2-files-and-folders": {
         "copy-move-rename": {
           "sketch-1": {
-            "title": "Kopye fichye avèk cp",
-            "bodyMarkdown": "`cp` makes a duplicate of a fichye ak leaves the original nan place. This se useful when ou want a backup oswa when ou need the same kontni nan a second kote.\n\nWorked example:\n\n```bash\ncp notes.txt backup-notes.txt\n```\n\nStep by etap:\n- `cp` se the kopye kòmand.\n- `notes.txt` se the source fichye ou already have.\n- `backup-notes.txt` se the new fichye that will be kreyed.\n\nAfter this kòmand, both fichyes exist.\n\nIf ou kopye into a katab, the fichye keeps its name unless ou give a new one:\n\n```bash\ncp notes.txt archive/notes.txt\n```\n\nThat kòmand copies `notes.txt` into the `archive` katab. The original fichye still stays where li started."
+            "title": "Kopi dosye ak cp",
+            "bodyMarkdown": "`cp` makes a duplicate of a file and leaves the original in place. This is useful when you want a backup or when you need the same content in a second location.\n\nWorked example:\n\n```bash\ncp notes.txt backup-notes.txt\n```\n\nStep by step:\n- `cp` is the copy command.\n- `notes.txt` is the source file you already have.\n- `backup-notes.txt` is the new file that will be created.\n\nAfter this command, both files exist.\n\nIf you copy into a folder, the file keeps its name unless you give a new one:\n\n```bash\ncp notes.txt archive/notes.txt\n```\n\nThat command copies `notes.txt` into the `archive` folder. The original file still stays where it started."
           },
           "sketch-2": {
-            "title": "Deplase fichye ak katab avèk mv",
-            "bodyMarkdown": "`mv` changes where a fichye oswa katab lives. Unlike `cp`, li fè not leave the original behind.\n\nWorked example:\n\n```bash\nmv draft.txt school/\n```\n\nStep by etap:\n- `mv` se the deplase kòmand.\n- `draft.txt` se the item ou want pou relocate.\n- `school/` se the destination katab.\n\nAfter the kòmand, `draft.txt` se no longer nan the old kote. It se now inside `school/`.\n\nYou can also deplase katabs:\n\n```bash\nmv notes archive/\n```\n\nThat places the whole `notes` katab inside `archive`."
+            "title": "Deplase fichye ak dosye avèk mv",
+            "bodyMarkdown": "`mv` changes where a file or folder lives. Unlike `cp`, it does not leave the original behind.\n\nWorked example:\n\n```bash\nmv draft.txt school/\n```\n\nStep by step:\n- `mv` is the move command.\n- `draft.txt` is the item you want to relocate.\n- `school/` is the destination folder.\n\nAfter the command, `draft.txt` is no longer in the old location. It is now inside `school/`.\n\nYou can also move folders:\n\n```bash\nmv notes archive/\n```\n\nThat places the whole `notes` folder inside `archive`."
           },
           "sketch-3": {
-            "title": "Chanje non avèk mv",
-            "bodyMarkdown": "In Linux, renaming se also done avèk `mv`. Ou se moving a fichye depi its old name pou its new name nan the same katab.\n\nWorked example:\n\n```bash\nmv todo.txt tasks.txt\n```\n\nStep by etap:\n- `mv` starts the chanje non.\n- `todo.txt` se the current name.\n- `tasks.txt` se the new name.\n\nAfter the kòmand, `todo.txt` no longer exists, ak `tasks.txt` exists instead.\n\nYou can chanje non while moving too:\n\n```bash\nmv draft.txt projects/final.txt\n```\n\nThat changes both the kote ak the name nan one kòmand."
+            "title": "Chanje non ak mv",
+            "bodyMarkdown": "In Linux, renaming is also done with `mv`. You are moving a file from its old name to its new name in the same folder.\n\nWorked example:\n\n```bash\nmv todo.txt tasks.txt\n```\n\nStep by step:\n- `mv` starts the rename.\n- `todo.txt` is the current name.\n- `tasks.txt` is the new name.\n\nAfter the command, `todo.txt` no longer exists, and `tasks.txt` exists instead.\n\nYou can rename while moving too:\n\n```bash\nmv draft.txt projects/final.txt\n```\n\nThat changes both the location and the name in one command."
           }
         }
       }

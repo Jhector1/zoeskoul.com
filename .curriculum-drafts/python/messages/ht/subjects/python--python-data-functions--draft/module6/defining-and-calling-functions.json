@@ -1,0 +1,301 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "defining-and-calling-functions": {
+          "label": "Definir ak Rele Fonksyon",
+          "summary": "Kreye fonksyon epi rele yo ak agiman.",
+          "cards": {
+            "sketch0": {
+              "title": "Ki fonksyon sa fè"
+            },
+            "sketch1": {
+              "title": "Apèl fonksyon ak agiman"
+            },
+            "sketch2": {
+              "title": "Fonksyon yo ka retounen valè"
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Pwojè Fonksyon Pratik"
+            }
+          },
+          "projectSteps": {
+            "ci_make_greeting": {
+              "title": "Ekri yon fonksyon pou salye"
+            },
+            "ci_square_number": {
+              "title": "Remèt kare a"
+            },
+            "ci_full_name": {
+              "title": "Konbine non premye ak non dènye"
+            }
+          },
+          "quiz": {
+            "sc-function-call": {
+              "title": "Rekonèt yon apèl fonksyon",
+              "prompt": "Ki liy ki rele yon fonksyon ki rele `greet`?",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Kesyon sa a verifye si ou ka konekte kòmand lan ak konsèp Python ki soti nan leson an.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Eseye chak opsyon nan fraz la oswa nan liy kòd la epi kenbe sa ki fè egzanp lan mache egzakteman jan yo dekri l."
+              },
+              "options": {
+                "a": "def greet():",
+                "b": "Salye",
+                "c": "Enprime = Salye",
+                "d": "retounen salye"
+              }
+            },
+            "sc-parameter-meaning": {
+              "title": "Konprann yon paramèt",
+              "prompt": "Nan `def greet(name):`, kisa `name` ye?",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Kesyon sa a verifye si ou ka konekte kòmand lan ak konsèp Python ki soti nan leson an.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Eseye chak opsyon nan fraz la oswa nan liy kòd la epi kenbe sa ki fè egzanp lan mache egzakteman jan yo dekri l."
+              },
+              "options": {
+                "a": "Yon mesaj enprime",
+                "b": "Yon paramèt",
+                "c": "Yon valè retou",
+                "d": "Yon lis"
+              }
+            },
+            "mc-valid-calls": {
+              "title": "Chwazi apèl fonksyon ki valab yo.",
+              "prompt": "Yon fonksyon defini kòm `def greet(name):`. Ki apèl ki valab? Chwazi tout repons ki kòrèk.",
+              "hint": "Fonksyon an atann egzakteman yon sèl agiman.",
+              "help": {
+                "concept": "Lè yon fonksyon gen yon sèl paramèt, chak apèl dwe bay yon sèl agiman andedan parantèz yo.",
+                "hint_1": "Tcheke konbyen valè chak apèl pase bay`greet(...)`.",
+                "hint_2": "Apèl valab yo gen egzakteman yon sèl valè ant parantèz yo, ni zewo ni de."
+              },
+              "options": {
+                "a": "Salye Ava",
+                "b": "Salye",
+                "c": "Salye (\"Ava\", \"Leo\")",
+                "d": "Salye Mina"
+              }
+            },
+            "mc-return-uses": {
+              "title": "Fason pou itilize yon valè ki retounen",
+              "prompt": "Yon fonksyon `double(x)` retounen yon nimewo. Ki liy yo itilize valè retounen sa a kòrèkteman? Chwazi tout repons ki kòrèk.",
+              "hint": "Yon valè retounen ka estoke oswa enprime.",
+              "help": {
+                "concept": "Lè yon fonksyon retounen yon valè, ou ka mete apèl la nenpòt kote yo ka itilize yon valè nòmal, tankou nan yon asiyasyon oswa andedan yon ekspresyon kondisyonèl (`print(...)`).",
+                "hint_1": "Chèche liy kote `double(4)` trete tankou yon valè.",
+                "hint_2": "Liy kòrèk yo swa estoke rezilta a nan yon varyab oswa pase rezilta a nan yon lòt fonksyon tankou `print`."
+              },
+              "options": {
+                "a": "rezilta = double(4)",
+                "b": "print(double(4))",
+                "c": "retou = double(4)",
+                "d": "def double(4):"
+              }
+            },
+            "dr-define-then-call": {
+              "title": "Kòmande yon pwogram pou yon fonksyon senp",
+              "prompt": "Mete liy sa yo nan bon lòd pou defini yon fonksyon epi rele li.",
+              "hint": "Fonksyon an dwe defini anvan yo rele li.",
+              "help": {
+                "concept": "Python li kòd la depi anlè desann. Definisyon yon fonksyon vini an premye, kò li rete antre anba li, epi apèl la vini apre definisyon an.",
+                "hint_1": "Kòmanse ak liy `def` la, epi mete liy kò a ki gen entansyon anba li.",
+                "hint_2": "Apre de liy definisyon yo fin ansanm, mete apèl fonksyon an an dènye."
+              },
+              "tokens": {
+                "t1": "def say_hi():",
+                "t2": "print(\"Hi\")",
+                "t3": "di bonjou()"
+              }
+            },
+            "dr-call-with-argument": {
+              "title": "Kòmande yon fonksyon ak yon paramèt",
+              "prompt": "Arranje liy yo pou defini yon e`show_name`, epi rele li ak `\"Ava\"`.",
+              "hint": "Aranje moso kòd yo nan lòd Python ta dwe egzekite yo.",
+              "help": {
+                "concept": "Moso yo dwe fòme yon kòd Python valab nan lòd li dwe kouri.",
+                "hint_1": "Kòmanse ak liy ki mete aksyon Python an an plas.",
+                "hint_2": "Mete liy ki depann sou valè ki te egziste pi bonè apre valè sa yo fin egziste."
+              },
+              "tokens": {
+                "t1": "def show_name(name):",
+                "t2": "print(name)",
+                "t3": "show_name(\"Ava\")"
+              }
+            },
+            "fb-def-keyword": {
+              "title": "Konplete yon definisyon fonksyon",
+              "prompt": "Chwazi mo ki kòmanse yon definisyon fonksyon.",
+              "hint": "Li fraz la ki antoure espas vid la epi deside ki wòl mo ki manke a jwe.",
+              "help": {
+                "concept": "Espas vid la bezwen mo oswa senbòl Python egzak ki fè liy lan fè sa ki dekri nan mesaj la.",
+                "hint_1": "Gade kòd ki antoure espas vid la pou deside si ou bezwen yon mo kle, yon valè, yon metòd, oswa yon kle.",
+                "hint_2": "Chwazi opsyon ki fè tout liy lan valab an Python epi ki bay rezilta ke kòmand la mande."
+              },
+              "template": "[blank1] salye():",
+              "choices": [
+                "defini",
+                "Enprime",
+                "rele",
+                "retounen"
+              ]
+            },
+            "fb-call-argument": {
+              "title": "Ranpli agiman an",
+              "prompt": "Chwazi valè ki konplete apèl fonksyon an.",
+              "hint": "Apèl fonksyon an ta dwe pase non ki parèt nan gitas.",
+              "help": {
+                "concept": "Yon agiman se valè ki mete andedan parantèz yo lè w ap rele yon fonksyon.",
+                "hint_1": "Gade sitasyon yo ki deja parèt nan apèl la.",
+                "hint_2": "Pati ki manke a se valè tèks egzak ki ant parantèz yo, enkli lèt majiskil la."
+              },
+              "template": "Salye",
+              "choices": [
+                "Ava",
+                "non",
+                "Salye",
+                "Enprime"
+              ]
+            },
+            "ci-make-greeting": {
+              "title": "Ekri yon fonksyon pou salye",
+              "prompt": "Ekri `make_greeting(name)` pou li retounen yon chèn salitasyon pou non sa a.",
+              "hint": "Li tach la \"Ekri yon fonksyon salitasyon\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare rezilta a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
+              "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
+            },
+            "ci-square-number": {
+              "title": "Remèt kare a",
+              "prompt": "Ekri `square(number)` pou li retounen kare `number`.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def square(number):\n    # return the square of number\n    pass",
+              "solutionCode": "def square(number):\n    return number * number"
+            },
+            "ci-full-name": {
+              "title": "Konbine non premye ak non dènye",
+              "prompt": "Ekri `full_name(first, last)` pou li retounen prenon ak non ki konbine ansanm nan yon sèl chèn.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+              "solutionCode": "def full_name(first, last):\n    return first + \" \" + last"
+            },
+            "try-defining-and-calling-functions-checkpoint": {
+              "title": "Defini epi rele yon fonksyon",
+              "prompt": "Defini `say_hello()` pou li enprime `Hello from a function!`, epi rele li.",
+              "hint": "Mete `print()` anndan kò fonksyon an, epi rele fonksyon ki anba li a.",
+              "help": {
+                "concept": "Yon fonksyon gwoupe deklarasyon ki ka egzekite lè yo rele non fonksyon an.",
+                "hint_1": "Mete `print()` anndan kò fonksyon an, epi rele fonksyon ki anba li a.",
+                "hint_2": "Kouri kòd ou a epi konpare sòti a ak rezilta espere a."
+              },
+              "starterCode": "# Define say_hello() below.\n\n",
+              "solutionCode": "def say_hello():\n    print(\"Hello from a function!\")\n\nsay_hello()\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Defini yon fonksyon ki rele say_hello()."
+                },
+                "1": {
+                  "message": "Rele say_hello() apre ou fin defini li."
+                }
+              }
+            },
+            "try-defining-and-calling-functions-sketch0": {
+              "title": "Defini epi rele greet",
+              "prompt": "Defini fonksyon an anvan ou rele li.",
+              "hint": "Defini greet(name) pou li retounen 'Bonjou, ' + name.",
+              "help": {
+                "concept": "Defini greet(name) pou li retounen 'Bonjou, ' + name.",
+                "hint_1": "Defini greet(name) pou li retounen 'Hello, ' + name, epi enprime greet('Ava').",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n",
+              "solutionCode": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n"
+            },
+            "try-defining-and-calling-functions-sketch1": {
+              "title": "Apèl yon fonksyon kare",
+              "prompt": "Rele fonksyon an epi enprime valè retou li.",
+              "hint": "Enprime kare(5).",
+              "help": {
+                "concept": "Enprime kare (5).",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke pwomp la mande."
+              },
+              "starterCode": "def square(number):\n    return number * number\n\n# Print square(5).\n",
+              "solutionCode": "def square(number):\n    return number * number\n\nprint(square(5))\n"
+            },
+            "try-defining-and-calling-functions-sketch2": {
+              "title": "Sèvi ak yon fonksyon èd de fwa",
+              "prompt": "Re-itilize menm fonksyon an pou de antre diferan.",
+              "hint": "Enprime shout('go') ak shout('team'), youn pa liy.",
+              "help": {
+                "concept": "Enprime shout('go') ak shout('team'), youn pa liy.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n",
+              "solutionCode": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n"
+            }
+          },
+          "tryIt": {
+            "try_defining_and_calling_functions_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Defini `say_hello()` pou li enprime `Hello from a function!`, epi rele li."
+            },
+            "try_defining_and_calling_functions_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Defini fonksyon an anvan ou rele li."
+            },
+            "try_defining_and_calling_functions_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Rele fonksyon an epi enprime valè retou li."
+            },
+            "try_defining_and_calling_functions_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Re-itilize menm fonksyon an pou de antre diferan."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "defining-and-calling-functions": {
+          "sketch-1": {
+            "title": "Ki fonksyon sa fè",
+            "bodyMarkdown": "A **function** is a named block of code that does a job. You define it once, then call it whenever you need that job again.\n\nIn Python, you define a function with `def`:\n\n```python\ndef greet():\n    print(\"Hello!\")\n\ngreet()\n```\n\nStep by step:\n\n- `def greet():` creates a function named `greet`\n- The indented line is the code that runs when the function is called\n- `greet()` calls the function\n- The output panel shows `Hello!`\n\nThis is useful because you can avoid repeating the same code many times.\n\nWorked example:\n\n```python\ndef cheer():\n    print(\"Go!\")\n\ncheer()\ncheer()\n```\n\nBecause `cheer()` is called twice, the output is:\n\n```python\nGo!\nGo!\n```"
+          },
+          "sketch-2": {
+            "title": "Apèl fonksyon ak agiman",
+            "bodyMarkdown": "Some functions need extra information to do their job. That information is passed in as **arguments**.\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name)\n\ngreet(\"Ava\")\ngreet(\"Leo\")\n```\n\nLine by line:\n\n- `def greet(name):` defines a function with one parameter, `name`\n- `greet(\"Ava\")` sends the value `\"Ava\"` into the function\n- Inside the function, `name` becomes `\"Ava\"`\n- Then `greet(\"Leo\")` runs the same code with a different value\n\nThe output is:\n\n```python\nHello, Ava\nHello, Leo\n```\n\nA parameter is the variable in the function definition. An argument is the value you pass when calling the function."
+          },
+          "sketch-3": {
+            "title": "Fonksyon yo ka retounen valè",
+            "bodyMarkdown": "A function can also **return** a result instead of printing it directly.\n\n```python\ndef double(number):\n    return number * 2\n\nresult = double(5)\nprint(result)\n```\n\nStep by step:\n\n- `double(number)` receives a value\n- `return number * 2` sends back the result\n- `result = double(5)` stores that returned value\n- `print(result)` shows it in the output panel\n\nThe output is:\n\n```python\n10\n```\n\nWorked example:\n\n```python\ndef make_label(text):\n    return \"Item: \" + text\n\nlabel = make_label(\"Book\")\nprint(label)\n```\n\nThis prints:\n\n```python\nItem: Book\n```\n\nWhy return instead of print? Returning lets you reuse the result later in your code."
+          }
+        }
+      }
+    }
+  }
+}

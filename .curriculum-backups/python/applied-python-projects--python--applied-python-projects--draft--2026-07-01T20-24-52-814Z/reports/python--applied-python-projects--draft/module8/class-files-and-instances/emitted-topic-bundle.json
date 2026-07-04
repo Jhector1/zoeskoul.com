@@ -1,0 +1,1050 @@
+{
+  "topicId": "class-files-and-instances",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-object-foundations",
+  "prefix": "py8",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.sketch0.title",
+      "sketchId": "sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-class-files-and-instances-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.prompt",
+        "exerciseKey": "try-class-files-and-instances-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.sketch1.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-class-files-and-instances-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.prompt",
+        "exerciseKey": "try-class-files-and-instances-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.sketch2.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-class-files-and-instances-sketch2",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.prompt",
+        "exerciseKey": "try-class-files-and-instances-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-0.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-class-files-and-instances-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\n\nbook = Book(\"Deep Work\", 320)\nprint(book.title)\nprint(book.pages)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\n\nbook = Book(\"Deep Work\", 320)\nprint(book.title)\nprint(book.pages)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\n\nbook = Book(\"Deep Work\", 320)\nprint(book.title)\nprint(book.pages)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define a class named Book in the model file."
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Deep Work",
+              320
+            ],
+            "message": "Book should be constructible with title and pages."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Deep Work",
+              320
+            ],
+            "attributes": [
+              "title",
+              "pages"
+            ],
+            "message": "Store title and pages on each Book instance."
+          },
+          {
+            "type": "created_instances",
+            "className": "Book",
+            "min": 1,
+            "message": "Create one Book object in the main code."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print the title and page count on separate lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-class-files-and-instances-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\n\nfirst_book = Book(\"Dune\", 412)\nsecond_book = Book(\"Emma\", 300)\n\nprint(first_book.title)\nprint(second_book.pages)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\n\nfirst_book = Book(\"Dune\", 412)\nsecond_book = Book(\"Emma\", 300)\n\nprint(first_book.title)\nprint(second_book.pages)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\n\nfirst_book = Book(\"Dune\", 412)\nsecond_book = Book(\"Emma\", 300)\n\nprint(first_book.title)\nprint(second_book.pages)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define a class named Book."
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune",
+              412
+            ],
+            "message": "Book should accept title and pages in its constructor."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Emma",
+              300
+            ],
+            "attributes": [
+              "title",
+              "pages"
+            ],
+            "message": "Each Book instance should store title and pages."
+          },
+          {
+            "type": "created_instances",
+            "className": "Book",
+            "min": 1,
+            "message": "Create two Book objects in the main code."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print two lines from the two different objects."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-class-files-and-instances-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\n\nbook = Book(\"Beloved\", 275)\nprint(book.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def summary(self):\n        return f\"Title: {self.title}, Pages: {self.pages}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\n\nbook = Book(\"Beloved\", 275)\nprint(book.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\n\nbook = Book(\"Beloved\", 275)\nprint(book.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n\n    def summary(self):\n        return f\"Title: {self.title}, Pages: {self.pages}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define the Book class."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Beloved",
+              275
+            ],
+            "attributes": [
+              "title",
+              "pages"
+            ],
+            "message": "Keep title and pages stored on the instance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Beloved",
+              275
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Title: Beloved, Pages: 275",
+            "expectedKind": "value",
+            "message": "summary() should return the formatted description."
+          },
+          {
+            "type": "created_instances",
+            "className": "Book",
+            "min": 1,
+            "message": "Create one Book object in the main code."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Print the returned summary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mc-class-vs-instance",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.mc-class-vs-instance",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "fb-init-self-title",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.fb-init-self-title",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "title"
+      }
+    },
+    {
+      "id": "dr-import-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.dr-import-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "project-step-account-class",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define a class named Account."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              120
+            ],
+            "message": "Account should accept owner and balance."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              120
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "Store owner and balance on the Account instance."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Create one Account object in the main code."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print the owner and balance on separate lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-account-methods",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\naccount.deposit(30)\nprint(account.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Keep the Account class defined."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              120
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "Account should still store owner and balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              120
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Ava: $120",
+            "expectedKind": "value",
+            "message": "summary() should report the current owner and balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              120
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Ava: $120",
+            "expectedKind": "value",
+            "message": "summary() should exist before any deposit."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              120
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  30
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 150,
+            "message": "deposit(30) should update the balance to 150."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Create one Account object in the main code."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Print the summary after depositing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-two-accounts",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\nava_account = Account(\"Ava\", 120)\nnoah_account = Account(\"Noah\", 90)\n\nava_account.deposit(30)\nprint(ava_account.summary())\nprint(noah_account.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Keep the Account class defined."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Noah",
+              90
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "Each Account should store owner and balance."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              120
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  30
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 150,
+            "message": "Ava's account should update to 150 after deposit(30)."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Noah",
+              90
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Noah: $90",
+            "expectedKind": "value",
+            "message": "Noah's summary should still show the original balance."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Create two Account objects in the main code."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print both account summaries on separate lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mc-import-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.mc-import-benefits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "fb-import-book",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.fb-import-book",
+      "choiceCount": 3,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Book"
+      }
+    },
+    {
+      "id": "sc-self-meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.sc-self-meaning",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    }
+  ]
+}

@@ -36,6 +36,7 @@
     "curr:critique-subject": "node packages/curriculum-cli/dist/index.js critique-subject",
     "curr:critique-subject-draft": "node packages/curriculum-cli/dist/index.js critique-subject-draft",
     "curr:course": "node scripts/curriculum-course.mjs",
+    "curr:translate": "node scripts/translate-current-draft-course.mjs",
     "curr:test": "vitest run packages/curriculum-compiler",
     "curr:test:golden": "pnpm --filter @zoeskoul/curriculum-compiler exec vitest run --root ../.. packages/curriculum-compiler/src/validate/draftSubjectCodeInputGoldens.test.ts",
     "test:curriculum": "vitest run packages/curriculum-compiler",

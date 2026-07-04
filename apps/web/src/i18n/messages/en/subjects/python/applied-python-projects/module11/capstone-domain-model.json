@@ -1,0 +1,521 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-11-oop-capstone-project": {
+        "capstone-domain-model": {
+          "label": "Capstone Domain Model",
+          "summary": "Build the task objects that carry the tracker domain before adding storage or reports.",
+          "cards": {
+            "sketch0": {
+              "title": "Planning brief"
+            },
+            "project": {
+              "title": "Smart Task Tracker Domain Model Capstone"
+            }
+          },
+          "projectSteps": {
+            "try_capstone_domain_model_sketch0": {
+              "title": "Create the base task class"
+            },
+            "capstone_domain_model_step1_bug_task": {
+              "title": "Add the BugTask subclass"
+            },
+            "capstone_domain_model_step2_feature_task": {
+              "title": "Add the FeatureTask subclass with validation"
+            },
+            "capstone_domain_model_step3_task_service": {
+              "title": "Create a polymorphic task service"
+            },
+            "capstone_domain_model_step4_package_runner": {
+              "title": "Organize the models package and runner"
+            },
+            "capstone_domain_model_step5_final_domain_demo": {
+              "title": "Finish the domain model handoff demo"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "try_capstone_domain_model_sketch0": {
+                "title": "Create the base task class",
+                "prompt": "Build the first Smart Task Tracker model layer. In `models/base_task.py`, define a `BaseTask` class with `title`, `priority`, and `completed` attributes. New tasks should start with `completed` set to `False`. Add a `mark_done()` method that changes `completed` to `True`. Keep the `summary()` method as an abstract-style base-class contract by raising `NotImplementedError`. In `main.py`, create one `BaseTask` object with title `Draft roadmap` and priority `high`, call `mark_done()`, and print its three attributes on separate lines so you can verify the object state in the output panel.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                },
+                "starterCode": "# main.py\nfrom models.base_task import BaseTask\n\n# Create a BaseTask, mark it done, and print its state.",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# main.py\nfrom models.base_task import BaseTask\n\n# Create a BaseTask, mark it done, and print its state."
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"high\"\n        return \"medium\"\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"planned\"\n        return \"small\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n\nbase = BaseTask(\"Draft roadmap\", \"high\")\nprint(base.title)\nprint(base.priority)\nprint(base.completed)\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"high\"\n        return \"medium\"\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"planned\"\n        return \"small\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionCode": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n\nbase = BaseTask(\"Draft roadmap\", \"high\")\nprint(base.title)\nprint(base.priority)\nprint(base.completed)\n",
+                "checks": {
+                  "0": {
+                    "message": "Define a BaseTask class in models/base_task.py."
+                  },
+                  "1": {
+                    "message": "BaseTask should be constructible with title and priority."
+                  },
+                  "2": {
+                    "message": "BaseTask instances should store title, priority, and completed."
+                  },
+                  "3": {
+                    "message": "main.py should print the task state on three lines."
+                  }
+                }
+              },
+              "capstone_domain_model_step1_bug_task": {
+                "title": "Add the BugTask subclass",
+                "prompt": "Build on the last working Smart Task Tracker snapshot. Keep the existing `BaseTask` class, then add `models/bug_task.py` with a `BugTask` subclass. It should inherit from `BaseTask`, call `super().__init__(title, priority)`, store a `severity` attribute, and override `summary()` to return exactly `BUG: <title> | priority=<priority> | severity=<severity> | done=<completed>`. In `main.py`, create a bug task for `Fix login redirect`, priority `high`, severity `critical`, and print its summary before and after calling `mark_done()`.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n\nbase = BaseTask(\"Draft roadmap\", \"high\")\nprint(base.title)\nprint(base.priority)\nprint(base.completed)\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n\nbase = BaseTask(\"Draft roadmap\", \"high\")\nprint(base.title)\nprint(base.priority)\nprint(base.completed)\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"high\"\n        return \"medium\"\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"planned\"\n        return \"small\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, severity):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.severity = severity\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"planned\"\n        return \"small\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionCode": "class BugTask:\n    def __init__(self, title, priority, severity):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.severity = severity\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())\n",
+                "checks": {
+                  "0": {
+                    "message": "Define a BugTask class in models/bug_task.py."
+                  },
+                  "1": {
+                    "message": "BugTask should accept title, priority, and severity."
+                  },
+                  "2": {
+                    "message": "BugTask should keep inherited attributes plus severity."
+                  },
+                  "3": {
+                    "message": "BugTask.summary() should use the required bug summary format."
+                  },
+                  "4": {
+                    "message": "After mark_done(), the summary should show done=True."
+                  },
+                  "5": {
+                    "message": "main.py should print the bug summary before and after completion."
+                  }
+                }
+              },
+              "capstone_domain_model_step2_feature_task": {
+                "title": "Add the FeatureTask subclass with validation",
+                "prompt": "Build on the last working Smart Task Tracker snapshot. Add `models/feature_task.py` with a `FeatureTask` subclass that inherits from `BaseTask`. It should accept `title`, `priority`, and `estimate_points`. Use `super()` for the shared fields. Add validation so `estimate_points` cannot be less than 1; if it is, store `1` instead. Override `summary()` to return exactly `FEATURE: <title> | priority=<priority> | points=<estimate_points> | done=<completed>`. In `main.py`, create one feature task with title `Add dark mode`, priority `medium`, and estimate points `0`, then print its summary. This step matters because the capstone needs encapsulated object rules, not unchecked raw data.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "class BugTask:\n    def __init__(self, title, priority, severity):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.severity = severity\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, severity):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.severity = severity\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"planned\"\n        return \"small\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, estimate_points):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.estimate_points = estimate_points if estimate_points >= 1 else 1\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionCode": "class FeatureTask:\n    def __init__(self, title, priority, estimate_points):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.estimate_points = estimate_points if estimate_points >= 1 else 1\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())\n",
+                "checks": {
+                  "0": {
+                    "message": "Define a FeatureTask class in models/feature_task.py."
+                  },
+                  "1": {
+                    "message": "FeatureTask should accept title, priority, and estimate_points."
+                  },
+                  "2": {
+                    "message": "FeatureTask should keep inherited attributes plus estimate_points."
+                  },
+                  "3": {
+                    "message": "estimate_points should be validated to at least 1."
+                  },
+                  "4": {
+                    "message": "FeatureTask.summary() should show the validated points value."
+                  },
+                  "5": {
+                    "message": "main.py should print the feature summary."
+                  }
+                }
+              },
+              "capstone_domain_model_step3_task_service": {
+                "title": "Create a polymorphic task service",
+                "prompt": "Build on the full workspace from the last working step. Add `services/task_service.py` with a function named `build_report_lines(tasks)` that returns a list of summary strings for every task in order. The function must work with a mixed list of `BugTask` and `FeatureTask` objects by calling each object's `summary()` method. Do not hard-code separate formatting in the service. In `main.py`, create one bug task (`Fix login redirect`, `high`, `critical`) and one feature task (`Add dark mode`, `medium`, `3`), put them in a list, call `build_report_lines(tasks)`, and print each returned line. This step demonstrates polymorphism in the capstone architecture.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "class FeatureTask:\n    def __init__(self, title, priority, estimate_points):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.estimate_points = estimate_points if estimate_points >= 1 else 1\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, estimate_points):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.estimate_points = estimate_points if estimate_points >= 1 else 1\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 3)\n\ntasks = [bug, feature]\nlines = build_report_lines(tasks)\n\nfor line in lines:\n    print(line)"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(value):\n    return [\"BUG: Fix login redirect | priority=high | severity=critical | done=False\", \"FEATURE: Add dark mode | priority=medium | points=3 | done=False\"]"
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionCode": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 3)\n\ntasks = [bug, feature]\nlines = build_report_lines(tasks)\n\nfor line in lines:\n    print(line)",
+                "checks": {
+                  "0": {
+                    "message": "build_report_lines() should return summary strings in order for mixed task objects."
+                  },
+                  "1": {
+                    "message": "main.py should print both report lines."
+                  }
+                }
+              },
+              "capstone_domain_model_step4_package_runner": {
+                "title": "Organize the models package and runner",
+                "prompt": "Build on the full workspace from the last working step. Add `models/__init__.py` so other files can import `BaseTask`, `BugTask`, and `FeatureTask` from the `models` package directly. Update `main.py` to use package imports instead of importing each model from its individual file. Then create three tasks: a bug task for `Fix login redirect`, a feature task for `Add dark mode`, and a feature task for `Export CSV`. Mark only the bug task as done. Use `build_report_lines(tasks)` and print the lines. This step improves the capstone architecture by making imports cleaner across workspace files.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 3)\n\ntasks = [bug, feature]\nlines = build_report_lines(tasks)\n\nfor line in lines:\n    print(line)",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 3)\n\ntasks = [bug, feature]\nlines = build_report_lines(tasks)\n\nfor line in lines:\n    print(line)"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(value):\n    return [\"BUG: Fix login redirect | priority=high | severity=critical | done=False\", \"FEATURE: Add dark mode | priority=medium | points=3 | done=False\"]"
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, severity):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.severity = severity\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n\n\nclass FeatureTask:\n    def __init__(self, title, priority, estimate_points):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.estimate_points = estimate_points if estimate_points >= 1 else 1\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature_a = FeatureTask(\"Export CSV\", \"low\", 5)\nfeature_b = FeatureTask(\"Add dark mode\", \"medium\", 1)\nprint(bug.summary())\nprint(feature_a.summary())\nbug.mark_done()\nprint(bug.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(value):\n    return [\"BUG: Fix login redirect | priority=high | severity=critical | done=False\", \"FEATURE: Add dark mode | priority=medium | points=3 | done=False\"]"
+                  },
+                  "models_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, value_3):\n        pass\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.value_3} | done=False\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionCode": "class BugTask:\n    def __init__(self, title, priority, severity):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.severity = severity\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n\n\nclass FeatureTask:\n    def __init__(self, title, priority, estimate_points):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.estimate_points = estimate_points if estimate_points >= 1 else 1\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature_a = FeatureTask(\"Export CSV\", \"low\", 5)\nfeature_b = FeatureTask(\"Add dark mode\", \"medium\", 1)\nprint(bug.summary())\nprint(feature_a.summary())\nbug.mark_done()\nprint(bug.summary())\n",
+                "checks": {
+                  "0": {
+                    "message": "BugTask should still be importable through the models package."
+                  },
+                  "1": {
+                    "message": "FeatureTask should still be importable through the models package."
+                  },
+                  "2": {
+                    "message": "main.py should create two FeatureTask objects."
+                  },
+                  "3": {
+                    "message": "The bug task summary should reflect the completed state after mark_done()."
+                  },
+                  "4": {
+                    "message": "main.py should print three report lines."
+                  }
+                }
+              },
+              "capstone_domain_model_step5_final_domain_demo": {
+                "title": "Finish the domain model handoff demo",
+                "prompt": "Finish from the previous working step. Finish this topic with a polished domain-model demo that carries forward the full workspace. Add a new method `is_open()` to `BaseTask` that returns `True` when a task is not completed and `False` when it is completed. Keep the subclasses working without duplicating that logic. Update `services/task_service.py` with a function named `count_open_tasks(tasks)` that returns how many tasks are still open. In `main.py`, create four tasks: bug `Fix login redirect` (`high`, `critical`), bug `Resolve crash on save` (`high`, `major`), feature `Add dark mode` (`medium`, `3`), and feature `Export CSV` (`low`, `5`). Mark the first bug and the export feature as done. Print all report lines, then print one final line exactly as `Open tasks: <count>`. This is the final handoff for the topic because it shows abstraction, inheritance, encapsulation, and polymorphism working together in one mini app.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "class BugTask:\n    def __init__(self, title, priority, severity):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.severity = severity\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n\n\nclass FeatureTask:\n    def __init__(self, title, priority, estimate_points):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.estimate_points = estimate_points if estimate_points >= 1 else 1\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature_a = FeatureTask(\"Export CSV\", \"low\", 5)\nfeature_b = FeatureTask(\"Add dark mode\", \"medium\", 1)\nprint(bug.summary())\nprint(feature_a.summary())\nbug.mark_done()\nprint(bug.summary())\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, severity):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.severity = severity\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n\n\nclass FeatureTask:\n    def __init__(self, title, priority, estimate_points):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n        self.estimate_points = estimate_points if estimate_points >= 1 else 1\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature_a = FeatureTask(\"Export CSV\", \"low\", 5)\nfeature_b = FeatureTask(\"Add dark mode\", \"medium\", 1)\nprint(bug.summary())\nprint(feature_a.summary())\nbug.mark_done()\nprint(bug.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(value):\n    return [\"BUG: Fix login redirect | priority=high | severity=critical | done=False\", \"FEATURE: Add dark mode | priority=medium | points=3 | done=False\"]"
+                  },
+                  "models_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, value_3):\n        pass\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.value_3} | done=False\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BaseTask:\n    def __init__(self, title, priority, completed=False):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n\n    def mark_done(self):\n        self.completed = True\n\n    def is_open(self):\n        return not self.completed\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = estimate_points\n\n\ndef count_open_tasks(tasks):\n    return sum(1 for task in tasks if not get_field(task, 'completed'))\n\nfor line in ['a', 'b', 'c', 'd', 'e']:\n    print(line)\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        pass\n\n    def is_open(self):\n        return True"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  },
+                  "services_task_service_py": {
+                    "content": "def count_open_tasks(value):\n    return 2"
+                  },
+                  "models_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, value_3):\n        pass\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.value_3} | done=False\""
+                  },
+                  "services_report_service_py": {
+                    "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]"
+                  },
+                  "services_storage_service_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  }
+                },
+                "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BaseTask:\n    def __init__(self, title, priority, completed=False):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n\n    def mark_done(self):\n        self.completed = True\n\n    def is_open(self):\n        return not self.completed\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = estimate_points\n\n\ndef count_open_tasks(tasks):\n    return sum(1 for task in tasks if not get_field(task, 'completed'))\n\nfor line in ['a', 'b', 'c', 'd', 'e']:\n    print(line)\n",
+                "checks": {
+                  "0": {
+                    "message": "A new BaseTask should report that it is open."
+                  },
+                  "1": {
+                    "message": "After mark_done(), is_open() should return False."
+                  },
+                  "2": {
+                    "message": "count_open_tasks() should count unfinished tasks in a mixed task list."
+                  },
+                  "3": {
+                    "message": "main.py should print four summaries and one final open-task count line."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-11-oop-capstone-project": {
+        "capstone-domain-model": {
+          "capstone-domain-model-sketch-0": {
+            "title": "Capstone domain model: make the objects carry the app idea",
+            "bodyMarkdown": "A capstone app needs domain objects that mean something.\n\nIn a recipe planner, you might have a base `RecipeItem` and specialized items like `MealPrepTask` or `ShoppingTask`. Each object stores its own state and knows how to summarize itself.\n\nThe Smart Task Tracker applies the same idea to product-team work. A task has a title, status, points, and a summary. Subclasses can represent different kinds of work while sharing the same interface.\n\nBuild the model slowly: base class first, subclasses second, service layer only after the objects are clear."
+          }
+        }
+      }
+    }
+  }
+}

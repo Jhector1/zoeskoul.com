@@ -305,11 +305,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -318,11 +318,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -342,7 +342,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-checkpoint.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -364,7 +364,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -374,7 +374,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -388,11 +388,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-1",
       "language": "python",
-      "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -401,11 +401,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -425,7 +425,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_name(name):\n    return name.strip().title()",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-1.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -458,7 +458,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(name):\n    return name.strip().title()",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -468,7 +468,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_name(name):\n    return name.strip().title()",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -482,11 +482,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-2",
       "language": "python",
-      "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -495,11 +495,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -519,7 +519,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-2.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -564,7 +564,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -574,7 +574,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -588,11 +588,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-3",
       "language": "python",
-      "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-3.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-3.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -601,11 +601,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-3.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -625,7 +625,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-3.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -686,7 +686,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-3.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -696,7 +696,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.ci-3.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -710,11 +710,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0",
       "language": "python",
-      "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -723,7 +723,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -732,11 +732,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -756,7 +756,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -778,7 +778,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -793,11 +793,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1",
       "language": "python",
-      "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -806,7 +806,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -815,11 +815,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -839,7 +839,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -861,7 +861,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -876,11 +876,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2",
       "language": "python",
-      "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -889,7 +889,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -898,11 +898,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -928,11 +928,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -942,7 +942,7 @@
           {
             "type": "uses_call",
             "functionName": "clean",
-            "message": "Use clean(name) inside badge instead of hard-coding one example."
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
           }
         ],
         "semanticChecks": [
@@ -970,7 +970,7 @@
         {
           "type": "uses_call",
           "functionName": "clean",
-          "message": "Use clean(name) inside badge instead of hard-coding one example."
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.decomposition-and-refactoring.quiz.try-decomposition-and-refactoring-sketch2.sourceChecks.0.message"
         }
       ]
     }

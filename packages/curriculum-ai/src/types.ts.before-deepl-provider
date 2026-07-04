@@ -1,0 +1,115 @@
+import type {
+  NormalizedCoursePlan,
+  TopicAuthoringDraft,
+} from "@zoeskoul/curriculum-contracts";
+
+export type GenerateJsonArgs = {
+  system: string;
+  user: string;
+  schemaName:
+      | "CoursePlan"
+      | "NormalizedPlanRepair"
+      | "TopicAuthoringDraft"
+      | "TranslatedEntries";
+};
+
+export type AiProviderId = "openai" | "gemini" | "claude" | "deepseek";
+
+export type AiModelPurpose =
+  | "cheap"
+  | "balanced"
+  | "quality"
+  | "reasoning"
+  | "legacy";
+
+export type AiModelOption = {
+  id: string;
+  label: string;
+  purpose?: AiModelPurpose;
+  recommendedForTranslation?: boolean;
+  deprecated?: boolean;
+};
+
+export type AiProviderCatalogEntry = {
+  id: AiProviderId;
+  label: string;
+  apiKeyEnv: string;
+  modelEnv: string;
+  defaultModel: string;
+  models: AiModelOption[];
+};
+
+export type GeneratedJsonMetadata = {
+  provider: string;
+  model: string;
+  temperature: number;
+  seed?: number;
+  schemaName: GenerateJsonArgs["schemaName"];
+  strictSchema: boolean;
+};
+
+export type GeneratedJsonResult<T> = GeneratedJsonMetadata & {
+  rawText: string;
+  parsedJson: unknown;
+  value: T;
+};
+
+export class GeneratedJsonError extends Error {
+  readonly code: string;
+  readonly metadata: GeneratedJsonMetadata;
+  readonly rawText?: string;
+  readonly parsedJson?: unknown;
+  readonly validationErrors?: string[];
+
+  constructor(args: {
+    code: string;
+    message: string;
+    metadata: GeneratedJsonMetadata;
+    rawText?: string;
+    parsedJson?: unknown;
+    validationErrors?: string[];
+    cause?: unknown;
+  }) {
+    super(args.message);
+    this.name = "GeneratedJsonError";
+    this.code = args.code;
+    this.metadata = args.metadata;
+    this.rawText = args.rawText;
+    this.parsedJson = args.parsedJson;
+    this.validationErrors = args.validationErrors;
+    if (args.cause !== undefined) {
+      (this as Error & { cause?: unknown }).cause = args.cause;
+    }
+  }
+}
+
+export type PlanRepairDraft = {
+  repairedPlan: NormalizedCoursePlan;
+  warnings: string[];
+};
+
+export type TranslatedEntries = {
+  entries: Array<{
+    key: string;
+    value: string;
+  }>;
+};
+
+export type AiProvider = {
+  providerId?: AiProviderId;
+  model?: string;
+  generateJson<T>(args: GenerateJsonArgs): Promise<T>;
+  generateJsonDetailed?<T>(args: GenerateJsonArgs): Promise<GeneratedJsonResult<T>>;
+};
+
+export type TopicRetryContext = {
+  attempt: number;
+  maxRetries: number;
+  previousErrorCode: string;
+  previousErrorMessage: string;
+  qualityIssues?: Array<{
+    code: string;
+    exerciseId?: string;
+    message: string;
+  }>;
+};

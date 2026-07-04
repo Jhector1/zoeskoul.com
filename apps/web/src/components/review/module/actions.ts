@@ -14,6 +14,12 @@ type RuntimeStateRecord = {
     exercises?: Record<string, { cardId?: string }>;
     cards?: Record<string, { cardId?: string }>;
 };
+
+export type QuizResetTarget = {
+    progressId: string;
+    runtimeCardId?: string;
+    cardProgressKeys?: string[];
+};
 type ExtendedTopicProgress = ReviewTopicProgress & {
     runtimeStateV2?: RuntimeStateRecord;
     toolState?: Record<string, unknown>;
@@ -95,23 +101,42 @@ export function buildResetModuleProgress(
         moduleCompletedAt: undefined,
     };
 }
+function cardIdFromRuntimeKey(key: string) {
+    const parts = String(key ?? "").split(":").filter(Boolean);
+    return parts[4] ?? "";
+}
+
+function runtimeRecordMatchesCard(
+    key: string,
+    value: { cardId?: string } | undefined,
+    runtimeCardId: string,
+) {
+    const cardId = String(runtimeCardId ?? "").trim();
+    if (!cardId) return false;
+
+    return (
+        String(value?.cardId ?? "").trim() === cardId ||
+        cardIdFromRuntimeKey(key) === cardId
+    );
+}
+
 function dropRuntimeForQuizCard(
     topicState: ExtendedTopicProgress,
-    quizCardId: string,
+    runtimeCardId: string,
 ) {
     const runtime = topicState?.runtimeStateV2;
     if (!runtime) return topicState;
     const runtimeRecord = runtime as RuntimeStateRecord;
 
     const nextExercises = Object.fromEntries(
-        Object.entries(runtimeRecord.exercises ?? {}).filter(([, value]) => {
-            return String(value?.cardId ?? "") !== quizCardId;
+        Object.entries(runtimeRecord.exercises ?? {}).filter(([key, value]) => {
+            return !runtimeRecordMatchesCard(key, value, runtimeCardId);
         }),
     );
 
     const nextCards = Object.fromEntries(
-        Object.entries(runtimeRecord.cards ?? {}).filter(([, value]) => {
-            return String(value?.cardId ?? "") !== quizCardId;
+        Object.entries(runtimeRecord.cards ?? {}).filter(([key, value]) => {
+            return !runtimeRecordMatchesCard(key, value, runtimeCardId);
         }),
     );
 
@@ -122,6 +147,31 @@ function dropRuntimeForQuizCard(
             exercises: nextExercises,
             cards: nextCards,
         },
+    };
+}
+
+function dropTopicStateForCard(
+    topicState: ExtendedTopicProgress,
+    runtimeCardId: string,
+) {
+    const nextSketchState = Object.fromEntries(
+        Object.entries(topicState.sketchState ?? {}).filter(([key]) => key !== runtimeCardId),
+    );
+
+    const nextToolState = Object.fromEntries(
+        Object.entries(topicState.toolState ?? {}).filter(([key]) => {
+            if (key === runtimeCardId) return false;
+            if (key === `card:${runtimeCardId}`) return false;
+            if (key.endsWith(`:${runtimeCardId}:general`)) return false;
+            if (key.endsWith(`:${runtimeCardId}`)) return false;
+            return true;
+        }),
+    );
+
+    return {
+        ...topicState,
+        sketchState: nextSketchState,
+        toolState: nextToolState,
     };
 }
 
@@ -252,25 +302,54 @@ export function buildQuizStateProgress(
 export function buildQuizResetProgress(
     progress: ReviewProgressState,
     viewTid: string,
-    quizCardId: string,
+    target: string | QuizResetTarget,
 ) {
+    const normalizedTarget: QuizResetTarget =
+        typeof target === "string"
+            ? {
+                  progressId: target,
+                  runtimeCardId: target,
+                  cardProgressKeys: [target],
+              }
+            : {
+                  progressId: target.progressId,
+                  runtimeCardId: target.runtimeCardId ?? target.progressId,
+                  cardProgressKeys:
+                      target.cardProgressKeys && target.cardProgressKeys.length > 0
+                          ? target.cardProgressKeys
+                          : [target.runtimeCardId ?? target.progressId],
+              };
     const tp0 = getTopicProgress(progress, viewTid);
     const nextQuizState = { ...(tp0.quizState ?? {}) };
-    delete nextQuizState[quizCardId];
+    delete nextQuizState[normalizedTarget.progressId];
 
     const nextQuizzesDone = { ...(tp0.quizzesDone ?? {}) };
-    delete nextQuizzesDone[quizCardId];
+    delete nextQuizzesDone[normalizedTarget.progressId];
 
-    const nextTopic = dropRuntimeForQuizCard(
+    const nextReadingDone = { ...(tp0.readingDone ?? {}) };
+    const nextCardsDone = { ...(tp0.cardsDone ?? {}) };
+
+    for (const key of normalizedTarget.cardProgressKeys ?? []) {
+        delete nextReadingDone[key];
+        delete nextCardsDone[key];
+    }
+
+    const nextTopicBase = dropRuntimeForQuizCard(
         {
             ...tp0,
             quizVersion: (tp0.quizVersion ?? 0) + 1,
+            readingDone: nextReadingDone,
+            cardsDone: nextCardsDone,
             quizState: nextQuizState,
             quizzesDone: nextQuizzesDone,
             completed: false,
             completedAt: undefined,
         },
-        quizCardId,
+        normalizedTarget.runtimeCardId ?? normalizedTarget.progressId,
+    );
+    const nextTopic = dropTopicStateForCard(
+        nextTopicBase,
+        normalizedTarget.runtimeCardId ?? normalizedTarget.progressId,
     );
 
     return {

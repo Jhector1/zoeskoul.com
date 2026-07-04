@@ -1,0 +1,355 @@
+{
+  "topicId": "testing-inheritance-and-polymorphism",
+  "repairs": [
+    {
+      "code": "PYTHON_OOP_FIXED_TESTS_CONVERTED_TO_SEMANTIC",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-testing-inheritance-and-polymorphism-sketch0",
+      "message": "Converted an OOP/class multifile fixed_tests exercise into semantic checks so the critique gate validates structure instead of one stdout fixture."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-testing-inheritance-and-polymorphism-sketch0",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "try-testing-inheritance-and-polymorphism-sketch0",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_single_choice_1",
+      "message": "Added a fallback single_choice exercise to satisfy the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_multi_choice_1",
+      "message": "Added a fallback multi_choice exercise to satisfy the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_2",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_3",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_4",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_5",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_6",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_7",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_8",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_9",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_10",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_11",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_12",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_multi_choice_13",
+      "message": "Skipped a duplicate synthesized multi_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_drag_reorder_1",
+      "message": "Added a fallback drag_reorder exercise to satisfy the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_fill_blank_choice_1",
+      "message": "Added a fallback fill_blank_choice exercise to satisfy the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_2",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_3",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_4",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_5",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_6",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_7",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_8",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_9",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_10",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_11",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_12",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_fill_blank_choice_13",
+      "message": "Skipped a duplicate synthesized fill_blank_choice exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_1",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_2",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXERCISE_SYNTHESIZED",
+      "category": "other",
+      "severity": "medium",
+      "field": "policy_code_input_3",
+      "message": "Added a fallback code_input exercise to satisfy the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_4",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_5",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_6",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_7",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_8",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_9",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_10",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_11",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_12",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_13",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_14",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_15",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_16",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_DUPLICATE_POLICY_CODE_INPUT_SKIPPED",
+      "category": "other",
+      "severity": "low",
+      "field": "policy_code_input_17",
+      "message": "Skipped a duplicate synthesized code_input exercise while satisfying the planned exercise mix for \"testing-inheritance-and-polymorphism\"."
+    },
+    {
+      "code": "PYTHON_FORBIDDEN_WORKSPACE_TERM_REPLACED",
+      "category": "text",
+      "severity": "medium",
+      "field": "policy_single_choice_1.help.hint_1",
+      "message": "Replaced forbidden Python browser-workspace wording with allowed learner-facing workspace language."
+    },
+    {
+      "code": "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+      "category": "other",
+      "severity": "medium",
+      "field": "sketchBlocks",
+      "message": "Added a Try it yourself learner action required by programming teaching validation."
+    }
+  ]
+}

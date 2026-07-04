@@ -1,0 +1,1195 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import {
+  openAiProvider,
+  translateMessages,
+} from "../packages/curriculum-ai/dist/index.js";
+import { buildTranslationPrompt } from "../packages/curriculum-ai/dist/prompts/buildTranslationPrompt.js";
+import {
+  finishProgressBar,
+  renderProgressBar,
+} from "../packages/curriculum-cli/dist/utils/renderProgressBar.js";
+import { resolveAuthoringCompileTarget } from "../packages/curriculum-compiler/dist/index.js";
+import { getSubjectShape } from "../packages/curriculum-profiles/dist/shapes/index.js";
+
+
+/* Provider-first translation AI selection injected by fix_translation_provider_prompt_first_v2.py. */
+const __ZS_AI_CATALOG = {
+  openai: {
+    label: "OpenAI",
+    modelEnv: "OPENAI_MODEL",
+    models: ["gpt-5-mini", "gpt-5.4-mini", "gpt-5.4-nano", "gpt-4o-mini", "gpt-4o", "gpt-5.5"],
+  },
+  gemini: {
+    label: "Gemini",
+    modelEnv: "GEMINI_MODEL",
+    models: ["gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.5-pro"],
+  },
+  claude: {
+    label: "Claude",
+    modelEnv: "CLAUDE_MODEL",
+    models: ["claude-haiku-4-5", "claude-sonnet-5", "claude-opus-4-8", "claude-fable-5"],
+  },
+  deepseek: {
+    label: "DeepSeek",
+    modelEnv: "DEEPSEEK_MODEL",
+    models: ["deepseek-v4-flash", "deepseek-v4-pro", "deepseek-chat", "deepseek-reasoner"],
+  },
+};
+
+function __zsReadFlag(args, name) {
+  const index = args.indexOf(name);
+  if (index < 0) return undefined;
+  const value = args[index + 1]?.trim();
+  if (!value || value.startsWith("--")) {
+    throw new Error(`${name} requires a value`);
+  }
+  return value;
+}
+
+function __zsNormalizeProvider(value) {
+  const id = String(value || "").trim().toLowerCase();
+  return Object.prototype.hasOwnProperty.call(__ZS_AI_CATALOG, id) ? id : undefined;
+}
+
+function __zsPrintAiModelCatalog() {
+  console.log("");
+  console.log("AI providers and models:");
+  for (const [id, entry] of Object.entries(__ZS_AI_CATALOG)) {
+    console.log("");
+    console.log(`${entry.label} (${id})`);
+    for (const model of entry.models) {
+      console.log(`  - ${model}`);
+    }
+  }
+  console.log("");
+}
+
+async function __zsAskChoice({ title, choices, customModel }) {
+  if (!process.stdin.isTTY) {
+    throw new Error(`${title} requires --provider/--model flags or env vars because stdin is not interactive.`);
+  }
+
+  const readline = await import("node:readline/promises");
+  const processModule = await import("node:process");
+
+  console.log("");
+  console.log(title);
+  console.log("");
+
+  choices.forEach((choice, index) => {
+    console.log(`${index + 1}. ${choice.label}${choice.detail ? ` - ${choice.detail}` : ""}`);
+  });
+
+  const customIndex = customModel ? choices.length + 1 : null;
+  if (customIndex !== null) {
+    console.log(`${customIndex}. custom model id`);
+  }
+
+  console.log("");
+
+  const rl = readline.createInterface({
+    input: processModule.stdin,
+    output: processModule.stdout,
+  });
+
+  try {
+    while (true) {
+      const answer = await rl.question("Choose number: ");
+      const index = Number(answer.trim()) - 1;
+
+      if (Number.isInteger(index) && index >= 0 && index < choices.length) {
+        return choices[index].id;
+      }
+
+      if (customIndex !== null && index === customIndex - 1) {
+        const custom = await rl.question("Enter custom model id: ");
+        if (custom.trim()) return custom.trim();
+      }
+
+      console.log("Invalid choice. Please choose a number from the list.");
+    }
+  } finally {
+    rl.close();
+  }
+}
+
+async function __zsResolveTranslationAi(args) {
+  if (args.includes("--list-ai-models")) {
+    __zsPrintAiModelCatalog();
+    process.exit(0);
+  }
+
+  const provider =
+    __zsNormalizeProvider(__zsReadFlag(args, "--translation-provider")) ||
+    __zsNormalizeProvider(__zsReadFlag(args, "--provider")) ||
+    __zsNormalizeProvider(process.env.TRANSLATION_PROVIDER) ||
+    __zsNormalizeProvider(process.env.AI_PROVIDER) ||
+    await __zsAskChoice({
+      title: "Select translation AI provider:",
+      choices: Object.entries(__ZS_AI_CATALOG).map(([id, entry]) => ({
+        id,
+        label: entry.label,
+        detail: id,
+      })),
+    });
+
+  const entry = __ZS_AI_CATALOG[provider];
+
+  const model =
+    __zsReadFlag(args, "--translation-model") ||
+    __zsReadFlag(args, "--model") ||
+    process.env.TRANSLATION_MODEL?.trim() ||
+    process.env[entry.modelEnv]?.trim() ||
+    process.env.AI_MODEL?.trim() ||
+    await __zsAskChoice({
+      title: `Select ${entry.label} translation model:`,
+      choices: entry.models.map((model) => ({ id: model, label: model })),
+      customModel: true,
+    });
+
+  process.env.TRANSLATION_PROVIDER = provider;
+  process.env.TRANSLATION_MODEL = model;
+  process.env.AI_PROVIDER = process.env.AI_PROVIDER || provider;
+  process.env.AI_MODEL = process.env.AI_MODEL || model;
+  process.env[entry.modelEnv] = model;
+
+  if (provider === "openai") {
+    process.env.OPENAI_MODEL = model;
+  }
+
+  console.log("");
+  console.log("Translation AI:");
+  console.log(`  provider: ${provider}`);
+  console.log(`  model: ${model}`);
+  console.log("");
+
+  return { provider, model };
+}
+
+const SOURCE_LOCALE = "en";
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const PROTECTED_NULL = null;
+const MAX_TRANSLATION_ATTEMPTS = 3;
+
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function encodePathSegment(segment) {
+  return segment.replace(/~/g, "~0").replace(/\//g, "~1");
+}
+
+function pathToPointer(parts) {
+  return `/${parts.map(encodePathSegment).join("/")}`;
+}
+
+function rejectUnknownFlags(args, allowedFlags) {
+  for (const arg of args) {
+    if (arg.startsWith("--") && !allowedFlags.has(arg)) {
+      throw new Error(`Unknown option: ${arg}`);
+    }
+  }
+}
+
+function readFlagValue(args, flagName) {
+  const index = args.indexOf(flagName);
+  const value = index >= 0 ? args[index + 1] : undefined;
+
+  if (index >= 0 && (!value || value.startsWith("--"))) {
+    throw new Error(`${flagName} requires a value`);
+  }
+
+  return value;
+}
+
+function parseLocaleList(rawLocaleValue) {
+  const locales = rawLocaleValue
+    .split(",")
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  if (locales.length === 0) {
+    throw new Error("--locale must include at least one locale");
+  }
+
+  const uniqueLocales = [...new Set(locales)];
+  return uniqueLocales;
+}
+
+function parseArgs(argv) {
+  const normalizedArgv = [
+    argv[0],
+    argv[1],
+    ...argv.slice(2).filter((arg) => arg !== "--"),
+  ];
+
+  rejectUnknownFlags(
+    normalizedArgv.slice(2),
+    new Set([
+      "--locale",
+      "--only-missing",
+      "--topic",
+      "--module",
+      "--model",
+      "--no-progress",
+      "--unsafe-skip-validation",
+    ]),
+  );
+
+  const args = normalizedArgv.slice(2);
+  const positionals = [];
+
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (arg === "--only-missing") continue;
+    if (
+      arg === "--locale" ||
+      arg === "--topic" ||
+      arg === "--module" ||
+      arg === "--model"
+    ) {
+      index += 1;
+      continue;
+    }
+    if (arg.startsWith("--")) continue;
+    positionals.push(arg);
+  }
+
+  const [subjectSlug, courseSlug] = positionals;
+
+  if (!subjectSlug || !courseSlug) {
+    throw new Error(
+      "Usage: pnpm curr:translate -- <subjectSlug> <courseSlug> --locale <locale[,locale...]> [--only-missing] [--topic <topicId>] [--module <moduleDir>] [--model <model>] [--no-progress] [--unsafe-skip-validation]",
+    );
+  }
+
+  const localeValue = readFlagValue(normalizedArgv, "--locale");
+  if (!localeValue) {
+    throw new Error("--locale is required");
+  }
+
+  return {
+    subjectSlug,
+    courseSlug,
+    locales: parseLocaleList(localeValue),
+    onlyMissing: normalizedArgv.includes("--only-missing"),
+    topicId: readFlagValue(normalizedArgv, "--topic"),
+    moduleDir: readFlagValue(normalizedArgv, "--module"),
+    model: readFlagValue(normalizedArgv, "--model"),
+    showProgress: !normalizedArgv.includes("--no-progress"),
+    validation: {
+      unsafeSkipValidation: normalizedArgv.includes("--unsafe-skip-validation"),
+    },
+  };
+}
+
+function requireEnv(name) {
+  const value = process.env[name];
+  if (!value || !value.trim()) {
+    throw new Error(`Missing ${name}`);
+  }
+}
+
+async function ensureModelSelection(modelOverride) {
+  if (modelOverride?.trim()) {
+    process.env.OPENAI_MODEL = modelOverride.trim();
+    console.log(`Using model from --model: ${process.env.OPENAI_MODEL}`);
+    return process.env.OPENAI_MODEL;
+  }
+
+  return selectModelFromConsole();
+}
+
+async function pathExists(filePath) {
+  try {
+    await fs.access(filePath);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function readJson(filePath) {
+  return JSON.parse(await fs.readFile(filePath, "utf8"));
+}
+
+async function writeJson(filePath, value) {
+  await fs.mkdir(path.dirname(filePath), { recursive: true });
+  await fs.writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
+}
+
+async function listJsonFiles(rootDir) {
+  const entries = await fs.readdir(rootDir, { withFileTypes: true });
+  const files = [];
+
+  for (const entry of entries) {
+    const fullPath = path.join(rootDir, entry.name);
+    if (entry.isDirectory()) {
+      files.push(...(await listJsonFiles(fullPath)));
+      continue;
+    }
+
+    if (!entry.isFile()) continue;
+    if (!entry.name.endsWith(".json")) continue;
+    if (entry.name === "topic.bundle.json") continue;
+    if (entry.name.endsWith(".manifest.json")) continue;
+    files.push(fullPath);
+  }
+
+  return files.sort();
+}
+
+function flattenKeyPaths(value, parts = [], output = new Set()) {
+  if (Array.isArray(value)) {
+    output.add(pathToPointer(parts));
+    value.forEach((item, index) => flattenKeyPaths(item, [...parts, String(index)], output));
+    return output;
+  }
+
+  if (isPlainObject(value)) {
+    output.add(pathToPointer(parts));
+    for (const [key, child] of Object.entries(value)) {
+      flattenKeyPaths(child, [...parts, key], output);
+    }
+    return output;
+  }
+
+  output.add(pathToPointer(parts));
+  return output;
+}
+
+function collectStringEntries(value, parts = [], output = []) {
+  if (typeof value === "string") {
+    output.push({
+      path: parts,
+      pointer: pathToPointer(parts),
+      value,
+    });
+    return output;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => collectStringEntries(item, [...parts, String(index)], output));
+    return output;
+  }
+
+  if (isPlainObject(value)) {
+    for (const [key, child] of Object.entries(value)) {
+      collectStringEntries(child, [...parts, key], output);
+    }
+  }
+
+  return output;
+}
+
+function collectTranslatableEntries(value) {
+  return collectStringEntries(value)
+    .filter((entry) => entry.value.trim())
+    .map((entry) => ({
+      key: entry.pointer,
+      value: entry.value,
+    }));
+}
+
+function hasPath(value, parts) {
+  let current = value;
+  for (const part of parts) {
+    if (Array.isArray(current)) {
+      const index = Number(part);
+      if (!Number.isInteger(index) || index < 0 || index >= current.length) {
+        return false;
+      }
+      current = current[index];
+      continue;
+    }
+
+    if (!isPlainObject(current) || !Object.prototype.hasOwnProperty.call(current, part)) {
+      return false;
+    }
+
+    current = current[part];
+  }
+
+  return true;
+}
+
+function getAtPath(value, parts) {
+  let current = value;
+  for (const part of parts) {
+    current = Array.isArray(current) ? current[Number(part)] : current?.[part];
+  }
+  return current;
+}
+
+function setAtPath(root, parts, value) {
+  if (parts.length === 0) return value;
+
+  let current = root;
+  for (let index = 0; index < parts.length; index += 1) {
+    const segment = parts[index];
+    const isLast = index === parts.length - 1;
+
+    if (Array.isArray(current)) {
+      const numericIndex = Number(segment);
+      if (isLast) {
+        current[numericIndex] = value;
+      } else {
+        current = current[numericIndex];
+      }
+      continue;
+    }
+
+    if (isLast) {
+      current[segment] = value;
+    } else {
+      current = current[segment];
+    }
+  }
+
+  return root;
+}
+
+function pointerToPath(pointer) {
+  if (!pointer || pointer === "/") return [];
+
+  return pointer
+    .slice(1)
+    .split("/")
+    .map((segment) => segment.replace(/~1/g, "/").replace(/~0/g, "~"));
+}
+
+function cloneJson(value) {
+  return structuredClone(value);
+}
+
+function isProtectedCodePath(parts) {
+  if (parts.includes("starterCode") || parts.includes("solutionCode")) {
+    return true;
+  }
+
+  const contentIndex = parts.lastIndexOf("content");
+  if (contentIndex < 0) return false;
+
+  return parts.includes("starterFiles") || parts.includes("solutionFiles");
+}
+
+function extractTokens(value, pattern) {
+  return Array.from(value.matchAll(pattern), (match) => match[0]);
+}
+
+function assertSameTokens(label, source, target, pattern) {
+  const sourceTokens = extractTokens(source, pattern);
+  const targetTokens = extractTokens(target, pattern);
+
+  if (sourceTokens.length !== targetTokens.length) {
+    throw new Error(`${label} changed token count`);
+  }
+
+  sourceTokens.forEach((token, index) => {
+    if (targetTokens[index] !== token) {
+      throw new Error(`${label} changed protected token "${token}"`);
+    }
+  });
+}
+
+function isPureRefString(value) {
+  return /^@:[A-Za-z0-9_.\-/]+$/.test(value.trim());
+}
+
+function isCodeLikeString(value) {
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+
+  if (/^(from\s+[A-Za-z_][\w.]*\s+import\s+[A-Za-z_][\w,* ]*|import\s+[A-Za-z_][\w.]*|class\s+[A-Za-z_]\w*:|def\s+[A-Za-z_]\w*\(|[A-Za-z_]\w*\s*=\s*.+|print\(.+\)|[\w./-]+\.(py|json|csv|txt|md))$/m.test(trimmed)) {
+    return true;
+  }
+
+  return false;
+}
+
+function sanitizeForTranslation(sourceValue) {
+  const sanitized = cloneJson(sourceValue);
+  const protectedPaths = new Set();
+
+  for (const entry of collectStringEntries(sourceValue)) {
+    if (isProtectedCodePath(entry.path) || isPureRefString(entry.value)) {
+      setAtPath(sanitized, entry.path, PROTECTED_NULL);
+      protectedPaths.add(entry.pointer);
+    }
+  }
+
+  return { sanitized, protectedPaths };
+}
+
+function countTranslatableStrings(value) {
+  return collectStringEntries(value).filter((entry) => entry.value.trim()).length;
+}
+
+function assertTranslatedEntryCompleteness({ sourceEntries, translatedEntries, locale }) {
+  const sourceKeys = new Set(sourceEntries.map((entry) => entry.key));
+  const translatedKeys = new Set(translatedEntries.map((entry) => entry.key));
+
+  const missing = [...sourceKeys].filter((key) => !translatedKeys.has(key));
+  const extra = [...translatedKeys].filter((key) => !sourceKeys.has(key));
+
+  if (missing.length > 0 || extra.length > 0) {
+    throw new Error(
+      [
+        `Translation key mismatch for locale "${locale}".`,
+        missing.length > 0 ? `Missing keys: ${missing.slice(0, 20).join(", ")}` : "",
+        extra.length > 0 ? `Extra keys: ${extra.slice(0, 20).join(", ")}` : "",
+      ]
+        .filter(Boolean)
+        .join("\n"),
+    );
+  }
+}
+
+function rebuildTranslatedMessagesFromEntries({ sourceMessages, translatedEntries }) {
+  const rebuilt = cloneJson(sourceMessages);
+
+  for (const entry of translatedEntries) {
+    setAtPath(rebuilt, pointerToPath(entry.key), entry.value);
+  }
+
+  return rebuilt;
+}
+
+async function translateMessagesWithSafetyRetries({
+  shape,
+  locale,
+  sourceMessages,
+  onRetry,
+  validation,
+}) {
+  const sourceEntries = collectTranslatableEntries(sourceMessages);
+  if (sourceEntries.length === 0) {
+    return sourceMessages;
+  }
+
+  let lastError;
+  let lastTranslatedEntries = null;
+
+  for (let attempt = 1; attempt <= MAX_TRANSLATION_ATTEMPTS; attempt += 1) {
+    try {
+      if (attempt === 1) {
+        return await translateMessages(openAiProvider, {
+          shape,
+          sourceLocale: SOURCE_LOCALE,
+          locale,
+          sourceMessages,
+        });
+      }
+
+      onRetry?.({
+        attempt,
+        maxAttempts: MAX_TRANSLATION_ATTEMPTS,
+        error: lastError,
+      });
+
+      const prompt = buildTranslationPrompt({
+        locale,
+        sourceLocale: SOURCE_LOCALE,
+        entries: sourceEntries,
+        shape,
+      });
+
+      const translated = await openAiProvider.generateJson({
+        system: [
+          prompt.system,
+          "CRITICAL: Copy every key byte-for-byte from the input entries.",
+          "Do not normalize, rename, slugify, reformat, or repair keys.",
+          "If a key contains underscores, hyphens, numbers, or repeated segments, preserve it exactly.",
+          "Return the same number of entries as the input.",
+        ].join("\n"),
+        user: JSON.stringify(
+          {
+            sourceLocale: SOURCE_LOCALE,
+            targetLocale: locale,
+            shapeProfile: shape.profileId,
+            previousFailure: lastError instanceof Error ? lastError.message : String(lastError),
+            requiredKeys: sourceEntries.map((entry) => entry.key),
+            entries: sourceEntries,
+          },
+          null,
+          2,
+        ),
+        schemaName: "TranslatedEntries",
+      });
+
+      const translatedEntries = (translated.entries ?? []).map((entry) => ({
+        key: String(entry.key),
+        value: String(entry.value),
+      }));
+      lastTranslatedEntries = translatedEntries;
+
+      assertTranslatedEntryCompleteness({
+        sourceEntries,
+        translatedEntries,
+        locale,
+      });
+
+      return rebuildTranslatedMessagesFromEntries({
+        sourceMessages,
+        translatedEntries,
+      });
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  if (
+    validation?.unsafeSkipValidation &&
+    Array.isArray(lastTranslatedEntries) &&
+    lastTranslatedEntries.length === sourceEntries.length
+  ) {
+    return rebuildTranslatedMessagesFromEntries({
+      sourceMessages,
+      translatedEntries: sourceEntries.map((entry, index) => ({
+        key: entry.key,
+        value: String(lastTranslatedEntries[index]?.value ?? entry.value),
+      })),
+    });
+  }
+
+  throw lastError;
+}
+
+function restoreProtectedStrings({ sourceValue, nextValue, protectedPaths }) {
+  const restored = cloneJson(nextValue);
+  for (const entry of collectStringEntries(sourceValue)) {
+    if (protectedPaths.has(entry.pointer)) {
+      setAtPath(restored, entry.path, entry.value);
+    }
+  }
+  return restored;
+}
+
+function mergeOnlyMissing({ sourceValue, translatedValue, targetValue }) {
+  if (Array.isArray(sourceValue)) {
+    const output = Array.isArray(targetValue) ? [...targetValue] : [];
+    sourceValue.forEach((sourceItem, index) => {
+      if (index in output) {
+        output[index] = mergeOnlyMissing({
+          sourceValue: sourceItem,
+          translatedValue: translatedValue[index],
+          targetValue: output[index],
+        });
+      } else {
+        output[index] = cloneJson(translatedValue[index]);
+      }
+    });
+    return output;
+  }
+
+  if (isPlainObject(sourceValue)) {
+    const output = isPlainObject(targetValue) ? { ...targetValue } : {};
+    for (const [key, sourceChild] of Object.entries(sourceValue)) {
+      if (Object.prototype.hasOwnProperty.call(output, key)) {
+        output[key] = mergeOnlyMissing({
+          sourceValue: sourceChild,
+          translatedValue: translatedValue[key],
+          targetValue: output[key],
+        });
+      } else {
+        output[key] = cloneJson(translatedValue[key]);
+      }
+    }
+    return output;
+  }
+
+  if (typeof sourceValue === "string") {
+    return typeof targetValue === "undefined" ? translatedValue : targetValue;
+  }
+
+  return typeof targetValue === "undefined" ? sourceValue : targetValue;
+}
+
+function findMissingAndExtraKeyPaths(sourceValue, targetValue) {
+  const sourceKeys = flattenKeyPaths(sourceValue);
+  const targetKeys = flattenKeyPaths(targetValue);
+
+  return {
+    missing: [...sourceKeys].filter((key) => !targetKeys.has(key)).sort(),
+    extra: [...targetKeys].filter((key) => !sourceKeys.has(key)).sort(),
+  };
+}
+
+function validateStructureAndValues(sourceValue, targetValue, parts = [], issues = []) {
+  const pointer = pathToPointer(parts);
+
+  if (Array.isArray(sourceValue)) {
+    if (!Array.isArray(targetValue)) {
+      issues.push(`${pointer}: expected array`);
+      return issues;
+    }
+
+    if (sourceValue.length !== targetValue.length) {
+      issues.push(`${pointer}: expected array length ${sourceValue.length}, got ${targetValue.length}`);
+    }
+
+    sourceValue.forEach((item, index) => {
+      if (index >= targetValue.length) return;
+      validateStructureAndValues(item, targetValue[index], [...parts, String(index)], issues);
+    });
+
+    return issues;
+  }
+
+  if (isPlainObject(sourceValue)) {
+    if (!isPlainObject(targetValue)) {
+      issues.push(`${pointer}: expected object`);
+      return issues;
+    }
+
+    const sourceKeys = Object.keys(sourceValue);
+    const targetKeys = Object.keys(targetValue);
+
+    sourceKeys.forEach((key) => {
+      if (!Object.prototype.hasOwnProperty.call(targetValue, key)) {
+        issues.push(`${pathToPointer([...parts, key])}: missing key`);
+      }
+    });
+
+    targetKeys.forEach((key) => {
+      if (!Object.prototype.hasOwnProperty.call(sourceValue, key)) {
+        issues.push(`${pathToPointer([...parts, key])}: extra key`);
+      }
+    });
+
+    sourceKeys.forEach((key) => {
+      if (!Object.prototype.hasOwnProperty.call(targetValue, key)) return;
+      validateStructureAndValues(sourceValue[key], targetValue[key], [...parts, key], issues);
+    });
+
+    return issues;
+  }
+
+  if (typeof sourceValue === "string") {
+    if (typeof targetValue !== "string") {
+      issues.push(`${pointer}: expected string`);
+    }
+    return issues;
+  }
+
+  if (sourceValue !== targetValue) {
+    issues.push(`${pointer}: expected non-string value ${JSON.stringify(sourceValue)} but got ${JSON.stringify(targetValue)}`);
+  }
+
+  return issues;
+}
+
+function validateTranslatedStrings(sourceValue, targetValue) {
+  for (const entry of collectStringEntries(sourceValue)) {
+    const targetString = getAtPath(targetValue, entry.path);
+    const label = entry.pointer;
+
+    if (typeof targetString !== "string") {
+      throw new Error(`${label} is not a string after translation`);
+    }
+
+    if (isProtectedCodePath(entry.path) || isPureRefString(entry.value)) {
+      if (targetString !== entry.value) {
+        throw new Error(`${label} changed protected content`);
+      }
+      continue;
+    }
+
+    assertSameTokens(label, entry.value, targetString, /@:[A-Za-z0-9_.\-/]+/g);
+    assertSameTokens(label, entry.value, targetString, /```[\s\S]*?```/g);
+    assertSameTokens(label, entry.value, targetString, /`[^`\n]+`/g);
+    assertSameTokens(label, entry.value, targetString, /\bfrom\s+[A-Za-z_][\w.]*\s+import\s+[A-Za-z_][\w,* ]*\b/g);
+    assertSameTokens(label, entry.value, targetString, /\bimport\s+[A-Za-z_][\w.]*\b/g);
+    assertSameTokens(label, entry.value, targetString, /\b[\w./-]+\.(py|json|csv|txt|md)\b/g);
+
+    if (isCodeLikeString(entry.value) && targetString !== entry.value) {
+      throw new Error(`${label} looks like pure code and should not be translated`);
+    }
+  }
+}
+
+function buildMissingOnlyTranslationInput({ sourceValue, targetValue, protectedPaths }) {
+  const input = cloneJson(sourceValue);
+
+  for (const entry of collectStringEntries(sourceValue)) {
+    const shouldSkip =
+      protectedPaths.has(entry.pointer) || hasPath(targetValue, entry.path);
+
+    if (shouldSkip) {
+      setAtPath(input, entry.path, PROTECTED_NULL);
+    }
+  }
+
+  return input;
+}
+
+function filterFiles(allFiles, { moduleDir, topicId }) {
+  return allFiles.filter((filePath) => {
+    const relativePath = path.relative(REPO_ROOT, filePath);
+    const parts = relativePath.split(path.sep);
+    const baseName = path.basename(filePath, ".json");
+
+    const modulePart = parts.find((part) => /^module\d+$/.test(part));
+
+    if (moduleDir && modulePart !== moduleDir) {
+      return false;
+    }
+
+    if (topicId && baseName !== topicId) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
+function buildBackupPath({ locale, timestamp, targetRoot, targetFilePath }) {
+  const relativeTargetPath = path.relative(targetRoot, targetFilePath);
+  return path.join(
+    REPO_ROOT,
+    ".curriculum-backups",
+    "translation",
+    locale,
+    timestamp,
+    relativeTargetPath,
+  );
+}
+
+function formatTimestamp(date = new Date()) {
+  const pad = (value) => String(value).padStart(2, "0");
+  return [
+    date.getFullYear(),
+    pad(date.getMonth() + 1),
+    pad(date.getDate()),
+  ].join("") + "-" + [
+    pad(date.getHours()),
+    pad(date.getMinutes()),
+    pad(date.getSeconds()),
+  ].join("");
+}
+
+async function backupExistingFile({ locale, timestamp, targetRoot, targetFilePath }) {
+  if (!(await pathExists(targetFilePath))) return null;
+
+  const backupPath = buildBackupPath({
+    locale,
+    timestamp,
+    targetRoot,
+    targetFilePath,
+  });
+
+  await fs.mkdir(path.dirname(backupPath), { recursive: true });
+  await fs.copyFile(targetFilePath, backupPath);
+  return backupPath;
+}
+
+async function translateFile({
+  filePath,
+  sourceRoot,
+  targetRoot,
+  locale,
+  onlyMissing,
+  shape,
+  timestamp,
+  onRetry,
+  validation,
+}) {
+  const relativePath = path.relative(sourceRoot, filePath);
+  const targetFilePath = path.join(targetRoot, relativePath);
+  const sourceJson = await readJson(filePath);
+  const targetExists = await pathExists(targetFilePath);
+  const currentTargetJson = targetExists ? await readJson(targetFilePath) : undefined;
+
+  if (currentTargetJson) {
+    const keyDiff = findMissingAndExtraKeyPaths(sourceJson, currentTargetJson);
+    if (keyDiff.extra.length > 0) {
+      throw new Error(
+        [
+          `Refusing to translate ${relativePath} because the target locale has extra keys.`,
+          `Extra keys: ${keyDiff.extra.slice(0, 20).join(", ")}`,
+        ].join("\n"),
+      );
+    }
+  }
+
+  const { sanitized, protectedPaths } = sanitizeForTranslation(sourceJson);
+  const translationInput =
+    onlyMissing && currentTargetJson
+      ? buildMissingOnlyTranslationInput({
+          sourceValue: sanitized,
+          targetValue: currentTargetJson,
+          protectedPaths,
+        })
+      : sanitized;
+
+  const hasTranslatableContent = countTranslatableStrings(translationInput) > 0;
+  const translatedRaw = hasTranslatableContent
+    ? await translateMessagesWithSafetyRetries({
+        shape,
+        locale,
+        sourceMessages: translationInput,
+        onRetry,
+        validation,
+      })
+    : translationInput;
+
+  const restored = restoreProtectedStrings({
+    sourceValue: sourceJson,
+    nextValue: translatedRaw,
+    protectedPaths,
+  });
+
+  const finalJson =
+    onlyMissing && currentTargetJson
+      ? mergeOnlyMissing({
+          sourceValue: sourceJson,
+          translatedValue: restored,
+          targetValue: currentTargetJson,
+        })
+      : restored;
+
+  const structuralIssues = validateStructureAndValues(sourceJson, finalJson);
+  if (structuralIssues.length > 0) {
+    throw new Error(
+      [
+        `Translated JSON failed validation for ${relativePath}.`,
+        ...structuralIssues.slice(0, 20),
+      ].join("\n"),
+    );
+  }
+
+  if (!validation?.unsafeSkipValidation) {
+    validateTranslatedStrings(sourceJson, finalJson);
+  }
+
+  const backupPath = await backupExistingFile({
+    locale,
+    timestamp,
+    targetRoot,
+    targetFilePath,
+  });
+
+  await writeJson(targetFilePath, finalJson);
+
+  return {
+    relativePath,
+    targetFilePath,
+    backupPath,
+    translated: hasTranslatableContent,
+    created: !targetExists,
+  };
+}
+
+async function runLocaleTranslation({
+  locale,
+  args,
+  draftSubjectSlug,
+  sourceRoot,
+  files,
+  shape,
+  progress,
+}) {
+  const targetRoot = path.join(
+    REPO_ROOT,
+    ".curriculum-drafts",
+    args.subjectSlug,
+    "messages",
+    locale,
+    "subjects",
+    draftSubjectSlug,
+  );
+
+  const timestamp = formatTimestamp();
+  const results = [];
+
+  for (const filePath of files) {
+    progress?.onStage({
+      locale,
+      relativePath: path.relative(sourceRoot, filePath),
+      stage: `translating messages (${locale})`,
+    });
+
+    results.push(
+      await translateFile({
+        filePath,
+        sourceRoot,
+        targetRoot,
+        locale,
+        onlyMissing: args.onlyMissing,
+        shape,
+        timestamp,
+        validation: args.validation,
+        onRetry: ({ attempt, maxAttempts, error }) => {
+          progress?.onStage({
+            locale,
+            relativePath: path.relative(sourceRoot, filePath),
+            stage: `retrying translation (${attempt}/${maxAttempts})`,
+          });
+
+          if (!args.showProgress) {
+            console.log(
+              [
+                `Retrying translation for ${locale}/${path.relative(sourceRoot, filePath)} (${attempt}/${maxAttempts})`,
+                error instanceof Error ? error.message : String(error),
+              ].join("\n"),
+            );
+          }
+        },
+      }),
+    );
+
+    progress?.onFileComplete();
+  }
+
+  const backupCount = results.filter((result) => result.backupPath).length;
+  const createdCount = results.filter((result) => result.created).length;
+
+  return {
+    locale,
+    targetRoot,
+    timestamp,
+    results,
+    backupCount,
+    createdCount,
+  };
+}
+
+async function main() {
+  
+  await __zsResolveTranslationAi(process.argv.slice(2));
+const args = parseArgs(process.argv);
+  requireEnv("OPENAI_API_KEY");
+  await ensureModelSelection(args.model);
+
+  if (args.validation.unsafeSkipValidation) {
+    console.log(
+      "⚠️  Skipping strict translation validation because --unsafe-skip-validation was provided.",
+    );
+  }
+
+  const target = await resolveAuthoringCompileTarget({
+    subjectSlug: args.subjectSlug,
+    courseSlug: args.courseSlug,
+    options: {
+      draftOnly: true,
+    },
+  });
+
+  if (target.courseSlug !== args.courseSlug) {
+    throw new Error(
+      `Resolved wrong course: requested ${args.courseSlug} but got ${target.courseSlug}`,
+    );
+  }
+
+  if (target.authoringSubjectSlug !== args.subjectSlug) {
+    throw new Error(
+      `Resolved wrong subject: requested ${args.subjectSlug} but got ${target.authoringSubjectSlug}`,
+    );
+  }
+
+  const draftSubjectSlug = target.liveSubjectSlug;
+  const sourceRoot = path.join(
+    REPO_ROOT,
+    ".curriculum-drafts",
+    args.subjectSlug,
+    "messages",
+    SOURCE_LOCALE,
+    "subjects",
+    draftSubjectSlug,
+  );
+  if (!(await pathExists(sourceRoot))) {
+    throw new Error(`Source messages root not found: ${sourceRoot}`);
+  }
+
+  const shape = getSubjectShape(target.blueprint.profileId);
+  const allFiles = await listJsonFiles(sourceRoot);
+  const files = filterFiles(allFiles, {
+    moduleDir: args.moduleDir,
+    topicId: args.topicId,
+  });
+
+  if (files.length === 0) {
+    throw new Error("No matching source message JSON files found for the requested scope.");
+  }
+
+  const totalFiles = files.length * args.locales.length;
+  let completedFiles = 0;
+  let sawProgress = false;
+
+  const progress = args.showProgress
+    ? {
+        onStage({ locale, relativePath, stage }) {
+          sawProgress = true;
+          renderProgressBar({
+            current: completedFiles,
+            total: totalFiles,
+            label: `${stage} - ${relativePath}`,
+          });
+        },
+        onFileComplete() {
+          completedFiles += 1;
+          sawProgress = true;
+          renderProgressBar({
+            current: completedFiles,
+            total: totalFiles,
+            label: completedFiles < totalFiles ? "continuing translation" : "completed translation",
+          });
+        },
+      }
+    : null;
+
+  const summaries = [];
+
+  try {
+    console.log(
+      `Translating course ${args.subjectSlug}/${args.courseSlug} for ${args.locales.join(", ")}...`,
+    );
+
+    for (const locale of args.locales) {
+      const summary = await runLocaleTranslation({
+        locale,
+        args,
+        draftSubjectSlug,
+        sourceRoot,
+        files,
+        shape,
+        progress,
+      });
+      summaries.push(summary);
+    }
+  } catch (error) {
+    if (sawProgress) {
+      finishProgressBar("✖ Translation failed");
+    }
+    throw error;
+  }
+
+  const summaryLines = summaries.flatMap((summary) => [
+    `Translated ${summary.results.length} file(s) for ${args.subjectSlug}/${args.courseSlug} -> ${summary.locale}.`,
+    `Draft subject: ${draftSubjectSlug}`,
+    `Mode: ${args.onlyMissing ? "only-missing" : "full overwrite"}`,
+    `Created: ${summary.createdCount}`,
+    `Backed up existing files: ${summary.backupCount}`,
+    `Target root: ${summary.targetRoot}`,
+    summary.backupCount > 0
+      ? `Backup root: ${path.join(REPO_ROOT, ".curriculum-backups", "translation", summary.locale, summary.timestamp)}`
+      : null,
+    summaries.length > 1 ? "" : null,
+  ]);
+
+  if (sawProgress) {
+    finishProgressBar(
+      `✔ Translated ${args.subjectSlug}/${args.courseSlug} into ${args.locales.join(", ")}`,
+    );
+  }
+
+  console.log(summaryLines.filter((line) => line !== null).join("\n"));
+}
+
+main().catch((error) => {
+  console.error(error instanceof Error ? error.message : String(error));
+  process.exitCode = 1;
+});

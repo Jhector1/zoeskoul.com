@@ -1,0 +1,525 @@
+{
+  "topicId": "writing-text-into-files",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-2-files-and-folders",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-2-file-workflow",
+  "prefix": "linux_module_2",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.cards.sketch0.title",
+      "sketchId": "echo-prints-text",
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing-text-into-files-sketch0",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.try_writing_text_into_files_sketch0.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.try_writing_text_into_files_sketch0.prompt",
+        "exerciseKey": "writing-text-into-files-try-it-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.cards.sketch1.title",
+      "sketchId": "write-with-greater-than",
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing-text-into-files-sketch1",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.try_writing_text_into_files_sketch1.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.try_writing_text_into_files_sketch1.prompt",
+        "exerciseKey": "writing-text-into-files-try-it-2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.cards.sketch2.title",
+      "sketchId": "append-with-double-greater-than",
+      "height": 420,
+      "tryIt": {
+        "id": "try-writing-text-into-files-sketch2",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.try_writing_text_into_files_sketch2.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.try_writing_text_into_files_sketch2.prompt",
+        "exerciseKey": "writing-text-into-files-try-it-3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "select": {
+          "purpose": "quiz"
+        }
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "echo-prints-text",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.echo-prints-text.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.echo-prints-text.bodyMarkdown"
+    },
+    {
+      "id": "write-with-greater-than",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.write-with-greater-than.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.write-with-greater-than.bodyMarkdown"
+    },
+    {
+      "id": "append-with-double-greater-than",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.append-with-double-greater-than.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.append-with-double-greater-than.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-echo-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.practice.sc-echo-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-write-symbol",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.practice.sc-write-symbol",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-append-symbol",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.practice.sc-append-symbol",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "dr-write-check-flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.practice.dr-write-check-flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "writing-text-into-files-try-it-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1",
+      "language": "bash",
+      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "echo \"Club checklist\"\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspaceExpectations": {},
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^\\s*echo\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {}
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-1.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace"
+      }
+    },
+    {
+      "id": "writing-text-into-files-try-it-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2",
+      "language": "bash",
+      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "echo \"Club checklist\" > checklist.txt\ncat checklist.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "checklist.txt",
+          "content": "Club checklist\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "checklist.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^\\s*echo\\b.*>\\s*checklist\\.txt\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "\\bcat\\s+checklist\\.txt\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "checklist.txt"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-2.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace"
+      }
+    },
+    {
+      "id": "writing-text-into-files-try-it-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3",
+      "language": "bash",
+      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "event-checklist.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.event_checklist_txt.content",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "echo \"Bring markers\" >> event-checklist.txt\ncat event-checklist.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "event-checklist.txt",
+          "content": "Club checklist\n",
+          "language": "bash"
+        },
+        {
+          "path": "event-checklist.txt",
+          "content": "Club checklist\nBring markers\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "event-checklist.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^\\s*echo\\b.*>>\\s*event-checklist\\.txt\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "\\bcat\\s+event-checklist\\.txt\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "event-checklist.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.event_checklist_txt.content",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "event-checklist.txt"
+          ]
+        },
+        "fixtureFiles": [
+          {
+            "path": "event-checklist.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.event_checklist_txt.content",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace"
+      },
+      "fixtureFiles": [
+        {
+          "path": "event-checklist.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.writing-text-into-files.tryIt.exercises.writing-text-into-files-try-it-3.starterFiles.event_checklist_txt.content",
+          "language": "bash"
+        }
+      ]
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Print a checklist line",
+      "Write the first line to a file",
+      "Append a second checklist line"
+    ]
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    },
+    "terminalCwd": "/workspace"
+  }
+}

@@ -37,7 +37,26 @@
                 "hint_1": "Use `with open(\"data/students.csv\") as file:`.",
                 "hint_2": "Inside the loop, print `line.strip()` to avoid extra blank lines."
               },
-              "starterCode": "# Read data/students.csv and print every line without extra blank lines.\n"
+              "starterCode": "# Read data/students.csv and print every line without extra blank lines.\n",
+              "starterFiles": {
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n"
+                },
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Read data/students.csv instead of typing the file contents."
+                }
+              },
+              "solutionCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n"
             },
             "mp-2-clean-one-row": {
               "title": "Clean and validate one row",
@@ -48,7 +67,21 @@
                 "hint_1": "Split the row with `line.strip().split(\",\")`.",
                 "hint_2": "Return `{\"name\": ..., \"score\": ...}` with a title-cased name and an integer score."
               },
-              "starterCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw-file preview above as your starting point.\n# Next, write clean_row(line) so one row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split the row, clean the name, and convert the score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Print the cleaned first row dictionary.\nprint(clean_row(first_row))\n"
+              "starterCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw-file preview above as your starting point.\n# Next, write clean_row(line) so one row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split the row, clean the name, and convert the score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Print the cleaned first row dictionary.\nprint(clean_row(first_row))\n",
+              "starterFiles": {
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nprint(clean_row(first_row))\n"
+                },
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionCode": "try:\n    with open(\"data/students.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\n\ntry:\n    with open(\"data/students.csv\") as file:\n        first_row = file.readline()\n\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n"
             },
             "mp-3-skip-bad-rows": {
               "title": "Skip bad rows and collect records",
@@ -59,7 +92,26 @@
                 "hint_1": "Start with `records = []` before the loop.",
                 "hint_2": "Append inside `try`, then skip `ValueError` rows in `except`."
               },
-              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # Keep using clean_row(line), but only save the rows that work.\n        # Skip ValueError rows so the project keeps moving.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n"
+              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # Keep using clean_row(line), but only save the rows that work.\n        # Skip ValueError rows so the project keeps moving.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
+              "starterFiles": {
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+                },
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Use try/except to skip bad rows."
+                }
+              },
+              "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
             },
             "mp-4-write-clean-records": {
               "title": "Write cleaned records",
@@ -70,7 +122,29 @@
                 "hint_1": "Create `output/` if needed, then open `output/clean_students.csv` in write mode.",
                 "hint_2": "Write one cleaned record per line, then print how many clean records were saved."
               },
-              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the preview print with the shareable output file.\n# Create output/, write output/clean_students.csv, and print how many clean records were saved.\n"
+              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the preview print with the shareable output file.\n# Create output/, write output/clean_students.csv, and print how many clean records were saved.\n",
+              "starterFiles": {
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n"
+                },
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Write the clean records file."
+                },
+                "1": {
+                  "message": "Use file.write() to create the output CSV."
+                }
+              },
+              "solutionCode": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n"
             },
             "try-module-7-clean-student-records-sketch0": {
               "title": "Clean the first row from the file",
@@ -81,7 +155,22 @@
                 "hint_1": "Use `with open(\"data/students.csv\") as file:` and `first_row = file.readline()`.",
                 "hint_2": "Split the row, use `.strip().title()` for the name, and print `name:score`."
               },
-              "starterCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Clean the first row and print Ava:92.\n"
+              "starterCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Clean the first row and print Ava:92.\n",
+              "solutionCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nname, score = first_row.split(\",\")\nprint(f\"{name.strip().title()}:{score.strip()}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Read the row from data/students.csv."
+                },
+                "1": {
+                  "message": "Split the row into name and score."
+                },
+                "2": {
+                  "message": "Strip spaces from the name and score."
+                },
+                "3": {
+                  "message": "Title-case the student name."
+                }
+              }
             }
           },
           "tryIt": {

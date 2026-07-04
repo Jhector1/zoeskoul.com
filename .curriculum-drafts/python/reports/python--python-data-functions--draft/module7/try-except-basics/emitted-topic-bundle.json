@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch0.title",
       "sketchId": "s1",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-try-except-basics-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.tryIt.try_try_except_basics_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.tryIt.try_try_except_basics_sketch0.prompt",
+        "exerciseKey": "try-try-except-basics-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch1.title",
       "sketchId": "s2",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-try-except-basics-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.tryIt.try_try_except_basics_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.tryIt.try_try_except_basics_sketch1.prompt",
+        "exerciseKey": "try-try-except-basics-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.cards.sketch2.title",
       "sketchId": "s3",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-try-except-basics-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.tryIt.try_try_except_basics_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.tryIt.try_try_except_basics_sketch2.prompt",
+        "exerciseKey": "try-try-except-basics-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -263,17 +299,18 @@
       }
     },
     {
-      "id": "q9",
+      "id": "try-try-except-basics-checkpoint",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9",
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint",
       "language": "python",
-      "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -282,11 +319,125 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "text = input()\ntry:\n    int(text)\n    print(\"Valid\")\nexcept ValueError:\n    print(\"Invalid\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "42\n",
+            "stdout": "Valid\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "oops\n",
+            "stdout": "Invalid\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "abc\n",
+            "stdout": "Invalid\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.sourceChecks.1.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-checkpoint.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "text = input()\n\ntry:\n    number = int(text)\n    print(f\"Number: {number}\")\nexcept ValueError:\n    print(\"Invalid number\")",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -308,8 +459,50 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "text = input()\n\ntry:\n    number = int(text)\n    print(f\"Number: {number}\")\nexcept ValueError:\n    print(\"Invalid number\")"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.sourceChecks.1.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q9.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "q10",
@@ -318,11 +511,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10",
       "language": "python",
-      "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -331,11 +524,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "first_text = input()\nsecond_text = input()\n\ntry:\n    first_number = int(first_text)\n    second_number = int(second_text)\n    print(f\"Sum: {first_number + second_number}\")\nexcept ValueError:\n    print(\"Invalid input\")",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -357,8 +559,50 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "first_text = input()\nsecond_text = input()\n\ntry:\n    first_number = int(first_text)\n    second_number = int(second_text)\n    print(f\"Sum: {first_number + second_number}\")\nexcept ValueError:\n    print(\"Invalid input\")"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.sourceChecks.1.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q10.sourceChecks.1.message"
+        }
+      ]
     },
     {
       "id": "q11",
@@ -367,11 +611,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11",
       "language": "python",
-      "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -380,11 +624,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "parts = input().split(\",\")\nvalid_count = 0\n\nfor part in parts:\n    try:\n        int(part)\n        valid_count += 1\n    except ValueError:\n        pass\n\nprint(f\"Valid count: {valid_count}\")",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -406,8 +659,355 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "parts = input().split(\",\")\nvalid_count = 0\n\nfor part in parts:\n    try:\n        int(part)\n        valid_count += 1\n    except ValueError:\n        pass\n\nprint(f\"Valid count: {valid_count}\")"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "parts",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.sourceChecks.1.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.sourceChecks.2.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "parts",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.sourceChecks.1.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.q11.sourceChecks.2.message"
+        }
+      ]
+    },
+    {
+      "id": "try-try-except-basics-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "text = 'abc'\ntry:\n    number = int(text)\n    print(number)\nexcept ValueError:\n    print('bad number')\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "bad number\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.1.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch0.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "try-try-except-basics-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "text = '42'\ntry:\n    number = int(text)\nexcept ValueError:\n    print('bad number')\nelse:\n    print('ok')\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "ok\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.1.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch1.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "try-try-except-basics-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "values = ['10', 'bad', '3']\nfor value in values:\n    try:\n        print(int(value))\n    except ValueError:\n        pass\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "10\n3\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "values",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\btry\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.1.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "int",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.2.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "values",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\btry\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.1.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "int",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.try-except-basics.quiz.try-try-except-basics-sketch2.sourceChecks.2.message"
+        }
+      ]
     }
   ]
 }

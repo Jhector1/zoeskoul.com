@@ -4,32 +4,38 @@
   "profileId": "python",
   "workspaceProfileId": "browser-python-files-runner",
   "workspacePolicyId": "python-browser-workspace",
-  "title": "Applied Python Projects",
-  "subtitle": "Build cleaner Python projects with classes, testing, debugging, and capstone structure",
-  "intendedFor": "Learners who know Python fundamentals and want to build more complete beginner projects using classes, testing, debugging, and readable project structure.",
+  "title": "Applied Python Projects: Object-Oriented Apps",
+  "subtitle": "Build multifile Python apps with encapsulation, abstraction, inheritance, polymorphism, tests, and a final capstone.",
+  "intendedFor": "Learners who already know Python fundamentals, functions, imports, files, and lists, and now need a strong multifile OOP project course.",
   "sourceLocale": "en",
   "targetLocales": [],
   "courseOverview": {
-    "recommendedSequence": "Complete modules in order. This course moves from object-oriented programming to testing and then to a complete capstone project.",
-    "summary": "This course helps learners build polished beginner Python projects using classes, objects, tests, debugging techniques, style habits, and capstone planning.",
+    "recommendedSequence": "Complete modules in order. Each module depends on the last: class files and encapsulation, then inheritance/polymorphism/abstraction, then testing/refactoring, then the final capstone.",
+    "summary": "Learners build increasingly realistic multifile Python OOP apps while practicing the four pillars: encapsulation, abstraction, inheritance, and polymorphism.",
     "moduleSummary": [
       {
-        "moduleNumber": 1,
-        "title": "Object-Oriented Programming",
-        "coreSkill": "Introduce classes and objects as a way to model related state and behavior.",
-        "outputFocus": "Build a simple class-based gradebook, game character, or bank account model."
+        "moduleNumber": 8,
+        "title": "Object-Oriented Foundations",
+        "coreSkill": "Create class files, constructors, methods, imports, and encapsulated validation.",
+        "outputFocus": "Build an Account Tracker with models, helpers, data, and main.py."
       },
       {
-        "moduleNumber": 2,
-        "title": "Testing, Debugging, and Style",
-        "coreSkill": "Help learners verify code behavior, debug systematically, and write readable Python.",
-        "outputFocus": "Take a buggy utility program, add tests, fix the bugs, and improve readability."
+        "moduleNumber": 9,
+        "title": "Inheritance, Polymorphism, and Abstraction",
+        "coreSkill": "Use base classes, subclasses, overrides, mixed collections, and simple interface contracts.",
+        "outputFocus": "Build a polymorphic catalog app with Book and Video subclasses."
       },
       {
-        "moduleNumber": 3,
-        "title": "Capstone Automation Project",
-        "coreSkill": "Guide learners through a complete beginner Python project that combines core skills.",
-        "outputFocus": "Complete a capstone such as a task tracker, expense summarizer, text analyzer, or quiz game."
+        "moduleNumber": 10,
+        "title": "Testing and Debugging OOP Projects",
+        "coreSkill": "Test object state, subclass overrides, services, storage, imports, and refactors.",
+        "outputFocus": "Harden an OOP catalog app with tests and regression coverage."
+      },
+      {
+        "moduleNumber": 11,
+        "title": "Final OOP Capstone Project",
+        "coreSkill": "Combine all four OOP pillars in one full project.",
+        "outputFocus": "Complete a Smart Task Tracker with models, services, storage, reports, tests, and README notes."
       }
     ]
   },
@@ -37,233 +43,632 @@
     "currentRelease": {
       "name": "applied-python-projects-v2",
       "startModuleNumber": 8,
-      "endModuleNumber": 10
+      "endModuleNumber": 11
     },
     "releases": [
       {
         "name": "applied-python-projects-v2",
         "startModuleNumber": 8,
-        "endModuleNumber": 10
+        "endModuleNumber": 11
       }
     ]
   },
   "policy": {
     "exercisePolicy": {
       "defaultMix": {
-        "single_choice": 0.12,
+        "single_choice": 0.1,
         "multi_choice": 0.1,
-        "drag_reorder": 0.1,
-        "fill_blank_choice": 0.18,
-        "code_input": 0.5
+        "drag_reorder": 0.08,
+        "fill_blank_choice": 0.12,
+        "code_input": 0.6
       },
       "minimums": {
         "technicalTopicCodeInputMin": 1,
         "topicExerciseMin": 4
+      },
+      "generationTargets": {
+        "quizBankMin": 4,
+        "quizBankTarget": 6,
+        "quizVisibleDefault": 4,
+        "quizVisibleMax": 6,
+        "projectCodeInputMin": 5,
+        "projectCodeInputTarget": 6,
+        "projectCodeInputMax": 9,
+        "maxAttempts": null
       }
     },
     "projectPolicy": {
-      "minProjectsBeforeCapstone": 2,
+      "minProjectsBeforeCapstone": 3,
       "capstoneRequired": true
     },
+    "runtimePolicy": {},
     "qualityPolicy": {
       "allowBlankTopicIds": false,
       "allowDuplicateTopicIds": false,
       "requireUniqueModuleSlugs": true,
       "requireUniqueSectionSlugs": true,
       "requireModuleProject": true,
-      "maxModuleProjectLength": 320
+      "maxModuleProjectLength": 320,
+      "reservedConceptsByModule": [
+        {
+          "concept": "inheritance",
+          "earliestModuleNumber": 9
+        },
+        {
+          "concept": "polymorphism",
+          "earliestModuleNumber": 9
+        },
+        {
+          "concept": "abstraction",
+          "earliestModuleNumber": 9
+        },
+        {
+          "concept": "testing subclass overrides",
+          "earliestModuleNumber": 10
+        },
+        {
+          "concept": "capstone report output",
+          "earliestModuleNumber": 11
+        }
+      ]
     }
   },
   "authoringGuidance": [
-    "This course must always use profileId python and subjectSlug applied-python-projects-v2.",
-    "This course should use the browser-python-files-runner workspace across the full course.",
-    "Because learners already know imports and modules here, exercises may use starter files, helper modules, folders, and filesystem paths when that supports the lesson goal.",
-    "Prefer files-panel language such as main.py, helpers.py, src/, data/, and tests/ over single-file-only framing.",
-    "Do not use SQL datasets, SQL tables, sql_query recipes, datasetId, fixedSqlDialect, resultShape, or checkSql in Python lessons.",
-    "Python code_input exercises should prefer recipeType fixed_tests and include explicit stdin/stdout tests or function/class behavior checks.",
-    "Use semanticChecks only when validating classes, methods, attributes, or return values.",
-    "Module 8 class topics should prefer recipeType semantic for class/object/method behavior instead of fixed_tests stdout wrappers.",
-    "For classes-and-instances, attributes-and-init, and methods-and-self, use semantic checks such as defines_class, constructible, instance_attributes, and method_returns when the learner is returning values from methods.",
-    "Do not expose ast.literal_eval, _parse_arg, or visible stdin-parsing harness code in class or method exercises.",
-    "For method_returns semantic checks, always include expected.",
-    "Keep examples focused on classes, objects, testing, debugging, style, refactoring, and capstone projects."
+    "This course must always use subjectSlug python, courseSlug applied-python-projects, catalogSlug python, and profileId python.",
+    "The generated draft subject slug is python--applied-python-projects--draft; do not confuse that with the authoring subjectSlug/courseSlug split.",
+    "This course uses browser-python-files-runner and python-browser-workspace across all modules; it is a multifile editor workspace course, not terminal-first.",
+    "Every technical sketch must have a required embedded try-it code_input with tryItPlacement all_sketches unless a topic is explicitly conceptualOnly.",
+    "Embedded try-it exercise IDs, tryIt.id, and tryIt.exerciseKey must use the try-<topic-id>-sketchN convention, for example try-inheritance-for-shared-behavior-sketch0.",
+    "Embedded try-it exercises must include full starterFiles, solutionFiles, workspace.solutionFiles, recipe.solutionFiles, and recipe.solutionCode for the expected workspace; do not make try-it less complete than practice/project exercises.",
+    "Projects and capstones must be progressive: step N+1 starterFiles must equal step N full solutionFiles, and every step must include all files needed to run that step.",
+    "Do not put generated outputs such as reports/summary.txt in requiredFiles. Generated outputs may be verified through runtime/output expectations and may appear in solutionFiles only when the reveal should show the final state.",
+    "Use __init__.py files when package imports require them, and include them in starterFiles/solutionFiles when relevant.",
+    "Quizzes are conceptual and must not use code_input; graded programming belongs in try-it, practice, module project, or capstone steps.",
+    "The four OOP pillars must be taught cumulatively: encapsulation in module 8, inheritance/polymorphism/abstraction in module 9, tested/refactored in module 10, and integrated in module 11.",
+    "Do not introduce inheritance, polymorphism, or abstraction before module 9. Do not require OOP tests before module 10.",
+    "Keep main.py thin; put domain behavior in models/, orchestration/reporting in services/, sample inputs in data/, checks in tests/, and generated summaries in reports/.",
+    "Prefer deterministic fixed_tests or behavior checks that run the whole solution workspace. Avoid visible harness code such as ast.literal_eval or hidden parser helpers in starterCode."
   ],
   "assessmentAndDelivery": {
-    "suggestedBeginnerRhythm": "Two or three short lessons per week, with one applied project after each module.",
+    "suggestedBeginnerRhythm": "Two or three topics per week, with one cumulative module project after each standard module and one final capstone module.",
     "recommendedCourseDeliverables": [
-      "Short concept sketches",
-      "Class modeling exercises",
-      "Debugging tasks",
-      "Testing exercises",
-      "Refactoring practice",
-      "Portfolio-style capstone project"
+      "Multifile class/model exercises",
+      "Embedded try-it exercises on every technical sketch",
+      "Progressive module projects with chained solution snapshots",
+      "Tests for models, services, subclass overrides, and polymorphic behavior",
+      "Portfolio-style OOP capstone with README documentation"
     ],
     "toolingSuggestions": [
       "Python 3.11+",
-      "Browser runner or local VS Code",
-      "Simple test runner for function-based and class-based exercises"
+      "Browser Python files runner",
+      "Simple assert-based test files",
+      "Multifile workspace with models/, services/, data/, tests/, reports/"
     ],
-    "closingNote": "Learners finish with a polished beginner Python project and a stronger foundation for automation, data science, web backends, scripting, or algorithms."
+    "moduleMilestones": [
+      {
+        "range": "Module 8",
+        "milestone": "Encapsulated object model",
+        "learnersCan": "Create class files, import them, and validate state changes through methods."
+      },
+      {
+        "range": "Module 9",
+        "milestone": "Polymorphic catalog",
+        "learnersCan": "Use base classes, subclasses, overrides, and mixed collections."
+      },
+      {
+        "range": "Module 10",
+        "milestone": "Tested OOP app",
+        "learnersCan": "Test and refactor multifile object projects safely."
+      },
+      {
+        "range": "Module 11",
+        "milestone": "Final OOP capstone",
+        "learnersCan": "Build a complete project using all four OOP pillars."
+      }
+    ],
+    "closingNote": "Learners finish with a complete Smart Task Tracker capstone and a strong foundation for larger Python apps."
   },
   "modulePolicies": [
     {
       "moduleNumber": 8,
+      "allowedConcepts": [
+        "classes",
+        "instances",
+        "__init__",
+        "attributes",
+        "methods",
+        "self",
+        "imports",
+        "helper files",
+        "encapsulation",
+        "validation",
+        "lists of objects"
+      ],
+      "forbiddenConcepts": [
+        "inheritance",
+        "polymorphism",
+        "abstraction",
+        "abc",
+        "dataclasses"
+      ],
       "notes": [
-        "Use semantic code_input exercises for class definition, constructor, attribute, and method-return tasks in this module.",
-        "Avoid fixed_tests stdout wrappers when the learner is defining a class or returning values from instance methods.",
-        "Prefer semantic checks like defines_class, constructible, instance_attributes, and method_returns for module 8 class topics."
+        "Start every OOP idea through model files and object state.",
+        "Teach encapsulation before any inheritance language.",
+        "Use multifile starterFiles/solutionFiles even for embedded try-it exercises."
+      ]
+    },
+    {
+      "moduleNumber": 9,
+      "allowedConcepts": [
+        "inheritance",
+        "subclasses",
+        "base classes",
+        "super",
+        "overriding",
+        "polymorphism",
+        "abstraction",
+        "base-class contract",
+        "mixed object lists"
+      ],
+      "forbiddenConcepts": [
+        "metaclasses",
+        "multiple inheritance",
+        "advanced decorators"
+      ],
+      "notes": [
+        "Use simple base classes before optional abc language.",
+        "Every polymorphism exercise should show a service or loop that calls the same method on mixed subclasses."
+      ]
+    },
+    {
+      "moduleNumber": 10,
+      "allowedConcepts": [
+        "assert",
+        "tests",
+        "fixtures",
+        "debugging",
+        "tracebacks",
+        "imports",
+        "state bugs",
+        "refactoring",
+        "regression tests",
+        "storage tests"
+      ],
+      "notes": [
+        "Testing now targets objects, subclasses, polymorphic services, data fixtures, and output files.",
+        "Keep generated output files out of requiredFiles."
+      ]
+    },
+    {
+      "moduleNumber": 11,
+      "allowedConcepts": [
+        "architecture",
+        "encapsulation",
+        "abstraction",
+        "inheritance",
+        "polymorphism",
+        "storage",
+        "reports",
+        "tests",
+        "README",
+        "capstone polish"
+      ],
+      "notes": [
+        "Final capstone must use all four OOP pillars.",
+        "Every capstone step must chain from the previous full solutionFiles snapshot."
       ]
     }
   ],
   "topicPolicies": {
-    "classes-and-instances": {
+    "class-files-and-instances": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
       "notes": [
-        "Prefer semantic checks for class construction and simple method behavior.",
-        "Do not generate fixed_tests that expect stdout from a class-return task.",
-        "Treat create-an-instance-and-call-a-method tasks as semantic class behavior tasks, not print-output tasks."
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-class-files-and-instances-sketchN."
       ]
     },
-    "attributes-and-init": {
+    "constructors-and-object-state": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
       "notes": [
-        "Use semantic checks for constructor arguments and instance attributes.",
-        "Do not use stdin/stdout wrappers for __init__ attribute tasks."
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-constructors-and-object-state-sketchN."
       ]
     },
-    "methods-and-self": {
+    "methods-and-responsibility": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
       "notes": [
-        "Use semantic method_returns checks when learners define instance methods that return values.",
-        "Do not expose visible parser harness code or ast.literal_eval wrappers."
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-methods-and-responsibility-sketchN."
+      ]
+    },
+    "encapsulation-and-validation": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-encapsulation-and-validation-sketchN."
+      ]
+    },
+    "module-8-account-tracker-project": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-module-8-account-tracker-project-sketchN.",
+        "This is a progressive project/capstone topic; every step's solutionFiles must be a complete workspace snapshot."
+      ]
+    },
+    "inheritance-for-shared-behavior": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-inheritance-for-shared-behavior-sketchN."
+      ]
+    },
+    "overriding-and-specialization": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-overriding-and-specialization-sketchN."
+      ]
+    },
+    "polymorphic-collections": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-polymorphic-collections-sketchN."
+      ]
+    },
+    "abstraction-with-base-interfaces": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-abstraction-with-base-interfaces-sketchN."
+      ]
+    },
+    "module-9-catalog-polymorphism-project": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-module-9-catalog-polymorphism-project-sketchN.",
+        "This is a progressive project/capstone topic; every step's solutionFiles must be a complete workspace snapshot."
+      ]
+    },
+    "testing-object-state": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-testing-object-state-sketchN."
+      ]
+    },
+    "testing-inheritance-and-polymorphism": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-testing-inheritance-and-polymorphism-sketchN."
+      ]
+    },
+    "debugging-imports-and-state": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-debugging-imports-and-state-sketchN."
+      ]
+    },
+    "refactoring-oop-services": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-refactoring-oop-services-sketchN."
+      ]
+    },
+    "module-10-oop-quality-project": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-module-10-oop-quality-project-sketchN.",
+        "This is a progressive project/capstone topic; every step's solutionFiles must be a complete workspace snapshot."
+      ]
+    },
+    "capstone-scope-and-architecture": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-capstone-scope-and-architecture-sketchN."
+      ]
+    },
+    "capstone-domain-model": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-capstone-domain-model-sketchN."
+      ]
+    },
+    "capstone-storage-and-reports": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-capstone-storage-and-reports-sketchN."
+      ]
+    },
+    "capstone-tests-and-polish": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-capstone-tests-and-polish-sketchN."
+      ]
+    },
+    "module-11-final-oop-capstone": {
+      "requiresTryIt": true,
+      "runtimeMode": "editor_workspace",
+      "expectedPracticeKinds": [
+        "code_input"
+      ],
+      "notes": [
+        "Generate full starterFiles and solutionFiles for any code_input exercise.",
+        "Embedded sketch try-it exercise IDs must be try-module-11-final-oop-capstone-sketchN.",
+        "This is a progressive project/capstone topic; every step's solutionFiles must be a complete workspace snapshot."
       ]
     }
   },
   "modules": [
     {
       "moduleNumber": 8,
-      "moduleSlug": "python-8-object-oriented-programming",
+      "moduleSlug": "python-8-object-oriented-foundations",
       "prefix": "py8",
-      "title": "Object-Oriented Programming",
-      "purpose": "Introduce classes and objects as a way to model related state and behavior.",
+      "title": "Object-Oriented Foundations",
+      "description": "Build class files, constructors, methods, and encapsulated object state across a small multifile app.",
+      "purpose": "Teach classes as the foundation for multifile Python apps and introduce encapsulation as the first OOP pillar.",
       "learningObjectives": [
-        "Define simple classes",
-        "Create instances",
-        "Use methods and attributes"
+        "Define classes in dedicated model files and import them into main.py.",
+        "Use constructors, attributes, and methods to keep object behavior with object state.",
+        "Apply encapsulation with validation and helper/service files."
       ],
       "guidedExercises": [
-        "Create classes",
-        "Add methods",
-        "Model real objects"
+        "Create model files and import classes from main.py.",
+        "Add constructors and methods that change object state.",
+        "Move formatting and validation behavior into helper/service files."
       ],
       "quizFocus": [
+        "classes",
         "instances",
-        "attributes",
-        "methods"
+        "constructors",
+        "methods",
+        "encapsulation",
+        "imports"
       ],
-      "moduleProject": "Build a simple class-based gradebook, game character, or bank account model.",
+      "moduleProject": "Build a multifile account tracker where each step grows the previous full solution.",
       "sections": [
         {
-          "sectionSlug": "python-8-class-basics",
-          "title": "Class Basics",
+          "sectionSlug": "python-8-object-foundations",
+          "title": "Object Foundations",
+          "description": "Start with classes in separate files, object instances, constructors, and state.",
           "practiceDefaults": {
             "tryIt": true,
-            "tryItPlacement": "all_sketches"
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
           },
           "topics": [
             {
-              "topicId": "classes-and-instances",
-              "title": "Classes and Instances",
-              "summary": "Define classes and create individual objects.",
-              "minutes": 28,
+              "topicId": "class-files-and-instances",
+              "title": "Class Files and Instances",
+              "summary": "Create a class in its own file, import it, and make separate objects from it.",
+              "minutes": 30,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Create simple Python classes from real examples.",
-                "Create separate objects from the same class."
-              ]
+                "Create a model file such as models/profile.py or models/student.py.",
+                "Import a class into main.py and create multiple instances.",
+                "Keep class code out of the main script when the model deserves its own file."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             },
             {
-              "topicId": "attributes-and-init",
-              "title": "Attributes and __init__",
-              "summary": "Initialize object state with constructor parameters.",
-              "minutes": 28,
+              "topicId": "constructors-and-object-state",
+              "title": "Constructors and Object State",
+              "summary": "Use __init__ to receive starting data and store state on each object.",
+              "minutes": 30,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Create small Python classes that store state with **init**.",
-                "Pass starting data into a new object."
-              ]
-            },
-            {
-              "topicId": "methods-and-self",
-              "title": "Methods and self",
-              "summary": "Add behavior to classes with instance methods.",
-              "minutes": 26,
-              "technical": true,
-              "learningGoals": [
-                "Use methods to make objects perform useful actions.",
-                "Use `self` to read and update object state."
-              ]
+                "Use __init__ parameters to set instance attributes.",
+                "Explain how two objects can share a class but keep different state.",
+                "Write small checks that prove object state was initialized correctly."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             }
           ]
         },
         {
-          "sectionSlug": "python-8-design-with-objects",
-          "title": "Design With Objects",
+          "sectionSlug": "python-8-encapsulation-and-services",
+          "title": "Encapsulation and Services",
+          "description": "Add methods, validation, and helper files so each object owns its behavior.",
           "practiceDefaults": {
             "tryIt": true,
-            "tryItPlacement": "all_sketches"
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
           },
           "topics": [
             {
-              "topicId": "encapsulation-and-responsibility",
-              "title": "Encapsulation and Responsibility",
-              "summary": "Keep related data and behavior together in a class.",
-              "minutes": 22,
+              "topicId": "methods-and-responsibility",
+              "title": "Methods and Responsibility",
+              "summary": "Move behavior into methods and keep main.py as a thin coordinator.",
+              "minutes": 30,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Keep related data and behavior inside one class.",
-                "Give each class one clear responsibility."
-              ]
+                "Use self inside methods to read and update object state.",
+                "Decide whether code belongs in a model, service, helper, or main.py.",
+                "Refactor repeated formatting into helper files."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             },
             {
-              "topicId": "lists-of-objects",
-              "title": "Lists of Objects",
-              "summary": "Manage multiple instances and summarize their data.",
-              "minutes": 24,
+              "topicId": "encapsulation-and-validation",
+              "title": "Encapsulation and Validation",
+              "summary": "Protect object state with methods that validate changes before saving them.",
+              "minutes": 30,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Store multiple objects in a list and loop through them.",
-                "Use object data to build small summaries."
-              ]
-            },
-            {
-              "topicId": "class-debugging-patterns",
-              "title": "Class Debugging Patterns",
-              "summary": "Fix common attribute, method, and constructor mistakes.",
-              "minutes": 22,
-              "technical": true,
-              "learningGoals": [
-                "Find and fix common class mistakes.",
-                "Trace constructor, attribute, and method bugs."
-              ]
+                "Use methods such as deposit(), add_score(), or mark_complete() to control state changes.",
+                "Reject invalid values before they corrupt object state.",
+                "Use a service/helper file to operate on a list of objects without breaking encapsulation."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             }
           ]
         },
         {
           "sectionSlug": "python-8-module-project",
           "title": "Module Project",
+          "description": "Build an account tracker one cumulative step at a time.",
           "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ],
+            "projectFlow": "progressive"
+          },
           "topics": [
             {
-              "topicId": "module-8-class-model-project",
-              "title": "Module 8 Class Model Project",
-              "summary": "Build a class-based project in small steps so each new method and object behavior grows from the previous working version.",
-              "minutes": 28,
+              "topicId": "module-8-account-tracker-project",
+              "title": "Module 8 Account Tracker Project",
+              "summary": "Create a multifile account tracker with a model file, formatting helper, data file, and thin main script.",
+              "minutes": 45,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Extend one class-based project in small working steps.",
-                "Use objects to model state and behavior in a small tool."
+                "Build a complete Account model in models/account.py.",
+                "Use helpers/formatting.py and data/accounts.txt with a thin main.py.",
+                "Carry each project step's full solution into the next step's starter workspace."
               ],
               "practice": {
                 "tryIt": true,
+                "requiresTryIt": true,
                 "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
                 "projectFlow": "progressive"
               }
             }
@@ -273,131 +678,187 @@
     },
     {
       "moduleNumber": 9,
-      "moduleSlug": "python-9-testing-debugging-and-style",
+      "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
       "prefix": "py9",
-      "title": "Testing, Debugging, and Style",
-      "purpose": "Help learners verify code behavior, debug systematically, and write readable Python.",
+      "title": "Inheritance, Polymorphism, and Abstraction",
+      "description": "Extend the object model with shared base classes, overrides, mixed collections, and simple interface thinking.",
+      "purpose": "Teach the remaining OOP pillars cumulatively after learners already understand class files, state, methods, and encapsulation.",
       "learningObjectives": [
-        "Write simple tests",
-        "Use debugging techniques",
-        "Apply Python style conventions"
+        "Use inheritance to share behavior across related classes.",
+        "Override methods when subclasses need specialized behavior.",
+        "Use polymorphism and simple abstraction so services can work with mixed object types."
       ],
       "guidedExercises": [
-        "Test functions",
-        "Debug failing cases",
-        "Improve readability"
+        "Create base and subclass model files.",
+        "Override behavior while reusing parent initialization.",
+        "Build services that loop over mixed object types through shared method names."
       ],
       "quizFocus": [
-        "test cases",
-        "edge cases",
-        "style"
+        "inheritance",
+        "super",
+        "overriding",
+        "polymorphism",
+        "abstraction",
+        "base classes"
       ],
-      "moduleProject": "Take a buggy utility program, add tests, fix the bugs, and improve readability.",
+      "moduleProject": "Build a catalog app with a base item class, subclasses, polymorphic services, and data loading.",
       "sections": [
         {
-          "sectionSlug": "python-9-testing-basics",
-          "title": "Testing Basics",
+          "sectionSlug": "python-9-inheritance-and-overrides",
+          "title": "Inheritance and Overrides",
+          "description": "Use parent classes for shared behavior and subclasses for specialization.",
           "practiceDefaults": {
             "tryIt": true,
-            "tryItPlacement": "all_sketches"
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
           },
           "topics": [
             {
-              "topicId": "writing-test-cases",
-              "title": "Writing Test Cases",
-              "summary": "Design examples that prove a function works.",
-              "minutes": 25,
+              "topicId": "inheritance-for-shared-behavior",
+              "title": "Inheritance for Shared Behavior",
+              "summary": "Create subclasses that reuse a base class instead of copying shared code.",
+              "minutes": 32,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Write simple tests for normal cases and edge cases.",
-                "Choose examples that prove a function works."
-              ]
+                "Create a parent class such as LibraryItem or Membership.",
+                "Create subclasses that inherit shared attributes and methods.",
+                "Use imports across models/base.py and subclass files."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             },
             {
-              "topicId": "assertions-and-expected-results",
-              "title": "Assertions and Expected Results",
-              "summary": "Use assertions to compare actual and expected outputs.",
-              "minutes": 22,
+              "topicId": "overriding-and-specialization",
+              "title": "Overriding and Specialization",
+              "summary": "Override a parent method when a subclass needs a different result.",
+              "minutes": 32,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Use `assert` to compare actual and expected results.",
-                "Read a failing assertion to spot what broke."
-              ]
-            },
-            {
-              "topicId": "testing-edge-cases",
-              "title": "Testing Edge Cases",
-              "summary": "Check empty inputs, boundaries, and unusual values.",
-              "minutes": 24,
-              "technical": true,
-              "learningGoals": [
-                "Test empty inputs, boundary values, and unusual cases.",
-                "Use edge cases to catch hidden bugs."
-              ]
+                "Override a method in a subclass without rewriting the whole class.",
+                "Use super() when a subclass should reuse parent initialization.",
+                "Compare shared behavior with specialized behavior."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             }
           ]
         },
         {
-          "sectionSlug": "python-9-debugging-and-style",
-          "title": "Debugging and Style",
+          "sectionSlug": "python-9-polymorphism-and-abstraction",
+          "title": "Polymorphism and Abstraction",
+          "description": "Use common method names and base-class contracts to keep services flexible.",
           "practiceDefaults": {
             "tryIt": true,
-            "tryItPlacement": "all_sketches"
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
           },
           "topics": [
             {
-              "topicId": "debugging-with-print-and-trace",
-              "title": "Debugging With Print and Trace",
-              "summary": "Use temporary output and tracing to find bugs.",
-              "minutes": 22,
+              "topicId": "polymorphic-collections",
+              "title": "Polymorphic Collections",
+              "summary": "Loop over different object types and call the same method name on each object.",
+              "minutes": 32,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Use print tracing to follow code step by step.",
-                "Narrow a bug down to the exact failing step."
-              ]
+                "Store different subclasses in one list.",
+                "Call shared method names such as summary(), fee(), or send() on each object.",
+                "Write service functions that depend on behavior, not exact class names."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             },
             {
-              "topicId": "readable-python-style",
-              "title": "Readable Python Style",
-              "summary": "Use naming, spacing, and small functions to make code easier to understand.",
-              "minutes": 20,
+              "topicId": "abstraction-with-base-interfaces",
+              "title": "Abstraction With Base Interfaces",
+              "summary": "Use a simple base class/interface idea to define what every object must provide.",
+              "minutes": 32,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Use clear names and spacing to make code easier to read.",
-                "Break long logic into small readable helpers."
-              ]
-            },
-            {
-              "topicId": "refactoring-safely",
-              "title": "Refactoring Safely",
-              "summary": "Improve code structure while keeping behavior the same.",
-              "minutes": 24,
-              "technical": true,
-              "learningGoals": [
-                "Refactor small pieces without changing behavior.",
-                "Use tests to confirm a refactor stayed correct."
-              ]
+                "Define a small common interface through base-class methods.",
+                "Keep reports and services focused on what objects can do.",
+                "Avoid overusing inheritance when composition or helpers are clearer."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
             }
           ]
         },
         {
           "sectionSlug": "python-9-module-project",
           "title": "Module Project",
+          "description": "Build a polymorphic catalog one cumulative step at a time.",
           "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ],
+            "projectFlow": "progressive"
+          },
           "topics": [
             {
-              "topicId": "module-9-debug-and-polish-project",
-              "title": "Module 9 Debug and Polish Project",
-              "summary": "Improve a buggy utility in focused steps so tests, fixes, and readability improvements build on the previous working version.",
-              "minutes": 28,
+              "topicId": "module-9-catalog-polymorphism-project",
+              "title": "Module 9 Catalog Polymorphism Project",
+              "summary": "Build a multifile catalog with a base item, Book and Video subclasses, service functions, abstract fee behavior, and loaded data.",
+              "minutes": 50,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Use tests, tracing, and cleanup to improve one program step by step.",
-                "Keep behavior stable while you fix bugs and readability."
+                "Model shared catalog behavior with inheritance.",
+                "Use polymorphic services for mixed Book and Video objects.",
+                "Carry each project step's full solution into the next step's starter workspace."
               ],
               "practice": {
                 "tryIt": true,
+                "requiresTryIt": true,
                 "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
                 "projectFlow": "progressive"
               }
             }
@@ -407,125 +868,379 @@
     },
     {
       "moduleNumber": 10,
-      "moduleSlug": "python-10-capstone-automation-project",
+      "moduleSlug": "python-10-testing-debugging-oop-projects",
       "prefix": "py10",
-      "title": "Capstone Automation Project",
-      "role": "capstone",
-      "purpose": "Guide learners through a complete beginner Python project that combines core skills.",
+      "title": "Testing and Debugging OOP Projects",
+      "description": "Test object state, subclass behavior, polymorphic services, imports, fixtures, and refactors in multifile apps.",
+      "purpose": "Turn OOP projects into reliable software by testing behavior, debugging imports/state, and refactoring safely across files.",
       "learningObjectives": [
-        "Plan a small program",
-        "Build and test multiple functions",
-        "Present a finished Python project"
+        "Write tests for object state changes, validation rules, and subclass overrides.",
+        "Debug import errors and object-state bugs in multifile workspaces.",
+        "Refactor main.py into model/service/test files while preserving behavior."
       ],
       "guidedExercises": [
-        "Plan features",
-        "Build modules",
-        "Test and polish"
+        "Write tests in tests/check_*.py for model methods.",
+        "Debug shared mutable state and import path mistakes.",
+        "Refactor reporting logic into service files."
       ],
       "quizFocus": [
-        "project planning",
-        "integration",
-        "debugging"
+        "assertions",
+        "object state",
+        "edge cases",
+        "imports",
+        "refactoring",
+        "fixtures"
       ],
-      "moduleProject": "Complete a capstone such as a task tracker, expense summarizer, text analyzer, or quiz game.",
+      "moduleProject": "Add tests, services, storage, and regression coverage to an OOP catalog app.",
       "sections": [
         {
-          "sectionSlug": "python-10-project-planning",
-          "title": "Project Planning",
+          "sectionSlug": "python-10-testing-oop-behavior",
+          "title": "Testing OOP Behavior",
+          "description": "Write tests for methods, state changes, subclass overrides, and polymorphic loops.",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          },
           "topics": [
             {
-              "topicId": "choosing-a-capstone-scope",
-              "title": "Choosing a Capstone Scope",
-              "summary": "Pick a project that is useful, small enough, and testable.",
-              "minutes": 20,
-              "technical": false,
-              "learningGoals": [
-                "Choose a project idea that is small, useful, and testable.",
-                "Cut a big idea down to a realistic first version."
-              ]
-            },
-            {
-              "topicId": "breaking-projects-into-functions",
-              "title": "Breaking Projects Into Functions",
-              "summary": "Plan functions, inputs, outputs, and data flow before coding.",
-              "minutes": 25,
+              "topicId": "testing-object-state",
+              "title": "Testing Object State",
+              "summary": "Use assert-based tests to prove object construction and method state changes work.",
+              "minutes": 30,
+              "difficulty": "beginner",
               "technical": true,
               "learningGoals": [
-                "Split a small automation project into helper functions.",
-                "Plan what each function receives and returns."
-              ]
-            },
-            {
-              "topicId": "data-model-for-a-small-app",
-              "title": "Data Model for a Small App",
-              "summary": "Choose lists, dictionaries, files, or classes to represent project data.",
-              "minutes": 25,
-              "technical": true,
-              "learningGoals": [
-                "Choose simple data structures for a small app.",
-                "Match your data model to the features you want to build."
-              ]
-            }
-          ]
-        },
-        {
-          "sectionSlug": "python-10-building-and-polishing",
-          "title": "Building and Polishing",
-          "topics": [
-            {
-              "topicId": "implementing-the-core-loop",
-              "title": "Implementing the Core Loop",
-              "summary": "Build the main interaction loop or workflow for the project.",
-              "minutes": 28,
-              "technical": true,
-              "learningGoals": [
-                "Build the main loop or workflow for a small project.",
-                "Handle repeated user choices in a clear order."
-              ]
-            },
-            {
-              "topicId": "testing-the-capstone",
-              "title": "Testing the Capstone",
-              "summary": "Test the most important functions and realistic user paths.",
-              "minutes": 26,
-              "technical": true,
-              "learningGoals": [
-                "Test the most important paths in your capstone.",
-                "Find and fix bugs across several working pieces."
-              ]
-            },
-            {
-              "topicId": "presenting-and-documenting-the-project",
-              "title": "Presenting and Documenting the Project",
-              "summary": "Write a short README-style explanation and show how to run the project.",
-              "minutes": 20,
-              "technical": false,
-              "learningGoals": [
-                "Explain what your project does and how to run it.",
-                "Write short notes that help another learner use the project."
-              ]
-            }
-          ]
-        },
-        {
-          "sectionSlug": "python-10-capstone-project",
-          "title": "Final Project",
-          "role": "capstone",
-          "topics": [
-            {
-              "topicId": "capstone-automation-project",
-              "title": "Capstone Automation Project",
-              "summary": "Complete a final automation project that carries a working solution through implementation, testing, and presentation.",
-              "minutes": 40,
-              "technical": true,
-              "learningGoals": [
-                "Grow one final Python project through several focused changes.",
-                "Combine planning, building, testing, and polish in one workflow.",
-                "Finish with a complete beginner portfolio project."
+                "Write tests that construct objects and inspect attributes.",
+                "Test methods that update state such as deposit(), apply_payment(), or mark_done().",
+                "Cover invalid input and edge cases."
               ],
               "practice": {
                 "tryIt": true,
+                "requiresTryIt": true,
                 "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "testing-inheritance-and-polymorphism",
+              "title": "Testing Inheritance and Polymorphism",
+              "summary": "Test subclass overrides and services that process mixed object lists.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Test inherited behavior and overridden methods.",
+                "Test polymorphic service functions with mixed subclasses.",
+                "Use small fixtures in tests/check_models.py or tests/check_services.py."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-10-debugging-and-refactoring",
+          "title": "Debugging and Refactoring",
+          "description": "Fix import/state problems and move code into services without changing behavior.",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          },
+          "topics": [
+            {
+              "topicId": "debugging-imports-and-state",
+              "title": "Debugging Imports and State",
+              "summary": "Find broken imports, shared-list bugs, and confusing object state in multifile projects.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Read tracebacks caused by bad module paths or missing __init__.py files.",
+                "Fix shared mutable defaults and accidental class-level state.",
+                "Use focused print/debug checks only while diagnosing a problem."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "refactoring-oop-services",
+              "title": "Refactoring OOP Services",
+              "summary": "Move reporting and orchestration logic out of main.py into service modules.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Keep main.py thin by moving reusable logic into services/.",
+                "Preserve output while moving code across files.",
+                "Use tests to protect behavior during refactors."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-10-module-project",
+          "title": "Module Project",
+          "description": "Harden an OOP project with tests, storage, and regression coverage.",
+          "role": "module_project",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ],
+            "projectFlow": "progressive"
+          },
+          "topics": [
+            {
+              "topicId": "module-10-oop-quality-project",
+              "title": "Module 10 OOP Quality Project",
+              "summary": "Add model tests, service tests, storage loading, and final regression coverage to a multifile OOP app.",
+              "minutes": 55,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Create tests/check_*.py files for models and services.",
+                "Verify polymorphic behavior and storage loading.",
+                "Carry each project step's full solution into the next step's starter workspace."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
+                "projectFlow": "progressive"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "moduleNumber": 11,
+      "moduleSlug": "python-11-oop-capstone-project",
+      "prefix": "py11",
+      "role": "capstone",
+      "title": "Final OOP Capstone Project",
+      "description": "Build and polish a smart task tracker that uses encapsulation, abstraction, inheritance, and polymorphism.",
+      "purpose": "Complete a portfolio-style multifile OOP app where every capstone step starts from the previous full solution.",
+      "learningObjectives": [
+        "Design a clear file architecture for a multifile OOP app.",
+        "Use all four OOP pillars in one working project.",
+        "Add storage, reporting, tests, and documentation to finish a polished capstone."
+      ],
+      "guidedExercises": [
+        "Plan model, service, data, report, and test files.",
+        "Build a BaseTask class plus BugTask and FeatureTask subclasses.",
+        "Generate reports, load data, test behavior, and document the finished app."
+      ],
+      "quizFocus": [
+        "architecture",
+        "encapsulation",
+        "inheritance",
+        "polymorphism",
+        "abstraction",
+        "tests",
+        "reports"
+      ],
+      "moduleProject": "Complete a Smart Task Tracker capstone with models, services, storage, reports, tests, and README notes.",
+      "sections": [
+        {
+          "sectionSlug": "python-11-capstone-architecture",
+          "title": "Capstone Architecture",
+          "description": "Plan the app structure and build the core domain model.",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          },
+          "topics": [
+            {
+              "topicId": "capstone-scope-and-architecture",
+              "title": "Capstone Scope and Architecture",
+              "summary": "Choose a realistic scope and map the files before building the app.",
+              "minutes": 30,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Plan files such as main.py, models/, services/, data/, reports/, tests/, and README.md.",
+                "Keep capstone scope small enough to finish but rich enough to show OOP design.",
+                "Identify where each OOP pillar will appear in the project."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "capstone-domain-model",
+              "title": "Capstone Domain Model",
+              "summary": "Build the base task model and specialized task subclasses.",
+              "minutes": 35,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Create models/base_task.py with validation and shared behavior.",
+                "Create specialized subclasses such as BugTask and FeatureTask.",
+                "Use polymorphic summary methods for mixed task lists."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-11-capstone-services-and-polish",
+          "title": "Capstone Services and Polish",
+          "description": "Add storage, reports, tests, polish, and documentation.",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ]
+          },
+          "topics": [
+            {
+              "topicId": "capstone-storage-and-reports",
+              "title": "Capstone Storage and Reports",
+              "summary": "Load task data and generate a summary report from task objects.",
+              "minutes": 35,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Parse data/tasks.txt into task objects.",
+                "Write services/storage.py and services/reports.py.",
+                "Generate reports/summary.txt as runtime output, not a required starter file."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            },
+            {
+              "topicId": "capstone-tests-and-polish",
+              "title": "Capstone Tests and Polish",
+              "summary": "Test the model and service layers, then document and polish the app.",
+              "minutes": 35,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Write tests/check_models.py and tests/check_services.py.",
+                "Use regression checks to protect behavior across files.",
+                "Document how to run the finished capstone in README.md."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "sectionSlug": "python-11-final-capstone",
+          "title": "Final Capstone",
+          "description": "Complete the Smart Task Tracker through cumulative graded steps.",
+          "role": "capstone",
+          "practiceDefaults": {
+            "tryIt": true,
+            "requiresTryIt": true,
+            "tryItPlacement": "all_sketches",
+            "runtimeMode": "editor_workspace",
+            "expectedPracticeKinds": [
+              "code_input"
+            ],
+            "projectFlow": "progressive"
+          },
+          "topics": [
+            {
+              "topicId": "module-11-final-oop-capstone",
+              "title": "Module 11 Final OOP Capstone",
+              "summary": "Finish the Smart Task Tracker by chaining architecture, domain models, services, storage, tests, and polish into one runnable project.",
+              "minutes": 70,
+              "difficulty": "beginner",
+              "technical": true,
+              "learningGoals": [
+                "Use encapsulation, abstraction, inheritance, and polymorphism in one app.",
+                "Keep every capstone step cumulative with full solutionFiles.",
+                "Finish with a runnable project and README documentation."
+              ],
+              "practice": {
+                "tryIt": true,
+                "requiresTryIt": true,
+                "tryItPlacement": "all_sketches",
+                "runtimeMode": "editor_workspace",
+                "expectedPracticeKinds": [
+                  "code_input"
+                ],
                 "projectFlow": "progressive"
               }
             }
@@ -536,5 +1251,172 @@
   ],
   "catalogSlug": "python",
   "courseSlug": "applied-python-projects",
-  "trackSlug": "python"
+  "trackSlug": "python",
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "description": "A cumulative, project-first Python course where learners build object-oriented apps across multiple files and finish with a complete OOP capstone.",
+  "moduleRange": {
+    "start": 8,
+    "end": 11,
+    "label": "Modules 8-11"
+  },
+  "versioning": {
+    "family": "python",
+    "version": 2,
+    "status": "active",
+    "defaultForNewEnrollments": true,
+    "supersedes": "python",
+    "supersededBy": null
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "editor_workspace",
+    "expectedPracticeKinds": [
+      "code_input"
+    ]
+  },
+  "courseGenerationPolicy": {
+    "studentActionStyle": "multifile_editor_workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "terminal-first",
+      "single-file-only",
+      "standalone toy",
+      "unrelated project step"
+    ],
+    "preferredTerms": {
+      "object model": "domain model",
+      "interface": "base-class contract",
+      "files": "workspace files"
+    },
+    "notes": [
+      "Every topic should produce multifile practice when it is technical.",
+      "Try-it cards use try-* exercise keys; regular practice can use ci-*; module project/capstone steps keep descriptive project step ids.",
+      "Full-scope solution workspace is required for every reveal and every golden validation contract.",
+      "Project and capstone solutionFiles are complete snapshots, not diffs."
+    ]
+  },
+  "validationPolicy": {
+    "policyId": "applied-python-projects-oop-validation",
+    "allowedConcepts": [
+      "classes",
+      "instances",
+      "__init__",
+      "attributes",
+      "methods",
+      "self",
+      "encapsulation",
+      "validation",
+      "imports",
+      "modules",
+      "packages",
+      "__init__.py",
+      "helper files",
+      "service files",
+      "filesystem paths",
+      "file input",
+      "file output",
+      "lists of objects",
+      "base classes",
+      "subclasses",
+      "inheritance",
+      "super",
+      "overriding",
+      "polymorphism",
+      "abstraction",
+      "base-class contract",
+      "assert",
+      "testing",
+      "fixtures",
+      "debugging",
+      "tracebacks",
+      "refactoring",
+      "storage",
+      "reports",
+      "README",
+      "project planning"
+    ],
+    "disallowedConcepts": [
+      "external packages",
+      "terminal-first workflows",
+      "SQL datasets",
+      "advanced metaclasses",
+      "multiple inheritance"
+    ],
+    "globalRules": [
+      "Every technical sketch must have a required embedded try-it unless explicitly conceptualOnly.",
+      "Embedded try-it IDs and exercise keys must start with try- and follow try-<topic-id>-sketchN.",
+      "Every code_input exercise must include full starterFiles and full solutionFiles when it uses a workspace.",
+      "solutionFiles must include unchanged starter files too; solutionFiles are snapshots, not diffs.",
+      "Module project and capstone step N+1 starterFiles must equal step N solutionFiles.",
+      "Do not place generated output files such as reports/summary.txt in requiredFiles."
+    ],
+    "moduleRules": {
+      "8": {
+        "notes": [
+          "Teach class files, constructors, methods, object state, encapsulation, validation, imports, and helpers.",
+          "Do not introduce inheritance, polymorphism, or abstraction yet.",
+          "Use multifile try-it exercises from the start: main.py plus models/ or helpers/."
+        ],
+        "validationRequirements": {
+          "requireEncapsulationPractice": true,
+          "forbidInheritanceBeforeModule9": true,
+          "requireTryItPrefix": true,
+          "requireFullWorkspaceSolutions": true
+        }
+      },
+      "9": {
+        "notes": [
+          "Teach inheritance, overriding, polymorphism, and abstraction/base-class contracts cumulatively.",
+          "Use models/base_item.py, subclass files, and services that operate on mixed object lists."
+        ],
+        "validationRequirements": {
+          "requireInheritancePractice": true,
+          "requirePolymorphismPractice": true,
+          "requireAbstractionPractice": true,
+          "requireFullWorkspaceSolutions": true
+        }
+      },
+      "10": {
+        "notes": [
+          "Testing/debugging/refactoring exercises must target multifile OOP apps.",
+          "Use tests/check_*.py, services/, data fixtures, and import/state debugging."
+        ],
+        "validationRequirements": {
+          "requireModelTests": true,
+          "requireServiceTests": true,
+          "requireFixtureCoverage": true,
+          "forbidOutputFilesInRequiredFiles": true
+        }
+      },
+      "11": {
+        "notes": [
+          "Final capstone must integrate encapsulation, abstraction, inheritance, and polymorphism.",
+          "Each capstone step must carry forward the previous complete workspace."
+        ],
+        "validationRequirements": {
+          "requireAllFourOopPillars": true,
+          "requireCapstoneRubric": true,
+          "requireProjectStepChaining": true,
+          "forbidOutputFilesInRequiredFiles": true
+        }
+      }
+    },
+    "validationRequirements": {
+      "goldenTestsRequired": true,
+      "requireTryItPrefix": true,
+      "requireTryItOnAllTechnicalSketches": true,
+      "requireFullWorkspaceSolutions": true,
+      "requireMultiFilePractice": true,
+      "requireProjectRubric": true,
+      "requireCapstoneRubric": true,
+      "requireDeliverableChecklist": true,
+      "requireProjectStepChaining": true,
+      "requireAllFourOopPillars": true,
+      "forbidOutputFilesInRequiredFiles": true,
+      "requireQuizNoCodeInput": true
+    }
+  }
 }

@@ -1,0 +1,1072 @@
+{
+  "topicId": "inheritance-for-shared-behavior",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-inheritance-and-overrides",
+  "prefix": "py9",
+  "minutes": 32,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch0.title",
+      "sketchId": "sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inheritance-for-shared-behavior-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.prompt",
+        "exerciseKey": "try-inheritance-for-shared-behavior-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch1.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inheritance-for-shared-behavior-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.prompt",
+        "exerciseKey": "try-inheritance-for-shared-behavior-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch2.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inheritance-for-shared-behavior-sketch2",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.prompt",
+        "exerciseKey": "try-inheritance-for-shared-behavior-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch3.title",
+      "sketchId": "sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inheritance-for-shared-behavior-sketch3",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.prompt",
+        "exerciseKey": "try-inheritance-for-shared-behavior-sketch3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-3.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-inheritance-for-shared-behavior-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.models_base_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.base_item import CatalogItem\n\nitem = CatalogItem(\"Deep Work\")\nprint(item.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def summary(self):\n        return f\"Item: {self.title}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.models_base_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.base_item import CatalogItem\n\nitem = CatalogItem(\"Deep Work\")\nprint(item.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.base_item import CatalogItem\n\nitem = CatalogItem(\"Deep Work\")\nprint(item.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def summary(self):\n        return f\"Item: {self.title}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "CatalogItem",
+            "message": "Define a CatalogItem class in models/base_item.py."
+          },
+          {
+            "type": "constructible",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Deep Work"
+            ],
+            "message": "CatalogItem should accept a title when created."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Deep Work"
+            ],
+            "attributes": [
+              "title"
+            ],
+            "message": "Store the title on each CatalogItem instance."
+          },
+          {
+            "type": "method_returns",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Deep Work"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Item: Deep Work",
+            "expectedKind": "value",
+            "message": "summary() should return the formatted item text."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-inheritance-for-shared-behavior-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\n\nbook = Book(\"Deep Work\", \"Cal Newport\")\nprint(book.title)\nprint(book.author)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\n\nbook = Book(\"Deep Work\", \"Cal Newport\")\nprint(book.title)\nprint(book.author)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\n\nbook = Book(\"Deep Work\", \"Cal Newport\")\nprint(book.title)\nprint(book.author)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define a Book class in models/book.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Deep Work",
+              "Cal Newport"
+            ],
+            "message": "Book should accept both title and author."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Deep Work",
+              "Cal Newport"
+            ],
+            "attributes": [
+              "title",
+              "author"
+            ],
+            "message": "A Book instance should have inherited title data and its own author data."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-inheritance-for-shared-behavior-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_movie_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n\n\nclass Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, value_1):\n        pass\n\n    def label(self):\n        return f\"Book: {self.value_1}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie.py",
+          "content": "class Movie:\n    def __init__(self, value_1):\n        pass\n\n    def label(self):\n        return f\"Movie: {self.value_1}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_movie_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n\n\nclass Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n\n\nclass Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, value_1):\n        pass\n\n    def label(self):\n        return f\"Book: {self.value_1}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie.py",
+            "content": "class Movie:\n    def __init__(self, value_1):\n        pass\n\n    def label(self):\n        return f\"Movie: {self.value_1}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define a Book class in models/book.py."
+          },
+          {
+            "type": "defines_class",
+            "className": "Movie",
+            "message": "Define a Movie class in models/movie.py."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Book: Dune",
+            "expectedKind": "value",
+            "message": "Book.label() should return the book-specific label."
+          },
+          {
+            "type": "method_returns",
+            "className": "Movie",
+            "constructorArgs": [
+              "Arrival"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Movie: Arrival",
+            "expectedKind": "value",
+            "message": "Movie.label() should return the movie-specific label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-inheritance-for-shared-behavior-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_report(items):\n    return [\"Book: Dune\", \"Movie: Arrival\"]\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_report(value):\n    return [\"Book: Dune\", \"Movie: Arrival\"]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def build_report(items):\n    return [\"Book: Dune\", \"Movie: Arrival\"]\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_report(items):\n    return [\"Book: Dune\", \"Movie: Arrival\"]\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_report(value):\n    return [\"Book: Dune\", \"Movie: Arrival\"]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_report",
+            "args": [
+              [
+                "__mixed_items_case_1__"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              "Book: Dune",
+              "Movie: Arrival"
+            ],
+            "expectedKind": "value",
+            "message": "build_report(items) should return labels for a mixed list in order."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-inheritance-shared-price-method",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.models_catalog_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def discounted_price(self, percent):\n        return int(self.price * (100 - percent) / 100)\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, price, author):\n        super().__init__(title, price)\n        self.author = author\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def discounted_price(self, amount):\n        return 24",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.models_catalog_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-shared-price-method.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class CatalogItem:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def discounted_price(self, percent):\n        return int(self.price * (100 - percent) / 100)\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, price, author):\n        super().__init__(title, price)\n        self.author = author\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, price):\n        self.title = title\n        self.price = price\n\n    def discounted_price(self, percent):\n        return int(self.price * (100 - percent) / 100)\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, price, author):\n        super().__init__(title, price)\n        self.author = author\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/catalog_item.py",
+            "content": "class CatalogItem:\n    def __init__(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def discounted_price(self, amount):\n        return 24",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "CatalogItem",
+            "message": "Define CatalogItem in models/base_item.py."
+          },
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define Book in models/book.py."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Clean Code",
+              30,
+              "Robert C. Martin"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "discounted_price",
+            "methodArgs": [
+              20
+            ],
+            "methodArgKinds": [],
+            "expected": 24,
+            "expectedKind": "value",
+            "message": "A Book should inherit discounted_price() from CatalogItem and calculate the reduced price correctly."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-inheritance-mixed-count-service",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterFiles.models_movie_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/inventory_service.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterFiles.services_inventory_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, stock):\n        self.title = title\n        self.stock = stock\n\n    def is_available(self):\n        return self.stock > 0\n\n\nclass Book(CatalogItem):\n    pass\n\n\nclass Movie(CatalogItem):\n    pass\n\n\ndef count_available(items):\n    return 1\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def is_available(self):\n        return True",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/movie.py",
+          "content": "class Movie:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def is_available(self):\n        return True",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/inventory_service.py",
+          "content": "def count_available(value):\n    return 1",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterFiles.models_movie_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/inventory_service.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-mixed-count-service.starterFiles.services_inventory_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class CatalogItem:\n    def __init__(self, title, stock):\n        self.title = title\n        self.stock = stock\n\n    def is_available(self):\n        return self.stock > 0\n\n\nclass Book(CatalogItem):\n    pass\n\n\nclass Movie(CatalogItem):\n    pass\n\n\ndef count_available(items):\n    return 1\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, stock):\n        self.title = title\n        self.stock = stock\n\n    def is_available(self):\n        return self.stock > 0\n\n\nclass Book(CatalogItem):\n    pass\n\n\nclass Movie(CatalogItem):\n    pass\n\n\ndef count_available(items):\n    return 1\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def is_available(self):\n        return True",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/movie.py",
+            "content": "class Movie:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def is_available(self):\n        return True",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/inventory_service.py",
+            "content": "def count_available(value):\n    return 1",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune",
+              3
+            ],
+            "constructorArgKinds": [],
+            "methodName": "is_available",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": true,
+            "expectedKind": "value",
+            "message": "Book should inherit is_available() and return True when stock is above zero."
+          },
+          {
+            "type": "method_returns",
+            "className": "Movie",
+            "constructorArgs": [
+              "Arrival",
+              0
+            ],
+            "constructorArgKinds": [],
+            "methodName": "is_available",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "Movie should inherit is_available() and return False when stock is zero."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "count_available",
+            "args": [
+              [
+                "__mixed_items_case_2__"
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": 1,
+            "expectedKind": "value",
+            "message": "count_available(items) should count available objects in a mixed list."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sc-inheritance-main-benefit",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.sc-inheritance-main-benefit",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc-super-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.sc-super-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "mc-polymorphism-shared-methods",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.mc-polymorphism-shared-methods",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-subclass-constructor-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.dr-subclass-constructor-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "fb-inheritance-class-header",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.fb-inheritance-class-header",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "CatalogItem"
+      }
+    },
+    {
+      "id": "fb-overriding-method-name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.fb-overriding-method-name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "label"
+      }
+    }
+  ]
+}

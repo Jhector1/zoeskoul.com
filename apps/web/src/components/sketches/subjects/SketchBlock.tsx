@@ -69,7 +69,23 @@ export default function SketchBlock(props: {
         [initialState],
     );
 
-    const entry: SketchEntry | null = useMemo(() => getSketchEntry(sketchId), [sketchId]);
+    const entry: SketchEntry | null = useMemo(() => {
+        const registered = getSketchEntry(sketchId);
+        if (registered) return registered;
+
+        const patch = propsPatch as Record<string, unknown> | undefined;
+        if (patch && typeof patch.archetype === "string") {
+            return {
+                kind: "archetype",
+                spec: {
+                    specVersion: typeof patch.specVersion === "number" ? patch.specVersion : 1,
+                    ...patch,
+                } as any,
+            } satisfies SketchEntry;
+        }
+
+        return null;
+    }, [sketchId, propsPatch]);
     const [confirmReset, setConfirmReset] = useState(false);
 
     const resolved = useMemo(() => {

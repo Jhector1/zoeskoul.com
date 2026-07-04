@@ -1,0 +1,95 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "module-5-gradebook-project": {
+          "label": "Pwojè Kaye Nòt Modil 5",
+          "summary": "Bati yon ti pwojè rejis nòt pa etap konsantre ki kenbe vèsyon k ap fonksyone anvan an epi ajoute yon lide koleksyon chak fwa.",
+          "cards": {
+            "sketch0": {
+              "title": "Konprann Lis ak Diksyonè"
+            },
+            "sketch1": {
+              "title": "Eseye l poukont ou"
+            },
+            "project": {
+              "title": "Pwojè Kaye Nòt"
+            }
+          },
+          "projectSteps": {
+            "exercise1": {
+              "title": "Kreye yon lis elèv"
+            },
+            "exercise2": {
+              "title": "Ajoute nòt pou elèv yo"
+            },
+            "exercise3": {
+              "title": "Kalkile mwayèn nòt la"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_module_5_gradebook_project_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ekri yon fonksyon `create_student_list` ki retounen yon lis non elèv yo. Fonksyon an pa dwe pran okenn paramèt epi li dwe retounen yon lis ki gen 'Alice', 'Bob', ak 'Charlie'."
+            }
+          },
+          "quiz": {
+            "exercise1": {
+              "title": "Kreye yon lis elèv",
+              "prompt": "Kòmanse pwojè modil la. Nan etap 1 sou 3, ekri yon fonksyon `create_student_list` ki retounen yon lis non elèv yo. Fonksyon an pa dwe pran okenn paramèt epi li dwe retounen yon lis ki gen 'Alice', 'Bob', ak 'Charlie'.",
+              "hint": "Sa a se premye etap pwojè a. Bati yon vèsyon kòmansman pwòp, epi kouri li anvan ou kontinye.",
+              "help": {
+                "concept": "Pwojè modil sa a pwogresif. Chak etap kòmanse ak solisyon ki te deja ap fonksyone epi li ajoute yon karakteristik ki byen konsantre.",
+                "hint_1": "Sa a se premye etap pwojè a. Bati yon vèsyon kòmansman pwòp, epi kouri li anvan ou kontinye.",
+                "hint_2": "Klike sou Kouri epi konpare panèl sòti a ak rezilta espere a."
+              },
+              "starterCode": "def create_student_list():\n    # Create a list of student names\n    return []",
+              "solutionCode": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']"
+            },
+            "exercise2": {
+              "title": "Ajoute nòt pou elèv yo",
+              "prompt": "Kontinye menm pwojè modil la depi etap travay anvan an. Nan etap 2 sou 3, ekri yon fonksyon `add_grades` ki pran yon lis non elèv ak yon lis nòt, epi ki retounen yon diksyonè ki map chak elèv ak nòt li.",
+              "hint": "Kòmanse ak kòd k ap fonksyone nan etap anvan an. Kenbe kòd sa a, swiv nouvo kòmantè yo, epi ajoute sèlman pwochen konpòtman ki konsantre a.",
+              "help": {
+                "concept": "Pwojè modil sa a pwogresif. Chak etap kòmanse ak solisyon ki te deja ap fonksyone epi li ajoute yon karakteristik ki byen konsantre.",
+                "hint_1": "Kòmanse ak kòd k ap fonksyone nan etap anvan an. Kenbe kòd sa a, swiv nouvo kòmantè yo, epi ajoute sèlman pwochen konpòtman ki konsantre a.",
+                "hint_2": "Kouri kòd ki t ap fonksyone anvan an an premye, epi fè sèlman chanjman ki konsantre pou etap sa a."
+              },
+              "starterCode": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']\n# Project step 2: Add Grades to Students\n# Keep the working code above from the previous step.\n# Next, Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade\n# Add only the focused change for this step below or inside the existing work.\n",
+              "solutionCode": "def add_grades(students, grades):\n    return dict(zip(students, grades))"
+            },
+            "exercise3": {
+              "title": "Kalkile mwayèn nòt la",
+              "prompt": "Kontinye menm pwojè modil la depi etap travay anvan an. Nan etap 3 sou 3, ekri yon fonksyon `calculate_average` ki pran yon diksyonè nòt elèv yo epi retounen mwayèn nòt la.",
+              "hint": "Kòmanse ak kòd k ap fonksyone nan etap anvan an. Kenbe kòd sa a, swiv nouvo kòmantè yo, epi ajoute sèlman pwochen konpòtman ki konsantre a.",
+              "help": {
+                "concept": "Pwojè modil sa a pwogresif. Chak etap kòmanse ak solisyon ki te deja ap fonksyone epi li ajoute yon karakteristik ki byen konsantre.",
+                "hint_1": "Kòmanse ak kòd k ap fonksyone nan etap anvan an. Kenbe kòd sa a, swiv nouvo kòmantè yo, epi ajoute sèlman pwochen konpòtman ki konsantre a.",
+                "hint_2": "Kouri kòd ki te deja ap mache a an premye, epi fè sèlman chanjman ki konsantre pou etap sa a."
+              },
+              "starterCode": "def add_grades(students, grades):\n    return dict(zip(students, grades))\n# Project step 3: Calculate Average Grade\n# Keep the working code above from the previous step.\n# Next, Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade\n# Add only the focused change for this step below or inside the existing work.\n",
+              "solutionCode": "def calculate_average(grades):\n    return sum(grades.values()) / len(grades)"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "module-5-gradebook-project": {
+          "sketch1": {
+            "title": "Konprann Lis ak Diksyonè",
+            "bodyMarkdown": "In Python, lists and dictionaries are powerful tools for organizing data. A list is an ordered collection of items, which can be of any type. You can access elements by their index, modify them, and iterate over them. Here's a simple example:\n\n```python\nstudents = ['Alice', 'Bob', 'Charlie']\nprint(students[0])  # Outputs: Alice\n```\n\nDictionaries, on the other hand, store data in key-value pairs. They are unordered, and you access values by their keys. Here's how you can use a dictionary:\n\n```python\ngrades = {'Alice': 85, 'Bob': 90, 'Charlie': 78}\nprint(grades['Bob'])  # Outputs: 90\n```\n\nUnderstanding how to use these structures is crucial for building applications that manage data effectively.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "try-it-yourself": {
+            "title": "Eseye l poukont ou",
+            "bodyMarkdown": "Eseye li poukont ou: chanje yon sèl valè nan egzanp lan, predi nouvo rezilta a, epi kouri kòd la pou verifye prediksyon ou."
+          }
+        }
+      }
+    }
+  }
+}

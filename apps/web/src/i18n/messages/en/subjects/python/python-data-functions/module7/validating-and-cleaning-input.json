@@ -173,7 +173,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass"
+              "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
+              "solutionCode": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()"
             },
             "ci-parse-age": {
               "title": "Parse an age safely",
@@ -184,7 +185,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def parse_age(text):\n    # return an int or None\n    pass"
+              "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
+              "solutionCode": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None"
             },
             "ci-clean-row": {
               "title": "Validate and clean one row",
@@ -195,7 +197,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass"
+              "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
+              "solutionCode": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}"
             },
             "try-validating-and-cleaning-input-checkpoint": {
               "title": "Clean and validate a name",
@@ -206,7 +209,16 @@
                 "hint_1": "Use `.strip()` before checking whether the value is empty.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "name = input()\n\n# Clean and validate the name.\n"
+              "starterCode": "name = input()\n\n# Clean and validate the name.\n",
+              "solutionCode": "name = input().strip().title()\nif name:\n    print(name)\nelse:\n    print(\"Missing\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Strip whitespace from the name."
+                },
+                "1": {
+                  "message": "Title-case the cleaned name."
+                }
+              }
             },
             "try-validating-and-cleaning-input-sketch0": {
               "title": "Clean a name",
@@ -217,7 +229,16 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n"
+              "starterCode": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n",
+              "solutionCode": "raw = '  aVA smith  '\nclean = raw.strip().title()\nprint(clean)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use strip() to remove extra spaces."
+                },
+                "1": {
+                  "message": "Use title() to normalize the name."
+                }
+              }
             },
             "try-validating-and-cleaning-input-sketch1": {
               "title": "Validate a score",
@@ -228,7 +249,16 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n"
+              "starterCode": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n",
+              "solutionCode": "score_text = '92'\nscore = int(score_text)\nif 0 <= score <= 100:\n    print('valid')\nelse:\n    print('invalid')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Convert score_text to an integer."
+                },
+                "1": {
+                  "message": "Check that the score is within 0 to 100."
+                }
+              }
             },
             "try-validating-and-cleaning-input-sketch2": {
               "title": "Clean several rows",
@@ -239,7 +269,22 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n"
+              "starterCode": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n",
+              "solutionCode": "rows = [' ava , 92 ', ' mia , 85 ']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name.strip().title()}:{score.strip()}')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through rows instead of typing both cleaned lines."
+                },
+                "1": {
+                  "message": "Split each row into name and score."
+                },
+                "2": {
+                  "message": "Strip spaces from each part."
+                },
+                "3": {
+                  "message": "Title-case each name."
+                }
+              }
             }
           },
           "tryIt": {

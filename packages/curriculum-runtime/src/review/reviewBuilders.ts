@@ -18,6 +18,7 @@ export function makeQuizSpec(args: any) {
     topic: args.topic,
     difficulty: args.difficulty ?? "easy",
     n: args.n ?? 3,
+    exerciseKeys: Array.isArray(args.exerciseKeys) ? args.exerciseKeys : undefined,
     min: args.min,
     max: args.max,
     selectionMode: args.selectionMode ?? "fixed",

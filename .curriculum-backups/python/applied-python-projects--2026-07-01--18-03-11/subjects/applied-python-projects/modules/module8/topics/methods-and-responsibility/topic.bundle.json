@@ -1,0 +1,1130 @@
+{
+  "topicId": "methods-and-responsibility",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "applied-python-projects-python-8-encapsulation-and-services",
+  "prefix": "py8",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.sketch0.title",
+      "sketchId": "methods-and-responsibility-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-methods-and-responsibility-sketch0",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.prompt",
+        "exerciseKey": "try-methods-and-responsibility-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.sketch1.title",
+      "sketchId": "methods-and-responsibility-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-methods-and-responsibility-sketch1",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.prompt",
+        "exerciseKey": "try-methods-and-responsibility-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.sketch2.title",
+      "sketchId": "methods-and-responsibility-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-methods-and-responsibility-sketch2",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.prompt",
+        "exerciseKey": "try-methods-and-responsibility-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.sketch3.title",
+      "sketchId": "methods-and-responsibility-sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-methods-and-responsibility-sketch3",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.prompt",
+        "exerciseKey": "try-methods-and-responsibility-sketch3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "methods-and-responsibility-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "methods-and-responsibility-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "methods-and-responsibility-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "methods-and-responsibility-sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch-3.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-methods-and-responsibility-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def deposit(self, amount):\n        self.balance = ComparableValue(self.balance.value + amount)\n        return self.balance\n\naccount = Account(\"Mina\", 100)\naccount.deposit(25)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def deposit(self, amount):\n        self.balance = ComparableValue(self.balance.value + amount)\n        return self.balance\n\naccount = Account(\"Mina\", 100)\naccount.deposit(25)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def deposit(self, amount):\n        self.balance = ComparableValue(self.balance.value + amount)\n        return self.balance\n\naccount = Account(\"Mina\", 100)\naccount.deposit(25)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define the Account class."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              100
+            ],
+            "message": "Account should be constructible with owner and balance."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              100
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "Store owner and balance as instance attributes."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              100
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 125,
+            "expectedKind": "value",
+            "message": "deposit should update the balance and return the new balance."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              100
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": [
+              125
+            ],
+            "expectedKind": "value",
+            "message": "After deposit(25), balance should be 125."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-methods-and-responsibility-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def withdraw(self, amount):\n        self.balance = ComparableValue(self.balance.value - amount)\n        return self.balance\n\naccount = Account(\"Leo\", 120)\naccount.withdraw(30)\nprint(account.balance)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def withdraw(self, amount):\n        self.balance = ComparableValue(self.balance.value - amount)\n        return self.balance\n\naccount = Account(\"Leo\", 120)\naccount.withdraw(30)\nprint(account.balance)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def withdraw(self, amount):\n        self.balance = ComparableValue(self.balance.value - amount)\n        return self.balance\n\naccount = Account(\"Leo\", 120)\naccount.withdraw(30)\nprint(account.balance)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define the Account class."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Leo",
+              120
+            ],
+            "message": "Account should be constructible with owner and balance."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Leo",
+              120
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  30
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 90,
+            "expectedKind": "value",
+            "message": "withdraw should subtract the amount and return the new balance."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Leo",
+              120
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  30
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": [
+              90
+            ],
+            "expectedKind": "value",
+            "message": "After withdraw(30), balance should be 90."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "The program should still print a result from main.py."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-methods-and-responsibility-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\naccount = Account(\"Ava\", 80)\naccount.summary()\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\naccount = Account(\"Ava\", 80)\naccount.summary()\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\naccount = Account(\"Ava\", 80)\naccount.summary()\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define the Account class."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              80
+            ],
+            "message": "Account should be constructible with owner and balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              80
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Ava: $80",
+            "expectedKind": "value",
+            "message": "summary should return the formatted account text."
+          },
+          {
+            "type": "no_stdout",
+            "message": "The class method should return text rather than printing it directly."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-methods-and-responsibility-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.starterFiles.helpers_formatting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def format_dollars(amount):\n    return f\"${amount}\"\n\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n\naccount = Account(\"Noor\", 145)\naccount.summary()\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "from helpers.formatting import format_dollars\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "def format_dollars(value):\n    return f\"${value}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch3.starterFiles.helpers_formatting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def format_dollars(amount):\n    return f\"${amount}\"\n\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n\naccount = Account(\"Noor\", 145)\naccount.summary()\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_dollars(amount):\n    return f\"${amount}\"\n\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n\naccount = Account(\"Noor\", 145)\naccount.summary()\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.formatting import format_dollars\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_dollars(value):\n    return f\"${value}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define the Account class."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_dollars",
+            "args": [
+              145
+            ],
+            "argKinds": [],
+            "expected": "$145",
+            "expectedKind": "value",
+            "message": "format_dollars should return a dollar-formatted string."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Noor",
+              145
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Noor: $145",
+            "expectedKind": "value",
+            "message": "summary should use the helper-formatted balance."
+          },
+          {
+            "type": "no_stdout",
+            "message": "The helper and method should return values instead of printing."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-methods-and-responsibility-validate-withdrawal",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def withdraw(self, amount):\n        if amount <= self.balance.value:\n            self.balance = ComparableValue(self.balance.value - amount)\n        return self.balance\n\naccount = Account(\"Jules\", 100)\naccount.withdraw(40)\naccount.withdraw(80)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-validate-withdrawal.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def withdraw(self, amount):\n        if amount <= self.balance.value:\n            self.balance = ComparableValue(self.balance.value - amount)\n        return self.balance\n\naccount = Account(\"Jules\", 100)\naccount.withdraw(40)\naccount.withdraw(80)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def withdraw(self, amount):\n        if amount <= self.balance.value:\n            self.balance = ComparableValue(self.balance.value - amount)\n        return self.balance\n\naccount = Account(\"Jules\", 100)\naccount.withdraw(40)\naccount.withdraw(80)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define the Account class."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Jules",
+              100
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  40
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 60,
+            "expectedKind": "value",
+            "message": "A valid withdrawal should reduce the balance."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Jules",
+              100
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  40
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  80
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": [
+              60
+            ],
+            "expectedKind": "value",
+            "message": "After an invalid second withdrawal, the balance should remain 60."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Jules",
+              100
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  120
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 100,
+            "expectedKind": "value",
+            "message": "If the amount is too large, return the unchanged balance."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-methods-and-responsibility-report-line",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def deposit(self, amount):\n        self.balance = ComparableValue(self.balance.value + amount)\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance.value}\"\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\naccount.report_line()\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-report-line.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def deposit(self, amount):\n        self.balance = ComparableValue(self.balance.value + amount)\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance.value}\"\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\naccount.report_line()\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def deposit(self, amount):\n        self.balance = ComparableValue(self.balance.value + amount)\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance.value}\"\n\naccount = Account(\"Rae\", 70)\naccount.deposit(25)\naccount.report_line()\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def report_line(self):\n        return f\"{self.owner} | balance: ${self.balance}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define the Account class."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Rae",
+              70
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": [
+              95
+            ],
+            "expectedKind": "value",
+            "message": "deposit should update the balance to 95."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Rae",
+              95
+            ],
+            "constructorArgKinds": [],
+            "methodName": "report_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Rae | balance: $95",
+            "expectedKind": "value",
+            "message": "report_line should return the formatted report text."
+          },
+          {
+            "type": "no_stdout",
+            "message": "The methods should return values rather than printing directly."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mc-method-responsibility-core",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.mc-method-responsibility-core",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc-encapsulation-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.mc-encapsulation-benefits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "fb-method-call-balance",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.fb-method-call-balance",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "deposit"
+      }
+    },
+    {
+      "id": "fb-summary-return",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.fb-summary-return",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "owner"
+      }
+    },
+    {
+      "id": "sc-main-thin-coordinator",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.sc-main-thin-coordinator",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "dr-account-workflow-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.dr-account-workflow-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t3",
+          "t4",
+          "t1"
+        ]
+      }
+    }
+  ]
+}

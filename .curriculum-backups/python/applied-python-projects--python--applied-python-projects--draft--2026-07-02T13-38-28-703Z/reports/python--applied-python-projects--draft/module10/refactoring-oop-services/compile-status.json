@@ -1,0 +1,37 @@
+{
+  "reportDir": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/reports/python--applied-python-projects--draft/module10/refactoring-oop-services",
+  "status": "success",
+  "attempts": 0,
+  "finalAttempt": 0,
+  "mode": "rebuild-from-drafts",
+  "sourceDraft": "current-draft-output",
+  "validationState": {
+    "unsafeSkipValidation": false,
+    "requested": {
+      "skipQualityGates": false,
+      "skipSemantic": false,
+      "skipGolden": false,
+      "unsafeSkipValidation": false
+    },
+    "structural": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "qualityGates": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "semantic": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    },
+    "golden": {
+      "ran": true,
+      "skipped": false,
+      "required": true
+    }
+  }
+}

@@ -941,6 +941,111 @@ describe("review module completion/navigation source of truth", () => {
 
         expect(isTopicComplete(cards, progressTopic(progress, topicId), topicId)).toBe(false);
     });
+    it("resetting an embedded Try it clears saved progress by try-it id and runtime by parent card id", () => {
+        const topicId = "setup-and-first-python";
+
+        let progress: ReviewProgressState = {
+            topics: {
+                [topicId]: {
+                    readingDone: {
+                        "sketch-card": true,
+                    },
+                    cardsDone: {
+                        "sketch-card": true,
+                    },
+                    quizzesDone: {
+                        "try-it-1": true,
+                        "try-it-2": true,
+                    },
+                    quizState: {
+                        "try-it-1": {
+                            answers: { q1: "old answer" },
+                        } as any,
+                        "try-it-2": {
+                            answers: { q2: "keep this answer" },
+                        } as any,
+                    },
+                    sketchState: {
+                        "sketch-card": { code: "remove sketch state" },
+                        "other-card": { code: "keep sketch state" },
+                    },
+                    toolState: {
+                        "card:sketch-card": { activeFile: "remove.py" },
+                        "card:other-card": { activeFile: "keep.py" },
+                    },
+                    runtimeStateV2: {
+                        exercises: {
+                            "python:module:section:setup-and-first-python:sketch-card:try-it-1": {
+                                code: "print('remove me even without cardId')",
+                            },
+                            "python:module:section:setup-and-first-python:other-card:try-it-2": {
+                                code: "print('keep me')",
+                            },
+                        },
+                        cards: {
+                            "python:module:section:setup-and-first-python:sketch-card:general": {
+                                files: "remove me even without cardId",
+                            },
+                            "python:module:section:setup-and-first-python:other-card:general": {
+                                files: "keep me",
+                            },
+                        },
+                    },
+                    completed: true,
+                    completedAt: "2026-05-16T12:00:00.000Z",
+                } as any,
+            },
+            moduleCompleted: true,
+            moduleCompletedAt: "2026-05-16T12:00:00.000Z",
+        };
+
+        progress = buildQuizResetProgress(progress, topicId, {
+            progressId: "try-it-1",
+            runtimeCardId: "sketch-card",
+            cardProgressKeys: ["sketch-card", "try-it-1"],
+        });
+
+        const nextTopic = progress.topics?.[topicId] as any;
+
+        expect(progress.moduleCompleted).toBe(false);
+        expect(progress.moduleCompletedAt).toBeUndefined();
+
+        expect(nextTopic.quizzesDone["try-it-1"]).toBeUndefined();
+        expect(nextTopic.quizzesDone["try-it-2"]).toBe(true);
+        expect(nextTopic.quizState["try-it-1"]).toBeUndefined();
+        expect(nextTopic.quizState["try-it-2"]).toEqual({
+            answers: { q2: "keep this answer" },
+        });
+
+        expect(nextTopic.readingDone["sketch-card"]).toBeUndefined();
+        expect(nextTopic.cardsDone["sketch-card"]).toBeUndefined();
+        expect(nextTopic.sketchState["sketch-card"]).toBeUndefined();
+        expect(nextTopic.sketchState["other-card"]).toEqual({ code: "keep sketch state" });
+        expect(nextTopic.toolState["card:sketch-card"]).toBeUndefined();
+        expect(nextTopic.toolState["card:other-card"]).toEqual({ activeFile: "keep.py" });
+
+        expect(
+            nextTopic.runtimeStateV2.exercises[
+                "python:module:section:setup-and-first-python:sketch-card:try-it-1"
+            ],
+        ).toBeUndefined();
+        expect(
+            nextTopic.runtimeStateV2.cards[
+                "python:module:section:setup-and-first-python:sketch-card:general"
+            ],
+        ).toBeUndefined();
+        expect(
+            nextTopic.runtimeStateV2.exercises[
+                "python:module:section:setup-and-first-python:other-card:try-it-2"
+            ],
+        ).toEqual({ code: "print('keep me')" });
+        expect(
+            nextTopic.runtimeStateV2.cards[
+                "python:module:section:setup-and-first-python:other-card:general"
+            ],
+        ).toEqual({ files: "keep me" });
+    });
+
     it("resetting an already-reset module stays clean and does not crash", () => {
         const topicId = "setup-and-first-python";
 

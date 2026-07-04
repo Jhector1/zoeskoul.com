@@ -1,0 +1,816 @@
+{
+  "title": "Module 10 OOP Quality Project",
+  "summary": "Build regression coverage for a multifile catalog app by adding model tests, service tests, storage loading, and a final end-to-end check.",
+  "minutes": 55,
+  "sketchBlocks": [
+    {
+      "id": "module-10-oop-quality-project-sketch0",
+      "title": "Project synopsis: test and stabilize a catalog app",
+      "bodyMarkdown": "In this project, you are the developer responsible for making a small catalog app reliable before it is shared with a team. The app already has a **domain model**, a **report service**, and a **storage loader**, but it needs stronger tests and a few bug fixes.\n\nYou will work across several workspace files:\n\n- `models/the code editor` for the main class\n- `services/the code editor` for summary logic\n- `storage/the code editor` for reading fixture data\n- `tests/check_*.py` for regression coverage\n- `the code editor` to show the app working together\n\nA small OOP project becomes easier to trust when each file has a clear job:\n\n```python\n# models/the code editor\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n```\n\nLine by line:\n\n- `class CatalogItem:` starts the class definition.\n- `__init__` runs when a new object is created.\n- `self.name`, `self.category`, and `self.quantity` store object state.\n\nA service file can then use many objects together:\n\n```python\n# services/the code editor\nfrom models.catalog_item import CatalogItem\n\ndef total_quantity(items):\n    return sum(item.quantity for item in items)\n```\n\nHere, the service does not store item data itself. Instead, it reads the state from each object and computes a result.\n\nBy the end of the project, your deliverable is a catalog app that:\n\n1. validates object state correctly,\n2. loads items from fixture data,\n3. summarizes inventory through a service,\n4. and includes regression tests that protect the behavior during refactoring."
+    },
+    {
+      "id": "try-it-yourself",
+      "title": "Try it yourself",
+      "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-10-oop-quality-project-sketch0",
+      "kind": "code_input",
+      "title": "Milestone 1: Add model validation tests",
+      "prompt": "You are starting the catalog quality pass. Open the workspace files and add model tests in `tests/check_model.py` for the `CatalogItem` class. Verify that a valid item stores its attributes, that `is_in_stock()` reports correctly, and that creating an item with a negative quantity raises `ValueError`. Keep `main.py` runnable so the output panel still shows the sample summary line.",
+      "starterCode": "# Write your answer below",
+      "solutionCode": "from models.catalog_item import CatalogItem\nfrom services.reporting import total_quantity\n\nitems = [\n    CatalogItem(\"Notebook\", \"Office\", 4),\n    CatalogItem(\"Marker\", \"Office\", 0),\n]\n\nprint(f\"Total quantity: {total_quantity(items)}\")",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "CatalogItem",
+          "message": "Define the CatalogItem class in models/catalog_item.py."
+        },
+        {
+          "type": "constructible",
+          "className": "CatalogItem",
+          "constructorArgs": [
+            "Notebook",
+            "Office",
+            4
+          ],
+          "message": "A valid CatalogItem should be constructible with name, category, and quantity."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "CatalogItem",
+          "constructorArgs": [
+            "Notebook",
+            "Office",
+            4
+          ],
+          "attributes": [
+            "name",
+            "category",
+            "quantity"
+          ],
+          "message": "CatalogItem instances should store name, category, and quantity attributes."
+        },
+        {
+          "type": "method_returns",
+          "className": "CatalogItem",
+          "constructorArgs": [
+            "Notebook",
+            "Office",
+            4
+          ],
+          "constructorArgKinds": [],
+          "methodName": "is_in_stock",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": true,
+          "expectedKind": "value",
+          "message": "is_in_stock() should return True when quantity is greater than 0."
+        },
+        {
+          "type": "method_returns",
+          "className": "CatalogItem",
+          "constructorArgs": [
+            "Marker",
+            "Office",
+            0
+          ],
+          "constructorArgKinds": [],
+          "methodName": "is_in_stock",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": false,
+          "expectedKind": "value",
+          "message": "is_in_stock() should return False when quantity is 0."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 1,
+          "message": "Running the workspace should still print at least one line from main.py."
+        }
+      ],
+      "hint": "Read the task \"Milestone 1: Add model validation tests\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Milestone 1: Add model validation tests\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your answer below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.catalog_item import CatalogItem\nfrom services.reporting import total_quantity\n\nitems = [\n    CatalogItem(\"Notebook\", \"Office\", 4),\n    CatalogItem(\"Marker\", \"Office\", 0),\n]\n\nprint(f\"Total quantity: {total_quantity(items)}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "project-step-report-service-tests",
+      "kind": "code_input",
+      "title": "Milestone 2: Test and fix the reporting service",
+      "prompt": "Continue from the previous working workspace. Add service tests in `tests/check_reporting.py` for `total_quantity(items)` and `low_stock_names(items, threshold)`. Then fix the reporting code so the tests pass. `low_stock_names` should return item names whose quantity is less than or equal to the threshold, in the same order as the input list. Keep the sample run in `main.py` working.",
+      "starterCode": "# Write your answer below",
+      "solutionCode": "from models.catalog_item import CatalogItem\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = [\n    CatalogItem(\"Notebook\", \"Office\", 4),\n    CatalogItem(\"Marker\", \"Office\", 0),\n    CatalogItem(\"Tape\", \"Office\", 2),\n]\n\nprint(f\"Total quantity: {total_quantity(items)}\")\nprint(f\"Low stock: {', '.join(low_stock_names(items, 2))}\")",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "total_quantity",
+          "args": [
+            [
+              [
+                [
+                  "name",
+                  "Notebook"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  4
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Marker"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  0
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Tape"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  2
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries"
+          ],
+          "expected": 6,
+          "expectedKind": "value",
+          "message": "total_quantity(items) should add the quantity from every CatalogItem."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "low_stock_names",
+          "args": [
+            [
+              [
+                [
+                  "name",
+                  "Notebook"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  4
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Marker"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  0
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Tape"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  2
+                ]
+              ]
+            ],
+            2
+          ],
+          "argKinds": [
+            "list_of_dict_entries",
+            "value"
+          ],
+          "expected": [
+            "Marker",
+            "Tape"
+          ],
+          "expectedKind": "value",
+          "message": "low_stock_names(items, threshold) should include names whose quantity is less than or equal to the threshold."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "Running the workspace should print both the total quantity and low-stock summary."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your answer below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "def total_quantity(items):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.catalog_item import CatalogItem\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = [\n    CatalogItem(\"Notebook\", \"Office\", 4),\n    CatalogItem(\"Marker\", \"Office\", 0),\n    CatalogItem(\"Tape\", \"Office\", 2),\n]\n\nprint(f\"Total quantity: {total_quantity(items)}\")\nprint(f\"Low stock: {', '.join(low_stock_names(items, 2))}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "def total_quantity(value):\n    return 6",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "project-step-storage-loader",
+      "kind": "code_input",
+      "title": "Milestone 3: Load catalog items from fixture data",
+      "prompt": "Continue from the previous working workspace. Implement `load_items(path)` in `storage/catalog_loader.py` so it reads `data/catalog.csv`, skips the header row, creates `CatalogItem` objects, and returns the list. Add tests in `tests/check_loader.py` that verify the loader returns the right number of objects and preserves names and quantities from the fixture file. Update `main.py` to load from the CSV file before printing the report.",
+      "starterCode": "# Write your answer below",
+      "solutionCode": "from storage.catalog_loader import load_items\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = load_items(\"data/catalog.csv\")\n\nprint(f\"Total quantity: {total_quantity(items)}\")\nprint(f\"Low stock: {', '.join(low_stock_names(items, 2))}\")",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "load_items",
+          "args": [
+            "data/catalog.csv"
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": [
+            [
+              [
+                "name",
+                "Notebook"
+              ],
+              [
+                "category",
+                "Office"
+              ],
+              [
+                "quantity",
+                4
+              ]
+            ],
+            [
+              [
+                "name",
+                "Marker"
+              ],
+              [
+                "category",
+                "Office"
+              ],
+              [
+                "quantity",
+                0
+              ]
+            ],
+            [
+              [
+                "name",
+                "Tape"
+              ],
+              [
+                "category",
+                "Office"
+              ],
+              [
+                "quantity",
+                2
+              ]
+            ]
+          ],
+          "expectedKind": "list_of_dict_entries",
+          "message": "load_items(path) should return CatalogItem objects built from the CSV fixture."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "Running the workspace should still print the report after loading from the CSV file."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your answer below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "storage/catalog_loader.py",
+          "content": "def load_items(value):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from storage.catalog_loader import load_items\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = load_items(\"data/catalog.csv\")\n\nprint(f\"Total quantity: {total_quantity(items)}\")\nprint(f\"Low stock: {', '.join(low_stock_names(items, 2))}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "storage/catalog_loader.py",
+          "content": "def load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "project-step-debug-imports-state",
+      "kind": "code_input",
+      "title": "Milestone 4: Debug imports and state updates",
+      "prompt": "Continue from the previous working workspace. The app now needs a restock feature. Add an `add_stock(amount)` method to `CatalogItem` that increases quantity and rejects negative amounts with `ValueError`. Add tests in `tests/check_restock.py` for both the successful state change and the invalid negative amount case. Update the report flow so `main.py` restocks `Marker` by 3 before printing the final summary.",
+      "starterCode": "from storage.catalog_loader import load_items\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        # TODO: restock Marker by 3 using the new method\n        pass\n\nprint(f\"Total quantity: {total_quantity(items)}\")\nprint(f\"Low stock: {', '.join(low_stock_names(items, 2))}\")",
+      "solutionCode": "from storage.catalog_loader import load_items\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        item.add_stock(3)\n\nprint(f\"Total quantity: {total_quantity(items)}\")\nprint(f\"Low stock: {', '.join(low_stock_names(items, 2))}\")",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "CatalogItem",
+          "message": "Keep the CatalogItem class available for the restock feature."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "Running the workspace should still print the updated report after restocking."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from storage.catalog_loader import load_items\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        # TODO: restock Marker by 3 using the new method\n        pass\n\nprint(f\"Total quantity: {total_quantity(items)}\")\nprint(f\"Low stock: {', '.join(low_stock_names(items, 2))}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from storage.catalog_loader import load_items\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        item.add_stock(3)\n\nprint(f\"Total quantity: {total_quantity(items)}\")\nprint(f\"Low stock: {', '.join(low_stock_names(items, 2))}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/catalog_item.py",
+          "content": "class CatalogItem:\n    def __init__(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "project-step-regression-summary",
+      "kind": "code_input",
+      "title": "Milestone 5: Add a reusable summary service and regression tests",
+      "prompt": "Continue from the previous working workspace. Create a new service function `build_summary(items, threshold)` in `services/reporting.py` that returns a dictionary with three keys: `total_quantity`, `low_stock_names`, and `in_stock_count`. Add tests in `tests/check_summary.py` that verify the returned dictionary for the loaded fixture data after `Marker` has been restocked by 3. Update `main.py` to call `build_summary` and print each part of the summary.",
+      "starterCode": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        item.add_stock(3)\n\nsummary = build_summary(items, 2)\n\nprint(f\"Total quantity: {summary['total_quantity']}\")\nprint(f\"Low stock: {', '.join(summary['low_stock_names'])}\")\n# TODO: print the in-stock count on its own line",
+      "solutionCode": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        item.add_stock(3)\n\nsummary = build_summary(items, 2)\n\nprint(f\"Total quantity: {summary['total_quantity']}\")\nprint(f\"Low stock: {', '.join(summary['low_stock_names'])}\")\nprint(f\"In-stock count: {summary['in_stock_count']}\")",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "build_summary",
+          "args": [
+            [
+              [
+                [
+                  "name",
+                  "Notebook"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  4
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Marker"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  3
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Tape"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  2
+                ]
+              ]
+            ],
+            2
+          ],
+          "argKinds": [
+            "list_of_dict_entries",
+            "value"
+          ],
+          "expected": [
+            [
+              "total_quantity",
+              9
+            ],
+            [
+              "low_stock_names",
+              [
+                "Tape"
+              ]
+            ],
+            [
+              "in_stock_count",
+              3
+            ]
+          ],
+          "expectedKind": "dict_entries",
+          "message": "build_summary(items, threshold) should return the combined report values in a dictionary."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 3,
+          "message": "Running the workspace should print total quantity, low-stock names, and in-stock count."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        item.add_stock(3)\n\nsummary = build_summary(items, 2)\n\nprint(f\"Total quantity: {summary['total_quantity']}\")\nprint(f\"Low stock: {', '.join(summary['low_stock_names'])}\")\n# TODO: print the in-stock count on its own line",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "def build_summary(accounts, amount_2):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        item.add_stock(3)\n\nsummary = build_summary(items, 2)\n\nprint(f\"Total quantity: {summary['total_quantity']}\")\nprint(f\"Low stock: {', '.join(summary['low_stock_names'])}\")\nprint(f\"In-stock count: {summary['in_stock_count']}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "def build_summary(value, value_2):\n    return [[\"total_quantity\", 9], [\"low_stock_names\", [\"Tape\"]], [\"in_stock_count\", 3]]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "project-step-final-regression",
+      "kind": "code_input",
+      "title": "Milestone 6: Finish the end-to-end regression workspace",
+      "prompt": "Continue from the previous working workspace. Add a final regression file `tests/check_regression.py` that exercises the full flow: load fixture data, restock `Marker` by 3, build the summary with threshold 2, and assert the final values. Also add a short `README.md` that explains what each folder does in this project. Keep `main.py` as the runnable demonstration of the final deliverable.",
+      "starterCode": "# Write your answer below",
+      "solutionCode": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        item.add_stock(3)\n\nsummary = build_summary(items, 2)\n\nprint(f\"Total quantity: {summary['total_quantity']}\")\nprint(f\"Low stock: {', '.join(summary['low_stock_names'])}\")\nprint(f\"In-stock count: {summary['in_stock_count']}\")",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "load_items",
+          "args": [
+            "data/catalog.csv"
+          ],
+          "argKinds": [
+            "value"
+          ],
+          "expected": [
+            [
+              [
+                "name",
+                "Notebook"
+              ],
+              [
+                "category",
+                "Office"
+              ],
+              [
+                "quantity",
+                4
+              ]
+            ],
+            [
+              [
+                "name",
+                "Marker"
+              ],
+              [
+                "category",
+                "Office"
+              ],
+              [
+                "quantity",
+                0
+              ]
+            ],
+            [
+              [
+                "name",
+                "Tape"
+              ],
+              [
+                "category",
+                "Office"
+              ],
+              [
+                "quantity",
+                2
+              ]
+            ]
+          ],
+          "expectedKind": "list_of_dict_entries",
+          "message": "The loader should still return the expected objects from the fixture file."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "build_summary",
+          "args": [
+            [
+              [
+                [
+                  "name",
+                  "Notebook"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  4
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Marker"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  3
+                ]
+              ],
+              [
+                [
+                  "name",
+                  "Tape"
+                ],
+                [
+                  "category",
+                  "Office"
+                ],
+                [
+                  "quantity",
+                  2
+                ]
+              ]
+            ],
+            2
+          ],
+          "argKinds": [
+            "list_of_dict_entries",
+            "value"
+          ],
+          "expected": [
+            [
+              "total_quantity",
+              9
+            ],
+            [
+              "low_stock_names",
+              [
+                "Tape"
+              ]
+            ],
+            [
+              "in_stock_count",
+              3
+            ]
+          ],
+          "expectedKind": "dict_entries",
+          "message": "The final summary should match the expected regression values after restocking."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 3,
+          "message": "Running the final workspace should print the three summary lines."
+        }
+      ],
+      "hint": "Read the task \"Milestone 6: Finish the end-to-end regression workspace\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Milestone 6: Finish the end-to-end regression workspace\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your answer below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "storage/catalog_loader.py",
+          "content": "def load_items(value):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "def build_summary(accounts, amount_2):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\n\nfor item in items:\n    if item.name == \"Marker\":\n        item.add_stock(3)\n\nsummary = build_summary(items, 2)\n\nprint(f\"Total quantity: {summary['total_quantity']}\")\nprint(f\"Low stock: {', '.join(summary['low_stock_names'])}\")\nprint(f\"In-stock count: {summary['in_stock_count']}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "storage/catalog_loader.py",
+          "content": "def load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "def build_summary(value, value_2):\n    return [[\"total_quantity\", 9], [\"low_stock_names\", [\"Tape\"]], [\"in_stock_count\", 3]]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Catalog App Quality Pass",
+    "stepIds": [
+      "try-module-10-oop-quality-project-sketch0",
+      "project-step-report-service-tests",
+      "project-step-storage-loader",
+      "project-step-debug-imports-state",
+      "project-step-regression-summary",
+      "project-step-final-regression"
+    ]
+  }
+}

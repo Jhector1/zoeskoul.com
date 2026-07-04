@@ -1,0 +1,502 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "and-or-not": {
+          "label": "And, Or, ak Not",
+          "summary": "Konbine kondisyon ak operatè boolean.",
+          "cards": {
+            "sketch0": {
+              "title": "Sèvi ak and pou mande de bagay"
+            },
+            "sketch1": {
+              "title": "Sèvi ak or ak not"
+            },
+            "sketch2": {
+              "title": "Konbine kondisyon nan vrè deklarasyon if"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Bati verifikatè lojik ak and, or, ak not"
+            }
+          },
+          "projectSteps": {
+            "code_ticket_check": {
+              "title": "Tcheke antre nan evènman an"
+            },
+            "code_free_day": {
+              "title": "Fen semèn oswa jou ferye"
+            },
+            "code_not_logged_in": {
+              "title": "Mande lè itilizatè a pa konekte"
+            },
+            "code_score_certificate": {
+              "title": "Desizyon sètifika"
+            },
+            "code_range_check": {
+              "title": "Tcheke si yon nonb nan entèval la"
+            }
+          },
+          "quiz": {
+            "sc_and_true": {
+              "title": "Kilè and vin vre?",
+              "prompt": "Ki deklarasyon sou `A and B` ki kòrèk?",
+              "hint": "Panse ak yon règ kote de kondisyon yo dwe toude satisfè.",
+              "help": {
+                "concept": "Operatè `and` la konbine de kondisyon epi li retounen true sèlman si chak kondisyon vre.",
+                "hint_1": "Konpare `and` ak yon sitiyasyon tankou 'ase gran epi li gen pèmisyon'. Si youn manke, sa dwe echwe.",
+                "hint_2": "Mande tèt ou sa k rive si yon bò fo. Avèk `and`, sa fè tout rezilta a fo."
+              },
+              "options": {
+                "a": "Li vre sèlman lè toude A ak B vre.",
+                "b": "Li vre lè swa A oswa B vre.",
+                "c": "Li toujou opoze A.",
+                "d": "Li vre chak fwa A fo."
+              }
+            },
+            "sc_not_flip": {
+              "title": "Kisa not fè?",
+              "prompt": "Si `logged_in = False`, `not logged_in` evalye a kisa?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "False",
+                "b": "0",
+                "c": "True",
+                "d": "None"
+              }
+            },
+            "mc_or_cases": {
+              "title": "Chwazi ekspresyon or ki vre yo",
+              "prompt": "Ki ekspresyon ki evalye a `True`? Chwazi tout bon repons yo.",
+              "hint": "Avèk `or`, se yon sèl bò ki bezwen vre.",
+              "help": {
+                "concept": "Operatè `or` la retounen true lè omwen youn nan de kondisyon li yo vre.",
+                "hint_1": "Tcheke chak bò nan chak ekspresyon separeman, epi gade si omwen yon bò vre.",
+                "hint_2": "Nenpòt ekspresyon ki gen yon bò vre ak yon bò fo toujou vin vre ak `or`."
+              },
+              "options": {
+                "a": "True or False",
+                "b": "False or False",
+                "c": "3 > 5 or 10 > 2",
+                "d": "7 == 8 or 1 > 4"
+              }
+            },
+            "mc_valid_age_and_name": {
+              "title": "Verifikasyon antre valab",
+              "prompt": "Yon pwogram ta dwe aksepte antre sèlman lè itilizatè a gen omwen 18 an epi non an pa vid. Ki kondisyon ki koresponn ak règ sa a? Chwazi tout bon repons yo.",
+              "hint": "Règ la bezwen toude laj la ak yon non ki pa vid.",
+              "help": {
+                "concept": "Kondisyon boolean ekivalan yo ka ekri nan diferan fason, men yo dwe toujou mande pou toude pati règ la satisfè.",
+                "hint_1": "Yon pati tcheke si moun nan granmoun. Lòt pati a tcheke si chèn lan pa vid.",
+                "hint_2": "Yon kondisyon ki sèvi ak `not (age < 18)` vle di menm bagay ak gen 18 an oswa plis."
+              },
+              "options": {
+                "a": "age >= 18 and name != \"\"",
+                "b": "age >= 18 or name != \"\"",
+                "c": "not (age < 18) and name != \"\"",
+                "d": "age > 18 and name == \"\""
+              }
+            },
+            "dr_build_and_condition": {
+              "title": "Bati yon kondisyon and",
+              "prompt": "Mete token yo nan lòd pou fè yon kondisyon Python valab ki tcheke si `score` omwen 50 epi `passed` vre.",
+              "hint": "Konsantre sou lòd lojik pati yo.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Panse ki pati ki dwe vini an premye.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "tokens": {
+                "t1": "score",
+                "t2": ">=",
+                "t3": "50",
+                "t4": "and",
+                "t5": "passed"
+              }
+            },
+            "dr_if_elif_else_logic": {
+              "title": "Mete branch yo nan lòd",
+              "prompt": "Ranje liy sa yo pou fòme yon estrikti `if` / `elif` / `else` ki valab.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "if age < 13:",
+                "t2": "print(\"child\")",
+                "t3": "elif age < 18:",
+                "t4": "print(\"teen\")",
+                "t5": "else:",
+                "t6": "print(\"adult\")"
+              }
+            },
+            "fb_not_condition": {
+              "title": "Konplete yon verifikasyon not",
+              "prompt": "Chwazi mo ki manke a pou fè kondisyon an vre lè `ready` fo.",
+              "hint": "Ou bezwen operatè ki ranvèse yon valè boolean.",
+              "help": {
+                "concept": "Sèvi ak `the missing term` lè ou vle yon kondisyon vre pou valè boolean opoze a.",
+                "hint_1": "Si `ready` fo, kondisyon an ta dwe toujou pase.",
+                "hint_2": "Chwazi operatè ki fè false tounen true anndan verifikasyon `if` la."
+              },
+              "template": "if [blank1] ready:\n    print(\"Wait\")",
+              "choices": [
+                "and",
+                "or",
+                "not",
+                "elif"
+              ]
+            },
+            "fb_or_operator": {
+              "title": "Konplete yon règ swa-sa-oswa-sa",
+              "prompt": "Chwazi operatè ki fè kondisyon an vre lè youn oswa lòt konparezon an vre.",
+              "hint": "Konsantre sou konsèp ki manke a olye de tèm egzak ki manke a.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki koresponn ak travay yo dekri a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi tèm ki pi byen konplete sans deklarasyon an."
+              },
+              "template": "if temp < 0 [blank1] temp > 30:\n    print(\"Extreme\")",
+              "choices": [
+                "and",
+                "or",
+                "not",
+                "="
+              ]
+            },
+            "code_ticket_check": {
+              "title": "Tcheke antre nan evènman an",
+              "prompt": "Ekri kòd Python ki li de liy: yon antye age ak yon chèn `yes` oswa `no` pou endike si moun nan gen yon ID. Enprime `allowed` si age omwen 18 epi repons ID a se `yes`. Sinon enprime `denied`.",
+              "hint": "Li travay la \"Tcheke antre nan evènman an\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Tcheke antre nan evènman an\".",
+                "hint_1": "Ekri kòd la ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "age = int(input())\nhas_id = input().strip()\n\n# TODO: print allowed or denied"
+            },
+            "code_free_day": {
+              "title": "Fen semèn oswa jou ferye",
+              "prompt": "Ekri kòd Python ki li de liy, chak ladan yo gen `True` oswa `False`: `is_weekend` ak `is_holiday`. Enprime `rest` si youn nan valè yo vre. Sinon enprime `work`.",
+              "hint": "Li travay la \"Fen semèn oswa jou ferye\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Fen semèn oswa jou ferye\".",
+                "hint_1": "Ekri kòd la ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\n# TODO: print rest or work"
+            },
+            "code_not_logged_in": {
+              "title": "Mande lè itilizatè a pa konekte",
+              "prompt": "Ekri kòd Python ki li yon liy ki gen `True` oswa `False` pou `logged_in`. Si itilizatè a pa konekte, enprime `please sign in`. Sinon enprime `welcome`.",
+              "hint": "Li travay kodaj la epi idantifye sa pwogram nan ta dwe enprime.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si pwogram nan pwodui pwodiksyon yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "logged_in = input().strip() == \"True\"\n\n# TODO: print the correct message"
+            },
+            "code_score_certificate": {
+              "title": "Desizyon sètifika",
+              "prompt": "Ekri kòd Python ki li yon antye score ak yon dezyèm liy ki gen `True` oswa `False` pou `late`. Enprime `certificate` si score omwen 80 epi travay la pa an reta. Enprime `passed` si score omwen 80 epi travay la an reta. Sinon enprime `practice`.",
+              "hint": "Li travay la \"Desizyon sètifika\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Desizyon sètifika\".",
+                "hint_1": "Ekri kòd la ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "score = int(input())\nlate = input().strip() == \"True\"\n\n# TODO: print certificate, passed, or practice"
+            },
+            "code_range_check": {
+              "title": "Tcheke si yon nonb nan entèval la",
+              "prompt": "Ekri kòd Python ki li yon antye `n`. Enprime `in range` si `n` omwen 10 epi pa plis pase 20. Sinon enprime `out of range`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print in range or out of range"
+            }
+          }
+        }
+      },
+      "python-v2-2": {
+        "and-or-not": {
+          "label": "And, Or, ak Not",
+          "summary": "Konbine kondisyon ak operatè boolean.",
+          "cards": {
+            "sketch0": {
+              "title": "Sèvi ak and pou mande de bagay"
+            },
+            "sketch1": {
+              "title": "Sèvi ak or ak not"
+            },
+            "sketch2": {
+              "title": "Konbine kondisyon nan vrè deklarasyon if"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Bati verifikatè lojik ak and, or, ak not"
+            }
+          },
+          "projectSteps": {
+            "code_ticket_check": {
+              "title": "Tcheke antre nan evènman an"
+            },
+            "code_free_day": {
+              "title": "Fen semèn oswa jou ferye"
+            },
+            "code_not_logged_in": {
+              "title": "Mande lè itilizatè a pa konekte"
+            },
+            "code_score_certificate": {
+              "title": "Desizyon sètifika"
+            },
+            "code_range_check": {
+              "title": "Tcheke si yon nonb nan entèval la"
+            }
+          },
+          "quiz": {
+            "sc_and_true": {
+              "title": "Kilè and vin vre?",
+              "prompt": "Ki deklarasyon sou `A and B` ki kòrèk?",
+              "hint": "Panse ak yon règ kote de kondisyon yo dwe toude satisfè.",
+              "help": {
+                "concept": "Operatè `and` la konbine de kondisyon epi li retounen true sèlman si chak kondisyon vre.",
+                "hint_1": "Konpare `and` ak yon sitiyasyon tankou 'ase gran epi li gen pèmisyon'. Si youn manke, sa dwe echwe.",
+                "hint_2": "Mande tèt ou sa k rive si yon bò fo. Avèk `and`, sa fè tout rezilta a fo."
+              },
+              "options": {
+                "a": "Li vre sèlman lè toude A ak B vre.",
+                "b": "Li vre lè swa A oswa B vre.",
+                "c": "Li toujou opoze A.",
+                "d": "Li vre chak fwa A fo."
+              }
+            },
+            "sc_not_flip": {
+              "title": "Kisa not fè?",
+              "prompt": "Si `logged_in = False`, `not logged_in` evalye a kisa?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "False",
+                "b": "0",
+                "c": "True",
+                "d": "None"
+              }
+            },
+            "mc_or_cases": {
+              "title": "Chwazi ekspresyon or ki vre yo",
+              "prompt": "Ki ekspresyon ki evalye a `True`? Chwazi tout bon repons yo.",
+              "hint": "Avèk `or`, se yon sèl bò ki bezwen vre.",
+              "help": {
+                "concept": "Operatè `or` la retounen true lè omwen youn nan de kondisyon li yo vre.",
+                "hint_1": "Tcheke chak bò nan chak ekspresyon separeman, epi gade si omwen yon bò vre.",
+                "hint_2": "Nenpòt ekspresyon ki gen yon bò vre ak yon bò fo toujou vin vre ak `or`."
+              },
+              "options": {
+                "a": "True or False",
+                "b": "False or False",
+                "c": "3 > 5 or 10 > 2",
+                "d": "7 == 8 or 1 > 4"
+              }
+            },
+            "mc_valid_age_and_name": {
+              "title": "Verifikasyon antre valab",
+              "prompt": "Yon pwogram ta dwe aksepte antre sèlman lè itilizatè a gen omwen 18 an epi non an pa vid. Ki kondisyon ki koresponn ak règ sa a? Chwazi tout bon repons yo.",
+              "hint": "Règ la bezwen toude laj la ak yon non ki pa vid.",
+              "help": {
+                "concept": "Kondisyon boolean ekivalan yo ka ekri nan diferan fason, men yo dwe toujou mande pou toude pati règ la satisfè.",
+                "hint_1": "Yon pati tcheke si moun nan granmoun. Lòt pati a tcheke si chèn lan pa vid.",
+                "hint_2": "Yon kondisyon ki sèvi ak `not (age < 18)` vle di menm bagay ak gen 18 an oswa plis."
+              },
+              "options": {
+                "a": "age >= 18 and name != \"\"",
+                "b": "age >= 18 or name != \"\"",
+                "c": "not (age < 18) and name != \"\"",
+                "d": "age > 18 and name == \"\""
+              }
+            },
+            "dr_build_and_condition": {
+              "title": "Bati yon kondisyon and",
+              "prompt": "Mete token yo nan lòd pou fè yon kondisyon Python valab ki tcheke si `score` omwen 50 epi `passed` vre.",
+              "hint": "Konsantre sou lòd lojik pati yo.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Panse ki pati ki dwe vini an premye.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "tokens": {
+                "t1": "score",
+                "t2": ">=",
+                "t3": "50",
+                "t4": "and",
+                "t5": "passed"
+              }
+            },
+            "dr_if_elif_else_logic": {
+              "title": "Mete branch yo nan lòd",
+              "prompt": "Ranje liy sa yo pou fòme yon estrikti `if` / `elif` / `else` ki valab.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "if age < 13:",
+                "t2": "print(\"child\")",
+                "t3": "elif age < 18:",
+                "t4": "print(\"teen\")",
+                "t5": "else:",
+                "t6": "print(\"adult\")"
+              }
+            },
+            "fb_not_condition": {
+              "title": "Konplete yon verifikasyon not",
+              "prompt": "Chwazi mo ki manke a pou fè kondisyon an vre lè `ready` fo.",
+              "hint": "Ou bezwen operatè ki ranvèse yon valè boolean.",
+              "help": {
+                "concept": "Sèvi ak `the missing term` lè ou vle yon kondisyon vre pou valè boolean opoze a.",
+                "hint_1": "Si `ready` fo, kondisyon an ta dwe toujou pase.",
+                "hint_2": "Chwazi operatè ki fè false tounen true anndan verifikasyon `if` la."
+              },
+              "template": "if [blank1] ready:\n    print(\"Wait\")",
+              "choices": [
+                "and",
+                "or",
+                "not",
+                "elif"
+              ]
+            },
+            "fb_or_operator": {
+              "title": "Konplete yon règ swa-sa-oswa-sa",
+              "prompt": "Chwazi operatè ki fè kondisyon an vre lè youn oswa lòt konparezon an vre.",
+              "hint": "Konsantre sou konsèp ki manke a olye de tèm egzak ki manke a.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki koresponn ak travay yo dekri a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi tèm ki pi byen konplete sans deklarasyon an."
+              },
+              "template": "if temp < 0 [blank1] temp > 30:\n    print(\"Extreme\")",
+              "choices": [
+                "and",
+                "or",
+                "not",
+                "="
+              ]
+            },
+            "code_ticket_check": {
+              "title": "Tcheke antre nan evènman an",
+              "prompt": "Ekri kòd Python ki li de liy: yon antye age ak yon chèn `yes` oswa `no` pou endike si moun nan gen yon ID. Enprime `allowed` si age omwen 18 epi repons ID a se `yes`. Sinon enprime `denied`.",
+              "hint": "Li travay la \"Tcheke antre nan evènman an\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Tcheke antre nan evènman an\".",
+                "hint_1": "Ekri kòd la ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "age = int(input())\nhas_id = input().strip()\n\n# TODO: print allowed or denied"
+            },
+            "code_free_day": {
+              "title": "Fen semèn oswa jou ferye",
+              "prompt": "Ekri kòd Python ki li de liy, chak ladan yo gen `True` oswa `False`: `is_weekend` ak `is_holiday`. Enprime `rest` si youn nan valè yo vre. Sinon enprime `work`.",
+              "hint": "Li travay la \"Fen semèn oswa jou ferye\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Fen semèn oswa jou ferye\".",
+                "hint_1": "Ekri kòd la ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "is_weekend = input().strip() == \"True\"\nis_holiday = input().strip() == \"True\"\n\n# TODO: print rest or work"
+            },
+            "code_not_logged_in": {
+              "title": "Mande lè itilizatè a pa konekte",
+              "prompt": "Ekri kòd Python ki li yon liy ki gen `True` oswa `False` pou `logged_in`. Si itilizatè a pa konekte, enprime `please sign in`. Sinon enprime `welcome`.",
+              "hint": "Li travay kodaj la epi idantifye sa pwogram nan ta dwe enprime.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si pwogram nan pwodui pwodiksyon yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "logged_in = input().strip() == \"True\"\n\n# TODO: print the correct message"
+            },
+            "code_score_certificate": {
+              "title": "Desizyon sètifika",
+              "prompt": "Ekri kòd Python ki li yon antye score ak yon dezyèm liy ki gen `True` oswa `False` pou `late`. Enprime `certificate` si score omwen 80 epi travay la pa an reta. Enprime `passed` si score omwen 80 epi travay la an reta. Sinon enprime `practice`.",
+              "hint": "Li travay la \"Desizyon sètifika\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Desizyon sètifika\".",
+                "hint_1": "Ekri kòd la ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "score = int(input())\nlate = input().strip() == \"True\"\n\n# TODO: print certificate, passed, or practice"
+            },
+            "code_range_check": {
+              "title": "Tcheke si yon nonb nan entèval la",
+              "prompt": "Ekri kòd Python ki li yon antye `n`. Enprime `in range` si `n` omwen 10 epi pa plis pase 20. Sinon enprime `out of range`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print in range or out of range"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "and-or-not": {
+          "sketch_and_basics": {
+            "title": "Sèvi ak and pou mande de bagay",
+            "bodyMarkdown": "Sa a se premye modil kote Python kòmanse pran desizyon ak konparezon ak lojik boolean.\n\nOperatè boolean yo pèmèt ou konbine kondisyon. Sèvi ak `and` lè **toude** pati yo dwe vre.\n\nEgzanp:\n\n```python\nage = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"Allowed in\")\nelse:\n    print(\"Not allowed\")\n```\n\nAnn pase ladan l:\n- `age >= 18` tcheke si laj la omwen 18.\n- `has_id` deja yon valè boolean.\n- `and` konekte yo.\n- Blòk `if` la kouri sèlman lè **toude** yo vre.\n\nEgzanp rezoud:\n- Si `age` se `20` epi `has_id` se `True`, pwodiksyon an se `Allowed in`.\n- Si `age` se `20` men `has_id` se `False`, pwodiksyon an se `Not allowed`."
+          },
+          "sketch_or_not": {
+            "title": "Sèvi ak or ak not",
+            "bodyMarkdown": "Sèvi ak `or` lè **omwen youn** nan kondisyon yo dwe vre. Sèvi ak `not` pou ranvèse yon valè boolean.\n\nEgzanp:\n\n```python\nis_weekend = False\nis_holiday = True\n\nif is_weekend or is_holiday:\n    print(\"No school\")\n\nlogged_in = False\n\nif not logged_in:\n    print(\"Please sign in\")\n```\n\nAnn pase ladan l etap pa etap:\n- `is_weekend or is_holiday` vre si youn nan valè yo vre.\n- Piske `is_holiday` se `True`, `No school` ap enprime.\n- `logged_in` se `False`.\n- `not logged_in` vin `True`, kidonk `Please sign in` ap enprime.\n\nEgzanp rezoud:\n- `False or True` vin `True`.\n- `not False` vin `True`."
+          },
+          "sketch_combining_clear_rules": {
+            "title": "Konbine kondisyon nan vrè deklarasyon if",
+            "bodyMarkdown": "Ou ka sèvi ak operatè boolean pou ekri règ branchman ki pi klè.\n\nEgzanp:\n\n```python\nscore = 82\nlate = False\n\nif score >= 80 and not late:\n    print(\"Certificate\")\nelif score >= 80 and late:\n    print(\"Passed, but no certificate\")\nelse:\n    print(\"Keep practicing\")\n```\n\nMen kijan sa mache:\n- Premyèman, Python tcheke `score >= 80 and not late`.\n- Si `score` se `82`, alò `score >= 80` vre.\n- Si `late` se `False`, alò `not late` vre.\n- Paske toude pati yo vre, Python enprime `Certificate` epi li sispann tcheke branch ki vini apre yo.\n\nSa itil pou règ tankou kalifikasyon, validasyon, ak klasifikasyon.\n\nAnn pase ladan l etap pa etap: li chak deklarasyon soti anlè rive anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki pwodiksyon kòd la fèt pou montre."
+          }
+        }
+      },
+      "python-v2-2": {
+        "and-or-not": {
+          "sketch_and_basics": {
+            "title": "Sèvi ak and pou mande de bagay",
+            "bodyMarkdown": "Sa a se premye modil kote Python kòmanse pran desizyon ak konparezon ak lojik boolean.\n\nOperatè boolean yo pèmèt ou konbine kondisyon. Sèvi ak `and` lè **toude** pati yo dwe vre.\n\nEgzanp:\n\n```python\nage = 20\nhas_id = True\n\nif age >= 18 and has_id:\n    print(\"Allowed in\")\nelse:\n    print(\"Not allowed\")\n```\n\nAnn pase ladan l:\n- `age >= 18` tcheke si laj la omwen 18.\n- `has_id` deja yon valè boolean.\n- `and` konekte yo.\n- Blòk `if` la kouri sèlman lè **toude** yo vre.\n\nEgzanp rezoud:\n- Si `age` se `20` epi `has_id` se `True`, pwodiksyon an se `Allowed in`.\n- Si `age` se `20` men `has_id` se `False`, pwodiksyon an se `Not allowed`."
+          },
+          "sketch_or_not": {
+            "title": "Sèvi ak or ak not",
+            "bodyMarkdown": "Sèvi ak `or` lè **omwen youn** nan kondisyon yo dwe vre. Sèvi ak `not` pou ranvèse yon valè boolean.\n\nEgzanp:\n\n```python\nis_weekend = False\nis_holiday = True\n\nif is_weekend or is_holiday:\n    print(\"No school\")\n\nlogged_in = False\n\nif not logged_in:\n    print(\"Please sign in\")\n```\n\nAnn pase ladan l etap pa etap:\n- `is_weekend or is_holiday` vre si youn nan valè yo vre.\n- Piske `is_holiday` se `True`, `No school` ap enprime.\n- `logged_in` se `False`.\n- `not logged_in` vin `True`, kidonk `Please sign in` ap enprime.\n\nEgzanp rezoud:\n- `False or True` vin `True`.\n- `not False` vin `True`."
+          },
+          "sketch_combining_clear_rules": {
+            "title": "Konbine kondisyon nan vrè deklarasyon if",
+            "bodyMarkdown": "Ou ka sèvi ak operatè boolean pou ekri règ branchman ki pi klè.\n\nEgzanp:\n\n```python\nscore = 82\nlate = False\n\nif score >= 80 and not late:\n    print(\"Certificate\")\nelif score >= 80 and late:\n    print(\"Passed, but no certificate\")\nelse:\n    print(\"Keep practicing\")\n```\n\nMen kijan sa mache:\n- Premyèman, Python tcheke `score >= 80 and not late`.\n- Si `score` se `82`, alò `score >= 80` vre.\n- Si `late` se `False`, alò `not late` vre.\n- Paske toude pati yo vre, Python enprime `Certificate` epi li sispann tcheke branch ki vini apre yo.\n\nSa itil pou règ tankou kalifikasyon, validasyon, ak klasifikasyon.\n\nAnn pase ladan l etap pa etap: li chak deklarasyon soti anlè rive anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki pwodiksyon kòd la fèt pou montre."
+          }
+        }
+      }
+    }
+  }
+}

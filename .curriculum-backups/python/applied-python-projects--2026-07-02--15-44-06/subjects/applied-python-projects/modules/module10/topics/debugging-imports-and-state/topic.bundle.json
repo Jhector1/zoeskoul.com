@@ -1,0 +1,628 @@
+{
+  "topicId": "debugging-imports-and-state",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-10-testing-debugging-oop-projects",
+  "sectionSlug": "applied-python-projects-python-10-debugging-and-refactoring",
+  "prefix": "py10",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.label",
+    "summaryKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch0.title",
+      "sketchId": "debugging-imports-and-state-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-debugging-imports-and-state-sketch0",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.prompt",
+        "exerciseKey": "try-debugging-imports-and-state-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch1.title",
+      "sketchId": "debugging-imports-and-state-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-debugging-imports-and-state-sketch1",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.prompt",
+        "exerciseKey": "try-debugging-imports-and-state-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch2.title",
+      "sketchId": "debugging-imports-and-state-sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-debugging-imports-and-state-sketch2",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.prompt",
+        "exerciseKey": "try-debugging-imports-and-state-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "debugging-imports-and-state-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "debugging-imports-and-state-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "debugging-imports-and-state-sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-3.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-debugging-imports-and-state-sketch0",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0",
+      "language": "python",
+      "starterCode": "# main.py\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "book.py",
+          "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        # return a readable summary string\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "book.py",
+          "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# main.py\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# main.py\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "book.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        # return a readable summary string\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "book.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define the Book class in book.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "The Hobbit",
+              "Tolkien"
+            ],
+            "message": "Book should be constructible with a title and author."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "The Hobbit",
+              "Tolkien"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "The Hobbit by Tolkien",
+            "expectedKind": "value",
+            "message": "summary() should return the title and author in a readable format."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Program should print the book summary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-debugging-imports-and-state-sketch1",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1",
+      "language": "python",
+      "starterCode": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/reading_list.py",
+          "content": "class ReadingList:\n    def __init__(self, owner):\n        self.owner = owner\n        self.books = []\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return 0",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nprint(reading_list.count())\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/reading_list.py",
+          "content": "class ReadingList:\n    def __init__(self, owner):\n        self.owner = owner\n        self.books = []\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/reading_list.py",
+            "content": "class ReadingList:\n    def __init__(self, owner):\n        self.owner = owner\n        self.books = []\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return 0",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nprint(reading_list.count())\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nprint(reading_list.count())\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/reading_list.py",
+            "content": "class ReadingList:\n    def __init__(self, owner):\n        self.owner = owner\n        self.books = []\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "ReadingList",
+            "message": "Define the ReadingList class."
+          },
+          {
+            "type": "constructible",
+            "className": "ReadingList",
+            "constructorArgs": [
+              "Ava"
+            ],
+            "message": "ReadingList should be constructible with an owner."
+          },
+          {
+            "type": "method_returns",
+            "className": "ReadingList",
+            "constructorArgs": [
+              "Ava"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "count",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 0,
+            "expectedKind": "value",
+            "message": "A new reading list should start empty."
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "ReadingList",
+            "constructorArgs": [
+              "Ava"
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "add_book",
+                "methodArgs": [
+                  "Dune"
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              }
+            ],
+            "methodName": "count",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 1,
+            "expectedKind": "value",
+            "message": "Adding one book should change only that instance's count."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-debugging-imports-and-state-sketch2",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2",
+      "language": "python",
+      "starterCode": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/stock_item.py",
+          "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        return self.quantity\n\n    def get_quantity(self):\n        return self.quantity",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())\nprint(StockItem(\"Pen\", 5).sell(10))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/stock_item.py",
+          "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        if amount <= self.quantity:\n            self.quantity -= amount\n        return self.quantity\n\n    def get_quantity(self):\n        return self.quantity",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/stock_item.py",
+            "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        return self.quantity\n\n    def get_quantity(self):\n        return self.quantity",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())\nprint(StockItem(\"Pen\", 5).sell(10))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())\nprint(StockItem(\"Pen\", 5).sell(10))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/stock_item.py",
+            "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        if amount <= self.quantity:\n            self.quantity -= amount\n        return self.quantity\n\n    def get_quantity(self):\n        return self.quantity",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "StockItem",
+            "message": "Define the StockItem class."
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "StockItem",
+            "constructorArgs": [
+              "Pen",
+              5
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "sell",
+                "methodArgs": [
+                  2
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              }
+            ],
+            "methodName": "get_quantity",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 3,
+            "expectedKind": "value",
+            "message": "A valid sale should reduce quantity."
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "StockItem",
+            "constructorArgs": [
+              "Pen",
+              5
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "sell",
+                "methodArgs": [
+                  10
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              }
+            ],
+            "methodName": "get_quantity",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 5,
+            "expectedKind": "value",
+            "message": "An invalid sale should leave quantity unchanged."
+          }
+        ]
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-single-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-single-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-multi-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-multi-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "None"
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-fill-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "book"
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-order-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-order-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    }
+  ]
+}

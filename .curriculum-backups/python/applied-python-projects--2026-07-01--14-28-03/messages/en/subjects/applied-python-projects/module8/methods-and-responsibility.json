@@ -1,0 +1,214 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "methods-and-responsibility": {
+          "label": "Methods and Responsibility",
+          "summary": "Move behavior into methods and keep main.py as a thin coordinator.",
+          "cards": {
+            "sketch0": {
+              "title": "Understanding Methods in Python"
+            },
+            "sketch1": {
+              "title": "Encapsulation with Methods"
+            },
+            "sketch2": {
+              "title": "Try it yourself"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_methods_and_responsibility_sketch0": {
+              "title": "Implement a Method for a Class",
+              "prompt": "Create a class `Book` with an `__init__` method that initializes `title` and `author` attributes. Add a method `description` that returns a string in the format \"Title by Author\".",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "class Book:\n    def __init__(self, title, author):\n        # Initialize attributes\n\n    def description(self):\n        # Return formatted string"
+            },
+            "try_methods_and_responsibility_sketch1": {
+              "title": "Encapsulate Behavior in a Method",
+              "prompt": "Create a class `Rectangle` with attributes `width` and `height`. Add a method `area` that returns the area of the rectangle.",
+              "hint": "Read the task \"Encapsulate Behavior in a Method\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Encapsulate Behavior in a Method\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Rectangle:\n    def __init__(self, width, height):\n        # Initialize attributes\n\n    def area(self):\n        # Calculate and return area"
+            },
+            "try_methods_and_responsibility_sketch2": {
+              "title": "Method for Attribute Validation",
+              "prompt": "Create a class `Person` with an attribute `age`. Add a method `set_age` that sets the age only if it's a positive integer.",
+              "hint": "Read the task \"Method for Attribute Validation\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Method for Attribute Validation\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Person:\n    def __init__(self, age):\n        self.age = age\n\n    def set_age(self, age):\n        # Validate and set age"
+            }
+          },
+          "practice": {
+            "ci-methods-and-responsibility-3": {
+              "title": "Using Methods for Object Interaction",
+              "prompt": "Create a class `Circle` with a method `circumference` that calculates the circumference using the radius attribute.",
+              "hint": "Read the task \"Using Methods for Object Interaction\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Using Methods for Object Interaction\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "import math\n\nclass Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\n    def circumference(self):\n        # Calculate and return circumference"
+            },
+            "ci-methods-and-responsibility-4": {
+              "title": "Method for Data Transformation",
+              "prompt": "Create a class `Temperature` with a method `to_fahrenheit` that converts Celsius to Fahrenheit.",
+              "hint": "Read the task \"Method for Data Transformation\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Method for Data Transformation\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    def to_fahrenheit(self):\n        # Convert and return Fahrenheit"
+            },
+            "ci-methods-and-responsibility-5": {
+              "title": "Method for List of Objects",
+              "prompt": "Create a class `Student` with a method `add_grade` that adds a grade to a list of grades.",
+              "hint": "Read the task \"Method for List of Objects\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Method for List of Objects\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Student:\n    def __init__(self, name):\n        self.name = name\n        # Initialize grades list\n\n    def add_grade(self, grade):\n        # Add grade to list"
+            },
+            "multi-methods-and-responsibility-0": {
+              "title": "Benefits of Using Methods",
+              "prompt": "Which of the following are benefits of using methods in a class?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Encapsulation of behavior",
+                "b": "Code reuse",
+                "c": "Increased complexity",
+                "d": "Direct access to attributes"
+              }
+            },
+            "multi-methods-and-responsibility-1": {
+              "title": "Encapsulation in Python",
+              "prompt": "What are the key aspects of encapsulation in Python?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Hiding data",
+                "b": "Providing public methods",
+                "c": "Direct attribute access",
+                "d": "Using private methods"
+              }
+            },
+            "fill-methods-and-responsibility-0": {
+              "title": "Method Definition",
+              "prompt": "Complete the method definition: `def [blank1](self):`",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "def [blank1](self):",
+              "choices": [
+                "define",
+                "method",
+                "def",
+                "function"
+              ]
+            },
+            "fill-methods-and-responsibility-1": {
+              "title": "Accessing Attributes",
+              "prompt": "Fill in the blank to access an attribute: `self.[blank1]`",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank should be filled with the term that makes the statement accurate.",
+                "hint_1": "Look at the words before and after the blank to infer what kind of term is needed.",
+                "hint_2": "Pick the choice that completes the statement with the clearest meaning."
+              },
+              "template": "self.[blank1]",
+              "choices": [
+                "attribute",
+                "method",
+                "self",
+                "variable"
+              ]
+            },
+            "drag-methods-and-responsibility-0": {
+              "title": "Order of Method Execution",
+              "prompt": "Arrange the steps in the correct order for executing a method in a class.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Define the method in the class",
+                "t2": "Create an instance of the class",
+                "t3": "Call the method on the instance"
+              }
+            },
+            "policy_single_choice_1": {
+              "title": "Identify the result of running code",
+              "prompt": "In \"Methods and Responsibility\", what should you check after running a Python program?",
+              "hint": "Running code lets you inspect what the program displays.",
+              "help": {
+                "concept": "When you run Python code, the most important feedback is usually the output or error message.",
+                "hint_1": "Look at the output panel.",
+                "hint_2": "Printed values appear after the program runs."
+              },
+              "options": {
+                "a": "The output shown by the program",
+                "b": "Only the file name",
+                "c": "Whether Python deletes the code",
+                "d": "Whether comments are printed automatically"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "methods-and-responsibility": {
+          "methods-and-responsibility-sketch0": {
+            "title": "Understanding Methods in Python",
+            "bodyMarkdown": "In Python, methods are functions that are defined within a class and are used to manipulate the data of the objects created from the class. Methods allow us to encapsulate behavior that is specific to the objects of the class. For example, consider a `Car` class:\n\n```python\nclass Car:\n    def __init__(self, make, model):\n        self.make = make\n        self.model = model\n\n    def start_engine(self):\n        print(f\"The {self.make} {self.model}'s engine has started.\")\n```\n\nHere, `start_engine` is a method that belongs to the `Car` class. It uses the `make` and `model` attributes of the `Car` instance to print a message. This method encapsulates the behavior of starting the car's engine.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "methods-and-responsibility-sketch1": {
+            "title": "Encapsulation with Methods",
+            "bodyMarkdown": "Encapsulation is a fundamental concept in object-oriented programming that involves bundling the data (attributes) and the methods that operate on the data into a single unit, or class. This helps in hiding the internal state of the object from the outside world and only exposing a controlled interface.\n\nFor example, consider a `BankAccount` class:\n\n```python\nclass BankAccount:\n    def __init__(self, owner, balance=0):\n        self.owner = owner\n        self.__balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.__balance += amount\n            print(f\"Deposited {amount}. New balance is {self.__balance}.\")\n        else:\n            print(\"Deposit amount must be positive.\")\n\n    def get_balance(self):\n        return self.__balance\n```\n\nIn this example, the `__balance` attribute is private, and the `deposit` method provides a controlled way to modify it. The `get_balance` method allows access to the balance without exposing the attribute directly.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "try-it-yourself": {
+            "title": "Try it yourself",
+            "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+          }
+        }
+      }
+    }
+  }
+}

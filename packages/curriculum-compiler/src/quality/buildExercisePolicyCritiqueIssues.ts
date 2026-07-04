@@ -71,6 +71,7 @@ function toMix(counts: Record<Kind, number>): Record<Kind, number> {
 function buildGenerationTargetIssues(args: {
     draft: TopicAuthoringDraft;
     generationTargets?: GenerationTargets;
+    projectTopic?: boolean;
 }): CritiqueIssue[] {
     const targets = args.generationTargets;
 
@@ -97,22 +98,28 @@ function buildGenerationTargetIssues(args: {
         });
     }
 
-    if (codeInputCount < targets.projectCodeInputMin) {
-        issues.push({
-            code: "PROJECT_CODE_INPUT_TOO_SMALL",
-            category: "clarity",
-            severity: "error",
-            message: `Expected at least ${targets.projectCodeInputMin} code_input project exercise(s), but the draft has ${codeInputCount}.`,
-        });
-    }
+    // projectCodeInput* is a project/capstone step-count target. Lesson topics
+    // can still contain embedded code_input try-it/practice exercises, but they
+    // should not fail critique merely because they do not meet a project step
+    // count.
+    if (args.projectTopic) {
+        if (codeInputCount < targets.projectCodeInputMin) {
+            issues.push({
+                code: "PROJECT_CODE_INPUT_TOO_SMALL",
+                category: "clarity",
+                severity: "error",
+                message: `Expected at least ${targets.projectCodeInputMin} code_input project exercise(s), but the draft has ${codeInputCount}.`,
+            });
+        }
 
-    if (codeInputCount > targets.projectCodeInputMax) {
-        issues.push({
-            code: "PROJECT_CODE_INPUT_TOO_LARGE",
-            category: "clarity",
-            severity: "warn",
-            message: `Expected no more than ${targets.projectCodeInputMax} code_input project exercise(s), but the draft has ${codeInputCount}. Extra code_input exercises may be ignored by the project card.`,
-        });
+        if (codeInputCount > targets.projectCodeInputMax) {
+            issues.push({
+                code: "PROJECT_CODE_INPUT_TOO_LARGE",
+                category: "clarity",
+                severity: "warn",
+                message: `Expected no more than ${targets.projectCodeInputMax} code_input project exercise(s), but the draft has ${codeInputCount}. Extra code_input exercises may be ignored by the project card.`,
+            });
+        }
     }
 
     return issues;
@@ -122,9 +129,10 @@ function buildCountBasedIssues(args: {
     counts: Record<Kind, number>;
     plannedCounts: PlannedExerciseCounts;
     generationTargets?: GenerationTargets;
+    projectTopic?: boolean;
 }): CritiqueIssue[] {
     const issues: CritiqueIssue[] = [];
-    const { counts, plannedCounts, generationTargets } = args;
+    const { counts, plannedCounts, generationTargets, projectTopic = false } = args;
 
     for (const kind of KINDS) {
         const expected = plannedCounts.counts[kind] ?? 0;
@@ -135,12 +143,15 @@ function buildCountBasedIssues(args: {
         const delta = Math.abs(actual - expected);
 
         if (kind === "code_input" && actual < expected) {
-            issues.push({
-                code: "EXERCISE_POLICY_CODE_INPUT_UNDER_TARGET",
-                category: "clarity",
-                severity: "error",
-                message: `Exercise policy expects ${expected} "code_input" exercise(s), but the draft has ${actual}.`,
-            });
+            const hasEnoughLessonPractice = !projectTopic && actual >= Math.min(3, expected);
+            if (!hasEnoughLessonPractice) {
+                issues.push({
+                    code: "EXERCISE_POLICY_CODE_INPUT_UNDER_TARGET",
+                    category: "clarity",
+                    severity: projectTopic || actual === 0 ? "error" : "warn",
+                    message: `Exercise policy expects ${expected} "code_input" exercise(s), but the draft has ${actual}.`,
+                });
+            }
             continue;
         }
 
@@ -170,12 +181,15 @@ function buildCountBasedIssues(args: {
     const actualTotal = Object.values(counts).reduce((sum, value) => sum + value, 0);
 
     if (actualTotal !== expectedTotal) {
-        issues.push({
-            code: "EXERCISE_POLICY_TOTAL_MISMATCH",
-            category: "clarity",
-            severity: "error",
-            message: `Exercise policy expects ${expectedTotal} total exercise(s), but the draft has ${actualTotal}.`,
-        });
+        const hasEnoughLessonPractice = !projectTopic && counts.code_input >= 3 && actualTotal >= 6;
+        if (!hasEnoughLessonPractice) {
+            issues.push({
+                code: "EXERCISE_POLICY_TOTAL_MISMATCH",
+                category: "clarity",
+                severity: projectTopic ? "error" : "warn",
+                message: `Exercise policy expects ${expectedTotal} total exercise(s), but the draft has ${actualTotal}.`,
+            });
+        }
     }
 
     return issues;
@@ -243,9 +257,11 @@ export function buildExercisePolicyCritiqueIssues(args: {
     policy?: ResolvedExercisePolicy;
     plannedCounts?: PlannedExerciseCounts;
     generationTargets?: GenerationTargets;
+    sectionRole?: TopicSeed["sectionRole"];
 }): CritiqueIssue[] {
     const counts = countKinds(args.draft);
     const total = Object.values(counts).reduce((sum, value) => sum + value, 0);
+    const projectTopic = args.sectionRole === "module_project" || args.sectionRole === "capstone";
 
     if (total === 0) {
         return [
@@ -265,6 +281,7 @@ export function buildExercisePolicyCritiqueIssues(args: {
         ...buildGenerationTargetIssues({
             draft: args.draft,
             generationTargets: args.generationTargets,
+            projectTopic,
         }),
     );
 
@@ -274,6 +291,7 @@ export function buildExercisePolicyCritiqueIssues(args: {
                 counts,
                 plannedCounts: args.plannedCounts,
                 generationTargets: args.generationTargets,
+                projectTopic,
             }),
         );
     } else if (args.policy) {

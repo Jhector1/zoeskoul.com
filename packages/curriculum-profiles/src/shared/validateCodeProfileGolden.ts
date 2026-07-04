@@ -89,7 +89,7 @@ function collectExerciseWorkspaceFiles(
     exercise: ManifestCodeInput,
 ): Array<{ path: string; content: string }> {
     const merged = new Map<string, string>();
-    const sources = [
+    const starterSources = [
         exercise.workspace?.files,
         exercise.workspace?.initialFiles,
         exercise.workspace?.workspaceFiles,
@@ -97,7 +97,7 @@ function collectExerciseWorkspaceFiles(
         exercise.starterFiles,
     ];
 
-    for (const source of sources) {
+    for (const source of starterSources) {
         for (const file of normalizeWorkspaceFiles(source)) {
             if (!merged.has(file.path)) {
                 merged.set(file.path, file.content);
@@ -105,7 +105,57 @@ function collectExerciseWorkspaceFiles(
         }
     }
 
+    const solutionSources = [
+        exercise.solutionFiles,
+        exercise.recipe.type === "fixed_tests" || exercise.recipe.type === "semantic"
+            ? exercise.recipe.solutionFiles
+            : undefined,
+    ];
+
+    // Golden validation checks the official solution, so any solved files must
+    // override starter files. Otherwise a semantic multifile solution can be
+    // validated against starter helper modules and fail even though the
+    // published reveal/fill solutionFiles are correct.
+    for (const source of solutionSources) {
+        for (const file of normalizeWorkspaceFiles(source)) {
+            merged.set(file.path, file.content);
+        }
+    }
+
     return [...merged.entries()].map(([path, content]) => ({ path, content }));
+}
+
+
+function semanticModuleNameForPath(filePath: string): string | null {
+    const normalized = String(filePath ?? "")
+        .trim()
+        .replace(/\\/g, "/")
+        .replace(/^\.\//, "");
+
+    if (!normalized.endsWith(".py")) return null;
+    if (normalized.endsWith("/__init__.py")) return null;
+
+    const name = normalized
+        .replace(/\.py$/, "")
+        .split("/")
+        .filter(Boolean)
+        .join(".");
+
+    return name && name !== "main" ? name : null;
+}
+
+function collectSemanticModuleNames(files: Array<{ path: string; content: string }>): string[] {
+    const seen = new Set<string>();
+    const result: string[] = [];
+
+    for (const file of files) {
+        const moduleName = semanticModuleNameForPath(file.path);
+        if (!moduleName || seen.has(moduleName)) continue;
+        seen.add(moduleName);
+        result.push(moduleName);
+    }
+
+    return result;
 }
 
 function normalizeTestFiles(
@@ -297,11 +347,13 @@ export async function validateCodeProfileGolden(args: {
         }
 
         if (expected.checkMode === "semantic") {
+            const semanticFiles = collectExerciseWorkspaceFiles(exercise);
             const run = await validateSemanticCode({
                 language: exercise.language,
                 solutionCode,
                 expected,
-                files: collectExerciseWorkspaceFiles(exercise),
+                files: semanticFiles,
+                semanticModuleNames: collectSemanticModuleNames(semanticFiles),
             });
 
             if (!run.ok) {

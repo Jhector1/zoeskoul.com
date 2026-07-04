@@ -1,0 +1,500 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "truthiness-and-empty-values": {
+          "label": "Truthiness ak Valè Vid",
+          "summary": "Konprann kijan chèn vid, zewo, ak None konpòte yo nan kondisyon.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa truthy ak falsy vle di"
+            },
+            "sketch1": {
+              "title": "Kijan nonb ak None konpòte yo"
+            },
+            "sketch2": {
+              "title": "Kilè truthiness itil ak kilè pou fè atansyon"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Pwojè Pratik Truthiness"
+            }
+          },
+          "projectSteps": {
+            "code_classify_string": {
+              "title": "Klasifye tèks vid oswa ki pa vid"
+            },
+            "code_classify_number": {
+              "title": "Klasifye zewo oswa ki pa zewo"
+            },
+            "code_check_missing_word": {
+              "title": "Tcheke yon makè mo ki manke"
+            },
+            "code_points_message": {
+              "title": "Afiche yon mesaj pou pwen"
+            },
+            "code_two_inputs_both_present": {
+              "title": "Tcheke si toude antre yo gen tèks"
+            }
+          },
+          "quiz": {
+            "sc-falsy-empty-string": {
+              "title": "Chèn vid nan yon kondisyon",
+              "prompt": "Kisa k rive nan Python lè `text = \"\"` epi pwogram nan tcheke `if text:`?",
+              "hint": "Yon chèn vid gen yon valè truthiness espesyal.",
+              "help": {
+                "concept": "Python trete chèn vid kòm falsy, kidonk `if text:` echwe lè `text` se `\"\"`.",
+                "hint_1": "Poze tèt ou kesyon si `\"\"` konte kòm gen kontni.",
+                "hint_2": "Kondisyon an pa antre nan blòk `if` la pou yon chèn vid."
+              },
+              "options": {
+                "a": "Kondisyon an trete kòm vre",
+                "b": "Kondisyon an trete kòm fo",
+                "c": "Python leve yon erè",
+                "d": "Python konvèti li an nonb 0 anvan"
+              }
+            },
+            "sc-none-truthiness": {
+              "title": "None nan yon deklarasyon if",
+              "prompt": "Ki deklarasyon sou `None` nan yon kondisyon Python ki kòrèk?",
+              "hint": "Reflechi si `None` konpòte li plis tankou yon valè prezan oswa yon valè ki manke.",
+              "help": {
+                "concept": "Nan Python pou debutan, `None` se yon valè falsy epi li souvan reprezante done ki manke oswa ki poko defini.",
+                "hint_1": "Si `value = None`, alò `if value:` pa pral egzekite blòk prensipal li a.",
+                "hint_2": "Chwazi opsyon ki di Python trete `None` tankou fo nan kondisyon yo."
+              },
+              "options": {
+                "a": "`None` toujou truthy",
+                "b": "`None` se falsy",
+                "c": "`None` vin yon chèn vid otomatikman",
+                "d": "`None` ka itilize sèlman ak nonb"
+              }
+            },
+            "mc-falsy-values": {
+              "title": "Chwazi valè falsy yo",
+              "prompt": "Ki valè ki falsy nan Python? Chwazi tout sa ki aplikab.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "0",
+                "b": "\"\"",
+                "c": "None",
+                "d": "\"hi\""
+              }
+            },
+            "mc-truthy-values": {
+              "title": "Chwazi valè truthy yo",
+              "prompt": "Ki valè ki truthy nan Python? Chwazi tout sa ki aplikab.",
+              "hint": "Tèks ki pa vid ak nonb ki pa zewo anjeneral konte kòm vre.",
+              "help": {
+                "concept": "Yon chèn ki pa vid ak nenpòt nonb ki pa zewo se truthy, pandan `0`, `\"\"`, ak `None` se falsy.",
+                "hint_1": "Tcheke ki opsyon ki ta fè `if value:` egzekite blòk li a.",
+                "hint_2": "Youn nan bon repons yo se tèks ki gen karaktè ladan l, epi yon lòt se yon nonb ki pa zewo."
+              },
+              "options": {
+                "a": "\"hello\"",
+                "b": "5",
+                "c": "0",
+                "d": "None"
+              }
+            },
+            "dr-check-empty-input-order": {
+              "title": "Mete verifikasyon antre vid la nan lòd",
+              "prompt": "Ranje liy sa yo pou fè yon pwogram ki li tèks epi ki afiche `Empty` lè antre a se yon chèn vid, sinon li afiche `Has text`.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "text = input()",
+                "t2": "if text:",
+                "t3": "print(\"Has text\")",
+                "t4": "else:",
+                "t5": "print(\"Empty\")"
+              }
+            },
+            "dr-check-none-order": {
+              "title": "Mete verifikasyon None nan lòd",
+              "prompt": "Ranje liy sa yo pou fè yon pwogram ki afiche `Missing` lè `value` se `None`, sinon li afiche `Present`.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "value = None",
+                "t2": "if value is None:",
+                "t3": "print(\"Missing\")",
+                "t4": "else:",
+                "t5": "print(\"Present\")"
+              }
+            },
+            "fb-zero-falsy": {
+              "title": "Ranpli valè ki manke pou zewo",
+              "prompt": "Konplete fraz la sou truthiness.",
+              "hint": "Reflechi sou kijan Python trete zewo nan yon kondisyon `if`.",
+              "help": {
+                "concept": "Nonb `0` la se youn nan valè estanda the missing term nan Python.",
+                "hint_1": "Si `count = 0`, alò `if count:` pa egzekite blòk prensipal la.",
+                "hint_2": "Chwazi mo ki vle di Python trete kondisyon an tankou fo."
+              },
+              "template": "Nan Python, `0` se [blank1].",
+              "choices": [
+                "truthy",
+                "falsy",
+                "yon chèn",
+                "None"
+              ]
+            },
+            "fb-nonempty-string": {
+              "title": "Ranpli valè ki manke pou tèks",
+              "prompt": "Konplete fraz la sou chèn nan kondisyon yo.",
+              "hint": "Yon chèn ki gen karaktè ladan l konpòte li diferan de `\"\"`.",
+              "help": {
+                "concept": "Yon chèn ki pa vid se the missing term, pandan yon chèn vid se falsy.",
+                "hint_1": "Imajine `name = \"Leo\"` anndan `if name:`.",
+                "hint_2": "Chwazi mo ki vle di kondisyon an aji tankou vre."
+              },
+              "template": "Yon chèn ki pa vid se [blank1] nan kondisyon Python yo.",
+              "choices": [
+                "ki manke",
+                "falsy",
+                "truthy",
+                "zewo"
+              ]
+            },
+            "code-classify-string": {
+              "title": "Klasifye tèks vid oswa ki pa vid",
+              "prompt": "Ekri kòd Python ki li yon liy antre. Si antre a se yon chèn vid, afiche `empty`. Sinon, afiche `not empty`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si pwogram nan pwodui rezilta yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "text = input()\n# TODO: print \"empty\" if text is empty, otherwise print \"not empty\""
+            },
+            "code-classify-number": {
+              "title": "Klasifye zewo oswa ki pa zewo",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Si nonb la truthy, afiche `truthy number`. Sinon, afiche `falsy number`.",
+              "hint": "Li travay la \"Classify zero or non-zero\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Classify zero or non-zero\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman rezilta yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl rezilta a ak rezilta yo espere a."
+              },
+              "starterCode": "number = int(input())\n# TODO: print the correct message based on the number's truthiness"
+            },
+            "code-check-missing-word": {
+              "title": "Tcheke yon makè mo ki manke",
+              "prompt": "Ekri kòd Python ki li yon liy antre. Si antre a egzakteman `None`, afiche `missing`. Sinon, afiche `present`.",
+              "hint": "Li travay la \"Check for a missing word marker\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Check for a missing word marker\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman rezilta yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl rezilta a ak rezilta yo espere a."
+              },
+              "starterCode": "value = input()\n# TODO: if the input text is exactly \"None\", print \"missing\"; otherwise print \"present\""
+            },
+            "code-points-message": {
+              "title": "Afiche yon mesaj pou pwen",
+              "prompt": "Ekri kòd Python ki li yon nonb antye yo rele `points`. Si `points` se 0, afiche `no points`. Sinon, afiche `points recorded`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "points = int(input())\n# TODO: print the correct message"
+            },
+            "code-two-inputs-both-present": {
+              "title": "Tcheke si toude antre yo gen tèks",
+              "prompt": "Ekri kòd Python ki li de liy antre: `first` ak `second`. Si toude se chèn ki pa vid, afiche `both present`. Sinon, afiche `missing one`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "first = input()\nsecond = input()\n# TODO: print \"both present\" only when both strings are non-empty"
+            }
+          }
+        }
+      },
+      "python-v2-2": {
+        "truthiness-and-empty-values": {
+          "label": "Truthiness ak Valè Vid",
+          "summary": "Konprann kijan chèn vid, zewo, ak None konpòte yo nan kondisyon.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa truthy ak falsy vle di"
+            },
+            "sketch1": {
+              "title": "Kijan nonb ak None konpòte yo"
+            },
+            "sketch2": {
+              "title": "Kilè truthiness itil ak kilè pou fè atansyon"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Pwojè Pratik Truthiness"
+            }
+          },
+          "projectSteps": {
+            "code_classify_string": {
+              "title": "Klasifye tèks vid oswa ki pa vid"
+            },
+            "code_classify_number": {
+              "title": "Klasifye zewo oswa ki pa zewo"
+            },
+            "code_check_missing_word": {
+              "title": "Tcheke yon makè mo ki manke"
+            },
+            "code_points_message": {
+              "title": "Afiche yon mesaj pou pwen"
+            },
+            "code_two_inputs_both_present": {
+              "title": "Tcheke si toude antre yo gen tèks"
+            }
+          },
+          "quiz": {
+            "sc-falsy-empty-string": {
+              "title": "Chèn vid nan yon kondisyon",
+              "prompt": "Kisa k rive nan Python lè `text = \"\"` epi pwogram nan tcheke `if text:`?",
+              "hint": "Yon chèn vid gen yon valè truthiness espesyal.",
+              "help": {
+                "concept": "Python trete chèn vid kòm falsy, kidonk `if text:` echwe lè `text` se `\"\"`.",
+                "hint_1": "Poze tèt ou kesyon si `\"\"` konte kòm gen kontni.",
+                "hint_2": "Kondisyon an pa antre nan blòk `if` la pou yon chèn vid."
+              },
+              "options": {
+                "a": "Kondisyon an trete kòm vre",
+                "b": "Kondisyon an trete kòm fo",
+                "c": "Python leve yon erè",
+                "d": "Python konvèti li an nonb 0 anvan"
+              }
+            },
+            "sc-none-truthiness": {
+              "title": "None nan yon deklarasyon if",
+              "prompt": "Ki deklarasyon sou `None` nan yon kondisyon Python ki kòrèk?",
+              "hint": "Reflechi si `None` konpòte li plis tankou yon valè prezan oswa yon valè ki manke.",
+              "help": {
+                "concept": "Nan Python pou debutan, `None` se yon valè falsy epi li souvan reprezante done ki manke oswa ki poko defini.",
+                "hint_1": "Si `value = None`, alò `if value:` pa pral egzekite blòk prensipal li a.",
+                "hint_2": "Chwazi opsyon ki di Python trete `None` tankou fo nan kondisyon yo."
+              },
+              "options": {
+                "a": "`None` toujou truthy",
+                "b": "`None` se falsy",
+                "c": "`None` vin yon chèn vid otomatikman",
+                "d": "`None` ka itilize sèlman ak nonb"
+              }
+            },
+            "mc-falsy-values": {
+              "title": "Chwazi valè falsy yo",
+              "prompt": "Ki valè ki falsy nan Python? Chwazi tout sa ki aplikab.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "0",
+                "b": "\"\"",
+                "c": "None",
+                "d": "\"hi\""
+              }
+            },
+            "mc-truthy-values": {
+              "title": "Chwazi valè truthy yo",
+              "prompt": "Ki valè ki truthy nan Python? Chwazi tout sa ki aplikab.",
+              "hint": "Tèks ki pa vid ak nonb ki pa zewo anjeneral konte kòm vre.",
+              "help": {
+                "concept": "Yon chèn ki pa vid ak nenpòt nonb ki pa zewo se truthy, pandan `0`, `\"\"`, ak `None` se falsy.",
+                "hint_1": "Tcheke ki opsyon ki ta fè `if value:` egzekite blòk li a.",
+                "hint_2": "Youn nan bon repons yo se tèks ki gen karaktè ladan l, epi yon lòt se yon nonb ki pa zewo."
+              },
+              "options": {
+                "a": "\"hello\"",
+                "b": "5",
+                "c": "0",
+                "d": "None"
+              }
+            },
+            "dr-check-empty-input-order": {
+              "title": "Mete verifikasyon antre vid la nan lòd",
+              "prompt": "Ranje liy sa yo pou fè yon pwogram ki li tèks epi ki afiche `Empty` lè antre a se yon chèn vid, sinon li afiche `Has text`.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "text = input()",
+                "t2": "if text:",
+                "t3": "print(\"Has text\")",
+                "t4": "else:",
+                "t5": "print(\"Empty\")"
+              }
+            },
+            "dr-check-none-order": {
+              "title": "Mete verifikasyon None nan lòd",
+              "prompt": "Ranje liy sa yo pou fè yon pwogram ki afiche `Missing` lè `value` se `None`, sinon li afiche `Present`.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "value = None",
+                "t2": "if value is None:",
+                "t3": "print(\"Missing\")",
+                "t4": "else:",
+                "t5": "print(\"Present\")"
+              }
+            },
+            "fb-zero-falsy": {
+              "title": "Ranpli valè ki manke pou zewo",
+              "prompt": "Konplete fraz la sou truthiness.",
+              "hint": "Reflechi sou kijan Python trete zewo nan yon kondisyon `if`.",
+              "help": {
+                "concept": "Nonb `0` la se youn nan valè estanda the missing term nan Python.",
+                "hint_1": "Si `count = 0`, alò `if count:` pa egzekite blòk prensipal la.",
+                "hint_2": "Chwazi mo ki vle di Python trete kondisyon an tankou fo."
+              },
+              "template": "Nan Python, `0` se [blank1].",
+              "choices": [
+                "truthy",
+                "falsy",
+                "yon chèn",
+                "None"
+              ]
+            },
+            "fb-nonempty-string": {
+              "title": "Ranpli valè ki manke pou tèks",
+              "prompt": "Konplete fraz la sou chèn nan kondisyon yo.",
+              "hint": "Yon chèn ki gen karaktè ladan l konpòte li diferan de `\"\"`.",
+              "help": {
+                "concept": "Yon chèn ki pa vid se the missing term, pandan yon chèn vid se falsy.",
+                "hint_1": "Imajine `name = \"Leo\"` anndan `if name:`.",
+                "hint_2": "Chwazi mo ki vle di kondisyon an aji tankou vre."
+              },
+              "template": "Yon chèn ki pa vid se [blank1] nan kondisyon Python yo.",
+              "choices": [
+                "ki manke",
+                "falsy",
+                "truthy",
+                "zewo"
+              ]
+            },
+            "code-classify-string": {
+              "title": "Klasifye tèks vid oswa ki pa vid",
+              "prompt": "Ekri kòd Python ki li yon liy antre. Si antre a se yon chèn vid, afiche `empty`. Sinon, afiche `not empty`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si pwogram nan pwodui rezilta yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "text = input()\n# TODO: print \"empty\" if text is empty, otherwise print \"not empty\""
+            },
+            "code-classify-number": {
+              "title": "Klasifye zewo oswa ki pa zewo",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Si nonb la truthy, afiche `truthy number`. Sinon, afiche `falsy number`.",
+              "hint": "Li travay la \"Classify zero or non-zero\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Classify zero or non-zero\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman rezilta yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl rezilta a ak rezilta yo espere a."
+              },
+              "starterCode": "number = int(input())\n# TODO: print the correct message based on the number's truthiness"
+            },
+            "code-check-missing-word": {
+              "title": "Tcheke yon makè mo ki manke",
+              "prompt": "Ekri kòd Python ki li yon liy antre. Si antre a egzakteman `None`, afiche `missing`. Sinon, afiche `present`.",
+              "hint": "Li travay la \"Check for a missing word marker\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a tcheke si kòd ou a pwodui rezilta yo mande a pou: \"Check for a missing word marker\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman rezilta yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl rezilta a ak rezilta yo espere a."
+              },
+              "starterCode": "value = input()\n# TODO: if the input text is exactly \"None\", print \"missing\"; otherwise print \"present\""
+            },
+            "code-points-message": {
+              "title": "Afiche yon mesaj pou pwen",
+              "prompt": "Ekri kòd Python ki li yon nonb antye yo rele `points`. Si `points` se 0, afiche `no points`. Sinon, afiche `points recorded`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "points = int(input())\n# TODO: print the correct message"
+            },
+            "code-two-inputs-both-present": {
+              "title": "Tcheke si toude antre yo gen tèks",
+              "prompt": "Ekri kòd Python ki li de liy antre: `first` ak `second`. Si toude se chèn ki pa vid, afiche `both present`. Sinon, afiche `missing one`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "first = input()\nsecond = input()\n# TODO: print \"both present\" only when both strings are non-empty"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "truthiness-and-empty-values": {
+          "truthy-basics": {
+            "title": "Sa truthy ak falsy vle di",
+            "bodyMarkdown": "Nan Python, yon kondisyon `if` pa toujou bezwen `True` oswa `False` ekri dirèkteman. Anpil valè yo *trete tankou* vre oswa fo.\n\nYon valè se **truthy** si Python trete li tankou `True` nan yon kondisyon. Yon valè se **falsy** si Python trete li tankou `False`.\n\nValè falsy ki komen pou debutan:\n- `0`\n- `\"\"` (yon chèn vid)\n- `None`\n\nAnpil lòt valè se truthy, tankou:\n- `5`\n- `\"hello\"`\n- `-2`\n\nEgzanp:\n\n```python\nname = \"\"\n\nif name:\n    print(\"You entered a name\")\nelse:\n    print(\"Name is empty\")\n```\n\nAnn pase ladan l:\n- `name` estoke yon chèn vid.\n- Yon chèn vid se falsy.\n- Kidonk blòk `else` la egzekite.\n- Rezilta a se `Name is empty`."
+          },
+          "numbers-and-none": {
+            "title": "Kijan nonb ak None konpòte yo",
+            "bodyMarkdown": "Nonb yo tou gen règ truthiness. Pou travay Python debaz:\n- `0` se falsy\n- nonb ki pa zewo yo se truthy\n- `None` se falsy\n\nEgzanp detaye:\n\n```python\nscore = 0\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nAnn suiv li etap pa etap:\n- `score = 0` estoke zewo.\n- Nan liy `if score:` a, Python tcheke truthiness `score` la.\n- Paske `0` se falsy, blòk `if` la sote.\n- Blòk `else` la afiche `No score yet`.\n\nKounye a konpare sa ak:\n\n```python\nscore = 7\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nFwa sa a `7` se truthy, kidonk `Score recorded` afiche.\n\n`None` souvan vle di “pa gen valè ankò” oswa “valè ki manke.”\n\n```python\nemail = None\n\nif email:\n    print(\"Email found\")\nelse:\n    print(\"No email found\")\n```\n\nPaske `None` se falsy, pwogram nan afiche `No email found`."
+          },
+          "using-truthiness-carefully": {
+            "title": "Kilè truthiness itil ak kilè pou fè atansyon",
+            "bodyMarkdown": "Truthiness itil pou verifikasyon rapid, espesyalman lè ou vle konnen si yon valè vid oswa manke.\n\nEgzanp:\n\n```python\ncomment = input()\n\nif comment:\n    print(\"Thanks for your comment\")\nelse:\n    print(\"You entered nothing\")\n```\n\nSa mache byen paske yon antre vid vin yon chèn vid, ki se falsy.\n\nMen fè atansyon: pafwa `0` se yon vrè valè, pa yon valè ki manke.\n\n```python\nage = 0\n\nif age:\n    print(\"Age entered\")\nelse:\n    print(\"Age missing\")\n```\n\nSa afiche `Age missing`, menm si `0` se yon vrè nonb. Sa vle di yon senp verifikasyon truthiness pa toujou pi bon chwa a.\n\nSi ou vle espesyalman tcheke yon valè ki manke, konpare ak `None` olye ou konte sèlman sou truthiness.\n\n```python\nage = 0\n\nif age is None:\n    print(\"Age missing\")\nelse:\n    print(\"Age entered\")\n```\n\nKounye a pwogram nan trete `0` kòrèkteman kòm yon valè ki te antre.\n\nAnn suiv li: li chak deklarasyon soti anlè rive anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki rezilta kòd la sipoze montre."
+          }
+        }
+      },
+      "python-v2-2": {
+        "truthiness-and-empty-values": {
+          "truthy-basics": {
+            "title": "Sa truthy ak falsy vle di",
+            "bodyMarkdown": "Nan Python, yon kondisyon `if` pa toujou bezwen `True` oswa `False` ekri dirèkteman. Anpil valè yo *trete tankou* vre oswa fo.\n\nYon valè se **truthy** si Python trete li tankou `True` nan yon kondisyon. Yon valè se **falsy** si Python trete li tankou `False`.\n\nValè falsy ki komen pou debutan:\n- `0`\n- `\"\"` (yon chèn vid)\n- `None`\n\nAnpil lòt valè se truthy, tankou:\n- `5`\n- `\"hello\"`\n- `-2`\n\nEgzanp:\n\n```python\nname = \"\"\n\nif name:\n    print(\"You entered a name\")\nelse:\n    print(\"Name is empty\")\n```\n\nAnn pase ladan l:\n- `name` estoke yon chèn vid.\n- Yon chèn vid se falsy.\n- Kidonk blòk `else` la egzekite.\n- Rezilta a se `Name is empty`."
+          },
+          "numbers-and-none": {
+            "title": "Kijan nonb ak None konpòte yo",
+            "bodyMarkdown": "Nonb yo tou gen règ truthiness. Pou travay Python debaz:\n- `0` se falsy\n- nonb ki pa zewo yo se truthy\n- `None` se falsy\n\nEgzanp detaye:\n\n```python\nscore = 0\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nAnn suiv li etap pa etap:\n- `score = 0` estoke zewo.\n- Nan liy `if score:` a, Python tcheke truthiness `score` la.\n- Paske `0` se falsy, blòk `if` la sote.\n- Blòk `else` la afiche `No score yet`.\n\nKounye a konpare sa ak:\n\n```python\nscore = 7\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nFwa sa a `7` se truthy, kidonk `Score recorded` afiche.\n\n`None` souvan vle di “pa gen valè ankò” oswa “valè ki manke.”\n\n```python\nemail = None\n\nif email:\n    print(\"Email found\")\nelse:\n    print(\"No email found\")\n```\n\nPaske `None` se falsy, pwogram nan afiche `No email found`."
+          },
+          "using-truthiness-carefully": {
+            "title": "Kilè truthiness itil ak kilè pou fè atansyon",
+            "bodyMarkdown": "Truthiness itil pou verifikasyon rapid, espesyalman lè ou vle konnen si yon valè vid oswa manke.\n\nEgzanp:\n\n```python\ncomment = input()\n\nif comment:\n    print(\"Thanks for your comment\")\nelse:\n    print(\"You entered nothing\")\n```\n\nSa mache byen paske yon antre vid vin yon chèn vid, ki se falsy.\n\nMen fè atansyon: pafwa `0` se yon vrè valè, pa yon valè ki manke.\n\n```python\nage = 0\n\nif age:\n    print(\"Age entered\")\nelse:\n    print(\"Age missing\")\n```\n\nSa afiche `Age missing`, menm si `0` se yon vrè nonb. Sa vle di yon senp verifikasyon truthiness pa toujou pi bon chwa a.\n\nSi ou vle espesyalman tcheke yon valè ki manke, konpare ak `None` olye ou konte sèlman sou truthiness.\n\n```python\nage = 0\n\nif age is None:\n    print(\"Age missing\")\nelse:\n    print(\"Age entered\")\n```\n\nKounye a pwogram nan trete `0` kòrèkteman kòm yon valè ki te antre.\n\nAnn suiv li: li chak deklarasyon soti anlè rive anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki rezilta kòd la sipoze montre."
+          }
+        }
+      }
+    }
+  }
+}

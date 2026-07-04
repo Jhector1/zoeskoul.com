@@ -1,0 +1,1023 @@
+{
+  "title": "Capstone Tests and Polish",
+  "summary": "Test the Smart Task Tracker model and service layers, then finish the capstone with reporting, documentation, and final polish.",
+  "minutes": 35,
+  "sketchBlocks": [
+    {
+      "id": "capstone-tests-and-polish-sketch-0",
+      "title": "Finish the Smart Task Tracker for handoff",
+      "bodyMarkdown": "In this final capstone topic, you are acting as the developer who must prepare **Smart Task Tracker** for a real handoff. The app already has a domain model with a base class and subclasses, plus service logic that works with mixed task objects. Your job now is to make the project feel complete: add tests, verify service behavior, generate a polished report, and write clear documentation.\n\nA polished capstone does more than \"run once.\" It should show that:\n\n- **encapsulation** protects task data through methods and validation\n- **inheritance** connects shared task behavior through a base class\n- **polymorphism** lets one service work with different task types\n- **abstraction** gives the app a clear base-class contract\n\nA small example of the kind of project flow you are finishing might look like this:\n\n```python\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import TaskService\n\nservice = TaskService()\nservice.add_task(BugTask(\"Fix login\", \"high\", 3))\nservice.add_task(FeatureTask(\"Add export\", \"medium\", 5))\n\nfor line in service.build_report_lines():\n    print(line)\n```\n\nLine by line:\n\n- `BugTask(...)` and `FeatureTask(...)` create two different kinds of task objects.\n- `TaskService()` manages a list of those objects.\n- `add_task(...)` stores each object in the service.\n- `build_report_lines()` uses polymorphism, because each task can describe itself through shared methods from the base-class contract.\n- The loop prints a final human-readable report.\n\nBy the end of this topic, your workspace should include working model files, service files, tests, a report generator, and a README that explains the project clearly enough for another person to review it."
+    },
+    {
+      "id": "try-it-yourself",
+      "title": "Try it yourself",
+      "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-capstone-tests-and-polish-sketch0",
+      "kind": "code_input",
+      "title": "Add model tests for task classes",
+      "prompt": "You are polishing the Smart Task Tracker before handoff. Add assertions in `tests/check_models.py` to verify the model layer.\n\nRequirements:\n- Create a `BugTask` with title `Fix login`, priority `high`, severity `3`.\n- Create a `FeatureTask` with title `Add export`, priority `medium`, estimate `5`.\n- Assert that each object returns the correct value from `get_title()`.\n- Assert that `BugTask.get_effort_score()` returns `6`.\n- Assert that `FeatureTask.get_effort_score()` returns `5`.\n- Assert that `describe()` for each object starts with its task type label.\n- Keep the final `print(\"model tests passed\")` line.\n\nThis matters because your capstone needs proof that the base class contract and subclass overrides behave correctly.",
+      "starterCode": "# Open tests/check_models.py and add the missing assertions.",
+      "solutionCode": "# Open tests/check_models.py and add the missing assertions.",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "BugTask",
+          "message": "BugTask must be defined."
+        },
+        {
+          "type": "defines_class",
+          "className": "FeatureTask",
+          "message": "FeatureTask must be defined."
+        },
+        {
+          "type": "method_returns",
+          "className": "BugTask",
+          "constructorArgs": [
+            "Fix login",
+            "high",
+            3
+          ],
+          "constructorArgKinds": [
+            "value",
+            "value",
+            "value"
+          ],
+          "methodName": "get_effort_score",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": 6,
+          "expectedKind": "value",
+          "message": "BugTask.get_effort_score() should double the severity."
+        },
+        {
+          "type": "method_returns",
+          "className": "FeatureTask",
+          "constructorArgs": [
+            "Add export",
+            "medium",
+            5
+          ],
+          "constructorArgKinds": [
+            "value",
+            "value",
+            "value"
+          ],
+          "methodName": "get_effort_score",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": 5,
+          "expectedKind": "value",
+          "message": "FeatureTask.get_effort_score() should return the estimate."
+        },
+        {
+          "type": "method_returns",
+          "className": "BugTask",
+          "constructorArgs": [
+            "Fix login",
+            "high",
+            3
+          ],
+          "constructorArgKinds": [
+            "value",
+            "value",
+            "value"
+          ],
+          "methodName": "get_title",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "Fix login",
+          "expectedKind": "value",
+          "message": "BugTask should inherit working title access from the base class."
+        },
+        {
+          "type": "method_returns",
+          "className": "FeatureTask",
+          "constructorArgs": [
+            "Add export",
+            "medium",
+            5
+          ],
+          "constructorArgKinds": [
+            "value",
+            "value",
+            "value"
+          ],
+          "methodName": "get_title",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "Add export",
+          "expectedKind": "value",
+          "message": "FeatureTask should inherit working title access from the base class."
+        }
+      ],
+      "hint": "Read the task \"Add model tests for task classes\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Add model tests for task classes\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Open tests/check_models.py and add the missing assertions.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def get_effort_score(self):\n        pass\n\n    def get_title(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def get_effort_score(self):\n        pass\n\n    def get_title(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# Open tests/check_models.py and add the missing assertions.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def get_effort_score(self):\n        return 6\n\n    def get_title(self):\n        return f\"{self.value_1}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def get_effort_score(self):\n        return 5\n\n    def get_title(self):\n        return f\"{self.value_1}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "capstone-tests-and-polish-step1-service-tests",
+      "kind": "code_input",
+      "title": "Add service-layer tests",
+      "prompt": "Build on the previous workspace. In `tests/check_service.py`, add assertions that verify the service layer works with a mixed list of task objects.\n\nRequirements:\n- Create a `TaskService`.\n- Add these tasks in order:\n  - `BugTask(\"Fix login\", \"high\", 3)`\n  - `FeatureTask(\"Add export\", \"medium\", 5)`\n  - `BugTask(\"Patch crash\", \"medium\", 2)`\n- Assert that `count_tasks()` returns `3`.\n- Assert that `total_effort()` returns `15`.\n- Assert that `titles_by_priority(\"high\")` returns only `['Fix login']`.\n- Assert that `titles_by_priority(\"medium\")` returns `['Add export', 'Patch crash']` in that order.\n- Keep the final `print(\"service tests passed\")` line.\n\nThis step proves your service can use polymorphism correctly across different subclasses.",
+      "starterCode": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import TaskService\n\n# TODO: create the service, add the tasks, and write the assertions.\n\nprint(\"service tests passed\")",
+      "solutionCode": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import TaskService\n\nservice = TaskService()\nservice.add_task(BugTask(\"Fix login\", \"high\", 3))\nservice.add_task(FeatureTask(\"Add export\", \"medium\", 5))\nservice.add_task(BugTask(\"Patch crash\", \"medium\", 2))\n\nassert service.count_tasks() == 3\nassert service.total_effort() == 15\nassert service.titles_by_priority(\"high\") == [\"Fix login\"]\nassert service.titles_by_priority(\"medium\") == [\"Add export\", \"Patch crash\"]\n\nprint(\"service tests passed\")",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "TaskService",
+          "message": "TaskService must be defined."
+        },
+        {
+          "type": "constructible",
+          "className": "TaskService",
+          "constructorArgs": [],
+          "message": "TaskService should be constructible with no arguments."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "TaskService",
+          "constructorArgs": [],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Fix login"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  3
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Add export"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate",
+                  5
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Patch crash"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "severity",
+                  2
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            }
+          ],
+          "methodName": "count_tasks",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": 3,
+          "expectedKind": "value",
+          "message": "TaskService should count all added tasks."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "TaskService",
+          "constructorArgs": [],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Fix login"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  3
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Add export"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate",
+                  5
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Patch crash"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "severity",
+                  2
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            }
+          ],
+          "methodName": "total_effort",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": 15,
+          "expectedKind": "value",
+          "message": "TaskService.total_effort() should sum polymorphic effort scores."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "TaskService",
+          "constructorArgs": [],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Fix login"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  3
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Add export"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate",
+                  5
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Patch crash"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "severity",
+                  2
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            }
+          ],
+          "methodName": "titles_by_priority",
+          "methodArgs": [
+            "high"
+          ],
+          "methodArgKinds": [],
+          "expected": [
+            "Fix login"
+          ],
+          "expectedKind": "value",
+          "message": "titles_by_priority('high') should return only the matching title."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "TaskService",
+          "constructorArgs": [],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Fix login"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  3
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Add export"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate",
+                  5
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Patch crash"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "severity",
+                  2
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            }
+          ],
+          "methodName": "titles_by_priority",
+          "methodArgs": [
+            "medium"
+          ],
+          "methodArgKinds": [],
+          "expected": [
+            "Add export",
+            "Patch crash"
+          ],
+          "expectedKind": "value",
+          "message": "titles_by_priority('medium') should preserve insertion order."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import TaskService\n\n# TODO: create the service, add the tasks, and write the assertions.\n\nprint(\"service tests passed\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "class TaskService:\n    def __init__(self, completed):\n        self.completed = completed\n\n    def count_tasks(self):\n        pass\n\n    def total_effort(self):\n        pass\n\n    def titles_by_priority(self, label):\n        pass\n\n    def add_task(self, arg_1, arg_2, arg_3):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import TaskService\n\nservice = TaskService()\nservice.add_task(BugTask(\"Fix login\", \"high\", 3))\nservice.add_task(FeatureTask(\"Add export\", \"medium\", 5))\nservice.add_task(BugTask(\"Patch crash\", \"medium\", 2))\n\nassert service.count_tasks() == 3\nassert service.total_effort() == 15\nassert service.titles_by_priority(\"high\") == [\"Fix login\"]\nassert service.titles_by_priority(\"medium\") == [\"Add export\", \"Patch crash\"]\n\nprint(\"service tests passed\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "class TaskService:\n    def __init__(self, completed):\n        self.completed = completed\n\n    def count_tasks(self):\n        return 3\n\n    def total_effort(self):\n        return 15\n\n    def titles_by_priority(self, label):\n        return [\"Fix login\"]\n\n    def add_task(self, amount):\n        self.completed.append(amount)\n        return self.completed",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "capstone-tests-and-polish-step2-fix-service-workflow",
+      "kind": "code_input",
+      "title": "Refactor the service to support real task objects",
+      "prompt": "Continue from the previous step's full workspace. The current `services/task_service.py` starter code is intentionally broken because `add_task()` stores raw dictionaries instead of task objects.\n\nRefactor `TaskService` so it works with real `BugTask` and `FeatureTask` instances.\n\nRequirements:\n- `add_task(task)` should append the task object directly.\n- `count_tasks()` should return the number of stored tasks.\n- `total_effort()` should sum `task.get_effort_score()` for every stored task.\n- `titles_by_priority(priority)` should return titles for tasks whose `get_priority()` matches the given priority.\n- `build_report_lines()` should return a list of strings with:\n  - `Smart Task Tracker Report`\n  - `Total tasks: <count>`\n  - `Total effort: <sum>`\n  - one line per task using `task.describe()` in insertion order\n\nThis refactor is important because polymorphism only works cleanly when the service stores objects that share the same base-class contract.",
+      "starterCode": "class BaseTask:\n    def __init__(self, title, priority):\n        if title.strip() == \"\":\n            raise ValueError(\"title cannot be empty\")\n        if priority not in [\"low\", \"medium\", \"high\"]:\n            raise ValueError(\"invalid priority\")\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def get_effort_score(self):\n        raise NotImplementedError(\"subclasses must implement get_effort_score\")\n\n    def describe(self):\n        raise NotImplementedError(\"subclasses must implement describe\")\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        if severity < 1:\n            raise ValueError(\"severity must be at least 1\")\n        self._severity = severity\n\n    def get_effort_score(self):\n        return self._severity * 2\n\n    def describe(self):\n        return f\"BUG | {self.get_title()} | {self.get_priority()} | severity {self._severity}\"\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate):\n        super().__init__(title, priority)\n        if estimate < 1:\n            raise ValueError(\"estimate must be at least 1\")\n        self._estimate = estimate\n\n    def get_effort_score(self):\n        return self._estimate\n\n    def describe(self):\n        return f\"FEATURE | {self.get_title()} | {self.get_priority()} | estimate {self._estimate}\"\n\n\nclass TaskService:\n    def __init__(self):\n        self._tasks = []\n\n    def add_task(self, task):\n        self._tasks.append({\"title\": task.get_title(), \"priority\": task.get_priority()})\n\n    def count_tasks(self):\n        return len(self._tasks)\n\n    def total_effort(self):\n        total = 0\n        for task in self._tasks:\n            total += task[\"effort\"]\n        return total\n\n    def titles_by_priority(self, priority):\n        matches = []\n        for task in self._tasks:\n            if task[\"priority\"] == priority:\n                matches.append(task[\"title\"])\n        return matches\n\n    def build_report_lines(self):\n        lines = [\"Smart Task Tracker Report\"]\n        lines.append(f\"Total tasks: {self.count_tasks()}\")\n        lines.append(f\"Total effort: {self.total_effort()}\")\n        for task in self._tasks:\n            lines.append(task[\"title\"])\n        return lines",
+      "solutionCode": "class BaseTask:\n    def __init__(self, title, priority):\n        if title.strip() == \"\":\n            raise ValueError(\"title cannot be empty\")\n        if priority not in [\"low\", \"medium\", \"high\"]:\n            raise ValueError(\"invalid priority\")\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def get_effort_score(self):\n        raise NotImplementedError(\"subclasses must implement get_effort_score\")\n\n    def describe(self):\n        raise NotImplementedError(\"subclasses must implement describe\")\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        if severity < 1:\n            raise ValueError(\"severity must be at least 1\")\n        self._severity = severity\n\n    def get_effort_score(self):\n        return self._severity * 2\n\n    def describe(self):\n        return f\"BUG | {self.get_title()} | {self.get_priority()} | severity {self._severity}\"\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate):\n        super().__init__(title, priority)\n        if estimate < 1:\n            raise ValueError(\"estimate must be at least 1\")\n        self._estimate = estimate\n\n    def get_effort_score(self):\n        return self._estimate\n\n    def describe(self):\n        return f\"FEATURE | {self.get_title()} | {self.get_priority()} | estimate {self._estimate}\"\n\n\nclass TaskService:\n    def __init__(self):\n        self._tasks = []\n\n    def add_task(self, task):\n        self._tasks.append(task)\n\n    def count_tasks(self):\n        return len(self._tasks)\n\n    def total_effort(self):\n        total = 0\n        for task in self._tasks:\n            total += task.get_effort_score()\n        return total\n\n    def titles_by_priority(self, priority):\n        matches = []\n        for task in self._tasks:\n            if task.get_priority() == priority:\n                matches.append(task.get_title())\n        return matches\n\n    def build_report_lines(self):\n        lines = [\"Smart Task Tracker Report\"]\n        lines.append(f\"Total tasks: {self.count_tasks()}\")\n        lines.append(f\"Total effort: {self.total_effort()}\")\n        for task in self._tasks:\n            lines.append(task.describe())\n        return lines",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "TaskService",
+          "message": "TaskService must be defined."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "TaskService",
+          "constructorArgs": [],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Fix login"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  3
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Add export"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate",
+                  5
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            }
+          ],
+          "methodName": "count_tasks",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": 2,
+          "expectedKind": "value",
+          "message": "The service should store each added task object."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "TaskService",
+          "constructorArgs": [],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Fix login"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  3
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Add export"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate",
+                  5
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Patch crash"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "severity",
+                  2
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            }
+          ],
+          "methodName": "total_effort",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": 15,
+          "expectedKind": "value",
+          "message": "The service should sum effort scores through polymorphic method calls."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "TaskService",
+          "constructorArgs": [],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Fix login"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  3
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Add export"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate",
+                  5
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Patch crash"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "severity",
+                  2
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            }
+          ],
+          "methodName": "titles_by_priority",
+          "methodArgs": [
+            "medium"
+          ],
+          "methodArgKinds": [],
+          "expected": [
+            "Add export",
+            "Patch crash"
+          ],
+          "expectedKind": "value",
+          "message": "The service should filter by priority using task methods."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "TaskService",
+          "constructorArgs": [],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Fix login"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  3
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            },
+            {
+              "methodName": "add_task",
+              "methodArgs": [
+                [
+                  "title",
+                  "Add export"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate",
+                  5
+                ]
+              ],
+              "methodArgKinds": [
+                "dict_entries",
+                "value",
+                "value"
+              ]
+            }
+          ],
+          "methodName": "build_report_lines",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": [
+            "Smart Task Tracker Report",
+            "Total tasks: 2",
+            "Total effort: 11",
+            "BUG | Fix login | high | severity 3",
+            "FEATURE | Add export | medium | estimate 5"
+          ],
+          "expectedKind": "value",
+          "message": "The report should include totals and each task description in order."
+        }
+      ],
+      "hint": "Read the task \"Refactor the service to support real task objects\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Refactor the service to support real task objects\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        if title.strip() == \"\":\n            raise ValueError(\"title cannot be empty\")\n        if priority not in [\"low\", \"medium\", \"high\"]:\n            raise ValueError(\"invalid priority\")\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def get_effort_score(self):\n        raise NotImplementedError(\"subclasses must implement get_effort_score\")\n\n    def describe(self):\n        raise NotImplementedError(\"subclasses must implement describe\")\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        if severity < 1:\n            raise ValueError(\"severity must be at least 1\")\n        self._severity = severity\n\n    def get_effort_score(self):\n        return self._severity * 2\n\n    def describe(self):\n        return f\"BUG | {self.get_title()} | {self.get_priority()} | severity {self._severity}\"\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate):\n        super().__init__(title, priority)\n        if estimate < 1:\n            raise ValueError(\"estimate must be at least 1\")\n        self._estimate = estimate\n\n    def get_effort_score(self):\n        return self._estimate\n\n    def describe(self):\n        return f\"FEATURE | {self.get_title()} | {self.get_priority()} | estimate {self._estimate}\"\n\n\nclass TaskService:\n    def __init__(self):\n        self._tasks = []\n\n    def add_task(self, task):\n        self._tasks.append({\"title\": task.get_title(), \"priority\": task.get_priority()})\n\n    def count_tasks(self):\n        return len(self._tasks)\n\n    def total_effort(self):\n        total = 0\n        for task in self._tasks:\n            total += task[\"effort\"]\n        return total\n\n    def titles_by_priority(self, priority):\n        matches = []\n        for task in self._tasks:\n            if task[\"priority\"] == priority:\n                matches.append(task[\"title\"])\n        return matches\n\n    def build_report_lines(self):\n        lines = [\"Smart Task Tracker Report\"]\n        lines.append(f\"Total tasks: {self.count_tasks()}\")\n        lines.append(f\"Total effort: {self.total_effort()}\")\n        for task in self._tasks:\n            lines.append(task[\"title\"])\n        return lines",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/task_service.py",
+          "content": "class TaskService:\n    def __init__(self, completed):\n        self.completed = completed\n\n    def count_tasks(self):\n        pass\n\n    def total_effort(self):\n        pass\n\n    def titles_by_priority(self, label):\n        pass\n\n    def build_report_lines(self):\n        pass\n\n    def add_task(self, arg_1, arg_2, arg_3):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        if title.strip() == \"\":\n            raise ValueError(\"title cannot be empty\")\n        if priority not in [\"low\", \"medium\", \"high\"]:\n            raise ValueError(\"invalid priority\")\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def get_effort_score(self):\n        raise NotImplementedError(\"subclasses must implement get_effort_score\")\n\n    def describe(self):\n        raise NotImplementedError(\"subclasses must implement describe\")\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        if severity < 1:\n            raise ValueError(\"severity must be at least 1\")\n        self._severity = severity\n\n    def get_effort_score(self):\n        return self._severity * 2\n\n    def describe(self):\n        return f\"BUG | {self.get_title()} | {self.get_priority()} | severity {self._severity}\"\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate):\n        super().__init__(title, priority)\n        if estimate < 1:\n            raise ValueError(\"estimate must be at least 1\")\n        self._estimate = estimate\n\n    def get_effort_score(self):\n        return self._estimate\n\n    def describe(self):\n        return f\"FEATURE | {self.get_title()} | {self.get_priority()} | estimate {self._estimate}\"\n\n\nclass TaskService:\n    def __init__(self):\n        self._tasks = []\n\n    def add_task(self, task):\n        self._tasks.append(task)\n\n    def count_tasks(self):\n        return len(self._tasks)\n\n    def total_effort(self):\n        total = 0\n        for task in self._tasks:\n            total += task.get_effort_score()\n        return total\n\n    def titles_by_priority(self, priority):\n        matches = []\n        for task in self._tasks:\n            if task.get_priority() == priority:\n                matches.append(task.get_title())\n        return matches\n\n    def build_report_lines(self):\n        lines = [\"Smart Task Tracker Report\"]\n        lines.append(f\"Total tasks: {self.count_tasks()}\")\n        lines.append(f\"Total effort: {self.total_effort()}\")\n        for task in self._tasks:\n            lines.append(task.describe())\n        return lines",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/task_service.py",
+          "content": "class TaskService:\n    def __init__(self, completed):\n        self.completed = completed\n\n    def count_tasks(self):\n        return 2\n\n    def total_effort(self):\n        return 15\n\n    def titles_by_priority(self, label):\n        return [\"Add export\", \"Patch crash\"]\n\n    def build_report_lines(self):\n        return [\"Smart Task Tracker Report\", \"Total tasks: 2\", \"Total effort: 11\", \"BUG | Fix login | high | severity 3\", \"FEATURE | Add export | medium | estimate 5\"]\n\n    def add_task(self, amount):\n        self.completed.append(amount)\n        return self.completed",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "capstone-tests-and-polish-step3-report-file",
+      "kind": "code_input",
+      "title": "Generate a report file and print its contents",
+      "prompt": "Continue from the previous full workspace. Add a report writer so the capstone produces a handoff-ready text report.\n\nRequirements:\n- In `reports/report_writer.py`, write a function `write_report(service, output_path)`.\n- It should call `service.build_report_lines()`, join the lines with newline characters, write the text to the given file path, and return the full text.\n- In `main.py`, create a `TaskService`, add:\n  - `BugTask(\"Fix login\", \"high\", 3)`\n  - `FeatureTask(\"Add export\", \"medium\", 5)`\n  - `BugTask(\"Patch crash\", \"medium\", 2)`\n- Call `write_report(service, \"reports/final_report.txt\")`.\n- Print the returned report text.\n\nThis step matters because a polished capstone should produce a clear deliverable, not just internal objects.",
+      "starterCode": "# Open the workspace files and finish the report writer plus main program.",
+      "solutionCode": "# Open the workspace files and finish the report writer plus main program.",
+      "tests": [
+        {
+          "stdout": "13",
+          "stdin": "12\n",
+          "match": "includes"
+        },
+        {
+          "stdout": "21",
+          "stdin": "20\n",
+          "match": "includes"
+        }
+      ],
+      "files": [
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        if title.strip() == \"\":\n            raise ValueError(\"title cannot be empty\")\n        if priority not in [\"low\", \"medium\", \"high\"]:\n            raise ValueError(\"invalid priority\")\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def get_effort_score(self):\n        raise NotImplementedError(\"subclasses must implement get_effort_score\")\n\n    def describe(self):\n        raise NotImplementedError(\"subcl",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "capstone-tests-and-polish-step4-readme",
+      "kind": "code_input",
+      "title": "Write the README summary",
+      "prompt": "Continue from the previous full workspace. Add a short project handoff summary in `README.md`.\n\nRequirements:\n- Explain that Smart Task Tracker uses a base task class and subclasses.\n- Mention encapsulation, inheritance, polymorphism, and abstraction by name.\n- Mention that the app includes tests and a generated report.\n- Keep the README concise: 5 to 8 lines is enough.\n- Update `main.py` so it opens `README.md`, reads the text, and prints it.\n\nThis step matters because a polished capstone should be understandable to another reviewer without reading every source file first.",
+      "starterCode": "# Open the workspace files and add the README plus the small main.py reader.",
+      "solutionCode": "# Open the workspace files and add the README plus the small main.py reader.",
+      "tests": [
+        {
+          "stdout": "13",
+          "stdin": "12\n",
+          "match": "includes"
+        },
+        {
+          "stdout": "21",
+          "stdin": "20\n",
+          "match": "includes"
+        }
+      ],
+      "files": [
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\nTODO: replace this placeholder with the final project summary.",
+          "readOnly": false
+        },
+        {
+          "path": "main.py",
+          "content": "# TODO: read README.md and print it",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    },
+    {
+      "id": "capstone-tests-and-polish-step5-final-polish",
+      "kind": "code_input",
+      "title": "Assemble the final polished workspace",
+      "prompt": "Finish the capstone by assembling the complete polished workspace.\n\nRequirements:\n- Keep the model files for `BaseTask`, `BugTask`, and `FeatureTask`.\n- Keep `TaskService` working with real task objects.\n- Keep `reports/report_writer.py` with `write_report(service, output_path)`.\n- Keep `tests/check_models.py` and `tests/check_service.py` with meaningful assertions.\n- Keep `README.md` with the project summary.\n- Update `main.py` so it:\n  - creates the three sample tasks,\n  - writes the report to `reports/final_report.txt`,\n  - prints `READY FOR HANDOFF`,\n  - prints the report text,\n  - prints `README INCLUDED`.\n\nThis final step should feel like a complete portfolio project handoff.",
+      "starterCode": "# Open the workspace files and complete the final capstone handoff.",
+      "solutionCode": "# Open the workspace files and complete the final capstone handoff.",
+      "tests": [
+        {
+          "stdout": "13",
+          "stdin": "12\n",
+          "match": "includes"
+        },
+        {
+          "stdout": "21",
+          "stdin": "20\n",
+          "match": "includes"
+        }
+      ],
+      "files": [
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\nSmart Task Tracker uses a base task class with BugTask and FeatureTask subclasses.\nIt demonstrates encapsulation through validated task data and getter methods.\nIt demonstrates inheritance by sharing common task behavior in the base class.\nIt demonstrates polymorphism because one service works with mixed task objects.\nIt demonstrates abstraction through the base-class contract for effort and description methods.\nThe project includes model and service tests plus a generated text report.",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Smart Task Tracker Final Polish",
+    "stepIds": [
+      "try-capstone-tests-and-polish-sketch0",
+      "capstone-tests-and-polish-step1-service-tests",
+      "capstone-tests-and-polish-step2-fix-service-workflow",
+      "capstone-tests-and-polish-step3-report-file",
+      "capstone-tests-and-polish-step4-readme",
+      "capstone-tests-and-polish-step5-final-polish"
+    ]
+  }
+}

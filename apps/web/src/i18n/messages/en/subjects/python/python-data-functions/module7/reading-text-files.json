@@ -172,7 +172,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass"
+              "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
+              "solutionCode": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/message.txt to read the file."
+                }
+              }
             },
             "ci-first-line": {
               "title": "Print only the first line",
@@ -183,7 +189,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass"
+              "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
+              "solutionCode": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/notes.txt to read the file."
+                }
+              }
             },
             "ci-count-lines": {
               "title": "Count lines in a text file",
@@ -194,7 +206,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass"
+              "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+              "solutionCode": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/list.txt to count the lines."
+                }
+              }
             },
             "try-reading-text-files-checkpoint": {
               "title": "Read a text file",
@@ -205,7 +223,26 @@
                 "hint_1": "Use `with open(\"data/note.txt\") as file:`.",
                 "hint_2": "Call `file.read()` and print the result without adding extra words."
               },
-              "starterCode": "# Read data/note.txt and print its contents.\n"
+              "starterCode": "# Read data/note.txt and print its contents.\n",
+              "starterFiles": {
+                "data_note_txt": {
+                  "content": "Hello from a file!\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n"
+                },
+                "data_note_txt": {
+                  "content": "Hello from a file!\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Open data/note.txt instead of typing the file contents."
+                }
+              },
+              "solutionCode": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n"
             },
             "try-reading-text-files-sketch0": {
               "title": "Read and print a note file",
@@ -216,7 +253,26 @@
                 "hint_1": "Open `note.txt` first, then call `file.read()` inside the `with` block.",
                 "hint_2": "Print only the saved text from the file."
               },
-              "starterCode": "# Read note.txt and print its contents without extra blank lines.\n"
+              "starterCode": "# Read note.txt and print its contents without extra blank lines.\n",
+              "starterFiles": {
+                "note_txt": {
+                  "content": "Hello from a file\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open('note.txt') as file:\n    print(file.read().strip())\n"
+                },
+                "note_txt": {
+                  "content": "Hello from a file\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Open note.txt instead of typing the file contents."
+                }
+              },
+              "solutionCode": "with open('note.txt') as file:\n    print(file.read().strip())\n"
             },
             "try-reading-text-files-sketch1": {
               "title": "Print each line from a file",
@@ -227,7 +283,26 @@
                 "hint_1": "Open `names.txt`, then use `for line in file:`.",
                 "hint_2": "Print `line.strip()` so each name shows once without extra blank lines."
               },
-              "starterCode": "# Read names.txt and print each line without extra blank lines.\n"
+              "starterCode": "# Read names.txt and print each line without extra blank lines.\n",
+              "starterFiles": {
+                "names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n"
+                },
+                "names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Open names.txt instead of typing the names directly."
+                }
+              },
+              "solutionCode": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n"
             },
             "try-reading-text-files-sketch2": {
               "title": "Count file lines",
@@ -238,7 +313,32 @@
                 "hint_1": "Open `names.txt`, loop through it, and increase `count` inside the loop.",
                 "hint_2": "After the loop ends, print the final count."
               },
-              "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n"
+              "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+              "starterFiles": {
+                "names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n"
+                },
+                "names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Read names.txt instead of typing the final count."
+                },
+                "1": {
+                  "message": "Loop through the file lines to count them."
+                },
+                "2": {
+                  "message": "Use open(...) to read the file."
+                }
+              },
+              "solutionCode": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n"
             }
           },
           "tryIt": {

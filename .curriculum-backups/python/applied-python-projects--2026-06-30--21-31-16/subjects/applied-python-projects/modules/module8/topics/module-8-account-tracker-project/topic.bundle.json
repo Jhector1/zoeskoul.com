@@ -1,0 +1,1172 @@
+{
+  "topicId": "module-8-account-tracker-project",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "applied-python-projects-python-8-module-project",
+  "prefix": "py8",
+  "minutes": 36,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.sketch0.title",
+      "sketchId": "project-story",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 1,
+        "min": 1,
+        "max": 7,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "account_tracker_step_1_model_file",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_1_model_file.title",
+            "exerciseKey": "account-tracker-step-1-model-file",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "account_tracker_step_2_constructor",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_2_constructor.title",
+            "exerciseKey": "account-tracker-step-2-constructor",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "account_tracker_step_3_methods",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_3_methods.title",
+            "exerciseKey": "account-tracker-step-3-methods",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "account_tracker_step_4_helper_formatting",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_4_helper_formatting.title",
+            "exerciseKey": "account-tracker-step-4-helper-formatting",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "account_tracker_step_5_load_data",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_5_load_data.title",
+            "exerciseKey": "account-tracker-step-5-load-data",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "account_tracker_step_6_final_summary",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_6_final_summary.title",
+            "exerciseKey": "account-tracker-step-6-final-summary",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "project-story",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.project-story.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.project-story.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "account-tracker-step-1-model-file",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.quiz.account-tracker-step-1-model-file",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Account model ready\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYWNjb3VudCBpbXBvcnQgQWNjb3VudAoKYWNjb3VudCA9IEFjY291bnQoKQpwcmludCgiQWNjb3VudCBtb2RlbCByZWFkeSIpCg==',\n    'models/account.py': 'Y2xhc3MgQWNjb3VudDoKICAgIHBhc3MK',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/account.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/account.py"
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-2-constructor",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.quiz.account-tracker-step-2-constructor",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n125\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYWNjb3VudCBpbXBvcnQgQWNjb3VudAoKYWNjb3VudCA9IEFjY291bnQoIkF2YSIsIDEyNSkKcHJpbnQoYWNjb3VudC5vd25lcikKcHJpbnQoYWNjb3VudC5iYWxhbmNlKQo=',\n    'models/account.py': 'Y2xhc3MgQWNjb3VudDoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBvd25lciwgYmFsYW5jZSk6CiAgICAgICAgc2VsZi5vd25lciA9IG93bmVyCiAgICAgICAgc2VsZi5iYWxhbmNlID0gbWF4KDAsIGJhbGFuY2UpCg==',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/account.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/account.py"
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-3-methods",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.quiz.account-tracker-step-3-methods",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\naccount.withdraw(999)\nprint(account.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: $110\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYWNjb3VudCBpbXBvcnQgQWNjb3VudAoKYWNjb3VudCA9IEFjY291bnQoIkF2YSIsIDEyNSkKYWNjb3VudC5kZXBvc2l0KDI1KQphY2NvdW50LndpdGhkcmF3KDQwKQphY2NvdW50LndpdGhkcmF3KDk5OSkKcHJpbnQoYWNjb3VudC5zdW1tYXJ5KCkpCg==',\n    'models/account.py': 'Y2xhc3MgQWNjb3VudDoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBvd25lciwgYmFsYW5jZSk6CiAgICAgICAgc2VsZi5vd25lciA9IG93bmVyCiAgICAgICAgc2VsZi5iYWxhbmNlID0gbWF4KDAsIGJhbGFuY2UpCgogICAgZGVmIGRlcG9zaXQoc2VsZiwgYW1vdW50KToKICAgICAgICBpZiBhbW91bnQgPiAwOgogICAgICAgICAgICBzZWxmLmJhbGFuY2UgKz0gYW1vdW50CiAgICAgICAgcmV0dXJuIHNlbGYuYmFsYW5jZQoKICAgIGRlZiB3aXRoZHJhdyhzZWxmLCBhbW91bnQpOgogICAgICAgIGlmIGFtb3VudCA+IDAgYW5kIGFtb3VudCA8PSBzZWxmLmJhbGFuY2U6CiAgICAgICAgICAgIHNlbGYuYmFsYW5jZSAtPSBhbW91bnQKICAgICAgICAgICAgcmV0dXJuIFRydWUKICAgICAgICByZXR1cm4gRmFsc2UKCiAgICBkZWYgc3VtbWFyeShzZWxmKToKICAgICAgICByZXR1cm4gZiJ7c2VsZi5vd25lcn06ICR7c2VsZi5iYWxhbmNlfSIK',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\naccount.withdraw(999)\nprint(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\naccount.withdraw(999)\nprint(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/account.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/account.py"
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-4-helper-formatting",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.quiz.account-tracker-step-4-helper-formatting",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\naccount.withdraw(999)\nprint(account.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\nprint(account.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "helpers/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: $110\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYWNjb3VudCBpbXBvcnQgQWNjb3VudAoKYWNjb3VudCA9IEFjY291bnQoIkF2YSIsIDEyNSkKYWNjb3VudC5kZXBvc2l0KDI1KQphY2NvdW50LndpdGhkcmF3KDQwKQpwcmludChhY2NvdW50LnN1bW1hcnkoKSkK',\n    'models/account.py': 'ZnJvbSBoZWxwZXJzLmZvcm1hdHRpbmcgaW1wb3J0IGZvcm1hdF9tb25leQoKY2xhc3MgQWNjb3VudDoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBvd25lciwgYmFsYW5jZSk6CiAgICAgICAgc2VsZi5vd25lciA9IG93bmVyCiAgICAgICAgc2VsZi5iYWxhbmNlID0gbWF4KDAsIGJhbGFuY2UpCgogICAgZGVmIGRlcG9zaXQoc2VsZiwgYW1vdW50KToKICAgICAgICBpZiBhbW91bnQgPiAwOgogICAgICAgICAgICBzZWxmLmJhbGFuY2UgKz0gYW1vdW50CiAgICAgICAgcmV0dXJuIHNlbGYuYmFsYW5jZQoKICAgIGRlZiB3aXRoZHJhdyhzZWxmLCBhbW91bnQpOgogICAgICAgIGlmIGFtb3VudCA+IDAgYW5kIGFtb3VudCA8PSBzZWxmLmJhbGFuY2U6CiAgICAgICAgICAgIHNlbGYuYmFsYW5jZSAtPSBhbW91bnQKICAgICAgICAgICAgcmV0dXJuIFRydWUKICAgICAgICByZXR1cm4gRmFsc2UKCiAgICBkZWYgc3VtbWFyeShzZWxmKToKICAgICAgICByZXR1cm4gZiJ7c2VsZi5vd25lcn06IHtmb3JtYXRfbW9uZXkoc2VsZi5iYWxhbmNlKX0iCg==',\n    'models/__init__.py': '',\n    'helpers/formatting.py': 'ZGVmIGZvcm1hdF9tb25leShhbW91bnQpOgogICAgcmV0dXJuIGYiJHthbW91bnR9Igo=',\n    'helpers/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\nprint(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\naccount.withdraw(999)\nprint(account.summary())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\naccount.withdraw(999)\nprint(account.summary())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\naccount.withdraw(999)\nprint(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\nprint(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "helpers",
+            "models"
+          ],
+          "requiredFiles": [
+            "helpers/__init__.py",
+            "helpers/formatting.py",
+            "main.py",
+            "models/__init__.py",
+            "models/account.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "helpers",
+          "models"
+        ],
+        "requiredFiles": [
+          "helpers/__init__.py",
+          "helpers/formatting.py",
+          "main.py",
+          "models/__init__.py",
+          "models/account.py"
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-5-load-data",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.quiz.account-tracker-step-5-load-data",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\nprint(account.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "helpers/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "helpers/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "data/accounts.txt",
+          "content": "Ava|125\nBen|80\nCy|0\n",
+          "language": "text"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: $125\nBen: $80\nCy: $0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYWNjb3VudCBpbXBvcnQgQWNjb3VudAoKYWNjb3VudHMgPSBbXQp3aXRoIG9wZW4oImRhdGEvYWNjb3VudHMudHh0IiwgInIiKSBhcyBzb3VyY2U6CiAgICBmb3IgbGluZSBpbiBzb3VyY2U6CiAgICAgICAgb3duZXIsIGJhbGFuY2VfdGV4dCA9IGxpbmUuc3RyaXAoKS5zcGxpdCgifCIpCiAgICAgICAgYWNjb3VudHMuYXBwZW5kKEFjY291bnQob3duZXIsIGludChiYWxhbmNlX3RleHQpKSkKCmZvciBhY2NvdW50IGluIGFjY291bnRzOgogICAgcHJpbnQoYWNjb3VudC5zdW1tYXJ5KCkpCg==',\n    'models/account.py': 'ZnJvbSBoZWxwZXJzLmZvcm1hdHRpbmcgaW1wb3J0IGZvcm1hdF9tb25leQoKY2xhc3MgQWNjb3VudDoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBvd25lciwgYmFsYW5jZSk6CiAgICAgICAgc2VsZi5vd25lciA9IG93bmVyCiAgICAgICAgc2VsZi5iYWxhbmNlID0gbWF4KDAsIGJhbGFuY2UpCgogICAgZGVmIGRlcG9zaXQoc2VsZiwgYW1vdW50KToKICAgICAgICBpZiBhbW91bnQgPiAwOgogICAgICAgICAgICBzZWxmLmJhbGFuY2UgKz0gYW1vdW50CiAgICAgICAgcmV0dXJuIHNlbGYuYmFsYW5jZQoKICAgIGRlZiB3aXRoZHJhdyhzZWxmLCBhbW91bnQpOgogICAgICAgIGlmIGFtb3VudCA+IDAgYW5kIGFtb3VudCA8PSBzZWxmLmJhbGFuY2U6CiAgICAgICAgICAgIHNlbGYuYmFsYW5jZSAtPSBhbW91bnQKICAgICAgICAgICAgcmV0dXJuIFRydWUKICAgICAgICByZXR1cm4gRmFsc2UKCiAgICBkZWYgc3VtbWFyeShzZWxmKToKICAgICAgICByZXR1cm4gZiJ7c2VsZi5vd25lcn06IHtmb3JtYXRfbW9uZXkoc2VsZi5iYWxhbmNlKX0iCg==',\n    'helpers/formatting.py': 'ZGVmIGZvcm1hdF9tb25leShhbW91bnQpOgogICAgcmV0dXJuIGYiJHthbW91bnR9Igo=',\n    'helpers/__init__.py': '',\n    'models/__init__.py': '',\n    'data/accounts.txt': 'QXZhfDEyNQpCZW58ODAKQ3l8MAo=',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "data/accounts.txt",
+            "content": "Ava|125\nBen|80\nCy|0\n",
+            "language": "text"
+          }
+        ]
+      },
+      "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\nprint(account.summary())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\nprint(account.summary())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\nprint(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "data/accounts.txt",
+            "content": "Ava|125\nBen|80\nCy|0\n",
+            "language": "text"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data",
+            "helpers",
+            "models"
+          ],
+          "requiredFiles": [
+            "data/accounts.txt",
+            "helpers/__init__.py",
+            "helpers/formatting.py",
+            "main.py",
+            "models/__init__.py",
+            "models/account.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data",
+          "helpers",
+          "models"
+        ],
+        "requiredFiles": [
+          "data/accounts.txt",
+          "helpers/__init__.py",
+          "helpers/formatting.py",
+          "main.py",
+          "models/__init__.py",
+          "models/account.py"
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-6-final-summary",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.quiz.account-tracker-step-6-final-summary",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "data/accounts.txt",
+          "content": "Ava|125\nBen|80\nCy|0\n",
+          "language": "text"
+        },
+        {
+          "path": "helpers/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n\ntotal_balance = 0\nfor account in accounts:\n    total_balance += account.balance\n\nprint(f\"Total accounts: {len(accounts)}\")\nprint(f\"Total balance: ${total_balance}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "data/accounts.txt",
+          "content": "Ava|125\nBen|80\nCy|0\n",
+          "language": "text"
+        },
+        {
+          "path": "helpers/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: $125\nBen: $80\nCy: $0\nTotal accounts: 3\nTotal balance: $205\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuYWNjb3VudCBpbXBvcnQgQWNjb3VudAoKYWNjb3VudHMgPSBbXQp3aXRoIG9wZW4oImRhdGEvYWNjb3VudHMudHh0IiwgInIiKSBhcyBzb3VyY2U6CiAgICBmb3IgbGluZSBpbiBzb3VyY2U6CiAgICAgICAgb3duZXIsIGJhbGFuY2VfdGV4dCA9IGxpbmUuc3RyaXAoKS5zcGxpdCgifCIpCiAgICAgICAgYWNjb3VudHMuYXBwZW5kKEFjY291bnQob3duZXIsIGludChiYWxhbmNlX3RleHQpKSkKCmZvciBhY2NvdW50IGluIGFjY291bnRzOgogICAgcHJpbnQoYWNjb3VudC5zdW1tYXJ5KCkpCgp0b3RhbF9iYWxhbmNlID0gMApmb3IgYWNjb3VudCBpbiBhY2NvdW50czoKICAgIHRvdGFsX2JhbGFuY2UgKz0gYWNjb3VudC5iYWxhbmNlCgpwcmludChmIlRvdGFsIGFjY291bnRzOiB7bGVuKGFjY291bnRzKX0iKQpwcmludChmIlRvdGFsIGJhbGFuY2U6ICR7dG90YWxfYmFsYW5jZX0iKQo=',\n    'models/account.py': 'ZnJvbSBoZWxwZXJzLmZvcm1hdHRpbmcgaW1wb3J0IGZvcm1hdF9tb25leQoKY2xhc3MgQWNjb3VudDoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBvd25lciwgYmFsYW5jZSk6CiAgICAgICAgc2VsZi5vd25lciA9IG93bmVyCiAgICAgICAgc2VsZi5iYWxhbmNlID0gbWF4KDAsIGJhbGFuY2UpCgogICAgZGVmIGRlcG9zaXQoc2VsZiwgYW1vdW50KToKICAgICAgICBpZiBhbW91bnQgPiAwOgogICAgICAgICAgICBzZWxmLmJhbGFuY2UgKz0gYW1vdW50CiAgICAgICAgcmV0dXJuIHNlbGYuYmFsYW5jZQoKICAgIGRlZiB3aXRoZHJhdyhzZWxmLCBhbW91bnQpOgogICAgICAgIGlmIGFtb3VudCA+IDAgYW5kIGFtb3VudCA8PSBzZWxmLmJhbGFuY2U6CiAgICAgICAgICAgIHNlbGYuYmFsYW5jZSAtPSBhbW91bnQKICAgICAgICAgICAgcmV0dXJuIFRydWUKICAgICAgICByZXR1cm4gRmFsc2UKCiAgICBkZWYgc3VtbWFyeShzZWxmKToKICAgICAgICByZXR1cm4gZiJ7c2VsZi5vd25lcn06IHtmb3JtYXRfbW9uZXkoc2VsZi5iYWxhbmNlKX0iCg==',\n    'helpers/formatting.py': 'ZGVmIGZvcm1hdF9tb25leShhbW91bnQpOgogICAgcmV0dXJuIGYiJHthbW91bnR9Igo=',\n    'data/accounts.txt': 'QXZhfDEyNQpCZW58ODAKQ3l8MAo=',\n    'helpers/__init__.py': '',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n\ntotal_balance = 0\nfor account in accounts:\n    total_balance += account.balance\n\nprint(f\"Total accounts: {len(accounts)}\")\nprint(f\"Total balance: ${total_balance}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "data/accounts.txt",
+            "content": "Ava|125\nBen|80\nCy|0\n",
+            "language": "text"
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "data/accounts.txt",
+            "content": "Ava|125\nBen|80\nCy|0\n",
+            "language": "text"
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n\ntotal_balance = 0\nfor account in accounts:\n    total_balance += account.balance\n\nprint(f\"Total accounts: {len(accounts)}\")\nprint(f\"Total balance: ${total_balance}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "from helpers.formatting import format_money\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n    def summary(self):\n        return f\"{self.owner}: {format_money(self.balance)}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_money(amount):\n    return f\"${amount}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "data/accounts.txt",
+            "content": "Ava|125\nBen|80\nCy|0\n",
+            "language": "text"
+          },
+          {
+            "path": "helpers/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data",
+            "helpers",
+            "models"
+          ],
+          "requiredFiles": [
+            "data/accounts.txt",
+            "helpers/__init__.py",
+            "helpers/formatting.py",
+            "main.py",
+            "models/__init__.py",
+            "models/account.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data",
+          "helpers",
+          "models"
+        ],
+        "requiredFiles": [
+          "data/accounts.txt",
+          "helpers/__init__.py",
+          "helpers/formatting.py",
+          "main.py",
+          "models/__init__.py",
+          "models/account.py"
+        ]
+      }
+    },
+    {
+      "id": "sc-module-8-account-tracker-project-project-design",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.quiz.sc-module-8-account-tracker-project-project-design",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

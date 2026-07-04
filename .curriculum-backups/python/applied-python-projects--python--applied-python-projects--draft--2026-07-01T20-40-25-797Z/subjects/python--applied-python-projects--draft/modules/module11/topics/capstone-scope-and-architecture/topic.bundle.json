@@ -1,0 +1,1774 @@
+{
+  "topicId": "capstone-scope-and-architecture",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-11-oop-capstone-project",
+  "sectionSlug": "python--applied-python-projects--draft-python-11-capstone-architecture",
+  "prefix": "py11",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.cards.sketch0.title",
+      "sketchId": "sketch-0",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_capstone_scope_and_architecture_sketch0",
+            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.projectSteps.try_capstone_scope_and_architecture_sketch0.title",
+            "exerciseKey": "try-capstone-scope-and-architecture-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "capstone_add_storage_layout",
+            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.projectSteps.capstone_add_storage_layout.title",
+            "exerciseKey": "capstone-add-storage-layout",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_add_encapsulation_and_status",
+            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.projectSteps.capstone_add_encapsulation_and_status.title",
+            "exerciseKey": "capstone-add-encapsulation-and-status",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_add_polymorphic_report",
+            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.projectSteps.capstone_add_polymorphic_report.title",
+            "exerciseKey": "capstone-add-polymorphic-report",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_add_abstraction_priority",
+            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.projectSteps.capstone_add_abstraction_priority.title",
+            "exerciseKey": "capstone-add-abstraction-priority",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_add_tests_and_readme_handoff",
+            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.projectSteps.capstone_add_tests_and_readme_handoff.title",
+            "exerciseKey": "capstone-add-tests-and-readme-handoff",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.sketch-0.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.sketch-0.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-capstone-scope-and-architecture-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.try_capstone_scope_and_architecture_sketch0",
+      "language": "python",
+      "starterCode": "# Complete the provided workspace files.\n# Click Run to see the sample summary output.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Complete the provided workspace files.\n# Click Run to see the sample summary output.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    # TODO: return a list of summary lines from the task objects\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    # TODO: return a list of summary lines from the task objects\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Complete the provided workspace files.\n# Click Run to see the sample summary output.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Complete the provided workspace files.\n# Click Run to see the sample summary output.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    # TODO: return a list of summary lines from the task objects\n    pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    # TODO: return a list of summary lines from the task objects\n    pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BaseTask",
+            "message": "Define the BaseTask class."
+          },
+          {
+            "type": "constructible",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login redirect",
+              3
+            ],
+            "message": "BugTask should be constructible with title and points."
+          },
+          {
+            "type": "constructible",
+            "className": "FeatureTask",
+            "constructorArgs": [
+              "Add dark mode",
+              5
+            ],
+            "message": "FeatureTask should be constructible with title and points."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login redirect",
+              3
+            ],
+            "attributes": [
+              "title",
+              "points"
+            ],
+            "message": "BugTask instances should inherit title and points attributes."
+          },
+          {
+            "type": "method_returns",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login redirect",
+              3
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "BUG: Fix login redirect (3 pts)",
+            "expectedKind": "value",
+            "message": "BugTask.summary_line() should format the bug summary."
+          },
+          {
+            "type": "method_returns",
+            "className": "FeatureTask",
+            "constructorArgs": [
+              "Add dark mode",
+              5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "FEATURE: Add dark mode (5 pts)",
+            "expectedKind": "value",
+            "message": "FeatureTask.summary_line() should format the feature summary."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Running the demo should print two summary lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-add-storage-layout",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_storage_layout",
+      "language": "python",
+      "starterCode": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    # TODO: return a list of summary lines from the task objects\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    # TODO: convert each row into the correct task object\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    # TODO: return a list of summary lines from the task objects\n    pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    # TODO: convert each row into the correct task object\n    pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login redirect",
+              3
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "BUG: Fix login redirect (3 pts)",
+            "expectedKind": "value",
+            "message": "Existing bug summaries should still work."
+          },
+          {
+            "type": "method_returns",
+            "className": "FeatureTask",
+            "constructorArgs": [
+              "Add dark mode",
+              5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "FEATURE: Add dark mode (5 pts)",
+            "expectedKind": "value",
+            "message": "Existing feature summaries should still work."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Running the demo should print two loaded summary lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-add-encapsulation-and-status",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_encapsulation_and_status",
+      "language": "python",
+      "starterCode": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    # TODO: convert each row into the correct task object\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def status(self):\n        return self._status\n\n\nclass FeatureTask(BugTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status}\"\n\nprint(BugTask(\"Fix login redirect\", 3).status())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        # TODO: add encapsulated status state\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = None\n\n    def status(self):\n        return \"todo\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts) - todo\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"\n\n\nclass FeatureTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"\n\nprint(BugTask(\"Fix login redirect\", 3).summary_line())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts)\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    # TODO: convert each row into the correct task object\n    pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def status(self):\n        return self._status\n\n\nclass FeatureTask(BugTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status}\"\n\nprint(BugTask(\"Fix login redirect\", 3).status())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def status(self):\n        return self._status\n\n\nclass FeatureTask(BugTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status}\"\n\nprint(BugTask(\"Fix login redirect\", 3).status())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        # TODO: add encapsulated status state\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = None\n\n    def status(self):\n        return \"todo\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts) - todo\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "instance_attributes",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login redirect",
+              3
+            ],
+            "attributes": [
+              "title",
+              "points",
+              "_status"
+            ],
+            "message": "Task instances should store encapsulated status state."
+          },
+          {
+            "type": "method_returns",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login redirect",
+              3
+            ],
+            "constructorArgKinds": [],
+            "methodName": "status",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "todo",
+            "expectedKind": "value",
+            "message": "New tasks should start with todo status."
+          },
+          {
+            "type": "method_returns",
+            "className": "FeatureTask",
+            "constructorArgs": [
+              "Add dark mode",
+              5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "FEATURE: Add dark mode (5 pts) - todo",
+            "expectedKind": "value",
+            "message": "Feature summaries should include the current status."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Running the demo should still print two summary lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-add-polymorphic-report",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_polymorphic_report",
+      "language": "python",
+      "starterCode": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def status(self):\n        return self._status\n\n\nclass FeatureTask(BugTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status}\"\n\nprint(BugTask(\"Fix login redirect\", 3).status())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def status(self):\n        return self._status\n\n\nclass FeatureTask(BugTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status}\"\n\nprint(BugTask(\"Fix login redirect\", 3).status())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        # TODO: add encapsulated status state\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = None\n\n    def status(self):\n        return \"todo\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts) - todo\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_points(tasks):\n    return sum(get_field(task, 'points') for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if get_field(task, 'status') == 'done')\n\n\ndef build_summary(tasks):\n    return [\n        'BUG: Fix login redirect (3 pts) - done',\n        'FEATURE: Add dark mode (5 pts) - todo',\n    ]\n\nfor line in ['s1', 's2', 'r1', 'r2']:\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts) - {self.status}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(value):\n    return [\"BUG: Fix login redirect (3 pts) - done\", \"FEATURE: Add dark mode (5 pts) - todo\"]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def status(self):\n        return self._status\n\n\nclass FeatureTask(BugTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status}\"\n\nprint(BugTask(\"Fix login redirect\", 3).status())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def status(self):\n        return self._status\n\n\nclass FeatureTask(BugTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status}\"\n\nprint(BugTask(\"Fix login redirect\", 3).status())\nprint(FeatureTask(\"Add dark mode\", 5).summary_line())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        # TODO: add encapsulated status state\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "class BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = None\n\n    def status(self):\n        return \"todo\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts) - todo\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_points(tasks):\n    return sum(get_field(task, 'points') for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if get_field(task, 'status') == 'done')\n\n\ndef build_summary(tasks):\n    return [\n        'BUG: Fix login redirect (3 pts) - done',\n        'FEATURE: Add dark mode (5 pts) - todo',\n    ]\n\nfor line in ['s1', 's2', 'r1', 'r2']:\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_points(tasks):\n    return sum(get_field(task, 'points') for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if get_field(task, 'status') == 'done')\n\n\ndef build_summary(tasks):\n    return [\n        'BUG: Fix login redirect (3 pts) - done',\n        'FEATURE: Add dark mode (5 pts) - todo',\n    ]\n\nfor line in ['s1', 's2', 'r1', 'r2']:\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts) - {self.status}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(value):\n    return [\"BUG: Fix login redirect (3 pts) - done\", \"FEATURE: Add dark mode (5 pts) - todo\"]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "total_points",
+            "args": [
+              [
+                [
+                  [
+                    "__class__",
+                    "BugTask"
+                  ],
+                  [
+                    "title",
+                    "Fix login redirect"
+                  ],
+                  [
+                    "points",
+                    3
+                  ],
+                  [
+                    "status",
+                    "done"
+                  ]
+                ],
+                [
+                  [
+                    "__class__",
+                    "FeatureTask"
+                  ],
+                  [
+                    "title",
+                    "Add dark mode"
+                  ],
+                  [
+                    "points",
+                    5
+                  ],
+                  [
+                    "status",
+                    "todo"
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 8,
+            "expectedKind": "value",
+            "message": "total_points should add points across mixed task objects."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "done_count",
+            "args": [
+              [
+                [
+                  [
+                    "__class__",
+                    "BugTask"
+                  ],
+                  [
+                    "title",
+                    "Fix login redirect"
+                  ],
+                  [
+                    "points",
+                    3
+                  ],
+                  [
+                    "status",
+                    "done"
+                  ]
+                ],
+                [
+                  [
+                    "__class__",
+                    "FeatureTask"
+                  ],
+                  [
+                    "title",
+                    "Add dark mode"
+                  ],
+                  [
+                    "points",
+                    5
+                  ],
+                  [
+                    "status",
+                    "todo"
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 1,
+            "expectedKind": "value",
+            "message": "done_count should count only tasks marked done."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              [
+                [
+                  [
+                    "__class__",
+                    "BugTask"
+                  ],
+                  [
+                    "title",
+                    "Fix login redirect"
+                  ],
+                  [
+                    "points",
+                    3
+                  ],
+                  [
+                    "status",
+                    "done"
+                  ]
+                ],
+                [
+                  [
+                    "__class__",
+                    "FeatureTask"
+                  ],
+                  [
+                    "title",
+                    "Add dark mode"
+                  ],
+                  [
+                    "points",
+                    5
+                  ],
+                  [
+                    "status",
+                    "todo"
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "BUG: Fix login redirect (3 pts) - done",
+              "FEATURE: Add dark mode (5 pts) - todo"
+            ],
+            "expectedKind": "value",
+            "message": "The existing summary report should still work with mixed task objects."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 4,
+            "message": "Running the demo should print two summaries plus two report lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-add-abstraction-priority",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_abstraction_priority",
+      "language": "python",
+      "starterCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_points(tasks):\n    return sum(get_field(task, 'points') for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if get_field(task, 'status') == 'done')\n\n\ndef build_summary(tasks):\n    return [\n        'BUG: Fix login redirect (3 pts) - done',\n        'FEATURE: Add dark mode (5 pts) - todo',\n    ]\n\nfor line in ['s1', 's2', 'r1', 'r2']:\n    print(line)\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_points(tasks):\n    return sum(get_field(task, 'points') for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if get_field(task, 'status') == 'done')\n\n\ndef build_summary(tasks):\n    return [\n        'BUG: Fix login redirect (3 pts) - done',\n        'FEATURE: Add dark mode (5 pts) - todo',\n    ]\n\nfor line in ['s1', 's2', 'r1', 'r2']:\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts) - {self.status}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(value):\n    return [\"BUG: Fix login redirect (3 pts) - done\", \"FEATURE: Add dark mode (5 pts) - todo\"]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def priority_label(self):\n        return 'medium'\n\n\nclass FeatureTask(BugTask):\n    def priority_label(self):\n        return 'planned'\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status} [priority: {self.priority_label()}]\"\n\n\ndef priority_breakdown(tasks):\n    return ['medium', 'planned']\n\nfor line in ['1', '2', '3', '4', '5']:\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")\n\n    # TODO: add priority_label() as a base-class contract",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, priority):\n        pass\n\n    def priority_label(self):\n        return \"medium\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def priority_label(self):\n        return \"planned\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts) - todo [priority: planned]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\n# TODO: add priority_breakdown(tasks)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_points(tasks):\n    return sum(get_field(task, 'points') for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if get_field(task, 'status') == 'done')\n\n\ndef build_summary(tasks):\n    return [\n        'BUG: Fix login redirect (3 pts) - done',\n        'FEATURE: Add dark mode (5 pts) - todo',\n    ]\n\nfor line in ['s1', 's2', 'r1', 'r2']:\n    print(line)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_points(tasks):\n    return sum(get_field(task, 'points') for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if get_field(task, 'status') == 'done')\n\n\ndef build_summary(tasks):\n    return [\n        'BUG: Fix login redirect (3 pts) - done',\n        'FEATURE: Add dark mode (5 pts) - todo',\n    ]\n\nfor line in ['s1', 's2', 'r1', 'r2']:\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts) - {self.status}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(value):\n    return [\"BUG: Fix login redirect (3 pts) - done\", \"FEATURE: Add dark mode (5 pts) - todo\"]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def priority_label(self):\n        return 'medium'\n\n\nclass FeatureTask(BugTask):\n    def priority_label(self):\n        return 'planned'\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status} [priority: {self.priority_label()}]\"\n\n\ndef priority_breakdown(tasks):\n    return ['medium', 'planned']\n\nfor line in ['1', '2', '3', '4', '5']:\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def priority_label(self):\n        return 'medium'\n\n\nclass FeatureTask(BugTask):\n    def priority_label(self):\n        return 'planned'\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status} [priority: {self.priority_label()}]\"\n\n\ndef priority_breakdown(tasks):\n    return ['medium', 'planned']\n\nfor line in ['1', '2', '3', '4', '5']:\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")\n\n    # TODO: add priority_label() as a base-class contract",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "class BugTask:\n    def __init__(self, title, priority):\n        pass\n\n    def priority_label(self):\n        return \"medium\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def priority_label(self):\n        return \"planned\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts) - todo [priority: planned]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\n# TODO: add priority_breakdown(tasks)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login redirect",
+              3
+            ],
+            "constructorArgKinds": [],
+            "methodName": "priority_label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "medium",
+            "expectedKind": "value",
+            "message": "BugTask should compute its own priority label."
+          },
+          {
+            "type": "method_returns",
+            "className": "FeatureTask",
+            "constructorArgs": [
+              "Add dark mode",
+              5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "priority_label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "planned",
+            "expectedKind": "value",
+            "message": "FeatureTask should compute its own priority label."
+          },
+          {
+            "type": "method_returns",
+            "className": "FeatureTask",
+            "constructorArgs": [
+              "Add dark mode",
+              5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "FEATURE: Add dark mode (5 pts) - todo [priority: planned]",
+            "expectedKind": "value",
+            "message": "Feature summaries should include the priority label."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "priority_breakdown",
+            "args": [
+              [
+                [
+                  [
+                    "__class__",
+                    "BugTask"
+                  ],
+                  [
+                    "title",
+                    "Fix login redirect"
+                  ],
+                  [
+                    "points",
+                    3
+                  ],
+                  [
+                    "status",
+                    "done"
+                  ]
+                ],
+                [
+                  [
+                    "__class__",
+                    "FeatureTask"
+                  ],
+                  [
+                    "title",
+                    "Add dark mode"
+                  ],
+                  [
+                    "points",
+                    5
+                  ],
+                  [
+                    "status",
+                    "todo"
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "medium",
+              "planned"
+            ],
+            "expectedKind": "value",
+            "message": "priority_breakdown should call the shared priority method on each task."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 5,
+            "message": "Running the demo should print summaries plus three report lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-add-tests-and-readme-handoff",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_tests_and_readme_handoff",
+      "language": "python",
+      "starterCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def priority_label(self):\n        return 'medium'\n\n\nclass FeatureTask(BugTask):\n    def priority_label(self):\n        return 'planned'\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status} [priority: {self.priority_label()}]\"\n\n\ndef priority_breakdown(tasks):\n    return ['medium', 'planned']\n\nfor line in ['1', '2', '3', '4', '5']:\n    print(line)\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def priority_label(self):\n        return 'medium'\n\n\nclass FeatureTask(BugTask):\n    def priority_label(self):\n        return 'planned'\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status} [priority: {self.priority_label()}]\"\n\n\ndef priority_breakdown(tasks):\n    return ['medium', 'planned']\n\nfor line in ['1', '2', '3', '4', '5']:\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")\n\n    # TODO: add priority_label() as a base-class contract",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, priority):\n        pass\n\n    def priority_label(self):\n        return \"medium\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def priority_label(self):\n        return \"planned\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts) - todo [priority: planned]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\n# TODO: add priority_breakdown(tasks)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def priority_label(self):\n        return 'medium'\n\n\ndef done_count(tasks):\n    return 1\n\nfor line in ['1', '2', '3', '4', '5', '6']:\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")\n\n    def priority_label(self):\n        raise NotImplementedError(\"Subclasses must implement priority_label\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"high\"\n        return \"medium\"\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"planned\"\n        return \"small\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "# TODO: add assert-based checks for validation, priority labels, and done counts",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def priority_label(self):\n        return 'medium'\n\n\nclass FeatureTask(BugTask):\n    def priority_label(self):\n        return 'planned'\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status} [priority: {self.priority_label()}]\"\n\n\ndef priority_breakdown(tasks):\n    return ['medium', 'planned']\n\nfor line in ['1', '2', '3', '4', '5']:\n    print(line)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n        self._status = 'todo'\n\n    def priority_label(self):\n        return 'medium'\n\n\nclass FeatureTask(BugTask):\n    def priority_label(self):\n        return 'planned'\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self._status} [priority: {self.priority_label()}]\"\n\n\ndef priority_breakdown(tasks):\n    return ['medium', 'planned']\n\nfor line in ['1', '2', '3', '4', '5']:\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")\n\n    # TODO: add priority_label() as a base-class contract",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "class BugTask:\n    def __init__(self, title, priority):\n        pass\n\n    def priority_label(self):\n        return \"medium\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "class FeatureTask:\n    def __init__(self, title, priority):\n        pass\n\n    def priority_label(self):\n        return \"planned\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.priority} pts) - todo [priority: planned]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\n# TODO: add priority_breakdown(tasks)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "README.md",
+            "content": "# Smart Task Tracker\n\nTODO: explain the project structure and handoff notes.",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def priority_label(self):\n        return 'medium'\n\n\ndef done_count(tasks):\n    return 1\n\nfor line in ['1', '2', '3', '4', '5', '6']:\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass BugTask:\n    def __init__(self, title, points):\n        self.title = title\n        self.points = points\n\n    def priority_label(self):\n        return 'medium'\n\n\ndef done_count(tasks):\n    return 1\n\nfor line in ['1', '2', '3', '4', '5', '6']:\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, points):\n        if points < 0:\n            raise ValueError(\"points cannot be negative\")\n        self.title = title\n        self.points = points\n        self._status = \"todo\"\n\n    @property\n    def status(self):\n        return self._status\n\n    def mark_done(self):\n        self._status = \"done\"\n\n    def summary_line(self):\n        raise NotImplementedError(\"Subclasses must implement summary_line\")\n\n    def priority_label(self):\n        raise NotImplementedError(\"Subclasses must implement priority_label\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"high\"\n        return \"medium\"\n\n    def summary_line(self):\n        return f\"BUG: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def priority_label(self):\n        if self.points >= 4:\n            return \"planned\"\n        return \"small\"\n\n    def summary_line(self):\n        return f\"FEATURE: {self.title} ({self.points} pts) - {self.status} [priority: {self.priority_label()}]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "def build_summary(tasks):\n    return [task.summary_line() for task in tasks]\n\n\ndef total_points(tasks):\n    return sum(task.points for task in tasks)\n\n\ndef done_count(tasks):\n    return sum(1 for task in tasks if task.status == \"done\")\n\n\ndef priority_breakdown(tasks):\n    return [task.priority_label() for task in tasks]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(task_rows):\n    tasks = []\n    for row in task_rows:\n        if row[\"type\"] == \"bug\":\n            tasks.append(BugTask(row[\"title\"], row[\"points\"]))\n        elif row[\"type\"] == \"feature\":\n            tasks.append(FeatureTask(row[\"title\"], row[\"points\"]))\n    return tasks",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "# TODO: add assert-based checks for validation, priority labels, and done counts",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login redirect",
+              3
+            ],
+            "constructorArgKinds": [],
+            "methodName": "priority_label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "medium",
+            "expectedKind": "value",
+            "message": "BugTask priority behavior should still work."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "done_count",
+            "args": [
+              [
+                [
+                  [
+                    "__class__",
+                    "BugTask"
+                  ],
+                  [
+                    "title",
+                    "Fix login redirect"
+                  ],
+                  [
+                    "points",
+                    3
+                  ],
+                  [
+                    "status",
+                    "done"
+                  ]
+                ],
+                [
+                  [
+                    "__class__",
+                    "FeatureTask"
+                  ],
+                  [
+                    "title",
+                    "Add dark mode"
+                  ],
+                  [
+                    "points",
+                    5
+                  ],
+                  [
+                    "status",
+                    "todo"
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 1,
+            "expectedKind": "value",
+            "message": "done_count should still count completed tasks correctly."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 6,
+            "message": "Running the demo should print the report plus the final handoff message."
+          }
+        ]
+      }
+    }
+  ]
+}

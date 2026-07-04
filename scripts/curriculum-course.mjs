@@ -1,11 +1,32 @@
-import { existsSync, readFileSync } from "node:fs";
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import {
   buildCheckCliPlan,
   buildPublishCliPlan,
   assertCourseScopedPublishPlan,
+  buildValidationBypassArgs,
 } from "./curriculum-course-lib.mjs";
+
+
+function __zsCourseListAiModels() {
+  console.log('AI providers and models:\n\nOpenAI\n  - gpt-5-mini\n  - gpt-5.4-mini\n  - gpt-5.4-nano\n  - gpt-4o-mini\n  - gpt-4o\n  - gpt-5.5\n\nGemini\n  - gemini-2.5-flash-lite\n  - gemini-2.5-flash\n  - gemini-2.5-pro\n\nClaude\n  - claude-haiku-4-5\n  - claude-sonnet-5\n  - claude-opus-4-8\n  - claude-fable-5\n\nDeepSeek\n  - deepseek-v4-flash\n  - deepseek-v4-pro\n  - deepseek-chat        deprecated legacy alias\n  - deepseek-reasoner    deprecated legacy alias\n');
+}
+
+const __zsCourseArgsForModels = process.argv.slice(2).filter((arg) => arg !== "--");
+if (__zsCourseArgsForModels[0] === "list-ai-models" || __zsCourseArgsForModels.includes("--list-ai-models")) {
+  __zsCourseListAiModels();
+  process.exit(0);
+}
 
 const rawArgs = process.argv.slice(2).filter((arg) => arg !== "--");
 
@@ -25,7 +46,7 @@ function parseArgs(args) {
     }
 
     const next = args[i + 1];
-    const flagNeedsValue = arg === "--live-subject";
+    const flagNeedsValue = arg === "--live-subject" || arg === "--backup-key";
 
     if (flagNeedsValue) {
       if (!next || next.startsWith("--")) {
@@ -58,6 +79,11 @@ const preferReports = flags.has("--prefer-reports");
 const noSyncReports = flags.has("--no-sync-reports");
 const forceLiveOverwrite = flags.has("--force-live-overwrite");
 const liveSubjectSlugFlag = flags.get("--live-subject");
+const backupKeyFlag = flags.get("--backup-key");
+const skipQualityGates = flags.has("--skip-quality-gates");
+const skipSemantic = flags.has("--skip-semantic");
+const skipGolden = flags.has("--skip-golden");
+const unsafeSkipValidation = flags.has("--unsafe-skip-validation");
 
 const allowedFlags = new Set([
   "--force",
@@ -70,6 +96,11 @@ const allowedFlags = new Set([
   "--no-sync-reports",
   "--force-live-overwrite",
   "--live-subject",
+  "--backup-key",
+  "--skip-quality-gates",
+  "--skip-semantic",
+  "--skip-golden",
+  "--unsafe-skip-validation",
 ]);
 
 for (const flag of flags.keys()) {
@@ -77,6 +108,36 @@ for (const flag of flags.keys()) {
     console.error(`Unknown flag: ${flag}`);
     process.exit(1);
   }
+}
+
+const validationBypassRequested =
+    skipQualityGates || skipSemantic || skipGolden || unsafeSkipValidation;
+
+const validationBypassCompileActions = new Set(["compile-course", "check"]);
+
+if (
+    validationBypassRequested &&
+    action &&
+    !validationBypassCompileActions.has(action)
+) {
+  console.error(
+      `Validation bypass flags are only supported for compile-course and check actions. Received action: ${action}`,
+  );
+  process.exit(1);
+}
+
+if (validationBypassRequested && action === "compile-course" && !draftOnly) {
+  console.error(
+      `Validation bypass flags require --draft-only so non-draft compile output cannot skip validation.`,
+  );
+  process.exit(1);
+}
+
+if (unsafeSkipValidation && !draftOnly) {
+  console.error(
+      `--unsafe-skip-validation requires --draft-only. This escape hatch is not allowed for non-draft compile output or publish flows.`,
+  );
+  process.exit(1);
 }
 
 if (!action || !subjectSlug) {
@@ -120,6 +181,9 @@ Course-specific examples:
   pnpm curr:course -- compile-course sql multi-table-sql --live-subject sql --force-live-overwrite
   pnpm curr:course -- publish python python-data-functions --force
   pnpm curr:course -- publish python python-data-functions --live-subject python-v2 --force
+  pnpm curr:course -- backup-draft python applied-python-projects
+  pnpm curr:course -- list-backups python applied-python-projects
+  pnpm curr:course -- restore-draft python applied-python-projects --backup-key <backupKey>
 
 Flags:
   --resume                 Skip topics that already have completed draft artifacts
@@ -132,7 +196,12 @@ Flags:
   --no-sync-reports        For rebuild mode, do not write rebuild-source/report snapshots
   --force                  Allow publish/publish-auto to overwrite an existing subject release
   --live-subject <slug>    Compile/publish a course into an explicit live subject slug override
+  --backup-key <key>       Backup key to create, list around, or restore from
   --force-live-overwrite   Allow compile-course or publish to overwrite the configured live publish target with a non-target course
+  --skip-quality-gates     Draft compile only: skip downstream quality/critique gates
+  --skip-semantic          Draft compile only: skip downstream semantic validation
+  --skip-golden            Draft compile only: skip downstream golden validation
+  --unsafe-skip-validation Draft compile only: loud escape hatch that implies all downstream skip flags
 
 Actions:
   compile
@@ -146,6 +215,9 @@ Actions:
   critique
   critique-draft
   check
+  backup-draft / backup-course-draft
+  list-backups / list-course-backups
+  restore-draft / restore-course-draft
 `);
 }
 
@@ -297,6 +369,421 @@ function resolveDraftSubjectTarget() {
     courseSlug: requestedCourseSlug,
     draftSubjectSlug: `${subjectSlug}--${requestedCourseSlug}--draft`,
   };
+}
+
+
+function timestampBackupSuffix() {
+  return new Date().toISOString().replace(/[:.]/g, "-");
+}
+
+function slugSafe(value) {
+  return String(value ?? "")
+      .trim()
+      .replace(/[^A-Za-z0-9._-]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+}
+
+
+function listDirectoryNames(dirPath) {
+  if (!existsSync(dirPath)) return [];
+  return readdirSync(dirPath, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name);
+}
+
+function tryReadJson(filePath) {
+  if (!existsSync(filePath)) return null;
+  try {
+    return JSON.parse(readFileSync(filePath, "utf8"));
+  } catch {
+    return null;
+  }
+}
+
+function rewriteSubjectSlugDeep(value, fromSubjectSlug, toSubjectSlug) {
+  if (!fromSubjectSlug || !toSubjectSlug || fromSubjectSlug === toSubjectSlug) {
+    return value;
+  }
+
+  if (typeof value === "string") {
+    return value.split(fromSubjectSlug).join(toSubjectSlug);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) =>
+        rewriteSubjectSlugDeep(item, fromSubjectSlug, toSubjectSlug),
+    );
+  }
+
+  if (value && typeof value === "object") {
+    const next = {};
+    for (const [key, childValue] of Object.entries(value)) {
+      const nextKey = key.split(fromSubjectSlug).join(toSubjectSlug);
+      next[nextKey] = rewriteSubjectSlugDeep(
+          childValue,
+          fromSubjectSlug,
+          toSubjectSlug,
+      );
+    }
+    return next;
+  }
+
+  return value;
+}
+
+function maybeRewriteJsonRaw(raw, fromSubjectSlug, toSubjectSlug) {
+  if (!fromSubjectSlug || !toSubjectSlug || fromSubjectSlug === toSubjectSlug) {
+    return raw;
+  }
+
+  try {
+    const parsed = JSON.parse(raw);
+    return `${JSON.stringify(
+        rewriteSubjectSlugDeep(parsed, fromSubjectSlug, toSubjectSlug),
+        null,
+        2,
+    )}\n`;
+  } catch {
+    return raw.split(fromSubjectSlug).join(toSubjectSlug);
+  }
+}
+
+function copyTreeWithSubjectRewrite(sourcePath, targetPath, fromSubjectSlug, toSubjectSlug) {
+  if (!existsSync(sourcePath)) return false;
+
+  const sourceStats = statSync(sourcePath);
+  if (sourceStats.isDirectory()) {
+    mkdirSync(targetPath, { recursive: true });
+    for (const entry of readdirSync(sourcePath, { withFileTypes: true })) {
+      copyTreeWithSubjectRewrite(
+          path.join(sourcePath, entry.name),
+          path.join(targetPath, entry.name),
+          fromSubjectSlug,
+          toSubjectSlug,
+      );
+    }
+    return true;
+  }
+
+  mkdirSync(path.dirname(targetPath), { recursive: true });
+
+  if (sourcePath.endsWith(".json")) {
+    const raw = readFileSync(sourcePath, "utf8");
+    writeFileSync(
+        targetPath,
+        maybeRewriteJsonRaw(raw, fromSubjectSlug, toSubjectSlug),
+    );
+  } else {
+    writeFileSync(targetPath, readFileSync(sourcePath));
+  }
+
+  return true;
+}
+
+function inferBackupCreatedAt(backupKey) {
+  const courseStyle = backupKey.match(/(\d{4}-\d{2}-\d{2})--(\d{2}-\d{2}-\d{2})$/);
+  if (courseStyle) return `${courseStyle[1]}T${courseStyle[2].replace(/-/g, ":")}Z`;
+
+  const isoStyle = backupKey.match(/(\d{4}-\d{2}-\d{2}T\d{2}-\d{2}-\d{2})/);
+  if (isoStyle) return `${isoStyle[1].replace(/T(\d{2})-(\d{2})-(\d{2})/, "T$1:$2:$3")}Z`;
+
+  return "unknown";
+}
+
+function backupRoot() {
+  return path.join(root, ".curriculum-backups", subjectSlug);
+}
+
+function courseDraftPaths(draftSubjectSlug) {
+  return {
+    subject: path.join(root, ".curriculum-drafts", subjectSlug, "subjects", draftSubjectSlug),
+    messages: path.join(root, ".curriculum-drafts", subjectSlug, "messages", "en", "subjects", draftSubjectSlug),
+    reports: path.join(root, ".curriculum-drafts", subjectSlug, "reports", draftSubjectSlug),
+  };
+}
+
+function courseBackupPaths(backupKey) {
+  const backupBase = path.join(backupRoot(), backupKey);
+  return {
+    base: backupBase,
+    manifest: path.join(backupBase, "backup.manifest.json"),
+    subject: path.join(backupBase, "subjects"),
+    messages: path.join(backupBase, "messages", "en", "subjects"),
+    reports: path.join(backupBase, "reports"),
+  };
+}
+
+function hasAnyDraftArtifact(paths) {
+  return existsSync(paths.subject) || existsSync(paths.messages) || existsSync(paths.reports);
+}
+
+function assertReadableBackupKey(value) {
+  const key = slugSafe(value);
+  if (!key) {
+    console.error("--backup-key must be a non-empty filesystem-safe value.");
+    process.exit(1);
+  }
+  if (key !== value) {
+    console.error(`Unsafe --backup-key: ${value}`);
+    console.error(`Use a filesystem-safe key such as: ${key}`);
+    process.exit(1);
+  }
+  return key;
+}
+
+function resolveBackupKey(
+    resolvedCourseSlug,
+    draftSubjectSlug,
+    purpose,
+    { ignoreBackupKeyFlag = false } = {},
+) {
+  if (!ignoreBackupKeyFlag && backupKeyFlag) return assertReadableBackupKey(backupKeyFlag);
+  if (purpose === "restore") {
+    console.error("restore-draft requires --backup-key <backupKey>.");
+    process.exit(1);
+  }
+  return slugSafe(`${resolvedCourseSlug}--${draftSubjectSlug}--${timestampBackupSuffix()}`);
+}
+
+function backupCurrentDraft({
+  reason = "manual",
+  backupKeyOverride = null,
+  ignoreBackupKeyFlag = false,
+} = {}) {
+  const target = resolveDraftSubjectTarget();
+  const resolvedCourseSlug = target.courseSlug;
+  assertCourseExists(resolvedCourseSlug);
+
+  const draftPaths = courseDraftPaths(target.draftSubjectSlug);
+  if (!hasAnyDraftArtifact(draftPaths)) {
+    console.error(`No draft artifacts found for ${subjectSlug}/${resolvedCourseSlug}.`);
+    console.error(`Expected one of:`);
+    console.error(`  ${draftPaths.subject}`);
+    console.error(`  ${draftPaths.messages}`);
+    console.error(`  ${draftPaths.reports}`);
+    process.exit(1);
+  }
+
+  const backupKey = backupKeyOverride
+      ? assertReadableBackupKey(backupKeyOverride)
+      : resolveBackupKey(resolvedCourseSlug, target.draftSubjectSlug, "backup", {
+        ignoreBackupKeyFlag,
+      });
+  const backupPaths = courseBackupPaths(backupKey);
+
+  if (existsSync(backupPaths.base)) {
+    console.error(`Backup already exists: ${backupPaths.base}`);
+    console.error(`Use a different --backup-key.`);
+    process.exit(1);
+  }
+
+  mkdirSync(backupPaths.base, { recursive: true });
+
+  if (existsSync(draftPaths.subject)) {
+    mkdirSync(backupPaths.subject, { recursive: true });
+    cpSync(draftPaths.subject, path.join(backupPaths.subject, target.draftSubjectSlug), { recursive: true });
+  }
+  if (existsSync(draftPaths.messages)) {
+    mkdirSync(backupPaths.messages, { recursive: true });
+    cpSync(draftPaths.messages, path.join(backupPaths.messages, target.draftSubjectSlug), { recursive: true });
+  }
+  if (existsSync(draftPaths.reports)) {
+    mkdirSync(backupPaths.reports, { recursive: true });
+    cpSync(draftPaths.reports, path.join(backupPaths.reports, target.draftSubjectSlug), { recursive: true });
+  }
+
+  writeFileSync(
+      backupPaths.manifest,
+      JSON.stringify(
+          {
+            kind: "course-draft-backup",
+            reason,
+            createdAt: new Date().toISOString(),
+            subjectSlug,
+            courseSlug: resolvedCourseSlug,
+            draftSubjectSlug: target.draftSubjectSlug,
+            backupKey,
+          },
+          null,
+          2,
+      ) + "\n",
+  );
+
+  console.log(`Backed up draft ${subjectSlug}/${resolvedCourseSlug}`);
+  console.log(`Draft subject: ${target.draftSubjectSlug}`);
+  console.log(`Backup key: ${backupKey}`);
+  console.log(`Backup path: ${backupPaths.base}`);
+  return { backupKey, backupPath: backupPaths.base };
+}
+
+function describeBackupEntry(backupKey, target, resolvedCourseSlug) {
+  const backupPaths = courseBackupPaths(backupKey);
+  const manifest = tryReadJson(backupPaths.manifest);
+
+  if (manifest) {
+    if (manifest.subjectSlug !== subjectSlug) return null;
+    if (manifest.courseSlug !== resolvedCourseSlug) return null;
+
+    return {
+      key: backupKey,
+      format: manifest.kind ?? "course-draft-backup",
+      createdAt: manifest.createdAt ?? inferBackupCreatedAt(backupKey),
+      reason: manifest.reason ?? "unknown",
+      sourceSubjectSlug: manifest.draftSubjectSlug,
+      courseSlug: manifest.courseSlug,
+      hasManifest: true,
+      backupPaths,
+    };
+  }
+
+  const subjectDirs = listDirectoryNames(backupPaths.subject);
+  const messageDirs = listDirectoryNames(backupPaths.messages);
+  const availableSubjectSlugs = Array.from(new Set([...subjectDirs, ...messageDirs]));
+
+  if (availableSubjectSlugs.length === 0) return null;
+
+  const configuredLiveSubjectSlug = resolveConfiguredLiveSubjectSlug();
+  const sourceSubjectSlug =
+      availableSubjectSlugs.includes(target.draftSubjectSlug)
+          ? target.draftSubjectSlug
+          : availableSubjectSlugs.includes(configuredLiveSubjectSlug)
+              ? configuredLiveSubjectSlug
+              : availableSubjectSlugs[0];
+
+  return {
+    key: backupKey,
+    format: "legacy-publish-backup",
+    createdAt: inferBackupCreatedAt(backupKey),
+    reason: "legacy/no-manifest",
+    sourceSubjectSlug,
+    courseSlug: backupKey.startsWith(`${resolvedCourseSlug}--`)
+        ? resolvedCourseSlug
+        : "unknown legacy course",
+    hasManifest: false,
+    backupPaths,
+  };
+}
+
+function listCourseBackups() {
+  const target = resolveDraftSubjectTarget();
+  const resolvedCourseSlug = target.courseSlug;
+  assertCourseExists(resolvedCourseSlug);
+
+  const base = backupRoot();
+  if (!existsSync(base)) {
+    console.log(`No backups found for ${subjectSlug}/${resolvedCourseSlug}.`);
+    return;
+  }
+
+  const rows = [];
+  for (const entry of readdirSync(base)) {
+    const backupBase = path.join(base, entry);
+    if (!statSync(backupBase).isDirectory()) continue;
+
+    const descriptor = describeBackupEntry(entry, target, resolvedCourseSlug);
+    if (!descriptor) continue;
+    rows.push(descriptor);
+  }
+
+  rows.sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
+
+  if (rows.length === 0) {
+    console.log(`No backups found for ${subjectSlug}/${resolvedCourseSlug}.`);
+    console.log(`Backup folder exists, but no recognizable backup snapshots were found at:`);
+    console.log(`  ${base}`);
+    return;
+  }
+
+  console.log(`Backups for ${subjectSlug}/${resolvedCourseSlug}:`);
+  for (const row of rows) {
+    console.log(`- ${row.key}`);
+    console.log(`  createdAt: ${row.createdAt}`);
+    console.log(`  reason: ${row.reason}`);
+    console.log(`  format: ${row.format}`);
+    console.log(`  sourceSubjectSlug: ${row.sourceSubjectSlug}`);
+    if (!row.hasManifest) {
+      console.log(`  note: legacy backup has no course manifest; verify the key before restore`);
+    }
+  }
+}
+
+function restoreDraftFromBackup() {
+  const target = resolveDraftSubjectTarget();
+  const resolvedCourseSlug = target.courseSlug;
+  assertCourseExists(resolvedCourseSlug);
+
+  const backupKey = resolveBackupKey(resolvedCourseSlug, target.draftSubjectSlug, "restore");
+  const descriptor = describeBackupEntry(backupKey, target, resolvedCourseSlug);
+
+  if (!descriptor) {
+    const backupPaths = courseBackupPaths(backupKey);
+    console.error(`Backup not found or not recognizable: ${backupPaths.base}`);
+    console.error(`Run: pnpm curr:course -- list-backups ${subjectSlug} ${resolvedCourseSlug}`);
+    process.exit(1);
+  }
+
+  const backupPaths = descriptor.backupPaths;
+  const sourceSubjectSlug = descriptor.sourceSubjectSlug;
+  const sourcePaths = {
+    subject: path.join(backupPaths.subject, sourceSubjectSlug),
+    messages: path.join(backupPaths.messages, sourceSubjectSlug),
+    reports: path.join(backupPaths.reports, sourceSubjectSlug),
+  };
+  const targetPaths = courseDraftPaths(target.draftSubjectSlug);
+
+  if (!hasAnyDraftArtifact(sourcePaths)) {
+    console.error(`Backup ${backupKey} has no draft/live artifacts to restore.`);
+    console.error(`Expected one of:`);
+    console.error(`  ${sourcePaths.subject}`);
+    console.error(`  ${sourcePaths.messages}`);
+    console.error(`  ${sourcePaths.reports}`);
+    process.exit(1);
+  }
+
+  if (hasAnyDraftArtifact(targetPaths)) {
+    if (!force) {
+      console.error(`Refusing to overwrite existing draft for ${subjectSlug}/${resolvedCourseSlug}.`);
+      console.error(`Existing draft subject: ${target.draftSubjectSlug}`);
+      console.error(`Use --force to first back up the current draft, then restore this backup:`);
+      console.error(`  pnpm curr:course -- restore-draft ${subjectSlug} ${resolvedCourseSlug} --backup-key ${backupKey} --force`);
+      process.exit(1);
+    }
+
+    backupCurrentDraft({
+      reason: `pre-restore:${backupKey}`,
+      ignoreBackupKeyFlag: true,
+    });
+  }
+
+  for (const targetPath of [targetPaths.subject, targetPaths.messages, targetPaths.reports]) {
+    if (existsSync(targetPath)) rmSync(targetPath, { recursive: true, force: true });
+  }
+
+  copyTreeWithSubjectRewrite(
+      sourcePaths.subject,
+      targetPaths.subject,
+      sourceSubjectSlug,
+      target.draftSubjectSlug,
+  );
+  copyTreeWithSubjectRewrite(
+      sourcePaths.messages,
+      targetPaths.messages,
+      sourceSubjectSlug,
+      target.draftSubjectSlug,
+  );
+  copyTreeWithSubjectRewrite(
+      sourcePaths.reports,
+      targetPaths.reports,
+      sourceSubjectSlug,
+      target.draftSubjectSlug,
+  );
+
+  console.log(`Restored backup ${backupKey} into draft ${subjectSlug}/${resolvedCourseSlug}.`);
+  console.log(`Source subject: ${sourceSubjectSlug}`);
+  console.log(`Draft subject: ${target.draftSubjectSlug}`);
+  if (!descriptor.hasManifest) {
+    console.log(`Note: restored from legacy publish backup and rewrote subject slug to draft slug.`);
+  }
 }
 
 function loadEnvFiles() {
@@ -470,6 +957,19 @@ function cli(args) {
   run("node", ["packages/curriculum-cli/dist/index.js", ...args]);
 }
 
+function getValidationBypassArgs() {
+  return buildValidationBypassArgs({
+    skipQualityGates,
+    skipSemantic,
+    skipGolden,
+    unsafeSkipValidation,
+  });
+}
+
+function shouldSkipDraftGoldens() {
+  return skipGolden || unsafeSkipValidation;
+}
+
 function runDraftGoldensForCourse() {
   const draftGoldensTarget = resolveDraftSubjectTarget();
   const resolvedCourseSlug = draftGoldensTarget.courseSlug;
@@ -511,6 +1011,7 @@ function buildCompileCourseArgs(resolvedCourseSlug) {
     ...(preferReports ? ["--prefer-reports"] : []),
     ...(noSyncReports ? ["--no-sync-reports"] : []),
     ...(forceLiveOverwrite ? ["--force-live-overwrite"] : []),
+    ...getValidationBypassArgs(),
   ];
 }
 
@@ -629,6 +1130,10 @@ switch (action) {
       resume,
       liveSubjectSlug: liveSubjectSlugFlag,
       forceLiveOverwrite,
+      skipQualityGates,
+      skipSemantic,
+      skipGolden,
+      unsafeSkipValidation,
       hasCourseBlueprint: existsSync(blueprintPath),
       courseBlueprintPath: blueprintPath,
     });
@@ -637,7 +1142,31 @@ switch (action) {
       cli(args);
     }
 
-    runDraftGoldensForCourse();
+    if (shouldSkipDraftGoldens()) {
+      console.warn(
+          "⚠️  Skipping post-compile draft golden validation because --skip-golden or --unsafe-skip-validation was provided.",
+      );
+    } else {
+      runDraftGoldensForCourse();
+    }
+    break;
+  }
+
+  case "backup-draft":
+  case "backup-course-draft": {
+    backupCurrentDraft({ reason: "manual" });
+    break;
+  }
+
+  case "list-backups":
+  case "list-course-backups": {
+    listCourseBackups();
+    break;
+  }
+
+  case "restore-draft":
+  case "restore-course-draft": {
+    restoreDraftFromBackup();
     break;
   }
 

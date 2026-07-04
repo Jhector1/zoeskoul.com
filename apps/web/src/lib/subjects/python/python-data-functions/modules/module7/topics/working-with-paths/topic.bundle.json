@@ -299,36 +299,36 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "data/names.txt",
-          "content": "Ava\nMia\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterFiles.data_names_txt.content",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "data/names.txt",
-            "content": "Ava\nMia\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterFiles.data_names_txt.content",
             "language": "text"
           }
         ],
@@ -365,18 +365,18 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "data/names.txt",
-            "content": "Ava\nMia\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionFiles.data_names_txt.content",
             "language": "text"
           }
         ],
@@ -392,26 +392,26 @@
           {
             "type": "uses_call",
             "functionName": "Path",
-            "message": "Use Path(...) to build the path."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
             "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]names\\.txt['\\\"]",
-            "message": "Build the path with Path('data') / 'names.txt'."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.sourceChecks.1.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "data/names.txt",
-          "content": "Ava\nMia\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionFiles.data_names_txt.content",
           "language": "text"
         }
       ],
@@ -427,12 +427,12 @@
         {
           "type": "uses_call",
           "functionName": "Path",
-          "message": "Use Path(...) to build the path."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
           "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]names\\.txt['\\\"]",
-          "message": "Build the path with Path('data') / 'names.txt'."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.sourceChecks.1.message"
         }
       ]
     },
@@ -443,11 +443,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file",
       "language": "python",
-      "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -456,11 +456,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -512,11 +512,11 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -526,7 +526,7 @@
           {
             "type": "source_contains",
             "pattern": "data/input.txt",
-            "message": "Open data/input.txt to read the nested file.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -534,7 +534,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -544,7 +544,7 @@
         {
           "type": "source_contains",
           "pattern": "data/input.txt",
-          "message": "Open data/input.txt to read the nested file.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -556,11 +556,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths",
       "language": "python",
-      "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -569,11 +569,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -633,11 +633,11 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -647,26 +647,26 @@
           {
             "type": "source_contains",
             "pattern": "data/source.txt",
-            "message": "Read from data/source.txt.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "source_contains",
             "pattern": "data/copy.txt",
-            "message": "Write to data/copy.txt.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.1.message",
             "normalizeWhitespace": true
           },
           {
             "type": "uses_method",
             "method": "write",
-            "message": "Use file.write() to create the copy."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.2.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -684,19 +684,19 @@
         {
           "type": "source_contains",
           "pattern": "data/source.txt",
-          "message": "Read from data/source.txt.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "source_contains",
           "pattern": "data/copy.txt",
-          "message": "Write to data/copy.txt.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.1.message",
           "normalizeWhitespace": true
         },
         {
           "type": "uses_method",
           "method": "write",
-          "message": "Use file.write() to create the copy."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.2.message"
         }
       ]
     },
@@ -707,11 +707,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder",
       "language": "python",
-      "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -720,11 +720,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -776,11 +776,11 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -790,7 +790,7 @@
           {
             "type": "source_contains",
             "pattern": "data/items.txt",
-            "message": "Open data/items.txt to count its lines.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -798,7 +798,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -808,7 +808,7 @@
         {
           "type": "source_contains",
           "pattern": "data/items.txt",
-          "message": "Open data/items.txt to count its lines.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -820,11 +820,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0",
       "language": "python",
-      "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -833,7 +833,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -842,11 +842,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -872,11 +872,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -894,7 +894,7 @@
           {
             "type": "source_regex",
             "pattern": "\\bfolder\\s*\\+\\s*['\\\"]/['\\\"]\\s*\\+\\s*filename",
-            "message": "Build the path from folder and filename instead of typing the final path."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.sourceChecks.0.message"
           }
         ]
       },
@@ -902,7 +902,7 @@
         {
           "type": "source_regex",
           "pattern": "\\bfolder\\s*\\+\\s*['\\\"]/['\\\"]\\s*\\+\\s*filename",
-          "message": "Build the path from folder and filename instead of typing the final path."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.sourceChecks.0.message"
         }
       ]
     },
@@ -913,11 +913,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1",
       "language": "python",
-      "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -926,7 +926,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -935,11 +935,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -965,11 +965,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -987,12 +987,12 @@
           {
             "type": "uses_call",
             "functionName": "Path",
-            "message": "Use Path(...) to build the path."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
             "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]scores\\.txt['\\\"]",
-            "message": "Build the path with Path('data') / 'scores.txt'."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
           }
         ]
       },
@@ -1000,12 +1000,12 @@
         {
           "type": "uses_call",
           "functionName": "Path",
-          "message": "Use Path(...) to build the path."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
           "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]scores\\.txt['\\\"]",
-          "message": "Build the path with Path('data') / 'scores.txt'."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
         }
       ]
     },
@@ -1016,18 +1016,18 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2",
       "language": "python",
-      "starterCode": "# Open data/message.txt and print its text.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Open data/message.txt and print its text.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "data/message.txt",
-          "content": "Nested hello\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_message_txt.content",
           "language": "text",
           "isEntry": false,
           "entry": false
@@ -1036,14 +1036,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "data/message.txt",
-          "content": "Nested hello\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_message_txt.content",
           "language": "text",
           "isEntry": false,
           "entry": false
@@ -1052,18 +1052,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Open data/message.txt and print its text.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Open data/message.txt and print its text.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "data/message.txt",
-            "content": "Nested hello\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_message_txt.content",
             "language": "text",
             "isEntry": false,
             "entry": false
@@ -1113,18 +1113,18 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "with open('data/message.txt') as file:\n    print(file.read().strip())\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "data/message.txt",
-            "content": "Nested hello\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_message_txt.content",
             "language": "text",
             "isEntry": false,
             "entry": false
@@ -1134,7 +1134,7 @@
           {
             "type": "source_contains",
             "pattern": "data/message.txt",
-            "message": "Open data/message.txt instead of typing Nested hello.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -1151,7 +1151,7 @@
         {
           "type": "source_contains",
           "pattern": "data/message.txt",
-          "message": "Open data/message.txt instead of typing Nested hello.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]

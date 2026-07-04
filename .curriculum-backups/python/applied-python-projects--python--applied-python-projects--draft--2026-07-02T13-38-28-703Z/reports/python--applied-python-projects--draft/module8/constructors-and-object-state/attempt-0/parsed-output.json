@@ -1,0 +1,465 @@
+{
+  "title": "Constructors and Object State",
+  "summary": "Use __init__ to give each object its own starting data, store that data as attributes, and organize simple classes across multiple workspace files.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "constructors-and-object-state-sketch-0",
+      "title": "Why constructors matter",
+      "bodyMarkdown": "A constructor is the `__init__` method inside a class. It runs when you create a new object, so it is the place to give that object its starting state.\n\nWhen you store values on `self`, each object keeps its own copy of that data.\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\nchecking = Account(\"Ava\", 120)\nsavings = Account(\"Ben\", 300)\n\nprint(checking.owner)\nprint(savings.balance)\n```\n\nStep by step:\n\n- `class Account:` defines a blueprint.\n- `def __init__(self, owner, balance):` says new `Account` objects need two starting values.\n- `self.owner = owner` stores the owner's name on that specific object.\n- `self.balance = balance` stores the starting balance on that specific object.\n- `checking` and `savings` are two different objects, so they can hold different values.\n\nWithout a constructor, you would have to attach attributes later by hand. With a constructor, every object starts in a complete, predictable state."
+    },
+    {
+      "id": "constructors-and-object-state-sketch-1",
+      "title": "How object state stays with each instance",
+      "bodyMarkdown": "Object state means the data stored on one object. Different instances of the same class can have different state.\n\n```python\nclass Task:\n    def __init__(self, title, done):\n        self.title = title\n        self.done = done\n\nfirst_task = Task(\"Write report\", False)\nsecond_task = Task(\"Send email\", True)\n\nprint(first_task.title)\nprint(first_task.done)\nprint(second_task.title)\nprint(second_task.done)\n```\n\nLine by line:\n\n- `first_task = Task(\"Write report\", False)` creates one object with its own values.\n- `second_task = Task(\"Send email\", True)` creates another object from the same class.\n- `first_task.done` is `False`, but `second_task.done` is `True`.\n\nThat difference is the key idea: the class is shared, but the state belongs to each object.\n\nIn real projects, this is useful for things like accounts, books, orders, or tickets, where each object represents one record with its own data."
+    },
+    {
+      "id": "constructors-and-object-state-sketch-2",
+      "title": "Putting classes in model files and importing them",
+      "bodyMarkdown": "In a multifile project, class definitions usually live in their own model files, and `main.py` imports them.\n\n```python\nfrom models.account import Account\n\naccount = Account(\"Mia\", 75)\nprint(account.owner)\nprint(account.balance)\n```\n\nA matching model file might contain:\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n```\n\nWhy this structure helps:\n\n- `models/account.py` holds the class definition.\n- `main.py` focuses on using the class.\n- The project becomes easier to read as it grows.\n\nThis separation is especially helpful once you add methods later, because the data and behavior for an object stay together in one place."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-constructors-and-object-state-sketch0",
+      "kind": "code_input",
+      "title": "Build an Account constructor",
+      "prompt": "You are starting an account tracker app. In `models/account.py`, finish the `Account` class so its constructor accepts `owner` and `balance`, then stores them on `self.owner` and `self.balance`. Do not change `main.py`. When you click Run, the output panel should show the owner's name and starting balance from the created object.",
+      "hint": "The constructor should receive two values after `self` and save both on the object.",
+      "help": {
+        "concept": "A constructor sets the starting state of each new object by copying incoming values into attributes on `self`.",
+        "hint_1": "Look at how `main.py` creates `Account(\"Ava\", 120)`. The class must accept those two values in `__init__`.",
+        "hint_2": "Inside `__init__`, assign the incoming `owner` value to `self.owner` and the incoming `balance` value to `self.balance`."
+      },
+      "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+      "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.owner)\nprint(account.balance)",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Define an Account class in models/account.py."
+        },
+        {
+          "type": "constructible",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            120
+          ],
+          "message": "Your Account constructor should accept owner and balance."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            120
+          ],
+          "attributes": [
+            "owner",
+            "balance"
+          ],
+          "message": "Store owner and balance as instance attributes."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "try-constructors-and-object-state-sketch1",
+      "kind": "code_input",
+      "title": "Create two tasks with different state",
+      "prompt": "A teammate wants proof that two objects from the same class can hold different data. In `models/task.py`, complete the `Task` constructor so each task stores its own `title` and `done` values. Do not change `main.py`. When you click Run, the output panel should show different values for the two task objects.",
+      "hint": "Both objects use the same class, but each one should keep its own attribute values.",
+      "help": {
+        "concept": "Instance state lives on each object, so the constructor must save incoming values on `self` instead of using one shared value for every object.",
+        "hint_1": "`main.py` creates two `Task` objects with different arguments. The constructor needs matching parameters.",
+        "hint_2": "Assign both incoming values to attributes with the same names on `self`, so `first_task` and `second_task` can differ."
+      },
+      "starterCode": "from models.task import Task\n\nfirst_task = Task(\"Write report\", False)\nsecond_task = Task(\"Send email\", True)\n\nprint(first_task.title)\nprint(first_task.done)\nprint(second_task.title)\nprint(second_task.done)",
+      "solutionCode": "from models.task import Task\n\nfirst_task = Task(\"Write report\", False)\nsecond_task = Task(\"Send email\", True)\n\nprint(first_task.title)\nprint(first_task.done)\nprint(second_task.title)\nprint(second_task.done)",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Task",
+          "message": "Define a Task class in models/task.py."
+        },
+        {
+          "type": "constructible",
+          "className": "Task",
+          "constructorArgs": [
+            "Write report",
+            false
+          ],
+          "message": "Your Task constructor should accept title and done."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Task",
+          "constructorArgs": [
+            "Send email",
+            true
+          ],
+          "attributes": [
+            "title",
+            "done"
+          ],
+          "message": "Store title and done on each Task object."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "try-constructors-and-object-state-sketch2",
+      "kind": "code_input",
+      "title": "Import a class from a model file",
+      "prompt": "Your app already has a model file, but `main.py` is missing the import and object creation. Update `main.py` so it imports `Account` from `models/account.py`, creates an account for `\"Mia\"` with balance `75`, and prints the owner and balance on separate lines.",
+      "hint": "The class already exists in the model file. This step is about importing it and using the constructor correctly.",
+      "help": {
+        "concept": "In a multifile project, `main.py` uses `from ... import ...` to bring in a class from a model file, then creates objects with constructor arguments.",
+        "hint_1": "Import `Account` from `models.account`, not from the folder name alone.",
+        "hint_2": "After the import, create one `Account` object with the given values and print its two attributes in order."
+      },
+      "starterCode": "# Update this file to use the Account class.\n",
+      "solutionCode": "from models.account import Account\n\naccount = Account(\"Mia\", 75)\nprint(account.owner)\nprint(account.balance)\n",
+      "files": [
+        {
+          "path": "main.py",
+          "content": "# Update this file to use the Account class.\n\n\nn/a",
+          "readOnly": false
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "readOnly": false
+        }
+      ],
+      "semanticChecks": [
+        {
+          "type": "constructible",
+          "className": "Account",
+          "constructorArgs": [
+            "Mia",
+            75
+          ],
+          "message": "Use the Account constructor with the provided owner and balance."
+        },
+        {
+          "type": "created_instances",
+          "className": "Account",
+          "min": 1,
+          "message": "Create one Account object in main.py."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "Print the owner and balance on separate lines."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "ci-constructors-and-object-state-balance-label",
+      "kind": "fill_blank_choice",
+      "title": "Pick the missing attribute name",
+      "prompt": "Complete the constructor line so the starting balance is stored on the object.",
+      "hint": "The value should be saved as an attribute on `self`.",
+      "help": {
+        "concept": "Inside `__init__`, attributes that belong to the object are stored with `self.attribute_name = value`.",
+        "hint_1": "The left side should name the object's balance attribute, not the parameter itself.",
+        "hint_2": "Use the attribute access form that starts with `self.` and matches the idea of a balance."
+      },
+      "template": "[blank1] = balance",
+      "choices": [
+        "self.balance",
+        "balance",
+        "self.owner",
+        "__init__"
+      ],
+      "correctValue": "self.balance"
+    },
+    {
+      "id": "ci-constructors-and-object-state-self-purpose",
+      "kind": "single_choice",
+      "title": "What does self refer to?",
+      "prompt": "Inside a class constructor like `__init__`, what does `self` refer to?",
+      "hint": "It points to the specific object being created or used.",
+      "help": {
+        "concept": "`self` is the reference to the current instance, which lets methods and constructors read or store that object's attributes.",
+        "hint_1": "Think about why `self.owner` and `self.balance` belong to one object, not to the whole class name.",
+        "hint_2": "Choose the option that describes the current object instance, not the file, method name, or imported module."
+      },
+      "options": [
+        "The current object instance",
+        "The class file on disk",
+        "The `__init__` method itself",
+        "Any imported module"
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "ci-constructors-and-object-state-order",
+      "kind": "drag_reorder",
+      "title": "Order the steps to create an object",
+      "prompt": "Put these steps in the correct order for using a class from a model file in `main.py`.",
+      "hint": "Import comes before creating the object, and creation comes before reading its attributes.",
+      "help": {
+        "concept": "A multifile class workflow starts by importing the class, then constructing an instance with arguments, then using the stored state through attributes.",
+        "hint_1": "You cannot create `Account(...)` until the class name is available in `main.py`.",
+        "hint_2": "After the object exists, you can access values like `account.owner` and `account.balance`."
+      },
+      "tokens": [
+        "Import `Account` from `models.account`",
+        "Create `account = Account(\"Ava\", 120)`",
+        "Read an attribute like `account.owner`"
+      ],
+      "correctOrder": [
+        "Import `Account` from `models.account`",
+        "Create `account = Account(\"Ava\", 120)`",
+        "Read an attribute like `account.owner`"
+      ]
+    },
+    {
+      "id": "ci-constructors-and-object-state-constructor-parts",
+      "kind": "multi_choice",
+      "title": "Find the constructor pieces",
+      "prompt": "Which lines belong inside a constructor that stores starting data for a `Book` object? Choose all that apply.",
+      "hint": "Look for the parameter list and the assignments that save values on the object.",
+      "help": {
+        "concept": "A constructor both receives starting values as parameters and stores them as instance attributes on `self`.",
+        "hint_1": "A correct constructor needs `self` plus incoming values, and it should assign those values to attributes.",
+        "hint_2": "Pick the method header for `__init__` and the lines that copy `title` and `pages` onto `self`."
+      },
+      "options": [
+        "`def __init__(self, title, pages):`",
+        "`self.title = title`",
+        "`self.pages = pages`",
+        "`print(title, pages)`"
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "ci-constructors-and-object-state-owner-value",
+      "kind": "fill_blank_choice",
+      "title": "Choose the starting owner value",
+      "prompt": "Fill the blank so this object is created for owner `\"Lina\"`.",
+      "hint": "The blank is the first argument passed into the constructor call.",
+      "help": {
+        "concept": "Constructor arguments provide the starting values that `__init__` stores on the new object.",
+        "hint_1": "The class call is `Account(owner, balance)`, so the first value should be the owner's name.",
+        "hint_2": "Choose the string value that matches the requested owner name exactly."
+      },
+      "template": "account = Account([blank1], 90)",
+      "choices": [
+        "\"Lina\"",
+        "90",
+        "owner",
+        "self.owner"
+      ],
+      "correctValue": "\"Lina\""
+    },
+    {
+      "id": "ci-constructors-and-object-state-shared-vs-instance",
+      "kind": "multi_choice",
+      "title": "Spot true statements about object state",
+      "prompt": "Which statements are true about object state in this topic? Choose all that apply.",
+      "hint": "Think about what belongs to one object versus what is shared by the class definition.",
+      "help": {
+        "concept": "A class is the blueprint, while each instance stores its own attribute values created by the constructor.",
+        "hint_1": "Two objects from the same class can still have different attribute values.",
+        "hint_2": "Choose the statements that describe per-object data stored on `self`, not statements claiming every object must share one value."
+      },
+      "options": [
+        "Two `Account` objects can have different balances.",
+        "Attributes like `self.owner` belong to one object instance.",
+        "Every object from a class must share the exact same stored state.",
+        "`__init__` can set starting values when an object is created."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ]
+    },
+    {
+      "id": "ci-constructors-and-object-state-add-method",
+      "kind": "code_input",
+      "title": "Add a method that reads object state",
+      "prompt": "Your account tracker now needs a simple method. In `models/account.py`, add a `describe()` method that returns a string in this exact format: `Owner: Ava, Balance: 120` using the object's stored attributes. Do not change the constructor. `main.py` should keep working and print the returned description.",
+      "hint": "The method should return a string built from `self.owner` and `self.balance`.",
+      "help": {
+        "concept": "Methods use `self` to read the state already stored by the constructor and turn it into useful behavior.",
+        "hint_1": "Keep the constructor as it is, then define a new method under it with `self` as the only parameter.",
+        "hint_2": "Build one formatted string that includes both stored attributes in the same order shown in the prompt."
+      },
+      "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.describe())",
+      "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 120)\nprint(account.describe())",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Keep the Account class defined."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            120
+          ],
+          "methodName": "describe",
+          "methodArgs": [],
+          "expected": "Owner: Ava, Balance: 120",
+          "message": "describe() should return the formatted account summary."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "ci-constructors-and-object-state-transaction-model",
+      "kind": "code_input",
+      "title": "Create a Transaction model file",
+      "prompt": "You are adding transaction records to the tracker. Complete `models/transaction.py` so the `Transaction` constructor accepts `label` and `amount`, stores them on the object, and lets `main.py` print both attributes. Keep the file structure as provided.",
+      "hint": "Match the constructor parameters to the values used when `Transaction` is created in `main.py`.",
+      "help": {
+        "concept": "A new class follows the same constructor pattern: receive starting values in `__init__`, then store them as attributes on `self`.",
+        "hint_1": "`main.py` already creates one `Transaction` object, so inspect those two arguments mentally: a label and an amount.",
+        "hint_2": "Define `__init__(self, label, amount)` and assign both values to attributes with matching names on `self`."
+      },
+      "starterCode": "from models.transaction import Transaction\n\ntransaction = Transaction(\"Groceries\", -32)\nprint(transaction.label)\nprint(transaction.amount)",
+      "solutionCode": "from models.transaction import Transaction\n\ntransaction = Transaction(\"Groceries\", -32)\nprint(transaction.label)\nprint(transaction.amount)",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Transaction",
+          "message": "Define a Transaction class in models/transaction.py."
+        },
+        {
+          "type": "constructible",
+          "className": "Transaction",
+          "constructorArgs": [
+            "Groceries",
+            -32
+          ],
+          "message": "Your Transaction constructor should accept label and amount."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Transaction",
+          "constructorArgs": [
+            "Groceries",
+            -32
+          ],
+          "attributes": [
+            "label",
+            "amount"
+          ],
+          "message": "Store label and amount as instance attributes."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "ci-constructors-and-object-state-deposit-method",
+      "kind": "code_input",
+      "title": "Change object state with a method",
+      "prompt": "The tracker should update balances after a deposit. In `models/account.py`, add a `deposit(amount)` method that increases `self.balance` by the given amount and returns the new balance. Do not change `main.py`. When Run is clicked, the output panel should show the updated balance.",
+      "hint": "This method should modify the stored balance, then return the result.",
+      "help": {
+        "concept": "Methods can change object state by updating attributes on `self`, so later reads use the new value.",
+        "hint_1": "Start from the current `self.balance`, add the incoming `amount`, and save the result back to `self.balance`.",
+        "hint_2": "After updating the attribute, return the updated balance so `print(account.deposit(30))` shows the new total."
+      },
+      "starterCode": "from models.account import Account\n\naccount = Account(\"Noah\", 50)\nprint(account.deposit(30))",
+      "solutionCode": "from models.account import Account\n\naccount = Account(\"Noah\", 50)\nprint(account.deposit(30))",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Keep the Account class defined."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Noah",
+            50
+          ],
+          "methodName": "deposit",
+          "methodArgs": [
+            30
+          ],
+          "expected": 80,
+          "message": "deposit(30) should return the updated balance."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Account",
+          "constructorArgs": [
+            "Noah",
+            50
+          ],
+          "attributes": [
+            "owner",
+            "balance"
+          ],
+          "message": "The Account object should still store owner and balance as attributes."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "ci-constructors-and-object-state-helper-summary",
+      "kind": "code_input",
+      "title": "Use a helper file with object state",
+      "prompt": "Your team wants formatting separated from the model. Keep the `Account` constructor in `models/account.py`, then complete `helpers/formatting.py` so `format_account(account)` returns `Ava has 120 credits`. Do not change the provided import lines in `main.py`. This step shows how object state can be read from another file.",
+      "hint": "The helper function receives an `account` object, so read its attributes directly.",
+      "help": {
+        "concept": "Once a constructor stores state on an object, other files can use that object through imports and helper functions without duplicating the data.",
+        "hint_1": "The helper function should use `account.owner` and `account.balance`, not create a new object.",
+        "hint_2": "Return one string that combines the two attributes in the exact order and wording shown in the prompt."
+      },
+      "starterCode": "from models.account import Account\nfrom helpers.formatting import format_account\n\naccount = Account(\"Ava\", 120)\nprint(format_account(account))",
+      "solutionCode": "from models.account import Account\nfrom helpers.formatting import format_account\n\naccount = Account(\"Ava\", 120)\nprint(format_account(account))",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Keep the Account class defined in models/account.py."
+        },
+        {
+          "type": "constructible",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            120
+          ],
+          "message": "The Account constructor should still accept owner and balance."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 1,
+          "message": "main.py should print the formatted account summary."
+        }
+      ],
+      "recipeType": "semantic"
+    }
+  ],
+  "projectDraft": {
+    "title": "Account Tracker Foundations",
+    "stepIds": [
+      "try-constructors-and-object-state-sketch0",
+      "try-constructors-and-object-state-sketch1",
+      "try-constructors-and-object-state-sketch2",
+      "ci-constructors-and-object-state-add-method",
+      "ci-constructors-and-object-state-transaction-model",
+      "ci-constructors-and-object-state-deposit-method",
+      "ci-constructors-and-object-state-helper-summary"
+    ]
+  }
+}

@@ -3,88 +3,131 @@
     "linux--linux-terminal-fundamentals--draft": {
       "linux-module-2-files-and-folders": {
         "module-2-notes-organizer-project": {
-          "label": "Project: Notes Organizer",
-          "summary": "Organize a messy folder into notes, homework, code, and backups using core Linux terminal commands.",
+          "label": "Project: Class Notes Handoff",
+          "summary": "Build a notes workspace, write a handoff file, move notes, and remove only temporary scratch.",
           "cards": {
             "sketch0": {
-              "title": "Study Group Notes Organizer synopsis"
+              "title": "Class notes handoff"
             },
             "project": {
-              "title": "Study Group Notes Organizer"
+              "title": "Project steps"
             }
           },
           "moduleProject": {
             "steps": {
               "module-2-notes-organizer-project-terminal-task-1": {
-                "title": "Create the notes intake folders",
-                "prompt": "A study group is dropping off two raw note files for sorting. Create `student-notes-organizer/inbox/math.txt` and `student-notes-organizer/inbox/history.txt` so both notes are ready in the intake folder.",
-                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "title": "Create the notes workspace",
+                "prompt": "Create a clean notes organizer with `inbox`, `handoff`, and `archive` folders. Then list the top folder.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
                 "help": {
-                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
-                  "hint_1": "Use ls or find to check the current workspace before changing it.",
-                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
                 },
-                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "starterCode": "# Use the terminal for this project step.",
                 "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `mkdir` or `mkdir -p` to create the workspace folders."
+                    }
+                  },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Do not use sudo for beginner workspace tasks."
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
                     }
                   }
                 }
               },
               "module-2-notes-organizer-project-terminal-task-2": {
-                "title": "Sort notes and create a backup",
-                "prompt": "The study group wants the notes filed before handoff. Move `math.txt` and `history.txt` out of `student-notes-organizer/inbox` and into `student-notes-organizer/classes`, then make a backup copy of `history.txt` at `student-notes-organizer/backups/history.txt`.",
-                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "title": "Write the first handoff notes",
+                "prompt": "Write `Substitute teacher handoff` to `class-notes-organizer/handoff/README.txt`, then append `Bring math worksheets`. Read the file with `cat`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
                 "help": {
-                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
-                  "hint_1": "Use ls or find to check the current workspace before changing it.",
-                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
                 },
-                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "starterCode": "# Use the terminal for this project step.",
                 "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `echo` with `>` to write the first line."
+                    },
+                    "1": {
+                      "message": "Use `>>` to append the second line."
+                    },
+                    "2": {
+                      "message": "Read the handoff file with `cat`."
+                    }
+                  },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Do not use sudo for beginner workspace tasks."
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
                     }
-                  }
-                },
-                "starterFiles": {
-                  "student_notes_organizer_inbox_math_txt": {
-                    "content": "Math review notes\n"
-                  },
-                  "student_notes_organizer_inbox_history_txt": {
-                    "content": "History reading notes\n"
                   }
                 }
               },
               "module-2-notes-organizer-project-terminal-task-3": {
-                "title": "Finish the organizer handoff",
-                "prompt": "The notes are sorted and backed up. Leave a clear handoff marker by creating `student-notes-organizer/handoff/notes-ready.txt` while keeping the class notes and backup in place.",
-                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "title": "Move notes and remove scratch",
+                "prompt": "Move `math.txt` and `history.txt` from `inbox` into `archive`. Remove only `tmp-scratch.txt`, then list the folders.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
                 "help": {
-                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
-                  "hint_1": "Use ls or find to check the current workspace before changing it.",
-                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
                 },
-                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "starterCode": "# Use the terminal for this project step.",
                 "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `mv` to move the notes into archive."
+                    },
+                    "1": {
+                      "message": "Remove only the temporary scratch file."
+                    }
+                  },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Do not use sudo for beginner workspace tasks."
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
                     }
                   }
                 },
                 "starterFiles": {
-                  "student_notes_organizer_classes_math_txt": {
-                    "content": "Math review notes\n"
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
                   },
-                  "student_notes_organizer_classes_history_txt": {
-                    "content": "History reading notes\n"
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
                   },
-                  "student_notes_organizer_backups_history_txt": {
-                    "content": "History reading notes\n"
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
                   }
                 }
               }
@@ -99,8 +142,8 @@
       "linux-module-2-files-and-folders": {
         "module-2-notes-organizer-project": {
           "project-synopsis": {
-            "title": "Study Group Notes Organizer",
-            "bodyMarkdown": "You are preparing a clean file handoff for a study group. Build an intake area, sort notes into class folders, preserve a backup, and leave a ready marker.\n\nYou will complete this as connected project steps. Each step starts from the previous working workspace, so do not delete earlier deliverables."
+            "title": "Class notes handoff",
+            "bodyMarkdown": "A substitute teacher needs a clean folder by the end of the day. In this project, you will build the folder structure, write a small README with `echo`, move notes into the right place, and remove one temporary scratch file safely."
           }
         }
       }

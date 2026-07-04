@@ -1,0 +1,60 @@
+{
+  "title": "Testing Inheritance and Polymorphism",
+  "summary": "Practice testing subclass overrides, mixed-object services, and multifile OOP behavior in a catalog app.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "testing-inheritance-and-polymorphism-sketch-0",
+      "title": "Test behavior through the base-class contract",
+      "bodyMarkdown": "When several subclasses share the same base-class contract, your tests should focus on **behavior**, not just the class name. If every catalog item has a `label()` method, a service can call `label()` on a mixed list of objects without caring whether each object is a `Book`, `Game`, or `Movie`.\n\nHere is a small example:\n\n```python\nclass CatalogItem:\n    def label(self):\n        return \"item\"\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n```\n\nLine by line:\n- `CatalogItem` defines the shared method name: `label()`.\n- `Book` inherits from `CatalogItem`.\n- `Book.label()` **overrides** the base version.\n- A test should check the returned text from `Book.label()`, because that is the behavior other code depends on.\n\nA useful assertion would be:\n\n```python\nbook = Book(\"Dune\", \"Frank Herbert\")\nassert book.label() == \"Book: Dune by Frank Herbert\"\n```\n\nThat test is stronger than checking only that `book.title` exists, because it verifies the subclass override that a reporting service will actually use."
+    },
+    {
+      "id": "testing-inheritance-and-polymorphism-sketch-1",
+      "title": "Test services with mixed object lists",
+      "bodyMarkdown": "Polymorphism becomes most useful when a service processes a list containing different subclasses. The service should call the same method on each object and trust each subclass to provide its own result.\n\nExample:\n\n```python\nclass Game(CatalogItem):\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"\n\n\ndef build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n```\n\nStep by step:\n- `Game` is another subclass with its own `label()` override.\n- `build_labels(items)` loops through every object in the list.\n- It calls `item.label()` the same way each time.\n- The returned value changes based on the actual subclass.\n\nA worked example:\n\n```python\nitems = [\n    Book(\"Dune\", \"Frank Herbert\"),\n    Game(\"Portal 2\", \"PC\")\n]\n\nprint(build_labels(items))\n```\n\nThis should produce a list like:\n\n```python\n['Book: Dune by Frank Herbert', 'Game: Portal 2 on PC']\n```\n\nA good test for the service checks the whole returned list, because that proves the service works with mixed subclasses."
+    },
+    {
+      "id": "testing-inheritance-and-polymorphism-sketch-2",
+      "title": "Use fixtures to cover edge cases and validation",
+      "bodyMarkdown": "Tests are more reliable when they include realistic fixture data and edge cases. In an OOP catalog app, one subclass might sanitize bad values differently from another, or a service might need to skip unavailable items.\n\nExample fixture-style data in code:\n\n```python\nitems = [\n    Book(\"Clean Code\", \"Robert Martin\"),\n    Game(\"\", \"Switch\"),\n    Book(\"Python Tricks\", \"Dan Bader\")\n]\n```\n\nSuppose your class validates empty titles:\n\n```python\nclass Game(CatalogItem):\n    def __init__(self, title, platform):\n        self.title = title if title else \"Untitled\"\n        self.platform = platform\n```\n\nLine by line:\n- The constructor receives `title` and `platform`.\n- `self.title = title if title else \"Untitled\"` replaces an empty title.\n- That means tests should check the stored attribute or a method that uses it.\n\nA concrete assertion could be:\n\n```python\ngame = Game(\"\", \"Switch\")\nassert game.title == \"Untitled\"\n```\n\nThis kind of test protects against regressions during refactoring. If you later move reporting logic into a service file, the validation behavior should still stay correct."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-testing-inheritance-and-polymorphism-sketch0",
+      "kind": "code_input",
+      "title": "Test a subclass override",
+      "prompt": "A library catalog app already has a base class and a `Book` subclass in separate workspace files. Complete the test file so it checks the subclass override correctly. In `tests/check_book.py`, create a `Book` with title `Dune` and author `Frank Herbert`, then assert that calling `label()` returns exactly `Book: Dune by Frank Herbert`. Keep the existing print line so the output panel shows a success message when the assertion passes.",
+      "starterCode": "from models.book import Book\n\n# Create a Book instance and assert its label() result.\n\nprint(\"book test passed\")\n",
+      "solutionCode": "from models.book import Book\n\nbook = Book(\"Dune\", \"Frank Herbert\")\nassert book.label() == \"Book: Dune by Frank Herbert\"\n\nprint(\"book test passed\")\n",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "book test passed\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "models/base_item.py",
+              "content": "class CatalogItem:\n    def label(self):\n        return \"item\"\n\n    def is_available(self):\n        return True\n\n    def category(self):\n        return \"general\"\n\n    def summary(self):\n        return self.label()\n\n    def matches_search(self, text):\n        return text.lower() in self.label().lower()\n\n    def is_featured(self):\n        return False\n\n    def report_line(self):\n        return self.label()\n\n    def stock_message(self):\n        return \"Available\"\n\n    def display_name(self):\n        return self.label()\n\n    def export_row(self):\n        return self.label()\n\n    def short_code(self",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def label(self):\n        return \"item\"\n\n    def is_available(self):\n        return True\n\n    def category(self):\n        return \"general\"\n\n    def summary(self):\n        return self.label()\n\n    def matches_search(self, text):\n        return text.lower() in self.label().lower()\n\n    def is_featured(self):\n        return False\n\n    def report_line(self):\n        return self.label()\n\n    def stock_message(self):\n        return \"Available\"\n\n    def display_name(self):\n        return self.label()\n\n    def export_row(self):\n        return self.label()\n\n    def short_code(self",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "The test should call the overridden method, not just inspect raw attributes.",
+      "help": {
+        "concept": "When testing inheritance, verify the behavior promised by the base-class contract. Here, the important behavior is the `label()` method that subclasses override.",
+        "hint_1": "Import `Book`, create one instance with the given values, and store it in a variable before asserting.",
+        "hint_2": "Your assertion should compare `book.label()` to the full expected string, including punctuation and spaces."
+      }
+    }
+  ]
+}

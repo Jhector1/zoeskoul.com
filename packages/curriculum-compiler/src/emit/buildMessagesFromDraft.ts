@@ -4,6 +4,8 @@ import type {
 } from "@zoeskoul/curriculum-contracts";
 import {
     getCurriculumProfile,
+    semanticCheckMessageField,
+    solutionFileContentMessageField,
     starterFileContentMessageField,
     type SubjectShapePack,
 } from "@zoeskoul/curriculum-profiles";
@@ -13,6 +15,7 @@ import {
     effectiveSketchBlocks,
     projectStepIdFromExerciseId,
     resolveTopicProjectKind,
+    tryItExerciseId,
     tryItMessageId,
 } from "./exerciseMessageBase.js";
 import { applyProgressiveProjectFlow } from "./progressiveProjectFlow.js";
@@ -65,6 +68,69 @@ function uniqueNonEmpty(values: string[]) {
     return Array.from(new Set(values.map((x) => x.trim()).filter(Boolean)));
 }
 
+function isGeneratedPolicyExerciseId(id: string) {
+    return /^policy_[a-z_]+_\d+$/i.test(id.trim());
+}
+
+function extractMarkedPythonFileSections(source: unknown): Map<string, string> {
+    const result = new Map<string, string>();
+    const lines = String(source ?? "").replace(/\r\n?/g, "\n").split("\n");
+    let currentPath: string | null = null;
+    let currentLines: string[] = [];
+
+    function flush() {
+        if (!currentPath) return;
+        result.set(currentPath, currentLines.join("\n").trimEnd());
+    }
+
+    for (const line of lines) {
+        const match = /^\s*#\s*([a-zA-Z0-9_.\/-]+\.py)\s*$/.exec(line);
+        if (match?.[1]) {
+            flush();
+            currentPath = match[1];
+            currentLines = [];
+            continue;
+        }
+
+        if (currentPath) {
+            currentLines.push(line);
+        }
+    }
+
+    flush();
+    return result;
+}
+
+function solutionFilesFromDraftExercise(exercise: TopicAuthoringDraft["quizDraft"][number]) {
+    const rawSolutionCode = typeof (exercise as { solutionCode?: unknown }).solutionCode === "string"
+        ? String((exercise as { solutionCode?: unknown }).solutionCode)
+        : "";
+    const marked = extractMarkedPythonFileSections(rawSolutionCode);
+
+    if (marked.size > 0) {
+        return Array.from(marked.entries()).map(([path, content]) => ({
+            path,
+            content,
+        }));
+    }
+
+    const authored = (exercise as { solutionFiles?: unknown }).solutionFiles;
+    if (Array.isArray(authored)) {
+        return authored.flatMap((file) => {
+            if (!file || typeof file !== "object" || Array.isArray(file)) return [];
+            const record = file as Record<string, unknown>;
+            const path = typeof record.path === "string"
+                ? record.path
+                : typeof record.name === "string"
+                  ? record.name
+                  : "";
+            const content = typeof record.content === "string" ? record.content : "";
+            return path && content ? [{ path, content }] : [];
+        });
+    }
+
+    return [];
+}
 
 function writeTerminalExpectationMessageEntries(args: {
     out: Record<string, unknown>;
@@ -112,14 +178,20 @@ function buildProjectStepIds(
     sourceExercises: TopicAuthoringDraft["quizDraft"],
     maxSteps = 5,
 ) {
-    const sourceIds = sourceExercises.map((exercise) => exercise.id);
+    const sourceIds = sourceExercises
+        .map((exercise) => exercise.id)
+        .filter((id) => !isGeneratedPolicyExerciseId(id));
     const sourceIdSet = new Set(sourceIds);
 
     const explicit = (draft.projectDraft?.stepIds ?? []).filter((id) =>
-        sourceIdSet.has(id),
+        sourceIdSet.has(id) && !isGeneratedPolicyExerciseId(id),
     );
 
-    return uniqueNonEmpty([...explicit, ...sourceIds]).slice(0, maxSteps);
+    if (explicit.length > 0) {
+        return uniqueNonEmpty(explicit).slice(0, maxSteps);
+    }
+
+    return uniqueNonEmpty(sourceIds).slice(0, maxSteps);
 }
 
 function hasQuizExercises(draft: TopicAuthoringDraft) {
@@ -224,6 +296,7 @@ export function buildMessagesFromDraft(args: {
     }
 
     const tryItExerciseIdToMessageId = new Map<string, string>();
+    const tryItSourceIdToCanonicalId = new Map<string, string>();
 
     if (seed.practice?.tryIt === true && !isProjectOnlyTopic) {
         const sketchIndexes = resolveTryItSketchIndexes(
@@ -251,7 +324,10 @@ export function buildMessagesFromDraft(args: {
             if (!exercise) continue;
 
             const tryItId = tryItMessageId(seed.topicId, sketchIndex);
+            const canonicalTryItExerciseId = tryItExerciseId(seed.topicId, sketchIndex);
+            tryItSourceIdToCanonicalId.set(exercise.id, canonicalTryItExerciseId);
             tryItExerciseIdToMessageId.set(exercise.id, tryItId);
+            tryItExerciseIdToMessageId.set(canonicalTryItExerciseId, tryItId);
 
             setNested(
                 out,
@@ -295,7 +371,12 @@ export function buildMessagesFromDraft(args: {
         setNested(out, [...sketchPath, block.id, "bodyMarkdown"], block.bodyMarkdown);
     }
 
-    for (const exercise of progressiveExercises) {
+    const canonicalExercises = progressiveExercises.map((exercise) => {
+        const canonicalId = tryItSourceIdToCanonicalId.get(exercise.id);
+        return canonicalId ? { ...exercise, id: canonicalId } : exercise;
+    });
+
+    for (const exercise of canonicalExercises) {
         const optionIds =
             exercise.kind === "single_choice" || exercise.kind === "multi_choice"
                 ? exercise.options.map((_, index) => optionIdFromIndex(index))
@@ -357,6 +438,18 @@ export function buildMessagesFromDraft(args: {
 
         if (exercise.kind === "code_input") {
             setNested(out, [...quizBase, "starterCode"], exercise.starterCode);
+
+            if (
+                typeof (exercise as { solutionCode?: unknown }).solutionCode === "string" &&
+                String((exercise as { solutionCode?: unknown }).solutionCode).trim().length > 0
+            ) {
+                setNested(
+                    out,
+                    [...quizBase, "solutionCode"],
+                    String((exercise as { solutionCode?: unknown }).solutionCode),
+                );
+            }
+
             if (
                 typeof exercise.instructions === "string" &&
                 exercise.instructions.trim().length > 0
@@ -377,6 +470,25 @@ export function buildMessagesFromDraft(args: {
                         starterFileContentMessageField(file.path, index),
                     );
                     setNested(out, [...quizBase, ...fieldPath], file.content);
+                });
+            }
+
+            for (const [index, file] of solutionFilesFromDraftExercise(exercise).entries()) {
+                const fieldPath = splitMessageField(
+                    solutionFileContentMessageField(file.path, index),
+                );
+                setNested(out, [...quizBase, ...fieldPath], file.content);
+            }
+
+            const semanticChecks = (exercise as { semanticChecks?: unknown }).semanticChecks;
+            if (Array.isArray(semanticChecks)) {
+                semanticChecks.forEach((check, index) => {
+                    if (!check || typeof check !== "object" || Array.isArray(check)) return;
+                    const message = (check as Record<string, unknown>).message;
+                    if (typeof message !== "string" || message.trim().length === 0) return;
+
+                    const fieldPath = splitMessageField(semanticCheckMessageField(index));
+                    setNested(out, [...quizBase, ...fieldPath], message);
                 });
             }
 

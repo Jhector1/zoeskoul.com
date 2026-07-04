@@ -272,6 +272,55 @@ function sanitizeFixtureList(
     return sanitized.length > 0 ? sanitized : undefined;
 }
 
+function firstNonEmptyString(...values: unknown[]): string {
+    for (const value of values) {
+        const normalized = normalizeText(value);
+        if (normalized) return normalized;
+    }
+
+    return "";
+}
+
+function findEntryFixtureContent(
+    files: Record<string, unknown>[] | undefined,
+    entryFilePath: string,
+): string {
+    if (!files?.length) return "";
+
+    const preferredPaths = [entryFilePath, "main.py", "src/main.py"]
+        .map((path) => normalizeText(path))
+        .filter(Boolean);
+
+    for (const preferredPath of preferredPaths) {
+        const match = files.find((file) => normalizeText(file.path) === preferredPath);
+        const content = normalizeText(match?.content);
+        if (content) return content;
+    }
+
+    const firstPythonFile = files.find((file) => normalizeText(file.path).endsWith(".py"));
+    const pythonContent = normalizeText(firstPythonFile?.content);
+    if (pythonContent) return pythonContent;
+
+    const firstContent = files.map((file) => normalizeText(file.content)).find(Boolean);
+    return firstContent ?? "";
+}
+
+function ensureCodeInputRequiredCodeFields(
+    exercise: Record<string, unknown>,
+    files: Record<string, unknown>[] | undefined,
+): void {
+    const entryFilePath = firstNonEmptyString(exercise.entryFilePath, "main.py");
+    const entryContent = findEntryFixtureContent(files, entryFilePath);
+
+    if (!normalizeText(exercise.starterCode)) {
+        exercise.starterCode = entryContent || "# Write your code below.\n";
+    }
+
+    if (!normalizeText(exercise.solutionCode)) {
+        exercise.solutionCode = entryContent || String(exercise.starterCode ?? "# Write your code below.\n");
+    }
+}
+
 function sanitizeStringArray(value: unknown): string[] | undefined {
     if (!Array.isArray(value)) return undefined;
 
@@ -427,11 +476,24 @@ function sanitizeSemanticCheck(check: unknown): Record<string, unknown> | null {
             ...(message ? { message } : {}),
         };
     }
-    if (type === "method_returns") {
+    if (
+        type === "method_returns" ||
+        type === "method_sequence_returns" ||
+        type === "attribute_sequence_equals"
+    ) {
         const className = normalizeText(check.className);
         const methodName = normalizeText(check.methodName);
+        const attributeName = normalizeText(check.attributeName);
 
-        if (!className || !methodName || !("expected" in check)) {
+        if (!className || !("expected" in check)) {
+            return null;
+        }
+
+        if (type === "attribute_sequence_equals" && !attributeName) {
+            return null;
+        }
+
+        if (type !== "attribute_sequence_equals" && !methodName) {
             return null;
         }
 
@@ -458,14 +520,39 @@ function sanitizeSemanticCheck(check: unknown): Record<string, unknown> | null {
             check.expectedKind,
         );
 
+        const rawCalls = Array.isArray(check.calls) ? check.calls : [];
+        const calls = rawCalls
+            .filter((call): call is Record<string, unknown> => !!call && typeof call === "object")
+            .map((call) => {
+                const callMethodName = normalizeText(call.methodName);
+                const callMethodArgs = Array.isArray(call.methodArgs)
+                    ? call.methodArgs
+                    : [];
+                const callMethodArgKinds = sanitizeSemanticValueKindsForValues(
+                    callMethodArgs,
+                    call.methodArgKinds,
+                );
+
+                if (!callMethodName) return null;
+
+                return {
+                    methodName: callMethodName,
+                    methodArgs: callMethodArgs,
+                    ...(callMethodArgKinds ? { methodArgKinds: callMethodArgKinds } : {}),
+                };
+            })
+            .filter((call): call is { methodName: string; methodArgs: unknown[]; methodArgKinds?: string[] } => !!call);
+
         return {
             type,
             className,
             constructorArgs,
             ...(constructorArgKinds ? { constructorArgKinds } : {}),
-            methodName,
-            methodArgs,
-            ...(methodArgKinds ? { methodArgKinds } : {}),
+            ...(type === "method_sequence_returns" || type === "attribute_sequence_equals" ? { calls } : {}),
+            ...(type === "attribute_sequence_equals" ? { attributeName } : {}),
+            ...(type !== "attribute_sequence_equals" ? { methodName } : {}),
+            ...(type !== "attribute_sequence_equals" ? { methodArgs } : {}),
+            ...(type !== "attribute_sequence_equals" && methodArgKinds ? { methodArgKinds } : {}),
             expected: check.expected,
             ...(expectedKind ? { expectedKind } : {}),
             ...(message ? { message } : {}),
@@ -615,6 +702,8 @@ function sanitizeCodeInputExercise(
     } else {
         delete next.files;
     }
+
+    ensureCodeInputRequiredCodeFields(next, fixtureFiles);
 
     const declaredRecipeType =
         typeof next.recipeType === "string"

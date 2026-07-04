@@ -1,0 +1,760 @@
+{
+  "topicId": "class-files-and-instances",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-object-foundations",
+  "prefix": "py8",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.sketch0.title",
+      "sketchId": "class-files-and-instances-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-class-files-and-instances-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.prompt",
+        "exerciseKey": "try-class-files-and-instances-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.sketch1.title",
+      "sketchId": "class-files-and-instances-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-class-files-and-instances-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.prompt",
+        "exerciseKey": "try-class-files-and-instances-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.sketch2.title",
+      "sketchId": "class-files-and-instances-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-class-files-and-instances-sketch2",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.prompt",
+        "exerciseKey": "try-class-files-and-instances-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "class-files-and-instances-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.class-files-and-instances-sketch-0.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.class-files-and-instances-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "class-files-and-instances-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.class-files-and-instances-sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.class-files-and-instances-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "class-files-and-instances-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.class-files-and-instances-sketch-2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.class-files-and-instances-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-class-files-and-instances-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.product import Product\n\nitem = Product(\"Notebook\", 4.5)\nprint(item.name)\nprint(item.price)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.product import Product\n\nitem = Product(\"Notebook\", 4.5)\nprint(item.name)\nprint(item.price)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.product import Product\n\nitem = Product(\"Notebook\", 4.5)\nprint(item.name)\nprint(item.price)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Product",
+            "message": "Define a Product class in models/product.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Product",
+            "constructorArgs": [
+              "Notebook",
+              4.5
+            ],
+            "message": "Your Product class should be constructible with a name and price."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Product",
+            "constructorArgs": [
+              "Notebook",
+              4.5
+            ],
+            "attributes": [
+              "name",
+              "price"
+            ],
+            "message": "Store both name and price as instance attributes."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "main.py should print two lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-class-files-and-instances-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.ticket import Ticket\n\nfirst = Ticket(\"Mia\", \"A1\")\nsecond = Ticket(\"Leo\", \"B4\")\n\nprint(first.owner)\nprint(first.seat)\nprint(second.owner)\nprint(second.seat)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.ticket import Ticket\n\nfirst = Ticket(\"Mia\", \"A1\")\nsecond = Ticket(\"Leo\", \"B4\")\n\nprint(first.owner)\nprint(first.seat)\nprint(second.owner)\nprint(second.seat)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.ticket import Ticket\n\nfirst = Ticket(\"Mia\", \"A1\")\nsecond = Ticket(\"Leo\", \"B4\")\n\nprint(first.owner)\nprint(first.seat)\nprint(second.owner)\nprint(second.seat)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Ticket",
+            "message": "Define a Ticket class in models/ticket.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Ticket",
+            "constructorArgs": [
+              "Mia",
+              "A1"
+            ],
+            "message": "Your Ticket class should accept owner and seat values."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Ticket",
+            "constructorArgs": [
+              "Leo",
+              "B4"
+            ],
+            "attributes": [
+              "owner",
+              "seat"
+            ],
+            "message": "Each Ticket instance should store owner and seat attributes."
+          },
+          {
+            "type": "created_instances",
+            "className": "Ticket",
+            "min": 1,
+            "message": "Create two Ticket objects in main.py."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 4,
+            "message": "main.py should print four lines for the two tickets."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-class-files-and-instances-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.counter import Counter\n\ntracker = Counter(3)\ntracker.add_one()\nprint(tracker.label())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.counter import Counter\n\ntracker = Counter(3)\ntracker.add_one()\nprint(tracker.label())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.counter import Counter\n\ntracker = Counter(3)\ntracker.add_one()\nprint(tracker.label())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Counter",
+            "message": "Define a Counter class in models/counter.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Counter",
+            "constructorArgs": [
+              3
+            ],
+            "message": "Your Counter class should accept a starting count."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Counter",
+            "constructorArgs": [
+              3
+            ],
+            "attributes": [
+              "count"
+            ],
+            "message": "Store the starting count on the instance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Counter",
+            "constructorArgs": [
+              4
+            ],
+            "constructorArgKinds": [],
+            "methodName": "label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Count: 4",
+            "expectedKind": "value",
+            "message": "label() should return the formatted count string."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mc-class-vs-instance",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.mc-class-vs-instance",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "fb-import-statement",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.fb-import-statement",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "Book"
+      }
+    },
+    {
+      "id": "project-step-account-class",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nprint(club_fund.owner)\nprint(club_fund.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-class.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nprint(club_fund.owner)\nprint(club_fund.balance)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nprint(club_fund.owner)\nprint(club_fund.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define an Account class in models/account.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Club Fund",
+              120
+            ],
+            "message": "Your Account class should accept owner and balance values."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Club Fund",
+              120
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "Store owner and balance as instance attributes."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "main.py should print two lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "dr-object-setup-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.dr-object-setup-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "mc-methods-and-self",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.mc-methods-and-self",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "fb-self-attribute",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.fb-self-attribute",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "self"
+      }
+    },
+    {
+      "id": "sc-why-separate-class-file",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.sc-why-separate-class-file",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "project-step-account-methods",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nclub_fund.deposit(30)\nprint(club_fund.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-account-methods.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nclub_fund.deposit(30)\nprint(club_fund.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nclub_fund.deposit(30)\nprint(club_fund.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Keep the Account class in models/account.py."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Club Fund",
+              150
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Club Fund: $150",
+            "expectedKind": "value",
+            "message": "summary() should return the owner and current balance."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Club Fund",
+              120
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "The Account object should still store owner and balance."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-step-two-accounts",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nsnack_budget = Account(\"Snack Budget\", 40)\n\nclub_fund.deposit(30)\nsnack_budget.deposit(5)\n\nprint(club_fund.summary())\nprint(snack_budget.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.class-files-and-instances.practice.project-step-two-accounts.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nsnack_budget = Account(\"Snack Budget\", 40)\n\nclub_fund.deposit(30)\nsnack_budget.deposit(5)\n\nprint(club_fund.summary())\nprint(snack_budget.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nsnack_budget = Account(\"Snack Budget\", 40)\n\nclub_fund.deposit(30)\nsnack_budget.deposit(5)\n\nprint(club_fund.summary())\nprint(snack_budget.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Create two Account objects in main.py."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "main.py should print two summary lines."
+          }
+        ]
+      }
+    }
+  ]
+}

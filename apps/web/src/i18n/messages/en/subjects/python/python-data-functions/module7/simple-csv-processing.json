@@ -174,7 +174,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass"
+              "starterCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # print the cleaned name\n        pass",
+              "solutionCode": "import csv\n\nwith open(\"students.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(row[\"name\"].strip())",
+              "sourceChecks": {
+                "0": {
+                  "message": "Strip each CSV name before printing it."
+                }
+              }
             },
             "ci-sum-valid-scores": {
               "title": "Sum valid scores from CSV",
@@ -185,7 +191,16 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)"
+              "starterCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # try to convert the cleaned score and add it to total\n        pass\n\nprint(total)",
+              "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            total += int(row[\"score\"].strip())\n        except ValueError:\n            pass\n\nprint(total)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use try/except for invalid score values."
+                },
+                "1": {
+                  "message": "Convert score text with int()."
+                }
+              }
             },
             "ci-write-summary-file": {
               "title": "Write a CSV summary file",
@@ -196,7 +211,16 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents"
+              "starterCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        # update valid_rows and total_score for rows with valid integer scores\n        pass\n\n# write summary.txt, then print its contents",
+              "solutionCode": "import csv\n\nvalid_rows = 0\ntotal_score = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        try:\n            score = int(row[\"score\"].strip())\n            valid_rows += 1\n            total_score += score\n        except ValueError:\n            pass\n\nwith open(\"summary.txt\", \"w\") as file:\n    file.write(f\"valid_rows: {valid_rows}\\n\")\n    file.write(f\"total_score: {total_score}\\n\")\n\nwith open(\"summary.txt\") as file:\n    print(file.read(), end=\"\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use try/except for invalid score values."
+                },
+                "1": {
+                  "message": "Write the summary to summary.txt."
+                }
+              }
             },
             "try-simple-csv-processing-checkpoint": {
               "title": "Read the first CSV row",
@@ -207,7 +231,16 @@
                 "hint_1": "Use `import csv` and `with open(\"scores.csv\") as file:`.",
                 "hint_2": "Create `reader = csv.DictReader(file)`, get the first row, and print `row[\"name\"]` and `row[\"score\"]`."
               },
-              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n"
+              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Print the first row name, then the first row score.\n",
+              "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"])\n    print(row[\"score\"])\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use csv.DictReader to read scores.csv."
+                },
+                "1": {
+                  "message": "Open scores.csv for this step."
+                }
+              }
             },
             "try-simple-csv-processing-sketch0": {
               "title": "Clean one CSV row from a file",
@@ -218,7 +251,16 @@
                 "hint_1": "Use `row[\"name\"].strip()` and `row[\"score\"].strip()`.",
                 "hint_2": "Print the cleaned name first, then the cleaned score."
               },
-              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n"
+              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Read the first row, strip the name and score, and print them on separate lines.\n",
+              "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    row = next(reader)\n    print(row[\"name\"].strip())\n    print(row[\"score\"].strip())\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use csv.DictReader to read the row."
+                },
+                "1": {
+                  "message": "Strip spaces from the CSV values."
+                }
+              }
             },
             "try-simple-csv-processing-sketch1": {
               "title": "Loop through CSV rows",
@@ -229,7 +271,16 @@
                 "hint_1": "Use `for row in reader:` after you create `csv.DictReader(file)`.",
                 "hint_2": "Print `f\"{row[\"name\"]}: {row[\"score\"]}\"` for each row."
               },
-              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n"
+              "starterCode": "import csv\n\n# Open scores.csv with csv.DictReader.\n# Loop through the rows and print each one as name: score.\n",
+              "solutionCode": "import csv\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        print(f'{row[\"name\"]}: {row[\"score\"]}')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use csv.DictReader to read the rows."
+                },
+                "1": {
+                  "message": "Loop through the CSV rows instead of hard-coding the output."
+                }
+              }
             },
             "try-simple-csv-processing-sketch2": {
               "title": "Add CSV scores",
@@ -240,7 +291,22 @@
                 "hint_1": "Start with `total = 0`, then loop through `csv.DictReader(file)`.",
                 "hint_2": "Use `int(row[\"score\"])` inside the loop before adding to `total`."
               },
-              "starterCode": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n"
+              "starterCode": "import csv\n\ntotal = 0\n\n# Open scores.csv with csv.DictReader.\n# Convert each score to int, add it into total, and print total.\n",
+              "solutionCode": "import csv\n\ntotal = 0\n\nwith open(\"scores.csv\") as file:\n    reader = csv.DictReader(file)\n    for row in reader:\n        total += int(row[\"score\"])\n\nprint(total)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use csv.DictReader to read the rows."
+                },
+                "1": {
+                  "message": "Loop through the CSV rows instead of hard-coding the total."
+                },
+                "2": {
+                  "message": "Convert the score text with int()."
+                },
+                "3": {
+                  "message": "Add each numeric score into total."
+                }
+              }
             }
           },
           "tryIt": {

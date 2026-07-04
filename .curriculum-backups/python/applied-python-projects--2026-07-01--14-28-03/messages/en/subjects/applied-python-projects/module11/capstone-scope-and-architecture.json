@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-11-oop-capstone-project": {
+        "capstone-scope-and-architecture": {
+          "label": "Capstone Scope and Architecture",
+          "summary": "Plan a real multi-file OOP app before writing the final classes and services.",
+          "cards": {
+            "sketch0": {
+              "title": "Capstone Scope and Architecture: the idea"
+            },
+            "sketch1": {
+              "title": "Capstone Scope and Architecture: the file shape"
+            },
+            "sketch2": {
+              "title": "Capstone Scope and Architecture: what the grader checks"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "ci_capstone_architecture_practice": {
+              "title": "Add service and model folders for the capstone"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_capstone_scope_and_architecture_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Create `README.md` and a tiny architecture check script output through `main.py`."
+            },
+            "try_capstone_scope_and_architecture_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Create `models/base_task.py` with a base class that stores common task state."
+            }
+          },
+          "quiz": {
+            "ci-capstone-architecture-practice": {
+              "title": "Add service and model folders for the capstone",
+              "prompt": "Create a tiny `services/reports.py` function that proves the project can import service helpers.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from services.reports import heading\n\nprint(heading(\"Sprint\"))\n"
+            },
+            "sc-capstone-scope-and-architecture-design": {
+              "title": "Check the design choice",
+              "prompt": "Which choice best matches the lesson goal for capstone scope and architecture?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Plan a real multi-file OOP app before writing the final classes and services.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Put every class in main.py so imports are never needed.",
+                "b": "Give each class or service a focused responsibility and import it where needed.",
+                "c": "Avoid methods so every object exposes all of its data directly.",
+                "d": "Copy the same logic into each subclass to avoid shared code."
+              }
+            },
+            "try-capstone-scope-and-architecture-sketch0": {
+              "title": "Create the capstone file map",
+              "prompt": "Create `README.md` and a tiny architecture check script output through `main.py`.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "print(\"Task tracker architecture\")\nprint(\"models + services + tests\")\n"
+            },
+            "try-capstone-scope-and-architecture-sketch1": {
+              "title": "Create the base task class stub",
+              "prompt": "Create `models/base_task.py` with a base class that stores common task state.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.base_task import BaseTask\n\ntask = BaseTask(\"Setup\", \"open\")\nprint(task.title)\nprint(task.status)\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-11-oop-capstone-project": {
+        "capstone-scope-and-architecture": {
+          "concept": {
+            "title": "Capstone Scope and Architecture: the idea",
+            "bodyMarkdown": "**Capstone Scope and Architecture** is not just syntax. In this course it is practiced inside small projects where one file owns one clear part of the program. Plan a real multi-file OOP app before writing the final classes and services."
+          },
+          "multifile-shape": {
+            "title": "Capstone Scope and Architecture: the file shape",
+            "bodyMarkdown": "The file layout matters. Models hold object state and behavior, services coordinate groups of objects, tests verify behavior, and `main.py` stays thin enough to read."
+          },
+          "graded-habit": {
+            "title": "Capstone Scope and Architecture: what the grader checks",
+            "bodyMarkdown": "The grader checks behavior from the running project. A strong answer keeps imports working, keeps all files present, and proves the object behavior through output or assertions."
+          }
+        }
+      }
+    }
+  }
+}

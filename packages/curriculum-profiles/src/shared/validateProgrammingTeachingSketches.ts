@@ -42,6 +42,35 @@ function hasMultilineCodeExample(text: string): boolean {
     });
 }
 
+
+function normalizeKebabText(value: unknown): string {
+    return String(value ?? "")
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
+function isTryItPlaceholderSketch(block: TopicAuthoringDraft["sketchBlocks"][number]) {
+    const id = normalizeKebabText((block as { id?: unknown }).id);
+    const title = normalizeKebabText((block as { title?: unknown }).title);
+    const body = String((block as { bodyMarkdown?: unknown }).bodyMarkdown ?? "").trim();
+
+    // A model may add a prose sketch named "Try it yourself" even though
+    // embedded Try It activities are represented by code_input exercises. Do
+    // not count that placeholder as a teaching sketch for all_sketches.
+    return (
+        id === "try-it-yourself" ||
+        title === "try-it-yourself" ||
+        (title === "try-it" && body.length < 240)
+    );
+}
+
+function teachingSketchBlocks(draft: TopicAuthoringDraft) {
+    const blocks = Array.isArray(draft.sketchBlocks) ? draft.sketchBlocks : [];
+    return blocks.filter((block) => !isTryItPlaceholderSketch(block));
+}
+
 function codeInputCount(draft: TopicAuthoringDraft): number {
     return Array.isArray(draft.quizDraft)
         ? draft.quizDraft.filter((exercise) => exercise?.kind === "code_input").length
@@ -54,7 +83,7 @@ export function validateProgrammingTeachingSketches(args: {
     draft: TopicAuthoringDraft;
 }): SemanticValidationIssue[] {
     const issues: SemanticValidationIssue[] = [];
-    const blocks = Array.isArray(args.draft.sketchBlocks) ? args.draft.sketchBlocks : [];
+    const blocks = teachingSketchBlocks(args.draft);
     const bodies = blocks.map((block: TopicAuthoringDraft["sketchBlocks"][number]) =>
         String(block.bodyMarkdown ?? ""),
     );

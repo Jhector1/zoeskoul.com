@@ -11,6 +11,7 @@
     "imageAlt": null,
     "titleKey": "subjects.python--python-data-functions--draft.title",
     "descriptionKey": "subjects.python--python-data-functions--draft.description",
+    "serviceDefaults": null,
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
@@ -43,6 +44,7 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
         "estimatedMinutes": 177,
         "prereqKeys": [
@@ -74,6 +76,7 @@
               "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-list-basics.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "creating-and-indexing-lists",
             "list-methods-and-mutation",
@@ -95,6 +98,7 @@
               "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-dictionaries.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "dictionary-basics",
             "updating-and-looping-dictionaries",
@@ -117,6 +121,7 @@
               "sections.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.python--python-data-functions--draft-python-5-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-5-gradebook-project"
           ]
@@ -141,6 +146,7 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
         "estimatedMinutes": 196,
         "prereqKeys": [
@@ -173,6 +179,7 @@
               "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-function-basics.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "defining-and-calling-functions",
             "parameters-and-return-values",
@@ -194,6 +201,7 @@
               "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-function-design.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "scope-and-local-variables",
             "decomposition-and-refactoring",
@@ -217,6 +225,7 @@
               "sections.python--python-data-functions--draft.python-6-functions-and-modularity.python--python-data-functions--draft-python-6-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-6-name-badge-package"
           ]
@@ -240,6 +249,13 @@
         "supportsFileSystem": true,
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
+      },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
       },
       "meta": {
         "estimatedMinutes": 171,
@@ -274,6 +290,13 @@
               "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-file-io.bullets.3"
             ]
           },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
           "topics": [
             "reading-text-files",
             "writing-text-files",
@@ -294,6 +317,13 @@
               "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-exceptions-and-cleaning.bullets.2",
               "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-exceptions-and-cleaning.bullets.3"
             ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
           },
           "topics": [
             "try-except-basics",
@@ -316,6 +346,13 @@
               "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.2",
               "sections.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.python--python-data-functions--draft-python-7-module-project.bullets.3"
             ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
           },
           "topics": [
             "module-7-clean-student-records"
@@ -342,6 +379,7 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
         "estimatedMinutes": 36,
         "prereqKeys": [
@@ -374,6 +412,7 @@
               "sections.python--python-data-functions--draft.python-8-real-world-project.python--python-data-functions--draft-python-8-course-capstone.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "class-roster-cleaner"
           ]

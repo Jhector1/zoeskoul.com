@@ -1,0 +1,424 @@
+{
+  "ok": true,
+  "profileId": "python",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "courseSlug": "applied-python-projects",
+  "summary": {
+    "modules": 4,
+    "topicsTotal": 20,
+    "exercises": 188,
+    "exerciseKinds": {
+      "code_input": 118,
+      "multi_choice": 19,
+      "fill_blank_choice": 23,
+      "drag_reorder": 12,
+      "single_choice": 16
+    },
+    "codeInputs": 118,
+    "projects": 118,
+    "capstones": 118,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 41,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 41,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "message": "Topic \"class-files-and-instances\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "try-class-files-and-instances-sketch0",
+      "message": "Exercise \"try-class-files-and-instances-sketch0\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "try-class-files-and-instances-sketch1",
+      "message": "Exercise \"try-class-files-and-instances-sketch1\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "try-class-files-and-instances-sketch2",
+      "message": "Exercise \"try-class-files-and-instances-sketch2\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "project-step-account-class",
+      "message": "Exercise \"project-step-account-class\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "project-step-account-methods",
+      "message": "Exercise \"project-step-account-methods\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "project-step-two-accounts",
+      "message": "Exercise \"project-step-two-accounts\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/constructors-and-object-state",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "constructors-and-object-state",
+      "message": "Topic \"constructors-and-object-state\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-encapsulation-and-services/methods-and-responsibility",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "methods-and-responsibility",
+      "message": "Topic \"methods-and-responsibility\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-encapsulation-and-services/encapsulation-and-validation",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "encapsulation-and-validation",
+      "message": "Topic \"encapsulation-and-validation\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-module-project/module-8-account-tracker-project",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "module-8-account-tracker-project",
+      "message": "Topic \"module-8-account-tracker-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-9-inheritance-polymorphism-and-abstraction/python-9-inheritance-and-overrides/inheritance-for-shared-behavior",
+      "profileId": "python",
+      "moduleId": "python-9-inheritance-polymorphism-and-abstraction",
+      "topicId": "inheritance-for-shared-behavior",
+      "message": "Topic \"inheritance-for-shared-behavior\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-9-inheritance-polymorphism-and-abstraction/python-9-inheritance-and-overrides/overriding-and-specialization",
+      "profileId": "python",
+      "moduleId": "python-9-inheritance-polymorphism-and-abstraction",
+      "topicId": "overriding-and-specialization",
+      "message": "Topic \"overriding-and-specialization\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-9-inheritance-polymorphism-and-abstraction/python-9-polymorphism-and-abstraction/polymorphic-collections",
+      "profileId": "python",
+      "moduleId": "python-9-inheritance-polymorphism-and-abstraction",
+      "topicId": "polymorphic-collections",
+      "message": "Topic \"polymorphic-collections\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-9-inheritance-polymorphism-and-abstraction/python-9-polymorphism-and-abstraction/abstraction-with-base-interfaces",
+      "profileId": "python",
+      "moduleId": "python-9-inheritance-polymorphism-and-abstraction",
+      "topicId": "abstraction-with-base-interfaces",
+      "message": "Topic \"abstraction-with-base-interfaces\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-9-inheritance-polymorphism-and-abstraction/python-9-module-project/module-9-catalog-polymorphism-project",
+      "profileId": "python",
+      "moduleId": "python-9-inheritance-polymorphism-and-abstraction",
+      "topicId": "module-9-catalog-polymorphism-project",
+      "message": "Topic \"module-9-catalog-polymorphism-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-9-inheritance-polymorphism-and-abstraction/python-9-module-project/module-9-catalog-polymorphism-project",
+      "profileId": "python",
+      "moduleId": "python-9-inheritance-polymorphism-and-abstraction",
+      "topicId": "module-9-catalog-polymorphism-project",
+      "exerciseId": "try-module-9-catalog-polymorphism-project-sketch0",
+      "message": "Exercise \"try-module-9-catalog-polymorphism-project-sketch0\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-10-testing-debugging-oop-projects/python-10-testing-oop-behavior/testing-object-state",
+      "profileId": "python",
+      "moduleId": "python-10-testing-debugging-oop-projects",
+      "topicId": "testing-object-state",
+      "message": "Topic \"testing-object-state\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-10-testing-debugging-oop-projects/python-10-testing-oop-behavior/testing-inheritance-and-polymorphism",
+      "profileId": "python",
+      "moduleId": "python-10-testing-debugging-oop-projects",
+      "topicId": "testing-inheritance-and-polymorphism",
+      "message": "Topic \"testing-inheritance-and-polymorphism\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-10-testing-debugging-oop-projects/python-10-testing-oop-behavior/testing-inheritance-and-polymorphism",
+      "profileId": "python",
+      "moduleId": "python-10-testing-debugging-oop-projects",
+      "topicId": "testing-inheritance-and-polymorphism",
+      "exerciseId": "policy_code_input_1",
+      "message": "Exercise \"policy_code_input_1\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-10-testing-debugging-oop-projects/python-10-testing-oop-behavior/testing-inheritance-and-polymorphism",
+      "profileId": "python",
+      "moduleId": "python-10-testing-debugging-oop-projects",
+      "topicId": "testing-inheritance-and-polymorphism",
+      "exerciseId": "policy_code_input_2",
+      "message": "Exercise \"policy_code_input_2\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-10-testing-debugging-oop-projects/python-10-testing-oop-behavior/testing-inheritance-and-polymorphism",
+      "profileId": "python",
+      "moduleId": "python-10-testing-debugging-oop-projects",
+      "topicId": "testing-inheritance-and-polymorphism",
+      "exerciseId": "policy_code_input_3",
+      "message": "Exercise \"policy_code_input_3\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-10-testing-debugging-oop-projects/python-10-debugging-and-refactoring/debugging-imports-and-state",
+      "profileId": "python",
+      "moduleId": "python-10-testing-debugging-oop-projects",
+      "topicId": "debugging-imports-and-state",
+      "message": "Topic \"debugging-imports-and-state\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-10-testing-debugging-oop-projects/python-10-debugging-and-refactoring/refactoring-oop-services",
+      "profileId": "python",
+      "moduleId": "python-10-testing-debugging-oop-projects",
+      "topicId": "refactoring-oop-services",
+      "message": "Topic \"refactoring-oop-services\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-10-testing-debugging-oop-projects/python-10-module-project/module-10-oop-quality-project",
+      "profileId": "python",
+      "moduleId": "python-10-testing-debugging-oop-projects",
+      "topicId": "module-10-oop-quality-project",
+      "message": "Topic \"module-10-oop-quality-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-10-testing-debugging-oop-projects/python-10-module-project/module-10-oop-quality-project",
+      "profileId": "python",
+      "moduleId": "python-10-testing-debugging-oop-projects",
+      "topicId": "module-10-oop-quality-project",
+      "exerciseId": "project-step-regression-summary",
+      "message": "Exercise \"project-step-regression-summary\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-architecture/capstone-scope-and-architecture",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-scope-and-architecture",
+      "message": "Topic \"capstone-scope-and-architecture\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-architecture/capstone-domain-model",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-domain-model",
+      "message": "Topic \"capstone-domain-model\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-architecture/capstone-domain-model",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-domain-model",
+      "exerciseId": "try-capstone-domain-model-sketch0",
+      "message": "Exercise \"try-capstone-domain-model-sketch0\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-architecture/capstone-domain-model",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-domain-model",
+      "exerciseId": "capstone-domain-model-step1-bug-task",
+      "message": "Exercise \"capstone-domain-model-step1-bug-task\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-architecture/capstone-domain-model",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-domain-model",
+      "exerciseId": "capstone-domain-model-step2-feature-task",
+      "message": "Exercise \"capstone-domain-model-step2-feature-task\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-architecture/capstone-domain-model",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-domain-model",
+      "exerciseId": "capstone-domain-model-step3-task-service",
+      "message": "Exercise \"capstone-domain-model-step3-task-service\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-architecture/capstone-domain-model",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-domain-model",
+      "exerciseId": "capstone-domain-model-step4-package-runner",
+      "message": "Exercise \"capstone-domain-model-step4-package-runner\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-architecture/capstone-domain-model",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-domain-model",
+      "exerciseId": "capstone-domain-model-step5-final-domain-demo",
+      "message": "Exercise \"capstone-domain-model-step5-final-domain-demo\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-services-and-polish/capstone-storage-and-reports",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-storage-and-reports",
+      "message": "Topic \"capstone-storage-and-reports\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-services-and-polish/capstone-tests-and-polish",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-tests-and-polish",
+      "message": "Topic \"capstone-tests-and-polish\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-services-and-polish/capstone-tests-and-polish",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-tests-and-polish",
+      "exerciseId": "capstone-tests-and-polish-step2-service-tests",
+      "message": "Exercise \"capstone-tests-and-polish-step2-service-tests\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-services-and-polish/capstone-tests-and-polish",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-tests-and-polish",
+      "exerciseId": "capstone-tests-and-polish-step3-report-file",
+      "message": "Exercise \"capstone-tests-and-polish-step3-report-file\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-services-and-polish/capstone-tests-and-polish",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-tests-and-polish",
+      "exerciseId": "capstone-tests-and-polish-step4-readme",
+      "message": "Exercise \"capstone-tests-and-polish-step4-readme\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-capstone-services-and-polish/capstone-tests-and-polish",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "capstone-tests-and-polish",
+      "exerciseId": "capstone-tests-and-polish-step6-final-handoff",
+      "message": "Exercise \"capstone-tests-and-polish-step6-final-handoff\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-11-oop-capstone-project/python-11-final-capstone/module-11-final-oop-capstone",
+      "profileId": "python",
+      "moduleId": "python-11-oop-capstone-project",
+      "topicId": "module-11-final-oop-capstone",
+      "message": "Topic \"module-11-final-oop-capstone\" has no learning goals on its seed metadata."
+    }
+  ]
+}

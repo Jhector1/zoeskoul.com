@@ -81,6 +81,51 @@ function countIssues(issues: CurriculumQualityIssue[]) {
     );
 }
 
+
+function collectStarterFilePaths(value: unknown): string[] {
+    if (!value) return [];
+    if (Array.isArray(value)) {
+        return value.flatMap((item) => collectStarterFilePaths(item));
+    }
+    if (typeof value === "object") {
+        const record = value as Record<string, unknown>;
+        const path = normalizeText(record.path);
+        if (path) return [path];
+        return Object.keys(record).filter((key) => normalizeText(key));
+    }
+    return [];
+}
+
+function capabilityEnabled(value: unknown): boolean {
+    return Boolean(value && typeof value === "object" && (value as { enabled?: unknown }).enabled === true);
+}
+
+function topicAllowsExplicitPythonEntryFile(args: {
+    topic: TopicQualityInput;
+    exercise: ManifestCodeInput;
+    expectedEntryFile?: string;
+}): boolean {
+    if (args.topic.seed.profileId !== "python") return false;
+    const entryFilePath = normalizeText(args.exercise.workspace?.entryFilePath);
+    if (!entryFilePath || entryFilePath === args.expectedEntryFile) return false;
+
+    const capabilities = args.topic.seed.workspacePolicy?.workspace.capabilities;
+    const supportsFiles =
+        capabilityEnabled(capabilities?.filesystem) ||
+        capabilityEnabled(capabilities?.multiFileProjects) ||
+        capabilityEnabled(capabilities?.createFiles) ||
+        capabilityEnabled(capabilities?.createFolders);
+    if (!supportsFiles) return false;
+
+    const knownWorkspacePaths = new Set([
+        ...collectStarterFilePaths(args.exercise.workspace?.starterFiles),
+        ...collectStarterFilePaths(args.exercise.starterFiles),
+        ...collectStarterFilePaths(args.exercise.solutionFiles),
+    ]);
+
+    return knownWorkspacePaths.has(entryFilePath);
+}
+
 function flattenStarterFileText(value: unknown): string {
     if (!value) return "";
     if (typeof value === "string") return value;
@@ -406,7 +451,18 @@ export function buildCurriculumQualityReport(args: {
                 .filter(Boolean)
                 .join("\n");
 
-            if (expectedEntryFile && starterText && !starterText.includes(expectedEntryFile)) {
+            const explicitPythonEntryFileAllowed = topicAllowsExplicitPythonEntryFile({
+                topic,
+                exercise,
+                expectedEntryFile,
+            });
+
+            if (
+                expectedEntryFile &&
+                starterText &&
+                !starterText.includes(expectedEntryFile) &&
+                !explicitPythonEntryFileAllowed
+            ) {
                 addIssue(issues, {
                     code: "EXPECTED_ENTRY_FILE_MISSING",
                     severity: "error",
@@ -422,7 +478,8 @@ export function buildCurriculumQualityReport(args: {
             if (
                 expectedEntryFile &&
                 exercise.workspace?.entryFilePath &&
-                exercise.workspace.entryFilePath !== expectedEntryFile
+                exercise.workspace.entryFilePath !== expectedEntryFile &&
+                !explicitPythonEntryFileAllowed
             ) {
                 addIssue(issues, {
                     code: "WORKSPACE_ENTRY_FILE_LEAK",

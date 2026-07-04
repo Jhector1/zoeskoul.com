@@ -1,0 +1,287 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-10-testing-debugging-oop-projects": {
+        "testing-object-state": {
+          "label": "Testing Object State",
+          "summary": "Use assert-based tests to verify that objects start with the right attributes and that methods correctly change state over time.",
+          "cards": {
+            "sketch0": {
+              "title": "Why test object state?"
+            },
+            "sketch1": {
+              "title": "Test construction and validation separately"
+            },
+            "sketch2": {
+              "title": "State-changing methods need before-and-after checks"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_testing_object_state_sketch0": {
+              "title": "Test a book's availability state",
+              "prompt": "A small catalog app already has a `Book` class in `models/book.py`. Add assert-based tests in `tests/check_book.py` to prove a new book starts available and becomes unavailable after `checkout()` runs once. Keep the existing print line so the output panel shows success when your assertions pass.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "models_book_py": {
+                  "content": "# Write your answer below"
+                }
+              },
+              "solutionCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False",
+              "checks": {
+                "0": {
+                  "message": "Keep the Book class defined in models/book.py."
+                },
+                "1": {
+                  "message": "Book should still be constructible with a title."
+                },
+                "2": {
+                  "message": "A Book instance should have title and available attributes."
+                },
+                "3": {
+                  "message": "A new book should start available, then become unavailable after checkout()."
+                }
+              }
+            },
+            "try_testing_object_state_sketch1": {
+              "title": "Test constructor validation for task priority",
+              "prompt": "Open the workspace files for a task tracker. The `Task` class in `models/task.py` should store a normal priority as-is, but negative priorities should become `0`. Add assert-based tests in `tests/check_task.py` for both cases, and keep the success print line.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "models_task_py": {
+                  "content": "# Write your answer below"
+                }
+              },
+              "solutionCode": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        if priority < 0:\n            self.priority = 0\n        else:\n            self.priority = priority",
+              "checks": {
+                "0": {
+                  "message": "Keep the Task class defined in models/task.py."
+                },
+                "1": {
+                  "message": "A Task instance should store name and priority."
+                },
+                "2": {
+                  "message": "A normal priority should be stored unchanged."
+                },
+                "3": {
+                  "message": "A negative priority should be corrected to 0."
+                }
+              }
+            },
+            "try_testing_object_state_sketch2": {
+              "title": "Test repeated counter state changes",
+              "prompt": "In this workspace, `models/counter.py` defines a `Counter` class with an `increment()` method. Add assert-based tests in `tests/check_counter.py` to prove the counter starts at `0`, becomes `1` after one increment, and becomes `2` after a second increment. Keep the success print line.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "models_counter_py": {
+                  "content": "# Write your answer below"
+                }
+              },
+              "solutionCode": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1",
+              "checks": {
+                "0": {
+                  "message": "Keep the Counter class defined in models/counter.py."
+                },
+                "1": {
+                  "message": "A Counter instance should have a count attribute."
+                },
+                "2": {
+                  "message": "The count should move from 0 to 1 to 2 across two increment() calls."
+                }
+              }
+            }
+          },
+          "practice": {
+            "q-testing-object-state-single-1": {
+              "title": "What should an object-state test check after a mutating method runs?",
+              "prompt": "A `checkout()` method is supposed to change a book from available to unavailable. Which test idea best proves that state change happened?",
+              "hint": "Look for the choice that checks the attribute after the method call, not just that the method exists.",
+              "help": {
+                "concept": "A state-change test should verify the actual attribute value after a mutating method runs, because the goal is to prove behavior, not just structure.",
+                "hint_1": "A method can exist and still fail to update the object's data correctly.",
+                "hint_2": "Choose the option that inspects the `available` attribute after calling `checkout()`."
+              },
+              "options": {
+                "a": "Create a Book object and check that `available` becomes `False` after calling `checkout()`",
+                "b": "Only check that the `Book` class has a `checkout` method name",
+                "c": "Print the object once and assume the method worked",
+                "d": "Check only the book title because constructors are more important than methods"
+              }
+            },
+            "q-testing-object-state-multi-1": {
+              "title": "Choose the strongest constructor validation checks",
+              "prompt": "A `Task` constructor should keep positive priorities unchanged and replace negative priorities with `0`. Which assertions belong in a good test set? Choose all that apply.",
+              "hint": "Include one check for valid input and one for invalid input.",
+              "help": {
+                "concept": "Good validation coverage includes both the normal path and the edge-case path so the constructor rule is tested from more than one angle.",
+                "hint_1": "One correct option should confirm that a positive priority stays the same.",
+                "hint_2": "Another correct option should confirm that a negative priority does not remain negative after construction."
+              },
+              "options": {
+                "a": "`Task(\"Email\", 2).priority == 2`",
+                "b": "`Task(\"Broken\", -5).priority == 0`",
+                "c": "`Task(\"Email\", 2).name == 2`",
+                "d": "`Task(\"Broken\", -5).priority == -5`"
+              }
+            },
+            "q-testing-object-state-fill-1": {
+              "title": "Complete an assert for starting state",
+              "prompt": "Fill in the missing value so the assertion checks that a new counter starts at zero.",
+              "hint": "A new `Counter` object should begin with no increments applied.",
+              "help": {
+                "concept": "Starting-state assertions verify what the constructor sets before any methods change the object.",
+                "hint_1": "The `count` attribute should match the constructor's initial value.",
+                "hint_2": "Choose the numeric value that represents an untouched counter."
+              },
+              "template": "assert counter.count == [blank1]",
+              "choices": [
+                "0",
+                "1",
+                "False",
+                "None"
+              ]
+            },
+            "q-testing-object-state-drag-1": {
+              "title": "Order a before-and-after state test",
+              "prompt": "Put these testing steps in the best order for checking a method that changes object state.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Assert the starting attribute value",
+                "t2": "Create the object",
+                "t3": "Call the state-changing method",
+                "t4": "Assert the updated attribute value"
+              }
+            },
+            "q-testing-object-state-multi-2": {
+              "title": "Spot useful object-state edge cases",
+              "prompt": "You are testing a `Counter` object with an `increment()` method. Which checks help prove repeated state changes work correctly? Choose all that apply.",
+              "hint": "Think about what happens before any increments and after more than one increment.",
+              "help": {
+                "concept": "Repeated state-change tests are stronger when they verify the initial state and multiple successive updates on the same object.",
+                "hint_1": "One correct option should check the starting count before any method calls.",
+                "hint_2": "Another correct option should check the count after the method has been called more than once on the same instance."
+              },
+              "options": {
+                "a": "Assert that a new counter starts at `0`",
+                "b": "Assert that the same counter reaches `2` after two `increment()` calls",
+                "c": "Only check that `increment` is spelled correctly",
+                "d": "Create two separate counters and ignore their `count` values"
+              }
+            },
+            "q-testing-object-state-fill-2": {
+              "title": "Complete an assert after a checkout",
+              "prompt": "Fill in the missing value so the assertion checks the book's state after `checkout()` has already run.",
+              "hint": "After checkout, the book should no longer be available.",
+              "help": {
+                "concept": "After-method assertions should match the new stored state, not the original constructor value.",
+                "hint_1": "The `available` attribute should switch away from its starting value.",
+                "hint_2": "Choose the boolean value that represents an unavailable book."
+              },
+              "template": "assert book.available is [blank1]",
+              "choices": [
+                "True",
+                "False",
+                "0",
+                "Lesson notes panel"
+              ]
+            },
+            "ci-testing-object-state-debug-book-return": {
+              "title": "Fix a broken return method after state changes",
+              "prompt": "A checkout service uses `Book.checkout()` and `Book.return_book()`. Right now, returning a book does not restore availability. Fix `models/book.py` so the object's state changes correctly. Do not change the test file. When you click Run, the output panel should show that the tests passed.",
+              "hint": "Read the task \"Fix a broken return method after state changes\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix a broken return method after state changes\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False",
+              "starterFiles": {
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False"
+                }
+              }
+            },
+            "ci-testing-object-state-fix-wallet-validation": {
+              "title": "Fix wallet validation so balance never starts negative",
+              "prompt": "A budgeting app has a `Wallet` class in `models/wallet.py`. The constructor should store the given balance when it is zero or more, but negative starting balances should become `0`. The current code stores negative values by mistake. Fix the class so the provided tests in `tests/check_wallet.py` pass when you click Run.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance",
+              "starterFiles": {
+                "models_wallet_py": {
+                  "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance"
+                }
+              }
+            },
+            "ci-testing-object-state-fix-scoreboard-add-points": {
+              "title": "Fix a method that updates score incorrectly",
+              "prompt": "A game app has a `Scoreboard` class in `models/scoreboard.py`. The `add_points()` method should increase the current score by the amount passed in. Right now it resets the score instead. Fix the class so the tests in `tests/check_scoreboard.py` pass.",
+              "hint": "Read the task \"Fix a method that updates score incorrectly\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix a method that updates score incorrectly\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points",
+              "starterFiles": {
+                "models_scoreboard_py": {
+                  "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-10-testing-debugging-oop-projects": {
+        "testing-object-state": {
+          "testing-object-state-sketch-0": {
+            "title": "Why test object state?",
+            "bodyMarkdown": "When you test object state, you check **what an object stores before and after methods run**. This matters because many class bugs are not syntax errors—they are logic errors where an attribute never changes, changes too much, or changes in the wrong place.\n\nFor example, imagine a library app with a `Book` class. A book starts as available, and calling `checkout()` should change that state:\n\n```python\nclass Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n```\n\nA simple assert-based test can prove both the starting state and the changed state:\n\n```python\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\n```\n\nLine by line:\n\n- `book = Book(\"Dune\")` creates one object.\n- `assert book.available is True` checks the constructor set the attribute correctly.\n- `book.checkout()` runs a method that should update the object.\n- `assert book.available is False` checks the state really changed.\n\nWithout tests like these, a class can look correct but still behave incorrectly when your app uses it."
+          },
+          "testing-object-state-sketch-1": {
+            "title": "Test construction and validation separately",
+            "bodyMarkdown": "A good object-state test often checks **construction first**, then **validation rules**. That keeps failures easier to understand.\n\nSuppose a `Task` object should never store a negative priority. The class might correct bad input during construction:\n\n```python\nclass Task:\n    def __init__(self, name, priority):\n        self.name = name\n        if priority < 0:\n            self.priority = 0\n        else:\n            self.priority = priority\n```\n\nYou can write separate assertions for normal and edge-case input:\n\n```python\ntask_a = Task(\"Email clients\", 2)\nassert task_a.priority == 2\n\ntask_b = Task(\"Broken input\", -5)\nassert task_b.priority == 0\n```\n\nThis is useful because each assertion checks one clear rule:\n\n- normal input stays the same\n- invalid input is corrected\n\nWhen tests are split this way, you can quickly tell whether the bug is in the constructor, the validation rule, or both.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "testing-object-state-sketch-2": {
+            "title": "State-changing methods need before-and-after checks",
+            "bodyMarkdown": "Methods that change attributes should usually be tested with a **before-and-after pattern**. First confirm the starting value, then call the method, then confirm the new value.\n\nHere is a `Counter` example:\n\n```python\nclass Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1\n```\n\nA useful test is:\n\n```python\ncounter = Counter()\nassert counter.count == 0\ncounter.increment()\nassert counter.count == 1\ncounter.increment()\nassert counter.count == 2\n```\n\nStep by step:\n\n- The constructor should start `count` at `0`.\n- After one call to `increment()`, the count should be `1`.\n- After another call, it should be `2`.\n\nThis kind of test is stronger than checking only the final value once, because it proves the method changes state consistently each time it runs."
+          }
+        }
+      }
+    }
+  }
+}

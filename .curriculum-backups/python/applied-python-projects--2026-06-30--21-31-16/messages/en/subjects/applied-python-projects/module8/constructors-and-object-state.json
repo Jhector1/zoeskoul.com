@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "constructors-and-object-state": {
+          "label": "Constructors and Object State",
+          "summary": "Use `__init__` to create valid starting state and methods to update one object safely.",
+          "cards": {
+            "sketch0": {
+              "title": "Constructors and Object State: the idea"
+            },
+            "sketch1": {
+              "title": "Constructors and Object State: the file shape"
+            },
+            "sketch2": {
+              "title": "Constructors and Object State: what the grader checks"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "ci_grade_result_practice": {
+              "title": "Model a grade result"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_constructors_and_object_state_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Complete `Item` so each item stores a `name` and `quantity`."
+            },
+            "try_constructors_and_object_state_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Complete `Counter.increment()` so calling it changes the object and returns the new count."
+            }
+          },
+          "quiz": {
+            "ci-grade-result-practice": {
+              "title": "Model a grade result",
+              "prompt": "Build a `GradeResult` class with `is_passing()` and `summary()` methods.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.grade_result import GradeResult\n\nresult = GradeResult(\"Sam\", 84)\nprint(result.summary())\nprint(result.is_passing())\n"
+            },
+            "sc-constructors-and-object-state-design": {
+              "title": "Check the design choice",
+              "prompt": "Which choice best matches the lesson goal for constructors and object state?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Use `__init__` to create valid starting state and methods to update one object safely.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Put every class in main.py so imports are never needed.",
+                "b": "Give each class or service a focused responsibility and import it where needed.",
+                "c": "Avoid methods so every object exposes all of its data directly.",
+                "d": "Copy the same logic into each subclass to avoid shared code."
+              }
+            },
+            "try-constructors-and-object-state-sketch0": {
+              "title": "Create an Item constructor",
+              "prompt": "Complete `Item` so each item stores a `name` and `quantity`.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.item import Item\n\nitem = Item(\"notebook\", 3)\nprint(f\"{item.name}: {item.quantity}\")\n"
+            },
+            "try-constructors-and-object-state-sketch1": {
+              "title": "Update object state with a method",
+              "prompt": "Complete `Counter.increment()` so calling it changes the object and returns the new count.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.counter import Counter\n\ncounter = Counter(2)\nprint(counter.increment())\nprint(counter.increment())\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "constructors-and-object-state": {
+          "concept": {
+            "title": "Constructors and Object State: the idea",
+            "bodyMarkdown": "**Constructors and Object State** is not just syntax. In this course it is practiced inside small projects where one file owns one clear part of the program. Use `__init__` to create valid starting state and methods to update one object safely."
+          },
+          "multifile-shape": {
+            "title": "Constructors and Object State: the file shape",
+            "bodyMarkdown": "The file layout matters. Models hold object state and behavior, services coordinate groups of objects, tests verify behavior, and `main.py` stays thin enough to read."
+          },
+          "graded-habit": {
+            "title": "Constructors and Object State: what the grader checks",
+            "bodyMarkdown": "The grader checks behavior from the running project. A strong answer keeps imports working, keeps all files present, and proves the object behavior through output or assertions."
+          }
+        }
+      }
+    }
+  }
+}

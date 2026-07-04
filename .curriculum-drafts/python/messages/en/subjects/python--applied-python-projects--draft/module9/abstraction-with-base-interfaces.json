@@ -1,0 +1,266 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "abstraction-with-base-interfaces": {
+          "label": "Abstraction With Base Interfaces",
+          "summary": "Treat a base class like a promise: every child class must provide the method that helpers expect.",
+          "cards": {
+            "sketch0": {
+              "title": "Describe the expected method"
+            },
+            "sketch1": {
+              "title": "Make subclasses fulfill the promise"
+            },
+            "sketch2": {
+              "title": "Write helpers against the interface"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_abstraction_with_base_interfaces_sketch0": {
+              "title": "Define the CatalogItem interface gently",
+              "prompt": "The lesson used notification channels. Now practice with catalog media. In `models/catalog_item.py`, define a base `label(self)` method that raises `NotImplementedError`. In `models/book.py`, make `Book.label()` return `Book: Dune`. Then finish `main.py` by printing the book label.",
+              "hint": "The base class can say what method subclasses must provide. The subclass writes the real label.",
+              "help": {
+                "concept": "An interface is a promise about what method name exists. A base class can document that promise even when each subclass supplies the real result.",
+                "hint_1": "Store the title in `CatalogItem.__init__`.",
+                "hint_2": "Use `raise NotImplementedError(...)` in the base `label()` method."
+              },
+              "starterCode": "from models.book import Book\n\n# TODO: create Book(\"Dune\").\n# TODO: print the book label.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\n\n# TODO: create Book(\"Dune\").\n# TODO: print the book label.\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def label(self):\n        # TODO: raise NotImplementedError so subclasses must define label().\n        pass\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        # TODO: return \"Book: <title>\".\n        pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\n\nbook = Book(\"The Wild Robot\")\nprint(book.label())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\n\nbook = Book(\"The Wild Robot\")\nprint(book.label())\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        raise NotImplementedError(\"Subclasses must define label().\")\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define the CatalogItem class."
+                },
+                "1": {
+                  "message": "CatalogItem should still accept a title."
+                },
+                "2": {
+                  "message": "Store title on the base object."
+                },
+                "3": {
+                  "message": "Book.label() should return the book label."
+                }
+              }
+            },
+            "try_abstraction_with_base_interfaces_sketch1": {
+              "title": "Add Movie to the same interface",
+              "prompt": "Keep the base interface and add another child class. In `models/movie.py`, make `Movie.label()` return `Movie: Moana`. Then finish `main.py` by printing both a Book label and a Movie label.",
+              "hint": "Do not invent a second method name. Book and Movie should both answer `label()`.",
+              "help": {
+                "concept": "The point of the interface is consistency. Helpers can work with mixed objects only when the subclasses agree on the method name.",
+                "hint_1": "Inherit `Movie` from `CatalogItem`.",
+                "hint_2": "Return `Movie: ` followed by the stored title."
+              },
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create Book(\"Dune\") and Movie(\"Moana\").\n# TODO: print each label.\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create Book(\"Dune\") and Movie(\"Moana\").\n# TODO: print each label.\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        raise NotImplementedError(\"Subclasses must define label().\")\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        # TODO: return \"Movie: <title>\".\n        pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\nbook = Book(\"Wonder\")\nmovie = Movie(\"Moana\")\nprint(book.label())\nprint(movie.label())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\nbook = Book(\"Wonder\")\nmovie = Movie(\"Moana\")\nprint(book.label())\nprint(movie.label())\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        raise NotImplementedError(\"Subclasses must define label().\")\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Book.label() should still return the book label."
+                },
+                "1": {
+                  "message": "Movie.label() should return the movie label."
+                }
+              }
+            },
+            "try_abstraction_with_base_interfaces_sketch2": {
+              "title": "Use a helper that trusts the interface",
+              "prompt": "Complete `show_labels(items)` in `services/catalog_view.py`. It should loop through the items and return one string with each item label on its own line. The helper should call `item.label()` and trust the shared interface.",
+              "hint": "Use the shared interface: call `item.label()` for each item.",
+              "help": {
+                "concept": "Once classes agree on an interface, helper code can stay small. It can trust the shared method instead of knowing every subclass.",
+                "hint_1": "Loop through `items`.",
+                "hint_2": "Print `item.label()` inside the loop."
+              },
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\n\n# TODO: print the result from show_labels(items).\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\n\n# TODO: print the result from show_labels(items).\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        raise NotImplementedError(\"Subclasses must define label().\")\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                },
+                "services_catalog_view_py": {
+                  "content": "def show_labels(items):\n    # TODO: build and return one string with each item.label() on its own line.\n    pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Frindle\"), Movie(\"Luca\")]\nshow_labels(items)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Frindle\"), Movie(\"Luca\")]\nshow_labels(items)\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        raise NotImplementedError(\"Subclasses must define label().\")\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                },
+                "services_catalog_view_py": {
+                  "content": "def show_labels(items):\n    for item in items:\n        print(item.label())\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Book.label() should return the expected label."
+                },
+                "1": {
+                  "message": "Movie.label() should return the expected label."
+                }
+              }
+            }
+          },
+          "practice": {
+            "sc-interface-purpose": {
+              "title": "Why define the interface in CatalogItem?",
+              "prompt": "Why is a base interface useful in this module?",
+              "hint": "Think about what later code can rely on.",
+              "help": {
+                "concept": "A base interface tells the rest of the program which method every subclass should provide.",
+                "hint_1": "The answer is about a shared contract.",
+                "hint_2": "It is not about forcing every subclass to return identical text."
+              },
+              "options": {
+                "a": "It tells later code that every catalog item should provide `label()`.",
+                "b": "It prevents subclasses from changing behavior.",
+                "c": "It removes the need for subclasses entirely.",
+                "d": "It makes `Book` and `Movie` the same class."
+              }
+            },
+            "fb-interface-method-name": {
+              "title": "Complete the shared interface method",
+              "prompt": "Fill in the expected method name for the interface.",
+              "hint": "Use the same method name from this module's helper examples.",
+              "help": {
+                "concept": "The base interface and the subclasses agree on one shared method name.",
+                "hint_1": "The method returns display text.",
+                "hint_2": "It is not `__init__`."
+              },
+              "template": "class CatalogItem:\n    def [blank1](self):\n        raise NotImplementedError(\"Subclasses must define label().\")",
+              "choices": [
+                "label",
+                "title",
+                "movie",
+                "catalog"
+              ]
+            },
+            "dr-interface-build-order": {
+              "title": "Order the interface steps",
+              "prompt": "Put these steps in order.",
+              "hint": "Describe the contract first, then fulfill it, then use it.",
+              "help": {
+                "concept": "The interface comes before the subclasses and helpers that depend on it.",
+                "hint_1": "The base class describes the expected method first.",
+                "hint_2": "The helper uses the finished interface last."
+              },
+              "tokens": {
+                "t1": "Write `label()` in CatalogItem as the expected interface",
+                "t2": "Create `Book.label()`",
+                "t3": "Create `Movie.label()`",
+                "t4": "Write a helper that calls `item.label()`"
+              }
+            },
+            "sc-interface-helper-focus": {
+              "title": "Choose what the helper should care about",
+              "prompt": "When `show_labels(items)` loops through mixed objects, what should it focus on most?",
+              "hint": "Pick the shared contract, not the exact subclass.",
+              "help": {
+                "concept": "Good interface-based code depends on shared behavior instead of subclass-specific branches.",
+                "hint_1": "The helper should not care whether the object is a Book or Movie.",
+                "hint_2": "It only needs the shared method to exist."
+              },
+              "options": {
+                "a": "The order the subclasses were written in the file",
+                "b": "The exact subclass name for every object",
+                "c": "Whether each object supports `label()`",
+                "d": "How many times the constructor was called"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "abstraction-with-base-interfaces": {
+          "sketch-0": {
+            "title": "An interface is a promise the children agree to keep",
+            "bodyMarkdown": "An interface is like a school form that says, \"Every club must provide a contact name.\"\n\nThe clubs can be different, but they all agree to provide the same kind of answer.\n\nIn code, a base class can describe that promise:\n\n```python\nclass NotificationChannel:\n    def message(self):\n        raise NotImplementedError(\"Subclasses must define message\")\n```\n\nThis says: every child class should have a `message()` method. The base class names the promise; the child classes fulfill it."
+          },
+          "sketch-1": {
+            "title": "Each child fulfills the promise in its own way",
+            "bodyMarkdown": "Different child classes can fulfill the same promise differently:\n\n```python\nclass EmailChannel(NotificationChannel):\n    def message(self):\n        return \"Email message\"\n\nclass SmsChannel(NotificationChannel):\n    def message(self):\n        return \"SMS message\"\n```\n\nBoth children answer `message()`. That shared method name lets other code treat them as a group even though the details are different."
+          },
+          "sketch-2": {
+            "title": "Helpers can trust the promise",
+            "bodyMarkdown": "A helper can work with any object that keeps the promise:\n\n```python\ndef collect_messages(channels):\n    messages = []\n    for channel in channels:\n        messages.append(channel.message())\n    return messages\n```\n\nThe helper does not need to know whether the channel is email or SMS. It only trusts the interface: each object has `message()`.\n\nThat is why interfaces help larger programs stay flexible."
+          }
+        }
+      }
+    }
+  }
+}

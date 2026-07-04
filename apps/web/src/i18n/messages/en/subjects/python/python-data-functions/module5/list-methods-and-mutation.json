@@ -172,7 +172,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list."
+              "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
+              "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use items.append(item) so the list is really mutated."
+                }
+              }
             },
             "ci-2": {
               "title": "Remove a value and show the result",
@@ -183,7 +189,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list."
+              "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
+              "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use colors.remove(color) so the list is really mutated."
+                }
+              }
             },
             "ci-3": {
               "title": "Sort numbers from input",
@@ -194,7 +206,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list."
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use numbers.sort() so the list is really sorted in place."
+                }
+              }
             },
             "try-list-methods-and-mutation-checkpoint": {
               "title": "Append 10 to a list",
@@ -205,7 +223,13 @@
                 "hint_1": "Use `append()` to add one item to the end.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n"
+              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
+              "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use numbers.append(10) so the list is really changed."
+                }
+              }
             },
             "try-list-methods-and-mutation-sketch0": {
               "title": "Append 10 and print the list",
@@ -216,7 +240,13 @@
                 "hint_1": "Add 10 to the end of the list, then print the updated list.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n"
+              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
+              "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use numbers.append(10) so the list is really changed."
+                }
+              }
             },
             "try-list-methods-and-mutation-sketch1": {
               "title": "Remove banana and pop the last item",
@@ -227,7 +257,16 @@
                 "hint_1": "Remove 'banana' Then pop the last remaining item into last_item.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n"
+              "starterCode": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n",
+              "solutionCode": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Call fruits.remove('banana') instead of replacing the final list directly."
+                },
+                "1": {
+                  "message": "Store the result of fruits.pop() in last_item instead of typing cherry directly."
+                }
+              }
             },
             "try-list-methods-and-mutation-sketch2": {
               "title": "Sort and print names",
@@ -238,7 +277,13 @@
                 "hint_1": "Sort the list alphabetically, then print the sorted list.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n"
+              "starterCode": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n",
+              "solutionCode": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use names.sort() so the list is actually sorted."
+                }
+              }
             }
           },
           "tryIt": {

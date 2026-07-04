@@ -76,6 +76,119 @@ function readJson(filePath: string): JsonObject {
     return JSON.parse(fs.readFileSync(filePath, "utf8")) as JsonObject;
 }
 
+
+function getByDottedPath(root: JsonObject, dottedPath: string): unknown {
+    let current: unknown = root;
+
+    for (const part of dottedPath.split(".")) {
+        if (!part) return undefined;
+        if (!current || typeof current !== "object") return undefined;
+        current = (current as JsonObject)[part];
+    }
+
+    return current;
+}
+
+function resolveDraftMessageRef(messages: JsonObject, ref: string): unknown {
+    const key = ref.replace(/^@:/, "").trim();
+    if (!key) return undefined;
+    return getByDottedPath(messages, key);
+}
+
+function resolveDraftMessageRefs(value: unknown, messages: JsonObject): unknown {
+    if (typeof value === "string") {
+        if (!value.startsWith("@:")) return value;
+        const resolved = resolveDraftMessageRef(messages, value);
+        return resolved === undefined ? value : resolved;
+    }
+
+    if (Array.isArray(value)) {
+        return value.map((entry) => resolveDraftMessageRefs(entry, messages));
+    }
+
+    if (value && typeof value === "object") {
+        return Object.fromEntries(
+            Object.entries(value as JsonObject).map(([key, entry]) => [
+                key,
+                resolveDraftMessageRefs(entry, messages),
+            ]),
+        );
+    }
+
+    return value;
+}
+
+function collectUnresolvedDraftMessageRefs(value: unknown, refs: string[] = []): string[] {
+    if (typeof value === "string") {
+        if (value.startsWith("@:")) refs.push(value);
+        return refs;
+    }
+
+    if (Array.isArray(value)) {
+        for (const entry of value) collectUnresolvedDraftMessageRefs(entry, refs);
+        return refs;
+    }
+
+    if (value && typeof value === "object") {
+        for (const entry of Object.values(value as JsonObject)) {
+            collectUnresolvedDraftMessageRefs(entry, refs);
+        }
+    }
+
+    return refs;
+}
+
+function readTopicMessages(args: {
+    subjectRoot: string;
+    moduleDir: string;
+    topicId: string;
+}): { messages?: JsonObject; messagePath: string } {
+    const subjectFolderName = path.basename(args.subjectRoot);
+    const messagePath = path.join(
+        getDraftMessagesRoot(subjectFolderName),
+        "en",
+        "subjects",
+        subjectFolderName,
+        args.moduleDir,
+        `${args.topicId}.json`,
+    );
+
+    if (!fs.existsSync(messagePath)) {
+        return { messagePath };
+    }
+
+    return { messages: readJson(messagePath), messagePath };
+}
+
+function resolveTopicBundleForGolden(args: {
+    subjectRoot: string;
+    moduleDir: string;
+    topicId: string;
+    bundle: JsonObject;
+}): { bundle: JsonObject; messagePath?: string; unresolvedRefs: string[] } {
+    const { messages, messagePath } = readTopicMessages({
+        subjectRoot: args.subjectRoot,
+        moduleDir: args.moduleDir,
+        topicId: args.topicId,
+    });
+
+    if (!messages) {
+        return {
+            bundle: args.bundle,
+            messagePath,
+            unresolvedRefs: collectUnresolvedDraftMessageRefs(args.bundle),
+        };
+    }
+
+    const resolvedBundle = resolveDraftMessageRefs(args.bundle, messages) as JsonObject;
+
+    return {
+        bundle: resolvedBundle,
+        messagePath,
+        unresolvedRefs: collectUnresolvedDraftMessageRefs(resolvedBundle),
+    };
+}
+
 function findTopicBundlePaths(subjectRoot: string): string[] {
     const result: string[] = [];
 
@@ -581,6 +694,27 @@ describe("draft subject code_input goldens", () => {
             let report: any;
 
             try {
+                const resolved = resolveTopicBundleForGolden({
+                    subjectRoot,
+                    moduleDir,
+                    topicId,
+                    bundle,
+                });
+
+                if (resolved.unresolvedRefs.length > 0) {
+                    rows.push({
+                        status: "FAIL",
+                        topicId,
+                        exerciseId: "(bundle)",
+                        code: "DRAFT_MESSAGE_REF_UNRESOLVED",
+                        message: `Unresolved message refs for golden validation: ${resolved.unresolvedRefs.slice(0, 8).join(", ")}${resolved.unresolvedRefs.length > 8 ? " ..." : ""}`,
+                        file: resolved.messagePath
+                            ? path.relative(repoRoot, resolved.messagePath)
+                            : relativeBundlePath,
+                    });
+                    continue;
+                }
+
                 report = await services.validateGolden({
                     seed: {
                         profileId,
@@ -635,7 +769,7 @@ describe("draft subject code_input goldens", () => {
                                 : null,
                     } as any,
                     draft: {} as any,
-                    topicBundle: bundle as any,
+                    topicBundle: resolved.bundle as any,
                 });
             } catch (error) {
                 for (const exercise of codeInputExercises) {

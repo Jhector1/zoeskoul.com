@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-10-testing-debugging-oop-projects": {
+        "debugging-imports-and-state": {
+          "label": "Debugging Imports and State",
+          "summary": "Fix common multi-file OOP bugs by following imports, object state, and repeated method calls.",
+          "cards": {
+            "sketch0": {
+              "title": "Debugging Imports and State: the idea"
+            },
+            "sketch1": {
+              "title": "Debugging Imports and State: the file shape"
+            },
+            "sketch2": {
+              "title": "Debugging Imports and State: what the grader checks"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "ci_debug_order_practice": {
+              "title": "Fix object state update order"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_debugging_imports_and_state_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Fix the import so `main.py` can create a `Customer` from `models/customer.py`."
+            },
+            "try_debugging_imports_and_state_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Move the task list onto each instance so two projects do not share the same list."
+            }
+          },
+          "quiz": {
+            "ci-debug-order-practice": {
+              "title": "Fix object state update order",
+              "prompt": "Debug the cart so adding an item updates the total before the summary is printed.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.cart import Cart\n\ncart = Cart()\ncart.add_item(\"Pen\", 2)\ncart.add_item(\"Bag\", 5)\nprint(cart.summary())\n"
+            },
+            "sc-debugging-imports-and-state-design": {
+              "title": "Check the design choice",
+              "prompt": "Which choice best matches the lesson goal for debugging imports and state?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Fix common multi-file OOP bugs by following imports, object state, and repeated method calls.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Put every class in main.py so imports are never needed.",
+                "b": "Give each class or service a focused responsibility and import it where needed.",
+                "c": "Avoid methods so every object exposes all of its data directly.",
+                "d": "Copy the same logic into each subclass to avoid shared code."
+              }
+            },
+            "try-debugging-imports-and-state-sketch0": {
+              "title": "Fix a broken import path",
+              "prompt": "Fix the import so `main.py` can create a `Customer` from `models/customer.py`.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from customer import Customer\n\ncustomer = Customer(\"Lina\")\nprint(customer.name)\n"
+            },
+            "try-debugging-imports-and-state-sketch1": {
+              "title": "Fix shared list state",
+              "prompt": "Move the task list onto each instance so two projects do not share the same list.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.project import Project\n\na = Project(\"A\")\nb = Project(\"B\")\na.add_task(\"plan\")\nprint(a.count_tasks())\nprint(b.count_tasks())\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-10-testing-debugging-oop-projects": {
+        "debugging-imports-and-state": {
+          "concept": {
+            "title": "Debugging Imports and State: the idea",
+            "bodyMarkdown": "**Debugging Imports and State** is not just syntax. In this course it is practiced inside small projects where one file owns one clear part of the program. Fix common multi-file OOP bugs by following imports, object state, and repeated method calls."
+          },
+          "multifile-shape": {
+            "title": "Debugging Imports and State: the file shape",
+            "bodyMarkdown": "The file layout matters. Models hold object state and behavior, services coordinate groups of objects, tests verify behavior, and `main.py` stays thin enough to read."
+          },
+          "graded-habit": {
+            "title": "Debugging Imports and State: what the grader checks",
+            "bodyMarkdown": "The grader checks behavior from the running project. A strong answer keeps imports working, keeps all files present, and proves the object behavior through output or assertions."
+          }
+        }
+      }
+    }
+  }
+}

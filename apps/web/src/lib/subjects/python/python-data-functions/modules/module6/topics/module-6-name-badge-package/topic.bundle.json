@@ -4,7 +4,7 @@
   "moduleSlug": "python-6-functions-and-modularity",
   "sectionSlug": "python-data-functions-python-6-module-project",
   "prefix": "py6",
-  "minutes": 65,
+  "minutes": 26,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -105,11 +105,11 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -118,11 +118,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -179,11 +179,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -195,7 +195,7 @@
           },
           {
             "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.tools_names_py.content",
             "language": "python"
           }
         ],
@@ -203,26 +203,26 @@
           {
             "type": "uses_import",
             "module": "tools.names",
-            "message": "Import from tools.names.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.0.message",
             "importName": "clean_name",
             "path": "main.py"
           },
           {
             "type": "source_regex",
             "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
-            "message": "Define clean_name(text) inside tools/names.py.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.1.message",
             "path": "tools/names.py"
           },
           {
             "type": "uses_method",
             "method": "strip",
-            "message": "clean_name should strip whitespace.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.2.message",
             "path": "tools/names.py"
           },
           {
             "type": "uses_method",
             "method": "title",
-            "message": "clean_name should title-case the name.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.3.message",
             "path": "tools/names.py"
           }
         ]
@@ -230,7 +230,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -242,7 +242,7 @@
         },
         {
           "path": "tools/names.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.solutionFiles.tools_names_py.content",
           "language": "python"
         }
       ],
@@ -259,26 +259,26 @@
         {
           "type": "uses_import",
           "module": "tools.names",
-          "message": "Import from tools.names.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.0.message",
           "importName": "clean_name",
           "path": "main.py"
         },
         {
           "type": "source_regex",
           "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
-          "message": "Define clean_name(text) inside tools/names.py.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.1.message",
           "path": "tools/names.py"
         },
         {
           "type": "uses_method",
           "method": "strip",
-          "message": "clean_name should strip whitespace.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.2.message",
           "path": "tools/names.py"
         },
         {
           "type": "uses_method",
           "method": "title",
-          "message": "clean_name should title-case the name.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-1-create-clean-name-module.sourceChecks.3.message",
           "path": "tools/names.py"
         }
       ]
@@ -291,56 +291,56 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "tools/__init__.py",
-          "content": "",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_init_py.content",
           "language": "python"
         },
         {
           "path": "tools/names.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_names_py.content",
           "language": "python"
         },
         {
           "path": "tools/badges.py",
-          "content": "# Add make_badge(name, role) here.\n# Return one formatted string for the badge.\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_badges_py.content",
           "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "tools/__init__.py",
-            "content": "",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_init_py.content",
             "language": "python"
           },
           {
             "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_names_py.content",
             "language": "python"
           },
           {
             "path": "tools/badges.py",
-            "content": "# Add make_badge(name, role) here.\n# Return one formatted string for the badge.\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.starterFiles.tools_badges_py.content",
             "language": "python"
           }
         ],
@@ -406,11 +406,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -422,12 +422,12 @@
           },
           {
             "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_names_py.content",
             "language": "python"
           },
           {
             "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_badges_py.content",
             "language": "python"
           }
         ],
@@ -435,20 +435,20 @@
           {
             "type": "uses_import",
             "module": "tools.badges",
-            "message": "Import from tools.badges.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.0.message",
             "importName": "make_badge",
             "path": "main.py"
           },
           {
             "type": "source_regex",
             "pattern": "def\\s+make_badge\\s*\\(",
-            "message": "Define make_badge in tools/badges.py.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.1.message",
             "path": "tools/badges.py"
           },
           {
             "type": "uses_method",
             "method": "upper",
-            "message": "make_badge should uppercase the role.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.2.message",
             "path": "tools/badges.py"
           }
         ]
@@ -456,7 +456,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -468,12 +468,12 @@
         },
         {
           "path": "tools/names.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_names_py.content",
           "language": "python"
         },
         {
           "path": "tools/badges.py",
-          "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.solutionFiles.tools_badges_py.content",
           "language": "python"
         }
       ],
@@ -491,20 +491,20 @@
         {
           "type": "uses_import",
           "module": "tools.badges",
-          "message": "Import from tools.badges.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.0.message",
           "importName": "make_badge",
           "path": "main.py"
         },
         {
           "type": "source_regex",
           "pattern": "def\\s+make_badge\\s*\\(",
-          "message": "Define make_badge in tools/badges.py.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.1.message",
           "path": "tools/badges.py"
         },
         {
           "type": "uses_method",
           "method": "upper",
-          "message": "make_badge should uppercase the role.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-2-add-badge-helper.sourceChecks.2.message",
           "path": "tools/badges.py"
         }
       ]
@@ -517,56 +517,56 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "tools/__init__.py",
-          "content": "",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_init_py.content",
           "language": "python"
         },
         {
           "path": "tools/names.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_names_py.content",
           "language": "python"
         },
         {
           "path": "tools/badges.py",
-          "content": "def make_badge(name, role):\n    # Add a docstring that explains what this helper returns.\n    # Then clean role before uppercasing it so extra spaces do not reach the badge.\n    return f\"{role.upper()} badge: {name}\"\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_badges_py.content",
           "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "tools/__init__.py",
-            "content": "",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_init_py.content",
             "language": "python"
           },
           {
             "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_names_py.content",
             "language": "python"
           },
           {
             "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    # Add a docstring that explains what this helper returns.\n    # Then clean role before uppercasing it so extra spaces do not reach the badge.\n    return f\"{role.upper()} badge: {name}\"\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.starterFiles.tools_badges_py.content",
             "language": "python"
           }
         ],
@@ -632,11 +632,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -648,12 +648,12 @@
           },
           {
             "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_names_py.content",
             "language": "python"
           },
           {
             "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_badges_py.content",
             "language": "python"
           }
         ],
@@ -664,19 +664,19 @@
               "\"\"\"",
               "'''"
             ],
-            "message": "Add a docstring to make_badge in tools/badges.py.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.0.message",
             "path": "tools/badges.py"
           },
           {
             "type": "uses_method",
             "method": "strip",
-            "message": "Clean the role before uppercasing it.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.1.message",
             "path": "tools/badges.py"
           },
           {
             "type": "uses_method",
             "method": "upper",
-            "message": "Uppercase the role in make_badge.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.2.message",
             "path": "tools/badges.py"
           }
         ]
@@ -684,7 +684,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -696,12 +696,12 @@
         },
         {
           "path": "tools/names.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_names_py.content",
           "language": "python"
         },
         {
           "path": "tools/badges.py",
-          "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.solutionFiles.tools_badges_py.content",
           "language": "python"
         }
       ],
@@ -722,19 +722,19 @@
             "\"\"\"",
             "'''"
           ],
-          "message": "Add a docstring to make_badge in tools/badges.py.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.0.message",
           "path": "tools/badges.py"
         },
         {
           "type": "uses_method",
           "method": "strip",
-          "message": "Clean the role before uppercasing it.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.1.message",
           "path": "tools/badges.py"
         },
         {
           "type": "uses_method",
           "method": "upper",
-          "message": "Uppercase the role in make_badge.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-3-document-badge-helper.sourceChecks.2.message",
           "path": "tools/badges.py"
         }
       ]
@@ -747,56 +747,56 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "tools/__init__.py",
-          "content": "",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_init_py.content",
           "language": "python"
         },
         {
           "path": "tools/names.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_names_py.content",
           "language": "python"
         },
         {
           "path": "tools/badges.py",
-          "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_badges_py.content",
           "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "tools/__init__.py",
-            "content": "",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_init_py.content",
             "language": "python"
           },
           {
             "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_names_py.content",
             "language": "python"
           },
           {
             "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.starterFiles.tools_badges_py.content",
             "language": "python"
           }
         ],
@@ -862,11 +862,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -878,12 +878,12 @@
           },
           {
             "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_names_py.content",
             "language": "python"
           },
           {
             "path": "tools/badges.py",
-            "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_badges_py.content",
             "language": "python"
           }
         ],
@@ -891,13 +891,13 @@
           {
             "type": "uses_call",
             "functionName": "make_badge",
-            "message": "Build the badge with make_badge() instead of hard-coding the final text.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.0.message",
             "path": "main.py"
           },
           {
             "type": "source_contains",
             "pattern": "Welcome!",
-            "message": "Print the final welcome message.",
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.1.message",
             "path": "main.py"
           }
         ]
@@ -905,7 +905,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -917,12 +917,12 @@
         },
         {
           "path": "tools/names.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_names_py.content",
           "language": "python"
         },
         {
           "path": "tools/badges.py",
-          "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.solutionFiles.tools_badges_py.content",
           "language": "python"
         }
       ],
@@ -940,13 +940,13 @@
         {
           "type": "uses_call",
           "functionName": "make_badge",
-          "message": "Build the badge with make_badge() instead of hard-coding the final text.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.0.message",
           "path": "main.py"
         },
         {
           "type": "source_contains",
           "pattern": "Welcome!",
-          "message": "Print the final welcome message.",
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.mp-4-package-welcome-message.sourceChecks.1.message",
           "path": "main.py"
         }
       ]
@@ -958,11 +958,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0",
       "language": "python",
-      "starterCode": "# Create tools/names.py with clean_name(text).\n# Import clean_name from tools.names.\n# Print clean_name(\"  ava  \").\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Create tools/names.py with clean_name(text).\n# Import clean_name from tools.names.\n# Print clean_name(\"  ava  \").\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -971,25 +971,25 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "tools/names.py",
-          "content": "def clean_name(text):\n    return text.strip().title()\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.tools_names_py.content",
           "language": "python"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Create tools/names.py with clean_name(text).\n# Import clean_name from tools.names.\n# Print clean_name(\"  ava  \").\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Create tools/names.py with clean_name(text).\n# Import clean_name from tools.names.\n# Print clean_name(\"  ava  \").\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1040,18 +1040,18 @@
             ]
           }
         ],
-        "solutionCode": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "tools/names.py",
-            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.solutionFiles.tools_names_py.content",
             "language": "python"
           }
         ],
@@ -1061,25 +1061,25 @@
             "module": "tools.names",
             "importName": "clean_name",
             "path": "main.py",
-            "message": "Import clean_name from tools.names."
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
             "pattern": "def\\s+clean_name\\s*\\(",
             "path": "tools/names.py",
-            "message": "Define clean_name in tools/names.py."
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.1.message"
           },
           {
             "type": "uses_method",
             "method": "strip",
             "path": "tools/names.py",
-            "message": "clean_name should strip spaces."
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.2.message"
           },
           {
             "type": "uses_method",
             "method": "title",
             "path": "tools/names.py",
-            "message": "clean_name should title-case the name."
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.3.message"
           }
         ]
       },
@@ -1097,25 +1097,25 @@
           "module": "tools.names",
           "importName": "clean_name",
           "path": "main.py",
-          "message": "Import clean_name from tools.names."
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
           "pattern": "def\\s+clean_name\\s*\\(",
           "path": "tools/names.py",
-          "message": "Define clean_name in tools/names.py."
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.1.message"
         },
         {
           "type": "uses_method",
           "method": "strip",
           "path": "tools/names.py",
-          "message": "clean_name should strip spaces."
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.2.message"
         },
         {
           "type": "uses_method",
           "method": "title",
           "path": "tools/names.py",
-          "message": "clean_name should title-case the name."
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0.sourceChecks.3.message"
         }
       ]
     }

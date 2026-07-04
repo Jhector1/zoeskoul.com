@@ -1,53 +1,53 @@
 {
   "subjects": {
     "linux-terminal-fundamentals": {
-      "title": "Baz Tèminal Linux",
-      "description": "Yon kou Linux ki fasil pou débutan, ki konsantre sou deplase nan tèminal la, fichye, katab, bon abitid kòmand ki an sekirite, ak pratik nan espas travay.",
-      "moreComingSoon": "Gen plis leson sou Baz Tèminal Linux k ap vini byento."
+      "title": "Fondamantal Linux Terminal",
+      "description": "Yon kou Linux pou debutan ki konsantre sou navigasyon nan tèminal la, fichye, dosye, bon abitid pou kòmand yo, ak pratik ki baze sou espas travay.",
+      "moreComingSoon": "Plis leson sou baz Linux Terminal ap vini byento."
     }
   },
   "modules": {
     "linux-terminal-fundamentals": {
       "linux-module-1-terminal-navigation": {
-        "title": "Baz pou navige nan tèminal la",
-        "description": "Aprann kisa tèminal la ye, kijan pou konnen kote ou ye, kijan pou lis fichye yo, ak kijan pou deplase ant katab yo.",
+        "title": "Baz Navigasyon nan Tèminal",
+        "description": "Aprann sa ki tèminal la ye, kijan pou w konnen ki kote w ye, kijan pou w lisye fichye yo, ak kijan pou w deplase ant dosye yo.",
         "outcomes": [
-          "Eksplike sa yon kòmand tèminal fè.",
-          "Sèvi ak pwd ak ls pou enspekte kote ou ye kounye a.",
+          "Explike sa yon kòmand terminàl fè.",
+          "Sèvi ak pwd ak ls pou enspekte kote aktyèl la.",
           "Sèvi ak cd, ., .., ak ~ pou deplase an sekirite.",
-          "Kreye yon kat senp pou katab yo avèk kòmand tèminal."
+          "Kreye yon katab senp lè w itilize kòmand terminàl."
         ],
         "why": [
-          "Sa bati konfyans nan baz navige ak tèminal la.",
-          "Sa prepare elèv yo pou pwochen konpetans nan kou a."
+          "Bati konfyans ak baz navigasyon tèminal la.",
+          "Prepare aprenan yo pou pwochen konpetans yo nan kou a."
         ]
       },
       "linux-module-2-files-and-folders": {
-        "title": "Fichye, katab, ak gade kontni",
-        "description": "Kreye, kopye, deplase, chanje non, efase, epi enspekte fichye depi nan tèminal la.",
+        "title": "Fichye, Dossye, ak Wè Kontni",
+        "description": "Kreye, kopye, deplase, chanje non, efase, epi enspekte fichye yo nan tèminal la.",
         "outcomes": [
-          "Kreye katab ak fichye avèk mkdir, mkdir -p, ak touch.",
-          "Kopye, deplase, epi chanje non fichye avèk cp ak mv.",
-          "Sèvi ak bon abitid efasman ki an sekirite avèk rm.",
-          "Enspekte fichye tèks avèk cat, head, tail, ak wc."
+          "Kreye dosye ak fichye ak mkdir, mkdir -p, ak touch.",
+          "Kopi, deplase, ak renome fichye yo lè w itilize cp ak mv.",
+          "Itilize bonjan abitid pou efase ak rm.",
+          "Enspekte fichye tèks ak cat, head, tail, ak wc."
         ],
         "why": [
-          "Sa bati konfyans ak fichye, katab, ak gade kontni.",
-          "Sa prepare elèv yo pou pwochen konpetans nan kou a."
+          "Devlope konfyans ak fichye, dosye, ak wè kontni.",
+          "Prepare aprenan yo pou pwochen konpetans yo nan kou a."
         ]
       },
       "linux-module-3-final-capstone": {
-        "title": "Pwojè final: remèt sal fichye a",
-        "description": "Sèvi ak tèminal la pou netwaye yon ti espas travay reyèl epi kite li pare pou yon lòt moun.",
+        "title": "Pwojè Final: Remiz Sal Fichye a",
+        "description": "Sèvi ak tèminal la pou netwaye yon ti espas travay reyèl epi kite l pare pou yon lòt moun.",
         "outcomes": [
           "Enspekte yon espas travay anvan ou chanje li.",
-          "Kreye yon estrikti katab ki pwòp pou yon travay reyèl.",
-          "Deplase, kopye, chanje non, epi retire fichye an sekirite.",
-          "Verifye espas travay ki fini an avèk kòmand tèminal."
+          "Kreye yon estrikti dosye ki byen òdone pou yon travay reyèl.",
+          "Deplase, kopye, chanje non, epi efase fichye yo an sekirite.",
+          "Verifye espas travay fini a ak kòmand tèminal yo."
         ],
         "why": [
-          "Sa bati konfyans ak pwojè final la: remèt sal fichye a.",
-          "Sa prepare elèv yo pou pwochen konpetans nan kou a."
+          "Bati konfyans ak dènye pwojè final la: remiz chanm dosye a.",
+          "Prepare aprenan yo pou pwochen konpetans yo nan kou a."
         ]
       }
     }
@@ -56,51 +56,51 @@
     "linux-terminal-fundamentals": {
       "linux-module-1-terminal-navigation": {
         "linux-terminal-fundamentals-linux-module-1-orientation": {
-          "title": "Oryantasyon nan tèminal la",
-          "description": "Aprann kisa tèminal la ye, kote ou ye avèk pwd ak ls, epi kijan pou deplase avèk cd atravè egzanp ki konsantre ak pratik.",
+          "title": "Oryantasyon Tèminal",
+          "description": "Aprann sa ki tèminal la, kote mwen ye? pwd ak ls, deplase ak cd atravè egzanp ki byen konsantre ak pratik.",
           "weeks": null,
           "bullets": [
-            "Kisa tèminal la ye",
-            "Kote mwen ye? pwd ak ls",
-            "Deplase avèk cd"
+            "Sa ki Tèminal la ye",
+            "Ki kote mwen ye? modpas ak ls",
+            "Pale ak cd"
           ]
         },
         "linux-terminal-fundamentals-linux-module-1-project": {
-          "title": "Pwojè modil",
-          "description": "Aprann pwojè kat tèminal la atravè egzanp ki konsantre ak pratik.",
+          "title": "Pwojè Modil",
+          "description": "Aprann pwojè: kat tèminal atravè egzanp ki byen konsantre ak pratik.",
           "weeks": null,
           "bullets": [
-            "Pwojè: kat tèminal"
+            "Pwojè: Kat Tèminal"
           ]
         }
       },
       "linux-module-2-files-and-folders": {
         "linux-terminal-fundamentals-linux-module-2-file-workflow": {
-          "title": "Fason travay ak fichye",
-          "description": "Aprann kreye katab ak fichye, kopye, deplase, chanje non, epi gade kontni fichye atravè egzanp ki konsantre ak pratik.",
+          "title": "Fichye Travay",
+          "description": "Aprann kreye dosye ak fichye, kopye, deplase, ak chanje non, epi wè kontni fichye yo atravè egzanp ki byen konsantre ak pratik.",
           "weeks": null,
           "bullets": [
-            "Kreye katab ak fichye",
-            "Kopye, deplase, ak chanje non",
-            "Gade kontni fichye"
+            "Kreye Dosye ak Fichye",
+            "Kopi, Deplase, ak Chanje Non",
+            "Gade sa ki nan fichye a"
           ]
         },
         "linux-terminal-fundamentals-linux-module-2-project": {
-          "title": "Pwojè modil",
-          "description": "Aprann pwojè òganizatè nòt la atravè egzanp ki konsantre ak pratik.",
+          "title": "Pwojè Modil",
+          "description": "Aprann pwojè: òganizatè nòt atravè egzanp ki byen konsantre ak pratik.",
           "weeks": null,
           "bullets": [
-            "Pwojè: òganizatè nòt"
+            "Pwojè: Òganizatè Nòt"
           ]
         }
       },
       "linux-module-3-final-capstone": {
         "linux-terminal-fundamentals-linux-module-3-capstone": {
-          "title": "Pwojè final",
-          "description": "Aprann pwojè final remèt sal fichye a atravè egzanp ki konsantre ak pratik.",
+          "title": "Pwojè Final",
+          "description": "Aprann kapstone: remiz chanm dosye atravè egzanp ki byen vize ak pratik.",
           "weeks": null,
           "bullets": [
-            "Pwojè final: remèt sal fichye a"
+            "Capstone: Remiz Sal Fichye a"
           ]
         }
       }

@@ -1,0 +1,180 @@
+{
+  "topicId": "methods-and-responsibility",
+  "repairs": [
+    {
+      "code": "PYTHON_BROWSER_TRACEBACK_FILENAME_REMOVED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.methods-and-responsibility-sketch-0.bodyMarkdown",
+      "message": "Replaced .py filename traceback wording with browser code editor wording."
+    },
+    {
+      "code": "PYTHON_BROWSER_TRACEBACK_FILENAME_REMOVED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.methods-and-responsibility-sketch-1.bodyMarkdown",
+      "message": "Replaced .py filename traceback wording with browser code editor wording."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch0",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_STATEFUL_SEMANTIC_METHOD_SEQUENCE_ADDED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch0",
+      "message": "Converted getter-only method_returns checks into method_sequence_returns checks so state-changing OOP methods are called before the final getter is validated."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch0",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "try-methods-and-responsibility-sketch0",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch1",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch1",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "try-methods-and-responsibility-sketch1",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch2",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_STATEFUL_SEMANTIC_METHOD_SEQUENCE_ADDED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch2",
+      "message": "Converted getter-only method_returns checks into method_sequence_returns checks so state-changing OOP methods are called before the final getter is validated."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch2",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "try-methods-and-responsibility-sketch2",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch3",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-methods-and-responsibility-sketch3",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "try-methods-and-responsibility-sketch3",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-methods-and-responsibility-validation-step",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_STATEFUL_SEMANTIC_METHOD_SEQUENCE_ADDED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-methods-and-responsibility-validation-step",
+      "message": "Converted getter-only method_returns checks into method_sequence_returns checks so state-changing OOP methods are called before the final getter is validated."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-methods-and-responsibility-validation-step",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_FUNCTION_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-methods-and-responsibility-validation-step",
+      "message": "Completed helper function implementation files from function_returns semantic checks when generated solution files still contained starter comments or pass statements."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "ci-methods-and-responsibility-validation-step",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-methods-and-responsibility-report-step",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_ENTRY_SOLUTION_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-methods-and-responsibility-report-step",
+      "message": "Synthesized a complete runnable entry-file solution from semantic OOP checks when the generated main file only contained imports, comments, or placeholders."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-methods-and-responsibility-report-step",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+      "category": "other",
+      "severity": "medium",
+      "field": "sketchBlocks",
+      "message": "Added a Try it yourself learner action required by programming teaching validation."
+    }
+  ]
+}

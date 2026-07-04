@@ -194,6 +194,23 @@ function TerminalExample({ raw }: { raw: string }) {
     );
 }
 
+
+const LITERAL_OPERATOR_CHARACTERS = new Set(
+    Array.from("><|&;~^%$@#*+=!?:.,/\\\\()[]{}_-"),
+);
+
+export function shouldRenderLiteralOperatorContent(content: string): boolean {
+    const value = String(content ?? "").trim();
+
+    if (!value || value.includes("`")) {
+        return false;
+    }
+
+    return Array.from(value).every((character) =>
+        LITERAL_OPERATOR_CHARACTERS.has(character),
+    );
+}
+
 export default function MathMarkdown({ content, className, inline = false }: Props) {
     const Wrapper: React.ElementType = inline ? "span" : "div";
 
@@ -201,6 +218,21 @@ export default function MathMarkdown({ content, className, inline = false }: Pro
         "[&_.katex]:text-inherit [&_.katex-display]:overflow-x-auto",
         className,
     );
+
+    if (shouldRenderLiteralOperatorContent(content)) {
+        return (
+            <Wrapper className={wrapperClass}>
+                <code
+                    className={join(
+                        "rounded-md border px-1.5 py-0.5 font-mono text-[0.85em]",
+                        "ui-border ui-bg-surface-2 ui-text",
+                    )}
+                >
+                    {String(content).trim()}
+                </code>
+            </Wrapper>
+        );
+    }
 
     return (
         <Wrapper className={wrapperClass}>

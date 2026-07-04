@@ -168,7 +168,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass"
+              "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
+              "solutionCode": "def make_label(item, count):\n    return item + \": \" + str(count)"
             },
             "ci-calculate-tip": {
               "title": "Return a tip amount",
@@ -179,7 +180,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass"
+              "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
+              "solutionCode": "def calculate_tip(bill, percent):\n    return bill * percent / 100"
             },
             "ci-first-item": {
               "title": "Return the first list item",
@@ -190,7 +192,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass"
+              "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass",
+              "solutionCode": "def first_item(items):\n    return items[0]"
             },
             "try-parameters-and-return-values-checkpoint": {
               "title": "Return a doubled number",
@@ -201,7 +204,8 @@
                 "hint_1": "Use `return number * 2`.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n"
+              "starterCode": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
+              "solutionCode": "def double(number):\n    return number * 2\n\nprint(double(7))\n"
             },
             "try-parameters-and-return-values-sketch0": {
               "title": "Return a sum",
@@ -212,7 +216,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n"
+              "starterCode": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
+              "solutionCode": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n"
             },
             "try-parameters-and-return-values-sketch1": {
               "title": "Format a full name",
@@ -223,7 +228,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n"
+              "starterCode": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
+              "solutionCode": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n"
             }
           },
           "tryIt": {

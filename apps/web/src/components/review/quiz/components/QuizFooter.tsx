@@ -35,11 +35,12 @@ export default function QuizFooter(props: {
                   correct: props.correctCount,
                   score: props.scorePct,
                 },
+                `Checked: ${props.checkedCount}/${props.total} • Correct: ${props.correctCount}/${props.total} • Score: ${props.scorePct}%`,
             )}
           </div>
 
           <div className="mt-2 flex items-center gap-2">
-            <div className="ui-progress-track" aria-label={ui.t("footer.progressAria")}>
+            <div className="ui-progress-track" aria-label="Quiz progress">
               <div className="ui-progress-fill" style={{ width: `${pct}%` }} />
             </div>
             <div className="ui-review-footer-percent">{pct}%</div>
@@ -48,16 +49,16 @@ export default function QuizFooter(props: {
 
         <div className="flex items-center gap-2">
           {props.locked ? (
-              <span className="ui-pill-warn">{ui.t("status.locked")}</span>
+              <span className="ui-pill-warn">{ui.t("status.locked", {}, "Locked")}</span>
           ) : props.isCompleted ? (
-              <span className="ui-pill-good">{ui.t("status.completed")}</span>
+              <span className="ui-pill-good">{ui.t("status.completed", {}, "✓ Completed")}</span>
           ) : props.passed ? (
-              <span className="ui-pill-good">{ui.t("status.passed")}</span>
+              <span className="ui-pill-good">{ui.t("status.passed", {}, "✓ Passed")}</span>
           ) : (
               <span className="ui-review-footer-hint">
             {props.sequential
-                ? ui.t("footer.sequentialHint")
-                : ui.t("footer.nonSequentialHint")}
+                ? ui.t("footer.sequentialHint", {}, "Check each question in order to pass")
+                : ui.t("footer.nonSequentialHint", {}, "Check all questions to pass")}
           </span>
           )}
         </div>

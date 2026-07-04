@@ -3,43 +3,43 @@
     "linux-terminal-fundamentals": {
       "linux-module-1-terminal-navigation": {
         "module-1-terminal-map-project": {
-          "label": "Pwojè: kat tèminal",
-          "summary": "Trase yon ti kat katab pou yon pwojè nòt teren avèk ls, cd, ak pwd pou wè kote ou ye epi deplase ant katab yo.",
+          "label": "Pwojè: Kat Tèminal",
+          "summary": "Trase yon ti katab pou yon pwojè nòt teren lè w itilize ls, cd, ak pwd pou w wè kote w ye epi deplase ant katab yo.",
           "cards": {
             "sketch0": {
-              "title": "Rezime pwojè kat tèminal pou nòt teren"
+              "title": "Rezime pwojè nòt teren pou chan Terminal Map"
             },
             "project": {
-              "title": "Pwojè kat tèminal pou nòt teren"
+              "title": "Pwojè nòt teren pou chan Map Terminal"
             }
           },
           "moduleProject": {
             "steps": {
               "module-1-terminal-map-project-terminal-task-1": {
-                "title": "Antre nan katab pwojè a",
-                "prompt": "Ou se helping a park survey team trace an existing tèminal map. Kouri ls, deplase into park-tèminal-map, ak use pwd pou konfime ou reached the project katab.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Antre nan dosye pwojè a",
+                "prompt": "Ou ap ede yon ekip sondaj nan pak la trase yon kat tèminal ki egziste deja. Kouri ls, antre nan park-terminal-map, epi itilize pwd pou konfime ou rive nan dosye pwojè a.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Project etaps se connected. Focus on where ou are, what katabs ou can see, ak where pou deplase next.",
-                  "hint_1": "Start avèk ls so ou can see the katab ou need pou enter.",
-                  "hint_2": "After ou cd into the project katab, run pwd pou konfime ou kote."
+                  "concept": "Etap pwojè yo konekte. Konsantre sou kote ou ye, ki dosye ou ka wè, ak kote pou deplase apre.",
+                  "hint_1": "Kòmanse ak ls pou w ka wè dosye ou bezwen antre ladan l.",
+                  "hint_2": "Apre ou fin antre nan dosye pwojè a, kouri pwd pou konfime kote ou ye a."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "List the espas travay first avèk ls."
+                      "message": "Lise espas travay la an premye ak ls."
                     },
                     "1": {
-                      "message": "Move into park-tèminal-map."
+                      "message": "Avanse nan pak-terminál-kat la."
                     },
                     "2": {
-                      "message": "Kouri pwd apre entering park-tèminal-map."
+                      "message": "Kouri pwd apre ou fin antre park-terminal-map."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
@@ -48,7 +48,7 @@
                     "content": "North trail request log\n"
                   },
                   "park_terminal_map_maps_current_location_txt": {
-                    "content": "Current kote tchekeed avèk pwd ak ls\n"
+                    "content": "Current location checked with pwd and ls\n"
                   },
                   "park_terminal_map_handoff_terminal_map_ready_txt": {
                     "content": "Terminal map ready for the park survey team\n"
@@ -56,30 +56,30 @@
                 }
               },
               "module-1-terminal-map-project-terminal-task-2": {
-                "title": "Jwenn katab requests la",
-                "prompt": "From inside park-tèminal-map, lis what se there, deplase into requests, ak use pwd pou konfime ou found the request notes.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Jwenn dosye demann yo",
+                "prompt": "Nan `park-terminal-map`, fè lis sa ki la, ale nan demann yo, epi itilize `pwd` pou konfime ou jwenn nòt demann yo.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Once ou se inside a katab, ls montres what se available ak cd deplases ou deeper into the map.",
-                  "hint_1": "Sèvi ak ls inside park-tèminal-map anvan choosing where pou go next.",
-                  "hint_2": "Kouri pwd apre cd requests so ou can verify the katab name."
+                  "concept": "Yon fwa ou anndan yon dosye, ls montre sa ki disponib epi cd mennen ou pi fon nan kat la.",
+                  "hint_1": "Sèvi ak ls andedan park-terminal-map anvan ou chwazi kote pou ale apre sa.",
+                  "hint_2": "Kouri pwd apre demann cd yo pou ou ka verifye non dosye a."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Sèvi ak ls inside park-tèminal-map."
+                      "message": "Sèvi ak ls andedan park-terminal-map."
                     },
                     "1": {
-                      "message": "Move into the requests katab."
+                      "message": "Ale nan dosye demann yo."
                     },
                     "2": {
-                      "message": "Kouri pwd apre entering requests."
+                      "message": "Kouri pwd apre ou fin antre demann yo."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
@@ -88,7 +88,7 @@
                     "content": "North trail request log\n"
                   },
                   "park_terminal_map_maps_current_location_txt": {
-                    "content": "Current kote tchekeed avèk pwd ak ls\n"
+                    "content": "Current location checked with pwd and ls\n"
                   },
                   "park_terminal_map_handoff_terminal_map_ready_txt": {
                     "content": "Terminal map ready for the park survey team\n"
@@ -96,30 +96,30 @@
                 }
               },
               "module-1-terminal-map-project-terminal-task-3": {
-                "title": "Deplase soti nan requests pou ale nan maps",
-                "prompt": "From requests, deplase back pou park-tèminal-map, enter maps, ak use pwd pou konfime ou reached the navigation notes.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Soti nan demann pou rive nan kat",
+                "prompt": "Soti nan demann yo, retounen nan plan-tèminal-pak la, antre nan kat yo, epi itilize pwd pou konfime ou rive nan nòt navigasyon yo.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "cd .. deplases ou up one level, which se useful when ou need pou deplase depi one sibling katab pou another.",
-                  "hint_1": "Leave requests avèk cd .. anvan trying pou enter maps.",
-                  "hint_2": "Sèvi ak pwd at the end so ou can konfime that maps se ou katab aktyèl la."
+                  "concept": "cd .. moves you up one level, which is useful when you need to move from one sibling folder to another.",
+                  "hint_1": "Kite demann yo ak cd .. anvan ou eseye antre nan kat yo.",
+                  "hint_2": "Sèvi ak pwd nan fen an pou w ka konfime ke maps se dosye kouran ou."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Move back up one level first avèk cd .."
+                      "message": "Monte yon nivo pi wo an premye ak cd .."
                     },
                     "1": {
-                      "message": "Then deplase into maps."
+                      "message": "Apre sa, pase nan kat yo."
                     },
                     "2": {
-                      "message": "Kouri pwd apre entering maps."
+                      "message": "Kouri pwd apre ou fin antre kat yo."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
@@ -128,7 +128,7 @@
                     "content": "North trail request log\n"
                   },
                   "park_terminal_map_maps_current_location_txt": {
-                    "content": "Current kote tchekeed avèk pwd ak ls\n"
+                    "content": "Current location checked with pwd and ls\n"
                   },
                   "park_terminal_map_handoff_terminal_map_ready_txt": {
                     "content": "Terminal map ready for the park survey team\n"
@@ -146,8 +146,8 @@
       "linux-module-1-terminal-navigation": {
         "module-1-terminal-map-project": {
           "project-synopsis": {
-            "title": "Rezime pwojè kat tèminal pou nòt teren",
-            "bodyMarkdown": "Ou se helping a park operations team trace an existing katab map anvan a volunteer event. In this project, ou will use `ls` pou see what se available, `cd` pou deplase between katabs, ak `pwd` pou konfime ou kote. Each etap builds on the previous espas travay, so focus on finding the right place instead of kreye new fichyes."
+            "title": "Rezime pwojè nòt teren pou chan Terminal Map",
+            "bodyMarkdown": "Ou ap ede yon ekip operasyon pak trase yon kat repèrtwa ki egziste deja anvan yon evènman volontè. Nan pwojè sa a, w ap itilize `ls` pou w wè sa ki disponib, `cd` pou w deplase ant repèrtwa yo, ak `pwd` pou w konfime kote w ye. Chak etap bati sou espas travay anvan an, kidonk konsantre w sou jwenn kote ki kòrèk la olye w kreye nouvo fichye."
           }
         }
       }

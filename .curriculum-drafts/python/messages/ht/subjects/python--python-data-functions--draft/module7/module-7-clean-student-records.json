@@ -1,0 +1,199 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "module-7-clean-student-records": {
+          "label": "Pwojè Modil: Netwaye Dosye Etidyan",
+          "summary": "Fè grandi yon ti pwogram netwayaj ki soti nan yon apèsi fichye brit pou vin yon fichye rezilta netwaye ki ka pataje.",
+          "cards": {
+            "sketch0": {
+              "title": "Yon dosye etidyan dezòdone rive nan bwat resepsyon ou."
+            },
+            "project": {
+              "title": "Dosye Elèv Pwòp"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Li dosye elèv la"
+            },
+            "mp_2": {
+              "title": "Netwaye epi valide yon ranje"
+            },
+            "mp_3": {
+              "title": "Sote ranje ki pa bon yo epi kolekte anrejistreman yo."
+            },
+            "mp_4": {
+              "title": "Ekri dosye ki netwaye"
+            }
+          },
+          "quiz": {
+            "mp-1-read-student-file": {
+              "title": "Li dosye elèv la",
+              "prompt": "Yon gwoup etidyan te voye yon imèl ba ou nan adr`data/students.csv`, epi yo mande sa ki ladan l. Li fichye a epi enprime chak ranje brit san liy vid anplis pou ou ka enspekte done yo anvan ou netwaye yo.",
+              "hint": "Ouvri fichye a, fè yon bouk sou chak liy, epi enprime liy ki dekole a.",
+              "help": {
+                "concept": "Yon bon travay netwayaj anjeneral kòmanse pa enspekte fichye brit la anvan ou chanje anyen.",
+                "hint_1": "Itilize `with open(\"data/students.csv\") as file:`.",
+                "hint_2": "Anndan bouk la, enprime `line.strip()` pou evite liy vid anplis."
+              },
+              "starterCode": "# Read data/students.csv and print every line without extra blank lines.\n",
+              "starterFiles": {
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n"
+                },
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Li data/students.csv olye pou w tape kontni fichye a."
+                }
+              },
+              "solutionCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n"
+            },
+            "mp-2-clean-one-row": {
+              "title": "Netwaye epi valide yon ranje",
+              "prompt": "Kòmanse ak apèsi fichye RAW ou deja bati a. Kenbe kontèks sa a, epi ajoute yon liy pou kreye yon diksyonè ak non netwaye ak yon nòt antye. Li premye liy lan ankò epi enprime diksyonè netwaye a.",
+              "hint": "Konsève fòm fichye a jan li abitye: defini yon èd, epi reitilize fichye a pou teste l sou premye ranje a.",
+              "help": {
+                "concept": "Yon fonksyon netwayaj bay rès pwogram nan yon fòm serye pou chak ranje ki valab.",
+                "hint_1": "Separe ranje a ak `line.strip().split(\",\")`.",
+                "hint_2": "Retounen `{\"name\": ..., \"score\": ...}` ak yon non an majiskil tit ak yon nòt antye."
+              },
+              "starterCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n# Keep the raw-file preview above as your starting point.\n# Next, write clean_row(line) so one row becomes a cleaned dictionary.\ndef clean_row(line):\n    # Split the row, clean the name, and convert the score to int.\n    pass\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Print the cleaned first row dictionary.\nprint(clean_row(first_row))\n",
+              "starterFiles": {
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nprint(clean_row(first_row))\n"
+                },
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionCode": "try:\n    with open(\"data/students.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\n\ntry:\n    with open(\"data/students.csv\") as file:\n        first_row = file.readline()\n\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n"
+            },
+            "mp-3-skip-bad-rows": {
+              "title": "Sote ranje ki pa bon yo epi kolekte anrejistreman yo.",
+              "prompt": "Kenbe `clean_row(line)` ki soti nan dènye etap la. Kounye a, kreye yon lis ki rele `records` pa fè yon bouk sou fichye a, ajoute ranje ki valab apre yo fin netwaye, epi sote ranje `ValueError` pou netwayè a ka kontinye avanse.",
+              "hint": "Re-itilize `clean_row(line)` anndan bouk la olye pou w netwaye moso yo ankò ak men.",
+              "help": {
+                "concept": "Nan fichye done reyèl yo, gen kèk liy ki kase. Yon netwayè ta dwe kenbe bon liy yo epi pase san pwoblèm sou liy ki pa bon yo.",
+                "hint_1": "Kòmanse ak `records = []` anvan bouk la.",
+                "hint_2": "Ajoute andedan `try`, epi sote `ValueError` ranje nan `except`."
+              },
+              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        # Keep using clean_row(line), but only save the rows that work.\n        # Skip ValueError rows so the project keeps moving.\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            pass\n\nprint(records)\n",
+              "starterFiles": {
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+                },
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak try/except pou sote ran move yo."
+                }
+              },
+              "solutionCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n"
+            },
+            "mp-4-write-clean-records": {
+              "title": "Ekri dosye pwòp",
+              "prompt": "Kòmanse ak builder dosye ki deja netwaye ou genyen an. Kenbe lojik sa a, epi ekri ranje ki valab yo nan tablo rezilta a epi ranplase enprime apèsi a ak yon mesaj kout sou konklizyon an.",
+              "hint": "Tounen lis `records` k ap mache a an yon fichye pou delivre ak yon konfimasyon rapid.",
+              "help": {
+                "concept": "Dènye etap nan yon travay netwayaj se delivre yon atik pwòp, pa sèlman enprime done sou ekran an.",
+                "hint_1": "Kreye `output/` si sa nesesè, epi louvri `output/clean_students.csv` an mòd ekriti.",
+                "hint_2": "Ekri yon dosye pwòp pa liy, epi enprime konbyen dosye pwòp ki te sove."
+              },
+              "starterCode": "def clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nprint(records)\n\n# Replace the preview print with the shareable output file.\n# Create output/, write output/clean_students.csv, and print how many clean records were saved.\n",
+              "starterFiles": {
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n"
+                },
+                "data_students_csv": {
+                  "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Ekri fichye dosye pwòp la."
+                },
+                "1": {
+                  "message": "Sèvi ak file.write() pou kreye fichye CSV sòti a."
+                }
+              },
+              "solutionCode": "from pathlib import Path\nPath(\"output\").mkdir(exist_ok=True)\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\nrecords = []\nwith open(\"data/students.csv\") as file:\n    for line in file:\n        try:\n            records.append(clean_row(line))\n        except ValueError:\n            continue\n\nwith open(\"output/clean_students.csv\", \"w\") as file:\n    for record in records:\n        file.write(f\"{record['name']},{record['score']}\\n\")\n\nprint(f\"Wrote {len(records)} clean records\")\n"
+            },
+            "try-module-7-clean-student-records-sketch0": {
+              "title": "Netwaye premye ranje a nan fichye a",
+              "prompt": "Ouvri `data/students.csv`, li premye liy la, netwaye non an ak nòt la, epi enprime `Ava:92`.",
+              "hint": "Li premye liy ki nan fichye a, separe l, netwaye tou de moso yo, epi enprime yo ak yon pwen-virg.",
+              "help": {
+                "concept": "Kat sa a pratike netwaye yon ranje reyèl nan menm fòm fichye ki itilize nan pwojè a.",
+                "hint_1": "Itilize `with open(\"data/students.csv\") as file:` ak `first_row = file.readline()`.",
+                "hint_2": "Separe ranje a, itilize `.strip().title()` pou non an, epi enprime `name:score`."
+              },
+              "starterCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\n# Clean the first row and print Ava:92.\n",
+              "solutionCode": "with open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nname, score = first_row.split(\",\")\nprint(f\"{name.strip().title()}:{score.strip()}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Li ranje a nan data/students.csv."
+                },
+                "1": {
+                  "message": "Separe ranje a an non ak nòt."
+                },
+                "2": {
+                  "message": "Retire espas vid nan non an ak nòt la."
+                },
+                "3": {
+                  "message": "Mete non etidyan an an tit."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_module_7_clean_student_records_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `data/students.csv`, li premye liy la, netwaye non an ak nòt la, epi enprime `Ava:92`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "module-7-clean-student-records": {
+          "sketch-1": {
+            "title": "Yon dosye etidyan dezòdone rive nan bwat resepsyon ou.",
+            "bodyMarkdown": "Yon gwoup etidyan ekspòte yon fichye ki gen non ak nòt, men kèk liy dezòdone e kèk kase. Yo pa bezwen yon leson sou netwayaj done; yo bezwen yon ti zouti Python ki li fichye a, kenbe bon anrejistreman yo, sote move yo, epi ekri yon bagay ki itil.\n\nPwojè modil sa a grandi yon pa atantif alafwa. Chak demaraj se solisyon kanonik anvan an plis pwochen travay reyalis la."
+          }
+        }
+      }
+    }
+  }
+}

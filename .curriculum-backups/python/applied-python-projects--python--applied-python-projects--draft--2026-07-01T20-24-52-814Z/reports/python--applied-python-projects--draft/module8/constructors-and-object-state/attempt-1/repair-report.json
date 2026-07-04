@@ -1,0 +1,54 @@
+{
+  "topicId": "constructors-and-object-state",
+  "repairs": [
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-constructors-and-object-state-sketch0",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-constructors-and-object-state-sketch1",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-constructors-and-object-state-transaction-model",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-constructors-and-object-state-add-method",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-constructors-and-object-state-deposit-method",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-constructors-and-object-state-ledger-step",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+      "category": "other",
+      "severity": "medium",
+      "field": "sketchBlocks",
+      "message": "Added a Try it yourself learner action required by programming teaching validation."
+    }
+  ]
+}

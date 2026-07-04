@@ -304,11 +304,11 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "name = input()\n\n# Clean and validate the name.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "name = input()\n\n# Clean and validate the name.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -317,11 +317,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "name = input()\n\n# Clean and validate the name.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "name = input()\n\n# Clean and validate the name.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -357,11 +357,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "name = input().strip().title()\nif name:\n    print(name)\nelse:\n    print(\"Missing\")\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "name = input().strip().title()\nif name:\n    print(name)\nelse:\n    print(\"Missing\")\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -371,19 +371,19 @@
           {
             "type": "uses_method",
             "method": "strip",
-            "message": "Strip whitespace from the name."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.sourceChecks.0.message"
           },
           {
             "type": "uses_method",
             "method": "title",
-            "message": "Title-case the cleaned name."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.sourceChecks.1.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "name = input().strip().title()\nif name:\n    print(name)\nelse:\n    print(\"Missing\")\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -393,12 +393,12 @@
         {
           "type": "uses_method",
           "method": "strip",
-          "message": "Strip whitespace from the name."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.sourceChecks.0.message"
         },
         {
           "type": "uses_method",
           "method": "title",
-          "message": "Title-case the cleaned name."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-checkpoint.sourceChecks.1.message"
         }
       ]
     },
@@ -409,11 +409,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-name",
       "language": "python",
-      "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-name.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_name(text):\n    # return the cleaned name\n    pass",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-name.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -422,11 +422,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(text):\n    # return the cleaned name\n    pass",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-name.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -446,7 +446,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-name.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -479,7 +479,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-name.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -489,7 +489,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-name.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -503,11 +503,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-parse-age",
       "language": "python",
-      "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-parse-age.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def parse_age(text):\n    # return an int or None\n    pass",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-parse-age.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -516,11 +516,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-parse-age.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def parse_age(text):\n    # return an int or None\n    pass",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-parse-age.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -540,7 +540,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-parse-age.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -573,7 +573,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-parse-age.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -583,7 +583,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-parse-age.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -597,11 +597,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-row",
       "language": "python",
-      "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-row.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-row.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -610,11 +610,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-row.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-row.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -634,7 +634,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-row.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -667,7 +667,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-row.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -677,7 +677,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.ci-clean-row.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -691,11 +691,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0",
       "language": "python",
-      "starterCode": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -704,7 +704,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "raw = '  aVA smith  '\nclean = raw.strip().title()\nprint(clean)\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -713,11 +713,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -743,11 +743,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "raw = '  aVA smith  '\nclean = raw.strip().title()\nprint(clean)\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "raw = '  aVA smith  '\nclean = raw.strip().title()\nprint(clean)\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -765,12 +765,12 @@
           {
             "type": "uses_method",
             "method": "strip",
-            "message": "Use strip() to remove extra spaces."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.0.message"
           },
           {
             "type": "uses_method",
             "method": "title",
-            "message": "Use title() to normalize the name."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
           }
         ]
       },
@@ -778,12 +778,12 @@
         {
           "type": "uses_method",
           "method": "strip",
-          "message": "Use strip() to remove extra spaces."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.0.message"
         },
         {
           "type": "uses_method",
           "method": "title",
-          "message": "Use title() to normalize the name."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch0.sourceChecks.1.message"
         }
       ]
     },
@@ -794,11 +794,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1",
       "language": "python",
-      "starterCode": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -807,7 +807,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "score_text = '92'\nscore = int(score_text)\nif 0 <= score <= 100:\n    print('valid')\nelse:\n    print('invalid')\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -816,11 +816,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -846,11 +846,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "score_text = '92'\nscore = int(score_text)\nif 0 <= score <= 100:\n    print('valid')\nelse:\n    print('invalid')\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "score_text = '92'\nscore = int(score_text)\nif 0 <= score <= 100:\n    print('valid')\nelse:\n    print('invalid')\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -860,12 +860,12 @@
           {
             "type": "uses_call",
             "functionName": "int",
-            "message": "Convert score_text to an integer."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
             "pattern": "0\\s*<=|<=\\s*100",
-            "message": "Check that the score is within 0 to 100."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
           }
         ]
       },
@@ -873,12 +873,12 @@
         {
           "type": "uses_call",
           "functionName": "int",
-          "message": "Convert score_text to an integer."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
           "pattern": "0\\s*<=|<=\\s*100",
-          "message": "Check that the score is within 0 to 100."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch1.sourceChecks.1.message"
         }
       ]
     },
@@ -889,11 +889,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2",
       "language": "python",
-      "starterCode": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -902,7 +902,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "rows = [' ava , 92 ', ' mia , 85 ']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name.strip().title()}:{score.strip()}')\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -911,11 +911,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -941,11 +941,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "rows = [' ava , 92 ', ' mia , 85 ']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name.strip().title()}:{score.strip()}')\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "rows = [' ava , 92 ', ' mia , 85 ']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name.strip().title()}:{score.strip()}')\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -955,22 +955,22 @@
           {
             "type": "uses_for_loop",
             "iterable": "rows",
-            "message": "Loop through rows instead of typing both cleaned lines."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
           },
           {
             "type": "uses_method",
             "method": "split",
-            "message": "Split each row into name and score."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
           },
           {
             "type": "uses_method",
             "method": "strip",
-            "message": "Strip spaces from each part."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
           },
           {
             "type": "uses_method",
             "method": "title",
-            "message": "Title-case each name."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
           }
         ]
       },
@@ -978,22 +978,22 @@
         {
           "type": "uses_for_loop",
           "iterable": "rows",
-          "message": "Loop through rows instead of typing both cleaned lines."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.0.message"
         },
         {
           "type": "uses_method",
           "method": "split",
-          "message": "Split each row into name and score."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.1.message"
         },
         {
           "type": "uses_method",
           "method": "strip",
-          "message": "Strip spaces from each part."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.2.message"
         },
         {
           "type": "uses_method",
           "method": "title",
-          "message": "Title-case each name."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.validating-and-cleaning-input.quiz.try-validating-and-cleaning-input-sketch2.sourceChecks.3.message"
         }
       ]
     }

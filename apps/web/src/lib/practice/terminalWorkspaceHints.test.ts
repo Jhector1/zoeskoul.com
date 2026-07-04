@@ -69,4 +69,72 @@ describe("terminalWorkspaceHints", () => {
         expect(submittedFolderPaths.has("student-notes-organizer/classes")).toBe(true);
         expect(submittedFolderPaths.has("student-notes-organizer/backups")).toBe(true);
     });
+
+    it("resolves a relative mv command from terminalEvidence.cwd", () => {
+        const submittedFilePaths = new Set<string>([
+            "sign-shop/banner-note.txt",
+        ]);
+        const submittedFolderPaths = new Set<string>([
+            "sign-shop",
+            "sign-shop/handoff",
+        ]);
+
+        applyTerminalWorkspaceHintsToPathSets({
+            submittedFilePaths,
+            submittedFolderPaths,
+            terminalEvidence: {
+                cwd: "/workspace/sign-shop",
+                commands: [
+                    "mv banner-note.txt handoff/banner-note.txt",
+                ],
+            },
+        });
+
+        expect(submittedFilePaths.has("sign-shop/banner-note.txt")).toBe(false);
+        expect(
+            submittedFilePaths.has("sign-shop/handoff/banner-note.txt"),
+        ).toBe(true);
+    });
+
+    it("resolves a relative rm command from terminalEvidence.cwd", () => {
+        const submittedFilePaths = new Set<string>([
+            "cleanup-desk/temp-label.txt",
+        ]);
+        const submittedFolderPaths = new Set<string>([
+            "cleanup-desk",
+        ]);
+
+        applyTerminalWorkspaceHintsToPathSets({
+            submittedFilePaths,
+            submittedFolderPaths,
+            terminalEvidence: {
+                cwd: "/workspace/cleanup-desk",
+                commands: ["rm temp-label.txt"],
+            },
+        });
+
+        expect(submittedFilePaths.has("cleanup-desk/temp-label.txt")).toBe(false);
+    });
+
+    it("resolves redirected files relative to terminalEvidence.cwd", () => {
+        const submittedFilePaths = new Set<string>();
+        const submittedFolderPaths = new Set<string>([
+            "visitor-desk",
+        ]);
+
+        applyTerminalWorkspaceHintsToPathSets({
+            submittedFilePaths,
+            submittedFolderPaths,
+            terminalEvidence: {
+                cwd: "/workspace/visitor-desk",
+                commands: ['echo "Welcome" > welcome-note.txt'],
+            },
+        });
+
+        expect(
+            submittedFilePaths.has("visitor-desk/welcome-note.txt"),
+        ).toBe(true);
+    });
+
+
 });

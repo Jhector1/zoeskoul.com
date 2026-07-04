@@ -20,6 +20,72 @@ function asNonEmptyString(value: unknown) {
   return typeof value === "string" && value.trim() ? value.trim() : "";
 }
 
+
+function buildLocalAuthoredQuizQuestions(args: {
+  spec: ReviewQuizSpec;
+  stableQuizKey: string;
+}): ReviewQuestion[] | null {
+  const specAny = args.spec as ReviewQuizSpec & {
+    mode?: unknown;
+    exerciseKeys?: unknown;
+    subject?: string;
+    moduleSlug?: string;
+    module?: string;
+    section?: string;
+    topic?: string;
+    difficulty?: "easy" | "medium" | "hard";
+    allowReveal?: boolean;
+    preferKind?: unknown;
+    maxAttempts?: number | null;
+  };
+
+  if (specAny.mode === "project") return null;
+
+  const exerciseKeys = Array.isArray(specAny.exerciseKeys)
+    ? Array.from(
+        new Set(
+          specAny.exerciseKeys
+            .map((key) => asNonEmptyString(key))
+            .filter(Boolean),
+        ),
+      )
+    : [];
+
+  if (!exerciseKeys.length) return null;
+
+  const subject = asNonEmptyString(specAny.subject);
+  const moduleSlug = asNonEmptyString(specAny.moduleSlug ?? specAny.module);
+  const topic = asNonEmptyString(specAny.topic);
+  if (!subject || !moduleSlug || !topic || topic === "all") return null;
+
+  const qk = Math.abs(
+    Array.from(args.stableQuizKey).reduce(
+      (hash, char) => ((hash << 5) - hash + char.charCodeAt(0)) | 0,
+      0,
+    ),
+  ).toString(36);
+
+  return exerciseKeys.map((exerciseKey, index) => ({
+    kind: "practice" as const,
+    id: `q${index + 1}:${qk}:${exerciseKey}`,
+    exerciseKey,
+    fetch: {
+      subject,
+      module: moduleSlug,
+      section: specAny.section,
+      topic,
+      difficulty: specAny.difficulty ?? "easy",
+      allowReveal: Boolean(specAny.allowReveal),
+      preferPurpose: "quiz",
+      preferKind: (specAny.preferKind ?? null) as any,
+      exerciseKey,
+      seedPolicy: "global",
+      salt: `${args.stableQuizKey}|topic=${topic}|slot=${index + 1}|q=${index + 1}|k=${exerciseKey}`,
+    } as any,
+    maxAttempts: specAny.maxAttempts !== undefined ? (specAny.maxAttempts as any) : 1,
+  })) as ReviewQuestion[];
+}
+
 function buildLocalProjectQuestions(args: {
   spec: ReviewQuizSpec;
   stableQuizKey: string;
@@ -97,18 +163,21 @@ export function useReviewQuizQuestions(args: {
 const specSnap = JSON.stringify(spec);
 
 const localProjectQuestions = useMemo(
-
   () => buildLocalProjectQuestions({ spec, stableQuizKey }),
-
   [specSnap, stableQuizKey],
+);
 
+const localAuthoredQuizQuestions = useMemo(
+  () => buildLocalAuthoredQuizQuestions({ spec, stableQuizKey }),
+  [specSnap, stableQuizKey],
 );
 
   useEffect(() => {
-    if (localProjectQuestions) {
+    const localQuestions = localProjectQuestions ?? localAuthoredQuizQuestions;
+    if (localQuestions) {
       setQuizLoading(false);
       setQuizError(null);
-      setQuestions(localProjectQuestions);
+      setQuestions(localQuestions);
       setServerQuizKey(stableQuizKey);
       return;
     }
@@ -161,7 +230,7 @@ const localProjectQuestions = useMemo(
       window.clearTimeout(timeoutId);
       ctrl.abort();
     };
-  }, [quizId, stableQuizKey, reloadNonce, specSnap, localProjectQuestions]);
+  }, [quizId, stableQuizKey, reloadNonce, specSnap, localProjectQuestions, localAuthoredQuizQuestions]);
 
   return { quizLoading, quizError, questions, serverQuizKey };
 }

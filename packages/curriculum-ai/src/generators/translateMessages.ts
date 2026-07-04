@@ -166,6 +166,246 @@ function assertTranslationCompleteness(args: {
     }
 }
 
+
+type CodeCommentTask = {
+    commentKey: string;
+    lineIndex: number;
+    start: number;
+    text: string;
+};
+
+type CodeCommentPlan = {
+    sourceKey: string;
+    sourceValue: string;
+    newline: string;
+    lines: string[];
+    tasks: CodeCommentTask[];
+};
+
+const CODE_COMMENT_SYNTHETIC_SEGMENT = "__zsCodeComment";
+
+function isCodeTextEntryKey(key: string): boolean {
+    const path = keyToPath(key);
+    const last = path[path.length - 1]?.toLowerCase() ?? "";
+    const joined = path.join("/").toLowerCase();
+
+    return (
+        last === "startercode" ||
+        last === "solutioncode" ||
+        last === "content" ||
+        joined.includes("/starterfiles/") ||
+        joined.includes("/solutionfiles/")
+    );
+}
+
+function findLineCommentStart(line: string): number {
+    let quote: '"' | "'" | "`" | null = null;
+    let escaped = false;
+
+    for (let index = 0; index < line.length; index += 1) {
+        const char = line[index];
+        const next = line[index + 1];
+
+        if (escaped) {
+            escaped = false;
+            continue;
+        }
+
+        if (quote) {
+            if (char === "\\") {
+                escaped = true;
+                continue;
+            }
+
+            if (char === quote) {
+                quote = null;
+            }
+
+            continue;
+        }
+
+        if (char === '"' || char === "'" || char === "`") {
+            quote = char;
+            continue;
+        }
+
+        if (char === "#" && next !== "!") return index;
+        if (char === "/" && next === "/") return index;
+        if (char === "-" && next === "-") return index;
+    }
+
+    return -1;
+}
+
+function getCommentPrefix(line: string, start: number): string {
+    const marker = line.slice(start, start + 2);
+
+    if (marker === "//" || marker === "--") {
+        const afterMarker = line[start + 2] === " " ? " " : "";
+        return line.slice(0, start + 2) + afterMarker;
+    }
+
+    const afterHash = line[start + 1] === " " ? " " : "";
+    return line.slice(0, start + 1) + afterHash;
+}
+
+function getCommentText(line: string, start: number): string {
+    const marker = line.slice(start, start + 2);
+
+    if (marker === "//" || marker === "--") {
+        return line.slice(start + 2).replace(/^\s/, "");
+    }
+
+    return line.slice(start + 1).replace(/^\s/, "");
+}
+
+function shouldTranslateCodeComment(text: string): boolean {
+    const value = text.trim();
+
+    if (!value) return false;
+    if (value.startsWith("@:")) return false;
+    if (/^noqa\b|^type:\s*ignore\b|^eslint\b|^prettier\b/i.test(value)) {
+        return false;
+    }
+    if (/^(TODO|FIXME|NOTE)\s*:?$/i.test(value)) return false;
+    if (/^[A-Za-z_][A-Za-z0-9_]*$/.test(value)) return false;
+
+    return /[A-Za-z]/.test(value);
+}
+
+function extractCodeCommentPlan(entry: FlatEntry): CodeCommentPlan | null {
+    if (!isCodeTextEntryKey(entry.key)) return null;
+    if (!/[#]|\/\//.test(entry.value) && !/--/.test(entry.value)) return null;
+
+    const newline = entry.value.includes("\r\n") ? "\r\n" : "\n";
+    const lines = entry.value.split(/\r?\n/);
+    const tasks: CodeCommentTask[] = [];
+
+    lines.forEach((line, lineIndex) => {
+        const start = findLineCommentStart(line);
+        if (start < 0) return;
+
+        const text = getCommentText(line, start);
+        if (!shouldTranslateCodeComment(text)) return;
+
+        tasks.push({
+            commentKey: `${entry.key}/${CODE_COMMENT_SYNTHETIC_SEGMENT}/${tasks.length}`,
+            lineIndex,
+            start,
+            text,
+        });
+    });
+
+    if (tasks.length === 0) return null;
+
+    return {
+        sourceKey: entry.key,
+        sourceValue: entry.value,
+        newline,
+        lines,
+        tasks,
+    };
+}
+
+function buildTranslationEntries(args: {
+    sourceEntries: FlatEntry[];
+}): {
+    entriesForProvider: FlatEntry[];
+    codeCommentPlans: CodeCommentPlan[];
+} {
+    const codeCommentPlans: CodeCommentPlan[] = [];
+    const entriesForProvider: FlatEntry[] = [];
+
+    for (const entry of args.sourceEntries) {
+        const plan = extractCodeCommentPlan(entry);
+
+        if (!plan) {
+            entriesForProvider.push(entry);
+            continue;
+        }
+
+        codeCommentPlans.push(plan);
+
+        for (const task of plan.tasks) {
+            entriesForProvider.push({
+                key: task.commentKey,
+                value: task.text,
+            });
+        }
+    }
+
+    return { entriesForProvider, codeCommentPlans };
+}
+
+function rebuildCodeEntryWithTranslatedComments(args: {
+    plan: CodeCommentPlan;
+    translatedByKey: Map<string, string>;
+}): string {
+    const lines = [...args.plan.lines];
+
+    for (const task of args.plan.tasks) {
+        const line = lines[task.lineIndex] ?? "";
+        const prefix = getCommentPrefix(line, task.start);
+        const translated = args.translatedByKey.get(task.commentKey)?.trim() || task.text;
+        lines[task.lineIndex] = prefix + translated;
+    }
+
+    return lines.join(args.plan.newline);
+}
+
+function resolveTranslatedEntries(args: {
+    sourceEntries: FlatEntry[];
+    translatedEntries: FlatEntry[];
+    codeCommentPlans: CodeCommentPlan[];
+}): FlatEntry[] {
+    const translatedByKey = new Map(
+        args.translatedEntries.map((entry) => [entry.key, entry.value] as const),
+    );
+    const planBySourceKey = new Map(
+        args.codeCommentPlans.map((plan) => [plan.sourceKey, plan] as const),
+    );
+
+    return args.sourceEntries.map((entry) => {
+        const plan = planBySourceKey.get(entry.key);
+
+        if (plan) {
+            return {
+                key: entry.key,
+                value: rebuildCodeEntryWithTranslatedComments({
+                    plan,
+                    translatedByKey,
+                }),
+            };
+        }
+
+        return {
+            key: entry.key,
+            value: translatedByKey.get(entry.key) ?? entry.value,
+        };
+    });
+}
+
+function logCodeCommentTranslationDebug(plans: CodeCommentPlan[]) {
+    if (
+        process.env.DEEPL_DEBUG_CODE_COMMENTS !== "1" &&
+        process.env.TRANSLATION_DEBUG_CODE_COMMENTS !== "1"
+    ) {
+        return;
+    }
+
+    const commentCount = plans.reduce((sum, plan) => sum + plan.tasks.length, 0);
+    const sampleKeys = plans
+        .slice(0, 8)
+        .map((plan) => plan.sourceKey)
+        .join(", ");
+
+    console.log(`Translation code-comment entries: ${plans.length}`);
+    console.log(`Translation code-comment segments: ${commentCount}`);
+    if (sampleKeys) {
+        console.log(`Translation code-comment sample keys: ${sampleKeys}`);
+    }
+}
+
 export async function translateMessages(
     provider: AiProvider,
     args: {
@@ -175,9 +415,9 @@ export async function translateMessages(
         sourceMessages: Record<string, unknown>;
     },
 ): Promise<Record<string, unknown>> {
-    const entries = flattenStringLeaves(args.sourceMessages);
+    const sourceEntries = flattenStringLeaves(args.sourceMessages);
 
-    if (entries.length === 0) {
+    if (sourceEntries.length === 0) {
         throw new Error(
             [
                 `No translatable string entries found for locale "${args.locale}".`,
@@ -186,10 +426,16 @@ export async function translateMessages(
         );
     }
 
+    const { entriesForProvider, codeCommentPlans } = buildTranslationEntries({
+        sourceEntries,
+    });
+
+    logCodeCommentTranslationDebug(codeCommentPlans);
+
     const prompt = buildTranslationPrompt({
         locale: args.locale,
         sourceLocale: args.sourceLocale,
-        entries,
+        entries: entriesForProvider,
         shape: args.shape,
     });
 
@@ -205,13 +451,26 @@ export async function translateMessages(
     }));
 
     assertTranslationCompleteness({
-        sourceEntries: entries,
+        sourceEntries: entriesForProvider,
         translatedEntries,
+        locale: args.locale,
+    });
+
+    const resolvedTranslatedEntries = resolveTranslatedEntries({
+        sourceEntries,
+        translatedEntries,
+        codeCommentPlans,
+    });
+
+    assertTranslationCompleteness({
+        sourceEntries,
+        translatedEntries: resolvedTranslatedEntries,
         locale: args.locale,
     });
 
     return rebuildTranslatedMessages({
         sourceMessages: args.sourceMessages,
-        translatedEntries,
+        translatedEntries: resolvedTranslatedEntries,
     });
 }
+

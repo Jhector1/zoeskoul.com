@@ -1,0 +1,626 @@
+{
+  "topicId": "encapsulation-and-validation",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "applied-python-projects-python-8-encapsulation-and-services",
+  "prefix": "py8",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch0.title",
+      "sketchId": "concept",
+      "height": 420,
+      "tryIt": {
+        "id": "try-encapsulation-and-validation-sketch0",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.prompt",
+        "exerciseKey": "try-encapsulation-and-validation-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch1.title",
+      "sketchId": "multifile-shape",
+      "height": 420,
+      "tryIt": {
+        "id": "try-encapsulation-and-validation-sketch1",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.prompt",
+        "exerciseKey": "try-encapsulation-and-validation-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch2.title",
+      "sketchId": "graded-habit",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_savings_goal_practice",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.projectSteps.ci_savings_goal_practice.title",
+            "exerciseKey": "ci-savings-goal-practice",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "concept",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.concept.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.concept.bodyMarkdown"
+    },
+    {
+      "id": "multifile-shape",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.multifile-shape.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.multifile-shape.bodyMarkdown"
+    },
+    {
+      "id": "graded-habit",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.graded-habit.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.graded-habit.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-encapsulation-and-validation-sketch0",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.quiz.try-encapsulation-and-validation-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.wallet import Wallet\n\nwallet = Wallet(10)\nprint(wallet.deposit(5))\nprint(wallet.deposit(-3))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/wallet.py",
+          "content": "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.wallet import Wallet\n\nwallet = Wallet(10)\nprint(wallet.deposit(5))\nprint(wallet.deposit(-3))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/wallet.py",
+          "content": "class Wallet:\n    def __init__(self, balance):\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "15\n15\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMud2FsbGV0IGltcG9ydCBXYWxsZXQKCndhbGxldCA9IFdhbGxldCgxMCkKcHJpbnQod2FsbGV0LmRlcG9zaXQoNSkpCnByaW50KHdhbGxldC5kZXBvc2l0KC0zKSkK',\n    'models/wallet.py': 'Y2xhc3MgV2FsbGV0OgogICAgZGVmIF9faW5pdF9fKHNlbGYsIGJhbGFuY2UpOgogICAgICAgIHNlbGYuYmFsYW5jZSA9IG1heCgwLCBiYWxhbmNlKQoKICAgIGRlZiBkZXBvc2l0KHNlbGYsIGFtb3VudCk6CiAgICAgICAgaWYgYW1vdW50ID4gMDoKICAgICAgICAgICAgc2VsZi5iYWxhbmNlICs9IGFtb3VudAogICAgICAgIHJldHVybiBzZWxmLmJhbGFuY2UK',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.wallet import Wallet\n\nwallet = Wallet(10)\nprint(wallet.deposit(5))\nprint(wallet.deposit(-3))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/wallet.py",
+            "content": "class Wallet:\n    def __init__(self, balance):\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.wallet import Wallet\n\nwallet = Wallet(10)\nprint(wallet.deposit(5))\nprint(wallet.deposit(-3))\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.wallet import Wallet\n\nwallet = Wallet(10)\nprint(wallet.deposit(5))\nprint(wallet.deposit(-3))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.wallet import Wallet\n\nwallet = Wallet(10)\nprint(wallet.deposit(5))\nprint(wallet.deposit(-3))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/wallet.py",
+            "content": "class Wallet:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.wallet import Wallet\n\nwallet = Wallet(10)\nprint(wallet.deposit(5))\nprint(wallet.deposit(-3))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/wallet.py",
+            "content": "class Wallet:\n    def __init__(self, balance):\n        self.balance = max(0, balance)\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/wallet.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/wallet.py"
+        ]
+      }
+    },
+    {
+      "id": "try-encapsulation-and-validation-sketch1",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.quiz.try-encapsulation-and-validation-sketch1",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.student import Student\nfrom services.roster import passing_students\n\nstudents = [Student(\"Ava\", 92), Student(\"Ben\", 60), Student(\"Cy\", 75)]\nfor student in passing_students(students):\n    print(student.name)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/student.py",
+          "content": "class Student:\n    def __init__(self, name, score):\n        self.name = name\n        self.score = score\n\n    def is_passing(self):\n        return self.score >= 70\n",
+          "language": "python"
+        },
+        {
+          "path": "services/roster.py",
+          "content": "def passing_students(students):\n    return []\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.student import Student\nfrom services.roster import passing_students\n\nstudents = [Student(\"Ava\", 92), Student(\"Ben\", 60), Student(\"Cy\", 75)]\nfor student in passing_students(students):\n    print(student.name)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/student.py",
+          "content": "class Student:\n    def __init__(self, name, score):\n        self.name = name\n        self.score = score\n\n    def is_passing(self):\n        return self.score >= 70\n",
+          "language": "python"
+        },
+        {
+          "path": "services/roster.py",
+          "content": "def passing_students(students):\n    results = []\n    for student in students:\n        if student.is_passing():\n            results.append(student)\n    return results\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\nCy\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuc3R1ZGVudCBpbXBvcnQgU3R1ZGVudApmcm9tIHNlcnZpY2VzLnJvc3RlciBpbXBvcnQgcGFzc2luZ19zdHVkZW50cwoKc3R1ZGVudHMgPSBbU3R1ZGVudCgiQXZhIiwgOTIpLCBTdHVkZW50KCJCZW4iLCA2MCksIFN0dWRlbnQoIkN5IiwgNzUpXQpmb3Igc3R1ZGVudCBpbiBwYXNzaW5nX3N0dWRlbnRzKHN0dWRlbnRzKToKICAgIHByaW50KHN0dWRlbnQubmFtZSkK',\n    'models/student.py': 'Y2xhc3MgU3R1ZGVudDoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBuYW1lLCBzY29yZSk6CiAgICAgICAgc2VsZi5uYW1lID0gbmFtZQogICAgICAgIHNlbGYuc2NvcmUgPSBzY29yZQoKICAgIGRlZiBpc19wYXNzaW5nKHNlbGYpOgogICAgICAgIHJldHVybiBzZWxmLnNjb3JlID49IDcwCg==',\n    'services/roster.py': 'ZGVmIHBhc3Npbmdfc3R1ZGVudHMoc3R1ZGVudHMpOgogICAgcmVzdWx0cyA9IFtdCiAgICBmb3Igc3R1ZGVudCBpbiBzdHVkZW50czoKICAgICAgICBpZiBzdHVkZW50LmlzX3Bhc3NpbmcoKToKICAgICAgICAgICAgcmVzdWx0cy5hcHBlbmQoc3R1ZGVudCkKICAgIHJldHVybiByZXN1bHRzCg==',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.student import Student\nfrom services.roster import passing_students\n\nstudents = [Student(\"Ava\", 92), Student(\"Ben\", 60), Student(\"Cy\", 75)]\nfor student in passing_students(students):\n    print(student.name)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/student.py",
+            "content": "class Student:\n    def __init__(self, name, score):\n        self.name = name\n        self.score = score\n\n    def is_passing(self):\n        return self.score >= 70\n",
+            "language": "python"
+          },
+          {
+            "path": "services/roster.py",
+            "content": "def passing_students(students):\n    results = []\n    for student in students:\n        if student.is_passing():\n            results.append(student)\n    return results\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.student import Student\nfrom services.roster import passing_students\n\nstudents = [Student(\"Ava\", 92), Student(\"Ben\", 60), Student(\"Cy\", 75)]\nfor student in passing_students(students):\n    print(student.name)\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.student import Student\nfrom services.roster import passing_students\n\nstudents = [Student(\"Ava\", 92), Student(\"Ben\", 60), Student(\"Cy\", 75)]\nfor student in passing_students(students):\n    print(student.name)\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.student import Student\nfrom services.roster import passing_students\n\nstudents = [Student(\"Ava\", 92), Student(\"Ben\", 60), Student(\"Cy\", 75)]\nfor student in passing_students(students):\n    print(student.name)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/student.py",
+            "content": "class Student:\n    def __init__(self, name, score):\n        self.name = name\n        self.score = score\n\n    def is_passing(self):\n        return self.score >= 70\n",
+            "language": "python"
+          },
+          {
+            "path": "services/roster.py",
+            "content": "def passing_students(students):\n    return []\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.student import Student\nfrom services.roster import passing_students\n\nstudents = [Student(\"Ava\", 92), Student(\"Ben\", 60), Student(\"Cy\", 75)]\nfor student in passing_students(students):\n    print(student.name)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/student.py",
+            "content": "class Student:\n    def __init__(self, name, score):\n        self.name = name\n        self.score = score\n\n    def is_passing(self):\n        return self.score >= 70\n",
+            "language": "python"
+          },
+          {
+            "path": "services/roster.py",
+            "content": "def passing_students(students):\n    results = []\n    for student in students:\n        if student.is_passing():\n            results.append(student)\n    return results\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "services"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/student.py",
+            "services/__init__.py",
+            "services/roster.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "services"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/student.py",
+          "services/__init__.py",
+          "services/roster.py"
+        ]
+      }
+    },
+    {
+      "id": "ci-savings-goal-practice",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.quiz.ci-savings-goal-practice",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.savings_goal import SavingsGoal\n\ngoal = SavingsGoal(\"Laptop\", 1000)\ngoal.deposit(250)\ngoal.deposit(-50)\nprint(goal.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/savings_goal.py",
+          "content": "class SavingsGoal:\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.savings_goal import SavingsGoal\n\ngoal = SavingsGoal(\"Laptop\", 1000)\ngoal.deposit(250)\ngoal.deposit(-50)\nprint(goal.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/savings_goal.py",
+          "content": "class SavingsGoal:\n    def __init__(self, name, target):\n        self.name = name\n        self.target = max(1, target)\n        self.saved = 0\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.saved += amount\n        return self.saved\n\n    def percent_complete(self):\n        return int((self.saved / self.target) * 100)\n\n    def summary(self):\n        return f\"{self.name}: {self.percent_complete()}% complete\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Laptop: 25% complete\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuc2F2aW5nc19nb2FsIGltcG9ydCBTYXZpbmdzR29hbAoKZ29hbCA9IFNhdmluZ3NHb2FsKCJMYXB0b3AiLCAxMDAwKQpnb2FsLmRlcG9zaXQoMjUwKQpnb2FsLmRlcG9zaXQoLTUwKQpwcmludChnb2FsLnN1bW1hcnkoKSkK',\n    'models/savings_goal.py': 'Y2xhc3MgU2F2aW5nc0dvYWw6CiAgICBkZWYgX19pbml0X18oc2VsZiwgbmFtZSwgdGFyZ2V0KToKICAgICAgICBzZWxmLm5hbWUgPSBuYW1lCiAgICAgICAgc2VsZi50YXJnZXQgPSBtYXgoMSwgdGFyZ2V0KQogICAgICAgIHNlbGYuc2F2ZWQgPSAwCgogICAgZGVmIGRlcG9zaXQoc2VsZiwgYW1vdW50KToKICAgICAgICBpZiBhbW91bnQgPiAwOgogICAgICAgICAgICBzZWxmLnNhdmVkICs9IGFtb3VudAogICAgICAgIHJldHVybiBzZWxmLnNhdmVkCgogICAgZGVmIHBlcmNlbnRfY29tcGxldGUoc2VsZik6CiAgICAgICAgcmV0dXJuIGludCgoc2VsZi5zYXZlZCAvIHNlbGYudGFyZ2V0KSAqIDEwMCkKCiAgICBkZWYgc3VtbWFyeShzZWxmKToKICAgICAgICByZXR1cm4gZiJ7c2VsZi5uYW1lfToge3NlbGYucGVyY2VudF9jb21wbGV0ZSgpfSUgY29tcGxldGUiCg==',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.savings_goal import SavingsGoal\n\ngoal = SavingsGoal(\"Laptop\", 1000)\ngoal.deposit(250)\ngoal.deposit(-50)\nprint(goal.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/savings_goal.py",
+            "content": "class SavingsGoal:\n    def __init__(self, name, target):\n        self.name = name\n        self.target = max(1, target)\n        self.saved = 0\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.saved += amount\n        return self.saved\n\n    def percent_complete(self):\n        return int((self.saved / self.target) * 100)\n\n    def summary(self):\n        return f\"{self.name}: {self.percent_complete()}% complete\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.savings_goal import SavingsGoal\n\ngoal = SavingsGoal(\"Laptop\", 1000)\ngoal.deposit(250)\ngoal.deposit(-50)\nprint(goal.summary())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.savings_goal import SavingsGoal\n\ngoal = SavingsGoal(\"Laptop\", 1000)\ngoal.deposit(250)\ngoal.deposit(-50)\nprint(goal.summary())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.savings_goal import SavingsGoal\n\ngoal = SavingsGoal(\"Laptop\", 1000)\ngoal.deposit(250)\ngoal.deposit(-50)\nprint(goal.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/savings_goal.py",
+            "content": "class SavingsGoal:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.savings_goal import SavingsGoal\n\ngoal = SavingsGoal(\"Laptop\", 1000)\ngoal.deposit(250)\ngoal.deposit(-50)\nprint(goal.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/savings_goal.py",
+            "content": "class SavingsGoal:\n    def __init__(self, name, target):\n        self.name = name\n        self.target = max(1, target)\n        self.saved = 0\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.saved += amount\n        return self.saved\n\n    def percent_complete(self):\n        return int((self.saved / self.target) * 100)\n\n    def summary(self):\n        return f\"{self.name}: {self.percent_complete()}% complete\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/savings_goal.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/savings_goal.py"
+        ]
+      }
+    },
+    {
+      "id": "sc-encapsulation-and-validation-design",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.quiz.sc-encapsulation-and-validation-design",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

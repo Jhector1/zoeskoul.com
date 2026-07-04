@@ -297,11 +297,11 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -310,11 +310,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -340,11 +340,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -354,25 +354,25 @@
           {
             "type": "source_contains",
             "pattern": "students[1]",
-            "message": "Use students[1] to reach Mia instead of typing Mia directly.",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "uses_dict_key",
             "key": "name",
-            "message": "Use the name key from the student dictionary."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.sourceChecks.1.message"
           },
           {
             "type": "uses_dict_key",
             "key": "score",
-            "message": "Use the score key from the student dictionary."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.sourceChecks.2.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -382,18 +382,18 @@
         {
           "type": "source_contains",
           "pattern": "students[1]",
-          "message": "Use students[1] to reach Mia instead of typing Mia directly.",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "uses_dict_key",
           "key": "name",
-          "message": "Use the name key from the student dictionary."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.sourceChecks.1.message"
         },
         {
           "type": "uses_dict_key",
           "key": "score",
-          "message": "Use the score key from the student dictionary."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-checkpoint.sourceChecks.2.message"
         }
       ]
     },
@@ -404,11 +404,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1",
       "language": "python",
-      "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -417,11 +417,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -441,7 +441,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -511,7 +511,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -521,7 +521,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -535,11 +535,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2",
       "language": "python",
-      "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -548,11 +548,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -572,7 +572,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -657,7 +657,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -667,7 +667,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -681,11 +681,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3",
       "language": "python",
-      "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -694,11 +694,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -718,7 +718,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -803,7 +803,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -813,7 +813,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.code-3.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -827,11 +827,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0",
       "language": "python",
-      "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -840,7 +840,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nprint(students[0]['name'])\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -849,11 +849,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -879,11 +879,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nprint(students[0]['name'])\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nprint(students[0]['name'])\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -893,13 +893,13 @@
           {
             "type": "source_contains",
             "pattern": "students[0]",
-            "message": "Use students[0] to reach the first student instead of typing Ava directly.",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "uses_dict_key",
             "key": "name",
-            "message": "Use the name key from the student dictionary."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.1.message"
           }
         ]
       },
@@ -907,13 +907,13 @@
         {
           "type": "source_contains",
           "pattern": "students[0]",
-          "message": "Use students[0] to reach the first student instead of typing Ava directly.",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "uses_dict_key",
           "key": "name",
-          "message": "Use the name key from the student dictionary."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch0.sourceChecks.1.message"
         }
       ]
     },
@@ -924,11 +924,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1",
       "language": "python",
-      "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -937,7 +937,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -946,11 +946,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -976,11 +976,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -990,17 +990,17 @@
           {
             "type": "uses_for_loop",
             "iterable": "students",
-            "message": "Loop through students instead of typing each line directly."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.0.message"
           },
           {
             "type": "uses_dict_key",
             "key": "name",
-            "message": "Use the name key while building each line."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.1.message"
           },
           {
             "type": "uses_dict_key",
             "key": "score",
-            "message": "Use the score key while building each line."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.2.message"
           }
         ]
       },
@@ -1008,17 +1008,17 @@
         {
           "type": "uses_for_loop",
           "iterable": "students",
-          "message": "Loop through students instead of typing each line directly."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.0.message"
         },
         {
           "type": "uses_dict_key",
           "key": "name",
-          "message": "Use the name key while building each line."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.1.message"
         },
         {
           "type": "uses_dict_key",
           "key": "score",
-          "message": "Use the score key while building each line."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch1.sourceChecks.2.message"
         }
       ]
     },
@@ -1029,11 +1029,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2",
       "language": "python",
-      "starterCode": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1042,7 +1042,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "course = {'title': 'Python', 'students': ['Ava']}\ncourse['students'].append('Mia')\nprint(course)\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1051,11 +1051,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1081,11 +1081,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "course = {'title': 'Python', 'students': ['Ava']}\ncourse['students'].append('Mia')\nprint(course)\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "course = {'title': 'Python', 'students': ['Ava']}\ncourse['students'].append('Mia')\nprint(course)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1115,17 +1115,17 @@
           {
             "type": "uses_dict_key",
             "key": "students",
-            "message": "Use the students key in the course dictionary."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
           },
           {
             "type": "uses_method",
             "method": "append",
-            "message": "Append Mia to course['students'] instead of replacing the whole course."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.1.message"
           },
           {
             "type": "source_regex",
             "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
-            "message": "Call course['students'].append('Mia')."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.2.message"
           }
         ]
       },
@@ -1133,17 +1133,17 @@
         {
           "type": "uses_dict_key",
           "key": "students",
-          "message": "Use the students key in the course dictionary."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.0.message"
         },
         {
           "type": "uses_method",
           "method": "append",
-          "message": "Append Mia to course['students'] instead of replacing the whole course."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.1.message"
         },
         {
           "type": "source_regex",
           "pattern": "\\bcourse\\s*\\[\\s*['\\\"]students['\\\"]\\s*\\]\\.append\\s*\\(\\s*['\\\"]Mia['\\\"]\\s*\\)",
-          "message": "Call course['students'].append('Mia')."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.nested-data-structures.quiz.try-nested-data-structures-sketch2.sourceChecks.2.message"
         }
       ]
     }

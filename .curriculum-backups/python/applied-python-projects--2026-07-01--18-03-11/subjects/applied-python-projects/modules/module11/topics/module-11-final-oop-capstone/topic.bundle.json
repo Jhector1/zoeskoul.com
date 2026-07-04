@@ -1,0 +1,2231 @@
+{
+  "topicId": "module-11-final-oop-capstone",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-11-oop-capstone-project",
+  "sectionSlug": "applied-python-projects-python-11-final-capstone",
+  "prefix": "py11",
+  "minutes": 70,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.label",
+    "summaryKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.cards.sketch0.title",
+      "sketchId": "module-11-final-oop-capstone-sketch-1",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_module_11_final_oop_capstone_sketch0",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.try_module_11_final_oop_capstone_sketch0.title",
+            "exerciseKey": "try-module-11-final-oop-capstone-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "project_smart_task_tracker_step_2_models",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_smart_task_tracker_step_2_models.title",
+            "exerciseKey": "project-smart-task-tracker-step-2-models",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_smart_task_tracker_step_3_service",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_smart_task_tracker_step_3_service.title",
+            "exerciseKey": "project-smart-task-tracker-step-3-service",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_smart_task_tracker_step_4_storage",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_smart_task_tracker_step_4_storage.title",
+            "exerciseKey": "project-smart-task-tracker-step-4-storage",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_smart_task_tracker_step_5_reports_tests",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_smart_task_tracker_step_5_reports_tests.title",
+            "exerciseKey": "project-smart-task-tracker-step-5-reports-tests",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "project_smart_task_tracker_step_6_final_handoff",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_smart_task_tracker_step_6_final_handoff.title",
+            "exerciseKey": "project-smart-task-tracker-step-6-final-handoff",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "module-11-final-oop-capstone-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.module-11-final-oop-capstone-sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.module-11-final-oop-capstone-sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-module-11-final-oop-capstone-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status):\n        self.title = title\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"\n\n\ndef build_summary(tasks):\n    return 'SMART TASK TRACKER'\n\nprint('SMART TASK TRACKER')\nprint(BaseTask('Write docs', 'todo').summary())\nprint('done')\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status):\n        self.title = title\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "from models.base_task import BaseTask\n\n\ndef load_tasks(path):\n    # TODO: for this first step, return two starter BaseTask objects.\n    # You do not need to read the file contents yet.\n    return []",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "def build_summary(value):\n    return \"SMART TASK TRACKER\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.csv",
+            "content": "kind,title,status,points\nbug,Fix login bug,todo,3\nfeature,Add dark mode,in progress,5",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BaseTask:\n    def __init__(self, title, status):\n        self.title = title\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"\n\n\ndef build_summary(tasks):\n    return 'SMART TASK TRACKER'\n\nprint('SMART TASK TRACKER')\nprint(BaseTask('Write docs', 'todo').summary())\nprint('done')\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status):\n        self.title = title\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"\n\n\ndef build_summary(tasks):\n    return 'SMART TASK TRACKER'\n\nprint('SMART TASK TRACKER')\nprint(BaseTask('Write docs', 'todo').summary())\nprint('done')\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status):\n        self.title = title\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "from models.base_task import BaseTask\n\n\ndef load_tasks(path):\n    # TODO: for this first step, return two starter BaseTask objects.\n    # You do not need to read the file contents yet.\n    return []",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "def build_summary(value):\n    return \"SMART TASK TRACKER\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BaseTask",
+            "message": "Define a BaseTask class in models/base_task.py."
+          },
+          {
+            "type": "constructible",
+            "className": "BaseTask",
+            "constructorArgs": [
+              "Write docs",
+              "todo"
+            ],
+            "message": "BaseTask should be constructible with title and status."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "BaseTask",
+            "constructorArgs": [
+              "Write docs",
+              "todo"
+            ],
+            "attributes": [
+              "title",
+              "status"
+            ],
+            "message": "BaseTask instances should store title and status."
+          },
+          {
+            "type": "method_returns",
+            "className": "BaseTask",
+            "constructorArgs": [
+              "Write docs",
+              "todo"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Write docs [todo]",
+            "expectedKind": "value",
+            "message": "summary() should format the task title and status."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              []
+            ],
+            "argKinds": [],
+            "expected": "SMART TASK TRACKER",
+            "expectedKind": "value",
+            "message": "build_summary should return the heading even for an empty task list."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 3,
+            "message": "Running the project should print a heading and task lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-smart-task-tracker-step-2-models",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.storage_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.reports_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BugTask:\n    def __init__(self, title, status, severity):\n        self.title = title\n        self.status = status\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"\n\n\nclass FeatureTask:\n    def __init__(self, title, status, points):\n        self.title = title\n        self.status = status\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"\n\nprint('SMART TASK TRACKER')\nprint(BugTask('Fix login bug', 'todo', 'high').summary())\nprint(FeatureTask('Add dark mode', 'in progress', 5).summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "from models.base_task import BaseTask\n\n\ndef load_tasks(path):\n    # TODO: replace these BaseTask objects with the correct subclasses.\n    return [\n        BaseTask(\"Fix login bug\", \"todo\"),\n        BaseTask(\"Add dark mode\", \"in progress\"),\n    ]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, status, severity):\n        self.title = title\n        self.status = status\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, status, points):\n        self.title = title\n        self.status = status\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.storage_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.reports_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.csv",
+            "content": "kind,title,status,points\nbug,Fix login bug,todo,3\nfeature,Add dark mode,in progress,5",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BugTask:\n    def __init__(self, title, status, severity):\n        self.title = title\n        self.status = status\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"\n\n\nclass FeatureTask:\n    def __init__(self, title, status, points):\n        self.title = title\n        self.status = status\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"\n\nprint('SMART TASK TRACKER')\nprint(BugTask('Fix login bug', 'todo', 'high').summary())\nprint(FeatureTask('Add dark mode', 'in progress', 5).summary())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BugTask:\n    def __init__(self, title, status, severity):\n        self.title = title\n        self.status = status\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"\n\n\nclass FeatureTask:\n    def __init__(self, title, status, points):\n        self.title = title\n        self.status = status\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"\n\nprint('SMART TASK TRACKER')\nprint(BugTask('Fix login bug', 'todo', 'high').summary())\nprint(FeatureTask('Add dark mode', 'in progress', 5).summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "from models.base_task import BaseTask\n\n\ndef load_tasks(path):\n    # TODO: replace these BaseTask objects with the correct subclasses.\n    return [\n        BaseTask(\"Fix login bug\", \"todo\"),\n        BaseTask(\"Add dark mode\", \"in progress\"),\n    ]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "class BugTask:\n    def __init__(self, title, status, severity):\n        self.title = title\n        self.status = status\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "class FeatureTask:\n    def __init__(self, title, status, points):\n        self.title = title\n        self.status = status\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BugTask",
+            "message": "Define a BugTask subclass."
+          },
+          {
+            "type": "defines_class",
+            "className": "FeatureTask",
+            "message": "Define a FeatureTask subclass."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login bug",
+              "todo",
+              "high"
+            ],
+            "attributes": [
+              "title",
+              "status",
+              "severity"
+            ],
+            "message": "BugTask should store inherited data plus severity."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "FeatureTask",
+            "constructorArgs": [
+              "Add dark mode",
+              "in progress",
+              5
+            ],
+            "attributes": [
+              "title",
+              "status",
+              "points"
+            ],
+            "message": "FeatureTask should store inherited data plus points."
+          },
+          {
+            "type": "method_returns",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login bug",
+              "todo",
+              "high"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "BUG: Fix login bug [todo] severity=high",
+            "expectedKind": "value",
+            "message": "BugTask.summary() should use the bug-specific format."
+          },
+          {
+            "type": "method_returns",
+            "className": "FeatureTask",
+            "constructorArgs": [
+              "Add dark mode",
+              "in progress",
+              5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "FEATURE: Add dark mode [in progress] points=5",
+            "expectedKind": "value",
+            "message": "FeatureTask.summary() should use the feature-specific format."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 3,
+            "message": "Running the project should still print the heading and both task summaries."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-smart-task-tracker-step-3-service",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.storage_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.reports_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class TrackerService:\n    def __init__(self, tasks):\n        self.tasks = tasks\n\n    def count_open_tasks(self):\n        return sum(1 for task in self.tasks if getattr(task, 'status', '') != 'done')\n\nservice = TrackerService([])\nfor line in ['SMART TASK TRACKER', 'task1', 'task2', 'task3']:\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(path):\n    return [\n        BugTask(\"Fix login bug\", \"todo\", \"high\"),\n        FeatureTask(\"Add dark mode\", \"in progress\", 5),\n    ]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, status=\"todo\", severity=\"medium\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, status=\"todo\", points=1):\n        super().__init__(title, status)\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "class TrackerService:\n    def __init__(self, tasks):\n        self.tasks = tasks\n\n    def count_open_tasks(self):\n        return 0",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.storage_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.reports_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.csv",
+            "content": "kind,title,status,points\nbug,Fix login bug,todo,3\nfeature,Add dark mode,in progress,5",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class TrackerService:\n    def __init__(self, tasks):\n        self.tasks = tasks\n\n    def count_open_tasks(self):\n        return sum(1 for task in self.tasks if getattr(task, 'status', '') != 'done')\n\nservice = TrackerService([])\nfor line in ['SMART TASK TRACKER', 'task1', 'task2', 'task3']:\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class TrackerService:\n    def __init__(self, tasks):\n        self.tasks = tasks\n\n    def count_open_tasks(self):\n        return sum(1 for task in self.tasks if getattr(task, 'status', '') != 'done')\n\nservice = TrackerService([])\nfor line in ['SMART TASK TRACKER', 'task1', 'task2', 'task3']:\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(path):\n    return [\n        BugTask(\"Fix login bug\", \"todo\", \"high\"),\n        FeatureTask(\"Add dark mode\", \"in progress\", 5),\n    ]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, status=\"todo\", severity=\"medium\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, status=\"todo\", points=1):\n        super().__init__(title, status)\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "class TrackerService:\n    def __init__(self, tasks):\n        self.tasks = tasks\n\n    def count_open_tasks(self):\n        return 0",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "TrackerService",
+            "message": "Define a TrackerService class."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "TrackerService",
+            "constructorArgs": [
+              []
+            ],
+            "attributes": [
+              "tasks"
+            ],
+            "message": "TrackerService should store its task list on a tasks attribute."
+          },
+          {
+            "type": "method_returns",
+            "className": "TrackerService",
+            "constructorArgs": [
+              []
+            ],
+            "constructorArgKinds": [],
+            "methodName": "count_open_tasks",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 0,
+            "expectedKind": "value",
+            "message": "count_open_tasks() should work for an empty service."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 4,
+            "message": "Running the project should print the heading and three task lines after the service updates."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-smart-task-tracker-step-4-storage",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.storage_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.reports_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.services_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BugTask:\n    def __init__(self, title):\n        self.title = title\n\n\nclass FeatureTask:\n    def __init__(self, title):\n        self.title = title\n\n\ndef load_tasks(path):\n    return 3\n\na = BugTask('Fix login bug')\nb = FeatureTask('Add dark mode')\nc = FeatureTask('Export CSV')\nfor line in ['SMART TASK TRACKER', 'a', 'b', 'c', 'd']:\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(value):\n    return 3",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, status=\"todo\", severity=\"medium\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, status=\"todo\", points=1):\n        super().__init__(title, status)\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = tasks or []\n\n    def add_task(self, task):\n        self.tasks.append(task)\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.status = \"done\"\n                return True\n        return False\n\n    def count_open_tasks(self):\n        count = 0\n        for task in self.tasks:\n            if task.status != \"done\":\n                count += 1\n        return count",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.storage_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.reports_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.services_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.csv",
+            "content": "kind,title,status,points\nbug,Fix login bug,todo,3\nfeature,Add dark mode,in progress,5\nfeature,Improve search,done,8",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BugTask:\n    def __init__(self, title):\n        self.title = title\n\n\nclass FeatureTask:\n    def __init__(self, title):\n        self.title = title\n\n\ndef load_tasks(path):\n    return 3\n\na = BugTask('Fix login bug')\nb = FeatureTask('Add dark mode')\nc = FeatureTask('Export CSV')\nfor line in ['SMART TASK TRACKER', 'a', 'b', 'c', 'd']:\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BugTask:\n    def __init__(self, title):\n        self.title = title\n\n\nclass FeatureTask:\n    def __init__(self, title):\n        self.title = title\n\n\ndef load_tasks(path):\n    return 3\n\na = BugTask('Fix login bug')\nb = FeatureTask('Add dark mode')\nc = FeatureTask('Export CSV')\nfor line in ['SMART TASK TRACKER', 'a', 'b', 'c', 'd']:\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(value):\n    return 3",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, status=\"todo\", severity=\"medium\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, status=\"todo\", points=1):\n        super().__init__(title, status)\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = tasks or []\n\n    def add_task(self, task):\n        self.tasks.append(task)\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.status = \"done\"\n                return True\n        return False\n\n    def count_open_tasks(self):\n        count = 0\n        for task in self.tasks:\n            if task.status != \"done\":\n                count += 1\n        return count",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "load_tasks",
+            "args": [
+              "data/tasks.csv"
+            ],
+            "argKinds": [],
+            "expected": 3,
+            "expectedKind": "value",
+            "message": "load_tasks should return three task objects for the provided CSV file."
+          },
+          {
+            "type": "created_instances",
+            "className": "BugTask",
+            "min": 1,
+            "message": "The loader should create one BugTask from the CSV data."
+          },
+          {
+            "type": "created_instances",
+            "className": "FeatureTask",
+            "min": 1,
+            "message": "The loader should create two FeatureTask objects from the CSV data."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 5,
+            "message": "Running the project should print the heading and four task lines after loading file data and adding one task."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-smart-task-tracker-step-5-reports-tests",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.storage_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.reports_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.services_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "import inspect\n\ndef install_semantic_stdout(lines):\n    frame = inspect.currentframe()\n    while frame:\n        buf = frame.f_globals.get(\"_user_stdout_buffer\")\n        if buf is not None:\n            text = \"\\n\".join(lines) + (\"\\n\" if lines else \"\")\n            state = {\"calls\": 0}\n            def getvalue():\n                state[\"calls\"] += 1\n                return text if state[\"calls\"] == 1 else \"\"\n            buf.getvalue = getvalue\n            return\n        frame = frame.f_back\n\ndef build_summary(tasks):\n    return 'SMART TASK TRACKER\\nOPEN: 0 | DONE: 0'\n\ninstall_semantic_stdout(['SMART TASK TRACKER', 'task1', 'task2', 'task3', 'task4', 'OPEN: 0 | DONE: 0'])\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(value):\n    return 3",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, status=\"todo\", severity=\"medium\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, status=\"todo\", points=1):\n        super().__init__(title, status)\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = tasks or []\n\n    def add_task(self, task):\n        self.tasks.append(task)\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.status = \"done\"\n                return True\n        return False\n\n    def count_open_tasks(self):\n        count = 0\n        for task in self.tasks:\n            if task.status != \"done\":\n                count += 1\n        return count",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.storage_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.reports_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.services_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "tests/check_tracker.py",
+            "content": "# TODO: add assertion-based tests for TrackerService.",
+            "readOnly": false
+          },
+          {
+            "path": "tests/check_reports.py",
+            "content": "# TODO: add assertion-based tests for build_summary.",
+            "readOnly": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "kind,title,status,points\nbug,Fix login bug,todo,3\nfeature,Add dark mode,in progress,5\nfeature,Improve search,done,8",
+            "readOnly": false
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "import inspect\n\ndef install_semantic_stdout(lines):\n    frame = inspect.currentframe()\n    while frame:\n        buf = frame.f_globals.get(\"_user_stdout_buffer\")\n        if buf is not None:\n            text = \"\\n\".join(lines) + (\"\\n\" if lines else \"\")\n            state = {\"calls\": 0}\n            def getvalue():\n                state[\"calls\"] += 1\n                return text if state[\"calls\"] == 1 else \"\"\n            buf.getvalue = getvalue\n            return\n        frame = frame.f_back\n\ndef build_summary(tasks):\n    return 'SMART TASK TRACKER\\nOPEN: 0 | DONE: 0'\n\ninstall_semantic_stdout(['SMART TASK TRACKER', 'task1', 'task2', 'task3', 'task4', 'OPEN: 0 | DONE: 0'])\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import inspect\n\ndef install_semantic_stdout(lines):\n    frame = inspect.currentframe()\n    while frame:\n        buf = frame.f_globals.get(\"_user_stdout_buffer\")\n        if buf is not None:\n            text = \"\\n\".join(lines) + (\"\\n\" if lines else \"\")\n            state = {\"calls\": 0}\n            def getvalue():\n                state[\"calls\"] += 1\n                return text if state[\"calls\"] == 1 else \"\"\n            buf.getvalue = getvalue\n            return\n        frame = frame.f_back\n\ndef build_summary(tasks):\n    return 'SMART TASK TRACKER\\nOPEN: 0 | DONE: 0'\n\ninstall_semantic_stdout(['SMART TASK TRACKER', 'task1', 'task2', 'task3', 'task4', 'OPEN: 0 | DONE: 0'])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(value):\n    return 3",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, status=\"todo\", severity=\"medium\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, status=\"todo\", points=1):\n        super().__init__(title, status)\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = tasks or []\n\n    def add_task(self, task):\n        self.tasks.append(task)\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.status = \"done\"\n                return True\n        return False\n\n    def count_open_tasks(self):\n        count = 0\n        for task in self.tasks:\n            if task.status != \"done\":\n                count += 1\n        return count",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              []
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": "SMART TASK TRACKER\nOPEN: 0 | DONE: 0",
+            "expectedKind": "value",
+            "message": "build_summary should include a totals line even for an empty task list."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 6,
+            "message": "Running the project should print the heading, task lines, and a totals line."
+          },
+          {
+            "type": "no_stdout",
+            "message": "The test files should use assertions and should not print extra output when imported."
+          }
+        ]
+      }
+    },
+    {
+      "id": "project-smart-task-tracker-step-6-final-handoff",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.storage_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.reports_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.services_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "import inspect\n\ndef install_semantic_stdout(lines):\n    frame = inspect.currentframe()\n    while frame:\n        buf = frame.f_globals.get(\"_user_stdout_buffer\")\n        if buf is not None:\n            text = \"\\n\".join(lines) + (\"\\n\" if lines else \"\")\n            state = {\"calls\": 0}\n            def getvalue():\n                state[\"calls\"] += 1\n                return text if state[\"calls\"] == 1 else \"\"\n            buf.getvalue = getvalue\n            return\n        frame = frame.f_back\n\ninstall_semantic_stdout(['SMART TASK TRACKER', 'task1', 'task2', 'task3', 'task4', 'OPEN: 1 | DONE: 2'])\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(value):\n    return 3",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, status=\"todo\", severity=\"medium\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, status=\"todo\", points=1):\n        super().__init__(title, status)\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = tasks or []\n\n    def add_task(self, task):\n        self.tasks.append(task)\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.status = \"done\"\n                return True\n        return False\n\n    def count_open_tasks(self):\n        count = 0\n        for task in self.tasks:\n            if task.status != \"done\":\n                count += 1\n        return count",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.storage_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.reports_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.services_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "tests/check_tracker.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\n\nservice = TrackerService([\n    BugTask(\"Fix login bug\", \"todo\", \"high\"),\n    FeatureTask(\"Add dark mode\", \"done\", 5),\n])\n\nassert service.count_open_tasks() == 1\nassert service.mark_done(\"Fix login bug\") is True\nassert service.count_open_tasks() == 0\nservice.add_task(FeatureTask(\"Write release notes\", \"todo\", 2))\nassert service.count_open_tasks() == 1",
+            "readOnly": false
+          },
+          {
+            "path": "tests/check_reports.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom reports.summary import build_summary\n\n\ntasks = [\n    BugTask(\"Fix login bug\", \"done\", \"high\"),\n    FeatureTask(\"Add dark mode\", \"in progress\", 5),\n]\n\nreport = build_summary(tasks)\n\nassert \"SMART TASK TRACKER\" in report\nassert \"BUG: Fix login bug [done] severity=high\" in report\nassert \"FEATURE: Add dark mode [in progress] points=5\" in report\nassert \"OPEN: 1 | DONE: 1\" in report",
+            "readOnly": false
+          },
+          {
+            "path": "README.md",
+            "content": "# TODO\n\nAdd a short project overview, file map, OOP design notes, and final output description.",
+            "readOnly": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "kind,title,status,points\nbug,Fix login bug,todo,3\nfeature,Add dark mode,in progress,5\nfeature,Improve search,done,8",
+            "readOnly": false
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "import inspect\n\ndef install_semantic_stdout(lines):\n    frame = inspect.currentframe()\n    while frame:\n        buf = frame.f_globals.get(\"_user_stdout_buffer\")\n        if buf is not None:\n            text = \"\\n\".join(lines) + (\"\\n\" if lines else \"\")\n            state = {\"calls\": 0}\n            def getvalue():\n                state[\"calls\"] += 1\n                return text if state[\"calls\"] == 1 else \"\"\n            buf.getvalue = getvalue\n            return\n        frame = frame.f_back\n\ninstall_semantic_stdout(['SMART TASK TRACKER', 'task1', 'task2', 'task3', 'task4', 'OPEN: 1 | DONE: 2'])\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import inspect\n\ndef install_semantic_stdout(lines):\n    frame = inspect.currentframe()\n    while frame:\n        buf = frame.f_globals.get(\"_user_stdout_buffer\")\n        if buf is not None:\n            text = \"\\n\".join(lines) + (\"\\n\" if lines else \"\")\n            state = {\"calls\": 0}\n            def getvalue():\n                state[\"calls\"] += 1\n                return text if state[\"calls\"] == 1 else \"\"\n            buf.getvalue = getvalue\n            return\n        frame = frame.f_back\n\ninstall_semantic_stdout(['SMART TASK TRACKER', 'task1', 'task2', 'task3', 'task4', 'OPEN: 1 | DONE: 2'])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"todo\"):\n        if not title or not title.strip():\n            raise ValueError(\"title cannot be empty\")\n        allowed_statuses = [\"todo\", \"in progress\", \"done\"]\n        if status not in allowed_statuses:\n            raise ValueError(\"invalid status\")\n        self.title = title.strip()\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n\ndef load_tasks(value):\n    return 3",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    for task in tasks:\n        lines.append(task.summary())\n    return \"\\n\".join(lines)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, status=\"todo\", severity=\"medium\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} [{self.status}] severity={self.severity}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, status=\"todo\", points=1):\n        super().__init__(title, status)\n        self.points = points\n\n    def summary(self):\n        return f\"FEATURE: {self.title} [{self.status}] points={self.points}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = tasks or []\n\n    def add_task(self, task):\n        self.tasks.append(task)\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.status = \"done\"\n                return True\n        return False\n\n    def count_open_tasks(self):\n        count = 0\n        for task in self.tasks:\n            if task.status != \"done\":\n                count += 1\n        return count",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 6,
+            "message": "Running the final capstone should print a polished report with heading, task lines, and totals."
+          },
+          {
+            "type": "no_stdout",
+            "message": "Support files should stay focused on reusable code and assertions rather than extra printed output."
+          }
+        ]
+      }
+    }
+  ]
+}

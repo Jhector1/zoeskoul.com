@@ -21,6 +21,8 @@ import type {
 import { pythonShape } from "../shapes/pythonShape.js";
 import {
     messageTag,
+    semanticCheckMessageTag,
+    solutionFileContentMessageTag,
     starterFileContentMessageTag,
 } from "../shared/messageTags.js";
 
@@ -69,6 +71,142 @@ function normalizePythonStarterFiles(
     }
 
     return normalized;
+}
+
+function solutionFileContentTagForFile(args: {
+    messageBase: string;
+    file: ManifestStarterFile;
+    index: number;
+}) {
+    return solutionFileContentMessageTag({
+        messageBase: args.messageBase,
+        filePath: args.file.path ?? args.file.name,
+        index: args.index,
+    });
+}
+
+function withSolutionFileMessageRefs(args: {
+    files: ManifestStarterFile[];
+    messageBase: string;
+    entryFilePath: string;
+    entryFallbackTag: string;
+    language: "python" | "bash";
+}): ManifestStarterFile[] {
+    return args.files.map((file, index) => {
+        const filePath = file.path ?? file.name ?? "";
+        const isEntry = filePath === args.entryFilePath || file.isEntry === true || file.entry === true;
+        const content = isEntry && args.files.length === 1
+            ? args.entryFallbackTag
+            : solutionFileContentTagForFile({
+                messageBase: args.messageBase,
+                file,
+                index,
+            });
+
+        return {
+            ...file,
+            content,
+            language: file.language ?? args.language,
+            ...(isEntry ? { isEntry: true, entry: true } : {}),
+        };
+    });
+}
+
+function withSemanticCheckMessageRefs(checks: unknown, messageBase: string): unknown {
+    if (!Array.isArray(checks)) return checks;
+
+    return checks.map((check, index) => {
+        if (!check || typeof check !== "object" || Array.isArray(check)) {
+            return check;
+        }
+
+        const record = { ...(check as Record<string, unknown>) };
+        if (typeof record.message === "string" && record.message.trim().length > 0) {
+            record.message = semanticCheckMessageTag({ messageBase, index });
+        }
+        return record;
+    });
+}
+function extractMarkedPythonFileSections(source: unknown): Map<string, string> {
+    const result = new Map<string, string>();
+    const lines = String(source ?? "").replace(/\r\n?/g, "\n").split("\n");
+    let currentPath: string | null = null;
+    let currentLines: string[] = [];
+
+    function flush() {
+        if (!currentPath) return;
+        result.set(currentPath, currentLines.join("\n").trimEnd());
+    }
+
+    for (const line of lines) {
+        const match = /^\s*#\s*([a-zA-Z0-9_.\/-]+\.py)\s*$/.exec(line);
+        if (match?.[1]) {
+            flush();
+            currentPath = safeNormalizeWorkspacePath(
+                match[1],
+                "Invalid marked Python solution file path",
+            );
+            currentLines = [];
+            continue;
+        }
+
+        if (currentPath) {
+            currentLines.push(line);
+        }
+    }
+
+    flush();
+    return result;
+}
+
+function mergeMarkedPythonSolutionFiles(args: {
+    entryFilePath: string;
+    authoredSolutionFiles: ManifestStarterFile[];
+    markedFiles: Map<string, string>;
+    language: "python" | "bash";
+}): ManifestStarterFile[] {
+    const merged = new Map<string, ManifestStarterFile>();
+    const order: string[] = [];
+
+    function upsert(file: ManifestStarterFile) {
+        if (!file.path || merged.has(file.path)) return;
+        merged.set(file.path, { ...file });
+        order.push(file.path);
+    }
+
+    for (const file of args.authoredSolutionFiles) upsert(file);
+
+    for (const [path, content] of args.markedFiles) {
+        if (!merged.has(path)) order.push(path);
+        merged.set(path, {
+            ...(merged.get(path) ?? { path }),
+            path,
+            content,
+            language: args.language,
+            isEntry: path === args.entryFilePath,
+            entry: path === args.entryFilePath,
+        });
+    }
+
+    if (!merged.has(args.entryFilePath)) {
+        order.unshift(args.entryFilePath);
+        merged.set(args.entryFilePath, {
+            path: args.entryFilePath,
+            content: args.markedFiles.get(args.entryFilePath) ?? "",
+            language: args.language,
+            isEntry: true,
+            entry: true,
+        });
+    }
+
+    return order
+        .map((path) => merged.get(path))
+        .filter((file): file is ManifestStarterFile => Boolean(file))
+        .map((file) =>
+            file.path === args.entryFilePath
+                ? { ...file, isEntry: true, entry: true }
+                : { ...file, isEntry: file.isEntry === true ? false : file.isEntry, entry: file.entry === true ? false : file.entry },
+        );
 }
 function requireProgrammingTests(
     exercise: {
@@ -300,7 +438,8 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
 
         const fallbackStarterCode = normalizeText(args.exercise.starterCode);
         const starterCodeTag = messageTag(args.messageBase, "starterCode");
-        const solutionCode = normalizeText(args.exercise.solutionCode);
+        const solutionCodeTag = messageTag(args.messageBase, "solutionCode");
+        const rawSolutionCode = normalizeText(args.exercise.solutionCode);
 
         const authoredEntryFilePath = safeNormalizeWorkspacePath(
             (args.exercise as { entryFilePath?: string }).entryFilePath ??
@@ -312,10 +451,23 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
             (args.exercise as { starterFiles?: ProgrammingCodeInputStarterFileDraft[] })
                 .starterFiles,
         );
-        const authoredSolutionFiles = normalizePythonStarterFiles(
+        const authoredSolutionFilesBase = normalizePythonStarterFiles(
             (args.exercise as { solutionFiles?: ProgrammingCodeInputStarterFileDraft[] })
                 .solutionFiles,
         );
+        const markedSolutionFiles = extractMarkedPythonFileSections(rawSolutionCode);
+        const authoredSolutionFiles = markedSolutionFiles.size > 0
+            ? mergeMarkedPythonSolutionFiles({
+                entryFilePath: authoredEntryFilePath,
+                authoredSolutionFiles: authoredSolutionFilesBase,
+                markedFiles: markedSolutionFiles,
+                language: manifestLanguage,
+            })
+            : authoredSolutionFilesBase;
+        const solutionCode =
+            markedSolutionFiles.get(authoredEntryFilePath) ??
+            authoredSolutionFiles.find((file) => file.path === authoredEntryFilePath)?.content ??
+            rawSolutionCode;
         const workspaceExpectations = normalizePythonWorkspaceExpectations(
             (args.exercise as { workspaceExpectations?: ManifestWorkspaceExpectations })
                 .workspaceExpectations,
@@ -394,7 +546,7 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                 ? starterCodeTag
                 : starterCodeTag;
 
-        const solutionFiles = authoredSolutionFiles.length > 0
+        const rawSolutionFiles = authoredSolutionFiles.length > 0
             ? authoredSolutionFiles
             : [
                 {
@@ -405,6 +557,14 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                     entry: true,
                 },
             ];
+
+        const solutionFiles = withSolutionFileMessageRefs({
+            files: rawSolutionFiles,
+            messageBase: args.messageBase,
+            entryFilePath: authoredEntryFilePath,
+            entryFallbackTag: solutionCodeTag,
+            language: manifestLanguage,
+        });
 
         return {
             id: args.exercise.id,
@@ -455,18 +615,21 @@ const pythonCodeInputCapability: CodeInputProfileCapability = {
                 ? {
                     type: "semantic",
                     language: "python",
-                    solutionCode,
+                    solutionCode: solutionCodeTag,
                     solutionFiles,
                     ...(sourceChecks?.length ? { sourceChecks } : {}),
                     semanticChecks: requireSemanticChecks(
-                        args.exercise.semanticChecks,
+                        withSemanticCheckMessageRefs(
+                            args.exercise.semanticChecks,
+                            args.messageBase,
+                        ),
                         args.exercise.id,
                     ),
                 }
                 : {
                     type: "fixed_tests",
                     tests: requireProgrammingTests(args.exercise, args.seed.topicId),
-                    solutionCode,
+                    solutionCode: solutionCodeTag,
                     solutionFiles,
                     ...(sourceChecks?.length ? { sourceChecks } : {}),
                 },
@@ -512,6 +675,9 @@ export const pythonProfile: CourseProfile = {
             '- For nested data structures like a list of dictionaries, use argKinds: ["list_of_dict_entries"] or expectedKind: "list_of_dict_entries" as needed.',
             '- For Python code_input, use recipeType "fixed_tests" only when the exercise is a normal runnable program that reads stdin and/or prints exact output.',
             '- For Python code_input, use recipeType "semantic" for function-return tasks, class/object tasks, method tasks, attribute checks, local-scope tasks, and algorithm/data-transformation tasks.',
+            '- For OOP/class/object/method code_input, recipeType "semantic" is required even when the exercise has starterFiles or solutionFiles. Do not use fixed_tests just because the task is multifile.',
+            '- For class and method exercises, include semanticChecks[] such as defines_class, constructible, instance_attributes, method_returns, created_instances, printed_line_count, and no_stdout.',
+            '- tests[].files is for runtime input fixtures such as data files, not for proving that classes, methods, attributes, imports, or helper modules were implemented correctly.',
             '- For function-return exercises, include semanticChecks[] with type "function_returns"; do not create stdin/stdout wrappers with ast.literal_eval or _parse_arg.',
             '- For dictionary return values in semanticChecks, encode the dictionary as [["key", value]] pairs and set expectedKind: "dict_entries".',
             '- For dictionary arguments in semanticChecks.args, encode the dictionary as [["key", value]] pairs and set argKinds for that argument.',
@@ -547,6 +713,7 @@ export const pythonProfile: CourseProfile = {
                 "- If the exercise needs a helper module but the checker cannot validate newly created files, provide that helper file in starterFiles and ask the learner to edit it.",
                 "- If asking the learner to create files/folders, explicitly state the exact required path and only do this when createFiles/createFolders or filesystem capabilities are enabled.",
                 "- File-based fixed_tests need at least two meaningful tests with different tests[].files contents, even when stdin is empty.",
+                "- Treat tests[].files as data fixtures for code that reads files. For OOP structure tasks across multiple Python files, prefer semantic checks and complete starterFiles/solutionFiles instead of file-fixture fixed_tests.",
                 "- CSV file fixtures should contain only CSV text, such as `name,score\\nAva,9\\nBen,7\\n`.",
             );
         } else {
@@ -629,6 +796,7 @@ export const pythonProfile: CourseProfile = {
                 "- Use semantic checks when the learner must define a function, use parameters, return a value, avoid print-only solutions, or demonstrate local scope.",
                 "- Function basics should usually be single-file main.py exercises.",
                 "- For modularity/refactoring exercises, prefer provided starterFiles over asking learners to create helper files from scratch.",
+                "- For OOP multifile exercises that grade class/import/method behavior, use semanticChecks with complete starterFiles/solutionFiles; do not rely on one static stdout test with tests[].files.",
                 "- If a project-style exercise asks learners to create files or folders, state the exact required paths and pair it with workspaceExpectations so grading can verify those paths.",
             );
         } else {

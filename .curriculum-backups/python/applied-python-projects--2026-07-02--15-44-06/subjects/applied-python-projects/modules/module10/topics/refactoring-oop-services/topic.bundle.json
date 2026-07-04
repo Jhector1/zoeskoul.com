@@ -1,0 +1,697 @@
+{
+  "topicId": "refactoring-oop-services",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-10-testing-debugging-oop-projects",
+  "sectionSlug": "applied-python-projects-python-10-debugging-and-refactoring",
+  "prefix": "py10",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.label",
+    "summaryKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch0.title",
+      "sketchId": "refactoring-oop-services-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-refactoring-oop-services-sketch0",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.prompt",
+        "exerciseKey": "try-refactoring-oop-services-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch1.title",
+      "sketchId": "refactoring-oop-services-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-refactoring-oop-services-sketch1",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.prompt",
+        "exerciseKey": "try-refactoring-oop-services-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch2.title",
+      "sketchId": "refactoring-oop-services-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-refactoring-oop-services-sketch2",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.prompt",
+        "exerciseKey": "try-refactoring-oop-services-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "refactoring-oop-services-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "refactoring-oop-services-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "refactoring-oop-services-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-refactoring-oop-services-sketch0",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0",
+      "language": "python",
+      "starterCode": "# Write your answer below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your answer below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "class ReportService:\n    def __init__(self):\n        pass\n\n    def build_book_report(self, value):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass ReportService:\n    def build_book_report(self, books):\n        return \"\\n\".join(f\"{get_field(book, 'title')}: ${get_field(book, 'price')}\" for book in books)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "class ReportService:\n    def build_book_report(self, books):\n        lines = []\n        for book in books:\n            title = book['title'] if isinstance(book, dict) else book.title\n            price = book['price'] if isinstance(book, dict) else book.price\n            lines.append(f\"{title}: ${price}\")\n        return \"\\n\".join(lines)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Write your answer below",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Write your answer below",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "class ReportService:\n    def __init__(self):\n        pass\n\n    def build_book_report(self, value):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass ReportService:\n    def build_book_report(self, books):\n        return \"\\n\".join(f\"{get_field(book, 'title')}: ${get_field(book, 'price')}\" for book in books)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass ReportService:\n    def build_book_report(self, books):\n        return \"\\n\".join(f\"{get_field(book, 'title')}: ${get_field(book, 'price')}\" for book in books)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "class ReportService:\n    def build_book_report(self, books):\n        lines = []\n        for book in books:\n            title = book['title'] if isinstance(book, dict) else book.title\n            price = book['price'] if isinstance(book, dict) else book.price\n            lines.append(f\"{title}: ${price}\")\n        return \"\\n\".join(lines)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "ReportService",
+            "message": "Define a ReportService class in services/report_service.py."
+          },
+          {
+            "type": "constructible",
+            "className": "ReportService",
+            "constructorArgs": [],
+            "message": "ReportService should be constructible with no arguments."
+          },
+          {
+            "type": "method_returns",
+            "className": "ReportService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "build_book_report",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "title",
+                    "Python Basics"
+                  ],
+                  [
+                    "price",
+                    12
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Debugging Guide"
+                  ],
+                  [
+                    "price",
+                    18
+                  ]
+                ]
+              ]
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": "Python Basics: $12\nDebugging Guide: $18",
+            "expectedKind": "value",
+            "message": "build_book_report should return one formatted line per book."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-refactoring-oop-services-sketch1",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1",
+      "language": "python",
+      "starterCode": "# Write your answer below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your answer below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "class CatalogService:\n    def __init__(self):\n        pass\n\n    def total_price(self, value):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass CatalogService:\n    def total_price(self, books):\n        return sum(get_field(book, 'price') for book in books)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "class CatalogService:\n    def total_price(self, books):\n        total = 0\n        for book in books:\n            total += book['price'] if isinstance(book, dict) else book.price\n        return total",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Write your answer below",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Write your answer below",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "class CatalogService:\n    def __init__(self):\n        pass\n\n    def total_price(self, value):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass CatalogService:\n    def total_price(self, books):\n        return sum(get_field(book, 'price') for book in books)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass CatalogService:\n    def total_price(self, books):\n        return sum(get_field(book, 'price') for book in books)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "class CatalogService:\n    def total_price(self, books):\n        total = 0\n        for book in books:\n            total += book['price'] if isinstance(book, dict) else book.price\n        return total",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "CatalogService",
+            "message": "Define a CatalogService class in services/catalog_service.py."
+          },
+          {
+            "type": "constructible",
+            "className": "CatalogService",
+            "constructorArgs": [],
+            "message": "CatalogService should be constructible with no arguments."
+          },
+          {
+            "type": "method_returns",
+            "className": "CatalogService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "total_price",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "title",
+                    "Python Basics"
+                  ],
+                  [
+                    "price",
+                    12
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Debugging Guide"
+                  ],
+                  [
+                    "price",
+                    18
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Testing Notes"
+                  ],
+                  [
+                    "price",
+                    10
+                  ]
+                ]
+              ]
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 40,
+            "expectedKind": "value",
+            "message": "total_price should return the sum of all prices."
+          },
+          {
+            "type": "method_returns",
+            "className": "CatalogService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "total_price",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "title",
+                    "One"
+                  ],
+                  [
+                    "price",
+                    5
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Two"
+                  ],
+                  [
+                    "price",
+                    0
+                  ]
+                ]
+              ]
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 5,
+            "expectedKind": "value",
+            "message": "total_price should handle small lists and zero prices correctly."
+          },
+          {
+            "type": "no_stdout",
+            "message": "The service method should return the total instead of printing from inside the method."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-refactoring-oop-services-sketch2",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2",
+      "language": "python",
+      "starterCode": "# Write your answer below",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your answer below",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "class CatalogService:\n    def __init__(self):\n        pass\n\n    def count_books(self, value):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class CatalogService:\n    def count_books(self, books):\n        return len(books)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "class CatalogService:\n    def count_books(self, books):\n        return len(books)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Write your answer below",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Write your answer below",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "class CatalogService:\n    def __init__(self):\n        pass\n\n    def count_books(self, value):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class CatalogService:\n    def count_books(self, books):\n        return len(books)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class CatalogService:\n    def count_books(self, books):\n        return len(books)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "class CatalogService:\n    def count_books(self, books):\n        return len(books)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "CatalogService",
+            "message": "Define a CatalogService class in services/catalog_service.py."
+          },
+          {
+            "type": "constructible",
+            "className": "CatalogService",
+            "constructorArgs": [],
+            "message": "CatalogService should be constructible with no arguments."
+          },
+          {
+            "type": "method_returns",
+            "className": "CatalogService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "count_books",
+            "methodArgs": [
+              [
+                [
+                  [
+                    "title",
+                    "Python Basics"
+                  ],
+                  [
+                    "price",
+                    12
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Debugging Guide"
+                  ],
+                  [
+                    "price",
+                    18
+                  ]
+                ]
+              ]
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 2,
+            "expectedKind": "value",
+            "message": "count_books should return the number of objects in the list."
+          },
+          {
+            "type": "method_returns",
+            "className": "CatalogService",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "count_books",
+            "methodArgs": [
+              []
+            ],
+            "methodArgKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": 0,
+            "expectedKind": "value",
+            "message": "count_books should return 0 for an empty list."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mc-refactor-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.mc-refactor-benefits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "fb-service-home",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.fb-service-home",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "service"
+      }
+    },
+    {
+      "id": "mc-safe-refactor-steps",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.mc-safe-refactor-steps",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "fb-import-line",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.fb-import-line",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "report_service"
+      }
+    },
+    {
+      "id": "sc-main-role",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.sc-main-role",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "dr-refactor-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.dr-refactor-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    }
+  ]
+}

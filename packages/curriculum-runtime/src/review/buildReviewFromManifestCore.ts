@@ -53,6 +53,39 @@ function inheritMaxAttempts(
     return parent;
 }
 
+function normalizeExercisePurpose(value: unknown, kind?: unknown) {
+    const raw = String(value ?? "").trim().toLowerCase();
+    if (raw === "quiz") return "quiz";
+    if (raw === "project" || raw === "try_it" || raw === "try-it" || raw === "practice" || raw === "capstone") {
+        return "project";
+    }
+    if (!raw && String(kind ?? "").trim() !== "code_input") return "quiz";
+    if (!raw && String(kind ?? "").trim() === "code_input") return "project";
+    return null;
+}
+
+function readAuthoredQuizExerciseKeys(manifest: any, card: any): string[] {
+    const explicit = Array.isArray(card?.quiz?.exerciseKeys)
+        ? card.quiz.exerciseKeys.map((key: unknown) => String(key ?? "").trim()).filter(Boolean)
+        : [];
+    if (explicit.length) return Array.from(new Set(explicit));
+
+    const exercises = Array.isArray(manifest?.exercises) ? manifest.exercises : [];
+    const keys = exercises
+        .filter((exercise: any) =>
+            exercise &&
+            typeof exercise.id === "string" &&
+            String(exercise.kind ?? "").trim() !== "code_input" &&
+            normalizeExercisePurpose(exercise.purpose, exercise.kind) === "quiz",
+        )
+        .map((exercise: any) => String(exercise.id).trim())
+        .filter(Boolean);
+
+    const n = Number(card?.quiz?.n ?? keys.length);
+    const limit = Number.isFinite(n) && n > 0 ? Math.min(keys.length, Math.floor(n)) : keys.length;
+    return Array.from(new Set(keys.slice(0, limit)));
+}
+
 export function buildReviewFromManifestCore(args: {
     manifest: any;
     pool: readonly PoolItem[];
@@ -105,6 +138,7 @@ export function buildReviewFromManifestCore(args: {
                         min: card.quiz.min,
                         max: card.quiz.max,
                         selectionMode: card.quiz.selectionMode,
+                        exerciseKeys: readAuthoredQuizExerciseKeys(manifest, card),
                         allowReveal: card.quiz.allowReveal ?? true,
                         preferKind: card.quiz.preferKind ?? null,
                         maxAttempts: card.quiz.maxAttempts,

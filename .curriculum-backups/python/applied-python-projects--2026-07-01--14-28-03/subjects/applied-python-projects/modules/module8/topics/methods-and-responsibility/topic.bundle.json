@@ -1,0 +1,648 @@
+{
+  "topicId": "methods-and-responsibility",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "applied-python-projects-python-8-encapsulation-and-services",
+  "prefix": "py8",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.sketch0.title",
+      "sketchId": "methods-and-responsibility-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-methods-and-responsibility-sketch0",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.prompt",
+        "exerciseKey": "try-methods-and-responsibility-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.sketch1.title",
+      "sketchId": "methods-and-responsibility-sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-methods-and-responsibility-sketch1",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.prompt",
+        "exerciseKey": "try-methods-and-responsibility-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.sketch2.title",
+      "sketchId": "try-it-yourself",
+      "height": 420,
+      "tryIt": {
+        "id": "try-methods-and-responsibility-sketch2",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.prompt",
+        "exerciseKey": "try-methods-and-responsibility-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "methods-and-responsibility-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch0.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "methods-and-responsibility-sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch1.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.methods-and-responsibility-sketch1.bodyMarkdown"
+    },
+    {
+      "id": "try-it-yourself",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.try-it-yourself.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.try-it-yourself.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-methods-and-responsibility-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f\"{self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f\"{self.title} by {self.author}\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def description(self):\n        return f\"{self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book"
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "The Great Gatsby",
+              "F. Scott Fitzgerald"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "description",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "The Great Gatsby by F. Scott Fitzgerald"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-methods-and-responsibility-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Rectangle:\n    def __init__(self, width, height):\n        self.width = width\n        self.height = height\n\n    def area(self):\n        return self.width * self.height",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Rectangle:\n    def __init__(self, width, height):\n        self.width = width\n        self.height = height\n\n    def area(self):\n        return self.width * self.height",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Rectangle:\n    def __init__(self, width, height):\n        self.width = width\n        self.height = height\n\n    def area(self):\n        return self.width * self.height",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Rectangle"
+          },
+          {
+            "type": "method_returns",
+            "className": "Rectangle",
+            "constructorArgs": [
+              5,
+              10
+            ],
+            "constructorArgKinds": [],
+            "methodName": "area",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 50
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-methods-and-responsibility-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Person:\n    def __init__(self, age):\n        self.age = age\n\n    def set_age(self, age):\n        if age > 0:\n            self.age = age",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Person:\n    def __init__(self, age):\n        self.age = age\n\n    def set_age(self, age):\n        if age > 0:\n            self.age = age",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Person:\n    def __init__(self, age):\n        self.age = age\n\n    def set_age(self, age):\n        if age > 0:\n            self.age = age",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Person"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-methods-and-responsibility-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-3",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "import math\n\nclass Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\n    def circumference(self):\n        return 2 * math.pi * self.radius",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "import math\n\nclass Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\n    def circumference(self):\n        return 2 * math.pi * self.radius",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import math\n\nclass Circle:\n    def __init__(self, radius):\n        self.radius = radius\n\n    def circumference(self):\n        return 2 * math.pi * self.radius",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Circle"
+          },
+          {
+            "type": "method_returns",
+            "className": "Circle",
+            "constructorArgs": [
+              7
+            ],
+            "constructorArgKinds": [],
+            "methodName": "circumference",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 43.982297150257104
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-methods-and-responsibility-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-4",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-4.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-4.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    def to_fahrenheit(self):\n        return (self.celsius * 9/5) + 32",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-4.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    def to_fahrenheit(self):\n        return (self.celsius * 9/5) + 32",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    def to_fahrenheit(self):\n        return (self.celsius * 9/5) + 32",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Temperature"
+          },
+          {
+            "type": "method_returns",
+            "className": "Temperature",
+            "constructorArgs": [
+              0
+            ],
+            "constructorArgKinds": [],
+            "methodName": "to_fahrenheit",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 32
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-methods-and-responsibility-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-5",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-5.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-5.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Student:\n    def __init__(self, name):\n        self.name = name\n        self.grades = []\n\n    def add_grade(self, grade):\n        self.grades.append(grade)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-5.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.ci-methods-and-responsibility-5.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Student:\n    def __init__(self, name):\n        self.name = name\n        self.grades = []\n\n    def add_grade(self, grade):\n        self.grades.append(grade)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Student:\n    def __init__(self, name):\n        self.name = name\n        self.grades = []\n\n    def add_grade(self, grade):\n        self.grades.append(grade)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Student"
+          }
+        ]
+      }
+    },
+    {
+      "id": "multi-methods-and-responsibility-0",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.multi-methods-and-responsibility-0",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "multi-methods-and-responsibility-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.multi-methods-and-responsibility-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "fill-methods-and-responsibility-0",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.fill-methods-and-responsibility-0",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "def"
+      }
+    },
+    {
+      "id": "fill-methods-and-responsibility-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.fill-methods-and-responsibility-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "attribute"
+      }
+    },
+    {
+      "id": "drag-methods-and-responsibility-0",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.drag-methods-and-responsibility-0",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "policy_single_choice_1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.practice.policy_single_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    }
+  ]
+}

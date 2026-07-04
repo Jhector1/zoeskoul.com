@@ -1,0 +1,20 @@
+{
+  "topicId": "capstone-scope-and-architecture",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "try-capstone-scope-and-architecture-sketch0",
+      "message": "Exercise \"try-capstone-scope-and-architecture-sketch0\" is an OOP/multifile structure task but is still using fixed_tests with fewer than 2 meaningful validations. Switch it to recipeType \"semantic\", remove tests[], and add semanticChecks such as defines_class, constructible, instance_attributes, method_returns, created_instances, printed_line_count, or no_stdout."
+    },
+    {
+      "code": "PYTHON_FIXED_TEST_REPAIR_UNSAFE",
+      "category": "pedagogy",
+      "severity": "error",
+      "exerciseId": "capstone-add-tests-and-readme-handoff",
+      "message": "Exercise \"capstone-add-tests-and-readme-handoff\" is an OOP/multifile structure task but is still using fixed_tests with fewer than 2 meaningful validations. Switch it to recipeType \"semantic\", remove tests[], and add semanticChecks such as defines_class, constructible, instance_attributes, method_returns, created_instances, printed_line_count, or no_stdout."
+    }
+  ]
+}

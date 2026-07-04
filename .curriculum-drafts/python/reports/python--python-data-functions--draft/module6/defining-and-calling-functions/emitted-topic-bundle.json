@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch0.title",
       "sketchId": "sketch-1",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-defining-and-calling-functions-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.tryIt.try_defining_and_calling_functions_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.tryIt.try_defining_and_calling_functions_sketch0.prompt",
+        "exerciseKey": "try-defining-and-calling-functions-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch1.title",
       "sketchId": "sketch-2",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-defining-and-calling-functions-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.tryIt.try_defining_and_calling_functions_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.tryIt.try_defining_and_calling_functions_sketch1.prompt",
+        "exerciseKey": "try-defining-and-calling-functions-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.cards.sketch2.title",
       "sketchId": "sketch-3",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-defining-and-calling-functions-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.tryIt.try_defining_and_calling_functions_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.tryIt.try_defining_and_calling_functions_sketch2.prompt",
+        "exerciseKey": "try-defining-and-calling-functions-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -256,17 +292,18 @@
       }
     },
     {
-      "id": "ci-make-greeting",
+      "id": "try-defining-and-calling-functions-checkpoint",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint",
       "language": "python",
-      "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def make_greeting(name):\n    # return a greeting string\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -275,11 +312,115 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def make_greeting(name):\n    # return a greeting string\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def say_hello():\n    print(\"Hello from a function!\")\n\nsay_hello()\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hello from a function!\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+say_hello\\s*\\(\\s*\\)\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "say_hello",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.sourceChecks.1.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+say_hello\\s*\\(\\s*\\)\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "say_hello",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "ci-make-greeting",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_greeting(name):\n    return \"Hello, \" + name",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -290,7 +431,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -319,8 +460,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-square-number",
@@ -329,11 +488,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number",
       "language": "python",
-      "starterCode": "def square(number):\n    # return the square of number\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def square(number):\n    # return the square of number\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -342,11 +501,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def square(number):\n    # return the square of number\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def square(number):\n    # return the square of number\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def square(number):\n    return number * number",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -357,7 +525,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def square(number):\n    return number * number",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -386,8 +554,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-full-name",
@@ -396,11 +582,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name",
       "language": "python",
-      "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -409,11 +595,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def full_name(first, last):\n    return first + \" \" + last",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -424,7 +619,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def full_name(first, last):\n    return first + \" \" + last",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -456,6 +651,273 @@
           },
           {
             "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-defining-and-calling-functions-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "greet",
+            "args": [
+              "Ava"
+            ],
+            "expected": "Hello, Ava"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "greet",
+            "args": [
+              "Mia"
+            ],
+            "expected": "Hello, Mia"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-defining-and-calling-functions-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def square(number):\n    return number * number\n\nprint(square(5))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "square",
+            "args": [
+              5
+            ],
+            "expected": 25
+          },
+          {
+            "type": "function_returns",
+            "functionName": "square",
+            "args": [
+              -4
+            ],
+            "expected": 16
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-defining-and-calling-functions-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "shout",
+            "args": [
+              "go"
+            ],
+            "expected": "GO"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "shout",
+            "args": [
+              "team"
+            ],
+            "expected": "TEAM"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           }
         ]
       }

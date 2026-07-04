@@ -658,7 +658,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
 
         const sketchCard = bundle.cards.find((card) => card.id === "sketch0") as any;
         expect(sketchCard?.tryIt).toMatchObject({
-            exerciseKey: "code-1",
+            exerciseKey: "try-read-and-add-sketch0",
             difficulty: "easy",
             preferKind: "code_input",
             required: true,
@@ -734,7 +734,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
 
         expect(sketchCard?.tryIt).toMatchObject({
             id: "try-read-and-add-sketch0",
-            exerciseKey: "code-1",
+            exerciseKey: "try-read-and-add-sketch0",
             preferKind: "code_input",
             required: true,
             allowReveal: true,
@@ -800,7 +800,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         const sketchCard = bundle.cards.find((card) => card.id === "sketch0") as any;
 
         expect(sketchCard?.tryIt).toMatchObject({
-            exerciseKey: "quiz-1",
+            exerciseKey: "try-read-and-add-sketch0",
             preferKind: "single_choice",
         });
     });
@@ -820,13 +820,13 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         expect(bundle.cards.find((card) => card.id === "sketch0")).toMatchObject({
-            tryIt: { exerciseKey: "ex1" },
+            tryIt: { exerciseKey: "try-attributes-and-init-sketch0" },
         });
         expect(bundle.cards.find((card) => card.id === "sketch1")).toMatchObject({
-            tryIt: { exerciseKey: "ex6" },
+            tryIt: { exerciseKey: "try-attributes-and-init-sketch1" },
         });
         expect(bundle.cards.find((card) => card.id === "sketch2")).toMatchObject({
-            tryIt: { exerciseKey: "ex11" },
+            tryIt: { exerciseKey: "try-attributes-and-init-sketch2" },
         });
     });
 
@@ -879,7 +879,7 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         expect(bundle.cards.find((card) => card.id === "sketch0")).toMatchObject({
-            tryIt: { exerciseKey: "ex1" },
+            tryIt: { exerciseKey: "try-attributes-and-init-sketch0" },
         });
         expect((bundle.cards.find((card) => card.id === "sketch1") as any)?.tryIt).toBeUndefined();
         expect((bundle.cards.find((card) => card.id === "sketch2") as any)?.tryIt).toBeUndefined();
@@ -901,13 +901,13 @@ describe("buildTopicBundleFromDraft messageBase integration", () => {
         });
 
         expect(bundle.cards.find((card) => card.id === "sketch0")).toMatchObject({
-            tryIt: { exerciseKey: "ex6" },
+            tryIt: { exerciseKey: "try-attributes-and-init-sketch1" },
         });
         expect(bundle.cards.find((card) => card.id === "sketch1")).toMatchObject({
-            tryIt: { exerciseKey: "ex1" },
+            tryIt: { exerciseKey: "try-attributes-and-init-sketch0" },
         });
         expect(bundle.cards.find((card) => card.id === "sketch2")).toMatchObject({
-            tryIt: { exerciseKey: "ex11" },
+            tryIt: { exerciseKey: "try-attributes-and-init-sketch2" },
         });
     });
 

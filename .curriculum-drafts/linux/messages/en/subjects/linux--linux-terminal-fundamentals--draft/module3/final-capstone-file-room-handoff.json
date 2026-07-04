@@ -3,32 +3,52 @@
     "linux--linux-terminal-fundamentals--draft": {
       "linux-module-3-final-capstone": {
         "final-capstone-file-room-handoff": {
-          "label": "Capstone: File Room Handoff",
-          "summary": "Use the Linux terminal to turn a messy event workspace into a clean handoff: inspect what is there, sort files into the right folders, protect an important note with a backup, remove temporary clutter, and leave a clear ready marker.",
+          "label": "Final Capstone: Community File Room Handoff",
+          "summary": "Clean a small file room workspace with the full beginner terminal toolkit.",
           "cards": {
             "sketch0": {
-              "title": "Community File Room Handoff synopsis"
+              "title": "Community file room handoff"
             },
             "project": {
-              "title": "Community File Room Handoff"
+              "title": "Final capstone steps"
             }
           },
           "finalCapstone": {
             "steps": {
               "final-capstone-file-room-handoff-terminal-task-1": {
-                "title": "Inventory the file-room inbox",
-                "prompt": "You are starting the final event handoff and need a quick record of what arrived. Check the inbox, then create `community-file-room/handoff/inventory.txt` to mark that the intake review happened.",
-                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "title": "Inspect and create the handoff area",
+                "prompt": "Inspect `community-file-room`, then create `handoff`, `reports`, `archive`, and `backup` folders.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
                 "help": {
-                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
-                  "hint_1": "Use ls or find to check the current workspace before changing it.",
-                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
                 },
-                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "starterCode": "# Use the terminal for this project step.",
                 "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `pwd` to confirm where you are."
+                    },
+                    "1": {
+                      "message": "Use `ls` to inspect before changing."
+                    },
+                    "2": {
+                      "message": "Create the handoff folders with `mkdir` or `mkdir -p`."
+                    }
+                  },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Do not use sudo for beginner workspace tasks."
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
                     }
                   }
                 },
@@ -39,28 +59,48 @@
                   "community_file_room_inbox_guest_list_txt": {
                     "content": "Guest list\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Temporary scratch note\n"
-                  },
                   "community_file_room_inbox_venue_txt": {
-                    "content": "Venue setup notes\n"
+                    "content": "Venue note\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-2": {
-                "title": "Sort agenda, guests, and venue notes",
-                "prompt": "The inbox still has loose event files. Create `community-file-room/agenda`, `community-file-room/guests`, and `community-file-room/venue`, then move `agenda.txt`, `guest-list.txt`, and `venue.txt` out of `community-file-room/inbox` into their matching folders.",
-                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "title": "Write the handoff README",
+                "prompt": "Write `Community file room handoff` to `handoff/README.txt`, then append `Agenda, guest list, and venue notes prepared`. Read it with `cat`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
                 "help": {
-                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
-                  "hint_1": "Use ls or find to check the current workspace before changing it.",
-                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
                 },
-                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "starterCode": "# Use the terminal for this project step.",
                 "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Write the first README line with `>`."
+                    },
+                    "1": {
+                      "message": "Append the second README line with `>>`."
+                    },
+                    "2": {
+                      "message": "Read the README with `cat`."
+                    }
+                  },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Do not use sudo for beginner workspace tasks."
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
                     }
                   }
                 },
@@ -71,128 +111,146 @@
                   "community_file_room_inbox_guest_list_txt": {
                     "content": "Guest list\n"
                   },
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Temporary scratch note\n"
-                  },
                   "community_file_room_inbox_venue_txt": {
-                    "content": "Venue setup notes\n"
+                    "content": "Venue note\n"
                   },
-                  "community_file_room_handoff_inventory_txt": {
-                    "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n"
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-3": {
-                "title": "Back up the agenda",
-                "prompt": "Before anyone cleans up the workspace, save a copy of the agenda. Copy `community-file-room/agenda/agenda.txt` to `community-file-room/backups/agenda.txt`.",
-                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "title": "Move files into clean folders",
+                "prompt": "Move `agenda.txt` and `venue.txt` into `handoff`. Move `guest-list.txt` into `reports`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
                 "help": {
-                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
-                  "hint_1": "Use ls or find to check the current workspace before changing it.",
-                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
                 },
-                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "starterCode": "# Use the terminal for this project step.",
                 "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `mv` to move the inbox files."
+                    }
+                  },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Do not use sudo for beginner workspace tasks."
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
                     }
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Temporary scratch note\n"
-                  },
-                  "community_file_room_handoff_inventory_txt": {
-                    "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n"
-                  },
-                  "community_file_room_agenda_agenda_txt": {
+                  "community_file_room_inbox_agenda_txt": {
                     "content": "Community event agenda\n"
                   },
-                  "community_file_room_guests_guest_list_txt": {
+                  "community_file_room_inbox_guest_list_txt": {
                     "content": "Guest list\n"
                   },
-                  "community_file_room_venue_venue_txt": {
-                    "content": "Venue setup notes\n"
+                  "community_file_room_inbox_venue_txt": {
+                    "content": "Venue note\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-4": {
-                "title": "Create a review summary",
-                "prompt": "The next volunteer needs a short review note after you check the agenda and guest list. Create `community-file-room/handoff/review-summary.txt` as that summary file.",
-                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "title": "Back up the guest list and remove scratch",
+                "prompt": "Copy the guest list into `backup/guest-list-backup.txt`. Remove only `tmp-scratch.txt`, then list `inbox`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
                 "help": {
-                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
-                  "hint_1": "Use ls or find to check the current workspace before changing it.",
-                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
                 },
-                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "starterCode": "# Use the terminal for this project step.",
                 "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `cp` to create the backup."
+                    },
+                    "1": {
+                      "message": "Remove only the temporary scratch file."
+                    }
+                  },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Do not use sudo for beginner workspace tasks."
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
                     }
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Temporary scratch note\n"
-                  },
-                  "community_file_room_handoff_inventory_txt": {
-                    "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n"
-                  },
-                  "community_file_room_agenda_agenda_txt": {
-                    "content": "Community event agenda\n"
-                  },
-                  "community_file_room_guests_guest_list_txt": {
+                  "community_file_room_reports_guest_list_txt": {
                     "content": "Guest list\n"
                   },
-                  "community_file_room_venue_venue_txt": {
-                    "content": "Venue setup notes\n"
-                  },
-                  "community_file_room_backups_agenda_txt": {
-                    "content": "Community event agenda\n"
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-5": {
-                "title": "Clean temporary clutter and mark ready",
-                "prompt": "Finish the event handoff by removing the temporary scratch file from the inbox and creating `community-file-room/handoff/READY.txt` so the workspace clearly shows it is ready.",
-                "hint": "This is a cumulative project step. Start from the previous workspace and add only the requested change.",
+                "title": "Verify and mark ready",
+                "prompt": "Count the guest list lines with `wc -l`, append `Ready for pickup` to the README, and create `handoff/READY.txt`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
                 "help": {
-                  "concept": "Project steps are connected. Preserve earlier deliverables and add one useful new piece of work.",
-                  "hint_1": "Use ls or find to check the current workspace before changing it.",
-                  "hint_2": "Do not delete files from earlier steps unless the prompt explicitly asks you to clean up a temporary file."
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
                 },
-                "starterCode": "# Use the terminal for this Linux project step.\n",
+                "starterCode": "# Use the terminal for this project step.",
                 "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `wc -l` to count the guest list."
+                    },
+                    "1": {
+                      "message": "Append the final README line with `>>`."
+                    },
+                    "2": {
+                      "message": "Create the ready marker with `touch`."
+                    }
+                  },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Do not use sudo for beginner workspace tasks."
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
                     }
                   }
                 },
                 "starterFiles": {
-                  "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Temporary scratch note\n"
-                  },
-                  "community_file_room_handoff_inventory_txt": {
-                    "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n"
-                  },
-                  "community_file_room_handoff_review_summary_txt": {
-                    "content": "Agenda and guest list reviewed for handoff\n"
-                  },
-                  "community_file_room_agenda_agenda_txt": {
-                    "content": "Community event agenda\n"
-                  },
-                  "community_file_room_guests_guest_list_txt": {
+                  "community_file_room_reports_guest_list_txt": {
                     "content": "Guest list\n"
                   },
-                  "community_file_room_venue_venue_txt": {
-                    "content": "Venue setup notes\n"
-                  },
-                  "community_file_room_backups_agenda_txt": {
-                    "content": "Community event agenda\n"
+                  "community_file_room_handoff_readme_txt": {
+                    "content": "Community file room handoff\n"
                   }
                 }
               }
@@ -207,8 +265,8 @@
       "linux-module-3-final-capstone": {
         "final-capstone-file-room-handoff": {
           "capstone-synopsis": {
-            "title": "Community File Room Handoff",
-            "bodyMarkdown": "You are the final file-room helper for a community event. Inspect the inbox, sort important files, back up the agenda, review the handoff, remove temporary clutter, and leave a ready marker.\n\nYou will complete this as connected project steps. Each step starts from the previous working workspace, so do not delete earlier deliverables."
+            "title": "Community file room handoff",
+            "bodyMarkdown": "The community center has a messy file room before an event. Your job is to inspect first, build a clean handoff area, write a README, move files, back up the guest list, safely remove a scratch file, and mark the folder ready.\n\nThis capstone uses the whole course: `pwd`, `ls`, `cd`, `mkdir`, `touch`, `echo`, `>`, `>>`, `cat`, `wc -l`, `cp`, `mv`, and safe `rm`."
           }
         }
       }

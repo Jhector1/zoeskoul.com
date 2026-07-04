@@ -1,0 +1,272 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "overriding-and-specialization": {
+          "label": "Overriding and Specialization",
+          "summary": "Override a parent method when a subclass needs a different result, while still reusing shared setup from the base class.",
+          "cards": {
+            "sketch0": {
+              "title": "Why subclasses override methods"
+            },
+            "sketch1": {
+              "title": "Reusing parent initialization with super()"
+            },
+            "sketch2": {
+              "title": "Specialized behavior still supports polymorphism"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_overriding_and_specialization_sketch0": {
+              "title": "Override a label method for books",
+              "prompt": "You are building a small catalog app. In `models/item.py`, the base `Item` class already returns the item name from `display_name()`. In `models/book.py`, complete the `Book` subclass so it reuses the parent constructor with `super()` and overrides `display_name()` to return `\"<name> by <author>\"`. Keep the shared method name the same so the catalog can call it consistently.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Open the workspace files and complete the Book class.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Open the workspace files and complete the Book class."
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, name, author):\n        self.name = name\n        self.author = author\n\n    def display_name(self):\n        pass"
+                }
+              }
+            },
+            "try_overriding_and_specialization_sketch1": {
+              "title": "Reuse parent initialization in a digital item",
+              "prompt": "In this workspace, `Item` already stores `name` and `price`. Finish `DigitalItem` in `models/digital_item.py` so its constructor uses `super()` to reuse the parent initialization, then stores `file_size_mb`. Also override `summary()` so it returns `\"<name> ($<price>) - <file_size_mb>MB download\"` using the stored values.",
+              "hint": "Read the task \"Reuse parent initialization in a digital item\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Reuse parent initialization in a digital item\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Complete the DigitalItem class in the workspace files.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Complete the DigitalItem class in the workspace files."
+                },
+                "models_digital_item_py": {
+                  "content": "class DigitalItem:\n    def __init__(self, name, price, file_size_mb):\n        self.name = name\n        self.price = price\n        self.file_size_mb = file_size_mb\n\n    def summary(self):\n        pass"
+                }
+              }
+            },
+            "try_overriding_and_specialization_sketch2": {
+              "title": "Use one service loop with mixed item types",
+              "prompt": "A shipping service should work with mixed item types through one shared method name. Complete `FragileItem` so it overrides `shipping_note()` to return `\"Handle with care\"`. Then complete `services/shipping.py` so `collect_shipping_notes(items)` loops through the list and returns a new list of each object's `shipping_note()` result in order.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Complete the subclass and service function in the workspace files.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Complete the subclass and service function in the workspace files."
+                },
+                "models_fragile_item_py": {
+                  "content": "class FragileItem:\n    def __init__(self, value_1):\n        pass\n\n    def shipping_note(self):\n        pass"
+                }
+              }
+            }
+          },
+          "practice": {
+            "sc-overriding-contract": {
+              "title": "Identify the overridden method",
+              "prompt": "A base class `Item` has a method named `display_name()`. A subclass `Book` also defines `display_name()` with the same parameter list. What is this called?",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "options": {
+                "a": "Overriding",
+                "b": "Importing",
+                "c": "Instantiating",
+                "d": "Encapsulation"
+              }
+            },
+            "sc-super-purpose": {
+              "title": "Why call super() in a subclass constructor",
+              "prompt": "Why would a subclass constructor call `super().__init__(name, price)` in a catalog app?",
+              "hint": "Think about which class already knows how to store the shared attributes.",
+              "help": {
+                "concept": "`super()` lets a subclass reuse the base class constructor so shared setup is not duplicated.",
+                "hint_1": "The base class already handles common fields like `name` and `price`.",
+                "hint_2": "The subclass can let the parent set shared attributes first, then add its own extra attributes."
+              },
+              "options": {
+                "a": "To reuse the parent setup for shared attributes",
+                "b": "To turn the subclass into a base class",
+                "c": "To prevent the subclass from having new attributes",
+                "d": "To make every method return the same value"
+              }
+            },
+            "fb-specialized-method-name": {
+              "title": "Keep the shared method name",
+              "prompt": "Complete the subclass method name so the service can call the same method on every item type.",
+              "hint": "The subclass should use the same method name as the base class method it replaces.",
+              "help": {
+                "concept": "For overriding to work, the subclass method must use the same name as the base class method so shared code can call it consistently.",
+                "hint_1": "The base class method in this example is the one that returns the label shown in the catalog.",
+                "hint_2": "Choose the method name that matches the parent method exactly, not a new custom name."
+              },
+              "template": "class Book(Item):\n    def [blank1](self):\n        return f\"{self.name} by {self.author}\"",
+              "choices": [
+                "display_name",
+                "book_name",
+                "show_author",
+                "label_book"
+              ]
+            },
+            "fb-super-call": {
+              "title": "Choose the parent setup call",
+              "prompt": "Fill in the missing expression that reuses the parent constructor inside a subclass `__init__`.",
+              "hint": "You want the parent class to handle the shared attributes first.",
+              "help": {
+                "concept": "Inside a subclass constructor, `super().__init__(...)` calls the base class constructor to initialize inherited state.",
+                "hint_1": "The missing code should call the parent constructor, not assign directly to `self`.",
+                "hint_2": "Choose the expression that starts with `super()` and passes the shared arguments into `__init__`."
+              },
+              "template": "class DigitalItem(Item):\n    def __init__(self, name, price, file_size_mb):\n        [blank1]\n        self.file_size_mb = file_size_mb",
+              "choices": [
+                "super().__init__(name, price)",
+                "Item(name, price)",
+                "self.__init__(name, price)",
+                "super(name, price)"
+              ]
+            },
+            "mc-overriding-benefits": {
+              "title": "Choose the true statements about overriding",
+              "prompt": "Which statements are true about overriding in this topic? Choose all that apply.",
+              "hint": "Think about what stays the same and what changes when a subclass specializes behavior.",
+              "help": {
+                "concept": "Overriding keeps a shared method contract while allowing subclasses to return different results and still work in shared loops or services.",
+                "hint_1": "Look for statements about same method names, specialized behavior, and mixed-object services.",
+                "hint_2": "Avoid choices that claim every subclass must behave identically or that overriding removes the need for inheritance."
+              },
+              "options": {
+                "a": "A subclass can keep the same method name but return a more specific result.",
+                "b": "Overriding helps a service work with mixed object types through one shared method call.",
+                "c": "A subclass must delete the parent method before it can specialize behavior.",
+                "d": "Overriding means every subclass method must return exactly the same text as the base class."
+              }
+            },
+            "dr-build-specialized-subclass": {
+              "title": "Order the subclass setup steps",
+              "prompt": "Put these steps in the best order for building a subclass that specializes a base class method in the catalog app.",
+              "hint": "Start by inheriting from the base class, then reuse shared setup before adding specialized behavior.",
+              "help": {
+                "concept": "A clean subclass usually starts by inheriting from the base class, reusing parent initialization, adding subclass state, and then overriding the needed method.",
+                "hint_1": "The parent constructor call belongs before storing subclass-only attributes.",
+                "hint_2": "The overridden method comes after the constructor work because it uses the stored attributes."
+              },
+              "tokens": {
+                "t1": "Declare the subclass with the base class in parentheses",
+                "t2": "Call super().__init__(...) for shared attributes",
+                "t3": "Store the subclass-specific attribute",
+                "t4": "Define the overridden method with the same name"
+              }
+            },
+            "catalog-step-book-and-movie": {
+              "title": "Specialize labels for two catalog subclasses",
+              "prompt": "You are extending a media catalog. The base `CatalogItem` already stores `title`. Complete both subclasses so they reuse the parent constructor and override `display_name()`: `BookItem` should return `\"<title> by <author>\"`, and `MovieItem` should return `\"<title> (<minutes> min)\"`. The workspace already includes a small `main.py` that prints both labels.",
+              "hint": "Both subclasses share the same method name, but each one formats the result differently.",
+              "help": {
+                "concept": "Different subclasses can override the same base method in different ways while still fitting the same base-class contract.",
+                "hint_1": "Use `super().__init__(title)` in both subclass constructors before storing the extra field.",
+                "hint_2": "Write one `display_name()` method in each subclass, each returning its own specialized string format."
+              },
+              "starterCode": "# Complete the workspace files.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Complete the workspace files."
+                },
+                "models_book_item_py": {
+                  "content": "class BookItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def display_name(self):\n        pass"
+                },
+                "models_movie_item_py": {
+                  "content": "class MovieItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def display_name(self):\n        pass"
+                }
+              }
+            },
+            "catalog-step-sale-price": {
+              "title": "Override a pricing method for sale items",
+              "prompt": "A store app has a base `Item` class with `final_price()` that returns the regular price. Complete `SaleItem` so it reuses the parent constructor and overrides `final_price()` to apply a percentage discount. For example, a price of `50` with a discount of `20` should return `40.0`. Keep the method name `final_price()` so pricing services can call it on any item type.",
+              "hint": "The subclass should compute a reduced price from the inherited price and its own discount percentage.",
+              "help": {
+                "concept": "A subclass can override a calculation method so shared services still call the same method name while each subtype computes its own result.",
+                "hint_1": "Store `discount_percent` in the subclass after calling `super().__init__(name, price)`.",
+                "hint_2": "Compute the discount amount from `self.price * self.discount_percent / 100`, then subtract it from `self.price`."
+              },
+              "starterCode": "# Complete the workspace files.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Complete the workspace files."
+                },
+                "models_sale_item_py": {
+                  "content": "class SaleItem:\n    def __init__(self, name, price, discount_percent):\n        self.name = name\n        self.price = price\n        self.discount_percent = discount_percent\n\n    def final_price(self):\n        pass"
+                }
+              }
+            },
+            "catalog-step-mixed-report": {
+              "title": "Build a report from mixed specialized items",
+              "prompt": "You now have a mixed catalog report. Complete the subclasses and the service so `services/reporting.py` defines `build_display_report(items)`, which returns a list of each object's `display_name()` result. The list may contain base `CatalogItem` objects, `BookItem` objects, and `MovieItem` objects. The service should not check types manually; it should rely on the shared method name.",
+              "hint": "The service loop should trust that every object in the list supports `display_name()`.",
+              "help": {
+                "concept": "Polymorphic services work by calling the same method on mixed related objects, while overriding lets each subclass provide its own specialized output.",
+                "hint_1": "Make sure each subclass overrides `display_name()` correctly before writing the service loop.",
+                "hint_2": "In the service function, iterate through `items` and append `item.display_name()` for each object in order."
+              },
+              "starterCode": "# Complete the workspace files.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Complete the workspace files."
+                },
+                "models_book_item_py": {
+                  "content": "class BookItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def display_name(self):\n        pass"
+                },
+                "models_movie_item_py": {
+                  "content": "class MovieItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def display_name(self):\n        pass"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self):\n        pass"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "overriding-and-specialization": {
+          "overriding-and-specialization-sketch-0": {
+            "title": "Why subclasses override methods",
+            "bodyMarkdown": "A subclass inherits behavior from a base class, but sometimes one method needs to work differently for that specific subtype. That is when you **override** the parent method: you keep the same method name, but write a new version in the subclass.\n\nImagine a catalog app with a general `Item` and a special `Book`. Most items might show a plain label, but books may need the author in the label too.\n\n```python\nclass Item:\n    def __init__(self, name):\n        self.name = name\n\n    def display_name(self):\n        return self.name\n\nclass Book(Item):\n    def __init__(self, name, author):\n        super().__init__(name)\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.name} by {self.author}\"\n```\n\nStep by step:\n\n- `Item.display_name()` returns the basic item name.\n- `Book` inherits from `Item`, so it already gets `name` handling.\n- `super().__init__(name)` reuses the parent setup instead of rewriting it.\n- `Book.display_name()` overrides the parent version because books need a more specific result.\n\nThe important idea is that the subclass keeps the **same method contract** but provides a more specialized result."
+          },
+          "overriding-and-specialization-sketch-1": {
+            "title": "Reusing parent initialization with super()",
+            "bodyMarkdown": "When a subclass adds new attributes, it often still needs the base class to set up shared attributes first. That is why `super()` is useful.\n\n```python\nclass Item:\n    def __init__(self, name, price):\n        self.name = name\n        self.price = price\n\nclass DigitalItem(Item):\n    def __init__(self, name, price, file_size_mb):\n        super().__init__(name, price)\n        self.file_size_mb = file_size_mb\n```\n\nLine by line:\n\n- `Item.__init__` stores the shared data: `name` and `price`.\n- `DigitalItem` needs those shared attributes too.\n- `super().__init__(name, price)` calls the parent constructor.\n- After that, `DigitalItem` adds its own attribute: `file_size_mb`.\n\nWithout `super()`, you would repeat the parent setup manually. Reusing the parent constructor keeps the code shorter and safer, especially if the base class changes later."
+          },
+          "overriding-and-specialization-sketch-2": {
+            "title": "Specialized behavior still supports polymorphism",
+            "bodyMarkdown": "Overriding is especially useful when a service works with a mixed list of related objects. Each object can respond to the same method name in its own way.\n\n```python\nclass Item:\n    def shipping_note(self):\n        return \"Standard shipping\"\n\nclass FragileItem(Item):\n    def shipping_note(self):\n        return \"Handle with care\"\n\nitems = [Item(), FragileItem()]\nfor item in items:\n    print(item.shipping_note())\n```\n\nWhat happens here:\n\n- Both classes provide a `shipping_note()` method.\n- The loop does not need separate logic for each subtype.\n- A plain `Item` returns `\"Standard shipping\"`.\n- A `FragileItem` overrides that method and returns `\"Handle with care\"`.\n\nThis is the start of **polymorphism**: one loop, one shared method name, different specialized results depending on the object type.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

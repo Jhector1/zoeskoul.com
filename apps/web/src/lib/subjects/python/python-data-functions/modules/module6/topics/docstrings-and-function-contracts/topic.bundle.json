@@ -300,11 +300,11 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "def square(number):\n    # Add a docstring and return the square.\n    pass\n\nprint(square(5))\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def square(number):\n    # Add a docstring and return the square.\n    pass\n\nprint(square(5))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -313,11 +313,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def square(number):\n    # Add a docstring and return the square.\n    pass\n\nprint(square(5))\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def square(number):\n    # Add a docstring and return the square.\n    pass\n\nprint(square(5))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -337,7 +337,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def square(number):\n    \"\"\"Return number multiplied by itself.\"\"\"\n    return number * number\n\nprint(square(5))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-checkpoint.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -359,7 +359,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def square(number):\n    \"\"\"Return number multiplied by itself.\"\"\"\n    return number * number\n\nprint(square(5))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -369,7 +369,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def square(number):\n    \"\"\"Return number multiplied by itself.\"\"\"\n    return number * number\n\nprint(square(5))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -383,11 +383,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring",
       "language": "python",
-      "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -396,11 +396,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -420,7 +420,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -453,7 +453,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -463,7 +463,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-add-docstring.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -477,11 +477,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function",
       "language": "python",
-      "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -490,11 +490,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -514,7 +514,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -551,7 +551,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -561,7 +561,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-write-contract-function.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -575,11 +575,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return",
       "language": "python",
-      "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -588,11 +588,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -612,7 +612,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -649,7 +649,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -659,7 +659,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.ci-fix-print-vs-return.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -673,11 +673,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0",
       "language": "python",
-      "starterCode": "def clean_name(text):\n    # Add a docstring and return text stripped and title-cased.\n    pass\n\nprint(clean_name('  ava  '))\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_name(text):\n    # Add a docstring and return text stripped and title-cased.\n    pass\n\nprint(clean_name('  ava  '))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -686,7 +686,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def clean_name(text):\n    \"\"\"Return text stripped of extra space and converted to title case.\"\"\"\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -695,11 +695,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_name(text):\n    # Add a docstring and return text stripped and title-cased.\n    pass\n\nprint(clean_name('  ava  '))\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(text):\n    # Add a docstring and return text stripped and title-cased.\n    pass\n\nprint(clean_name('  ava  '))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -719,7 +719,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def clean_name(text):\n    \"\"\"Return text stripped of extra space and converted to title case.\"\"\"\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -741,7 +741,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(text):\n    \"\"\"Return text stripped of extra space and converted to title case.\"\"\"\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -756,11 +756,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1",
       "language": "python",
-      "starterCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    # Finish the return statement.\n    pass\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    # Finish the return statement.\n    pass\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -769,7 +769,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    return (temp - 32) * 5 / 9\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -778,11 +778,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    # Finish the return statement.\n    pass\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    # Finish the return statement.\n    pass\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -802,7 +802,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    return (temp - 32) * 5 / 9\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -824,7 +824,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    return (temp - 32) * 5 / 9\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -839,11 +839,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2",
       "language": "python",
-      "starterCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    pass\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    pass\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -852,7 +852,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    return 0 <= score <= 100\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -861,11 +861,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    pass\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    pass\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -885,7 +885,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    return 0 <= score <= 100\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -907,7 +907,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    return 0 <= score <= 100\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.docstrings-and-function-contracts.quiz.try-docstrings-and-function-contracts-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true

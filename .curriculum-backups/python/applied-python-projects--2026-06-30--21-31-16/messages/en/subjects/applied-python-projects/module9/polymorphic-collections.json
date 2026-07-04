@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "polymorphic-collections": {
+          "label": "Polymorphic Collections",
+          "summary": "Process a mixed list of objects through shared method names instead of type-specific branches.",
+          "cards": {
+            "sketch0": {
+              "title": "Polymorphic Collections: the idea"
+            },
+            "sketch1": {
+              "title": "Polymorphic Collections: the file shape"
+            },
+            "sketch2": {
+              "title": "Polymorphic Collections: what the grader checks"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "ci_notification_polymorphism_practice": {
+              "title": "Send mixed notifications"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_polymorphic_collections_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Complete the classes so `main.py` can call `.label()` on both `Book` and `Video` objects."
+            },
+            "try_polymorphic_collections_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Complete `total_fees()` so it calls `fee()` on every item without checking its class name."
+            }
+          },
+          "quiz": {
+            "ci-notification-polymorphism-practice": {
+              "title": "Send mixed notifications",
+              "prompt": "Build two notification classes with a shared `send()` method and use them polymorphically.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.email_notice import EmailNotice\nfrom models.sms_notice import SmsNotice\n\nnotices = [EmailNotice(\"Ava\", \"Welcome\"), SmsNotice(\"555-0101\", \"Ready\")]\nfor notice in notices:\n    print(notice.send())\n"
+            },
+            "sc-polymorphic-collections-design": {
+              "title": "Check the design choice",
+              "prompt": "Which choice best matches the lesson goal for polymorphic collections?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Process a mixed list of objects through shared method names instead of type-specific branches.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Put every class in main.py so imports are never needed.",
+                "b": "Give each class or service a focused responsibility and import it where needed.",
+                "c": "Avoid methods so every object exposes all of its data directly.",
+                "d": "Copy the same logic into each subclass to avoid shared code."
+              }
+            },
+            "try-polymorphic-collections-sketch0": {
+              "title": "Loop over mixed media objects",
+              "prompt": "Complete the classes so `main.py` can call `.label()` on both `Book` and `Video` objects.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book import Book\nfrom models.video import Video\n\nitems = [Book(\"Python\", \"Ana\"), Video(\"OOP\", 8)]\nfor item in items:\n    print(item.label())\n"
+            },
+            "try-polymorphic-collections-sketch1": {
+              "title": "Write a service for a polymorphic list",
+              "prompt": "Complete `total_fees()` so it calls `fee()` on every item without checking its class name.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.physical_book import PhysicalBook\nfrom models.dvd import DVD\nfrom services.catalog import total_fees\n\nitems = [PhysicalBook(\"SQL\", 2), DVD(\"History\", 3)]\nprint(total_fees(items))\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "polymorphic-collections": {
+          "concept": {
+            "title": "Polymorphic Collections: the idea",
+            "bodyMarkdown": "**Polymorphic Collections** is not just syntax. In this course it is practiced inside small projects where one file owns one clear part of the program. Process a mixed list of objects through shared method names instead of type-specific branches."
+          },
+          "multifile-shape": {
+            "title": "Polymorphic Collections: the file shape",
+            "bodyMarkdown": "The file layout matters. Models hold object state and behavior, services coordinate groups of objects, tests verify behavior, and `main.py` stays thin enough to read."
+          },
+          "graded-habit": {
+            "title": "Polymorphic Collections: what the grader checks",
+            "bodyMarkdown": "The grader checks behavior from the running project. A strong answer keeps imports working, keeps all files present, and proves the object behavior through output or assertions."
+          }
+        }
+      }
+    }
+  }
+}

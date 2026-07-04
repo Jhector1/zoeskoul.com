@@ -1,11 +1,6 @@
 {
   "ide": {
     "tools": {
-      "tabs": {
-        "run": "Run",
-        "notes": "Notes",
-        "disabledForSubject": "{label} disabled for this subject"
-      },
       "header": {
         "title": "Tools",
         "boundTo": "Bound to:",

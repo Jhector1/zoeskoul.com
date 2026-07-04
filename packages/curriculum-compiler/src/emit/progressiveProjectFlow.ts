@@ -136,8 +136,98 @@ function cloneStarterFiles(files: CodeExercise["starterFiles"]) {
     return Array.isArray(files) ? files.map((file) => ({ ...file })) : [];
 }
 
+function extractMarkedWorkspaceFiles(source: unknown): Map<string, string> {
+    const result = new Map<string, string>();
+    const lines = String(source ?? "").replace(/\r\n?/g, "\n").split("\n");
+    let currentPath: string | null = null;
+    let currentLines: string[] = [];
+
+    function flush() {
+        if (!currentPath) return;
+        result.set(currentPath, currentLines.join("\n").trimEnd());
+    }
+
+    for (const line of lines) {
+        const match = /^\s*#\s*([a-zA-Z0-9_.\/-]+\.py)\s*$/.exec(line);
+        if (match?.[1]) {
+            flush();
+            currentPath = match[1];
+            currentLines = [];
+            continue;
+        }
+
+        if (currentPath) {
+            currentLines.push(line);
+        }
+    }
+
+    flush();
+    return result;
+}
+
+function buildMarkedSolutionFiles(exercise: CodeExercise, entryFilePath: string) {
+    const markedFiles = extractMarkedWorkspaceFiles(exercise.solutionCode);
+    if (markedFiles.size < 1) return null;
+
+    type StarterDraftFile = NonNullable<CodeExercise["starterFiles"]>[number];
+    const merged = new Map<string, StarterDraftFile>();
+    const order: string[] = [];
+
+    function upsert(file: StarterDraftFile) {
+        if (!file?.path || merged.has(file.path)) return;
+        merged.set(file.path, { ...file });
+        order.push(file.path);
+    }
+
+    for (const file of cloneStarterFiles(exercise.solutionFiles)) upsert(file);
+    for (const file of cloneStarterFiles(exercise.starterFiles)) upsert(file);
+
+    for (const [path, content] of markedFiles) {
+        if (!merged.has(path)) {
+            order.push(path);
+        }
+
+        merged.set(path, {
+            ...(merged.get(path) ?? { path }),
+            path,
+            content,
+            isEntry: path === entryFilePath,
+            entry: path === entryFilePath,
+        });
+    }
+
+    if (!merged.has(entryFilePath)) {
+        order.unshift(entryFilePath);
+        merged.set(entryFilePath, {
+            path: entryFilePath,
+            content: markedFiles.get(entryFilePath) ?? normalizeText(exercise.solutionCode),
+            isEntry: true,
+            entry: true,
+        });
+    }
+
+    return order
+        .map((path) => merged.get(path))
+        .filter((file): file is StarterDraftFile => Boolean(file))
+        .map((file) =>
+            file.path === entryFilePath
+                ? { ...file, isEntry: true, entry: true }
+                : { ...file, isEntry: file.isEntry === true ? false : file.isEntry, entry: file.entry === true ? false : file.entry },
+        );
+}
+
+function entryContentFromMarkedWorkspace(source: string, entryFilePath: string) {
+    return extractMarkedWorkspaceFiles(source).get(entryFilePath) ?? source;
+}
+
 function buildBaseSolutionFiles(exercise: CodeExercise) {
     const entryFilePath = resolveEntryFilePath(exercise);
+    const markedSolutions = buildMarkedSolutionFiles(exercise, entryFilePath);
+
+    if (markedSolutions) {
+        return markedSolutions;
+    }
+
     const authoredSolutions = cloneStarterFiles(exercise.solutionFiles);
 
     if (authoredSolutions.length > 0) {
@@ -264,7 +354,7 @@ function mergeProgressiveFiles(args: {
     merged.set(entryFilePath, {
         ...(existingEntry ?? { path: entryFilePath }),
         path: entryFilePath,
-        content: args.entryContent,
+        content: entryContentFromMarkedWorkspace(args.entryContent, entryFilePath),
         isEntry: true,
         entry: true,
     });

@@ -1,0 +1,182 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "module-8-account-tracker-project": {
+          "label": "Module 8 Account Tracker Project",
+          "summary": "Build a small multifile account tracker with an Account class, helper functions, validation, file loading, and a thin main script that prints a useful summary.",
+          "cards": {
+            "sketch0": {
+              "title": "Project overview: build a small account tracker app"
+            },
+            "project": {
+              "title": "Account Tracker Build"
+            }
+          },
+          "projectSteps": {
+            "try_module_8_account_tracker_project_sketch0": {
+              "title": "Create the Account model and import it"
+            },
+            "account_tracker_step_2_add_methods": {
+              "title": "Add deposit and withdraw methods"
+            },
+            "account_tracker_step_3_format_helper": {
+              "title": "Move money formatting into a helper file"
+            },
+            "account_tracker_step_4_validate_transactions": {
+              "title": "Add validation for unsafe amounts"
+            },
+            "account_tracker_step_5_load_from_file": {
+              "title": "Load accounts from a data file"
+            },
+            "account_tracker_step_6_summary_report": {
+              "title": "Print a final summary report"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_8_account_tracker_project_sketch0": {
+                "title": "Create the Account model and import it",
+                "prompt": "Start the module project. In step 1 of 6, Project step 1: Set up the first working version of the account tracker. In `models/account.py`, define an `Account` class with an `__init__(self, owner, balance)` constructor that stores `owner` and `balance` as attributes. In `main.py`, import `Account`, create one account for `Ava` with balance `125`, and print exactly two lines: the owner on the first line and the balance on the second line. Keep the provided helper file unchanged.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "# Open the workspace files and complete the TODOs.",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Open the workspace files and complete the TODOs."
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance"
+                  }
+                }
+              },
+              "account_tracker_step_2_add_methods": {
+                "title": "Add deposit and withdraw methods",
+                "prompt": "Continue the same module project from the previous working step. In step 2 of 6, Project step 2: Continue from the previous working workspace. In `models/account.py`, add a `deposit(self, amount)` method that increases the balance and returns the new balance, and a `withdraw(self, amount)` method that decreases the balance and returns the new balance. In `main.py`, create the same `Ava` account, call `deposit(25)` and then `withdraw(40)`, and print exactly three lines: the owner, the balance after the deposit, and the balance after the withdrawal.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\n# Project step 2: Add deposit and withdraw methods\n# Keep the working code above from the previous step.\n# Next, Project step 2: Continue from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\n# Project step 2: Add deposit and withdraw methods\n# Keep the working code above from the previous step.\n# Next, Project step 2: Continue from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance"
+                  }
+                }
+              },
+              "account_tracker_step_3_format_helper": {
+                "title": "Move money formatting into a helper file",
+                "prompt": "Continue the same module project from the previous working step. In step 3 of 6, Project step 3: Continue from the previous working workspace. In `helpers/formatting.py`, write a function named `format_money(amount)` that returns a string like `$125.00`. Update `main.py` so it prints the owner and then two formatted balances after calling `deposit(25)` and `withdraw(40)`. Keep the `Account` methods returning numbers; only the display formatting should move into the helper.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())\n# Project step 3: Move money formatting into a helper file\n# Keep the working code above from the previous step.\n# Next, Project step 3: Continue from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())\n# Project step 3: Move money formatting into a helper file\n# Keep the working code above from the previous step.\n# Next, Project step 3: Continue from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def balance(self):\n        return 150\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance"
+                  }
+                }
+              },
+              "account_tracker_step_4_validate_transactions": {
+                "title": "Add validation for unsafe amounts",
+                "prompt": "Continue the same module project from the previous working step. In step 4 of 6, Project step 4: Continue from the previous working workspace. Improve encapsulation by validating transaction amounts inside the `Account` methods. `deposit` should ignore amounts less than or equal to 0 and return the unchanged balance. `withdraw` should ignore amounts less than or equal to 0, and it should also ignore withdrawals larger than the current balance. Update `main.py` to demonstrate this by creating `Ava` with `125`, printing the starting balance, then printing the result of `deposit(-5)`, `withdraw(500)`, and `withdraw(25)` using the formatting helper. The invalid operations should leave the balance unchanged.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.deposit(25))\n# Project step 4: Add validation for unsafe amounts\n# Keep the working code above from the previous step.\n# Next, Project step 4: Continue from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.deposit(25))\n# Project step 4: Add validation for unsafe amounts\n# Keep the working code above from the previous step.\n# Next, Project step 4: Continue from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def deposit(self, amount):\n        return 150\n\n    def withdraw(self, amount):\n        return 85"
+                  },
+                  "services_format_money_py": {
+                    "content": "def format_money(amount):\n    return f\"${amount:.2f}\""
+                  }
+                }
+              },
+              "account_tracker_step_5_load_from_file": {
+                "title": "Load accounts from a data file",
+                "prompt": "Continue the same module project from the previous working step. In step 5 of 6, Project step 5: Continue from the previous working workspace. Add a service file at `services/account_loader.py` with a function named `load_accounts(file_path)` that reads lines like `Ava,125` from `data/accounts.txt`, creates `Account` objects, and returns a list of accounts. Update `main.py` so it loads the accounts from `data/accounts.txt` and prints one line per account in this format: `Owner: $Balance`. Use the formatting helper for the balance. The provided data file should produce three printed lines.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.deposit(25))\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(-5))\nprint(account_1.withdraw(500))\nprint(account_1.withdraw(25))\nprint(account_1.deposit(-5))\n# Project step 5: Load accounts from a data file\n# Keep the working code above from the previous step.\n# Next, Project step 5: Continue from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.deposit(25))\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(-5))\nprint(account_1.withdraw(500))\nprint(account_1.withdraw(25))\nprint(account_1.deposit(-5))\n# Project step 5: Load accounts from a data file\n# Keep the working code above from the previous step.\n# Next, Project step 5: Continue from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def deposit(self, amount):\n        return 125\n\n    def withdraw(self, amount):\n        return 125"
+                  },
+                  "services_format_money_py": {
+                    "content": "def format_money(amount):\n    return f\"${amount:.2f}\""
+                  }
+                }
+              },
+              "account_tracker_step_6_summary_report": {
+                "title": "Print a final summary report",
+                "prompt": "Continue the same module project from the previous working step. In step 6 of 6, Project step 6: Finish the project by continuing from the previous working workspace. Keep loading accounts from `data/accounts.txt`, then print a small report with one line per account in the format `Owner: $Balance`, followed by a final line `Total: $Amount` where the total is the sum of all account balances. Add a helper function in `services/account_loader.py` named `total_balance(accounts)` that takes the list of Account objects and returns the numeric total. Use the formatting helper for every money value, including the total.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.deposit(25))\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(-5))\nprint(account_1.withdraw(500))\nprint(account_1.withdraw(25))\nprint(account_1.deposit(-5))\nfrom models.account import Account\n\naccount_1 = Account()\nprint('done')\nprint('done')\nprint('done')\n# Project step 6: Print a final summary report\n# Keep the working code above from the previous step.\n# Next, Project step 6: Finish the project by continuing from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.deposit(25))\nfrom models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(-5))\nprint(account_1.withdraw(500))\nprint(account_1.withdraw(25))\nprint(account_1.deposit(-5))\nfrom models.account import Account\n\naccount_1 = Account()\nprint('done')\nprint('done')\nprint('done')\n# Project step 6: Print a final summary report\n# Keep the working code above from the previous step.\n# Next, Project step 6: Finish the project by continuing from the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n"
+                  },
+                  "models_account_py": {
+                    "content": "class Account:\n    def __init__(self):\n        pass"
+                  },
+                  "services_format_money_py": {
+                    "content": "def format_money(amount):\n    return f\"${amount:.2f}\""
+                  },
+                  "services_load_accounts_py": {
+                    "content": "def load_accounts(value):\n    return 3"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "module-8-account-tracker-project": {
+          "module-8-account-tracker-project-sketch-0": {
+            "title": "Project overview: build a small account tracker app",
+            "bodyMarkdown": "In this project, you will build a small **account tracker** across several workspace files instead of putting everything in one place. That mirrors how real Python apps are organized.\n\nYou will create:\n\n- a model file for the `Account` class\n- a helper file for formatting money\n- a service file for loading account data\n- a thin `the code editor` script that creates objects and prints a report\n\nThe main idea is that each object keeps its own **state** and **behavior** together. For example, an account should know its owner, current balance, and how to deposit or withdraw money.\n\nHere is the kind of class you will build:\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n```\n\nLine by line:\n\n- `class Account:` starts the class definition.\n- `__init__` runs when you create a new account object.\n- `self.owner = owner` stores the owner's name on that object.\n- `self.balance = balance` stores the starting balance.\n- `deposit()` changes the object's balance and returns the new value.\n\nLater, `the code editor` can import that class and use it:\n\n```python\nfrom models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.deposit(25))\n```\n\nThis project also introduces **encapsulation**. Instead of letting any code change the balance in unsafe ways, your methods will validate amounts before updating object state. By the end, your app will read account data from a file and print a clean summary report."
+          }
+        }
+      }
+    }
+  }
+}

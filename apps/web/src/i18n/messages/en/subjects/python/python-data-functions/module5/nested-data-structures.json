@@ -170,7 +170,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names"
+              "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
+              "solutionCode": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names"
             },
             "code-2": {
               "title": "Count total stock",
@@ -181,7 +182,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total"
+              "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
+              "solutionCode": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total"
             },
             "code-3": {
               "title": "Find the highest score",
@@ -192,7 +194,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best"
+              "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
+              "solutionCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best"
             },
             "try-nested-data-structures-checkpoint": {
               "title": "Read nested data",
@@ -203,7 +206,19 @@
                 "hint_1": "Use index `1`, then dictionary keys.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n"
+              "starterCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\n\n# Print Mia and her score on separate lines.\n",
+              "solutionCode": "students = [{\"name\": \"Ava\", \"score\": 88}, {\"name\": \"Mia\", \"score\": 91}]\nprint(students[1][\"name\"])\nprint(students[1][\"score\"])\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use students[1] to reach Mia instead of typing Mia directly."
+                },
+                "1": {
+                  "message": "Use the name key from the student dictionary."
+                },
+                "2": {
+                  "message": "Use the score key from the student dictionary."
+                }
+              }
             },
             "try-nested-data-structures-sketch0": {
               "title": "Read a nested value",
@@ -214,7 +229,16 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n"
+              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n",
+              "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nprint(students[0]['name'])\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use students[0] to reach the first student instead of typing Ava directly."
+                },
+                "1": {
+                  "message": "Use the name key from the student dictionary."
+                }
+              }
             },
             "try-nested-data-structures-sketch1": {
               "title": "Print names and scores",
@@ -225,7 +249,19 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n"
+              "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n",
+              "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through students instead of typing each line directly."
+                },
+                "1": {
+                  "message": "Use the name key while building each line."
+                },
+                "2": {
+                  "message": "Use the score key while building each line."
+                }
+              }
             },
             "try-nested-data-structures-sketch2": {
               "title": "Add a nested value",
@@ -236,7 +272,19 @@
                 "hint_1": "Add 'Mia' to the students list, then print course.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n"
+              "starterCode": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n",
+              "solutionCode": "course = {'title': 'Python', 'students': ['Ava']}\ncourse['students'].append('Mia')\nprint(course)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use the students key in the course dictionary."
+                },
+                "1": {
+                  "message": "Append Mia to course['students'] instead of replacing the whole course."
+                },
+                "2": {
+                  "message": "Call course['students'].append('Mia')."
+                }
+              }
             }
           },
           "tryIt": {

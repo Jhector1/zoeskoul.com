@@ -1,0 +1,12 @@
+{
+  "topicId": "class-files-and-instances",
+  "ok": false,
+  "issues": [
+    {
+      "code": "PROGRAMMING_TRY_IT_PER_SKETCH_MISSING",
+      "category": "pedagogy",
+      "severity": "error",
+      "message": "Programming profile \"python\" uses all_sketches Try It policy, but has 6 code_input exercise(s) for 7 sketch block(s)."
+    }
+  ]
+}

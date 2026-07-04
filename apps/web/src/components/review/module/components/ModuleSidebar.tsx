@@ -184,7 +184,7 @@ function SidebarTopicRow({
                         <div className="flex shrink-0 items-center gap-1.5">
                             {item.isActive ? (
                                 <span className="ui-pill-neutral shrink-0">
-                                    {ui.t("current")}
+                                    {ui.t("current", {}, "CURRENT")}
                                 </span>
                             ) : null}
 
@@ -508,7 +508,7 @@ function ModuleSidebar({
                             data-testid="review-module-progress-label"
                         >
     <span className="ui-review-progress-text">
-        {ui.t("topicsLabel")}
+        {ui.t("topicsLabel", {}, "Topics")}
     </span>
 
                             <span className="ui-review-progress-value">
@@ -527,7 +527,7 @@ function ModuleSidebar({
 
                         {unlockAll ? (
                             <div className="ui-pill-warn mt-2.5">
-                                {ui.t("unlockEnabled")}
+                                {ui.t("unlockEnabled", {}, "UNLOCK ENABLED")}
                             </div>
                         ) : null}
                     </div>
@@ -537,7 +537,7 @@ function ModuleSidebar({
                             type="button"
                             onClick={onCollapse}
                             className="ui-btn-secondary px-3"
-                            title={ui.t("collapseTitle")}
+                            title={ui.t("collapseTitle", {}, "Collapse sidebar")}
                         >
                             ◀
                         </button>

@@ -1,0 +1,142 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "module-9-catalog-polymorphism-project": {
+          "label": "Module 9 Catalog Polymorphism Project",
+          "summary": "Build a catalog that uses inheritance, overriding, abstraction, and polymorphism across files.",
+          "cards": {
+            "sketch0": {
+              "title": "Module 9 Catalog Polymorphism Project: project story"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "catalog_project_step_1_base_class": {
+              "title": "Step 1: Build the base catalog item"
+            },
+            "catalog_project_step_2_book_subclass": {
+              "title": "Step 2: Add a BookItem subclass"
+            },
+            "catalog_project_step_3_video_subclass": {
+              "title": "Step 3: Add a VideoItem subclass"
+            },
+            "catalog_project_step_4_polymorphic_service": {
+              "title": "Step 4: Add a polymorphic catalog service"
+            },
+            "catalog_project_step_5_abstract_fee": {
+              "title": "Step 5: Add an abstract-style fee interface"
+            },
+            "catalog_project_step_6_load_final_catalog": {
+              "title": "Step 6: Load and summarize the final catalog"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true
+          },
+          "quiz": {
+            "catalog-project-step-1-base-class": {
+              "title": "Step 1: Build the base catalog item",
+              "prompt": "Create `CatalogItem` with shared title state and a basic label method.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a catalog that uses inheritance, overriding, abstraction, and polymorphism across files.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Starter\")\nprint(item.label())\n"
+            },
+            "catalog-project-step-2-book-subclass": {
+              "title": "Step 2: Add a BookItem subclass",
+              "prompt": "Add a subclass that inherits title state and overrides `label()`.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a catalog that uses inheritance, overriding, abstraction, and polymorphism across files.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Starter\")\nprint(item.label())\n"
+            },
+            "catalog-project-step-3-video-subclass": {
+              "title": "Step 3: Add a VideoItem subclass",
+              "prompt": "Add a second subclass so the project has mixed object types.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a catalog that uses inheritance, overriding, abstraction, and polymorphism across files.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book_item import BookItem\n\nbook = BookItem(\"Python\", \"Ana\")\nprint(book.label())\n"
+            },
+            "catalog-project-step-4-polymorphic-service": {
+              "title": "Step 4: Add a polymorphic catalog service",
+              "prompt": "Create a service that receives mixed catalog items and calls `label()` on each.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a catalog that uses inheritance, overriding, abstraction, and polymorphism across files.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\n\nitems = [BookItem(\"Python\", \"Ana\"), VideoItem(\"OOP\", 9)]\nfor item in items:\n    print(item.label())\n"
+            },
+            "catalog-project-step-5-abstract-fee": {
+              "title": "Step 5: Add an abstract-style fee interface",
+              "prompt": "Add a shared `fee()` expectation and implement different fee rules in each subclass.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a catalog that uses inheritance, overriding, abstraction, and polymorphism across files.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\"), VideoItem(\"OOP\", 9)]\nfor line in catalog_lines(items):\n    print(line)\n"
+            },
+            "catalog-project-step-6-load-final-catalog": {
+              "title": "Step 6: Load and summarize the final catalog",
+              "prompt": "Load mixed item rows from a data file and produce the final polymorphic summary.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a catalog that uses inheritance, overriding, abstraction, and polymorphism across files.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom models.video_item import VideoItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), VideoItem(\"OOP\", 9, 1)]\nfor line in catalog_lines(items):\n    print(line)\nprint(f\"Fees: ${total_fees(items)}\")\n"
+            },
+            "sc-module-9-catalog-polymorphism-project-project-design": {
+              "title": "Check the design choice",
+              "prompt": "Why does this module 9 catalog polymorphism project require each step to keep all files, not only the file changed in that step?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Cumulative project steps must preserve the whole runnable app state.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Because Python ignores unchanged files.",
+                "b": "Because the next step starts from the full previous project state and must still run.",
+                "c": "Because only README files are graded.",
+                "d": "Because imports work even when files are missing."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "module-9-catalog-polymorphism-project": {
+          "project-story": {
+            "title": "Module 9 Catalog Polymorphism Project: project story",
+            "bodyMarkdown": "This graded project is cumulative. Each step starts from the exact full solution of the previous step, so the project grows like a real multi-file app."
+          }
+        }
+      }
+    }
+  }
+}

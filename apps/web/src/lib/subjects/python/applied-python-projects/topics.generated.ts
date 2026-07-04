@@ -7,71 +7,71 @@ import type {
   TopicManifestRefMap,
 } from "@/lib/subjects/_core/subjectManifestTypes";
 
-import classesAndInstancesJson from "./modules/module8/topics/classes-and-instances/topic.bundle.json";
-import attributesAndInitJson from "./modules/module8/topics/attributes-and-init/topic.bundle.json";
-import methodsAndSelfJson from "./modules/module8/topics/methods-and-self/topic.bundle.json";
-import encapsulationAndResponsibilityJson from "./modules/module8/topics/encapsulation-and-responsibility/topic.bundle.json";
-import listsOfObjectsJson from "./modules/module8/topics/lists-of-objects/topic.bundle.json";
-import classDebuggingPatternsJson from "./modules/module8/topics/class-debugging-patterns/topic.bundle.json";
-import module8ClassModelProjectJson from "./modules/module8/topics/module-8-class-model-project/topic.bundle.json";
-import writingTestCasesJson from "./modules/module9/topics/writing-test-cases/topic.bundle.json";
-import assertionsAndExpectedResultsJson from "./modules/module9/topics/assertions-and-expected-results/topic.bundle.json";
-import testingEdgeCasesJson from "./modules/module9/topics/testing-edge-cases/topic.bundle.json";
-import debuggingWithPrintAndTraceJson from "./modules/module9/topics/debugging-with-print-and-trace/topic.bundle.json";
-import readablePythonStyleJson from "./modules/module9/topics/readable-python-style/topic.bundle.json";
-import refactoringSafelyJson from "./modules/module9/topics/refactoring-safely/topic.bundle.json";
-import module9DebugAndPolishProjectJson from "./modules/module9/topics/module-9-debug-and-polish-project/topic.bundle.json";
-import choosingACapstoneScopeJson from "./modules/module10/topics/choosing-a-capstone-scope/topic.bundle.json";
-import breakingProjectsIntoFunctionsJson from "./modules/module10/topics/breaking-projects-into-functions/topic.bundle.json";
-import dataModelForASmallAppJson from "./modules/module10/topics/data-model-for-a-small-app/topic.bundle.json";
-import implementingTheCoreLoopJson from "./modules/module10/topics/implementing-the-core-loop/topic.bundle.json";
-import testingTheCapstoneJson from "./modules/module10/topics/testing-the-capstone/topic.bundle.json";
-import presentingAndDocumentingTheProjectJson from "./modules/module10/topics/presenting-and-documenting-the-project/topic.bundle.json";
-import capstoneAutomationProjectJson from "./modules/module10/topics/capstone-automation-project/topic.bundle.json";
+import thinkingInObjectsJson from "./modules/module8/topics/thinking-in-objects/topic.bundle.json";
+import classFilesAndInstancesJson from "./modules/module8/topics/class-files-and-instances/topic.bundle.json";
+import constructorsAndObjectStateJson from "./modules/module8/topics/constructors-and-object-state/topic.bundle.json";
+import methodsAndResponsibilityJson from "./modules/module8/topics/methods-and-responsibility/topic.bundle.json";
+import encapsulationAndValidationJson from "./modules/module8/topics/encapsulation-and-validation/topic.bundle.json";
+import module8AccountTrackerProjectJson from "./modules/module8/topics/module-8-account-tracker-project/topic.bundle.json";
+import inheritanceForSharedBehaviorJson from "./modules/module9/topics/inheritance-for-shared-behavior/topic.bundle.json";
+import overridingAndSpecializationJson from "./modules/module9/topics/overriding-and-specialization/topic.bundle.json";
+import polymorphicCollectionsJson from "./modules/module9/topics/polymorphic-collections/topic.bundle.json";
+import abstractionWithBaseInterfacesJson from "./modules/module9/topics/abstraction-with-base-interfaces/topic.bundle.json";
+import module9CatalogPolymorphismProjectJson from "./modules/module9/topics/module-9-catalog-polymorphism-project/topic.bundle.json";
+import testingObjectStateJson from "./modules/module10/topics/testing-object-state/topic.bundle.json";
+import testingInheritanceAndPolymorphismJson from "./modules/module10/topics/testing-inheritance-and-polymorphism/topic.bundle.json";
+import debuggingImportsAndStateJson from "./modules/module10/topics/debugging-imports-and-state/topic.bundle.json";
+import refactoringOopServicesJson from "./modules/module10/topics/refactoring-oop-services/topic.bundle.json";
+import module10OopQualityProjectJson from "./modules/module10/topics/module-10-oop-quality-project/topic.bundle.json";
+import capstoneScopeAndArchitectureJson from "./modules/module11/topics/capstone-scope-and-architecture/topic.bundle.json";
+import capstoneDomainModelJson from "./modules/module11/topics/capstone-domain-model/topic.bundle.json";
+import capstoneStorageAndReportsJson from "./modules/module11/topics/capstone-storage-and-reports/topic.bundle.json";
+import capstoneTestsAndPolishJson from "./modules/module11/topics/capstone-tests-and-polish/topic.bundle.json";
+import module11FinalOopCapstoneJson from "./modules/module11/topics/module-11-final-oop-capstone/topic.bundle.json";
 
 
-const classesAndInstances = classesAndInstancesJson as SlimTopicManifest;
-const attributesAndInit = attributesAndInitJson as SlimTopicManifest;
-const methodsAndSelf = methodsAndSelfJson as SlimTopicManifest;
-const encapsulationAndResponsibility = encapsulationAndResponsibilityJson as SlimTopicManifest;
-const listsOfObjects = listsOfObjectsJson as SlimTopicManifest;
-const classDebuggingPatterns = classDebuggingPatternsJson as SlimTopicManifest;
-const module8ClassModelProject = module8ClassModelProjectJson as SlimTopicManifest;
-const writingTestCases = writingTestCasesJson as SlimTopicManifest;
-const assertionsAndExpectedResults = assertionsAndExpectedResultsJson as SlimTopicManifest;
-const testingEdgeCases = testingEdgeCasesJson as SlimTopicManifest;
-const debuggingWithPrintAndTrace = debuggingWithPrintAndTraceJson as SlimTopicManifest;
-const readablePythonStyle = readablePythonStyleJson as SlimTopicManifest;
-const refactoringSafely = refactoringSafelyJson as SlimTopicManifest;
-const module9DebugAndPolishProject = module9DebugAndPolishProjectJson as SlimTopicManifest;
-const choosingACapstoneScope = choosingACapstoneScopeJson as SlimTopicManifest;
-const breakingProjectsIntoFunctions = breakingProjectsIntoFunctionsJson as SlimTopicManifest;
-const dataModelForASmallApp = dataModelForASmallAppJson as SlimTopicManifest;
-const implementingTheCoreLoop = implementingTheCoreLoopJson as SlimTopicManifest;
-const testingTheCapstone = testingTheCapstoneJson as SlimTopicManifest;
-const presentingAndDocumentingTheProject = presentingAndDocumentingTheProjectJson as SlimTopicManifest;
-const capstoneAutomationProject = capstoneAutomationProjectJson as SlimTopicManifest;
+const thinkingInObjects = thinkingInObjectsJson as SlimTopicManifest;
+const classFilesAndInstances = classFilesAndInstancesJson as SlimTopicManifest;
+const constructorsAndObjectState = constructorsAndObjectStateJson as SlimTopicManifest;
+const methodsAndResponsibility = methodsAndResponsibilityJson as SlimTopicManifest;
+const encapsulationAndValidation = encapsulationAndValidationJson as SlimTopicManifest;
+const module8AccountTrackerProject = module8AccountTrackerProjectJson as SlimTopicManifest;
+const inheritanceForSharedBehavior = inheritanceForSharedBehaviorJson as SlimTopicManifest;
+const overridingAndSpecialization = overridingAndSpecializationJson as SlimTopicManifest;
+const polymorphicCollections = polymorphicCollectionsJson as SlimTopicManifest;
+const abstractionWithBaseInterfaces = abstractionWithBaseInterfacesJson as SlimTopicManifest;
+const module9CatalogPolymorphismProject = module9CatalogPolymorphismProjectJson as SlimTopicManifest;
+const testingObjectState = testingObjectStateJson as SlimTopicManifest;
+const testingInheritanceAndPolymorphism = testingInheritanceAndPolymorphismJson as SlimTopicManifest;
+const debuggingImportsAndState = debuggingImportsAndStateJson as SlimTopicManifest;
+const refactoringOopServices = refactoringOopServicesJson as SlimTopicManifest;
+const module10OopQualityProject = module10OopQualityProjectJson as SlimTopicManifest;
+const capstoneScopeAndArchitecture = capstoneScopeAndArchitectureJson as SlimTopicManifest;
+const capstoneDomainModel = capstoneDomainModelJson as SlimTopicManifest;
+const capstoneStorageAndReports = capstoneStorageAndReportsJson as SlimTopicManifest;
+const capstoneTestsAndPolish = capstoneTestsAndPolishJson as SlimTopicManifest;
+const module11FinalOopCapstone = module11FinalOopCapstoneJson as SlimTopicManifest;
 
 export const TOPIC_MANIFESTS: TopicManifestRefMap = {
-  "classes-and-instances": classesAndInstances,
-  "attributes-and-init": attributesAndInit,
-  "methods-and-self": methodsAndSelf,
-  "encapsulation-and-responsibility": encapsulationAndResponsibility,
-  "lists-of-objects": listsOfObjects,
-  "class-debugging-patterns": classDebuggingPatterns,
-  "module-8-class-model-project": module8ClassModelProject,
-  "writing-test-cases": writingTestCases,
-  "assertions-and-expected-results": assertionsAndExpectedResults,
-  "testing-edge-cases": testingEdgeCases,
-  "debugging-with-print-and-trace": debuggingWithPrintAndTrace,
-  "readable-python-style": readablePythonStyle,
-  "refactoring-safely": refactoringSafely,
-  "module-9-debug-and-polish-project": module9DebugAndPolishProject,
-  "choosing-a-capstone-scope": choosingACapstoneScope,
-  "breaking-projects-into-functions": breakingProjectsIntoFunctions,
-  "data-model-for-a-small-app": dataModelForASmallApp,
-  "implementing-the-core-loop": implementingTheCoreLoop,
-  "testing-the-capstone": testingTheCapstone,
-  "presenting-and-documenting-the-project": presentingAndDocumentingTheProject,
-  "capstone-automation-project": capstoneAutomationProject,
+  "thinking-in-objects": thinkingInObjects,
+  "class-files-and-instances": classFilesAndInstances,
+  "constructors-and-object-state": constructorsAndObjectState,
+  "methods-and-responsibility": methodsAndResponsibility,
+  "encapsulation-and-validation": encapsulationAndValidation,
+  "module-8-account-tracker-project": module8AccountTrackerProject,
+  "inheritance-for-shared-behavior": inheritanceForSharedBehavior,
+  "overriding-and-specialization": overridingAndSpecialization,
+  "polymorphic-collections": polymorphicCollections,
+  "abstraction-with-base-interfaces": abstractionWithBaseInterfaces,
+  "module-9-catalog-polymorphism-project": module9CatalogPolymorphismProject,
+  "testing-object-state": testingObjectState,
+  "testing-inheritance-and-polymorphism": testingInheritanceAndPolymorphism,
+  "debugging-imports-and-state": debuggingImportsAndState,
+  "refactoring-oop-services": refactoringOopServices,
+  "module-10-oop-quality-project": module10OopQualityProject,
+  "capstone-scope-and-architecture": capstoneScopeAndArchitecture,
+  "capstone-domain-model": capstoneDomainModel,
+  "capstone-storage-and-reports": capstoneStorageAndReports,
+  "capstone-tests-and-polish": capstoneTestsAndPolish,
+  "module-11-final-oop-capstone": module11FinalOopCapstone,
 };

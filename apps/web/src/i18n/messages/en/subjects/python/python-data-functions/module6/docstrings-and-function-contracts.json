@@ -171,7 +171,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()"
+              "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
+              "solutionCode": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()"
             },
             "ci-write-contract-function": {
               "title": "Write a documented function with a clear contract",
@@ -182,7 +183,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass"
+              "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
+              "solutionCode": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times"
             },
             "ci-fix-print-vs-return": {
               "title": "Fix the contract mismatch",
@@ -193,7 +195,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)"
+              "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
+              "solutionCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax"
             },
             "try-docstrings-and-function-contracts-checkpoint": {
               "title": "Write a documented helper",
@@ -204,7 +207,8 @@
                 "hint_1": "Place a triple-quoted string as the first line inside the function.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "def square(number):\n    # Add a docstring and return the square.\n    pass\n\nprint(square(5))\n"
+              "starterCode": "def square(number):\n    # Add a docstring and return the square.\n    pass\n\nprint(square(5))\n",
+              "solutionCode": "def square(number):\n    \"\"\"Return number multiplied by itself.\"\"\"\n    return number * number\n\nprint(square(5))\n"
             },
             "try-docstrings-and-function-contracts-sketch0": {
               "title": "Write a documented helper",
@@ -215,7 +219,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def clean_name(text):\n    # Add a docstring and return text stripped and title-cased.\n    pass\n\nprint(clean_name('  ava  '))\n"
+              "starterCode": "def clean_name(text):\n    # Add a docstring and return text stripped and title-cased.\n    pass\n\nprint(clean_name('  ava  '))\n",
+              "solutionCode": "def clean_name(text):\n    \"\"\"Return text stripped of extra space and converted to title case.\"\"\"\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n"
             },
             "try-docstrings-and-function-contracts-sketch1": {
               "title": "Return the documented result",
@@ -226,7 +231,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    # Finish the return statement.\n    pass\n\nprint(round(fahrenheit_to_celsius(32), 1))\n"
+              "starterCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    # Finish the return statement.\n    pass\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+              "solutionCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    return (temp - 32) * 5 / 9\n\nprint(round(fahrenheit_to_celsius(32), 1))\n"
             },
             "try-docstrings-and-function-contracts-sketch2": {
               "title": "Use a contract-style check",
@@ -237,7 +243,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    pass\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n"
+              "starterCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    pass\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+              "solutionCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    return 0 <= score <= 100\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n"
             }
           },
           "tryIt": {

@@ -52,15 +52,15 @@
       },
       "python-8-real-world-project": {
         "title": "Real-World Project",
-        "description": "A local school has a messy roster export and needs a clean Python tool that turns it into dependable reports.",
+        "description": "Guide learners through a longer beginner data-cleaning project that combines lists, dictionaries, helper functions, files, and summaries.",
         "outcomes": [
-          "Grow one project from raw file input into a clean multi-file app",
-          "Clean, validate, summarize, and report on messy roster data",
-          "Use lists, dictionaries, functions, modules, files, and exceptions together"
+          "Read and clean a structured file line by line",
+          "Refactor cleaning and summary logic into helper functions",
+          "Write final output files and summaries from one complete workflow"
         ],
         "why": [
-          "Gives learners a portfolio-style project with a real client-style story.",
-          "Shows how every course skill fits together inside one useful data-cleaning workflow."
+          "Builds confidence with real-world project.",
+          "Prepares learners for the next skills in the course."
         ]
       }
     }
@@ -90,12 +90,10 @@
         },
         "python-data-functions-python-5-module-project": {
           "title": "Module Project",
-          "description": "A teacher wants to stop tracking scores on scraps of paper. Build a small gradebook that keeps names, scores, and summaries organized.",
+          "description": "Learn module 5 gradebook project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Turn a messy class list into organized Python collections",
-            "Use lists and dictionaries to connect students with scores",
-            "Finish a gradebook summary the teacher can actually read"
+            "Module 5 Gradebook Project"
           ]
         }
       },
@@ -123,12 +121,10 @@
         },
         "python-data-functions-python-6-module-project": {
           "title": "Module Project",
-          "description": "A campus club needs quick name badges for an event. Build a small helper package that cleans names, formats roles, and prints polished badges.",
+          "description": "Learn module 6 name badge package through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Organize badge logic into helper functions",
-            "Split the app into clear multi-file modules",
-            "Finish a reusable name-badge package"
+            "Module 6 Name Badge Package"
           ]
         }
       },
@@ -155,24 +151,20 @@
         },
         "python-data-functions-python-7-module-project": {
           "title": "Module Project",
-          "description": "A student group sends you a messy file of records. Build a cleaner that reads the file, skips bad rows, and writes a usable output file.",
+          "description": "Learn module 7 clean student records project through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Read and clean a messy file from a real-looking workflow",
-            "Handle bad rows without crashing",
-            "Write a clean file someone else can use"
+            "Module 7 Clean Student Records Project"
           ]
         }
       },
       "python-8-real-world-project": {
         "python-data-functions-python-8-course-capstone": {
-          "title": "Course Capstone",
-          "description": "You have been asked to help a school office clean a roster export before report day. Build the tool they will use to clean names, validate scores, skip bad rows, and write final reports.",
+          "title": "Final Project",
+          "description": "Learn class roster cleaner through focused examples and practice.",
           "weeks": null,
           "bullets": [
-            "Start with a messy roster file from a school office",
-            "Grow the project step by step into a multi-file tool",
-            "Deliver clean roster and summary reports"
+            "Class Roster Cleaner"
           ]
         }
       }

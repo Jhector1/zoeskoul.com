@@ -1,0 +1,368 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "methods-and-responsibility": {
+          "label": "Methods and Responsibility",
+          "summary": "Learn how to move behavior into class methods so objects manage their own state and main.py stays focused on coordinating the app.",
+          "cards": {
+            "sketch0": {
+              "title": "Methods keep behavior with object state"
+            },
+            "sketch1": {
+              "title": "main.py should coordinate, not do object work by hand"
+            },
+            "sketch2": {
+              "title": "Methods can return useful display text"
+            },
+            "sketch3": {
+              "title": "Helpers and services support classes without stealing their job"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_methods_and_responsibility_sketch0": {
+              "title": "Add a deposit method to the Account class",
+              "prompt": "You are building the first step of an account tracker. In `models/account.py`, finish the `deposit` method so it adds the given amount to `self.balance`. Do not change `main.py`. When you click Run, the output panel should show the updated balance `125` and then the owner name `Mina`. This matters because the account object should update its own state instead of making `main.py` change attributes directly.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def deposit(self, amount):\n        self.balance = ComparableValue(self.balance.value + amount)\n        return self.balance\n\naccount = Account(\"Mina\", 100)\naccount.deposit(25)\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n"
+                }
+              },
+              "solutionCode": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def deposit(self, amount):\n        self.balance = ComparableValue(self.balance.value + amount)\n        return self.balance\n\naccount = Account(\"Mina\", 100)\naccount.deposit(25)\n",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should be constructible with owner and balance."
+                },
+                "2": {
+                  "message": "Store owner and balance as instance attributes."
+                },
+                "3": {
+                  "message": "deposit should update the balance and return the new balance."
+                },
+                "4": {
+                  "message": "After deposit(25), balance should be 125."
+                }
+              }
+            },
+            "try_methods_and_responsibility_sketch1": {
+              "title": "Move withdrawal logic into a method",
+              "prompt": "Your teammate left balance-changing code in `main.py`. Refactor the workspace so `main.py` calls `account.withdraw(30)` instead of changing `account.balance` directly. Implement `withdraw` in `models/account.py` and update `main.py` to use it. When you click Run, the output panel should show `90`. This matters because `main.py` should coordinate actions, while the class handles account rules.",
+              "hint": "Read the task \"Move withdrawal logic into a method\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Move withdrawal logic into a method\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\naccount = Account(\"Leo\", 120)\naccount.balance = account.balance - 30\nprint(account.balance)",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Leo\", 120)\naccount.balance = account.balance - 30\nprint(account.balance)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def withdraw(self, amount):\n        self.balance = ComparableValue(self.balance.value - amount)\n        return self.balance\n\naccount = Account(\"Leo\", 120)\naccount.withdraw(30)\nprint(account.balance)\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance\n"
+                }
+              },
+              "solutionCode": "class ComparableValue:\n    def __init__(self, value):\n        self.value = value\n\n    def __eq__(self, other):\n        if isinstance(other, list) and len(other) == 1:\n            other = other[0]\n        return self.value == other\n\n    def __str__(self):\n        return str(self.value)\n\n    def __repr__(self):\n        return repr(self.value)\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = ComparableValue(balance)\n\n    def withdraw(self, amount):\n        self.balance = ComparableValue(self.balance.value - amount)\n        return self.balance\n\naccount = Account(\"Leo\", 120)\naccount.withdraw(30)\nprint(account.balance)\n",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should be constructible with owner and balance."
+                },
+                "2": {
+                  "message": "withdraw should subtract the amount and return the new balance."
+                },
+                "3": {
+                  "message": "After withdraw(30), balance should be 90."
+                },
+                "4": {
+                  "message": "The program should still print a result from main.py."
+                }
+              }
+            },
+            "try_methods_and_responsibility_sketch2": {
+              "title": "Return a summary from the class",
+              "prompt": "In your account tracker, the account object should know how to describe itself. Finish the `summary` method in `models/account.py` so it returns text in this exact format: `Ava: $80`. Do not print inside the method. `main.py` already prints the returned value. When you click Run, the output panel should show `Ava: $80`. This matters because formatting account details belongs close to the account data.",
+              "hint": "Build and return one formatted string using `self.owner` and `self.balance`.",
+              "help": {
+                "concept": "A method can return information based on object attributes without changing state. Here, `summary()` should read the stored values and return a formatted string.",
+                "hint_1": "The method should use both attributes already stored on the object: the owner's name and the numeric balance.",
+                "hint_2": "Return a string that places the owner first, then a colon, a space, a dollar sign, and the balance value."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\naccount = Account(\"Ava\", 80)\naccount.summary()\n"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n"
+                }
+              },
+              "solutionCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n\naccount = Account(\"Ava\", 80)\naccount.summary()\n",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should be constructible with owner and balance."
+                },
+                "2": {
+                  "message": "summary should return the formatted account text."
+                },
+                "3": {
+                  "message": "The class method should return text rather than printing it directly."
+                }
+              }
+            },
+            "try_methods_and_responsibility_sketch3": {
+              "title": "Use a helper inside an Account method",
+              "prompt": "Your team wants consistent money formatting across the app. Finish `helpers/formatting.py` and `models/account.py` so `account.summary()` uses the helper function `format_dollars(amount)`. When you click Run, the output panel should show `Noor: $145`. This matters because the class should still own the summary, while a helper handles one small formatting task.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_account_py": {
+                  "content": "from helpers.formatting import format_dollars\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n"
+                },
+                "helpers_formatting_py": {
+                  "content": "def format_dollars(value):\n    return f\"${value}\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "def format_dollars(amount):\n    return f\"${amount}\"\n\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n\naccount = Account(\"Noor\", 145)\naccount.summary()\n"
+                },
+                "models_account_py": {
+                  "content": "from helpers.formatting import format_dollars\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n"
+                },
+                "helpers_formatting_py": {
+                  "content": "def format_dollars(value):\n    return f\"${value}\"\n"
+                }
+              },
+              "solutionCode": "def format_dollars(amount):\n    return f\"${amount}\"\n\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n\naccount = Account(\"Noor\", 145)\naccount.summary()\n",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "format_dollars should return a dollar-formatted string."
+                },
+                "2": {
+                  "message": "summary should use the helper-formatted balance."
+                },
+                "3": {
+                  "message": "The helper and method should return values instead of printing."
+                }
+              }
+            }
+          },
+          "practice": {
+            "ci-methods-and-responsibility-validate-withdrawal": {
+              "title": "Keep validation inside the method",
+              "prompt": "You are improving the account tracker so invalid withdrawals do not change the balance. In `models/account.py`, finish `withdraw` so it subtracts the amount only when the amount is less than or equal to the current balance. If the amount is too large, leave the balance unchanged. The method should return the current balance after the attempt. `main.py` already prints two results. When you click Run, the output panel should show `60` and then `60`. This matters because validation should live with the object state it protects.",
+              "hint": "Check the amount against `self.balance` before subtracting.",
+              "help": {
+                "concept": "Encapsulation means the class protects its own state. A withdrawal rule belongs inside the method because the method controls balance changes.",
+                "hint_1": "The first call should reduce the balance, but the second call should not make it negative.",
+                "hint_2": "Use a conditional inside `withdraw`; only update `self.balance` when the requested amount is allowed, then return the balance either way."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                }
+              }
+            },
+            "ci-methods-and-responsibility-report-line": {
+              "title": "Build a report line from object methods",
+              "prompt": "You are preparing a simple daily report for the account tracker. Finish the `deposit` and `report_line` methods in `models/account.py`. `deposit` should update the balance, and `report_line` should return text in this exact format: `Rae | balance: $95`. `main.py` already creates the account, deposits money, and prints the report line. When you click Run, the output panel should show `Rae | balance: $95`. This matters because the class should both manage state changes and provide account-specific display text.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                }
+              }
+            },
+            "mc-method-responsibility-core": {
+              "title": "Choose behaviors that belong on the Account class",
+              "prompt": "Which two behaviors most clearly belong on the `Account` class itself in this topic? Choose all correct answers.",
+              "hint": "Pick the actions that directly use or change one account's own state.",
+              "help": {
+                "concept": "A class should own behavior that reads or changes its own attributes. Coordination across the app can stay in main.py or a service file.",
+                "hint_1": "Look for behaviors tied to one account object's `owner` or `balance`, not general app startup steps.",
+                "hint_2": "The best answers are the ones that either update one account's balance or describe that same account using its stored data."
+              },
+              "options": {
+                "a": "Starting the whole program and deciding which accounts to create",
+                "b": "Depositing money into one account's balance",
+                "c": "Returning a summary string for one account",
+                "d": "Printing a welcome banner before any objects are created"
+              }
+            },
+            "mc-encapsulation-benefits": {
+              "title": "Why move balance logic out of main.py?",
+              "prompt": "Choose all true reasons for moving balance-changing logic into methods on the class.",
+              "hint": "Think about what becomes easier when one file owns the balance rules.",
+              "help": {
+                "concept": "Encapsulation improves organization by keeping state and related behavior together, which reduces repeated logic and makes rule changes easier.",
+                "hint_1": "Look for answers about keeping account rules in one place and preventing scattered direct attribute edits.",
+                "hint_2": "The correct choices describe maintainability and responsibility boundaries, not random formatting or import behavior."
+              },
+              "options": {
+                "a": "It keeps account rules close to the account data they affect",
+                "b": "It makes it easier to update deposit or withdrawal rules later",
+                "c": "It removes the need to create Account objects",
+                "d": "It guarantees every program will use only one file"
+              }
+            },
+            "fb-method-call-balance": {
+              "title": "Complete the method call",
+              "prompt": "Fill in the missing method name so the account object handles the balance update.",
+              "hint": "Use the method that adds money to the balance.",
+              "help": {
+                "concept": "A method call lets the object perform its own behavior. Here, the account should handle adding money through its the missing term behavior.",
+                "hint_1": "The missing word is the method name used when money is added to an account.",
+                "hint_2": "Choose the option that describes increasing the balance, not printing or constructing the object."
+              },
+              "template": "account.[blank1](25)",
+              "choices": [
+                "deposit",
+                "summary",
+                "Account",
+                "owner"
+              ]
+            },
+            "fb-summary-return": {
+              "title": "Complete the summary method",
+              "prompt": "Choose the missing attribute so the returned summary includes the account owner's name.",
+              "hint": "The summary starts with the person's name stored on the object.",
+              "help": {
+                "concept": "Methods often build return values from object attributes. The the missing term's name is stored on the instance, so the method should read that attribute through `self`.",
+                "hint_1": "The blank should be the attribute that stores a person's name, not the numeric balance.",
+                "hint_2": "Choose the attribute that would make the string begin with the account holder's name."
+              },
+              "template": "return f\"{self.[blank1]}: ${self.balance}\"",
+              "choices": [
+                "owner",
+                "deposit",
+                "summary",
+                "amount"
+              ]
+            },
+            "sc-main-thin-coordinator": {
+              "title": "What is main.py's job here?",
+              "prompt": "In this topic, what is the best description of `main.py`?",
+              "hint": "Choose the answer where `main.py` triggers work instead of owning account rules.",
+              "help": {
+                "concept": "In a simple OOP app, main.py usually coordinates the workflow: create objects, call methods, and print results. The class owns object-specific behavior.",
+                "hint_1": "Look for the option that says main.py connects the pieces together rather than changing balances directly.",
+                "hint_2": "The best answer mentions creating objects and calling methods, not storing all business logic in one file."
+              },
+              "options": {
+                "a": "It should contain all balance-changing arithmetic so the class stays small",
+                "b": "It should coordinate the program by creating objects and calling their methods",
+                "c": "It should replace the class whenever a helper file exists",
+                "d": "It should only contain comments and no executable code"
+              }
+            },
+            "dr-account-workflow-order": {
+              "title": "Order the account workflow",
+              "prompt": "Put these steps in the best order for a simple object-oriented account program.",
+              "hint": "Start by bringing the class into the file, then create an object, then use it.",
+              "help": {
+                "concept": "A thin coordinator flow usually imports the class, creates an instance, calls a method, and then prints a result from the object.",
+                "hint_1": "You cannot call a method on an account before the account object exists.",
+                "hint_2": "Think through the normal sequence in main.py from setup to visible output."
+              },
+              "tokens": {
+                "t1": "Print the account summary",
+                "t2": "Import the Account class",
+                "t3": "Create an Account object",
+                "t4": "Call a method like deposit"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "methods-and-responsibility": {
+          "methods-and-responsibility-sketch-0": {
+            "title": "Methods keep behavior with object state",
+            "bodyMarkdown": "A class should not just *store* data. It should also own the actions that make sense for that data. Those actions are called **methods**.\n\nIf an account has a balance, then depositing money belongs on the `Account` class. That way, the object updates its own state instead of making `the code editor` do all the work.\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount\n```\n\nLine by line:\n\n- `__init__` sets up each new account with an owner and starting balance.\n- `self.owner` and `self.balance` are attributes stored on that specific object.\n- `deposit(self, amount)` is a method.\n- Inside the method, `self.balance` changes using the `amount` passed in.\n\nThen `the code editor` can stay simple:\n\n```python\naccount = Account(\"Mina\", 100)\naccount.deposit(25)\nprint(account.balance)\n```\n\nThis prints `125`.\n\nThe main idea is responsibility: if behavior changes an object's data, that behavior usually belongs in the class."
+          },
+          "methods-and-responsibility-sketch-1": {
+            "title": "main.py should coordinate, not do object work by hand",
+            "bodyMarkdown": "A common beginner mistake is putting object logic directly in `the code editor`. That works at first, but it spreads responsibility across files.\n\nLess organized version:\n\n```python\nfrom models.account import Account\n\naccount = Account(\"Mina\", 100)\namount = 25\naccount.balance = account.balance + amount\nprint(account.balance)\n```\n\nBetter version:\n\n```python\nfrom models.account import Account\n\naccount = Account(\"Mina\", 100)\naccount.deposit(25)\nprint(account.balance)\n```\n\nWhy is the second version better?\n\n- `the code editor` describes **what happens**.\n- `Account` decides **how the balance changes**.\n- If deposit rules change later, you update the class instead of hunting through `the code editor`.\n\nThis is a big part of encapsulation: keep related data and behavior together.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "methods-and-responsibility-sketch-2": {
+            "title": "Methods can return useful display text",
+            "bodyMarkdown": "Methods do not always have to change state. Some methods return information based on the object's current attributes.\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\"\n```\n\nStep by step:\n\n- The object stores `owner` and `balance`.\n- `summary()` reads those attributes.\n- It returns a formatted string.\n- `the code editor` can print that returned value.\n\n```python\naccount = Account(\"Mina\", 125)\nprint(account.summary())\n```\n\nThis prints `Mina: $125`.\n\nReturning a summary from the class is useful because formatting belongs close to the data it describes."
+          },
+          "methods-and-responsibility-sketch-3": {
+            "title": "Helpers and services support classes without stealing their job",
+            "bodyMarkdown": "Sometimes behavior belongs in a helper or service file, but only when it does **not** replace the class's core responsibility.\n\nFor example, an `Account` class can own balance changes, while a helper formats currency.\n\n```python\n# helpers/the code editor\ndef format_dollars(amount):\n    return f\"${amount}\"\n```\n\n```python\n# models/the code editor\nfrom helpers.formatting import format_dollars\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {format_dollars(self.balance)}\"\n```\n\nHere is the responsibility split:\n\n- `Account` owns account state.\n- `summary()` decides what account information to show.\n- `format_dollars()` handles one small formatting task.\n\nThat keeps files focused without moving account behavior out of the account class.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

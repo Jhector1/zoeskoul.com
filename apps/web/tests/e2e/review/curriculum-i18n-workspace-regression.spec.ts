@@ -1,4 +1,5 @@
 import { expect, test, type Locator, type Page } from "@playwright/test";
+import { replaceMonacoText } from "../../utils";
 
 type RenderedExerciseState = {
   exerciseId: string;
@@ -74,6 +75,101 @@ test.describe("dev clone curriculum i18n + workspace runtime regressions", () =>
 
     expectPythonI18nStarterState(state);
     await expectVisiblePageNotToContainRawTaggedKey(page);
+  });
+
+  test("Python embedded Try It reset clears persisted learner workspace and restores starter on reload", async ({ page }) => {
+    const savedBodies: any[] = [];
+    let currentProgress: any = { topics: {} };
+
+    await page.route("**/api/review/progress**", async (route) => {
+      const request = route.request();
+
+      if (request.method() === "GET") {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            progress: currentProgress,
+          }),
+        });
+        return;
+      }
+
+      if (request.method() === "PUT") {
+        const body = request.postDataJSON();
+        savedBodies.push(body);
+        currentProgress = body.state;
+
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            ok: true,
+            state: body.state,
+          }),
+        });
+        return;
+      }
+
+      await route.fallback();
+    });
+
+    const route = `${PYTHON_CLONE_BASE}/text/e2e-i18n-tryit-reading?e2eUnlockAll=1`;
+    const learnerMarker = "# embedded try-it learner marker";
+
+    await page.goto(route, {
+      waitUntil: "domcontentloaded",
+    });
+
+    await openCodeWorkspaceIfPresent(page);
+    await expectAnyVisibleEditorToContain(page, "age = int(input())");
+
+    await replaceMonacoText(
+      page,
+      [
+        "age = int(input())",
+        "has_id = input().strip()",
+        learnerMarker,
+        "print('learner saved workspace')",
+      ].join("\n"),
+    );
+
+    await expect
+      .poll(
+        () => savedBodies.some((body) => JSON.stringify(body).includes(learnerMarker)),
+        {
+          timeout: 20_000,
+          message: "Expected embedded Try It learner workspace to be persisted before reset",
+        },
+      )
+      .toBe(true);
+
+    await page.getByTestId("review-reset-menu-button").first().click();
+    await page.getByRole("button", { name: /This exercise/i }).click();
+
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible({ timeout: 15_000 });
+    await dialog.getByRole("button", { name: /^Reset$/i }).click();
+    await expect(dialog).toBeHidden({ timeout: 15_000 });
+
+    await expect
+      .poll(
+        () => JSON.stringify(currentProgress),
+        {
+          timeout: 20_000,
+          message: "Expected reset save to clear the embedded Try It learner workspace from persisted progress",
+        },
+      )
+      .not.toContain(learnerMarker);
+
+    await page.goto(route, {
+      waitUntil: "domcontentloaded",
+    });
+
+    await openCodeWorkspaceIfPresent(page);
+    await expectAnyVisibleEditorToContain(page, "age = int(input())");
+    await expectAnyVisibleEditorToContain(page, "TODO: print allowed or denied");
+    await expectNoVisibleEditorToContain(page, learnerMarker);
   });
 
   test("Linux dev clone contract binds terminal_workspace cwd and resolved feedback", async ({ page }) => {
@@ -210,6 +306,70 @@ async function openCodeWorkspaceIfPresent(page: Page) {
     page.getByTestId("code-editor-e2e-input").first().waitFor({ state: "attached", timeout: 15_000 }).catch(() => null),
     page.getByTestId("interactive-terminal").first().waitFor({ state: "visible", timeout: 15_000 }).catch(() => null),
   ]);
+}
+
+async function getVisibleEditorValues(page: Page): Promise<string[]> {
+  const selectors = ["fullide-editor-e2e-input", "code-editor-e2e-input"] as const;
+  const values: string[] = [];
+
+  for (const testId of selectors) {
+    const inputs = page.getByTestId(testId);
+    const count = await inputs.count().catch(() => 0);
+
+    for (let index = 0; index < count; index += 1) {
+      const value = await inputs
+        .nth(index)
+        .evaluate((node) => {
+          const el = node as HTMLTextAreaElement;
+          const rect = el.getBoundingClientRect();
+          const style = window.getComputedStyle(el);
+
+          const visible =
+            rect.width > 0 &&
+            rect.height > 0 &&
+            style.display !== "none" &&
+            style.visibility !== "hidden";
+
+          return visible ? el.value : null;
+        })
+        .catch(() => null);
+
+      if (typeof value === "string") values.push(value);
+    }
+  }
+
+  return values;
+}
+
+async function expectAnyVisibleEditorToContain(page: Page, text: string | RegExp) {
+  await expect
+    .poll(
+      async () => {
+        const values = await getVisibleEditorValues(page);
+
+        return values.some((value) =>
+          typeof text === "string" ? value.includes(text) : text.test(value),
+        );
+      },
+      {
+        timeout: 20_000,
+      },
+    )
+    .toBe(true);
+}
+
+async function expectNoVisibleEditorToContain(page: Page, text: string) {
+  await expect
+    .poll(
+      async () => {
+        const values = await getVisibleEditorValues(page);
+        return values.every((value) => !value.includes(text));
+      },
+      {
+        timeout: 20_000,
+      },
+    )
+    .toBe(true);
 }
 
 async function waitForTerminalNotInRunnerError(page: Page, transcript: Locator) {

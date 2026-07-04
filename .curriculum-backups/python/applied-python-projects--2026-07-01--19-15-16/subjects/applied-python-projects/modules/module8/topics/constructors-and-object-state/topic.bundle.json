@@ -1,0 +1,400 @@
+{
+  "topicId": "constructors-and-object-state",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "applied-python-projects-python-8-object-foundations",
+  "prefix": "py8",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch0.title",
+      "sketchId": "constructors-and-object-state-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-constructors-and-object-state-sketch0",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.prompt",
+        "exerciseKey": "try-constructors-and-object-state-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch1.title",
+      "sketchId": "constructors-and-object-state-sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-constructors-and-object-state-sketch1",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.prompt",
+        "exerciseKey": "try-constructors-and-object-state-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "constructors-and-object-state-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.constructors-and-object-state-sketch0.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.constructors-and-object-state-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "constructors-and-object-state-sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.constructors-and-object-state-sketch1.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.constructors-and-object-state-sketch1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-constructors-and-object-state-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0",
+      "language": "python",
+      "starterCode": "# Write your code below.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your code below.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Write your code below.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Write your code below.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define an Account class."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              100
+            ],
+            "message": "Account should be constructible with owner and balance."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              100
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "Store owner and balance as instance attributes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-constructors-and-object-state-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1",
+      "language": "python",
+      "starterCode": "# Write your code below.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Write your code below.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Write your code below.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Write your code below.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance = self.balance + amount",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define an Account class."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              50
+            ],
+            "message": "Account should still accept owner and balance in the constructor."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              50
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "The object should keep owner and balance as attributes."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              50
+            ],
+            "constructorArgKinds": [
+              "value",
+              "value"
+            ],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 75,
+            "expectedKind": "value",
+            "message": "Calling deposit should update the balance attribute."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mc-constructors-and-object-state-attributes",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.mc-constructors-and-object-state-attributes",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "mc-constructors-and-object-state-methods",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.mc-constructors-and-object-state-methods",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "fb-constructors-and-object-state-init-name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.fb-constructors-and-object-state-init-name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "__init__"
+      }
+    },
+    {
+      "id": "fb-constructors-and-object-state-self-balance",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.fb-constructors-and-object-state-self-balance",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "balance"
+      }
+    },
+    {
+      "id": "sc-constructors-and-object-state-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.sc-constructors-and-object-state-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "dr-constructors-and-object-state-flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.dr-constructors-and-object-state-flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    }
+  ]
+}

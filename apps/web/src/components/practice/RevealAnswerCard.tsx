@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Exercise } from "@/lib/practice/types";
 import type { QItem } from "./practiceType";
 import type { FSNode, NodeId, WorkspaceStateV2 } from "@/components/ide/types";
@@ -172,6 +172,40 @@ function getWorkspaceFilePaths(
         .sort((a, b) => a.localeCompare(b));
 }
 
+function getWorkspaceFileEntries(
+    workspace: WorkspaceStateV2 | null | undefined,
+): Array<{ path: string; content: string }> {
+    if (!workspace?.nodes?.length) return [];
+
+    return workspace.nodes
+        .filter((node): node is Extract<FSNode, { kind: "file" }> => node.kind === "file")
+        .map((node) => ({
+            path: workspacePathForNode(workspace.nodes, node.id),
+            content: node.content ?? "",
+        }))
+        .filter((entry) => Boolean(entry.path))
+        .sort((a, b) => a.path.localeCompare(b.path));
+}
+
+function formatWorkspaceFilesForCopy(
+    workspace: WorkspaceStateV2 | null | undefined,
+): string {
+    const entries = getWorkspaceFileEntries(workspace);
+    if (entries.length <= 1) return entries[0]?.content ?? "";
+
+    return entries
+        .map((entry) => `# ${entry.path}\n${entry.content}`.trimEnd())
+        .join("\n\n");
+}
+
+function firstPresentValue(...values: unknown[]) {
+    for (const value of values) {
+        if (value !== undefined && value !== null) return value;
+    }
+    return undefined;
+}
+
+
 export function buildSolutionWorkspace(args: {
     language: string;
     solutionCode: string;
@@ -226,7 +260,9 @@ export function buildSolutionWorkspace(args: {
         file.path === entryPath
             ? {
                 ...file,
-                content: args.solutionCode || file.content,
+                // Prefer the explicit multi-file solution content. Only fall back to
+                // solutionCode when the entry file was not included or has no content.
+                content: file.content || args.solutionCode,
                 entry: true,
             }
             : file,
@@ -407,18 +443,27 @@ export default function RevealAnswerCard({
     const tools = useReviewTools();
 
     const { raw } = useTaggedT();
+    const resolveTaggedValue = useCallback(
+        (key: string) => raw(key, `@:${key}`) as string,
+        [raw],
+    );
     const exT: Exercise | null = useMemo(() => {
         if (!exercise) return null;
-        return resolveDeepTagged(exercise, (key) => raw(key, "")) as Exercise;
-    }, [exercise, raw]);
+        return resolveDeepTagged(exercise, resolveTaggedValue) as Exercise;
+    }, [exercise, resolveTaggedValue]);
+
+    const revealT: any | null = useMemo(() => {
+        if (!reveal || typeof reveal !== "object") return reveal ?? null;
+        return resolveDeepTagged(reveal, resolveTaggedValue) as any;
+    }, [reveal, resolveTaggedValue]);
 
     const model: RevealModel | null = useMemo(() => {
-        if (!reveal || typeof reveal !== "object") return null;
+        if (!revealT || typeof revealT !== "object") return null;
 
-        const kind = String(reveal.kind ?? exT?.kind ?? exercise?.kind);
+        const kind = String(revealT.kind ?? exT?.kind ?? exercise?.kind);
 
         if (kind === "numeric") {
-            const v = reveal.value;
+            const v = revealT.value;
             const copyText = v == null ? "" : String(v);
             return {
                 title: "Answer",
@@ -437,37 +482,48 @@ export default function RevealAnswerCard({
 
         if (kind === "code_input") {
             const lang = String(
-                reveal.codeLang ??
-                    reveal.language ??
-                    reveal.lang ??
+                revealT.codeLang ??
+                    revealT.language ??
+                    revealT.lang ??
                     current.codeLang ??
                     "python",
             );
             const code = String(
-                reveal.solutionCode ?? reveal.code ?? reveal.source ?? "",
+                revealT.solutionCode ?? revealT.code ?? revealT.source ?? "",
             );
-            const stdin = String(reveal.codeStdin ?? reveal.stdin ?? "");
+            const stdin = String(revealT.codeStdin ?? revealT.stdin ?? "");
             const explicitWorkspace =
-                reveal.workspace && typeof reveal.workspace === "object"
-                    ? reveal.workspace
-                    : reveal.solutionWorkspace && typeof reveal.solutionWorkspace === "object"
-                        ? reveal.solutionWorkspace
-                        : reveal.codeWorkspace && typeof reveal.codeWorkspace === "object"
-                            ? reveal.codeWorkspace
-                            : reveal.ideWorkspace && typeof reveal.ideWorkspace === "object"
-                            ? reveal.ideWorkspace
+                revealT.workspace && typeof revealT.workspace === "object"
+                    ? revealT.workspace
+                    : revealT.solutionWorkspace && typeof revealT.solutionWorkspace === "object"
+                        ? revealT.solutionWorkspace
+                        : revealT.codeWorkspace && typeof revealT.codeWorkspace === "object"
+                            ? revealT.codeWorkspace
+                            : revealT.ideWorkspace && typeof revealT.ideWorkspace === "object"
+                            ? revealT.ideWorkspace
                             : null;
-            const solutionFiles =
-                reveal.solutionFiles ??
-                (
-                    exercise && typeof exercise === "object"
-                        ? (exercise as any).solutionFiles
-                        : undefined
-                );
+            const revealWorkspace = isRecord(revealT.workspace) ? revealT.workspace : null;
+            const exWorkspace = isRecord((exT as any)?.workspace) ? (exT as any).workspace : null;
+            const revealRecipe = isRecord(revealT.recipe) ? revealT.recipe : null;
+            const exRecipe = isRecord((exT as any)?.recipe) ? (exT as any).recipe : null;
+            const solutionFiles = firstPresentValue(
+                revealT.solutionFiles,
+                revealRecipe?.solutionFiles,
+                revealWorkspace?.solutionFiles,
+                (exT as any)?.solutionFiles,
+                exRecipe?.solutionFiles,
+                exWorkspace?.solutionFiles,
+            );
             const entryFile =
-                typeof (exercise as any)?.workspace?.entryFilePath === "string"
-                    ? (exercise as any).workspace.entryFilePath
-                    : undefined;
+                typeof revealWorkspace?.entryFilePath === "string"
+                    ? revealWorkspace.entryFilePath
+                    : typeof revealWorkspace?.entryFile === "string"
+                        ? revealWorkspace.entryFile
+                        : typeof exWorkspace?.entryFilePath === "string"
+                            ? exWorkspace.entryFilePath
+                            : typeof exWorkspace?.entryFile === "string"
+                                ? exWorkspace.entryFile
+                                : undefined;
             const workspace =
                 explicitWorkspace ??
                 buildSolutionWorkspace({
@@ -478,7 +534,12 @@ export default function RevealAnswerCard({
                     entryFile,
                 });
             const workspaceFiles = getWorkspaceFilePaths(workspace);
-            const copyText = code.trim() ? code : getWorkspaceEntryCode(workspace);
+            const workspaceFileEntries = getWorkspaceFileEntries(workspace);
+            const entryCode = getWorkspaceEntryCode(workspace) || code;
+            const copyText =
+                workspaceFileEntries.length > 1
+                    ? formatWorkspaceFilesForCopy(workspace)
+                    : entryCode;
             const entryPath =
                 workspace && workspace.entryFileId
                     ? workspacePathForNode(workspace.nodes, workspace.entryFileId)
@@ -487,10 +548,12 @@ export default function RevealAnswerCard({
             return {
                 title: `Solution code (${lang})`,
                 copyText,
-                fillPatch: copyText || workspace
+                fillPatch: entryCode || workspace
                     ? ({
-                        code: copyText,
-                        source: copyText,
+                        // Keep code/source as the entry file for legacy single-file state,
+                        // but pass the full workspace so Fill answer updates every file.
+                        code: entryCode,
+                        source: entryCode,
                         codeLang: lang,
                         language: lang,
                         lang,
@@ -525,9 +588,24 @@ export default function RevealAnswerCard({
                             </div>
                         ) : null}
 
-                        <pre className="p-3 overflow-x-auto font-mono text-xs leading-relaxed ui-text">
-                            <code>{copyText?.trim() ? copyText : "// (no solutionCode provided)"}</code>
-                        </pre>
+                        {workspaceFileEntries.length > 1 ? (
+                            <div className="divide-y ui-border">
+                                {workspaceFileEntries.map((file) => (
+                                    <div key={file.path}>
+                                        <div className="border-b px-3 py-2 font-mono text-xs font-semibold ui-border ui-bg-surface-soft ui-text">
+                                            {file.path}
+                                        </div>
+                                        <pre className="p-3 overflow-x-auto font-mono text-xs leading-relaxed ui-text">
+                                            <code>{file.content?.trim() ? file.content : "# (empty file)"}</code>
+                                        </pre>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <pre className="p-3 overflow-x-auto font-mono text-xs leading-relaxed ui-text">
+                                <code>{entryCode?.trim() ? entryCode : "// (no solutionCode provided)"}</code>
+                            </pre>
+                        )}
 
                         {workspaceFiles.length > 1 ? (
                             <div className="border-t px-3 py-2 ui-border">
@@ -550,7 +628,7 @@ export default function RevealAnswerCard({
         }
 
         if (kind === "matrix_input") {
-            const values = Array.isArray(reveal.values) ? (reveal.values as number[][]) : [];
+            const values = Array.isArray(revealT.values) ? (revealT.values as number[][]) : [];
             const rows = values.length;
             const cols = values[0]?.length ?? 0;
 
@@ -569,7 +647,7 @@ export default function RevealAnswerCard({
                 node: (
                     <div className={REVEAL_PANEL}>
                         <MatrixInputPanel
-                            labelLatex={(reveal.labelLatex as string) ?? String.raw`\mathbf{A}=`}
+                            labelLatex={(revealT.labelLatex as string) ?? String.raw`\mathbf{A}=`}
                             rows={rows}
                             cols={cols}
                             allowResize={false}
@@ -587,10 +665,10 @@ export default function RevealAnswerCard({
 
         if (kind === "voice_input") {
             const transcript =
-                String(reveal.preferred ?? reveal.transcript ?? "").trim() ||
-                String((Array.isArray(reveal.answers) ? reveal.answers[0] : "") ?? "").trim();
+                String(revealT.preferred ?? revealT.transcript ?? "").trim() ||
+                String((Array.isArray(revealT.answers) ? revealT.answers[0] : "") ?? "").trim();
 
-            const answers = Array.isArray(reveal.answers) ? reveal.answers.map(String) : [];
+            const answers = Array.isArray(revealT.answers) ? revealT.answers.map(String) : [];
             const copyText = transcript;
 
             return {
@@ -620,7 +698,7 @@ export default function RevealAnswerCard({
         }
 
         if (kind === "drag_reorder") {
-            const order = Array.isArray(reveal.order) ? reveal.order.map(String) : [];
+            const order = Array.isArray(revealT.order) ? revealT.order.map(String) : [];
             const tokens = Array.isArray((exT as any)?.tokens) ? (exT as any).tokens : [];
             const byId = new Map(tokens.map((t: any) => [String(t.id), String(t.text ?? t.label ?? t.id)]));
 
@@ -664,8 +742,8 @@ export default function RevealAnswerCard({
             kind === "word_bank_arrange" ||
             kind === "fill_blank_choice"
         ) {
-            const answers = Array.isArray(reveal.answers) ? reveal.answers.map(String) : [];
-            const preferred = String(reveal.preferred ?? reveal.value ?? (answers[0] ?? "")).trim();
+            const answers = Array.isArray(revealT.answers) ? revealT.answers.map(String) : [];
+            const preferred = String(revealT.preferred ?? revealT.value ?? (answers[0] ?? "")).trim();
             const copyText = preferred || (answers[0] ?? "");
 
             return {
@@ -704,7 +782,7 @@ export default function RevealAnswerCard({
         }
 
         if (kind === "single_choice") {
-            const optionId = String(reveal.optionId ?? "");
+            const optionId = String(revealT.optionId ?? "");
             const options = (exT as any)?.options ?? [];
             const found = options.find((o: any) => String(o.id) === optionId);
             const label = found?.label ?? found?.text ?? found?.markdown ?? found?.latex ?? optionId;
@@ -729,7 +807,7 @@ export default function RevealAnswerCard({
         }
 
         if (kind === "multi_choice") {
-            const optionIds = Array.isArray(reveal.optionIds) ? reveal.optionIds.map(String) : [];
+            const optionIds = Array.isArray(revealT.optionIds) ? revealT.optionIds.map(String) : [];
             const options = (exT as any)?.options ?? [];
             const byId = new Map(options.map((o: any) => [String(o.id), String(o.text ?? o.label ?? o.id)]));
 
@@ -760,8 +838,8 @@ export default function RevealAnswerCard({
         }
 
         if (kind === "vector_drag_target" || kind === "vector_drag_dot") {
-            const sol = reveal.solutionA ?? reveal.targetA ?? null;
-            const b = reveal.b ?? null;
+            const sol = revealT.solutionA ?? revealT.targetA ?? null;
+            const b = revealT.b ?? null;
             const copyText = sol ? JSON.stringify(sol) : "";
 
             return {
@@ -784,7 +862,7 @@ export default function RevealAnswerCard({
         }
 
         return null;
-    }, [reveal, exT, exercise, current.codeLang]);
+    }, [revealT, exT, exercise, current.codeLang]);
 
     useEffect(() => {
         if (!autoScroll) return;
@@ -816,13 +894,24 @@ export default function RevealAnswerCard({
     function onFill() {
         if (!m.fillPatch) return;
 
+        const fillPatchAny = m.fillPatch as Record<string, unknown>;
+        const hasCodeWorkspace =
+            Boolean(fillPatchAny.workspace) ||
+            Boolean(fillPatchAny.codeWorkspace) ||
+            Boolean(fillPatchAny.ideWorkspace);
+        const hasCodeValue =
+            typeof fillPatchAny.code === "string" || typeof fillPatchAny.source === "string";
         const isCodeInput =
-            String(reveal?.kind ?? exercise?.kind ?? "") === "code_input";
+            String(revealT?.kind ?? reveal?.kind ?? exT?.kind ?? exercise?.kind ?? "") ===
+                "code_input" ||
+            hasCodeWorkspace ||
+            hasCodeValue;
+        const fillCodeInputId = codeInputId ?? tools?.boundId ?? undefined;
 
         applyRevealFillAnswer({
             fillPatch: m.fillPatch,
             isCodeInput,
-            codeInputId,
+            codeInputId: fillCodeInputId,
             updateCurrent,
             patchCodeInput: tools?.patchCodeInput,
         });

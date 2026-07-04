@@ -1,0 +1,76 @@
+{
+  "title": "Thinking in Objects",
+  "summary": "Understand what objects are for before writing classes from scratch.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "sketch-0",
+      "title": "Objects model real things in a program",
+      "bodyMarkdown": "Before writing class syntax, it helps to understand the idea behind object-oriented programming.\n\nAn **object** is a program thing that groups related data and behavior together. If you are building a study tracker, a task is a natural object because it has data like a title and time estimate, and it has behavior like being marked done.\n\nFor example:\n\n```python\nfrom models.task import Task\n\nreading_task = Task(\"Read chapter\", 20)\nreview_task = Task(\"Review notes\", 10)\n```\n\nLine by line:\n\n- `Task` is the model the program uses for study tasks.\n- `reading_task` is one object with its own title and minutes.\n- `review_task` is another object from the same model.\n- Even though both objects come from `Task`, they can store different values.\n\nThe beginner-friendly OOP idea is simple: if your program tracks real things, it often becomes cleaner to represent those things as objects instead of scattering their data across unrelated variables."
+    },
+    {
+      "id": "sketch-1",
+      "title": "Each object keeps its own state",
+      "bodyMarkdown": "The data stored on one object is that object's **state**. Different objects can have different state, even if they come from the same model.\n\nExample:\n\n```python\nfrom models.task import Task\n\nfirst_task = Task(\"Draft outline\", 30)\nsecond_task = Task(\"Revise notes\", 15)\n\nfirst_task.mark_done()\n\nprint(first_task.status_line())\nprint(second_task.status_line())\n```\n\nStep by step:\n\n- `first_task` starts with its own title, minutes, and done state.\n- `second_task` starts with different values.\n- `first_task.mark_done()` changes the first object's state only.\n- `print(first_task.status_line())` shows the updated state for the first task.\n- `print(second_task.status_line())` shows that the second task kept its own separate state.\n\nThis is one of the biggest OOP wins for beginners: instead of manually tracking many related variables, each object carries its own state with it."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Behavior belongs with the object that owns the data",
+      "bodyMarkdown": "Objects are useful because the behavior that changes data can live with the same object that stores the data.\n\n```python\nclass Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def reschedule(self, new_minutes):\n        self.minutes = new_minutes\n```\n\nLine by line:\n\n- `self.minutes` is part of the task's stored state.\n- `reschedule` is behavior that belongs to a task because it changes the task's own time estimate.\n- `self.minutes = new_minutes` updates the object's state directly.\n\nWhen code is organized this way, the model owns both the data and the actions that make sense for that data. That idea will make the next topic feel more natural, because creating class files is really just a way to package this object behavior cleanly."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-thinking-in-objects-sketch0",
+      "kind": "code_input",
+      "title": "Create and inspect two task objects",
+      "prompt": "A study tracker already includes a `Task` class in `models/task.py`. In `main.py`, create `Task(\"Read chapter\", 20)` and `Task(\"Review notes\", 10)`. Then print the first task's title on one line and the second task's minutes on the next line so you can see that each object stores its own data.",
+      "hint": "You are using a provided class here, not writing a new one yet."
+    },
+    {
+      "id": "try-thinking-in-objects-sketch1",
+      "kind": "code_input",
+      "title": "Change one object's state without changing another",
+      "prompt": "Keep using the provided `Task` model. In `main.py`, create `Task(\"Draft outline\", 30)` and `Task(\"Revise notes\", 15)`. Call `mark_done()` on the first task only. Then print `status_line()` for both tasks on separate lines so the output shows that each object keeps its own state.",
+      "hint": "Only one task should become done."
+    },
+    {
+      "id": "try-thinking-in-objects-sketch2",
+      "kind": "code_input",
+      "title": "Finish a method that updates object state",
+      "prompt": "The study tracker now needs to move a task to a different time estimate. In `models/task.py`, finish `reschedule(self, new_minutes)` so it updates the task's stored minutes. Then in `main.py`, create `Task(\"Review quiz\", 15)`, call `reschedule(25)`, and print `status_line()`.",
+      "hint": "The method should change the object's stored minutes on `self`."
+    },
+    {
+      "id": "mc-thinking-in-objects-why-oop",
+      "kind": "multi_choice",
+      "title": "Why think in objects?",
+      "prompt": "Which statements match the beginner-friendly idea of object-oriented programming from this topic? Choose all that apply."
+    },
+    {
+      "id": "sc-thinking-in-objects-instance-state",
+      "kind": "single_choice",
+      "title": "What is instance state?",
+      "prompt": "In this topic, what does it mean when we say each object has its own state?"
+    },
+    {
+      "id": "fb-thinking-in-objects-method-call",
+      "kind": "fill_blank_choice",
+      "title": "Complete the method call",
+      "prompt": "Fill in the missing method name so this line marks the task as done."
+    },
+    {
+      "id": "dr-thinking-in-objects-flow",
+      "kind": "drag_reorder",
+      "title": "Order the object workflow",
+      "prompt": "Put these steps in the order a learner follows in this topic when using an object."
+    },
+    {
+      "id": "ci-thinking-in-objects-check-in",
+      "kind": "code_input",
+      "title": "Build a cumulative task check-in",
+      "prompt": "Use the provided `Task` model to show the full object workflow. In `main.py`, create `Task(\"Plan study block\", 20)`, call `reschedule(35)`, call `mark_done()`, and then print `status_line()`. Do not rewrite the model from scratch; use the provided class and methods.",
+      "hint": "This practice combines object creation, a state update, and a final report from the same object."
+    }
+  ]
+}

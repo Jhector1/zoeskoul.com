@@ -1,0 +1,282 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "inheritance-for-shared-behavior": {
+          "label": "Inheritance for Shared Behavior",
+          "summary": "Create subclasses that reuse a base class so related catalog items share common setup and behavior without duplicated code.",
+          "cards": {
+            "sketch0": {
+              "title": "Why use a base class for shared behavior?"
+            },
+            "sketch1": {
+              "title": "How subclasses add their own data with super()"
+            },
+            "sketch2": {
+              "title": "Overriding a shared method"
+            },
+            "sketch3": {
+              "title": "Shared method names enable polymorphism"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_inheritance_for_shared_behavior_sketch0": {
+              "title": "Build a shared base class for catalog items",
+              "prompt": "You are organizing a small library catalog. In `models/base_item.py`, complete the `CatalogItem` class so its constructor stores `title` and its `summary()` method returns `Item: <title>`. In `main.py`, create one `CatalogItem` with the title `Deep Work` and print its summary. This practice matters because it shows how one base class can hold behavior that later subclasses will reuse.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_base_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def summary(self):\n        pass"
+                }
+              }
+            },
+            "try_inheritance_for_shared_behavior_sketch1": {
+              "title": "Use super() to reuse shared setup",
+              "prompt": "You are adding books to the catalog app. `CatalogItem` is already provided in `models/base_item.py`. In `models/book.py`, complete the `Book` subclass so it inherits from `CatalogItem`, calls `super().__init__(title)`, and stores `author`. In `main.py`, create `Book(\"Deep Work\", \"Cal Newport\")` and print the title on one line and the author on the next line. This practice matters because subclasses often need shared parent setup plus their own extra data.",
+              "hint": "Read the task \"Use super() to reuse shared setup\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Use super() to reuse shared setup\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author"
+                }
+              }
+            },
+            "try_inheritance_for_shared_behavior_sketch2": {
+              "title": "Override label() in two subclasses",
+              "prompt": "You are preparing labels for a media shelf. The base class `CatalogItem` is provided. In `models/book.py`, make `Book.label()` return `Book: <title>`. In `models/movie.py`, make `Movie.label()` return `Movie: <title>`. In `main.py`, create `Book(\"Dune\")` and `Movie(\"Arrival\")`, then print each label on its own line. This practice matters because overriding keeps one shared method name while allowing subclass-specific output.",
+              "hint": "Read the task \"Override label() in two subclasses\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Override label() in two subclasses\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, value_1):\n        pass\n\n    def label(self):\n        pass"
+                },
+                "models_movie_py": {
+                  "content": "class Movie:\n    def __init__(self, value_1):\n        pass\n\n    def label(self):\n        pass"
+                }
+              }
+            },
+            "try_inheritance_for_shared_behavior_sketch3": {
+              "title": "Use one service with mixed subclasses",
+              "prompt": "You are building a catalog report service. `Book` and `Movie` classes are provided and both define `label()`. In `services/report_service.py`, complete `build_report(items)` so it returns a list of labels by looping through the mixed item list and calling `label()` on each object. In `main.py`, print each returned label on its own line for `Book(\"Dune\")` and `Movie(\"Arrival\")`. This practice matters because polymorphism lets one service work with different subclasses through a shared method name.",
+              "hint": "Read the task \"Use one service with mixed subclasses\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Use one service with mixed subclasses\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "services_report_service_py": {
+                  "content": "def build_report(value):\n    pass"
+                }
+              }
+            }
+          },
+          "practice": {
+            "ci-inheritance-shared-price-method": {
+              "title": "Share a discount method through inheritance",
+              "prompt": "You are updating prices in a shop catalog. In `models/base_item.py`, complete `CatalogItem` so it stores `title` and `price`, and add `discounted_price(percent)` that returns the reduced price. In `models/book.py`, make `Book` inherit from `CatalogItem` and add `author`. In `main.py`, create `Book(\"Clean Code\", 30, \"Robert C. Martin\")` and print the result of `discounted_price(20)`. This matters because shared business rules belong in the base class instead of being copied into every subclass.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_catalog_item_py": {
+                  "content": "class CatalogItem:\n    def __init__(self):\n        pass"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def discounted_price(self, amount):\n        pass"
+                }
+              }
+            },
+            "ci-inheritance-mixed-count-service": {
+              "title": "Count mixed catalog items with one shared method",
+              "prompt": "You are building a quick inventory summary. `Book` and `Movie` should both inherit from `CatalogItem`, and `CatalogItem` should define `is_available()` that returns `True` when `stock > 0`. In `services/inventory_service.py`, complete `count_available(items)` so it returns how many objects in the mixed list are available. In `main.py`, use `Book(\"Dune\", 3)` and `Movie(\"Arrival\", 0)` and print the count. This matters because one shared base method lets a service work across different subclasses.",
+              "hint": "Give both subclasses the same inherited availability rule, then count how many return `True`.",
+              "help": {
+                "concept": "A shared base-class method creates a common contract for subclasses. Services can then loop through mixed objects and call the same method on each one.",
+                "hint_1": "`is_available()` should check the stored `stock` value in the base class.",
+                "hint_2": "In the service function, increase the count only when `item.is_available()` is true."
+              },
+              "starterCode": "# Write your answer below",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Write your answer below"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def is_available(self):\n        pass"
+                },
+                "models_movie_py": {
+                  "content": "class Movie:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def is_available(self):\n        pass"
+                },
+                "services_inventory_service_py": {
+                  "content": "def count_available(value):\n    pass"
+                }
+              }
+            },
+            "sc-inheritance-main-benefit": {
+              "title": "Choose the main benefit of inheritance here",
+              "prompt": "In a catalog app, both `Book` and `Movie` need the same `title` setup and the same `summary()` method. Why is a base class the best fit?",
+              "hint": "Look for the choice that reduces repeated code across related classes.",
+              "help": {
+                "concept": "Inheritance is most useful when related classes share the same core data or behavior and should reuse one implementation instead of duplicating it.",
+                "hint_1": "Think about what happens if you copy the same constructor and method into several classes.",
+                "hint_2": "The strongest answer is about centralizing shared behavior so changes happen in one place."
+              },
+              "options": {
+                "a": "It lets unrelated classes share random variable names.",
+                "b": "It stores shared setup and behavior once so subclasses can reuse it.",
+                "c": "It forces every subclass to print the exact same output forever.",
+                "d": "It removes the need to create objects from subclasses."
+              }
+            },
+            "sc-super-purpose": {
+              "title": "Identify what super() does in a subclass constructor",
+              "prompt": "A `Book` subclass has `__init__(self, title, author)` and calls `super().__init__(title)`. What is that call doing?",
+              "hint": "It reuses the parent class constructor work for the shared attribute.",
+              "help": {
+                "concept": "`super()` gives a subclass access to parent behavior, especially useful in constructors when the parent already handles shared attributes.",
+                "hint_1": "Focus on which class is responsible for setting `title`.",
+                "hint_2": "The call runs the parent constructor so the subclass does not have to rewrite the shared setup."
+              },
+              "options": {
+                "a": "It creates a second Book object automatically.",
+                "b": "It deletes subclass attributes before setup starts.",
+                "c": "It runs the parent constructor to initialize inherited data.",
+                "d": "It converts the subclass into a base class."
+              }
+            },
+            "mc-polymorphism-shared-methods": {
+              "title": "Pick the statements that show polymorphism",
+              "prompt": "Which statements correctly describe polymorphism in a catalog service? Choose all that apply.",
+              "hint": "Look for ideas about one loop or service calling the same method on different subclasses.",
+              "help": {
+                "concept": "Polymorphism lets code work with different subclasses through a shared method name or base-class contract, so the caller does not need separate logic for each type.",
+                "hint_1": "A mixed list is a clue, but only if the objects share a method the service can call.",
+                "hint_2": "Correct choices describe one service using the same method name across different subclasses, even when each subclass returns different results."
+              },
+              "options": {
+                "a": "A report service loops through `Book` and `Movie` objects and calls `label()` on each.",
+                "b": "Each subclass can return a different result from `label()` while the service code stays the same.",
+                "c": "Polymorphism means every subclass must have identical method bodies.",
+                "d": "A mixed list of subclasses can be processed through one shared method name."
+              }
+            },
+            "dr-subclass-constructor-order": {
+              "title": "Order the steps in a subclass constructor",
+              "prompt": "Put these steps in the usual order for a subclass constructor that reuses parent setup and then adds its own attribute.",
+              "hint": "Start with the subclass definition, then reuse the parent setup before adding subclass-specific data.",
+              "help": {
+                "concept": "A subclass constructor usually receives all needed values, calls the parent constructor for shared attributes, and then sets its own extra attributes.",
+                "hint_1": "The parent setup should happen before the subclass stores its extra field.",
+                "hint_2": "Think of the flow as: define subclass constructor, run shared setup, then add subclass-only state."
+              },
+              "tokens": {
+                "t1": "Write `class Book(CatalogItem):`",
+                "t2": "Define `__init__(self, title, author)`",
+                "t3": "Call `super().__init__(title)`",
+                "t4": "Set `self.author = author`"
+              }
+            },
+            "fb-inheritance-class-header": {
+              "title": "Complete the subclass header",
+              "prompt": "Fill in the missing parent class name.",
+              "hint": "The name in parentheses is the class being inherited from.",
+              "help": {
+                "concept": "A subclass names its parent class in parentheses so Python knows which class to inherit from.",
+                "hint_1": "`Book` should inherit from the shared base class used for catalog items.",
+                "hint_2": "Choose the class name that would hold common item behavior like `title` and shared methods."
+              },
+              "template": "class Book([blank1]):",
+              "choices": [
+                "CatalogItem",
+                "author",
+                "label",
+                "self"
+              ]
+            },
+            "fb-overriding-method-name": {
+              "title": "Complete the overridden method call",
+              "prompt": "Fill in the method name that a report service should call on both subclasses.",
+              "hint": "Use the shared method name from the the missing term examples.",
+              "help": {
+                "concept": "Polymorphism depends on different subclasses responding to the same method name, so the service can call one method consistently.",
+                "hint_1": "The method returns text like `Book: Dune` or `Movie: Arrival`.",
+                "hint_2": "Choose the method name used for subclass-specific display text in the examples."
+              },
+              "template": "text = item.[blank1]()",
+              "choices": [
+                "label",
+                "author",
+                "title",
+                "super"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "inheritance-for-shared-behavior": {
+          "sketch-0": {
+            "title": "Why use a base class for shared behavior?",
+            "bodyMarkdown": "When two classes have the same core data and methods, copying that code into both classes makes your project harder to maintain. **Inheritance** lets you put the shared behavior in one base class, then let subclasses reuse it.\n\nImagine a catalog app with books and movies. Both need a title and a way to show a summary. Instead of writing the same constructor twice, you can move the shared parts into `CatalogItem`.\n\n```python\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def summary(self):\n        return f\"Item: {self.title}\"\n\nclass Book(CatalogItem):\n    pass\n```\n\nStep by step:\n\n- `CatalogItem` is the base class.\n- Its `__init__` method stores `title`.\n- Its `summary()` method gives every item a shared behavior.\n- `Book(CatalogItem)` means `Book` inherits from `CatalogItem`.\n- `pass` means `Book` adds nothing yet, but it still gets the inherited constructor and method.\n\nThat means this works:\n\n```python\nbook = Book(\"Deep Work\")\nprint(book.summary())\n```\n\nOutput:\n\n```python\nItem: Deep Work\n```\n\nThe big idea is simple: put common behavior in one place, then let related subclasses reuse it."
+          },
+          "sketch-1": {
+            "title": "How subclasses add their own data with super()",
+            "bodyMarkdown": "A subclass often needs **all the shared setup from the base class** plus a few extra attributes of its own. That is where `super()` helps.\n\n```python\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n```\n\nLine by line:\n\n- `Book` inherits from `CatalogItem`.\n- `Book.__init__` receives both `title` and `author`.\n- `super().__init__(title)` runs the parent class constructor.\n- That parent constructor creates `self.title`.\n- Then `self.author = author` adds the subclass-specific attribute.\n\nNow the object has both pieces of data:\n\n```python\nbook = Book(\"Deep Work\", \"Cal Newport\")\nprint(book.title)\nprint(book.author)\n```\n\nOutput:\n\n```python\nDeep Work\nCal Newport\n```\n\nUsing `super()` avoids rewriting the parent setup by hand. If the shared setup changes later, you only update it in the base class."
+          },
+          "sketch-2": {
+            "title": "Overriding a shared method",
+            "bodyMarkdown": "Sometimes subclasses share a method name, but each subclass needs a different version of that behavior. That is called **overriding**.\n\n```python\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n```\n\nWhat changed?\n\n- The base class defines a general `label()` method.\n- `Book` replaces that method with a book-specific version.\n- `Movie` replaces it with a movie-specific version.\n- All three classes still use the same method name: `label`.\n\nExample:\n\n```python\nbook = Book(\"Dune\")\nmovie = Movie(\"Arrival\")\nprint(book.label())\nprint(movie.label())\n```\n\nOutput:\n\n```python\nBook: Dune\nMovie: Arrival\n```\n\nThis is useful because other parts of your program can call `label()` on different item types and still get the right result for each subclass.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          },
+          "sketch-3": {
+            "title": "Shared method names enable polymorphism",
+            "bodyMarkdown": "When different subclasses all respond to the same method name, a service can work with a **mixed list of objects**. This is the practical value of inheritance and overriding.\n\n```python\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n\nitems = [Book(\"Dune\"), Movie(\"Arrival\")]\n\nfor item in items:\n    print(item.label())\n```\n\nStep by step:\n\n- `items` contains different subclasses.\n- The loop does not need separate code for books and movies.\n- It just calls `item.label()` each time.\n- Python uses the correct subclass method for each object.\n\nOutput:\n\n```python\nBook: Dune\nMovie: Arrival\n```\n\nThis is **polymorphism** in action: one loop, one method call, different subclass behavior. In real projects, this keeps service code shorter and easier to extend."
+          }
+        }
+      }
+    }
+  }
+}

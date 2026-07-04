@@ -19,6 +19,7 @@ import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
 import { FlowNavMode } from "@/components/review/navigation/FlowNavigator";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import { buildQuizBlockRuntimeDefaultsProps } from "@/components/review/module/runtime/cardRuntimeDefaults";
+import type { QuizResetTarget } from "@/components/review/module/actions";
 import {
     getAssessmentDisplayKind,
     type AssessmentDisplayKind,
@@ -52,7 +53,7 @@ export default function CardRenderer(props: {
     versionStr: string;
     onQuizPass: (quizId: string) => void;
     onQuizStateChange: (quizCardId: string, s: SavedQuizState) => void;
-    onQuizReset: (quizCardId: string) => void;
+    onQuizReset: (target: string | QuizResetTarget) => void;
 
     savedSketch: SavedSketchState | null;
     quizNavMode?: FlowNavMode;
@@ -73,6 +74,12 @@ export default function CardRenderer(props: {
     routeExerciseId?: string | null;
     defaultToolLanguage?: string;
     onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
+    /**
+     * Dev preview / unlock-all mode: allow authors to move through every card
+     * and mark reading/sketch cards complete without having to pass the embedded
+     * Try It first. Production learner routes keep this false.
+     */
+    unlockAll?: boolean;
 }) {
     const reviewT = useTranslations("review.cardRenderer");
     const ui = useTaggedT("cardUi");
@@ -254,7 +261,11 @@ export default function CardRenderer(props: {
                         initialState={savedTryIt}
                         onPass={() => onEmbeddedTryItPass?.(tryItId)}
                         onStateChange={(s: SavedQuizState) => onQuizStateChange(tryItId, s)}
-                        onReset={() => onQuizReset(tryItId)}
+                        onReset={() => onQuizReset({
+                            progressId: tryItId,
+                            runtimeCardId: card.id,
+                            cardProgressKeys: [card.id, tryItId],
+                        })}
                         sequential={true}
                         strictSequential={true}
                         unlimitedAttempts={true}
@@ -366,7 +377,8 @@ export default function CardRenderer(props: {
         const tryIt = getCardTryIt(card);
         const tryItRequired = Boolean(tryIt && tryIt.required !== false);
         const tryItDone = tryIt ? Boolean(tp?.quizzesDone?.[tryIt.id]) : true;
-        const markReadDisabled = tryItRequired && !tryItDone;
+        const forceUnlock = Boolean(props.unlockAll);
+        const markReadDisabled = !forceUnlock && tryItRequired && !tryItDone;
         const tryItCopy = tryItButtonCopy(tryItRequired);
 
         return (
@@ -398,7 +410,8 @@ export default function CardRenderer(props: {
         const tryIt = getCardTryIt(card);
         const tryItRequired = Boolean(tryIt && tryIt.required !== false);
         const tryItDone = tryIt ? Boolean(tp?.quizzesDone?.[tryIt.id]) : true;
-        const markReadDisabled = tryItRequired && !tryItDone;
+        const forceUnlock = Boolean(props.unlockAll);
+        const markReadDisabled = !forceUnlock && tryItRequired && !tryItDone;
         const tryItCopy = tryItButtonCopy(tryItRequired);
 
         return (

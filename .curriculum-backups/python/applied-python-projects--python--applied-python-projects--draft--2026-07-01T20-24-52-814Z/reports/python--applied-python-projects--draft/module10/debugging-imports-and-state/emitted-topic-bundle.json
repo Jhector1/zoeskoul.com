@@ -1,0 +1,895 @@
+{
+  "topicId": "debugging-imports-and-state",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-testing-debugging-oop-projects",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-debugging-and-refactoring",
+  "prefix": "py10",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch0.title",
+      "sketchId": "debugging-imports-and-state-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-debugging-imports-and-state-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.prompt",
+        "exerciseKey": "try-debugging-imports-and-state-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch1.title",
+      "sketchId": "debugging-imports-and-state-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-debugging-imports-and-state-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.prompt",
+        "exerciseKey": "try-debugging-imports-and-state-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch2.title",
+      "sketchId": "debugging-imports-and-state-sketch-3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-debugging-imports-and-state-sketch2",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.prompt",
+        "exerciseKey": "try-debugging-imports-and-state-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "debugging-imports-and-state-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "debugging-imports-and-state-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-2.bodyMarkdown"
+    },
+    {
+      "id": "debugging-imports-and-state-sketch-3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-3.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-3.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-debugging-imports-and-state-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Program should print the book summary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-debugging-imports-and-state-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/reading_list.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.models_reading_list_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class ReadingList:\n    def __init__(self, owner, books=None):\n        self.owner = owner\n        self.books = books or []\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/reading_list.py",
+          "content": "class ReadingList:\n    def __init__(self, value_1):\n        pass\n\n    def count(self):\n        return 0",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/reading_list.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.models_reading_list_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class ReadingList:\n    def __init__(self, owner, books=None):\n        self.owner = owner\n        self.books = books or []\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class ReadingList:\n    def __init__(self, owner, books=None):\n        self.owner = owner\n        self.books = books or []\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/reading_list.py",
+            "content": "class ReadingList:\n    def __init__(self, value_1):\n        pass\n\n    def count(self):\n        return 0",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "ReadingList",
+            "message": "Define the ReadingList class."
+          },
+          {
+            "type": "constructible",
+            "className": "ReadingList",
+            "constructorArgs": [
+              "Ava"
+            ],
+            "message": "ReadingList should be constructible with an owner."
+          },
+          {
+            "type": "method_returns",
+            "className": "ReadingList",
+            "constructorArgs": [
+              "Ava"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "count",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 0,
+            "expectedKind": "value",
+            "message": "A new reading list should start empty."
+          },
+          {
+            "type": "method_returns",
+            "className": "ReadingList",
+            "constructorArgs": [
+              "Ava"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "count",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 1,
+            "expectedKind": "value",
+            "message": "Adding one book should change only that instance's count."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-debugging-imports-and-state-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/stock_item.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        if amount <= self.quantity:\n            self.quantity -= amount\n\n    def get_quantity(self):\n        return self.quantity",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/stock_item.py",
+          "content": "class StockItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def get_quantity(self):\n        return 3",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/stock_item.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        if amount <= self.quantity:\n            self.quantity -= amount\n\n    def get_quantity(self):\n        return self.quantity",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        if amount <= self.quantity:\n            self.quantity -= amount\n\n    def get_quantity(self):\n        return self.quantity",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/stock_item.py",
+            "content": "class StockItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def get_quantity(self):\n        return 3",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "StockItem",
+            "message": "Define the StockItem class."
+          },
+          {
+            "type": "method_returns",
+            "className": "StockItem",
+            "constructorArgs": [
+              "Pen",
+              5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "get_quantity",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 3,
+            "expectedKind": "value",
+            "message": "A valid sale should reduce quantity."
+          },
+          {
+            "type": "method_returns",
+            "className": "StockItem",
+            "constructorArgs": [
+              "Pen",
+              5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "get_quantity",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 5,
+            "expectedKind": "value",
+            "message": "An invalid sale should leave quantity unchanged."
+          }
+        ]
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-single-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-single-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-multi-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-multi-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "None"
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-fill-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "book"
+      }
+    },
+    {
+      "id": "q-debugging-imports-state-order-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-order-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "ci-debugging-imports-and-state-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-4.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.catalog_item import CatalogItem\nfrom services.report_service import format_item\n\nitem = CatalogItem(\"Marker\", 8)\nprint(format_item(item))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Program should print one formatted report line."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-debugging-imports-and-state-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/cart.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.models_cart_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/__init__.py",
+          "content": "# package marker",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/cart.py",
+          "content": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/cart.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterFiles.models_cart_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-5.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+        "solutionFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "# package marker",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/cart.py",
+            "content": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.cart import Cart\n\nfirst = Cart(\"Ava\")\nsecond = Cart(\"Ben\")\nfirst.add_item(\"chips\")\nprint(first.item_count())\nprint(second.item_count())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Cart",
+            "message": "Define the Cart class."
+          },
+          {
+            "type": "method_returns",
+            "className": "Cart",
+            "constructorArgs": [
+              "Ava"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "item_count",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 1,
+            "expectedKind": "value",
+            "message": "The first cart should contain one item after one add."
+          },
+          {
+            "type": "method_returns",
+            "className": "Cart",
+            "constructorArgs": [
+              "Ben"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "item_count",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 0,
+            "expectedKind": "value",
+            "message": "A separate cart should still be empty."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-debugging-imports-and-state-6",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/task.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.models_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/__init__.py",
+          "content": "# package marker",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/task.py",
+          "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/task.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterFiles.models_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.ci-debugging-imports-and-state-6.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+        "solutionFiles": [
+          {
+            "path": "models/__init__.py",
+            "content": "# package marker",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\ntask = Task(\"Write report\")\nprint(task.is_done())\ntask.complete()\nprint(task.is_done())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Task",
+            "message": "Define the Task class."
+          },
+          {
+            "type": "method_returns",
+            "className": "Task",
+            "constructorArgs": [
+              "Write report"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "is_done",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "A new task should start incomplete."
+          },
+          {
+            "type": "method_returns",
+            "className": "Task",
+            "constructorArgs": [
+              "Write report"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "is_done",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": true,
+            "expectedKind": "value",
+            "message": "After complete() runs, the task should be done."
+          }
+        ]
+      }
+    }
+  ]
+}

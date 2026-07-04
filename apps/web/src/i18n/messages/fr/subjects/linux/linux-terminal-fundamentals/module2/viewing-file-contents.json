@@ -3,47 +3,47 @@
     "linux-terminal-fundamentals": {
       "linux-module-2-files-and-folders": {
         "viewing-file-contents": {
-          "label": "Consulter le contenu des fichiers",
-          "summary": "Inspecter des fichiers texte avec cat, head, tail et wc.",
+          "label": "Affichage du contenu d'un fichier",
+          "summary": "Examinez les fichiers texte à l'aide des commandes `cat`, `head`, `tail` et `wc`.",
           "cards": {
             "sketch0": {
               "title": "Lire un fichier entier avec cat"
             },
             "sketch1": {
-              "title": "Prévisualiser le début ou la fin avec head et tail"
+              "title": "Prévisualiser le début ou la fin avec « head » et « tail »"
             },
             "sketch2": {
               "title": "Compter les lignes, les mots et les caractères avec wc"
             },
             "quiz": {
-              "title": "Vérification de pratique"
+              "title": "Vérification des exercices"
             },
             "project": {
-              "title": "Inspecter les fichiers d’un espace de travail scolaire nettoyé"
+              "title": "Vérifier les fichiers pour s'assurer que l'espace de travail scolaire a été nettoyé"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "exercises": {
               "viewing-file-contents-try-it-1": {
-                "title": "Tâche terminal : lire un fichier avec cat",
-                "prompt": "Lisez le menu complet en exécutant `cat cafe/menu.txt` dans le terminal.",
-                "hint": "Utilisez les dossiers et noms de fichiers exacts de l’énoncé, puis exécutez ls, cat ou find pour vérifier votre travail.",
+                "title": "Tâche dans le terminal : lire un fichier avec cat",
+                "prompt": "Pour consulter le menu complet, lancez la commande « `cat cafe/menu.txt` » dans le terminal.",
+                "hint": "Utilisez exactement les noms de dossiers et de fichiers indiqués dans l'invite de commande, puis exécutez les commandes `ls`, `cat` ou `find` pour vérifier votre travail.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `cat cafe/menu.txt`."
+                      "message": "Exécutez la commande « `cat cafe/menu.txt` »."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
@@ -54,27 +54,27 @@
                 }
               },
               "viewing-file-contents-try-it-2": {
-                "title": "Tâche terminal : prévisualiser avec head et tail",
-                "prompt": "Prévisualisez le journal en exécutant `head logs/event.log`, puis `tail logs/event.log`.",
-                "hint": "Utilisez les dossiers et noms de fichiers exacts de l’énoncé, puis exécutez ls, cat ou find pour vérifier votre travail.",
+                "title": "Tâche du terminal : aperçu avec le début et la fin",
+                "prompt": "Pour prévisualiser le fichier journal, exécutez la commande « `head logs/event.log` », puis « `tail logs/event.log` ».",
+                "hint": "Utilisez exactement les noms de dossiers et de fichiers indiqués dans l'invite de commande, puis exécutez les commandes `ls`, `cat` ou `find` pour vérifier votre travail.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `head logs/event.log`."
+                      "message": "Exécutez la commande « `head logs/event.log` »."
                     },
                     "1": {
-                      "message": "Exécutez `tail logs/event.log`."
+                      "message": "Exécutez la commande « `tail logs/event.log` »."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes de l'espace de travail."
                     }
                   }
                 },
@@ -85,104 +85,104 @@
                 }
               },
               "viewing-file-contents-try-it-3": {
-                "title": "Tâche terminal : compter les lignes avec wc -l",
-                "prompt": "Comptez les lignes de la liste de vérification en exécutant `wc -l logs/checklist.txt`.",
-                "hint": "Utilisez les dossiers et noms de fichiers exacts de l’énoncé, puis exécutez ls, cat ou find pour vérifier votre travail.",
+                "title": "Tâche dans le terminal : compter le nombre de lignes avec la commande `wc -l`",
+                "prompt": "Comptez le nombre de lignes de la liste de contrôle en exécutant la commande « `wc -l logs/checklist.txt` ».",
+                "hint": "Utilisez exactement les noms de dossiers et de fichiers indiqués dans l'invite de commande, puis exécutez les commandes `ls`, `cat` ou `find` pour vérifier votre travail.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `wc -l logs/checklist.txt`."
+                      "message": "Exécutez la commande « `wc -l logs/checklist.txt` »."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
                 "starterFiles": {
                   "logs_checklist_txt": {
-                    "content": "open room\nset chairs\nvérifier projector\nwelcome guests\n"
+                    "content": "open room\nset chairs\ncheck projector\nwelcome guests\n"
                   }
                 }
               }
             },
             "try_viewing_file_contents_sketch0": {
-              "title": "Essayez vous-même : lire un fichier avec cat",
-              "prompt": "Exécutez `cat cafe/menu.txt` pour afficher tout le fichier du menu."
+              "title": "Essayez vous-même : lisez un fichier avec la commande `cat`",
+              "prompt": "Exécutez la commande « `cat cafe/menu.txt` » pour afficher l'intégralité du fichier de menu."
             },
             "try_viewing_file_contents_sketch1": {
-              "title": "Essayez vous-même : prévisualiser avec head et tail",
-              "prompt": "Exécutez `head logs/event.log`, puis `tail logs/event.log`, pour prévisualiser le début et la fin du fichier."
+              "title": "Essayez vous-même : aperçu avec « head » et « tail »",
+              "prompt": "Exécutez la commande « `head logs/event.log` », puis « `tail logs/event.log` », pour prévisualiser le début et la fin du fichier."
             },
             "try_viewing_file_contents_sketch2": {
-              "title": "Essayez vous-même : compter les lignes avec wc -l",
-              "prompt": "Exécutez `wc -l logs/checklist.txt` pour compter les lignes de la liste de vérification."
+              "title": "Essayez vous-même : comptez le nombre de lignes avec la commande `wc -l`",
+              "prompt": "Exécutez la commande « `wc -l logs/checklist.txt` » pour compter le nombre de lignes de la liste de contrôle."
             }
           },
           "practice": {
             "sc-tail-purpose": {
-              "title": "Choisir la meilleure commande pour les dernières lignes",
-              "prompt": "Un club ajoute sans cesse de nouvelles entrées à `updates.txt`. Quelle commande convient le mieux pour voir rapidement la fin de ce fichier ?",
-              "hint": "Utilisez l’explication de la leçon et la formulation de cette question pour réduire les choix.",
+              "title": "Choisissez la commande la plus appropriée pour les dernières lignes",
+              "prompt": "Un club ajoute sans cesse de nouvelles entrées au fichier `updates.txt`. Quelle commande est la plus adaptée pour visualiser rapidement la fin de ce fichier ?",
+              "hint": "Servez-vous de l'explication donnée dans la leçon et de la formulation de cette question pour affiner votre réponse.",
               "help": {
-                "concept": "Ce texte d’aide a été corrigé parce que la formulation originale révélait la réponse trop directement.",
-                "hint_1": "Comparez chaque option au sujet exact nommé dans la question.",
-                "hint_2": "Utilisez le rôle ou les indices nommés dans l’énoncé au lieu de vous appuyer sur la formulation des réponses."
+                "concept": "Ce texte d'aide a été modifié, car la formulation initiale révélait la réponse de manière trop directe.",
+                "hint_1": "Comparez chaque option au sujet précis mentionné dans la question.",
+                "hint_2": "Utilisez le rôle ou l'élément de preuve mentionné dans l'énoncé plutôt que de vous fier à la formulation de la réponse."
               },
               "options": {
                 "a": "cat",
-                "b": "head",
-                "c": "tail",
+                "b": "tête",
+                "c": "queue",
                 "d": "wc"
               }
             },
             "mc-cat-uses": {
-              "title": "Quand cat convient bien",
-              "prompt": "Un élève assistant est vérifiering fichiers dans a class notes dossier. Quel/quelle tasks sont good uses for `cat`? Choisissez toutes les réponses qui conviennent.",
-              "hint": "Réfléchissez aux moments où il est utile de voir tout le texte d’un coup.",
+              "title": "Quand le chat est le bon choix",
+              "prompt": "Un assistant étudiant consulte des fichiers dans un dossier contenant des notes de cours. Quelles sont les tâches pour lesquelles l'`cat` est particulièrement utile ? Cochez toutes les réponses qui s'appliquent.",
+              "hint": "Réfléchissez aux situations dans lesquelles il est utile de voir l'intégralité du texte d'un seul coup d'œil.",
               "help": {
-                "concept": "`cat` affiche tout le contenu d’un fichier dans le terminal ; il convient donc mieux aux fichiers texte courts quand vous voulez tout lire.",
-                "hint_1": "Cherchez les tâches où l’apprenant veut le fichier entier, et pas seulement le début, la fin ou un compte.",
-                "hint_2": "Deux choix concernent la lecture directe de tout le texte. Les autres correspondent mieux à `wc`, `head` ou `tail`."
+                "concept": "`cat` affiche l'intégralité du contenu d'un fichier sur le terminal ; cette commande est donc particulièrement adaptée aux fichiers texte courts, lorsque vous souhaitez en lire l'intégralité.",
+                "hint_1": "Recherchez des exercices dans lesquels l'apprenant souhaite obtenir le fichier dans son intégralité, et pas seulement le début, la fin ou un nombre donné de lignes.",
+                "hint_2": "Deux options consistent à lire l'intégralité du texte directement. Les autres correspondent davantage à `wc`, `head` ou `tail`."
               },
               "options": {
-                "a": "Lire chaque ligne d’un court fichier de liste de vérification",
-                "b": "Voir seulement les dernières lignes d’un long fichier journal",
-                "c": "Afficher tout le contenu d’une courte note de rappel",
-                "d": "Compter le nombre de mots dans un brouillon de rédaction"
+                "a": "Lire chaque ligne d'un fichier contenant une courte liste de contrôle",
+                "b": "Afficher uniquement les dernières lignes d'un long fichier journal",
+                "c": "Afficher l'intégralité du contenu d'un petit mémo",
+                "d": "Compter le nombre de mots dans un brouillon de dissertation"
               }
             },
             "mc-wc-meaning": {
-              "title": "Ce que wc vous indique",
-              "prompt": "Vous exécutez `wc draft.txt` pendant la révision d’une annonce d’élève. Quels types d’informations `wc` peut-il rapporter sur le fichier ? Choisissez toutes les réponses qui conviennent.",
-              "hint": "Pensez aux comptes, pas au contenu réel du texte.",
+              "title": "Ce que « wc » vous indique",
+              "prompt": "Vous exécutez la commande « `wc draft.txt` » tout en consultant une annonce destinée aux étudiants. Quels types d'informations la commande « `wc` » peut-elle fournir sur ce fichier ? Sélectionnez toutes les réponses qui s'appliquent.",
+              "hint": "Concentrez-vous sur le nombre de mots, et non sur le contenu du texte lui-même.",
               "help": {
-                "concept": "`wc` résume la quantité de texte d’un fichier en rapportant des comptes comme les lignes, les mots et les caractères.",
-                "hint_1": "Cherchez des mesures de la taille du contenu du fichier plutôt que des commandes qui affichent le texte.",
-                "hint_2": "Trois choix sont des résumés basés sur des comptes que `wc` peut fournir."
+                "concept": "`wc` résume le volume de texte contenu dans un fichier en indiquant des statistiques telles que le nombre de lignes, de mots et de caractères.",
+                "hint_1": "Recherchez les commandes permettant de mesurer la taille du contenu d'un fichier plutôt que celles qui affichent du texte.",
+                "hint_2": "`wc` propose trois types de synthèses basées sur le nombre."
               },
               "options": {
-                "a": "Le nombre de lignes dans le fichier",
-                "b": "Le nombre de mots dans le fichier",
-                "c": "Le nombre de caractères dans le fichier",
-                "d": "La dernière phrase exacte du fichier"
+                "a": "Combien y a-t-il de lignes dans le fichier ?",
+                "b": "Combien y a-t-il de mots dans le fichier ?",
+                "c": "Combien y a-t-il de caractères dans le fichier ?",
+                "d": "La toute dernière phrase du fichier"
               }
             },
             "dr-inspect-order": {
-              "title": "Inspecter un fichier dans un ordre logique",
-              "prompt": "Placez ces actions dans un ordre logique pour vérifier un fichier texte dans le terminal après être entré dans un dossier de projet.",
-              "hint": "Lisez chaque élément et placez-les dans l’ordre où l’énoncé doit être compris.",
+              "title": "Examiner un fichier en suivant un ordre logique",
+              "prompt": "Organisez ces actions dans un ordre logique pour vérifier un fichier texte dans le terminal après avoir accédé au dossier d'un projet.",
+              "hint": "Lisez chaque élément et classez-les dans l'ordre dans lequel l'énoncé doit être compris.",
               "help": {
-                "concept": "Les éléments doivent former un énoncé valide dans un ordre logique.",
-                "hint_1": "Commencez par l’élément qui introduit l’idée ou l’action.",
-                "hint_2": "Placez les éléments dépendants après la partie qu’ils décrivent ou complètent."
+                "concept": "Les éléments doivent former un ensemble cohérent, présenté dans un ordre logique.",
+                "hint_1": "Commencez par le passage qui présente l'idée ou l'action.",
+                "hint_2": "Placez les pièces liées à un emplacement précis après l'élément qu'elles décrivent ou complètent."
               },
               "tokens": {
                 "t1": "ls",
@@ -191,37 +191,37 @@
               }
             },
             "fb-head-purpose": {
-              "title": "Choisir la bonne commande d’aperçu",
-              "prompt": "Un enseignant a enregistré un long fichier nommé `chapter_notes.txt`, et vous voulez seulement en inspecter le début.",
-              "hint": "Choisissez la commande qui affiche le haut d’un fichier.",
+              "title": "Choisissez la bonne commande d'aperçu",
+              "prompt": "Un enseignant a enregistré un fichier volumineux intitulé « `chapter_notes.txt` », et vous souhaitez uniquement en consulter le début.",
+              "hint": "Choisissez la commande qui permet d'afficher le début d'un fichier.",
               "help": {
-                "concept": "`the missing term` affiche la première partie d’un fichier, ce qui est utile quand vous voulez un aperçu rapide de son début.",
-                "hint_1": "Cette commande est le partenaire opposé de `tail`.",
-                "hint_2": "Utilisez la commande qui correspond à l’idée du haut ou du début du fichier."
+                "concept": "`the missing term` affiche la première partie d'un fichier, ce qui est utile lorsque vous souhaitez avoir un aperçu rapide du début du fichier.",
+                "hint_1": "Cette commande est le pendant de « `tail` ».",
+                "hint_2": "Utilisez la commande qui correspond à la notion de « haut » ou de « début » du fichier."
               },
-              "template": "[blank1] chapter_notes.txt",
+              "template": "[blank1] chapitre_notes.txt",
               "choices": [
                 "cat",
-                "head",
-                "tail",
+                "tête",
+                "queue",
                 "wc"
               ]
             },
             "code-cat-menu": {
-              "title": "Consulter un fichier de menu de café",
-              "prompt": "Vous voulez confirmer chaque ligne d’un court fichier de menu. Quel résultat montre que `cat` a fait le bon travail ?",
-              "hint": "Utilisez la commande qui affiche un fichier entier dans le terminal.",
+              "title": "Consulter le fichier du menu d'un café",
+              "prompt": "Vous souhaitez vérifier chaque ligne d'un petit fichier de menu. Quel résultat indique que la commande « `cat` » a fonctionné correctement ?",
+              "hint": "Utilisez la commande qui affiche l'intégralité d'un fichier dans le terminal.",
               "help": {
-                "concept": "Pour les fichiers texte courts, `cat` affiche tout le fichier directement dans le terminal afin que vous puissiez inspecter chaque ligne d’un coup.",
-                "hint_1": "Vous n’avez pas besoin de changer de dossier ni de modifier le fichier. Exécutez une seule commande sur `menu.txt`.",
-                "hint_2": "Utilisez le nom de commande de ce sujet qui affiche le contenu complet d’un fichier."
+                "concept": "Pour les fichiers texte courts, la commande « `cat` » affiche l'intégralité du fichier directement dans le terminal, ce qui vous permet de consulter toutes les lignes d'un seul coup d'œil.",
+                "hint_1": "Vous n'avez pas besoin de changer de dossier ni de modifier le fichier. Exécutez une seule commande sur `menu.txt`.",
+                "hint_2": "Utilisez le nom de la commande mentionnée dans cette rubrique qui permet d'afficher l'intégralité du contenu d'un fichier."
               },
-              "template": "Une commande qui lit un fichier entier doit ____ afin que vous puissiez voir clairement le contenu.",
+              "template": "Une commande qui lit un fichier dans son intégralité devrait ____ afin que vous puissiez en voir clairement le contenu.",
               "choices": [
                 "afficher un résultat observable",
-                "masquer toute sortie",
+                "masquer toutes les sorties",
                 "supprimer le fichier immédiatement",
-                "sauter le programme"
+                "passer le programme"
               ]
             }
           }
@@ -235,15 +235,15 @@
         "viewing-file-contents": {
           "sketch-1": {
             "title": "Lire un fichier entier avec cat",
-            "bodyMarkdown": "`cat` affiche le contenu d’un fichier texte dans le terminal. C’est utile quand le fichier est court et que vous voulez tout voir d’un coup.\n\nExemple :\n\n```bash\ncat notes.txt\n```\n\nSi `notes.txt` contient :\n\n```text\nBuy folders\nReview chapter 2\nEmail project partner\n```\n\nalors `cat notes.txt` affiche les trois lignes dans le terminal.\n\nÉtape par étape :\n- `cat` est la commande.\n- `notes.txt` est le fichier que vous voulez lire.\n- Le terminal affiche le fichier exactement comme il est enregistré.\n\nUtilisez `cat` pour inspecter rapidement de petits fichiers texte. Pour les fichiers plus longs, `head` et `tail` sont souvent plus faciles à utiliser."
+            "bodyMarkdown": "`cat` prints the contents of a text file to the terminal. It is useful when the file is short and you want to see everything at once.\n\nExample:\n\n```bash\ncat notes.txt\n```\n\nIf `notes.txt` contains:\n\n```text\nBuy folders\nReview chapter 2\nEmail project partner\n```\n\nthen `cat notes.txt` shows all three lines in the terminal.\n\nStep by step:\n- `cat` is the command.\n- `notes.txt` is the file you want to read.\n- The terminal prints the file exactly as it is stored.\n\nUse `cat` for quick inspection of small text files. For longer files, `head` and `tail` are often easier to use."
           },
           "sketch-2": {
-            "title": "Prévisualiser le début ou la fin avec head et tail",
-            "bodyMarkdown": "Parfois, vous n’avez pas besoin du fichier entier. `head` affiche la première partie d’un fichier, et `tail` affiche la dernière partie.\n\nExemple :\n\n```bash\nhead reading-log.txt\ntail reading-log.txt\n```\n\nSi `reading-log.txt` contient beaucoup de lignes, `head` vous aide à vérifier comment il commence, tandis que `tail` vous aide à vérifier les entrées les plus récentes ou les dernières.\n\nPour les débutants, vous pouvez les retenir ainsi :\n- `head` = haut du fichier\n- `tail` = bas du fichier\n\nExemple guidé :\n\n```text\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday\n```\n\n- `head` afficherait les premières lignes, en commençant par `Monday`.\n- `tail` afficherait les dernières lignes, en finissant par `Sunday`.\n\nCes commandes sont particulièrement utiles quand un fichier est trop long pour être lu confortablement avec `cat`."
+            "title": "Prévisualiser le début ou la fin avec « head » et « tail »",
+            "bodyMarkdown": "Parfois, vous n’avez pas besoin du fichier dans son intégralité. `head` affiche la première partie d’un fichier, et `tail` affiche la dernière partie.\n\nExemple :\n\n```bash\nhead reading-log.txt\ntail reading-log.txt\n```\n\nSi `reading-log.txt` comporte de nombreuses lignes, `head` vous permet de voir comment il commence, tandis que `tail` vous permet de consulter les entrées les plus récentes ou les dernières.\n\nPour une approche adaptée aux débutants :\n- `head` = début du fichier\n- `tail` = fin du fichier\n\nExemple concret :\n\n```text\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday\n```\n\n- `head` afficherait les premières lignes, en commençant par `Monday`.\n- `tail` afficherait les dernières lignes, en terminant par `Sunday`.\n\nCes commandes sont particulièrement utiles lorsqu’un fichier est trop long pour être lu confortablement avec `cat`."
           },
           "sketch-3": {
             "title": "Compter les lignes, les mots et les caractères avec wc",
-            "bodyMarkdown": "`wc` donne des comptes pour un fichier. On l’utilise souvent pour compter les lignes, les mots et les caractères dans un texte.\n\nExemple :\n\n```bash\nwc announcement.txt\n```\n\nUn résultat peut ressembler à ceci :\n\n```text\n3 12 68 announcement.txt\n```\n\nCela signifie :\n- `3` lignes\n- `12` mots\n- `68` caractères\n\nVous n’avez pas besoin de mémoriser tout de suite la position de chaque nombre. L’idée principale est que `wc` résume la quantité de texte dans le fichier.\n\nExemple guidé :\n\nSi `announcement.txt` contient trois phrases courtes, `wc announcement.txt` vous indique rapidement que le fichier est court sans afficher tout le texte.\n\nC’est utile pour vérifier la longueur des notes, comparer des fichiers ou confirmer qu’un fichier contient la quantité de contenu attendue."
+            "bodyMarkdown": "`wc`\n\nfournit des statistiques sur un fichier. Elle est souvent utilisée pour compter le nombre de lignes, de mots et de caractères dans un texte.\n\nExemple :\n\n```bash\nwc announcement.txt\n```\n\nUn résultat pourrait ressembler à ceci :\n\n```text\n3 12 68 announcement.txt\n```\n\n\n\nCela signifie :\n-`3`\n\nlignes\n-`12`\n\nmots\n-`68`\n\ncaractères\n\nIl n’est pas nécessaire de mémoriser d’emblée la position de chaque chiffre. L’idée principale est que`wc`\n\nrésume la quantité de texte contenue dans le fichier.\n\nExemple concret :\n\nSi`announcement.txt`\n\ncontient trois phrases courtes,`wc announcement.txt`\n\nvous indique rapidement que le fichier est court sans afficher l’intégralité du texte.\n\nCela s’avère utile pour vérifier la longueur d’une note, comparer des fichiers ou confirmer qu’un fichier contient bien la quantité de contenu attendue."
           }
         }
       }

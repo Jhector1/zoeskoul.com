@@ -1,9 +1,41 @@
 subject: python--python-data-functions--draft
 profile: python
 course: python-data-functions
-modules: 1
-topics: 1
-exercise counts: {"single_choice":2,"multi_choice":2,"drag_reorder":2,"fill_blank_choice":2,"code_input":3}
-code_input count: 3
-severity counts: {"blocker":0,"error":0,"warning":1,"info":0}
+modules: 4
+topics: 23
+exercise counts: {"single_choice":38,"multi_choice":38,"drag_reorder":38,"fill_blank_choice":38,"code_input":152}
+code_input count: 152
+severity counts: {"blocker":0,"error":0,"warning":33,"info":0}
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "creating-and-indexing-lists" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "ci-print-first-last" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "ci-print-second-number" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "ci-build-and-show-list" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "list-methods-and-mutation" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "ci-1" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "ci-2" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "ci-3" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "looping-through-lists" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "ci-print-each-item" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "dictionary-basics" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "updating-and-looping-dictionaries" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "nested-data-structures" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-5-gradebook-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "defining-and-calling-functions" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "parameters-and-return-values" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "print-vs-return" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "scope-and-local-variables" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "decomposition-and-refactoring" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "using-imports-and-helper-files" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "docstrings-and-function-contracts" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-6-name-badge-package" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "reading-text-files" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "writing-text-files" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "working-with-paths" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "try-except-basics" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "q9" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "q10" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "q11" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "validating-and-cleaning-input" has no learning goals on its seed metadata.
 [warning] MISSING_TOPIC_LEARNING_GOALS: Topic "simple-csv-processing" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-7-clean-student-records" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "class-roster-cleaner" has no learning goals on its seed metadata.

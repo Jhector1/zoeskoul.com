@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "encapsulation-and-validation": {
+          "label": "Encapsulation and Validation",
+          "summary": "Protect object state by validating changes inside methods instead of scattering checks across the program.",
+          "cards": {
+            "sketch0": {
+              "title": "Encapsulation and Validation: the idea"
+            },
+            "sketch1": {
+              "title": "Encapsulation and Validation: the file shape"
+            },
+            "sketch2": {
+              "title": "Encapsulation and Validation: what the grader checks"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "ci_savings_goal_practice": {
+              "title": "Build an encapsulated savings goal"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_encapsulation_and_validation_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Complete `Wallet.deposit()` so it ignores non-positive amounts and returns the current balance."
+            },
+            "try_encapsulation_and_validation_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Complete `services/roster.py` so it only returns students with scores at least 70."
+            }
+          },
+          "quiz": {
+            "ci-savings-goal-practice": {
+              "title": "Build an encapsulated savings goal",
+              "prompt": "Complete the savings goal model with validated deposits and a percent summary.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.savings_goal import SavingsGoal\n\ngoal = SavingsGoal(\"Laptop\", 1000)\ngoal.deposit(250)\ngoal.deposit(-50)\nprint(goal.summary())\n"
+            },
+            "sc-encapsulation-and-validation-design": {
+              "title": "Check the design choice",
+              "prompt": "Which choice best matches the lesson goal for encapsulation and validation?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Protect object state by validating changes inside methods instead of scattering checks across the program.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Put every class in main.py so imports are never needed.",
+                "b": "Give each class or service a focused responsibility and import it where needed.",
+                "c": "Avoid methods so every object exposes all of its data directly.",
+                "d": "Copy the same logic into each subclass to avoid shared code."
+              }
+            },
+            "try-encapsulation-and-validation-sketch0": {
+              "title": "Validate a deposit inside the class",
+              "prompt": "Complete `Wallet.deposit()` so it ignores non-positive amounts and returns the current balance.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.wallet import Wallet\n\nwallet = Wallet(10)\nprint(wallet.deposit(5))\nprint(wallet.deposit(-3))\n"
+            },
+            "try-encapsulation-and-validation-sketch1": {
+              "title": "Keep roster validation in a service file",
+              "prompt": "Complete `services/roster.py` so it only returns students with scores at least 70.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.student import Student\nfrom services.roster import passing_students\n\nstudents = [Student(\"Ava\", 92), Student(\"Ben\", 60), Student(\"Cy\", 75)]\nfor student in passing_students(students):\n    print(student.name)\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "encapsulation-and-validation": {
+          "concept": {
+            "title": "Encapsulation and Validation: the idea",
+            "bodyMarkdown": "**Encapsulation and Validation** is not just syntax. In this course it is practiced inside small projects where one file owns one clear part of the program. Protect object state by validating changes inside methods instead of scattering checks across the program."
+          },
+          "multifile-shape": {
+            "title": "Encapsulation and Validation: the file shape",
+            "bodyMarkdown": "The file layout matters. Models hold object state and behavior, services coordinate groups of objects, tests verify behavior, and `main.py` stays thin enough to read."
+          },
+          "graded-habit": {
+            "title": "Encapsulation and Validation: what the grader checks",
+            "bodyMarkdown": "The grader checks behavior from the running project. A strong answer keeps imports working, keeps all files present, and proves the object behavior through output or assertions."
+          }
+        }
+      }
+    }
+  }
+}

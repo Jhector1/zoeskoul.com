@@ -3,6 +3,36 @@ import { pythonProfile } from "../profile.js";
 import { validatePythonGolden } from "../validatePythonGolden.js";
 import { repairPythonDraft } from "./repairPythonDraft.js";
 
+async function validateSingleExerciseGolden(args: {
+    seed: any;
+    draft: any;
+    exercise: any;
+    messageBase: string;
+}) {
+    const topicBundle = {
+        topicId: args.seed.topicId,
+        subjectSlug: args.seed.subjectSlug,
+        moduleSlug: args.seed.moduleSlug,
+        sectionSlug: args.seed.sectionSlug,
+        prefix: args.seed.modulePrefix,
+        minutes: args.seed.minutes,
+        runtimeDefaults: args.seed.moduleRuntimeDefaults,
+        exercises: [
+            pythonProfile.codeInput!.buildManifest({
+                exercise: args.exercise,
+                seed: args.seed,
+                messageBase: args.messageBase,
+            }),
+        ],
+    } as any;
+
+    return validatePythonGolden({
+        seed: args.seed,
+        draft: args.draft,
+        topicBundle,
+    });
+}
+
 describe("repairPythonDraft", () => {
     it("converts no-input hardcoded OOP output demos instead of leaving one-test fixed_tests code_input", async () => {
         const result = await repairPythonDraft({
@@ -167,6 +197,301 @@ describe("repairPythonDraft", () => {
             ]),
         );
     });
+
+    it("keeps pure arithmetic methods from being rewritten as stateful mutators", async () => {
+        const seed = {
+            subjectSlug: "python",
+            moduleSlug: "python-8-object-oriented-foundations",
+            sectionSlug: "python-8-encapsulation-and-services",
+            modulePrefix: "py8",
+            topicId: "methods-and-responsibility",
+            title: "Methods and responsibility",
+            minutes: 10,
+        } as any;
+
+        const draft = {
+            title: "Methods and responsibility",
+            summary: "Practice focused object methods.",
+            minutes: 10,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "try-methods-and-responsibility-sketch0",
+                    kind: "code_input",
+                    title: "Build a calculator class",
+                    prompt:
+                        "Create a Calculator class with add, subtract, multiply, and divide methods. Each method should return the calculated value.",
+                    starterCode:
+                        "class Calculator:\n" +
+                        "    def add(self, a, b):\n" +
+                        "        # Implement addition\n" +
+                        "\n" +
+                        "    def subtract(self, a, b):\n" +
+                        "        # Implement subtraction\n" +
+                        "\n" +
+                        "    def multiply(self, a, b):\n" +
+                        "        # Implement multiplication\n" +
+                        "\n" +
+                        "    def divide(self, a, b):\n" +
+                        "        # Implement division\n",
+                    solutionCode:
+                        "class Calculator:\n" +
+                        "    def add(self, a, b):\n" +
+                        "        return a + b\n" +
+                        "\n" +
+                        "    def subtract(self, a, b):\n" +
+                        "        return a - b\n" +
+                        "\n" +
+                        "    def multiply(self, a, b):\n" +
+                        "        return a * b\n" +
+                        "\n" +
+                        "    def divide(self, a, b):\n" +
+                        "        if b == 0:\n" +
+                        "            return None\n" +
+                        "        return a / b\n",
+                    recipeType: "semantic",
+                    semanticChecks: [
+                        { type: "defines_class", className: "Calculator" },
+                        {
+                            type: "method_returns",
+                            className: "Calculator",
+                            constructorArgs: [],
+                            constructorArgKinds: [],
+                            methodName: "add",
+                            methodArgs: [3, 2],
+                            methodArgKinds: [],
+                            expected: 5,
+                            expectedKind: "value",
+                        },
+                        {
+                            type: "method_returns",
+                            className: "Calculator",
+                            constructorArgs: [],
+                            constructorArgKinds: [],
+                            methodName: "subtract",
+                            methodArgs: [5, 3],
+                            methodArgKinds: [],
+                            expected: 2,
+                            expectedKind: "value",
+                        },
+                        {
+                            type: "method_returns",
+                            className: "Calculator",
+                            constructorArgs: [],
+                            constructorArgKinds: [],
+                            methodName: "multiply",
+                            methodArgs: [4, 3],
+                            methodArgKinds: [],
+                            expected: 12,
+                            expectedKind: "value",
+                        },
+                        {
+                            type: "method_returns",
+                            className: "Calculator",
+                            constructorArgs: [],
+                            constructorArgKinds: [],
+                            methodName: "divide",
+                            methodArgs: [10, 2],
+                            methodArgKinds: [],
+                            expected: 5,
+                            expectedKind: "value",
+                        },
+                    ],
+                    hint: "Each method should return its own calculation.",
+                    help: {
+                        concept: "A method should take responsibility for one focused behavior.",
+                        hint_1: "Use the two method parameters in the return value.",
+                        hint_2: "Do not store these arithmetic results on self.",
+                    },
+                },
+            ],
+        } as any;
+
+        const result = await repairPythonDraft({ seed, draft });
+        const exercise = result.draft.quizDraft[0] as any;
+
+        expect(exercise.solutionCode).toContain("return a + b");
+        expect(exercise.solutionCode).toContain("return a - b");
+        expect(exercise.solutionCode).not.toContain("self.count");
+
+        const golden = await validateSingleExerciseGolden({
+            seed,
+            draft: result.draft,
+            exercise,
+            messageBase: "python.module8.methods.calculator",
+        });
+
+        expect(golden.ok).toBe(true);
+    });
+
+    it("repairs function_returns object arguments without dropping later primitive args", async () => {
+        const seed = {
+            subjectSlug: "python",
+            moduleSlug: "python-8-object-oriented-foundations",
+            sectionSlug: "python-8-encapsulation-and-services",
+            modulePrefix: "py8",
+            topicId: "encapsulation-and-validation",
+            title: "Encapsulation and validation",
+            minutes: 10,
+        } as any;
+
+        const draft = {
+            title: "Encapsulation and validation",
+            summary: "Practice account validation helpers.",
+            minutes: 10,
+            sketchBlocks: [],
+            quizDraft: [
+                {
+                    id: "ci-account-service-check",
+                    kind: "code_input",
+                    title: "Check whether an account can cover a cost",
+                    prompt:
+                        "In services/account_service.py, implement can_cover(account, cost). Return True when the account balance can cover the cost and False otherwise.",
+                    starterCode:
+                        "# models/account.py\n" +
+                        "class Account:\n" +
+                        "    def __init__(self, owner, balance):\n" +
+                        "        self.owner = owner\n" +
+                        "        self.balance = balance\n" +
+                        "\n" +
+                        "# services/account_service.py\n" +
+                        "def can_cover(account, cost):\n" +
+                        "    # return whether the account has enough balance\n" +
+                        "    pass\n",
+                    solutionCode:
+                        "# models/account.py\n" +
+                        "class Account:\n" +
+                        "    def __init__(self, owner, balance):\n" +
+                        "        self.owner = owner\n" +
+                        "        self.balance = balance\n" +
+                        "\n" +
+                        "# services/account_service.py\n" +
+                        "def can_cover(account, cost):\n" +
+                        "    return cost <= account.balance\n",
+                    entryFilePath: "main.py",
+                    starterFiles: [
+                        {
+                            path: "models/account.py",
+                            content:
+                                "class Account:\n" +
+                                "    def __init__(self, owner, balance):\n" +
+                                "        self.owner = owner\n" +
+                                "        self.balance = balance\n",
+                            language: "python",
+                            isEntry: false,
+                            entry: false,
+                        },
+                        {
+                            path: "services/account_service.py",
+                            content:
+                                "def can_cover(account, cost):\n" +
+                                "    # return whether the account has enough balance\n" +
+                                "    pass\n",
+                            language: "python",
+                            isEntry: false,
+                            entry: false,
+                        },
+                        {
+                            path: "main.py",
+                            content:
+                                "from models.account import Account\n" +
+                                "from services.account_service import can_cover\n" +
+                                "\n" +
+                                "account = Account(\"Rae\", 75)\n" +
+                                "print(can_cover(account, 50))\n" +
+                                "print(can_cover(account, 90))\n",
+                            language: "python",
+                            isEntry: true,
+                            entry: true,
+                        },
+                    ],
+                    solutionFiles: [
+                        {
+                            path: "models/account.py",
+                            content:
+                                "class Account:\n" +
+                                "    def __init__(self, owner, balance):\n" +
+                                "        self.owner = owner\n" +
+                                "        self.balance = balance\n",
+                            language: "python",
+                            isEntry: false,
+                            entry: false,
+                        },
+                        {
+                            path: "services/account_service.py",
+                            content:
+                                "def can_cover(account, cost):\n" +
+                                "    return cost <= account.balance\n",
+                            language: "python",
+                            isEntry: false,
+                            entry: false,
+                        },
+                        {
+                            path: "main.py",
+                            content:
+                                "from models.account import Account\n" +
+                                "from services.account_service import can_cover\n" +
+                                "\n" +
+                                "account = Account(\"Rae\", 75)\n" +
+                                "print(can_cover(account, 50))\n" +
+                                "print(can_cover(account, 90))\n",
+                            language: "python",
+                            isEntry: true,
+                            entry: true,
+                        },
+                    ],
+                    recipeType: "semantic",
+                    semanticChecks: [
+                        { type: "defines_class", className: "Account" },
+                        {
+                            type: "function_returns",
+                            functionName: "can_cover",
+                            args: [["Rae", 75], 50],
+                            argKinds: [],
+                            expected: true,
+                            expectedKind: "value",
+                        },
+                        {
+                            type: "function_returns",
+                            functionName: "can_cover",
+                            args: [["Rae", 75], 90],
+                            argKinds: [],
+                            expected: false,
+                            expectedKind: "value",
+                        },
+                    ],
+                    hint: "Compare the cost with the account balance.",
+                    help: {
+                        concept: "A service helper can receive an object and read its public fields.",
+                        hint_1: "Use the account parameter, not a hardcoded balance.",
+                        hint_2: "The function should return a boolean comparison.",
+                    },
+                },
+            ],
+        } as any;
+
+        const result = await repairPythonDraft({ seed, draft });
+        const exercise = result.draft.quizDraft[0] as any;
+        const functionChecks = exercise.semanticChecks.filter(
+            (check: any) => check.type === "function_returns",
+        );
+
+        expect(functionChecks[0].args).toEqual([[ ["owner", "Rae"], ["balance", 75] ], 50]);
+        expect(functionChecks[0].argKinds).toEqual(["dict_entries", "value"]);
+        expect(
+            exercise.solutionFiles.find((file: any) => file.path === "services/account_service.py")?.content,
+        ).toContain("return cost <= account.balance");
+
+        const golden = await validateSingleExerciseGolden({
+            seed,
+            draft: result.draft,
+            exercise,
+            messageBase: "python.module8.encapsulation.accountService",
+        });
+
+        expect(golden.ok).toBe(true);
+    });
+
     it("rewrites stock SQL-flavored hints into Python guidance", async () => {
         const result = await repairPythonDraft({
             seed: { topicId: "python-topic" } as any,
@@ -2320,6 +2645,640 @@ describe("repairPythonDraft", () => {
         ).toBe(true);
     });
 
+    it("repairs semantic OOP solution files when a mutator method is missing without any pass placeholder", async () => {
+        const seed = {
+            profileId: "python",
+            topicId: "methods-and-responsibility-summary",
+            subjectSlug: "python--applied-python-projects--draft",
+            moduleSlug: "python-8-object-oriented-foundations",
+            sectionSlug: "python-8-encapsulation-and-services",
+            modulePrefix: "module8",
+            minutes: 10,
+            moduleRuntimeDefaults: { kind: "code", language: "python" },
+        } as any;
+
+        const result = await repairPythonDraft({
+            seed,
+            draft: {
+                title: "Methods and Responsibility",
+                summary: "Practice methods and responsibility.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "deposit-summary",
+                        kind: "code_input",
+                        title: "Deposit then summarize",
+                        prompt: "Complete the account methods so a deposit updates the balance before summary returns the formatted text.",
+                        starterCode:
+                            "# main.py\nfrom models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(25)\nprint(account.summary())\n",
+                        solutionCode:
+                            "# main.py\nfrom models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(25)\nprint(account.summary())\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            { type: "defines_class", className: "Account" },
+                            {
+                                type: "instance_attributes",
+                                className: "Account",
+                                constructorArgs: ["Ava", 100],
+                                attributes: ["owner", "balance"],
+                            },
+                            {
+                                type: "method_sequence_returns",
+                                className: "Account",
+                                constructorArgs: ["Ava", 100],
+                                calls: [{ methodName: "deposit", methodArgs: [25] }],
+                                methodName: "summary",
+                                methodArgs: [],
+                                expected: "Ava: 125",
+                            },
+                        ],
+                        entryFilePath: "main.py",
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(25)\nprint(account.summary())\n",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                            {
+                                path: "models/account.py",
+                                content:
+                                    "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass\n\n    def summary(self):\n        pass\n",
+                                language: "python",
+                                isEntry: false,
+                                entry: false,
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "from models.account import Account\n\naccount = Account(\"Ava\", 100)\naccount.deposit(25)\nprint(account.summary())\n",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                            {
+                                path: "models/account.py",
+                                content:
+                                    "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: {self.balance}\"\n",
+                                language: "python",
+                                isEntry: false,
+                                entry: false,
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        const accountFile = exercise.solutionFiles.find((file: any) => file.path === "models/account.py");
+
+        expect(accountFile.content).toContain("def deposit");
+        expect(accountFile.content).toContain("self.balance += amount");
+        expect(accountFile.content).toContain('return f"{self.owner}: {self.balance}"');
+
+        const golden = await validateSingleExerciseGolden({
+            seed,
+            draft: result.draft,
+            exercise,
+            messageBase:
+                "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.deposit_summary",
+        });
+
+        expect(golden.ok).toBe(true);
+    });
+
+    it("synthesizes semantic OOP workspace files and boolean validation methods from semantic checks", async () => {
+        const seed = {
+            profileId: "python",
+            topicId: "methods-and-responsibility-validate",
+            subjectSlug: "python--applied-python-projects--draft",
+            moduleSlug: "python-8-object-oriented-foundations",
+            sectionSlug: "python-8-encapsulation-and-services",
+            modulePrefix: "module8",
+            minutes: 10,
+            moduleRuntimeDefaults: { kind: "code", language: "python" },
+        } as any;
+
+        const result = await repairPythonDraft({
+            seed,
+            draft: {
+                title: "Methods and Responsibility",
+                summary: "Practice methods and responsibility.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "validate-transaction",
+                        kind: "code_input",
+                        title: "Validate a transaction",
+                        prompt: "Complete is_valid so it returns True for positive amounts and False otherwise.",
+                        starterCode:
+                            "# main.py\nfrom models.transaction import Transaction\n\ncoffee = Transaction(\"Coffee\", 4)\nrefund = Transaction(\"Refund\", -2)\n\nprint(coffee.is_valid())\nprint(refund.is_valid())\n",
+                        solutionCode:
+                            "# main.py\nfrom models.transaction import Transaction\n\ncoffee = Transaction(\"Coffee\", 4)\nrefund = Transaction(\"Refund\", -2)\n\nprint(coffee.is_valid())\nprint(refund.is_valid())\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            { type: "defines_class", className: "Transaction" },
+                            {
+                                type: "constructible",
+                                className: "Transaction",
+                                constructorArgs: ["Coffee", 4],
+                            },
+                            {
+                                type: "instance_attributes",
+                                className: "Transaction",
+                                constructorArgs: ["Coffee", 4],
+                                attributes: ["description", "amount"],
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Transaction",
+                                constructorArgs: ["Coffee", 4],
+                                methodName: "is_valid",
+                                methodArgs: [],
+                                expected: true,
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Transaction",
+                                constructorArgs: ["Refund", -2],
+                                methodName: "is_valid",
+                                methodArgs: [],
+                                expected: false,
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        const transactionFile = exercise.solutionFiles.find((file: any) => file.path === "models/transaction.py");
+
+        expect(transactionFile.content).toContain("def is_valid");
+        expect(transactionFile.content).toContain("return self.amount > 0");
+        expect(exercise.starterFiles.find((file: any) => file.path === "models/transaction.py").content).toContain("pass");
+
+        const golden = await validateSingleExerciseGolden({
+            seed,
+            draft: result.draft,
+            exercise,
+            messageBase:
+                "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.validate_transaction",
+        });
+
+        expect(golden.ok).toBe(true);
+    });
+
+    it("repairs formatter-style method_returns checks into dynamic string methods", async () => {
+        const seed = {
+            profileId: "python",
+            topicId: "methods-and-responsibility-record-line",
+            subjectSlug: "python--applied-python-projects--draft",
+            moduleSlug: "python-8-object-oriented-foundations",
+            sectionSlug: "python-8-encapsulation-and-services",
+            modulePrefix: "module8",
+            minutes: 10,
+            moduleRuntimeDefaults: { kind: "code", language: "python" },
+        } as any;
+
+        const result = await repairPythonDraft({
+            seed,
+            draft: {
+                title: "Methods and Responsibility",
+                summary: "Practice methods and responsibility.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "record-transaction-line",
+                        kind: "code_input",
+                        title: "Record a transaction line",
+                        prompt: "Complete record_transaction so it formats the label and amount.",
+                        starterCode:
+                            "# main.py\nfrom models.account import Account\n\naccount = Account(\"Lena\", 90)\nprint(account.record_transaction(\"Rent\", -30))\nprint(account.record_transaction(\"Paycheck\", 100))\n",
+                        solutionCode:
+                            "# main.py\nfrom models.account import Account\n\naccount = Account(\"Lena\", 90)\nprint(account.record_transaction(\"Rent\", -30))\nprint(account.record_transaction(\"Paycheck\", 100))\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            { type: "defines_class", className: "Account" },
+                            {
+                                type: "constructible",
+                                className: "Account",
+                                constructorArgs: ["Lena", 90],
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Account",
+                                constructorArgs: ["Lena", 90],
+                                methodName: "record_transaction",
+                                methodArgs: ["Rent", -30],
+                                expected: "Rent: -30",
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Account",
+                                constructorArgs: ["Lena", 90],
+                                methodName: "record_transaction",
+                                methodArgs: ["Paycheck", 100],
+                                expected: "Paycheck: 100",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        const accountFile = exercise.solutionFiles.find((file: any) => file.path === "models/account.py");
+
+        expect(accountFile.content).toContain("def record_transaction");
+        expect(accountFile.content).toContain('return f"{label}: {amount}"');
+    });
+
+    it("repairs service/helper function solution files from semantic checks", async () => {
+        const seed = {
+            profileId: "python",
+            topicId: "methods-and-responsibility-service-helper",
+            subjectSlug: "python--applied-python-projects--draft",
+            moduleSlug: "python-8-object-oriented-foundations",
+            sectionSlug: "python-8-encapsulation-and-services",
+            modulePrefix: "module8",
+            minutes: 10,
+            moduleRuntimeDefaults: { kind: "code", language: "python" },
+        } as any;
+
+        const result = await repairPythonDraft({
+            seed,
+            draft: {
+                title: "Methods and Responsibility",
+                summary: "Practice methods and responsibility.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "service-call",
+                        kind: "code_input",
+                        title: "Summarize a withdrawal",
+                        prompt: "Complete summarize_withdrawal so it calls withdraw and formats the result.",
+                        starterCode:
+                            "# main.py\nfrom models.account import Account\nfrom services.account_service import summarize_withdrawal\n\naccount = Account(\"Kai\", 40)\nprint(summarize_withdrawal(account, 15))\nprint(summarize_withdrawal(account, 50))\n",
+                        solutionCode:
+                            "# main.py\nfrom models.account import Account\nfrom services.account_service import summarize_withdrawal\n\naccount = Account(\"Kai\", 40)\nprint(summarize_withdrawal(account, 15))\nprint(summarize_withdrawal(account, 50))\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            { type: "defines_class", className: "Account" },
+                            {
+                                type: "instance_attributes",
+                                className: "Account",
+                                constructorArgs: ["Kai", 40],
+                                attributes: ["owner", "balance"],
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Account",
+                                constructorArgs: ["Kai", 40],
+                                methodName: "withdraw",
+                                methodArgs: [15],
+                                expected: 25,
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Account",
+                                constructorArgs: ["Kai", 40],
+                                methodName: "withdraw",
+                                methodArgs: [50],
+                                expected: "Not enough funds",
+                            },
+                            {
+                                type: "function_returns",
+                                functionName: "summarize_withdrawal",
+                                args: [[["owner", "Kai"], ["balance", 40]], 15],
+                                argKinds: ["dict_entries", "value"],
+                                expected: "Kai balance: 25",
+                            },
+                            {
+                                type: "function_returns",
+                                functionName: "summarize_withdrawal",
+                                args: [[["owner", "Kai"], ["balance", 40]], 50],
+                                argKinds: ["dict_entries", "value"],
+                                expected: "Kai balance: Not enough funds",
+                            },
+                        ],
+                    },
+                    {
+                        id: "format-money",
+                        kind: "code_input",
+                        title: "Format money",
+                        prompt: "Complete format_money so it returns a money string.",
+                        starterCode:
+                            "# main.py\nfrom services.money import format_money\n\nprint(format_money(42))\n",
+                        solutionCode:
+                            "# main.py\nfrom services.money import format_money\n\nprint(format_money(42))\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            {
+                                type: "function_returns",
+                                functionName: "format_money",
+                                args: [42],
+                                expected: "$42.00",
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const serviceExercise = result.draft.quizDraft[0] as any;
+        const helperExercise = result.draft.quizDraft[1] as any;
+
+        expect(
+            serviceExercise.solutionFiles.find((file: any) => file.path === "services/account_service.py").content,
+        ).toContain("result = account.withdraw(amount)");
+        expect(
+            serviceExercise.solutionFiles.find((file: any) => file.path === "services/account_service.py").content,
+        ).toContain('return f"{account.owner} balance: {result}"');
+        expect(
+            helperExercise.solutionFiles.find((file: any) => file.path === "services/money.py").content,
+        ).toContain('return f"${amount:.2f}"');
+
+        const serviceGolden = await validateSingleExerciseGolden({
+            seed,
+            draft: {
+                ...result.draft,
+                quizDraft: [serviceExercise],
+            },
+            exercise: serviceExercise,
+            messageBase:
+                "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.service_call",
+        });
+        const helperGolden = await validateSingleExerciseGolden({
+            seed: {
+                ...seed,
+                topicId: "methods-and-responsibility-format-money",
+            },
+            draft: {
+                ...result.draft,
+                quizDraft: [helperExercise],
+            },
+            exercise: helperExercise,
+            messageBase:
+                "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.methods-and-responsibility.format_money",
+        });
+
+        expect(serviceGolden.ok).toBe(true);
+        expect(helperGolden.ok).toBe(true);
+    });
+
+    it("repairs record-style mutators that must update numeric state", async () => {
+        const seed = {
+            profileId: "python",
+            topicId: "methods-and-responsibility-record-total",
+            subjectSlug: "python--applied-python-projects--draft",
+            moduleSlug: "python-8-object-oriented-foundations",
+            sectionSlug: "python-8-encapsulation-and-services",
+            modulePrefix: "module8",
+            minutes: 10,
+            moduleRuntimeDefaults: { kind: "code", language: "python" },
+        } as any;
+
+        const result = await repairPythonDraft({
+            seed,
+            draft: {
+                title: "Methods and Responsibility",
+                summary: "Practice methods and responsibility.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "record-total",
+                        kind: "code_input",
+                        title: "Record a total",
+                        prompt: "Complete record so it updates the running total.",
+                        starterCode:
+                            "# main.py\nfrom models.ledger import Ledger\n\nledger = Ledger(10)\nprint(ledger.record(5))\n",
+                        solutionCode:
+                            "# main.py\nfrom models.ledger import Ledger\n\nledger = Ledger(10)\nprint(ledger.record(5))\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            { type: "defines_class", className: "Ledger" },
+                            {
+                                type: "instance_attributes",
+                                className: "Ledger",
+                                constructorArgs: [10],
+                                attributes: ["total"],
+                            },
+                            {
+                                type: "attribute_sequence_equals",
+                                className: "Ledger",
+                                constructorArgs: [10],
+                                calls: [{ methodName: "record", methodArgs: [5] }],
+                                attributeName: "total",
+                                expected: 15,
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const exercise = result.draft.quizDraft[0] as any;
+        const ledgerFile = exercise.solutionFiles.find((file: any) => file.path === "models/ledger.py");
+
+        expect(ledgerFile.content).toContain("def record");
+        expect(ledgerFile.content).toContain("self.total += amount");
+    });
+
+    it("repairs encapsulation validation mutators with boolean and status returns", async () => {
+        const result = await repairPythonDraft({
+            seed: {
+                profileId: "python",
+                topicId: "encapsulation-and-validation",
+                title: "Encapsulation and Validation",
+            } as any,
+            draft: {
+                title: "Encapsulation and Validation",
+                summary: "Protect state with validation methods.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "wallet-guard",
+                        kind: "code_input",
+                        title: "Protect wallet balance",
+                        prompt: "Complete add_money so it only accepts positive amounts and returns True or False.",
+                        starterCode: "# Write your code below.",
+                        solutionCode: "# Write your code below.",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            { type: "defines_class", className: "Wallet" },
+                            {
+                                type: "constructible",
+                                className: "Wallet",
+                                constructorArgs: ["Mina", 20],
+                            },
+                            {
+                                type: "instance_attributes",
+                                className: "Wallet",
+                                constructorArgs: ["Mina", 20],
+                                attributes: ["owner", "balance"],
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Wallet",
+                                constructorArgs: ["Mina", 20],
+                                methodName: "add_money",
+                                methodArgs: [15],
+                                expected: true,
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Wallet",
+                                constructorArgs: ["Mina", 20],
+                                methodName: "add_money",
+                                methodArgs: [0],
+                                expected: false,
+                            },
+                            {
+                                type: "attribute_sequence_equals",
+                                className: "Wallet",
+                                constructorArgs: ["Mina", 20],
+                                calls: [
+                                    { methodName: "add_money", methodArgs: [15] },
+                                    { methodName: "add_money", methodArgs: [-4] },
+                                ],
+                                attributeName: "balance",
+                                expected: 35,
+                            },
+                        ],
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content: "# Write your code below.",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                            {
+                                path: "models/wallet.py",
+                                content:
+                                    "class Wallet:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def add_money(self, amount):\n        pass",
+                                language: "python",
+                                isEntry: false,
+                                entry: false,
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "main.py",
+                                content: "# Write your code below.",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                            {
+                                path: "models/wallet.py",
+                                content:
+                                    "class Wallet:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def add_money(self, amount):\n        return True",
+                                language: "python",
+                                isEntry: false,
+                                entry: false,
+                            },
+                        ],
+                    },
+                    {
+                        id: "book-checkout",
+                        kind: "code_input",
+                        title: "Guard availability on checkout",
+                        prompt: "Complete checkout so it returns checked out once and unavailable after that.",
+                        starterCode: "# Write your answer below",
+                        solutionCode: "from models.book import Book\n\nbook = Book(\"Python Basics\")\nprint(book.checkout())\nprint(book.checkout())\nprint(book.available)",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            { type: "defines_class", className: "Book" },
+                            {
+                                type: "constructible",
+                                className: "Book",
+                                constructorArgs: ["Python Basics"],
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Book",
+                                constructorArgs: ["Python Basics"],
+                                methodName: "checkout",
+                                methodArgs: [],
+                                expected: "checked out",
+                            },
+                            {
+                                type: "attribute_sequence_equals",
+                                className: "Book",
+                                constructorArgs: ["Python Basics"],
+                                calls: [
+                                    { methodName: "checkout", methodArgs: [] },
+                                    { methodName: "checkout", methodArgs: [] },
+                                ],
+                                attributeName: "available",
+                                expected: false,
+                            },
+                        ],
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content: "# Write your answer below",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                            {
+                                path: "models/book.py",
+                                content: "",
+                                language: "python",
+                                isEntry: false,
+                                entry: false,
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "from models.book import Book\n\nbook = Book(\"Python Basics\")\nprint(book.checkout())\nprint(book.checkout())\nprint(book.available)",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                            {
+                                path: "models/book.py",
+                                content:
+                                    "class Book:\n    def __init__(self, title):\n        self.available = title\n        self.title = title\n\n    def checkout(self):\n        return \"checked out\"",
+                                language: "python",
+                                isEntry: false,
+                                entry: false,
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const walletExercise = result.draft.quizDraft[0] as any;
+        const walletFile = walletExercise.solutionFiles.find((file: any) => file.path === "models/wallet.py");
+        expect(walletFile.content).toContain("if amount > 0:");
+        expect(walletFile.content).toContain("self.balance += amount");
+        expect(walletFile.content).toContain("return False");
+
+        const bookExercise = result.draft.quizDraft[1] as any;
+        const bookFile = bookExercise.solutionFiles.find((file: any) => file.path === "models/book.py");
+        expect(bookFile.content).toContain("self.available = True");
+        expect(bookFile.content).toContain("if self.available:");
+        expect(bookFile.content).toContain('return "unavailable"');
+    });
+
     it("normalizes repaired drafts to the planned exercise policy mix", async () => {
         const result = await repairPythonDraft({
             seed: {
@@ -2836,5 +3795,260 @@ describe("repairPythonDraft", () => {
         expect(exercise.options).toContain("Terminal");
         expect(exercise.prompt).toContain("terminal");
         expect(result.report.repairs.some((repair) => repair.code === "PYTHON_FORBIDDEN_WORKSPACE_OPTION_REPLACED")).toBe(false);
+    });
+
+    it("repairs trimmed rename validation, dynamic owner helpers, and replacement setters", async () => {
+        const seed = {
+            profileId: "python",
+            topicId: "encapsulation-and-validation-regressions",
+            subjectSlug: "python--applied-python-projects--draft",
+            moduleSlug: "python-8-object-oriented-foundations",
+            sectionSlug: "python-8-encapsulation-and-services",
+            modulePrefix: "module8",
+            minutes: 10,
+            moduleRuntimeDefaults: { kind: "code", language: "python" },
+        } as any;
+
+        const result = await repairPythonDraft({
+            seed,
+            draft: {
+                title: "Encapsulation and Validation",
+                summary: "Protect state with validation methods.",
+                minutes: 10,
+                sketchBlocks: [],
+                quizDraft: [
+                    {
+                        id: "rename-trimmed",
+                        kind: "code_input",
+                        title: "Validate nickname updates",
+                        prompt: "Trim spaces, keep the cleaned nickname when it is not blank, and reject empty cleaned names.",
+                        starterCode:
+                            "class Account:\n    def __init__(self, owner, nickname):\n        self.owner = owner\n        self.nickname = nickname\n\n    def rename(self, new_name):\n        pass\n",
+                        solutionCode:
+                            "class Account:\n    def __init__(self, owner, nickname):\n        self.owner = owner\n        self.nickname = nickname\n\n    def rename(self, new_name):\n        cleaned = new_name.strip()\n        if cleaned:\n            self.nickname = cleaned\n            return True\n        return False\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            { type: "defines_class", className: "Account" },
+                            {
+                                type: "constructible",
+                                className: "Account",
+                                constructorArgs: ["Mina", "Savings"],
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Account",
+                                constructorArgs: ["Mina", "Savings"],
+                                methodName: "rename",
+                                methodArgs: ["  Holiday Fund  "],
+                                expected: true,
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Account",
+                                constructorArgs: ["Mina", "Savings"],
+                                methodName: "rename",
+                                methodArgs: ["   "],
+                                expected: false,
+                            },
+                            {
+                                type: "attribute_sequence_equals",
+                                className: "Account",
+                                constructorArgs: ["Mina", "Savings"],
+                                calls: [
+                                    { methodName: "rename", methodArgs: ["  Holiday Fund  "] },
+                                    { methodName: "rename", methodArgs: ["   "] },
+                                ],
+                                attributeName: "nickname",
+                                expected: "Holiday Fund",
+                            },
+                        ],
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "class Account:\n    def __init__(self, owner, nickname):\n        self.owner = owner\n        self.nickname = nickname\n\n    def rename(self, new_name):\n        pass\n",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "class Account:\n    def __init__(self, owner, nickname):\n        self.owner = owner\n        self.nickname = nickname\n\n    def rename(self, label):\n        if len(label) >= 3 and \" \" not in label:\n            self.nickname = label\n            return True\n        return False\n",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                        ],
+                    },
+                    {
+                        id: "owner-report-helper",
+                        kind: "code_input",
+                        title: "Format one account line",
+                        prompt: "Return a single account line in the format Owner -> $Balance.",
+                        starterCode:
+                            "# main.py\nfrom helpers.formatting import format_account_line\n\nprint(format_account_line({\"owner\": \"Lia\", \"balance\": 40}))\n",
+                        solutionCode:
+                            "# main.py\nfrom helpers.formatting import format_account_line\n\nprint(format_account_line({\"owner\": \"Lia\", \"balance\": 40}))\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            {
+                                type: "function_returns",
+                                functionName: "format_account_line",
+                                args: [[["owner", "Lia"], ["balance", 40]]],
+                                argKinds: ["dict_entries"],
+                                expected: "Lia -> $40",
+                            },
+                            {
+                                type: "function_returns",
+                                functionName: "format_account_line",
+                                args: [[["owner", "Omar"], ["balance", 95]]],
+                                argKinds: ["dict_entries"],
+                                expected: "Omar -> $95",
+                            },
+                        ],
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "from helpers.formatting import format_account_line\n\nprint(format_account_line({\"owner\": \"Lia\", \"balance\": 40}))\n",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                            {
+                                path: "helpers/formatting.py",
+                                content: "def format_account_line(account):\n    pass\n",
+                                language: "python",
+                                isEntry: false,
+                                entry: false,
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "from helpers.formatting import format_account_line\n\nprint(format_account_line({\"owner\": \"Lia\", \"balance\": 40}))\n",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                            {
+                                path: "helpers/formatting.py",
+                                content: "def format_account_line(value):\n    return \"Lia -> $40\"\n",
+                                language: "python",
+                                isEntry: false,
+                                entry: false,
+                            },
+                        ],
+                    },
+                    {
+                        id: "set-balance-guard",
+                        kind: "code_input",
+                        title: "Guard a direct balance replacement",
+                        prompt: "Replace balance only when the new value is non-negative.",
+                        starterCode:
+                            "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def set_balance(self, new_balance):\n        pass\n",
+                        solutionCode:
+                            "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def set_balance(self, new_balance):\n        if new_balance >= 0:\n            self.balance = new_balance\n            return True\n        return False\n",
+                        recipeType: "semantic",
+                        semanticChecks: [
+                            { type: "defines_class", className: "Account" },
+                            {
+                                type: "method_returns",
+                                className: "Account",
+                                constructorArgs: ["Ivy", 50],
+                                methodName: "set_balance",
+                                methodArgs: [75],
+                                expected: true,
+                            },
+                            {
+                                type: "method_returns",
+                                className: "Account",
+                                constructorArgs: ["Ivy", 50],
+                                methodName: "set_balance",
+                                methodArgs: [-10],
+                                expected: false,
+                            },
+                            {
+                                type: "attribute_sequence_equals",
+                                className: "Account",
+                                constructorArgs: ["Ivy", 50],
+                                calls: [
+                                    { methodName: "set_balance", methodArgs: [75] },
+                                    { methodName: "set_balance", methodArgs: [-10] },
+                                ],
+                                attributeName: "balance",
+                                expected: 75,
+                            },
+                        ],
+                        starterFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def set_balance(self, new_balance):\n        pass\n",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                        ],
+                        solutionFiles: [
+                            {
+                                path: "main.py",
+                                content:
+                                    "class Account:\n    def __init__(self, owner, balance):\n        self.balance = balance\n        self.owner = owner\n\n    def set_balance(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False\n",
+                                language: "python",
+                                isEntry: true,
+                                entry: true,
+                            },
+                        ],
+                    },
+                ],
+            } as any,
+        });
+
+        const renameExercise = result.draft.quizDraft[0] as any;
+        const helperExercise = result.draft.quizDraft[1] as any;
+        const setterExercise = result.draft.quizDraft[2] as any;
+
+        expect(renameExercise.solutionFiles[0].content).toContain("cleaned = label.strip()");
+        expect(renameExercise.solutionFiles[0].content).toContain("if cleaned:");
+        expect(renameExercise.solutionFiles[0].content).toContain("self.nickname = cleaned");
+
+        expect(
+            helperExercise.solutionFiles.find((file: any) => file.path === "helpers/formatting.py").content,
+        ).toContain('return f"{owner} -> ${balance}"');
+
+        expect(setterExercise.solutionFiles[0].content).toContain("if amount >= 0:");
+        expect(setterExercise.solutionFiles[0].content).toContain("self.balance = amount");
+        expect(setterExercise.solutionFiles[0].content).not.toContain("self.balance +=");
+
+        const renameGolden = await validateSingleExerciseGolden({
+            seed: { ...seed, topicId: "encapsulation-rename-trimmed" },
+            draft: { ...result.draft, quizDraft: [renameExercise] },
+            exercise: renameExercise,
+            messageBase:
+                "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.rename_trimmed",
+        });
+        const helperGolden = await validateSingleExerciseGolden({
+            seed: { ...seed, topicId: "encapsulation-owner-report-helper" },
+            draft: { ...result.draft, quizDraft: [helperExercise] },
+            exercise: helperExercise,
+            messageBase:
+                "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.owner_report_helper",
+        });
+        const setterGolden = await validateSingleExerciseGolden({
+            seed: { ...seed, topicId: "encapsulation-set-balance-guard" },
+            draft: { ...result.draft, quizDraft: [setterExercise] },
+            exercise: setterExercise,
+            messageBase:
+                "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.set_balance_guard",
+        });
+
+        expect(renameGolden.ok).toBe(true);
+        expect(helperGolden.ok).toBe(true);
+        expect(setterGolden.ok).toBe(true);
     });
 });

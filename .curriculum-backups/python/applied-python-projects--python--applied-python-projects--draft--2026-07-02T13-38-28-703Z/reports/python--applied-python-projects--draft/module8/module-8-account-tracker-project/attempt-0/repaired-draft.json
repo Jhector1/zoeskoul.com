@@ -1,0 +1,688 @@
+{
+  "title": "Module 8 Account Tracker Project",
+  "summary": "Build a small multifile account tracker with an Account class, helper functions, validation, file loading, and a thin main script that prints a useful summary.",
+  "minutes": 45,
+  "sketchBlocks": [
+    {
+      "id": "module-8-account-tracker-project-sketch-0",
+      "title": "Project overview: build a small account tracker app",
+      "bodyMarkdown": "In this project, you will build a small **account tracker** across several workspace files instead of putting everything in one place. That mirrors how real Python apps are organized.\n\nYou will create:\n\n- a model file for the `Account` class\n- a helper file for formatting money\n- a service file for loading account data\n- a thin `the code editor` script that creates objects and prints a report\n\nThe main idea is that each object keeps its own **state** and **behavior** together. For example, an account should know its owner, current balance, and how to deposit or withdraw money.\n\nHere is the kind of class you will build:\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n```\n\nLine by line:\n\n- `class Account:` starts the class definition.\n- `__init__` runs when you create a new account object.\n- `self.owner = owner` stores the owner's name on that object.\n- `self.balance = balance` stores the starting balance.\n- `deposit()` changes the object's balance and returns the new value.\n\nLater, `the code editor` can import that class and use it:\n\n```python\nfrom models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.deposit(25))\n```\n\nThis project also introduces **encapsulation**. Instead of letting any code change the balance in unsafe ways, your methods will validate amounts before updating object state. By the end, your app will read account data from a file and print a clean summary report."
+    },
+    {
+      "id": "try-it-yourself",
+      "title": "Try it yourself",
+      "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-module-8-account-tracker-project-sketch0",
+      "kind": "code_input",
+      "title": "Create the Account model and import it",
+      "prompt": "Project step 1: Set up the first working version of the account tracker. In `models/account.py`, define an `Account` class with an `__init__(self, owner, balance)` constructor that stores `owner` and `balance` as attributes. In `main.py`, import `Account`, create one account for `Ava` with balance `125`, and print exactly two lines: the owner on the first line and the balance on the second line. Keep the provided helper file unchanged.",
+      "starterCode": "# Open the workspace files and complete the TODOs.",
+      "solutionCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Define an Account class in the workspace."
+        },
+        {
+          "type": "constructible",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "message": "Account should be constructible with owner and balance."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "attributes": [
+            "owner",
+            "balance"
+          ],
+          "message": "An Account instance should store owner and balance attributes."
+        },
+        {
+          "type": "created_instances",
+          "className": "Account",
+          "min": 1,
+          "message": "main.py should create one Account instance."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "The program should print at least two lines."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Open the workspace files and complete the TODOs.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "account-tracker-step-2-add-methods",
+      "kind": "code_input",
+      "title": "Add deposit and withdraw methods",
+      "prompt": "Project step 2: Continue from the previous working workspace. In `models/account.py`, add a `deposit(self, amount)` method that increases the balance and returns the new balance, and a `withdraw(self, amount)` method that decreases the balance and returns the new balance. In `main.py`, create the same `Ava` account, call `deposit(25)` and then `withdraw(40)`, and print exactly three lines: the owner, the balance after the deposit, and the balance after the withdrawal.",
+      "starterCode": "# Continue building the project in the workspace files.",
+      "solutionCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Keep the Account class defined."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "constructorArgKinds": [],
+          "methodName": "balance",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": 150,
+          "expectedKind": "value",
+          "message": "deposit(25) should return the updated balance.",
+          "calls": [
+            {
+              "methodName": "deposit",
+              "methodArgs": [
+                25
+              ],
+              "methodArgKinds": []
+            }
+          ]
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "constructorArgKinds": [],
+          "methodName": "balance",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": 85,
+          "expectedKind": "value",
+          "message": "withdraw(40) should return the updated balance when called on a fresh account.",
+          "calls": [
+            {
+              "methodName": "withdraw",
+              "methodArgs": [
+                40
+              ],
+              "methodArgKinds": []
+            }
+          ]
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "deposit",
+              "methodArgs": [
+                25
+              ],
+              "methodArgKinds": []
+            },
+            {
+              "methodName": "withdraw",
+              "methodArgs": [
+                40
+              ],
+              "methodArgKinds": []
+            }
+          ],
+          "methodName": "balance",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": 110,
+          "expectedKind": "value",
+          "message": "After deposit then withdraw on the same account, the final balance should be 110."
+        },
+        {
+          "type": "created_instances",
+          "className": "Account",
+          "min": 1,
+          "message": "main.py should still create an Account instance."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 3,
+          "message": "The program should print at least three lines for the report."
+        }
+      ],
+      "hint": "Read the task \"Add deposit and withdraw methods\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Add deposit and withdraw methods\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Continue building the project in the workspace files.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass\n\n    def withdraw(self, amount):\n        pass\n\n    def balance(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\naccount_1.deposit(25)\naccount_1.withdraw(40)\naccount_1.balance()\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.balance())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def balance(self):\n        return 150\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if amount <= self.balance:\n            self.balance -= amount\n        return self.balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "account-tracker-step-3-format-helper",
+      "kind": "code_input",
+      "title": "Move money formatting into a helper file",
+      "prompt": "Project step 3: Continue from the previous working workspace. In `helpers/formatting.py`, write a function named `format_money(amount)` that returns a string like `$125.00`. Update `main.py` so it prints the owner and then two formatted balances after calling `deposit(25)` and `withdraw(40)`. Keep the `Account` methods returning numbers; only the display formatting should move into the helper.",
+      "starterCode": "# Continue building the project in the workspace files.",
+      "solutionCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.deposit(25))",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "format_money",
+          "args": [
+            125
+          ],
+          "argKinds": [],
+          "expected": "$125.00",
+          "expectedKind": "value",
+          "message": "format_money should format whole numbers with two decimal places."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "format_money",
+          "args": [
+            110.5
+          ],
+          "argKinds": [],
+          "expected": "$110.50",
+          "expectedKind": "value",
+          "message": "format_money should keep two decimal places for decimal amounts."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "constructorArgKinds": [],
+          "methodName": "deposit",
+          "methodArgs": [
+            25
+          ],
+          "methodArgKinds": [],
+          "expected": 150,
+          "expectedKind": "value",
+          "message": "deposit should still return a numeric balance."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "constructorArgKinds": [],
+          "methodName": "withdraw",
+          "methodArgs": [
+            40
+          ],
+          "methodArgKinds": [],
+          "expected": 85,
+          "expectedKind": "value",
+          "message": "withdraw should still return a numeric balance."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 3,
+          "message": "The program should print a small formatted report."
+        }
+      ],
+      "hint": "Read the task \"Move money formatting into a helper file\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Move money formatting into a helper file\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Continue building the project in the workspace files.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def deposit(self, amount):\n        pass\n\n    def withdraw(self, amount):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\nprint(account_1.deposit(25))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def deposit(self, amount):\n        return 150\n\n    def withdraw(self, amount):\n        return 85",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "account-tracker-step-4-validate-transactions",
+      "kind": "code_input",
+      "title": "Add validation for unsafe amounts",
+      "prompt": "Project step 4: Continue from the previous working workspace. Improve encapsulation by validating transaction amounts inside the `Account` methods. `deposit` should ignore amounts less than or equal to 0 and return the unchanged balance. `withdraw` should ignore amounts less than or equal to 0, and it should also ignore withdrawals larger than the current balance. Update `main.py` to demonstrate this by creating `Ava` with `125`, printing the starting balance, then printing the result of `deposit(-5)`, `withdraw(500)`, and `withdraw(25)` using the formatting helper. The invalid operations should leave the balance unchanged.",
+      "starterCode": "# Continue building the project in the workspace files.",
+      "solutionCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(-5))\nprint(account_1.withdraw(500))\nprint(account_1.withdraw(25))\nprint(account_1.deposit(-5))",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "constructorArgKinds": [],
+          "methodName": "deposit",
+          "methodArgs": [
+            -5
+          ],
+          "methodArgKinds": [],
+          "expected": 125,
+          "expectedKind": "value",
+          "message": "deposit should leave the balance unchanged for non-positive amounts."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "constructorArgKinds": [],
+          "methodName": "withdraw",
+          "methodArgs": [
+            500
+          ],
+          "methodArgKinds": [],
+          "expected": 125,
+          "expectedKind": "value",
+          "message": "withdraw should leave the balance unchanged when the amount is larger than the balance."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Ava",
+            125
+          ],
+          "constructorArgKinds": [],
+          "methodName": "withdraw",
+          "methodArgs": [
+            25
+          ],
+          "methodArgKinds": [],
+          "expected": 100,
+          "expectedKind": "value",
+          "message": "A valid withdrawal should still reduce the balance."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "format_money",
+          "args": [
+            100
+          ],
+          "argKinds": [],
+          "expected": "$100.00",
+          "expectedKind": "value",
+          "message": "Keep the formatting helper working with validated balances."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 4,
+          "message": "The program should print the starting balance and three transaction results."
+        }
+      ],
+      "hint": "Read the task \"Add validation for unsafe amounts\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Add validation for unsafe amounts\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Continue building the project in the workspace files.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def deposit(self, amount):\n        pass\n\n    def withdraw(self, amount):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(-5))\nprint(account_1.withdraw(500))\nprint(account_1.withdraw(25))\nprint(account_1.deposit(-5))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def deposit(self, amount):\n        return 125\n\n    def withdraw(self, amount):\n        return 125",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "account-tracker-step-5-load-from-file",
+      "kind": "code_input",
+      "title": "Load accounts from a data file",
+      "prompt": "Project step 5: Continue from the previous working workspace. Add a service file at `services/account_loader.py` with a function named `load_accounts(file_path)` that reads lines like `Ava,125` from `data/accounts.txt`, creates `Account` objects, and returns a list of accounts. Update `main.py` so it loads the accounts from `data/accounts.txt` and prints one line per account in this format: `Owner: $Balance`. Use the formatting helper for the balance. The provided data file should produce three printed lines.",
+      "starterCode": "# Continue building the project in the workspace files.",
+      "solutionCode": "from models.account import Account\n\naccount_1 = Account()\nprint('done')\nprint('done')\nprint('done')",
+      "files": [
+        {
+          "path": "data/accounts.txt",
+          "content": "Ava,125\nBen,80\nCara,210.5\n'}],"
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "format_money",
+          "args": [
+            210.5
+          ],
+          "argKinds": [],
+          "expected": "$210.50",
+          "expectedKind": "value",
+          "message": "The formatting helper should still format loaded balances correctly."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "load_accounts",
+          "args": [
+            "data/accounts.txt"
+          ],
+          "argKinds": [],
+          "expected": 3,
+          "expectedKind": "value",
+          "message": "load_accounts should return a list with three Account objects for the provided file."
+        },
+        {
+          "type": "created_instances",
+          "className": "Account",
+          "min": 1,
+          "message": "Loading the file should create three Account instances."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 3,
+          "message": "The program should print one summary line per loaded account."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Continue building the project in the workspace files.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/load_accounts.py",
+          "content": "def load_accounts(value):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount_1 = Account()\nprint('done')\nprint('done')\nprint('done')",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/load_accounts.py",
+          "content": "def load_accounts(value):\n    return 3",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "account-tracker-step-6-summary-report",
+      "kind": "code_input",
+      "title": "Print a final summary report",
+      "prompt": "Project step 6: Finish the project by continuing from the previous working workspace. Keep loading accounts from `data/accounts.txt`, then print a small report with one line per account in the format `Owner: $Balance`, followed by a final line `Total: $Amount` where the total is the sum of all account balances. Add a helper function in `services/account_loader.py` named `total_balance(accounts)` that takes the list of Account objects and returns the numeric total. Use the formatting helper for every money value, including the total.",
+      "starterCode": "# Continue building the project in the workspace files.",
+      "solutionCode": "# Continue building the project in the workspace files.",
+      "files": [
+        {
+          "path": "data/accounts.txt",
+          "content": "Ava,125\nBen,80\nCara,210.5\n'}],"
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "total_balance",
+          "args": [
+            [
+              "data/accounts.txt"
+            ]
+          ],
+          "argKinds": [],
+          "expected": 415.5,
+          "expectedKind": "value",
+          "message": "total_balance should return the sum of all loaded account balances."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "format_money",
+          "args": [
+            415.5
+          ],
+          "argKinds": [],
+          "expected": "$415.50",
+          "expectedKind": "value",
+          "message": "The total should be formatted with two decimal places."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 4,
+          "message": "The final report should print three account lines and one total line."
+        }
+      ],
+      "hint": "Read the task \"Print a final summary report\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Print a final summary report\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Account Tracker Build",
+    "stepIds": [
+      "try-module-8-account-tracker-project-sketch0",
+      "account-tracker-step-2-add-methods",
+      "account-tracker-step-3-format-helper",
+      "account-tracker-step-4-validate-transactions",
+      "account-tracker-step-5-load-from-file",
+      "account-tracker-step-6-summary-report"
+    ]
+  }
+}

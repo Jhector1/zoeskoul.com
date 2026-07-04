@@ -1,0 +1,826 @@
+{
+  "topicId": "constructors-and-object-state",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-object-foundations",
+  "prefix": "py8",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch0.title",
+      "sketchId": "sketch-constructors-state-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-constructors-and-object-state-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.prompt",
+        "exerciseKey": "try-constructors-and-object-state-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch1.title",
+      "sketchId": "sketch-constructors-state-methods",
+      "height": 420,
+      "tryIt": {
+        "id": "try-constructors-and-object-state-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.prompt",
+        "exerciseKey": "try-constructors-and-object-state-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-constructors-state-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-constructors-state-basics.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-constructors-state-basics.bodyMarkdown"
+    },
+    {
+      "id": "sketch-constructors-state-methods",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-constructors-state-methods.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-constructors-state-methods.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-constructors-and-object-state-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\ntask = Task(\"Write summary\", \"high\")\nprint(task.name)\nprint(task.priority)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.task import Task\n\ntask = Task(\"Write summary\", \"high\")\nprint(task.name)\nprint(task.priority)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\ntask = Task(\"Write summary\", \"high\")\nprint(task.name)\nprint(task.priority)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Task",
+            "message": "Define a Task class in models/task.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Task",
+            "constructorArgs": [
+              "Write summary",
+              "high"
+            ],
+            "message": "Your Task class should accept name and priority in its constructor."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Task",
+            "constructorArgs": [
+              "Write summary",
+              "high"
+            ],
+            "attributes": [
+              "name",
+              "priority"
+            ],
+            "message": "Store both constructor values as instance attributes named name and priority."
+          },
+          {
+            "type": "created_instances",
+            "className": "Task",
+            "min": 1,
+            "message": "Create a Task object in main.py using the provided values."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print the task name and priority on separate lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-constructors-and-object-state-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\ntask = Task(\"Draft intro\", \"medium\")\nprint(task.rename(\"Draft final intro\"))\nprint(task.name)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.task import Task\n\ntask = Task(\"Draft intro\", \"medium\")\nprint(task.rename(\"Draft final intro\"))\nprint(task.name)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\ntask = Task(\"Draft intro\", \"medium\")\nprint(task.rename(\"Draft final intro\"))\nprint(task.name)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Task",
+            "message": "Keep the Task class defined in models/task.py."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Task",
+            "constructorArgs": [
+              "Draft intro",
+              "medium"
+            ],
+            "attributes": [
+              "name",
+              "priority"
+            ],
+            "message": "The constructor should still store name and priority."
+          },
+          {
+            "type": "method_returns",
+            "className": "Task",
+            "constructorArgs": [
+              "Draft intro",
+              "medium"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "rename",
+            "methodArgs": [
+              "Draft final intro"
+            ],
+            "methodArgKinds": [],
+            "expected": "Draft final intro",
+            "expectedKind": "value",
+            "message": "rename should return the updated task name."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Task",
+            "constructorArgs": [
+              "Draft intro",
+              "medium"
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "rename",
+                "methodArgs": [
+                  "Draft final intro"
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "name",
+            "expected": [
+              "Draft final intro"
+            ],
+            "expectedKind": "value",
+            "message": "After calling rename, the object's name attribute should hold the new value."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print the returned value and the stored name so the state change is visible."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-owner-meaning",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-owner-meaning",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-self-assignments",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-self-assignments",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-init-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-init-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-balance-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-balance-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "balance"
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-transaction-model",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-transaction-model",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-transaction-model.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-transaction-model.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-transaction-model.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-transaction-model.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define an Account class in models/account.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "message": "The Account constructor should accept owner and balance."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "Store owner and balance as instance attributes."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Create the requested Account object in main.py."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print the owner and balance on separate lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-add-method",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-add-method.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.summary())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.summary())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Keep the Account class defined."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "The constructor should still store owner and balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Ava: 125 credits",
+            "expectedKind": "value",
+            "message": "summary should return the exact formatted account text."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Create the requested Account object in main.py."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Print the summary result in main.py."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-deposit-method",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.deposit(25))\nprint(account.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-deposit-method.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.deposit(25))\nprint(account.balance)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.deposit(25))\nprint(account.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Keep the Account class defined."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "deposit",
+            "methodArgs": [
+              25
+            ],
+            "methodArgKinds": [],
+            "expected": 150,
+            "expectedKind": "value",
+            "message": "deposit should return the updated balance after adding the amount."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": [
+              150
+            ],
+            "expectedKind": "value",
+            "message": "After deposit runs, the object's balance attribute should hold the new total."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Create the requested Account object in main.py."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print the returned balance and the stored balance after the deposit."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-method-effects",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-method-effects",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-owner-blank",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-owner-blank",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\"Ava\""
+      }
+    },
+    {
+      "id": "ci-constructors-and-object-state-ledger-step",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\nfirst_account = Account(\"Ava\", 125)\nsecond_account = Account(\"Leo\", 90)\nprint(first_account.owner)\nprint(first_account.balance)\nprint(second_account.owner)\nprint(second_account.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.ci-constructors-and-object-state-ledger-step.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\nfirst_account = Account(\"Ava\", 125)\nsecond_account = Account(\"Leo\", 90)\nprint(first_account.owner)\nprint(first_account.balance)\nprint(second_account.owner)\nprint(second_account.balance)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\nfirst_account = Account(\"Ava\", 125)\nsecond_account = Account(\"Leo\", 90)\nprint(first_account.owner)\nprint(first_account.balance)\nprint(second_account.owner)\nprint(second_account.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define an Account class in models/account.py."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "The constructor should store owner and balance as instance attributes."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Create an Account object for Ava."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Create an Account object for Leo."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 4,
+            "message": "Print four lines to show both objects keep separate state."
+          }
+        ]
+      }
+    }
+  ]
+}

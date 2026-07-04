@@ -1,0 +1,185 @@
+import readline from "node:readline/promises";
+import { stdin as input, stdout as output } from "node:process";
+import {
+  AI_PROVIDER_IDS,
+  formatAiModelCatalog,
+  getAiProviderCatalogEntry,
+  normalizeAiProviderId,
+  resolveModelForProvider,
+  type AiProviderId,
+} from "@zoeskoul/curriculum-ai";
+
+function readFlag(args: string[], name: string): string | undefined {
+  const index = args.indexOf(name);
+  if (index < 0) return undefined;
+  const value = args[index + 1]?.trim();
+
+  if (!value || value.startsWith("--")) {
+    throw new Error(`${name} requires a value`);
+  }
+
+  return value;
+}
+
+function hasAnyAiEnv() {
+  return Boolean(
+    process.env.AI_PROVIDER?.trim() ||
+      process.env.AI_MODEL?.trim() ||
+      process.env.OPENAI_MODEL?.trim() ||
+      process.env.GEMINI_MODEL?.trim() ||
+      process.env.CLAUDE_MODEL?.trim() ||
+      process.env.DEEPSEEK_MODEL?.trim(),
+  );
+}
+
+async function askChoice(args: {
+  title: string;
+  choices: Array<{ id: string; label: string; detail?: string }>;
+  customLabel?: string;
+}): Promise<string> {
+  if (!process.stdin.isTTY) {
+    throw new Error(
+      `${args.title} cannot be selected interactively because stdin is not a TTY.`,
+    );
+  }
+
+  console.log("");
+  console.log(args.title);
+  console.log("");
+
+  args.choices.forEach((choice, index) => {
+    console.log(
+      `${index + 1}. ${choice.label}${choice.detail ? ` — ${choice.detail}` : ""}`,
+    );
+  });
+
+  const customIndex = args.customLabel ? args.choices.length + 1 : null;
+  if (customIndex !== null) {
+    console.log(`${customIndex}. ${args.customLabel}`);
+  }
+
+  console.log("");
+
+  const rl = readline.createInterface({ input, output });
+
+  try {
+    while (true) {
+      const answer = await rl.question("Choose number: ");
+      const index = Number(answer.trim()) - 1;
+
+      if (Number.isInteger(index) && index >= 0 && index < args.choices.length) {
+        return args.choices[index].id;
+      }
+
+      if (customIndex !== null && index === customIndex - 1) {
+        const custom = await rl.question("Enter custom model id: ");
+        if (custom.trim()) return custom.trim();
+      }
+
+      console.log("Invalid choice. Please choose a number from the list.");
+    }
+  } finally {
+    rl.close();
+  }
+}
+
+export async function selectProviderFromConsole(): Promise<AiProviderId> {
+  const selected = await askChoice({
+    title: "Select AI provider:",
+    choices: AI_PROVIDER_IDS.map((id) => {
+      const entry = getAiProviderCatalogEntry(id);
+      return { id, label: entry.label, detail: id };
+    }),
+  });
+
+  return normalizeAiProviderId(selected)!;
+}
+
+export async function selectModelFromConsoleForProvider(
+  provider: AiProviderId,
+): Promise<string> {
+  const entry = getAiProviderCatalogEntry(provider);
+  const selected = await askChoice({
+    title: `Select ${entry.label} model:`,
+    choices: entry.models.map((model) => ({
+      id: model.id,
+      label: model.id,
+      detail: [
+        model.purpose,
+        model.recommendedForTranslation ? "translation" : "",
+        model.deprecated ? "deprecated" : "",
+      ].filter(Boolean).join(", "),
+    })),
+    customLabel: "custom model id",
+  });
+
+  return selected;
+}
+
+export function printAiModelCatalog() {
+  console.log(formatAiModelCatalog());
+}
+
+export function getAiCliFlag(args: string[], name: string): string | undefined {
+  return readFlag(args, name);
+}
+
+export async function resolveGenerationProviderModel(args: {
+  cliArgs: string[];
+  interactive?: boolean;
+}): Promise<{ provider: AiProviderId; model: string }> {
+  const cliProvider = normalizeAiProviderId(readFlag(args.cliArgs, "--provider"));
+  const providerFromEnv = normalizeAiProviderId(process.env.AI_PROVIDER);
+  const shouldPromptProvider =
+    args.interactive !== false &&
+    !cliProvider &&
+    !providerFromEnv &&
+    !hasAnyAiEnv() &&
+    process.stdin.isTTY;
+
+  const provider = shouldPromptProvider
+    ? await selectProviderFromConsole()
+    : cliProvider ?? providerFromEnv ?? "openai";
+
+  const cliModel = readFlag(args.cliArgs, "--model");
+  const genericModelEnv = process.env.AI_MODEL;
+  const modelFromEnv = resolveModelForProvider({
+    provider,
+    cliModel,
+    genericModelEnv,
+  });
+
+  const shouldPromptModel =
+    args.interactive !== false &&
+    !cliModel &&
+    !genericModelEnv?.trim() &&
+    !process.env[getAiProviderCatalogEntry(provider).modelEnv]?.trim() &&
+    !hasAnyAiEnv() &&
+    process.stdin.isTTY;
+
+  const model = shouldPromptModel
+    ? await selectModelFromConsoleForProvider(provider)
+    : modelFromEnv;
+
+  return { provider, model };
+}
+
+export function resolveTranslationProviderModel(args: {
+  cliArgs: string[];
+  generation: { provider: AiProviderId; model: string };
+}): { provider: AiProviderId; model: string } {
+  const cliProvider = normalizeAiProviderId(readFlag(args.cliArgs, "--translation-provider"));
+  const envProvider = normalizeAiProviderId(process.env.TRANSLATION_PROVIDER);
+  const provider = cliProvider ?? envProvider ?? args.generation.provider;
+
+  const cliModel = readFlag(args.cliArgs, "--translation-model");
+  const model = resolveModelForProvider({
+    provider,
+    cliModel,
+    genericModelEnv:
+      process.env.TRANSLATION_MODEL ??
+      (provider === args.generation.provider ? args.generation.model : undefined),
+  });
+
+  return { provider, model };
+}

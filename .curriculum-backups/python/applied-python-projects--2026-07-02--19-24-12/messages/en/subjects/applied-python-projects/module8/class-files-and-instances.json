@@ -1,0 +1,233 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "class-files-and-instances": {
+          "label": "Class Files and Instances",
+          "summary": "Create a class shell with `pass`, import it from a model file, and make one object cleanly.",
+          "cards": {
+            "sketch0": {
+              "title": "Class shell"
+            },
+            "sketch1": {
+              "title": "Import and create"
+            },
+            "sketch2": {
+              "title": "Keep files clean"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_class_files_and_instances_sketch0": {
+              "title": "Define the Car class shell",
+              "prompt": "In `models/car.py`, define `class Car:` with `pass` inside it. Do not add a constructor yet. Do not add attributes or methods yet. `main.py` can stay unchanged in this first step.",
+              "hint": "This step is only about making the class exist in its own file.",
+              "help": {
+                "concept": "`pass` means the class exists, but it does not do any work yet. That is enough for the first clean class shell.",
+                "hint_1": "Write `class Car:` on one line.",
+                "hint_2": "Indent `pass` under the class name."
+              },
+              "starterCode": "# The class definition belongs in models/car.py.\n# You do not need to add code in main.py yet.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# The class definition belongs in models/car.py.\n# You do not need to add code in main.py yet."
+                },
+                "models_car_py": {
+                  "content": "# Define the Car class shell below.\n"
+                }
+              },
+              "solutionCode": "# The class definition belongs in models/car.py.\n# You do not need to add code in main.py yet.",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "# The class definition belongs in models/car.py.\n# You do not need to add code in main.py yet."
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    pass"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define a Car class in models/car.py."
+                },
+                "1": {
+                  "message": "The class shell should be constructible with no arguments yet."
+                }
+              }
+            },
+            "try_class_files_and_instances_sketch1": {
+              "title": "Import Car and create one object",
+              "prompt": "Keep `class Car:` with `pass` in `models/car.py`. In `main.py`, import `Car` from `models.car` and create one object with `car = Car()`. Do not add attributes or methods yet.",
+              "hint": "Use `from models.car import Car`, then call `Car()` to create one object.",
+              "help": {
+                "concept": "A class is a plan. Calling the class name with parentheses, like `Car()`, creates one object from that class.",
+                "hint_1": "The import line belongs at the top of `main.py`.",
+                "hint_2": "Create the object with `car = Car()`."
+              },
+              "starterCode": "# Import the Car class.\n# Then create one Car object.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Import the Car class.\n# Then create one Car object."
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    pass"
+                }
+              },
+              "solutionCode": "from models.car import Car\n\ncar = Car()",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\ncar = Car()"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    pass"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Keep the Car class defined."
+                },
+                "1": {
+                  "message": "Car should still be constructible with no arguments."
+                },
+                "2": {
+                  "message": "Create one Car object in main.py."
+                }
+              }
+            },
+            "try_class_files_and_instances_sketch2": {
+              "title": "Keep the model and main script separate",
+              "prompt": "Keep the `Car` class in `models/car.py`. Keep `main.py` as the small script that imports the class and creates one object. Add `print(\"Car object ready\")` in `main.py` so the program shows that it ran.",
+              "hint": "Do not move the class into `main.py`. Import it from the model file.",
+              "help": {
+                "concept": "A clean multifile project keeps model code in a model file and keeps the main script focused on using that model.",
+                "hint_1": "`models/car.py` should contain the class.",
+                "hint_2": "`main.py` should import `Car`, create `car = Car()`, and print the ready message."
+              },
+              "starterCode": "from models.car import Car\n\ncar = Car()\n\n# Print a short ready message below.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\ncar = Car()\n\n# Print a short ready message below."
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    pass"
+                }
+              },
+              "solutionCode": "from models.car import Car\n\ncar = Car()\nprint(\"Car object ready\")",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\ncar = Car()\nprint(\"Car object ready\")"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    pass"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Keep the Car class defined in the model file."
+                },
+                "1": {
+                  "message": "Car should still be constructible with no arguments."
+                },
+                "2": {
+                  "message": "Create one Car object in main.py."
+                },
+                "3": {
+                  "message": "Print one short ready message from main.py."
+                }
+              }
+            }
+          },
+          "practice": {
+            "mc-class-files-and-instances-class-role": {
+              "title": "What does a class do?",
+              "prompt": "Which statements correctly describe a class at this point? Choose all that apply.",
+              "hint": "Think of the class as the plan, not one finished object.",
+              "help": {
+                "concept": "A class is a reusable plan for making objects. One class can be used to create many objects.",
+                "hint_1": "Look for choices about plans and object creation.",
+                "hint_2": "Reject choices that say a class must immediately have many methods."
+              },
+              "options": {
+                "a": "A class is a reusable plan for creating objects.",
+                "b": "A class is always the same thing as one object.",
+                "c": "Calling a class, such as `Car()`, creates an object.",
+                "d": "A class must have a constructor before Python accepts it."
+              }
+            },
+            "sc-class-files-and-instances-pass-meaning": {
+              "title": "Why use pass?",
+              "prompt": "Why can an empty class use `pass`?",
+              "hint": "`pass` lets Python keep a block valid even when there is no real code yet.",
+              "help": {
+                "concept": "`pass` is a placeholder. It keeps an empty class body syntactically valid until you add real code later.",
+                "hint_1": "A class body cannot be completely empty.",
+                "hint_2": "Choose the answer about a placeholder."
+              },
+              "options": {
+                "a": "`pass` creates every method automatically.",
+                "b": "`pass` is a placeholder that keeps the empty class valid.",
+                "c": "`pass` imports the class into main.py.",
+                "d": "`pass` prints the object."
+              }
+            },
+            "fb-class-files-and-instances-import-name": {
+              "title": "Complete the import",
+              "prompt": "Fill in the class name imported from `models.car`.",
+              "hint": "Use the exact class name from `class Car:`.",
+              "help": {
+                "concept": "When a class is defined in another file, `main.py` imports the class by name.",
+                "hint_1": "Class names use capital letters by convention.",
+                "hint_2": "The class is named `Car`."
+              },
+              "template": "from models.car import [blank1]",
+              "choices": [
+                "Car",
+                "car",
+                "models",
+                "pass"
+              ]
+            },
+            "dr-class-files-and-instances-order": {
+              "title": "Order the first class workflow",
+              "prompt": "Put the steps in the order you follow when creating a class in a model file.",
+              "hint": "Start with the class file before importing it.",
+              "help": {
+                "concept": "A clean first workflow is: define the class, import it, create one object, then run main.py.",
+                "hint_1": "You cannot import a class that has not been defined yet.",
+                "hint_2": "Creating the object comes after the import."
+              },
+              "tokens": {
+                "t1": "Define the class in models/car.py",
+                "t2": "Import Car in main.py",
+                "t3": "Create one object with Car()",
+                "t4": "Run main.py"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "class-files-and-instances": {
+          "sketch-0": {
+            "title": "Start with a class shell",
+            "bodyMarkdown": "A **class** is a reusable plan for making objects.\n\nAn **object** is one thing created from that class. Python also calls that object an **instance**.\n\nFor example, a `Book` class can be the plan, and `Book()` can create one book object.\n\nThe smallest class shell looks like this:\n\n```python\nclass Book:\n    pass\n```\n\nLine by line:\n\n- `class Book:` starts the class definition.\n- `pass` means \"nothing goes here yet.\"\n- The class exists, even though it does not store values or do actions yet.\n\nStarting with a shell keeps the first step simple. You learn how a class exists before adding a constructor, attributes, or methods."
+          },
+          "sketch-1": {
+            "title": "Create one object from the class",
+            "bodyMarkdown": "After a class exists, you can create an object from it.\n\n```python\nclass Book:\n    pass\n\nbook = Book()\n```\n\n`Book` is the class.\n\n`Book()` creates one object from that class.\n\n`book` is the variable that stores the object.\n\nThis is the core class/object pattern:\n\n```text\nClass plan  ->  call the class  ->  object stored in a variable\n```\n\nYou will use this pattern again when the class becomes more useful."
+          },
+          "sketch-2": {
+            "title": "Keep the class in its own file",
+            "bodyMarkdown": "Real projects usually separate the class from the script that uses it.\n\nThe class can live in a model file:\n\n```python\n# models/book.py\nclass Book:\n    pass\n```\n\nThen `main.py` imports and uses it:\n\n```python\n# main.py\nfrom models.book import Book\n\nbook = Book()\n```\n\nThis keeps the project easier to read:\n\n- `models/book.py` defines what a book is.\n- `main.py` creates and uses book objects.\n\nThat separation matters more as the class grows."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,492 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "indentation-and-blocks": {
+          "label": "Endantasyon ak Blòk",
+          "summary": "Konprann poukisa endantasyon kontwole estrikti nan Python.",
+          "cards": {
+            "sketch0": {
+              "title": "Poukisa endantasyon enpòtan"
+            },
+            "sketch1": {
+              "title": "Liy ki gen menm endantasyon fè pati ansanm"
+            },
+            "sketch2": {
+              "title": "Chak branch gen pwòp blòk pa li"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Pratike ak endantasyon ak blòk kondisyonèl"
+            }
+          },
+          "projectSteps": {
+            "code_basic_if_output": {
+              "title": "Afiche soti nan yon blòk if"
+            },
+            "code_two_lines_in_block": {
+              "title": "Sèvi ak de liy nan yon sèl blòk"
+            },
+            "code_elif_branches": {
+              "title": "Klasifye ak if elif else"
+            },
+            "code_special_case_first": {
+              "title": "Tcheke ka espesyal la an premye"
+            },
+            "code_nested_if_basic": {
+              "title": "Sèvi ak yon if anndan yon lòt if"
+            }
+          },
+          "quiz": {
+            "sc-indent-purpose": {
+              "title": "Sa endantasyon fè",
+              "prompt": "Nan Python, kisa endantasyon sitou di pwogram nan?",
+              "hint": "Reflechi sou ki liy ki fè pati anba yon `if` oswa `else`.",
+              "help": {
+                "concept": "Python sèvi ak endantasyon pou defini blòk kòd yo. Yon blòk se ansanm liy ki fè pati yon deklarasyon tankou `if`, `elif`, oswa `else`.",
+                "hint_1": "Chèche chwa ki pale sou gwoupe liy anba yon branch kondisyonèl.",
+                "hint_2": "Sa pa sitou sou dekorasyon oswa kòmantè. Li kontwole estrikti a."
+              },
+              "options": {
+                "a": "Ki liy ki fè pati menm blòk la",
+                "b": "Ki varyab ki se strings",
+                "c": "Konbyen fwa yon liy ap egzekite",
+                "d": "Si print ajoute yon nouvo liy"
+              }
+            },
+            "sc-outside-block": {
+              "title": "Liy deyò blòk la",
+              "prompt": "Kisa ki vre sou yon liy ki pa endante anba yon deklarasyon `if`?",
+              "hint": "Konpare yon liy ki aliyen ak `if` ak yon liy ki endante anba li.",
+              "help": {
+                "concept": "Yon liy ki aliyen ak deklarasyon `if` la deyò blòk `if` sa a, kidonk kondisyon an pa kontwole li menm jan ak liy ki endante yo.",
+                "hint_1": "Yon liy sou bò gòch la separe ak branch ki endante a.",
+                "hint_2": "Si kondisyon an fo, liy deyò a ka toujou egzekite paske li pa fè pati blòk yo sote a."
+              },
+              "options": {
+                "a": "Yo toujou inyore li",
+                "b": "Li fè pati blòk `if` la",
+                "c": "Li deyò blòk `if` la",
+                "d": "Li fè `if` la tounen yon `else`"
+              }
+            },
+            "mc-same-block": {
+              "title": "Chwazi tout liy ki nan blòk la",
+              "prompt": "Konsidere kòd sa a:\n\n```python\nif True:\n    print(\"A\")\n    print(\"B\")\nprint(\"C\")\n```\n\nKi liy ki anndan blòk `if` la? Chwazi tout bon repons yo.",
+              "hint": "Se sèlman liy ki endante anba `if True:` ki fè pati blòk sa a.",
+              "help": {
+                "concept": "Nan Python, tout liy ki dirèkteman anba yon deklarasyon epi ki gen menm kantite endantasyon fè pati blòk sa a.",
+                "hint_1": "Tcheke ki liy ki deplase sou bò dwat anba `if True:`.",
+                "hint_2": "De liy `print` ki gen menm endantasyon yo gwoupe ansanm; liy ki aliyen agoch la separe."
+              },
+              "options": {
+                "a": "print(\"A\")",
+                "b": "print(\"B\")",
+                "c": "print(\"C\")",
+                "d": "if True:"
+              }
+            },
+            "mc-branch-blocks": {
+              "title": "Bon lide sou blòk yo",
+              "prompt": "Ki deklarasyon sou blòk Python yo ki kòrèk? Chwazi tout bon repons yo.",
+              "hint": "Reflechi sou nivo endantasyon an ak kijan branch `if`/`elif`/`else` yo gwoupe.",
+              "help": {
+                "concept": "Blòk nan Python fòme ak endantasyon. Chak branch ka gen pwòp blòk pa li, epi menm endantasyon gwoupe liy yo ansanm.",
+                "hint_1": "Chèche deklarasyon sou menm endantasyon ak kò branch separe yo.",
+                "hint_2": "Rejte nenpòt chwa ki di endantasyon se sèlman vizyèl oswa opsyonèl."
+              },
+              "options": {
+                "a": "Liy ki gen menm endantasyon anba yon `if` ka fè pati menm blòk la",
+                "b": "Yon branch `else` ka gen pwòp blòk endante pa li",
+                "c": "Endantasyon nan Python se sèlman pou lizibilite epi li pa afekte egzekisyon",
+                "d": "Yon liy deyò blòk la dwe gen plis endantasyon pase liy `if` la"
+              }
+            },
+            "dr-if-else-structure": {
+              "title": "Konstwi yon if-else senp",
+              "prompt": "Ranje token yo pou fòme yon estrikti Python `if`/`else` ki valab ki afiche `yes` lè `x > 0` epi `no` sinon.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "if x > 0:",
+                "t2": "print(\"yes\")",
+                "t3": "else:",
+                "t4": "print(\"no\")"
+              }
+            },
+            "dr-two-line-block": {
+              "title": "Ranje yon blòk de liy",
+              "prompt": "Ranje token yo pou fè yon pwogram valab kote toude mesaj yo anndan blòk `if` la.",
+              "hint": "Tou de liy `print` yo ta dwe rete anba liy `if` la ak menm endantasyon an.",
+              "help": {
+                "concept": "Plizyè liy ka fè pati yon sèl blòk lè yo gen menm endantasyon anba menm liy antèt la.",
+                "hint_1": "Mete antèt `if` la an premye, apre sa de liy endante yo.",
+                "hint_2": "De liy `print` yo ta dwe youn apre lòt epi toude deplase sou bò dwat menm kantite a."
+              },
+              "tokens": {
+                "t1": "if score >= 50:",
+                "t2": "print(\"pass\")",
+                "t3": "print(\"good effort\")"
+              }
+            },
+            "fb-indent-after-if": {
+              "title": "Konplete antèt blòk la",
+              "prompt": "Chwazi mo ki manke a pou konplete liy kondisyonèl la.",
+              "hint": "Yon branch kondisyonèl kòmanse ak mo kle Python pou verifye yon kondisyon.",
+              "help": {
+                "concept": "Python kòmanse yon kondisyonèl debaz ak mo kle `the missing term` la, apre sa yon kondisyon ak yon kolon.",
+                "hint_1": "Ou itilize mo kle sa a anvan yon kondisyon tankou `x > 3`.",
+                "hint_2": "Se premye mo kle branch la, pa branch sekou a."
+              },
+              "template": "[blank1] score >= 80:",
+              "choices": [
+                "if",
+                "else",
+                "print",
+                "input"
+              ]
+            },
+            "fb-line-in-block": {
+              "title": "Chwazi liy ki endante a",
+              "prompt": "Chwazi liy ki ranpli espas vid la kòrèkteman pou deklarasyon print la anndan blòk `if` la.",
+              "hint": "Liy ki anndan blòk la dwe endante.",
+              "help": {
+                "concept": "Yon deklarasyon fè pati yon blòk `if` sèlman lè li endante anba liy `if` la.",
+                "hint_1": "Chèche chwa ki gen espas anvan `print`.",
+                "hint_2": "Liy ki kòrèk la pa aliyen agoch; li deplase sou bò dwat pou montre li fè pati blòk la."
+              },
+              "template": "if ready:\n[blank1]",
+              "choices": [
+                "print(\"Go\")",
+                "if print(\"Go\")",
+                ": print(\"Go\")"
+              ]
+            },
+            "code-basic-if-output": {
+              "title": "Afiche soti nan yon blòk if",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Si nonb la pi gran pase 10, afiche `big`. Sinon afiche `small`.",
+              "hint": "Li travay la \"Afiche soti nan yon blòk if\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Afiche soti nan yon blòk if\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print \"big\" if n > 10, otherwise print \"small\""
+            },
+            "code-two-lines-in-block": {
+              "title": "Sèvi ak de liy nan yon sèl blòk",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Si nonb la omwen 5, afiche `high` sou yon liy epi `checked` sou liy apre a. Sinon afiche sèlman `low`.",
+              "hint": "Li travay la \"Sèvi ak de liy nan yon sèl blòk\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Sèvi ak de liy nan yon sèl blòk\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: write the conditional output"
+            },
+            "code-elif-branches": {
+              "title": "Klasifye ak if elif else",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Afiche `positive` si li pi gran pase 0, `negative` si li pi piti pase 0, epi `zero` sinon.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero"
+            },
+            "code-special-case-first": {
+              "title": "Tcheke ka espesyal la an premye",
+              "prompt": "Ekri kòd Python ki li yon nòt antye. Afiche `perfect` si nòt la egzakteman 100. Sinon, si nòt la omwen 60, afiche `pass`. Nan tout lòt ka yo, afiche `retry`.",
+              "hint": "Li travay la \"Tcheke ka espesyal la an premye\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Tcheke ka espesyal la an premye\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "score = int(input())\n\n# TODO: print perfect, pass, or retry"
+            },
+            "code-nested-if-basic": {
+              "title": "Sèvi ak yon if anndan yon lòt if",
+              "prompt": "Ekri kòd Python ki li yon laj antye. Si laj la omwen 13, alò tcheke yon lòt kondisyon: si laj la omwen 18, afiche `adult`; sinon afiche `teen`. Si laj la pi piti pase 13, afiche `child`.",
+              "hint": "Kòmanse ak verifikasyon laj ekstèn nan, apre sa mete yon lòt `if` anndan blòk sa a.",
+              "help": {
+                "concept": "Kondisyonèl anbrike yo sèvi ak yon blòk endante anndan yon lòt. `if` entèn nan egzekite sèlman lè kondisyon ekstèn nan vre.",
+                "hint_1": "Premye separe laj ki anba 13 ak laj 13 oswa plis.",
+                "hint_2": "Anndan branch ekstèn ki vre a, konpare ankò pou deside ant de gwoup ki pi gran yo."
+              },
+              "starterCode": "age = int(input())\n\n# TODO: use a nested if to print child, teen, or adult"
+            }
+          }
+        }
+      },
+      "python-v2-2": {
+        "indentation-and-blocks": {
+          "label": "Endantasyon ak Blòk",
+          "summary": "Konprann poukisa endantasyon kontwole estrikti nan Python.",
+          "cards": {
+            "sketch0": {
+              "title": "Poukisa endantasyon enpòtan"
+            },
+            "sketch1": {
+              "title": "Liy ki gen menm endantasyon fè pati ansanm"
+            },
+            "sketch2": {
+              "title": "Chak branch gen pwòp blòk pa li"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Pratike ak endantasyon ak blòk kondisyonèl"
+            }
+          },
+          "projectSteps": {
+            "code_basic_if_output": {
+              "title": "Afiche soti nan yon blòk if"
+            },
+            "code_two_lines_in_block": {
+              "title": "Sèvi ak de liy nan yon sèl blòk"
+            },
+            "code_elif_branches": {
+              "title": "Klasifye ak if elif else"
+            },
+            "code_special_case_first": {
+              "title": "Tcheke ka espesyal la an premye"
+            },
+            "code_nested_if_basic": {
+              "title": "Sèvi ak yon if anndan yon lòt if"
+            }
+          },
+          "quiz": {
+            "sc-indent-purpose": {
+              "title": "Sa endantasyon fè",
+              "prompt": "Nan Python, kisa endantasyon sitou di pwogram nan?",
+              "hint": "Reflechi sou ki liy ki fè pati anba yon `if` oswa `else`.",
+              "help": {
+                "concept": "Python sèvi ak endantasyon pou defini blòk kòd yo. Yon blòk se ansanm liy ki fè pati yon deklarasyon tankou `if`, `elif`, oswa `else`.",
+                "hint_1": "Chèche chwa ki pale sou gwoupe liy anba yon branch kondisyonèl.",
+                "hint_2": "Sa pa sitou sou dekorasyon oswa kòmantè. Li kontwole estrikti a."
+              },
+              "options": {
+                "a": "Ki liy ki fè pati menm blòk la",
+                "b": "Ki varyab ki se strings",
+                "c": "Konbyen fwa yon liy ap egzekite",
+                "d": "Si print ajoute yon nouvo liy"
+              }
+            },
+            "sc-outside-block": {
+              "title": "Liy deyò blòk la",
+              "prompt": "Kisa ki vre sou yon liy ki pa endante anba yon deklarasyon `if`?",
+              "hint": "Konpare yon liy ki aliyen ak `if` ak yon liy ki endante anba li.",
+              "help": {
+                "concept": "Yon liy ki aliyen ak deklarasyon `if` la deyò blòk `if` sa a, kidonk kondisyon an pa kontwole li menm jan ak liy ki endante yo.",
+                "hint_1": "Yon liy sou bò gòch la separe ak branch ki endante a.",
+                "hint_2": "Si kondisyon an fo, liy deyò a ka toujou egzekite paske li pa fè pati blòk yo sote a."
+              },
+              "options": {
+                "a": "Yo toujou inyore li",
+                "b": "Li fè pati blòk `if` la",
+                "c": "Li deyò blòk `if` la",
+                "d": "Li fè `if` la tounen yon `else`"
+              }
+            },
+            "mc-same-block": {
+              "title": "Chwazi tout liy ki nan blòk la",
+              "prompt": "Konsidere kòd sa a:\n\n```python\nif True:\n    print(\"A\")\n    print(\"B\")\nprint(\"C\")\n```\n\nKi liy ki anndan blòk `if` la? Chwazi tout bon repons yo.",
+              "hint": "Se sèlman liy ki endante anba `if True:` ki fè pati blòk sa a.",
+              "help": {
+                "concept": "Nan Python, tout liy ki dirèkteman anba yon deklarasyon epi ki gen menm kantite endantasyon fè pati blòk sa a.",
+                "hint_1": "Tcheke ki liy ki deplase sou bò dwat anba `if True:`.",
+                "hint_2": "De liy `print` ki gen menm endantasyon yo gwoupe ansanm; liy ki aliyen agoch la separe."
+              },
+              "options": {
+                "a": "print(\"A\")",
+                "b": "print(\"B\")",
+                "c": "print(\"C\")",
+                "d": "if True:"
+              }
+            },
+            "mc-branch-blocks": {
+              "title": "Bon lide sou blòk yo",
+              "prompt": "Ki deklarasyon sou blòk Python yo ki kòrèk? Chwazi tout bon repons yo.",
+              "hint": "Reflechi sou nivo endantasyon an ak kijan branch `if`/`elif`/`else` yo gwoupe.",
+              "help": {
+                "concept": "Blòk nan Python fòme ak endantasyon. Chak branch ka gen pwòp blòk pa li, epi menm endantasyon gwoupe liy yo ansanm.",
+                "hint_1": "Chèche deklarasyon sou menm endantasyon ak kò branch separe yo.",
+                "hint_2": "Rejte nenpòt chwa ki di endantasyon se sèlman vizyèl oswa opsyonèl."
+              },
+              "options": {
+                "a": "Liy ki gen menm endantasyon anba yon `if` ka fè pati menm blòk la",
+                "b": "Yon branch `else` ka gen pwòp blòk endante pa li",
+                "c": "Endantasyon nan Python se sèlman pou lizibilite epi li pa afekte egzekisyon",
+                "d": "Yon liy deyò blòk la dwe gen plis endantasyon pase liy `if` la"
+              }
+            },
+            "dr-if-else-structure": {
+              "title": "Konstwi yon if-else senp",
+              "prompt": "Ranje token yo pou fòme yon estrikti Python `if`/`else` ki valab ki afiche `yes` lè `x > 0` epi `no` sinon.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "if x > 0:",
+                "t2": "print(\"yes\")",
+                "t3": "else:",
+                "t4": "print(\"no\")"
+              }
+            },
+            "dr-two-line-block": {
+              "title": "Ranje yon blòk de liy",
+              "prompt": "Ranje token yo pou fè yon pwogram valab kote toude mesaj yo anndan blòk `if` la.",
+              "hint": "Tou de liy `print` yo ta dwe rete anba liy `if` la ak menm endantasyon an.",
+              "help": {
+                "concept": "Plizyè liy ka fè pati yon sèl blòk lè yo gen menm endantasyon anba menm liy antèt la.",
+                "hint_1": "Mete antèt `if` la an premye, apre sa de liy endante yo.",
+                "hint_2": "De liy `print` yo ta dwe youn apre lòt epi toude deplase sou bò dwat menm kantite a."
+              },
+              "tokens": {
+                "t1": "if score >= 50:",
+                "t2": "print(\"pass\")",
+                "t3": "print(\"good effort\")"
+              }
+            },
+            "fb-indent-after-if": {
+              "title": "Konplete antèt blòk la",
+              "prompt": "Chwazi mo ki manke a pou konplete liy kondisyonèl la.",
+              "hint": "Yon branch kondisyonèl kòmanse ak mo kle Python pou verifye yon kondisyon.",
+              "help": {
+                "concept": "Python kòmanse yon kondisyonèl debaz ak mo kle `the missing term` la, apre sa yon kondisyon ak yon kolon.",
+                "hint_1": "Ou itilize mo kle sa a anvan yon kondisyon tankou `x > 3`.",
+                "hint_2": "Se premye mo kle branch la, pa branch sekou a."
+              },
+              "template": "[blank1] score >= 80:",
+              "choices": [
+                "if",
+                "else",
+                "print",
+                "input"
+              ]
+            },
+            "fb-line-in-block": {
+              "title": "Chwazi liy ki endante a",
+              "prompt": "Chwazi liy ki ranpli espas vid la kòrèkteman pou deklarasyon print la anndan blòk `if` la.",
+              "hint": "Liy ki anndan blòk la dwe endante.",
+              "help": {
+                "concept": "Yon deklarasyon fè pati yon blòk `if` sèlman lè li endante anba liy `if` la.",
+                "hint_1": "Chèche chwa ki gen espas anvan `print`.",
+                "hint_2": "Liy ki kòrèk la pa aliyen agoch; li deplase sou bò dwat pou montre li fè pati blòk la."
+              },
+              "template": "if ready:\n[blank1]",
+              "choices": [
+                "print(\"Go\")",
+                "if print(\"Go\")",
+                ": print(\"Go\")"
+              ]
+            },
+            "code-basic-if-output": {
+              "title": "Afiche soti nan yon blòk if",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Si nonb la pi gran pase 10, afiche `big`. Sinon afiche `small`.",
+              "hint": "Li travay la \"Afiche soti nan yon blòk if\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Afiche soti nan yon blòk if\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print \"big\" if n > 10, otherwise print \"small\""
+            },
+            "code-two-lines-in-block": {
+              "title": "Sèvi ak de liy nan yon sèl blòk",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Si nonb la omwen 5, afiche `high` sou yon liy epi `checked` sou liy apre a. Sinon afiche sèlman `low`.",
+              "hint": "Li travay la \"Sèvi ak de liy nan yon sèl blòk\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Sèvi ak de liy nan yon sèl blòk\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: write the conditional output"
+            },
+            "code-elif-branches": {
+              "title": "Klasifye ak if elif else",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Afiche `positive` si li pi gran pase 0, `negative` si li pi piti pase 0, epi `zero` sinon.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero"
+            },
+            "code-special-case-first": {
+              "title": "Tcheke ka espesyal la an premye",
+              "prompt": "Ekri kòd Python ki li yon nòt antye. Afiche `perfect` si nòt la egzakteman 100. Sinon, si nòt la omwen 60, afiche `pass`. Nan tout lòt ka yo, afiche `retry`.",
+              "hint": "Li travay la \"Tcheke ka espesyal la an premye\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Tcheke ka espesyal la an premye\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "score = int(input())\n\n# TODO: print perfect, pass, or retry"
+            },
+            "code-nested-if-basic": {
+              "title": "Sèvi ak yon if anndan yon lòt if",
+              "prompt": "Ekri kòd Python ki li yon laj antye. Si laj la omwen 13, alò tcheke yon lòt kondisyon: si laj la omwen 18, afiche `adult`; sinon afiche `teen`. Si laj la pi piti pase 13, afiche `child`.",
+              "hint": "Kòmanse ak verifikasyon laj ekstèn nan, apre sa mete yon lòt `if` anndan blòk sa a.",
+              "help": {
+                "concept": "Kondisyonèl anbrike yo sèvi ak yon blòk endante anndan yon lòt. `if` entèn nan egzekite sèlman lè kondisyon ekstèn nan vre.",
+                "hint_1": "Premye separe laj ki anba 13 ak laj 13 oswa plis.",
+                "hint_2": "Anndan branch ekstèn ki vre a, konpare ankò pou deside ant de gwoup ki pi gran yo."
+              },
+              "starterCode": "age = int(input())\n\n# TODO: use a nested if to print child, teen, or adult"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "indentation-and-blocks": {
+          "indentation-intro": {
+            "title": "Poukisa endantasyon enpòtan",
+            "bodyMarkdown": "Nan Python, endantasyon pa sèlman pou stil. Li di Python ki liy ki fè pati anndan yon blòk.\n\nYon blòk se yon gwoup liy ki egzekite ansanm apre yon deklarasyon tankou `if`, `elif`, oswa `else`.\n\n```python\nage = 16\n\nif age >= 18:\n    print(\"adult\")\nprint(\"done\")\n```\n\nAnn pase ladan l:\n- `if age >= 18:` verifye yon kondisyon.\n- Liy ki endante anba li a fè pati blòk `if` la.\n- `print(\"done\")` pa endante, kidonk li deyò blòk la.\n- Paske `16 >= 18` fo, Python sote `print(\"adult\")` epi li toujou egzekite `print(\"done\")`.\n\nPwodiksyon egzanp rezoud la:\n\n```python\ndone\n```\n\nSi ou endante yon liy, ou ap di, \"Liy sa a fè pati blòk sa a.\""
+          },
+          "same-indent-same-block": {
+            "title": "Liy ki gen menm endantasyon fè pati ansanm",
+            "bodyMarkdown": "Anndan yon blòk, liy ki gen menm nivo endantasyon gwoupe ansanm.\n\n```python\nscore = 85\n\nif score >= 80:\n    print(\"Great job\")\n    print(\"You passed the target\")\nprint(\"Check complete\")\n```\n\nAnn pase ladan l etap pa etap:\n- `if score >= 80:` kòmanse yon blòk kondisyonèl.\n- De liy apre yo gen menm endantasyon an, kidonk toude anndan blòk `if` la.\n- `print(\"Check complete\")` retounen sou bò gòch la, kidonk li egzekite apre blòk la.\n\nSi `score` se `85`, pwodiksyon an se:\n\n```python\nGreat job\nYou passed the target\nCheck complete\n```\n\nSi `score` te `60`, yo t ap sote de premye liy yo, men `Check complete` t ap toujou afiche."
+          },
+          "if-elif-else-blocks": {
+            "title": "Chak branch gen pwòp blòk pa li",
+            "bodyMarkdown": "Avèk `if`, `elif`, ak `else`, chak branch ka gen pwòp blòk endante pa li.\n\n```python\nnumber = 0\n\nif number > 0:\n    print(\"positive\")\nelif number < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n```\n\nMen kijan sa mache:\n- `if number > 0:` verifye premye kondisyon an.\n- `elif number < 0:` verifye sèlman si premye kondisyon an fo.\n- `else:` egzekite si kondisyon anvan yo fo.\n- Liy ki endante anba chak branch fè pati branch sa a sèlman.\n\nPou `number = 0`, pwodiksyon an se:\n\n```python\nzero\n```\n\nYon erè debutan fè souvan se bliye endante liy apre `if` oswa `else`. Python bezwen endantasyon sa a pou konnen sa ki dwe egzekite nan branch sa a.\n\nAnn pase ladan l: li chak deklarasyon soti anlè rive anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki pwodiksyon kòd la sipoze montre."
+          }
+        }
+      },
+      "python-v2-2": {
+        "indentation-and-blocks": {
+          "indentation-intro": {
+            "title": "Poukisa endantasyon enpòtan",
+            "bodyMarkdown": "Nan Python, endantasyon pa sèlman pou stil. Li di Python ki liy ki fè pati anndan yon blòk.\n\nYon blòk se yon gwoup liy ki egzekite ansanm apre yon deklarasyon tankou `if`, `elif`, oswa `else`.\n\n```python\nage = 16\n\nif age >= 18:\n    print(\"adult\")\nprint(\"done\")\n```\n\nAnn pase ladan l:\n- `if age >= 18:` verifye yon kondisyon.\n- Liy ki endante anba li a fè pati blòk `if` la.\n- `print(\"done\")` pa endante, kidonk li deyò blòk la.\n- Paske `16 >= 18` fo, Python sote `print(\"adult\")` epi li toujou egzekite `print(\"done\")`.\n\nPwodiksyon egzanp rezoud la:\n\n```python\ndone\n```\n\nSi ou endante yon liy, ou ap di, \"Liy sa a fè pati blòk sa a.\""
+          },
+          "same-indent-same-block": {
+            "title": "Liy ki gen menm endantasyon fè pati ansanm",
+            "bodyMarkdown": "Anndan yon blòk, liy ki gen menm nivo endantasyon gwoupe ansanm.\n\n```python\nscore = 85\n\nif score >= 80:\n    print(\"Great job\")\n    print(\"You passed the target\")\nprint(\"Check complete\")\n```\n\nAnn pase ladan l etap pa etap:\n- `if score >= 80:` kòmanse yon blòk kondisyonèl.\n- De liy apre yo gen menm endantasyon an, kidonk toude anndan blòk `if` la.\n- `print(\"Check complete\")` retounen sou bò gòch la, kidonk li egzekite apre blòk la.\n\nSi `score` se `85`, pwodiksyon an se:\n\n```python\nGreat job\nYou passed the target\nCheck complete\n```\n\nSi `score` te `60`, yo t ap sote de premye liy yo, men `Check complete` t ap toujou afiche."
+          },
+          "if-elif-else-blocks": {
+            "title": "Chak branch gen pwòp blòk pa li",
+            "bodyMarkdown": "Avèk `if`, `elif`, ak `else`, chak branch ka gen pwòp blòk endante pa li.\n\n```python\nnumber = 0\n\nif number > 0:\n    print(\"positive\")\nelif number < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n```\n\nMen kijan sa mache:\n- `if number > 0:` verifye premye kondisyon an.\n- `elif number < 0:` verifye sèlman si premye kondisyon an fo.\n- `else:` egzekite si kondisyon anvan yo fo.\n- Liy ki endante anba chak branch fè pati branch sa a sèlman.\n\nPou `number = 0`, pwodiksyon an se:\n\n```python\nzero\n```\n\nYon erè debutan fè souvan se bliye endante liy apre `if` oswa `else`. Python bezwen endantasyon sa a pou konnen sa ki dwe egzekite nan branch sa a.\n\nAnn pase ladan l: li chak deklarasyon soti anlè rive anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki pwodiksyon kòd la sipoze montre."
+          }
+        }
+      }
+    }
+  }
+}

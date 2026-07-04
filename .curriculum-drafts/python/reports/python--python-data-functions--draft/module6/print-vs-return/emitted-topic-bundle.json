@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.cards.sketch0.title",
       "sketchId": "print-vs-return-idea",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-print-vs-return-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.tryIt.try_print_vs_return_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.tryIt.try_print_vs_return_sketch0.prompt",
+        "exerciseKey": "try-print-vs-return-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.cards.sketch1.title",
       "sketchId": "print-vs-return-compare",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-print-vs-return-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.tryIt.try_print_vs_return_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.tryIt.try_print_vs_return_sketch1.prompt",
+        "exerciseKey": "try-print-vs-return-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.cards.sketch2.title",
       "sketchId": "print-vs-return-when",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-print-vs-return-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.tryIt.try_print_vs_return_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.tryIt.try_print_vs_return_sketch2.prompt",
+        "exerciseKey": "try-print-vs-return-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -263,17 +299,18 @@
       }
     },
     {
-      "id": "pvrs-code-1",
+      "id": "try-print-vs-return-checkpoint",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1",
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-checkpoint",
       "language": "python",
-      "starterCode": "def double_number(n):\n    # return double the input\n    pass",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def double_number(n):\n    # return double the input\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -282,11 +319,105 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def double_number(n):\n    # return double the input\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def double_number(n):\n    # return double the input\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-checkpoint.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-checkpoint.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "add",
+            "args": [
+              3,
+              4
+            ],
+            "expected": 7
+          },
+          {
+            "type": "function_returns",
+            "functionName": "add",
+            "args": [
+              -2,
+              5
+            ],
+            "expected": 3
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-checkpoint.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-checkpoint.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "pvrs-code-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def double_number(n):\n    return n * 2",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -297,7 +428,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def double_number(n):\n    return n * 2",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -326,8 +457,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "pvrs-code-2",
@@ -336,11 +485,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2",
       "language": "python",
-      "starterCode": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -349,11 +498,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_greeting(name):\n    return \"Hello, \" + name",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -364,7 +522,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -393,8 +551,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "pvrs-code-3",
@@ -403,11 +579,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3",
       "language": "python",
-      "starterCode": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -416,11 +592,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def add_prices(price1, price2):\n    return price1 + price2",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -431,7 +616,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def add_prices(price1, price2):\n    return price1 + price2",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -463,6 +648,273 @@
           },
           {
             "type": "no_stdout"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.pvrs-code-3.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-print-vs-return-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_message(name):\n    return 'Hi, ' + name\n\nmessage = make_message('Ava')\nprint(message)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "make_message",
+            "args": [
+              "Ava"
+            ],
+            "expected": "Hi, Ava"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "make_message",
+            "args": [
+              "Mia"
+            ],
+            "expected": "Hi, Mia"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-print-vs-return-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def double(number):\n    return number * 2\n\nresult = double(6)\nprint(result + 1)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "double",
+            "args": [
+              7
+            ],
+            "expected": 14
+          },
+          {
+            "type": "function_returns",
+            "functionName": "double",
+            "args": [
+              -3
+            ],
+            "expected": -6
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-print-vs-return-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def label(name):\n    return name.upper()\n\nprint(label('zoe'))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.solutionCode",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "label",
+            "args": [
+              "zoe"
+            ],
+            "expected": "ZOE"
+          },
+          {
+            "type": "function_returns",
+            "functionName": "label",
+            "args": [
+              "Ava"
+            ],
+            "expected": "AVA"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.print-vs-return.quiz.try-print-vs-return-sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           }
         ]
       }

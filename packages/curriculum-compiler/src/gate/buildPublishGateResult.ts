@@ -28,6 +28,8 @@ export async function buildPublishGateResult(args: {
     let qualityErrors = 0;
     let qualityWarnings = 0;
     let qualityInfos = 0;
+    let validationSkips = 0;
+    let unsafeValidationSkips = 0;
 
     for (const report of reports) {
         for (const repair of report.repairReport?.repairs ?? []) {
@@ -55,6 +57,18 @@ export async function buildPublishGateResult(args: {
         qualityErrors += report.qualityReport?.severityCounts?.error ?? 0;
         qualityWarnings += report.qualityReport?.severityCounts?.warning ?? 0;
         qualityInfos += report.qualityReport?.severityCounts?.info ?? 0;
+
+        const state = report.validationState;
+        if (state) {
+            const skippedLayers = [
+                state.qualityGates,
+                state.semantic,
+                state.golden,
+            ].filter((layer) => layer?.skipped).length;
+
+            validationSkips += skippedLayers;
+            if (state.unsafeSkipValidation) unsafeValidationSkips += 1;
+        }
     }
 
     const courseQualityReport = await readCourseQualityReport({
@@ -114,6 +128,14 @@ export async function buildPublishGateResult(args: {
         reasons.push(`Curriculum quality report found ${qualityErrors} error(s).`);
     }
 
+    if (validationSkips > 0) {
+        reasons.push(`Validation was skipped for ${validationSkips} downstream gate(s).`);
+    }
+
+    if (unsafeValidationSkips > 0) {
+        reasons.push(`Unsafe validation bypass was used for ${unsafeValidationSkips} topic report(s).`);
+    }
+
     if (repairsHigh > 0 && !policy.allowHighSeverityRepairs) {
         reasons.push(`Found ${repairsHigh} high-severity repair(s).`);
     }
@@ -149,6 +171,8 @@ export async function buildPublishGateResult(args: {
             qualityErrors,
             qualityWarnings,
             qualityInfos,
+            validationSkips,
+            unsafeValidationSkips,
         },
     };
 }

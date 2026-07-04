@@ -152,9 +152,6 @@ export default function MultiChoiceExerciseUI({
           })}
         </div>
 
-        <div className="ui-meta">
-          Stored as <span className="font-mono">optionIds[]</span> for submit.
-        </div>
       </div>
   );
 }

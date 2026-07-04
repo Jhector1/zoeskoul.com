@@ -4,17 +4,18 @@
     "profileId": "python",
     "catalogSlug": "python",
     "genKey": "python_part1",
-    "order": 30,
+    "order": 0,
     "accessPolicy": "paid",
     "status": "active",
-    "imagePublicId": "python_data_function_qeemap.png",
+    "imagePublicId": null,
     "imageAlt": null,
     "titleKey": "subjects.python-data-functions.title",
     "descriptionKey": "subjects.python-data-functions.description",
+    "serviceDefaults": null,
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
-        "isTerminalRelease": true,
+        "isTerminalRelease": false,
         "moreComingMessageKey": "subjects.python-data-functions.moreComingSoon"
       },
       "completionPolicy": {
@@ -43,8 +44,9 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 153,
+        "estimatedMinutes": 177,
         "prereqKeys": [
           "modules.python-data-functions.python-4.title"
         ],
@@ -74,6 +76,7 @@
               "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-list-basics.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "creating-and-indexing-lists",
             "list-methods-and-mutation",
@@ -95,6 +98,7 @@
               "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-dictionaries.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "dictionary-basics",
             "updating-and-looping-dictionaries",
@@ -103,7 +107,8 @@
         },
         {
           "slug": "python-data-functions-python-5-module-project",
-          "order": 99,
+          "order": 3,
+          "role": "module_project",
           "titleKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.title",
           "descriptionKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.description",
           "meta": {
@@ -112,9 +117,11 @@
             "bulletKeys": [
               "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.bullets.0",
               "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.bullets.1",
-              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.bullets.2"
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.bullets.2",
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-5-gradebook-project"
           ]
@@ -134,13 +141,14 @@
         "kind": "code",
         "language": "python",
         "supportsTerminal": false,
-        "supportsMultiFile": true,
+        "supportsMultiFile": false,
         "supportsFileSystem": false,
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 170,
+        "estimatedMinutes": 196,
         "prereqKeys": [
           "modules.python-data-functions.python-5.title"
         ],
@@ -171,6 +179,7 @@
               "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-basics.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "defining-and-calling-functions",
             "parameters-and-return-values",
@@ -192,6 +201,7 @@
               "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-design.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "scope-and-local-variables",
             "decomposition-and-refactoring",
@@ -201,7 +211,8 @@
         },
         {
           "slug": "python-data-functions-python-6-module-project",
-          "order": 99,
+          "order": 3,
+          "role": "module_project",
           "titleKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.title",
           "descriptionKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.description",
           "meta": {
@@ -210,9 +221,11 @@
             "bulletKeys": [
               "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.bullets.0",
               "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.bullets.1",
-              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.bullets.2"
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.bullets.2",
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "module-6-name-badge-package"
           ]
@@ -237,8 +250,15 @@
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": {
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": false
+        }
+      },
       "meta": {
-        "estimatedMinutes": 143,
+        "estimatedMinutes": 171,
         "prereqKeys": [
           "modules.python-data-functions.python-6.title"
         ],
@@ -270,6 +290,13 @@
               "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-file-io.bullets.3"
             ]
           },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
           "topics": [
             "reading-text-files",
             "writing-text-files",
@@ -291,6 +318,13 @@
               "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-exceptions-and-cleaning.bullets.3"
             ]
           },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
+          },
           "topics": [
             "try-except-basics",
             "validating-and-cleaning-input",
@@ -299,7 +333,8 @@
         },
         {
           "slug": "python-data-functions-python-7-module-project",
-          "order": 99,
+          "order": 3,
+          "role": "module_project",
           "titleKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.title",
           "descriptionKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.description",
           "meta": {
@@ -308,8 +343,16 @@
             "bulletKeys": [
               "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.bullets.0",
               "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.bullets.1",
-              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.bullets.2"
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.bullets.2",
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.bullets.3"
             ]
+          },
+          "serviceDefaults": {
+            "requires": {
+              "files": true,
+              "multiFile": true,
+              "terminal": false
+            }
           },
           "topics": [
             "module-7-clean-student-records"
@@ -321,6 +364,7 @@
       "slug": "python-8-real-world-project",
       "prefix": "py8",
       "order": 8,
+      "role": "capstone",
       "titleKey": "modules.python-data-functions.python-8-real-world-project.title",
       "descriptionKey": "modules.python-data-functions.python-8-real-world-project.description",
       "weekStart": null,
@@ -330,15 +374,16 @@
         "kind": "code",
         "language": "python",
         "supportsTerminal": false,
-        "supportsMultiFile": true,
-        "supportsFileSystem": true,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
         "supportsStdInStdOut": true,
         "supportsPackageInstall": false
       },
+      "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 120,
+        "estimatedMinutes": 36,
         "prereqKeys": [
-          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.title"
+          "modules.python-data-functions.python-7.title"
         ],
         "outcomeKeys": [
           "modules.python-data-functions.python-8-real-world-project.outcomes.0",
@@ -354,6 +399,7 @@
         {
           "slug": "python-data-functions-python-8-course-capstone",
           "order": 1,
+          "role": "capstone",
           "titleKey": "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.title",
           "descriptionKey": "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.description",
           "meta": {
@@ -362,9 +408,11 @@
             "bulletKeys": [
               "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.bullets.0",
               "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.bullets.1",
-              "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.bullets.2"
+              "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.bullets.2",
+              "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.bullets.3"
             ]
           },
+          "serviceDefaults": null,
           "topics": [
             "class-roster-cleaner"
           ]

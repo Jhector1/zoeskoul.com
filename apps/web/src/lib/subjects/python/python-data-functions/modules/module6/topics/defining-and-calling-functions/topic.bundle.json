@@ -299,11 +299,11 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "# Define say_hello() below.\n\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Define say_hello() below.\n\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -312,11 +312,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Define say_hello() below.\n\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Define say_hello() below.\n\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -342,11 +342,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "def say_hello():\n    print(\"Hello from a function!\")\n\nsay_hello()\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def say_hello():\n    print(\"Hello from a function!\")\n\nsay_hello()\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -356,19 +356,19 @@
           {
             "type": "source_regex",
             "pattern": "def\\s+say_hello\\s*\\(\\s*\\)\\s*:",
-            "message": "Define a function named say_hello()."
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.sourceChecks.0.message"
           },
           {
             "type": "uses_call",
             "functionName": "say_hello",
-            "message": "Call say_hello() after defining it."
+            "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.sourceChecks.1.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def say_hello():\n    print(\"Hello from a function!\")\n\nsay_hello()\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -378,12 +378,12 @@
         {
           "type": "source_regex",
           "pattern": "def\\s+say_hello\\s*\\(\\s*\\)\\s*:",
-          "message": "Define a function named say_hello()."
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.sourceChecks.0.message"
         },
         {
           "type": "uses_call",
           "functionName": "say_hello",
-          "message": "Call say_hello() after defining it."
+          "message": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-checkpoint.sourceChecks.1.message"
         }
       ]
     },
@@ -394,11 +394,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting",
       "language": "python",
-      "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def make_greeting(name):\n    # return a greeting string\n    pass",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -407,11 +407,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def make_greeting(name):\n    # return a greeting string\n    pass",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -431,7 +431,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -464,7 +464,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def make_greeting(name):\n    return \"Hello, \" + name",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -474,7 +474,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def make_greeting(name):\n    return \"Hello, \" + name",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-make-greeting.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -488,11 +488,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number",
       "language": "python",
-      "starterCode": "def square(number):\n    # return the square of number\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def square(number):\n    # return the square of number\n    pass",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -501,11 +501,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def square(number):\n    # return the square of number\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def square(number):\n    # return the square of number\n    pass",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -525,7 +525,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def square(number):\n    return number * number",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -558,7 +558,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def square(number):\n    return number * number",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -568,7 +568,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def square(number):\n    return number * number",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-square-number.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -582,11 +582,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name",
       "language": "python",
-      "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -595,11 +595,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -619,7 +619,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def full_name(first, last):\n    return first + \" \" + last",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -656,7 +656,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def full_name(first, last):\n    return first + \" \" + last",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -666,7 +666,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def full_name(first, last):\n    return first + \" \" + last",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.ci-full-name.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -680,11 +680,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0",
       "language": "python",
-      "starterCode": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -693,7 +693,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -702,11 +702,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -726,7 +726,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -748,7 +748,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -763,11 +763,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1",
       "language": "python",
-      "starterCode": "def square(number):\n    return number * number\n\n# Print square(5).\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def square(number):\n    return number * number\n\n# Print square(5).\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -776,7 +776,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def square(number):\n    return number * number\n\nprint(square(5))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -785,11 +785,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def square(number):\n    return number * number\n\n# Print square(5).\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def square(number):\n    return number * number\n\n# Print square(5).\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -809,7 +809,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def square(number):\n    return number * number\n\nprint(square(5))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -831,7 +831,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def square(number):\n    return number * number\n\nprint(square(5))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -846,11 +846,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2",
       "language": "python",
-      "starterCode": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -859,7 +859,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -868,11 +868,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -892,7 +892,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -914,7 +914,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.defining-and-calling-functions.quiz.try-defining-and-calling-functions-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true

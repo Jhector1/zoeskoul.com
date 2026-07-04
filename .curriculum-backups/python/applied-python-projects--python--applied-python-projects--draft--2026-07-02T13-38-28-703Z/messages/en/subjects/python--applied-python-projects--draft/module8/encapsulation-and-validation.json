@@ -1,0 +1,242 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "encapsulation-and-validation": {
+          "label": "Encapsulation and Validation",
+          "summary": "Protect the balance inside the Account class by ignoring invalid deposits and withdrawals, then return a clean summary.",
+          "cards": {
+            "sketch0": {
+              "title": "The object protects its own balance"
+            },
+            "sketch1": {
+              "title": "Withdraw rules prevent invalid balance changes"
+            },
+            "sketch2": {
+              "title": "Validated behavior leads to a clean final summary"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_encapsulation_and_validation_sketch0": {
+              "title": "Validate deposit inside the class",
+              "prompt": "In `models/account.py`, update `deposit(self, amount)` so it changes the balance only when `amount > 0`. Return the current balance either way. `main.py` already checks one valid deposit and one invalid deposit.",
+              "hint": "Only add the amount in the valid branch.",
+              "help": {
+                "concept": "Encapsulation means the class decides whether a state change is allowed before saving it.",
+                "hint_1": "A positive amount should update the balance.",
+                "hint_2": "A zero or negative amount should leave the balance unchanged."
+              },
+              "starterCode": "from models.account import Account\n\nclub = Account(\"Club Fund\", 100)\nprint(club.deposit(10))\n\nsnacks = Account(\"Snacks\", 40)\nprint(snacks.deposit(-5))",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nclub = Account(\"Club Fund\", 100)\nprint(club.deposit(10))\n\nsnacks = Account(\"Snacks\", 40)\nprint(snacks.deposit(-5))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nclub = Account(\"Club Fund\", 100)\nprint(club.deposit(10))\n\nsnacks = Account(\"Snacks\", 40)\nprint(snacks.deposit(-5))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\nclub = Account(\"Club Fund\", 100)\nprint(club.deposit(10))\n\nsnacks = Account(\"Snacks\", 40)\nprint(snacks.deposit(-5))",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should still accept owner and balance."
+                },
+                "2": {
+                  "message": "A valid deposit should return the updated balance."
+                },
+                "3": {
+                  "message": "An invalid deposit should return the unchanged balance."
+                },
+                "4": {
+                  "message": "Print both results from main.py."
+                }
+              }
+            },
+            "try_encapsulation_and_validation_sketch1": {
+              "title": "Validate withdraw inside the class",
+              "prompt": "Keep the validated `deposit` method. Now finish `withdraw(self, amount)` so it subtracts only when `0 < amount <= self.balance`. Return the current balance after each withdrawal attempt.",
+              "hint": "The balance should stay the same after an invalid withdrawal.",
+              "help": {
+                "concept": "A validated withdrawal rule prevents the object from drifting into a bad state.",
+                "hint_1": "A successful withdrawal changes the balance.",
+                "hint_2": "An overdraft attempt should leave the balance unchanged."
+              },
+              "starterCode": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.withdraw(70))",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.withdraw(70))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.withdraw(70))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self.balance:\n            self.balance -= amount\n        return self.balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.withdraw(70))",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "A valid withdrawal should lower the balance."
+                },
+                "2": {
+                  "message": "An invalid withdrawal should return the unchanged balance."
+                },
+                "3": {
+                  "message": "Print both withdrawal results."
+                }
+              }
+            },
+            "try_encapsulation_and_validation_sketch2": {
+              "title": "Demonstrate valid and invalid operations together",
+              "prompt": "Keep the validated `deposit` and `withdraw` methods. Add `summary(self)` so it returns text in this format: `Mira: $70.00`. `main.py` already runs valid and invalid operations, then prints the final summary.",
+              "hint": "The summary should reflect only the valid balance changes.",
+              "help": {
+                "concept": "When validation lives inside the class, the final summary stays trustworthy because invalid operations never changed the stored state.",
+                "hint_1": "Add the formatted summary method after the validated methods.",
+                "hint_2": "Return the final text with two decimal places."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Mira\", 100)\naccount.deposit(20)\naccount.deposit(-3)\naccount.withdraw(50)\naccount.withdraw(500)\n\nprint(account.summary())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Mira\", 100)\naccount.deposit(20)\naccount.deposit(-3)\naccount.withdraw(50)\naccount.withdraw(500)\n\nprint(account.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n\n    def summary(self):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Mira\", 100)\naccount.deposit(20)\naccount.deposit(-3)\naccount.withdraw(50)\naccount.withdraw(500)\n\nprint(account.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self.balance:\n            self.balance -= amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance:.2f}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Mira\", 100)\naccount.deposit(20)\naccount.deposit(-3)\naccount.withdraw(50)\naccount.withdraw(500)\n\nprint(account.summary())",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "summary should reflect only the valid operations."
+                },
+                "2": {
+                  "message": "Print the final summary."
+                }
+              }
+            }
+          },
+          "practice": {
+            "mc-encapsulation-and-validation-safe-design": {
+              "title": "Which designs are safer?",
+              "prompt": "Which designs best protect account state? Choose all that apply.",
+              "hint": "Look for changes that go through class methods with rules.",
+              "help": {
+                "concept": "Encapsulation keeps the rules close to the data they protect.",
+                "hint_1": "Pick the options where the class decides whether a value is valid.",
+                "hint_2": "Reject options that rely on direct outside edits."
+              },
+              "options": {
+                "a": "`deposit()` checks the amount before changing `balance`",
+                "b": "`main.py` writes any balance directly with no checks",
+                "c": "`withdraw()` rejects values that would overdraw the account",
+                "d": "Outside code remembers every rule and the class knows none of them"
+              }
+            },
+            "sc-encapsulation-and-validation-why-inside-class": {
+              "title": "Why keep the rule inside the class?",
+              "prompt": "Why is it better for `withdraw()` to check the balance inside the class?",
+              "hint": "The class owns the state it is protecting.",
+              "help": {
+                "concept": "The rule belongs on the class because the class controls that object's stored data.",
+                "hint_1": "Look for the answer about keeping the balance safe in one place.",
+                "hint_2": "Reject answers about making methods longer just for style."
+              },
+              "options": {
+                "a": "The object can protect its own state in one reliable place",
+                "b": "It makes imports run faster",
+                "c": "It removes the need for attributes",
+                "d": "It stops the class from having methods later"
+              }
+            },
+            "fb-encapsulation-and-validation-condition": {
+              "title": "Complete the withdraw rule",
+              "prompt": "Fill in the missing comparison so the method rejects withdrawals that are larger than the balance.",
+              "hint": "The amount must be less than or equal to the balance.",
+              "help": {
+                "concept": "A safe withdrawal must not take out more money than the object currently stores.",
+                "hint_1": "The rule should allow equal values but reject larger ones.",
+                "hint_2": "Choose the operator that means 'less than or equal to'."
+              },
+              "template": "if 0 < amount [blank1] self.balance:",
+              "choices": [
+                "<",
+                "<=",
+                ">",
+                ">="
+              ]
+            },
+            "dr-encapsulation-and-validation-update-order": {
+              "title": "Order the safe update",
+              "prompt": "Put these steps in the best order for a validated state change.",
+              "hint": "Check the rule before saving the new value.",
+              "help": {
+                "concept": "A safe update receives input, checks the rule, changes the attribute only if valid, then returns the result.",
+                "hint_1": "The assignment should not happen before validation.",
+                "hint_2": "Returning the result comes after the decision has been made."
+              },
+              "tokens": {
+                "t1": "Receive the incoming amount",
+                "t2": "Check whether the amount is allowed",
+                "t3": "Change the balance only if the rule passes",
+                "t4": "Return the current balance"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "encapsulation-and-validation": {
+          "sketch-0": {
+            "title": "The object protects its own balance",
+            "bodyMarkdown": "So far, `deposit()` and `withdraw()` always changed the balance.\n\nNow the class should start protecting its own state.\n\n```python\ndef deposit(self, amount):\n    if amount > 0:\n        self.balance += amount\n    return self.balance\n```\n\nInvalid amounts do not change the balance at all."
+          },
+          "sketch-1": {
+            "title": "Withdraw rules prevent invalid balance changes",
+            "bodyMarkdown": "Withdrawals need two checks:\n\n- the amount must be greater than 0\n- the amount must not be larger than the balance\n\n```python\ndef withdraw(self, amount):\n    if 0 < amount <= self.balance:\n        self.balance -= amount\n    return self.balance\n```"
+          },
+          "sketch-2": {
+            "title": "Validated behavior leads to a clean final summary",
+            "bodyMarkdown": "Once invalid updates are blocked, the object's summary becomes more trustworthy.\n\n```python\naccount.deposit(20)\naccount.deposit(-3)\naccount.withdraw(50)\naccount.withdraw(500)\nprint(account.summary())\n```\n\nOnly the valid operations should affect the final balance."
+          }
+        }
+      }
+    }
+  }
+}

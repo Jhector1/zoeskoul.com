@@ -39,24 +39,44 @@ function looksLikeFunctionReturnExercise(args: {
 
     const starterFunctions = extractDefinedFunctionNames(starterCode);
     const solutionFunctions = extractDefinedFunctionNames(solutionCode);
+    const functionNames = Array.from(
+        new Set([...starterFunctions, ...solutionFunctions]),
+    );
 
     const hasFunction =
-        starterFunctions.length > 0 ||
-        solutionFunctions.length > 0 ||
-        starterCode.trimStart().startsWith("def ");
+        functionNames.length > 0 || starterCode.trimStart().startsWith("def ");
+
+    const promptSaysReturn = /\breturn(?:s|ed|ing)?\b/.test(prompt);
+    const solutionReturns = /\breturn\b/.test(solutionCode);
+
+    // A named function can still be a procedural stdout task. Project service
+    // functions such as print_catalog() should be graded by printed_line_count,
+    // not by function_returns, when they print and do not return a value.
+    const promptSaysPrintOrOutput =
+        /\b(print|prints|printed|display|displays|output|outputs)\b/.test(
+            prompt,
+        );
+    const functionNameSuggestsPrinting = functionNames.some((name) =>
+        /^(print|display|show)_/i.test(name),
+    );
+    const solutionPrints = /\bprint\s*\(/.test(solutionCode);
+
+    if (
+        hasFunction &&
+        !promptSaysReturn &&
+        !solutionReturns &&
+        solutionPrints &&
+        (promptSaysPrintOrOutput || functionNameSuggestsPrinting)
+    ) {
+        return false;
+    }
 
     const promptSaysFunction =
         /\b(write|create|define|complete|implement)\s+(a\s+)?function\b/.test(
             prompt,
-        ) ||
-        /\breturn\b/.test(prompt) ||
-        /\breturns?\b/.test(prompt);
+        ) || promptSaysReturn;
 
-    const starterSaysReturn =
-        /#.*\breturn\b/i.test(starterCode) ||
-        /\bpass\b/.test(starterCode);
-
-    const solutionReturns = /\breturn\b/.test(solutionCode);
+    const starterSaysReturn = /#.*\breturn\b/i.test(starterCode);
 
     return hasFunction && (promptSaysFunction || starterSaysReturn || solutionReturns);
 }
@@ -94,6 +114,14 @@ function semanticChecksContainClassCheck(semanticChecks: SemanticCheck[]): boole
             "method_returns",
             "created_instances",
         ].includes(check.type),
+    );
+}
+
+function semanticChecksContainStdoutBehaviorCheck(
+    semanticChecks: SemanticCheck[],
+): boolean {
+    return semanticChecks.some((check) =>
+        ["printed_line_count", "no_stdout"].includes(check.type),
     );
 }
 
@@ -249,7 +277,8 @@ function validatePythonExerciseShape(args: {
             isSemanticRecipe &&
             functionReturnExercise &&
             !semanticChecksContainFunctionReturn(semanticChecks, functionNames) &&
-            !semanticChecksContainClassCheck(semanticChecks)
+            !semanticChecksContainClassCheck(semanticChecks) &&
+            !semanticChecksContainStdoutBehaviorCheck(semanticChecks)
         ) {
             issues.push({
                 code: "PYTHON_FUNCTION_RETURNS_CHECK_MISSING",

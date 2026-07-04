@@ -1,0 +1,268 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-3": {},
+      "python--python-v2--draft-4": {
+        "mini-gradebook-capstone": {
+          "label": "Pwojè Final: Konstwi yon Ti Liv Nòt",
+          "summary": "Fini kou a ak yon capstone liv nòt ki pi long ki grandi etap pa etap soti nan liy rapò debaz yo rive nan yon rezime final konplè.",
+          "cards": {
+            "sketch0": {
+              "title": "Planifye liv nòt la"
+            },
+            "project": {
+              "title": "Konstriktè Ti Liv Nòt"
+            }
+          },
+          "projectSteps": {
+            "cp_1": {
+              "title": "Li antèt liv nòt la"
+            },
+            "cp_2": {
+              "title": "Ajoute total nòt yo"
+            },
+            "cp_3": {
+              "title": "Swiv nòt ki pi wo a"
+            },
+            "cp_4": {
+              "title": "Kalkile mwayèn nan"
+            },
+            "cp_5": {
+              "title": "Chwazi liy estati a"
+            },
+            "cp_6": {
+              "title": "Konstwi rapò final liv nòt la"
+            }
+          },
+          "quiz": {
+            "capstone-mini-gradebook": {
+              "title": "Konstwi rapò final liv nòt la",
+              "prompt": "Kòmanse apati apèsi liv nòt k ap mache a ou fèk konstwi a. Kenbe bouk la, swivi nòt ki pi wo a, kalkil mwayèn nan, ak lojik estati a, men ranplase vèsyon stil apèsi a ak rapò final egzak la.\n\nFòma antre:\n1. Non elèv la\n2. Kantite nòt yo\n3. Kantite valè nòt sa yo, youn pa liy\n\nRezilta final obligatwa:\nStudent: <name>\nScores entered: <count>\nHighest score: <highest>\nAverage: <average>\nStatus: <status>",
+              "hint": "Dènye etap la se yon etap netwayaj: kenbe kalkil yo, retire liy Total apèsi a, epi enprime sèlman lòd rapò final la.",
+              "help": {
+                "concept": "Yon bon capstone fini lè li poli yon pwogram ki deja mache olye pou li rekòmanse depi nan kòmansman. Kenbe menm lojik la epi bay rezilta a fòm final livrezon an.",
+                "hint_1": "Li nòt yo ak `for i in range(count)`, mete ajou `total` ak `highest`, epi apre sa kalkile `average = total / count`.",
+                "hint_2": "Enprime liy final yo nan lòd egzak yo montre a, epi chwazi estati a ak `if` / `elif` / `else`."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n\n# Replace the preview-style version with the final report.\n# Remove the Total line and keep only the required final output order.\n"
+            },
+            "try-mini-gradebook-capstone-sketch0": {
+              "title": "Enprime premye liy liv nòt la",
+              "prompt": "Kòmanse capstone a ak yon ti apèsi rapò. Li non yon elèv epi enprime `Student: <name>`.",
+              "hint": "Sèvi ak `input()` pou non an, epi apre sa enprime liy ki gen etikèt la ak yon f-string.",
+              "help": {
+                "concept": "Capstone a grandi yon liy rapò alafwa, kidonk premye apèsi a bezwen sèlman etikèt elèv la.",
+                "hint_1": "Sere non ki soti nan `input()` la nan `student`.",
+                "hint_2": "Enprime `f\"Student: {student}\"`."
+              },
+              "starterCode": "student = input()\n\n# Print the first report line as Student: <name>\n"
+            },
+            "cp-1-read-gradebook-header": {
+              "title": "Li antèt liv nòt la",
+              "prompt": "Yon pwofesè patikilye vle rapò liv nòt la kòmanse ak non elèv la ak kantite nòt yo. Li `student` ak `count`, epi apre sa enprime de premye liy rapò yo.",
+              "hint": "Etap sa a sèlman konstwi antèt rapò a: li de antre yo epi make yo klèman.",
+              "help": {
+                "concept": "Yon rapò souvan kòmanse ak enfòmasyon idantifikasyon anvan nenpòt kalkil fèt.",
+                "hint_1": "Sèvi ak `student = input()` ak `count = int(input())`.",
+                "hint_2": "Enprime `Student: ...` ak `Scores entered: ...` ak f-strings."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\n# Start the gradebook report.\n# Print the student line and the scores-entered line.\n"
+            },
+            "cp-2-add-score-total": {
+              "title": "Ajoute total nòt yo",
+              "prompt": "Kenbe liy antèt yo k ap mache yo. Kounye a li egzakteman `count` nòt ak yon bouk `for`, ajoute yo nan `total`, epi enprime yon liy apèsi ki montre total la.",
+              "hint": "Kite bouk la fè travay antre repete a, epi mete ajou `total` chak fwa li pase.",
+              "help": {
+                "concept": "Yon akimilatè kòmanse nan 0 epi li grandi yon ti kras chak fwa bouk la li yon nouvo valè.",
+                "hint_1": "Kòmanse ak `total = 0` anvan bouk la.",
+                "hint_2": "Anndan bouk la, sèvi ak `total = total + score`, epi apre sa enprime `Total: ...` apre bouk la."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    # Add each score to total.\n\n# Print a preview line: Total: <total>\n"
+            },
+            "cp-3-track-highest-score": {
+              "title": "Swiv nòt ki pi wo a",
+              "prompt": "Kenbe antèt la ak lojik total la k ap mache. Kounye a ajoute `highest` pou pwogram nan sonje pi gwo nòt li wè jiskaprezan, epi enprime nouvo liy apèsi sa a tou.",
+              "hint": "Ranplase `highest` sèlman lè nòt aktyèl la pi gwo pase ansyen an.",
+              "help": {
+                "concept": "Yon maksimòm k ap kontinye kenbe pi bon valè yo jwenn jiskaprezan pandan bouk la ap pase nan antre yo.",
+                "hint_1": "Kòmanse ak `highest = 0` anvan bouk la.",
+                "hint_2": "Anndan bouk la, sèvi ak `if score > highest:` anvan ou mete `highest` ajou."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    # Keep total working, then update highest when this score is bigger.\n\nprint(f\"Total: {total}\")\n# Print Highest score: <highest>\n"
+            },
+            "cp-4-calculate-average": {
+              "title": "Kalkile mwayèn nan",
+              "prompt": "Kenbe total k ap kontinye a ak nòt ki pi wo a. Apre bouk la, kalkile mwayèn nan epi ajoute liy mwayèn fòmate a nan rapò apèsi a.",
+              "hint": "Fè divizyon an apre bouk la, epi apre sa enprime rezilta a ak yon chif apre pwen desimal la.",
+              "help": {
+                "concept": "Bouk la ranmase enfòmasyon yo an premye, epi mwayèn nan kalkile yon fwa total la ak kantite a toude pare.",
+                "hint_1": "Sèvi ak `average = total / count` apre bouk la fini.",
+                "hint_2": "Enprime `Average: ...` ak `:.1f` anndan yon f-string."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n\n# Calculate average after the loop.\n# Print Average: <average> with one digit after the decimal point.\n"
+            },
+            "cp-5-choose-status": {
+              "title": "Chwazi liy estati a",
+              "prompt": "Kenbe rapò apèsi k ap mache a, epi apre sa ajoute liy estati final la: `excellent` pou mwayèn omwen 90, `passing` pou mwayèn omwen 70, epi `needs practice` sinon.",
+              "hint": "Sèvi ak yon chèn `if` / `elif` / `else` apre mwayèn nan pare.",
+              "help": {
+                "concept": "Yon fwa yon pwogram gen rezime final nòt la, kondisyon yo ka tounen li an yon jijman senp moun ka konprann fasil.",
+                "hint_1": "Tcheke `average >= 90` an premye.",
+                "hint_2": "Sèvi ak `elif average >= 70` pou ka mitan an, epi `else` pou ka ki rete a."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\n# Add the status line.\n# Print excellent for averages 90+, passing for 70+, and needs practice otherwise.\n"
+            }
+          },
+          "tryIt": {
+            "try_mini_gradebook_capstone_sketch0": {
+              "title": "Eseye li ou menm",
+              "prompt": "Li non yon elèv epi enprime premye liy rapò a kòm `Student: <name>`."
+            },
+            "allowReveal": true
+          }
+        }
+      },
+      "python-v2-4": {
+        "mini-gradebook-capstone": {
+          "label": "Pwojè Final: Konstwi yon Ti Liv Nòt",
+          "summary": "Fini kou a ak yon capstone liv nòt ki pi long ki grandi etap pa etap soti nan liy rapò debaz yo rive nan yon rezime final konplè.",
+          "cards": {
+            "sketch0": {
+              "title": "Planifye liv nòt la"
+            },
+            "project": {
+              "title": "Konstriktè Ti Liv Nòt"
+            }
+          },
+          "projectSteps": {
+            "cp_1": {
+              "title": "Li antèt liv nòt la"
+            },
+            "cp_2": {
+              "title": "Ajoute total nòt yo"
+            },
+            "cp_3": {
+              "title": "Swiv nòt ki pi wo a"
+            },
+            "cp_4": {
+              "title": "Kalkile mwayèn nan"
+            },
+            "cp_5": {
+              "title": "Chwazi liy estati a"
+            },
+            "cp_6": {
+              "title": "Konstwi rapò final liv nòt la"
+            }
+          },
+          "quiz": {
+            "capstone-mini-gradebook": {
+              "title": "Konstwi rapò final liv nòt la",
+              "prompt": "Kòmanse apati apèsi liv nòt k ap mache a ou fèk konstwi a. Kenbe bouk la, swivi nòt ki pi wo a, kalkil mwayèn nan, ak lojik estati a, men ranplase vèsyon stil apèsi a ak rapò final egzak la.\n\nFòma antre:\n1. Non elèv la\n2. Kantite nòt yo\n3. Kantite valè nòt sa yo, youn pa liy\n\nRezilta final obligatwa:\nStudent: <name>\nScores entered: <count>\nHighest score: <highest>\nAverage: <average>\nStatus: <status>",
+              "hint": "Dènye etap la se yon etap netwayaj: kenbe kalkil yo, retire liy Total apèsi a, epi enprime sèlman lòd rapò final la.",
+              "help": {
+                "concept": "Yon bon capstone fini lè li poli yon pwogram ki deja mache olye pou li rekòmanse depi nan kòmansman. Kenbe menm lojik la epi bay rezilta a fòm final livrezon an.",
+                "hint_1": "Li nòt yo ak `for i in range(count)`, mete ajou `total` ak `highest`, epi apre sa kalkile `average = total / count`.",
+                "hint_2": "Enprime liy final yo nan lòd egzak yo montre a, epi chwazi estati a ak `if` / `elif` / `else`."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n\n# Replace the preview-style version with the final report.\n# Remove the Total line and keep only the required final output order.\n"
+            },
+            "try-mini-gradebook-capstone-sketch0": {
+              "title": "Enprime premye liy liv nòt la",
+              "prompt": "Kòmanse capstone a ak yon ti apèsi rapò. Li non yon elèv epi enprime `Student: <name>`.",
+              "hint": "Sèvi ak `input()` pou non an, epi apre sa enprime liy ki gen etikèt la ak yon f-string.",
+              "help": {
+                "concept": "Capstone a grandi yon liy rapò alafwa, kidonk premye apèsi a bezwen sèlman etikèt elèv la.",
+                "hint_1": "Sere non ki soti nan `input()` la nan `student`.",
+                "hint_2": "Enprime `f\"Student: {student}\"`."
+              },
+              "starterCode": "student = input()\n\n# Print the first report line as Student: <name>\n"
+            },
+            "cp-1-read-gradebook-header": {
+              "title": "Li antèt liv nòt la",
+              "prompt": "Yon pwofesè patikilye vle rapò liv nòt la kòmanse ak non elèv la ak kantite nòt yo. Li `student` ak `count`, epi apre sa enprime de premye liy rapò yo.",
+              "hint": "Etap sa a sèlman konstwi antèt rapò a: li de antre yo epi make yo klèman.",
+              "help": {
+                "concept": "Yon rapò souvan kòmanse ak enfòmasyon idantifikasyon anvan nenpòt kalkil fèt.",
+                "hint_1": "Sèvi ak `student = input()` ak `count = int(input())`.",
+                "hint_2": "Enprime `Student: ...` ak `Scores entered: ...` ak f-strings."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\n# Start the gradebook report.\n# Print the student line and the scores-entered line.\n"
+            },
+            "cp-2-add-score-total": {
+              "title": "Ajoute total nòt yo",
+              "prompt": "Kenbe liy antèt yo k ap mache yo. Kounye a li egzakteman `count` nòt ak yon bouk `for`, ajoute yo nan `total`, epi enprime yon liy apèsi ki montre total la.",
+              "hint": "Kite bouk la fè travay antre repete a, epi mete ajou `total` chak fwa li pase.",
+              "help": {
+                "concept": "Yon akimilatè kòmanse nan 0 epi li grandi yon ti kras chak fwa bouk la li yon nouvo valè.",
+                "hint_1": "Kòmanse ak `total = 0` anvan bouk la.",
+                "hint_2": "Anndan bouk la, sèvi ak `total = total + score`, epi apre sa enprime `Total: ...` apre bouk la."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    # Add each score to total.\n\n# Print a preview line: Total: <total>\n"
+            },
+            "cp-3-track-highest-score": {
+              "title": "Swiv nòt ki pi wo a",
+              "prompt": "Kenbe antèt la ak lojik total la k ap mache. Kounye a ajoute `highest` pou pwogram nan sonje pi gwo nòt li wè jiskaprezan, epi enprime nouvo liy apèsi sa a tou.",
+              "hint": "Ranplase `highest` sèlman lè nòt aktyèl la pi gwo pase ansyen an.",
+              "help": {
+                "concept": "Yon maksimòm k ap kontinye kenbe pi bon valè yo jwenn jiskaprezan pandan bouk la ap pase nan antre yo.",
+                "hint_1": "Kòmanse ak `highest = 0` anvan bouk la.",
+                "hint_2": "Anndan bouk la, sèvi ak `if score > highest:` anvan ou mete `highest` ajou."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    # Keep total working, then update highest when this score is bigger.\n\nprint(f\"Total: {total}\")\n# Print Highest score: <highest>\n"
+            },
+            "cp-4-calculate-average": {
+              "title": "Kalkile mwayèn nan",
+              "prompt": "Kenbe total k ap kontinye a ak nòt ki pi wo a. Apre bouk la, kalkile mwayèn nan epi ajoute liy mwayèn fòmate a nan rapò apèsi a.",
+              "hint": "Fè divizyon an apre bouk la, epi apre sa enprime rezilta a ak yon chif apre pwen desimal la.",
+              "help": {
+                "concept": "Bouk la ranmase enfòmasyon yo an premye, epi mwayèn nan kalkile yon fwa total la ak kantite a toude pare.",
+                "hint_1": "Sèvi ak `average = total / count` apre bouk la fini.",
+                "hint_2": "Enprime `Average: ...` ak `:.1f` anndan yon f-string."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n\n# Calculate average after the loop.\n# Print Average: <average> with one digit after the decimal point.\n"
+            },
+            "cp-5-choose-status": {
+              "title": "Chwazi liy estati a",
+              "prompt": "Kenbe rapò apèsi k ap mache a, epi apre sa ajoute liy estati final la: `excellent` pou mwayèn omwen 90, `passing` pou mwayèn omwen 70, epi `needs practice` sinon.",
+              "hint": "Sèvi ak yon chèn `if` / `elif` / `else` apre mwayèn nan pare.",
+              "help": {
+                "concept": "Yon fwa yon pwogram gen rezime final nòt la, kondisyon yo ka tounen li an yon jijman senp moun ka konprann fasil.",
+                "hint_1": "Tcheke `average >= 90` an premye.",
+                "hint_2": "Sèvi ak `elif average >= 70` pou ka mitan an, epi `else` pou ka ki rete a."
+              },
+              "starterCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\n# Add the status line.\n# Print excellent for averages 90+, passing for 70+, and needs practice otherwise.\n"
+            }
+          },
+          "tryIt": {
+            "try_mini_gradebook_capstone_sketch0": {
+              "title": "Eseye li ou menm",
+              "prompt": "Li non yon elèv epi enprime premye liy rapò a kòm `Student: <name>`."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-3": {},
+      "python--python-v2--draft-4": {
+        "mini-gradebook-capstone": {
+          "sketch_gradebook_plan": {
+            "title": "Planifye liv nòt la",
+            "bodyMarkdown": "Imajine yon pwofesè patikilye k ap prepare pou rankont ak paran yo. Li poko bezwen yon gwo sistèm lekòl. Li bezwen yon pwogram Python serye ki ka li non yon elèv, ranmase nòt yo, epi tounen yo an yon rapò li ka li byen vit.\n\nCapstone sa a kounye a grandi nan yon sekans klè: dabò antèt la, apre sa total la, apre sa nòt ki pi wo a, apre sa mwayèn nan, apre sa estati a, epi finalman rapò final poli a. Chak etap kòmanse soti nan vèsyon anvan an ki deja mache pou tout pwojè a santi tankou yon sèl ti zouti reyèl olye de yon sèl gwo sote."
+          }
+        }
+      },
+      "python-v2-4": {
+        "mini-gradebook-capstone": {
+          "sketch_gradebook_plan": {
+            "title": "Planifye liv nòt la",
+            "bodyMarkdown": "Imajine yon pwofesè patikilye k ap prepare pou rankont ak paran yo. Li poko bezwen yon gwo sistèm lekòl. Li bezwen yon pwogram Python serye ki ka li non yon elèv, ranmase nòt yo, epi tounen yo an yon rapò li ka li byen vit.\n\nCapstone sa a kounye a grandi nan yon sekans klè: dabò antèt la, apre sa total la, apre sa nòt ki pi wo a, apre sa mwayèn nan, apre sa estati a, epi finalman rapò final poli a. Chak etap kòmanse soti nan vèsyon anvan an ki deja mache pou tout pwojè a santi tankou yon sèl ti zouti reyèl olye de yon sèl gwo sote."
+          }
+        }
+      }
+    }
+  }
+}

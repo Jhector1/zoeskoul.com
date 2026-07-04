@@ -1,0 +1,109 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "label": "Projet : organisateur de notes",
+          "summary": "Organiser un dossier en désordre en notes, devoirs, code et sauvegardes avec les commandes de base du terminal Linux.",
+          "cards": {
+            "sketch0": {
+              "title": "Synopsis de l’organisateur de notes du groupe d’étude"
+            },
+            "project": {
+              "title": "Organisateur de notes du groupe d’étude"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module-2-notes-organizer-project-terminal-task-1": {
+                "title": "Créer les dossiers d’arrivée des notes",
+                "prompt": "A study group est dropping off two raw note fichiers for sorting. Create `student-notes-organizer/inbox/math.txt` et `student-notes-organizer/inbox/history.txt` so both notes sont ready dans the intake dossier.",
+                "hint": "Ceci est une étape de projet cumulative. Commencez à partir de l’espace de travail précédent et ajoutez uniquement la modification demandée.",
+                "help": {
+                  "concept": "Les étapes du projet sont liées. Conservez les livrables précédents et ajoutez un nouvel élément utile.",
+                  "hint_1": "Utilisez ls ou find pour vérifier l’espace de travail actuel avant de le modifier.",
+                  "hint_2": "Ne supprimez pas les fichiers des étapes précédentes sauf si l’énoncé vous demande explicitement de nettoyer un fichier temporaire."
+                },
+                "starterCode": "# Utilisez le terminal pour cette étape de projet Linux.\n",
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                    }
+                  }
+                }
+              },
+              "module-2-notes-organizer-project-terminal-task-2": {
+                "title": "Trier les notes et créer une sauvegarde",
+                "prompt": "The study group wants the notes fichierd avant handoff. Move `math.txt` et `history.txt` out of `student-notes-organizer/inbox` et into `student-notes-organizer/classes`, then make a backup copier of `history.txt` at `student-notes-organizer/backups/history.txt`.",
+                "hint": "Ceci est une étape de projet cumulative. Commencez à partir de l’espace de travail précédent et ajoutez uniquement la modification demandée.",
+                "help": {
+                  "concept": "Les étapes du projet sont liées. Conservez les livrables précédents et ajoutez un nouvel élément utile.",
+                  "hint_1": "Utilisez ls ou find pour vérifier l’espace de travail actuel avant de le modifier.",
+                  "hint_2": "Ne supprimez pas les fichiers des étapes précédentes sauf si l’énoncé vous demande explicitement de nettoyer un fichier temporaire."
+                },
+                "starterCode": "# Utilisez le terminal pour cette étape de projet Linux.\n",
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "student_notes_organizer_inbox_math_txt": {
+                    "content": "Math review notes\n"
+                  },
+                  "student_notes_organizer_inbox_history_txt": {
+                    "content": "History reading notes\n"
+                  }
+                }
+              },
+              "module-2-notes-organizer-project-terminal-task-3": {
+                "title": "Terminer le passage de relais de l’organisateur",
+                "prompt": "The notes sont sorted et backed up. Leave a clear handoff marker by création de `student-notes-organizer/handoff/notes-ready.txt` while keeping the class notes et backup dans place.",
+                "hint": "Ceci est une étape de projet cumulative. Commencez à partir de l’espace de travail précédent et ajoutez uniquement la modification demandée.",
+                "help": {
+                  "concept": "Les étapes du projet sont liées. Conservez les livrables précédents et ajoutez un nouvel élément utile.",
+                  "hint_1": "Utilisez ls ou find pour vérifier l’espace de travail actuel avant de le modifier.",
+                  "hint_2": "Ne supprimez pas les fichiers des étapes précédentes sauf si l’énoncé vous demande explicitement de nettoyer un fichier temporaire."
+                },
+                "starterCode": "# Utilisez le terminal pour cette étape de projet Linux.\n",
+                "terminalExpectations": {
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "student_notes_organizer_classes_math_txt": {
+                    "content": "Math review notes\n"
+                  },
+                  "student_notes_organizer_classes_history_txt": {
+                    "content": "History reading notes\n"
+                  },
+                  "student_notes_organizer_backups_history_txt": {
+                    "content": "History reading notes\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "project-synopsis": {
+            "title": "Organisateur de notes du groupe d’étude",
+            "bodyMarkdown": "Vous êtes preparing a clean fichier handoff for a study group. Build an intake area, sort notes into class dossiers, preserve a backup, et leave a ready marker.\n\nYou will complete this as connected project étapes. Each étape starts depuis the previous working espace de travail, so faire not supprimer earlier deliverables."
+          }
+        }
+      }
+    }
+  }
+}

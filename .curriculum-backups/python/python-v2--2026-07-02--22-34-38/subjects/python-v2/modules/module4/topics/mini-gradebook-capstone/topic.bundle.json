@@ -1,0 +1,1163 @@
+{
+  "topicId": "mini-gradebook-capstone",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-4",
+  "sectionSlug": "python-v2-python-v2-4-capstone-project",
+  "prefix": "pyv2_4",
+  "minutes": 35,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.label",
+    "summaryKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.cards.sketch0.title",
+      "sketchId": "sketch_gradebook_plan",
+      "height": 420,
+      "tryIt": {
+        "id": "try-mini-gradebook-capstone-sketch0",
+        "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.tryIt.try_mini_gradebook_capstone_sketch0.title",
+        "promptKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.tryIt.try_mini_gradebook_capstone_sketch0.prompt",
+        "exerciseKey": "try-mini-gradebook-capstone-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.cards.project.title",
+      "project": {
+        "difficulty": "medium",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": 10,
+        "steps": [
+          {
+            "id": "cp_1",
+            "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.projectSteps.cp_1.title",
+            "exerciseKey": "cp-1-read-gradebook-header",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "cp_2",
+            "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.projectSteps.cp_2.title",
+            "exerciseKey": "cp-2-add-score-total",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "cp_3",
+            "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.projectSteps.cp_3.title",
+            "exerciseKey": "cp-3-track-highest-score",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "cp_4",
+            "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.projectSteps.cp_4.title",
+            "exerciseKey": "cp-4-calculate-average",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "cp_5",
+            "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.projectSteps.cp_5.title",
+            "exerciseKey": "cp-5-choose-status",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          },
+          {
+            "id": "cp_6",
+            "titleKey": "topics.python-v2.python-v2-4.mini-gradebook-capstone.projectSteps.cp_6.title",
+            "exerciseKey": "capstone-mini-gradebook",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": 10
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch_gradebook_plan",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-4.mini-gradebook-capstone.sketch_gradebook_plan.title",
+      "bodyKey": "sketches.python-v2.python-v2-4.mini-gradebook-capstone.sketch_gradebook_plan.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-mini-gradebook-capstone-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "student = input()\nprint(f\"Student: {student}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\nprint(f\"Student: {student}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\n",
+            "stdout": "Student: Maya\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student = input()\nprint(f\"Student: {student}\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\nprint(f\"Student: {student}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed values with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "f[\"']",
+            "message": "Use f-strings to build the report lines."
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed values with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "f[\"']",
+          "message": "Use f-strings to build the report lines."
+        }
+      ]
+    },
+    {
+      "id": "cp-1-read-gradebook-header",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\n3\n",
+            "stdout": "Student: Maya\nScores entered: 3\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed values with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert numeric input before doing number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "f[\"']",
+            "message": "Use f-strings to build the report lines."
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed values with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert numeric input before doing number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "f[\"']",
+          "message": "Use f-strings to build the report lines."
+        }
+      ]
+    },
+    {
+      "id": "cp-2-add-score-total",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n\nprint(f\"Total: {total}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n\nprint(f\"Total: {total}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\n3\n90\n80\n100\n",
+            "stdout": "Student: Maya\nScores entered: 3\nTotal: 270\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n\nprint(f\"Total: {total}\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n\nprint(f\"Total: {total}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed values with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert numeric input before doing number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "for ",
+            "message": "Use a for loop for the repeated scores.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "range(",
+            "message": "Use range(count) to control how many scores are read.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "f[\"']",
+            "message": "Use f-strings to build the report lines."
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed values with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert numeric input before doing number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "for ",
+          "message": "Use a for loop for the repeated scores.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "range(",
+          "message": "Use range(count) to control how many scores are read.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "f[\"']",
+          "message": "Use f-strings to build the report lines."
+        }
+      ]
+    },
+    {
+      "id": "cp-3-track-highest-score",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\n3\n90\n80\n100\n",
+            "stdout": "Student: Maya\nScores entered: 3\nTotal: 270\nHighest score: 100\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed values with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert numeric input before doing number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "for ",
+            "message": "Use a for loop for the repeated scores.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "range(",
+            "message": "Use range(count) to control how many scores are read.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to update highest only when needed.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "f[\"']",
+            "message": "Use f-strings to build the report lines."
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed values with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert numeric input before doing number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "for ",
+          "message": "Use a for loop for the repeated scores.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "range(",
+          "message": "Use range(count) to control how many scores are read.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to update highest only when needed.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "f[\"']",
+          "message": "Use f-strings to build the report lines."
+        }
+      ]
+    },
+    {
+      "id": "cp-4-calculate-average",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\n3\n90\n80\n100\n",
+            "stdout": "Student: Maya\nScores entered: 3\nTotal: 270\nHighest score: 100\nAverage: 90.0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed values with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert numeric input before doing number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "for ",
+            "message": "Use a for loop for the repeated scores.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "range(",
+            "message": "Use range(count) to control how many scores are read.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "f[\"']",
+            "message": "Use f-strings to build the report lines."
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed values with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert numeric input before doing number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "for ",
+          "message": "Use a for loop for the repeated scores.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "range(",
+          "message": "Use range(count) to control how many scores are read.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "f[\"']",
+          "message": "Use f-strings to build the report lines."
+        }
+      ]
+    },
+    {
+      "id": "cp-5-choose-status",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\n3\n90\n80\n100\n",
+            "stdout": "Student: Maya\nScores entered: 3\nTotal: 270\nHighest score: 100\nAverage: 90.0\nStatus: excellent\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Leo\n2\n70\n72\n",
+            "stdout": "Student: Leo\nScores entered: 2\nTotal: 142\nHighest score: 72\nAverage: 71.0\nStatus: passing\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\n\ntotal = 0\nhighest = 0\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Total: {total}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed values with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert numeric input before doing number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "for ",
+            "message": "Use a for loop for the repeated scores.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "range(",
+            "message": "Use range(count) to control how many scores are read.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "elif ",
+            "message": "Use elif for the middle status case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed values with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert numeric input before doing number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "for ",
+          "message": "Use a for loop for the repeated scores.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "range(",
+          "message": "Use range(count) to control how many scores are read.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "elif ",
+          "message": "Use elif for the middle status case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "capstone-mini-gradebook",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Maya\n3\n90\n80\n100\n",
+            "stdout": "Student: Maya\nScores entered: 3\nHighest score: 100\nAverage: 90.0\nStatus: excellent\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Leo\n2\n70\n72\n",
+            "stdout": "Student: Leo\nScores entered: 2\nHighest score: 72\nAverage: 71.0\nStatus: passing\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Nia\n4\n60\n65\n70\n75\n",
+            "stdout": "Student: Nia\nScores entered: 4\nHighest score: 75\nAverage: 67.5\nStatus: needs practice\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = input()\ncount = int(input())\n\ntotal = 0\nhighest = 0\n\nfor i in range(count):\n    score = int(input())\n    total = total + score\n    if score > highest:\n        highest = score\n\naverage = total / count\n\nprint(f\"Student: {student}\")\nprint(f\"Scores entered: {count}\")\nprint(f\"Highest score: {highest}\")\nprint(f\"Average: {average:.1f}\")\n\nif average >= 90:\n    print(\"Status: excellent\")\nelif average >= 70:\n    print(\"Status: passing\")\nelse:\n    print(\"Status: needs practice\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed values with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert numeric input before doing number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "for ",
+            "message": "Use a for loop for the repeated scores.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "range(",
+            "message": "Use range(count) to control how many scores are read.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "elif ",
+            "message": "Use elif for the middle status case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "f[\"']",
+            "message": "Use f-strings to build the report lines."
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed values with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert numeric input before doing number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "for ",
+          "message": "Use a for loop for the repeated scores.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "range(",
+          "message": "Use range(count) to control how many scores are read.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "elif ",
+          "message": "Use elif for the middle status case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "f[\"']",
+          "message": "Use f-strings to build the report lines."
+        }
+      ]
+    }
+  ]
+}

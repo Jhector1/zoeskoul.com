@@ -4,7 +4,7 @@
   "moduleSlug": "linux-module-2-files-and-folders",
   "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow",
   "prefix": "linux_module_2",
-  "minutes": 20,
+  "minutes": 18,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "copy-with-cp",
       "height": 420,
       "tryIt": {
         "id": "try-copy-move-rename-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "move-with-mv",
       "height": 420,
       "tryIt": {
         "id": "try-copy-move-rename-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.cards.sketch2.title",
-      "sketchId": "sketch-3",
+      "sketchId": "rename-with-mv",
       "height": 420,
       "tryIt": {
         "id": "try-copy-move-rename-sketch2",
@@ -85,40 +85,39 @@
         "n": 4,
         "min": 4,
         "max": 6,
-        "selectionMode": "random",
-        "allowReveal": true,
-        "preferKind": null,
-        "maxAttempts": null
+        "select": {
+          "purpose": "quiz"
+        }
       }
     }
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "copy-with-cp",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.sketch-1.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.copy-with-cp.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.copy-with-cp.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "move-with-mv",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.sketch-2.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.move-with-mv.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.move-with-mv.bodyMarkdown"
     },
     {
-      "id": "sketch-3",
+      "id": "rename-with-mv",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.sketch-3.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.rename-with-mv.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.rename-with-mv.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-which-command-renames",
+      "id": "sc-copy-keeps-original",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.sc-which-command-renames",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.sc-copy-keeps-original",
       "optionIds": [
         "a",
         "b",
@@ -127,15 +126,32 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-copy-vs-move",
+      "id": "sc-move-command",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.sc-move-command",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-mv-uses",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.mc-copy-vs-move",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.mc-mv-uses",
       "optionIds": [
         "a",
         "b",
@@ -151,69 +167,23 @@
       }
     },
     {
-      "id": "mc-safe-command-choice",
-      "kind": "multi_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.mc-safe-command-choice",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "c"
-        ]
-      }
-    },
-    {
-      "id": "dr-copy-then-rename-flow",
+      "id": "dr-backup-then-move",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.dr-copy-then-rename-flow",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.dr-backup-then-move",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4"
+          "t3"
         ]
-      }
-    },
-    {
-      "id": "ci-copy-class-notes",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.ci-copy-class-notes",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "print an observable result"
-      }
-    },
-    {
-      "id": "ci-move-report-into-folder",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.practice.ci-move-report-into-folder",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "print an observable result"
       }
     },
     {
@@ -233,55 +203,40 @@
           "entry": true
         },
         {
-          "path": "sample-inbox/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.sample_inbox_agenda_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "warmup/backups/.keep",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.warmup_backups_keep.content",
+          "path": "registration/attendee-list.txt",
+          "content": "Amina\nDiego\nMaya\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "cp sample-inbox/agenda.txt warmup/backups/agenda.txt\nls warmup/backups\n",
+          "content": "cp attendee-list.txt attendee-list-backup.txt\nls\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "sample-inbox/agenda.txt",
-          "content": "Agenda\n",
+          "path": "registration/attendee-list.txt",
+          "content": "Amina\nDiego\nMaya\n",
           "language": "bash"
         },
         {
-          "path": "warmup/backups/.keep",
-          "content": "",
-          "language": "bash"
-        },
-        {
-          "path": "warmup/backups/agenda.txt",
-          "content": "Agenda\n",
+          "path": "registration/attendee-list-backup.txt",
+          "content": "Amina\nDiego\nMaya\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "sample-inbox/agenda.txt",
-          "warmup/backups/agenda.txt"
-        ],
-        "requiredFolders": [
-          "sample-inbox",
-          "warmup",
-          "warmup/backups"
+          "registration/attendee-list.txt",
+          "registration/attendee-list-backup.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^cp\\s+sample-inbox/agenda\\.txt\\s+warmup/backups/agenda\\.txt$",
+            "pattern": "(^|\\s)cp(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.terminalExpectations.requiredCommands.0.message"
           }
         ],
@@ -289,8 +244,21 @@
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "registration"
       },
       "workspace": {
         "language": "bash",
@@ -305,36 +273,21 @@
             "entry": true
           },
           {
-            "path": "sample-inbox/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.sample_inbox_agenda_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "warmup/backups/.keep",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.warmup_backups_keep.content",
+            "path": "registration/attendee-list.txt",
+            "content": "Amina\nDiego\nMaya\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "sample-inbox/agenda.txt",
-            "warmup/backups/agenda.txt"
-          ],
-          "requiredFolders": [
-            "sample-inbox",
-            "warmup",
-            "warmup/backups"
+            "registration/attendee-list.txt",
+            "registration/attendee-list-backup.txt"
           ]
         },
         "fixtureFiles": [
           {
-            "path": "sample-inbox/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.sample_inbox_agenda_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "warmup/backups/.keep",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.warmup_backups_keep.content",
+            "path": "registration/attendee-list.txt",
+            "content": "Amina\nDiego\nMaya\n",
             "language": "bash"
           }
         ]
@@ -353,17 +306,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/registration"
       },
       "fixtureFiles": [
         {
-          "path": "sample-inbox/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.sample_inbox_agenda_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "warmup/backups/.keep",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-1.starterFiles.warmup_backups_keep.content",
+          "path": "registration/attendee-list.txt",
+          "content": "Amina\nDiego\nMaya\n",
           "language": "bash"
         }
       ]
@@ -385,52 +334,50 @@
           "entry": true
         },
         {
-          "path": "sample-inbox/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.sample_inbox_guest_list_txt.content",
+          "path": "sign-shop/banner-note.txt",
+          "content": "Hang the welcome banner by 8:30.\n",
           "language": "bash"
         },
         {
-          "path": "warmup/guests/.keep",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.warmup_guests_keep.content",
+          "path": "sign-shop/handoff/.keep",
+          "content": "",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mv sample-inbox/guest-list.txt warmup/guests/guest-list.txt\nls warmup/guests\n",
+          "content": "mv banner-note.txt handoff/banner-note.txt\nls handoff\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "warmup/guests/.keep",
+          "path": "sign-shop/handoff/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "warmup/guests/guest-list.txt",
-          "content": "Guest list\n",
+          "path": "sign-shop/handoff/banner-note.txt",
+          "content": "Hang the welcome banner by 8:30.\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "warmup/guests/guest-list.txt"
+          "sign-shop/handoff/banner-note.txt"
         ],
         "requiredFolders": [
-          "sample-inbox",
-          "warmup",
-          "warmup/guests"
+          "sign-shop/handoff"
         ],
         "forbiddenFiles": [
-          "sample-inbox/guest-list.txt"
+          "sign-shop/banner-note.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^mv\\s+sample-inbox/guest-list\\.txt\\s+warmup/guests/guest-list\\.txt$",
+            "pattern": "(^|\\s)mv(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.terminalExpectations.requiredCommands.0.message"
           }
         ],
@@ -438,8 +385,21 @@
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "sign-shop"
       },
       "workspace": {
         "language": "bash",
@@ -454,38 +414,36 @@
             "entry": true
           },
           {
-            "path": "sample-inbox/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.sample_inbox_guest_list_txt.content",
+            "path": "sign-shop/banner-note.txt",
+            "content": "Hang the welcome banner by 8:30.\n",
             "language": "bash"
           },
           {
-            "path": "warmup/guests/.keep",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.warmup_guests_keep.content",
+            "path": "sign-shop/handoff/.keep",
+            "content": "",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "warmup/guests/guest-list.txt"
+            "sign-shop/handoff/banner-note.txt"
           ],
           "requiredFolders": [
-            "sample-inbox",
-            "warmup",
-            "warmup/guests"
+            "sign-shop/handoff"
           ],
           "forbiddenFiles": [
-            "sample-inbox/guest-list.txt"
+            "sign-shop/banner-note.txt"
           ]
         },
         "fixtureFiles": [
           {
-            "path": "sample-inbox/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.sample_inbox_guest_list_txt.content",
+            "path": "sign-shop/banner-note.txt",
+            "content": "Hang the welcome banner by 8:30.\n",
             "language": "bash"
           },
           {
-            "path": "warmup/guests/.keep",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.warmup_guests_keep.content",
+            "path": "sign-shop/handoff/.keep",
+            "content": "",
             "language": "bash"
           }
         ]
@@ -504,17 +462,18 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/sign-shop"
       },
       "fixtureFiles": [
         {
-          "path": "sample-inbox/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.sample_inbox_guest_list_txt.content",
+          "path": "sign-shop/banner-note.txt",
+          "content": "Hang the welcome banner by 8:30.\n",
           "language": "bash"
         },
         {
-          "path": "warmup/guests/.keep",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-2.starterFiles.warmup_guests_keep.content",
+          "path": "sign-shop/handoff/.keep",
+          "content": "",
           "language": "bash"
         }
       ]
@@ -536,40 +495,37 @@
           "entry": true
         },
         {
-          "path": "sample-inbox/draft-report.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterFiles.sample_inbox_draft_report_txt.content",
+          "path": "schedule-desk/schedule-draft.txt",
+          "content": "Opening: 9:00\nWorkshop: 10:30\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mv sample-inbox/draft-report.txt sample-inbox/final-report.txt\nls sample-inbox\n",
+          "content": "mv schedule-draft.txt schedule-final.txt\nls\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "sample-inbox/final-report.txt",
-          "content": "Draft report\n",
+          "path": "schedule-desk/schedule-final.txt",
+          "content": "Opening: 9:00\nWorkshop: 10:30\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "sample-inbox/final-report.txt"
-        ],
-        "requiredFolders": [
-          "sample-inbox"
+          "schedule-desk/schedule-final.txt"
         ],
         "forbiddenFiles": [
-          "sample-inbox/draft-report.txt"
+          "schedule-desk/schedule-draft.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^mv\\s+sample-inbox/draft-report\\.txt\\s+sample-inbox/final-report\\.txt$",
+            "pattern": "(^|\\s)mv(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.terminalExpectations.requiredCommands.0.message"
           }
         ],
@@ -577,8 +533,21 @@
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "schedule-desk"
       },
       "workspace": {
         "language": "bash",
@@ -593,26 +562,23 @@
             "entry": true
           },
           {
-            "path": "sample-inbox/draft-report.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterFiles.sample_inbox_draft_report_txt.content",
+            "path": "schedule-desk/schedule-draft.txt",
+            "content": "Opening: 9:00\nWorkshop: 10:30\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "sample-inbox/final-report.txt"
-          ],
-          "requiredFolders": [
-            "sample-inbox"
+            "schedule-desk/schedule-final.txt"
           ],
           "forbiddenFiles": [
-            "sample-inbox/draft-report.txt"
+            "schedule-desk/schedule-draft.txt"
           ]
         },
         "fixtureFiles": [
           {
-            "path": "sample-inbox/draft-report.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterFiles.sample_inbox_draft_report_txt.content",
+            "path": "schedule-desk/schedule-draft.txt",
+            "content": "Opening: 9:00\nWorkshop: 10:30\n",
             "language": "bash"
           }
         ]
@@ -631,12 +597,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/schedule-desk"
       },
       "fixtureFiles": [
         {
-          "path": "sample-inbox/draft-report.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.copy-move-rename.tryIt.exercises.copy-move-rename-try-it-3.starterFiles.sample_inbox_draft_report_txt.content",
+          "path": "schedule-desk/schedule-draft.txt",
+          "content": "Opening: 9:00\nWorkshop: 10:30\n",
           "language": "bash"
         }
       ]
@@ -644,9 +611,9 @@
   ],
   "topicMeta": {
     "learningGoals": [
-      "Try it yourself: copy an agenda backup",
-      "Try it yourself: move a guest list into place",
-      "Try it yourself: rename a draft report"
+      "Copy a backup",
+      "Move a file into handoff",
+      "Rename a draft"
     ]
   },
   "serviceDefaults": {
@@ -656,6 +623,7 @@
       "files": true,
       "multiFile": true,
       "terminal": true
-    }
+    },
+    "terminalCwd": "/workspace"
   }
 }

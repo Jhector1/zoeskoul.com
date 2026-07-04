@@ -1,0 +1,49 @@
+subject: python--applied-python-projects--draft
+profile: python
+course: applied-python-projects
+modules: 4
+topics: 20
+exercise counts: {"code_input":118,"multi_choice":19,"fill_blank_choice":23,"drag_reorder":12,"single_choice":16}
+code_input count: 118
+severity counts: {"blocker":0,"error":0,"warning":41,"info":0}
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "class-files-and-instances" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-class-files-and-instances-sketch0" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-class-files-and-instances-sketch1" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-class-files-and-instances-sketch2" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "project-step-account-class" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "project-step-account-methods" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "project-step-two-accounts" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "constructors-and-object-state" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "methods-and-responsibility" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "encapsulation-and-validation" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-8-account-tracker-project" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "inheritance-for-shared-behavior" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "overriding-and-specialization" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "polymorphic-collections" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "abstraction-with-base-interfaces" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-9-catalog-polymorphism-project" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-module-9-catalog-polymorphism-project-sketch0" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "testing-object-state" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "testing-inheritance-and-polymorphism" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "policy_code_input_1" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "policy_code_input_2" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "policy_code_input_3" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "debugging-imports-and-state" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "refactoring-oop-services" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-10-oop-quality-project" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "project-step-regression-summary" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "capstone-scope-and-architecture" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "capstone-domain-model" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "try-capstone-domain-model-sketch0" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "capstone-domain-model-step1-bug-task" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "capstone-domain-model-step2-feature-task" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "capstone-domain-model-step3-task-service" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "capstone-domain-model-step4-package-runner" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "capstone-domain-model-step5-final-domain-demo" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "capstone-storage-and-reports" has no learning goals on its seed metadata.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "capstone-tests-and-polish" has no learning goals on its seed metadata.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "capstone-tests-and-polish-step2-service-tests" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "capstone-tests-and-polish-step3-report-file" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "capstone-tests-and-polish-step4-readme" starterCode appears to contain most of the final solution structure.
+[warning] STARTER_MAY_REVEAL_SOLUTION_STRUCTURE: Exercise "capstone-tests-and-polish-step6-final-handoff" starterCode appears to contain most of the final solution structure.
+[warning] MISSING_TOPIC_LEARNING_GOALS: Topic "module-11-final-oop-capstone" has no learning goals on its seed metadata.

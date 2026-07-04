@@ -1,0 +1,118 @@
+{
+  "ide": {
+    "fullIde": {
+      "status": {
+        "conflict": "Konfli",
+        "saving": "Ap anrejistre…",
+        "unsaved": "Pa anrejistre",
+        "saved": "Anrejistre",
+        "notSaved": "Pa anrejistre",
+        "unsavedTitle": "Chanjman ki pa anrejistre",
+        "savedAt": "Anrejistre a {time}",
+        "notSavedYet": "Siko pa anrejistre"
+      },
+      "header": {
+        "sqlDialect": "Dyalèk SQL",
+        "goBack": "Tounen dèyè",
+        "back": "Retounen",
+        "files": "Fichye yo",
+        "saveCopy": "Anrejistre yon kopi",
+        "saveAs": "Anrejistre kòm",
+        "resolve": "Rezoud",
+        "saving": "Ap anrejistre…",
+        "save": "Anrejistre",
+        "upgrade": "Amelyore",
+        "logIn": "Konekte"
+      },
+      "deleteModal": {
+        "title": "Efase",
+        "description": "Efase {name}?",
+        "fallbackItem": "eleman sa a",
+        "cancel": "Anile",
+        "confirm": "Efase"
+      }
+    },
+    "explorer": {
+      "layout": {
+        "openFileExplorer": "Ouvri eksploratè fichye",
+        "resizeExplorer": "Chanje gwosè eksploratè a",
+        "resizeExplorerHelp": "Slepe oswa itilize flèch yo pou chanje gwosè eksploratè a",
+        "files": "Fichye yo",
+        "close": "Fèmen",
+        "closeFilesPanel": "Fèmen panèl fichye yo"
+      },
+      "menu": {
+        "openNodeActions": "Ouvri aksyon nœud yo",
+        "actionsTitle": "Aksyon yo"
+      },
+      "tabs": {
+        "openFiles": "Fichye ki ouvri",
+        "closeFile": "Fèmen {name}"
+      },
+      "tree": {
+        "save": "Anrejistre",
+        "cancel": "Anile",
+        "setAsEntry": "Defini kòm Antre",
+        "entryFile": "Fichye antre",
+        "rename": "Chanje non",
+        "delete": "Efase",
+        "newFile": "Nouvo fichye",
+        "newFolder": "Nouvo dosye",
+        "moveTo": "Deplase nan…",
+        "moveUsingMenu": "Itilize \"Deplase nan…\" depi nan meni an",
+        "dragToMove": "Slepe pou deplase",
+        "moveDisabled": "Deplasman dezaktive",
+        "useMoveAction": "Itilize aksyon Deplase a",
+        "dragHandle": "Manch pou slepe",
+        "collapse": "Redui",
+        "expand": "Pliye",
+        "entryRunsOnClick": "Lanse lè w klike sou Kouri",
+        "entryBadge": "ANTRE",
+        "moveItem": "Deplase {name}",
+        "moveFallback": "eleman",
+        "moveHint": "Klike sou yon dosye pou w deplase ladan l, oswa deplase l tounen nan rasin lan.",
+        "moveToRoot": "Deplase nan rasin"
+      },
+      "pane": {
+        "title": "Eksploratè",
+        "sqlWorkspace": "Espas travay SQL",
+        "undoTip": "Defè (Ctrl/Cmd+Z)",
+        "undo": "Defè",
+        "redoTip": "Refè (Ctrl/Cmd+Shift+Z / Ctrl/Cmd+Y)",
+        "redo": "Refè",
+        "collapseExplorer": "Redui eksploratè a",
+        "filterFiles": "Filtre fichye yo…",
+        "filterSqlFiles": "Filtre fichye SQL yo…",
+        "newFile": "Nouvo fichye",
+        "newFolder": "Nouvo dosye",
+        "openFile": "Ouvri fichye",
+        "openFolder": "Ouvri dosye",
+        "uploadDisabled": "Televèsman dezaktive pou espas travay sa a.",
+        "logInToUpload": "Konekte pou w ka televèse fichye.",
+        "uploadUnavailable": "Televèsman fichye pa disponib nan espas travay sa a.",
+        "folderImportUnavailable": "Enpòtasyon dosye pa disponib nan espas travay sa a.",
+        "uploadLimit": "Limit televèsman: {perFile} pou chak fichye, {count} {fileWord} alafwa.",
+        "upgrade": "Amelyore",
+        "sqlMode": "Mòd SQL",
+        "activeDialect": "Dyalèk aktif:",
+        "sqlModeHelp": "Egzekisyon SQL yo sèvi ak fichye editè aktyèl la kòm sous rekèt la epi yo montre rezilta rekèt estriktire yo nan panèl pwodiksyon an.",
+        "webPreview": "Aperçu Web",
+        "webPreviewFiles": "Itilize index.html, styles.css, ak script.js.",
+        "webPreviewHelp": "Panèl dwat la se yon aperçu navigatè an dirèk. Chanjman yo rafrechi otomatikman.",
+        "sharedStdin": "Stdin pataje",
+        "sharedInputPlaceholder": "Antre pataje…"
+      }
+    },
+    "editor": {
+      "e2eInputLabel": "Antre editè IDE konplè E2E",
+      "emptyState": {
+        "noSqlFile": "Pa gen okenn fichye SQL ki chwazi.",
+        "noWebFile": "Pa gen okenn fichye web ki chwazi.",
+        "noFile": "Pa gen okenn fichye ki chwazi."
+      }
+    },
+    "terminal": {
+      "title": "Tèminal"
+    }
+  }
+}

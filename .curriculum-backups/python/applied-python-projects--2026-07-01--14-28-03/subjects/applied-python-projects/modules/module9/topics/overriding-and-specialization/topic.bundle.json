@@ -1,0 +1,562 @@
+{
+  "topicId": "overriding-and-specialization",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-inheritance-and-overrides",
+  "prefix": "py9",
+  "minutes": 32,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch0.title",
+      "sketchId": "overriding-and-specialization-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-overriding-and-specialization-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.prompt",
+        "exerciseKey": "try-overriding-and-specialization-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch1.title",
+      "sketchId": "overriding-and-specialization-sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-overriding-and-specialization-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.prompt",
+        "exerciseKey": "try-overriding-and-specialization-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch2.title",
+      "sketchId": "try-it-yourself",
+      "height": 420,
+      "tryIt": {
+        "id": "try-overriding-and-specialization-sketch2",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.prompt",
+        "exerciseKey": "try-overriding-and-specialization-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 5,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "overriding-and-specialization-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch0.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "overriding-and-specialization-sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch1.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch1.bodyMarkdown"
+    },
+    {
+      "id": "try-it-yourself",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.try-it-yourself.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.try-it-yourself.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-overriding-and-specialization-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Cat"
+          },
+          {
+            "type": "method_returns",
+            "className": "Cat",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "speak",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Meow!"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-overriding-and-specialization-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        original_sound = super().speak()\n        return f\"{original_sound} Woof!\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        original_sound = super().speak()\n        return f\"{original_sound} Woof!\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        original_sound = super().speak()\n        return f\"{original_sound} Woof!\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "Dog",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "speak",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Some sound Woof!"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-overriding-and-specialization-0",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-0",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "ci-overriding-and-specialization-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "superclass"
+      }
+    },
+    {
+      "id": "ci-overriding-and-specialization-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "ci-overriding-and-specialization-3",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-3",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "ci-overriding-and-specialization-4",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-4",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "name"
+      }
+    },
+    {
+      "id": "try-overriding-and-specialization-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"\n\n# Create a list of Animal objects\nanimals = [Dog(), Cat()]\n\n# Iterate over the list and call speak()\nfor animal in animals:\n    print(animal.speak())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"\n\n# Create a list of Animal objects\nanimals = [Dog(), Cat()]\n\n# Iterate over the list and call speak()\nfor animal in animals:\n    print(animal.speak())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"\n\n# Create a list of Animal objects\nanimals = [Dog(), Cat()]\n\n# Iterate over the list and call speak()\nfor animal in animals:\n    print(animal.speak())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Animal",
+            "message": "Define or import the Animal class for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Animal",
+            "constructorArgs": [],
+            "message": "Animal should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Dog",
+            "message": "Define the Dog subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Dog",
+            "constructorArgs": [],
+            "message": "Dog should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Cat",
+            "message": "Define the Cat subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Cat",
+            "constructorArgs": [],
+            "message": "Cat should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Dog",
+            "message": "Define the Dog subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Dog",
+            "constructorArgs": [],
+            "message": "Dog should be constructible with the example arguments."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print at least 2 non-empty output line(s)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-overriding-and-specialization-6",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-6",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-6.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-6.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"\n\nclass Bird(Animal):\n    def speak(self):\n        return \"Chirp!\"\n\n# Create a list of Animal objects\nanimals = [Dog(), Cat(), Bird()]\n\n# Iterate over the list and call speak()\nfor animal in animals:\n    print(animal.speak())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-6.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.ci-overriding-and-specialization-6.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"\n\nclass Bird(Animal):\n    def speak(self):\n        return \"Chirp!\"\n\n# Create a list of Animal objects\nanimals = [Dog(), Cat(), Bird()]\n\n# Iterate over the list and call speak()\nfor animal in animals:\n    print(animal.speak())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"\n\nclass Cat(Animal):\n    def speak(self):\n        return \"Meow!\"\n\nclass Bird(Animal):\n    def speak(self):\n        return \"Chirp!\"\n\n# Create a list of Animal objects\nanimals = [Dog(), Cat(), Bird()]\n\n# Iterate over the list and call speak()\nfor animal in animals:\n    print(animal.speak())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Animal",
+            "message": "Define or import the Animal class for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Animal",
+            "constructorArgs": [],
+            "message": "Animal should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Dog",
+            "message": "Define the Dog subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Dog",
+            "constructorArgs": [],
+            "message": "Dog should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Cat",
+            "message": "Define the Cat subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Cat",
+            "constructorArgs": [],
+            "message": "Cat should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Dog",
+            "message": "Define the Dog subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Dog",
+            "constructorArgs": [],
+            "message": "Dog should be constructible with the example arguments."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 3,
+            "message": "Print at least 3 non-empty output line(s)."
+          }
+        ]
+      }
+    }
+  ]
+}

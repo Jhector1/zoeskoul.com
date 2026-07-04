@@ -1,0 +1,16 @@
+import { resolveGenerationProviderModel } from "./selectProviderModel.js";
+
+export async function selectModelFromConsole() {
+  const resolved = await resolveGenerationProviderModel({
+    cliArgs: [],
+    interactive: true,
+  });
+
+  if (resolved.provider === "openai") {
+    process.env.OPENAI_MODEL = resolved.model;
+  }
+
+  console.log(`Selected ${resolved.provider} model: ${resolved.model}`);
+  console.log("");
+  return resolved.model;
+}

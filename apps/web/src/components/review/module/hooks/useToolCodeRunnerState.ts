@@ -146,6 +146,46 @@ function firstNonBlank(...values: Array<string | null | undefined>) {
     }
     return undefined;
 }
+
+export function resolveStarterHashForToolBind(args: {
+    snapshotOverridesSaved: boolean;
+    effectiveSavedStarterHash?: string | null;
+    runtimeStarterHash?: string | null;
+    progressRuntimeStarterHash?: string | null;
+    progressToolStarterHash?: string | null;
+    currentStarterHash: string;
+}) {
+    const effectiveSavedStarterHash = firstNonBlank(
+        args.effectiveSavedStarterHash,
+    );
+
+    if (effectiveSavedStarterHash) {
+        return effectiveSavedStarterHash;
+    }
+
+    /**
+     * A terminal-created file is learner workspace state, not a new authored
+     * starter. syncCodeInputSnapshot rebinds the visible tool with
+     * preferSnapshot=true after a terminal snapshot. Preserve the original
+     * starter identity during that rebind.
+     *
+     * Replacing starterHash with the mutated workspace hash changes
+     * CodeToolPane's workspaceOwnerIdentityKey, remounts FullIDE/CodeRunner,
+     * and auto-opens a fresh PTY session.
+     */
+    if (args.snapshotOverridesSaved) {
+        return (
+            firstNonBlank(
+                args.runtimeStarterHash,
+                args.progressRuntimeStarterHash,
+                args.progressToolStarterHash,
+            ) ?? args.currentStarterHash
+        );
+    }
+
+    return args.currentStarterHash;
+}
+
 function isSavedUserWork(value: any) {
     if (!value) return false;
 
@@ -1693,10 +1733,26 @@ export function useToolCodeRunnerState(args: {
                     (effectiveSavedForBind?.workspace as any)?.sqlSeedSql,
                     resolvedSql.sqlSeedSql,
                 ),
-                    starterHash:
-                    typeof effectiveSavedForBind?.starterHash === "string"
-                        ? effectiveSavedForBind.starterHash
-                        : currentStarterHash,
+                    starterHash: resolveStarterHashForToolBind({
+                        snapshotOverridesSaved,
+                        effectiveSavedStarterHash:
+                            typeof effectiveSavedForBind?.starterHash === "string"
+                                ? effectiveSavedForBind.starterHash
+                                : null,
+                        runtimeStarterHash:
+                            typeof runtimeSaved?.starterHash === "string"
+                                ? runtimeSaved.starterHash
+                                : null,
+                        progressRuntimeStarterHash:
+                            typeof progressRuntimeExerciseSaved?.starterHash === "string"
+                                ? progressRuntimeExerciseSaved.starterHash
+                                : null,
+                        progressToolStarterHash:
+                            typeof progressToolStateSaved?.starterHash === "string"
+                                ? progressToolStateSaved.starterHash
+                                : null,
+                        currentStarterHash,
+                    }),
                     sqlInitialTableSnapshots:
                     (effectiveSavedForBind as any)?.sqlInitialTableSnapshots ??
                     (effectiveSavedForBind?.workspace as any)?.sqlInitialTableSnapshots ??

@@ -301,11 +301,11 @@
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -314,11 +314,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "student = {}\n\n# Store name Ava and score 92.\n# Then print the score.\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -344,11 +344,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "student = {\"name\": \"Ava\", \"score\": 92}\nprint(student[\"score\"])\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "student = {\"name\": \"Ava\", \"score\": 92}\nprint(student[\"score\"])\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -375,19 +375,19 @@
           {
             "type": "source_regex",
             "pattern": "\\bstudent\\s*=",
-            "message": "Create a dictionary variable named student."
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.sourceChecks.0.message"
           },
           {
             "type": "uses_dict_key",
             "key": "score",
-            "message": "Use the score key to read the score from student."
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.sourceChecks.1.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "student = {\"name\": \"Ava\", \"score\": 92}\nprint(student[\"score\"])\n",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -397,12 +397,12 @@
         {
           "type": "source_regex",
           "pattern": "\\bstudent\\s*=",
-          "message": "Create a dictionary variable named student."
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.sourceChecks.0.message"
         },
         {
           "type": "uses_dict_key",
           "key": "score",
-          "message": "Use the score key to read the score from student."
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.sourceChecks.1.message"
         }
       ]
     },
@@ -413,11 +413,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary",
       "language": "python",
-      "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -426,11 +426,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -450,7 +450,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -505,7 +505,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -515,7 +515,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -529,11 +529,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score",
       "language": "python",
-      "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -542,11 +542,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -566,7 +566,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def get_score(scores, name):\n    return scores[name]",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -621,7 +621,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def get_score(scores, name):\n    return scores[name]",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -631,7 +631,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def get_score(scores, name):\n    return scores[name]",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -645,11 +645,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary",
       "language": "python",
-      "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -658,11 +658,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -682,7 +682,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -755,7 +755,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -765,7 +765,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -779,11 +779,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0",
       "language": "python",
-      "starterCode": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -792,7 +792,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -801,11 +801,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -831,11 +831,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -845,7 +845,7 @@
           {
             "type": "uses_dict_key",
             "key": "name",
-            "message": "Use profile[\"name\"] instead of typing Ava directly.",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message",
             "variable": "profile"
           }
         ]
@@ -854,7 +854,7 @@
         {
           "type": "uses_dict_key",
           "key": "name",
-          "message": "Use profile[\"name\"] instead of typing Ava directly.",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message",
           "variable": "profile"
         }
       ]
@@ -866,11 +866,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1",
       "language": "python",
-      "starterCode": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -879,7 +879,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -888,11 +888,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -918,11 +918,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -949,7 +949,7 @@
           {
             "type": "source_regex",
             "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
-            "message": "Update profile['age'] to 12 instead of replacing the final dictionary."
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
           }
         ]
       },
@@ -957,7 +957,7 @@
         {
           "type": "source_regex",
           "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
-          "message": "Update profile['age'] to 12 instead of replacing the final dictionary."
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
         }
       ]
     },
@@ -968,11 +968,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2",
       "language": "python",
-      "starterCode": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -981,7 +981,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -990,11 +990,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1020,11 +1020,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1051,17 +1051,17 @@
           {
             "type": "source_regex",
             "pattern": "\\bscores\\s*=",
-            "message": "Create a dictionary variable named scores."
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
           },
           {
             "type": "uses_dict_key",
             "key": "Ava",
-            "message": "Use Ava as a key in scores."
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.1.message"
           },
           {
             "type": "uses_dict_key",
             "key": "Mia",
-            "message": "Use Mia as a key in scores."
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.2.message"
           }
         ]
       },
@@ -1069,17 +1069,17 @@
         {
           "type": "source_regex",
           "pattern": "\\bscores\\s*=",
-          "message": "Create a dictionary variable named scores."
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
         },
         {
           "type": "uses_dict_key",
           "key": "Ava",
-          "message": "Use Ava as a key in scores."
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.1.message"
         },
         {
           "type": "uses_dict_key",
           "key": "Mia",
-          "message": "Use Mia as a key in scores."
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.2.message"
         }
       ]
     }

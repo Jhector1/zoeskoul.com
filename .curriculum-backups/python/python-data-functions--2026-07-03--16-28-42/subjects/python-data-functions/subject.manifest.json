@@ -1,0 +1,375 @@
+{
+  "subject": {
+    "slug": "python-data-functions",
+    "profileId": "python",
+    "catalogSlug": "python",
+    "genKey": "python_part1",
+    "order": 30,
+    "accessPolicy": "paid",
+    "status": "active",
+    "imagePublicId": "python_data_function_qeemap.png",
+    "imageAlt": null,
+    "titleKey": "subjects.python-data-functions.title",
+    "descriptionKey": "subjects.python-data-functions.description",
+    "meta": {
+      "curriculum": {
+        "plannedModuleCount": 4,
+        "isTerminalRelease": true,
+        "moreComingMessageKey": "subjects.python-data-functions.moreComingSoon"
+      },
+      "completionPolicy": {
+        "requireAllPublishedModules": true,
+        "rewardEnabledByDefault": true,
+        "certificateEnabledByDefault": true
+      }
+    }
+  },
+  "modules": [
+    {
+      "slug": "python-5-lists-tuples-and-dictionaries",
+      "prefix": "py5",
+      "order": 5,
+      "titleKey": "modules.python-data-functions.python-5-lists-tuples-and-dictionaries.title",
+      "descriptionKey": "modules.python-data-functions.python-5-lists-tuples-and-dictionaries.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": false,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 153,
+        "prereqKeys": [
+          "modules.python-data-functions.python-4.title"
+        ],
+        "outcomeKeys": [
+          "modules.python-data-functions.python-5-lists-tuples-and-dictionaries.outcomes.0",
+          "modules.python-data-functions.python-5-lists-tuples-and-dictionaries.outcomes.1",
+          "modules.python-data-functions.python-5-lists-tuples-and-dictionaries.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.python-data-functions.python-5-lists-tuples-and-dictionaries.why.0",
+          "modules.python-data-functions.python-5-lists-tuples-and-dictionaries.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "python-data-functions-python-5-list-basics",
+          "order": 1,
+          "titleKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-list-basics.title",
+          "descriptionKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-list-basics.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-list-basics.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-list-basics.bullets.0",
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-list-basics.bullets.1",
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-list-basics.bullets.2",
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-list-basics.bullets.3"
+            ]
+          },
+          "topics": [
+            "creating-and-indexing-lists",
+            "list-methods-and-mutation",
+            "looping-through-lists"
+          ]
+        },
+        {
+          "slug": "python-data-functions-python-5-dictionaries",
+          "order": 2,
+          "titleKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-dictionaries.title",
+          "descriptionKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-dictionaries.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-dictionaries.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-dictionaries.bullets.0",
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-dictionaries.bullets.1",
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-dictionaries.bullets.2",
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-dictionaries.bullets.3"
+            ]
+          },
+          "topics": [
+            "dictionary-basics",
+            "updating-and-looping-dictionaries",
+            "nested-data-structures"
+          ]
+        },
+        {
+          "slug": "python-data-functions-python-5-module-project",
+          "order": 99,
+          "titleKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.title",
+          "descriptionKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.description",
+          "meta": {
+            "module": 5,
+            "weeksKey": "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.bullets.0",
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.bullets.1",
+              "sections.python-data-functions.python-5-lists-tuples-and-dictionaries.python-data-functions-python-5-module-project.bullets.2"
+            ]
+          },
+          "topics": [
+            "module-5-gradebook-project"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-6-functions-and-modularity",
+      "prefix": "py6",
+      "order": 6,
+      "titleKey": "modules.python-data-functions.python-6-functions-and-modularity.title",
+      "descriptionKey": "modules.python-data-functions.python-6-functions-and-modularity.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": false,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 170,
+        "prereqKeys": [
+          "modules.python-data-functions.python-5.title"
+        ],
+        "outcomeKeys": [
+          "modules.python-data-functions.python-6-functions-and-modularity.outcomes.0",
+          "modules.python-data-functions.python-6-functions-and-modularity.outcomes.1",
+          "modules.python-data-functions.python-6-functions-and-modularity.outcomes.2",
+          "modules.python-data-functions.python-6-functions-and-modularity.outcomes.3"
+        ],
+        "whyKeys": [
+          "modules.python-data-functions.python-6-functions-and-modularity.why.0",
+          "modules.python-data-functions.python-6-functions-and-modularity.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "python-data-functions-python-6-function-basics",
+          "order": 1,
+          "titleKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-basics.title",
+          "descriptionKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-basics.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-basics.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-basics.bullets.0",
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-basics.bullets.1",
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-basics.bullets.2",
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-basics.bullets.3"
+            ]
+          },
+          "topics": [
+            "defining-and-calling-functions",
+            "parameters-and-return-values",
+            "print-vs-return"
+          ]
+        },
+        {
+          "slug": "python-data-functions-python-6-function-design",
+          "order": 2,
+          "titleKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-design.title",
+          "descriptionKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-design.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-design.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-design.bullets.0",
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-design.bullets.1",
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-design.bullets.2",
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-function-design.bullets.3"
+            ]
+          },
+          "topics": [
+            "scope-and-local-variables",
+            "decomposition-and-refactoring",
+            "using-imports-and-helper-files",
+            "docstrings-and-function-contracts"
+          ]
+        },
+        {
+          "slug": "python-data-functions-python-6-module-project",
+          "order": 99,
+          "titleKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.title",
+          "descriptionKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.description",
+          "meta": {
+            "module": 6,
+            "weeksKey": "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.bullets.0",
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.bullets.1",
+              "sections.python-data-functions.python-6-functions-and-modularity.python-data-functions-python-6-module-project.bullets.2"
+            ]
+          },
+          "topics": [
+            "module-6-name-badge-package"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-7-files-exceptions-and-data-cleaning",
+      "prefix": "py7",
+      "order": 7,
+      "titleKey": "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.title",
+      "descriptionKey": "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 143,
+        "prereqKeys": [
+          "modules.python-data-functions.python-6.title"
+        ],
+        "outcomeKeys": [
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.0",
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.1",
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.2",
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.3",
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.outcomes.4"
+        ],
+        "whyKeys": [
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.why.0",
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "python-data-functions-python-7-file-io",
+          "order": 1,
+          "titleKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-file-io.title",
+          "descriptionKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-file-io.description",
+          "meta": {
+            "module": 7,
+            "weeksKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-file-io.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-file-io.bullets.0",
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-file-io.bullets.1",
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-file-io.bullets.2",
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-file-io.bullets.3"
+            ]
+          },
+          "topics": [
+            "reading-text-files",
+            "writing-text-files",
+            "working-with-paths"
+          ]
+        },
+        {
+          "slug": "python-data-functions-python-7-exceptions-and-cleaning",
+          "order": 2,
+          "titleKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-exceptions-and-cleaning.title",
+          "descriptionKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-exceptions-and-cleaning.description",
+          "meta": {
+            "module": 7,
+            "weeksKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-exceptions-and-cleaning.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-exceptions-and-cleaning.bullets.0",
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-exceptions-and-cleaning.bullets.1",
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-exceptions-and-cleaning.bullets.2",
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-exceptions-and-cleaning.bullets.3"
+            ]
+          },
+          "topics": [
+            "try-except-basics",
+            "validating-and-cleaning-input",
+            "simple-csv-processing"
+          ]
+        },
+        {
+          "slug": "python-data-functions-python-7-module-project",
+          "order": 99,
+          "titleKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.title",
+          "descriptionKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.description",
+          "meta": {
+            "module": 7,
+            "weeksKey": "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.bullets.0",
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.bullets.1",
+              "sections.python-data-functions.python-7-files-exceptions-and-data-cleaning.python-data-functions-python-7-module-project.bullets.2"
+            ]
+          },
+          "topics": [
+            "module-7-clean-student-records"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-8-real-world-project",
+      "prefix": "py8",
+      "order": 8,
+      "titleKey": "modules.python-data-functions.python-8-real-world-project.title",
+      "descriptionKey": "modules.python-data-functions.python-8-real-world-project.description",
+      "weekStart": null,
+      "weekEnd": null,
+      "accessOverride": null,
+      "runtimeDefaults": {
+        "kind": "code",
+        "language": "python",
+        "supportsTerminal": false,
+        "supportsMultiFile": true,
+        "supportsFileSystem": true,
+        "supportsStdInStdOut": true,
+        "supportsPackageInstall": false
+      },
+      "meta": {
+        "estimatedMinutes": 120,
+        "prereqKeys": [
+          "modules.python-data-functions.python-7-files-exceptions-and-data-cleaning.title"
+        ],
+        "outcomeKeys": [
+          "modules.python-data-functions.python-8-real-world-project.outcomes.0",
+          "modules.python-data-functions.python-8-real-world-project.outcomes.1",
+          "modules.python-data-functions.python-8-real-world-project.outcomes.2"
+        ],
+        "whyKeys": [
+          "modules.python-data-functions.python-8-real-world-project.why.0",
+          "modules.python-data-functions.python-8-real-world-project.why.1"
+        ]
+      },
+      "sections": [
+        {
+          "slug": "python-data-functions-python-8-course-capstone",
+          "order": 1,
+          "titleKey": "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.title",
+          "descriptionKey": "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.description",
+          "meta": {
+            "module": 8,
+            "weeksKey": "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.weeks",
+            "bulletKeys": [
+              "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.bullets.0",
+              "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.bullets.1",
+              "sections.python-data-functions.python-8-real-world-project.python-data-functions-python-8-course-capstone.bullets.2"
+            ]
+          },
+          "topics": [
+            "class-roster-cleaner"
+          ]
+        }
+      ]
+    }
+  ]
+}

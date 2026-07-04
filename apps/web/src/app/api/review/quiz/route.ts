@@ -74,6 +74,31 @@ function defaultPurposeForMode(mode: "quiz" | "project") {
   return mode === "project" ? "project" : "quiz";
 }
 
+function explicitQuizExerciseKeys(spec: ReviewQuizRequestSpec) {
+  return Array.isArray((spec as any).exerciseKeys)
+    ? Array.from(
+        new Set(
+          ((spec as any).exerciseKeys as unknown[])
+            .map((key) => String(key ?? "").trim())
+            .filter(Boolean),
+        ),
+      )
+    : [];
+}
+
+function isCodeInputPoolItem(item: PoolItem) {
+  return String(item.kind ?? "").trim() === "code_input";
+}
+
+function quizPoolForTopic(slug: string, preferKind: ReviewQuizRequestSpec["preferKind"]) {
+  const topic = findRegistryTopic(slug);
+  const rawPool = readPoolFromTopicMeta(topic?.meta);
+  const quizPool = filterPoolForPurposeAndKind(rawPool, "quiz", preferKind ?? null)
+    .filter((item) => !isCodeInputPoolItem(item));
+
+  return { topic, rawPool, quizPool };
+}
+
 function matchesProjectQuestionShape(args: {
   question: ReviewQuizQuestion;
   step: NonNullable<ReviewQuizRequestSpec["steps"]>[number];
@@ -98,16 +123,20 @@ function matchesProjectQuestionShape(args: {
 function matchesQuizQuestionShape(args: {
   question: ReviewQuizQuestion;
   spec: ReviewQuizRequestSpec;
+  index: number;
 }) {
-  const { question, spec } = args;
+  const { question, spec, index } = args;
   const expectedTopic = spec.topic ? toDbTopicSlug(spec.topic) : "";
   const expectedPurpose = defaultPurposeForMode("quiz");
+  const explicitKeys = explicitQuizExerciseKeys(spec);
+  const expectedExerciseKey = explicitKeys[index] ?? null;
 
   return (
     question.kind === "practice" &&
     question.fetch?.preferPurpose === expectedPurpose &&
     (!expectedTopic || question.fetch?.topic === expectedTopic) &&
-    (spec.preferKind == null || question.fetch?.preferKind === spec.preferKind)
+    (spec.preferKind == null || question.fetch?.preferKind === spec.preferKind) &&
+    (!expectedExerciseKey || question.fetch?.exerciseKey === expectedExerciseKey)
   );
 }
 
@@ -134,12 +163,16 @@ function existingQuestionsMatchSpec(args: {
   }
 
   if (!questions.length) return false;
-  if (questions.length !== (spec.n ?? 4)) return false;
 
-  return questions.every((question) =>
+  const explicitKeys = explicitQuizExerciseKeys(spec);
+  const expectedCount = explicitKeys.length || (spec.n ?? 4);
+  if (questions.length !== expectedCount) return false;
+
+  return questions.every((question, index) =>
     matchesQuizQuestionShape({
       question,
       spec,
+      index,
     }),
   );
 }
@@ -580,38 +613,117 @@ export async function POST(req: Request) {
       };
     });
   } else {
-    const rng = rngFromActor({
-      userId: actor.userId,
-      guestId: actor.guestId,
-      sessionId: null,
-      salt: `review-quiz-instance:${quizKey}`,
-    });
-
-    const pickedTopics = pickTopicsForQuizPreferUnique(rng, allowedTopicSlugs, n);
+    const explicitKeys = explicitQuizExerciseKeys(spec);
     const qk = shortHash(quizKey);
 
-    const uniqPickedTopics = Array.from(new Set(pickedTopics));
+    if (explicitKeys.length) {
+      if (wantsAll || !spec.topic) {
+        return bodyJsonWithGuestCookie(
+          {
+            message: "Explicit authored quiz exercise keys require a concrete topic.",
+            detail: {
+              subject: spec.subject,
+              module: spec.moduleSlug,
+              section: spec.section ?? null,
+              topic: spec.topic ?? null,
+              exerciseKeys: explicitKeys,
+            },
+          },
+          400,
+          setGuestId,
+        );
+      }
 
-    const poolBySlug = new Map<string, PoolItem[]>();
+      const dbSlug = toDbTopicSlug(spec.topic);
 
-    for (const slug of uniqPickedTopics) {
-      const topic = findRegistryTopic(slug);
-      const pool = readPoolFromTopicMeta(topic?.meta);
-      poolBySlug.set(
-          slug,
-          filterPoolForPurposeAndKind(pool, "quiz", spec.preferKind ?? null),
-      );
-    }
+      if (!allowedTopicSlugs.includes(dbSlug)) {
+        return bodyJsonWithGuestCookie(
+          {
+            message: `Topic "${dbSlug}" is not part of the allowed review scope.`,
+            detail: {
+              requested: spec.topic,
+              normalized: dbSlug,
+              subject: spec.subject,
+              module: spec.moduleSlug,
+              section: spec.section ?? null,
+              allowedTopicSlugs,
+              exerciseKeys: explicitKeys,
+            },
+          },
+          400,
+          setGuestId,
+        );
+      }
 
-    const missingPool = uniqPickedTopics.filter(
+      const { rawPool, quizPool } = quizPoolForTopic(dbSlug, spec.preferKind ?? null);
+      const availableQuizKeys = new Set(quizPool.map((item) => item.key));
+      const missingKeys = explicitKeys.filter((key) => !availableQuizKeys.has(key));
+
+      if (missingKeys.length) {
+        return bodyJsonWithGuestCookie(
+          {
+            message: "Authored quiz card references exercises that are not available in the quiz pool.",
+            detail: {
+              topic: dbSlug,
+              missingKeys,
+              exerciseKeys: explicitKeys,
+              availableQuizKeys: quizPool.map((item) => item.key),
+              rawPoolCount: rawPool.length,
+              quizPoolCount: quizPool.length,
+              preferPurpose: "quiz",
+              preferKind: spec.preferKind ?? null,
+            },
+          },
+          400,
+          setGuestId,
+        );
+      }
+
+      questions = explicitKeys.map((exerciseKey, i) => ({
+        kind: "practice" as const,
+        id: `q${i + 1}:${qk}:${shortHash(exerciseKey)}`,
+        fetch: {
+          subject: spec.subject,
+          module: spec.moduleSlug,
+          section: spec.section,
+          topic: dbSlug,
+          difficulty: spec.difficulty ?? "easy",
+          allowReveal: Boolean(spec.allowReveal),
+          preferPurpose: "quiz",
+          preferKind: spec.preferKind ?? null,
+          exerciseKey,
+          seedPolicy: "global",
+          salt: `${quizKey}|topic=${dbSlug}|slot=${i + 1}|q=${i + 1}|k=${exerciseKey}`,
+        },
+        maxAttempts: defaultMaxAttempts,
+      }));
+    } else {
+      const rng = rngFromActor({
+        userId: actor.userId,
+        guestId: actor.guestId,
+        sessionId: null,
+        salt: `review-quiz-instance:${quizKey}`,
+      });
+
+      const pickedTopics = pickTopicsForQuizPreferUnique(rng, allowedTopicSlugs, n);
+      const uniqPickedTopics = Array.from(new Set(pickedTopics));
+
+      const poolBySlug = new Map<string, PoolItem[]>();
+
+      for (const slug of uniqPickedTopics) {
+        const { quizPool } = quizPoolForTopic(slug, spec.preferKind ?? null);
+        poolBySlug.set(slug, quizPool);
+      }
+
+      const missingPool = uniqPickedTopics.filter(
         (s) => (poolBySlug.get(s)?.length ?? 0) === 0,
-    );
+      );
 
-    if (missingPool.length) {
-      return bodyJsonWithGuestCookie(
+      if (missingPool.length) {
+        return bodyJsonWithGuestCookie(
           {
             message:
-                "Cannot generate a no-duplicate quiz because some topics have no exercises after purpose/preferKind filtering.",
+              "Cannot generate a no-duplicate quiz because some topics have no exercises after purpose/preferKind filtering.",
             detail: {
               missingPool,
               preferPurpose: "quiz",
@@ -620,48 +732,69 @@ export async function POST(req: Request) {
           },
           400,
           setGuestId,
-      );
-    }
-
-    const usedByTopic = new Map<string, Set<string>>();
-    const out: ReviewQuizQuestion[] = [];
-
-    for (let i = 0; i < n; i++) {
-      const pickedTopic = pickedTopics[i];
-
-      if (!pickedTopic) {
-        break;
+        );
       }
 
-      const pool = poolBySlug.get(pickedTopic)!;
+      const usedByTopic = new Map<string, Set<string>>();
+      const out: ReviewQuizQuestion[] = [];
 
-      const used = usedByTopic.get(pickedTopic) ?? new Set<string>();
-      const exerciseKey = pickUniqueExerciseKey(rng, pool, used);
+      for (let i = 0; i < n; i++) {
+        const pickedTopic = pickedTopics[i];
 
-      if (!exerciseKey) break;
+        if (!pickedTopic) {
+          break;
+        }
 
-      usedByTopic.set(pickedTopic, used);
+        const pool = poolBySlug.get(pickedTopic)!;
 
-      out.push({
-        kind: "practice" as const,
-        id: `p${i + 1}:${qk}`,
-        fetch: {
+        const used = usedByTopic.get(pickedTopic) ?? new Set<string>();
+        const exerciseKey = pickUniqueExerciseKey(rng, pool, used);
+
+        if (!exerciseKey) break;
+
+        usedByTopic.set(pickedTopic, used);
+
+        out.push({
+          kind: "practice" as const,
+          id: `p${i + 1}:${qk}`,
+          fetch: {
+            subject: spec.subject,
+            module: spec.moduleSlug,
+            section: spec.section,
+            topic: pickedTopic,
+            difficulty: spec.difficulty ?? "easy",
+            allowReveal: Boolean(spec.allowReveal),
+            preferPurpose: defaultPurpose,
+            preferKind: spec.preferKind ?? null,
+            exerciseKey,
+            salt: `${quizKey}|topic=${pickedTopic}|slot=${i + 1}|q=${i + 1}|k=${exerciseKey}`,
+          },
+          maxAttempts: defaultMaxAttempts,
+        });
+      }
+
+      questions = out;
+    }
+  }
+  if (mode === "quiz" && questions.length === 0) {
+    return bodyJsonWithGuestCookie(
+      {
+        message: "Quiz generation returned no questions.",
+        detail: {
           subject: spec.subject,
           module: spec.moduleSlug,
-          section: spec.section,
-          topic: pickedTopic,
-          difficulty: spec.difficulty ?? "easy",
-          allowReveal: Boolean(spec.allowReveal),
-          preferPurpose: defaultPurpose,
+          section: spec.section ?? null,
+          topic: spec.topic ?? null,
+          requested: n,
+          exerciseKeys: explicitQuizExerciseKeys(spec),
+          allowedTopicSlugs,
+          preferPurpose: "quiz",
           preferKind: spec.preferKind ?? null,
-          exerciseKey,
-          salt: `${quizKey}|topic=${pickedTopic}|slot=${i + 1}|q=${i + 1}|k=${exerciseKey}`,
         },
-        maxAttempts: defaultMaxAttempts,
-      });
-    }
-
-    questions = out;
+      },
+      400,
+      setGuestId,
+    );
   }
 
   try {

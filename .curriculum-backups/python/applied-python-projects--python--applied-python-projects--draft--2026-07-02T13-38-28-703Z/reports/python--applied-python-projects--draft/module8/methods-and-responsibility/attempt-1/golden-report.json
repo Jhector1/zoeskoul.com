@@ -1,0 +1,34 @@
+{
+  "topicId": "methods-and-responsibility",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-methods-and-responsibility-sketch0",
+      "message": "Exercise \"try-methods-and-responsibility-sketch0\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-methods-and-responsibility-sketch1",
+      "message": "Exercise \"try-methods-and-responsibility-sketch1\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-methods-and-responsibility-sketch2",
+      "message": "Exercise \"try-methods-and-responsibility-sketch2\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "ci-methods-and-responsibility-validation-step",
+      "message": "Exercise \"ci-methods-and-responsibility-validation-step\" solutionCode does not satisfy its semantic checks."
+    }
+  ]
+}

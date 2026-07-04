@@ -1,0 +1,362 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "encapsulation-and-validation": {
+          "label": "Encapsulation and Validation",
+          "summary": "Protect object state by changing attributes through methods that check values before saving them, using model and helper files in a small account tracker app.",
+          "cards": {
+            "sketch0": {
+              "title": "Why encapsulation matters"
+            },
+            "sketch1": {
+              "title": "Validation methods protect object state"
+            },
+            "sketch2": {
+              "title": "Using helper files with model classes"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_encapsulation_and_validation_sketch0": {
+              "title": "Add a validated deposit method",
+              "prompt": "You are building an account tracker for a neighborhood club. In `models/account.py`, finish the `deposit` method so it adds the amount only when the amount is greater than 0. Return `True` when the deposit succeeds and `False` when it is rejected. `main.py` already creates two accounts and prints the results, so click Run to verify that valid deposits change the balance and invalid ones do not.",
+              "hint": "Update `self.balance` only inside the valid branch.",
+              "help": {
+                "concept": "Encapsulation means the object changes its own state through a method that checks the rule first. Here, `deposit` should be the only place that decides whether a balance update is allowed.",
+                "hint_1": "The method needs one rule: amounts must be greater than 0 before the balance changes.",
+                "hint_2": "In the valid case, add `amount` to `self.balance` and return a success value. In the invalid case, leave the balance unchanged and return a failure value."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\nclub = Account(\"Club Fund\", 100)\nprint(club.deposit(25))\nprint(club.balance)\n\nsnack = Account(\"Snack Budget\", 40)\nprint(snack.deposit(-5))\nprint(snack.balance)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        # add validation and update the balance only for valid amounts\n        pass",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom models.account import Account\n\nclub = Account(\"Club Fund\", 100)\nprint(club.deposit(25))\nprint(club.balance)\n\nsnack = Account(\"Snack Budget\", 40)\nprint(snack.deposit(-5))\nprint(snack.balance)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        # add validation and update the balance only for valid amounts\n        pass"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nclub = Account(\"Club Fund\", 100)\nprint(club.deposit(25))\nprint(club.balance)\n\nsnack = Account(\"Snack Budget\", 40)\nprint(snack.deposit(-5))\nprint(snack.balance)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\nclub = Account(\"Club Fund\", 100)\nprint(club.deposit(25))\nprint(club.balance)\n\nsnack = Account(\"Snack Budget\", 40)\nprint(snack.deposit(-5))\nprint(snack.balance)",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should be constructible with owner and balance."
+                },
+                "2": {
+                  "message": "Store owner and balance as instance attributes."
+                },
+                "3": {
+                  "message": "A positive deposit should return True."
+                },
+                "4": {
+                  "message": "A positive deposit should increase the balance."
+                },
+                "5": {
+                  "message": "A negative deposit should return False."
+                },
+                "6": {
+                  "message": "An invalid deposit should leave the balance unchanged."
+                }
+              }
+            },
+            "try_encapsulation_and_validation_sketch1": {
+              "title": "Validate a spending limit update",
+              "prompt": "A school event app stores account spending limits. In `models/account.py`, complete `set_spending_limit` so it updates the limit only when `new_limit` is 0 or more. Return the string `\"updated\"` for a valid change and `\"rejected\"` for an invalid one. `main.py` prints both the method result and the final limit for two accounts.",
+              "hint": "Read the task \"Validate a spending limit update\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Validate a spending limit update\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\nbooth = Account(\"Booth\", 60)\nprint(booth.set_spending_limit(80))\nprint(booth.spending_limit)\n\nraffle = Account(\"Raffle\", 30)\nprint(raffle.set_spending_limit(-10))\nprint(raffle.spending_limit)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, spending_limit):\n        self.owner = owner\n        self.spending_limit = spending_limit\n\n    def set_spending_limit(self, new_limit):\n        # validate before changing the limit\n        pass",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom models.account import Account\n\nbooth = Account(\"Booth\", 60)\nprint(booth.set_spending_limit(80))\nprint(booth.spending_limit)\n\nraffle = Account(\"Raffle\", 30)\nprint(raffle.set_spending_limit(-10))\nprint(raffle.spending_limit)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, spending_limit):\n        self.owner = owner\n        self.spending_limit = spending_limit\n\n    def set_spending_limit(self, new_limit):\n        # validate before changing the limit\n        pass"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, spending_limit):\n        self.owner = owner\n        self.spending_limit = spending_limit\n\n    def set_spending_limit(self, amount):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nbooth = Account(\"Booth\", 60)\nprint(booth.set_spending_limit(80))\nprint(booth.spending_limit)\n\nraffle = Account(\"Raffle\", 30)\nprint(raffle.set_spending_limit(-10))\nprint(raffle.spending_limit)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, spending_limit):\n        self.owner = owner\n        self.spending_limit = spending_limit\n\n    def set_spending_limit(self, new_limit):\n        if new_limit >= 0:\n            self.spending_limit = new_limit\n            return \"updated\"\n        return \"rejected\""
+                }
+              },
+              "solutionCode": "class Account:\n    def __init__(self, owner, spending_limit):\n        self.owner = owner\n        self.spending_limit = spending_limit\n\n    def set_spending_limit(self, new_limit):\n        if new_limit >= 0:\n            self.spending_limit = new_limit\n            return \"updated\"\n        return \"rejected\"\n\nbooth = Account(\"Booth\", 60)\nprint(booth.set_spending_limit(80))\nprint(booth.spending_limit)\n\nraffle = Account(\"Raffle\", 30)\nprint(raffle.set_spending_limit(-10))\nprint(raffle.spending_limit)",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should be constructible with owner and spending_limit."
+                },
+                "2": {
+                  "message": "Store owner and spending_limit as instance attributes."
+                },
+                "3": {
+                  "message": "A valid limit update should return 'updated'."
+                },
+                "4": {
+                  "message": "A valid limit update should change the stored limit."
+                },
+                "5": {
+                  "message": "An invalid limit update should return 'rejected'."
+                },
+                "6": {
+                  "message": "An invalid limit update should keep the old limit."
+                }
+              }
+            },
+            "try_encapsulation_and_validation_sketch2": {
+              "title": "Use a helper to clean deposit text",
+              "prompt": "You are improving the club account tracker so raw text amounts are cleaned in a helper file before the account uses them. In `helpers/validation.py`, complete `clean_amount` so it removes surrounding spaces and converts the text to an integer. `main.py` already imports the helper and passes the cleaned value into `Account.deposit`. When you click Run, the balance should reflect the cleaned amount.",
+              "hint": "Read the task \"Use a helper to clean deposit text\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Use a helper to clean deposit text\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# main.py\nfrom helpers.validation import clean_amount\nfrom models.account import Account\n\namount = clean_amount(\" 25 \")\naccount = Account(\"Mina\", 100)\naccount.deposit(amount)\nprint(account.balance)\n\n# helpers/validation.py\ndef clean_amount(text):\n    # return the cleaned integer amount\n    pass\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom helpers.validation import clean_amount\nfrom models.account import Account\n\namount = clean_amount(\" 25 \")\naccount = Account(\"Mina\", 100)\naccount.deposit(amount)\nprint(account.balance)\n\n# helpers/validation.py\ndef clean_amount(text):\n    # return the cleaned integer amount\n    pass\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass"
+                },
+                "helpers_validation_py": {
+                  "content": "def clean_amount(value):\n    pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from helpers.validation import clean_amount\nfrom models.account import Account\n\namount = clean_amount(\" 25 \")\naccount = Account(\"Mina\", 100)\naccount.deposit(amount)\nprint(account.balance)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False"
+                },
+                "helpers_validation_py": {
+                  "content": "def clean_amount(text):\n    return int(text.strip())"
+                }
+              },
+              "solutionCode": "def clean_amount(text):\n    return int(text.strip())\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False\n\namount = clean_amount(\" 25 \")\naccount = Account(\"Mina\", 100)\naccount.deposit(amount)\nprint(account.balance)",
+              "checks": {
+                "0": {
+                  "message": "clean_amount should strip spaces and return an integer."
+                },
+                "1": {
+                  "message": "clean_amount should also work when there are no extra spaces."
+                },
+                "2": {
+                  "message": "Keep the Account class available for main.py imports."
+                },
+                "3": {
+                  "message": "The cleaned amount should be usable in deposit."
+                },
+                "4": {
+                  "message": "A cleaned valid amount should increase the balance."
+                }
+              }
+            }
+          },
+          "practice": {
+            "mc-encapsulation-rules": {
+              "title": "Choose the encapsulated designs",
+              "prompt": "Which designs best protect account state with encapsulation? Choose all that apply.",
+              "hint": "Look for choices where the class, not outside code, decides whether a value is valid.",
+              "help": {
+                "concept": "Encapsulation keeps rules close to the data they protect. Good designs route changes through methods that validate before updating attributes.",
+                "hint_1": "A strong design uses methods like `deposit` or `set_spending_limit` instead of changing attributes directly from many places.",
+                "hint_2": "Select the options where invalid values can be rejected before the attribute changes, and avoid options that rely on outside code remembering every rule."
+              },
+              "options": {
+                "a": "`Account.deposit(amount)` checks that `amount > 0` before changing `balance`.",
+                "b": "`main.py` sets `account.balance = -50` directly whenever it wants.",
+                "c": "`Account.set_spending_limit(new_limit)` rejects negative values and keeps the old limit.",
+                "d": "A helper file prints a warning, but the class still accepts any value into the attribute."
+              }
+            },
+            "fb-validation-condition": {
+              "title": "Complete the validation rule",
+              "prompt": "Fill in the missing comparison so the method accepts zero and positive limits.",
+              "hint": "The rule should allow 0 as a valid limit.",
+              "help": {
+                "concept": "A validation condition defines exactly which values are allowed before an attribute changes. For a non-negative limit, the comparison must include zero.",
+                "hint_1": "Negative numbers should fail, but 0 should pass.",
+                "hint_2": "Choose the comparison operator that means 'greater than or equal to zero'."
+              },
+              "template": "if new_limit [blank1] 0:",
+              "choices": [
+                ">",
+                "<",
+                ">=",
+                "=="
+              ]
+            },
+            "dr-validated-update-order": {
+              "title": "Order a safe state update",
+              "prompt": "Put these steps in the best order for a method that safely updates an account attribute.",
+              "hint": "The method should check the new value before saving it.",
+              "help": {
+                "concept": "A safe state update follows a sequence: receive input, validate it, update only if valid, then report the result. This order prevents bad data from being stored.",
+                "hint_1": "The assignment to the attribute should happen after the validation check, not before it.",
+                "hint_2": "Start with the incoming value, then test it, then update the attribute only in the valid branch, and finally return the outcome."
+              },
+              "tokens": {
+                "t1": "Receive the new value in a method parameter.",
+                "t2": "Check whether the value follows the rule.",
+                "t3": "Save the value to the attribute only if it passes.",
+                "t4": "Return a result that shows success or rejection."
+              }
+            },
+            "ci-account-withdraw": {
+              "title": "Add a validated withdraw method",
+              "prompt": "Your club account tracker now needs withdrawals. In `models/account.py`, complete `withdraw` so it subtracts the amount only when the amount is greater than 0 and no larger than the current balance. Return `True` for a successful withdrawal and `False` otherwise. `main.py` already checks one valid and one invalid withdrawal.",
+              "hint": "Read the task \"Add a validated withdraw method\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add a validated withdraw method\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        # subtract only when the amount is valid\n        pass",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom models.account import Account\n\ntrip = Account(\"Trip Fund\", 90)\nprint(trip.withdraw(30))\nprint(trip.balance)\n\nsupplies = Account(\"Supplies\", 20)\nprint(supplies.withdraw(25))\nprint(supplies.balance)\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        # subtract only when the amount is valid\n        pass"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def withdraw(self, amount):\n        pass"
+                }
+              }
+            },
+            "mc-helper-vs-model": {
+              "title": "Separate helper work from model work",
+              "prompt": "Which statements correctly describe the roles of a helper file and a model class in this topic? Choose all that apply.",
+              "hint": "Think about which code prepares input and which code protects stored state.",
+              "help": {
+                "concept": "Helper files often clean or format data, while model classes own object state and validate changes to that state. Keeping those roles separate makes code easier to maintain.",
+                "hint_1": "A helper can turn raw text into a number, but the class should still decide whether that number is allowed to change the attribute.",
+                "hint_2": "Pick the options where the helper prepares data and the class enforces the rule for saving it."
+              },
+              "options": {
+                "a": "A helper function can strip spaces from text before the value is used.",
+                "b": "A model method can reject a value and keep the old attribute unchanged.",
+                "c": "A helper file should directly overwrite object attributes so the class stays smaller.",
+                "d": "A model class should store the account state such as owner and balance."
+              }
+            },
+            "fb-import-line": {
+              "title": "Complete the import",
+              "prompt": "Fill in the missing module path so `main.py` imports the `Account` class from the model file.",
+              "hint": "The class lives in the `models` folder, inside the `account` module.",
+              "help": {
+                "concept": "Imports connect files in a multifile project. To import a class, you need the correct module path before the class name.",
+                "hint_1": "The path should name the folder first and the module second.",
+                "hint_2": "Choose the dotted path that points to the `account` file inside `models`."
+              },
+              "template": "from [blank1] import Account",
+              "choices": [
+                "account.models",
+                "models.account",
+                "helpers.account",
+                "main.account"
+              ]
+            },
+            "ci-account-summary-method": {
+              "title": "Create a summary method for account state",
+              "prompt": "A volunteer dashboard needs a readable account summary. In `models/account.py`, complete `summary` so it returns a string in this exact format: `Owner: <owner>, Balance: <balance>`. Do not print inside the method; return the string instead. `main.py` already prints the returned summary for two accounts.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# main.py\nfrom models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        # return the formatted summary string\n        pass",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom models.account import Account\n\nfirst = Account(\"Mina\", 125)\nsecond = Account(\"Leo\", 40)\nprint(first.summary())\nprint(second.summary())\n\n# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        # return the formatted summary string\n        pass"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def summary(self):\n        pass"
+                }
+              }
+            },
+            "sc-why-validation-method": {
+              "title": "Why use a validation method?",
+              "prompt": "Why is `set_spending_limit()` usually safer than changing `account.spending_limit` directly from many places in the program?",
+              "hint": "Think about where the rule is enforced every time the value changes.",
+              "help": {
+                "concept": "A validation method centralizes the rule for changing an attribute. That makes it less likely that invalid state will be stored by mistake.",
+                "hint_1": "One approach depends on every file remembering the rule. The safer approach puts the rule in one place.",
+                "hint_2": "Choose the answer where the class checks the value before saving it, so invalid data can be rejected consistently."
+              },
+              "options": {
+                "a": "Because the method can validate the new value before updating the attribute.",
+                "b": "Because methods always run faster than direct attribute access.",
+                "c": "Because direct attributes cannot store numbers.",
+                "d": "Because imports only work when every attribute is private."
+              }
+            },
+            "ci-helper-is_positive_amount": {
+              "title": "Build a helper that checks positive amounts",
+              "prompt": "Your team wants a reusable validation helper. In `helpers/validation.py`, complete `is_positive_amount` so it returns `True` when the number is greater than 0 and `False` otherwise. `main.py` uses that helper inside `Account.deposit`, so the helper must work for both valid and invalid amounts.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "# main.py\nfrom helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)\n\n# helpers/validation.py\ndef is_positive_amount(amount):\n    # return True only for amounts greater than 0\n    pass\n\n# models/account.py\nfrom helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# main.py\nfrom helpers.validation import is_positive_amount\nfrom models.account import Account\n\nfirst = Account(\"Club\", 50)\nprint(first.deposit(10))\nprint(first.balance)\n\nsecond = Account(\"Snacks\", 50)\nprint(second.deposit(0))\nprint(second.balance)\n\n# helpers/validation.py\ndef is_positive_amount(amount):\n    # return True only for amounts greater than 0\n    pass\n\n# models/account.py\nfrom helpers.validation import is_positive_amount\n\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if is_positive_amount(amount):\n            self.balance += amount\n            return True\n        return False"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, balance):\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass"
+                },
+                "helpers_validation_py": {
+                  "content": "def is_positive_amount(amount):\n    pass"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "encapsulation-and-validation": {
+          "encapsulation-and-validation-sketch-0": {
+            "title": "Why encapsulation matters",
+            "bodyMarkdown": "Encapsulation means an object should manage its own state instead of letting any part of the program change attributes in unsafe ways.\n\nImagine an account tracker. If code anywhere can set `balance` directly, someone might accidentally store a negative balance when your app should not allow it. A safer design is to give the object a method like `deposit()` or `withdraw()` and let that method decide whether the change is valid.\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False\n```\n\nStep by step:\n\n- `__init__` stores the starting state for each account.\n- `deposit()` receives a requested change.\n- `if amount > 0:` checks whether the change is allowed.\n- Only valid amounts update `self.balance`.\n- The method returns `True` or `False` so other code knows what happened.\n\nThis keeps the rule close to the data it protects. Instead of asking `the code editor` to remember every rule, the `Account` class enforces the rule itself."
+          },
+          "encapsulation-and-validation-sketch-1": {
+            "title": "Validation methods protect object state",
+            "bodyMarkdown": "Validation is the rule-checking part of encapsulation. A method can reject bad input before it changes an attribute.\n\nFor example, a spending limit should never become negative.\n\n```python\nclass Account:\n    def __init__(self, owner, spending_limit):\n        self.owner = owner\n        self.spending_limit = spending_limit\n\n    def set_spending_limit(self, new_limit):\n        if new_limit >= 0:\n            self.spending_limit = new_limit\n            return \"updated\"\n        return \"rejected\"\n```\n\nLine by line:\n\n- The constructor saves the owner's name and current limit.\n- `set_spending_limit()` is the controlled way to change the limit.\n- `if new_limit >= 0:` is the validation rule.\n- If the value passes, the attribute changes.\n- If it fails, the old value stays in place.\n\nA key idea is that validation does **not** just detect bad data. It prevents bad data from being stored in the first place."
+          },
+          "encapsulation-and-validation-sketch-2": {
+            "title": "Using helper files with model classes",
+            "bodyMarkdown": "As programs grow, some logic fits better in a helper or service file instead of inside `the code editor`. The model class still protects its own state, while helper functions can prepare or clean input before the class uses it.\n\nHere is a small two-file example.\n\n```python\n# helpers/the code editor\ndef clean_amount(text):\n    return int(text.strip())\n```\n\n```python\n# models/the code editor\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False\n```\n\nThen `the code editor` can import both pieces:\n\n```python\nfrom helpers.validation import clean_amount\nfrom models.account import Account\n\namount = clean_amount(\" 25 \")\naccount = Account(\"Mina\", 100)\naccount.deposit(amount)\nprint(account.balance)\n```\n\nWhat each part does:\n\n- `helpers/the code editor` cleans raw text.\n- `models/the code editor` owns the account state and rules.\n- `the code editor` connects them.\n\nThis separation makes code easier to read and reuse. The helper prepares data, and the class decides whether the state should change.\n\nLine by line: read each statement from top to bottom. Notice which names are created, which values are passed into functions, and what output the code is meant to show."
+          }
+        }
+      }
+    }
+  }
+}

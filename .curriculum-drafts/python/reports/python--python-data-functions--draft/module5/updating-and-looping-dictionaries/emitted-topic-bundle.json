@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch0.title",
       "sketchId": "dict-update-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-updating-and-looping-dictionaries-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch0.prompt",
+        "exerciseKey": "try-updating-and-looping-dictionaries-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch1.title",
       "sketchId": "dict-looping",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-updating-and-looping-dictionaries-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch1.prompt",
+        "exerciseKey": "try-updating-and-looping-dictionaries-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.cards.sketch2.title",
       "sketchId": "dict-common-patterns",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-updating-and-looping-dictionaries-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.tryIt.try_updating_and_looping_dictionaries_sketch2.prompt",
+        "exerciseKey": "try-updating-and-looping-dictionaries-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -256,17 +292,18 @@
       }
     },
     {
-      "id": "ci-update-score",
+      "id": "try-updating-and-looping-dictionaries-checkpoint",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint",
       "language": "python",
-      "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -275,11 +312,122 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "scores = {\"Ava\": 88, \"Mia\": 79}\nscores[\"Mia\"] = 91\nfor name, score in scores.items():\n    print(f\"{name}: {score}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: 88\nMia: 91\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "scores",
+            "expected": [
+              [
+                "Ava",
+                88
+              ],
+              [
+                "Mia",
+                91
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bscores\\s*\\[\\s*['\\\"]Mia['\\\"]\\s*\\]\\s*=\\s*91",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint.sourceChecks.0.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bscores\\s*\\[\\s*['\\\"]Mia['\\\"]\\s*\\]\\s*=\\s*91",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-checkpoint.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "ci-update-score",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def update_score(scores, name, new_score):\n    scores[name] = new_score\n    return scores",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -290,7 +438,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def update_score(scores, name, new_score):\n    scores[name] = new_score\n    return scores",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -359,8 +507,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-update-score.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-remove-key",
@@ -369,11 +535,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key",
       "language": "python",
-      "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -382,11 +548,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def remove_item(data, key_name):\n    if key_name in data:\n        del data[key_name]\n    return data",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -397,7 +572,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def remove_item(data, key_name):\n    if key_name in data:\n        del data[key_name]\n    return data",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -462,8 +637,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-remove-key.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-format-items",
@@ -472,11 +665,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items",
       "language": "python",
-      "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -485,11 +678,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def format_inventory(items):\n    result = []\n    for name, count in items.items():\n        result.append(f\"{name}: {count}\")\n    return result",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -500,7 +702,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def format_inventory(items):\n    result = []\n    for name, count in items.items():\n        result.append(f\"{name}: {count}\")\n    return result",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -548,8 +750,335 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.ci-format-items.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-updating-and-looping-dictionaries-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "counts = {'apples': 2, 'bananas': 1}\ncounts['apples'] += 3\nprint(counts)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "{'apples': 5, 'bananas': 1}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "counts",
+            "expected": [
+              [
+                "apples",
+                5
+              ],
+              [
+                "bananas",
+                1
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bcounts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*(\\+=\\s*3|=\\s*(counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*\\+\\s*3|3\\s*\\+\\s*counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]))",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.0.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bcounts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*(\\+=\\s*3|=\\s*(counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]\\s*\\+\\s*3|3\\s*\\+\\s*counts\\s*\\[\\s*['\\\"]apples['\\\"]\\s*\\]))",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch0.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "try-updating-and-looping-dictionaries-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "inventory = {'pens': 3, 'markers': 2}\nfor item, count in inventory.items():\n    print(f'{item}: {count}')\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "pens: 3\nmarkers: 2\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "inventory",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.0.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "inventory",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch1.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "try-updating-and-looping-dictionaries-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "words = ['red', 'blue']\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "{'red': 3, 'blue': 4}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "lengths",
+            "expected": [
+              [
+                "red",
+                3
+              ],
+              [
+                "blue",
+                4
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_for_loop",
+            "iterable": "words",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "len",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.2.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_for_loop",
+          "iterable": "words",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "len",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\blengths\\s*\\[\\s*word\\s*\\]\\s*=\\s*len\\s*\\(\\s*word\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.updating-and-looping-dictionaries.quiz.try-updating-and-looping-dictionaries-sketch2.sourceChecks.2.message"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,253 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-3": {
+        "loop-debugging": {
+          "label": "Debogaj bouk",
+          "summary": "Swiv valè bouk yo pou jwenn travay ki repete oswa ki sote.",
+          "cards": {
+            "sketch0": {
+              "title": "Swiv eta bouk la yon etap alafwa"
+            },
+            "sketch1": {
+              "title": "Remake erè off-by-one"
+            },
+            "sketch2": {
+              "title": "Evite travay ki repete ak bouk enfini"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Pratik debogaj While Loop"
+            }
+          },
+          "projectSteps": {
+            "loop_debug_code_1": {
+              "title": "Ranje yon bouk kontè ki bloke"
+            },
+            "loop_debug_code_2": {
+              "title": "Enprime soti nan 0 rive 2"
+            },
+            "loop_debug_code_3": {
+              "title": "Konte desann san danje"
+            },
+            "loop_debug_code_4": {
+              "title": "Repete yon mo yon kantite fwa fikse"
+            },
+            "loop_debug_code_5": {
+              "title": "Fè sòm nonb soti nan 1 rive n"
+            }
+          },
+          "quiz": {
+            "loop-debug-sc-1": {
+              "title": "Kisa ki fè bouk la sispann?",
+              "prompt": "Nan yon bouk `while`, kisa ki fè bouk la sispann kouri?",
+              "hint": "Tcheke sa k rive lè kondisyon an pa vre ankò.",
+              "help": {
+                "concept": "Yon bouk `while` repete sèlman pandan kondisyon li evalye kòm vre. Li sispann nan premye verifikasyon kote kondisyon an fo.",
+                "hint_1": "Reflechi sou kondisyon an apre chak mizajou bouk la.",
+                "hint_2": "Bouk la pa sispann poutèt enpresyon an; li sispann lè kondisyon an echwe."
+              },
+              "options": {
+                "a": "Li sispann lè kondisyon an vin fo.",
+                "b": "Li sispann apre yon sèl deklarasyon print.",
+                "c": "Li sispann sèlman lè Python rive nan fen pwogram nan.",
+                "d": "Li sispann chak fwa non varyab la chanje."
+              }
+            },
+            "loop-debug-sc-2": {
+              "title": "Jwenn kondisyon off-by-one la",
+              "prompt": "Ou vle enprime `1`, `2`, ak `3` ak yon bouk ki kòmanse nan `count = 1`. Ki kondisyon bouk `while` la ta dwe itilize?",
+              "hint": "Bouk la dwe toujou kouri lè `count` se 3.",
+              "help": {
+                "concept": "Erè off-by-one souvan soti nan chwazi `<` olye de `<=` lè dènye valè a ta dwe toujou enkli.",
+                "hint_1": "Mande tèt ou si kondisyon an vre lè `count = 3`.",
+                "hint_2": "Yon verifikasyon strictement pi piti ta sispann anvan li enprime dènye nonb la."
+              },
+              "options": {
+                "a": "`while count < 3:`",
+                "b": "`while count <= 3:`",
+                "c": "`while count == 3:`",
+                "d": "`while count != 1:`"
+              }
+            },
+            "loop-debug-mc-1": {
+              "title": "Siy yon bouk enfini",
+              "prompt": "Chwazi tout sitiyasyon ki ka fè yon bouk `while` kouri pou tout tan.",
+              "hint": "Chèche ka kote kondisyon an ka rete vre ankò e ankò.",
+              "help": {
+                "concept": "Bouk enfini rive lè kondisyon bouk la pa janm vin fo, souvan paske varyab bouk la pa mete ajou oswa yo mete li ajou nan move direksyon.",
+                "hint_1": "Tcheke si varyab ki nan kondisyon an chanje ditou.",
+                "hint_2": "Tcheke tou si mizajou a ap deplase valè a nan direksyon pou sispann, pa lwen li."
+              },
+              "options": {
+                "a": "Varyab bouk la pa janm chanje andedan bouk la.",
+                "b": "Varyab bouk la chanje lwen valè ki fè li sispann nan.",
+                "c": "Bouk la enprime yon valè chak fwa.",
+                "d": "Kondisyon bouk la finalman vin fo."
+              }
+            },
+            "loop-debug-mc-2": {
+              "title": "Aksyon debogaj ki itil",
+              "prompt": "Chwazi tout aksyon ki ede deboge yon bouk `while`.",
+              "hint": "Reflechi sou fason pou wè varyab bouk la ak kondisyon an sou tan.",
+              "help": {
+                "concept": "Deboge bouk yo pi fasil lè ou swiv valè k ap chanje yo epi konpare yo ak kondisyon ki kontwole repetisyon an.",
+                "hint_1": "Aksyon ki montre chak etap kontè a itil.",
+                "hint_2": "Ekri valè yo oswa enprime yo tanporèman ka montre travay ki repete oswa ki sote."
+              },
+              "options": {
+                "a": "Swiv valè varyab bouk la nan chak pasaj.",
+                "b": "Ajoute yon `print()` tanporè pou montre kontè a.",
+                "c": "Inyore kondisyon an epi li sèlman rezilta final la.",
+                "d": "Tcheke si mizajou a andedan kò bouk la."
+              }
+            },
+            "loop-debug-dr-1": {
+              "title": "Mete etap bouk yo nan lòd",
+              "prompt": "Mete etap sa yo nan bon lòd pou yon sik konplè nan yon bouk `while` tipik.",
+              "hint": "Yon bouk `while` verifye anvan li kouri kò a.",
+              "help": {
+                "concept": "Yon bouk `while` premye verifye kondisyon li, apre sa li kouri kò a si li vre, apre sa li mete valè yo ajou, epi finalman li retounen verifye kondisyon an.",
+                "hint_1": "Verifikasyon kondisyon an fèt anvan enpresyon oswa mizajou.",
+                "hint_2": "Apre mizajou a, bouk la retounen teste kondisyon an ankò."
+              },
+              "tokens": {
+                "t1": "Verifye kondisyon an",
+                "t2": "Kouri kò bouk la",
+                "t3": "Mete varyab bouk la ajou",
+                "t4": "Verifye kondisyon an ankò"
+              }
+            },
+            "loop-debug-dr-2": {
+              "title": "Swiv valè yo",
+              "prompt": "Ranje valè `count` yo nan lòd yo verifye pa kòd sa a: `count = 1` epi `while count <= 3:` ak `count = count + 1` andedan bouk la.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide oswa aksyon an.",
+                "hint_2": "Mete moso depandan yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "1",
+                "t2": "2",
+                "t3": "3",
+                "t4": "4"
+              }
+            },
+            "loop-debug-fb-1": {
+              "title": "Konplete kondisyon pou sispann nan",
+              "prompt": "Ranpli valè ki manke a pou bouk la enkli 3 kòm dènye nonb ki enprime a.",
+              "hint": "Kondisyon an dwe toujou vre lè `count` se tèm ki manke a.",
+              "help": {
+                "concept": "Pou enkli dènye nonb la nan yon bouk `while`, kondisyon an dwe pèmèt valè sa a anvan li sispann.",
+                "hint_1": "Si bouk la kòmanse nan 1 epi li ta dwe enprime jiska tèm ki manke a, limit la dwe enkli tèm ki manke a.",
+                "hint_2": "Yon limit ki pi piti ta sispann twò bonè."
+              },
+              "template": "while count <= [blank1]:",
+              "choices": [
+                "2",
+                "3",
+                "4",
+                "count"
+              ]
+            },
+            "loop-debug-fb-2": {
+              "title": "Konplete mizajou a",
+              "prompt": "Ranpli kòd ki manke a pou kontè a avanse pa 1 chak fwa.",
+              "hint": "Nouvo valè a ta dwe youn plis pase ansyen valè a.",
+              "help": {
+                "concept": "Yon mizajou kontè chanje varyab bouk la pou kondisyon an ka finalman vin fo.",
+                "hint_1": "Bò dwat la ta dwe itilize valè aktyèl `count` plis youn.",
+                "hint_2": "San ogmante kontè a, bouk la ka repete menm travay la."
+              },
+              "template": "count = [blank1]",
+              "choices": [
+                "count",
+                "count + 1",
+                "1",
+                "count - 1"
+              ]
+            },
+            "loop-debug-code-1": {
+              "title": "Ranje yon bouk kontè ki bloke",
+              "prompt": "Ekri kòd Python ki enprime nonb 1 rive 3, youn pa liy, avèk yon bouk `while`. Bouk la dwe mete kontè a ajou pou li sispann kòrèkteman.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te repare paske fason orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "# TODO: print 1, 2, 3 using a while loop\ncount = 1"
+            },
+            "loop-debug-code-2": {
+              "title": "Enprime soti nan 0 rive 2",
+              "prompt": "Ekri kòd Python ki itilize yon bouk `while` pou enprime `0`, `1`, ak `2`, youn pa liy.",
+              "hint": "Kòmanse nan 0 epi sispann anvan valè a rive 3.",
+              "help": {
+                "concept": "Valè depa a ak kondisyon an travay ansanm pou deside egzakteman ki nonb yon bouk enprime.",
+                "hint_1": "Yon bouk ki kòmanse nan 0 ka itilize yon limit pi piti pase pou sispann anvan 3.",
+                "hint_2": "Enprime kontè a, apre sa ogmante li pa 1 chak fwa."
+              },
+              "starterCode": "# TODO: print 0, 1, 2 with a while loop\nn = 0"
+            },
+            "loop-debug-code-3": {
+              "title": "Konte desann san danje",
+              "prompt": "Ekri kòd Python ki enprime `3`, `2`, ak `1`, youn pa liy, avèk yon bouk `while`.",
+              "hint": "Li travay la \"Konte desann san danje\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Konte desann san danje\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "# TODO: print 3, 2, 1 using a while loop\nn = 3"
+            },
+            "loop-debug-code-4": {
+              "title": "Repete yon mo yon kantite fwa fikse",
+              "prompt": "Li yon mo nan input. Apre sa itilize yon bouk `while` pou enprime mo sa a egzakteman 3 fwa, youn pa liy.",
+              "hint": "Li travay kodaj la epi idantifye sa pwogram nan ta dwe enprime.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si pwogram nan pwodui sòti yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print word exactly 3 times using a while loop"
+            },
+            "loop-debug-code-5": {
+              "title": "Fè sòm nonb soti nan 1 rive n",
+              "prompt": "Li yon nonb antye `n` nan input. Itilize yon bouk `while` pou ajoute nonb soti nan 1 rive `n`, apre sa enprime total la.",
+              "hint": "Li travay la \"Fè sòm nonb soti nan 1 rive n\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Fè sòm nonb soti nan 1 rive n\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "n = int(input())\n# TODO: use a while loop to compute the sum from 1 to n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-3": {
+        "loop-debugging": {
+          "trace-while-state": {
+            "title": "Swiv eta bouk la yon etap alafwa",
+            "bodyMarkdown": "Yon bouk `while` kontinye kouri **pandan kondisyon li vre**. Lè w ap deboge youn, kesyon ki pi enpòtan an se: **kisa ki chanje chak fwa bouk la pase?** Anjeneral sa se yon varyab kontè.\n\nEgzanp rezoud:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1\n```\n\nSwiv li etap pa etap:\n- `count` kòmanse kòm `1`\n- `1 <= 3` vre, kidonk bouk la kouri epi li enprime `1`\n- apre sa `count` vin `2`\n- `2 <= 3` vre, kidonk li enprime `2`\n- apre sa `count` vin `3`\n- `3 <= 3` vre, kidonk li enprime `3`\n- apre sa `count` vin `4`\n- `4 <= 3` fo, kidonk bouk la sispann\n\nSòti:\n\n```python\n1\n2\n3\n```\n\nYon trik debogaj ki komen se swiv valè varyab yo sou papye oswa ajoute liy `print()` tanporè."
+          },
+          "find-off-by-one": {
+            "title": "Remake erè off-by-one",
+            "bodyMarkdown": "Yon **erè off-by-one** rive lè yon bouk kouri yon fwa twòp oswa yon fwa twò piti. Sa souvan soti nan itilize `<` lè ou te vle `<=`, oswa kòmanse kontè a ak move valè a.\n\nEgzanp:\n\n```python\ncount = 1\nwhile count < 3:\n    print(count)\n    count = count + 1\n```\n\nSwiv li etap pa etap:\n- kòmanse ak `count = 1`\n- `1 < 3` vre, kidonk enprime `1`\n- ogmante li a `2`\n- `2 < 3` vre, kidonk enprime `2`\n- ogmante li a `3`\n- `3 < 3` fo, kidonk sispann\n\nSa enprime:\n\n```python\n1\n2\n```\n\nSi ou te espere `1 2 3`, kondisyon an twò sevè. Chanje `< 3` pou `<= 3` ranje sa."
+          },
+          "avoid-stuck-loops": {
+            "title": "Evite travay ki repete ak bouk enfini",
+            "bodyMarkdown": "Yon bouk ka bloke si varyab ki nan kondisyon an pa janm chanje nan bon direksyon an. Sa lakòz travay ki repete.\n\nEgzanp ki gen erè:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n```\n\nPoukisa sa se yon pwoblèm:\n- `count` kòmanse nan `1`\n- `1 <= 3` vre\n- bouk la enprime `1`\n- men `count` pa janm chanje\n- kondisyon an rete vre pou tout tan\n\nYon vèsyon korije mete kontè a ajou:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1\n```\n\nLè w ap deboge, mande:\n- Èske varyab bouk la chanje?\n- Èske li deplase nan direksyon pou fè kondisyon an fo?\n- Èske mizajou a andedan kò bouk la?\n\nSwiv li etap pa etap: li chak deklarasyon soti anlè rive anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki sòti kòd la sipoze montre."
+          }
+        }
+      }
+    }
+  }
+}

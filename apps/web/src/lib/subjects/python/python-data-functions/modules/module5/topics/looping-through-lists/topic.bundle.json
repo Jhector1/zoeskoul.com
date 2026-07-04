@@ -305,11 +305,11 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -318,11 +318,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -348,11 +348,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nfor name in names:\n    print(name)\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nfor name in names:\n    print(name)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -362,14 +362,14 @@
           {
             "type": "uses_for_loop",
             "iterable": "names",
-            "message": "Use a for loop over names instead of printing each name manually."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint.sourceChecks.0.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nfor name in names:\n    print(name)\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -379,7 +379,7 @@
         {
           "type": "uses_for_loop",
           "iterable": "names",
-          "message": "Use a for loop over names instead of printing each name manually."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-checkpoint.sourceChecks.0.message"
         }
       ]
     },
@@ -390,11 +390,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item",
       "language": "python",
-      "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -403,11 +403,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -438,11 +438,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -452,14 +452,14 @@
           {
             "type": "uses_for_loop",
             "iterable": "animals",
-            "message": "Use a for loop over animals instead of printing each variable manually."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.sourceChecks.0.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -469,7 +469,7 @@
         {
           "type": "uses_for_loop",
           "iterable": "animals",
-          "message": "Use a for loop over animals instead of printing each variable manually."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-print-each-item.sourceChecks.0.message"
         }
       ]
     },
@@ -480,11 +480,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-double-list-function",
       "language": "python",
-      "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-double-list-function.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-double-list-function.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -493,11 +493,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-double-list-function.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-double-list-function.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -517,7 +517,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-double-list-function.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -558,7 +558,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-double-list-function.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -568,7 +568,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-double-list-function.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -582,11 +582,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-count-long-words",
       "language": "python",
-      "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-count-long-words.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-count-long-words.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -595,11 +595,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-count-long-words.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-count-long-words.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -619,7 +619,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-count-long-words.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -654,7 +654,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-count-long-words.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -664,7 +664,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.ci-count-long-words.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -678,11 +678,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0",
       "language": "python",
-      "starterCode": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -691,7 +691,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -700,11 +700,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -730,11 +730,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -744,7 +744,7 @@
           {
             "type": "uses_for_loop",
             "iterable": "animals",
-            "message": "Use a for loop over animals instead of typing each animal directly."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
           }
         ]
       },
@@ -752,7 +752,7 @@
         {
           "type": "uses_for_loop",
           "iterable": "animals",
-          "message": "Use a for loop over animals instead of typing each animal directly."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch0.sourceChecks.0.message"
         }
       ]
     },
@@ -763,11 +763,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1",
       "language": "python",
-      "starterCode": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -776,7 +776,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -785,11 +785,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -815,11 +815,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -837,12 +837,12 @@
           {
             "type": "uses_for_loop",
             "iterable": "scores",
-            "message": "Loop through scores instead of typing the final total."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
           },
           {
             "type": "source_regex",
             "pattern": "\\btotal\\s*(\\+=\\s*score|=\\s*total\\s*\\+\\s*score)",
-            "message": "Add each score into total inside the loop."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
           }
         ]
       },
@@ -850,12 +850,12 @@
         {
           "type": "uses_for_loop",
           "iterable": "scores",
-          "message": "Loop through scores instead of typing the final total."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.0.message"
         },
         {
           "type": "source_regex",
           "pattern": "\\btotal\\s*(\\+=\\s*score|=\\s*total\\s*\\+\\s*score)",
-          "message": "Add each score into total inside the loop."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch1.sourceChecks.1.message"
         }
       ]
     },
@@ -866,11 +866,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2",
       "language": "python",
-      "starterCode": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -879,7 +879,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -888,11 +888,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -918,11 +918,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -944,12 +944,12 @@
           {
             "type": "uses_for_loop",
             "iterable": "numbers",
-            "message": "Loop through numbers instead of typing the final doubled list."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
           },
           {
             "type": "uses_method",
             "method": "append",
-            "message": "Use doubled.append(...) to build the list.",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message",
             "target": "doubled"
           }
         ]
@@ -958,12 +958,12 @@
         {
           "type": "uses_for_loop",
           "iterable": "numbers",
-          "message": "Loop through numbers instead of typing the final doubled list."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.0.message"
         },
         {
           "type": "uses_method",
           "method": "append",
-          "message": "Use doubled.append(...) to build the list.",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.looping-through-lists.quiz.try-looping-through-lists-sketch2.sourceChecks.1.message",
           "target": "doubled"
         }
       ]

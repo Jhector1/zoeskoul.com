@@ -1,0 +1,610 @@
+{
+  "topicId": "thinking-in-objects",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "applied-python-projects-python-8-object-foundations",
+  "prefix": "py8",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.cards.sketch0.title",
+      "sketchId": "sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-thinking-in-objects-sketch0",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0.prompt",
+        "exerciseKey": "try-thinking-in-objects-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.cards.sketch1.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-thinking-in-objects-sketch1",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.prompt",
+        "exerciseKey": "try-thinking-in-objects-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.cards.sketch2.title",
+      "sketchId": "sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-thinking-in-objects-sketch2",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.prompt",
+        "exerciseKey": "try-thinking-in-objects-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-thinking-in-objects-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch0",
+      "language": "python",
+      "starterCode": "from models.task import Task\n\n# Create two Task objects below.\n# Print the first task's title.\n# Then print the second task's minutes.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\n# Create two Task objects below.\n# Print the first task's title.\n# Then print the second task's minutes.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/task.py",
+          "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\nmorning_task = Task(\"Read chapter\", 20)\nevening_task = Task(\"Review notes\", 10)\n\nprint(morning_task.title)\nprint(evening_task.minutes)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/task.py",
+          "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.task import Task\n\n# Create two Task objects below.\n# Print the first task's title.\n# Then print the second task's minutes.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\n# Create two Task objects below.\n# Print the first task's title.\n# Then print the second task's minutes.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.task import Task\n\nmorning_task = Task(\"Read chapter\", 20)\nevening_task = Task(\"Review notes\", 10)\n\nprint(morning_task.title)\nprint(evening_task.minutes)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\nmorning_task = Task(\"Read chapter\", 20)\nevening_task = Task(\"Review notes\", 10)\n\nprint(morning_task.title)\nprint(evening_task.minutes)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Task",
+            "message": "Keep the provided Task model available in models/task.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Task",
+            "constructorArgs": [
+              "Read chapter",
+              20
+            ],
+            "message": "Task should be constructible with a title and minutes."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Task",
+            "constructorArgs": [
+              "Review notes",
+              10
+            ],
+            "attributes": [
+              "title",
+              "minutes",
+              "done"
+            ],
+            "message": "Each Task instance should keep its own title, minutes, and done state."
+          },
+          {
+            "type": "created_instances",
+            "className": "Task",
+            "min": 2,
+            "message": "Create two Task objects in the main code."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print two separate lines from the two objects."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-thinking-in-objects-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1",
+      "language": "python",
+      "starterCode": "from models.task import Task\n\n# Create the two Task objects below.\n# Mark only the first one done.\n# Print both status lines.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\n# Create the two Task objects below.\n# Mark only the first one done.\n# Print both status lines.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/task.py",
+          "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\ndraft_task = Task(\"Draft outline\", 30)\nrevise_task = Task(\"Revise notes\", 15)\n\ndraft_task.mark_done()\n\nprint(draft_task.status_line())\nprint(revise_task.status_line())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/task.py",
+          "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.task import Task\n\n# Create the two Task objects below.\n# Mark only the first one done.\n# Print both status lines.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\n# Create the two Task objects below.\n# Mark only the first one done.\n# Print both status lines.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.task import Task\n\ndraft_task = Task(\"Draft outline\", 30)\nrevise_task = Task(\"Revise notes\", 15)\n\ndraft_task.mark_done()\n\nprint(draft_task.status_line())\nprint(revise_task.status_line())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\ndraft_task = Task(\"Draft outline\", 30)\nrevise_task = Task(\"Revise notes\", 15)\n\ndraft_task.mark_done()\n\nprint(draft_task.status_line())\nprint(revise_task.status_line())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Task",
+            "message": "Keep the provided Task model available in models/task.py."
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "Task",
+            "constructorArgs": [
+              "Draft outline",
+              30
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "mark_done",
+                "methodArgs": [],
+                "methodArgKinds": []
+              }
+            ],
+            "methodName": "status_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Draft outline [done] - 30 min",
+            "expectedKind": "value",
+            "message": "After mark_done(), the task should report itself as done."
+          },
+          {
+            "type": "method_returns",
+            "className": "Task",
+            "constructorArgs": [
+              "Revise notes",
+              15
+            ],
+            "constructorArgKinds": [],
+            "methodName": "status_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Revise notes [todo] - 15 min",
+            "expectedKind": "value",
+            "message": "A separate task should keep its own unchanged todo state."
+          },
+          {
+            "type": "created_instances",
+            "className": "Task",
+            "min": 2,
+            "message": "Create two Task objects in the main code."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print one line for each task so the different states are visible."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-thinking-in-objects-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2",
+      "language": "python",
+      "starterCode": "from models.task import Task\n\ntask = Task(\"Review quiz\", 15)\n\n# Call reschedule(25).\n# Print the updated status line.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\ntask = Task(\"Review quiz\", 15)\n\n# Call reschedule(25).\n# Print the updated status line.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/task.py",
+          "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def reschedule(self, new_minutes):\n        # Update the stored minutes for this task.\n        pass\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\ntask = Task(\"Review quiz\", 15)\ntask.reschedule(25)\nprint(task.status_line())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/task.py",
+          "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def reschedule(self, new_minutes):\n        self.minutes = new_minutes\n        return self.minutes\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.task import Task\n\ntask = Task(\"Review quiz\", 15)\n\n# Call reschedule(25).\n# Print the updated status line.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\ntask = Task(\"Review quiz\", 15)\n\n# Call reschedule(25).\n# Print the updated status line.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def reschedule(self, new_minutes):\n        # Update the stored minutes for this task.\n        pass\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.task import Task\n\ntask = Task(\"Review quiz\", 15)\ntask.reschedule(25)\nprint(task.status_line())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.task import Task\n\ntask = Task(\"Review quiz\", 15)\ntask.reschedule(25)\nprint(task.status_line())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def reschedule(self, new_minutes):\n        self.minutes = new_minutes\n        return self.minutes\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Task",
+            "message": "Keep the Task model defined in models/task.py."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Task",
+            "constructorArgs": [
+              "Review quiz",
+              15
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "reschedule",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              }
+            ],
+            "attributeName": "minutes",
+            "expected": 25,
+            "message": "reschedule(25) should update the stored minutes on the task."
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "Task",
+            "constructorArgs": [
+              "Review quiz",
+              15
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "reschedule",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              }
+            ],
+            "methodName": "status_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Review quiz [todo] - 25 min",
+            "expectedKind": "value",
+            "message": "status_line() should reflect the updated minutes after reschedule()."
+          },
+          {
+            "type": "created_instances",
+            "className": "Task",
+            "min": 1,
+            "message": "Create one Task object in the main code."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Print the updated task status."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mc-thinking-in-objects-why-oop",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.mc-thinking-in-objects-why-oop",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "sc-thinking-in-objects-instance-state",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.sc-thinking-in-objects-instance-state",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "fb-thinking-in-objects-method-call",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.fb-thinking-in-objects-method-call",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "mark_done"
+      }
+    },
+    {
+      "id": "dr-thinking-in-objects-flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.dr-thinking-in-objects-flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    }
+  ]
+}

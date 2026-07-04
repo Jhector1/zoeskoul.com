@@ -1,0 +1,350 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "writing-text-files": {
+          "label": "Ekri Fichye Tèks",
+          "summary": "Kreye oswa ranplase fichye tèks lè w louvri chemen yo an mòd ekriti oswa an mòd ajoute epi ekri tèks ke ou ka verifye ak rezilta enprime.",
+          "cards": {
+            "sketch0": {
+              "title": "Mòd ekri kreye oswa ranplase tèks"
+            },
+            "sketch1": {
+              "title": "Mòd apend ajoute nan fen an"
+            },
+            "sketch2": {
+              "title": "Sèvi ak karaktè nouvo liy epi verifye sa ou te ekri a."
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Pratike ekri ak mete fichye tèks an apèndis."
+            }
+          },
+          "projectSteps": {
+            "ci_write_greeting_file": {
+              "title": "Ekri epi montre yon salitasyon."
+            },
+            "ci_overwrite_shopping_list": {
+              "title": "Ekri sou yon lis ki gen de liy"
+            },
+            "ci_append_log_entry": {
+              "title": "Ajoute yon nouvo antre nan jounal la"
+            }
+          },
+          "quiz": {
+            "sc-write-vs-append": {
+              "title": "Chwazi mòd ki ranplase tèks ansyen an.",
+              "prompt": "Ki mòd fichye ou ta dwe itilize lè ou vle ranplase nenpòt tèks ki egziste deja nan yon fichye ak nouvo tèks?",
+              "hint": "Sèvi ak fason kesyon an poze a ak egzanp leson an pou limite chwa yo.",
+              "help": {
+                "concept": "Kesyon sa a tcheke yon lide espesifik nan leson an, pa yon estrateji jeneral pou pran tès.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Retire opsyon ki pa matche ak konsèp la oswa prèv ki site nan kesyon an."
+              },
+              "options": {
+                "a": "yon",
+                "b": "d",
+                "c": "r",
+                "d": "\"x\""
+              }
+            },
+            "sc-verify-written-text": {
+              "title": "Pi bon fason pou konfime tèks ki anrejistre a",
+              "prompt": "Apre ou fin ekri tèks nan yon fichye nan leson sa a, ki pi bon fason pou fè rezilta a parèt nan panèl sòti a?",
+              "hint": "Panse pou louvri chemen an ankò epi montre kontni ki te sove yo.",
+              "help": {
+                "concept": "Egzèsis ekriti fichye yo ta dwe pwodwi rezilta ki ka obsève, kidonk yon modèl komen se relouvri fichye a epi enprime sa ki te ekri a.",
+                "hint_1": "Ekri modifye fichye a, men panèl sòti a sèlman montre tèks ou enprime.",
+                "hint_2": "Chwazi opsyon ki li tèks ki anrejistre a ankò epi afiche li."
+              },
+              "options": {
+                "a": "Chanje tèm editè a",
+                "b": "Reouvri fichye a epi enprime sa ki ladan l.",
+                "c": "Ouvri panèl nòt yo",
+                "d": "Chanje non varyab la"
+              }
+            },
+            "mc-append-true-statements": {
+              "title": "Enfòmasyon sou mòd apendisyon",
+              "prompt": "Chwazi tout deklarasyon ki kòrèk sou ouvèti yon fichye an mòd apend (`\"a\"`).",
+              "hint": "Mòd apendi kenbe tèks ansyen an epi ajoute nouvo tèks la apre li.",
+              "help": {
+                "concept": "Mòd apendi a ekri nan fen kontni ki egziste deja olye pou li efase fichye a an premye.",
+                "hint_1": "Chèche deklarasyon ki dekri kenbe tèks ki egziste deja.",
+                "hint_2": "Rejte nenpòt opsyon ki di ke mòd apend efase fichye a anvan li ekri."
+              },
+              "options": {
+                "a": "Li kenbe kontni ki egziste deja.",
+                "b": "Li ajoute nouvo tèks nan fen fichye a.",
+                "c": "Li toujou retire tout sa ki deja nan fichye a.",
+                "d": "Li ka itilize pou ajoute yon lòt liy nan yon jounal."
+              }
+            },
+            "mc-good-writing-patterns": {
+              "title": "Modèl itil lè w ap ekri fichye tèks",
+              "prompt": "Chwazi tout pratik ki adapte ak pwosesis ekriti fichye pou sijè sa a.",
+              "hint": "Panse pou ekri tèks, epi fè rezilta a vizib.",
+              "help": {
+                "concept": "Pwogram ekriti fichye pou debutan souvan itilize yon dosye pwoteksyon (`with open(...)`) pou aksè an sekirite, karaktè nouvo liy (newline) pou kase liy, ak yon verifikasyon enprime apre ekriti.",
+                "hint_1": "Chèche modèl ki enplike `with open`, `\\n`, ak enprime tèks ki sove.",
+                "hint_2": "Evite chwa ki pa gen rapò ak ekriti oswa tcheke kontni fichye a."
+              },
+              "options": {
+                "a": "Itilize `with open(...)` pou fichye a jere byen.",
+                "b": "Itilize `\\n` lè ou vle pwochen tèks la sou yon nouvo liy.",
+                "c": "Enprime kontni ki sove a apre ekriti pou rezilta a vizib.",
+                "d": "Chanje panèl nòt yo anvan ou ekri."
+              }
+            },
+            "dr-write-file-steps": {
+              "title": "Kòdone etap pou ekri ak verifye yo",
+              "prompt": "Mete etap sa yo nan lòd kòrèk pou yon pwogram senp ki ekri tèks epi verifye li.",
+              "hint": "Ekri an premye, apre sa relouvri epi montre tèks ki te anrejistre a.",
+              "help": {
+                "concept": "Yon pwosesis travay komen se louvri dokiman an an mòd ekriti, ekri tèks la, relouvri l an mòd lekti, epi enprime sa ki ladan l.",
+                "hint_1": "Fichye a dwe louvri pou ekriti anvan ekzekisyon kowòdone a ka fèt.",
+                "hint_2": "Enpresyon vini apre lekti kontni ki sove yo."
+              },
+              "tokens": {
+                "t1": "Ouvri chemen an nan mòd \"w\".",
+                "t2": "Ekri tèks la",
+                "t3": "Ouvri menm chemen an pou lekti",
+                "t4": "Enprime sa ki nan fichye a"
+              }
+            },
+            "dr-append-log-sequence": {
+              "title": "Kòmande workflow apendiks la",
+              "prompt": "Aranje aksyon sa yo pou montre kijan yon pwogram ka kreye yon antre jounal kòmansman, ajoute yon lòt antre, epi afiche tout jounal la.",
+              "hint": "Premye ekriti a kreye tèks kòmansman an anvan ajoute a ajoute plis.",
+              "help": {
+                "concept": "Pou demontre mòd apend la klèman, premye kreye kontni inisyal la, apre sa ajoute nouvo tèks la, epi li tout fichye a ankò.",
+                "hint_1": "Ou bezwen kèk tèks kòmansman anvan etap ajoute a gen sans.",
+                "hint_2": "Li ak enprime tout jounal la ta dwe fèt apre tou de ekriti yo fini."
+              },
+              "tokens": {
+                "t1": "Louvri jounal la ak mòd \"w\" epi ekri premye liy lan.",
+                "t2": "Ouvri jounal la ak mòd \"a\" epi ajoute yon lòt liy",
+                "t3": "Louvri jounal la pou lekti",
+                "t4": "Enprime tout tèks jounal la"
+              }
+            },
+            "fb-write-mode-code": {
+              "title": "Ranpli mòd ekriti a",
+              "prompt": "Konplete mòd la pou kòd sa a louvri fichye a pou ranplase tèks la.",
+              "hint": "Konsantre sou konsèp ki manke a olye de tèm egzak ki manke a.",
+              "help": {
+                "concept": "Blank la dwe ranpli ak tèm ki koresponn ak travay k ap dekri a.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Chwazi tèm ki pi byen konplete sans deklarasyon an."
+              },
+              "template": "with open(\"report.txt\", [blank1]) as file:",
+              "choices": [
+                "r",
+                "yon",
+                "d",
+                "\"x\""
+              ]
+            },
+            "fb-newline-choice": {
+              "title": "Ranpli liy kase a",
+              "prompt": "Chwazi tèks ki kòmanse yon nouvo liy apre `First line`.",
+              "hint": "Li fraz la ki antoure espas vid la epi deside ki wòl mo ki manke a jwe.",
+              "help": {
+                "concept": "Espas vid la bezwen mo oswa senbòl Python egzak ki fè liy lan fè sa kòmand la dekri.",
+                "hint_1": "Gade kòd ki antoure espas vid la pou deside si ou bezwen yon mo kle, yon valè, yon metòd, oswa yon kle.",
+                "hint_2": "Chwazi opsyon ki fè tout liy lan valab an Python epi ki bay rezilta ke kòmand la mande."
+              },
+              "template": "ekri.fichye(\"Premye liy[espas1]Dezyèm liy\")",
+              "choices": [
+                "\\t",
+                "\\n",
+                "\\r"
+              ]
+            },
+            "ci-write-greeting-file": {
+              "title": "Ekri yon fichye salitasyon pèsonalize",
+              "prompt": "Ekri yon salitasyon nan `greeting.txt` lè w itilize non antre a an majiskil pou premye lèt chak mo, apre sa, louvri `greeting.txt` epi enprime sa ki ladan l.\n\nPa egzanp, si antre a se `zoe`, pwogram ou an ta dwe enprime:\n`Hello, Zoe!`.",
+              "hint": "Sèvi ak `input()` pou non an, epi ekri salitasyon fòmate a nan fichye a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n",
+              "solutionCode": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ekri nan greeting.txt olye de sèlman enprime repons lan."
+                },
+                "1": {
+                  "message": "Sèvi ak file.write() pou ekri greeting.txt."
+                }
+              }
+            },
+            "ci-overwrite-shopping-list": {
+              "title": "Ekri sou yon lis makèt ki soti nan antre",
+              "prompt": "Fòk yon lis makèt ekri ankò apati de nouvo done. Ekri toude atik yo nan`shopping.txt`\n, youn pa liy epi an majiskil pou premye lèt chak mo, epi enprime kontni fichye a.\n\nPa egzanp, si done ki antre yo se`bread`\nak`apples`\n, pwogram ou an ta dwe enprime:\n`Bread`\n\n`Apples`\n.",
+              "hint": "Lè w ouvri yon fichye ak `\"w\"`, li ranplase ansyen kontni an.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n",
+              "solutionCode": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ekri nan shopping.txt olye de sèlman enprime repons lan."
+                },
+                "1": {
+                  "message": "Sèvi ak file.write() pou ekri shopping.txt."
+                }
+              }
+            },
+            "ci-append-log-entry": {
+              "title": "Ajoute yon antre nan jounal la",
+              "prompt": "Jounal la deja kòmanse ak yon sèl liy. Ajoute nouvo antre antre a nan`log.txt`\nsou yon nouvo liy, epi enprime tout fichye a.\n\nPa egzanp, si antre a se`Checked sensors`\n, pwogram ou an ta dwe enprime:\n`Start shift`\n\n`Checked sensors`\n.",
+              "hint": "Lè w ouvri yon fichye ak `\"a\"`, li kenbe ansyen kontni an epi li ajoute nouvo tèks nan fen an.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare rezilta a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n",
+              "solutionCode": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ajoute nan log.txt olye de sèlman enprime repons lan."
+                },
+                "1": {
+                  "message": "Ouvri log.txt nan mòd apand."
+                }
+              }
+            },
+            "try-writing-text-files-checkpoint": {
+              "title": "Ekri epi li yon fichye tèks",
+              "prompt": "Ekri `Hello from a file!` nan `note.txt`, apre sa li fichye a epi enprime tèks ki sove a.",
+              "hint": "Ouvri fichye a an mòd ekriti an premye, epi relouvri l pou lekti.",
+              "help": {
+                "concept": "Ekri fichye a an premye, epi relouvri li pou w ka montre egzakteman sa ki te anrejistre.",
+                "hint_1": "Ouvri `note.txt` an mòd ekriti epi sove `Hello from a file!`.",
+                "hint_2": "Rouvri `note.txt` nan mòd lekti epi enprime tèks ou sot ekri a."
+              },
+              "starterCode": "# Write Hello from a file! to note.txt.\n# Then read note.txt and print it.\n",
+              "solutionCode": "with open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello from a file!\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ekri nan note.txt olye de sèlman enprime repons lan."
+                },
+                "1": {
+                  "message": "Sèvi ak file.write() pou ekri fichye a."
+                }
+              }
+            },
+            "try-writing-text-files-sketch0": {
+              "title": "Ekri epi li yon mesaj",
+              "prompt": "Ekri `Done` nan `note.txt`, apre sa relouvri `note.txt` epi enprime tèks ki sove a.",
+              "hint": "Sèvi ak mòd ekriti an premye, apre sa li menm fichye a ankò.",
+              "help": {
+                "concept": "Kat sa a pratike tout pwosesis ekri-epi-tcheke a ak yon sèl fichye.",
+                "hint_1": "Ouvri `note.txt` ak mòd `\"w\"` epi ekri `Done`.",
+                "hint_2": "Ouvri `note.txt` ankò epi enprime `file.read()`."
+              },
+              "starterCode": "# Write Done to note.txt.\n# Then open note.txt and print its contents.\n",
+              "solutionCode": "with open('note.txt', 'w') as file:\n    file.write('Done')\n\nwith open('note.txt') as file:\n    print(file.read())\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ekri nan note.txt olye de sèlman enprime Done."
+                },
+                "1": {
+                  "message": "Sèvi ak file.write() pou ekri note.txt."
+                }
+              }
+            },
+            "try-writing-text-files-sketch1": {
+              "title": "Ajoute yon dezyèm liy",
+              "prompt": "Kreye yon fisye `log.txt` ak `Start`, relouvri li nan mòd apend, ajoute `End` sou yon nouvo liy, epi enprime tout fichye a.",
+              "hint": "Sèvi ak mòd ekriti pou premye liy lan epi sèvi ak mòd apond pou dezyèm liy lan.",
+              "help": {
+                "concept": "Kat sa a konpare mòd ekri ak mòd ajoute nan yon pwogram kout.",
+                "hint_1": "Premyeman, louvri `log.txt` ak `\"w\"` epi ekri `Start\n`.",
+                "hint_2": "Apre sa, ouvri `log.txt` ak `\"a\"`, ekri `End`, epi enprime tout fichye a."
+              },
+              "starterCode": "# Create log.txt with Start, then append End on a new line.\n# Print the final file contents.\n",
+              "solutionCode": "with open('log.txt', 'w') as file:\n    file.write('Start\\n')\nwith open('log.txt', 'a') as file:\n    file.write('End')\nwith open('log.txt') as file:\n    print(file.read())\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Kreye epi ajoute nan log.txt."
+                },
+                "1": {
+                  "message": "Sèvi ak file.write() pou ekri fichye jounal la."
+                }
+              }
+            },
+            "try-writing-text-files-sketch2": {
+              "title": "Ekri yon rapò senp",
+              "prompt": "Ekri `Ava: 92` nan `report.txt`, apre sa relouvri fichye a epi enprime li.",
+              "hint": "Sèvi ak varyab `name` ak `score` pou konstwi tèks la anvan ou ekri li.",
+              "help": {
+                "concept": "Kat sa a pratike fòmate yon liy tèks anvan li anrejistre l nan yon fichye.",
+                "hint_1": "Bati tèks la ak `f\"{name}: {score}\"` epi ekri li nan `report.txt`.",
+                "hint_2": "Rouvri `report.txt` epi enprime liy ki sove a."
+              },
+              "starterCode": "name = 'Ava'\nscore = 92\n\n# Write 'Ava: 92' to report.txt, then print the file.\n",
+              "solutionCode": "name = 'Ava'\nscore = 92\nwith open('report.txt', 'w') as file:\n    file.write(f'{name}: {score}')\nwith open('report.txt') as file:\n    print(file.read())\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ekri nan report.txt olye de sèlman enprime repons lan."
+                },
+                "1": {
+                  "message": "Sèvi ak file.write() pou ekri report.txt."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_writing_text_files_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ekri `Hello from a file!` nan `note.txt`, apre sa li fichye a epi enprime tèks ki sove a."
+            },
+            "try_writing_text_files_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ekri `Done` nan `note.txt`, apre sa relouvri `note.txt` epi enprime tèks ki te sove a."
+            },
+            "try_writing_text_files_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Kreye yon fichye `log.txt` ak `Start`, relouvri li nan mòd apend, ajoute `End` sou yon nouvo liy, epi enprime tout fichye a."
+            },
+            "try_writing_text_files_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ekri `Ava: 92` nan `report.txt`, apre sa relouvri fichye a epi enprime li."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "writing-text-files": {
+          "sketch-write-mode-basics": {
+            "title": "Mòd ekriti kreye oswa ranplase tèks",
+            "bodyMarkdown": "Lè w louvri yon chemen nan mòd ekriti (`\"w\"`), Python prepare chemen sa a pou nouvo tèks. Si chemen an deja gen tèks, mòd ekriti a ranplase ansyen kontni an.\n\n```python\nwith open(\"note.txt\", \"w\") as file:\n    file.write(\"Hello\\n\")\n\nwith open(\"note.txt\") as file:\n    print(file.read())\n```\n\nEtap pa etap:\n\n- `open(\"note.txt\", \"w\")` louvri chemen an pou ekriti.\n- `file.write(\"Hello\\n\")` mete tèks nan fichye a.\n- Lè w louvri menm chemen an ankò nan mòd lekti, sa pèmèt ou verifye sa ki te anrejistre a.\n- `print(file.read())` voye tèks ki anrejistre a nan panèl sòti a.\n\nNan egzanp sa a, sòti a se:\n\n```python\nHello\n```"
+          },
+          "sketch-append-mode-basics": {
+            "title": "Mòd apend ajoute nan fen an",
+            "bodyMarkdown": "Mòd apandi (`\"a\"`) kenbe tèks ki egziste deja a epi li ajoute nouvo tèks nan fen an.\n\n```python\nwith open(\"log.txt\", \"w\") as file:\n    file.write(\"Start\\n\")\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"Next\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read())\n```\n\nLiy pa liy:\n\n- Premye `with open(..., \"w\")` an kreye tèks depa a.\n- Dezyèm `with open(..., \"a\")` la ajoute yon lòt liy san li pa retire `Start` a.\n- Lè w li fichye a ankò, ou wè toude liy yo.\n\nRezilta a vin:\n\n```python\nStart\nNext\n```"
+          },
+          "sketch-newlines-and-verifying": {
+            "title": "Sèvi ak karaktè nouvo liy epi verifye sa ou te ekri a.",
+            "bodyMarkdown": "Lè w ap ekri plizyè liy, `\\n` kòmanse yon nouvo liy. Li itil tou pou w relouvri fichye a epi enprime sa ki ladan l pou w ka verifye rezilta a.\n\n```python\nwith open(\"tasks.txt\", \"w\") as file:\n    file.write(\"Buy milk\\nWash dishes\\n\")\n\nwith open(\"tasks.txt\") as file:\n    saved_text = file.read()\n    print(saved_text)\n```\n\nMen sa l fè:\n\n- `Buy milk\\n` ekri yon liy epi li pase nan pwochen liy lan.\n- `Wash dishes\\n` ekri dezyèm liy lan.\n- `file.read()` pran tout tèks ki anrejistre a.\n- Lè w itilize `saved_text`, sa pèmèt ou konfime kontni fichye a nan panèl sòti a.\n\nSan `\\n`, toude travay yo t ap parèt sou menm liy lan."
+          }
+        }
+      }
+    }
+  }
+}

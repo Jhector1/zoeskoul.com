@@ -1,0 +1,589 @@
+{
+  "topicId": "overriding-and-specialization",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-inheritance-and-overrides",
+  "prefix": "py9",
+  "minutes": 32,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch0.title",
+      "sketchId": "overriding-and-specialization-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-overriding-and-specialization-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.prompt",
+        "exerciseKey": "try-overriding-and-specialization-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch1.title",
+      "sketchId": "overriding-and-specialization-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-overriding-and-specialization-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.prompt",
+        "exerciseKey": "try-overriding-and-specialization-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.sketch2.title",
+      "sketchId": "overriding-and-specialization-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-overriding-and-specialization-sketch2",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.prompt",
+        "exerciseKey": "try-overriding-and-specialization-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "overriding-and-specialization-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "overriding-and-specialization-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "overriding-and-specialization-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.overriding-and-specialization-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-overriding-and-specialization-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0",
+      "language": "python",
+      "starterCode": "# Open the workspace files and complete the Book class.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Open the workspace files and complete the Book class.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, name, author):\n        self.name = name\n        self.author = author\n\n    def display_name(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Book:\n    def __init__(self, name, author):\n        self.name = name\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.name} by {self.author}\"\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, name, author):\n        self.name = name\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.name} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Open the workspace files and complete the Book class.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Open the workspace files and complete the Book class.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, name, author):\n        self.name = name\n        self.author = author\n\n    def display_name(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, name, author):\n        self.name = name\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.name} by {self.author}\"\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Book:\n    def __init__(self, name, author):\n        self.name = name\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.name} by {self.author}\"\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, name, author):\n        self.name = name\n        self.author = author\n\n    def display_name(self):\n        return f\"{self.name} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define a Book class."
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Deep Work",
+              "Cal Newport"
+            ],
+            "message": "Book should be constructible with name and author."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Deep Work",
+              "Cal Newport"
+            ],
+            "attributes": [
+              "name",
+              "author"
+            ],
+            "message": "Book instances should store both name and author."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Deep Work",
+              "Cal Newport"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "display_name",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Deep Work by Cal Newport",
+            "expectedKind": "value",
+            "message": "Book.display_name() should return the specialized label."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-overriding-and-specialization-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1",
+      "language": "python",
+      "starterCode": "# Complete the DigitalItem class in the workspace files.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Complete the DigitalItem class in the workspace files.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/digital_item.py",
+          "content": "class DigitalItem:\n    def __init__(self, name, price, file_size_mb):\n        self.name = name\n        self.price = price\n        self.file_size_mb = file_size_mb\n\n    def summary(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class DigitalItem:\n    def __init__(self, name, price, file_size_mb):\n        self.name = name\n        self.price = price\n        self.file_size_mb = file_size_mb\n\n    def summary(self):\n        return f\"{self.name} (${self.price}) - {self.file_size_mb}MB download\"\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/digital_item.py",
+          "content": "class DigitalItem:\n    def __init__(self, name, price, file_size_mb):\n        self.name = name\n        self.price = price\n        self.file_size_mb = file_size_mb\n\n    def summary(self):\n        return f\"{self.name} (${self.price}) - {self.file_size_mb}MB download\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Complete the DigitalItem class in the workspace files.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Complete the DigitalItem class in the workspace files.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/digital_item.py",
+            "content": "class DigitalItem:\n    def __init__(self, name, price, file_size_mb):\n        self.name = name\n        self.price = price\n        self.file_size_mb = file_size_mb\n\n    def summary(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class DigitalItem:\n    def __init__(self, name, price, file_size_mb):\n        self.name = name\n        self.price = price\n        self.file_size_mb = file_size_mb\n\n    def summary(self):\n        return f\"{self.name} (${self.price}) - {self.file_size_mb}MB download\"\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class DigitalItem:\n    def __init__(self, name, price, file_size_mb):\n        self.name = name\n        self.price = price\n        self.file_size_mb = file_size_mb\n\n    def summary(self):\n        return f\"{self.name} (${self.price}) - {self.file_size_mb}MB download\"\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/digital_item.py",
+            "content": "class DigitalItem:\n    def __init__(self, name, price, file_size_mb):\n        self.name = name\n        self.price = price\n        self.file_size_mb = file_size_mb\n\n    def summary(self):\n        return f\"{self.name} (${self.price}) - {self.file_size_mb}MB download\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "DigitalItem",
+            "message": "Define a DigitalItem class."
+          },
+          {
+            "type": "constructible",
+            "className": "DigitalItem",
+            "constructorArgs": [
+              "Python Notes",
+              12,
+              45
+            ],
+            "message": "DigitalItem should accept name, price, and file_size_mb."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "DigitalItem",
+            "constructorArgs": [
+              "Python Notes",
+              12,
+              45
+            ],
+            "attributes": [
+              "name",
+              "price",
+              "file_size_mb"
+            ],
+            "message": "DigitalItem instances should store inherited and subclass attributes."
+          },
+          {
+            "type": "method_returns",
+            "className": "DigitalItem",
+            "constructorArgs": [
+              "Python Notes",
+              12,
+              45
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Python Notes ($12) - 45MB download",
+            "expectedKind": "value",
+            "message": "DigitalItem.summary() should return the specialized summary."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-overriding-and-specialization-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2",
+      "language": "python",
+      "starterCode": "# Complete the subclass and service function in the workspace files.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Complete the subclass and service function in the workspace files.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/fragile_item.py",
+          "content": "class FragileItem:\n    def __init__(self, title):\n        pass\n\n    def shipping_note(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class FragileItem:\n    def __init__(self, name):\n        self.name = name\n\n    def shipping_note(self):\n        return \"Handle with care\"\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/fragile_item.py",
+          "content": "class FragileItem:\n    def __init__(self, title):\n        pass\n\n    def shipping_note(self):\n        return \"Handle with care\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Complete the subclass and service function in the workspace files.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Complete the subclass and service function in the workspace files.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/fragile_item.py",
+            "content": "class FragileItem:\n    def __init__(self, title):\n        pass\n\n    def shipping_note(self):\n        pass",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class FragileItem:\n    def __init__(self, name):\n        self.name = name\n\n    def shipping_note(self):\n        return \"Handle with care\"\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class FragileItem:\n    def __init__(self, name):\n        self.name = name\n\n    def shipping_note(self):\n        return \"Handle with care\"\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/fragile_item.py",
+            "content": "class FragileItem:\n    def __init__(self, title):\n        pass\n\n    def shipping_note(self):\n        return \"Handle with care\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "FragileItem",
+            "message": "Define a FragileItem class."
+          },
+          {
+            "type": "method_returns",
+            "className": "FragileItem",
+            "constructorArgs": [
+              "Glass Vase"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "shipping_note",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Handle with care",
+            "expectedKind": "value",
+            "message": "FragileItem.shipping_note() should override the base behavior."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sc-overriding-contract",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.sc-overriding-contract",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-super-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.sc-super-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "fb-specialized-method-name",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.fb-specialized-method-name",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "display_name"
+      }
+    },
+    {
+      "id": "fb-super-call",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.fb-super-call",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "super().__init__(name, price)"
+      }
+    },
+    {
+      "id": "mc-overriding-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.mc-overriding-benefits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-build-specialized-subclass",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.practice.dr-build-specialized-subclass",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    }
+  ]
+}

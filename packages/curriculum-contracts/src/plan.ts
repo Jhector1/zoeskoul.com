@@ -37,6 +37,13 @@ export type PlannedModuleRuntimePolicy = Omit<BlueprintRuntimePolicy, "moduleDat
 
 export type PlannedModule = {
   moduleSlug: string;
+  /**
+   * Optional display/logical module number from course.spec.json.
+   * Courses that continue a sequence may render modules 8-11 while still
+   * sorting within this course by order 1-4. Policy lookup should prefer
+   * this value when present.
+   */
+  moduleNumber?: number;
   prefix: string;
   order: number;
   role?: "standard" | "capstone";

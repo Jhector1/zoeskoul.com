@@ -100,7 +100,7 @@ export const pythonShape: SubjectShapePack = {
             'Use code_input with fixed_tests, template_io, or semantic recipes for Python tasks.',
             'Use recipeType "semantic" for function-return tasks, class/object tasks, methods, attributes, and data-transformation behavior.',
             'For semantic function tasks, use semanticChecks[] with type "function_returns".',
-            'For class methods, use semanticChecks[] with type "method_returns" and include className.',        ],
+            'For class methods, use semanticChecks[] with type "method_returns" for pure return methods. For state-changing method workflows, use "method_sequence_returns" so the grader calls mutating methods before checking the getter.',        ],
         doNotGenerate: [
             "subject.manifest.json directly",
             "topic.bundle.json directly",

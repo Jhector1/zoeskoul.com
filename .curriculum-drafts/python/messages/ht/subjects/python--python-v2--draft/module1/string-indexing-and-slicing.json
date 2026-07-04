@@ -1,0 +1,492 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-1": {
+        "string-indexing-and-slicing": {
+          "label": "Endèksaj ak koupe String",
+          "summary": "Aksede karaktè ak sou-chèn lè w sèvi ak endèks ak koupe.",
+          "cards": {
+            "sketch0": {
+              "title": "Endèksaj pran yon sèl karaktè"
+            },
+            "sketch1": {
+              "title": "Koupe pran yon pati nan yon string"
+            },
+            "sketch2": {
+              "title": "Modèl komen ak endèks ak koupe"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Seri egzèsis sou koupe string"
+            }
+          },
+          "projectSteps": {
+            "code_first_and_last": {
+              "title": "Enprime premye ak dènye karaktè yo"
+            },
+            "code_middle_slice": {
+              "title": "Enprime yon koupe soti nan endèks 1 rive 4"
+            },
+            "code_prefix_suffix": {
+              "title": "Enprime twa premye yo ak rès la"
+            },
+            "code_last_two": {
+              "title": "Enprime de dènye karaktè yo"
+            },
+            "code_wrap_edges": {
+              "title": "Bati yon ti rezime sou bor yo"
+            }
+          },
+          "quiz": {
+            "sc_index_zero_start": {
+              "title": "Ki kote endèksaj string kòmanse?",
+              "prompt": "Nan Python, ki endèks ki bay premye karaktè yon string?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te korije paske fason li te ekri anvan an te montre repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san w pa konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "0",
+                "b": "1",
+                "c": "-1",
+                "d": "premye"
+              }
+            },
+            "sc_slice_end_rule": {
+              "title": "Kijan pozisyon fen koupe yo mache",
+              "prompt": "Kisa `text[1:4]` fè nan Python?",
+              "hint": "Yon koupe gen ladan endèks kòmansman an epi li sispann anvan endèks fen an.",
+              "help": {
+                "concept": "Nan yon koupe tankou `text[start:end]`, Python mete karaktè ki nan `start` la men li pa mete karaktè ki nan `end` la.",
+                "hint_1": "Verifye si endèks 4 fè pati rezilta a oswa si se sèlman pwen kote li sispann.",
+                "hint_2": "Koupe a kòmanse nan endèks 1 epi li pran karaktè yo jiska, men san li pa mete, endèks 4."
+              },
+              "options": {
+                "a": "Li pran sèlman karaktè ki nan endèks 4",
+                "b": "Li pran karaktè yo soti nan endèks 1 rive nan endèks 4, li mete toude ladan yo",
+                "c": "Li pran karaktè yo soti nan endèks 1 jiska, men san li pa mete, endèks 4",
+                "d": "Li retire karaktè yo soti nan endèks 1 rive nan endèks 4"
+              }
+            },
+            "mc_negative_and_open_slices": {
+              "title": "Rekonèt verite sou string yo",
+              "prompt": "Chwazi tout deklarasyon ki vre sou endèksaj ak koupe string nan Python.",
+              "hint": "Reflechi sou endèks negatif ak koupe ki manke kòmansman oswa fen.",
+              "help": {
+                "concept": "Endèks negatif konte apati fen string nan, epi koupe yo ka kite kòmansman oswa fen an vid pou vle di 'depi nan kòmansman' oswa 'rive nan fen an'.",
+                "hint_1": "Verifye si `-1` vle di dènye karaktè a epi si `[:3]` kòmanse nan kòmansman an.",
+                "hint_2": "Gen plis pase yon deklarasyon ki kòrèk isit la; chèche sa yo ki koresponn ak vrè konpòtman endèksaj ak koupe Python."
+              },
+              "options": {
+                "a": "`text[-1]` pran dènye karaktè a",
+                "b": "`text[:3]` kòmanse nan kòmansman an epi li sispann anvan endèks 3",
+                "c": "`text[2:]` kòmanse nan endèks 2 epi li ale rive nan fen an",
+                "d": "`text[1:4]` mete karaktè ki nan endèks 4 la ladan l"
+              }
+            },
+            "mc_valid_examples": {
+              "title": "Chwazi ekspresyon ki retounen sou-chèn",
+              "prompt": "Pou `word = \"planet\"`, ki ekspresyon ki retounen yon sou-chèn olye de yon sèl karaktè? Chwazi tout sa ki aplikab.",
+              "hint": "Yon sou-chèn anjeneral soti nan yon koupe ki gen de pwen.",
+              "help": {
+                "concept": "Endèksaj ak yon sèl nimewo retounen yon sèl karaktè, tandiske koupe ak de pwen retounen yon sou-chèn.",
+                "hint_1": "Chèche ekspresyon ki sèvi ak `:` anndan krochi yo.",
+                "hint_2": "Yon sèl endèks tankou `[0]` oswa `[-1]` retounen yon sèl karaktè, men fòm koupe yo retounen yon seksyon nan string nan."
+              },
+              "options": {
+                "a": "`word[0]`",
+                "b": "`word[1:4]`",
+                "c": "`word[:2]`",
+                "d": "`word[-1]`"
+              }
+            },
+            "dr_build_first_last_middle": {
+              "title": "Mete etap yo nan lòd pou egzamine yon string",
+              "prompt": "Mete etap sa yo nan bon lòd pou ekri yon pwogram ki sere yon mo, enprime premye karaktè li, epi apre sa enprime dènye karaktè li.",
+              "hint": "Kòmanse pa kreye varyab string nan anvan ou eseye fè endèksaj sou li.",
+              "help": {
+                "concept": "Pou sèvi ak endèksaj, ou bezwen yon varyab string an premye. Apre sa ou ka enprime karaktè yo lè w sèvi ak ekspresyon endèks nan yon lòd ki lojik.",
+                "hint_1": "Atribisyon varyab la dwe fèt anvan nenpòt liy `print`.",
+                "hint_2": "Apre string nan egziste, enprime endèks 0 an premye, epi apre sa enprime endèks -1."
+              },
+              "tokens": {
+                "t1": "word = \"robot\"",
+                "t2": "print(word[0])",
+                "t3": "print(word[-1])"
+              }
+            },
+            "dr_slice_reasoning": {
+              "title": "Mete eksplikasyon koupe a nan lòd",
+              "prompt": "Ranje etap rezònman yo pou `text = \"banana\"` ak `text[1:4]`.",
+              "hint": "Reflechi sou kote koupe a kòmanse ak kote li sispann.",
+              "help": {
+                "concept": "Yon koupe kòmanse nan premye endèks la, li mete chak karaktè jiska pwen kote li sispann, epi li pa mete endèks fen an.",
+                "hint_1": "Kòmanse ak règ pou endèks kòmansman an, apre sa pran karaktè ki ladan yo, epi apre sa sispann anvan endèks fen an.",
+                "hint_2": "Eksplikasyon an ta dwe soti nan endèks 1, pase nan lèt ki ladan yo, epi apre sa mansyone ke endèks 4 pa ladan l."
+              },
+              "tokens": {
+                "t1": "Kòmanse nan endèks 1",
+                "t2": "Mete karaktè ki nan endèks 1, 2, ak 3 yo ladan yo",
+                "t3": "Sispann anvan endèks 4"
+              }
+            },
+            "fb_first_char_index": {
+              "title": "Ranpli endèks pou premye karaktè a",
+              "prompt": "Konplete kòd la pou li pran premye karaktè yon string.",
+              "hint": "Premye karaktè a sèvi ak endèks kòmansman Python lan.",
+              "help": {
+                "concept": "String Python yo sèvi ak endèksaj ki baze sou zewo, kidonk premye karaktè a jwenn ak endèks tèm ki manke a.",
+                "hint_1": "Sa a se pi piti endèks nòmal yo itilize pou jwenn yon karaktè depi devan.",
+                "hint_2": "Li pa 1 epi li pa yon endèks negatif depi nan fen an."
+              },
+              "template": "print(name[[blank1]])",
+              "choices": [
+                "0",
+                "1",
+                "-1",
+                "2"
+              ]
+            },
+            "fb_open_end_slice": {
+              "title": "Ranpli pati koupe ki manke a",
+              "prompt": "Konplete kòd la pou li pran tout bagay soti nan endèks 2 rive nan fen an.",
+              "hint": "Gade espas vid la, epi chwazi mo oswa senbòl ki fè lide a kòrèk.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki fè deklarasyon an egzak.",
+                "hint_1": "Gade mo ki anvan ak apre espas vid la pou w dedwi ki kalite tèm ki nesesè.",
+                "hint_2": "Chwazi opsyon ki konplete deklarasyon an ak sans ki pi klè."
+              },
+              "template": "print(word[[blank1]])",
+              "choices": [
+                "2",
+                "2:",
+                ":2",
+                "1:2"
+              ]
+            },
+            "code_first_and_last": {
+              "title": "Enprime premye ak dènye karaktè yo",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a. Enprime premye karaktè a sou yon liy epi dènye karaktè a sou liy apre a.",
+              "hint": "Li travay la \"Enprime premye ak dènye karaktè yo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Enprime premye ak dènye karaktè yo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print the first character\n# TODO: print the last character"
+            },
+            "code_middle_slice": {
+              "title": "Enprime yon koupe soti nan endèks 1 rive 4",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a epi enprime koupe a soti nan endèks 1 jiska, men san li pa mete, endèks 4.",
+              "hint": "Li travay la \"Enprime yon koupe soti nan endèks 1 rive 4\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Enprime yon koupe soti nan endèks 1 rive 4\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print the required slice"
+            },
+            "code_prefix_suffix": {
+              "title": "Enprime twa premye yo ak rès la",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a. Enprime twa premye karaktè yo sou yon liy, epi apre sa enprime karaktè ki rete yo sou liy apre a.",
+              "hint": "Li travay la \"Enprime twa premye yo ak rès la\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Enprime twa premye yo ak rès la\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print the first three characters\n# TODO: print the rest of the word"
+            },
+            "code_last_two": {
+              "title": "Enprime de dènye karaktè yo",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a epi enprime de dènye karaktè li yo.",
+              "hint": "Li travay la \"Enprime de dènye karaktè yo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Enprime de dènye karaktè yo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print the last two characters"
+            },
+            "code_wrap_edges": {
+              "title": "Bati yon ti rezime sou bor yo",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a epi enprime yon nouvo string ki fèt ak premye karaktè a, yon tirè, ak dènye karaktè a. Pa egzanp, si antre a se `robot`, sòti a ta dwe `r-t`.",
+              "hint": "Li travay la \"Bati yon ti rezime sou bor yo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Bati yon ti rezime sou bor yo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print first character, then '-', then last character"
+            }
+          }
+        }
+      },
+      "python-v2-1": {
+        "string-indexing-and-slicing": {
+          "label": "Endèksaj ak koupe String",
+          "summary": "Aksede karaktè ak sou-chèn lè w sèvi ak endèks ak koupe.",
+          "cards": {
+            "sketch0": {
+              "title": "Endèksaj pran yon sèl karaktè"
+            },
+            "sketch1": {
+              "title": "Koupe pran yon pati nan yon string"
+            },
+            "sketch2": {
+              "title": "Modèl komen ak endèks ak koupe"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Seri egzèsis sou koupe string"
+            }
+          },
+          "projectSteps": {
+            "code_first_and_last": {
+              "title": "Enprime premye ak dènye karaktè yo"
+            },
+            "code_middle_slice": {
+              "title": "Enprime yon koupe soti nan endèks 1 rive 4"
+            },
+            "code_prefix_suffix": {
+              "title": "Enprime twa premye yo ak rès la"
+            },
+            "code_last_two": {
+              "title": "Enprime de dènye karaktè yo"
+            },
+            "code_wrap_edges": {
+              "title": "Bati yon ti rezime sou bor yo"
+            }
+          },
+          "quiz": {
+            "sc_index_zero_start": {
+              "title": "Ki kote endèksaj string kòmanse?",
+              "prompt": "Nan Python, ki endèks ki bay premye karaktè yon string?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te korije paske fason li te ekri anvan an te montre repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san w pa konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "0",
+                "b": "1",
+                "c": "-1",
+                "d": "premye"
+              }
+            },
+            "sc_slice_end_rule": {
+              "title": "Kijan pozisyon fen koupe yo mache",
+              "prompt": "Kisa `text[1:4]` fè nan Python?",
+              "hint": "Yon koupe gen ladan endèks kòmansman an epi li sispann anvan endèks fen an.",
+              "help": {
+                "concept": "Nan yon koupe tankou `text[start:end]`, Python mete karaktè ki nan `start` la men li pa mete karaktè ki nan `end` la.",
+                "hint_1": "Verifye si endèks 4 fè pati rezilta a oswa si se sèlman pwen kote li sispann.",
+                "hint_2": "Koupe a kòmanse nan endèks 1 epi li pran karaktè yo jiska, men san li pa mete, endèks 4."
+              },
+              "options": {
+                "a": "Li pran sèlman karaktè ki nan endèks 4",
+                "b": "Li pran karaktè yo soti nan endèks 1 rive nan endèks 4, li mete toude ladan yo",
+                "c": "Li pran karaktè yo soti nan endèks 1 jiska, men san li pa mete, endèks 4",
+                "d": "Li retire karaktè yo soti nan endèks 1 rive nan endèks 4"
+              }
+            },
+            "mc_negative_and_open_slices": {
+              "title": "Rekonèt verite sou string yo",
+              "prompt": "Chwazi tout deklarasyon ki vre sou endèksaj ak koupe string nan Python.",
+              "hint": "Reflechi sou endèks negatif ak koupe ki manke kòmansman oswa fen.",
+              "help": {
+                "concept": "Endèks negatif konte apati fen string nan, epi koupe yo ka kite kòmansman oswa fen an vid pou vle di 'depi nan kòmansman' oswa 'rive nan fen an'.",
+                "hint_1": "Verifye si `-1` vle di dènye karaktè a epi si `[:3]` kòmanse nan kòmansman an.",
+                "hint_2": "Gen plis pase yon deklarasyon ki kòrèk isit la; chèche sa yo ki koresponn ak vrè konpòtman endèksaj ak koupe Python."
+              },
+              "options": {
+                "a": "`text[-1]` pran dènye karaktè a",
+                "b": "`text[:3]` kòmanse nan kòmansman an epi li sispann anvan endèks 3",
+                "c": "`text[2:]` kòmanse nan endèks 2 epi li ale rive nan fen an",
+                "d": "`text[1:4]` mete karaktè ki nan endèks 4 la ladan l"
+              }
+            },
+            "mc_valid_examples": {
+              "title": "Chwazi ekspresyon ki retounen sou-chèn",
+              "prompt": "Pou `word = \"planet\"`, ki ekspresyon ki retounen yon sou-chèn olye de yon sèl karaktè? Chwazi tout sa ki aplikab.",
+              "hint": "Yon sou-chèn anjeneral soti nan yon koupe ki gen de pwen.",
+              "help": {
+                "concept": "Endèksaj ak yon sèl nimewo retounen yon sèl karaktè, tandiske koupe ak de pwen retounen yon sou-chèn.",
+                "hint_1": "Chèche ekspresyon ki sèvi ak `:` anndan krochi yo.",
+                "hint_2": "Yon sèl endèks tankou `[0]` oswa `[-1]` retounen yon sèl karaktè, men fòm koupe yo retounen yon seksyon nan string nan."
+              },
+              "options": {
+                "a": "`word[0]`",
+                "b": "`word[1:4]`",
+                "c": "`word[:2]`",
+                "d": "`word[-1]`"
+              }
+            },
+            "dr_build_first_last_middle": {
+              "title": "Mete etap yo nan lòd pou egzamine yon string",
+              "prompt": "Mete etap sa yo nan bon lòd pou ekri yon pwogram ki sere yon mo, enprime premye karaktè li, epi apre sa enprime dènye karaktè li.",
+              "hint": "Kòmanse pa kreye varyab string nan anvan ou eseye fè endèksaj sou li.",
+              "help": {
+                "concept": "Pou sèvi ak endèksaj, ou bezwen yon varyab string an premye. Apre sa ou ka enprime karaktè yo lè w sèvi ak ekspresyon endèks nan yon lòd ki lojik.",
+                "hint_1": "Atribisyon varyab la dwe fèt anvan nenpòt liy `print`.",
+                "hint_2": "Apre string nan egziste, enprime endèks 0 an premye, epi apre sa enprime endèks -1."
+              },
+              "tokens": {
+                "t1": "word = \"robot\"",
+                "t2": "print(word[0])",
+                "t3": "print(word[-1])"
+              }
+            },
+            "dr_slice_reasoning": {
+              "title": "Mete eksplikasyon koupe a nan lòd",
+              "prompt": "Ranje etap rezònman yo pou `text = \"banana\"` ak `text[1:4]`.",
+              "hint": "Reflechi sou kote koupe a kòmanse ak kote li sispann.",
+              "help": {
+                "concept": "Yon koupe kòmanse nan premye endèks la, li mete chak karaktè jiska pwen kote li sispann, epi li pa mete endèks fen an.",
+                "hint_1": "Kòmanse ak règ pou endèks kòmansman an, apre sa pran karaktè ki ladan yo, epi apre sa sispann anvan endèks fen an.",
+                "hint_2": "Eksplikasyon an ta dwe soti nan endèks 1, pase nan lèt ki ladan yo, epi apre sa mansyone ke endèks 4 pa ladan l."
+              },
+              "tokens": {
+                "t1": "Kòmanse nan endèks 1",
+                "t2": "Mete karaktè ki nan endèks 1, 2, ak 3 yo ladan yo",
+                "t3": "Sispann anvan endèks 4"
+              }
+            },
+            "fb_first_char_index": {
+              "title": "Ranpli endèks pou premye karaktè a",
+              "prompt": "Konplete kòd la pou li pran premye karaktè yon string.",
+              "hint": "Premye karaktè a sèvi ak endèks kòmansman Python lan.",
+              "help": {
+                "concept": "String Python yo sèvi ak endèksaj ki baze sou zewo, kidonk premye karaktè a jwenn ak endèks tèm ki manke a.",
+                "hint_1": "Sa a se pi piti endèks nòmal yo itilize pou jwenn yon karaktè depi devan.",
+                "hint_2": "Li pa 1 epi li pa yon endèks negatif depi nan fen an."
+              },
+              "template": "print(name[[blank1]])",
+              "choices": [
+                "0",
+                "1",
+                "-1",
+                "2"
+              ]
+            },
+            "fb_open_end_slice": {
+              "title": "Ranpli pati koupe ki manke a",
+              "prompt": "Konplete kòd la pou li pran tout bagay soti nan endèks 2 rive nan fen an.",
+              "hint": "Gade espas vid la, epi chwazi mo oswa senbòl ki fè lide a kòrèk.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki fè deklarasyon an egzak.",
+                "hint_1": "Gade mo ki anvan ak apre espas vid la pou w dedwi ki kalite tèm ki nesesè.",
+                "hint_2": "Chwazi opsyon ki konplete deklarasyon an ak sans ki pi klè."
+              },
+              "template": "print(word[[blank1]])",
+              "choices": [
+                "2",
+                "2:",
+                ":2",
+                "1:2"
+              ]
+            },
+            "code_first_and_last": {
+              "title": "Enprime premye ak dènye karaktè yo",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a. Enprime premye karaktè a sou yon liy epi dènye karaktè a sou liy apre a.",
+              "hint": "Li travay la \"Enprime premye ak dènye karaktè yo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Enprime premye ak dènye karaktè yo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print the first character\n# TODO: print the last character"
+            },
+            "code_middle_slice": {
+              "title": "Enprime yon koupe soti nan endèks 1 rive 4",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a epi enprime koupe a soti nan endèks 1 jiska, men san li pa mete, endèks 4.",
+              "hint": "Li travay la \"Enprime yon koupe soti nan endèks 1 rive 4\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Enprime yon koupe soti nan endèks 1 rive 4\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print the required slice"
+            },
+            "code_prefix_suffix": {
+              "title": "Enprime twa premye yo ak rès la",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a. Enprime twa premye karaktè yo sou yon liy, epi apre sa enprime karaktè ki rete yo sou liy apre a.",
+              "hint": "Li travay la \"Enprime twa premye yo ak rès la\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Enprime twa premye yo ak rès la\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print the first three characters\n# TODO: print the rest of the word"
+            },
+            "code_last_two": {
+              "title": "Enprime de dènye karaktè yo",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a epi enprime de dènye karaktè li yo.",
+              "hint": "Li travay la \"Enprime de dènye karaktè yo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Enprime de dènye karaktè yo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print the last two characters"
+            },
+            "code_wrap_edges": {
+              "title": "Bati yon ti rezime sou bor yo",
+              "prompt": "Ekri kòd Python ki li yon mo nan antre a epi enprime yon nouvo string ki fèt ak premye karaktè a, yon tirè, ak dènye karaktè a. Pa egzanp, si antre a se `robot`, sòti a ta dwe `r-t`.",
+              "hint": "Li travay la \"Bati yon ti rezime sou bor yo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Bati yon ti rezime sou bor yo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo espere a."
+              },
+              "starterCode": "word = input()\n# TODO: print first character, then '-', then last character"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-1": {
+        "string-indexing-and-slicing": {
+          "sketch_index_basics": {
+            "title": "Endèksaj pran yon sèl karaktè",
+            "bodyMarkdown": "Yon string se yon sekans karaktè, epi chak karaktè gen yon pozisyon yo rele yon **endèks**. Nan Python, endèksaj kòmanse nan `0`, pa nan `1`.\n\n```python\nword = \"python\"\nprint(word[0])\nprint(word[3])\n```\n\nSòti:\n\n```python\np\nh\n```\n\nAnn pase ladan l:\n- `word[0]` vle di karaktè ki nan endèks `0`, ki se `p`\n- `word[3]` vle di karaktè ki nan endèks `3`, ki se `h`\n\nOu ka sèvi tou ak endèks negatif pou konte apati fen an:\n\n```python\nword = \"python\"\nprint(word[-1])\nprint(word[-2])\n```\n\nSa enprime `n` epi apre sa `o`."
+          },
+          "sketch_slice_basics": {
+            "title": "Koupe pran yon pati nan yon string",
+            "bodyMarkdown": "Yon **koupe** ba ou yon sou-chèn, ki se yon pati ki pi piti nan string orijinal la. Fòm debaz la se `text[start:end]`.\n\nPython mete endèks `start` la, men li sispann **anvan** endèks `end` la.\n\n```python\ntext = \"banana\"\nprint(text[1:4])\n```\n\nSòti:\n\n```python\nana\n```\n\nPoukisa?\n- endèks `1` se `a`\n- endèks `2` se `n`\n- endèks `3` se `a`\n- endèks `4` pa ladan l\n\nKidonk `text[1:4]` vin `ana`.\n\nOu ka kite yon bò vid:\n\n```python\ntext = \"banana\"\nprint(text[:3])\nprint(text[3:])\n```\n\nAnn pase ladan l:\n- `text[:3]` kòmanse nan kòmansman an epi li sispann anvan endèks `3`, kidonk li bay `ban`\n- `text[3:]` kòmanse nan endèks `3` epi li ale rive nan fen an, kidonk li bay `ana`"
+          },
+          "sketch_common_patterns": {
+            "title": "Modèl komen ak endèks ak koupe",
+            "bodyMarkdown": "Endèksaj ak koupe itil pou anpil travay debutan, tankou pran premye lèt la, dènye lèt la, oswa tout bagay eksepte yon pati.\n\n```python\nname = \"Mila\"\nprint(name[0])\nprint(name[-1])\nprint(name[1:3])\n```\n\nSòti:\n\n```python\nM\na\nil\n```\n\nAnn pase etap pa etap:\n- `name[0]` pran premye karaktè a\n- `name[-1]` pran dènye karaktè a\n- `name[1:3]` pran karaktè yo soti nan endèks `1` jiska, men san li pa mete, endèks `3`\n\nYon egzanp rezoud:\nSi `code = \"ABCD1234\"`, alò:\n- `code[:4]` se `ABCD`\n- `code[4:]` se `1234`\n- `code[-2:]` se `34`\n\nFè atansyon: si ou sèvi ak yon sèl endèks ki pa egziste, Python bay yon erè. Koupe yo pi fleksib, men endèks yo dwe montre sou yon vrè karaktè."
+          }
+        }
+      },
+      "python-v2-1": {
+        "string-indexing-and-slicing": {
+          "sketch_index_basics": {
+            "title": "Endèksaj pran yon sèl karaktè",
+            "bodyMarkdown": "Yon string se yon sekans karaktè, epi chak karaktè gen yon pozisyon yo rele yon **endèks**. Nan Python, endèksaj kòmanse nan `0`, pa nan `1`.\n\n```python\nword = \"python\"\nprint(word[0])\nprint(word[3])\n```\n\nSòti:\n\n```python\np\nh\n```\n\nAnn pase ladan l:\n- `word[0]` vle di karaktè ki nan endèks `0`, ki se `p`\n- `word[3]` vle di karaktè ki nan endèks `3`, ki se `h`\n\nOu ka sèvi tou ak endèks negatif pou konte apati fen an:\n\n```python\nword = \"python\"\nprint(word[-1])\nprint(word[-2])\n```\n\nSa enprime `n` epi apre sa `o`."
+          },
+          "sketch_slice_basics": {
+            "title": "Koupe pran yon pati nan yon string",
+            "bodyMarkdown": "Yon **koupe** ba ou yon sou-chèn, ki se yon pati ki pi piti nan string orijinal la. Fòm debaz la se `text[start:end]`.\n\nPython mete endèks `start` la, men li sispann **anvan** endèks `end` la.\n\n```python\ntext = \"banana\"\nprint(text[1:4])\n```\n\nSòti:\n\n```python\nana\n```\n\nPoukisa?\n- endèks `1` se `a`\n- endèks `2` se `n`\n- endèks `3` se `a`\n- endèks `4` pa ladan l\n\nKidonk `text[1:4]` vin `ana`.\n\nOu ka kite yon bò vid:\n\n```python\ntext = \"banana\"\nprint(text[:3])\nprint(text[3:])\n```\n\nAnn pase ladan l:\n- `text[:3]` kòmanse nan kòmansman an epi li sispann anvan endèks `3`, kidonk li bay `ban`\n- `text[3:]` kòmanse nan endèks `3` epi li ale rive nan fen an, kidonk li bay `ana`"
+          },
+          "sketch_common_patterns": {
+            "title": "Modèl komen ak endèks ak koupe",
+            "bodyMarkdown": "Endèksaj ak koupe itil pou anpil travay debutan, tankou pran premye lèt la, dènye lèt la, oswa tout bagay eksepte yon pati.\n\n```python\nname = \"Mila\"\nprint(name[0])\nprint(name[-1])\nprint(name[1:3])\n```\n\nSòti:\n\n```python\nM\na\nil\n```\n\nAnn pase etap pa etap:\n- `name[0]` pran premye karaktè a\n- `name[-1]` pran dènye karaktè a\n- `name[1:3]` pran karaktè yo soti nan endèks `1` jiska, men san li pa mete, endèks `3`\n\nYon egzanp rezoud:\nSi `code = \"ABCD1234\"`, alò:\n- `code[:4]` se `ABCD`\n- `code[4:]` se `1234`\n- `code[-2:]` se `34`\n\nFè atansyon: si ou sèvi ak yon sèl endèks ki pa egziste, Python bay yon erè. Koupe yo pi fleksib, men endèks yo dwe montre sou yon vrè karaktè."
+          }
+        }
+      }
+    }
+  }
+}

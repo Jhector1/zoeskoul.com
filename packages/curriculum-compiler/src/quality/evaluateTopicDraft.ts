@@ -40,6 +40,7 @@ export async function evaluateTopicDraft(args: {
     seed: TopicSeed;
     rawDraft: TopicAuthoringDraft;
     profileServices: ProfileServices;
+    skipSemantic?: boolean;
 }): Promise<{
     normalizedDraft: TopicAuthoringDraft;
     draft: TopicAuthoringDraft;
@@ -84,6 +85,7 @@ export async function evaluateTopicDraft(args: {
         policy: args.seed.exercisePolicy,
         plannedCounts: args.seed.plannedExerciseCounts,
         generationTargets: args.seed.generationTargets,
+        sectionRole: args.seed.sectionRole,
     });
 
 
@@ -116,10 +118,16 @@ export async function evaluateTopicDraft(args: {
         ],
     });
 
-    const semanticReport = await args.profileServices.validateSemantic({
-        seed: args.seed,
-        draft,
-    });
+    const semanticReport = args.skipSemantic
+        ? {
+              topicId: args.seed.topicId,
+              ok: true,
+              issues: [],
+          }
+        : await args.profileServices.validateSemantic({
+              seed: args.seed,
+              draft,
+          });
 
     const repairReport = mergeRepairReports(args.seed.topicId, [
         makeBaseRepairReport(args.seed.topicId),

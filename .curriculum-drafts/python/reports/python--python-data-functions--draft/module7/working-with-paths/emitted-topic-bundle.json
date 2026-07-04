@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch0.title",
       "sketchId": "paths-relative-basics",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-working-with-paths-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch0.prompt",
+        "exerciseKey": "try-working-with-paths-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch1.title",
       "sketchId": "paths-folders-and-organization",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-working-with-paths-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch1.prompt",
+        "exerciseKey": "try-working-with-paths-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.cards.sketch2.title",
       "sketchId": "paths-safe-habits",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-working-with-paths-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.tryIt.try_working_with_paths_sketch2.prompt",
+        "exerciseKey": "try-working-with-paths-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -256,17 +292,162 @@
       }
     },
     {
+      "id": "try-working-with-paths-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/names.txt",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterFiles.data_names_txt.content",
+          "language": "text"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/names.txt",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.starterFiles.data_names_txt.content",
+            "language": "text"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/names.txt",
+            "content": "Ava\nMia\n",
+            "language": "text"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/names.txt"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\nMia\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/names.txt",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionFiles.data_names_txt.content",
+            "language": "text"
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "path",
+            "expected": "data/names.txt",
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "Path",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]names\\.txt['\\\"]",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.sourceChecks.1.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/names.txt",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.solutionFiles.data_names_txt.content",
+          "language": "text"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/names.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "Path",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]names\\.txt['\\\"]",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-checkpoint.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
       "id": "ci-read-nested-file",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file",
       "language": "python",
-      "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -275,11 +456,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -290,6 +471,15 @@
             "path": "data/input.txt",
             "content": "Hello paths!",
             "readOnly": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           }
         ]
       },
@@ -322,8 +512,42 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/input.txt",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/input.txt",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-read-nested-file.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        }
+      ]
     },
     {
       "id": "ci-copy-between-paths",
@@ -332,11 +556,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths",
       "language": "python",
-      "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -345,11 +569,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -362,12 +586,21 @@
             "readOnly": false
           }
         ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
         "workspaceExpectations": {
           "requiredFolders": [
             "data"
           ],
           "requiredFiles": [
-            "data/copy.txt"
+            "data/source.txt"
           ]
         }
       },
@@ -400,16 +633,72 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)"
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/source.txt",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "data/copy.txt",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.1.message",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "uses_method",
+            "method": "write",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.2.message"
+          }
+        ]
       },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
       "workspaceExpectations": {
         "requiredFolders": [
           "data"
         ],
         "requiredFiles": [
-          "data/copy.txt"
+          "data/source.txt"
         ]
-      }
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/source.txt",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "data/copy.txt",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.1.message",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "uses_method",
+          "method": "write",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-copy-between-paths.sourceChecks.2.message"
+        }
+      ]
     },
     {
       "id": "ci-count-lines-in-folder",
@@ -418,11 +707,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder",
       "language": "python",
-      "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -431,11 +720,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -446,6 +735,15 @@
             "path": "data/items.txt",
             "content": "pen\nbook\neraser",
             "readOnly": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           }
         ]
       },
@@ -478,8 +776,385 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/items.txt",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/items.txt",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.ci-count-lines-in-folder.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "try-working-with-paths-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "data/scores.txt\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "path",
+            "expected": "data/scores.txt",
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bfolder\\s*\\+\\s*['\\\"]/['\\\"]\\s*\\+\\s*filename",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.sourceChecks.0.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bfolder\\s*\\+\\s*['\\\"]/['\\\"]\\s*\\+\\s*filename",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch0.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "try-working-with-paths-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "data/scores.txt\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "path",
+            "expected": "data/scores.txt",
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_call",
+            "functionName": "Path",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]scores\\.txt['\\\"]",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_call",
+          "functionName": "Path",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "Path\\s*\\(\\s*['\\\"]data['\\\"]\\s*\\)\\s*/\\s*['\\\"]scores\\.txt['\\\"]",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch1.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "try-working-with-paths-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/message.txt",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_message_txt.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/message.txt",
+          "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_message_txt.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/message.txt",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.starterFiles.data_message_txt.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/message.txt",
+            "content": "Nested hello\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data"
+          ],
+          "requiredFiles": [
+            "data/message.txt"
+          ]
+        },
+        "files": [
+          {
+            "path": "data/message.txt",
+            "content": "Nested hello\n",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Nested hello\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/message.txt",
+            "content": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.solutionFiles.data_message_txt.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "data/message.txt",
+            "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data"
+        ],
+        "requiredFiles": [
+          "data/message.txt"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "data/message.txt",
+          "message": "@:topics.python--python-data-functions--draft.python-7-files-exceptions-and-data-cleaning.working-with-paths.quiz.try-working-with-paths-sketch2.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,181 @@
+{
+  "subjects": {
+    "applied-python-projects": {
+      "title": "Applied Python Projects: Object-Oriented Apps",
+      "description": "Build graded multi-file Python projects with the four OOP pillars: encapsulation, abstraction, inheritance, and polymorphism.",
+      "moreComingSoon": "More applied Python project lessons are coming soon."
+    }
+  },
+  "modules": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "title": "Object-Oriented Foundations",
+        "description": "Learn classes, instances, constructors, methods, encapsulation, imports, helper files, and lists of objects.",
+        "outcomes": [
+          "Define model classes in separate files",
+          "Encapsulate state changes inside methods",
+          "Use helper and service files in small projects"
+        ],
+        "why": [
+          "Strong OOP starts by putting behavior near the data it controls.",
+          "The course now makes multi-file work normal before projects begin."
+        ]
+      },
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "title": "Inheritance, Polymorphism, and Abstraction",
+        "description": "Learn inheritance, overriding, polymorphic collections, and base-interface thinking through a catalog project.",
+        "outcomes": [
+          "Create subclasses that reuse shared behavior",
+          "Override methods for specialized behavior",
+          "Process mixed objects through shared interfaces"
+        ],
+        "why": [
+          "The four OOP pillars need to be taught as a sequence, not scattered examples.",
+          "This module adds the missing inheritance, polymorphism, and abstraction foundation."
+        ]
+      },
+      "python-10-testing-debugging-oop-projects": {
+        "title": "Testing and Debugging OOP Projects",
+        "description": "Test object state, subclass behavior, polymorphic services, imports, and refactors in multi-file projects.",
+        "outcomes": [
+          "Write tests for object state and method behavior",
+          "Debug multi-file import and state problems",
+          "Refactor services without breaking OOP behavior"
+        ],
+        "why": [
+          "Testing makes the OOP design reliable as files and classes grow.",
+          "Debugging is taught inside realistic multi-file apps, not isolated snippets."
+        ]
+      },
+      "python-11-oop-capstone-project": {
+        "title": "Final OOP Capstone Project",
+        "description": "Build and test a complete Smart Task Tracker using encapsulation, abstraction, inheritance, and polymorphism.",
+        "outcomes": [
+          "Design a complete multi-file OOP app",
+          "Use all four OOP pillars in one final project",
+          "Ship tests, data, reports, and README together"
+        ],
+        "why": [
+          "The final capstone proves the learner can build a complete graded project.",
+          "Every capstone step now starts from the previous full solution."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "applied-python-projects-python-8-object-foundations": {
+          "title": "Object Foundations",
+          "description": "Classes in files, instance state, constructors, and object methods.",
+          "weeks": null,
+          "bullets": [
+            "Class Files and Instances",
+            "Constructors and Object State"
+          ]
+        },
+        "applied-python-projects-python-8-encapsulation-and-services": {
+          "title": "Encapsulation and Services",
+          "description": "Validation, helper imports, object responsibility, and service functions.",
+          "weeks": null,
+          "bullets": [
+            "Methods and Responsibility",
+            "Encapsulation and Validation"
+          ]
+        },
+        "applied-python-projects-python-8-module-project": {
+          "title": "Module Project",
+          "description": "Build a cumulative account tracker.",
+          "weeks": null,
+          "bullets": [
+            "Module 8 Account Tracker Project"
+          ]
+        }
+      },
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "applied-python-projects-python-9-inheritance-and-overrides": {
+          "title": "Inheritance and Overrides",
+          "description": "Shared base classes, subclass constructors, `super()`, and method overriding.",
+          "weeks": null,
+          "bullets": [
+            "Inheritance for Shared Behavior",
+            "Overriding and Specialization"
+          ]
+        },
+        "applied-python-projects-python-9-polymorphism-and-abstraction": {
+          "title": "Polymorphism and Abstraction",
+          "description": "Mixed object lists, shared method names, base interfaces, and services.",
+          "weeks": null,
+          "bullets": [
+            "Polymorphic Collections",
+            "Abstraction with Base Interfaces"
+          ]
+        },
+        "applied-python-projects-python-9-module-project": {
+          "title": "Module Project",
+          "description": "Build a cumulative polymorphic catalog.",
+          "weeks": null,
+          "bullets": [
+            "Module 9 Catalog Polymorphism Project"
+          ]
+        }
+      },
+      "python-10-testing-debugging-oop-projects": {
+        "applied-python-projects-python-10-testing-oop-behavior": {
+          "title": "Testing OOP Behavior",
+          "description": "Assertions for model state, validation, subclasses, and polymorphic services.",
+          "weeks": null,
+          "bullets": [
+            "Testing Object State",
+            "Testing Inheritance and Polymorphism"
+          ]
+        },
+        "applied-python-projects-python-10-debugging-and-refactoring": {
+          "title": "Debugging and Refactoring",
+          "description": "Import bugs, state bugs, service refactors, and thin main files.",
+          "weeks": null,
+          "bullets": [
+            "Debugging Imports and State",
+            "Refactoring OOP Services"
+          ]
+        },
+        "applied-python-projects-python-10-module-project": {
+          "title": "Module Project",
+          "description": "Test and polish a cumulative OOP catalog.",
+          "weeks": null,
+          "bullets": [
+            "Module 10 OOP Quality Project"
+          ]
+        }
+      },
+      "python-11-oop-capstone-project": {
+        "applied-python-projects-python-11-capstone-architecture": {
+          "title": "Capstone Architecture",
+          "description": "Plan files, create base task models, and shape the project.",
+          "weeks": null,
+          "bullets": [
+            "Capstone Scope and Architecture",
+            "Capstone Domain Model"
+          ]
+        },
+        "applied-python-projects-python-11-capstone-services-and-polish": {
+          "title": "Capstone Services and Polish",
+          "description": "Storage, reports, tests, README, and final output.",
+          "weeks": null,
+          "bullets": [
+            "Capstone Storage and Reports",
+            "Capstone Tests and Polish"
+          ]
+        },
+        "applied-python-projects-python-11-final-capstone": {
+          "title": "Final Capstone",
+          "description": "Build the final cumulative Smart Task Tracker.",
+          "weeks": null,
+          "bullets": [
+            "Module 11 Final OOP Capstone"
+          ]
+        }
+      }
+    }
+  }
+}

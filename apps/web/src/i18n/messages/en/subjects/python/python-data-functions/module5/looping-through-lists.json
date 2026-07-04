@@ -172,7 +172,13 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n"
+              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
+              "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a for loop over animals instead of printing each variable manually."
+                }
+              }
             },
             "ci-double-list-function": {
               "title": "Return a doubled list",
@@ -183,7 +189,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass"
+              "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
+              "solutionCode": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result"
             },
             "ci-count-long-words": {
               "title": "Count words longer than 4 letters",
@@ -194,7 +201,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass"
+              "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+              "solutionCode": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count"
             },
             "try-looping-through-lists-checkpoint": {
               "title": "Loop through names",
@@ -205,7 +213,13 @@
                 "hint_1": "Use a `for` loop.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n"
+              "starterCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n",
+              "solutionCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nfor name in names:\n    print(name)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a for loop over names instead of printing each name manually."
+                }
+              }
             },
             "try-looping-through-lists-sketch0": {
               "title": "Print each animal",
@@ -216,7 +230,13 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n"
+              "starterCode": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n",
+              "solutionCode": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a for loop over animals instead of typing each animal directly."
+                }
+              }
             },
             "try-looping-through-lists-sketch1": {
               "title": "Total the scores",
@@ -227,7 +247,16 @@
                 "hint_1": "Add each score to total using a loop, then print total.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n"
+              "starterCode": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n",
+              "solutionCode": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through scores instead of typing the final total."
+                },
+                "1": {
+                  "message": "Add each score into total inside the loop."
+                }
+              }
             },
             "try-looping-through-lists-sketch2": {
               "title": "Build doubled numbers",
@@ -238,7 +267,16 @@
                 "hint_1": "Loop through numbers and append each doubled value, then print doubled.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n"
+              "starterCode": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n",
+              "solutionCode": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through numbers instead of typing the final doubled list."
+                },
+                "1": {
+                  "message": "Use doubled.append(...) to build the list."
+                }
+              }
             }
           },
           "tryIt": {

@@ -4,7 +4,7 @@
   "moduleSlug": "linux-module-1-terminal-navigation",
   "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation",
   "prefix": "linux_module_1",
-  "minutes": 15,
+  "minutes": 18,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -23,13 +23,13 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.cards.sketch0.title",
-      "sketchId": "terminal-basics",
+      "sketchId": "terminal-command-output",
       "height": 420,
       "tryIt": {
         "id": "try-what-the-terminal-is-sketch0",
         "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch0.title",
         "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch0.prompt",
-        "exerciseKey": "what-the-terminal-is-try-it-1",
+        "exerciseKey": "what-terminal-is-try-it-1",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -42,13 +42,13 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.cards.sketch1.title",
-      "sketchId": "commands-and-output",
+      "sketchId": "prompt-and-command",
       "height": 420,
       "tryIt": {
         "id": "try-what-the-terminal-is-sketch1",
         "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch1.title",
         "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch1.prompt",
-        "exerciseKey": "what-the-terminal-is-try-it-2",
+        "exerciseKey": "what-terminal-is-try-it-2",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -61,13 +61,13 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.cards.sketch2.title",
-      "sketchId": "why-terminal-matters",
+      "sketchId": "safe-first-steps",
       "height": 420,
       "tryIt": {
         "id": "try-what-the-terminal-is-sketch2",
         "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch2.title",
         "promptKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.try_what_the_terminal_is_sketch2.prompt",
-        "exerciseKey": "what-the-terminal-is-try-it-3",
+        "exerciseKey": "what-terminal-is-try-it-3",
         "difficulty": "easy",
         "preferKind": "code_input",
         "seedPolicy": "global",
@@ -85,40 +85,39 @@
         "n": 4,
         "min": 4,
         "max": 6,
-        "selectionMode": "random",
-        "allowReveal": true,
-        "preferKind": null,
-        "maxAttempts": null
+        "select": {
+          "purpose": "quiz"
+        }
       }
     }
   ],
   "sketches": [
     {
-      "id": "terminal-basics",
+      "id": "terminal-command-output",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.terminal-basics.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.terminal-basics.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.terminal-command-output.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.terminal-command-output.bodyMarkdown"
     },
     {
-      "id": "commands-and-output",
+      "id": "prompt-and-command",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.commands-and-output.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.commands-and-output.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.prompt-and-command.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.prompt-and-command.bodyMarkdown"
     },
     {
-      "id": "why-terminal-matters",
+      "id": "safe-first-steps",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.why-terminal-matters.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.why-terminal-matters.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.safe-first-steps.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.safe-first-steps.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-terminal-purpose",
+      "id": "sc-terminal-output",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.sc-terminal-purpose",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.sc-terminal-output",
       "optionIds": [
         "a",
         "b",
@@ -131,28 +130,11 @@
       }
     },
     {
-      "id": "sc-pwd-vs-ls",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.sc-pwd-vs-ls",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "a"
-      }
-    },
-    {
-      "id": "mc-terminal-workflow",
+      "id": "mc-safe-inspection",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.mc-terminal-workflow",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.mc-safe-inspection",
       "optionIds": [
         "a",
         "b",
@@ -168,68 +150,63 @@
       }
     },
     {
-      "id": "dr-terminal-check-sequence",
+      "id": "dr-terminal-flow",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.dr-terminal-check-sequence",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.dr-terminal-flow",
       "tokenIds": [
         "t1",
         "t2",
-        "t3"
+        "t3",
+        "t4"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3"
+          "t3",
+          "t4"
         ]
       }
     },
     {
-      "id": "fb-pwd-meaning",
-      "kind": "fill_blank_choice",
+      "id": "sc-before-changing",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.fb-pwd-meaning",
-      "choiceCount": 4,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.sc-before-changing",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "pwd"
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "fb-ls-purpose",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.practice.fb-ls-purpose",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "ls"
-      }
-    },
-    {
-      "id": "what-the-terminal-is-try-it-1",
+      "id": "what-terminal-is-try-it-1",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1",
       "language": "bash",
-      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.starterCode",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "terminal-tour/location-readme.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.starterFiles.terminal_tour_location_readme_txt.content",
+          "path": "welcome-desk/shift-note.txt",
+          "content": "Morning volunteer shift\n",
           "language": "bash"
         }
       ],
@@ -242,47 +219,70 @@
           "entry": true
         },
         {
-          "path": "terminal-tour/location-readme.txt",
-          "content": "Run pwd to ask the terminal where you are.\n",
+          "path": "welcome-desk/shift-note.txt",
+          "content": "Morning volunteer shift\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "welcome-desk/shift-note.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^pwd$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.terminalExpectations.requiredCommands.0.message"
+            "pattern": "\\bpwd\\b",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.terminalExpectations.requiredCommands.0.message"
           }
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.terminalExpectations.forbiddenCommands.0.message"
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "welcome-desk"
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.starterCode",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "terminal-tour/location-readme.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.starterFiles.terminal_tour_location_readme_txt.content",
+            "path": "welcome-desk/shift-note.txt",
+            "content": "Morning volunteer shift\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "welcome-desk/shift-note.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "terminal-tour/location-readme.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.starterFiles.terminal_tour_location_readme_txt.content",
+            "path": "welcome-desk/shift-note.txt",
+            "content": "Morning volunteer shift\n",
             "language": "bash"
           }
         ]
@@ -291,7 +291,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.prompt"
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-1.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -301,40 +301,41 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/welcome-desk"
       },
       "fixtureFiles": [
         {
-          "path": "terminal-tour/location-readme.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-1.starterFiles.terminal_tour_location_readme_txt.content",
+          "path": "welcome-desk/shift-note.txt",
+          "content": "Morning volunteer shift\n",
           "language": "bash"
         }
       ]
     },
     {
-      "id": "what-the-terminal-is-try-it-2",
+      "id": "what-terminal-is-try-it-2",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2",
       "language": "bash",
-      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterCode",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "terminal-tour/notes.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterFiles.terminal_tour_notes_txt.content",
+          "path": "supply-room/labels.txt",
+          "content": "Name tags\n",
           "language": "bash"
         },
         {
-          "path": "terminal-tour/photos/README.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterFiles.terminal_tour_photos_readme_txt.content",
+          "path": "supply-room/inventory.txt",
+          "content": "Markers\nTape\n",
           "language": "bash"
         }
       ],
@@ -347,65 +348,87 @@
           "entry": true
         },
         {
-          "path": "terminal-tour/notes.txt",
-          "content": "notes\n",
+          "path": "supply-room/labels.txt",
+          "content": "Name tags\n",
           "language": "bash"
         },
         {
-          "path": "terminal-tour/photos/README.txt",
-          "content": "photo folder\n",
+          "path": "supply-room/inventory.txt",
+          "content": "Markers\nTape\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "supply-room/labels.txt",
+          "supply-room/inventory.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^ls$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.terminalExpectations.requiredCommands.0.message"
+            "pattern": "\\bls\\b",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.terminalExpectations.requiredCommands.0.message"
           }
-        ],
-        "outputContains": [
-          "terminal-tour"
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.terminalExpectations.forbiddenCommands.0.message"
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "supply-room"
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterCode",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "terminal-tour/notes.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterFiles.terminal_tour_notes_txt.content",
+            "path": "supply-room/labels.txt",
+            "content": "Name tags\n",
             "language": "bash"
           },
           {
-            "path": "terminal-tour/photos/README.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterFiles.terminal_tour_photos_readme_txt.content",
+            "path": "supply-room/inventory.txt",
+            "content": "Markers\nTape\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "supply-room/labels.txt",
+            "supply-room/inventory.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "terminal-tour/notes.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterFiles.terminal_tour_notes_txt.content",
+            "path": "supply-room/labels.txt",
+            "content": "Name tags\n",
             "language": "bash"
           },
           {
-            "path": "terminal-tour/photos/README.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterFiles.terminal_tour_photos_readme_txt.content",
+            "path": "supply-room/inventory.txt",
+            "content": "Markers\nTape\n",
             "language": "bash"
           }
         ]
@@ -414,7 +437,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.prompt"
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-2.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -424,45 +447,41 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/supply-room"
       },
       "fixtureFiles": [
         {
-          "path": "terminal-tour/notes.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterFiles.terminal_tour_notes_txt.content",
+          "path": "supply-room/labels.txt",
+          "content": "Name tags\n",
           "language": "bash"
         },
         {
-          "path": "terminal-tour/photos/README.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-2.starterFiles.terminal_tour_photos_readme_txt.content",
+          "path": "supply-room/inventory.txt",
+          "content": "Markers\nTape\n",
           "language": "bash"
         }
       ]
     },
     {
-      "id": "what-the-terminal-is-try-it-3",
+      "id": "what-terminal-is-try-it-3",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3",
       "language": "bash",
-      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterCode",
+      "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
       "starterFiles": [
         {
           "path": "main.sh",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterCode",
+          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "event-plan/schedule.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterFiles.event_plan_schedule_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "event-plan/guests.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterFiles.event_plan_guests_txt.content",
+          "path": "check-in/arrival-note.txt",
+          "content": "Open doors at 8:00\n",
           "language": "bash"
         }
       ],
@@ -475,69 +494,74 @@
           "entry": true
         },
         {
-          "path": "event-plan/schedule.txt",
-          "content": "10:00 setup\n",
-          "language": "bash"
-        },
-        {
-          "path": "event-plan/guests.txt",
-          "content": "Guests\n",
+          "path": "check-in/arrival-note.txt",
+          "content": "Open doors at 8:00\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "check-in/arrival-note.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^pwd$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.terminalExpectations.requiredCommands.0.message"
+            "pattern": "\\bpwd\\b",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^ls$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.terminalExpectations.requiredCommands.1.message"
+            "pattern": "\\bls\\b",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.requiredCommands.1.message"
           }
-        ],
-        "outputContains": [
-          "event-plan"
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.terminalExpectations.forbiddenCommands.0.message"
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "check-in"
       },
       "workspace": {
         "language": "bash",
         "entryFilePath": "main.sh",
-        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterCode",
+        "starterCode": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
         "starterFiles": [
           {
             "path": "main.sh",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterCode",
+            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.starterCode",
             "language": "bash",
             "isEntry": true,
             "entry": true
           },
           {
-            "path": "event-plan/schedule.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterFiles.event_plan_schedule_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "event-plan/guests.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterFiles.event_plan_guests_txt.content",
+            "path": "check-in/arrival-note.txt",
+            "content": "Open doors at 8:00\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "check-in/arrival-note.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "event-plan/schedule.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterFiles.event_plan_schedule_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "event-plan/guests.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterFiles.event_plan_guests_txt.content",
+            "path": "check-in/arrival-note.txt",
+            "content": "Open doors at 8:00\n",
             "language": "bash"
           }
         ]
@@ -546,7 +570,7 @@
       "recipe": {
         "type": "shell_task",
         "mode": "terminal_workspace",
-        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.prompt"
+        "instructions": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-terminal-is-try-it-3.prompt"
       },
       "ideConfig": {
         "runnerBackend": "pty",
@@ -556,17 +580,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/check-in"
       },
       "fixtureFiles": [
         {
-          "path": "event-plan/schedule.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterFiles.event_plan_schedule_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "event-plan/guests.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.tryIt.exercises.what-the-terminal-is-try-it-3.starterFiles.event_plan_guests_txt.content",
+          "path": "check-in/arrival-note.txt",
+          "content": "Open doors at 8:00\n",
           "language": "bash"
         }
       ]
@@ -574,9 +594,9 @@
   ],
   "topicMeta": {
     "learningGoals": [
-      "Try it yourself: make the terminal answer you",
-      "Try it yourself: capture command output",
-      "Try it yourself: record a terminal use case"
+      "Check that the terminal is listening",
+      "Read what is nearby",
+      "Use the safe first pair"
     ]
   },
   "serviceDefaults": {
@@ -586,6 +606,7 @@
       "files": true,
       "multiFile": true,
       "terminal": true
-    }
+    },
+    "terminalCwd": "/workspace"
   }
 }

@@ -1,0 +1,358 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "try-except-basics": {
+          "label": "Try/Except Baz yo",
+          "summary": "Kenbe erè yo atann epi kenbe pwogram yo itil.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa try/except fè"
+            },
+            "sketch1": {
+              "title": "Se sèlman liy ki riske a ki bezwen pwoteksyon."
+            },
+            "sketch2": {
+              "title": "Sèvi ak eksepsyon pou kenbe pwogram yo itilizab."
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Pratike konvèsyon entèg an sekirite ak try/except"
+            }
+          },
+          "projectSteps": {
+            "q9": {
+              "title": "Kenbe yon antre antye negatif"
+            },
+            "q10": {
+              "title": "Ajoute de antre an sekirite"
+            },
+            "q11": {
+              "title": "Konte nimewo valab yo"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "Kisa k rive apre yo fin detekte yon erè konvèsyon?",
+              "prompt": "Yon pwogram kouri modèl sa a:\n\n```python\ntry:\n    number = int(text)\nexcept ValueError:\n    print(\"Bad number\")\n```\n\nSi `text` se `\"cat\"`, kisa k ap pase?",
+              "hint": "Panse sou sa `int()` fè ak tèks ki pa yon nimewo antye valab.",
+              "help": {
+                "concept": "`except ValueError` Jere echèk ki soti nan `int()` lè tèks pa ka konvèti an nimerik.",
+                "hint_1": "`int(\"cat\")` Li pa ka pwodui yon nimewo, kidonk Python leve yon erè \"`ValueError`\".",
+                "hint_2": "Paske yo trape erè espesifik sa a, pwogram nan egzekite blòk `except` la olye pou l sispann imedyatman."
+              },
+              "options": {
+                "a": "Blòk `except` la kouri epi enprime `Bad number`",
+                "b": "Blòk `try` la enprime nimewo konvèti a.",
+                "c": "Python inyore tèks ki pa bon an epi li itilize 0",
+                "d": "Pwogram nan toujou kanpe anvan li rive nan `except`"
+              }
+            },
+            "q2": {
+              "title": "Ki erè ki anfòm nan konvèsyon entè?",
+              "prompt": "Ki tip eksepsyon ou ta dwe trape lè yon eksepsyon E`int(user_text)` ka leve paske tèks la pa yon antye valab?",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Kesyon sa a verifye si ou ka konekte kòmand lan ak konsèp Python ki soti nan leson an.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Eseye chak opsyon nan fraz la oswa nan liy kòd la epi kenbe sa ki fè egzanp lan mache egzakteman jan yo dekri l."
+              },
+              "options": {
+                "a": "Erè non",
+                "b": "Erè valè",
+                "c": "Erè Endèks",
+                "d": "Erè Sentaks"
+              }
+            },
+            "q3": {
+              "title": "Poukisa pou itilize try/except isit la?",
+              "prompt": "Chwazi tout rezon ki kòrèk pou itilize `try/except` alantou `int(text)` lè w ap netwaye done sal.",
+              "hint": "Chèche benefis ki gen rapò ak jere tèks nimerik ki pa kòrèk san danje.",
+              "help": {
+                "concept": "`try/except` Li itil lè gen kèk valè ki ka pa valab epi ou vle pwogram nan reyaji san danje olye pou l kraze.",
+                "hint_1": "Panse sou sa k rive lè yon atik pa bon nan yon seri pi laj de antre.",
+                "hint_2": "Bon chwa yo ta dwe mansyone jere erè avèk gras ak kontinye koule pwogram nan, pa siksè konvèsyon garanti."
+              },
+              "options": {
+                "a": "Li pèmèt pwogram nan jere tèks nimerik ki pa valab san li pa kraze imedyatman.",
+                "b": "Li ka montre yon mesaj ranplasman lè konvèsyon an echwe.",
+                "c": "Li garanti ke chak chèn ap tounen yon antye.",
+                "d": "Li ka ede yon bouk kontinye trete valè ki vin apre yo apre yon move valè."
+              }
+            },
+            "q4": {
+              "title": "Ki antre yo ki ta deklanche ValueError?",
+              "prompt": "Chwazi tout valè ki ta ogmante `ValueError` nan `int(value)`.",
+              "hint": "Chwazi kòd ki pa tèks nimewo antye valab.",
+              "help": {
+                "concept": "`int()` Aksepte chèn tankou `\"12\"` oswa `\"-3\"`, men li rejte tèks ki gen lèt oswa pwen desimal nan fòm chèn pou konvèsyon an antye senp.",
+                "hint_1": "Yon siy mwens ak chif toujou se yon chèn antye valab.",
+                "hint_2": "Chèche valè ki gen lèt oswa yon pwen desimal kòm tèks."
+              },
+              "options": {
+                "a": "\"18\"",
+                "b": "ble",
+                "c": "4.5",
+                "d": "-2"
+              }
+            },
+            "q5": {
+              "title": "Lòd egzekisyon lè konvèsyon echwe",
+              "prompt": "Mete etap sa yo nan lòd yo rive lè `int(text)` leve `ValueError` andedan yon blòk `try/except`.",
+              "hint": "Aranje moso kòd yo nan lòd Python ta dwe egzekite yo.",
+              "help": {
+                "concept": "Moso yo dwe fòme yon kòd Python valab nan lòd li dwe kouri.",
+                "hint_1": "Kòmanse ak liy ki mete aksyon Python an an plas.",
+                "hint_2": "Mete liy ki depann de valè ki te egziste pi bonè apre valè sa yo fin egziste."
+              },
+              "tokens": {
+                "t1": "Python antre nan blòk`try` la",
+                "t2": "`int(text)` Rasanble`ValueError`",
+                "t3": "Rès blòk `try` la sote",
+                "t4": "Blòk `except` ki mache ansanm yo"
+              }
+            },
+            "q6": {
+              "title": "Bati yon modèl debaz pou yon try/except",
+              "prompt": "Aranje moso kòd sa yo nan yon modèl debaz kòrèk ki konvèti tèks antre a an yon nimewo antye epi jere antre ki pa kòrèk.",
+              "hint": "Aranje moso kòd yo nan lòd Python ta dwe egzekite yo.",
+              "help": {
+                "concept": "Moso yo dwe fòme yon kòd Python valab nan lòd li dwe egzekite.",
+                "hint_1": "Kòmanse ak liy ki prepare aksyon Python lan.",
+                "hint_2": "Mete liy ki depann sou valè ki te egziste anvan yo apre valè sa yo fin egziste."
+              },
+              "tokens": {
+                "t1": "Eseye:",
+                "t2": "nimewo = ent(tekst)",
+                "t3": "print(number)",
+                "t4": "eksepte ValueError:",
+                "t5": "print(\"Invalid input\")"
+              }
+            },
+            "q7": {
+              "title": "Nonmen mo kle pou kaptire a",
+              "prompt": "Konplete mo kle code ki jere erè a apre `try`.",
+              "hint": "Li fraz la ki antoure espas vid la epi deside ki wòl mo ki manke a jwe.",
+              "help": {
+                "concept": "Espas vid la bezwen mo oswa senbòl Python egzak ki fè liy lan fè sa kòmand la dekri.",
+                "hint_1": "Gade kòd ki antoure espas vid la pou deside si ou bezwen yon mo kle, yon valè, yon metòd, oswa yon kle.",
+                "hint_2": "Chwazi opsyon ki fè tout liy lan valab an Python epi ki bay rezilta ke kòmand la mande."
+              },
+              "template": "try:\n    number = int(text)\n[blank1] ValueError:\n    print(\"Bad input\")",
+              "choices": [
+                "eksepte",
+                "retounen",
+                "pandan",
+                "Enpòte"
+              ]
+            },
+            "q8": {
+              "title": "Chwazi konvèsyon riske a",
+              "prompt": "Ranpli ekspresyon ki ka bay erè \"`ValueError`\" lè tèks la pa yon antye valab.",
+              "hint": "Sèvi ak konvèsyon entegre ki soti nan tèks pou nimewo antye.",
+              "help": {
+                "concept": "Etap ki riske nan modèl sa a se konvèti tèks ak `int(...)`, paske kèk chèn pa entèger valab.",
+                "hint_1": "Kòd ki manke a ta dwe eseye konvèti `user_text` an yon nimewo antye.",
+                "hint_2": "Chwazi ekspresyon ki rele fonksyon konvèsyon antye Python sou varyab la."
+              },
+              "template": "try:\n    number = [blank1]\n    print(number)\nexcept ValueError:\n    print(\"Invalid\")",
+              "choices": [
+                "ent(tekstit)",
+                "print(user_text)",
+                "longè(tekstitèb)",
+                "tekst(itilizatè_tekst)"
+              ]
+            },
+            "q9": {
+              "title": "Kenbe yon antre antye negatif",
+              "prompt": "Yon skanè nimewo ka resevwa yon tèks ki pa valab. Konvèti antre a andedan yon blòk ``try``, epi enprime swa nimewo ki fòmate a oswa yon mesaj ki pa valab.\n\nPa egzanp, si antre a se `27`, pwogram ou an ta dwe enprime:\n`Number: 27`.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
+              "solutionCode": "text = input()\n\ntry:\n    number = int(text)\n    print(f\"Number: {number}\")\nexcept ValueError:\n    print(\"Invalid number\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak yon blòk `try` pou konvèsyon an."
+                },
+                "1": {
+                  "message": "Konvèti tèks la ak int()."
+                }
+              }
+            },
+            "q10": {
+              "title": "Ajoute de antre an sekirite",
+              "prompt": "De antre 80 rive kòm tèks. Konvèti toude valè yo an nimewo antye, epi enprime sòm nan oswa yon mesaj ki di li pa valab si youn nan valè yo pa ka tounen yon antye.\n\nPa egzanp, si antre yo se `8` ak `5`, pwogram ou an ta dwe enprime:\n`Sum: 13`.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki deja ap mache nan etap anvan an; ajoute nouvo konpòtman yo mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an fonksyònman epi konpare sòti a ak egzanp ki atann lan anvan ou verifye repons ou."
+              },
+              "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
+              "solutionCode": "first_text = input()\nsecond_text = input()\n\ntry:\n    first_number = int(first_text)\n    second_number = int(second_text)\n    print(f\"Sum: {first_number + second_number}\")\nexcept ValueError:\n    print(\"Invalid input\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak yon blòk `try` pou konvèsyon an."
+                },
+                "1": {
+                  "message": "Konvèti tèks la ak int()."
+                }
+              }
+            },
+            "q11": {
+              "title": "Konte nimewo valab yo",
+              "prompt": "Yon lis ki separe ak virg pa ka genyen antre ki pa kòrèk. Fè yon bouk sou chak pati, eseye konvèti li an `int`, konte sèlman antyè valab yo, epi enprime kantite final la.\n\nPa egzanp, si antre a se `3,7,bad,10`, pwogram ou an ta dwe enprime:\n`Valid count: 3`.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
+              "solutionCode": "parts = input().split(\",\")\nvalid_count = 0\n\nfor part in parts:\n    try:\n        int(part)\n        valid_count += 1\n    except ValueError:\n        pass\n\nprint(f\"Valid count: {valid_count}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Pase nan chak pati."
+                },
+                "1": {
+                  "message": "Itiliztry/except alantou konvèsyon entègra."
+                },
+                "2": {
+                  "message": "Konvèti chak valè ak int()."
+                }
+              }
+            },
+            "try-try-except-basics-checkpoint": {
+              "title": "Jere yon move nimewo",
+              "prompt": "Li antre a epi eseye konvèti li an yon antye. Enprime \"`Valid`\" si sa mache, sinon enprime \"`Invalid`\".",
+              "hint": "Itiliz`try` ak `except ValueError`.",
+              "help": {
+                "concept": "Yon blòk `try/except` jere erè san li pa fè pwogram nan kraze.",
+                "hint_1": "Itiliz`try` ak `except ValueError`.",
+                "hint_2": "Kouri kòd ou a epi konpare sòti a ak rezilta espere a."
+              },
+              "starterCode": "text = input()\n\n# Print Valid for an integer, otherwise Invalid.\n",
+              "solutionCode": "text = input()\ntry:\n    int(text)\n    print(\"Valid\")\nexcept ValueError:\n    print(\"Invalid\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak yon blòk try pou konvèsyon an."
+                },
+                "1": {
+                  "message": "Konvèti tèks la ak int()."
+                }
+              }
+            },
+            "try-try-except-basics-sketch0": {
+              "title": "Trape yon Erè Valè",
+              "prompt": "Trape erè espesifik ki koze pa yon konvèsyon entèg ki pa valab.",
+              "hint": "Eseye konvèti tèks la an nimerik. Enprime 'move nimewo' si li echwe.",
+              "help": {
+                "concept": "Eseye konvèti tèks la an nimerik. Enprime 'move nimewo' si li echwe.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "text = 'abc'\n\n# Try to convert text to int. Print 'bad number' if it fails.\n",
+              "solutionCode": "text = 'abc'\ntry:\n    number = int(text)\n    print(number)\nexcept ValueError:\n    print('bad number')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak yon blòk `try` pou konvèsyon an."
+                },
+                "1": {
+                  "message": "Konvèti tèks la ak int()."
+                }
+              }
+            },
+            "try-try-except-basics-sketch1": {
+              "title": "Itilize else apre try",
+              "prompt": "Blòk `else` la egzekite lè pa gen okenn eksepsyon ki rive.",
+              "hint": "Konvèti tèks an entèger epi enprime 'ok' sèlman si konvèsyon an reyisi.",
+              "help": {
+                "concept": "Konvèti tèks la an nimerik epi enprime 'ok' sèlman si konvèsyon an reyisi.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "text = '42'\n\n# Convert text to int and print 'ok' only if conversion succeeds.\n",
+              "solutionCode": "text = '42'\ntry:\n    number = int(text)\nexcept ValueError:\n    print('bad number')\nelse:\n    print('ok')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak yon blòk `try` pou konvèsyon an."
+                },
+                "1": {
+                  "message": "Konvèti tèks la ak int()."
+                }
+              }
+            },
+            "try-try-except-basics-sketch2": {
+              "title": "Kontinye boukle apre yon move valè",
+              "prompt": "Sèvi ak try/except anndan bouk la pou yon move valè pa kanpe pwogram nan.",
+              "hint": "Enprime sèlman valè ki ka konvèti an entèger.",
+              "help": {
+                "concept": "Enprime sèlman valè ki ka konvèti an entèger.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "values = ['10', 'bad', '3']\n\n# Print only the values that can be converted to int.\n",
+              "solutionCode": "values = ['10', 'bad', '3']\nfor value in values:\n    try:\n        print(int(value))\n    except ValueError:\n        pass\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Fè yon sik sou valè yo olye pou w tape 10 ak 3 dirèkteman."
+                },
+                "1": {
+                  "message": "Itiliztry/except alantou konvèsyon entèger la."
+                },
+                "2": {
+                  "message": "Konvèti chak valè ak int()."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_try_except_basics_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Li antre a epi eseye konvèti li an yon antye. Enprime `Valid` si li mache, sinon enprime `Invalid`."
+            },
+            "try_try_except_basics_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Kenbe erè espesifik ki koze pa yon konvèsyon entèg ki pa valab."
+            },
+            "try_try_except_basics_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Blòk `else` la egzekite lè pa gen okenn eksepsyon ki rive."
+            },
+            "try_try_except_basics_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Itilize try/except anndan bouk la pou yon move valè pa kanpe pwogram nan."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "try-except-basics": {
+          "s1": {
+            "title": "Satry/except fè",
+            "bodyMarkdown": "`try` li pèmèt pwogram ou an eseye kòd ki ka echwe. Si yon erè prevwa rive, `except` egzekite olye pou l kite tout pwogram nan kraze.\n\n```python\ntext = \"42\"\n\ntry:\n    number = int(text)\n    print(number + 1)\nexcept ValueError:\n    print(\"That was not a whole number.\")\n```\n\nEtap pa etap:\n- `int(text)` eseye konvèti chèn nan an yon antye.\n- Si `text` sanble ak yon nimewo, blòk `try` la kontinye egzekite.\n- Si `text` pa ka konvèti, Python sote ale nan blòk `except ValueError` la.\n\nPa egzanp, si `text` se `\"42\"`, rezilta a se `43`.\nSi `text` se `\"apple\"`, rezilta a se `That was not a whole number.`"
+          },
+          "s2": {
+            "title": "Se sèlman liy ki riske a ki bezwen pwoteksyon.",
+            "bodyMarkdown": "Yon modèl kouran pou moun ki fèk kòmanse se mete konvèsyon ki riske a anndan yon `try-finally`, epi jere pwoblèm nan nan yon `except`.\n\n```python\nuser_text = \"9a\"\n\ntry:\n    score = int(user_text)\n    print(\"Valid score:\", score)\nexcept ValueError:\n    print(\"Invalid score\")\n```\n\nLiy pa liy:\n- ``user_text`` anrejistre tèks la.\n- ``int(user_text)`` se etap ki riske a paske gen tèks ki pa ka tounen yon antye.\n- Si konvèsyon an reyisi, ``print(\"Valid score:\", score)`` ap egzekite.\n- Si konvèsyon an echwe, Python sote enprime sa a epi li egzekite blòk `except` la.\n\nSa itil lè w ap netwaye done antre ki dezòdone, tankou chif yon itilizatè tape oswa valè ki soti nan done tèks."
+          },
+          "s3": {
+            "title": "Sèvi ak eksepsyon pou kenbe pwogram yo itilizab.",
+            "bodyMarkdown": "San `try/except`, yon sèl move valè ka kanpe tout pwogram nan. Avèk li, ou ka montre yon mesaj itil epi kontinye.\n\n```python\nfirst = \"10\"\nsecond = \"oops\"\n\nfor item in [first, second]:\n    try:\n        value = int(item)\n        print(\"Clean value:\", value)\n    except ValueError:\n        print(\"Skipped bad value:\", item)\n```\n\nSa k rive:\n- Bouk la tcheke chak valè tèks.\n- `\"10\"` konvèti avèk siksè, kidonk li enprime `Clean value: 10`.\n- `\"oops\"` leve `ValueError`, kidonk li enprime `Skipped bad value: oops`.\n- Pwogram nan kontinye pito ke l kanpe sou move valè a."
+          }
+        }
+      }
+    }
+  }
+}

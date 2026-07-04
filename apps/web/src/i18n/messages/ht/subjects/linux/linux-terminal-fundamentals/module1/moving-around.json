@@ -3,17 +3,17 @@
     "linux-terminal-fundamentals": {
       "linux-module-1-terminal-navigation": {
         "moving-around": {
-          "label": "Deplase avèk cd",
-          "summary": "Sèvi ak cd, .., . ak ~ pou deplase ant katab yo an sekirite.",
+          "label": "Ap deplase ak cd",
+          "summary": "Sèvi ak cd, .., ., ak ~ pou deplase ant dosye yo an sekirite.",
           "cards": {
             "sketch0": {
-              "title": "Sa `cd` chanje"
+              "title": "Sa chanjman `cd` yo"
             },
             "sketch1": {
-              "title": "Sèvi ak `..`, `.` ak `~`"
+              "title": "Sèvi ak `..`, `.`, ak `~`"
             },
             "sketch2": {
-              "title": "Li chemen yo ak prekosyon anvan ou deplase"
+              "title": "Li chemen yo an sekirite anvan ou deplase"
             },
             "quiz": {
               "title": "Tcheke pratik"
@@ -26,139 +26,139 @@
             "allowReveal": true,
             "exercises": {
               "moving-around-try-it-1": {
-                "title": "Travay tèminal: antre nan yon katab avèk cd",
-                "prompt": "Ou bezwen pou enter the `navigation-practice` katab. Kouri `ls`, then `cd navigation-practice`, then `pwd` pou konfime ou deplased.",
-                "hint": "List first, deplase second, then konfime ou new kote avèk `pwd`.",
+                "title": "Travay final: antre nan yon dosye",
+                "prompt": "Ou bezwen antre nan dosye `navigation-practice`. Kouri `ls`, apre sa `cd navigation-practice`, epi `pwd` pou konfime ou deplase.",
+                "hint": "Fè lis an premye, deplase dezyèm, epi konfime nouvo adrès ou a ak `pwd`.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Tcheke."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Kouri `ls` anvan moving."
+                      "message": "Kouri `ls` anvan ou deplase."
                     },
                     "1": {
                       "message": "Kouri `cd navigation-practice`."
                     },
                     "2": {
-                      "message": "Kouri `pwd` apre changing katabs."
+                      "message": "Kouri `pwd` apre ou fin chanje dosye yo."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "navigation_practice_start_welcome_txt": {
-                    "content": "Start katab\n"
+                    "content": "Start folder\n"
                   },
                   "navigation_practice_reports_today_txt": {
-                    "content": "Report katab\n"
+                    "content": "Report folder\n"
                   }
                 }
               },
               "moving-around-try-it-2": {
-                "title": "Travay tèminal: remonte avèk cd ..",
-                "prompt": "Start inside `navigation-practice/start`, then deplase up one level. Kouri `cd navigation-practice/start`, `pwd`, `cd ..`, ak `pwd` again.",
-                "hint": "After `cd ..`, the second `pwd` should montre the parent katab.",
+                "title": "Travay terminal: monte ak cd ..",
+                "prompt": "Kòmanse andedan `navigation-practice/start`, epi monte yon nivo. Kouri `cd navigation-practice/start`, `pwd`, `cd ..`, ak `pwd` ankò.",
+                "hint": "Apre `cd ..`, dezyèm `pwd` la ta dwe montre dosye paran an.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Tcheke."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
                       "message": "Kouri `cd navigation-practice/start`."
                     },
                     "1": {
-                      "message": "Kouri `cd ..` pou deplase up one katab."
+                      "message": "Kouri `cd ..` pou monte yon dosye."
                     },
                     "2": {
-                      "message": "Kouri `pwd` pou konfime where ou are."
+                      "message": "Kouri `pwd` pou konfime kote ou ye."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "navigation_practice_start_welcome_txt": {
-                    "content": "Start katab\n"
+                    "content": "Start folder\n"
                   },
                   "navigation_practice_reports_today_txt": {
-                    "content": "Report katab\n"
+                    "content": "Report folder\n"
                   }
                 }
               },
               "moving-around-try-it-3": {
-                "title": "Travay tèminal: retounen lakay avèk cd ~",
-                "prompt": "Jump depi a nested katab back pou ou home katab. Kouri `cd navigation-practice/reports`, `pwd`, `cd ~`, ak `pwd` again.",
-                "hint": "Sèvi ak `~` as the shortcut back pou ou home katab, then konfime avèk `pwd`.",
+                "title": "Travay final: retounen lakay ak cd ~",
+                "prompt": "Sote soti nan yon dosye anndan yon lòt pou retounen nan dosye lakay ou. Kouri `cd navigation-practice/reports`, `pwd`, `cd ~`, ak `pwd` ankò.",
+                "hint": "Sèvi ak `~` kòm chemen kout pou retounen nan dosye lakay ou, epi konfime ak `pwd`.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Tcheke."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
                       "message": "Kouri `cd navigation-practice/reports`."
                     },
                     "1": {
-                      "message": "Kouri `cd ~` pou jump back home."
+                      "message": "Kouri `cd ~` pou retounen lakay."
                     },
                     "2": {
-                      "message": "Kouri `pwd` pou konfime ou kote."
+                      "message": "Kouri `pwd` pou konfime kote ou ye."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "navigation_practice_start_welcome_txt": {
-                    "content": "Start katab\n"
+                    "content": "Start folder\n"
                   },
                   "navigation_practice_reports_today_txt": {
-                    "content": "Report katab\n"
+                    "content": "Report folder\n"
                   }
                 }
               }
             },
             "try_moving_around_sketch0": {
-              "title": "Eseye li ou menm: antre nan yon katab avèk cd",
-              "prompt": "Kouri `ls`, then `cd navigation-practice`, then `pwd` pou konfime the katab change."
+              "title": "Eseye li poukont ou: antre nan yon dosye",
+              "prompt": "Kouri `ls`, apre sa `cd navigation-practice`, epi `pwd` pou konfime chanjman dosye a."
             },
             "try_moving_around_sketch1": {
-              "title": "Eseye li ou menm: remonte avèk cd ..",
-              "prompt": "Kouri `cd navigation-practice/start`, `pwd`, `cd ..`, ak `pwd` again pou practice moving pou the parent katab."
+              "title": "Eseye li poukont ou: monte nan repètwa anlè a ak cd ..",
+              "prompt": "Kouri `cd navigation-practice/start`, `pwd`, `cd ..`, ak `pwd` ankò pou pratike deplase nan dosye paran an."
             },
             "try_moving_around_sketch2": {
-              "title": "Eseye li ou menm: retounen lakay avèk cd ~",
-              "prompt": "Kouri `cd navigation-practice/reports`, `pwd`, `cd ~`, ak `pwd` again pou practice the home-katab shortcut."
+              "title": "Eseye l poukont ou: retounen lakay ou ak CD ~",
+              "prompt": "Kouri `cd navigation-practice/reports`, `pwd`, `cd ~`, ak `pwd` ankò pou pratike chemen kout dosye lakay ou."
             }
           },
           "practice": {
             "q1": {
-              "title": "Sa `cd` fè",
-              "prompt": "Ki kòmand changes ou katab aktyèl la nan the Linux Terminal?",
-              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon an ekri pou diminye chwa yo.",
+              "title": "Sa`cd` fè",
+              "prompt": "Ki kòmand ki chanje dosye kouran ou nan Tèminal Linux la?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
               "help": {
-                "concept": "Tèks èd sa a te korije paske premye vèsyon an te montre repons lan twò dirèkteman.",
-                "hint_1": "Compare the question pou the lesson example ak redeplase details that fè not match the requested concept.",
-                "hint_2": "Sèvi ak wòl oswa prèv ki nan enstriksyon an olye ou konte sèlman sou mo ki nan repons yo."
+                "concept": "Tèks sipò sa a te repare paske fòmil orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Konpare kesyon an ak egzanp leson an epi retire detay ki pa matche ak konsèp ki mande a.",
+                "hint_2": "Sèvi ak wòl la oswa prèv ki nonmen nan kesyon an olye pou w konte sou fason ou ekri repons lan."
               },
               "options": {
                 "a": "pwd",
@@ -168,61 +168,61 @@
               }
             },
             "moving-around-single-choice-2": {
-              "title": "Chwazi pi bon deskripsyon an",
-              "prompt": "Ki statement best matches Moving Around avèk cd?",
-              "hint": "Chèche the answer that describes the main concept depi the lesson.",
+              "title": "Chwazi pi bon deskripsyon an.",
+              "prompt": "Ki fraz ki pi byen koresponn ak 'Moving Around with cd'?",
+              "hint": "Chèche repons ki dekri konsèp prensipal leson an.",
               "help": {
-                "concept": "This question tchekes the main idea depi Moving Around avèk cd.",
-                "hint_1": "Sèvi ak the lesson explanation, then eliminate answers that fè not match it.",
-                "hint_2": "Chwazi answer that matches the course concept, not a random detail."
+                "concept": "Kesyon sa a tcheke lide prensipal la nan Moving Around with cd.",
+                "hint_1": "Sèvi ak eksplikasyon leson an, epi elimine repons ki pa matche avè l.",
+                "hint_2": "Chwazi repons ki koresponn ak konsèp kou a, pa yon detay o aza."
               },
               "options": {
-                "a": "It describes the main concept depi the lesson.",
-                "b": "It se unrelated pou the course topic.",
-                "c": "It skips the learner objektif.",
-                "d": "It replaces the concept avèk an unan sekirite shortcut."
+                "a": "Li dekri konsèp prensipal la nan leson an.",
+                "b": "Li pa gen rapò ak sijè kou a.",
+                "c": "Li sote objektif aprenan an.",
+                "d": "Li ranplase konsèp la ak yon chemen kout ki pa an sekirite."
               }
             },
             "moving-around-multi-choice-1": {
-              "title": "Chwazi bon abitid aprantisaj ki an sekirite",
-              "prompt": "Ki actions se good abitids while aprantisaj this topic?",
-              "hint": "Good abitids keep the learner focused on the lesson objektif ak visible reziltas.",
+              "title": "Chwazi abitid aprantisaj ki an sekirite",
+              "prompt": "Ki aksyon ki bon abitid pandan w ap aprann sijè sa a?",
+              "hint": "Bon abitid kenbe aprenan an konsantre sou objektif leson an ak rezilta vizib yo.",
               "help": {
-                "concept": "This question tchekes the main idea depi Moving Around avèk cd.",
-                "hint_1": "Sèvi ak the lesson explanation, then eliminate answers that fè not match it.",
-                "hint_2": "Chwazi answer that matches the course concept, not a random detail."
+                "concept": "Kesyon sa a tcheke lide prensipal la nan Moving Around with cd.",
+                "hint_1": "Sèvi ak eksplikasyon leson an, epi elimine repons ki pa matche avè l.",
+                "hint_2": "Chwazi repons ki koresponn ak konsèp kou a, pa yon detay o aza."
               },
               "options": {
-                "a": "Read the enstriksyon carefully anvan acting",
-                "b": "Check ou rezilta apre making a change",
-                "c": "Ignore the exact names nan the task",
-                "d": "Sèvi ak unrelated shortcuts san understanding them"
+                "a": "Li enstriksyon an byen anvan ou aji.",
+                "b": "Tcheke rezilta w apre w fin fè yon chanjman.",
+                "c": "Inegore non egzak yo nan travay la",
+                "d": "Sèvi ak rakousi ki pa gen rapò san konprann yo"
               }
             },
             "moving-around-drag-reorder-1": {
-              "title": "Mete yon koule pratik ki an sekirite nan lòd",
-              "prompt": "Mete sa yo aprantisaj etaps nan a an sekirite order.",
-              "hint": "Li chak moso epi mete yo nan lòd pou deklarasyon an ka byen konprann.",
+              "title": "Kòmande yon kou sou pratik an sekirite",
+              "prompt": "Mete etap aprantisaj sa yo nan yon lòd ki an sekirite.",
+              "hint": "Li chak moso epi ranje yo nan lòd deklarasyon an dwe konprann.",
               "help": {
-                "concept": "Moso yo dwe fòme yon deklarasyon ki valab nan yon lòd ki lojik.",
+                "concept": "Moso yo ta dwe fòme yon deklarasyon valab nan yon lòd lojik.",
                 "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
-                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+                "hint_2": "Mete moso depandan yo apre pati yo dekri oswa konplete."
               },
               "tokens": {
-                "t1": "Read the objektif",
-                "t2": "Try one step",
-                "t3": "Check the rezilta",
-                "t4": "Reflect on what changed"
+                "t1": "Li objektif la",
+                "t2": "Eseye yon sèl etap",
+                "t3": "Tcheke rezilta a",
+                "t4": "Reflechi sou sa k te chanje"
               }
             },
             "q2": {
               "title": "Monte yon nivo",
-              "prompt": "Complete the kòmand that deplases depi the katab aktyèl la pou its parent katab.",
-              "hint": "Sèvi ak the special path that means 'parent katab.'",
+              "prompt": "Konplete kòmand ki deplase soti nan dosye aktyèl la pou ale nan dosye paran li.",
+              "hint": "Itilize chemen espesyal ki vle di 'dosye paran.'",
               "help": {
-                "concept": "In Linux paths, `..` refers pou the directory one level above ou current kote.",
-                "hint_1": "This se not a kòmand by itself here; li se the target used apre `cd`.",
-                "hint_2": "The parent-katab shortcut uses two dots."
+                "concept": "Nan chemen Linux, `..` refere a repètwa ki yon nivo pi wo pase kote ou ye kounye a.",
+                "hint_1": "Sa a pa yon kòmand poukont li isit la; se sib la yo itilize apre `cd`.",
+                "hint_2": "Ranje kout pou dosye paran an itilize de pwen."
               },
               "template": "cd [blank1]",
               "choices": [
@@ -233,20 +233,20 @@
               ]
             },
             "q3": {
-              "title": "Navige antre nan yon katab pwojè",
-              "prompt": "A script changes katabs anvan doing other work. Ki should li also fè so ou can konfime li ended up nan the right place?",
-              "hint": "Chèche the option that makes the katab change visible nan the rezilta.",
+              "title": "Ale nan yon dosye pwojè",
+              "prompt": "Yon script chanje dosye anvan li fè lòt travay. Kisa li ta dwe fè tou pou ou ka konfime li rive nan bon kote a?",
+              "hint": "Chèche opsyon ki fè chanjman dosye a vizib nan pwodiksyon an.",
               "help": {
-                "concept": "A common navigation workflow se kreye a katab avèk `mkdir`, enter li avèk `cd`, ak verify the new repètwa travay la avèk `pwd`.",
-                "hint_1": "Ou bezwen one kòmand pou kreye the katab ak another pou deplase into it.",
-                "hint_2": "After entering `client-site`, run the kòmand that enprime the current repètwa travay la so the tèminal rezilta montres the new kote."
+                "concept": "Yon pwosesis navigasyon komen se kreye yon dosye ak `mkdir`, antre ladan l ak `cd`, epi verifye nouvo repètwa travay la ak `pwd`.",
+                "hint_1": "Ou bezwen yon kòmand pou kreye dosye a epi yon lòt pou antre ladan l.",
+                "hint_2": "Apre ou fin antre nan `client-site`, egzekite kòmand ki enprime repètwa travay aktyèl la pou sòti tèminal la montre nouvo kote a."
               },
-              "template": "A script that changes katabs should also ____ so the rezilta se easy pou verify.",
+              "template": "Yon script ki chanje dosye yo ta dwe tou ____ pou rezilta a fasil pou verifye.",
               "choices": [
-                "enprime yon rezilta ou ka wè",
-                "kache tout rezilta",
-                "efase fichye a touswit",
-                "sote pwogram nan"
+                "Enprime yon rezilta obsèvab",
+                "Kache tout sòti",
+                "Efase fichye a imedyatman",
+                "Sote pwogram nan"
               ]
             }
           }
@@ -259,16 +259,16 @@
       "linux-module-1-terminal-navigation": {
         "moving-around": {
           "sketch-1": {
-            "title": "Sa `cd` chanje",
-            "bodyMarkdown": "`cd` means **change directory**. A directory se just another word for a katab. When ou run `cd`, ou deplase ou tèminal's current kote pou a different katab.\n\nA good abitid se pou tcheke where ou se anvan ak apre moving:\n\n```bash\npwd\ncd projects\npwd\n```\n\nStep by etap:\n\n- `pwd` enprime ou katab aktyèl la.\n- `cd projects` deplases into the `projects` katab if li exists nan ou current kote.\n- The second `pwd` konfimes the new kote.\n\nExample:\n\n```bash\n/home/learner\ncd projects\n/home/learner/projects\n```\n\nThis matters because many tèminal kòmands act on ou **katab aktyèl la**. If ou se nan the wrong place, `ls`, `touch`, `mkdir`, `cp`, oswa `mv` may affect the wrong fichyes."
+            "title": "Sa chanjman `cd` yo",
+            "bodyMarkdown": "`cd` means **change directory**. A directory is just another word for a folder. When you run `cd`, you move your terminal's current location to a different folder.\n\nA good habit is to check where you are before and after moving:\n\n```bash\npwd\ncd projects\npwd\n```\n\nStep by step:\n\n- `pwd` prints your current folder.\n- `cd projects` moves into the `projects` folder if it exists in your current location.\n- The second `pwd` confirms the new location.\n\nExample:\n\n```bash\n/home/learner\ncd projects\n/home/learner/projects\n```\n\nThis matters because many terminal commands act on your **current folder**. If you are in the wrong place, `ls`, `touch`, `mkdir`, `cp`, or `mv` may affect the wrong files."
           },
           "sketch-2": {
-            "title": "Sèvi ak `..`, `.` ak `~`",
-            "bodyMarkdown": "Some `cd` targets se shortcuts:\n\n- `..` means **the parent katab**\n- `.` means **the katab aktyèl la**\n- `~` means **your home katab**\n\nWorked example:\n\n```bash\npwd\ncd ..\npwd\ncd ~\npwd\n```\n\nLine by line:\n\n- The first `pwd` montres where ou start.\n- `cd ..` deplases up one level.\n- The next `pwd` montres the parent katab.\n- `cd ~` jumps pou ou home katab depi anywhere.\n- The last `pwd` konfimes that jump.\n\n`cd .` usually keeps ou nan the same place. It can still be useful when ou se practicing path ideas ak want pou montre “stay here.”"
+            "title": "Sèvi ak `..`, `.`, ak `~`",
+            "bodyMarkdown": "Some `cd` targets are shortcuts:\n\n- `..` means **the parent folder**\n- `.` means **the current folder**\n- `~` means **your home folder**\n\nWorked example:\n\n```bash\npwd\ncd ..\npwd\ncd ~\npwd\n```\n\nLine by line:\n\n- The first `pwd` shows where you start.\n- `cd ..` moves up one level.\n- The next `pwd` shows the parent folder.\n- `cd ~` jumps to your home folder from anywhere.\n- The last `pwd` confirms that jump.\n\n`cd .` usually keeps you in the same place. It can still be useful when you are practicing path ideas and want to show “stay here.”"
           },
           "sketch-3": {
-            "title": "Li chemen yo ak prekosyon anvan ou deplase",
-            "bodyMarkdown": "A path tells the tèminal **which katab** ou want. Before using `cd`, li helps pou enspekte the katab aktyèl la avèk `ls`.\n\nExample:\n\n```bash\npwd\nls\ncd reports\nls\n```\n\nKi happens:\n\n- `pwd` montres ou starting kote.\n- `ls` liss katabs ak fichyes there.\n- `cd reports` deplases into the `reports` katab.\n- `ls` now montres what se inside `reports`.\n\nIf `reports` se not lised anvan ou try `cd reports`, the kòmand will fail because that katab se not nan ou current kote. Checking avèk `ls` first helps ou deplase confidently ak avoid mistakes."
+            "title": "Li chemen yo an sekirite anvan ou deplase",
+            "bodyMarkdown": "A path tells the terminal **which folder** you want. Before using `cd`, it helps to inspect the current folder with `ls`.\n\nExample:\n\n```bash\npwd\nls\ncd reports\nls\n```\n\nWhat happens:\n\n- `pwd` shows your starting location.\n- `ls` lists folders and files there.\n- `cd reports` moves into the `reports` folder.\n- `ls` now shows what is inside `reports`.\n\nIf `reports` is not listed before you try `cd reports`, the command will fail because that folder is not in your current location. Checking with `ls` first helps you move confidently and avoid mistakes."
           }
         }
       }

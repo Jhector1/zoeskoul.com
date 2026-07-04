@@ -1,0 +1,48 @@
+{
+  "topicId": "class-files-and-instances",
+  "ok": false,
+  "issues": [
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-class-files-and-instances-sketch0",
+      "message": "Exercise \"try-class-files-and-instances-sketch0\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-class-files-and-instances-sketch1",
+      "message": "Exercise \"try-class-files-and-instances-sketch1\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-class-files-and-instances-sketch2",
+      "message": "Exercise \"try-class-files-and-instances-sketch2\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "try-class-files-and-instances-sketch3",
+      "message": "Exercise \"try-class-files-and-instances-sketch3\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "ci-class-files-and-instances-account-deposit",
+      "message": "Exercise \"ci-class-files-and-instances-account-deposit\" solutionCode does not satisfy its semantic checks."
+    },
+    {
+      "code": "CODE_PROFILE_SOLUTION_SEMANTIC_MISMATCH",
+      "category": "tests",
+      "severity": "error",
+      "exerciseId": "ci-class-files-and-instances-account-validation",
+      "message": "Exercise \"ci-class-files-and-instances-account-validation\" solutionCode does not satisfy its semantic checks."
+    }
+  ]
+}

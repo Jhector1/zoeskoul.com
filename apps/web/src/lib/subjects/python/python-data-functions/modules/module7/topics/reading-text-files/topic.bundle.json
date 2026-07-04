@@ -301,36 +301,36 @@
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "# Read data/note.txt and print its contents.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read data/note.txt and print its contents.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "data/note.txt",
-          "content": "Hello from a file!\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.starterFiles.data_note_txt.content",
           "language": "text"
         }
       ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read data/note.txt and print its contents.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read data/note.txt and print its contents.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "data/note.txt",
-            "content": "Hello from a file!\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.starterFiles.data_note_txt.content",
             "language": "text"
           }
         ],
@@ -374,18 +374,18 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "data/note.txt",
-            "content": "Hello from a file!\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.solutionFiles.data_note_txt.content",
             "language": "text"
           }
         ],
@@ -393,7 +393,7 @@
           {
             "type": "source_contains",
             "pattern": "data/note.txt",
-            "message": "Open data/note.txt instead of typing the file contents.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -401,14 +401,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "data/note.txt",
-          "content": "Hello from a file!\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.solutionFiles.data_note_txt.content",
           "language": "text"
         }
       ],
@@ -424,7 +424,7 @@
         {
           "type": "source_contains",
           "pattern": "data/note.txt",
-          "message": "Open data/note.txt instead of typing the file contents.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-checkpoint.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -436,11 +436,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print",
       "language": "python",
-      "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -449,11 +449,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -502,11 +502,11 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -516,7 +516,7 @@
           {
             "type": "source_contains",
             "pattern": "data/message.txt",
-            "message": "Open data/message.txt to read the file.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -524,7 +524,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -534,7 +534,7 @@
         {
           "type": "source_contains",
           "pattern": "data/message.txt",
-          "message": "Open data/message.txt to read the file.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-read-and-print.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -546,11 +546,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line",
       "language": "python",
-      "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -559,11 +559,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -612,11 +612,11 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -626,7 +626,7 @@
           {
             "type": "source_contains",
             "pattern": "data/notes.txt",
-            "message": "Open data/notes.txt to read the file.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -634,7 +634,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -644,7 +644,7 @@
         {
           "type": "source_contains",
           "pattern": "data/notes.txt",
-          "message": "Open data/notes.txt to read the file.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-first-line.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -656,11 +656,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines",
       "language": "python",
-      "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -669,11 +669,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -722,11 +722,11 @@
             ]
           }
         ],
-        "solutionCode": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -736,7 +736,7 @@
           {
             "type": "source_contains",
             "pattern": "data/list.txt",
-            "message": "Open data/list.txt to count the lines.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -744,7 +744,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -754,7 +754,7 @@
         {
           "type": "source_contains",
           "pattern": "data/list.txt",
-          "message": "Open data/list.txt to count the lines.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.ci-count-lines.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -766,18 +766,18 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0",
       "language": "python",
-      "starterCode": "# Read note.txt and print its contents without extra blank lines.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read note.txt and print its contents without extra blank lines.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "note.txt",
-          "content": "Hello from a file\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterFiles.note_txt.content",
           "language": "text",
           "isEntry": false,
           "entry": false
@@ -786,14 +786,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open('note.txt') as file:\n    print(file.read().strip())\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "note.txt",
-          "content": "Hello from a file\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.note_txt.content",
           "language": "text",
           "isEntry": false,
           "entry": false
@@ -802,18 +802,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read note.txt and print its contents without extra blank lines.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read note.txt and print its contents without extra blank lines.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "note.txt",
-            "content": "Hello from a file\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.starterFiles.note_txt.content",
             "language": "text",
             "isEntry": false,
             "entry": false
@@ -861,18 +861,18 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "with open('note.txt') as file:\n    print(file.read().strip())\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open('note.txt') as file:\n    print(file.read().strip())\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "note.txt",
-            "content": "Hello from a file\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.solutionFiles.note_txt.content",
             "language": "text",
             "isEntry": false,
             "entry": false
@@ -882,7 +882,7 @@
           {
             "type": "source_contains",
             "pattern": "note.txt",
-            "message": "Open note.txt instead of typing the file contents.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -897,7 +897,7 @@
         {
           "type": "source_contains",
           "pattern": "note.txt",
-          "message": "Open note.txt instead of typing the file contents.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch0.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -909,18 +909,18 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1",
       "language": "python",
-      "starterCode": "# Read names.txt and print each line without extra blank lines.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "# Read names.txt and print each line without extra blank lines.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "names.txt",
-          "content": "Ava\nMia\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterFiles.names_txt.content",
           "language": "text",
           "isEntry": false,
           "entry": false
@@ -929,14 +929,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "names.txt",
-          "content": "Ava\nMia\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.solutionFiles.names_txt.content",
           "language": "text",
           "isEntry": false,
           "entry": false
@@ -945,18 +945,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "# Read names.txt and print each line without extra blank lines.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "# Read names.txt and print each line without extra blank lines.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "names.txt",
-            "content": "Ava\nMia\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.starterFiles.names_txt.content",
             "language": "text",
             "isEntry": false,
             "entry": false
@@ -1004,18 +1004,18 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "names.txt",
-            "content": "Ava\nMia\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.solutionFiles.names_txt.content",
             "language": "text",
             "isEntry": false,
             "entry": false
@@ -1025,7 +1025,7 @@
           {
             "type": "source_contains",
             "pattern": "names.txt",
-            "message": "Open names.txt instead of typing the names directly.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -1040,7 +1040,7 @@
         {
           "type": "source_contains",
           "pattern": "names.txt",
-          "message": "Open names.txt instead of typing the names directly.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch1.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -1052,18 +1052,18 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2",
       "language": "python",
-      "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+      "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "names.txt",
-          "content": "Ava\nMia\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterFiles.names_txt.content",
           "language": "text",
           "isEntry": false,
           "entry": false
@@ -1072,14 +1072,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "names.txt",
-          "content": "Ava\nMia\n",
+          "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.names_txt.content",
           "language": "text",
           "isEntry": false,
           "entry": false
@@ -1088,18 +1088,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+        "starterCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "names.txt",
-            "content": "Ava\nMia\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.starterFiles.names_txt.content",
             "language": "text",
             "isEntry": false,
             "entry": false
@@ -1147,18 +1147,18 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n",
+        "solutionCode": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "names.txt",
-            "content": "Ava\nMia\n",
+            "content": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.solutionFiles.names_txt.content",
             "language": "text",
             "isEntry": false,
             "entry": false
@@ -1176,18 +1176,18 @@
           {
             "type": "source_contains",
             "pattern": "names.txt",
-            "message": "Read names.txt instead of typing the final count.",
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
             "type": "uses_for_loop",
             "iterable": "file",
-            "message": "Loop through the file lines to count them."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.1.message"
           },
           {
             "type": "source_regex",
             "pattern": "\\bopen\\s*\\(",
-            "message": "Use open(...) to read the file."
+            "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.2.message"
           }
         ]
       },
@@ -1201,18 +1201,18 @@
         {
           "type": "source_contains",
           "pattern": "names.txt",
-          "message": "Read names.txt instead of typing the final count.",
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
           "type": "uses_for_loop",
           "iterable": "file",
-          "message": "Loop through the file lines to count them."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.1.message"
         },
         {
           "type": "source_regex",
           "pattern": "\\bopen\\s*\\(",
-          "message": "Use open(...) to read the file."
+          "message": "@:topics.python-data-functions.python-7-files-exceptions-and-data-cleaning.reading-text-files.quiz.try-reading-text-files-sketch2.sourceChecks.2.message"
         }
       ]
     }

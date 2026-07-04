@@ -1,0 +1,255 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "module-6-name-badge-package": {
+          "label": "Pwojè Modil: Bati yon pake badj non",
+          "summary": "Bati aplikasyon badj \"welcome-table\" la yon sèl èdè alafwa pou li grandi soti nan netwayaj non pou vin yon pake plizyè fichye ki byen poli.",
+          "cards": {
+            "sketch0": {
+              "title": "Yon klib bezwen badj anvan evènman an kòmanse."
+            },
+            "project": {
+              "title": "Pake Badj Non"
+            }
+          },
+          "projectSteps": {
+            "mp_1": {
+              "title": "Kreye modil pou netwaye non an"
+            },
+            "mp_2": {
+              "title": "Ajoute modil èd badj la"
+            },
+            "mp_3": {
+              "title": "Dokimante epi netwaye asistan badj la."
+            },
+            "mp_4": {
+              "title": "Enprime badj akey final la"
+            }
+          },
+          "quiz": {
+            "mp-1-create-clean-name-module": {
+              "title": "Kreye modil pou netwaye non an",
+              "prompt": "Kòmanse aplikasyon badj la pa deplase netwayaj non an nan pwòp dosye èd li. Kreye yon fonksyon ``tools/names.py`` ak ``clean_name(text)``, enpòte li nan ``main.py``, li yon non nan antre a, epi enprime rezilta netwaye a.",
+              "hint": "Mete lojik netwayaj ki ka itilize ankò nan `tools/names.py`, epi kite `main.py` rele li.",
+              "help": {
+                "concept": "Yon modil èd kenbe lojik ki ka itilize ankò andeyò `main.py`, sa ki fè li pi fasil pou devlope aplikasyon badj la.",
+                "hint_1": "Nan `tools/names.py`, defini `clean_name(text)` epi retounen `text.strip().title()`.",
+                "hint_2": "Nan `main.py`, enpòte `clean_name`, li antre a, epi enprime non ki netwaye a."
+              },
+              "starterCode": "raw_name = input()\n\n# Start the badge app by moving name cleanup into tools/names.py.\n# Import clean_name, then print the cleaned version of raw_name.\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte soti nan tools.names."
+                },
+                "1": {
+                  "message": "Defini clean_name(text) andedan tools/names.py."
+                },
+                "2": {
+                  "message": "clean_name ta dwe retire espas vid yo."
+                },
+                "3": {
+                  "message": "clean_name ta dwe mete non an an majiskil tit."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n"
+            },
+            "mp-2-add-badge-helper": {
+              "title": "Ajoute modil èd badj la",
+              "prompt": "Kenbe asistan `clean_name` k ap mache a soti nan dènye etap la. Kounye a, ajoute `tools/badges.py` ak `make_badge(name, role)`, enpòte li nan `main.py`, li yon wòl tou, epi enprime badj fini a.",
+              "hint": "Kite `tools/names.py` ap mache, ajoute yon nouvo fichye èd, epi konekte li nan `main.py`.",
+              "help": {
+                "concept": "Etap sa a ajoute yon dezyèm fichye èd pou chak modil gen yon sèl travay klè: netwaye non yo, fòmate tèks badj yo.",
+                "hint_1": "Kreye yon sit entènèt ak `make_badge(name, role)`.",
+                "hint_2": "Nan `main.py`, netwaye non an an premye, epi pase `name` ak `role` nan `make_badge(...)`."
+              },
+              "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\n\n# Keep the name cleaner working, then add tools.badges.\n# Import make_badge and print the finished badge for this cleaned name and role.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": ""
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "# Add make_badge(name, role) here.\n# Return one formatted string for the badge.\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte soti nan zouti.badges."
+                },
+                "1": {
+                  "message": "Defini make_badge nan tools/badges.py."
+                },
+                "2": {
+                  "message": "make_badge ta dwe mete wòl la an majiskil."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+            },
+            "mp-3-document-badge-helper": {
+              "title": "Dokimante epi netwaye asistan badj la.",
+              "prompt": "Kòmanse ak aplikasyon badj ki gen de asistan k ap travay la. Kenbe rezilta a menm jan, men amelyore fonksyon ``tools/badges.py`` la lè w ajoute yon dokstring epi netwaye wòl la anvan w konvèti l an lèt majiskil.",
+              "hint": "Etap sa a rafine asistan an an plas olye pou chanje koule jeneral aplikasyon an.",
+              "help": {
+                "concept": "Ti fonksyon èd yo pi fasil pou kenbe lè yo eksplike tèt yo epi jere antre dezòdone yo byen.",
+                "hint_1": "Ajoute yon docstring anba `def make_badge(name, role):` ki gen twa guillemet.",
+                "hint_2": "Sere `role.strip().upper()` nan yon varyab anvan ou retounen tèks badj la."
+              },
+              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Keep this badge flow working.\n# Add the next improvement inside tools/badges.py.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": ""
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    # Add a docstring that explains what this helper returns.\n    # Then clean role before uppercasing it so extra spaces do not reach the badge.\n    return f\"{role.upper()} badge: {name}\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Ajoute yon docstring nan make_badge nan tools/badges.py."
+                },
+                "1": {
+                  "message": "Netwaye wòl la anvan ou mete l an majiskil."
+                },
+                "2": {
+                  "message": "Mete wòl la an majiskil nan make_badge."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n"
+            },
+            "mp-4-package-welcome-message": {
+              "title": "Enprime badj akey final la",
+              "prompt": "Kòmanse ak aplikasyon badj ki dokimante a. Kenbe tou de asistan yo, estoke badj la nan yon varyab, epi ranplase enprime badj dirèk la ak yon sèl liy final zanmitay ki kòmanse ak `Welcome!`.",
+              "hint": "Re-itilize koule asistans ki egziste deja a, men fè rezilta final la santi l tankou yon remiz travay byen rafine.",
+              "help": {
+                "concept": "Aplikasyon final la itilize ti modil èd pou fè pwogram prensipal la li tankou yon istwa senp: pran antre, netwaye li, konstwi badj la, enprime mesaj akeyi a.",
+                "hint_1": "Sèvi ak `badge = make_badge(name, role)` apre netwaye non an.",
+                "hint_2": "Enprime yon liy ki kòmanse ak `Welcome!` epi ki gen tèks badj la."
+              },
+              "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n\n# Replace the line above with one polished welcome message.\n# Store the badge in a variable, then print a line that starts with Welcome!.\n",
+              "starterFiles": {
+                "tools_init_py": {
+                  "content": ""
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                },
+                "tools_badges_py": {
+                  "content": "def make_badge(name, role):\n    \"\"\"Return a formatted badge label for a cleaned name and role.\"\"\"\n    clean_role = role.strip().upper()\n    return f\"{clean_role} badge: {name}\"\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Bati badj la ak make_badge() olye pou w kode tèks final la dirèkteman."
+                },
+                "1": {
+                  "message": "Enprime dènye mesaj akey la."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(f\"Welcome! {badge}\")\n"
+            },
+            "try-module-6-name-badge-package-sketch0": {
+              "title": "Kreye premye fichye èd pou badj la",
+              "prompt": "Konfigire premye èd la pou aplikasyon badj la.\n\n1. Kreye yon dosye ki rele `tools`.\n2. Kreye `tools/names.py`.\n3. Nan `tools/names.py`, defini `clean_name(text)`.\n4. Nan `main.py`, enpòte `clean_name`.\n5. Enprime vèsyon netwaye `\"  ava  \"` la.",
+              "hint": "Mete `clean_name` nan `tools/names.py`, epi enpòte li nan `main.py`.",
+              "help": {
+                "concept": "Pwojè badj la kòmanse pa deplase netwayaj non an nan pwòp fichye èd li.",
+                "hint_1": "Nan `tools/names.py`, retounen `text.strip().title()` soti nan `clean_name(text)`.",
+                "hint_2": "Nan `main.py`, enpòte `clean_name` epi enprime `clean_name(\"  ava  \")`."
+              },
+              "starterCode": "# Create a folder named tools.\n# Create tools/names.py with clean_name(text).\n# Then import clean_name from tools.names and print clean_name(\"  ava  \").\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
+                },
+                "tools_names_py": {
+                  "content": "def clean_name(text):\n    return text.strip().title()\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Enpòte clean_name nan tools.names."
+                },
+                "1": {
+                  "message": "Defini clean_name nan tools/names.py."
+                },
+                "2": {
+                  "message": "clean_name ta dwe retire espas yo."
+                },
+                "3": {
+                  "message": "clean_name ta dwe mete non an an titil-case."
+                }
+              },
+              "solutionCode": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n"
+            }
+          },
+          "tryIt": {
+            "try_module_6_name_badge_package_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Konfigire premye èd la pou aplikasyon badj la.\n\n1. Kreye yon dosye ki rele `tools`.\n2. Kreye `tools/names.py`.\n3. Nan `tools/names.py`, defini `clean_name(text)`.\n4. Nan `main.py`, enpòte `clean_name`.\n5. Enprime vèsyon netwaye `\"  ava  \"` la."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "module-6-name-badge-package": {
+          "sketch-1": {
+            "title": "Yon klib bezwen badj anvan evènman an kòmanse.",
+            "bodyMarkdown": "Klèb akeyi elèv yo ap mete kanpe yon tab enskripsyon epi li bezwen badj pwòp ak konsistan anvan envite yo rive. Non yo vini ak espas anplis, wòl yo bezwen yon fòma konsistan, epi aplikasyon an ta dwe fasil pou yon lòt volontè mentni.\n\nOu pral devlope zouti badj la etap pa etap. Chak etap kòmanse apati solisyon kanonik anvan an, epi li ajoute yon nouvo asistan, enpòtasyon, dokstring, oswa rezilta final."
+          }
+        }
+      }
+    }
+  }
+}

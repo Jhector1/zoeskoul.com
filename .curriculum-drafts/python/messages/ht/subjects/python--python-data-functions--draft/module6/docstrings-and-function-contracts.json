@@ -1,0 +1,293 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "docstrings-and-function-contracts": {
+          "label": "Kòd dokimantasyon ak kontra fonksyon",
+          "summary": "Dokimante sa yon fonksyon atann, sa li retounen, ak kijan pou itilize li kòrèkteman.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa yon docstring ak yon kontra fè"
+            },
+            "sketch1": {
+              "title": "Ekri dokstreng ki klè"
+            },
+            "sketch2": {
+              "title": "Kontrak yo ta dwe di retou olye de enprime."
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Dokimante epi aliyen konpòtman fonksyon yo"
+            }
+          },
+          "projectSteps": {
+            "ci_add_docstring": {
+              "title": "Ajoute yon dokstring ki koresponn"
+            },
+            "ci_write_contract_function": {
+              "title": "Ekri yon fonksyon dokimante ak yon kontra klè."
+            },
+            "ci_fix_print_vs_return": {
+              "title": "Ranje dezakò kontra a"
+            }
+          },
+          "quiz": {
+            "sc-docstring-location": {
+              "title": "Kote yon docstring ale",
+              "prompt": "Ki kote yo ta dwe mete docstring yon fonksyon?",
+              "hint": "Chèche chèn ki parèt imedyatman andedan fonksyon an.",
+              "help": {
+                "concept": "Yon docstring fonksyon se premye literal chèn ki nan kò fonksyon an, dirèkteman anba liy deklarasyon an.",
+                "hint_1": "Li pa mete devan definisyon fonksyon an oswa apre deklarasyon return lan.",
+                "hint_2": "Chwazi opsyon kote chèn tèks ki ant twa guillemet vini touswit apre `def ...:`."
+              },
+              "options": {
+                "a": "Drekteman anba definisyon fonksyon an kòm premye deklarasyon an",
+                "b": "Anndan lis paramèt la",
+                "c": "Apre deklarasyon retou a",
+                "d": "Sèlman nan fen pwogram nan"
+              }
+            },
+            "sc-contract-purpose": {
+              "title": "Sa yon kontra fonksyon eksplike",
+              "prompt": "Ki objektif prensipal yon kontra fonksyon?",
+              "hint": "Panse sou antre ak sòti.",
+              "help": {
+                "concept": "Yon kontra fonksyon di lòt pwogramè ki valè yon fonksyon atann li epi ki rezilta oswa konpòtman li bay.",
+                "hint_1": "Yon kontra se sou fason pou itilize fonksyon an kòrèkteman, pa sou chanje sentaks Python.",
+                "hint_2": "Chwazi opsyon ki mansyone agiman yo espere ak rezilta ki retounen."
+              },
+              "options": {
+                "a": "Li esplike ki antre fonksyon an atann ak sa li retounen.",
+                "b": "Li korije ensèk yo nan fonksyon an otomatikman.",
+                "c": "Sa fè fonksyon an kouri pi vit.",
+                "d": "Li ranplase bezwen non fonksyon yo."
+              }
+            },
+            "mc-good-docstring-features": {
+              "title": "Karakteristik yon docstring ki itil",
+              "prompt": "Ki deklarasyon ki dekri yon bon dokstring fonksyon? Chwazi tout sa ki aplikab.",
+              "hint": "Chèche deklarasyon ki fè fonksyon an pi fasil pou itilize kòrèkteman.",
+              "help": {
+                "concept": "Dokstrings ki itil yo espesifik, yo koresponn ak kòd la, epi yo esplike konpòtman fonksyon an klè ase pou yon moun ka rele l kòrèkteman.",
+                "hint_1": "Bon dokstrings yo anjeneral mansyone sa fonksyon an retounen oswa sa li fè ak antre li yo.",
+                "hint_2": "Chwazi opsyon ki klè ak egzak, pa sa ki vag oswa ki pa gen rapò."
+              },
+              "options": {
+                "a": "Li di klèman sa fonksyon an retounen oswa sa li fè.",
+                "b": "Li matche ak konpòtman aktyèl kòd la.",
+                "c": "Li ta dwe osi vag ke posib pou li mache pou nenpòt fonksyon.",
+                "d": "Li ka mansyone atant enpòtan pou antre yo."
+              }
+            },
+            "mc-return-vs-print-contract": {
+              "title": "Retou kont enprime nan yon kontra",
+              "prompt": "Yon docstring di yon fonksyon retounen yon valè. Ki modèl kòd ki matche ak kontra sa a? Chwazi tout sa ki aplike.",
+              "hint": "Chèche fonksyon ki voye yon valè tounen bay apèlè a.",
+              "help": {
+                "concept": "Lè yon kontra di yon fonksyon retounen yon valè, fonksyon an dwe itilize yon valè retou (`return`) pou moun ki rele l la ka anrejistre oswa reitilize rezilta a.",
+                "hint_1": "Enpresyon montre rezilta, men li pa bay apèlè a yon valè ki ka itilize ankò.",
+                "hint_2": "Chwazi opsyon ki itilize \"`return`\" pou pwodwi rezilta a."
+              },
+              "options": {
+                "a": "`return a + b`",
+                "b": "`return name.upper()`",
+                "c": "`print(a + b)`",
+                "d": "`print(\"Done\")`"
+              }
+            },
+            "dr-docstring-order": {
+              "title": "Lòd yon fonksyon dokimante",
+              "prompt": "Mete pati sa yo nan lòd kòrèk pou yon fonksyon senp ki dokimante.",
+              "hint": "Kòmanse ak antèt fonksyon an, apre sa ak docstring la, epi ak kò a.",
+              "help": {
+                "concept": "Yon fonksyon dokimante ekri nan yon lòd estanda: premye liy definisyon an, apre sa docstring la, epi kòd egzekitab la.",
+                "hint_1": "Docstring la dwe andedan fonksyon an, pa anvan liy `def` la.",
+                "hint_2": "Apre docstring la, mete deklarasyon ki kalkile oswa retounen rezilta a."
+              },
+              "tokens": {
+                "t1": "`def double(number):`",
+                "t2": "`\"\"\"Return twice number.\"\"\"`",
+                "t3": "`return number * 2`"
+              }
+            },
+            "dr-contract-reading": {
+              "title": "Li yon kontra fonksyon nan lòd",
+              "prompt": "Aranje ide sa yo nan yon lòd ki sansib pou konprann yon kontra fonksyon.",
+              "hint": "Aranje moso kòd yo nan lòd Python ta dwe egzekite yo.",
+              "help": {
+                "concept": "Moso yo dwe fòme yon kòd Python valab nan lòd li dwe kouri.",
+                "hint_1": "Kòmanse ak liy ki prepare aksyon Python lan.",
+                "hint_2": "Mete liy ki depann de valè ki te egziste anvan yo apre valè sa yo fin egziste."
+              },
+              "tokens": {
+                "t1": "Antre fonksyon an atann",
+                "t2": "Sa fonksyon an fè",
+                "t3": "Valè fonksyon an retounen"
+              }
+            },
+            "fb-return-word": {
+              "title": "Konplete tèks dokimantasyon an.",
+              "prompt": "Chwazi mo ki pi byen konplete dokstring la.",
+              "hint": "Fraz la dekri bay yon valè tounen bay apèlè a.",
+              "help": {
+                "concept": "Docstrings souvan itilize mo \"`the missing term`\" lè yon fonksyon voye yon valè tounen olye pou l enprime li.",
+                "hint_1": "Espas vid sa a ta dwe yon vèb ki matche ak konpòtman stil`the missing term total`.",
+                "hint_2": "Chwazi opsyon ki vle di fonksyon an retounen yon rezilta bay moun ki rele l la."
+              },
+              "template": "`\"\"\"[blank1] the sum of two numbers.\"\"\"`",
+              "choices": [
+                "Retounen",
+                "Enprime",
+                "Fè yon bouk nan",
+                "Enpòte"
+              ]
+            },
+            "fb-docstring-position": {
+              "title": "Konplete egzanp fonksyon an",
+              "prompt": "Chwazi liy ki ranpli espas vid la kòrèkteman.",
+              "hint": "Liy ki manke a ta dwe dokstring la, pa kòd ki fè kalkil la.",
+              "help": {
+                "concept": "Docstring la se yon chèn deskriptif ki plase kòm premye deklarasyon anndan kò fonksyon an.",
+                "hint_1": "Blank la vini touswit apre tit fonksyon an.",
+                "hint_2": "Chwazi chèn tèks ki ant twa guillemet ki dekri rezilta fonksyon an."
+              },
+              "template": "```python\ndef square(number):\n    [blank1]\n    return number * number\n```",
+              "choices": [
+                "`\"\"\"Return the square of number.\"\"\"`",
+                "`print(number * number)`",
+                "`number * number`",
+                "`square(number)`"
+              ]
+            },
+            "ci-add-docstring": {
+              "title": "Ajoute yon dokstring ki koresponn",
+              "prompt": "Ajoute yon docstring anba `make_lower(text)` ki di klèman sa fonksyon an retounen.",
+              "hint": "Li tach la \"Ajoute yon dokstring ki koresponn\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an kouri epi konpare sòti a ak egzanp ki te atann lan anvan ou tcheke repons ou a."
+              },
+              "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
+              "solutionCode": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()"
+            },
+            "ci-write-contract-function": {
+              "title": "Ekri yon fonksyon dokimante ak yon kontra klè.",
+              "prompt": "Ekri `repeat_word(word, times)` pou li retounen tèks la repete, epi ajoute yon docstring ki esplike kontra a klèman.",
+              "hint": "Li tach la \"Ekri yon fonksyon dokimante ak yon kontra klè\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare rezilta a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
+              "solutionCode": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times"
+            },
+            "ci-fix-print-vs-return": {
+              "title": "Ranje dezakò kontra a",
+              "prompt": "Docstring la di ke fonksyon `total_price(price, tax)` ta dwe retounen total la, men kòd demaraj la enprime li pito. Ranje fonksyon an pou konpòtman li matche ak docstring la.",
+              "hint": "Li tach la \"Ranje dezakò kontra a\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap mache nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
+              "solutionCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax"
+            },
+            "try-docstrings-and-function-contracts-checkpoint": {
+              "title": "Ekri yon helper dokimante",
+              "prompt": "Defini `square(number)` ak yon docstring epi retounen kare nimewo a. Enprime `square(5)`.",
+              "hint": "Mete yon chèn tèks ki gen twa guillemet kòm premye liy anndan fonksyon an.",
+              "help": {
+                "concept": "Yon docstring dekri kontra fonksyon an pou lektè ak zouti.",
+                "hint_1": "Mete yon chèn tèks ki ant twa guyòt kòm premye liy anndan fonksyon an.",
+                "hint_2": "Kouri kòd ou a epi konpare sòti a ak rezilta espere a."
+              },
+              "starterCode": "def square(number):\n    # Add a docstring and return the square.\n    pass\n\nprint(square(5))\n",
+              "solutionCode": "def square(number):\n    \"\"\"Return number multiplied by itself.\"\"\"\n    return number * number\n\nprint(square(5))\n"
+            },
+            "try-docstrings-and-function-contracts-sketch0": {
+              "title": "Ekri yon helper dokimante",
+              "prompt": "Yon docstring esplike sa fonksyon an atann ak sa li retounen.",
+              "hint": "Ajoute yon docstring epi retounen tèks la san mak fòma epi ak tit an majiskil.",
+              "help": {
+                "concept": "Ajoute yon docstring epi retounen tèks la san mak fòma epi ak tit an majiskil.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "def clean_name(text):\n    # Add a docstring and return text stripped and title-cased.\n    pass\n\nprint(clean_name('  ava  '))\n",
+              "solutionCode": "def clean_name(text):\n    \"\"\"Return text stripped of extra space and converted to title case.\"\"\"\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n"
+            },
+            "try-docstrings-and-function-contracts-sketch1": {
+              "title": "Retounen rezilta ki dokimante a",
+              "prompt": "Fè kòd la matche ak kontra ki dekri nan dokstrin nan.",
+              "hint": "Konplete deklarasyon retou a.",
+              "help": {
+                "concept": "Konplete deklarasyon retou a.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    # Finish the return statement.\n    pass\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
+              "solutionCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    return (temp - 32) * 5 / 9\n\nprint(round(fahrenheit_to_celsius(32), 1))\n"
+            },
+            "try-docstrings-and-function-contracts-sketch2": {
+              "title": "Sèvi ak yon tchèk stil kontra",
+              "prompt": "Aplikasyon an dwe swiv kontra ki deklare a egzakteman.",
+              "hint": "Kòmanse ak premye liy ki manke a.",
+              "help": {
+                "concept": "Kòmanse ak premye liy ki manke a.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    pass\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
+              "solutionCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    return 0 <= score <= 100\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n"
+            }
+          },
+          "tryIt": {
+            "try_docstrings_and_function_contracts_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Defini `square(number)` ak yon dokstring epi retounen kare nimewo a. Enprime `square(5)`."
+            },
+            "try_docstrings_and_function_contracts_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Yon docstring esplike sa fonksyon an atann ak sa li retounen."
+            },
+            "try_docstrings_and_function_contracts_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Fè kòd la matche ak kontra ki dekri nan docstring la."
+            },
+            "try_docstrings_and_function_contracts_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Aplikasyon an dwe swiv kontra ki deklare a egzakteman."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "docstrings-and-function-contracts": {
+          "docstrings-idea": {
+            "title": "Sa yon docstring ak yon kontra fè",
+            "bodyMarkdown": "A **docstring** is a short string placed right under a function definition. It explains what the function does.\n\nA **function contract** describes the function's inputs and output:\n- what arguments it expects\n- what kind of value it returns\n- any important assumptions\n\nHere is a simple example:\n\n```python\ndef square(number):\n    \"\"\"Return the square of number.\"\"\"\n    return number * number\n```\n\nLine by line:\n- `def square(number):` defines a function named `square` with one parameter.\n- The triple-quoted string is the docstring.\n- `return number * number` sends the result back to the caller.\n\nIf you call `square(4)`, the function returns `16`.\n\nA good beginner-friendly contract might answer questions like:\n- Should `number` be an integer or float?\n- Does the function print something, or return something?\n- What comes back after the call?"
+          },
+          "good-docstrings": {
+            "title": "Ekri dokstreng ki klè",
+            "bodyMarkdown": "A useful docstring is short, specific, and matches the code.\n\nCompare these two versions:\n\n```python\ndef greet(name):\n    \"\"\"Does stuff.\"\"\"\n    return \"Hello, \" + name\n```\n\nThis is too vague. Now look at this:\n\n```python\ndef greet(name):\n    \"\"\"Return a greeting for the given name.\"\"\"\n    return \"Hello, \" + name\n```\n\nThis version is better because it tells you:\n- the function **returns** a greeting\n- the input is a `name`\n- the result is not printed directly by the function\n\nWorked example:\n\n```python\ndef is_even(number):\n    \"\"\"Return True if number is even, otherwise return False.\"\"\"\n    return number % 2 == 0\n```\n\nStep by step:\n- The docstring says exactly what the function returns.\n- The code checks whether the remainder after dividing by 2 is 0.\n- `is_even(8)` returns `True`.\n- `is_even(5)` returns `False`."
+          },
+          "contracts-print-vs-return": {
+            "title": "Kontrak yo ta dwe di retou olye de enprime.",
+            "bodyMarkdown": "One common mistake is mixing up **printing** and **returning**.\n\nLook at these two functions:\n\n```python\ndef show_total(a, b):\n    \"\"\"Print the total of a and b.\"\"\"\n    print(a + b)\n\n\ndef get_total(a, b):\n    \"\"\"Return the total of a and b.\"\"\"\n    return a + b\n```\n\nThese functions are different:\n- `show_total` sends text to the output panel.\n- `get_total` gives a value back to the caller.\n\nWorked example:\n\n```python\nresult = get_total(3, 4)\nprint(result)\n```\n\nStep by step:\n- `get_total(3, 4)` returns `7`.\n- That returned value is stored in `result`.\n- `print(result)` displays `7` in the output panel.\n\nIf a docstring says **return**, the function should usually use `return`, not only `print`."
+          }
+        }
+      }
+    }
+  }
+}

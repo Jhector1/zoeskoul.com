@@ -9,8 +9,8 @@
     "kind": "code",
     "language": "python",
     "supportsTerminal": false,
-    "supportsMultiFile": false,
-    "supportsFileSystem": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
     "supportsStdInStdOut": true,
     "supportsPackageInstall": false
   },
@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch0.title",
       "sketchId": "sk1",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-using-imports-and-helper-files-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.tryIt.try_using_imports_and_helper_files_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.tryIt.try_using_imports_and_helper_files_sketch0.prompt",
+        "exerciseKey": "try-using-imports-and-helper-files-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch1.title",
       "sketchId": "sk2",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-using-imports-and-helper-files-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.tryIt.try_using_imports_and_helper_files_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.tryIt.try_using_imports_and_helper_files_sketch1.prompt",
+        "exerciseKey": "try-using-imports-and-helper-files-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.cards.sketch2.title",
       "sketchId": "sk3",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-using-imports-and-helper-files-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.tryIt.try_using_imports_and_helper_files_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.tryIt.try_using_imports_and_helper_files_sketch2.prompt",
+        "exerciseKey": "try-using-imports-and-helper-files-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -242,7 +278,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "helpers"
+        "value": "clean_name"
       }
     },
     {
@@ -254,8 +290,216 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "from"
+        "value": "tools"
       }
+    },
+    {
+      "id": "try-using-imports-and-helper-files-checkpoint",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py"
+          ]
+        },
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          }
+        ],
+        "files": [
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  aVA  \n",
+            "stdout": "Ava\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              }
+            ]
+          },
+          {
+            "stdin": "  mia  \n",
+            "stdout": "Mia\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              }
+            ]
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.solutionFiles.tools_names_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.names",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.sourceChecks.0.message",
+            "importName": "clean_name",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.sourceChecks.1.message",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.sourceChecks.2.message",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.sourceChecks.3.message",
+            "path": "tools/names.py"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tools/names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.solutionFiles.tools_names_py.content",
+          "language": "python"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.names",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.sourceChecks.0.message",
+          "importName": "clean_name",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.sourceChecks.1.message",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.sourceChecks.2.message",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-checkpoint.sourceChecks.3.message",
+          "path": "tools/names.py"
+        }
+      ]
     },
     {
       "id": "q9",
@@ -264,65 +508,206 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9",
       "language": "python",
-      "starterCode": "def clean_name(text):\n    # return the cleaned version of text\n    pass",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def clean_name(text):\n    # return the cleaned version of text\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         }
       ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py"
+        ]
+      },
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def clean_name(text):\n    # return the cleaned version of text\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def clean_name(text):\n    # return the cleaned version of text\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
-        ]
-      },
-      "showExpectedExample": false,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "def clean_name(text):\n    return text.strip().title()",
-        "semanticChecks": [
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py"
+          ]
+        },
+        "solutionFiles": [
           {
-            "type": "function_returns",
-            "functionName": "clean_name",
-            "args": [
-              "  aVA  "
-            ],
-            "argKinds": [
-              "value"
-            ],
-            "expected": "Ava",
-            "expectedKind": "json"
+            "path": "main.py",
+            "content": "from tools.names import clean_name\n\nraw_name = input()\nprint(clean_name(raw_name))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           },
           {
-            "type": "function_returns",
-            "functionName": "clean_name",
-            "args": [
-              "mARCO"
-            ],
-            "argKinds": [
-              "value"
-            ],
-            "expected": "Marco",
-            "expectedKind": "json"
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python"
           },
           {
-            "type": "no_stdout"
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          }
+        ],
+        "files": [
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python"
           }
         ]
-      }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  aVA  \n",
+            "stdout": "Ava\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              }
+            ]
+          },
+          {
+            "stdin": "mARCO\n",
+            "stdout": "Marco\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              }
+            ]
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.solutionFiles.tools_init_py.content",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.solutionFiles.tools_names_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.names",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.0.message",
+            "importName": "clean_name",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.1.message",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.2.message",
+            "path": "tools/names.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.3.message",
+            "path": "tools/names.py"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.solutionFiles.tools_init_py.content",
+          "language": "python"
+        },
+        {
+          "path": "tools/names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.solutionFiles.tools_names_py.content",
+          "language": "python"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.names",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.0.message",
+          "importName": "clean_name",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+clean_name\\s*\\(\\s*text\\s*\\)\\s*:",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.1.message",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.2.message",
+          "path": "tools/names.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q9.sourceChecks.3.message",
+          "path": "tools/names.py"
+        }
+      ]
     },
     {
       "id": "q10",
@@ -331,65 +716,250 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10",
       "language": "python",
-      "starterCode": "def greet(name):\n    # return a greeting string\n    pass",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def greet(name):\n    # return a greeting string\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterFiles.tools_init_py.content",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "tools/names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterFiles.tools_names_py.content",
+          "language": "python",
+          "readOnly": true
         }
       ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py",
+          "tools/badges.py"
+        ]
+      },
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def greet(name):\n    # return a greeting string\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def greet(name):\n    # return a greeting string\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterFiles.tools_init_py.content",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "tools/names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.starterFiles.tools_names_py.content",
+            "language": "python",
+            "readOnly": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py",
+            "tools/badges.py"
+          ]
+        },
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\nname = clean_name(raw_name)\nprint(make_badge(name, role))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python"
+          }
+        ],
+        "files": [
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
           }
         ]
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "def greet(name):\n    return f\"Hello, {name}!\"",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "greet",
-            "args": [
-              "Mina"
-            ],
-            "argKinds": [
-              "value"
-            ],
-            "expected": "Hello, Mina!",
-            "expectedKind": "json"
+            "stdin": "  lina  \nartist\n",
+            "stdout": "ARTIST badge: Lina\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/badges.py",
+                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+                "language": "python"
+              }
+            ]
           },
           {
-            "type": "function_returns",
-            "functionName": "greet",
-            "args": [
-              "Leo"
-            ],
-            "argKinds": [
-              "value"
-            ],
-            "expected": "Hello, Leo!",
-            "expectedKind": "json"
+            "stdin": "kai\ncoder\n",
+            "stdout": "CODER badge: Kai\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/badges.py",
+                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+                "language": "python"
+              }
+            ]
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           },
           {
-            "type": "no_stdout"
+            "path": "tools/__init__.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.tools_init_py.content",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.tools_names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.tools_badges_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.badges",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.0.message",
+            "importName": "make_badge",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+make_badge\\s*\\(",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.1.message",
+            "path": "tools/badges.py"
+          },
+          {
+            "type": "uses_method",
+            "method": "upper",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.2.message",
+            "path": "tools/badges.py"
           }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.tools_init_py.content",
+          "language": "python"
+        },
+        {
+          "path": "tools/names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.tools_names_py.content",
+          "language": "python"
+        },
+        {
+          "path": "tools/badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.solutionFiles.tools_badges_py.content",
+          "language": "python"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.badges",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.0.message",
+          "importName": "make_badge",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+make_badge\\s*\\(",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.1.message",
+          "path": "tools/badges.py"
+        },
+        {
+          "type": "uses_method",
+          "method": "upper",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q10.sourceChecks.2.message",
+          "path": "tools/badges.py"
+        }
+      ]
     },
     {
       "id": "q11",
@@ -398,69 +968,834 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11",
       "language": "python",
-      "starterCode": "def make_label(name, score):\n    # return a label like \"Ava: 9\"\n    pass",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def make_label(name, score):\n    # return a label like \"Ava: 9\"\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterFiles.tools_init_py.content",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "tools/names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterFiles.tools_names_py.content",
+          "language": "python",
+          "readOnly": true
+        },
+        {
+          "path": "tools/badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterFiles.tools_badges_py.content",
+          "language": "python",
+          "readOnly": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py",
+          "tools/badges.py",
+          "tools/reports.py"
+        ]
+      },
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterFiles.tools_init_py.content",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "tools/names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterFiles.tools_names_py.content",
+            "language": "python",
+            "readOnly": true
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.starterFiles.tools_badges_py.content",
+            "language": "python",
+            "readOnly": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py",
+            "tools/badges.py",
+            "tools/reports.py"
+          ]
+        },
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\nfrom tools.reports import mission_report\n\nraw_name = input()\nrole = input()\npoints = int(input())\nname = clean_name(raw_name)\nbadge = make_badge(name, role)\nprint(mission_report(badge, points))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/reports.py",
+            "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n",
+            "language": "python"
+          }
+        ],
+        "files": [
+          {
+            "path": "tools/__init__.py",
+            "content": "# Tools package for this mini app.\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "  zoe  \nscout\n18\n",
+            "stdout": "Mission report: SCOUT badge: Zoe has 18 points\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/badges.py",
+                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/reports.py",
+                "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n",
+                "language": "python"
+              }
+            ]
+          },
+          {
+            "stdin": "max\nbuilder\n25\n",
+            "stdout": "Mission report: BUILDER badge: Max has 25 points\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/badges.py",
+                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/reports.py",
+                "content": "def mission_report(badge, points):\n    return f\"Mission report: {badge} has {points} points\"\n",
+                "language": "python"
+              }
+            ]
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/__init__.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_init_py.content",
+            "language": "python"
+          },
+          {
+            "path": "tools/names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_badges_py.content",
+            "language": "python"
+          },
+          {
+            "path": "tools/reports.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_reports_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.reports",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.0.message",
+            "importName": "mission_report",
+            "path": "main.py"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+mission_report\\s*\\(",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.1.message",
+            "path": "tools/reports.py"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "mission_report",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.2.message",
+            "path": "main.py"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/__init__.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_init_py.content",
+          "language": "python"
+        },
+        {
+          "path": "tools/names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_names_py.content",
+          "language": "python"
+        },
+        {
+          "path": "tools/badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_badges_py.content",
+          "language": "python"
+        },
+        {
+          "path": "tools/reports.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.solutionFiles.tools_reports_py.content",
+          "language": "python"
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.reports",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.0.message",
+          "importName": "mission_report",
+          "path": "main.py"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+mission_report\\s*\\(",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.1.message",
+          "path": "tools/reports.py"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "mission_report",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.q11.sourceChecks.2.message",
+          "path": "main.py"
+        }
+      ]
+    },
+    {
+      "id": "try-using-imports-and-helper-files-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
         }
       ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.tools_names_py.content",
+          "language": "python"
+        }
+      ],
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def make_label(name, score):\n    # return a label like \"Ava: 9\"\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def make_label(name, score):\n    # return a label like \"Ava: 9\"\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
           }
-        ]
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.names import clean_name\n\nprint(clean_name(\"  ava  \"))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py"
+          ]
+        }
       },
-      "showExpectedExample": false,
+      "showExpectedExample": true,
       "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "def make_label(name, score):\n    return f\"{name}: {score}\"",
-        "semanticChecks": [
+        "type": "fixed_tests",
+        "tests": [
           {
-            "type": "function_returns",
-            "functionName": "make_label",
-            "args": [
-              "Ava",
-              9
-            ],
-            "argKinds": [
-              "value",
-              "value"
-            ],
-            "expected": "Ava: 9",
-            "expectedKind": "json"
+            "stdin": "",
+            "stdout": "Ava\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              }
+            ]
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
           },
           {
-            "type": "function_returns",
-            "functionName": "make_label",
-            "args": [
-              "Noah",
-              12
-            ],
-            "argKinds": [
-              "value",
-              "value"
-            ],
-            "expected": "Noah: 12",
-            "expectedKind": "json"
+            "path": "tools/names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.solutionFiles.tools_names_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.names",
+            "importName": "clean_name",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.0.message"
           },
           {
-            "type": "no_stdout"
+            "type": "source_regex",
+            "pattern": "def\\s+clean_name\\s*\\(",
+            "path": "tools/names.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.1.message"
+          },
+          {
+            "type": "uses_method",
+            "method": "strip",
+            "path": "tools/names.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.2.message"
+          },
+          {
+            "type": "uses_method",
+            "method": "title",
+            "path": "tools/names.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.3.message"
           }
         ]
-      }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.names",
+          "importName": "clean_name",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+clean_name\\s*\\(",
+          "path": "tools/names.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.1.message"
+        },
+        {
+          "type": "uses_method",
+          "method": "strip",
+          "path": "tools/names.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.2.message"
+        },
+        {
+          "type": "uses_method",
+          "method": "title",
+          "path": "tools/names.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch0.sourceChecks.3.message"
+        }
+      ]
+    },
+    {
+      "id": "try-using-imports-and-helper-files-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.tools_badges_py.content",
+          "language": "python"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.badges import make_badge\n\nprint(make_badge(\"Ava\", \"student\"))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/badges.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "STUDENT badge: Ava\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/badges.py",
+                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+                "language": "python"
+              }
+            ]
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.solutionFiles.tools_badges_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.badges",
+            "importName": "make_badge",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+make_badge\\s*\\(",
+            "path": "tools/badges.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.1.message"
+          },
+          {
+            "type": "uses_method",
+            "method": "upper",
+            "path": "tools/badges.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.2.message"
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/badges.py"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.badges",
+          "importName": "make_badge",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+make_badge\\s*\\(",
+          "path": "tools/badges.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.1.message"
+        },
+        {
+          "type": "uses_method",
+          "method": "upper",
+          "path": "tools/badges.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch1.sourceChecks.2.message"
+        }
+      ]
+    },
+    {
+      "id": "try-using-imports-and-helper-files-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tools/names.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.tools_names_py.content",
+          "language": "python"
+        },
+        {
+          "path": "tools/badges.py",
+          "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.tools_badges_py.content",
+          "language": "python"
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nname = clean_name(\"  mia  \")\nprint(make_badge(name, \"mentor\"))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/names.py",
+            "content": "def clean_name(text):\n    return text.strip().title()\n",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "tools"
+          ],
+          "requiredFiles": [
+            "tools/names.py",
+            "tools/badges.py"
+          ]
+        }
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "MENTOR badge: Mia\n",
+            "match": "exact",
+            "files": [
+              {
+                "path": "tools/__init__.py",
+                "content": "# tools package\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/names.py",
+                "content": "def clean_name(text):\n    return text.strip().title()\n",
+                "language": "python"
+              },
+              {
+                "path": "tools/badges.py",
+                "content": "def make_badge(name, role):\n    return f\"{role.upper()} badge: {name}\"\n",
+                "language": "python"
+              }
+            ]
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tools/names.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.tools_names_py.content",
+            "language": "python"
+          },
+          {
+            "path": "tools/badges.py",
+            "content": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.solutionFiles.tools_badges_py.content",
+            "language": "python"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "module": "tools.names",
+            "importName": "clean_name",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_import",
+            "module": "tools.badges",
+            "importName": "make_badge",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.1.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+clean_name\\s*\\(",
+            "path": "tools/names.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.2.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "def\\s+make_badge\\s*\\(",
+            "path": "tools/badges.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.3.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "clean_name",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.4.message"
+          },
+          {
+            "type": "uses_call",
+            "functionName": "make_badge",
+            "path": "main.py",
+            "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.5.message"
+          }
+        ]
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "tools"
+        ],
+        "requiredFiles": [
+          "tools/names.py",
+          "tools/badges.py"
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "module": "tools.names",
+          "importName": "clean_name",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_import",
+          "module": "tools.badges",
+          "importName": "make_badge",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.1.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+clean_name\\s*\\(",
+          "path": "tools/names.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.2.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "def\\s+make_badge\\s*\\(",
+          "path": "tools/badges.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.3.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "clean_name",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.4.message"
+        },
+        {
+          "type": "uses_call",
+          "functionName": "make_badge",
+          "path": "main.py",
+          "message": "@:topics.python--python-data-functions--draft.python-6-functions-and-modularity.using-imports-and-helper-files.quiz.try-using-imports-and-helper-files-sketch2.sourceChecks.5.message"
+        }
+      ]
     }
   ]
 }

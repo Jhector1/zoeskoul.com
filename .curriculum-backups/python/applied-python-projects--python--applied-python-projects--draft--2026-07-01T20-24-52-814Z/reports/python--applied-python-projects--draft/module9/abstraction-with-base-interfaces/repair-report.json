@@ -1,0 +1,187 @@
+{
+  "topicId": "abstraction-with-base-interfaces",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.abstraction-with-base-interfaces-sketch2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-abstraction-with-base-interfaces-sketch0",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-abstraction-with-base-interfaces-sketch0",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-abstraction-with-base-interfaces-sketch0",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-abstraction-with-base-interfaces-sketch1",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-abstraction-with-base-interfaces-sketch1",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-abstraction-with-base-interfaces-sketch1",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-abstraction-with-base-interfaces-sketch2",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-abstraction-with-base-interfaces-sketch2",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_FUNCTION_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-abstraction-with-base-interfaces-sketch2",
+      "message": "Completed helper function implementation files from function_returns semantic checks when generated solution files still contained starter comments or pass statements."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "try-abstraction-with-base-interfaces-sketch2",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-baseitem-checkout",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-baseitem-checkout",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-baseitem-checkout",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-export-labels",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-export-labels",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_FUNCTION_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-export-labels",
+      "message": "Completed helper function implementation files from function_returns semantic checks when generated solution files still contained starter comments or pass statements."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-add-audio-subclass",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-add-audio-subclass",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-add-audio-subclass",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-summary-service",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-summary-service",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_FUNCTION_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "ci-catalog-summary-service",
+      "message": "Completed helper function implementation files from function_returns semantic checks when generated solution files still contained starter comments or pass statements."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "ci-catalog-summary-service",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_POLICY_EXTRA_EXERCISE_DROPPED",
+      "category": "other",
+      "severity": "medium",
+      "field": "ci-catalog-summary-service",
+      "message": "Dropped extra code_input exercise to satisfy the planned exercise mix for \"abstraction-with-base-interfaces\"."
+    },
+    {
+      "code": "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+      "category": "other",
+      "severity": "medium",
+      "field": "sketchBlocks",
+      "message": "Added a Try it yourself learner action required by programming teaching validation."
+    }
+  ]
+}

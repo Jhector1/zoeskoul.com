@@ -1,0 +1,255 @@
+{
+  "topics": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-module-1-terminal-navigation": {
+        "where-am-i": {
+          "label": "« Où suis-je ? » pwd et ls",
+          "summary": "Utilisez les commandes `pwd` et `ls` pour examiner le répertoire dans lequel vous vous trouvez et voir ce qu'il contient.",
+          "cards": {
+            "sketch0": {
+              "title": "Utilisez `pwd` pour localiser votre position actuelle"
+            },
+            "sketch1": {
+              "title": "Utilisez la commande « `ls` » pour afficher le contenu du dossier actuel."
+            },
+            "sketch2": {
+              "title": "Utilisez conjointement les sites `pwd` et `ls` pour vous repérer"
+            },
+            "quiz": {
+              "title": "Vérification des exercices"
+            }
+          },
+          "practice": {
+            "sc-pwd-purpose": {
+              "title": "Ce que vous apprend « `pwd` »",
+              "prompt": "Vous organisez les fichiers d'un club étudiant et souhaitez vérifier le dossier dans lequel vous vous trouvez avant de faire quoi que ce soit d'autre. Quelle commande permet d'afficher votre emplacement actuel dans le système de fichiers ?",
+              "hint": "Servez-vous de l'explication donnée dans la leçon et de la formulation de cette question pour affiner votre réponse.",
+              "help": {
+                "concept": "Ce texte d'aide a été modifié, car la formulation initiale révélait la réponse de manière trop directe.",
+                "hint_1": "Comparez la question à l'exemple donné dans la leçon et supprimez les détails qui ne correspondent pas au concept demandé.",
+                "hint_2": "Utilisez le rôle ou l'élément de preuve mentionné dans l'énoncé plutôt que de vous fier à la formulation de la réponse."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "ls",
+                "c": "cd",
+                "d": "touch"
+              }
+            },
+            "sc-ls-purpose": {
+              "title": "Ce que montre « `ls` »",
+              "prompt": "Vous vous trouvez dans un dossier nommé « `newsletter` » et vous souhaitez vérifier s'il contient les fichiers « `drafts` », « `images` » et « `todo.txt` ». Quelle commande devez-vous utiliser ?",
+              "hint": "Servez-vous de l'explication donnée dans la leçon et de la formulation de cette question pour affiner votre réponse.",
+              "help": {
+                "concept": "Ce texte d'aide a été modifié, car la formulation initiale révélait la réponse de manière trop directe.",
+                "hint_1": "Comparez chaque option au sujet précis mentionné dans la question.",
+                "hint_2": "Utilisez le rôle ou l'élément de preuve mentionné dans l'énoncé plutôt que de vous fier à la formulation de la réponse."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "mkdir",
+                "c": "ls",
+                "d": "mv"
+              }
+            },
+            "mc-safe-inspection": {
+              "title": "Commandes d'inspection de sécurité",
+              "prompt": "Sélectionnez toutes les commandes ci-dessous qui permettent de vérifier le contenu de votre emplacement ou de votre dossier sans créer, déplacer ni supprimer de fichiers.",
+              "hint": "Servez-vous de l'explication donnée dans la leçon et de la formulation de cette question pour affiner votre réponse.",
+              "help": {
+                "concept": "Ce texte d'aide a été modifié, car la formulation initiale révélait la réponse de manière trop directe.",
+                "hint_1": "Comparez chaque option au sujet précis mentionné dans la question.",
+                "hint_2": "Utilisez le rôle ou l'élément de preuve mentionné dans l'énoncé plutôt que de vous fier à la formulation de la réponse."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "ls",
+                "c": "mkdir",
+                "d": "cd"
+              }
+            },
+            "dr-orient-yourself": {
+              "title": "Une bonne procédure de vérification initiale",
+              "prompt": "Organisez ces étapes dans un ordre logique afin de vous familiariser avec un nouveau dossier de travail avant d'y apporter des modifications.",
+              "hint": "Commencez par vérifier l'emplacement, puis examinez le contenu, et décidez ensuite de la marche à suivre.",
+              "help": {
+                "concept": "Une méthode sûre pour les débutants consiste à identifier d'abord le répertoire dans lequel vous vous trouvez, à en examiner le contenu ensuite, puis à choisir seulement après cela l'action suivante.",
+                "hint_1": "La commande qui affiche votre chemin d'accès doit précéder celle qui répertorie les fichiers.",
+                "hint_2": "La dernière étape ne consiste pas ici à donner une autre commande ; il s'agit de prendre une décision en vous appuyant sur ce que vous avez appris."
+              },
+              "tokens": {
+                "t1": "Exécutez la commande « `pwd` »",
+                "t2": "Exécutez la commande « `ls` »",
+                "t3": "Choisissez votre prochaine commande"
+              }
+            },
+            "fb-pwd-expansion": {
+              "title": "Développer le nom de la commande",
+              "prompt": "Complétez la phrase concernant « `pwd` ».",
+              "hint": "L'`w`, dans « `pwd` », fait référence au répertoire que vous utilisez actuellement.",
+              "help": {
+                "concept": "`pwd` signifie « imprimer le répertoire des termes manquants ». Connaître l'expression complète permet de faire le lien entre le nom de la commande et sa fonction.",
+                "hint_1": "Le mot manquant se trouve entre « print » et « directory ».",
+                "hint_2": "Il s'agit du répertoire dans lequel vous vous trouvez actuellement."
+              },
+              "template": "`pwd` signifie « imprimer le répertoire [blank1] ».",
+              "choices": [
+                "Accueil",
+                "en cours",
+                "parent",
+                "répertorié"
+              ]
+            },
+            "fb-ls-meaning": {
+              "title": "Choisissez la commande adaptée au contenu",
+              "prompt": "Complétez la ligne de commande permettant de vérifier le contenu du dossier actuel.",
+              "hint": "Utilisez la commande qui affiche la liste des noms dans le répertoire actuel.",
+              "help": {
+                "concept": "`the missing term` C'est la commande qui permet d'afficher le contenu du répertoire actuel. Elle vous permet de consulter les fichiers et les dossiers sans les modifier.",
+                "hint_1": "Ce n'est pas la commande qui affiche le chemin d'accès complet.",
+                "hint_2": "La commande correcte comporte deux lettres et commence par « `l` »."
+              },
+              "template": "Pour afficher les fichiers et dossiers du répertoire actuel, exécutez la commande « `[blank1]` ».",
+              "choices": [
+                "pwd",
+                "ls",
+                "cd",
+                "mkdir"
+              ]
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "exercises": {
+              "where-am-i-try-it-1": {
+                "title": "Tâche dans le terminal : vérifiez votre emplacement à l'aide de la commande « pwd »",
+                "prompt": "Vous venez d'ouvrir un dossier de projet. Exécutez la commande « `pwd` » pour vérifier votre emplacement actuel.",
+                "hint": "Exécutez la commande indiquée dans l'invite. Il n'est pas nécessaire de créer ou de modifier des fichiers à ce stade.",
+                "help": {
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
+                },
+                "starterCode": "# Use the terminal for this Linux task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Exécutez la commande « `pwd` » pour afficher le dossier actuel."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "orientation_demo_readme_txt": {
+                    "content": "Use pwd to print your current folder.\n"
+                  }
+                }
+              },
+              "where-am-i-try-it-2": {
+                "title": "Exercice sur le terminal : afficher la liste des fichiers du dossier actuel avec la commande « ls »",
+                "prompt": "Vous êtes sur le point de commencer à travailler dans ce dossier. Exécutez la commande « `ls` » pour voir ce qu’il contient déjà.",
+                "hint": "Exécutez la commande indiquée dans l'invite. Cette tâche consiste simplement à vérifier ce qui est déjà présent.",
+                "help": {
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
+                },
+                "starterCode": "# Use the terminal for this Linux task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Exécutez la commande « `ls` » pour afficher la liste des fichiers du dossier actuel."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "orientation_demo_notes_txt": {
+                    "content": "orientation notes\n"
+                  },
+                  "orientation_demo_archive_readme_txt": {
+                    "content": "archive folder\n"
+                  }
+                }
+              },
+              "where-am-i-try-it-3": {
+                "title": "Exercice sur le terminal : s'orienter à l'aide des commandes `pwd` et `ls`",
+                "prompt": "Commencez par vous comporter comme un coéquipier prudent. Exécutez les commandes « `pwd` », puis « `ls` », afin de vous repérer avant d'effectuer des modifications.",
+                "hint": "Commencez par utiliser `pwd`, puis `ls`, comme indiqué dans l'invite.",
+                "help": {
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
+                },
+                "starterCode": "# Use the terminal for this Linux task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Exécutez la commande « `pwd` » avant d'afficher la liste des fichiers."
+                    },
+                    "1": {
+                      "message": "Exécutez la commande « `ls` » après avoir changé de répertoire."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "reports_summary_txt": {
+                    "content": "weekly summary\n"
+                  },
+                  "reports_archive_readme_txt": {
+                    "content": "archive\n"
+                  }
+                }
+              }
+            },
+            "try_where_am_i_sketch0": {
+              "title": "Essayez vous-même : vérifiez votre position avec la commande « pwd »",
+              "prompt": "Exécutez la commande « `pwd` » pour afficher le dossier dans lequel vous vous trouvez actuellement."
+            },
+            "try_where_am_i_sketch1": {
+              "title": "Essayez vous-même : affichez le contenu du dossier actuel avec la commande « ls »",
+              "prompt": "Exécutez la commande « `ls` » pour afficher le contenu du dossier actuel."
+            },
+            "try_where_am_i_sketch2": {
+              "title": "Essayez vous-même : utilisez les commandes `pwd` et `ls` pour vous repérer",
+              "prompt": "Lancez `pwd`, puis `ls`, pour vérifier votre localisation et les fichiers disponibles à proximité avant de commencer."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux--linux-terminal-fundamentals--draft": {
+      "linux-module-1-terminal-navigation": {
+        "where-am-i": {
+          "where-am-i-basics": {
+            "title": "Utilisez `pwd` pour localiser votre position actuelle",
+            "bodyMarkdown": "When you open the Linux terminal, you are always **somewhere** in the file system. The `pwd` command tells you exactly where you are.\n\n`pwd` stands for **print working directory**. A directory is another word for a folder, and your working directory is the folder you are currently using.\n\nFor example:\n\n```bash\npwd\n```\n\nPossible output:\n\n```bash\n/home/learner/projects\n```\n\nThat output is the full path to your current folder.\n\nStep by step:\n\n- `pwd` is the command you type.\n- The terminal prints the current folder path.\n- You do not change anything in the workspace by running `pwd`.\n\nImagine you are helping organize a small school newsletter workspace. Before creating or moving files, you should first check where you are. If `pwd` shows `/home/learner/newsletter`, then you know any next command will happen inside that folder unless you move somewhere else."
+          },
+          "list-files-with-ls": {
+            "title": "Utilisez la commande « `ls` » pour afficher le contenu du dossier actuel.",
+            "bodyMarkdown": "Once you know where you are, the next question is usually: **what is here?** That is what `ls` does.\n\n`ls` lists the contents of the current folder.\n\nExample:\n\n```bash\nls\n```\n\nPossible output:\n\n```bash\ndrafts\nimages\nnotes.txt\n```\n\nStep by step:\n\n- `ls` checks the folder you are currently in.\n- It prints the names of files and folders inside it.\n- Like `pwd`, it is an inspection command, so it does not create, move, or delete anything.\n\nIn a real story, suppose you are a volunteer checking a community event folder. If `pwd` says you are in `/home/learner/event-kit`, then `ls` might show folders like `posters` and `schedule`, plus a file like `todo.txt`. That helps you decide what to open or where to go next."
+          },
+          "pwd-and-ls-together": {
+            "title": "Utilisez conjointement les sites `pwd` et `ls` pour vous repérer",
+            "bodyMarkdown": "`pwd` and `ls` work best as a pair:\n\n1. Use `pwd` to confirm your location.\n2. Use `ls` to inspect what is inside that location.\n\nExample session:\n\n```bash\npwd\nls\n```\n\nPossible output:\n\n```bash\n/home/learner/reports\nsummary.txt\nweekly\narchive\n```\n\nRead this carefully:\n\n- `pwd` tells you the current folder is `/home/learner/reports`.\n- `ls` then shows that this folder contains `summary.txt`, `weekly`, and `archive`.\n- Because both commands are safe inspection commands, they are great first steps when you feel unsure.\n\nA beginner-friendly habit is: **before changing anything, check location first, then check contents**. That habit helps prevent mistakes, especially when several folders have similar names."
+          }
+        }
+      }
+    }
+  }
+}

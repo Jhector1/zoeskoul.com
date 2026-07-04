@@ -1,0 +1,104 @@
+{
+  "ok": true,
+  "profileId": "python",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "courseSlug": "applied-python-projects",
+  "topicId": "class-files-and-instances",
+  "summary": {
+    "modules": 1,
+    "topicsTotal": 1,
+    "exercises": 12,
+    "exerciseKinds": {
+      "code_input": 6,
+      "multi_choice": 2,
+      "fill_blank_choice": 2,
+      "drag_reorder": 1,
+      "single_choice": 1
+    },
+    "codeInputs": 6,
+    "projects": 6,
+    "capstones": 6,
+    "thinFixedTestCount": 0,
+    "blockers": 0,
+    "errors": 0,
+    "warnings": 7,
+    "infos": 0
+  },
+  "severityCounts": {
+    "blocker": 0,
+    "error": 0,
+    "warning": 7,
+    "info": 0
+  },
+  "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "message": "Topic \"class-files-and-instances\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "try-class-files-and-instances-sketch0",
+      "message": "Exercise \"try-class-files-and-instances-sketch0\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "try-class-files-and-instances-sketch1",
+      "message": "Exercise \"try-class-files-and-instances-sketch1\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "try-class-files-and-instances-sketch2",
+      "message": "Exercise \"try-class-files-and-instances-sketch2\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "project-step-account-class",
+      "message": "Exercise \"project-step-account-class\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "project-step-account-methods",
+      "message": "Exercise \"project-step-account-methods\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-8-object-oriented-foundations/python-8-object-foundations/class-files-and-instances",
+      "profileId": "python",
+      "moduleId": "python-8-object-oriented-foundations",
+      "topicId": "class-files-and-instances",
+      "exerciseId": "project-step-two-accounts",
+      "message": "Exercise \"project-step-two-accounts\" starterCode appears to contain most of the final solution structure."
+    }
+  ]
+}

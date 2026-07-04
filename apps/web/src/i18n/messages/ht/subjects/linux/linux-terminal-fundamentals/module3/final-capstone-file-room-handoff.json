@@ -3,196 +3,196 @@
     "linux-terminal-fundamentals": {
       "linux-module-3-final-capstone": {
         "final-capstone-file-room-handoff": {
-          "label": "Pwojè final: remèt sal fichye a",
-          "summary": "Sèvi ak tèminal Linux la pou transfòme yon espas travay evènman ki an dezòd an yon remiz pwòp : enspekte sa ki ladan li, triye fichye yo nan bon katab yo, pwoteje yon nòt enpòtan ak yon kopi sekirite, retire dezòd tanporè, epi kite yon makè klè ki montre li pare.",
+          "label": "Capstone: Remiz Sal Fichye a",
+          "summary": "Sèvi ak tèminal Linux pou transfòme yon espas travay evènman dezòdone an yon remiz pwòp: enspekte sa ki la, klase fichye yo nan dosye ki kòrèk yo, pwoteje yon nòt enpòtan ak yon kopi sekirite, retire dezòd tanporè, epi kite yon makè klè ki montre li pare.",
           "cards": {
             "sketch0": {
-              "title": "Rezime remèt sal fichye kominote a"
+              "title": "Rezime sou remiz kle Sal Dosye Kominotè a"
             },
             "project": {
-              "title": "Remèt sal fichye kominote a"
+              "title": "Remiz Sal Fichye Kominotè"
             }
           },
           "finalCapstone": {
             "steps": {
               "final-capstone-file-room-handoff-terminal-task-1": {
-                "title": "Fè envantè bwat antre sal fichye a",
-                "prompt": "Ou ap kòmanse dènye remiz evènman an epi ou bezwen yon dosye rapid sou sa ki rive. Tcheke bwat antre a, apre sa kreye `community-file-room/handoff/inventory.txt` pou make ke revizyon antre a fèt.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Fè yon envantè bwat resepsyon chanm dosye a",
+                "prompt": "Ou ap kòmanse remiz final evènman an e ou bezwen yon anrejistreman rapid sou sa ki rive. Tcheke bwat resepsyon an, epi kreye yon evènman \"`community-file-room/handoff/inventory.txt`\" pou make ke revizyon admisyon an te fèt.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Etap pwojè yo konekte. Kenbe livrab ki te fèt anvan yo epi ajoute yon nouvo travay ki itil.",
+                  "concept": "Etap pwojè yo konekte. Konsève livrabl ki te fèt deja yo epi ajoute yon nouvo travay itil.",
                   "hint_1": "Sèvi ak ls oswa find pou tcheke espas travay aktyèl la anvan ou chanje li.",
-                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo sof si enstriksyon an mande klèman pou netwaye yon fichye tanporè."
+                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo, sof si mesaj la mande w klèman pou w netwaye yon fichye tanporè."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "community_file_room_inbox_agenda_txt": {
-                    "content": "Ajanda evènman kominotè\n"
+                    "content": "Community event agenda\n"
                   },
                   "community_file_room_inbox_guest_list_txt": {
-                    "content": "Lis envite\n"
+                    "content": "Guest list\n"
                   },
                   "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Nòt bouyon tanporè\n"
+                    "content": "Temporary scratch note\n"
                   },
                   "community_file_room_inbox_venue_txt": {
-                    "content": "Nòt pou prepare lokal la\n"
+                    "content": "Venue setup notes\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-2": {
-                "title": "Triye ajanda, envite, ak nòt sou lokal la",
-                "prompt": "Bwat antre a toujou gen fichye evènman ki pa klase. Kreye `community-file-room/agenda`, `community-file-room/guests`, ak `community-file-room/venue`, apre sa deplase `agenda.txt`, `guest-list.txt`, ak `venue.txt` soti nan `community-file-room/inbox` pou ale nan katab ki matche ak yo.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Klase nòt sou ajanda a, envite yo, ak lokal la.",
+                "prompt": "Bwat resepsyon an toujou gen fichye evènman ki pa òganize. Kreye dosye \"`community-file-room/agenda`\", \"`community-file-room/guests`\", ak \"`community-file-room/venue`\", epi deplase \"`agenda.txt`\", \"`guest-list.txt`\", ak \"`venue.txt`\" soti nan \"`community-file-room/inbox`\" pou mete yo nan dosye ki koresponn yo.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Etap pwojè yo konekte. Kenbe livrab ki te fèt anvan yo epi ajoute yon nouvo travay ki itil.",
+                  "concept": "Etap pwojè yo konekte. Konsève livrabl ki te fèt deja epi ajoute yon nouvo travay itil.",
                   "hint_1": "Sèvi ak ls oswa find pou tcheke espas travay aktyèl la anvan ou chanje li.",
-                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo sof si enstriksyon an mande klèman pou netwaye yon fichye tanporè."
+                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo, sof si mesaj la mande w klèman pou w efase yon fichye tanporè."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "community_file_room_inbox_agenda_txt": {
-                    "content": "Ajanda evènman kominotè\n"
+                    "content": "Community event agenda\n"
                   },
                   "community_file_room_inbox_guest_list_txt": {
-                    "content": "Lis envite\n"
+                    "content": "Guest list\n"
                   },
                   "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Nòt bouyon tanporè\n"
+                    "content": "Temporary scratch note\n"
                   },
                   "community_file_room_inbox_venue_txt": {
-                    "content": "Nòt pou prepare lokal la\n"
+                    "content": "Venue setup notes\n"
                   },
                   "community_file_room_handoff_inventory_txt": {
-                    "content": "agenda.txt\nguest-lis.txt\ntmp-scratch.txt\nvenue.txt\n"
+                    "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-3": {
-                "title": "Fè kopi sekirite ajanda a",
-                "prompt": "Anvan nenpòt moun netwaye espas travay la, sove yon kopi ajanda a. Kopye `community-file-room/agenda/agenda.txt` pou ale nan `community-file-room/backups/agenda.txt`.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Sipòte ajanda a",
+                "prompt": "Anvan nenpòt moun netwaye espas travay la, sove yon kopi ajanda a. Kopye `community-file-room/agenda/agenda.txt` pou `community-file-room/backups/agenda.txt`.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Etap pwojè yo konekte. Kenbe livrab ki te fèt anvan yo epi ajoute yon nouvo travay ki itil.",
+                  "concept": "Etap pwojè yo konekte. Konsève livrabl ki te fèt deja epi ajoute yon nouvo travay itil.",
                   "hint_1": "Sèvi ak ls oswa find pou tcheke espas travay aktyèl la anvan ou chanje li.",
-                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo sof si enstriksyon an mande klèman pou netwaye yon fichye tanporè."
+                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo, sof si mesaj la mande w klèman pou w netwaye yon fichye tanporè."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Nòt bouyon tanporè\n"
+                    "content": "Temporary scratch note\n"
                   },
                   "community_file_room_handoff_inventory_txt": {
-                    "content": "agenda.txt\nguest-lis.txt\ntmp-scratch.txt\nvenue.txt\n"
+                    "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n"
                   },
                   "community_file_room_agenda_agenda_txt": {
-                    "content": "Ajanda evènman kominotè\n"
+                    "content": "Community event agenda\n"
                   },
                   "community_file_room_guests_guest_list_txt": {
-                    "content": "Lis envite\n"
+                    "content": "Guest list\n"
                   },
                   "community_file_room_venue_venue_txt": {
-                    "content": "Nòt pou prepare lokal la\n"
+                    "content": "Venue setup notes\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-4": {
                 "title": "Kreye yon rezime revizyon",
-                "prompt": "Pwochen volontè a bezwen yon ti nòt revizyon apre ou tcheke ajanda a ak lis envite a. Kreye `community-file-room/handoff/review-summary.txt` kòm fichye rezime sa a.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "prompt": "Pwochen volontè a bezwen yon ti nòt revizyon apre ou fin verifye ajanda a ak lis envite yo. Kreye \"`community-file-room/handoff/review-summary.txt`\" kòm fichye rezime a.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Etap pwojè yo konekte. Kenbe livrab ki te fèt anvan yo epi ajoute yon nouvo travay ki itil.",
+                  "concept": "Etap pwojè yo konekte. Konsève livrabl ki te fèt deja epi ajoute yon nouvo travay itil.",
                   "hint_1": "Sèvi ak ls oswa find pou tcheke espas travay aktyèl la anvan ou chanje li.",
-                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo sof si enstriksyon an mande klèman pou netwaye yon fichye tanporè."
+                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo, sof si mesaj la mande w klèman pou w netwaye yon fichye tanporè."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Nòt bouyon tanporè\n"
+                    "content": "Temporary scratch note\n"
                   },
                   "community_file_room_handoff_inventory_txt": {
-                    "content": "agenda.txt\nguest-lis.txt\ntmp-scratch.txt\nvenue.txt\n"
+                    "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n"
                   },
                   "community_file_room_agenda_agenda_txt": {
-                    "content": "Ajanda evènman kominotè\n"
+                    "content": "Community event agenda\n"
                   },
                   "community_file_room_guests_guest_list_txt": {
-                    "content": "Lis envite\n"
+                    "content": "Guest list\n"
                   },
                   "community_file_room_venue_venue_txt": {
-                    "content": "Nòt pou prepare lokal la\n"
+                    "content": "Venue setup notes\n"
                   },
                   "community_file_room_backups_agenda_txt": {
-                    "content": "Ajanda evènman kominotè\n"
+                    "content": "Community event agenda\n"
                   }
                 }
               },
               "final-capstone-file-room-handoff-terminal-task-5": {
-                "title": "Netwaye dezòd tanporè epi make li pare",
-                "prompt": "Fini remiz evènman an lè ou retire fichye bouyon tanporè a nan bwat antre a epi kreye `community-file-room/handoff/READY.txt` pou espas travay la montre klèman li pare.",
-                "hint": "Sa a se yon etap pwojè kimilatif. Kòmanse ak espas travay anvan an epi ajoute sèlman chanjman yo mande a.",
+                "title": "Netwaye dezòd tanporè epi make pare",
+                "prompt": "Konplete remiz evènman an lè w retire fichye pwovizwa a ki nan bwat resepsyon an epi kreye yon dosye \"`community-file-room/handoff/READY.txt`\" pou espas travay la montre klèman ke li pare.",
+                "hint": "Sa a se yon etap pwojè kumulatif. Kòmanse nan espas travay anvan an epi ajoute sèlman chanjman ki mande a.",
                 "help": {
-                  "concept": "Etap pwojè yo konekte. Kenbe livrab ki te fèt anvan yo epi ajoute yon nouvo travay ki itil.",
+                  "concept": "Etap pwojè yo konekte. Konsève livrabl ki te fèt deja epi ajoute yon nouvo travay itil.",
                   "hint_1": "Sèvi ak ls oswa find pou tcheke espas travay aktyèl la anvan ou chanje li.",
-                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo sof si enstriksyon an mande klèman pou netwaye yon fichye tanporè."
+                  "hint_2": "Pa efase fichye ki soti nan etap anvan yo, sof si mesaj la mande w klèman pou w netwaye yon fichye tanporè."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou etap pwojè Linux sa a.\n",
+                "starterCode": "# Use the terminal for this Linux project step.\n",
                 "terminalExpectations": {
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "community_file_room_inbox_tmp_scratch_txt": {
-                    "content": "Nòt bouyon tanporè\n"
+                    "content": "Temporary scratch note\n"
                   },
                   "community_file_room_handoff_inventory_txt": {
-                    "content": "agenda.txt\nguest-lis.txt\ntmp-scratch.txt\nvenue.txt\n"
+                    "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n"
                   },
                   "community_file_room_handoff_review_summary_txt": {
-                    "content": "Ajanda ak lis envite verifye pou remèt travay la\n"
+                    "content": "Agenda and guest list reviewed for handoff\n"
                   },
                   "community_file_room_agenda_agenda_txt": {
-                    "content": "Ajanda evènman kominotè\n"
+                    "content": "Community event agenda\n"
                   },
                   "community_file_room_guests_guest_list_txt": {
-                    "content": "Lis envite\n"
+                    "content": "Guest list\n"
                   },
                   "community_file_room_venue_venue_txt": {
-                    "content": "Nòt pou prepare lokal la\n"
+                    "content": "Venue setup notes\n"
                   },
                   "community_file_room_backups_agenda_txt": {
-                    "content": "Ajanda evènman kominotè\n"
+                    "content": "Community event agenda\n"
                   }
                 }
               }
@@ -207,8 +207,8 @@
       "linux-module-3-final-capstone": {
         "final-capstone-file-room-handoff": {
           "capstone-synopsis": {
-            "title": "Remèt sal fichye kominote a",
-            "bodyMarkdown": "Ou se dènye moun k ap ede nan sal fichye a pou yon evènman kominotè. Enspekte bwat antre a, triye fichye enpòtan yo, fè kopi sekirite ajanda a, verifye remiz la, retire dezòd tanporè, epi kite yon makè ki montre li pare.\n\nOu pral fè sa kòm etap pwojè ki konekte. Chak etap kòmanse ak espas travay etap anvan an, kidonk pa efase livrab ki te fèt deja."
+            "title": "Remiz Sal Fichye Kominotè",
+            "bodyMarkdown": "Ou se dènye moun k ap ede nan chanm dosye a pou yon evènman kominotè. Enspekte bwat resepsyon an, triye dosye enpòtan yo, fè yon kopi sekirite ajanda a, revize remiz la, retire dezòd tanporè yo, epi kite yon makè ki pare.\n\nW ap konplete sa kòm etap pwojè ki konekte yo. Chak etap kòmanse apati espas travay anvan an, kidonk pa efase livrabl ki te fèt anvan yo."
           }
         }
       }

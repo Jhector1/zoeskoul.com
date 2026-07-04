@@ -914,9 +914,9 @@ describe("buildMessagesFromDraft", () => {
 
         expect(messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt)
             .toMatchObject({
-                try_attributes_and_init_sketch0: { title: "Try it yourself: Exercise 1" },
-                try_attributes_and_init_sketch1: { title: "Try it yourself: Exercise 6" },
-                try_attributes_and_init_sketch2: { title: "Try it yourself: Exercise 11" },
+                try_attributes_and_init_sketch0: { title: "Exercise 1" },
+                try_attributes_and_init_sketch1: { title: "Exercise 6" },
+                try_attributes_and_init_sketch2: { title: "Exercise 11" },
                 allowReveal: true,
             });
         expect(
@@ -976,7 +976,7 @@ describe("buildMessagesFromDraft", () => {
 
         const tryIt = messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt;
         expect(tryIt?.try_attributes_and_init_sketch0).toMatchObject({
-            title: "Try it yourself: Exercise 1",
+            title: "Exercise 1",
         });
         expect(tryIt?.try_attributes_and_init_sketch0?.prompt).toContain("Prompt ex1.");
         expect(tryIt?.try_attributes_and_init_sketch1).toBeUndefined();
@@ -1000,9 +1000,9 @@ describe("buildMessagesFromDraft", () => {
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt,
         ).toMatchObject({
-            try_attributes_and_init_sketch0: { title: "Try it yourself: Exercise 6" },
-            try_attributes_and_init_sketch1: { title: "Try it yourself: Exercise 1" },
-            try_attributes_and_init_sketch2: { title: "Try it yourself: Exercise 11" },
+            try_attributes_and_init_sketch0: { title: "Exercise 6" },
+            try_attributes_and_init_sketch1: { title: "Exercise 1" },
+            try_attributes_and_init_sketch2: { title: "Exercise 11" },
         });
         expect(
             messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt
@@ -1031,20 +1031,25 @@ describe("buildMessagesFromDraft", () => {
             draft,
         }) as any;
 
-        const promptByExerciseId = Object.fromEntries(
-            draft.quizDraft.map((exercise: any) => [exercise.id, `${exercise.prompt}.`]),
-        );
+        const selectedSourceExerciseIds = ["ex1", "ex6", "ex11"];
         for (const sketchIndex of [0, 1, 2]) {
             const exerciseKey = bundle.cards.find((card: any) => card.id === `sketch${sketchIndex}`)?.tryIt?.exerciseKey;
+            const tryItMessageKey = `try_attributes_and_init_sketch${sketchIndex}`;
+            const selectedSourceExercise = draft.quizDraft.find(
+                (exercise: any) => exercise.id === selectedSourceExerciseIds[sketchIndex],
+            );
+
+            expect(exerciseKey).toBe(`try-attributes-and-init-sketch${sketchIndex}`);
             expect(
                 messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt?.[
-                    `try_attributes_and_init_sketch${sketchIndex}`
+                    tryItMessageKey
                 ]?.prompt,
-            ).toContain(promptByExerciseId[exerciseKey]);
+            ).toContain(selectedSourceExercise?.prompt);
             expect(
-                messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt
-                    ?.exercises?.[exerciseKey]?.title,
-            ).toBe(draft.quizDraft.find((exercise: any) => exercise.id === exerciseKey)?.title);
+                messages.topics?.["python-v2"]?.["python-v2-1"]?.["attributes-and-init"]?.tryIt?.[
+                    tryItMessageKey
+                ]?.title,
+            ).toBe(selectedSourceExercise?.title);
         }
     });
 });

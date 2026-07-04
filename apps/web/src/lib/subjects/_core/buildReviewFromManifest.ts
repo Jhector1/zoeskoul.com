@@ -89,6 +89,43 @@ function pickExerciseStepFields(exercise: Record<string, unknown> | null) {
     return picked;
 }
 
+
+function normalizeExercisePurpose(value: unknown, kind?: unknown) {
+    const raw = String(value ?? "").trim().toLowerCase();
+    if (raw === "quiz") return "quiz";
+    if (raw === "project" || raw === "try_it" || raw === "try-it" || raw === "practice" || raw === "capstone") {
+        return "project";
+    }
+    if (!raw && String(kind ?? "").trim() === "code_input") return "project";
+    if (!raw) return "quiz";
+    return null;
+}
+
+function authoredQuizExerciseKeys(manifest: TopicBundleManifest, rawCard: Record<string, unknown> | null) {
+    const rawQuiz = asRecord(rawCard?.quiz);
+    const explicit = Array.isArray(rawQuiz?.exerciseKeys)
+        ? rawQuiz.exerciseKeys.map((key) => asString(key)).filter(Boolean)
+        : [];
+    if (explicit.length) return Array.from(new Set(explicit));
+
+    const exercises = Array.isArray(manifest.exercises) ? manifest.exercises : [];
+    const keys = exercises
+        .map((exercise) => asRecord(exercise))
+        .filter((exercise): exercise is Record<string, unknown> => Boolean(exercise))
+        .filter((exercise) => {
+            const id = asString(exercise.id);
+            if (!id) return false;
+            if (String(exercise.kind ?? "").trim() === "code_input") return false;
+            return normalizeExercisePurpose(exercise.purpose, exercise.kind) === "quiz";
+        })
+        .map((exercise) => asString(exercise.id))
+        .filter(Boolean);
+
+    const n = Number(rawQuiz?.n ?? keys.length);
+    const limit = Number.isFinite(n) && n > 0 ? Math.min(keys.length, Math.floor(n)) : keys.length;
+    return Array.from(new Set(keys.slice(0, limit)));
+}
+
 function findExerciseManifestByKey(
     manifest: TopicBundleManifest,
     exerciseKey: string,
@@ -145,6 +182,21 @@ export function buildReviewFromManifest(args: {
                 tools: rawToolsSpec,
             }
             : card;
+
+        if (cardWithTools.type === "quiz") {
+            const exerciseKeys = authoredQuizExerciseKeys(args.manifest, rawCard);
+            if (!exerciseKeys.length) return cardWithTools;
+
+            return {
+                ...cardWithTools,
+                spec: {
+                    ...(cardWithTools as any).spec,
+                    topic: topicSlug,
+                    exerciseKeys,
+                    n: exerciseKeys.length,
+                },
+            };
+        }
 
         if (cardWithTools.type !== "text" && cardWithTools.type !== "sketch") {
             return cardWithTools;

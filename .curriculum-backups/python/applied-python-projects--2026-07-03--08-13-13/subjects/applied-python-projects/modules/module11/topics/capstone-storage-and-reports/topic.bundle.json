@@ -1,0 +1,2301 @@
+{
+  "topicId": "capstone-storage-and-reports",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-11-oop-capstone-project",
+  "sectionSlug": "applied-python-projects-python-11-capstone-services-and-polish",
+  "prefix": "py11",
+  "minutes": 35,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.label",
+    "summaryKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.cards.sketch0.title",
+      "sketchId": "capstone-storage-and-reports-sketch-0",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_capstone_storage_and_reports_sketch0",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.projectSteps.try_capstone_storage_and_reports_sketch0.title",
+            "exerciseKey": "try-capstone-storage-and-reports-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "capstone_storage_step_2_loader",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.projectSteps.capstone_storage_step_2_loader.title",
+            "exerciseKey": "capstone-storage-step-2-loader",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_storage_step_3_report_service",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.projectSteps.capstone_storage_step_3_report_service.title",
+            "exerciseKey": "capstone-storage-step-3-report-service",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_storage_step_4_save_report",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.projectSteps.capstone_storage_step_4_save_report.title",
+            "exerciseKey": "capstone-storage-step-4-save-report",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_storage_step_5_assert_checks",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.projectSteps.capstone_storage_step_5_assert_checks.title",
+            "exerciseKey": "capstone-storage-step-5-assert-checks",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_storage_step_6_readme_handoff",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.projectSteps.capstone_storage_step_6_readme_handoff.title",
+            "exerciseKey": "capstone-storage-step-6-readme-handoff",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "capstone-storage-and-reports-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.capstone-storage-and-reports-sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.capstone-storage-and-reports-sketch-0.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-capstone-storage-and-reports-sketch0",
+      "kind": "code_input",
+      "purpose": "capstone",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.solutionFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BaseTask",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.0.message"
+          },
+          {
+            "type": "constructible",
+            "className": "BaseTask",
+            "constructorArgs": [
+              "Write tests",
+              3
+            ],
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.1.message"
+          },
+          {
+            "type": "instance_attributes",
+            "className": "BaseTask",
+            "constructorArgs": [
+              "Write tests",
+              -2
+            ],
+            "attributes": [
+              "title",
+              "points",
+              "done"
+            ],
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.2.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "BaseTask",
+            "constructorArgs": [
+              "Write tests",
+              -2
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Write tests [open] - 0 pts",
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.3.message"
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "BaseTask",
+            "constructorArgs": [
+              "Write tests",
+              3
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "mark_done",
+                "methodArgs": [],
+                "methodArgKinds": []
+              }
+            ],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Write tests [done] - 3 pts",
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.4.message"
+          },
+          {
+            "type": "defines_class",
+            "className": "BugTask",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.5.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "BugTask",
+            "constructorArgs": [
+              "Fix login",
+              5,
+              "high"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "BUG high: Fix login [open] - 5 pts",
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.6.message"
+          },
+          {
+            "type": "defines_class",
+            "className": "FeatureTask",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.7.message"
+          },
+          {
+            "type": "method_returns",
+            "className": "FeatureTask",
+            "constructorArgs": [
+              "Add export",
+              8,
+              "reports"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "summary_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "FEATURE reports: Add export [open] - 8 pts",
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.8.message"
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.9.message"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-storage-step-2-loader",
+      "kind": "code_input",
+      "purpose": "capstone",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.services_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.workspaceFiles.data_tasks_csv_0.content",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.services_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.solutionFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "created_instances",
+            "className": "BugTask",
+            "min": 1,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.checks.0.message"
+          },
+          {
+            "type": "created_instances",
+            "className": "FeatureTask",
+            "min": 1,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.checks.1.message"
+          },
+          {
+            "type": "printed_line_count",
+            "min": 3,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.checks.2.message"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-storage-step-3-report-service",
+      "kind": "code_input",
+      "purpose": "capstone",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.services_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_reporting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.services_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.workspaceFiles.data_tasks_csv_0.content",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_reporting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.solutionFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_report",
+            "args": [
+              [
+                [
+                  [
+                    "title",
+                    "Fix login"
+                  ],
+                  [
+                    "points",
+                    5
+                  ],
+                  [
+                    "done",
+                    true
+                  ],
+                  [
+                    "severity",
+                    "high"
+                  ]
+                ],
+                [
+                  [
+                    "title",
+                    "Add export"
+                  ],
+                  [
+                    "points",
+                    8
+                  ],
+                  [
+                    "done",
+                    false
+                  ],
+                  [
+                    "area",
+                    "reports"
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": "SMART TASK TRACKER REPORT\nTotal tasks: 2\nDone tasks: 1\nOpen tasks: 1\nBUG high: Fix login [done] - 5 pts\nFEATURE reports: Add export [open] - 8 pts",
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.checks.0.message"
+          },
+          {
+            "type": "printed_line_count",
+            "min": 6,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.checks.1.message"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-storage-step-4-save-report",
+      "kind": "code_input",
+      "purpose": "capstone",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_reporting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_reporting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_reporting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.workspaceFiles.data_tasks_csv_0.content",
+            "readOnly": false
+          },
+          {
+            "path": "reports/summary.txt",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.workspaceFiles.reports_summary_txt_1.content",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_reporting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.solutionFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 6,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.checks.0.message"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-storage-step-5-assert-checks",
+      "kind": "code_input",
+      "purpose": "capstone",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_reporting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_reporting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_reporting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "tests/check_tracker.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.workspaceFiles.tests_check_tracker_py_0.content",
+            "readOnly": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.workspaceFiles.data_tasks_csv_1.content",
+            "readOnly": false
+          },
+          {
+            "path": "reports/summary.txt",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.workspaceFiles.reports_summary_txt_2.content",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_reporting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.solutionFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 7,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.checks.0.message"
+          }
+        ]
+      }
+    },
+    {
+      "id": "capstone-storage-step-6-readme-handoff",
+      "kind": "code_input",
+      "purpose": "capstone",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_reporting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/reporting.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_reporting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_task_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.models_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/report_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_report_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/storage_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_storage_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_reporting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "tests/check_tracker.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.workspaceFiles.tests_check_tracker_py_0.content",
+            "readOnly": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.workspaceFiles.data_tasks_csv_1.content",
+            "readOnly": false
+          },
+          {
+            "path": "reports/summary.txt",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.workspaceFiles.reports_summary_txt_2.content",
+            "readOnly": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.workspaceFiles.readme_md_3.content",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/reporting.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_reporting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/task_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_task_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.models_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/report_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_report_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/storage_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.services_storage_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.solutionFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 8,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.checks.0.message"
+          }
+        ]
+      }
+    }
+  ]
+}

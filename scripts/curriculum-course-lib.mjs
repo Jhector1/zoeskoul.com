@@ -2,6 +2,17 @@ function uniqueArgs(args) {
   return args.filter(Boolean);
 }
 
+export function buildValidationBypassArgs(args) {
+  const unsafeSkipValidation = Boolean(args.unsafeSkipValidation);
+
+  return uniqueArgs([
+    args.skipQualityGates || unsafeSkipValidation ? "--skip-quality-gates" : null,
+    args.skipSemantic || unsafeSkipValidation ? "--skip-semantic" : null,
+    args.skipGolden || unsafeSkipValidation ? "--skip-golden" : null,
+    unsafeSkipValidation ? "--unsafe-skip-validation" : null,
+  ]);
+}
+
 export function buildDraftSubjectSlug(subjectSlug, courseSlug) {
   return `${subjectSlug}--${courseSlug}--draft`;
 }
@@ -18,6 +29,7 @@ export function buildCheckCliPlan(args) {
       ...(args.liveSubjectSlug ? ["--live-subject", args.liveSubjectSlug] : []),
       ...(args.resume ? ["--resume"] : []),
       ...(args.forceLiveOverwrite ? ["--force-live-overwrite"] : []),
+      ...buildValidationBypassArgs(args),
     ],
     ["validate-subject", args.subjectSlug],
     ...(args.hasCourseBlueprint

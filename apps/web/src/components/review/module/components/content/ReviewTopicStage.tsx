@@ -27,6 +27,7 @@ type Props = {
     viewCards: ReviewCard[];
     viewTid: string;
     activeCardIndex: number;
+    unlockAll?: boolean;
     maxUnlockedCardIndex?: number;
     progressiveLockMessage?: string | null;
     onLockedNavigate?: () => void;
@@ -78,6 +79,7 @@ export default function ReviewTopicStage({
     viewCards,
     viewTid,
     activeCardIndex,
+    unlockAll = false,
                                              maxUnlockedCardIndex,
                                              progressiveLockMessage,
                                              onLockedNavigate,
@@ -148,6 +150,7 @@ export default function ReviewTopicStage({
                     motionKey={`${viewTid}:${versionStr}`}
                     viewCards={viewCards}
                     activeCardIndex={activeCardIndex}
+                    unlockAll={unlockAll}
                     navModes={navModes}
                     reduceMotion={reduceMotion}
                     tp={tp}

@@ -1,0 +1,1200 @@
+{
+  "topicId": "encapsulation-and-validation",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-encapsulation-and-services",
+  "prefix": "py8",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch0.title",
+      "sketchId": "sketch-encapsulation-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-encapsulation-and-validation-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.prompt",
+        "exerciseKey": "try-encapsulation-and-validation-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch1.title",
+      "sketchId": "sketch-validation-rules",
+      "height": 420,
+      "tryIt": {
+        "id": "try-encapsulation-and-validation-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.prompt",
+        "exerciseKey": "try-encapsulation-and-validation-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch2.title",
+      "sketchId": "sketch-services-and-helpers",
+      "height": 420,
+      "tryIt": {
+        "id": "try-encapsulation-and-validation-sketch2",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.prompt",
+        "exerciseKey": "try-encapsulation-and-validation-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-encapsulation-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-encapsulation-basics.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-encapsulation-basics.bodyMarkdown"
+    },
+    {
+      "id": "sketch-validation-rules",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-validation-rules.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-validation-rules.bodyMarkdown"
+    },
+    {
+      "id": "sketch-services-and-helpers",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-services-and-helpers.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.sketch-services-and-helpers.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-encapsulation-and-validation-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))\nprint(account.deposit(-5))\nprint(account.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))\nprint(account.deposit(-5))\nprint(account.balance)",
+        "solutionFiles": [
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))\nprint(account.deposit(-5))\nprint(account.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define an Account class."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              100
+            ],
+            "message": "Account should be constructible with owner and balance."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              100
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "Store owner and balance as instance attributes."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              100
+            ],
+            "constructorArgKinds": [],
+            "methodName": "deposit",
+            "methodArgs": [
+              25
+            ],
+            "methodArgKinds": [],
+            "expected": true,
+            "expectedKind": "value",
+            "message": "deposit should return True for a positive amount."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              100
+            ],
+            "constructorArgKinds": [],
+            "methodName": "deposit",
+            "methodArgs": [
+              -5
+            ],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "deposit should return False for a negative amount."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Mina",
+              100
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  -5
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 125,
+            "expectedKind": "value",
+            "message": "Balance should change only after the valid deposit."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-encapsulation-and-validation-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/member.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterFiles.models_member_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/member.py",
+          "content": "class Member:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n\n    def update_email(self, new_email):\n        if new_email != \"\":\n            self.email = new_email\n            return \"updated\"\n        return \"invalid\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.member import Member\n\nmember = Member(\"Ava\", \"ava@example.com\")\nprint(member.update_email(\"ava@library.org\"))\nprint(member.update_email(\"\"))\nprint(member.email)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/member.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterFiles.models_member_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.member import Member\n\nmember = Member(\"Ava\", \"ava@example.com\")\nprint(member.update_email(\"ava@library.org\"))\nprint(member.update_email(\"\"))\nprint(member.email)",
+        "solutionFiles": [
+          {
+            "path": "models/member.py",
+            "content": "class Member:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n\n    def update_email(self, new_email):\n        if new_email != \"\":\n            self.email = new_email\n            return \"updated\"\n        return \"invalid\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.member import Member\n\nmember = Member(\"Ava\", \"ava@example.com\")\nprint(member.update_email(\"ava@library.org\"))\nprint(member.update_email(\"\"))\nprint(member.email)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Member",
+            "message": "Define a Member class."
+          },
+          {
+            "type": "constructible",
+            "className": "Member",
+            "constructorArgs": [
+              "Ava",
+              "ava@example.com"
+            ],
+            "message": "Member should be constructible with name and email."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Member",
+            "constructorArgs": [
+              "Ava",
+              "ava@example.com"
+            ],
+            "attributes": [
+              "name",
+              "email"
+            ],
+            "message": "Store name and email as instance attributes."
+          },
+          {
+            "type": "method_returns",
+            "className": "Member",
+            "constructorArgs": [
+              "Ava",
+              "ava@example.com"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "update_email",
+            "methodArgs": [
+              "ava@library.org"
+            ],
+            "methodArgKinds": [],
+            "expected": "updated",
+            "expectedKind": "value",
+            "message": "Return an update status for a valid email."
+          },
+          {
+            "type": "method_returns",
+            "className": "Member",
+            "constructorArgs": [
+              "Ava",
+              "ava@example.com"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "update_email",
+            "methodArgs": [
+              ""
+            ],
+            "methodArgKinds": [],
+            "expected": "invalid",
+            "expectedKind": "value",
+            "message": "Return an invalid status for a blank email."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Member",
+            "constructorArgs": [
+              "Ava",
+              "ava@example.com"
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "update_email",
+                "methodArgs": [
+                  "ava@library.org"
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "update_email",
+                "methodArgs": [
+                  ""
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "email",
+            "expected": "ava@library.org",
+            "expectedKind": "value",
+            "message": "The saved email should remain the last valid value."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-encapsulation-and-validation-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/account_service.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.services_account_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/account_service.py",
+          "content": "def account_status(account):\n    if account.balance == 0:\n        return \"empty\"\n    return \"active\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\nfrom services.account_service import account_status\n\nfirst = Account(\"Noah\", 0)\nsecond = Account(\"Lina\", 40)\nprint(account_status(first))\nprint(account_status(second))",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/account_service.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterFiles.services_account_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\nfrom services.account_service import account_status\n\nfirst = Account(\"Noah\", 0)\nsecond = Account(\"Lina\", 40)\nprint(account_status(first))\nprint(account_status(second))",
+        "solutionFiles": [
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/account_service.py",
+            "content": "def account_status(account):\n    if account.balance == 0:\n        return \"empty\"\n    return \"active\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\nfrom services.account_service import account_status\n\nfirst = Account(\"Noah\", 0)\nsecond = Account(\"Lina\", 40)\nprint(account_status(first))\nprint(account_status(second))",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Keep the Account class available for the service to use."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "account_status",
+            "args": [
+              [
+                [
+                  "owner",
+                  "Noah"
+                ],
+                [
+                  "balance",
+                  0
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": "empty",
+            "expectedKind": "value",
+            "message": "Return empty for a zero-balance account."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "account_status",
+            "args": [
+              [
+                [
+                  "owner",
+                  "Lina"
+                ],
+                [
+                  "balance",
+                  40
+                ]
+              ]
+            ],
+            "argKinds": [
+              "dict_entries"
+            ],
+            "expected": "active",
+            "expectedKind": "value",
+            "message": "Return active for an account with money."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-withdraw-validation",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-withdraw-validation",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-withdraw-validation.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-withdraw-validation.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-withdraw-validation.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Jules\", 60)\nprint(account.withdraw(20))\nprint(account.withdraw(100))\nprint(account.withdraw(-3))\nprint(account.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-withdraw-validation.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-withdraw-validation.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-withdraw-validation.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\naccount = Account(\"Jules\", 60)\nprint(account.withdraw(20))\nprint(account.withdraw(100))\nprint(account.withdraw(-3))\nprint(account.balance)",
+        "solutionFiles": [
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount = Account(\"Jules\", 60)\nprint(account.withdraw(20))\nprint(account.withdraw(100))\nprint(account.withdraw(-3))\nprint(account.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define an Account class."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Jules",
+              60
+            ],
+            "constructorArgKinds": [],
+            "methodName": "withdraw",
+            "methodArgs": [
+              20
+            ],
+            "methodArgKinds": [],
+            "expected": true,
+            "expectedKind": "value",
+            "message": "A valid withdrawal should return True."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Jules",
+              60
+            ],
+            "constructorArgKinds": [],
+            "methodName": "withdraw",
+            "methodArgs": [
+              100
+            ],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "An overdraft attempt should return False."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Jules",
+              60
+            ],
+            "constructorArgKinds": [],
+            "methodName": "withdraw",
+            "methodArgs": [
+              -3
+            ],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "A negative withdrawal should return False."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Account",
+            "constructorArgs": [
+              "Jules",
+              60
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  20
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  100
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  -3
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "balance",
+            "expected": 40,
+            "expectedKind": "value",
+            "message": "Only the valid withdrawal should change the balance."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-account-service-check",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-service-check",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-service-check.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-service-check.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/account_service.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-service-check.starterFiles.services_account_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-service-check.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/account_service.py",
+          "content": "def can_cover(account, cost):\n    return cost <= account.balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\nfrom services.account_service import can_cover\n\naccount = Account(\"Rae\", 75)\nprint(can_cover(account, 50))\nprint(can_cover(account, 90))\nprint(account.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-service-check.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-service-check.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/account_service.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-service-check.starterFiles.services_account_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-service-check.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\nfrom services.account_service import can_cover\n\naccount = Account(\"Rae\", 75)\nprint(can_cover(account, 50))\nprint(can_cover(account, 90))\nprint(account.balance)",
+        "solutionFiles": [
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/account_service.py",
+            "content": "def can_cover(account, cost):\n    return cost <= account.balance",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\nfrom services.account_service import can_cover\n\naccount = Account(\"Rae\", 75)\nprint(can_cover(account, 50))\nprint(can_cover(account, 90))\nprint(account.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Keep the Account class available."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "can_cover",
+            "args": [
+              [
+                "Rae",
+                75
+              ],
+              50
+            ],
+            "argKinds": [],
+            "expected": true,
+            "expectedKind": "value",
+            "message": "Return True when the balance can cover the cost."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "can_cover",
+            "args": [
+              [
+                "Rae",
+                75
+              ],
+              90
+            ],
+            "argKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "Return False when the cost is larger than the balance."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-account-status-method",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-status-method",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-status-method.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/account.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-status-method.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-status-method.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def status(self):\n        if self.balance == 0:\n            return \"empty\"\n        return \"active\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\nfirst = Account(\"Kai\", 0)\nsecond = Account(\"Uma\", 15)\nprint(first.status())\nprint(second.status())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-status-method.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/account.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-status-method.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-account-status-method.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\nfirst = Account(\"Kai\", 0)\nsecond = Account(\"Uma\", 15)\nprint(first.status())\nprint(second.status())",
+        "solutionFiles": [
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def status(self):\n        if self.balance == 0:\n            return \"empty\"\n        return \"active\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\nfirst = Account(\"Kai\", 0)\nsecond = Account(\"Uma\", 15)\nprint(first.status())\nprint(second.status())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define an Account class."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Kai",
+              0
+            ],
+            "message": "Account should be constructible with owner and balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Kai",
+              0
+            ],
+            "constructorArgKinds": [],
+            "methodName": "status",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "empty",
+            "expectedKind": "value",
+            "message": "status should report empty for a zero balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Uma",
+              15
+            ],
+            "constructorArgKinds": [],
+            "methodName": "status",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "active",
+            "expectedKind": "value",
+            "message": "status should report active for a positive balance."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mc-encapsulation-benefits",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.mc-encapsulation-benefits",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc-service-vs-method",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.mc-service-vs-method",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "fb-deposit-condition",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.fb-deposit-condition",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "> 0"
+      }
+    },
+    {
+      "id": "fb-status-return",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.fb-status-return",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "empty"
+      }
+    },
+    {
+      "id": "sc-best-update-pattern",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.sc-best-update-pattern",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "dr-validated-update-flow",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.encapsulation-and-validation.practice.dr-validated-update-flow",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    }
+  ]
+}

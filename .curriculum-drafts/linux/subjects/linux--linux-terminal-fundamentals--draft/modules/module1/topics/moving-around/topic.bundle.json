@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "cd-into-folder",
       "height": 420,
       "tryIt": {
         "id": "try-moving-around-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "cd-up-one-level",
       "height": 420,
       "tryIt": {
         "id": "try-moving-around-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cards.sketch2.title",
-      "sketchId": "sketch-3",
+      "sketchId": "relative-paths",
       "height": 420,
       "tryIt": {
         "id": "try-moving-around-sketch2",
@@ -85,57 +85,39 @@
         "n": 4,
         "min": 4,
         "max": 6,
-        "selectionMode": "random",
-        "allowReveal": true,
-        "preferKind": null,
-        "maxAttempts": null
+        "select": {
+          "purpose": "quiz"
+        }
       }
     }
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "cd-into-folder",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-1.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cd-into-folder.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cd-into-folder.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "cd-up-one-level",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-2.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cd-up-one-level.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.cd-up-one-level.bodyMarkdown"
     },
     {
-      "id": "sketch-3",
+      "id": "relative-paths",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-3.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.relative-paths.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.relative-paths.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "q1",
+      "id": "sc-cd-purpose",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.q1",
-      "optionIds": [
-        "a",
-        "b",
-        "c",
-        "d"
-      ],
-      "expected": {
-        "kind": "single_choice",
-        "optionId": "b"
-      }
-    },
-    {
-      "id": "moving-around-single-choice-2",
-      "kind": "single_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.moving-around-single-choice-2",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.sc-cd-purpose",
       "optionIds": [
         "a",
         "b",
@@ -148,11 +130,28 @@
       }
     },
     {
-      "id": "moving-around-multi-choice-1",
+      "id": "sc-parent-folder",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.sc-parent-folder",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-check-after-cd",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.moving-around-multi-choice-1",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.mc-check-after-cd",
       "optionIds": [
         "a",
         "b",
@@ -168,49 +167,23 @@
       }
     },
     {
-      "id": "moving-around-drag-reorder-1",
+      "id": "dr-navigate-and-check",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.moving-around-drag-reorder-1",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.dr-navigate-and-check",
       "tokenIds": [
         "t1",
         "t2",
-        "t3",
-        "t4"
+        "t3"
       ],
       "expected": {
         "kind": "drag_reorder",
         "tokenIds": [
           "t1",
           "t2",
-          "t3",
-          "t4"
+          "t3"
         ]
-      }
-    },
-    {
-      "id": "q2",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.q2",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": ".."
-      }
-    },
-    {
-      "id": "q3",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.practice.q3",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "print an observable result"
       }
     },
     {
@@ -230,57 +203,60 @@
           "entry": true
         },
         {
-          "path": "navigation-practice/start/welcome.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.navigation_practice_start_welcome_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "navigation-practice/reports/today.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.navigation_practice_reports_today_txt.content",
+          "path": "newsletter/brief.txt",
+          "content": "Community newsletter brief\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "ls\ncd navigation-practice\npwd\n",
+          "content": "cd newsletter\npwd\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "navigation-practice/start/welcome.txt",
-          "content": "Start folder\n",
-          "language": "bash"
-        },
-        {
-          "path": "navigation-practice/reports/today.txt",
-          "content": "Report folder\n",
+          "path": "newsletter/brief.txt",
+          "content": "Community newsletter brief\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "newsletter/brief.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^ls$",
+            "pattern": "\\bcd\\s+newsletter\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^cd\\s+navigation-practice$",
+            "pattern": "\\bpwd\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.terminalExpectations.requiredCommands.1.message"
-          },
-          {
-            "pattern": "^pwd$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.terminalExpectations.requiredCommands.2.message"
           }
         ],
-        "cwdEndsWith": "navigation-practice",
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "newsletter"
       },
       "workspace": {
         "language": "bash",
@@ -295,25 +271,20 @@
             "entry": true
           },
           {
-            "path": "navigation-practice/start/welcome.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.navigation_practice_start_welcome_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "navigation-practice/reports/today.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.navigation_practice_reports_today_txt.content",
+            "path": "newsletter/brief.txt",
+            "content": "Community newsletter brief\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "newsletter/brief.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "navigation-practice/start/welcome.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.navigation_practice_start_welcome_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "navigation-practice/reports/today.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.navigation_practice_reports_today_txt.content",
+            "path": "newsletter/brief.txt",
+            "content": "Community newsletter brief\n",
             "language": "bash"
           }
         ]
@@ -332,17 +303,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace"
       },
       "fixtureFiles": [
         {
-          "path": "navigation-practice/start/welcome.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.navigation_practice_start_welcome_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "navigation-practice/reports/today.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-1.starterFiles.navigation_practice_reports_today_txt.content",
+          "path": "newsletter/brief.txt",
+          "content": "Community newsletter brief\n",
           "language": "bash"
         }
       ]
@@ -364,57 +331,60 @@
           "entry": true
         },
         {
-          "path": "navigation-practice/start/welcome.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.navigation_practice_start_welcome_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "navigation-practice/reports/today.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.navigation_practice_reports_today_txt.content",
+          "path": "library-kit/returns/today.txt",
+          "content": "Three books returned\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "cd navigation-practice/start\npwd\ncd ..\npwd\n",
+          "content": "cd ..\npwd\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "navigation-practice/start/welcome.txt",
-          "content": "Start folder\n",
-          "language": "bash"
-        },
-        {
-          "path": "navigation-practice/reports/today.txt",
-          "content": "Report folder\n",
+          "path": "library-kit/returns/today.txt",
+          "content": "Three books returned\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "library-kit/returns/today.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^cd\\s+navigation-practice/start$",
+            "pattern": "(^|\\s)cd\\s+\\.\\.(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^cd\\s+\\.\\.$",
+            "pattern": "\\bpwd\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.terminalExpectations.requiredCommands.1.message"
-          },
-          {
-            "pattern": "^pwd$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.terminalExpectations.requiredCommands.2.message"
           }
         ],
-        "cwdEndsWith": "navigation-practice",
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "library-kit"
       },
       "workspace": {
         "language": "bash",
@@ -429,25 +399,20 @@
             "entry": true
           },
           {
-            "path": "navigation-practice/start/welcome.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.navigation_practice_start_welcome_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "navigation-practice/reports/today.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.navigation_practice_reports_today_txt.content",
+            "path": "library-kit/returns/today.txt",
+            "content": "Three books returned\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "library-kit/returns/today.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "navigation-practice/start/welcome.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.navigation_practice_start_welcome_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "navigation-practice/reports/today.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.navigation_practice_reports_today_txt.content",
+            "path": "library-kit/returns/today.txt",
+            "content": "Three books returned\n",
             "language": "bash"
           }
         ]
@@ -466,17 +431,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/library-kit/returns"
       },
       "fixtureFiles": [
         {
-          "path": "navigation-practice/start/welcome.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.navigation_practice_start_welcome_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "navigation-practice/reports/today.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-2.starterFiles.navigation_practice_reports_today_txt.content",
+          "path": "library-kit/returns/today.txt",
+          "content": "Three books returned\n",
           "language": "bash"
         }
       ]
@@ -498,56 +459,60 @@
           "entry": true
         },
         {
-          "path": "navigation-practice/start/welcome.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.navigation_practice_start_welcome_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "navigation-practice/reports/today.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.navigation_practice_reports_today_txt.content",
+          "path": "museum-tour/signs/labels.txt",
+          "content": "Entrance\nExit\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "cd navigation-practice/reports\npwd\ncd ~\npwd\n",
+          "content": "cd museum-tour/signs\nls\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "navigation-practice/start/welcome.txt",
-          "content": "Start folder\n",
-          "language": "bash"
-        },
-        {
-          "path": "navigation-practice/reports/today.txt",
-          "content": "Report folder\n",
+          "path": "museum-tour/signs/labels.txt",
+          "content": "Entrance\nExit\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "museum-tour/signs/labels.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^cd\\s+navigation-practice/reports$",
+            "pattern": "\\bcd\\s+museum-tour/signs\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^cd\\s+~$",
+            "pattern": "\\bls\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.terminalExpectations.requiredCommands.1.message"
-          },
-          {
-            "pattern": "^pwd$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.terminalExpectations.requiredCommands.2.message"
           }
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "museum-tour/signs"
       },
       "workspace": {
         "language": "bash",
@@ -562,25 +527,20 @@
             "entry": true
           },
           {
-            "path": "navigation-practice/start/welcome.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.navigation_practice_start_welcome_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "navigation-practice/reports/today.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.navigation_practice_reports_today_txt.content",
+            "path": "museum-tour/signs/labels.txt",
+            "content": "Entrance\nExit\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "museum-tour/signs/labels.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "navigation-practice/start/welcome.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.navigation_practice_start_welcome_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "navigation-practice/reports/today.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.navigation_practice_reports_today_txt.content",
+            "path": "museum-tour/signs/labels.txt",
+            "content": "Entrance\nExit\n",
             "language": "bash"
           }
         ]
@@ -599,17 +559,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace"
       },
       "fixtureFiles": [
         {
-          "path": "navigation-practice/start/welcome.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.navigation_practice_start_welcome_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "navigation-practice/reports/today.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.moving-around.tryIt.exercises.moving-around-try-it-3.starterFiles.navigation_practice_reports_today_txt.content",
+          "path": "museum-tour/signs/labels.txt",
+          "content": "Entrance\nExit\n",
           "language": "bash"
         }
       ]
@@ -617,9 +573,9 @@
   ],
   "topicMeta": {
     "learningGoals": [
-      "Try it yourself: enter a practice folder",
-      "Try it yourself: mark a parent-folder move",
-      "Try it yourself: mark a home-folder shortcut"
+      "Enter the drafts folder",
+      "Go up one folder",
+      "Move through a nested path"
     ]
   },
   "serviceDefaults": {
@@ -629,6 +585,7 @@
       "files": true,
       "multiFile": true,
       "terminal": true
-    }
+    },
+    "terminalCwd": "/workspace"
   }
 }

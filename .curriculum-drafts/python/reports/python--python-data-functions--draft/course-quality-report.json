@@ -3,34 +3,313 @@
   "profileId": "python",
   "subjectSlug": "python--python-data-functions--draft",
   "courseSlug": "python-data-functions",
-  "topicId": "simple-csv-processing",
   "summary": {
-    "modules": 1,
-    "topicsTotal": 1,
-    "exercises": 11,
+    "modules": 4,
+    "topicsTotal": 23,
+    "exercises": 304,
     "exerciseKinds": {
-      "single_choice": 2,
-      "multi_choice": 2,
-      "drag_reorder": 2,
-      "fill_blank_choice": 2,
-      "code_input": 3
+      "single_choice": 38,
+      "multi_choice": 38,
+      "drag_reorder": 38,
+      "fill_blank_choice": 38,
+      "code_input": 152
     },
-    "codeInputs": 3,
-    "projects": 3,
-    "capstones": 3,
+    "codeInputs": 152,
+    "projects": 152,
+    "capstones": 110,
     "thinFixedTestCount": 0,
     "blockers": 0,
     "errors": 0,
-    "warnings": 1,
+    "warnings": 33,
     "infos": 0
   },
   "severityCounts": {
     "blocker": 0,
     "error": 0,
-    "warning": 1,
+    "warning": 33,
     "info": 0
   },
   "issues": [
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/creating-and-indexing-lists",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "creating-and-indexing-lists",
+      "message": "Topic \"creating-and-indexing-lists\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/creating-and-indexing-lists",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "creating-and-indexing-lists",
+      "exerciseId": "ci-print-first-last",
+      "message": "Exercise \"ci-print-first-last\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/creating-and-indexing-lists",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "creating-and-indexing-lists",
+      "exerciseId": "ci-print-second-number",
+      "message": "Exercise \"ci-print-second-number\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/creating-and-indexing-lists",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "creating-and-indexing-lists",
+      "exerciseId": "ci-build-and-show-list",
+      "message": "Exercise \"ci-build-and-show-list\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/list-methods-and-mutation",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "list-methods-and-mutation",
+      "message": "Topic \"list-methods-and-mutation\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/list-methods-and-mutation",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "list-methods-and-mutation",
+      "exerciseId": "ci-1",
+      "message": "Exercise \"ci-1\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/list-methods-and-mutation",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "list-methods-and-mutation",
+      "exerciseId": "ci-2",
+      "message": "Exercise \"ci-2\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/list-methods-and-mutation",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "list-methods-and-mutation",
+      "exerciseId": "ci-3",
+      "message": "Exercise \"ci-3\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/looping-through-lists",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "looping-through-lists",
+      "message": "Topic \"looping-through-lists\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-list-basics/looping-through-lists",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "looping-through-lists",
+      "exerciseId": "ci-print-each-item",
+      "message": "Exercise \"ci-print-each-item\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-dictionaries/dictionary-basics",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "dictionary-basics",
+      "message": "Topic \"dictionary-basics\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-dictionaries/updating-and-looping-dictionaries",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "updating-and-looping-dictionaries",
+      "message": "Topic \"updating-and-looping-dictionaries\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-dictionaries/nested-data-structures",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "nested-data-structures",
+      "message": "Topic \"nested-data-structures\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-5-lists-tuples-and-dictionaries/python-5-module-project/module-5-gradebook-project",
+      "profileId": "python",
+      "moduleId": "python-5-lists-tuples-and-dictionaries",
+      "topicId": "module-5-gradebook-project",
+      "message": "Topic \"module-5-gradebook-project\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-basics/defining-and-calling-functions",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "defining-and-calling-functions",
+      "message": "Topic \"defining-and-calling-functions\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-basics/parameters-and-return-values",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "parameters-and-return-values",
+      "message": "Topic \"parameters-and-return-values\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-basics/print-vs-return",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "print-vs-return",
+      "message": "Topic \"print-vs-return\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-design/scope-and-local-variables",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "scope-and-local-variables",
+      "message": "Topic \"scope-and-local-variables\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-design/decomposition-and-refactoring",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "decomposition-and-refactoring",
+      "message": "Topic \"decomposition-and-refactoring\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-design/using-imports-and-helper-files",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "using-imports-and-helper-files",
+      "message": "Topic \"using-imports-and-helper-files\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-function-design/docstrings-and-function-contracts",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "docstrings-and-function-contracts",
+      "message": "Topic \"docstrings-and-function-contracts\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-6-functions-and-modularity/python-6-module-project/module-6-name-badge-package",
+      "profileId": "python",
+      "moduleId": "python-6-functions-and-modularity",
+      "topicId": "module-6-name-badge-package",
+      "message": "Topic \"module-6-name-badge-package\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-7-files-exceptions-and-data-cleaning/python-7-file-io/reading-text-files",
+      "profileId": "python",
+      "moduleId": "python-7-files-exceptions-and-data-cleaning",
+      "topicId": "reading-text-files",
+      "message": "Topic \"reading-text-files\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-7-files-exceptions-and-data-cleaning/python-7-file-io/writing-text-files",
+      "profileId": "python",
+      "moduleId": "python-7-files-exceptions-and-data-cleaning",
+      "topicId": "writing-text-files",
+      "message": "Topic \"writing-text-files\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-7-files-exceptions-and-data-cleaning/python-7-file-io/working-with-paths",
+      "profileId": "python",
+      "moduleId": "python-7-files-exceptions-and-data-cleaning",
+      "topicId": "working-with-paths",
+      "message": "Topic \"working-with-paths\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-7-files-exceptions-and-data-cleaning/python-7-exceptions-and-cleaning/try-except-basics",
+      "profileId": "python",
+      "moduleId": "python-7-files-exceptions-and-data-cleaning",
+      "topicId": "try-except-basics",
+      "message": "Topic \"try-except-basics\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-7-files-exceptions-and-data-cleaning/python-7-exceptions-and-cleaning/try-except-basics",
+      "profileId": "python",
+      "moduleId": "python-7-files-exceptions-and-data-cleaning",
+      "topicId": "try-except-basics",
+      "exerciseId": "q9",
+      "message": "Exercise \"q9\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-7-files-exceptions-and-data-cleaning/python-7-exceptions-and-cleaning/try-except-basics",
+      "profileId": "python",
+      "moduleId": "python-7-files-exceptions-and-data-cleaning",
+      "topicId": "try-except-basics",
+      "exerciseId": "q10",
+      "message": "Exercise \"q10\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "STARTER_MAY_REVEAL_SOLUTION_STRUCTURE",
+      "severity": "warning",
+      "path": "python-7-files-exceptions-and-data-cleaning/python-7-exceptions-and-cleaning/try-except-basics",
+      "profileId": "python",
+      "moduleId": "python-7-files-exceptions-and-data-cleaning",
+      "topicId": "try-except-basics",
+      "exerciseId": "q11",
+      "message": "Exercise \"q11\" starterCode appears to contain most of the final solution structure."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-7-files-exceptions-and-data-cleaning/python-7-exceptions-and-cleaning/validating-and-cleaning-input",
+      "profileId": "python",
+      "moduleId": "python-7-files-exceptions-and-data-cleaning",
+      "topicId": "validating-and-cleaning-input",
+      "message": "Topic \"validating-and-cleaning-input\" has no learning goals on its seed metadata."
+    },
     {
       "code": "MISSING_TOPIC_LEARNING_GOALS",
       "severity": "warning",
@@ -39,6 +318,24 @@
       "moduleId": "python-7-files-exceptions-and-data-cleaning",
       "topicId": "simple-csv-processing",
       "message": "Topic \"simple-csv-processing\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-7-files-exceptions-and-data-cleaning/python-7-module-project/module-7-clean-student-records",
+      "profileId": "python",
+      "moduleId": "python-7-files-exceptions-and-data-cleaning",
+      "topicId": "module-7-clean-student-records",
+      "message": "Topic \"module-7-clean-student-records\" has no learning goals on its seed metadata."
+    },
+    {
+      "code": "MISSING_TOPIC_LEARNING_GOALS",
+      "severity": "warning",
+      "path": "python-8-real-world-project/python-8-course-capstone/class-roster-cleaner",
+      "profileId": "python",
+      "moduleId": "python-8-real-world-project",
+      "topicId": "class-roster-cleaner",
+      "message": "Topic \"class-roster-cleaner\" has no learning goals on its seed metadata."
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "profileId": "python",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "courseSlug": "applied-python-projects",
+  "moduleSlug": "python-11-oop-capstone-project",
+  "sectionSlug": "python-11-capstone-services-and-polish",
+  "topicId": "capstone-storage-and-reports",
+  "provider": "openai",
+  "model": "gpt-5.4",
+  "temperature": 0,
+  "modelSeed": 0,
+  "generatorVersion": "2026-05-23-topic-authoring-draft-generator-v1",
+  "schemaName": "TopicAuthoringDraft",
+  "schemaVersion": "2026-05-23-topic-authoring-draft-v1",
+  "strictSchema": true,
+  "retryAttempt": 0,
+  "maxRetries": 2
+}

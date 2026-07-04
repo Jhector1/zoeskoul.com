@@ -1,0 +1,116 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "inheritance-for-shared-behavior": {
+          "label": "Inheritance for Shared Behavior",
+          "summary": "Use a parent class for behavior that several related classes should share.",
+          "cards": {
+            "sketch0": {
+              "title": "Inheritance for Shared Behavior: the idea"
+            },
+            "sketch1": {
+              "title": "Inheritance for Shared Behavior: the file shape"
+            },
+            "sketch2": {
+              "title": "Inheritance for Shared Behavior: what the grader checks"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "ci_membership_practice": {
+              "title": "Share membership behavior with subclasses"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_inheritance_for_shared_behavior_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Complete `Book` so it inherits from `LibraryItem` without rewriting `summary()`."
+            },
+            "try_inheritance_for_shared_behavior_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Create `models/video.py` as another `LibraryItem` subclass with a `minutes` attribute."
+            }
+          },
+          "quiz": {
+            "ci-membership-practice": {
+              "title": "Share membership behavior with subclasses",
+              "prompt": "Complete `PremiumMember` as a subclass of `Member` and keep the inherited greeting.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.premium_member import PremiumMember\n\nmember = PremiumMember(\"Kai\", 3)\nprint(member.greeting())\nprint(member.bonus_points)\n"
+            },
+            "sc-inheritance-for-shared-behavior-design": {
+              "title": "Check the design choice",
+              "prompt": "Which choice best matches the lesson goal for inheritance for shared behavior?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Use a parent class for behavior that several related classes should share.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Put every class in main.py so imports are never needed.",
+                "b": "Give each class or service a focused responsibility and import it where needed.",
+                "c": "Avoid methods so every object exposes all of its data directly.",
+                "d": "Copy the same logic into each subclass to avoid shared code."
+              }
+            },
+            "try-inheritance-for-shared-behavior-sketch0": {
+              "title": "Create a subclass that inherits shared behavior",
+              "prompt": "Complete `Book` so it inherits from `LibraryItem` without rewriting `summary()`.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book import Book\n\nbook = Book(\"Python Basics\", \"Ana\")\nprint(book.summary())\n"
+            },
+            "try-inheritance-for-shared-behavior-sketch1": {
+              "title": "Add a Video subclass file",
+              "prompt": "Create `models/video.py` as another `LibraryItem` subclass with a `minutes` attribute.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "In a multi-file project, each file should own one clear responsibility and imports should connect those responsibilities.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.video import Video\n\nvideo = Video(\"OOP Tour\", 12)\nprint(video.summary())\nprint(video.minutes)\n"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "inheritance-for-shared-behavior": {
+          "concept": {
+            "title": "Inheritance for Shared Behavior: the idea",
+            "bodyMarkdown": "**Inheritance for Shared Behavior** is not just syntax. In this course it is practiced inside small projects where one file owns one clear part of the program. Use a parent class for behavior that several related classes should share."
+          },
+          "multifile-shape": {
+            "title": "Inheritance for Shared Behavior: the file shape",
+            "bodyMarkdown": "The file layout matters. Models hold object state and behavior, services coordinate groups of objects, tests verify behavior, and `main.py` stays thin enough to read."
+          },
+          "graded-habit": {
+            "title": "Inheritance for Shared Behavior: what the grader checks",
+            "bodyMarkdown": "The grader checks behavior from the running project. A strong answer keeps imports working, keeps all files present, and proves the object behavior through output or assertions."
+          }
+        }
+      }
+    }
+  }
+}

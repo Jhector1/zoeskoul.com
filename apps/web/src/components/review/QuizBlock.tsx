@@ -46,6 +46,10 @@ import {
     computeReviewQuizCompletionSummary,
     shouldAutoCompleteReviewCard
 } from "@/components/review/quiz/reviewQuizCompletion";
+import {
+    flushBeforeExerciseRouteNavigation,
+    resolveReviewPracticeCompletionStatus,
+} from "@/components/review/quiz/projectPracticeCompletion";
 
 const LS_AUTO_ADV = "learnoir.quiz.autoAdvance";
 type PracticeRuntimeQuestion = Extract<ReviewQuestion, { kind: "practice" }> &
@@ -792,23 +796,96 @@ export default function QuizBlock({
     const stablePracticeKey = getStablePracticeQuestionKey(q);
     return practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id] ?? null;
   }
+
+  function getSavedPracticeRestoreKeys(q: ReviewQuestion) {
+    if (q.kind !== "practice") return [q.id];
+
+    const practiceQuestion = q as PracticeRuntimeQuestion;
+    const fetch = practiceQuestion.fetch ?? {};
+    const stablePracticeKey = getStablePracticeQuestionKey(q);
+
+    return Array.from(
+      new Set(
+        [
+          stablePracticeKey,
+          stablePracticeKey === q.id ? q.id : null,
+          fetch.exerciseKey,
+          fetch.stepId,
+          practiceQuestion.exerciseKey,
+          practiceQuestion.stepId,
+          practiceQuestion.sourceStepId,
+          practiceQuestion.item?.exerciseKey,
+          practiceQuestion.item?.id,
+          practiceQuestion.exercise?.exerciseKey,
+          practiceQuestion.exercise?.id,
+        ]
+          .map((value) => String(value ?? "").trim())
+          .filter(Boolean),
+      ),
+    );
+  }
+
+  function getSavedPracticeCompletion(q: ReviewQuestion) {
+    const restoreKeys = getSavedPracticeRestoreKeys(q);
+
+    for (const key of restoreKeys) {
+      const savedMeta = initState?.practiceMeta?.[key] ?? null;
+      const savedPatch = initState?.practiceItemPatch?.[key] as
+        | PracticeItemRecord
+        | undefined;
+      const savedItemResultOk =
+        typeof savedPatch?.result?.ok === "boolean"
+          ? savedPatch.result.ok
+          : null;
+
+      if (savedMeta || typeof savedItemResultOk === "boolean") {
+        return {
+          savedMeta,
+          savedItemResultOk,
+        };
+      }
+    }
+
+    return {
+      savedMeta: null,
+      savedItemResultOk: null,
+    };
+  }
+
+  function getPracticeCompletionStatus(q: ReviewQuestion) {
+    const ps = getPracticeStateForQuestion(q);
+    const liveItemResultOk =
+      typeof (ps?.item as PracticeItemRecord | undefined)?.result?.ok ===
+      "boolean"
+        ? Boolean((ps?.item as PracticeItemRecord).result?.ok)
+        : null;
+    const saved = getSavedPracticeCompletion(q);
+
+    return resolveReviewPracticeCompletionStatus({
+      live: ps
+        ? {
+            attempts: ps.attempts,
+            ok: ps.ok,
+            itemResultOk: liveItemResultOk,
+          }
+        : null,
+      saved: saved.savedMeta,
+      savedItemResultOk: saved.savedItemResultOk,
+    });
+  }
     function isFlowDone(q: ReviewQuestion): boolean {
         if (isExcused(q.id)) return true;
 
         if (q.kind === "practice") {
             const ps = getPracticeStateForQuestion(q);
-
-            const itemResult = (ps?.item as PracticeItemRecord | undefined)?.result;
-            const resultOk = itemResult?.ok === true;
+            const completion = getPracticeCompletionStatus(q);
 
             /**
-             * Keep this in sync with QuizPracticeCard.
-             * The card may show "Correct" from ps.item.result.ok before ps.ok
-             * has been promoted into the saved practice state.
+             * Keep this in sync with QuizPracticeCard and saved project state.
+             * Route-owned project steps are not all mounted at the same time,
+             * so inactive steps must still count from persisted metadata.
              */
-            const isCorrect = ps?.ok === true || resultOk;
-
-            if (isCorrect) return true;
+            if (completion.ok === true) return true;
 
             const maxA = ps?.maxAttempts;
             const outOfAttempts =
@@ -841,27 +918,16 @@ export default function QuizBlock({
         }
 
         if (q.kind === "practice") {
-            const ps = getPracticeStateForQuestion(q);
-            if (!ps) return null;
-
-            const itemResult = (ps.item as PracticeItemRecord | undefined)?.result;
-
-            if (typeof itemResult?.ok === "boolean") {
-                return itemResult.ok;
-            }
-
-            if (typeof ps.ok === "boolean") {
-                return ps.ok;
-            }
-
-            return null;
+            return getPracticeCompletionStatus(q).ok;
         }
 
         return null;
     }
   function isQuestionChecked(q: ReviewQuestion): boolean {
     if (isExcused(q.id)) return true;
-    if (q.kind === "practice") return practiceBank.isPracticeChecked(q);
+    if (q.kind === "practice") {
+      return getPracticeCompletionStatus(q).checked;
+    }
     return Boolean(local.checkedById[q.id]);
   }
     function isUnlocked(index: number): boolean {
@@ -946,6 +1012,8 @@ export default function QuizBlock({
         practiceBank.practice,
         passScore,
         excusedById,
+        initState?.practiceMeta,
+        initState?.practiceItemPatch,
     ]);  
     useEffect(() => {
         if (
@@ -1360,9 +1428,13 @@ export default function QuizBlock({
     ) {
       const nextExerciseId = getPracticeRouteExerciseId(nextQuestion);
       if (nextExerciseId) {
-        onNavigateToExerciseRoute({
-          cardId: quizCardId ?? quizId,
-          exerciseId: nextExerciseId,
+        void flushBeforeExerciseRouteNavigation({
+          flush: () => emitterFlushRef.current(),
+          navigate: () =>
+            onNavigateToExerciseRoute({
+              cardId: quizCardId ?? quizId,
+              exerciseId: nextExerciseId,
+            }),
         });
         return true;
       }
@@ -1468,6 +1540,12 @@ export default function QuizBlock({
     emitterFlushRef.current = () => emitter.flush();
   }, [emitter.flush]);
 
+  useEffect(() => {
+    return () => {
+      emitterFlushRef.current();
+    };
+  }, []);
+
   useLayoutEffect(() => {
     emitter.prime({
       answers: initState?.answers ?? {},
@@ -1523,7 +1601,7 @@ export default function QuizBlock({
   if (!questions.length) {
     return (
         <div className="mt-2 ui-quiz-status-soft">
-          {ui.t("noQuestions")}
+          {ui.t("noQuestions", {}, "No questions.")}
         </div>
     );
   }
@@ -1680,7 +1758,9 @@ export default function QuizBlock({
                       else advanceFrom(q.id);
                     }}
                 >
-                  {isLast ? ui.t("buttons.finish") : ui.t("buttons.next")}
+                  {isLast
+                      ? ui.t("buttons.finish", {}, "Finish →")
+                      : ui.t("buttons.next", {}, "Next →")}
                 </button>
               </div>
           ) : null}
@@ -1703,6 +1783,7 @@ export default function QuizBlock({
                 ui.t(
                     "progress.question",
                     { current: index + 1, total },
+                    `Question ${index + 1} of ${total}`,
                 )
             }
             canGoPrev={activeIndex > 0}
@@ -1735,7 +1816,7 @@ export default function QuizBlock({
                       setAutoAdvance(e.target.checked);
                     }}
                 />
-                {ui.t("autoAdvance")}
+                {ui.t("autoAdvance", {}, "Auto-advance")}
               </label>
             </div>
 
@@ -1755,18 +1836,36 @@ export default function QuizBlock({
             open={confirmResetQuiz}
             onOpenChange={setConfirmResetQuiz}
             danger
-            title={ui.t("resetDialog.title")}
-            confirmLabel={ui.t("resetDialog.confirm")}
+            title={ui.t("resetDialog.title", {}, "Reset this quiz?")}
+            confirmLabel={ui.t("resetDialog.confirm", {}, "Reset quiz")}
             description={
               <div className="grid gap-2">
-                <div>{ui.t("resetDialog.intro")}</div>
+                <div>{ui.t("resetDialog.intro", {}, "This will:")}</div>
                 <ul className="list-disc space-y-1 pl-5">
-                  <li>{ui.t("resetDialog.b1")}</li>
-                  <li>{ui.t("resetDialog.b2")}</li>
-                  <li>{ui.t("resetDialog.b3")}</li>
+                  <li>
+                    {ui.t(
+                        "resetDialog.b1",
+                        {},
+                        "Clear your selected answers and checked status.",
+                    )}
+                  </li>
+                  <li>
+                    {ui.t(
+                        "resetDialog.b2",
+                        {},
+                        "Clear practice attempts and local state for this quiz.",
+                    )}
+                  </li>
+                  <li>
+                    {ui.t(
+                        "resetDialog.b3",
+                        {},
+                        "Reload the same question set (it does not generate a new set).",
+                    )}
+                  </li>
                 </ul>
                 <div className="ui-quiz-dialog-note">
-                  {ui.t("resetDialog.cannotUndo")}
+                  {ui.t("resetDialog.cannotUndo", {}, "This can’t be undone.")}
                 </div>
               </div>
             }

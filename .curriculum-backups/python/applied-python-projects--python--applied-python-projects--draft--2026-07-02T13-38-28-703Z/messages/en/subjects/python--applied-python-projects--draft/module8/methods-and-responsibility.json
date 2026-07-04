@@ -1,0 +1,245 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "methods-and-responsibility": {
+          "label": "Methods and Responsibility",
+          "summary": "Add `deposit`, `withdraw`, and `summary` so one Account object manages its own state while `main.py` stays small.",
+          "cards": {
+            "sketch0": {
+              "title": "A method belongs to the object"
+            },
+            "sketch1": {
+              "title": "A method changes `self.balance`"
+            },
+            "sketch2": {
+              "title": "A method can return a readable summary"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_methods_and_responsibility_sketch0": {
+              "title": "Add a deposit method",
+              "prompt": "In `models/account.py`, finish `deposit(self, amount)` so it adds the amount to `self.balance` and returns the new balance. `main.py` already creates `Account(\"Mina\", 100)` and prints `account.deposit(25)`.",
+              "hint": "Update the stored balance inside the method, then return it.",
+              "help": {
+                "concept": "A method belongs on the class because it updates one object's own stored data.",
+                "hint_1": "Use `self.balance += amount`.",
+                "hint_2": "Return `self.balance` after the update."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should still accept owner and balance."
+                },
+                "2": {
+                  "message": "Keep owner and balance stored on the object."
+                },
+                "3": {
+                  "message": "deposit should return the updated balance."
+                },
+                "4": {
+                  "message": "Print one result from main.py."
+                }
+              }
+            },
+            "try_methods_and_responsibility_sketch1": {
+              "title": "Add a withdraw method",
+              "prompt": "Keep `deposit`. Now finish `withdraw(self, amount)` so it subtracts the amount from `self.balance` and returns the new balance. `main.py` already prints `account.withdraw(30)` for `Account(\"Leo\", 120)`.",
+              "hint": "This method should update the same `self.balance` attribute.",
+              "help": {
+                "concept": "The object should own both balance-changing actions, not `main.py`.",
+                "hint_1": "Use `self.balance -= amount`.",
+                "hint_2": "Return the new balance after subtracting."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Leo\", 120)\nprint(account.withdraw(30))",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Leo\", 120)\nprint(account.withdraw(30))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Leo\", 120)\nprint(account.withdraw(30))"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance"
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Leo\", 120)\nprint(account.withdraw(30))",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Keep the constructor in place."
+                },
+                "2": {
+                  "message": "withdraw should subtract from the stored balance and return it."
+                },
+                "3": {
+                  "message": "Print the withdrawal result."
+                }
+              }
+            },
+            "try_methods_and_responsibility_sketch2": {
+              "title": "Add a summary method",
+              "prompt": "In `models/account.py`, finish `summary(self)` so it returns text in this format: `Ava: $80`. `main.py` already creates `Account(\"Ava\", 80)` and prints `account.summary()`.",
+              "hint": "Build one string from `self.owner` and `self.balance`.",
+              "help": {
+                "concept": "A method can also return readable information based on the object's current state.",
+                "hint_1": "Use the stored owner and balance values.",
+                "hint_2": "Return the string instead of printing inside the method."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 80)\nprint(account.summary())",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 80)\nprint(account.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance\n\n    def summary(self):\n        pass"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Ava\", 80)\nprint(account.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Ava\", 80)\nprint(account.summary())",
+              "checks": {
+                "0": {
+                  "message": "Define the Account class."
+                },
+                "1": {
+                  "message": "Account should accept owner and balance."
+                },
+                "2": {
+                  "message": "summary should return the requested account text."
+                },
+                "3": {
+                  "message": "Print the returned summary."
+                }
+              }
+            }
+          },
+          "practice": {
+            "mc-methods-and-responsibility-class-jobs": {
+              "title": "Which jobs belong on the class?",
+              "prompt": "Which behaviors best belong on the `Account` class in this topic? Choose all that apply.",
+              "hint": "Pick the jobs that directly use one account's own state.",
+              "help": {
+                "concept": "Class methods should read or change one object's own attributes.",
+                "hint_1": "Look for the answers about one account's balance or summary.",
+                "hint_2": "Reject the answers about starting the whole program."
+              },
+              "options": {
+                "a": "Choosing which accounts the whole app should create",
+                "b": "Depositing money into one account",
+                "c": "Returning a summary for one account",
+                "d": "Printing a welcome banner before any objects exist"
+              }
+            },
+            "sc-methods-and-responsibility-main-role": {
+              "title": "What should `main.py` mostly do?",
+              "prompt": "In this topic, what is the best role for `main.py`?",
+              "hint": "Think small: create objects, call methods, print results.",
+              "help": {
+                "concept": "`main.py` should coordinate the program by using the class instead of doing the class's work by hand.",
+                "hint_1": "Look for the answer about calling class methods.",
+                "hint_2": "Reject the answer that makes main.py store all balance logic directly."
+              },
+              "options": {
+                "a": "Store all account rules directly in top-level variables",
+                "b": "Create objects, call methods, and print results",
+                "c": "Replace the class with repeated balance math",
+                "d": "Avoid using the Account class at all"
+              }
+            },
+            "fb-methods-and-responsibility-call-name": {
+              "title": "Complete the method call",
+              "prompt": "Fill in the missing method name so the account subtracts money from its own balance.",
+              "hint": "Use the method from this topic that removes money.",
+              "help": {
+                "concept": "Method calls keep balance logic on the object.",
+                "hint_1": "The object name is already written.",
+                "hint_2": "Choose the balance-lowering method, not the reporting one."
+              },
+              "template": "account.[blank1](30)",
+              "choices": [
+                "withdraw",
+                "summary",
+                "__init__",
+                "print"
+              ]
+            },
+            "dr-methods-and-responsibility-flow": {
+              "title": "Order the workflow",
+              "prompt": "Put these steps in the best order for a simple account program.",
+              "hint": "Create the object before asking it to change or report its state.",
+              "help": {
+                "concept": "A clean flow is: create the object, call a mutating method, call a reporting method, then print the result.",
+                "hint_1": "The object must exist before any method call happens.",
+                "hint_2": "Printing comes after the value has been returned."
+              },
+              "tokens": {
+                "t1": "Create an Account object",
+                "t2": "Call `deposit()` or `withdraw()`",
+                "t3": "Call `summary()`",
+                "t4": "Print the returned text"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "methods-and-responsibility": {
+          "sketch-0": {
+            "title": "A method belongs to the object",
+            "bodyMarkdown": "A method is a function that belongs to the class and works with one object's data.\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n```\n\n`deposit()` belongs on the object because it changes that object's own balance."
+          },
+          "sketch-1": {
+            "title": "A method changes `self.balance`",
+            "bodyMarkdown": "`self.balance` is the value stored on that object.\n\n```python\naccount = Account(\"Noor\", 140)\naccount.withdraw(20)\nprint(account.balance)\n```\n\nThe method uses `self` so it updates the object it was called on."
+          },
+          "sketch-2": {
+            "title": "A method can return a readable summary",
+            "bodyMarkdown": "Methods do not always change state. Some methods return readable information.\n\n```python\ndef summary(self):\n    return f\"{self.owner}: ${self.balance}\"\n```\n\nNow the account object knows how to describe itself, and `main.py` can stay small:\n\n```python\nprint(account.summary())\n```"
+          }
+        }
+      }
+    }
+  }
+}

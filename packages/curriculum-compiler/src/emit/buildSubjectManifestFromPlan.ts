@@ -42,6 +42,10 @@ export function buildSubjectManifestFromPlan(args: {
 
     const modules: SubjectModuleManifest[] = plan.modules.map((module) => {
         const moduleIndex = moduleOrderToIndex(module.order);
+        const logicalModuleNumber =
+            typeof module.moduleNumber === "number" && Number.isFinite(module.moduleNumber)
+                ? module.moduleNumber
+                : moduleIndex;
         const logicalModuleSlug = module.moduleSlug;
         const resolvedRuntimePolicy = resolveModuleRuntimePolicy({
             blueprint,
@@ -53,7 +57,7 @@ export function buildSubjectManifestFromPlan(args: {
         });
         const workspacePolicy = resolveWorkspacePolicy({
             blueprint,
-            moduleNumber: moduleIndex,
+            moduleNumber: logicalModuleNumber,
         });
 
         const workspaceRuntimeDefaults = workspaceToRuntimeDefaults({

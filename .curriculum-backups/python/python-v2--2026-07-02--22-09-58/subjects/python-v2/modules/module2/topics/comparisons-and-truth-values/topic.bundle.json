@@ -1,0 +1,999 @@
+{
+  "topicId": "comparisons-and-truth-values",
+  "subjectSlug": "python-v2",
+  "moduleSlug": "python-v2-2",
+  "sectionSlug": "python-v2-python-v2-2-conditional-basics",
+  "prefix": "pyv2_2",
+  "minutes": 22,
+  "topic": {
+    "labelKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.label",
+    "summaryKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.cards.sketch0.title",
+      "sketchId": "compare-operators",
+      "height": 420,
+      "tryIt": {
+        "id": "try-comparisons-and-truth-values-sketch0",
+        "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.title",
+        "promptKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.prompt",
+        "exerciseKey": "ci-print-comparisons",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.cards.sketch1.title",
+      "sketchId": "truth-values-in-conditions",
+      "height": 420,
+      "tryIt": {
+        "id": "try-comparisons-and-truth-values-sketch1",
+        "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.title",
+        "promptKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.prompt",
+        "exerciseKey": "ci-age-check",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.cards.sketch2.title",
+      "sketchId": "truthiness-basics",
+      "height": 420,
+      "tryIt": {
+        "id": "try-comparisons-and-truth-values-sketch2",
+        "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.title",
+        "promptKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.prompt",
+        "exerciseKey": "ci-number-sign",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_print_comparisons",
+            "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.projectSteps.ci_print_comparisons.title",
+            "exerciseKey": "ci-print-comparisons",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_age_check",
+            "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.projectSteps.ci_age_check.title",
+            "exerciseKey": "ci-age-check",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_number_sign",
+            "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.projectSteps.ci_number_sign.title",
+            "exerciseKey": "ci-number-sign",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_name_truthy",
+            "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.projectSteps.ci_name_truthy.title",
+            "exerciseKey": "ci-name-truthy",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "ci_max_of_two",
+            "titleKey": "topics.python-v2.python-v2-2.comparisons-and-truth-values.projectSteps.ci_max_of_two.title",
+            "exerciseKey": "ci-max-of-two",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "compare-operators",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.compare-operators.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.compare-operators.bodyMarkdown"
+    },
+    {
+      "id": "truth-values-in-conditions",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.truth-values-in-conditions.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.truth-values-in-conditions.bodyMarkdown"
+    },
+    {
+      "id": "truthiness-basics",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.truthiness-basics.title",
+      "bodyKey": "sketches.python-v2.python-v2-2.comparisons-and-truth-values.truthiness-basics.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-compare-equal",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.sc-compare-equal",
+      "optionIds": [
+        "a",
+        "b",
+        "c"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc-truthy-string",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.sc-truthy-string",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "d"
+      }
+    },
+    {
+      "id": "mc-true-comparisons",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.mc-true-comparisons",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "mc-falsey-values",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.mc-falsey-values",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "dr-check-age-order",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.dr-check-age-order",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "dr-compare-then-print",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.dr-compare-then-print",
+      "tokenIds": [
+        "t1",
+        "t2"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2"
+        ]
+      }
+    },
+    {
+      "id": "fb-greater-equal",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.fb-greater-equal",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": ">="
+      }
+    },
+    {
+      "id": "fb-empty-string",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.fb-empty-string",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "\"Ava\""
+      }
+    },
+    {
+      "id": "ci-print-comparisons",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "True\nFalse\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "",
+            "stdout": "True\nFalse\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "print(8 > 3)\nprint(8 == 10)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(8 > 3)\nprint(8 == 10)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "print(8 > 3)\nprint(8 == 10)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-print-comparisons.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "print(8 > 3)\nprint(8 == 10)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "ci-age-check",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "18\n",
+            "stdout": "adult\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "12\n",
+            "stdout": "minor\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "age = int(input())\n\nif age >= 18:\n    print(\"adult\")\nelse:\n    print(\"minor\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "age = int(input())\n\nif age >= 18:\n    print(\"adult\")\nelse:\n    print(\"minor\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct output.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the input to an integer before doing the number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bage\\b",
+            "message": "Use the variable name `age` in your solution."
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "age = int(input())\n\nif age >= 18:\n    print(\"adult\")\nelse:\n    print(\"minor\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-age-check.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "age = int(input())\n\nif age >= 18:\n    print(\"adult\")\nelse:\n    print(\"minor\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct output.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the input to an integer before doing the number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bage\\b",
+          "message": "Use the variable name `age` in your solution."
+        }
+      ]
+    },
+    {
+      "id": "ci-number-sign",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "7\n",
+            "stdout": "positive\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "0\n",
+            "stdout": "zero\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "-2\n",
+            "stdout": "negative\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n == 0:\n    print(\"zero\")\nelse:\n    print(\"negative\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n == 0:\n    print(\"zero\")\nelse:\n    print(\"negative\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct output.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "elif ",
+            "message": "Use elif for the middle case in this exercise.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the input to an integer before doing the number work.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bn\\b",
+            "message": "Use the variable name `n` in your solution."
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n == 0:\n    print(\"zero\")\nelse:\n    print(\"negative\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-number-sign.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "n = int(input())\n\nif n > 0:\n    print(\"positive\")\nelif n == 0:\n    print(\"zero\")\nelse:\n    print(\"negative\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct output.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "elif ",
+          "message": "Use elif for the middle case in this exercise.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the input to an integer before doing the number work.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bn\\b",
+          "message": "Use the variable name `n` in your solution."
+        }
+      ]
+    },
+    {
+      "id": "ci-name-truthy",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "Mia\n",
+            "stdout": "Hello\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\n",
+            "stdout": "No name\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "name = input()\n\nif name:\n    print(\"Hello\")\nelse:\n    print(\"No name\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input()\n\nif name:\n    print(\"Hello\")\nelse:\n    print(\"No name\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct output.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\bname\\b",
+            "message": "Use the variable name `name` in your solution."
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "name = input()\n\nif name:\n    print(\"Hello\")\nelse:\n    print(\"No name\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-name-truthy.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "name = input()\n\nif name:\n    print(\"Hello\")\nelse:\n    print(\"No name\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct output.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\bname\\b",
+          "message": "Use the variable name `name` in your solution."
+        }
+      ]
+    },
+    {
+      "id": "ci-max-of-two",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two",
+      "language": "python",
+      "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.starterCode",
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "9\n4\n",
+            "stdout": "9\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "3\n8\n",
+            "stdout": "8\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "5\n5\n",
+            "stdout": "5\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "a = int(input())\nb = int(input())\n\nif a >= b:\n    print(a)\nelse:\n    print(b)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\n\nif a >= b:\n    print(a)\nelse:\n    print(b)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "print(",
+            "message": "Use print(...) to show the required result.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "input(",
+            "message": "Read the needed value with input() instead of hard-coding the answer.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "if ",
+            "message": "Use an if statement to choose the correct output.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "else:",
+            "message": "Include an else branch for the remaining case.",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "int(",
+            "message": "Convert the input to an integer before doing the number work.",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "a = int(input())\nb = int(input())\n\nif a >= b:\n    print(a)\nelse:\n    print(b)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-v2.python-v2-2.comparisons-and-truth-values.quiz.ci-max-of-two.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\n\nif a >= b:\n    print(a)\nelse:\n    print(b)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "print(",
+          "message": "Use print(...) to show the required result.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "input(",
+          "message": "Read the needed value with input() instead of hard-coding the answer.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "if ",
+          "message": "Use an if statement to choose the correct output.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "else:",
+          "message": "Include an else branch for the remaining case.",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "int(",
+          "message": "Convert the input to an integer before doing the number work.",
+          "normalizeWhitespace": true
+        }
+      ]
+    }
+  ]
+}

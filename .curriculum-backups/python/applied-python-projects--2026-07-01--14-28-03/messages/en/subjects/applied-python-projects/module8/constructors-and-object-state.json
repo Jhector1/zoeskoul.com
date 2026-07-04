@@ -1,0 +1,222 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "constructors-and-object-state": {
+          "label": "Constructors and Object State",
+          "summary": "Use __init__ to receive starting data and store state on each object.",
+          "cards": {
+            "sketch0": {
+              "title": "Introduction to Constructors and Object State"
+            },
+            "sketch1": {
+              "title": "Example: Creating a Simple Class with a Constructor"
+            },
+            "sketch2": {
+              "title": "Encapsulation and Object State"
+            },
+            "sketch3": {
+              "title": "Try it yourself"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_constructors_and_object_state_sketch0": {
+              "title": "Create a Simple Class with a Constructor",
+              "prompt": "Define a `Book` class with a constructor that initializes `title`, `author`, and `year`. Create an instance and print the `title`.",
+              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "help": {
+                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+                "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+              },
+              "starterCode": "class Book:\n    def __init__(self, title, author, year):\n        # Initialize attributes\n\n# Create an instance of Book\nmy_book = Book('1984', 'George Orwell', 1949)\n# Print the title of the book"
+            },
+            "try_constructors_and_object_state_sketch1": {
+              "title": "Encapsulation with Constructors",
+              "prompt": "Create a `Person` class with a constructor that initializes `name` and `age`. Ensure the `age` is always a positive integer.",
+              "hint": "Read the task \"Encapsulation with Constructors\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Encapsulation with Constructors\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Person:\n    def __init__(self, name, age):\n        # Initialize attributes with validation\n\n# Create an instance of Person\nperson = Person('Alice', 30)\n# Print the name of the person"
+            },
+            "try_constructors_and_object_state_sketch2": {
+              "title": "Object State with Multiple Attributes",
+              "prompt": "Define a `Student` class with a constructor that initializes `name`, `grade`, and `student_id`. Print the `student_id` of an instance.",
+              "hint": "Read the task \"Object State with Multiple Attributes\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Object State with Multiple Attributes\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Student:\n    def __init__(self, name, grade, student_id):\n        # Initialize attributes\n\n# Create an instance of Student\nstudent = Student('John Doe', 'A', 12345)\n# Print the student_id"
+            },
+            "try_constructors_and_object_state_sketch3": {
+              "title": "Encapsulation with Validation",
+              "prompt": "Create a `BankAccount` class with a constructor that initializes `account_number` and `balance`. Ensure `balance` is non-negative.",
+              "hint": "Read the task \"Encapsulation with Validation\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Encapsulation with Validation\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class BankAccount:\n    def __init__(self, account_number, balance):\n        # Initialize attributes with validation\n\n# Create an instance of BankAccount\naccount = BankAccount('123456789', 1000)\n# Print the account number"
+            }
+          },
+          "practice": {
+            "ci-constructors-and-object-state-3": {
+              "title": "Using Methods to Modify Object State",
+              "prompt": "Add a `deposit` method to the `BankAccount` class that increases the `balance` by a given amount. Ensure the amount is positive.",
+              "hint": "Read the task \"Using Methods to Modify Object State\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Using Methods to Modify Object State\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class BankAccount:\n    def __init__(self, account_number, balance):\n        if balance < 0:\n            raise ValueError('Balance must be non-negative')\n        self.account_number = account_number\n        self.balance = balance\n\n    def deposit(self, amount):\n        # Implement deposit logic\n\n# Create an instance of BankAccount\naccount = BankAccount('123456789', 1000)\n# Deposit an amount\naccount.deposit(500)\n# Print the new balance"
+            },
+            "ci-constructors-and-object-state-4": {
+              "title": "Object State with Lists of Objects",
+              "prompt": "Create a `Library` class that holds a list of `Book` objects. Implement a method to add a new `Book` to the library.",
+              "hint": "Read the task \"Object State with Lists of Objects\" and identify the required result.",
+              "help": {
+                "concept": "This coding exercise checks whether your code produces the requested result for: \"Object State with Lists of Objects\".",
+                "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+                "hint_2": "Click Run and compare the output panel with the expected result."
+              },
+              "starterCode": "class Book:\n    def __init__(self, title, author, year):\n        self.title = title\n        self.author = author\n        self.year = year\n\nclass Library:\n    def __init__(self):\n        # Initialize a list to hold books\n\n    def add_book(self, book):\n        # Add a book to the list\n\n# Create a Library instance\nlibrary = Library()\n# Create a Book instance\nbook = Book('1984', 'George Orwell', 1949)\n# Add the book to the library\nlibrary.add_book(book)\n# Print the number of books in the library"
+            },
+            "ci-constructors-and-object-state-5": {
+              "title": "Understanding Constructors",
+              "prompt": "In Python, the constructor method is named [blank1].",
+              "hint": "It's a special method used to initialize objects.",
+              "help": {
+                "concept": "The constructor method initializes object attributes.",
+                "hint_1": "The constructor method starts with double underscores.",
+                "hint_2": "It's commonly used to set initial values for attributes."
+              },
+              "template": "In Python, the constructor method is named [blank1].",
+              "choices": [
+                "__init__",
+                "__construct__",
+                "__start__",
+                "__create__"
+              ]
+            },
+            "ci-constructors-and-object-state-6": {
+              "title": "Encapsulation in OOP",
+              "prompt": "Encapsulation in OOP is about [blank1] data and methods within a class.",
+              "hint": "It restricts access to certain components of an object.",
+              "help": {
+                "concept": "Encapsulation bundles data and methods.",
+                "hint_1": "Encapsulation prevents direct access to some components.",
+                "hint_2": "It ensures that objects are always in a valid state."
+              },
+              "template": "Encapsulation in OOP is about [blank1] data and methods within a class.",
+              "choices": [
+                "bundling",
+                "separating",
+                "exposing",
+                "hiding"
+              ]
+            },
+            "ci-constructors-and-object-state-7": {
+              "title": "Benefits of Using Constructors",
+              "prompt": "What are the benefits of using constructors in a class? Select all that apply.",
+              "hint": "Consider how constructors affect object initialization and state.",
+              "help": {
+                "concept": "Constructors initialize object attributes and ensure valid state.",
+                "hint_1": "Constructors set initial values for attributes.",
+                "hint_2": "They help maintain a valid object state from the start."
+              },
+              "options": {
+                "a": "They initialize object attributes.",
+                "b": "They allow for method overloading.",
+                "c": "They ensure objects start in a valid state.",
+                "d": "They automatically generate getters and setters."
+              }
+            },
+            "ci-constructors-and-object-state-8": {
+              "title": "Encapsulation and Validation",
+              "prompt": "How does encapsulation help with data validation in a class? Select all that apply.",
+              "hint": "Think about how encapsulation controls access to data.",
+              "help": {
+                "concept": "Encapsulation restricts access and allows validation.",
+                "hint_1": "Encapsulation can prevent invalid data from being set.",
+                "hint_2": "It allows methods to validate data before setting it."
+              },
+              "options": {
+                "a": "It allows direct access to attributes.",
+                "b": "It restricts access to attributes, allowing validation.",
+                "c": "It enables methods to validate data before setting it.",
+                "d": "It automatically corrects invalid data."
+              }
+            },
+            "ci-constructors-and-object-state-9": {
+              "title": "Order of Constructor Execution",
+              "prompt": "Arrange the steps of constructor execution in the correct order.",
+              "hint": "Read each piece and arrange them in the order the statement should be understood.",
+              "help": {
+                "concept": "The pieces should form a valid statement in a logical order.",
+                "hint_1": "Start with the piece that introduces the idea or action.",
+                "hint_2": "Place dependent pieces after the part they describe or complete."
+              },
+              "tokens": {
+                "t1": "Object is created",
+                "t2": "Constructor is called",
+                "t3": "Attributes are initialized",
+                "t4": "Object is ready for use"
+              }
+            },
+            "ci-constructors-and-object-state-10": {
+              "title": "Purpose of the `self` Keyword",
+              "prompt": "What is the purpose of the `self` keyword in a class method?",
+              "hint": "Think about how `self` is used to refer to the instance.",
+              "help": {
+                "concept": "`self` refers to the instance of the class.",
+                "hint_1": "`self` is used to access instance attributes and methods.",
+                "hint_2": "It differentiates instance attributes from local variables."
+              },
+              "options": {
+                "a": "To refer to the class itself",
+                "b": "To refer to the instance of the class",
+                "c": "To refer to a global variable",
+                "d": "To refer to a local variable"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "constructors-and-object-state": {
+          "constructors-and-object-state-intro": {
+            "title": "Introduction to Constructors and Object State",
+            "bodyMarkdown": "In Python, constructors are special methods used to initialize new objects. The `__init__` method is the most common constructor, allowing you to set initial values for an object's attributes. This is crucial for maintaining object state, which refers to the data held by an object at any given time. By using constructors, you can ensure that every object starts with a valid state."
+          },
+          "constructors-and-object-state-example": {
+            "title": "Example: Creating a Simple Class with a Constructor",
+            "bodyMarkdown": "Let's create a simple `Car` class to understand how constructors work. The `Car` class will have attributes like `make`, `model`, and `year`. We'll use the `__init__` method to initialize these attributes when a new `Car` object is created.\n\n```python\nclass Car:\n    def __init__(self, make, model, year):\n        self.make = make\n        self.model = model\n        self.year = year\n\n# Creating a new Car object\nmy_car = Car('Toyota', 'Corolla', 2020)\nprint(my_car.make)  # Output: Toyota\n```\n\n**Line by line explanation:**\n- The `Car` class is defined with an `__init__` method.\n- The `__init__` method takes `make`, `model`, and `year` as parameters.\n- These parameters are assigned to the object's attributes using `self`.\n- A new `Car` object is created with specific values, and we print the `make` attribute to verify."
+          },
+          "constructors-and-object-state-encapsulation": {
+            "title": "Encapsulation and Object State",
+            "bodyMarkdown": "Encapsulation is a fundamental concept in object-oriented programming that involves bundling data and methods that operate on the data within a single unit, or class. It restricts direct access to some of an object's components, which can prevent the accidental modification of data. By using constructors, you can encapsulate the initialization logic and ensure that objects are always in a valid state when they are created."
+          },
+          "try-it-yourself": {
+            "title": "Try it yourself",
+            "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+          }
+        }
+      }
+    }
+  }
+}

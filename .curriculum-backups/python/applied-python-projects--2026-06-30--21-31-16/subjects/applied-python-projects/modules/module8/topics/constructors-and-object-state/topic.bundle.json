@@ -1,0 +1,570 @@
+{
+  "topicId": "constructors-and-object-state",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "applied-python-projects-python-8-object-foundations",
+  "prefix": "py8",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch0.title",
+      "sketchId": "concept",
+      "height": 420,
+      "tryIt": {
+        "id": "try-constructors-and-object-state-sketch0",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.prompt",
+        "exerciseKey": "try-constructors-and-object-state-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch1.title",
+      "sketchId": "multifile-shape",
+      "height": 420,
+      "tryIt": {
+        "id": "try-constructors-and-object-state-sketch1",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.prompt",
+        "exerciseKey": "try-constructors-and-object-state-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch2.title",
+      "sketchId": "graded-habit",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_grade_result_practice",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.projectSteps.ci_grade_result_practice.title",
+            "exerciseKey": "ci-grade-result-practice",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "concept",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.concept.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.concept.bodyMarkdown"
+    },
+    {
+      "id": "multifile-shape",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.multifile-shape.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.multifile-shape.bodyMarkdown"
+    },
+    {
+      "id": "graded-habit",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.graded-habit.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.graded-habit.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-constructors-and-object-state-sketch0",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.quiz.try-constructors-and-object-state-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.item import Item\n\nitem = Item(\"notebook\", 3)\nprint(f\"{item.name}: {item.quantity}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/item.py",
+          "content": "class Item:\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.item import Item\n\nitem = Item(\"notebook\", 3)\nprint(f\"{item.name}: {item.quantity}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/item.py",
+          "content": "class Item:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "notebook: 3\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuaXRlbSBpbXBvcnQgSXRlbQoKaXRlbSA9IEl0ZW0oIm5vdGVib29rIiwgMykKcHJpbnQoZiJ7aXRlbS5uYW1lfToge2l0ZW0ucXVhbnRpdHl9IikK',\n    'models/item.py': 'Y2xhc3MgSXRlbToKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBuYW1lLCBxdWFudGl0eSk6CiAgICAgICAgc2VsZi5uYW1lID0gbmFtZQogICAgICAgIHNlbGYucXVhbnRpdHkgPSBxdWFudGl0eQo=',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.item import Item\n\nitem = Item(\"notebook\", 3)\nprint(f\"{item.name}: {item.quantity}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/item.py",
+            "content": "class Item:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.item import Item\n\nitem = Item(\"notebook\", 3)\nprint(f\"{item.name}: {item.quantity}\")\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.item import Item\n\nitem = Item(\"notebook\", 3)\nprint(f\"{item.name}: {item.quantity}\")\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.item import Item\n\nitem = Item(\"notebook\", 3)\nprint(f\"{item.name}: {item.quantity}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/item.py",
+            "content": "class Item:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.item import Item\n\nitem = Item(\"notebook\", 3)\nprint(f\"{item.name}: {item.quantity}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/item.py",
+            "content": "class Item:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/item.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/item.py"
+        ]
+      }
+    },
+    {
+      "id": "try-constructors-and-object-state-sketch1",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.quiz.try-constructors-and-object-state-sketch1",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.counter import Counter\n\ncounter = Counter(2)\nprint(counter.increment())\nprint(counter.increment())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/counter.py",
+          "content": "class Counter:\n    def __init__(self, count):\n        self.count = count\n\n    def increment(self):\n        # update and return the count\n        pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.counter import Counter\n\ncounter = Counter(2)\nprint(counter.increment())\nprint(counter.increment())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/counter.py",
+          "content": "class Counter:\n    def __init__(self, count):\n        self.count = count\n\n    def increment(self):\n        self.count += 1\n        return self.count\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "3\n4\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuY291bnRlciBpbXBvcnQgQ291bnRlcgoKY291bnRlciA9IENvdW50ZXIoMikKcHJpbnQoY291bnRlci5pbmNyZW1lbnQoKSkKcHJpbnQoY291bnRlci5pbmNyZW1lbnQoKSkK',\n    'models/counter.py': 'Y2xhc3MgQ291bnRlcjoKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBjb3VudCk6CiAgICAgICAgc2VsZi5jb3VudCA9IGNvdW50CgogICAgZGVmIGluY3JlbWVudChzZWxmKToKICAgICAgICBzZWxmLmNvdW50ICs9IDEKICAgICAgICByZXR1cm4gc2VsZi5jb3VudAo=',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.counter import Counter\n\ncounter = Counter(2)\nprint(counter.increment())\nprint(counter.increment())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/counter.py",
+            "content": "class Counter:\n    def __init__(self, count):\n        self.count = count\n\n    def increment(self):\n        self.count += 1\n        return self.count\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.counter import Counter\n\ncounter = Counter(2)\nprint(counter.increment())\nprint(counter.increment())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.counter import Counter\n\ncounter = Counter(2)\nprint(counter.increment())\nprint(counter.increment())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.counter import Counter\n\ncounter = Counter(2)\nprint(counter.increment())\nprint(counter.increment())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/counter.py",
+            "content": "class Counter:\n    def __init__(self, count):\n        self.count = count\n\n    def increment(self):\n        # update and return the count\n        pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.counter import Counter\n\ncounter = Counter(2)\nprint(counter.increment())\nprint(counter.increment())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/counter.py",
+            "content": "class Counter:\n    def __init__(self, count):\n        self.count = count\n\n    def increment(self):\n        self.count += 1\n        return self.count\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/counter.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/counter.py"
+        ]
+      }
+    },
+    {
+      "id": "ci-grade-result-practice",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.quiz.ci-grade-result-practice",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.grade_result import GradeResult\n\nresult = GradeResult(\"Sam\", 84)\nprint(result.summary())\nprint(result.is_passing())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/grade_result.py",
+          "content": "class GradeResult:\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.grade_result import GradeResult\n\nresult = GradeResult(\"Sam\", 84)\nprint(result.summary())\nprint(result.is_passing())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/grade_result.py",
+          "content": "class GradeResult:\n    def __init__(self, student, score):\n        self.student = student\n        self.score = score\n\n    def is_passing(self):\n        return self.score >= 70\n\n    def summary(self):\n        return f\"{self.student}: {self.score}\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Sam: 84\nTrue\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBtb2RlbHMuZ3JhZGVfcmVzdWx0IGltcG9ydCBHcmFkZVJlc3VsdAoKcmVzdWx0ID0gR3JhZGVSZXN1bHQoIlNhbSIsIDg0KQpwcmludChyZXN1bHQuc3VtbWFyeSgpKQpwcmludChyZXN1bHQuaXNfcGFzc2luZygpKQo=',\n    'models/grade_result.py': 'Y2xhc3MgR3JhZGVSZXN1bHQ6CiAgICBkZWYgX19pbml0X18oc2VsZiwgc3R1ZGVudCwgc2NvcmUpOgogICAgICAgIHNlbGYuc3R1ZGVudCA9IHN0dWRlbnQKICAgICAgICBzZWxmLnNjb3JlID0gc2NvcmUKCiAgICBkZWYgaXNfcGFzc2luZyhzZWxmKToKICAgICAgICByZXR1cm4gc2VsZi5zY29yZSA+PSA3MAoKICAgIGRlZiBzdW1tYXJ5KHNlbGYpOgogICAgICAgIHJldHVybiBmIntzZWxmLnN0dWRlbnR9OiB7c2VsZi5zY29yZX0iCg==',\n    'models/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.grade_result import GradeResult\n\nresult = GradeResult(\"Sam\", 84)\nprint(result.summary())\nprint(result.is_passing())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/grade_result.py",
+            "content": "class GradeResult:\n    def __init__(self, student, score):\n        self.student = student\n        self.score = score\n\n    def is_passing(self):\n        return self.score >= 70\n\n    def summary(self):\n        return f\"{self.student}: {self.score}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from models.grade_result import GradeResult\n\nresult = GradeResult(\"Sam\", 84)\nprint(result.summary())\nprint(result.is_passing())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.grade_result import GradeResult\n\nresult = GradeResult(\"Sam\", 84)\nprint(result.summary())\nprint(result.is_passing())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.grade_result import GradeResult\n\nresult = GradeResult(\"Sam\", 84)\nprint(result.summary())\nprint(result.is_passing())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/grade_result.py",
+            "content": "class GradeResult:\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.grade_result import GradeResult\n\nresult = GradeResult(\"Sam\", 84)\nprint(result.summary())\nprint(result.is_passing())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/grade_result.py",
+            "content": "class GradeResult:\n    def __init__(self, student, score):\n        self.student = student\n        self.score = score\n\n    def is_passing(self):\n        return self.score >= 70\n\n    def summary(self):\n        return f\"{self.student}: {self.score}\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models"
+          ],
+          "requiredFiles": [
+            "main.py",
+            "models/__init__.py",
+            "models/grade_result.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models"
+        ],
+        "requiredFiles": [
+          "main.py",
+          "models/__init__.py",
+          "models/grade_result.py"
+        ]
+      }
+    },
+    {
+      "id": "sc-constructors-and-object-state-design",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.quiz.sc-constructors-and-object-state-design",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

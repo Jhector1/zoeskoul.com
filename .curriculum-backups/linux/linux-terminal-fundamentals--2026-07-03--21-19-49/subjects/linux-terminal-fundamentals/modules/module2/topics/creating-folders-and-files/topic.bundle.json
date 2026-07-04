@@ -1,0 +1,536 @@
+{
+  "topicId": "creating-folders-and-files",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-2-files-and-folders",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-2-file-workflow",
+  "prefix": "linux_module_2",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.cards.sketch0.title",
+      "sketchId": "mkdir-one-folder",
+      "height": 420,
+      "tryIt": {
+        "id": "try-creating-folders-and-files-sketch0",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch0.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch0.prompt",
+        "exerciseKey": "creating-folders-and-files-try-it-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.cards.sketch1.title",
+      "sketchId": "mkdir-p-nested",
+      "height": 420,
+      "tryIt": {
+        "id": "try-creating-folders-and-files-sketch1",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch1.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch1.prompt",
+        "exerciseKey": "creating-folders-and-files-try-it-2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.cards.sketch2.title",
+      "sketchId": "touch-files",
+      "height": 420,
+      "tryIt": {
+        "id": "try-creating-folders-and-files-sketch2",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch2.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.try_creating_folders_and_files_sketch2.prompt",
+        "exerciseKey": "creating-folders-and-files-try-it-3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "select": {
+          "purpose": "quiz"
+        }
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "mkdir-one-folder",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.mkdir-one-folder.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.mkdir-one-folder.bodyMarkdown"
+    },
+    {
+      "id": "mkdir-p-nested",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.mkdir-p-nested.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.mkdir-p-nested.bodyMarkdown"
+    },
+    {
+      "id": "touch-files",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.touch-files.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.touch-files.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-mkdir-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.practice.sc-mkdir-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-mkdir-p-use",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.practice.mc-mkdir-p-use",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "sc-touch-purpose",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.practice.sc-touch-purpose",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "dr-folder-before-file",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.practice.dr-folder-before-file",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "creating-folders-and-files-try-it-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1",
+      "language": "bash",
+      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir school-notes\nls\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "school-notes"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "\\bmkdir\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "school-notes"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-1.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
+      }
+    },
+    {
+      "id": "creating-folders-and-files-try-it-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2",
+      "language": "bash",
+      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "mkdir -p project-kit/src\nmkdir -p project-kit/docs\nls project-kit\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "project-kit",
+          "project-kit/src",
+          "project-kit/docs"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "\\bmkdir\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "project-kit",
+            "project-kit/src",
+            "project-kit/docs"
+          ]
+        }
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-2.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
+      }
+    },
+    {
+      "id": "creating-folders-and-files-try-it-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3",
+      "language": "bash",
+      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "touch-lab/README.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.touch_lab_readme_txt.content",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "touch touch-lab/todo.txt\ntouch touch-lab/agenda.txt\nls touch-lab\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "touch-lab/README.txt",
+          "content": "This folder is ready for touch practice.\n",
+          "language": "bash"
+        },
+        {
+          "path": "touch-lab/todo.txt",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "touch-lab/agenda.txt",
+          "content": "",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "touch-lab/todo.txt",
+          "touch-lab/agenda.txt"
+        ],
+        "requiredFolders": [
+          "touch-lab"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "\\btouch\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "touch-lab/README.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.touch_lab_readme_txt.content",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "touch-lab/todo.txt",
+            "touch-lab/agenda.txt"
+          ],
+          "requiredFolders": [
+            "touch-lab"
+          ]
+        },
+        "fixtureFiles": [
+          {
+            "path": "touch-lab/README.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.touch_lab_readme_txt.content",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise"
+      },
+      "fixtureFiles": [
+        {
+          "path": "touch-lab/README.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.creating-folders-and-files.tryIt.exercises.creating-folders-and-files-try-it-3.starterFiles.touch_lab_readme_txt.content",
+          "language": "bash"
+        }
+      ]
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Create a class notes folder",
+      "Create a project kit",
+      "Create planning files"
+    ]
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    }
+  }
+}

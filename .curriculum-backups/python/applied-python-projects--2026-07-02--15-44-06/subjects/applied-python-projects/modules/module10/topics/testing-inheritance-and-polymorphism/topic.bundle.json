@@ -1,0 +1,580 @@
+{
+  "topicId": "testing-inheritance-and-polymorphism",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-10-testing-debugging-oop-projects",
+  "sectionSlug": "applied-python-projects-python-10-testing-oop-behavior",
+  "prefix": "py10",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.label",
+    "summaryKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.sketch0.title",
+      "sketchId": "testing-inheritance-and-polymorphism-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-inheritance-and-polymorphism-sketch0",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.prompt",
+        "exerciseKey": "try-testing-inheritance-and-polymorphism-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.sketch1.title",
+      "sketchId": "testing-inheritance-and-polymorphism-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-inheritance-and-polymorphism-sketch1",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.prompt",
+        "exerciseKey": "try-testing-inheritance-and-polymorphism-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.sketch2.title",
+      "sketchId": "testing-inheritance-and-polymorphism-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-inheritance-and-polymorphism-sketch2",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.prompt",
+        "exerciseKey": "try-testing-inheritance-and-polymorphism-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "testing-inheritance-and-polymorphism-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "testing-inheritance-and-polymorphism-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "testing-inheritance-and-polymorphism-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.testing-inheritance-and-polymorphism-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-testing-inheritance-and-polymorphism-sketch0",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0",
+      "language": "python",
+      "starterCode": "from models.book import Book\n\n\ndef build_book_label():\n    # Create the Book and return its label.\n    return \"\"\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
+      "starterFiles": [
+        {
+          "path": "tests/check_book.py",
+          "content": "from models.book import Book\n\n\ndef build_book_label():\n    # Create the Book and return its label.\n    return \"\"\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "from models.base_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "tests/check_book.py",
+          "content": "from models.book import Book\n\n\ndef build_book_label():\n    book = Book(\"Dune\", \"Frank Herbert\")\n    return book.label()\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "from models.base_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "tests/check_book.py",
+        "starterCode": "from models.book import Book\n\n\ndef build_book_label():\n    # Create the Book and return its label.\n    return \"\"\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
+        "starterFiles": [
+          {
+            "path": "tests/check_book.py",
+            "content": "from models.book import Book\n\n\ndef build_book_label():\n    # Create the Book and return its label.\n    return \"\"\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "from models.base_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\n\n\ndef build_book_label():\n    book = Book(\"Dune\", \"Frank Herbert\")\n    return book.label()\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
+        "solutionFiles": [
+          {
+            "path": "tests/check_book.py",
+            "content": "from models.book import Book\n\n\ndef build_book_label():\n    book = Book(\"Dune\", \"Frank Herbert\")\n    return book.label()\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "from models.base_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_book_label",
+            "args": [],
+            "argKinds": [],
+            "expected": "Book: Dune by Frank Herbert",
+            "expectedKind": "value",
+            "message": "build_book_label() should return the Book label from the subclass override."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Keep the success message print after the assertion passes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "policy_single_choice_1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_single_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "policy_multi_choice_1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_multi_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "policy_drag_reorder_1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_drag_reorder_1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "policy_fill_blank_choice_1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.practice.policy_fill_blank_choice_1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "if"
+      }
+    },
+    {
+      "id": "try-testing-inheritance-and-polymorphism-sketch1",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1",
+      "language": "python",
+      "starterCode": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/game.py",
+          "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_report.py",
+          "content": "def build_labels(items):\n    # Return one label() result for each item in order.\n    return []",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/game.py",
+          "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_report.py",
+          "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/game.py",
+            "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_report.py",
+            "content": "def build_labels(items):\n    # Return one label() result for each item in order.\n    return []",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.book import Book\nfrom models.game import Game\nfrom services.catalog_report import build_labels\n\n\ndef build_sample_labels():\n    items = [\n        Book(\"Dune\", \"Frank Herbert\"),\n        Game(\"Portal 2\", \"PC\"),\n    ]\n    return build_labels(items)\n\n\nprint(build_sample_labels())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/game.py",
+            "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_report.py",
+            "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_sample_labels",
+            "args": [],
+            "argKinds": [],
+            "expected": [
+              "Book: Dune by Frank Herbert",
+              "Game: Portal 2 on PC"
+            ],
+            "expectedKind": "value",
+            "message": "build_sample_labels() should return labels from a mixed Book/Game list in order."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Print the returned label list."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-testing-inheritance-and-polymorphism-sketch2",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2",
+      "language": "python",
+      "starterCode": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/game.py",
+          "content": "class Game:\n    def __init__(self, title, platform):\n        # Replace an empty title with \"Untitled\".\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/game.py",
+          "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title if title else \"Untitled\"\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/game.py",
+            "content": "class Game:\n    def __init__(self, title, platform):\n        # Replace an empty title with \"Untitled\".\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.game import Game\n\n\ndef build_empty_title_label():\n    game = Game(\"\", \"Switch\")\n    return game.label()\n\n\nprint(build_empty_title_label())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/game.py",
+            "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title if title else \"Untitled\"\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_empty_title_label",
+            "args": [],
+            "argKinds": [],
+            "expected": "Game: Untitled on Switch",
+            "expectedKind": "value",
+            "message": "build_empty_title_label() should prove the empty title is sanitized before labeling."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Print the sanitized label for the game."
+          }
+        ]
+      }
+    }
+  ]
+}

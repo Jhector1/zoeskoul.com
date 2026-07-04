@@ -22,6 +22,27 @@ export type HelpStepKey = "concept" | "hint_1" | "hint_2";
 
 export type PracticePurpose = "quiz" | "project";
 
+export function normalizePracticePurpose(
+    value: unknown,
+    kind?: unknown,
+    fallback?: PracticePurpose | null,
+): PracticePurpose | null {
+    const raw = String(value ?? "").trim().toLowerCase();
+    const normalizedKind = String(kind ?? "").trim();
+
+    if (raw === "quiz") return "quiz";
+    if (raw === "project" || raw === "try_it" || raw === "try-it" || raw === "practice" || raw === "capstone") {
+        return "project";
+    }
+
+    if (!raw) {
+        if (normalizedKind === "code_input") return "project";
+        return fallback ?? null;
+    }
+
+    return null;
+}
+
 /* -------------------------------------------------------------------------- */
 /* output / handler types                                                     */
 /* -------------------------------------------------------------------------- */
@@ -134,9 +155,7 @@ export function readPoolFromMeta(meta: unknown): PoolItem[] {
                 kind: item?.kind
                     ? (String(item.kind).trim() as ExerciseKind | PracticeKind)
                     : undefined,
-                purpose: item?.purpose
-                    ? (String(item.purpose).trim() as PracticePurpose)
-                    : undefined,
+                purpose: normalizePracticePurpose(item?.purpose, item?.kind) ?? undefined,
             };
         })
         .filter((p) => p.key && Number.isFinite(p.w) && p.w > 0);
@@ -351,8 +370,12 @@ export function filterExcluded(
 /* generator helpers                                                          */
 /* -------------------------------------------------------------------------- */
 
-function normalizePurpose(p?: PracticePurpose | null): PracticePurpose {
-    return p === "project" || p === "quiz" ? p : "quiz";
+function normalizePurpose(
+    p?: unknown,
+    kind?: unknown,
+    fallback: PracticePurpose = "quiz",
+): PracticePurpose | null {
+    return normalizePracticePurpose(p, kind, fallback);
 }
 
 function safeMixedPoolFor(
@@ -475,7 +498,7 @@ export function makeSubjectTopicGenerator(args: {
 
             const purposeFiltered = preferPurpose
                 ? kindFiltered.filter(
-                    (p) => normalizePurpose(p.purpose ?? defaultPurpose) === preferPurpose,
+                    (p) => normalizePurpose(p.purpose, p.kind, defaultPurpose) === preferPurpose,
                 )
                 : kindFiltered;
 
@@ -577,7 +600,7 @@ export function makeSubjectTopicGenerator(args: {
         }
 
         const chosenItem = pool.find((p) => p.key === chosen) ?? null;
-        const chosenPurpose = normalizePurpose(chosenItem?.purpose ?? defaultPurpose);
+        const chosenPurpose = normalizePurpose(chosenItem?.purpose, chosenItem?.kind, defaultPurpose) ?? defaultPurpose;
 
         const out = handler({ rng: R, diff, id, topic, ctx });
 

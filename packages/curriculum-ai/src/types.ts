@@ -13,6 +13,32 @@ export type GenerateJsonArgs = {
       | "TranslatedEntries";
 };
 
+export type AiProviderId = "openai" | "gemini" | "claude" | "deepseek" | "deepl";
+
+export type AiModelPurpose =
+  | "cheap"
+  | "balanced"
+  | "quality"
+  | "reasoning"
+  | "legacy";
+
+export type AiModelOption = {
+  id: string;
+  label: string;
+  purpose?: AiModelPurpose;
+  recommendedForTranslation?: boolean;
+  deprecated?: boolean;
+};
+
+export type AiProviderCatalogEntry = {
+  id: AiProviderId;
+  label: string;
+  apiKeyEnv: string;
+  modelEnv: string;
+  defaultModel: string;
+  models: AiModelOption[];
+};
+
 export type GeneratedJsonMetadata = {
   provider: string;
   model: string;
@@ -70,6 +96,8 @@ export type TranslatedEntries = {
 };
 
 export type AiProvider = {
+  providerId?: AiProviderId;
+  model?: string;
   generateJson<T>(args: GenerateJsonArgs): Promise<T>;
   generateJsonDetailed?<T>(args: GenerateJsonArgs): Promise<GeneratedJsonResult<T>>;
 };

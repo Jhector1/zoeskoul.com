@@ -1,0 +1,527 @@
+{
+  "topicId": "testing-object-state",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-10-testing-debugging-oop-projects",
+  "sectionSlug": "python--applied-python-projects--draft-python-10-testing-oop-behavior",
+  "prefix": "py10",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.cards.sketch0.title",
+      "sketchId": "testing-object-state-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-object-state-sketch0",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.prompt",
+        "exerciseKey": "try-testing-object-state-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.cards.sketch1.title",
+      "sketchId": "testing-object-state-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-object-state-sketch1",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.prompt",
+        "exerciseKey": "try-testing-object-state-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.cards.sketch2.title",
+      "sketchId": "testing-object-state-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-object-state-sketch2",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.prompt",
+        "exerciseKey": "try-testing-object-state-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "testing-object-state-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-0.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "testing-object-state-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "testing-object-state-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-testing-object-state-sketch0",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/book.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/book.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/book.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/book.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "models/book.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.0.message"
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune"
+            ],
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.1.message"
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune"
+            ],
+            "attributes": [
+              "title",
+              "available"
+            ],
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.2.message"
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune"
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "checkout",
+                "methodArgs": [],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "available",
+            "expected": false,
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.checks.3.message"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-testing-object-state-sketch1",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/task.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/task.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/task.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/task.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "models/task.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Task",
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.0.message"
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Task",
+            "constructorArgs": [
+              "Email clients",
+              2
+            ],
+            "attributes": [
+              "name",
+              "priority"
+            ],
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.1.message"
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Task",
+            "constructorArgs": [
+              "Email clients",
+              2
+            ],
+            "constructorArgKinds": [],
+            "calls": [],
+            "attributeName": "priority",
+            "expected": [
+              2
+            ],
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.2.message"
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Task",
+            "constructorArgs": [
+              "Broken input",
+              -5
+            ],
+            "constructorArgKinds": [],
+            "calls": [],
+            "attributeName": "priority",
+            "expected": [
+              0
+            ],
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.3.message"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-testing-object-state-sketch2",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/counter.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/counter.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/counter.py",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/counter.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "models/counter.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Counter",
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.checks.0.message"
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Counter",
+            "constructorArgs": [],
+            "attributes": [
+              "count"
+            ],
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.checks.1.message"
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Counter",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "increment",
+                "methodArgs": [],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "increment",
+                "methodArgs": [],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "count",
+            "expected": 2,
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.checks.2.message"
+          }
+        ]
+      }
+    },
+    {
+      "id": "q-testing-object-state-single-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-single-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q-testing-object-state-multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q-testing-object-state-fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "0"
+      }
+    },
+    {
+      "id": "q-testing-object-state-drag-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-drag-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t1",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q-testing-object-state-multi-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-multi-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q-testing-object-state-fill-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-fill-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "False"
+      }
+    }
+  ]
+}

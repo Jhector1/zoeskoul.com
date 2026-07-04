@@ -12,6 +12,7 @@ export * from "./validate/validateManifestTree.js";
 export * from "./validate/validateMessages.js";
 export * from "./validate/validatePlan.js";
 export * from "./write/publishDraft.js";
+export * from "./write/courseDraftBackups.js";
 export * from "./write/writeDraft.js";
 export * from "./planning/generatePlan.js";
 export * from "./planning/savePlan.js";
@@ -54,6 +55,7 @@ export { critiqueSubject } from "./compile/critiqueSubject.js";
 export { critiqueSubjectDraft } from "./compile/critiqueSubjectDraft.js";
 export { reviewSubjectDraft } from "./compile/reviewSubjectDraft.js";
 export type { CompileProgressInfo } from "./compile/compileProgress.js";
+export * from "./compile/validationState.js";
 
 
 export * from "./spec/loadCourseSpec.js";

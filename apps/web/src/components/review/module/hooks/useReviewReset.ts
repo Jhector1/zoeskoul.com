@@ -23,10 +23,11 @@ type UseReviewResetArgs = {
     setProgress: React.Dispatch<any>;
     setActiveTopicId: (tid: string) => void;
     setViewTopicId: (tid: string) => void;
-    flushNow: (next: any) => void;
+    flushNow: (next: any) => Promise<void> | void;
     toolUnbindCodeInput: () => void;
     onAfterResetModule?: () => void;
     onAfterResetTopic?: (topicId: string) => void;
+    onResetStatusChange?: (value: string | null) => void;
 };
 
 export function useReviewReset({
@@ -40,6 +41,7 @@ export function useReviewReset({
                                    toolUnbindCodeInput,
                                    onAfterResetModule,
                                    onAfterResetTopic,
+                                   onResetStatusChange,
                                }: UseReviewResetArgs) {
     const [confirmOpen, setConfirmOpen] = useState(false);
     const [pending, setPending] = useState<PendingChange | null>(null);
@@ -107,7 +109,7 @@ export function useReviewReset({
         setConfirmOpen(true);
     }, []);
 
-    const applyPendingChange = useCallback(() => {
+    const applyPendingChange = useCallback(async () => {
         if (!pending) return;
 
         toolUnbindCodeInput();
@@ -121,7 +123,10 @@ export function useReviewReset({
             setProgress(next);
             setActiveTopicId(firstTopicId || "");
             setViewTopicId(firstTopicId || "");
-            flushNow(next);
+            onResetStatusChange?.("Resetting this module...");
+            void Promise.resolve(flushNow(next)).finally(() => {
+                onResetStatusChange?.(null);
+            });
             cancelPendingChange();
 
             queueMicrotask(() => {
@@ -139,7 +144,10 @@ export function useReviewReset({
         const next = buildResetTopicProgress(progress, tid);
 
         setProgress(next);
-        flushNow(next);
+        onResetStatusChange?.("Resetting this topic...");
+        void Promise.resolve(flushNow(next)).finally(() => {
+            onResetStatusChange?.(null);
+        });
 
         setActiveTopicId(tid);
         setViewTopicId(tid);
@@ -161,6 +169,7 @@ export function useReviewReset({
         progress,
         onAfterResetModule,
         onAfterResetTopic,
+        onResetStatusChange,
     ]);
 
     return {

@@ -158,6 +158,11 @@ export function buildTopicSeedFromPlanNode(args: {
         sectionSlug: args.section.sectionSlug,
         topicId: args.topic.topicId,
     });
+    const logicalModuleNumber =
+        typeof args.module.moduleNumber === "number" && Number.isFinite(args.module.moduleNumber)
+            ? args.module.moduleNumber
+            : args.module.order - 1;
+
     const exercisePolicy = resolveExercisePolicy({
         blueprint: args.blueprint,
         spec: args.spec ?? null,
@@ -236,7 +241,7 @@ export function buildTopicSeedFromPlanNode(args: {
     });
     const workspacePolicy = resolveWorkspacePolicy({
         blueprint: args.blueprint,
-        moduleNumber: args.module.order - 1,
+        moduleNumber: logicalModuleNumber,
         topicId: args.topic.topicId,
     });
 

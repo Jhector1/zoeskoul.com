@@ -1,0 +1,508 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "if-elif-else": {
+          "label": "If, Elif, ak Else",
+          "summary": "Kontwole ki kòd ki kouri selon kondisyon yo.",
+          "cards": {
+            "sketch0": {
+              "title": "Chwazi yon chemen ak if"
+            },
+            "sketch1": {
+              "title": "Sèvi ak else pou lòt ka a"
+            },
+            "sketch2": {
+              "title": "Tcheke plis pase de ka ak elif"
+            },
+            "sketch3": {
+              "title": "Tcheke ka espesyal yo an premye"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Pwojè Pratik Branching"
+            }
+          },
+          "projectSteps": {
+            "code_positive_negative_zero": {
+              "title": "Klasifye yon nonb"
+            },
+            "code_pass_fail": {
+              "title": "Pase oswa echwe"
+            },
+            "code_grade_checker": {
+              "title": "Verifikatè nòt senp"
+            },
+            "code_empty_or_text": {
+              "title": "Tcheke si tèks la vid"
+            },
+            "code_even_odd": {
+              "title": "Pè oswa enpè"
+            }
+          },
+          "quiz": {
+            "sc_if_runs_true": {
+              "title": "Kilè yon blòk if kouri?",
+              "prompt": "Nan Python, kilè kòd ki endante anba `if condition:` la kouri?",
+              "hint": "Reflechi sou si kondisyon an evalye kòm `True` oswa `False`.",
+              "help": {
+                "concept": "Yon deklarasyon `if` kontwole si blòk endante li a kouri. Python evalye kondisyon an an premye, epi li kouri blòk la sèlman pou ka ki vre a.",
+                "hint_1": "Blòk `if` la pa otomatik. Python tcheke kondisyon an anvan li antre nan liy endante yo.",
+                "hint_2": "Chwazi opsyon ki di blòk la kouri sèlman pou rezilta vre kondisyon an."
+              },
+              "options": {
+                "a": "Li toujou kouri",
+                "b": "Li kouri sèlman lè kondisyon an se True",
+                "c": "Li kouri sèlman lè kondisyon an se False",
+                "d": "Li kouri sèlman lè gen yon blòk else"
+              }
+            },
+            "sc_elif_role": {
+              "title": "Pou kisa elif sèvi?",
+              "prompt": "Ki objektif prensipal `elif` nan Python?",
+              "hint": "Li pèmèt ou tcheke yon lòt kondisyon apre yon kondisyon anvan te fo.",
+              "help": {
+                "concept": "`elif` ajoute yon lòt branch nan yon chèn kondisyonèl. Python rive ladan l sèlman si kondisyon `if` oswa `elif` ki te vini anvan yo te fo.",
+                "hint_1": "Yo sèvi avè l ant `if` ak `else` lè ou gen yon lòt kondisyon pou teste.",
+                "hint_2": "Chèche chwa ki pale de tcheke yon kondisyon anplis olye pou kòmanse yon blòk separe ki pa gen rapò."
+              },
+              "options": {
+                "a": "Pou repete menm blòk la anpil fwa",
+                "b": "Pou tcheke yon lòt kondisyon si sa ki te vini anvan yo te fo",
+                "c": "Pou fini yon pwogram touswit",
+                "d": "Pou enprime valè yon varyab"
+              }
+            },
+            "mc_valid_conditional_facts": {
+              "title": "Reyalite sou chèn kondisyonèl yo",
+              "prompt": "Chwazi tout deklarasyon ki vre sou chèn `if` / `elif` / `else` nan Python.",
+              "hint": "Reflechi sou lòd la ak konbyen branch ki kouri nan yon sèl chèn.",
+              "help": {
+                "concept": "Nan yon chèn kondisyonèl, Python tcheke kondisyon yo soti anlè pou desann epi li sispann nan premye branch ki vre a. `else` se solisyon ranplasman an lè pa gen okenn kondisyon anvan ki matche.",
+                "hint_1": "Yon lide enpòtan se ke Python pa kontinye tcheke apre li jwenn yon branch ki vre.",
+                "hint_2": "Chwazi deklarasyon yo sou tcheke soti anlè pou desann ak `else` kòm ka ranplasman an."
+              },
+              "options": {
+                "a": "Python tcheke kondisyon yo soti anlè pou desann",
+                "b": "Plis pase yon branch nan menm chèn nan ka kouri pou yon sèl antre",
+                "c": "Python sispann apre premye branch ki vre nan chèn nan",
+                "d": "Blòk else la kouri lè kondisyon anvan yo te fo"
+              }
+            },
+            "mc_truthy_values": {
+              "title": "Valè truthy",
+              "prompt": "Chwazi tout valè ki truthy nan Python.",
+              "hint": "Li kesyon an epi konekte li ak egzanp espesifik leson an.",
+              "help": {
+                "concept": "Kesyon sa a verifye yon lide espesifik nan leson an, pa yon estrateji jeneral pou pran tès.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki matche dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "0",
+                "b": "\"hi\"",
+                "c": "5",
+                "d": "None"
+              }
+            },
+            "dr_branch_order": {
+              "title": "Mete verifikasyon branch yo nan lòd",
+              "prompt": "Ranje etap sa yo nan lòd Python swiv pou yon chèn `if` / `elif` / `else`.",
+              "hint": "Python kòmanse anlè a, tcheke kondisyon yo, epi li sispann nan premye korespondans lan.",
+              "help": {
+                "concept": "Yon chèn kondisyonèl evalye an sekans. Python tcheke premye kondisyon an, apre sa lòt yo sèlman si sa nesesè, epi li sèvi ak `else` sèlman lè pa gen okenn kondisyon ki matche.",
+                "hint_1": "Premye aksyon an se tcheke kondisyon `if` la, pa sote ale nan `else`.",
+                "hint_2": "Apre yon `if` ki fo, Python ka tcheke `elif`; `else` vini an dènye si pa gen anyen ki matche."
+              },
+              "tokens": {
+                "t1": "Tcheke kondisyon if la",
+                "t2": "Si sa nesesè, tcheke kondisyon elif la",
+                "t3": "Kouri premye branch ki matche a",
+                "t4": "Sèvi ak else sèlman si pa gen okenn kondisyon anvan ki matche"
+              }
+            },
+            "dr_specific_before_general": {
+              "title": "Mete kondisyon yo nan yon bon lòd",
+              "prompt": "Ranje verifikasyon sa yo soti nan pi espesifik rive nan pi jeneral pou yon klasifikatè nòt.",
+              "hint": "Yon ka espesyal tankou egzakteman 100 ta dwe vini anvan yon règ ki pi laj tankou 60 oswa plis.",
+              "help": {
+                "concept": "Lè kondisyon yo sipèpoze, kondisyon ki pi espesifik la ta dwe vini an premye pou li pa kache pa yon kondisyon ki pi laj ki vini anvan.",
+                "hint_1": "Mande tèt ou ki règ ki matche ak pi piti kantite valè yo. Se li ki ta dwe premye.",
+                "hint_2": "Verifikasyon nòt egzak la se pi etwat la, entèval pase a pi laj, epi ka ranplasman an vini an dènye."
+              },
+              "tokens": {
+                "t1": "score == 100",
+                "t2": "score >= 60",
+                "t3": "else"
+              }
+            },
+            "fb_else_keyword": {
+              "title": "Konplete branch ranplasman an",
+              "prompt": "Chwazi mo kle ki fè kòd sa a kouri lè kondisyon `if` la fo.",
+              "hint": "Mo kle sa a jere ka ki rete a apre tès `if` la echwe.",
+              "help": {
+                "concept": "Nan yon kondisyonèl ki gen de branch, `the missing term` se branch ranplasman an ki kouri lè kondisyon `if` la fo.",
+                "hint_1": "Li pa yon lòt kondisyon tankou `elif`; se branch ki pran tout lòt ka yo.",
+                "hint_2": "Chwazi mo kle yo itilize san kondisyon apre yon blòk `if`."
+              },
+              "template": "[blank1]:\n    print(\"no\")",
+              "choices": [
+                "if",
+                "elif",
+                "else",
+                "print"
+              ]
+            },
+            "fb_comparison_operator": {
+              "title": "Chwazi bon konparezon an",
+              "prompt": "Ranpli operatè a pou kondisyon an vre lè `age` se 18 oswa plis.",
+              "hint": "Gade espas vid la, epi chwazi mo oswa senbòl ki fè lide a kòrèk.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki fè deklarasyon an egzak.",
+                "hint_1": "Gade mo ki anvan ak apre espas vid la pou dedwi ki kalite tèm ki nesesè.",
+                "hint_2": "Chwazi opsyon ki konplete deklarasyon an ak sans ki pi klè."
+              },
+              "template": "if age [blank1] 18:\n    print(\"adult\")",
+              "choices": [
+                ">",
+                "<",
+                ">=",
+                "=="
+              ]
+            },
+            "code_positive_negative_zero": {
+              "title": "Klasifye yon nonb",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Enprime `positive` si nonb la pi gran pase 0, `negative` si li pi piti pase 0, oswa `zero` si li egzakteman 0.",
+              "hint": "Li travay la \"Klasifye yon nonb\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Klasifye yon nonb\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero"
+            },
+            "code_pass_fail": {
+              "title": "Pase oswa echwe",
+              "prompt": "Ekri kòd Python ki li yon nòt antye. Enprime `pass` si nòt la se 60 oswa plis. Sinon enprime `fail`.",
+              "hint": "Li travay la \"Pase oswa echwe\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Pase oswa echwe\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "score = int(input())\n\n# TODO: print pass or fail"
+            },
+            "code_grade_checker": {
+              "title": "Verifikatè nòt senp",
+              "prompt": "Ekri kòd Python ki li yon nòt antye soti nan 0 rive 100. Enprime `A` si nòt la se 90 oswa plis, `B` si li soti nan 80 rive 89, `C` si li soti nan 70 rive 79, epi `F` sinon.",
+              "hint": "Li travay la \"Verifikatè nòt senp\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Verifikatè nòt senp\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "score = int(input())\n\n# TODO: print A, B, C, or F"
+            },
+            "code_empty_or_text": {
+              "title": "Tcheke si tèks la vid",
+              "prompt": "Ekri kòd Python ki li yon liy antre. Si liy la se yon chèn vid, enprime `empty`. Sinon enprime `text`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri a pou limite repons lan.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si pwogram nan pwodui pwodiksyon yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki matche dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "text = input()\n\n# TODO: print empty or text"
+            },
+            "code_even_odd": {
+              "title": "Pè oswa enpè",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Enprime `even` si nonb la divizib pa 2. Sinon enprime `odd`.",
+              "hint": "Sèvi ak operatè rès `%` la pou teste divizibilite pa 2.",
+              "help": {
+                "concept": "Yon nonb se pè lè divizyon pa 2 kite yon rès 0. Sinon li enpè.",
+                "hint_1": "Sèvi ak yon kondisyon ki baze sou `n % 2`.",
+                "hint_2": "Ka pè a se lè rès apre divizyon pa 2 egal a zewo."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print even or odd"
+            }
+          }
+        }
+      },
+      "python-v2-2": {
+        "if-elif-else": {
+          "label": "If, Elif, ak Else",
+          "summary": "Kontwole ki kòd ki kouri selon kondisyon yo.",
+          "cards": {
+            "sketch0": {
+              "title": "Chwazi yon chemen ak if"
+            },
+            "sketch1": {
+              "title": "Sèvi ak else pou lòt ka a"
+            },
+            "sketch2": {
+              "title": "Tcheke plis pase de ka ak elif"
+            },
+            "sketch3": {
+              "title": "Tcheke ka espesyal yo an premye"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Pwojè Pratik Branching"
+            }
+          },
+          "projectSteps": {
+            "code_positive_negative_zero": {
+              "title": "Klasifye yon nonb"
+            },
+            "code_pass_fail": {
+              "title": "Pase oswa echwe"
+            },
+            "code_grade_checker": {
+              "title": "Verifikatè nòt senp"
+            },
+            "code_empty_or_text": {
+              "title": "Tcheke si tèks la vid"
+            },
+            "code_even_odd": {
+              "title": "Pè oswa enpè"
+            }
+          },
+          "quiz": {
+            "sc_if_runs_true": {
+              "title": "Kilè yon blòk if kouri?",
+              "prompt": "Nan Python, kilè kòd ki endante anba `if condition:` la kouri?",
+              "hint": "Reflechi sou si kondisyon an evalye kòm `True` oswa `False`.",
+              "help": {
+                "concept": "Yon deklarasyon `if` kontwole si blòk endante li a kouri. Python evalye kondisyon an an premye, epi li kouri blòk la sèlman pou ka ki vre a.",
+                "hint_1": "Blòk `if` la pa otomatik. Python tcheke kondisyon an anvan li antre nan liy endante yo.",
+                "hint_2": "Chwazi opsyon ki di blòk la kouri sèlman pou rezilta vre kondisyon an."
+              },
+              "options": {
+                "a": "Li toujou kouri",
+                "b": "Li kouri sèlman lè kondisyon an se True",
+                "c": "Li kouri sèlman lè kondisyon an se False",
+                "d": "Li kouri sèlman lè gen yon blòk else"
+              }
+            },
+            "sc_elif_role": {
+              "title": "Pou kisa elif sèvi?",
+              "prompt": "Ki objektif prensipal `elif` nan Python?",
+              "hint": "Li pèmèt ou tcheke yon lòt kondisyon apre yon kondisyon anvan te fo.",
+              "help": {
+                "concept": "`elif` ajoute yon lòt branch nan yon chèn kondisyonèl. Python rive ladan l sèlman si kondisyon `if` oswa `elif` ki te vini anvan yo te fo.",
+                "hint_1": "Yo sèvi avè l ant `if` ak `else` lè ou gen yon lòt kondisyon pou teste.",
+                "hint_2": "Chèche chwa ki pale de tcheke yon kondisyon anplis olye pou kòmanse yon blòk separe ki pa gen rapò."
+              },
+              "options": {
+                "a": "Pou repete menm blòk la anpil fwa",
+                "b": "Pou tcheke yon lòt kondisyon si sa ki te vini anvan yo te fo",
+                "c": "Pou fini yon pwogram touswit",
+                "d": "Pou enprime valè yon varyab"
+              }
+            },
+            "mc_valid_conditional_facts": {
+              "title": "Reyalite sou chèn kondisyonèl yo",
+              "prompt": "Chwazi tout deklarasyon ki vre sou chèn `if` / `elif` / `else` nan Python.",
+              "hint": "Reflechi sou lòd la ak konbyen branch ki kouri nan yon sèl chèn.",
+              "help": {
+                "concept": "Nan yon chèn kondisyonèl, Python tcheke kondisyon yo soti anlè pou desann epi li sispann nan premye branch ki vre a. `else` se solisyon ranplasman an lè pa gen okenn kondisyon anvan ki matche.",
+                "hint_1": "Yon lide enpòtan se ke Python pa kontinye tcheke apre li jwenn yon branch ki vre.",
+                "hint_2": "Chwazi deklarasyon yo sou tcheke soti anlè pou desann ak `else` kòm ka ranplasman an."
+              },
+              "options": {
+                "a": "Python tcheke kondisyon yo soti anlè pou desann",
+                "b": "Plis pase yon branch nan menm chèn nan ka kouri pou yon sèl antre",
+                "c": "Python sispann apre premye branch ki vre nan chèn nan",
+                "d": "Blòk else la kouri lè kondisyon anvan yo te fo"
+              }
+            },
+            "mc_truthy_values": {
+              "title": "Valè truthy",
+              "prompt": "Chwazi tout valè ki truthy nan Python.",
+              "hint": "Li kesyon an epi konekte li ak egzanp espesifik leson an.",
+              "help": {
+                "concept": "Kesyon sa a verifye yon lide espesifik nan leson an, pa yon estrateji jeneral pou pran tès.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki matche dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "options": {
+                "a": "0",
+                "b": "\"hi\"",
+                "c": "5",
+                "d": "None"
+              }
+            },
+            "dr_branch_order": {
+              "title": "Mete verifikasyon branch yo nan lòd",
+              "prompt": "Ranje etap sa yo nan lòd Python swiv pou yon chèn `if` / `elif` / `else`.",
+              "hint": "Python kòmanse anlè a, tcheke kondisyon yo, epi li sispann nan premye korespondans lan.",
+              "help": {
+                "concept": "Yon chèn kondisyonèl evalye an sekans. Python tcheke premye kondisyon an, apre sa lòt yo sèlman si sa nesesè, epi li sèvi ak `else` sèlman lè pa gen okenn kondisyon ki matche.",
+                "hint_1": "Premye aksyon an se tcheke kondisyon `if` la, pa sote ale nan `else`.",
+                "hint_2": "Apre yon `if` ki fo, Python ka tcheke `elif`; `else` vini an dènye si pa gen anyen ki matche."
+              },
+              "tokens": {
+                "t1": "Tcheke kondisyon if la",
+                "t2": "Si sa nesesè, tcheke kondisyon elif la",
+                "t3": "Kouri premye branch ki matche a",
+                "t4": "Sèvi ak else sèlman si pa gen okenn kondisyon anvan ki matche"
+              }
+            },
+            "dr_specific_before_general": {
+              "title": "Mete kondisyon yo nan yon bon lòd",
+              "prompt": "Ranje verifikasyon sa yo soti nan pi espesifik rive nan pi jeneral pou yon klasifikatè nòt.",
+              "hint": "Yon ka espesyal tankou egzakteman 100 ta dwe vini anvan yon règ ki pi laj tankou 60 oswa plis.",
+              "help": {
+                "concept": "Lè kondisyon yo sipèpoze, kondisyon ki pi espesifik la ta dwe vini an premye pou li pa kache pa yon kondisyon ki pi laj ki vini anvan.",
+                "hint_1": "Mande tèt ou ki règ ki matche ak pi piti kantite valè yo. Se li ki ta dwe premye.",
+                "hint_2": "Verifikasyon nòt egzak la se pi etwat la, entèval pase a pi laj, epi ka ranplasman an vini an dènye."
+              },
+              "tokens": {
+                "t1": "score == 100",
+                "t2": "score >= 60",
+                "t3": "else"
+              }
+            },
+            "fb_else_keyword": {
+              "title": "Konplete branch ranplasman an",
+              "prompt": "Chwazi mo kle ki fè kòd sa a kouri lè kondisyon `if` la fo.",
+              "hint": "Mo kle sa a jere ka ki rete a apre tès `if` la echwe.",
+              "help": {
+                "concept": "Nan yon kondisyonèl ki gen de branch, `the missing term` se branch ranplasman an ki kouri lè kondisyon `if` la fo.",
+                "hint_1": "Li pa yon lòt kondisyon tankou `elif`; se branch ki pran tout lòt ka yo.",
+                "hint_2": "Chwazi mo kle yo itilize san kondisyon apre yon blòk `if`."
+              },
+              "template": "[blank1]:\n    print(\"no\")",
+              "choices": [
+                "if",
+                "elif",
+                "else",
+                "print"
+              ]
+            },
+            "fb_comparison_operator": {
+              "title": "Chwazi bon konparezon an",
+              "prompt": "Ranpli operatè a pou kondisyon an vre lè `age` se 18 oswa plis.",
+              "hint": "Gade espas vid la, epi chwazi mo oswa senbòl ki fè lide a kòrèk.",
+              "help": {
+                "concept": "Espas vid la ta dwe ranpli ak tèm ki fè deklarasyon an egzak.",
+                "hint_1": "Gade mo ki anvan ak apre espas vid la pou dedwi ki kalite tèm ki nesesè.",
+                "hint_2": "Chwazi opsyon ki konplete deklarasyon an ak sans ki pi klè."
+              },
+              "template": "if age [blank1] 18:\n    print(\"adult\")",
+              "choices": [
+                ">",
+                "<",
+                ">=",
+                "=="
+              ]
+            },
+            "code_positive_negative_zero": {
+              "title": "Klasifye yon nonb",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Enprime `positive` si nonb la pi gran pase 0, `negative` si li pi piti pase 0, oswa `zero` si li egzakteman 0.",
+              "hint": "Li travay la \"Klasifye yon nonb\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Klasifye yon nonb\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print positive, negative, or zero"
+            },
+            "code_pass_fail": {
+              "title": "Pase oswa echwe",
+              "prompt": "Ekri kòd Python ki li yon nòt antye. Enprime `pass` si nòt la se 60 oswa plis. Sinon enprime `fail`.",
+              "hint": "Li travay la \"Pase oswa echwe\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Pase oswa echwe\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "score = int(input())\n\n# TODO: print pass or fail"
+            },
+            "code_grade_checker": {
+              "title": "Verifikatè nòt senp",
+              "prompt": "Ekri kòd Python ki li yon nòt antye soti nan 0 rive 100. Enprime `A` si nòt la se 90 oswa plis, `B` si li soti nan 80 rive 89, `C` si li soti nan 70 rive 79, epi `F` sinon.",
+              "hint": "Li travay la \"Verifikatè nòt senp\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande a pou: \"Verifikatè nòt senp\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman pwodiksyon yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl pwodiksyon an ak rezilta yo espere a."
+              },
+              "starterCode": "score = int(input())\n\n# TODO: print A, B, C, or F"
+            },
+            "code_empty_or_text": {
+              "title": "Tcheke si tèks la vid",
+              "prompt": "Ekri kòd Python ki li yon liy antre. Si liy la se yon chèn vid, enprime `empty`. Sinon enprime `text`.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri a pou limite repons lan.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si pwogram nan pwodui pwodiksyon yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki matche dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "text = input()\n\n# TODO: print empty or text"
+            },
+            "code_even_odd": {
+              "title": "Pè oswa enpè",
+              "prompt": "Ekri kòd Python ki li yon nonb antye. Enprime `even` si nonb la divizib pa 2. Sinon enprime `odd`.",
+              "hint": "Sèvi ak operatè rès `%` la pou teste divizibilite pa 2.",
+              "help": {
+                "concept": "Yon nonb se pè lè divizyon pa 2 kite yon rès 0. Sinon li enpè.",
+                "hint_1": "Sèvi ak yon kondisyon ki baze sou `n % 2`.",
+                "hint_2": "Ka pè a se lè rès apre divizyon pa 2 egal a zewo."
+              },
+              "starterCode": "n = int(input())\n\n# TODO: print even or odd"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-2": {
+        "if-elif-else": {
+          "sketch_if_basic": {
+            "title": "Chwazi yon chemen ak if",
+            "bodyMarkdown": "Yon deklarasyon `if` pèmèt pwogram ou a egzekite kòd sèlman lè yon kondisyon se `True`.\n\nMen yon egzanp senp:\n\n```python\nage = 16\n\nif age >= 13:\n    print(\"teen or older\")\n```\n\nAnn pase ladan l:\n- `age >= 13` se yon konparezon.\n- Python tcheke si konparezon sa a se `True` oswa `False`.\n- Paske `16 >= 13` se `True`, liy `print()` la kouri.\n- Liy endante a fè pati blòk `if` la.\n\nSi kondisyon an te `False`, Python ta sote liy endante sa a.\n\nEgzanp rezoud:\n\n```python\ntemperature = 30\n\nif temperature > 25:\n    print(\"warm\")\n```\n\nSa enprime `warm` paske `30 > 25` se vre."
+          },
+          "sketch_if_else": {
+            "title": "Sèvi ak else pou lòt ka a",
+            "bodyMarkdown": "Sèvi ak `else` lè ou vle yon blòk kouri si kondisyon an se `True`, epi yon lòt blòk kouri pou tout lòt ka yo.\n\n```python\nscore = 72\n\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")\n```\n\nAnn pase ladan l:\n- `if score >= 60:` tcheke kondisyon an.\n- Si li vre, Python enprime `pass`.\n- Sinon, Python ale nan `else` epi enprime `fail`.\n\nEgzanp rezoud:\n- Si `score` se `72`, pwodiksyon an se `pass`.\n- Si `score` se `40`, pwodiksyon an se `fail`.\n\nSa itil lè gen egzakteman de chemen."
+          },
+          "sketch_elif_chain": {
+            "title": "Tcheke plis pase de ka ak elif",
+            "bodyMarkdown": "Sèvi ak `elif` lè ou bezwen plis pase de branch posib.\n\n```python\nnumber = 0\n\nif number > 0:\n    print(\"positive\")\nelif number < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n```\n\nMen kijan Python li sa:\n1. Tcheke `number > 0`.\n2. Si sa fo, tcheke `number < 0`.\n3. Si toude fo, kouri blòk `else` la.\n\nEgzanp rezoud:\n- Si `number = 8`, pwodiksyon an se `positive`.\n- Si `number = -3`, pwodiksyon an se `negative`.\n- Si `number = 0`, pwodiksyon an se `zero`.\n\nSe yon sèl branch nan chèn sa a ki kouri.\n\nAnn pase ladan l: li chak deklarasyon soti anlè pou desann. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki pwodiksyon kòd la sipoze montre."
+          },
+          "sketch_order_matters": {
+            "title": "Tcheke ka espesyal yo an premye",
+            "bodyMarkdown": "Lòd kondisyon `if` ak `elif` yo enpòtan. Python sispann nan premye kondisyon ki vre a.\n\nGade egzanp sa a:\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"pass\")\nelif score == 100:\n    print(\"perfect\")\n```\n\nSa enprime `pass`, pa `perfect`, paske `score >= 60` deja vre. Python pa janm rive nan `elif` la.\n\nYon pi bon lòd se:\n\n```python\nscore = 100\n\nif score == 100:\n    print(\"perfect\")\nelif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")\n```\n\nKounye a yo tcheke ka espesyal la an premye.\n\nLide prensipal:\n- Mete ka ki pi etwat oswa pi espesifik yo anvan ka ki pi laj yo.\n- Mete ka ki pran tout lòt yo nan `else`.\n\nAnn pase ladan l: li chak deklarasyon soti anlè pou desann. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki pwodiksyon kòd la sipoze montre."
+          }
+        }
+      },
+      "python-v2-2": {
+        "if-elif-else": {
+          "sketch_if_basic": {
+            "title": "Chwazi yon chemen ak if",
+            "bodyMarkdown": "Yon deklarasyon `if` pèmèt pwogram ou a egzekite kòd sèlman lè yon kondisyon se `True`.\n\nMen yon egzanp senp:\n\n```python\nage = 16\n\nif age >= 13:\n    print(\"teen or older\")\n```\n\nAnn pase ladan l:\n- `age >= 13` se yon konparezon.\n- Python tcheke si konparezon sa a se `True` oswa `False`.\n- Paske `16 >= 13` se `True`, liy `print()` la kouri.\n- Liy endante a fè pati blòk `if` la.\n\nSi kondisyon an te `False`, Python ta sote liy endante sa a.\n\nEgzanp rezoud:\n\n```python\ntemperature = 30\n\nif temperature > 25:\n    print(\"warm\")\n```\n\nSa enprime `warm` paske `30 > 25` se vre."
+          },
+          "sketch_if_else": {
+            "title": "Sèvi ak else pou lòt ka a",
+            "bodyMarkdown": "Sèvi ak `else` lè ou vle yon blòk kouri si kondisyon an se `True`, epi yon lòt blòk kouri pou tout lòt ka yo.\n\n```python\nscore = 72\n\nif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")\n```\n\nAnn pase ladan l:\n- `if score >= 60:` tcheke kondisyon an.\n- Si li vre, Python enprime `pass`.\n- Sinon, Python ale nan `else` epi enprime `fail`.\n\nEgzanp rezoud:\n- Si `score` se `72`, pwodiksyon an se `pass`.\n- Si `score` se `40`, pwodiksyon an se `fail`.\n\nSa itil lè gen egzakteman de chemen."
+          },
+          "sketch_elif_chain": {
+            "title": "Tcheke plis pase de ka ak elif",
+            "bodyMarkdown": "Sèvi ak `elif` lè ou bezwen plis pase de branch posib.\n\n```python\nnumber = 0\n\nif number > 0:\n    print(\"positive\")\nelif number < 0:\n    print(\"negative\")\nelse:\n    print(\"zero\")\n```\n\nMen kijan Python li sa:\n1. Tcheke `number > 0`.\n2. Si sa fo, tcheke `number < 0`.\n3. Si toude fo, kouri blòk `else` la.\n\nEgzanp rezoud:\n- Si `number = 8`, pwodiksyon an se `positive`.\n- Si `number = -3`, pwodiksyon an se `negative`.\n- Si `number = 0`, pwodiksyon an se `zero`.\n\nSe yon sèl branch nan chèn sa a ki kouri.\n\nAnn pase ladan l: li chak deklarasyon soti anlè pou desann. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki pwodiksyon kòd la sipoze montre."
+          },
+          "sketch_order_matters": {
+            "title": "Tcheke ka espesyal yo an premye",
+            "bodyMarkdown": "Lòd kondisyon `if` ak `elif` yo enpòtan. Python sispann nan premye kondisyon ki vre a.\n\nGade egzanp sa a:\n\n```python\nscore = 100\n\nif score >= 60:\n    print(\"pass\")\nelif score == 100:\n    print(\"perfect\")\n```\n\nSa enprime `pass`, pa `perfect`, paske `score >= 60` deja vre. Python pa janm rive nan `elif` la.\n\nYon pi bon lòd se:\n\n```python\nscore = 100\n\nif score == 100:\n    print(\"perfect\")\nelif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"fail\")\n```\n\nKounye a yo tcheke ka espesyal la an premye.\n\nLide prensipal:\n- Mete ka ki pi etwat oswa pi espesifik yo anvan ka ki pi laj yo.\n- Mete ka ki pran tout lòt yo nan `else`.\n\nAnn pase ladan l: li chak deklarasyon soti anlè pou desann. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki pwodiksyon kòd la sipoze montre."
+          }
+        }
+      }
+    }
+  }
+}

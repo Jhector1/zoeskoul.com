@@ -1,0 +1,496 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-3": {
+        "break-and-continue": {
+          "label": "Break ak Continue",
+          "summary": "Kontwole koule bouk la avèk break ak continue.",
+          "cards": {
+            "sketch0": {
+              "title": "Sèvi ak break pou sispann yon bouk pi bonè"
+            },
+            "sketch1": {
+              "title": "Sèvi ak continue pou sote yon tou bouk"
+            },
+            "sketch2": {
+              "title": "Break kont continue"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Pratik Kontwòl Bouk"
+            }
+          },
+          "projectSteps": {
+            "code_break_stop_at_number": {
+              "title": "Sispann lè yon valè sib parèt"
+            },
+            "code_continue_skip_multiples": {
+              "title": "Sote miltip 3 yo"
+            },
+            "code_break_first_negative": {
+              "title": "Sispann nan premye nonb negatif la"
+            },
+            "code_continue_skip_letter": {
+              "title": "Enprime lèt yo eksepte youn"
+            },
+            "code_break_guess_game": {
+              "title": "Mini bouk devinèt"
+            }
+          },
+          "quiz": {
+            "sc-break-effect": {
+              "title": "Sa break fè",
+              "prompt": "Anndan yon bouk `while`, kisa `break` fè?",
+              "hint": "Li afekte tout bouk la, pa sèlman yon liy.",
+              "help": {
+                "concept": "`break` soti touswit nan bouk ki pi pre a, menm si kondisyon bouk la toujou vre.",
+                "hint_1": "Konpare sispann bouk la nèt ak sote sèlman yon iterasyon.",
+                "hint_2": "Apre `break` egzekite, bouk la pa kontinye nan pwochen repetisyon an."
+              },
+              "options": {
+                "a": "Li sispann bouk la touswit",
+                "b": "Li sote sèlman deklarasyon print aktyèl la",
+                "c": "Li rekòmanse bouk la depi nan kòmansman",
+                "d": "Li chanje False pou True"
+              }
+            },
+            "sc-continue-effect": {
+              "title": "Sa continue fè",
+              "prompt": "Anndan yon bouk, kisa `continue` fè?",
+              "hint": "Li sote ale pi devan, men bouk la menm kontinye mache.",
+              "help": {
+                "concept": "`continue` sote rès iterasyon aktyèl la epi li pase nan pwochen iterasyon bouk la.",
+                "hint_1": "Reflechi sou sa k rive apre `continue` nan tou sa a nan bouk la.",
+                "hint_2": "Bouk la pa fini; se sèlman deklarasyon ki rete nan iterasyon aktyèl la yo sote."
+              },
+              "options": {
+                "a": "Li fini pwogram nan",
+                "b": "Li soti nan bouk la nèt",
+                "c": "Li sote rès iterasyon aktyèl la",
+                "d": "Li repete menm iterasyon an pou tout tan"
+              }
+            },
+            "mc-break-uses": {
+              "title": "Bon itilizasyon pou break",
+              "prompt": "Ki sitiyasyon ki bon rezon pou itilize `break` nan yon bouk? Chwazi tout bon repons yo.",
+              "hint": "Reflechi sou ka kote ou vle sispann boukle pi bonè.",
+              "help": {
+                "concept": "`break` itil lè yon bouk dwe fini depi yon kondisyon sib rive.",
+                "hint_1": "Chèche opsyon kote kontinye bouk la pa nesesè apre yo fin jwenn oswa matche yon bagay.",
+                "hint_2": "Si travay la fini anvan kondisyon bouk la ta fini natirèlman, `break` ka sispann iterasyon anplis yo."
+              },
+              "options": {
+                "a": "Sispann chèche apre ou jwenn valè sib la",
+                "b": "Fini yon bouk lè itilizatè a antre yon nonb pou kite",
+                "c": "Sote enprime yon valè ou pa vle men kontinye boukle",
+                "d": "Otomatikman ogmante yon kontè pa 1"
+              }
+            },
+            "mc-continue-results": {
+              "title": "Efè continue",
+              "prompt": "Ki deklarasyon sou `continue` ki vre? Chwazi tout bon repons yo.",
+              "hint": "Reflechi sou yon iterasyon kont tout bouk la.",
+              "help": {
+                "concept": "`continue` afekte sèlman iterasyon aktyèl la, pa tout bouk la.",
+                "hint_1": "Verifye ki opsyon ki dekri sote kòd ki rete a pou yon tou bouk.",
+                "hint_2": "Yon bouk ak `continue` ka toujou trete valè ki vini apre yo apre iterasyon yo te sote a."
+              },
+              "options": {
+                "a": "Li ka sote enprime yon valè espesifik",
+                "b": "Li ka deplase kontwòl la nan pwochen iterasyon an",
+                "c": "Li toujou fini bouk la touswit",
+                "d": "Yo ka itilize li pandan iterasyon ki vini apre yo toujou ap mache"
+              }
+            },
+            "dr-break-flow": {
+              "title": "Lòd evènman yo ak break",
+              "prompt": "Ranje evènman sa yo nan bon lòd pou lide bouk sa a: bouk la verifye yon valè, li jwenn valè pou sispann nan, li egzekite `break`, epi apre sa bouk la fini.",
+              "hint": "Kisa ki dwe rive anvan `break` ka egzekite?",
+              "help": {
+                "concept": "Nan yon bouk, kòd la rive dabò nan verifikasyon kondisyon an anndan kò a, apre sa `break` egzekite, epi apre sa bouk la soti.",
+                "hint_1": "Bouk la pa ka fini ak `break` jiskaske yo rankontre valè sispann ki koresponn lan.",
+                "hint_2": "Mete dekouvèt valè sispann nan jis anvan aksyon `break` la."
+              },
+              "tokens": {
+                "t1": "Bouk la verifye valè aktyèl la",
+                "t2": "Yo jwenn valè sispann nan",
+                "t3": "`break` egzekite",
+                "t4": "Bouk la fini"
+              }
+            },
+            "dr-continue-flow": {
+              "title": "Lòd evènman yo ak continue",
+              "prompt": "Ranje etap sa yo pou yon iterasyon bouk kote yo itilize `continue` pou sote yon valè.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon ki valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "Bouk la rive sou yon valè espesyal",
+                "t2": "`continue` egzekite",
+                "t3": "Deklarasyon ki rete nan iterasyon sa a yo sote",
+                "t4": "Pwochen iterasyon an kòmanse"
+              }
+            },
+            "fb-break-keyword": {
+              "title": "Ranpli mo kontwòl bouk la",
+              "prompt": "Chwazi mo kle ki sispann bouk la touswit.",
+              "hint": "Mo kle sa a soti nan bouk la, pa sèlman yon iterasyon.",
+              "help": {
+                "concept": "Python itilize yon mo kle espesifik pou kite yon bouk pi bonè.",
+                "hint_1": "Li diferan de `continue`, ki sèlman sote yon iterasyon.",
+                "hint_2": "Bon mo a se sa yo itilize lè ou vle bouk la fini touswit."
+              },
+              "template": "if count == 5:\n    [blank1]",
+              "choices": [
+                "break",
+                "continue",
+                "while",
+                "print"
+              ]
+            },
+            "fb-continue-keyword": {
+              "title": "Ranpli mo kle pou sote a",
+              "prompt": "Chwazi mo kle ki sote rès iterasyon aktyèl la.",
+              "hint": "Sa a fè bouk la kontinye apre tou aktyèl la.",
+              "help": {
+                "concept": "Python itilize `the missing term` pou sote kòd ki rete nan iterasyon aktyèl bouk la.",
+                "hint_1": "Li pa fini bouk la nèt.",
+                "hint_2": "Sèvi ak mo kle ki sote ale nan pwochen repetisyon an."
+              },
+              "template": "if number == 3:\n    [blank1]",
+              "choices": [
+                "break",
+                "continue",
+                "range",
+                "input"
+              ]
+            },
+            "code-break-stop-at-number": {
+              "title": "Sispann lè yon valè sib parèt",
+              "prompt": "Ekri kòd Python ki li nonb antye nan antre estanda, youn pa liy. Enprime chak nonb sou pwòp liy pa li jiskaske ou li `0`. Lè yo li `0`, sispann bouk la epi pa enprime `0`.",
+              "hint": "Li travay la \"Sispann lè yon valè sib parèt\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Sispann lè yon valè sib parèt\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo atann nan."
+              },
+              "starterCode": "while True:\n    # TODO: read a number\n    # TODO: stop when the number is 0\n    # TODO: print the number if it is not 0\n    pass"
+            },
+            "code-continue-skip-multiples": {
+              "title": "Sote miltip 3 yo",
+              "prompt": "Ekri kòd Python ki enprime nonb soti 1 rive 10, youn pa liy, men ki sote nonb ki miltip 3 lè li itilize `continue`.",
+              "hint": "Li travay la \"Sote miltip 3 yo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Sote miltip 3 yo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo atann nan."
+              },
+              "starterCode": "for number in range(1, 11):\n    # TODO: if number is a multiple of 3, skip it\n    # TODO: otherwise print it\n    pass"
+            },
+            "code-break-first-negative": {
+              "title": "Sispann nan premye nonb negatif la",
+              "prompt": "Ekri kòd Python ki li nonb antye nan antre estanda, youn pa liy. Ajoute nonb yo nan yon total k ap akimile jiskaske yon nonb negatif parèt. Lè yo li yon nonb negatif, sispann touswit epi enprime total la san ou pa mete nonb negatif la ladan.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te korije paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "total = 0\n\nwhile True:\n    # TODO: read a number\n    # TODO: stop if it is negative\n    # TODO: otherwise add it to total\n    pass\n\nprint(total)"
+            },
+            "code-continue-skip-letter": {
+              "title": "Enprime lèt yo eksepte youn",
+              "prompt": "Ekri kòd Python ki fè bouk sou chèn `\"banana\"` epi enprime chak karaktè sou pwòp liy pa li, men ki sote karaktè `a` a lè li itilize `continue`.",
+              "hint": "Li travay kodaj la epi idantifye sa pwogram nan ta dwe enprime.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si pwogram nan pwodui sòti yo mande a.",
+                "hint_1": "Sèvi ak deklarasyon oswa ekspresyon Python ki koresponn ak sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo atann nan."
+              },
+              "starterCode": "word = \"banana\"\n\nfor ch in word:\n    # TODO: skip the letter a\n    # TODO: print the other characters\n    pass"
+            },
+            "code-break-guess-game": {
+              "title": "Mini bouk devinèt",
+              "prompt": "Ekri kòd Python ki kontinye li nonb antye nan antre estanda jiskaske itilizatè a antre `7`. Pou chak move devinèt, enprime `try again`. Lè antre a se `7`, enprime `correct` epi sispann bouk la.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te korije paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "while True:\n    guess = int(input())\n    # TODO: if the guess is 7, print the success message and stop\n    # TODO: otherwise print the retry message"
+            }
+          }
+        }
+      },
+      "python-v2-3": {
+        "break-and-continue": {
+          "label": "Break ak Continue",
+          "summary": "Kontwole koule bouk la avèk break ak continue.",
+          "cards": {
+            "sketch0": {
+              "title": "Sèvi ak break pou sispann yon bouk pi bonè"
+            },
+            "sketch1": {
+              "title": "Sèvi ak continue pou sote yon tou bouk"
+            },
+            "sketch2": {
+              "title": "Break kont continue"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Pratik Kontwòl Bouk"
+            }
+          },
+          "projectSteps": {
+            "code_break_stop_at_number": {
+              "title": "Sispann lè yon valè sib parèt"
+            },
+            "code_continue_skip_multiples": {
+              "title": "Sote miltip 3 yo"
+            },
+            "code_break_first_negative": {
+              "title": "Sispann nan premye nonb negatif la"
+            },
+            "code_continue_skip_letter": {
+              "title": "Enprime lèt yo eksepte youn"
+            },
+            "code_break_guess_game": {
+              "title": "Mini bouk devinèt"
+            }
+          },
+          "quiz": {
+            "sc-break-effect": {
+              "title": "Sa break fè",
+              "prompt": "Anndan yon bouk `while`, kisa `break` fè?",
+              "hint": "Li afekte tout bouk la, pa sèlman yon liy.",
+              "help": {
+                "concept": "`break` soti touswit nan bouk ki pi pre a, menm si kondisyon bouk la toujou vre.",
+                "hint_1": "Konpare sispann bouk la nèt ak sote sèlman yon iterasyon.",
+                "hint_2": "Apre `break` egzekite, bouk la pa kontinye nan pwochen repetisyon an."
+              },
+              "options": {
+                "a": "Li sispann bouk la touswit",
+                "b": "Li sote sèlman deklarasyon print aktyèl la",
+                "c": "Li rekòmanse bouk la depi nan kòmansman",
+                "d": "Li chanje False pou True"
+              }
+            },
+            "sc-continue-effect": {
+              "title": "Sa continue fè",
+              "prompt": "Anndan yon bouk, kisa `continue` fè?",
+              "hint": "Li sote ale pi devan, men bouk la menm kontinye mache.",
+              "help": {
+                "concept": "`continue` sote rès iterasyon aktyèl la epi li pase nan pwochen iterasyon bouk la.",
+                "hint_1": "Reflechi sou sa k rive apre `continue` nan tou sa a nan bouk la.",
+                "hint_2": "Bouk la pa fini; se sèlman deklarasyon ki rete nan iterasyon aktyèl la yo sote."
+              },
+              "options": {
+                "a": "Li fini pwogram nan",
+                "b": "Li soti nan bouk la nèt",
+                "c": "Li sote rès iterasyon aktyèl la",
+                "d": "Li repete menm iterasyon an pou tout tan"
+              }
+            },
+            "mc-break-uses": {
+              "title": "Bon itilizasyon pou break",
+              "prompt": "Ki sitiyasyon ki bon rezon pou itilize `break` nan yon bouk? Chwazi tout bon repons yo.",
+              "hint": "Reflechi sou ka kote ou vle sispann boukle pi bonè.",
+              "help": {
+                "concept": "`break` itil lè yon bouk dwe fini depi yon kondisyon sib rive.",
+                "hint_1": "Chèche opsyon kote kontinye bouk la pa nesesè apre yo fin jwenn oswa matche yon bagay.",
+                "hint_2": "Si travay la fini anvan kondisyon bouk la ta fini natirèlman, `break` ka sispann iterasyon anplis yo."
+              },
+              "options": {
+                "a": "Sispann chèche apre ou jwenn valè sib la",
+                "b": "Fini yon bouk lè itilizatè a antre yon nonb pou kite",
+                "c": "Sote enprime yon valè ou pa vle men kontinye boukle",
+                "d": "Otomatikman ogmante yon kontè pa 1"
+              }
+            },
+            "mc-continue-results": {
+              "title": "Efè continue",
+              "prompt": "Ki deklarasyon sou `continue` ki vre? Chwazi tout bon repons yo.",
+              "hint": "Reflechi sou yon iterasyon kont tout bouk la.",
+              "help": {
+                "concept": "`continue` afekte sèlman iterasyon aktyèl la, pa tout bouk la.",
+                "hint_1": "Verifye ki opsyon ki dekri sote kòd ki rete a pou yon tou bouk.",
+                "hint_2": "Yon bouk ak `continue` ka toujou trete valè ki vini apre yo apre iterasyon yo te sote a."
+              },
+              "options": {
+                "a": "Li ka sote enprime yon valè espesifik",
+                "b": "Li ka deplase kontwòl la nan pwochen iterasyon an",
+                "c": "Li toujou fini bouk la touswit",
+                "d": "Yo ka itilize li pandan iterasyon ki vini apre yo toujou ap mache"
+              }
+            },
+            "dr-break-flow": {
+              "title": "Lòd evènman yo ak break",
+              "prompt": "Ranje evènman sa yo nan bon lòd pou lide bouk sa a: bouk la verifye yon valè, li jwenn valè pou sispann nan, li egzekite `break`, epi apre sa bouk la fini.",
+              "hint": "Kisa ki dwe rive anvan `break` ka egzekite?",
+              "help": {
+                "concept": "Nan yon bouk, kòd la rive dabò nan verifikasyon kondisyon an anndan kò a, apre sa `break` egzekite, epi apre sa bouk la soti.",
+                "hint_1": "Bouk la pa ka fini ak `break` jiskaske yo rankontre valè sispann ki koresponn lan.",
+                "hint_2": "Mete dekouvèt valè sispann nan jis anvan aksyon `break` la."
+              },
+              "tokens": {
+                "t1": "Bouk la verifye valè aktyèl la",
+                "t2": "Yo jwenn valè sispann nan",
+                "t3": "`break` egzekite",
+                "t4": "Bouk la fini"
+              }
+            },
+            "dr-continue-flow": {
+              "title": "Lòd evènman yo ak continue",
+              "prompt": "Ranje etap sa yo pou yon iterasyon bouk kote yo itilize `continue` pou sote yon valè.",
+              "hint": "Ranje moso yo nan lòd Python itilize yo.",
+              "help": {
+                "concept": "Moso yo ta dwe fòme yon deklarasyon ki valab nan yon lòd lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "Bouk la rive sou yon valè espesyal",
+                "t2": "`continue` egzekite",
+                "t3": "Deklarasyon ki rete nan iterasyon sa a yo sote",
+                "t4": "Pwochen iterasyon an kòmanse"
+              }
+            },
+            "fb-break-keyword": {
+              "title": "Ranpli mo kontwòl bouk la",
+              "prompt": "Chwazi mo kle ki sispann bouk la touswit.",
+              "hint": "Mo kle sa a soti nan bouk la, pa sèlman yon iterasyon.",
+              "help": {
+                "concept": "Python itilize yon mo kle espesifik pou kite yon bouk pi bonè.",
+                "hint_1": "Li diferan de `continue`, ki sèlman sote yon iterasyon.",
+                "hint_2": "Bon mo a se sa yo itilize lè ou vle bouk la fini touswit."
+              },
+              "template": "if count == 5:\n    [blank1]",
+              "choices": [
+                "break",
+                "continue",
+                "while",
+                "print"
+              ]
+            },
+            "fb-continue-keyword": {
+              "title": "Ranpli mo kle pou sote a",
+              "prompt": "Chwazi mo kle ki sote rès iterasyon aktyèl la.",
+              "hint": "Sa a fè bouk la kontinye apre tou aktyèl la.",
+              "help": {
+                "concept": "Python itilize `the missing term` pou sote kòd ki rete nan iterasyon aktyèl bouk la.",
+                "hint_1": "Li pa fini bouk la nèt.",
+                "hint_2": "Sèvi ak mo kle ki sote ale nan pwochen repetisyon an."
+              },
+              "template": "if number == 3:\n    [blank1]",
+              "choices": [
+                "break",
+                "continue",
+                "range",
+                "input"
+              ]
+            },
+            "code-break-stop-at-number": {
+              "title": "Sispann lè yon valè sib parèt",
+              "prompt": "Ekri kòd Python ki li nonb antye nan antre estanda, youn pa liy. Enprime chak nonb sou pwòp liy pa li jiskaske ou li `0`. Lè yo li `0`, sispann bouk la epi pa enprime `0`.",
+              "hint": "Li travay la \"Sispann lè yon valè sib parèt\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Sispann lè yon valè sib parèt\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo atann nan."
+              },
+              "starterCode": "while True:\n    # TODO: read a number\n    # TODO: stop when the number is 0\n    # TODO: print the number if it is not 0\n    pass"
+            },
+            "code-continue-skip-multiples": {
+              "title": "Sote miltip 3 yo",
+              "prompt": "Ekri kòd Python ki enprime nonb soti 1 rive 10, youn pa liy, men ki sote nonb ki miltip 3 lè li itilize `continue`.",
+              "hint": "Li travay la \"Sote miltip 3 yo\" epi idantifye rezilta yo mande a.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si kòd ou a pwodui rezilta yo mande pou: \"Sote miltip 3 yo\".",
+                "hint_1": "Ekri kòd ki kreye egzakteman sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo atann nan."
+              },
+              "starterCode": "for number in range(1, 11):\n    # TODO: if number is a multiple of 3, skip it\n    # TODO: otherwise print it\n    pass"
+            },
+            "code-break-first-negative": {
+              "title": "Sispann nan premye nonb negatif la",
+              "prompt": "Ekri kòd Python ki li nonb antye nan antre estanda, youn pa liy. Ajoute nonb yo nan yon total k ap akimile jiskaske yon nonb negatif parèt. Lè yo li yon nonb negatif, sispann touswit epi enprime total la san ou pa mete nonb negatif la ladan.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te korije paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "total = 0\n\nwhile True:\n    # TODO: read a number\n    # TODO: stop if it is negative\n    # TODO: otherwise add it to total\n    pass\n\nprint(total)"
+            },
+            "code-continue-skip-letter": {
+              "title": "Enprime lèt yo eksepte youn",
+              "prompt": "Ekri kòd Python ki fè bouk sou chèn `\"banana\"` epi enprime chak karaktè sou pwòp liy pa li, men ki sote karaktè `a` a lè li itilize `continue`.",
+              "hint": "Li travay kodaj la epi idantifye sa pwogram nan ta dwe enprime.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si pwogram nan pwodui sòti yo mande a.",
+                "hint_1": "Sèvi ak deklarasyon oswa ekspresyon Python ki koresponn ak sòti yo mande a.",
+                "hint_2": "Klike Run epi konpare panèl sòti a ak rezilta yo atann nan."
+              },
+              "starterCode": "word = \"banana\"\n\nfor ch in word:\n    # TODO: skip the letter a\n    # TODO: print the other characters\n    pass"
+            },
+            "code-break-guess-game": {
+              "title": "Mini bouk devinèt",
+              "prompt": "Ekri kòd Python ki kontinye li nonb antye nan antre estanda jiskaske itilizatè a antre `7`. Pou chak move devinèt, enprime `try again`. Lè antre a se `7`, enprime `correct` epi sispann bouk la.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te korije paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, epi retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "while True:\n    guess = int(input())\n    # TODO: if the guess is 7, print the success message and stop\n    # TODO: otherwise print the retry message"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-3": {
+        "break-and-continue": {
+          "break-basics": {
+            "title": "Sèvi ak break pou sispann yon bouk pi bonè",
+            "bodyMarkdown": "Yon bouk `while` nòmalman kontinye mache toutotan kondisyon li se `True`. Deklarasyon `break` la sispann bouk la touswit, menm si kondisyon an toujou `True`.\n\nMen yon egzanp senp:\n\n```python\ncount = 1\n\nwhile count <= 5:\n    print(count)\n    if count == 3:\n        break\n    count += 1\n```\n\nAnn suiv li:\n- `count` kòmanse nan `1`\n- Bouk la enprime `1`, apre sa `2`, apre sa `3`\n- Lè `count == 3`, `break` egzekite\n- Bouk la fini touswit\n\nKidonk sòti a se:\n\n```python\n1\n2\n3\n```\n\nYon itilizasyon komen pou debutan ak `break` se sispann lè ou jwenn sa ou vle, tankou yon nonb sib oswa yon karaktè espesyal."
+          },
+          "continue-basics": {
+            "title": "Sèvi ak continue pou sote yon tou bouk",
+            "bodyMarkdown": "Deklarasyon `continue` la pa sispann tout bouk la. Olye de sa, li sote rès tou aktyèl bouk la epi li pase nan pwochen an.\n\nEgzanp:\n\n```python\ncount = 0\n\nwhile count < 5:\n    count += 1\n    if count == 3:\n        continue\n    print(count)\n```\n\nAnn suiv li etap pa etap:\n- `count` kòmanse nan `0`\n- Nan tèt chak tou bouk, `count` ogmante pa `1`\n- Lè `count` vin `3`, `continue` egzekite\n- Sa vle di `print(count)` sote pou tou sa a sèlman\n- Apre sa bouk la kontinye ak pwochen valè a\n\nSòti a se:\n\n```python\n1\n2\n4\n5\n```\n\nRemake `3` la manke, men bouk la toujou kontinye mache."
+          },
+          "break-vs-continue": {
+            "title": "Break kont continue",
+            "bodyMarkdown": "De deklarasyon sa yo toude chanje koule bouk la, men yo fè travay diferan:\n\n- `break` = sispann tout bouk la\n- `continue` = sote rès yon tou bouk\n\nKonpare egzanp sa yo.\n\nAvèk `break`:\n\n```python\nn = 1\nwhile n <= 5:\n    if n == 3:\n        break\n    print(n)\n    n += 1\n```\n\nSa enprime:\n\n```python\n1\n2\n```\n\nPoukisa? Lè `n` vin `3`, bouk la fini anvan li enprime `3`.\n\nAvèk `continue`:\n\n```python\nn = 0\nwhile n < 5:\n    n += 1\n    if n == 3:\n        continue\n    print(n)\n```\n\nSa enprime:\n\n```python\n1\n2\n4\n5\n```\n\nIsit la, se sèlman tou `3` la yo sote.\n\nYon fason itil pou sonje sa:\n- `break` soti nan bouk la\n- `continue` sote ale nan pwochen repetisyon an\n\nAnn suiv li: li chak deklarasyon soti anlè rive anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki sòti kòd la fèt pou montre."
+          }
+        }
+      },
+      "python-v2-3": {
+        "break-and-continue": {
+          "break-basics": {
+            "title": "Sèvi ak break pou sispann yon bouk pi bonè",
+            "bodyMarkdown": "Yon bouk `while` nòmalman kontinye mache toutotan kondisyon li se `True`. Deklarasyon `break` la sispann bouk la touswit, menm si kondisyon an toujou `True`.\n\nMen yon egzanp senp:\n\n```python\ncount = 1\n\nwhile count <= 5:\n    print(count)\n    if count == 3:\n        break\n    count += 1\n```\n\nAnn suiv li:\n- `count` kòmanse nan `1`\n- Bouk la enprime `1`, apre sa `2`, apre sa `3`\n- Lè `count == 3`, `break` egzekite\n- Bouk la fini touswit\n\nKidonk sòti a se:\n\n```python\n1\n2\n3\n```\n\nYon itilizasyon komen pou debutan ak `break` se sispann lè ou jwenn sa ou vle, tankou yon nonb sib oswa yon karaktè espesyal."
+          },
+          "continue-basics": {
+            "title": "Sèvi ak continue pou sote yon tou bouk",
+            "bodyMarkdown": "Deklarasyon `continue` la pa sispann tout bouk la. Olye de sa, li sote rès tou aktyèl bouk la epi li pase nan pwochen an.\n\nEgzanp:\n\n```python\ncount = 0\n\nwhile count < 5:\n    count += 1\n    if count == 3:\n        continue\n    print(count)\n```\n\nAnn suiv li etap pa etap:\n- `count` kòmanse nan `0`\n- Nan tèt chak tou bouk, `count` ogmante pa `1`\n- Lè `count` vin `3`, `continue` egzekite\n- Sa vle di `print(count)` sote pou tou sa a sèlman\n- Apre sa bouk la kontinye ak pwochen valè a\n\nSòti a se:\n\n```python\n1\n2\n4\n5\n```\n\nRemake `3` la manke, men bouk la toujou kontinye mache."
+          },
+          "break-vs-continue": {
+            "title": "Break kont continue",
+            "bodyMarkdown": "De deklarasyon sa yo toude chanje koule bouk la, men yo fè travay diferan:\n\n- `break` = sispann tout bouk la\n- `continue` = sote rès yon tou bouk\n\nKonpare egzanp sa yo.\n\nAvèk `break`:\n\n```python\nn = 1\nwhile n <= 5:\n    if n == 3:\n        break\n    print(n)\n    n += 1\n```\n\nSa enprime:\n\n```python\n1\n2\n```\n\nPoukisa? Lè `n` vin `3`, bouk la fini anvan li enprime `3`.\n\nAvèk `continue`:\n\n```python\nn = 0\nwhile n < 5:\n    n += 1\n    if n == 3:\n        continue\n    print(n)\n```\n\nSa enprime:\n\n```python\n1\n2\n4\n5\n```\n\nIsit la, se sèlman tou `3` la yo sote.\n\nYon fason itil pou sonje sa:\n- `break` soti nan bouk la\n- `continue` sote ale nan pwochen repetisyon an\n\nAnn suiv li: li chak deklarasyon soti anlè rive anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki sòti kòd la fèt pou montre."
+          }
+        }
+      }
+    }
+  }
+}

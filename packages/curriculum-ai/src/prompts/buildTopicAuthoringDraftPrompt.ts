@@ -117,9 +117,14 @@ function renderRetryGuidance(seed: TopicSeed, retry?: TopicRetryContext) {
             ? [
                 "- These exercise ids were invalid as fixed_tests code_input:",
                 ...unsafeFixedTestIssues.map((issue) => `  - ${issue.exerciseId ?? "unknown"}`),
-                "- Replace them with non-code exercises, regenerate them as stdin-based code_input with at least 2 tests, or switch them to semantic code_input when the task is about functions, classes, objects, methods, attributes, or return values.",
+                "- For EVERY listed Python class/object/method/multifile exercise, do not keep recipeType as fixed_tests just because the workspace has files.",
+                "- If the task asks the learner to define or edit a class, constructor, method, attribute, inheritance relationship, import, or helper module, switch that exercise to recipeType \"semantic\", remove tests[], and add semanticChecks[].",
+                "- Use defines_class, constructible, instance_attributes, method_returns, method_sequence_returns, attribute_sequence_equals, created_instances, printed_line_count, and no_stdout as appropriate for the exact object behavior.",
+                "- Only keep recipeType \"fixed_tests\" when the task is a normal runnable program with two genuinely different stdin/stdout cases or a true file-reading task with two different tests[].files fixtures and matching stdout.",
+                "- Do not fake a second tests[].files case for OOP structure tasks that are really about classes, methods, attributes, or imports; semantic checks are the required repair path.",
+                "- Replace them with non-code exercises only if they are conceptual and cannot be graded as runnable/semantic code_input.",
                 "- Do not produce static print-only code_input tasks with one test.",
-                "- For class/object/method tasks, prefer semantic checks such as defines_class, constructible, instance_attributes, function_returns, or method_returns instead of stdout tests.",
+                "- For class/object/method tasks, prefer semantic checks such as defines_class, constructible, instance_attributes, function_returns, method_returns, method_sequence_returns, or attribute_sequence_equals instead of stdout tests.",
             ]
             : []),
         "",
@@ -172,7 +177,10 @@ function renderWorkspacePolicy(seed: TopicSeed) {
 function renderAuthoringPolicy(seed: TopicSeed) {
     const policy = seed.authoringPolicy;
     if (!policy) return "";
-    const logicalModuleNumber = Math.max(0, (seed.moduleOrder ?? 1) - 1);
+    const logicalModuleNumber =
+        typeof seed.moduleNumber === "number" && Number.isFinite(seed.moduleNumber)
+            ? seed.moduleNumber
+            : Math.max(0, (seed.moduleOrder ?? 1) - 1);
 
     const lines: string[] = ["Authoring policy rules:"];
 
@@ -229,6 +237,7 @@ function renderStructuredLessonIntent(seed: TopicSeed) {
         lines.push("- This topic should support real embedded Try It practice through quizDraft exercises.");
         if (practice?.tryItPlacement === "all_sketches") {
             lines.push("- Every sketch block must map to its own concrete Try It exercise; do not rely on one exercise for the whole topic.");
+            lines.push("- Prefer embedded Try It exercise ids that follow try-<topic-id>-sketch0, try-<topic-id>-sketch1, etc.; do not use ci-* ids for sketch try-it exercises.");
         } else {
             lines.push("- Use sketchBlocks to teach the idea clearly, then make the configured code_input exercise work as the embedded try-it task.");
         }
@@ -324,8 +333,12 @@ export function buildTopicAuthoringDraftPrompt(args: {
             "Every exercise must include a real solution.",
             "Do not leave any solution field empty.",
             "Every Try It exercise prompt must be unique, specific, and tied to the topic context.",
-            "If a code_input exercise uses multiple files, include complete solutionFiles for every relevant file in the finished workspace.",
-            "For progressive module projects and capstones, each later step must start from the previous step's working solution or workspace state.",
+            "Embedded sketch Try It exercises must use try-* ids, preferably try-<topic-id>-sketch0, try-<topic-id>-sketch1, etc., not ci-* ids.",
+            "If a code_input exercise uses multiple files, include complete starterFiles and complete solutionFiles for every relevant file in the finished workspace.",
+            "For OOP/class/object/method exercises, use recipeType \"semantic\" with semanticChecks rather than fixed_tests, even when the exercise uses multiple files.",
+            "Use fixed_tests for multifile Python only when the learner runs a normal program with two distinct observable stdout cases, or a true file-reading task with two distinct tests[].files fixtures.",
+            "Do not use tests[].files as a substitute for semantic class/method/import checks.",
+            "For progressive module projects and capstones, each later step must start from the previous step's full working solutionFiles/workspace state.",
             "",
             renderRetryGuidance(args.seed, args.retry),
 

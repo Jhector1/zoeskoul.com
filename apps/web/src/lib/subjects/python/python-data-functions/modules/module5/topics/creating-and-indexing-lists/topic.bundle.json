@@ -307,11 +307,11 @@
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -320,11 +320,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "names = []\n\n# Create the list [\"Ava\", \"Mia\", \"Zoe\"].\n# Print the first name, then print the last name.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -344,11 +344,11 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -364,12 +364,12 @@
           {
             "type": "source_regex",
             "pattern": "\\bnames\\s*=\\s*\\[\\s*['\\\"]Ava['\\\"]\\s*,\\s*['\\\"]Mia['\\\"]\\s*,\\s*['\\\"]Zoe['\\\"]\\s*\\]",
-            "message": "Create the names list instead of only printing the final answers."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.0.message"
           },
           {
             "type": "source_contains",
             "pattern": "names[0]",
-            "message": "Use names[0] to print the first name instead of typing Ava directly.",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.1.message",
             "normalizeWhitespace": true
           },
           {
@@ -378,7 +378,7 @@
               "names[-1]",
               "names[2]"
             ],
-            "message": "Use an index on names to print the last name instead of typing Zoe directly.",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.2.message",
             "normalizeWhitespace": true
           }
         ]
@@ -386,7 +386,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nprint(names[0])\nprint(names[-1])\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -396,12 +396,12 @@
         {
           "type": "source_regex",
           "pattern": "\\bnames\\s*=\\s*\\[\\s*['\\\"]Ava['\\\"]\\s*,\\s*['\\\"]Mia['\\\"]\\s*,\\s*['\\\"]Zoe['\\\"]\\s*\\]",
-          "message": "Create the names list instead of only printing the final answers."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.0.message"
         },
         {
           "type": "source_contains",
           "pattern": "names[0]",
-          "message": "Use names[0] to print the first name instead of typing Ava directly.",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.1.message",
           "normalizeWhitespace": true
         },
         {
@@ -410,7 +410,7 @@
             "names[-1]",
             "names[2]"
           ],
-          "message": "Use an index on names to print the last name instead of typing Zoe directly.",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-checkpoint.sourceChecks.2.message",
           "normalizeWhitespace": true
         }
       ]
@@ -422,11 +422,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last",
       "language": "python",
-      "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -435,11 +435,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "word1 = input()\nword2 = input()\nword3 = input()\n\n# Store the words in a list.\n# Then print the first item and the last item on separate lines.",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -470,11 +470,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -484,7 +484,7 @@
           {
             "type": "uses_subscript",
             "index": 0,
-            "message": "Use index 0 to read the first item instead of printing the input directly."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.0.message"
           },
           {
             "type": "source_contains_any",
@@ -492,7 +492,7 @@
               "[-1]",
               "[2]"
             ],
-            "message": "Use an index to read the last item from the list.",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.1.message",
             "normalizeWhitespace": true
           }
         ]
@@ -500,7 +500,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "word1 = input()\nword2 = input()\nword3 = input()\n\nwords = [word1, word2, word3]\nprint(words[0])\nprint(words[2])",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -510,7 +510,7 @@
         {
           "type": "uses_subscript",
           "index": 0,
-          "message": "Use index 0 to read the first item instead of printing the input directly."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.0.message"
         },
         {
           "type": "source_contains_any",
@@ -518,7 +518,7 @@
             "[-1]",
             "[2]"
           ],
-          "message": "Use an index to read the last item from the list.",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-first-last.sourceChecks.1.message",
           "normalizeWhitespace": true
         }
       ]
@@ -530,11 +530,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number",
       "language": "python",
-      "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -543,11 +543,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\n# Put the numbers into a list.\n# Print the second item.",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -578,11 +578,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -592,14 +592,14 @@
           {
             "type": "uses_subscript",
             "index": 1,
-            "message": "Use index 1 to read the second item from the list."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.sourceChecks.0.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nprint(numbers[1])",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -609,7 +609,7 @@
         {
           "type": "uses_subscript",
           "index": 1,
-          "message": "Use index 1 to read the second item from the list."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-print-second-number.sourceChecks.0.message"
         }
       ]
     },
@@ -620,11 +620,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list",
       "language": "python",
-      "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -633,11 +633,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\n# Create a list with the three colors.\n# Print the whole list.",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -668,11 +668,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -682,14 +682,14 @@
           {
             "type": "source_regex",
             "pattern": "\\[\\s*color1\\s*,\\s*color2\\s*,\\s*color3\\s*\\]",
-            "message": "Create a list with color1, color2, and color3 before printing it."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.sourceChecks.0.message"
           }
         ]
       },
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "color1 = input()\ncolor2 = input()\ncolor3 = input()\n\ncolors = [color1, color2, color3]\nprint(colors)",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -699,7 +699,7 @@
         {
           "type": "source_regex",
           "pattern": "\\[\\s*color1\\s*,\\s*color2\\s*,\\s*color3\\s*\\]",
-          "message": "Create a list with color1, color2, and color3 before printing it."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.ci-build-and-show-list.sourceChecks.0.message"
         }
       ]
     },
@@ -710,11 +710,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0",
       "language": "python",
-      "starterCode": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -723,7 +723,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -732,11 +732,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "items = ['red', 'blue', 'green']\n\n# Print the first item.\n# Then print the last item.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -762,11 +762,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "items = ['red', 'blue', 'green']\nprint(items[0])\nprint(items[-1])\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -776,7 +776,7 @@
           {
             "type": "source_contains",
             "pattern": "items[0]",
-            "message": "Use items[0] for the first item instead of typing red.",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message",
             "normalizeWhitespace": true
           },
           {
@@ -785,7 +785,7 @@
               "items[-1]",
               "items[2]"
             ],
-            "message": "Use an index on items for the last item instead of typing green.",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message",
             "normalizeWhitespace": true
           }
         ]
@@ -794,7 +794,7 @@
         {
           "type": "source_contains",
           "pattern": "items[0]",
-          "message": "Use items[0] for the first item instead of typing red.",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.0.message",
           "normalizeWhitespace": true
         },
         {
@@ -803,7 +803,7 @@
             "items[-1]",
             "items[2]"
           ],
-          "message": "Use an index on items for the last item instead of typing green.",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch0.sourceChecks.1.message",
           "normalizeWhitespace": true
         }
       ]
@@ -815,11 +815,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1",
       "language": "python",
-      "starterCode": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -828,7 +828,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -837,11 +837,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [4, 9, 2]\n\n# Print the second number in the list.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -867,11 +867,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "numbers = [4, 9, 2]\nprint(numbers[1])\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -881,7 +881,7 @@
           {
             "type": "source_contains",
             "pattern": "numbers[1]",
-            "message": "Use numbers[1] instead of typing 9 directly.",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.0.message",
             "normalizeWhitespace": true
           }
         ]
@@ -890,7 +890,7 @@
         {
           "type": "source_contains",
           "pattern": "numbers[1]",
-          "message": "Use numbers[1] instead of typing 9 directly.",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch1.sourceChecks.0.message",
           "normalizeWhitespace": true
         }
       ]
@@ -902,11 +902,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2",
       "language": "python",
-      "starterCode": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -915,7 +915,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -924,11 +924,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "first = 'Ava'\nsecond = 'Mia'\n\n# Build a list named names with first and second.\n# Then print names.\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -954,11 +954,11 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "first = 'Ava'\nsecond = 'Mia'\nnames = [first, second]\nprint(names)\n",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -979,7 +979,7 @@
           {
             "type": "source_regex",
             "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
-            "message": "Build names from the variables first and second, not by typing the final list directly."
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.0.message"
           }
         ]
       },
@@ -987,7 +987,7 @@
         {
           "type": "source_regex",
           "pattern": "\\bnames\\s*=\\s*\\[\\s*first\\s*,\\s*second\\s*\\]",
-          "message": "Build names from the variables first and second, not by typing the final list directly."
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.creating-and-indexing-lists.quiz.try-creating-and-indexing-lists-sketch2.sourceChecks.0.message"
         }
       ]
     }

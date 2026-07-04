@@ -1,0 +1,252 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "viewing-file-contents": {
+          "label": "Gade kontni fichye",
+          "summary": "Enspekte fichye tèks avèk cat, head, tail, ak wc.",
+          "cards": {
+            "sketch0": {
+              "title": "Li yon fichye antye avèk cat"
+            },
+            "sketch1": {
+              "title": "Gade kòmansman oswa fen ak head ak tail"
+            },
+            "sketch2": {
+              "title": "Konte liy, mo, ak karaktè avèk wc"
+            },
+            "quiz": {
+              "title": "Tcheke pratik"
+            },
+            "project": {
+              "title": "Enspekte fichye pou yon espas travay lekòl ki netwaye"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "exercises": {
+              "viewing-file-contents-try-it-1": {
+                "title": "Travay tèminal: li yon fichye ak cat",
+                "prompt": "Li meni konplè a lè ou kouri `cat cafe/menu.txt` nan tèminal la.",
+                "hint": "Sèvi ak katab ak non fichye egzak ki nan enstriksyon an, apre sa kouri ls, cat oswa find pou verifye travay ou.",
+                "help": {
+                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
+                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                },
+                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Kouri `cat cafe/menu.txt`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "cafe_menu_txt": {
+                    "content": "Soup\nSalad\nTea\n"
+                  }
+                }
+              },
+              "viewing-file-contents-try-it-2": {
+                "title": "Travay tèminal: gade aperçu ak head ak tail",
+                "prompt": "Gade aperçu jounal la lè ou kouri `head logs/event.log`, apre sa `tail logs/event.log`.",
+                "hint": "Sèvi ak katab ak non fichye egzak ki nan enstriksyon an, apre sa kouri ls, cat oswa find pou verifye travay ou.",
+                "help": {
+                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
+                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                },
+                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Kouri `head logs/event.log`."
+                    },
+                    "1": {
+                      "message": "Kouri `tail logs/event.log`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "logs_event_log": {
+                    "content": "setup started\nchairs placed\nsnacks delivered\ndoors opened\nguests arrived\ncleanup planned\n"
+                  }
+                }
+              },
+              "viewing-file-contents-try-it-3": {
+                "title": "Travay tèminal: konte liy ak wc -l",
+                "prompt": "Konte liy yo nan lis verifikasyon an lè ou kouri `wc -l logs/checklist.txt`.",
+                "hint": "Sèvi ak katab ak non fichye egzak ki nan enstriksyon an, apre sa kouri ls, cat oswa find pou verifye travay ou.",
+                "help": {
+                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
+                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                },
+                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Kouri `wc -l logs/checklist.txt`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "logs_checklist_txt": {
+                    "content": "open room\nset chairs\ntcheke projector\nwelcome guests\n"
+                  }
+                }
+              }
+            },
+            "try_viewing_file_contents_sketch0": {
+              "title": "Eseye li ou menm: li yon fichye ak cat",
+              "prompt": "Kouri `cat cafe/menu.txt` pou enprime tout fichye meni an."
+            },
+            "try_viewing_file_contents_sketch1": {
+              "title": "Eseye li ou menm: gade aperçu ak head ak tail",
+              "prompt": "Kouri `head logs/event.log`, apre sa `tail logs/event.log`, pou gade kòmansman ak fen fichye a."
+            },
+            "try_viewing_file_contents_sketch2": {
+              "title": "Eseye li ou menm: konte liy ak wc -l",
+              "prompt": "Kouri `wc -l logs/checklist.txt` pou konte liy lis verifikasyon an."
+            }
+          },
+          "practice": {
+            "sc-tail-purpose": {
+              "title": "Chwazi pi bon kòmand pou dènye liy yo",
+              "prompt": "Yon klèb kontinye ajoute nouvo antre nan `updates.txt`. Ki kòmand ki pi bon lè ou vle wè fen fichye sa a vit ?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon an ekri pou diminye chwa yo.",
+              "help": {
+                "concept": "Tèks èd sa a te korije paske premye vèsyon an te montre repons lan twò dirèkteman.",
+                "hint_1": "Konpare chak opsyon ak sijè egzak ki site nan kesyon an.",
+                "hint_2": "Sèvi ak wòl oswa prèv ki nan enstriksyon an olye ou konte sèlman sou mo ki nan repons yo."
+              },
+              "options": {
+                "a": "cat",
+                "b": "head",
+                "c": "tail",
+                "d": "wc"
+              }
+            },
+            "mc-cat-uses": {
+              "title": "Lè cat bon pou travay la",
+              "prompt": "Yon elèv assistant se tchekeing fichyes nan a class notes katab. Ki tasks se good uses for `cat`? Chwazi tout sa ki mache.",
+              "hint": "Panse ak lè li itil pou wè tout tèks la yon sèl kou.",
+              "help": {
+                "concept": "`cat` enprime tout kontni yon fichye nan tèminal la, kidonk li pi bon pou ti fichye tèks lè ou vle li tout bagay.",
+                "hint_1": "Chèche travay kote elèv la vle tout fichye a, pa sèlman kòmansman an, fen an, oswa yon kantite.",
+                "hint_2": "De chwa mande pou li tout tèks la dirèkteman. Lòt yo pi byen mache ak `wc`, `head`, oswa `tail`."
+              },
+              "options": {
+                "a": "Li chak liy nan yon kout fichye lis verifikasyon",
+                "b": "Wè sèlman dènye liy yon long fichye jounal",
+                "c": "Montre tout kontni yon kout nòt rapèl",
+                "d": "Konte konbyen mo ki nan yon bouyon redaksyon"
+              }
+            },
+            "mc-wc-meaning": {
+              "title": "Sa wc di ou",
+              "prompt": "Ou kouri `wc draft.txt` pandan w ap revize yon anons elèv. Ki kalite enfòmasyon `wc` ka bay sou fichye a ? Chwazi tout sa ki mache.",
+              "hint": "Panse ak kantite yo, pa ak kontni tèks la menm.",
+              "help": {
+                "concept": "`wc` rezime kantite tèks ki nan yon fichye lè li bay kantite tankou liy, mo, ak karaktè.",
+                "hint_1": "Chèche mezi gwosè kontni fichye a olye de kòmand ki montre tèks.",
+                "hint_2": "Twa chwa yo se rezime ki baze sou kantite `wc` ka bay."
+              },
+              "options": {
+                "a": "Konbyen liy ki nan fichye a",
+                "b": "Konbyen mo ki nan fichye a",
+                "c": "Konbyen karaktè ki nan fichye a",
+                "d": "Dènye fraz egzak ki nan fichye a"
+              }
+            },
+            "dr-inspect-order": {
+              "title": "Enspekte yon fichye nan yon lòd ki fè sans",
+              "prompt": "Mete aksyon sa yo nan yon lòd ki fè sans pou tcheke yon fichye tèks nan tèminal la apre ou antre nan yon katab pwojè.",
+              "hint": "Li chak moso epi mete yo nan lòd pou deklarasyon an ka byen konprann.",
+              "help": {
+                "concept": "Moso yo dwe fòme yon deklarasyon ki valab nan yon lòd ki lojik.",
+                "hint_1": "Kòmanse ak moso ki prezante lide a oswa aksyon an.",
+                "hint_2": "Mete moso ki depann yo apre pati yo dekri oswa konplete a."
+              },
+              "tokens": {
+                "t1": "ls",
+                "t2": "cat notes.txt",
+                "t3": "wc notes.txt"
+              }
+            },
+            "fb-head-purpose": {
+              "title": "Chwazi bon kòmand aperçu a",
+              "prompt": "Yon pwofesè sove yon long fichye ki rele `chapter_notes.txt`, epi ou vle enspekte sèlman kòmansman li.",
+              "hint": "Chwazi kòmand ki montre anlè yon fichye.",
+              "help": {
+                "concept": "`the missing term` montre premye pati yon fichye, sa ki itil lè ou vle yon aperçu rapid sou kijan fichye a kòmanse.",
+                "hint_1": "Kòmand sa a se opoze `tail`.",
+                "hint_2": "Sèvi ak kòmand ki matche ak lide anlè oswa kòmansman fichye a."
+              },
+              "template": "[blank1] chapter_notes.txt",
+              "choices": [
+                "cat",
+                "head",
+                "tail",
+                "wc"
+              ]
+            },
+            "code-cat-menu": {
+              "title": "Gade fichye meni yon kafe",
+              "prompt": "Ou vle konfime chak liy nan yon kout fichye meni. Ki rezilta ki montre `cat` fè travay la byen ?",
+              "hint": "Sèvi ak kòmand ki enprime yon fichye antye nan tèminal la.",
+              "help": {
+                "concept": "Pou ti fichye tèks, `cat` montre tout fichye a dirèkteman nan tèminal la pou ou ka enspekte chak liy yon sèl kou.",
+                "hint_1": "Ou pa bezwen chanje katab oswa modifye fichye a. Kouri yon sèl kòmand sou `menu.txt`.",
+                "hint_2": "Sèvi ak non kòmand nan sijè sa a ki enprime kontni konplè yon fichye."
+              },
+              "template": "Yon kòmand ki li yon fichye antye dwe ____ pou ou ka wè kontni an klèman.",
+              "choices": [
+                "enprime yon rezilta ou ka wè",
+                "kache tout rezilta",
+                "efase fichye a touswit",
+                "sote pwogram nan"
+              ]
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "viewing-file-contents": {
+          "sketch-1": {
+            "title": "Li yon fichye antye avèk cat",
+            "bodyMarkdown": "`cat` enprime kontni yon fichye tèks nan tèminal la. Li itil lè fichye a kout epi ou vle wè tout bagay yon sèl kou.\n\nEgzanp :\n\n```bash\ncat notes.txt\n```\n\nSi `notes.txt` genyen :\n\n```text\nBuy folders\nReview chapter 2\nEmail project partner\n```\n\nalò `cat notes.txt` montre twa liy yo nan tèminal la.\n\nEtap pa etap :\n- `cat` se kòmand lan.\n- `notes.txt` se fichye ou vle li a.\n- Tèminal la enprime fichye a egzakteman jan li anrejistre.\n\nSèvi ak `cat` pou enspekte ti fichye tèks vit. Pou fichye ki pi long, `head` ak `tail` souvan pi fasil pou sèvi."
+          },
+          "sketch-2": {
+            "title": "Gade kòmansman oswa fen ak head ak tail",
+            "bodyMarkdown": "Pafwa ou pa bezwen tout fichye a. `head` montre premye pati yon fichye, epi `tail` montre dènye pati a.\n\nEgzanp :\n\n```bash\nhead reading-log.txt\ntail reading-log.txt\n```\n\nSi `reading-log.txt` gen anpil liy, `head` ede ou tcheke kijan li kòmanse, pandan `tail` ede ou tcheke antre ki pi nouvo yo oswa dènye antre yo.\n\nPou débutan, ou ka panse konsa :\n- `head` = anlè fichye a\n- `tail` = anba fichye a\n\nEgzanp travay :\n\n```text\nMonday\nTuesday\nWednesday\nThursday\nFriday\nSaturday\nSunday\n```\n\n- `head` ta montre premye liy yo, li kòmanse ak `Monday`.\n- `tail` ta montre dènye liy yo, li fini ak `Sunday`.\n\nKòmand sa yo itil anpil lè yon fichye twò long pou li alèz ak `cat`."
+          },
+          "sketch-3": {
+            "title": "Konte liy, mo, ak karaktè avèk wc",
+            "bodyMarkdown": "`wc` bay kantite pou yon fichye. Yo souvan sèvi avè l pou konte liy, mo, ak karaktè nan tèks.\n\nEgzanp :\n\n```bash\nwc announcement.txt\n```\n\nYon rezilta ka sanble ak sa :\n\n```text\n3 12 68 announcement.txt\n```\n\nSa vle di :\n- `3` liy\n- `12` mo\n- `68` karaktè\n\nOu pa bezwen memorize pozisyon chak nimewo touswit. Lide prensipal la se ke `wc` rezime konbyen tèks ki nan fichye a.\n\nEgzanp travay :\n\nSi `announcement.txt` gen twa fraz kout, `wc announcement.txt` di ou vit fichye a kout san li pa enprime tout tèks la.\n\nSa itil lè w ap tcheke longè nòt, konpare fichye, oswa konfime yon fichye gen kantite kontni ou te espere a."
+          }
+        }
+      }
+    }
+  }
+}

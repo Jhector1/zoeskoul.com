@@ -12,6 +12,8 @@ export type PublishGateStats = {
     qualityErrors?: number;
     qualityWarnings?: number;
     qualityInfos?: number;
+    validationSkips?: number;
+    unsafeValidationSkips?: number;
 };
 
 export type PublishGateResult = {

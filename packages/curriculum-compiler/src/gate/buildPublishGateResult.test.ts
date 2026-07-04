@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { getRepoRoot } from "@zoeskoul/curriculum-core";
+import { resolveCompileValidationState } from "../compile/validationState.js";
 import { buildPublishGateResult } from "./buildPublishGateResult.js";
 
 const subjectSlug = "python--publish-gate-quality-test--draft";
@@ -103,6 +104,28 @@ describe("buildPublishGateResult", () => {
         );
         expect(gate.reasons).toContain(
             "Curriculum quality report found 3 error(s).",
+        );
+    });
+
+    it("rejects reports produced with downstream validation skips", async () => {
+        await writeJson(
+            path.join(reportRoot, "module1", "topic-skip", "validation-state.json"),
+            resolveCompileValidationState({ unsafeSkipValidation: true }),
+        );
+
+        const gate = await buildPublishGateResult({
+            subjectSlug,
+            profileId: "python",
+        });
+
+        expect(gate.ok).toBe(false);
+        expect(gate.stats.validationSkips).toBe(3);
+        expect(gate.stats.unsafeValidationSkips).toBe(1);
+        expect(gate.reasons).toContain(
+            "Validation was skipped for 3 downstream gate(s).",
+        );
+        expect(gate.reasons).toContain(
+            "Unsafe validation bypass was used for 1 topic report(s).",
         );
     });
 });

@@ -1,0 +1,580 @@
+{
+  "topicId": "viewing-file-contents",
+  "subjectSlug": "linux-terminal-fundamentals",
+  "moduleSlug": "linux-module-2-files-and-folders",
+  "sectionSlug": "linux-terminal-fundamentals-linux-module-2-file-workflow",
+  "prefix": "linux_module_2",
+  "minutes": 18,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "bash",
+    "supportsTerminal": true,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.label",
+    "summaryKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch0.title",
+      "sketchId": "cat-whole-file",
+      "height": 420,
+      "tryIt": {
+        "id": "try-viewing-file-contents-sketch0",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch0.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch0.prompt",
+        "exerciseKey": "viewing-file-contents-try-it-1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch1.title",
+      "sketchId": "head-tail-preview",
+      "height": 420,
+      "tryIt": {
+        "id": "try-viewing-file-contents-sketch1",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch1.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch1.prompt",
+        "exerciseKey": "viewing-file-contents-try-it-2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch2.title",
+      "sketchId": "wc-line-count",
+      "height": 420,
+      "tryIt": {
+        "id": "try-viewing-file-contents-sketch2",
+        "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch2.title",
+        "promptKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.try_viewing_file_contents_sketch2.prompt",
+        "exerciseKey": "viewing-file-contents-try-it-3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "select": {
+          "purpose": "quiz"
+        }
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "cat-whole-file",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cat-whole-file.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.cat-whole-file.bodyMarkdown"
+    },
+    {
+      "id": "head-tail-preview",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.head-tail-preview.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.head-tail-preview.bodyMarkdown"
+    },
+    {
+      "id": "wc-line-count",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.wc-line-count.title",
+      "bodyKey": "sketches.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.wc-line-count.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "sc-cat-use",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.sc-cat-use",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-preview-long-file",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.mc-preview-long-file",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "sc-wc-lines",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.sc-wc-lines",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "dr-inspect-file",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.practice.dr-inspect-file",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3"
+        ]
+      }
+    },
+    {
+      "id": "viewing-file-contents-try-it-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1",
+      "language": "bash",
+      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "agenda.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.agenda_txt.content",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "cat agenda.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "agenda.txt",
+          "content": "Welcome\nSetup tables\nOpen doors\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "agenda.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "\\bcat\\s+agenda\\.txt\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "agenda.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.agenda_txt.content",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "agenda.txt"
+          ]
+        },
+        "fixtureFiles": [
+          {
+            "path": "agenda.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.agenda_txt.content",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace"
+      },
+      "fixtureFiles": [
+        {
+          "path": "agenda.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.agenda_txt.content",
+          "language": "bash"
+        }
+      ]
+    },
+    {
+      "id": "viewing-file-contents-try-it-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2",
+      "language": "bash",
+      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "event-log.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.event_log_txt.content",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "head event-log.txt\ntail event-log.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "event-log.txt",
+          "content": "line 1 setup\nline 2 chairs\nline 3 signs\nline 4 snacks\nline 5 doors\nline 6 music\nline 7 cleanup\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "event-log.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "\\bhead\\s+event-log\\.txt\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "\\btail\\s+event-log\\.txt\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "event-log.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.event_log_txt.content",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "event-log.txt"
+          ]
+        },
+        "fixtureFiles": [
+          {
+            "path": "event-log.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.event_log_txt.content",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace"
+      },
+      "fixtureFiles": [
+        {
+          "path": "event-log.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.event_log_txt.content",
+          "language": "bash"
+        }
+      ]
+    },
+    {
+      "id": "viewing-file-contents-try-it-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3",
+      "language": "bash",
+      "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.sh",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "guest-list.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.guest_list_txt.content",
+          "language": "bash"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.sh",
+          "content": "wc -l guest-list.txt\n",
+          "language": "bash",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "guest-list.txt",
+          "content": "Ava\nBen\nMaya\nNoah\n",
+          "language": "bash"
+        }
+      ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "guest-list.txt"
+        ]
+      },
+      "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "\\bwc\\s+-l\\s+guest-list\\.txt\\b",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
+        "forbiddenCommands": [
+          {
+            "pattern": "(^|\\s)sudo(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.forbiddenCommands.3.message"
+          }
+        ]
+      },
+      "workspace": {
+        "language": "bash",
+        "entryFilePath": "main.sh",
+        "starterCode": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.sh",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterCode",
+            "language": "bash",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "guest-list.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.guest_list_txt.content",
+            "language": "bash"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "guest-list.txt"
+          ]
+        },
+        "fixtureFiles": [
+          {
+            "path": "guest-list.txt",
+            "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.guest_list_txt.content",
+            "language": "bash"
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "shell_task",
+        "mode": "terminal_workspace",
+        "instructions": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.prompt"
+      },
+      "ideConfig": {
+        "runnerBackend": "pty",
+        "layoutMode": "terminal_workspace",
+        "requires": {
+          "files": true,
+          "multiFile": true,
+          "terminal": true
+        },
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace"
+      },
+      "fixtureFiles": [
+        {
+          "path": "guest-list.txt",
+          "content": "@:topics.linux-terminal-fundamentals.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.guest_list_txt.content",
+          "language": "bash"
+        }
+      ]
+    }
+  ],
+  "topicMeta": {
+    "learningGoals": [
+      "Read a short note",
+      "Preview a longer log",
+      "Count checklist lines"
+    ]
+  },
+  "serviceDefaults": {
+    "runnerBackend": "pty",
+    "layoutMode": "terminal_workspace",
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": true
+    },
+    "terminalCwd": "/workspace"
+  }
+}

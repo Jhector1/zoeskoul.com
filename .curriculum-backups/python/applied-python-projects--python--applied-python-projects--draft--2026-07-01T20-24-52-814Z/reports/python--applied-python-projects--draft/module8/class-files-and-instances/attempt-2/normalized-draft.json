@@ -1,0 +1,569 @@
+{
+  "title": "Class Files and Instances",
+  "summary": "Create a class in its own file, import it, and make separate objects from it.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "sketch-0",
+      "title": "Put a class in its own workspace file",
+      "bodyMarkdown": "A class often belongs in its own workspace file so the rest of your program can import and use it. This keeps your code organized: one place defines the model, and another place creates objects.\n\nHere is a small example with a `Book` class stored separately and then used from another file:\n\n```python\nfrom models.book import Book\n\nfirst_book = Book(\"Deep Work\", 320)\nsecond_book = Book(\"Atomic Habits\", 280)\n\nprint(first_book.title)\nprint(second_book.pages)\n```\n\nA matching class definition could look like this:\n\n```python\nclass Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n```\n\nLine by line:\n\n- First, `class Book:` starts the class definition.\n- Second, `__init__` is the constructor. It runs when you create a new object.\n- This line `self.title = title` stores the incoming title on that specific object.\n- This line `self.pages = pages` stores the page count on that specific object.\n- Later, `first_book = Book(\"Deep Work\", 320)` creates one instance.\n- Then, `second_book = Book(\"Atomic Habits\", 280)` creates a different instance.\n\nEven though both objects come from the same class, each one keeps its own data."
+    },
+    {
+      "id": "sketch-1",
+      "title": "Instances keep separate state",
+      "bodyMarkdown": "A class is the blueprint. An instance is one real object created from that blueprint. The important idea is that each instance has its own state.\n\nExample:\n\n```python\nclass Timer:\n    def __init__(self, label, seconds):\n        self.label = label\n        self.seconds = seconds\n\nstudy_timer = Timer(\"Study\", 25)\nbreak_timer = Timer(\"Break\", 5)\n\nprint(study_timer.seconds)\nprint(break_timer.seconds)\n```\n\nStep by step:\n\n- `Timer` defines what every timer object should have.\n- `study_timer` is one instance with `seconds` set to `25`.\n- `break_timer` is another instance with `seconds` set to `5`.\n- Printing `study_timer.seconds` gives the value stored on that object.\n- Printing `break_timer.seconds` gives the value stored on the other object.\n\nSo two objects from the same class do not share one single `seconds` value. Each object stores its own attributes."
+    },
+    {
+      "id": "sketch-2",
+      "title": "Methods belong with the object data",
+      "bodyMarkdown": "A method is a function inside a class. Methods use `self` so they can read or change the current object's attributes.\n\nExample:\n\n```python\nclass Counter:\n    def __init__(self, count):\n        self.count = count\n\n    def add_one(self):\n        self.count += 1\n\ncounter = Counter(3)\ncounter.add_one()\nprint(counter.count)\n```\n\nLine by line:\n\n- `self.count = count` stores the starting value on the object.\n- `def add_one(self):` defines a method for `Counter` objects.\n- `self.count += 1` changes the state of the current object.\n- `counter = Counter(3)` creates an instance starting at `3`.\n- `counter.add_one()` runs the method on that instance.\n- `print(counter.count)` shows the updated value `4`.\n\nThis is a key OOP idea: behavior and data stay together in the same class."
+    },
+    {
+      "id": "sketch-3",
+      "title": "Import a class and create objects in main code",
+      "bodyMarkdown": "After you define a class in one workspace file, you can import it into another part of the program and create objects there.\n\nExample:\n\n```python\nfrom models.task import Task\n\nmorning = Task(\"Email\", False)\nevening = Task(\"Workout\", True)\n\nprint(morning.name)\nprint(evening.done)\n```\n\nA matching class could be:\n\n```python\nclass Task:\n    def __init__(self, name, done):\n        self.name = name\n        self.done = done\n```\n\nStep by step:\n\n- `from models.task import Task` brings the class into the current code.\n- `morning = Task(\"Email\", False)` creates one object.\n- `evening = Task(\"Workout\", True)` creates another object.\n- `morning.name` reads the `name` stored on the first object.\n- `evening.done` reads the `done` value stored on the second object.\n\nThis pattern is common in larger apps: model classes live in one place, and the main program uses them."
+    },
+    {
+      "id": "sketch-4",
+      "title": "Use helper logic to keep class code clean",
+      "bodyMarkdown": "As programs grow, some formatting or validation logic can move into a helper workspace file. The class can then call that helper instead of doing everything itself.\n\nExample idea:\n\n```python\nfrom helpers.text_tools import format_name\n\nclass Contact:\n    def __init__(self, name):\n        self.name = format_name(name)\n```\n\nA helper function might be:\n\n```python\ndef format_name(name):\n    return name.strip().title()\n```\n\nLine by line:\n\n- The helper function receives a name string.\n- `strip()` removes extra spaces around it.\n- `title()` changes it to title case.\n- Inside `Contact.__init__`, the class calls the helper before storing the value.\n\nThis keeps the class focused on object state while shared cleanup logic lives in one reusable place."
+    },
+    {
+      "id": "sketch-5",
+      "title": "Separate objects make programs easier to grow",
+      "bodyMarkdown": "When you create several instances from one class, your program can manage many real items in a consistent way.\n\nExample:\n\n```python\nclass Student:\n    def __init__(self, name, score):\n        self.name = name\n        self.score = score\n\nstudents = [\n    Student(\"Ava\", 92),\n    Student(\"Ben\", 85),\n    Student(\"Cara\", 97)\n]\n\nfor student in students:\n    print(student.name, student.score)\n```\n\nStep by step:\n\n- The `Student` class defines the attributes every student object should have.\n- Three separate `Student(...)` calls create three different instances.\n- The list stores those objects together.\n- The loop visits one object at a time.\n- `student.name` and `student.score` read data from the current object.\n\nThis is why classes are useful in real projects: one class definition can support many separate objects."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-class-files-and-instances-sketch0",
+      "kind": "code_input",
+      "title": "Create a class in a model file",
+      "prompt": "A reading tracker needs a `Book` class stored in a model workspace file. Complete the class so each `Book` stores `title` and `pages`. Then create two objects in the main code and print the first book's title on one line and the second book's page count on the next line.",
+      "starterCode": "# main code\nfrom models.book import Book\n\n# create two Book objects below\n\n# print the first title, then the second page count\n",
+      "solutionCode": "from models.book import Book\n\nfirst_book = Book(\"Deep Work\", 320)\nsecond_book = Book(\"Atomic Habits\", 280)\n\nprint(first_book.title)\nprint(second_book.pages)",
+      "files": [
+        {
+          "path": "main.py",
+          "content": "from models.book import Book\n\n# create two Book objects below\n\n# print the first title, then the second page count\n\nprint()\nprint()\n\n# models/book.py\nclass Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Book",
+          "message": "Define a Book class."
+        },
+        {
+          "type": "constructible",
+          "className": "Book",
+          "constructorArgs": [
+            "Deep Work",
+            320
+          ],
+          "message": "Book should be constructible with title and pages."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Book",
+          "constructorArgs": [
+            "Deep Work",
+            320
+          ],
+          "attributes": [
+            "title",
+            "pages"
+          ],
+          "message": "Book instances should store title and pages."
+        },
+        {
+          "type": "created_instances",
+          "className": "Book",
+          "min": 1,
+          "message": "Create two Book objects in the main code."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "Print two lines of output."
+        }
+      ],
+      "hint": "Store both constructor values on `self`, then create two different `Book` objects.",
+      "help": {
+        "concept": "A class constructor uses `self` to save incoming values as instance attributes, and imported classes can be used to create separate objects in the main code.",
+        "hint_1": "In the model file, assign `self.title = title` and `self.pages = pages` inside `__init__`.",
+        "hint_2": "In the main code, import `Book`, create two objects with different values, then print one attribute from each object in the requested order."
+      }
+    },
+    {
+      "id": "try-class-files-and-instances-sketch1",
+      "kind": "code_input",
+      "title": "Show that instances keep separate values",
+      "prompt": "A focus app uses a `Timer` class. Complete the workspace so one timer stores `25` seconds and another stores `5` seconds. Print the first timer's seconds on one line and the second timer's seconds on the next line to prove the objects keep separate state.",
+      "starterCode": "from models.timer import Timer\n\n# create two Timer objects with different seconds values\n\n# print the first timer seconds, then the second timer seconds\n",
+      "solutionCode": "from models.timer import Timer\n\nstudy_timer = Timer(\"Study\", 25)\nbreak_timer = Timer(\"Break\", 5)\n\nprint(study_timer.seconds)\nprint(break_timer.seconds)",
+      "files": [
+        {
+          "path": "main.py",
+          "content": "from models.timer import Timer\n\n# create two Timer objects with different seconds values\n\n# print the first timer seconds, then the second timer seconds\n\nprint()\nprint()\n\n# models/timer.py\nclass Timer:\n    def __init__(self, label, seconds):\n        self.label = label\n        self.seconds = seconds",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Timer",
+          "message": "Define a Timer class."
+        },
+        {
+          "type": "constructible",
+          "className": "Timer",
+          "constructorArgs": [
+            "Study",
+            25
+          ],
+          "message": "Timer should accept label and seconds."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Timer",
+          "constructorArgs": [
+            "Break",
+            5
+          ],
+          "attributes": [
+            "label",
+            "seconds"
+          ],
+          "message": "Timer instances should store label and seconds."
+        },
+        {
+          "type": "created_instances",
+          "className": "Timer",
+          "min": 1,
+          "message": "Create two Timer objects."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "Print two lines showing separate seconds values."
+        }
+      ],
+      "hint": "Create two `Timer` objects with different constructor values.",
+      "help": {
+        "concept": "Different instances of the same class each keep their own attribute values, even when they come from one shared class definition.",
+        "hint_1": "Make sure `__init__` saves both `label` and `seconds` on `self`.",
+        "hint_2": "Create one object for study time and one for break time, then print each object's `seconds` attribute separately."
+      }
+    },
+    {
+      "id": "try-class-files-and-instances-sketch2",
+      "kind": "code_input",
+      "title": "Add a method that changes object state",
+      "prompt": "A click counter app needs behavior inside the class. Complete the `Counter` class so `add_one()` increases `count` by 1. Then create a counter starting at `3`, call `add_one()`, and print the updated count.",
+      "starterCode": "from models.counter import Counter\n\ncounter = Counter(3)\n\n# call the method that increases the count\n\n# print the updated count\n",
+      "solutionCode": "from models.counter import Counter\n\ncounter = Counter(3)\ncounter.add_one()\nprint(counter.count)",
+      "files": [
+        {
+          "path": "main.py",
+          "content": "from models.counter import Counter\n\ncounter = Counter(3)\n\n# call the method that increases the count\n\n# print the updated count\n\nprint()\n\n# models/counter.py\nclass Counter:\n    def __init__(self, count):\n        self.count = count\n\n    def add_one(self):\n        self.count += 1",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Counter",
+          "message": "Define a Counter class."
+        },
+        {
+          "type": "constructible",
+          "className": "Counter",
+          "constructorArgs": [
+            3
+          ],
+          "message": "Counter should accept a starting count."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Counter",
+          "constructorArgs": [
+            3
+          ],
+          "attributes": [
+            "count"
+          ],
+          "message": "Counter instances should store count."
+        },
+        {
+          "type": "attribute_sequence_equals",
+          "className": "Counter",
+          "constructorArgs": [
+            3
+          ],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "add_one",
+              "methodArgs": [],
+              "methodArgKinds": []
+            }
+          ],
+          "attributeName": "count",
+          "expected": [
+            4
+          ],
+          "expectedKind": "value",
+          "message": "After add_one runs, count should become 4."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 1,
+          "message": "Print the updated count."
+        }
+      ],
+      "hint": "The method should change `self.count`, not a separate variable.",
+      "help": {
+        "concept": "Methods use `self` to work with the current object's stored data, so a method can update that object's state directly.",
+        "hint_1": "Inside `add_one`, increase the attribute with `self.count` on the left side of the update.",
+        "hint_2": "After creating the object, call the method on that object before printing the count."
+      }
+    },
+    {
+      "id": "try-class-files-and-instances-sketch3",
+      "kind": "code_input",
+      "title": "Import a class and create task objects",
+      "prompt": "A daily planner stores tasks in a model class. Complete the workspace so the main code imports `Task`, creates `morning` and `evening` objects, and prints the morning task name on one line and the evening task done status on the next line.",
+      "starterCode": "from models.task import Task\n\n# create morning and evening Task objects\n\n# print the morning task name\n# print the evening task done value\n",
+      "solutionCode": "from models.task import Task\n\nmorning = Task(\"Email\", False)\nevening = Task(\"Workout\", True)\n\nprint(morning.name)\nprint(evening.done)",
+      "files": [
+        {
+          "path": "main.py",
+          "content": "from models.task import Task\n\n# create morning and evening Task objects\n\n# print the morning task name\n# print the evening task done value\n\nprint()\nprint()\n\n# models/task.py\nclass Task:\n    def __init__(self, name, done):\n        self.name = name\n        self.done = done",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Task",
+          "message": "Define a Task class."
+        },
+        {
+          "type": "constructible",
+          "className": "Task",
+          "constructorArgs": [
+            "Email",
+            false
+          ],
+          "message": "Task should accept a name and done value."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Task",
+          "constructorArgs": [
+            "Workout",
+            true
+          ],
+          "attributes": [
+            "name",
+            "done"
+          ],
+          "message": "Task instances should store name and done."
+        },
+        {
+          "type": "created_instances",
+          "className": "Task",
+          "min": 1,
+          "message": "Create two Task objects in the main code."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "Print two lines from the created task objects."
+        }
+      ],
+      "hint": "Use the imported class twice with different constructor values.",
+      "help": {
+        "concept": "Importing a class lets the main code create multiple instances and read their attributes without redefining the class there.",
+        "hint_1": "The `Task` constructor should save both `name` and `done` on the object.",
+        "hint_2": "Create one task with a text name and `False`, and another with a different name and `True`, then print one attribute from each."
+      }
+    },
+    {
+      "id": "try-class-files-and-instances-sketch4",
+      "kind": "code_input",
+      "title": "Use a helper to format stored names",
+      "prompt": "A contact list should clean names before storing them. Complete the helper function so it removes extra spaces and uses title case, then make the `Contact` class store the cleaned result. Create one contact with the text `\"  aVA stone  \"` and print the saved name.",
+      "starterCode": "from models.contact import Contact\n\ncontact = Contact(\"  aVA stone  \")\n\n# print the cleaned stored name\n",
+      "solutionCode": "from models.contact import Contact\n\ncontact = Contact(\"  aVA stone  \")\nprint(contact.name)",
+      "files": [
+        {
+          "path": "main.py",
+          "content": "from models.contact import Contact\n\ncontact = Contact(\"  aVA stone  \")\n\n# print the cleaned stored name\n\nprint()\n\n# helpers/text_tools.py\ndef format_name(name):\n    return name.strip().title()\n\n# models/contact.py\nfrom helpers.text_tools import format_name\n\nclass Contact:\n    def __init__(self, name):\n        self.name = format_name(name)",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Contact",
+          "message": "Define a Contact class."
+        },
+        {
+          "type": "constructible",
+          "className": "Contact",
+          "constructorArgs": [
+            "  aVA stone  "
+          ],
+          "message": "Contact should accept a name value."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Contact",
+          "constructorArgs": [
+            "  aVA stone  "
+          ],
+          "attributes": [
+            "name"
+          ],
+          "message": "Contact instances should store a name attribute."
+        },
+        {
+          "type": "attribute_sequence_equals",
+          "className": "Contact",
+          "constructorArgs": [
+            "  aVA stone  "
+          ],
+          "constructorArgKinds": [],
+          "calls": [],
+          "attributeName": "name",
+          "expected": [
+            "Ava Stone"
+          ],
+          "expectedKind": "value",
+          "message": "The stored name should be cleaned with the helper before saving."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 1,
+          "message": "Print the cleaned stored name."
+        }
+      ],
+      "hint": "The helper should return a cleaned string, and the class should store that returned value.",
+      "help": {
+        "concept": "A helper function can handle repeated formatting work, while the class uses that helper to keep object setup clean and reusable.",
+        "hint_1": "In the helper, call `strip()` before `title()` so spaces are removed first.",
+        "hint_2": "Inside `Contact.__init__`, assign `self.name` to the result of calling the helper with the incoming `name` value."
+      }
+    },
+    {
+      "id": "try-class-files-and-instances-sketch5",
+      "kind": "code_input",
+      "title": "Create several student objects",
+      "prompt": "A grade report needs several `Student` objects from one class. Complete the workspace so the main code creates three students named Ava, Ben, and Cara with scores 92, 85, and 97. Print each student's name and score on its own line in that order.",
+      "starterCode": "from models.student import Student\n\n# create three Student objects\nstudents = []\n\n# print each student's name and score on its own line\n",
+      "solutionCode": "from models.student import Student\n\nstudents = [\n    Student(\"Ava\", 92),\n    Student(\"Ben\", 85),\n    Student(\"Cara\", 97)\n]\n\nfor student in students:\n    print(student.name, student.score)",
+      "files": [
+        {
+          "path": "main.py",
+          "content": "from models.student import Student\n\n# create three Student objects\nstudents = []\n\n# print each student's name and score on its own line\n\n# models/student.py\nclass Student:\n    def __init__(self, name, score):\n        self.name = name\n        self.score = score",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Student",
+          "message": "Define a Student class."
+        },
+        {
+          "type": "constructible",
+          "className": "Student",
+          "constructorArgs": [
+            "Ava",
+            92
+          ],
+          "message": "Student should accept a name and score."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Student",
+          "constructorArgs": [
+            "Ben",
+            85
+          ],
+          "attributes": [
+            "name",
+            "score"
+          ],
+          "message": "Student instances should store name and score."
+        },
+        {
+          "type": "created_instances",
+          "className": "Student",
+          "min": 1,
+          "message": "Create three Student objects."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 3,
+          "message": "Print one line for each student."
+        }
+      ],
+      "hint": "Create three separate objects, then loop through them or print them one by one.",
+      "help": {
+        "concept": "One class definition can be reused to create many instances, and each instance stores its own attribute values.",
+        "hint_1": "Make sure the `Student` constructor saves both `name` and `score` on `self`.",
+        "hint_2": "Store the three objects in a list, then print `student.name` and `student.score` for each object in order."
+      }
+    },
+    {
+      "id": "mc-class-vs-instance",
+      "kind": "multi_choice",
+      "title": "Class or instance?",
+      "prompt": "Which statements correctly describe classes and instances in this topic? Choose all that apply.",
+      "options": [
+        "A class is a blueprint for creating objects.",
+        "Two instances from the same class can store different attribute values.",
+        "An instance is the file that contains the class definition.",
+        "Every object from one class must share one single copy of each attribute value."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Look for statements about blueprints versus created objects.",
+      "help": {
+        "concept": "A class defines the structure and behavior, while instances are separate objects created from that class with their own stored data.",
+        "hint_1": "A class is not the same thing as one object; it is the definition used to make objects.",
+        "hint_2": "Pick the choices that say objects can come from one class and still keep separate attribute values."
+      }
+    },
+    {
+      "id": "mc-imports-and-methods",
+      "kind": "multi_choice",
+      "title": "Imports and methods",
+      "prompt": "Which actions fit the way this topic organizes object-oriented code? Choose all that apply.",
+      "options": [
+        "Define the class in a model workspace file and import it into the main code.",
+        "Put behavior that changes object state into a method on the class.",
+        "Rewrite the whole class again each time you want a new object.",
+        "Treat imported classes as unusable in the main code."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Think about where the class lives and where object behavior belongs.",
+      "help": {
+        "concept": "This topic organizes code by defining classes in dedicated model workspace files, importing them where needed, and placing object behavior in methods on the class.",
+        "hint_1": "Choose the options that keep model code separate from the main code and keep behavior close to object state.",
+        "hint_2": "Avoid choices that describe copying class code into every place you need it or storing behavior outside the class for no reason."
+      }
+    },
+    {
+      "id": "fb-self-attribute",
+      "kind": "fill_blank_choice",
+      "title": "Store constructor data",
+      "prompt": "Complete the constructor line that stores the incoming title on the object.",
+      "template": "self.[blank1] = title",
+      "choices": [
+        "title",
+        "self",
+        "__init__",
+        "Book"
+      ],
+      "correctValue": "title",
+      "hint": "The object attribute goes after `self.`.",
+      "help": {
+        "concept": "Inside `__init__`, `self.attribute = parameter` stores incoming constructor data on the current instance.",
+        "hint_1": "The left side should name the object's attribute, not the parameter by itself.",
+        "hint_2": "To save the the missing term on the object, use the attribute name that matches the stored book the missing term."
+      }
+    },
+    {
+      "id": "fb-import-class",
+      "kind": "fill_blank_choice",
+      "title": "Import the class name",
+      "prompt": "Fill in the class name being imported from the model code.",
+      "template": "from models.book import [blank1]",
+      "choices": [
+        "Book",
+        "models",
+        "book",
+        "self"
+      ],
+      "correctValue": "Book",
+      "hint": "The imported name should be the class, not the folder name.",
+      "help": {
+        "concept": "An import statement brings the class name into the current code so you can create objects from it.",
+        "hint_1": "In `from models.the missing term import ...`, the missing part is the class defined in that model code.",
+        "hint_2": "Use the capitalized class name, not `models` or `the missing term`."
+      }
+    },
+    {
+      "id": "sc-helper-purpose",
+      "kind": "single_choice",
+      "title": "Why use a helper here?",
+      "prompt": "Why does this topic move name formatting into a helper function before storing it in a class?",
+      "options": [
+        "To keep formatting logic reusable and the class constructor simpler.",
+        "To prevent the class from having any attributes.",
+        "To replace object creation with plain strings.",
+        "To make imports unnecessary."
+      ],
+      "correctOptionIds": [
+        "a"
+      ],
+      "hint": "Think about keeping repeated cleanup logic reusable.",
+      "help": {
+        "concept": "Helper functions can hold shared formatting or validation logic so the class stays focused on object state and setup.",
+        "hint_1": "The best answer mentions reuse and cleaner class code.",
+        "hint_2": "Look for the choice that separates cleanup work from the class instead of mixing every detail into `__init__`."
+      }
+    },
+    {
+      "id": "dr-object-creation-order",
+      "kind": "drag_reorder",
+      "title": "Order the object workflow",
+      "prompt": "Put these steps in the correct order for using a class from another workspace file.",
+      "tokens": [
+        "Define the class in a model workspace file.",
+        "Import the class into the main code.",
+        "Create an instance from the class.",
+        "Read or print an attribute from that instance."
+      ],
+      "correctOrder": [
+        "Define the class in a model workspace file.",
+        "Import the class into the main code.",
+        "Create an instance from the class.",
+        "Read or print an attribute from that instance."
+      ],
+      "hint": "Start with the definition, then bring it in, then create and use objects.",
+      "help": {
+        "concept": "A typical class workflow is: define the class, import it where needed, create instances, then read or change their attributes.",
+        "hint_1": "The class must exist before it can be imported.",
+        "hint_2": "You cannot print an object's attribute until after the object has been created."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Account Tracker Foundations",
+    "stepIds": [
+      "try-class-files-and-instances-sketch0",
+      "try-class-files-and-instances-sketch1",
+      "try-class-files-and-instances-sketch2",
+      "try-class-files-and-instances-sketch3",
+      "try-class-files-and-instances-sketch4",
+      "try-class-files-and-instances-sketch5"
+    ]
+  }
+}

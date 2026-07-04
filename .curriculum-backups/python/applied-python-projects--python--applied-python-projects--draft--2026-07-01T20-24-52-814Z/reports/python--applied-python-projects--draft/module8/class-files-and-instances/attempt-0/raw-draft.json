@@ -1,0 +1,521 @@
+{
+  "title": "Class Files and Instances",
+  "summary": "Learn how to place a class in its own model file, import it into main.py, and create separate objects that each keep their own state.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "class-files-and-instances-sketch-0",
+      "title": "Put a class in its own file",
+      "bodyMarkdown": "A class often lives in its own workspace file so your program stays organized. A common pattern is to keep your class in a `models` folder and use `main.py` to create objects.\n\nHere is a small example:\n\n```python\n# models/book.py\nclass Book:\n    def __init__(self, title, pages):\n        self.title = title\n        self.pages = pages\n```\n\n```python\n# main.py\nfrom models.book import Book\n\nfirst_book = Book(\"Python Basics\", 120)\nprint(first_book.title)\nprint(first_book.pages)\n```\n\nStep by step:\n\n- `class Book:` starts the class definition.\n- `__init__` runs when you create a new `Book` object.\n- `self.title = title` stores the title inside that object.\n- `self.pages = pages` stores the page count inside that object.\n- `from models.book import Book` lets `main.py` use the class from another file.\n- `Book(\"Python Basics\", 120)` creates one instance of the class.\n\nThis structure matters because larger apps usually separate domain model code from the code that runs the program."
+    },
+    {
+      "id": "class-files-and-instances-sketch-1",
+      "title": "Different instances keep different state",
+      "bodyMarkdown": "A class is the blueprint. Each object you create from that class is an instance with its own attribute values.\n\nExample:\n\n```python\n# models/player.py\nclass Player:\n    def __init__(self, name, score):\n        self.name = name\n        self.score = score\n```\n\n```python\n# main.py\nfrom models.player import Player\n\nava = Player(\"Ava\", 10)\nben = Player(\"Ben\", 25)\n\nprint(ava.name, ava.score)\nprint(ben.name, ben.score)\n```\n\nOutput:\n\n```python\nAva 10\nBen 25\n```\n\nLine by line:\n\n- `ava` and `ben` are two separate instances.\n- Both come from the same `Player` class.\n- `ava.score` is `10` and `ben.score` is `25` because each object stores its own state.\n\nIf you change one object, the other object does not automatically change. That is one of the main reasons classes are useful."
+    },
+    {
+      "id": "class-files-and-instances-sketch-2",
+      "title": "Methods belong with the object data",
+      "bodyMarkdown": "A method is a function inside a class. Methods use `self` to work with that object's attributes.\n\nExample:\n\n```python\n# models/counter.py\nclass Counter:\n    def __init__(self, count):\n        self.count = count\n\n    def add_one(self):\n        self.count = self.count + 1\n\n    def label(self):\n        return f\"Count: {self.count}\"\n```\n\n```python\n# main.py\nfrom models.counter import Counter\n\ntracker = Counter(3)\ntracker.add_one()\nprint(tracker.label())\n```\n\nOutput:\n\n```python\nCount: 4\n```\n\nWhat happens here:\n\n- `tracker` starts with `count` equal to `3`.\n- `tracker.add_one()` changes that object's state to `4`.\n- `tracker.label()` returns a string based on the current state.\n\nKeeping behavior inside the class makes the code easier to read because the data and the actions for that data stay together."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-class-files-and-instances-sketch0",
+      "kind": "code_input",
+      "title": "Create and import a Product class",
+      "prompt": "A shop app needs its first domain model. In `models/product.py`, define a `Product` class with `__init__(self, name, price)` that stores `name` and `price` as attributes. In `main.py`, import `Product`, create `item = Product(\"Notebook\", 4.5)`, and print the name on one line and the price on the next line. This practice matters because it sets up the basic pattern of class file plus importing file.",
+      "hint": "Put the class in `models/product.py`, then import it into `main.py` before creating the object.",
+      "help": {
+        "concept": "This exercise checks the basic multi-file class pattern: define a class in one file, import it into another file, create an instance, and read its attributes.",
+        "hint_1": "Your class needs an `__init__` method with `self`, `name`, and `price`, and it should assign both values to attributes.",
+        "hint_2": "After importing the class in `main.py`, create one object with the given values and print `item.name` and `item.price` on separate lines."
+      },
+      "starterCode": "# main.py\nfrom models.product import Product\n\n# Create the Product object here.\n# Print the name and price on separate lines.\n",
+      "solutionCode": "# main.py\nfrom models.product import Product\n\nitem = Product(\"Notebook\", 4.5)\nprint(item.name)\nprint(item.price)\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Product",
+          "message": "Define a Product class in models/product.py."
+        },
+        {
+          "type": "constructible",
+          "className": "Product",
+          "constructorArgs": [
+            "Notebook",
+            4.5
+          ],
+          "message": "Your Product class should be constructible with a name and price."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Product",
+          "constructorArgs": [
+            "Notebook",
+            4.5
+          ],
+          "attributes": [
+            "name",
+            "price"
+          ],
+          "message": "Store both name and price as instance attributes."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "main.py should print two lines."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "try-class-files-and-instances-sketch1",
+      "kind": "code_input",
+      "title": "Make two separate Ticket instances",
+      "prompt": "An event app tracks tickets as objects. In `models/ticket.py`, define a `Ticket` class with `__init__(self, owner, seat)` that stores both attributes. In `main.py`, import `Ticket`, create `first = Ticket(\"Mia\", \"A1\")` and `second = Ticket(\"Leo\", \"B4\")`, then print `first.owner`, `first.seat`, `second.owner`, and `second.seat` each on its own line. This practice matters because it shows that different instances keep different state.",
+      "hint": "Use the same class twice with different constructor values.",
+      "help": {
+        "concept": "This exercise focuses on instances: one class can create many objects, and each object stores its own attribute values.",
+        "hint_1": "Your `Ticket` class should assign both constructor inputs to `self.owner` and `self.seat`.",
+        "hint_2": "Create two objects in `main.py` with different values, then print attributes from each object separately."
+      },
+      "starterCode": "# main.py\nfrom models.ticket import Ticket\n\n# Create first and second here.\n# Print the four requested attribute values.\n",
+      "solutionCode": "# main.py\nfrom models.ticket import Ticket\n\nfirst = Ticket(\"Mia\", \"A1\")\nsecond = Ticket(\"Leo\", \"B4\")\n\nprint(first.owner)\nprint(first.seat)\nprint(second.owner)\nprint(second.seat)\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Ticket",
+          "message": "Define a Ticket class in models/ticket.py."
+        },
+        {
+          "type": "constructible",
+          "className": "Ticket",
+          "constructorArgs": [
+            "Mia",
+            "A1"
+          ],
+          "message": "Your Ticket class should accept owner and seat values."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Ticket",
+          "constructorArgs": [
+            "Leo",
+            "B4"
+          ],
+          "attributes": [
+            "owner",
+            "seat"
+          ],
+          "message": "Each Ticket instance should store owner and seat attributes."
+        },
+        {
+          "type": "created_instances",
+          "className": "Ticket",
+          "min": 1,
+          "message": "Create two Ticket objects in main.py."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 4,
+          "message": "main.py should print four lines for the two tickets."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "try-class-files-and-instances-sketch2",
+      "kind": "code_input",
+      "title": "Add a method to a Counter class",
+      "prompt": "A dashboard widget needs an object that can update its own count. In `models/counter.py`, define a `Counter` class with `__init__(self, count)`, an `add_one(self)` method that increases `count` by 1, and a `label(self)` method that returns `Count: <current count>`. In `main.py`, import `Counter`, create `tracker = Counter(3)`, call `tracker.add_one()`, and print `tracker.label()`. This practice matters because it connects object state with methods in a separate class file.",
+      "hint": "One method changes `self.count`; the other returns a string based on `self.count`.",
+      "help": {
+        "concept": "This exercise checks how methods use `self` to read and change the state stored on one object.",
+        "hint_1": "Inside `add_one`, update the attribute by using the old value plus 1.",
+        "hint_2": "After creating the object in `main.py`, call the mutating method first, then print the string returned by `label()`."
+      },
+      "starterCode": "# main.py\nfrom models.counter import Counter\n\ntracker = Counter(3)\n\n# Call the method that changes the count.\n# Then print the label.\n",
+      "solutionCode": "# main.py\nfrom models.counter import Counter\n\ntracker = Counter(3)\ntracker.add_one()\nprint(tracker.label())\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Counter",
+          "message": "Define a Counter class in models/counter.py."
+        },
+        {
+          "type": "constructible",
+          "className": "Counter",
+          "constructorArgs": [
+            3
+          ],
+          "message": "Your Counter class should accept a starting count."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Counter",
+          "constructorArgs": [
+            3
+          ],
+          "attributes": [
+            "count"
+          ],
+          "message": "Store the starting count on the instance."
+        },
+        {
+          "type": "method_returns",
+          "className": "Counter",
+          "constructorArgs": [
+            4
+          ],
+          "methodName": "label",
+          "methodArgs": [],
+          "expected": "Count: 4",
+          "expectedKind": "value",
+          "message": "label() should return the formatted count string."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "mc-class-vs-instance",
+      "kind": "multi_choice",
+      "title": "Class or instance?",
+      "prompt": "Choose all statements that are correct about classes and instances in this topic.",
+      "hint": "Look for statements that match the blueprint-versus-object idea and separate stored state.",
+      "help": {
+        "concept": "A class defines the structure and behavior, while instances are the individual objects created from that class.",
+        "hint_1": "A class can be used to create more than one object, and each object can hold different attribute values.",
+        "hint_2": "Reject any statement that says all objects must share the same stored values or that an instance is the blueprint itself."
+      },
+      "options": [
+        "A class can be used to create multiple objects.",
+        "Two instances from the same class can store different attribute values.",
+        "An instance is the file that contains the class definition.",
+        "Every object from one class must keep identical state."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ]
+    },
+    {
+      "id": "fb-import-statement",
+      "kind": "fill_blank_choice",
+      "title": "Complete the import",
+      "prompt": "Fill in the missing class name so `main.py` can import the class from `models/book.py`.",
+      "hint": "The imported name should match the class name, not the file path part.",
+      "help": {
+        "concept": "Python imports a class by its exact class name after the `import` keyword.",
+        "hint_1": "If the file is `models/book.py` and the class inside is named `Book`, the imported symbol should use that class name.",
+        "hint_2": "The blank comes after `import`, so choose the class identifier rather than `models` or `book.py`."
+      },
+      "template": "from models.book import [blank1]",
+      "choices": [
+        "Book",
+        "book",
+        "models",
+        "__init__"
+      ],
+      "correctValue": "Book"
+    },
+    {
+      "id": "project-step-account-class",
+      "kind": "code_input",
+      "title": "Build the Account model file",
+      "prompt": "You are starting a small account tracker for a community club. Create `models/account.py` with an `Account` class. Its constructor should take `owner` and `balance` and store them as attributes. In `main.py`, import `Account`, create `club_fund = Account(\"Club Fund\", 120)`, and print the owner on one line and the balance on the next line. This is the first project step because the tracker needs a reusable account object before it can grow.",
+      "hint": "Define the class in the model file first, then import it into `main.py`.",
+      "help": {
+        "concept": "A project usually begins with a model class in its own file so the rest of the app can create and use consistent objects.",
+        "hint_1": "Your constructor should assign both incoming values to `self.owner` and `self.balance`.",
+        "hint_2": "After importing the class, create the `club_fund` object with the given values and print its two attributes on separate lines."
+      },
+      "starterCode": "# main.py\nfrom models.account import Account\n\n# Create the club_fund account.\n# Print the owner and balance on separate lines.\n",
+      "solutionCode": "# main.py\nfrom models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nprint(club_fund.owner)\nprint(club_fund.balance)\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Define an Account class in models/account.py."
+        },
+        {
+          "type": "constructible",
+          "className": "Account",
+          "constructorArgs": [
+            "Club Fund",
+            120
+          ],
+          "message": "Your Account class should accept owner and balance values."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Account",
+          "constructorArgs": [
+            "Club Fund",
+            120
+          ],
+          "attributes": [
+            "owner",
+            "balance"
+          ],
+          "message": "Store owner and balance as instance attributes."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "main.py should print two lines."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "dr-object-setup-order",
+      "kind": "drag_reorder",
+      "title": "Order the object setup steps",
+      "prompt": "Put these steps in the correct order for using a class from another file in `main.py`.",
+      "hint": "Start with defining the class before trying to import or create an object from it.",
+      "help": {
+        "concept": "Using a class across files follows a sequence: define the class, import it, create an instance, then use its attributes or methods.",
+        "hint_1": "The class file must exist before `main.py` can import the class name from it.",
+        "hint_2": "After the import, you create an object before printing or calling methods on that object."
+      },
+      "tokens": [
+        "Define the class in a model file.",
+        "Import the class into main.py.",
+        "Create an instance with constructor values.",
+        "Use the instance by printing attributes or calling methods."
+      ],
+      "correctOrder": [
+        "Define the class in a model file.",
+        "Import the class into main.py.",
+        "Create an instance with constructor values.",
+        "Use the instance by printing attributes or calling methods."
+      ]
+    },
+    {
+      "id": "mc-methods-and-self",
+      "kind": "multi_choice",
+      "title": "What methods do with self",
+      "prompt": "Choose all statements that correctly describe methods in this lesson.",
+      "hint": "Look for statements about methods living inside the class and using `self` to reach object data.",
+      "help": {
+        "concept": "Methods are functions defined inside a class, and `self` refers to the specific instance using that method.",
+        "hint_1": "A method can read or change attributes on the current object through `self`.",
+        "hint_2": "Reject any option that treats `self` as a separate imported object or says methods must live outside the class."
+      },
+      "options": [
+        "A method can update an instance attribute through `self`.",
+        "A method is defined inside the class body.",
+        "`self` refers to the current object using the method.",
+        "`self` is the folder that stores the class file."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "c"
+      ]
+    },
+    {
+      "id": "fb-self-attribute",
+      "kind": "fill_blank_choice",
+      "title": "Complete the attribute assignment",
+      "prompt": "Fill in the missing word to store the incoming `owner` value on the object inside `__init__`.",
+      "hint": "The blank should be the object reference used inside instance methods.",
+      "help": {
+        "concept": "Inside `__init__`, instance attributes are assigned with `self.attribute_name = parameter_name`.",
+        "hint_1": "The left side should refer to the current object, not the parameter value.",
+        "hint_2": "Use the special first parameter that instance methods receive to access the object's attributes."
+      },
+      "template": "[blank1].owner = owner",
+      "choices": [
+        "self",
+        "owner",
+        "Account",
+        "import"
+      ],
+      "correctValue": "self"
+    },
+    {
+      "id": "sc-why-separate-class-file",
+      "kind": "single_choice",
+      "title": "Why use a separate class file?",
+      "prompt": "What is the best reason to put a class like `Account` in its own model file instead of writing everything directly in `main.py`?",
+      "hint": "Think about organization and reuse when the program grows beyond one short script.",
+      "help": {
+        "concept": "Separate class files keep model code organized and reusable, while `main.py` can focus on creating and using objects.",
+        "hint_1": "Choose the answer that keeps object structure in one place and makes imports possible from other files.",
+        "hint_2": "Avoid answers that claim Python requires every class to be in `main.py` or that separate files remove the need for imports."
+      },
+      "options": [
+        "It keeps the model code organized so other files can import and use the class.",
+        "It makes every instance share the same attribute values automatically.",
+        "It prevents the class from needing an `__init__` method.",
+        "It means `main.py` can use the class without importing it."
+      ],
+      "correctOptionIds": [
+        "a"
+      ]
+    },
+    {
+      "id": "project-step-account-methods",
+      "kind": "code_input",
+      "title": "Add deposit and summary methods",
+      "prompt": "Continue the club account tracker from the previous step. Keep the existing `Account` class in `models/account.py`, then add a `deposit(self, amount)` method that increases `balance` and a `summary(self)` method that returns `<owner>: $<balance>`. In `main.py`, create `club_fund = Account(\"Club Fund\", 120)`, call `club_fund.deposit(30)`, and print `club_fund.summary()`. This step matters because the object should now manage its own state changes.",
+      "hint": "One method changes `balance`; the other returns a formatted string using the current values.",
+      "help": {
+        "concept": "Methods let an object control how its own state changes and how that state is displayed.",
+        "hint_1": "Inside `deposit`, add the incoming amount to `self.balance` instead of creating a new local variable.",
+        "hint_2": "After calling `deposit(30)`, the summary should reflect the updated balance, not the starting balance."
+      },
+      "starterCode": "# main.py\nfrom models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\n\n# Deposit 30, then print the summary.\n",
+      "solutionCode": "# main.py\nfrom models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nclub_fund.deposit(30)\nprint(club_fund.summary())\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Keep the Account class in models/account.py."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Club Fund",
+            150
+          ],
+          "methodName": "summary",
+          "methodArgs": [],
+          "expected": "Club Fund: $150",
+          "expectedKind": "value",
+          "message": "summary() should return the owner and current balance."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Account",
+          "constructorArgs": [
+            "Club Fund",
+            120
+          ],
+          "attributes": [
+            "owner",
+            "balance"
+          ],
+          "message": "The Account object should still store owner and balance."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "project-step-two-accounts",
+      "kind": "code_input",
+      "title": "Track two separate accounts",
+      "prompt": "Continue the club account tracker with the working `Account` class from the previous step. In `main.py`, create `club_fund = Account(\"Club Fund\", 120)` and `snack_budget = Account(\"Snack Budget\", 40)`. Call `club_fund.deposit(30)` and `snack_budget.deposit(5)`, then print each account's summary on its own line. This step matters because the tracker now needs multiple objects that change independently.",
+      "hint": "Use the same class twice, then call the method on each object separately.",
+      "help": {
+        "concept": "Multiple instances from one class can each keep and update their own state without interfering with each other.",
+        "hint_1": "Create two `Account` objects with different starting balances before calling `deposit` on them.",
+        "hint_2": "After the deposits, each printed summary should reflect only that object's own updated balance."
+      },
+      "starterCode": "# main.py\nfrom models.account import Account\n\n# Create club_fund and snack_budget.\n# Deposit into each account.\n# Print both summaries.\n",
+      "solutionCode": "# main.py\nfrom models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nsnack_budget = Account(\"Snack Budget\", 40)\n\nclub_fund.deposit(30)\nsnack_budget.deposit(5)\n\nprint(club_fund.summary())\nprint(snack_budget.summary())\n",
+      "semanticChecks": [
+        {
+          "type": "created_instances",
+          "className": "Account",
+          "min": 1,
+          "message": "Create two Account objects in main.py."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "main.py should print two summary lines."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "project-step-helper-formatting",
+      "kind": "code_input",
+      "title": "Move summary formatting into a helper file",
+      "prompt": "Continue the club account tracker from the previous step. Add a helper file at `helpers/formatting.py` with a function `format_money(amount)` that returns `$<amount>`. Update `models/account.py` so `summary(self)` imports and uses `format_money(self.balance)`. In `main.py`, create the same two accounts, deposit 30 into `club_fund` and 5 into `snack_budget`, then print both summaries. This step matters because real apps often move formatting work into helper files instead of keeping every detail inside the class.",
+      "hint": "The helper function should return the dollar-formatted text, and `summary()` should call that helper.",
+      "help": {
+        "concept": "Helper files let you separate reusable formatting logic from the class while still keeping the class responsible for its own summary behavior.",
+        "hint_1": "Write `format_money(amount)` in `helpers/formatting.py`, then import it inside `models/account.py`.",
+        "hint_2": "Keep `summary()` returning the same text as before, but build the balance part by calling the helper function."
+      },
+      "starterCode": "# main.py\nfrom models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nsnack_budget = Account(\"Snack Budget\", 40)\n\nclub_fund.deposit(30)\nsnack_budget.deposit(5)\n\nprint(club_fund.summary())\nprint(snack_budget.summary())\n",
+      "solutionCode": "# main.py\nfrom models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nsnack_budget = Account(\"Snack Budget\", 40)\n\nclub_fund.deposit(30)\nsnack_budget.deposit(5)\n\nprint(club_fund.summary())\nprint(snack_budget.summary())\n",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Keep the Account class in models/account.py."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Club Fund",
+            150
+          ],
+          "methodName": "summary",
+          "methodArgs": [],
+          "expected": "Club Fund: $150",
+          "expectedKind": "value",
+          "message": "summary() should still return the correctly formatted text."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "main.py should print two summary lines."
+        }
+      ],
+      "recipeType": "semantic"
+    },
+    {
+      "id": "project-step-validation",
+      "kind": "code_input",
+      "title": "Validate negative deposits",
+      "prompt": "Finish this topic's club account tracker by adding simple validation. Keep the helper file and `Account` class from the previous step. Update `deposit(self, amount)` so it only changes the balance when `amount` is greater than 0. If the amount is 0 or negative, leave the balance unchanged. In `main.py`, create `club_fund = Account(\"Club Fund\", 120)`, call `club_fund.deposit(-10)`, then print `club_fund.summary()`. This step matters because encapsulation means the object protects its own state from invalid updates.",
+      "hint": "Check the amount inside `deposit` before changing `self.balance`.",
+      "help": {
+        "concept": "Encapsulation includes validation inside methods so objects can guard their own data against invalid changes.",
+        "hint_1": "Use an `if` statement in `deposit` so only positive amounts are added to the balance.",
+        "hint_2": "For the given run, a negative deposit should not reduce the balance, so the printed summary should still show the original amount."
+      },
+      "starterCode": "# main.py\nfrom models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\n\n# Try a negative deposit, then print the summary.\n",
+      "solutionCode": "# main.py\nfrom models.account import Account\n\nclub_fund = Account(\"Club Fund\", 120)\nclub_fund.deposit(-10)\nprint(club_fund.summary())\n",
+      "semanticChecks": [
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Club Fund",
+            120
+          ],
+          "methodName": "summary",
+          "methodArgs": [],
+          "expected": "Club Fund: $120",
+          "expectedKind": "value",
+          "message": "summary() should report the current balance correctly."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 1,
+          "message": "main.py should print one summary line."
+        }
+      ],
+      "recipeType": "semantic"
+    }
+  ],
+  "projectDraft": {
+    "title": "Community Club Account Tracker",
+    "stepIds": [
+      "project-step-account-class",
+      "project-step-account-methods",
+      "project-step-two-accounts",
+      "project-step-helper-formatting",
+      "project-step-validation"
+    ]
+  }
+}

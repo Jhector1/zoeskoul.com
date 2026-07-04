@@ -35,6 +35,8 @@ import { validateGenericExerciseHelp } from "../validate/validateGenericExercise
 import { validateStarterCodeDoesNotRevealSolution } from "../validate/validateStarterCodeDoesNotRevealSolution.js";
 import { validateNoDummyFillBlankQuestions } from "../validate/validateNoDummyFillBlankQuestions.js";
 import type { CompileProgressCallback } from "./compileProgress.js";
+import type { CompileValidationSkipOptions } from "./validationState.js";
+import { resolveCompileValidationState } from "./validationState.js";
 
 import {
     getTopicReportDir,
@@ -233,13 +235,36 @@ function normalizeCurrentOutputMessageKeySegment(value: string): string {
         .replace(/^_+|_+$/g, "");
 }
 
+function currentOutputFileContentMessageField(args: {
+    group: "starterFiles" | "solutionFiles" | "files" | "fixtureFiles";
+    filePath: string | undefined;
+    index: number;
+}): string {
+    const normalizedPath = normalizeCurrentOutputMessageKeySegment(args.filePath ?? "");
+    const fileKey = normalizedPath || `file_${args.index + 1}`;
+    return `${args.group}.${fileKey}.content`;
+}
+
 function currentOutputStarterFileContentMessageField(
     filePath: string | undefined,
     index: number,
 ): string {
-    const normalizedPath = normalizeCurrentOutputMessageKeySegment(filePath ?? "");
-    const fileKey = normalizedPath || `file_${index + 1}`;
-    return `starterFiles.${fileKey}.content`;
+    return currentOutputFileContentMessageField({
+        group: "starterFiles",
+        filePath,
+        index,
+    });
+}
+
+function currentOutputSolutionFileContentMessageField(
+    filePath: string | undefined,
+    index: number,
+): string {
+    return currentOutputFileContentMessageField({
+        group: "solutionFiles",
+        filePath,
+        index,
+    });
 }
 
 function isCurrentOutputEntryStarterFile(file: Record<string, unknown>): boolean {
@@ -289,6 +314,90 @@ function normalizeCurrentOutputVisibleStarterFileContentRefs(args: {
     });
 }
 
+function normalizeCurrentOutputSolutionFileContentRefs(args: {
+    value: unknown;
+    messageBase: string;
+    messagesByLocale: Record<string, Record<string, unknown>>;
+    fallbackEntrySolutionRef?: string;
+}) {
+    const solutionFiles = args.value;
+    if (!Array.isArray(solutionFiles)) return;
+
+    solutionFiles.forEach((entry, index) => {
+        if (!isCurrentOutputRecord(entry)) return;
+
+        const content = entry.content;
+        if (typeof content !== "string" || content.trim().length === 0 || content.startsWith("@:")) {
+            return;
+        }
+
+        const filePath = typeof entry.path === "string"
+            ? entry.path
+            : typeof entry.name === "string"
+              ? entry.name
+              : undefined;
+        const isEntry = entry.isEntry === true || entry.entry === true || filePath === "main.py" || filePath === "main.sh";
+        const messagePath = isEntry && solutionFiles.length === 1 && args.fallbackEntrySolutionRef
+            ? args.fallbackEntrySolutionRef.replace(/^@:/, "")
+            : `${args.messageBase}.${currentOutputSolutionFileContentMessageField(filePath, index)}`;
+
+        setCurrentOutputMessageForAllLocales({
+            messagesByLocale: args.messagesByLocale,
+            messagePath,
+            value: content,
+        });
+
+        entry.content = `@:${messagePath}`;
+    });
+}
+
+function normalizeCurrentOutputSemanticCheckMessageRefs(args: {
+    semanticChecks: unknown;
+    messageBase: string;
+    messagesByLocale: Record<string, Record<string, unknown>>;
+}) {
+    if (!Array.isArray(args.semanticChecks)) return;
+
+    args.semanticChecks.forEach((entry, index) => {
+        if (!isCurrentOutputRecord(entry)) return;
+        const message = entry.message;
+        if (typeof message !== "string" || message.trim().length === 0 || message.startsWith("@:")) {
+            return;
+        }
+
+        const messagePath = `${args.messageBase}.checks.${index}.message`;
+        setCurrentOutputMessageForAllLocales({
+            messagesByLocale: args.messagesByLocale,
+            messagePath,
+            value: message,
+        });
+        entry.message = `@:${messagePath}`;
+    });
+}
+
+function normalizeCurrentOutputSourceCheckMessageRefs(args: {
+    value: unknown;
+    messageBase: string;
+    messagesByLocale: Record<string, Record<string, unknown>>;
+}) {
+    if (!Array.isArray(args.value)) return;
+
+    args.value.forEach((entry, index) => {
+        if (!isCurrentOutputRecord(entry)) return;
+        const message = entry.message;
+        if (typeof message !== "string" || message.trim().length === 0 || message.startsWith("@:")) {
+            return;
+        }
+        const messagePath = `${args.messageBase}.sourceChecks.${index}.message`;
+        setCurrentOutputMessageForAllLocales({
+            messagesByLocale: args.messagesByLocale,
+            messagePath,
+            value: message,
+        });
+        entry.message = `@:${messagePath}`;
+    });
+}
+
 function normalizeCurrentOutputEntryStarterFileRefs(
     value: unknown,
     starterCodeRef: string,
@@ -321,6 +430,7 @@ function normalizeCurrentOutputLearnerFacingRefs(
         if (!messageBase) continue;
 
         const starterCodeRef = `@:${messageBase}.starterCode`;
+        const solutionCodeRef = `@:${messageBase}.solutionCode`;
         const promptRef = `@:${messageBase}.prompt`;
 
         if (typeof exercise.starterCode === "string" && !exercise.starterCode.startsWith("@:")) {
@@ -358,6 +468,19 @@ function normalizeCurrentOutputLearnerFacingRefs(
             });
         }
 
+        normalizeCurrentOutputSolutionFileContentRefs({
+            value: exercise.solutionFiles,
+            messageBase,
+            messagesByLocale,
+            fallbackEntrySolutionRef: solutionCodeRef,
+        });
+
+        normalizeCurrentOutputSourceCheckMessageRefs({
+            value: exercise.sourceChecks,
+            messageBase,
+            messagesByLocale,
+        });
+
         if (isCurrentOutputRecord(exercise.recipe)) {
             const instructions = exercise.recipe.instructions;
             if (typeof instructions === "string" && !instructions.startsWith("@:")) {
@@ -368,6 +491,35 @@ function normalizeCurrentOutputLearnerFacingRefs(
                 });
                 exercise.recipe.instructions = promptRef;
             }
+
+            const solutionCode = exercise.recipe.solutionCode;
+            if (typeof solutionCode === "string" && solutionCode.trim().length > 0 && !solutionCode.startsWith("@:")) {
+                setCurrentOutputMessageForAllLocales({
+                    messagesByLocale,
+                    messagePath: `${messageBase}.solutionCode`,
+                    value: solutionCode,
+                });
+                exercise.recipe.solutionCode = solutionCodeRef;
+            }
+
+            normalizeCurrentOutputSolutionFileContentRefs({
+                value: exercise.recipe.solutionFiles,
+                messageBase,
+                messagesByLocale,
+                fallbackEntrySolutionRef: solutionCodeRef,
+            });
+
+            normalizeCurrentOutputSemanticCheckMessageRefs({
+                semanticChecks: exercise.recipe.semanticChecks,
+                messageBase,
+                messagesByLocale,
+            });
+
+            normalizeCurrentOutputSourceCheckMessageRefs({
+                value: exercise.recipe.sourceChecks,
+                messageBase,
+                messagesByLocale,
+            });
         }
     }
 }
@@ -689,12 +841,14 @@ export async function rebuildSubjectFromDraftReports(args: {
     onProgress?: CompileProgressCallback;
     rebuildDraftSource?: RebuildDraftSourcePreference;
     syncReports?: boolean;
+    validation?: CompileValidationSkipOptions;
 }) {
     const shape = getSubjectShape(args.blueprint.profileId);
     const profileServices = getProfileServices(args.blueprint.profileId);
     const topicNodes = listTopicPlanNodes({ plan: args.plan });
     const rebuildDraftSource = args.rebuildDraftSource ?? "reports";
     const syncReports = args.syncReports ?? true;
+    const validationState = resolveCompileValidationState(args.validation);
     const totalTopics = topicNodes.length;
     let completedTopics = 0;
 
@@ -813,6 +967,7 @@ export async function rebuildSubjectFromDraftReports(args: {
                     hashes,
                     topicBundle: normalizedCurrentOutput.topicBundle,
                     topicMessagesByLocale: normalizedCurrentOutput.messagesByLocale,
+                    validationState,
                     rebuildSource: {
                         mode: "rebuild-from-drafts",
                         source: currentOutput.source,
@@ -837,6 +992,7 @@ export async function rebuildSubjectFromDraftReports(args: {
                 finalAttempt: 0,
                 mode: "rebuild-from-drafts",
                 sourceDraft: currentOutput.source,
+                validationState,
             });
 
             completedTopics += 1;
@@ -860,7 +1016,10 @@ export async function rebuildSubjectFromDraftReports(args: {
 
         const workspacePolicy = resolveWorkspacePolicy({
             blueprint: args.blueprint,
-            moduleNumber: node.module.order - 1,
+            moduleNumber:
+                        typeof node.module.moduleNumber === "number" && Number.isFinite(node.module.moduleNumber)
+                            ? node.module.moduleNumber
+                            : node.module.order - 1,
             topicId: node.topic.topicId,
         });
 
@@ -913,7 +1072,7 @@ export async function rebuildSubjectFromDraftReports(args: {
         });
         const blockers = qualityFailures(qualityReport);
 
-        if (blockers.length > 0) {
+        if (!validationState.qualityGates.skipped && blockers.length > 0) {
             throw new Error(
                 [
                     `Cannot rebuild topic "${node.topic.topicId}" because the saved draft fails the quality gate.`,
@@ -927,14 +1086,20 @@ export async function rebuildSubjectFromDraftReports(args: {
             );
         }
 
-        const goldenReport = await profileServices.validateGolden({
-            seed,
-            draft,
-            topicBundle,
-        });
+        const goldenReport = validationState.golden.skipped
+            ? {
+                  topicId: seed.topicId,
+                  ok: true,
+                  issues: [],
+              }
+            : await profileServices.validateGolden({
+                  seed,
+                  draft,
+                  topicBundle,
+              });
         const goldenErrors = goldenFailures(goldenReport);
 
-        if (goldenErrors.length > 0) {
+        if (!validationState.golden.skipped && goldenErrors.length > 0) {
             throw new Error(
                 [
                     `Cannot rebuild topic "${node.topic.topicId}" because the saved draft fails golden validation.`,
@@ -1010,6 +1175,7 @@ export async function rebuildSubjectFromDraftReports(args: {
                 hashes,
                 goldenReport,
                 qualityReport,
+                validationState,
                 topicBundle,
                 topicMessagesByLocale: messagesByLocale,
                 rebuildSource: {
@@ -1032,6 +1198,7 @@ export async function rebuildSubjectFromDraftReports(args: {
             finalAttempt: 0,
             mode: "rebuild-from-drafts",
             sourceDraft: savedDraft.source,
+            validationState,
         });
 
         completedTopics += 1;

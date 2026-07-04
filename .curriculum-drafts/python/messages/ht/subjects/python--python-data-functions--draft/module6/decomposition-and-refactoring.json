@@ -1,0 +1,300 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "decomposition-and-refactoring": {
+          "label": "Dekompozisyon ak Refaktoring",
+          "summary": "Divize yon gwo travay an fonksyon èd ki klè.",
+          "cards": {
+            "sketch0": {
+              "title": "Poukisa kraze yon pwogram an fonksyon èd?"
+            },
+            "sketch1": {
+              "title": "Rekonèt kòd ki repete"
+            },
+            "sketch2": {
+              "title": "Fè chak fonksyon fè yon sèl travay klè."
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Refaktore yon gwo travay an edikatè ki ka itilize ankò."
+            }
+          },
+          "projectSteps": {
+            "ci_1": {
+              "title": "Ekstrè yon èd pou netwaye"
+            },
+            "ci_2": {
+              "title": "Bati yon rezime ak èdè"
+            },
+            "ci_3": {
+              "title": "Refaktore kalkil ki repete yo nan fonksyon èd."
+            }
+          },
+          "quiz": {
+            "sc-1": {
+              "title": "Pi bon rezon pou ekstrè yon helper",
+              "prompt": "Ki sitiyasyon ki bay rezon ki pi fò pou mete kòd nan yon fonksyon èd?",
+              "hint": "Chèche lojik ki repete ki fè menm travay la nan plis pase yon sèl kote.",
+              "help": {
+                "concept": "Fonksyon èd yo espesyalman itil lè menm lojik la parèt plizyè fwa, paske yon sèl fonksyon ka ranplase kòd ki repete epi fè mizajou yo pi fasil.",
+                "hint_1": "Konpare chwa yo epi jwenn youn kote menm etap yo ta sinon kopye.",
+                "hint_2": "Yon èd gen plis valè lè yon travay ki ka reitilize parèt plizyè fwa, pa sèlman paske yon pwogram gen anpil liy."
+              },
+              "options": {
+                "a": "Yon non varyab kout",
+                "b": "Menm etap netwayaj yo ekri nan plizyè kote.",
+                "c": "Pwogram nan itilize input() yon sèl fwa.",
+                "d": "Yon deklarasyon enprime parèt nan fen an."
+              }
+            },
+            "sc-2": {
+              "title": "Sa refactorizasyon ta dwe konsève",
+              "prompt": "Lè w refaktore yon pwogram k ap mache, kisa ki ta dwe rete menm jan?",
+              "hint": "Refactorizasyon chanje estrikti, pa rezilta pwogram nan vize a.",
+              "help": {
+                "concept": "Refactorizasyon amelyore lizibilite oswa òganizasyon pandan li prezève konpòtman, kidonk pwogram nan ta dwe toujou pwodwi menm rezilta pou menm antre yo.",
+                "hint_1": "Panse sou sa itilizatè yo remake: pwogram nan dwe toujou rezoud menm pwoblèm nan kòrèkteman.",
+                "hint_2": "Aranjman kòd la ka chanje, men rezilta ak konpòtman pou menm antre a pa dwe chanje."
+              },
+              "options": {
+                "a": "Kantite fonksyon yo dwe diminye",
+                "b": "Non varyab yo dwe rete idantik",
+                "c": "Konpòtman pwogram nan pou menm antre a dwe rete kòrèk.",
+                "d": "Chak liy dwe rete nan menm lòd la"
+              }
+            },
+            "mc-1": {
+              "title": "Siy ki montre yon fonksyon ap fè twòp",
+              "prompt": "Ki chwa yo ki sijere ke yon fonksyon ta dwe divize an ti fonksyon èd? Chwazi tout sa ki aplikab.",
+              "hint": "Chèche responsablite melanje ak moso lojik ki repete.",
+              "help": {
+                "concept": "Yon fonksyon souvan bezwen dekonpozisyon lè li jere plizyè travay diferan oswa li gen lòjik ki repete ki ta ka reitilize lòt kote.",
+                "hint_1": "Youn nan endis yo se ke fonksyon an toude transfòme done epi fòmate rezilta final la nan yon blòk long.",
+                "hint_2": "Yon lòt endis se lè w wè moso kòd ki prèske menm jan oswa yon fonksyon ki eseye netwaye, kalkile, epi afiche tout an menm tan."
+              },
+              "options": {
+                "a": "Li netwaye tèks la, kalkile yon rezilta, epi fòmate yon mesaj nan yon sèl blòk long.",
+                "b": "Li genyen moso kòd ki repete ak sèlman ti chanjman.",
+                "c": "Li gen yon sèl deklarasyon retou kout pou yon sèl travay klè.",
+                "d": "Li difisil pou dekri travay fonksyon an nan yon fraz."
+              }
+            },
+            "mc-2": {
+              "title": "Avantaj fonksyon èd yo",
+              "prompt": "Ki vrè benefis ki genyen lè w divize kòd an fonksyon èd? Chwazi tout sa ki aplikab.",
+              "hint": "Panse sou lizibilite, reyitilizasyon, ak tès.",
+              "help": {
+                "concept": "Fonksyon èd yo amelyore òganizasyon an lè yo bay ti travay yo non klè, diminye redondans, epi fè lojik la pi fasil pou teste separeman.",
+                "hint_1": "Etydè itil yo anjeneral fè kòd la pi fasil pou li epi pèmèt ou reitilize yon moso lojik nan plizyè kote.",
+                "hint_2": "Yo ede w teste yon ti konpòtman alafwa; yo pa fè chak pwogram ki gen liy pi kout otomatikman."
+              },
+              "options": {
+                "a": "Ou ka reitilize menm lojik la nan plizyè kote.",
+                "b": "Ti moso pi fasil pou teste youn apre lòt.",
+                "c": "Chak pwogram ap toujou itilize mwens liy an total",
+                "d": "Non fonksyon yo ka esplike sa chak etap fè."
+              }
+            },
+            "dr-1": {
+              "title": "Refaktore netwayaj repete",
+              "prompt": "Mete etap sa yo nan pi bon lòd pou refaktore kòd netwayaj tèks ki repete a an yon fonksyon èd.",
+              "hint": "Premyeman idantifye travay ki repete a, apre sa defini èd la, epi ranplase duplikat yo.",
+              "help": {
+                "concept": "Yon refactoraj pwòp anjeneral kòmanse lè w remake lojik ki repete, w ekstrè li nan yon fonksyon, epi w rele fonksyon sa a kote sa nesesè.",
+                "hint_1": "Ou pa ta dwe ranplase ansyen kòd ak apèl edikatè anvan edikatè a egziste.",
+                "hint_2": "Konpòtman ki repete a dwe idantifye an premye, apre sa deplase l nan yon fonksyon, epi itilize l apati kote orijinal yo."
+              },
+              "tokens": {
+                "t1": "Remake menm lojik netwayaj la parèt plis pase yon fwa.",
+                "t2": "Ekri yon fonksyon èd pou travay netwayaj sa a.",
+                "t3": "Ranplase kòd ki repete a ak apèl nan fonksyon èd la.",
+                "t4": "Kouri pwogram nan epi konfime ke konpòtman an toujou kòrèk."
+              }
+            },
+            "dr-2": {
+              "title": "Kijan yon pwogram ki baze sou èdye fonksyone",
+              "prompt": "Aranje etap yo nan lòd yo rive lè modèl sa a kouri: antre a netwaye, apre sa li itilize pou konstwi yon mesaj, epi li enprime.",
+              "hint": "Yon èd retounen yon valè anvan pwochen fonksyon an itilize li.",
+              "help": {
+                "concept": "Nan kòd dekonpoze, yon fonksyon souvan retounen yon valè netwaye, yon lòt fonksyon itilize valè sa a pou konstwi yon rezilta, epi kòd prensipal la enprime rezilta final la.",
+                "hint_1": "Tèks ki netwaye a dwe egziste anvan yo ka konstwi yon salitasyon oswa yon rezime apati de li.",
+                "hint_2": "Enpresyon se anjeneral dènye etap la apre fonksyon èd yo fin retounen valè ki nesesè yo."
+              },
+              "tokens": {
+                "t1": "Rele asistan netwayaj la ak tèks orijinal la",
+                "t2": "Resevwa tèks ki netwaye a kòm valè retou.",
+                "t3": "Sèvi ak tèks ki netwaye a pou konstwi mesaj final la.",
+                "t4": "Enprime mesaj final la"
+              }
+            },
+            "fb-1": {
+              "title": "Rele asistan an",
+              "prompt": "Chwazi apèl fonksyon ki itilize èd la pou netwaye varyab `name` la.",
+              "hint": "Blank la ta dwe yon apèl ki pase `name` nan helper la.",
+              "help": {
+                "concept": "Pou itilize yon fonksyon èd, ekri non li, mete l nan parantèz epi pase agiman ki nesesè a andedan.",
+                "hint_1": "Ou ap ranpli bò dwat yon devwa, kidonk espas vid la dwe pwodwi yon valè.",
+                "hint_2": "Chèche opsyon ki rele `clean_name` ak `name` andedan parantèz yo."
+              },
+              "template": "non bèl = [espas1]",
+              "choices": [
+                "netwaye_non(non)",
+                "non = netwaye_non",
+                "print(name)",
+                "retounen non_pwòp"
+              ]
+            },
+            "fb-2": {
+              "title": "Retou soti nan yon èd",
+              "prompt": "Chwazi mo ki manke a ki voye valè ki kalkile a tounen soti nan fonksyon an.",
+              "hint": "Anndan yon fonksyon, yon mo kle voye yon valè tounen bay apèlè a.",
+              "help": {
+                "concept": "Yon fonksyon èd itilize retou valè pa referans (`the missing term`) pou voye yon rezilta tounen, konsa lòt kòd ka anrejistre li, enprime li, oswa itilize li nan yon lòt kalkil.",
+                "hint_1": "`print` Li montre tèks nan panèl sòti a, men li pa voye yon valè reyitilizab tounen bay apèlè a.",
+                "hint_2": "Mo ki manke a se mo kle yo itilize anvan yon ekspresyon tankou `text.strip()` lè fonksyon an dwe pwodwi yon valè."
+              },
+              "template": "def clean_text(text):\n    [blank1] text.strip().lower()",
+              "choices": [
+                "retounen",
+                "Enprime",
+                "Antre",
+                "defini"
+              ]
+            },
+            "ci-1": {
+              "title": "Ekstrè yon èd pou netwaye",
+              "prompt": "Ekri `clean_name(name)` pou li retounen vèsyon netwaye `name`. Ede sa a ta dwe fè travay netwayaj non an olye pou li repete lòt kote.",
+              "hint": "Li tach la \"Extract a cleaning helper\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
+              "solutionCode": "def clean_name(name):\n    return name.strip().title()"
+            },
+            "ci-2": {
+              "title": "Bati yon rezime ak èdè",
+              "prompt": "Divize travay sa a an de fonksyon èd. `word_count(text)` ta dwe retounen kantite mo yo, epi `summary(text)` ta dwe rele fonksyon èd sa a epi retounen yon chèn tankou `Words: 3`.",
+              "hint": "Li tach la \"Bati yon rezime ak èd\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
+              "solutionCode": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\""
+            },
+            "ci-3": {
+              "title": "Refaktore kalkil ki repete yo nan fonksyon èd.",
+              "prompt": "Konplete `double(number)` ak `triple(number)`, epi itilize fonksyon ede sa yo andedan `combined_total(a, b)` olye pou w repete kalkil yo la.",
+              "hint": "Li tach la \"Refactor repeated math into helpers\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap mache nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an fonksyon epi konpare sòti a ak egzanp ki atann lan anvan ou verifye repons ou."
+              },
+              "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
+              "solutionCode": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)"
+            },
+            "try-decomposition-and-refactoring-checkpoint": {
+              "title": "Sèvi ak yon fonksyon èd.",
+              "prompt": "Defini `clean_title(text)` ki retire espas vid epi mete premye lèt chak mo an majiskil nan tèks la. Enprime vèsyon netwaye `\"  python helper  \"` la.",
+              "hint": "Sèvi ak `.strip().title()` andedan yon fonksyon èd.",
+              "help": {
+                "concept": "Dekompozisyon vle di deplase yon sèl etap klè nan yon fonksyon èd.",
+                "hint_1": "Itilize `.strip().title()` andedan yon fonksyon èd.",
+                "hint_2": "Kouri kòd ou a epi konpare sòti a ak rezilta espere a."
+              },
+              "starterCode": "def clean_title(text):\n    # Return the cleaned title.\n    pass\n\nprint(clean_title(\"  python helper  \"))\n",
+              "solutionCode": "def clean_title(text):\n    return text.strip().title()\n\nprint(clean_title(\"  python helper  \"))\n"
+            },
+            "try-decomposition-and-refactoring-sketch0": {
+              "title": "Netwaye tèks ak yon èd",
+              "prompt": "Avanse yon sèl pa klè nan yon fonksyon èd.",
+              "hint": "Retire espas vid epi mete tèks la an lèt piti.",
+              "help": {
+                "concept": "Retire espas vid epi mete tèks la an lèt piti.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
+              "solutionCode": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n"
+            },
+            "try-decomposition-and-refactoring-sketch1": {
+              "title": "Separe yon non konplè",
+              "prompt": "Yon èd ka kache yon ti etap tretman chèn.",
+              "hint": "Retounen premye mo nan full_name.",
+              "help": {
+                "concept": "Retounen premye mo nan full_name.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
+              "solutionCode": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n"
+            },
+            "try-decomposition-and-refactoring-sketch2": {
+              "title": "Konbine de asistan",
+              "prompt": "Yon èd ka rele yon lòt èd.",
+              "hint": "Retounen 'Badge: ' plis non ki netwaye a.",
+              "help": {
+                "concept": "Retounen 'Badge: ' plis non ki netwaye a.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
+              "solutionCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Itilize clean(name) andedan badge la olye pou w kode yon egzanp fiks."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_decomposition_and_refactoring_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Defini `clean_title(text)` ki retire espas vid epi mete premye lèt chak mo an majiskil nan tèks la. Enprime vèsyon netwaye `\"  python helper  \"` la."
+            },
+            "try_decomposition_and_refactoring_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Avanse yon sèl pa klè nan yon fonksyon asistans."
+            },
+            "try_decomposition_and_refactoring_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Yon èd ka kache yon ti etap tretman chèn."
+            },
+            "try_decomposition_and_refactoring_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Yon èd ka rele yon lòt èd."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-6-functions-and-modularity": {
+        "decomposition-and-refactoring": {
+          "sketch-1": {
+            "title": "Poukisa kraze yon pwogram an fonksyon èd?",
+            "bodyMarkdown": "Decomposition means splitting one larger task into smaller jobs. Refactoring means improving the structure of code without changing what the program does.\n\nA beginner-friendly rule is: if you see the same idea repeated, or one block of code is doing too many things, that is a good time to make a helper function.\n\nHere is a small example. Suppose you want to format a name and then build a greeting.\n\n```python\ndef clean_name(name):\n    return name.strip().title()\n\ndef make_greeting(name):\n    nice_name = clean_name(name)\n    return f\"Hello, {nice_name}!\"\n\nprint(make_greeting(\"  aVA  \"))\n```\n\nStep by step:\n\n- `clean_name(name)` handles one job: fixing spaces and capitalization.\n- `make_greeting(name)` handles a different job: building the final message.\n- Inside `make_greeting`, the program calls `clean_name` instead of repeating that cleanup logic.\n- `print(make_greeting(\"  aVA  \"))` shows the returned result in the output panel.\n\nThe output is:\n\n```python\nHello, Ava!\n```\n\nThis version is easier to read, easier to test, and easier to reuse."
+          },
+          "sketch-2": {
+            "title": "Rekonèt kòd ki repete",
+            "bodyMarkdown": "One common reason to refactor is repeated code. If two parts of a program do the same cleanup or calculation, that logic usually belongs in one helper function.\n\nBefore refactoring:\n\n```python\nfirst = input()\nsecond = input()\n\nfirst_clean = first.strip().lower()\nsecond_clean = second.strip().lower()\n\nprint(first_clean)\nprint(second_clean)\n```\n\nThis works, but the cleanup logic is repeated.\n\nAfter refactoring:\n\n```python\ndef clean_text(text):\n    return text.strip().lower()\n\nfirst = input()\nsecond = input()\n\nprint(clean_text(first))\nprint(clean_text(second))\n```\n\nLine by line:\n\n- `def clean_text(text):` creates a reusable helper.\n- `return text.strip().lower()` sends back cleaned text.\n- Each `print(clean_text(...))` call uses the same helper instead of copying the cleanup steps.\n\nNow if you want different cleanup later, you only change one function."
+          },
+          "sketch-3": {
+            "title": "Fè chak fonksyon fè yon sèl travay klè.",
+            "bodyMarkdown": "A good helper function usually has one clear responsibility. That makes code easier to understand and debug.\n\nHere is a worked example that separates counting from message building.\n\n```python\ndef word_count(text):\n    words = text.split()\n    return len(words)\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\"\n\nprint(summary(\"Python makes refactoring easier\"))\n```\n\nStep by step:\n\n- `word_count(text)` splits the text into words and returns the number.\n- `summary(text)` calls `word_count(text)` instead of doing the counting itself.\n- `summary` builds the final string.\n- `print(...)` displays that string.\n\nThe output is:\n\n```python\nWords: 4\n```\n\nThis is better than one long function because each part has a clear purpose."
+          }
+        }
+      }
+    }
+  }
+}

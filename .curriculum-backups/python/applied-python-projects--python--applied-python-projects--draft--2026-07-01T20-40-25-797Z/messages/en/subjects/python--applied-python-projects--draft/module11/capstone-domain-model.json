@@ -1,0 +1,200 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-11-oop-capstone-project": {
+        "capstone-domain-model": {
+          "label": "Capstone Domain Model",
+          "summary": "Build the Smart Task Tracker domain model with a reusable base task class, specialized subclasses, and a service that works polymorphically across mixed task objects.",
+          "cards": {
+            "sketch0": {
+              "title": "Smart Task Tracker capstone overview"
+            },
+            "project": {
+              "title": "Smart Task Tracker Domain Model Capstone"
+            }
+          },
+          "projectSteps": {
+            "try_capstone_domain_model_sketch0": {
+              "title": "Create the base task class"
+            },
+            "capstone_domain_model_step1_bug_task": {
+              "title": "Add the BugTask subclass"
+            },
+            "capstone_domain_model_step2_feature_task": {
+              "title": "Add the FeatureTask subclass with validation"
+            },
+            "capstone_domain_model_step3_task_service": {
+              "title": "Create a polymorphic task service"
+            },
+            "capstone_domain_model_step4_package_runner": {
+              "title": "Organize the models package and runner"
+            },
+            "capstone_domain_model_step5_final_domain_demo": {
+              "title": "Finish the domain model handoff demo"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "try_capstone_domain_model_sketch0": {
+                "title": "Create the base task class",
+                "prompt": "Start the final capstone project. In step 1 of 6, Build the first Smart Task Tracker model layer. In `models/base_task.py`, define a `BaseTask` class with `title`, `priority`, and `completed` attributes. New tasks should start with `completed` set to `False`. Add a `mark_done()` method that changes `completed` to `True`. Keep the `summary()` method as an abstract-style base-class contract by raising `NotImplementedError`. In `main.py`, create one `BaseTask` object with title `Draft roadmap` and priority `high`, call `mark_done()`, and print its three attributes on separate lines so you can verify the object state in the output panel.",
+                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                  "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+                },
+                "starterCode": "# main.py\nfrom models.base_task import BaseTask\n\n# Create a BaseTask, mark it done, and print its state.",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# main.py\nfrom models.base_task import BaseTask\n\n# Create a BaseTask, mark it done, and print its state."
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  }
+                }
+              },
+              "capstone_domain_model_step1_bug_task": {
+                "title": "Add the BugTask subclass",
+                "prompt": "Continue the final capstone project from the previous working step. In step 2 of 6, Continue the Smart Task Tracker workspace from the previous step. Keep the existing `BaseTask` class, then add `models/bug_task.py` with a `BugTask` subclass. It should inherit from `BaseTask`, call `super().__init__(title, priority)`, store a `severity` attribute, and override `summary()` to return exactly `BUG: <title> | priority=<priority> | severity=<severity> | done=<completed>`. In `main.py`, create a bug task for `Fix login redirect`, priority `high`, severity `critical`, and print its summary before and after calling `mark_done()`.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# main.py\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\n\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n# Capstone step 2: Add the BugTask subclass\n# Keep the working code above from the previous step.\n# Next, Continue the Smart Task Tracker workspace from the previous step\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\n\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n# Capstone step 2: Add the BugTask subclass\n# Keep the working code above from the previous step.\n# Next, Continue the Smart Task Tracker workspace from the previous step\n# Add only the focused change for this step below or inside the existing work."
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  }
+                }
+              },
+              "capstone_domain_model_step2_feature_task": {
+                "title": "Add the FeatureTask subclass with validation",
+                "prompt": "Continue the final capstone project from the previous working step. In step 3 of 6, Build on the previous working workspace. Add `models/feature_task.py` with a `FeatureTask` subclass that inherits from `BaseTask`. It should accept `title`, `priority`, and `estimate_points`. Use `super()` for the shared fields. Add validation so `estimate_points` cannot be less than 1; if it is, store `1` instead. Override `summary()` to return exactly `FEATURE: <title> | priority=<priority> | points=<estimate_points> | done=<completed>`. In `main.py`, create one feature task with title `Add dark mode`, priority `medium`, and estimate points `0`, then print its summary. This step matters because the capstone needs encapsulated object rules, not unchecked raw data.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# main.py\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\n\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n# main.py\nfrom models.bug_task import BugTask\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())\n# Capstone step 3: Add the FeatureTask subclass with validation\n# Keep the working code above from the previous step.\n# Next, Build on the previous working workspace\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.bug_task import BugTask\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())\n# Capstone step 3: Add the FeatureTask subclass with validation\n# Keep the working code above from the previous step.\n# Next, Build on the previous working workspace\n# Add only the focused change for this step below or inside the existing work."
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  }
+                }
+              },
+              "capstone_domain_model_step3_task_service": {
+                "title": "Create a polymorphic task service",
+                "prompt": "Continue the final capstone project from the previous working step. In step 4 of 6, Carry forward the full workspace from the previous step. Add `services/task_service.py` with a function named `build_report_lines(tasks)` that returns a list of summary strings for every task in order. The function must work with a mixed list of `BugTask` and `FeatureTask` objects by calling each object's `summary()` method. Do not hard-code separate formatting in the service. In `main.py`, create one bug task (`Fix login redirect`, `high`, `critical`) and one feature task (`Add dark mode`, `medium`, `3`), put them in a list, call `build_report_lines(tasks)`, and print each returned line. This step demonstrates polymorphism in the capstone architecture.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# main.py\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\n\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n# main.py\nfrom models.bug_task import BugTask\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())\n# main.py\nfrom models.feature_task import FeatureTask\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())\n# Capstone step 4: Create a polymorphic task service\n# Keep the working code above from the previous step.\n# Next, Carry forward the full workspace from the previous step\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.feature_task import FeatureTask\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())\n# Capstone step 4: Create a polymorphic task service\n# Keep the working code above from the previous step.\n# Next, Carry forward the full workspace from the previous step\n# Add only the focused change for this step below or inside the existing work."
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  }
+                }
+              },
+              "capstone_domain_model_step4_package_runner": {
+                "title": "Organize the models package and runner",
+                "prompt": "Continue the final capstone project from the previous working step. In step 5 of 6, Continue from the previous complete workspace. Add `models/__init__.py` so other files can import `BaseTask`, `BugTask`, and `FeatureTask` from the `models` package directly. Update `main.py` to use package imports instead of importing each model from its individual file. Then create three tasks: a bug task for `Fix login redirect`, a feature task for `Add dark mode`, and a feature task for `Export CSV`. Mark only the bug task as done. Use `build_report_lines(tasks)` and print the lines. This step improves the capstone architecture by making imports cleaner across workspace files.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# main.py\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\n\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n# main.py\nfrom models.bug_task import BugTask\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())\n# main.py\nfrom models.feature_task import FeatureTask\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())\n# main.py\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 3)\n\ntasks = [bug, feature]\nlines = build_report_lines(tasks)\n\nfor line in lines:\n    print(line)\n# Capstone step 5: Organize the models package and runner\n# Keep the working code above from the previous step.\n# Next, Continue from the previous complete workspace\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 3)\n\ntasks = [bug, feature]\nlines = build_report_lines(tasks)\n\nfor line in lines:\n    print(line)\n# Capstone step 5: Organize the models package and runner\n# Keep the working code above from the previous step.\n# Next, Continue from the previous complete workspace\n# Add only the focused change for this step below or inside the existing work."
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(value):\n    return [\"BUG: Fix login redirect | priority=high | severity=critical | done=False\", \"FEATURE: Add dark mode | priority=medium | points=3 | done=False\"]"
+                  }
+                }
+              },
+              "capstone_domain_model_step5_final_domain_demo": {
+                "title": "Finish the domain model handoff demo",
+                "prompt": "Continue the final capstone project from the previous working step. In step 6 of 6, Finish this topic with a polished domain-model demo that carries forward the full workspace. Add a new method `is_open()` to `BaseTask` that returns `True` when a task is not completed and `False` when it is completed. Keep the subclasses working without duplicating that logic. Update `services/task_service.py` with a function named `count_open_tasks(tasks)` that returns how many tasks are still open. In `main.py`, create four tasks: bug `Fix login redirect` (`high`, `critical`), bug `Resolve crash on save` (`high`, `major`), feature `Add dark mode` (`medium`, `3`), and feature `Export CSV` (`low`, `5`). Mark the first bug and the export feature as done. Print all report lines, then print one final line exactly as `Open tasks: <count>`. This is the final handoff for the topic because it shows abstraction, inheritance, encapsulation, and polymorphism working together in one mini app.",
+                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "help": {
+                  "concept": "The final capstone is progressive. Each step starts from the previous working solution and adds one focused feature.",
+                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                },
+                "starterCode": "# main.py\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\n\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n# main.py\nfrom models.bug_task import BugTask\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())\n# main.py\nfrom models.feature_task import FeatureTask\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())\n# main.py\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 3)\n\ntasks = [bug, feature]\nlines = build_report_lines(tasks)\n\nfor line in lines:\n    print(line)\n# main.py\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature_one = FeatureTask(\"Add dark mode\", \"medium\", 3)\nfeature_two = FeatureTask(\"Export CSV\", \"low\", 5)\n\nbug.mark_done()\n\ntasks = [bug, feature_one, feature_two]\n\nfor line in build_report_lines(tasks):\n    print(line)\n# Capstone step 6: Finish the domain model handoff demo\n# Keep the working code above from the previous step.\n# Next, Finish this topic with a polished domain-model demo that carries forward the full workspace\n# Add only the focused change for this step below or inside the existing work.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature_one = FeatureTask(\"Add dark mode\", \"medium\", 3)\nfeature_two = FeatureTask(\"Export CSV\", \"low\", 5)\n\nbug.mark_done()\n\ntasks = [bug, feature_one, feature_two]\n\nfor line in build_report_lines(tasks):\n    print(line)\n# Capstone step 6: Finish the domain model handoff demo\n# Keep the working code above from the previous step.\n# Next, Finish this topic with a polished domain-model demo that carries forward the full workspace\n# Add only the focused change for this step below or inside the existing work."
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None"
+                  },
+                  "models_bug_task_py": {
+                    "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\""
+                  },
+                  "models_feature_task_py": {
+                    "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\""
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(value):\n    return [\"BUG: Fix login redirect | priority=high | severity=critical | done=False\", \"FEATURE: Add dark mode | priority=medium | points=3 | done=False\"]"
+                  },
+                  "models_py": {
+                    "content": "class BugTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def summary(self):\n        return f\"BUG: {self.value_1} | priority={self.value_2} | severity={self.value_3} | done=False\""
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-11-oop-capstone-project": {
+        "capstone-domain-model": {
+          "capstone-domain-model-sketch-0": {
+            "title": "Smart Task Tracker capstone overview",
+            "bodyMarkdown": "In this capstone, you are building the **domain model** for a small workplace app called **Smart Task Tracker**. Your role is to create the core task objects that the rest of the project will depend on.\n\nThe app needs:\n\n- a reusable **base class** for shared task behavior\n- specialized subclasses for different task types\n- **encapsulation** so object state is updated through methods instead of random direct changes\n- **abstraction** through a base-class contract that every task can summarize itself\n- **inheritance** so subclasses reuse shared setup\n- **polymorphism** so one service can work with a mixed list of task objects\n\nA simple version of the model looks like this:\n\n```python\nclass BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary().\")\n```\n\nLine by line:\n\n- `class BaseTask:` starts the shared parent class.\n- `__init__` stores the common data every task needs.\n- `self.completed = False` gives each new task a starting state.\n- `mark_done()` changes object state through a method, which supports encapsulation.\n- `summary()` defines a base-class contract: every subclass must provide its own summary text.\n\nA subclass can reuse the parent setup with `super()` and then add its own field:\n\n```python\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity}\"\n```\n\nHere:\n\n- `BugTask` inherits from `BaseTask`.\n- `super().__init__(...)` runs the shared parent constructor.\n- `self.severity` stores bug-specific data.\n- `summary()` overrides the base method with bug-specific behavior.\n\nThat override is what makes polymorphism useful. If you store both `BugTask` and `FeatureTask` objects in one list, a service can call `task.summary()` on each object and let Python choose the right version automatically.\n\nBy the end of this topic, your handoff deliverable is a working multi-file domain model for Smart Task Tracker, including base and subclass models, a service layer that uses mixed task objects, and a small runner that prints a clean report from those objects."
+          }
+        }
+      }
+    }
+  }
+}

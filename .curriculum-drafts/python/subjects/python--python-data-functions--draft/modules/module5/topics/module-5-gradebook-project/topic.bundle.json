@@ -110,11 +110,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise1",
       "language": "python",
-      "starterCode": "def create_student_list():\n    # Create a list of student names\n    return []",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def create_student_list():\n    # Create a list of student names\n    return []",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -123,7 +123,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -132,11 +132,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def create_student_list():\n    # Create a list of student names\n    return []",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def create_student_list():\n    # Create a list of student names\n    return []",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -147,11 +147,11 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -180,11 +180,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise2",
       "language": "python",
-      "starterCode": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']\n# Project step 2: Add Grades to Students\n# Keep the working code above from the previous step.\n# Next, Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade\n# Add only the focused change for this step below or inside the existing work.",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']\n# Project step 2: Add Grades to Students\n# Keep the working code above from the previous step.\n# Next, Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade\n# Add only the focused change for this step below or inside the existing work.",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -193,7 +193,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def add_grades(students, grades):\n    return dict(zip(students, grades))",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise2.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -202,11 +202,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']\n# Project step 2: Add Grades to Students\n# Keep the working code above from the previous step.\n# Next, Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade\n# Add only the focused change for this step below or inside the existing work.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def create_student_list():\n    return ['Alice', 'Bob', 'Charlie']\n# Project step 2: Add Grades to Students\n# Keep the working code above from the previous step.\n# Next, Write a function `add_grades` that takes a list of student names and a list of grades, and returns a dictionary mapping each student to their grade\n# Add only the focused change for this step below or inside the existing work.",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -217,11 +217,11 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def add_grades(students, grades):\n    return dict(zip(students, grades))",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def add_grades(students, grades):\n    return dict(zip(students, grades))",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise2.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -273,11 +273,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise3",
       "language": "python",
-      "starterCode": "def add_grades(students, grades):\n    return dict(zip(students, grades))\n# Project step 3: Calculate Average Grade\n# Keep the working code above from the previous step.\n# Next, Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade\n# Add only the focused change for this step below or inside the existing work.",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise3.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def add_grades(students, grades):\n    return dict(zip(students, grades))\n# Project step 3: Calculate Average Grade\n# Keep the working code above from the previous step.\n# Next, Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade\n# Add only the focused change for this step below or inside the existing work.",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise3.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -286,7 +286,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def calculate_average(grades):\n    return sum(grades.values()) / len(grades)",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise3.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -295,11 +295,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def add_grades(students, grades):\n    return dict(zip(students, grades))\n# Project step 3: Calculate Average Grade\n# Keep the working code above from the previous step.\n# Next, Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade\n# Add only the focused change for this step below or inside the existing work.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def add_grades(students, grades):\n    return dict(zip(students, grades))\n# Project step 3: Calculate Average Grade\n# Keep the working code above from the previous step.\n# Next, Write a function `calculate_average` that takes a dictionary of student grades and returns the average grade\n# Add only the focused change for this step below or inside the existing work.",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise3.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -310,11 +310,11 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def calculate_average(grades):\n    return sum(grades.values()) / len(grades)",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise3.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def calculate_average(grades):\n    return sum(grades.values()) / len(grades)",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.module-5-gradebook-project.quiz.exercise3.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true

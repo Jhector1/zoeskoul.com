@@ -1,0 +1,775 @@
+{
+  "topicId": "polymorphic-collections",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-polymorphism-and-abstraction",
+  "prefix": "py9",
+  "minutes": 32,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch0.title",
+      "sketchId": "try-polymorphic-collections-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-polymorphic-collections-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.prompt",
+        "exerciseKey": "try-polymorphic-collections-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.sketch1.title",
+      "sketchId": "try-it-yourself",
+      "height": 420,
+      "tryIt": {
+        "id": "try-polymorphic-collections-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.prompt",
+        "exerciseKey": "try-polymorphic-collections-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "try-polymorphic-collections-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.try-polymorphic-collections-sketch0.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.try-polymorphic-collections-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "try-it-yourself",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.try-it-yourself.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.try-it-yourself.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-polymorphic-collections-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Shape:\n    def area(self):\n        pass\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return 3.14 * self.radius * self.radius\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side * self.side\n\nshapes = [Circle(5), Square(4)]\nfor shape in shapes:\n    print(shape.area())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Shape:\n    def area(self):\n        pass\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return 3.14 * self.radius * self.radius\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side * self.side\n\nshapes = [Circle(5), Square(4)]\nfor shape in shapes:\n    print(shape.area())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Shape:\n    def area(self):\n        pass\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n    def area(self):\n        return 3.14 * self.radius * self.radius\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n    def area(self):\n        return self.side * self.side\n\nshapes = [Circle(5), Square(4)]\nfor shape in shapes:\n    print(shape.area())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Shape",
+            "message": "Define or import the Shape class for this workspace exercise."
+          },
+          {
+            "type": "defines_class",
+            "className": "Circle",
+            "message": "Define the Circle subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Circle",
+            "constructorArgs": [
+              5
+            ],
+            "message": "Circle should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Square",
+            "message": "Define the Square subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Square",
+            "constructorArgs": [
+              4
+            ],
+            "message": "Square should be constructible with the example arguments."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print at least 2 non-empty output line(s)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-polymorphic-collections-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Vehicle:\n    def move(self):\n        pass\n\nclass Car(Vehicle):\n    def move(self):\n        return \"Car is moving\"\n\nclass Bike(Vehicle):\n    def move(self):\n        return \"Bike is moving\"\n\nvehicles = [Car(), Bike()]\nfor vehicle in vehicles:\n    print(vehicle.move())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.tryIt.try_polymorphic_collections_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Vehicle:\n    def move(self):\n        pass\n\nclass Car(Vehicle):\n    def move(self):\n        return \"Car is moving\"\n\nclass Bike(Vehicle):\n    def move(self):\n        return \"Bike is moving\"\n\nvehicles = [Car(), Bike()]\nfor vehicle in vehicles:\n    print(vehicle.move())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Vehicle:\n    def move(self):\n        pass\n\nclass Car(Vehicle):\n    def move(self):\n        return \"Car is moving\"\n\nclass Bike(Vehicle):\n    def move(self):\n        return \"Bike is moving\"\n\nvehicles = [Car(), Bike()]\nfor vehicle in vehicles:\n    print(vehicle.move())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Vehicle",
+            "message": "Define or import the Vehicle class for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Vehicle",
+            "constructorArgs": [],
+            "message": "Vehicle should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Car",
+            "message": "Define the Car subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Car",
+            "constructorArgs": [],
+            "message": "Car should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Bike",
+            "message": "Define the Bike subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Bike",
+            "constructorArgs": [],
+            "message": "Bike should be constructible with the example arguments."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print at least 2 non-empty output line(s)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-polymorphic-collections-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Appliance:\n    def operate(self):\n        pass\n\nclass WashingMachine(Appliance):\n    def operate(self):\n        return \"Washing clothes\"\n\nclass Refrigerator(Appliance):\n    def operate(self):\n        return \"Cooling food\"\n\nappliances = [WashingMachine(), Refrigerator()]\nfor appliance in appliances:\n    print(appliance.operate())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Appliance:\n    def operate(self):\n        pass\n\nclass WashingMachine(Appliance):\n    def operate(self):\n        return \"Washing clothes\"\n\nclass Refrigerator(Appliance):\n    def operate(self):\n        return \"Cooling food\"\n\nappliances = [WashingMachine(), Refrigerator()]\nfor appliance in appliances:\n    print(appliance.operate())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Appliance:\n    def operate(self):\n        pass\n\nclass WashingMachine(Appliance):\n    def operate(self):\n        return \"Washing clothes\"\n\nclass Refrigerator(Appliance):\n    def operate(self):\n        return \"Cooling food\"\n\nappliances = [WashingMachine(), Refrigerator()]\nfor appliance in appliances:\n    print(appliance.operate())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Appliance",
+            "message": "Define or import the Appliance class for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Appliance",
+            "constructorArgs": [],
+            "message": "Appliance should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "WashingMachine",
+            "message": "Define the WashingMachine subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "WashingMachine",
+            "constructorArgs": [],
+            "message": "WashingMachine should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Refrigerator",
+            "message": "Define the Refrigerator subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Refrigerator",
+            "constructorArgs": [],
+            "message": "Refrigerator should be constructible with the example arguments."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print at least 2 non-empty output line(s)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-polymorphic-collections-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-3",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Animal:\n    def sound(self):\n        pass\n\nclass Lion(Animal):\n    def sound(self):\n        return \"Roar\"\n\nclass Elephant(Animal):\n    def sound(self):\n        return \"Trumpet\"\n\nanimals = [Lion(), Elephant()]\nfor animal in animals:\n    print(animal.sound())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Animal:\n    def sound(self):\n        pass\n\nclass Lion(Animal):\n    def sound(self):\n        return \"Roar\"\n\nclass Elephant(Animal):\n    def sound(self):\n        return \"Trumpet\"\n\nanimals = [Lion(), Elephant()]\nfor animal in animals:\n    print(animal.sound())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Animal:\n    def sound(self):\n        pass\n\nclass Lion(Animal):\n    def sound(self):\n        return \"Roar\"\n\nclass Elephant(Animal):\n    def sound(self):\n        return \"Trumpet\"\n\nanimals = [Lion(), Elephant()]\nfor animal in animals:\n    print(animal.sound())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Animal",
+            "message": "Define or import the Animal class for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Animal",
+            "constructorArgs": [],
+            "message": "Animal should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Lion",
+            "message": "Define the Lion subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Lion",
+            "constructorArgs": [],
+            "message": "Lion should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Elephant",
+            "message": "Define the Elephant subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Elephant",
+            "constructorArgs": [],
+            "message": "Elephant should be constructible with the example arguments."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print at least 2 non-empty output line(s)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-polymorphic-collections-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-4",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-4.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-4.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Instrument:\n    def play(self):\n        pass\n\nclass Guitar(Instrument):\n    def play(self):\n        return \"Strumming guitar\"\n\nclass Piano(Instrument):\n    def play(self):\n        return \"Playing piano\"\n\ninstruments = [Guitar(), Piano()]\nfor instrument in instruments:\n    print(instrument.play())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-4.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Instrument:\n    def play(self):\n        pass\n\nclass Guitar(Instrument):\n    def play(self):\n        return \"Strumming guitar\"\n\nclass Piano(Instrument):\n    def play(self):\n        return \"Playing piano\"\n\ninstruments = [Guitar(), Piano()]\nfor instrument in instruments:\n    print(instrument.play())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Instrument:\n    def play(self):\n        pass\n\nclass Guitar(Instrument):\n    def play(self):\n        return \"Strumming guitar\"\n\nclass Piano(Instrument):\n    def play(self):\n        return \"Playing piano\"\n\ninstruments = [Guitar(), Piano()]\nfor instrument in instruments:\n    print(instrument.play())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Instrument",
+            "message": "Define or import the Instrument class for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Instrument",
+            "constructorArgs": [],
+            "message": "Instrument should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Guitar",
+            "message": "Define the Guitar subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Guitar",
+            "constructorArgs": [],
+            "message": "Guitar should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Piano",
+            "message": "Define the Piano subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Piano",
+            "constructorArgs": [],
+            "message": "Piano should be constructible with the example arguments."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print at least 2 non-empty output line(s)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-polymorphic-collections-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-5",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-5.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-5.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Device:\n    def operate(self):\n        pass\n\nclass Laptop(Device):\n    def operate(self):\n        return \"Running laptop\"\n\nclass Smartphone(Device):\n    def operate(self):\n        return \"Operating smartphone\"\n\ndevices = [Laptop(), Smartphone()]\nfor device in devices:\n    print(device.operate())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-5.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.ci-polymorphic-collections-5.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Device:\n    def operate(self):\n        pass\n\nclass Laptop(Device):\n    def operate(self):\n        return \"Running laptop\"\n\nclass Smartphone(Device):\n    def operate(self):\n        return \"Operating smartphone\"\n\ndevices = [Laptop(), Smartphone()]\nfor device in devices:\n    print(device.operate())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Device:\n    def operate(self):\n        pass\n\nclass Laptop(Device):\n    def operate(self):\n        return \"Running laptop\"\n\nclass Smartphone(Device):\n    def operate(self):\n        return \"Operating smartphone\"\n\ndevices = [Laptop(), Smartphone()]\nfor device in devices:\n    print(device.operate())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Device",
+            "message": "Define or import the Device class for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Device",
+            "constructorArgs": [],
+            "message": "Device should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Laptop",
+            "message": "Define the Laptop subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Laptop",
+            "constructorArgs": [],
+            "message": "Laptop should be constructible with the example arguments."
+          },
+          {
+            "type": "defines_class",
+            "className": "Smartphone",
+            "message": "Define the Smartphone subclass for this workspace exercise."
+          },
+          {
+            "type": "constructible",
+            "className": "Smartphone",
+            "constructorArgs": [],
+            "message": "Smartphone should be constructible with the example arguments."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print at least 2 non-empty output line(s)."
+          }
+        ]
+      }
+    },
+    {
+      "id": "sc-polymorphic-collections-0",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.sc-polymorphic-collections-0",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    },
+    {
+      "id": "sc-polymorphic-collections-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.sc-polymorphic-collections-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "c"
+      }
+    },
+    {
+      "id": "fb-polymorphic-collections-0",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.fb-polymorphic-collections-0",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "base class"
+      }
+    },
+    {
+      "id": "fb-polymorphic-collections-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.fb-polymorphic-collections-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "implementations"
+      }
+    },
+    {
+      "id": "mc-polymorphic-collections-0",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.mc-polymorphic-collections-0",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-polymorphic-collections-0",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.polymorphic-collections.practice.dr-polymorphic-collections-0",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4",
+          "t5"
+        ]
+      }
+    }
+  ]
+}

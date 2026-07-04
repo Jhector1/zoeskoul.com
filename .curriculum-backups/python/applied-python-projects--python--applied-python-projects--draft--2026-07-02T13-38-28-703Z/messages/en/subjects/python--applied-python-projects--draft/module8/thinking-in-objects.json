@@ -1,0 +1,245 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "thinking-in-objects": {
+          "label": "Thinking in Objects",
+          "summary": "Use provided Account objects first so object creation, attributes, and method calls make sense before you write class syntax.",
+          "cards": {
+            "sketch0": {
+              "title": "Create Account objects to represent real things"
+            },
+            "sketch1": {
+              "title": "Read values stored on an object"
+            },
+            "sketch2": {
+              "title": "Ask one object to do something"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_thinking_in_objects_sketch0": {
+              "title": "Create two provided Account objects",
+              "prompt": "An `Account` model is already provided in `models/account.py`. Do not edit that file yet. In `main.py`, create two objects: `Account(\"Nora\", 200)` and `Account(\"Eli\", 45)`. Store each object in its own variable. Do not print anything in this first exercise.",
+              "hint": "Use the provided class exactly as-is and focus only on object creation.",
+              "help": {
+                "concept": "At this stage, one object stands for one account in the program. You are practicing how to create objects before worrying about how the class is written.",
+                "hint_1": "Create one variable for `Account(\"Nora\", 200)` and another for `Account(\"Eli\", 45)`.",
+                "hint_2": "This exercise stops after object creation, so printing is not required."
+              },
+              "starterCode": "from models.account import Account\n\n# A working Account class is already provided.\n# Create two Account objects below.\n# Do not print anything yet.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\n# A working Account class is already provided.\n# Create two Account objects below.\n# Do not print anything yet."
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\""
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\nrainy_day = Account(\"Nora\", 200)\nsnack_fund = Account(\"Eli\", 45)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\nrainy_day = Account(\"Nora\", 200)\nsnack_fund = Account(\"Eli\", 45)",
+              "checks": {
+                "defines_class": {
+                  "message": "Use the provided Account class."
+                },
+                "constructible": {
+                  "message": "Create Account objects with an owner and a balance."
+                },
+                "instance_attributes": {
+                  "message": "Each Account object should keep its own owner and balance."
+                },
+                "created_instances": {
+                  "message": "Create at least two Account objects."
+                }
+              }
+            },
+            "try_thinking_in_objects_sketch1": {
+              "title": "Read attributes from two Account objects",
+              "prompt": "Keep using the provided `Account` model. In `main.py`, create `Account(\"Jae\", 55)` and `Account(\"Priya\", 210)`. Then print the first account owner on one line and the second account balance on the next line.",
+              "hint": "Use dot notation after each object is created.",
+              "help": {
+                "concept": "An attribute is a value stored on one object. Dot notation like `account.owner` reads that stored value.",
+                "hint_1": "Create both objects first so each variable points at one account.",
+                "hint_2": "Then print `travel_fund.owner` and `rent_fund.balance` on separate lines."
+              },
+              "starterCode": "from models.account import Account\n\n# Create two Account objects below.\n# Then print one attribute from each object.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\n# Create two Account objects below.\n# Then print one attribute from each object."
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\""
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\ntravel_fund = Account(\"Jae\", 55)\nrent_fund = Account(\"Priya\", 210)\n\nprint(travel_fund.owner)\nprint(rent_fund.balance)"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\ntravel_fund = Account(\"Jae\", 55)\nrent_fund = Account(\"Priya\", 210)\n\nprint(travel_fund.owner)\nprint(rent_fund.balance)",
+              "checks": {
+                "defines_class": {
+                  "message": "Keep using the provided Account class."
+                },
+                "constructible": {
+                  "message": "Create Account objects with the requested values."
+                },
+                "instance_attributes": {
+                  "message": "Each Account object should keep its own owner and balance."
+                },
+                "created_instances": {
+                  "message": "Create both Account objects."
+                },
+                "printed_line_count": {
+                  "message": "Print the requested attributes on separate lines."
+                }
+              }
+            },
+            "try_thinking_in_objects_sketch2": {
+              "title": "Call a method on one provided Account object",
+              "prompt": "Use the provided `Account` model again. In `main.py`, create `Account(\"Omar\", 70)`, call `deposit(15)` on that object, and then print `summary()`. Do not edit `models/account.py` yet.",
+              "hint": "Create the object, call the method on that same object, then print the returned summary.",
+              "help": {
+                "concept": "A method is behavior that belongs to one object. Here, `deposit` changes that object's balance and `summary` reads the updated state.",
+                "hint_1": "After creating the object, call `account.deposit(15)`.",
+                "hint_2": "Then print `account.summary()` so the changed balance appears."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Omar\", 70)\n\n# Call deposit on this object.\n# Then print account.summary().",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Omar\", 70)\n\n# Call deposit on this object.\n# Then print account.summary()."
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\""
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.account import Account\n\naccount = Account(\"Omar\", 70)\naccount.deposit(15)\n\nprint(account.summary())"
+                },
+                "models_account_py": {
+                  "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance}\""
+                }
+              },
+              "solutionCode": "from models.account import Account\n\naccount = Account(\"Omar\", 70)\naccount.deposit(15)\n\nprint(account.summary())",
+              "checks": {
+                "defines_class": {
+                  "message": "Keep using the provided Account class."
+                },
+                "method_sequence_returns": {
+                  "message": "After the deposit, summary() should show the updated balance."
+                },
+                "created_instances": {
+                  "message": "Create one Account object."
+                },
+                "printed_line_count": {
+                  "message": "Print the updated summary."
+                }
+              }
+            }
+          },
+          "practice": {
+            "mc-thinking-in-objects-object-idea": {
+              "title": "What makes an object useful?",
+              "prompt": "Which ideas match the beginner view of objects from this topic? Choose all that apply.",
+              "hint": "Think about keeping related data and actions together around one program thing.",
+              "help": {
+                "concept": "In this topic, an object stands for one thing the program cares about and keeps that thing's related data and behavior together.",
+                "hint_1": "Pick the answers about grouping values and actions around one account.",
+                "hint_2": "Reject answers that turn objects into random unrelated variables."
+              },
+              "options": {
+                "a": "An object can represent one account in the program.",
+                "b": "An object can keep related values and actions together.",
+                "c": "An object only matters after you memorize class syntax.",
+                "d": "An object means every account must share the exact same balance."
+              }
+            },
+            "sc-thinking-in-objects-attribute-meaning": {
+              "title": "What is an attribute here?",
+              "prompt": "In this topic, what is an attribute like `account.owner`?",
+              "hint": "It is a value stored on one specific object.",
+              "help": {
+                "concept": "An attribute is stored data that belongs to one object.",
+                "hint_1": "Think about the owner's name living on one account object.",
+                "hint_2": "Choose the answer about a stored value, not a separate program file."
+              },
+              "options": {
+                "a": "A value stored on one object",
+                "b": "A file that imports the class",
+                "c": "A Python keyword for making loops",
+                "d": "A comment above the class"
+              }
+            },
+            "fb-thinking-in-objects-method-call": {
+              "title": "Complete the method call",
+              "prompt": "Fill in the missing method name so the object adds money to its own balance.",
+              "hint": "Use the method from the topic that changes the balance.",
+              "help": {
+                "concept": "A method call asks one object to do something with its own state.",
+                "hint_1": "The object name is already there. The blank is only the method name.",
+                "hint_2": "Choose the method that adds money, not the method that only returns text."
+              },
+              "template": "account.[blank1](15)",
+              "choices": [
+                "deposit",
+                "summary",
+                "__init__",
+                "print"
+              ]
+            },
+            "dr-thinking-in-objects-workflow": {
+              "title": "Order the object workflow",
+              "prompt": "Put these beginner steps in order.",
+              "hint": "Create the object before reading from it or calling its methods.",
+              "help": {
+                "concept": "A beginner object workflow is: create the object, read values if needed, call a method when you want a change, then use the result.",
+                "hint_1": "The object must exist before any attribute read or method call can happen.",
+                "hint_2": "Printing the result comes after the object has done the work."
+              },
+              "tokens": {
+                "t1": "Create an Account object",
+                "t2": "Read one attribute from that object",
+                "t3": "Call one method on that object",
+                "t4": "Print the result or updated summary"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "thinking-in-objects": {
+          "sketch-0": {
+            "title": "Create Account objects to represent real things",
+            "bodyMarkdown": "Before writing class syntax, it helps to understand the problem objects solve.\n\nImagine tracking two accounts with separate variables:\n\n```python\nfirst_owner = \"Ava\"\nfirst_balance = 125\nsecond_owner = \"Ben\"\nsecond_balance = 80\n```\n\nThat works for a tiny example, but the values that belong to one account are spread apart.\n\nAn object lets the program treat one account as one thing:\n\n```python\nchecking = Account(\"Ava\", 125)\nsavings = Account(\"Ben\", 80)\n```\n\nYou do not need to know how `Account` is built yet. For now, notice the idea:\n\n- `checking` is one account object.\n- `savings` is another account object.\n- Each object starts with its own owner and balance."
+          },
+          "sketch-1": {
+            "title": "Read values stored on an object",
+            "bodyMarkdown": "After an object exists, you can read the values stored on it.\n\nThose stored values are called **attributes**.\n\n```python\naccount = Account(\"Sofia\", 90)\nprint(account.owner)\nprint(account.balance)\n```\n\nDot notation means:\n\n- `account.owner` reads the owner stored on that object.\n- `account.balance` reads the balance stored on that object.\n\nDifferent objects can keep different values:\n\n```python\nfirst = Account(\"Sofia\", 90)\nsecond = Account(\"Marco\", 140)\nprint(first.balance)\nprint(second.balance)\n```"
+          },
+          "sketch-2": {
+            "title": "Ask one object to do something",
+            "bodyMarkdown": "Objects can also have **methods**, which are actions you ask one object to perform.\n\n```python\naccount = Account(\"Lina\", 60)\naccount.deposit(20)\nprint(account.summary())\n```\n\nHere is the flow:\n\n- `deposit(20)` changes that account's stored balance.\n- `summary()` returns a readable description of the current state.\n\nThe big beginner idea is this: one object keeps its own data and can act on that same data."
+          }
+        }
+      }
+    }
+  }
+}

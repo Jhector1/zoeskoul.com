@@ -1,5 +1,7 @@
 import { notFound } from "next/navigation";
 import ReviewModulePageClient from "@/app/(public)/[locale]/(learningZone)/subjects/[subjectSlug]/modules/[moduleSlug]/learn/ReviewModulePageClient";
+import { getResolvedReviewModule } from "@/lib/subjects/server/resolveSubjectPresentation";
+import { buildDraftPreviewReviewModule } from "@/lib/dev/curriculumDrafts/preview";
 import type { ReviewCard, ReviewModule } from "@/lib/subjects/types";
 
 export const runtime = "nodejs";
@@ -1023,6 +1025,42 @@ function searchParamIsTrue(
     return value === "1" || value === "true";
 }
 
+function subjectWithoutDraftWrapper(subjectSlug: string) {
+    const draftMatch = subjectSlug.match(/^([^/]+?)--(.+)--draft$/);
+    if (draftMatch) return draftMatch[2] ?? subjectSlug;
+    return subjectSlug.replace(/--draft$/, "");
+}
+
+function firstSearchParam(
+    searchParams: DevCloneSearchParams,
+    key: string,
+) {
+    const value = searchParams[key];
+    return Array.isArray(value) ? value[0] : value;
+}
+
+function previewSource(searchParams: DevCloneSearchParams) {
+    const raw = firstSearchParam(searchParams, "source");
+    if (raw === "draft" || raw === "generated") return raw;
+    return searchParamIsTrue(searchParams, "draftPreview") ? "generated" : null;
+}
+
+function allowGeneratedDraftPreview(searchParams: DevCloneSearchParams) {
+    return (
+        process.env.NODE_ENV !== "production" &&
+        process.env.DEV_CURRICULUM_EDITOR === "1" &&
+        previewSource(searchParams) === "generated"
+    );
+}
+
+function allowRawDraftPreview(searchParams: DevCloneSearchParams) {
+    return (
+        process.env.NODE_ENV !== "production" &&
+        process.env.DEV_CURRICULUM_EDITOR === "1" &&
+        previewSource(searchParams) === "draft"
+    );
+}
+
 export default async function Page({
                                        params,
                                        searchParams,
@@ -1064,7 +1102,33 @@ export default async function Page({
         resolveDevRunnerBackend(resolvedSearchParams),
     );
 
-    const selectedModule = isSqlClone
+    const rawDraftPreview = allowRawDraftPreview(resolvedSearchParams);
+    const draftPreviewModule = rawDraftPreview
+        ? await buildDraftPreviewReviewModule({
+            catalog:
+                firstSearchParam(resolvedSearchParams, "catalog") ??
+                String(resolvedParams.subjectSlug ?? "").split("--", 1)[0] ??
+                "python",
+            subject: firstSearchParam(resolvedSearchParams, "subject") ?? resolvedParams.subjectSlug ?? "",
+            module: firstSearchParam(resolvedSearchParams, "moduleDir") ?? resolvedParams.moduleSlug ?? "",
+            topic: firstSearchParam(resolvedSearchParams, "topicDir") ?? resolvedParams.topicSlug ?? "",
+            locale: resolvedParams.locale ?? "en",
+        })
+        : null;
+
+    const generatedDraftPreview = !draftPreviewModule && allowGeneratedDraftPreview(resolvedSearchParams);
+    const generatedPreviewModule = generatedDraftPreview
+        ? await getResolvedReviewModule(
+            subjectWithoutDraftWrapper(resolvedParams.subjectSlug ?? ""),
+            resolvedParams.moduleSlug ?? "",
+        )
+        : null;
+
+    if (generatedDraftPreview && !generatedPreviewModule) {
+        notFound();
+    }
+
+    const selectedModule = draftPreviewModule ?? generatedPreviewModule ?? (isSqlClone
         ? sqlReviewCloneModule
         : isLinuxTerminalClone
           ? cloneReviewModuleWithServiceDefaults(
@@ -1074,7 +1138,7 @@ export default async function Page({
         : cloneReviewModuleWithServiceDefaults(
             reviewCloneModule,
             selectedServiceDefaults,
-        );
+        ));
 
     return (
         <>
@@ -1118,7 +1182,7 @@ export default async function Page({
                 />
             ) : null}
             <ReviewModulePageClient
-                canUnlockAll={!progressiveLockMode}
+                canUnlockAll={Boolean(draftPreviewModule) || generatedDraftPreview || !progressiveLockMode}
                 mod={selectedModule}
             />
         </>

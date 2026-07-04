@@ -1,0 +1,827 @@
+{
+  "title": "Encapsulation and Validation",
+  "summary": "Protect object state with methods that validate changes before saving them.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "sketch-encapsulation-basics",
+      "title": "Why encapsulation protects object state",
+      "bodyMarkdown": "Encapsulation means an object manages its own data instead of letting outside code change important values however it wants. A common beginner pattern is to store an attribute like `balance` and then update it directly from anywhere. That works at first, but it makes it easy to save impossible values.\n\nA better pattern is to give the class a method that checks the new value before changing the attribute.\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False\n```\n\nLine by line:\n\n- First, `__init__` stores the starting `owner` and `balance` on the object.\n- Next, `deposit(self, amount)` defines a method that controls how money is added.\n- This line, `if amount > 0:`, is the validation step.\n- If the amount is valid, `self.balance += amount` updates the object's state.\n- `return True` reports that the change happened.\n- If the amount is not valid, the method skips the update and returns `False`.\n\nThis keeps the rule close to the data it protects. Instead of hoping every other part of the program remembers the rule, the class enforces it itself."
+    },
+    {
+      "id": "sketch-validation-rules",
+      "title": "Validation methods should reject bad updates",
+      "bodyMarkdown": "Validation is the rule-checking part of encapsulation. A method should decide whether a change is allowed before saving it.\n\nFor example, imagine a library card account that tracks a contact email. You may want to reject blank values.\n\n```python\nclass Member:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n\n    def update_email(self, new_email):\n        if new_email != \"\":\n            self.email = new_email\n            return \"updated\"\n        return \"invalid\"\n```\n\nStep by step:\n\n- `name` and `email` are stored when the object is created.\n- `update_email` receives a proposed new value.\n- The `if new_email != \"\":` line checks whether the value is blank.\n- If it is valid, the object saves the new email.\n- The method returns a status string so other code can react.\n- If the value is blank, the old email stays unchanged.\n\nA good validation method does two jobs: it protects the object's state and clearly reports what happened."
+    },
+    {
+      "id": "sketch-services-and-helpers",
+      "title": "Use service files to work with validated objects",
+      "bodyMarkdown": "Encapsulation does not mean every piece of logic must live inside one class. The class should protect its own state, while helper or service code can coordinate several objects.\n\nHere is a small example with a model and a service function:\n\n```python\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n\ndef account_status(account):\n    if account.balance == 0:\n        return \"empty\"\n    return \"active\"\n```\n\nLine by line:\n\n- The `Account` class owns the `balance` data.\n- The `withdraw` method validates the change before updating `balance`.\n- The service function `account_status(account)` does not change the balance.\n- Instead, it reads the object's current state and returns a useful label.\n- This separation keeps validation inside the class and reporting logic in a helper or service.\n\nThat structure becomes especially useful in multifile programs, where `main` creates objects, model files define behavior, and service files summarize or format results."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-encapsulation-and-validation-sketch0",
+      "kind": "code_input",
+      "title": "Validate deposits inside an Account class",
+      "prompt": "An account tracker should only accept positive deposits. Complete the workspace so `Account.deposit()` adds the amount only when it is greater than 0, returns `True` for a successful deposit, and returns `False` otherwise. Keep the printed output in `main` working so the output panel shows whether each deposit worked and the final balance.",
+      "starterCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        # validate the amount before updating balance\n        pass\n\n# main.py\nfrom models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))\nprint(account.deposit(-5))\nprint(account.balance)\n",
+      "solutionCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.balance += amount\n            return True\n        return False\n\n# main.py\nfrom models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))\nprint(account.deposit(-5))\nprint(account.balance)\n",
+      "files": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        # validate the amount before updating balance\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Mina\", 100)\nprint(account.deposit(25))\nprint(account.deposit(-5))\nprint(account.balance)",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Define an Account class."
+        },
+        {
+          "type": "constructible",
+          "className": "Account",
+          "constructorArgs": [
+            "Mina",
+            100
+          ],
+          "message": "Account should be constructible with owner and balance."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Account",
+          "constructorArgs": [
+            "Mina",
+            100
+          ],
+          "attributes": [
+            "owner",
+            "balance"
+          ],
+          "message": "Store owner and balance as instance attributes."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Mina",
+            100
+          ],
+          "constructorArgKinds": [],
+          "methodName": "deposit",
+          "methodArgs": [
+            25
+          ],
+          "methodArgKinds": [],
+          "expected": true,
+          "expectedKind": "value",
+          "message": "deposit should return True for a positive amount."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Mina",
+            100
+          ],
+          "constructorArgKinds": [],
+          "methodName": "deposit",
+          "methodArgs": [
+            -5
+          ],
+          "methodArgKinds": [],
+          "expected": false,
+          "expectedKind": "value",
+          "message": "deposit should return False for a negative amount."
+        },
+        {
+          "type": "attribute_sequence_equals",
+          "className": "Account",
+          "constructorArgs": [
+            "Mina",
+            100
+          ],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "deposit",
+              "methodArgs": [
+                25
+              ],
+              "methodArgKinds": []
+            },
+            {
+              "methodName": "deposit",
+              "methodArgs": [
+                -5
+              ],
+              "methodArgKinds": []
+            }
+          ],
+          "attributeName": "balance",
+          "expected": 125,
+          "expectedKind": "value",
+          "message": "Balance should change only after the valid deposit."
+        }
+      ],
+      "hint": "Put the rule inside `deposit`, not in the code that prints results.",
+      "help": {
+        "concept": "Encapsulation means the class method controls how object state changes. Here, `deposit` should decide whether `balance` is allowed to change.",
+        "hint_1": "Check the incoming `amount` before changing `self.balance`. A positive amount should update the balance.",
+        "hint_2": "For invalid amounts, leave `self.balance` unchanged and return a value that shows the deposit was rejected."
+      }
+    },
+    {
+      "id": "try-encapsulation-and-validation-sketch1",
+      "kind": "code_input",
+      "title": "Reject blank email updates",
+      "prompt": "A member profile should not save a blank email address. Complete `update_email()` so it changes `self.email` only when the new value is not an empty string. Return `\"updated\"` when the change succeeds and `\"invalid\"` when it is rejected. The existing prints should show the result of two update attempts and the final saved email.",
+      "starterCode": "# models/member.py\nclass Member:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n\n    def update_email(self, new_email):\n        # reject blank updates\n        pass\n\n# main.py\nfrom models.member import Member\n\nmember = Member(\"Ava\", \"ava@example.com\")\nprint(member.update_email(\"ava@library.org\"))\nprint(member.update_email(\"\"))\nprint(member.email)\n",
+      "solutionCode": "# models/member.py\nclass Member:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n\n    def update_email(self, new_email):\n        if new_email != \"\":\n            self.email = new_email\n            return \"updated\"\n        return \"invalid\"\n\n# main.py\nfrom models.member import Member\n\nmember = Member(\"Ava\", \"ava@example.com\")\nprint(member.update_email(\"ava@library.org\"))\nprint(member.update_email(\"\"))\nprint(member.email)\n",
+      "files": [
+        {
+          "path": "models/member.py",
+          "content": "class Member:\n    def __init__(self, name, email):\n        self.name = name\n        self.email = email\n\n    def update_email(self, new_email):\n        # reject blank updates\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.member import Member\n\nmember = Member(\"Ava\", \"ava@example.com\")\nprint(member.update_email(\"ava@library.org\"))\nprint(member.update_email(\"\"))\nprint(member.email)",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Member",
+          "message": "Define a Member class."
+        },
+        {
+          "type": "constructible",
+          "className": "Member",
+          "constructorArgs": [
+            "Ava",
+            "ava@example.com"
+          ],
+          "message": "Member should be constructible with name and email."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "Member",
+          "constructorArgs": [
+            "Ava",
+            "ava@example.com"
+          ],
+          "attributes": [
+            "name",
+            "email"
+          ],
+          "message": "Store name and email as instance attributes."
+        },
+        {
+          "type": "method_returns",
+          "className": "Member",
+          "constructorArgs": [
+            "Ava",
+            "ava@example.com"
+          ],
+          "constructorArgKinds": [],
+          "methodName": "update_email",
+          "methodArgs": [
+            "ava@library.org"
+          ],
+          "methodArgKinds": [],
+          "expected": "updated",
+          "expectedKind": "value",
+          "message": "Return an update status for a valid email."
+        },
+        {
+          "type": "method_returns",
+          "className": "Member",
+          "constructorArgs": [
+            "Ava",
+            "ava@example.com"
+          ],
+          "constructorArgKinds": [],
+          "methodName": "update_email",
+          "methodArgs": [
+            ""
+          ],
+          "methodArgKinds": [],
+          "expected": "invalid",
+          "expectedKind": "value",
+          "message": "Return an invalid status for a blank email."
+        },
+        {
+          "type": "attribute_sequence_equals",
+          "className": "Member",
+          "constructorArgs": [
+            "Ava",
+            "ava@example.com"
+          ],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "update_email",
+              "methodArgs": [
+                "ava@library.org"
+              ],
+              "methodArgKinds": []
+            },
+            {
+              "methodName": "update_email",
+              "methodArgs": [
+                ""
+              ],
+              "methodArgKinds": []
+            }
+          ],
+          "attributeName": "email",
+          "expected": "ava@library.org",
+          "expectedKind": "value",
+          "message": "The saved email should remain the last valid value."
+        }
+      ],
+      "hint": "Only assign to `self.email` in the valid case.",
+      "help": {
+        "concept": "Validation methods protect existing object state by refusing bad replacement values. If the new value is invalid, the old attribute should stay the same.",
+        "hint_1": "Compare `new_email` to an empty string before updating the attribute.",
+        "hint_2": "One branch should save the new email and return a success message; the other branch should keep the old email unchanged."
+      }
+    },
+    {
+      "id": "try-encapsulation-and-validation-sketch2",
+      "kind": "code_input",
+      "title": "Report account status from a service function",
+      "prompt": "The account model already validates withdrawals. Now complete the service function `account_status(account)` so it returns `\"empty\"` when the balance is 0 and `\"active\"` otherwise. Keep the sample prints working so the output panel shows one empty account and one active account.",
+      "starterCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n# services/account_service.py\ndef account_status(account):\n    # return a label based on the current balance\n    pass\n\n# main.py\nfrom models.account import Account\nfrom services.account_service import account_status\n\nfirst = Account(\"Noah\", 0)\nsecond = Account(\"Lina\", 40)\nprint(account_status(first))\nprint(account_status(second))\n",
+      "solutionCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n# services/account_service.py\ndef account_status(account):\n    if account.balance == 0:\n        return \"empty\"\n    return \"active\"\n\n# main.py\nfrom models.account import Account\nfrom services.account_service import account_status\n\nfirst = Account(\"Noah\", 0)\nsecond = Account(\"Lina\", 40)\nprint(account_status(first))\nprint(account_status(second))\n",
+      "files": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False",
+          "readOnly": false
+        },
+        {
+          "path": "services/account_service.py",
+          "content": "def account_status(account):\n    # return a label based on the current balance\n    pass",
+          "readOnly": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\nfrom services.account_service import account_status\n\nfirst = Account(\"Noah\", 0)\nsecond = Account(\"Lina\", 40)\nprint(account_status(first))\nprint(account_status(second))",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Keep the Account class available for the service to use."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "account_status",
+          "args": [
+            [
+              "Noah",
+              0
+            ]
+          ],
+          "argKinds": [],
+          "expected": "empty",
+          "expectedKind": "value",
+          "message": "Return empty for a zero-balance account."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "account_status",
+          "args": [
+            [
+              "Lina",
+              40
+            ]
+          ],
+          "argKinds": [],
+          "expected": "active",
+          "expectedKind": "value",
+          "message": "Return active for an account with money."
+        }
+      ],
+      "hint": "This helper reads `account.balance`; it does not change it.",
+      "help": {
+        "concept": "A service function can inspect an object's state and return a summary, while the class itself keeps control over state changes.",
+        "hint_1": "Look at the account's `balance` attribute and choose between two status strings.",
+        "hint_2": "Use one branch for the zero-balance case and a different return value for every other balance."
+      }
+    },
+    {
+      "id": "ci-withdraw-validation",
+      "kind": "code_input",
+      "title": "Prevent overdraft withdrawals",
+      "prompt": "Extend the account tracker so withdrawals only succeed when the amount is positive and no larger than the current balance. Complete `withdraw()` to return `True` for a valid withdrawal and `False` otherwise. The printed lines should show two failed attempts around one successful withdrawal and the final balance.",
+      "starterCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        # allow only positive withdrawals that do not exceed balance\n        pass\n\n# main.py\nfrom models.account import Account\n\naccount = Account(\"Jules\", 60)\nprint(account.withdraw(20))\nprint(account.withdraw(100))\nprint(account.withdraw(-3))\nprint(account.balance)\n",
+      "solutionCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        if amount > 0 and amount <= self.balance:\n            self.balance -= amount\n            return True\n        return False\n\n# main.py\nfrom models.account import Account\n\naccount = Account(\"Jules\", 60)\nprint(account.withdraw(20))\nprint(account.withdraw(100))\nprint(account.withdraw(-3))\nprint(account.balance)\n",
+      "files": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def withdraw(self, amount):\n        # allow only positive withdrawals that do not exceed balance\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount = Account(\"Jules\", 60)\nprint(account.withdraw(20))\nprint(account.withdraw(100))\nprint(account.withdraw(-3))\nprint(account.balance)",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Define an Account class."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Jules",
+            60
+          ],
+          "constructorArgKinds": [],
+          "methodName": "withdraw",
+          "methodArgs": [
+            20
+          ],
+          "methodArgKinds": [],
+          "expected": true,
+          "expectedKind": "value",
+          "message": "A valid withdrawal should return True."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Jules",
+            60
+          ],
+          "constructorArgKinds": [],
+          "methodName": "withdraw",
+          "methodArgs": [
+            100
+          ],
+          "methodArgKinds": [],
+          "expected": false,
+          "expectedKind": "value",
+          "message": "An overdraft attempt should return False."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Jules",
+            60
+          ],
+          "constructorArgKinds": [],
+          "methodName": "withdraw",
+          "methodArgs": [
+            -3
+          ],
+          "methodArgKinds": [],
+          "expected": false,
+          "expectedKind": "value",
+          "message": "A negative withdrawal should return False."
+        },
+        {
+          "type": "attribute_sequence_equals",
+          "className": "Account",
+          "constructorArgs": [
+            "Jules",
+            60
+          ],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "withdraw",
+              "methodArgs": [
+                20
+              ],
+              "methodArgKinds": []
+            },
+            {
+              "methodName": "withdraw",
+              "methodArgs": [
+                100
+              ],
+              "methodArgKinds": []
+            },
+            {
+              "methodName": "withdraw",
+              "methodArgs": [
+                -3
+              ],
+              "methodArgKinds": []
+            }
+          ],
+          "attributeName": "balance",
+          "expected": 40,
+          "expectedKind": "value",
+          "message": "Only the valid withdrawal should change the balance."
+        }
+      ],
+      "hint": "A withdrawal needs two checks: positive amount and enough balance.",
+      "help": {
+        "concept": "Validation can combine multiple rules before changing object state. Here, the method should reject both negative amounts and amounts larger than the balance.",
+        "hint_1": "Use `and` to combine the two conditions that make a withdrawal valid.",
+        "hint_2": "Only subtract from `self.balance` inside the branch where both checks pass."
+      }
+    },
+    {
+      "id": "ci-account-service-check",
+      "kind": "code_input",
+      "title": "Summarize whether an account can cover a purchase",
+      "prompt": "A checkout helper needs to decide whether an account has enough balance for a purchase. Complete `can_cover(account, cost)` so it returns `True` when `cost` is less than or equal to the account balance and `False` otherwise. Do not change the account balance in this helper. The sample prints should show one affordable purchase and one unaffordable purchase.",
+      "starterCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n# services/account_service.py\ndef can_cover(account, cost):\n    # return whether the account has enough balance\n    pass\n\n# main.py\nfrom models.account import Account\nfrom services.account_service import can_cover\n\naccount = Account(\"Rae\", 75)\nprint(can_cover(account, 50))\nprint(can_cover(account, 90))\nprint(account.balance)\n",
+      "solutionCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n# services/account_service.py\ndef can_cover(account, cost):\n    return cost <= account.balance\n\n# main.py\nfrom models.account import Account\nfrom services.account_service import can_cover\n\naccount = Account(\"Rae\", 75)\nprint(can_cover(account, 50))\nprint(can_cover(account, 90))\nprint(account.balance)\n",
+      "files": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "readOnly": false
+        },
+        {
+          "path": "services/account_service.py",
+          "content": "def can_cover(account, cost):\n    # return whether the account has enough balance\n    pass",
+          "readOnly": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\nfrom services.account_service import can_cover\n\naccount = Account(\"Rae\", 75)\nprint(can_cover(account, 50))\nprint(can_cover(account, 90))\nprint(account.balance)",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Keep the Account class available."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "can_cover",
+          "args": [
+            [
+              "Rae",
+              75
+            ],
+            50
+          ],
+          "argKinds": [],
+          "expected": true,
+          "expectedKind": "value",
+          "message": "Return True when the balance can cover the cost."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "can_cover",
+          "args": [
+            [
+              "Rae",
+              75
+            ],
+            90
+          ],
+          "argKinds": [],
+          "expected": false,
+          "expectedKind": "value",
+          "message": "Return False when the cost is larger than the balance."
+        }
+      ],
+      "hint": "This service compares two numbers but does not update object state.",
+      "help": {
+        "concept": "Service functions often read object state to answer a question. Unlike a mutating method, this helper should inspect `account.balance` without changing it.",
+        "hint_1": "Compare `cost` to `account.balance` and return a boolean result.",
+        "hint_2": "If the cost is within the balance, return success; otherwise return failure, with no subtraction."
+      }
+    },
+    {
+      "id": "ci-account-status-method",
+      "kind": "code_input",
+      "title": "Add a status method to the Account class",
+      "prompt": "Move simple reporting into the model by adding a `status()` method to `Account`. It should return `\"empty\"` when the balance is 0 and `\"active\"` when the balance is greater than 0. Keep the sample prints working for both accounts.",
+      "starterCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def status(self):\n        # return a label for the current balance\n        pass\n\n# main.py\nfrom models.account import Account\n\nfirst = Account(\"Kai\", 0)\nsecond = Account(\"Uma\", 15)\nprint(first.status())\nprint(second.status())\n",
+      "solutionCode": "# models/account.py\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def status(self):\n        if self.balance == 0:\n            return \"empty\"\n        return \"active\"\n\n# main.py\nfrom models.account import Account\n\nfirst = Account(\"Kai\", 0)\nsecond = Account(\"Uma\", 15)\nprint(first.status())\nprint(second.status())\n",
+      "files": [
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def status(self):\n        # return a label for the current balance\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\nfirst = Account(\"Kai\", 0)\nsecond = Account(\"Uma\", 15)\nprint(first.status())\nprint(second.status())",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Account",
+          "message": "Define an Account class."
+        },
+        {
+          "type": "constructible",
+          "className": "Account",
+          "constructorArgs": [
+            "Kai",
+            0
+          ],
+          "message": "Account should be constructible with owner and balance."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Kai",
+            0
+          ],
+          "constructorArgKinds": [],
+          "methodName": "status",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "empty",
+          "expectedKind": "value",
+          "message": "status should report empty for a zero balance."
+        },
+        {
+          "type": "method_returns",
+          "className": "Account",
+          "constructorArgs": [
+            "Uma",
+            15
+          ],
+          "constructorArgKinds": [],
+          "methodName": "status",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "active",
+          "expectedKind": "value",
+          "message": "status should report active for a positive balance."
+        }
+      ],
+      "hint": "This method reads `self.balance` and returns a label.",
+      "help": {
+        "concept": "A method can expose a safe summary of object state without letting outside code rewrite the attribute directly.",
+        "hint_1": "Check whether `self.balance` equals zero.",
+        "hint_2": "Return one string for the zero case and a different string for any positive balance."
+      }
+    },
+    {
+      "id": "ci-member-name-validation",
+      "kind": "code_input",
+      "title": "Keep the old name when a rename is blank",
+      "prompt": "A profile editor should not replace a member name with a blank string. Complete `rename()` so it updates `self.name` only when the new name is not empty. Return `True` when the rename succeeds and `False` when it is rejected. The sample prints should show one successful rename, one rejected rename, and the final saved name.",
+      "starterCode": "# models/member.py\nclass Member:\n    def __init__(self, name):\n        self.name = name\n\n    def rename(self, new_name):\n        # reject blank names\n        pass\n\n# main.py\nfrom models.member import Member\n\nmember = Member(\"Nia\")\nprint(member.rename(\"Nina\"))\nprint(member.rename(\"\"))\nprint(member.name)\n",
+      "solutionCode": "# models/member.py\nclass Member:\n    def __init__(self, name):\n        self.name = name\n\n    def rename(self, new_name):\n        if new_name != \"\":\n            self.name = new_name\n            return True\n        return False\n\n# main.py\nfrom models.member import Member\n\nmember = Member(\"Nia\")\nprint(member.rename(\"Nina\"))\nprint(member.rename(\"\"))\nprint(member.name)\n",
+      "files": [
+        {
+          "path": "models/member.py",
+          "content": "class Member:\n    def __init__(self, name):\n        self.name = name\n\n    def rename(self, new_name):\n        # reject blank names\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "main.py",
+          "content": "from models.member import Member\n\nmember = Member(\"Nia\")\nprint(member.rename(\"Nina\"))\nprint(member.rename(\"\"))\nprint(member.name)",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "Member",
+          "message": "Define a Member class."
+        },
+        {
+          "type": "method_returns",
+          "className": "Member",
+          "constructorArgs": [
+            "Nia"
+          ],
+          "constructorArgKinds": [],
+          "methodName": "rename",
+          "methodArgs": [
+            "Nina"
+          ],
+          "methodArgKinds": [],
+          "expected": true,
+          "expectedKind": "value",
+          "message": "A non-blank rename should return True."
+        },
+        {
+          "type": "method_returns",
+          "className": "Member",
+          "constructorArgs": [
+            "Nia"
+          ],
+          "constructorArgKinds": [],
+          "methodName": "rename",
+          "methodArgs": [
+            ""
+          ],
+          "methodArgKinds": [],
+          "expected": false,
+          "expectedKind": "value",
+          "message": "A blank rename should return False."
+        },
+        {
+          "type": "attribute_sequence_equals",
+          "className": "Member",
+          "constructorArgs": [
+            "Nia"
+          ],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "rename",
+              "methodArgs": [
+                "Nina"
+              ],
+              "methodArgKinds": []
+            },
+            {
+              "methodName": "rename",
+              "methodArgs": [
+                ""
+              ],
+              "methodArgKinds": []
+            }
+          ],
+          "attributeName": "name",
+          "expected": "Nina",
+          "expectedKind": "value",
+          "message": "The saved name should remain the last valid name."
+        }
+      ],
+      "hint": "The invalid case should leave `self.name` unchanged.",
+      "help": {
+        "concept": "Encapsulation protects object state by making updates go through a method that can reject bad values before saving them.",
+        "hint_1": "Check whether `new_name` is an empty string before assigning it to `self.name`.",
+        "hint_2": "Return a success boolean after a valid assignment, and return a failure boolean when the value is blank."
+      }
+    },
+    {
+      "id": "mc-encapsulation-benefits",
+      "kind": "multi_choice",
+      "title": "Choose the benefits of encapsulation",
+      "prompt": "Which statements describe why encapsulation is useful in a class that manages account balances? Choose all that apply.",
+      "options": [
+        "It lets the class validate changes before saving them.",
+        "It keeps update rules close to the data they protect.",
+        "It means every attribute should always be changed directly from outside the class.",
+        "It helps prevent impossible states like a negative balance after a bad update."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b",
+        "d"
+      ],
+      "hint": "Look for choices where the class protects its own data rules.",
+      "help": {
+        "concept": "Encapsulation keeps important state changes inside methods so the object can enforce rules consistently.",
+        "hint_1": "Good answers mention validation, protecting state, or keeping update rules close to the data.",
+        "hint_2": "Reject choices that suggest outside code should freely rewrite important attributes without checks."
+      }
+    },
+    {
+      "id": "mc-service-vs-method",
+      "kind": "multi_choice",
+      "title": "Separate model behavior from service behavior",
+      "prompt": "A small app has an `Account` class and a helper that summarizes accounts. Which tasks belong naturally in a service function instead of a state-changing method? Choose all that apply.",
+      "options": [
+        "Return a label like \"active\" or \"empty\" based on an account's balance.",
+        "Check whether an account can cover a purchase amount without changing the balance.",
+        "Reject a negative deposit before adding money to the balance.",
+        "Refuse a blank email before saving it on a member object."
+      ],
+      "correctOptionIds": [
+        "a",
+        "b"
+      ],
+      "hint": "Pick tasks that read or summarize object state rather than changing it.",
+      "help": {
+        "concept": "Methods usually protect and update an object's own state, while service functions often coordinate, summarize, or report on objects.",
+        "hint_1": "Look for tasks that inspect balances or produce labels without mutating the object.",
+        "hint_2": "Avoid choices where the main job is to validate and save a new value on the object itself."
+      }
+    },
+    {
+      "id": "fb-deposit-condition",
+      "kind": "fill_blank_choice",
+      "title": "Complete a positive deposit check",
+      "prompt": "Fill in the comparison that allows a deposit only when the amount is positive.",
+      "template": "if amount [blank1]:",
+      "choices": [
+        "> 0",
+        "< 0",
+        "== amount",
+        "= 0"
+      ],
+      "correctValue": "> 0",
+      "hint": "The rule should reject zero and negative numbers.",
+      "help": {
+        "concept": "Validation often starts with a simple comparison that decides whether a state change is allowed.",
+        "hint_1": "A positive amount is greater than zero.",
+        "hint_2": "Choose the operator and number that make the condition true only for positive values."
+      }
+    },
+    {
+      "id": "fb-status-return",
+      "kind": "fill_blank_choice",
+      "title": "Return the zero-balance label",
+      "prompt": "Fill in the missing return value for an account whose balance is exactly 0.",
+      "template": "if self.balance == 0:\n    return \"[blank1]\"",
+      "choices": [
+        "empty",
+        "active",
+        "updated",
+        "invalid"
+      ],
+      "correctValue": "empty",
+      "hint": "Use the label shown in the lesson example for a zero-balance account.",
+      "help": {
+        "concept": "Status methods and service functions often map a specific state to a short descriptive string.",
+        "hint_1": "The lesson used one label for zero balance and another for balances above zero.",
+        "hint_2": "Choose the word that means the account has no money left."
+      }
+    },
+    {
+      "id": "sc-best-update-pattern",
+      "kind": "single_choice",
+      "title": "Pick the safer update pattern",
+      "prompt": "Which approach best matches encapsulation for changing an account balance?",
+      "options": [
+        "Outside code sets `account.balance` directly whenever it wants.",
+        "The class provides a method that validates the amount before changing `balance`.",
+        "A notes panel stores the balance rule instead of the class.",
+        "The app changes the theme color before updating the balance."
+      ],
+      "correctOptionIds": [
+        "b"
+      ],
+      "hint": "Choose the option where the class controls the change.",
+      "help": {
+        "concept": "Encapsulation is strongest when outside code asks the object to change itself through a method that can validate the request.",
+        "hint_1": "Look for the choice that uses a method like `deposit()` or `withdraw()` instead of direct assignment.",
+        "hint_2": "Avoid options where outside code rewrites `balance` freely without any rule check."
+      }
+    },
+    {
+      "id": "dr-validated-update-flow",
+      "kind": "drag_reorder",
+      "title": "Order a validated state change",
+      "prompt": "Put these steps in the correct order for a method that safely updates object state.",
+      "tokens": [
+        "Receive the new value in a method parameter.",
+        "Check whether the new value follows the rule.",
+        "Update the object's attribute only if the value is valid.",
+        "Return a result that shows whether the change happened."
+      ],
+      "correctOrder": [
+        "Receive the new value in a method parameter.",
+        "Check whether the new value follows the rule.",
+        "Update the object's attribute only if the value is valid.",
+        "Return a result that shows whether the change happened."
+      ],
+      "hint": "Validation should happen before the attribute changes.",
+      "help": {
+        "concept": "A validated method follows a clear sequence: receive a proposed value, check it, update state only if valid, and report the result.",
+        "hint_1": "Start with the incoming value and end with the method's result.",
+        "hint_2": "The attribute update belongs after the rule check, not before it."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Build an account tracker with validated updates and helper checks",
+    "stepIds": [
+      "try-encapsulation-and-validation-sketch0",
+      "try-encapsulation-and-validation-sketch1",
+      "try-encapsulation-and-validation-sketch2",
+      "ci-withdraw-validation",
+      "ci-account-service-check",
+      "ci-account-status-method"
+    ]
+  }
+}

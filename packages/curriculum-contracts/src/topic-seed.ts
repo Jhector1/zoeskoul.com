@@ -72,6 +72,8 @@ export type TopicSeed = {
     workspacePolicy?: TopicSeedWorkspacePolicy;
     authoringPolicy?: ResolvedAuthoringPolicy;
     modulePrefix: string;
+    /** Display/logical module number from course.spec.json when available. */
+    moduleNumber?: number;
     moduleOrder: number;
     sectionOrder: number;
     practice?: PracticeConfig;

@@ -1,0 +1,366 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "working-with-paths": {
+          "label": "Travay ak Chemen",
+          "summary": "Konprann chemen relatif ak òganizasyon senp dosye.",
+          "cards": {
+            "sketch0": {
+              "title": "Chemen relatif yo endike dosye ki nan espas travay aktyèl ou a."
+            },
+            "sketch1": {
+              "title": "Dosye ede òganize fichye yo klèman."
+            },
+            "sketch2": {
+              "title": "Sèvi ak chemen relatif senp, pa sa ki espesifik pou yon machin."
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Pratike lekti ak ekriti ak chemen relatif"
+            }
+          },
+          "projectSteps": {
+            "ci_read_nested_file": {
+              "title": "Li nan yon chemen relatif anbreye"
+            },
+            "ci_copy_between_paths": {
+              "title": "Kopi tèks la nan yon lòt chemen relatif"
+            },
+            "ci_count_lines_in_folder": {
+              "title": "Konte liy nan yon chemen fichye"
+            }
+          },
+          "quiz": {
+            "sc-relative-path-folder": {
+              "title": "Chwazi chemen relatif la",
+              "prompt": "Yon fichye ki rele `input.txt` nan yon dosye ki rele `data`. Ki chemen ki refere kòrèkteman a fichye sa a nan leson sa a?",
+              "hint": "Itilize non dosye a an premye, epi non fichye a.",
+              "help": {
+                "concept": "Nonche wout relatif dosye yo nan lòd soti nan kote espas travay aktyèl la rive nan fichye sib la.",
+                "hint_1": "Fichye a pa nan menm dosye ak kòd la; li andedan `data`.",
+                "hint_2": "Chèche opsyon ki konekte dosye a ak fichye a ak yon ba oblique."
+              },
+              "options": {
+                "a": "input.txt/data",
+                "b": "data/input.txt",
+                "c": "/data/input.txt",
+                "d": "done-antre.txt"
+              }
+            },
+            "sc-same-folder-path": {
+              "title": "Chemen pou yon fichye ki toupre",
+              "prompt": "Kòd ou a ak yon fichye ki rele `notes.txt` yo nan menm dosye a. Ki chemen ou ta dwe itilize pou louvri fichye sa a?",
+              "hint": "Si fichye a nan menm dosye a, ou pa bezwen nonmen yon lòt dosye.",
+              "help": {
+                "concept": "Yon fichye ki nan menm dosye a ka louvri sèlman ak non fichye li kòm yon chemen relatif.",
+                "hint_1": "Pa bezwen okenn non dosye anplis isit la.",
+                "hint_2": "Chwazi chemen ki pi kout ki valab ki nonmen sèlman fichye a li menm."
+              },
+              "options": {
+                "a": "data/notes.txt",
+                "b": "nòt.txt",
+                "c": "./data/notes.txt",
+                "d": "folder/notes.txt"
+              }
+            },
+            "mc-relative-path-benefits": {
+              "title": "Poukisa pou itilize chemen relatif isit la?",
+              "prompt": "Chwazi tout deklarasyon ki kòrèk sou itilizasyon chemen relatif nan leson sa a.",
+              "hint": "Panse sou chemen ki mache andedan espas travay ak dosye ki bay yo.",
+              "help": {
+                "concept": "Chemen relatif yo itil paske yo dekri kote fichye yo nan estrikti pwojè a olye pou yo depann sou yon konfigirasyon machin espesifik.",
+                "hint_1": "Chèche deklarasyon sou dosye pwojè ak pòtabte andedan espas travay leson an.",
+                "hint_2": "Select the choices that describe starting from the current workspace and avoiding machine-specific locations."
+              },
+              "options": {
+                "a": "Yo ka montre dosye ki nan katab tankou `data/input.txt`.",
+                "b": "Yo depann de kote konplè yon òdinatè espesifik.",
+                "c": "Yo ede òganize fichye yo pa dosye.",
+                "d": "Yo toujou mande yon kote konplè ki espesifik pou machin nan."
+              }
+            },
+            "mc-open-path-examples": {
+              "title": "Egzanp chemen relatif valab",
+              "prompt": "Chwazi tout egzanp chemen relatif ki valab pou stil espas travay leson sa a.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Kesyon sa a verifye si ou ka konekte kòmand lan ak konsèp Python ki soti nan leson an.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Eseye chak opsyon nan fraz la oswa nan liy kòd la epi kenbe sa ki fè egzanp lan mache egzakteman jan yo dekri a."
+              },
+              "options": {
+                "a": "nòt.txt",
+                "b": "data/input.txt",
+                "c": "dosye -&gt; input.txt",
+                "d": "non panèl sòti a"
+              }
+            },
+            "dr-read-file-steps": {
+              "title": "Kòdone etap pou li fichye a",
+              "prompt": "Mete etap sa yo nan lòd kòrèk pou li yon fichye ki gen yon chemen relatif epi montre kontni li.",
+              "hint": "Ouvri an premye, apre sa li, epi montre.",
+              "help": {
+                "concept": "Li yon fichye swiv yon sekans: louvri fichye a, jwenn kontni li, epi enprime rezilta a.",
+                "hint_1": "Ou pa ka li dosye a anvan ou louvri li.",
+                "hint_2": "Apre ou fin li tèks la nan yon varyab, dènye etap la se montre li nan panèl sòti a."
+              },
+              "tokens": {
+                "t1": "Ouvri `data/input.txt` an mòd lekti",
+                "t2": "Sere kontni an nan yon varyab",
+                "t3": "Enprime varyab la"
+              }
+            },
+            "dr-build-nested-path": {
+              "title": "Bati chemen an nan lòd",
+              "prompt": "Aranje jeton yo pou kreye chemen relatif la pou \"`report.txt`\" andedan dosye \"`data`\".",
+              "hint": "Non dosye a vini anvan slash la ak non fichye a.",
+              "help": {
+                "concept": "Yon chemen relatif anbrete konstwi kòm dosye, barr, epi non fichye.",
+                "hint_1": "Kòmanse ak dosye ki gen fichye a.",
+                "hint_2": "Slash la separe non dosye a ak non fichye a."
+              },
+              "tokens": {
+                "t1": "done",
+                "t2": "/",
+                "t3": "rapò.txt"
+              }
+            },
+            "fb-folder-part": {
+              "title": "Konplete chemen dosye a",
+              "prompt": "Ranpli non dosye ki manke a.",
+              "hint": "Fichye a nan dosye \"`the missing term`\".",
+              "help": {
+                "concept": "Yon chemen relatif pou yon fichye ki anndan yon dosye enkli non dosye a anvan barr la.",
+                "hint_1": "Pati ki manke a se dosye ki genyen `input.txt`.",
+                "hint_2": "Sèvi ak non dosye ki parèt nan tout egzanp leson yo."
+              },
+              "template": "[blank1]/input.txt",
+              "choices": [
+                "done",
+                "Antre",
+                "dosye",
+                "li"
+              ]
+            },
+            "fb-same-folder-file": {
+              "title": "Konplete chemen menm dosye a",
+              "prompt": "Ranpli non fichye ki manke a pou yon fichye ki nan menm dosye a.",
+              "hint": "Pa bezwen non dosye isit la.",
+              "help": {
+                "concept": "Lè yon fichye nan menm dosye a, chemen relatif la se jis non fichye a.",
+                "hint_1": "Blank la dwe non fichye egzak la, pa yon dosye.",
+                "hint_2": "Chwazi opsyon ki se yon non fichye senp ki fini ak `.txt`."
+              },
+              "template": "[vid1]",
+              "choices": [
+                "data/notes.txt",
+                "nòt.txt",
+                "/nòt.txt",
+                "folder/notes.txt"
+              ]
+            },
+            "ci-read-nested-file": {
+              "title": "Li nan yon chemen relatif anbreye",
+              "prompt": "Ouvri `data/input.txt`, li tèks ki nan chemen relatif sa a, epi enprime l.\n\nSòti ou a dwe egzakteman:\n`Hello paths!`.",
+              "hint": "Li tach la \"Li nan yon chemen relatif anbreye\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
+              "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ouvri data/input.txt pou li fichye anbreye a."
+                }
+              }
+            },
+            "ci-copy-between-paths": {
+              "title": "Kopi tèks la nan yon lòt chemen relatif",
+              "prompt": "Kopye tèks ki nan`data/source.txt`\npou mete l nan`data/copy.txt`\n, epi enprime tèks ou kopye a pou nou ka konfime de fichye yo koresponn.\n\nRezilta w la dwe egzakteman:\n`apple`\n\n`banana`\n.",
+              "hint": "Li tach la \"Kopi tèks nan yon lòt chemen relatif\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki deja ap mache nan etap anvan an; ajoute nouvo konpòtman yo mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
+              "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Li soti nan data/source.txt."
+                },
+                "1": {
+                  "message": "Ekri nan data/copy.txt."
+                },
+                "2": {
+                  "message": "Sèvi ak file.write() pou kreye kopi a."
+                }
+              }
+            },
+            "ci-count-lines-in-folder": {
+              "title": "Konte liy nan yon chemen fichye",
+              "prompt": "Ouvri `data/items.txt`, konte konbyen liy li genyen, epi enprime rezilta a.\n\nSòti ou a dwe egzakteman:\n`3`.",
+              "hint": "Li tach la \"Count lines from a file path\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
+              "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ouvri data/items.txt pou konte liy li yo."
+                }
+              }
+            },
+            "try-working-with-paths-checkpoint": {
+              "title": "Itilize yon chemen relatif",
+              "prompt": "Sèvi ak `Path` pou li `data/names.txt`, epi enprime tèks la san karaktè siplemantè.",
+              "hint": "Sèvi ak `Path(\"data\") / \"names.txt\"`.",
+              "help": {
+                "concept": "Konstrui chemen relatif la an premye, epi sèvi avè l pou li fichye a.",
+                "hint_1": "Kreye chemen an ak `Path(\"data\") / \"names.txt\"`.",
+                "hint_2": "Li chemen sa a epi enprime tèks fichye a san karaktè siplemantè."
+              },
+              "starterCode": "from pathlib import Path\n\n# Build a path to data/names.txt and print its contents.\n",
+              "starterFiles": {
+                "data_names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n"
+                },
+                "data_names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak Path(...) pou konstwi chemen an."
+                },
+                "1": {
+                  "message": "Bati chemen an ak Path('data') / 'names.txt'."
+                }
+              },
+              "solutionCode": "from pathlib import Path\n\npath = Path(\"data\") / \"names.txt\"\nprint(path.read_text(), end=\"\")\n"
+            },
+            "try-working-with-paths-sketch0": {
+              "title": "Bati yon chemen relatif",
+              "prompt": "Bati chemen relatif `data/scores.txt` apati varyab `folder` ak `filename`, epi enprime chemen an.",
+              "hint": "Konbine non dosye a, yon ba, ak non fichye a.",
+              "help": {
+                "concept": "Kat sa a pratike ekri yon chemen relatif kòm tèks.",
+                "hint_1": "Sèvi ak varyab `folder` an premye, apre sa `/`, epi `filename`.",
+                "hint_2": "Enprime chèn chemen fini a `data/scores.txt`."
+              },
+              "starterCode": "folder = 'data'\nfilename = 'scores.txt'\n\n# Build data/scores.txt and print it.\n",
+              "solutionCode": "folder = 'data'\nfilename = 'scores.txt'\npath = folder + '/' + filename\nprint(path)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Bati chemen an apati katab ak non fichye a olye pou w tape chemen final la."
+                }
+              }
+            },
+            "try-working-with-paths-sketch1": {
+              "title": "Sèvi ak pathlib pou yon chemen",
+              "prompt": "Itilize `Path(\"data\") / \"scores.txt\"`, estoke li nan yon varyab, epi enprime chemen an.",
+              "hint": "Enpòte `Path`, konekte de moso yo ak `/`, epi enprime rezilta a.",
+              "help": {
+                "concept": "Kat sa a pratike konstriksyon yon objè chemen olye de yon chèn senp.",
+                "hint_1": "Kreye yon varyab tankou `path = Path(\"data\") / \"scores.txt\"`.",
+                "hint_2": "Enprime varyab chemen an apre ou fin konstwi li."
+              },
+              "starterCode": "from pathlib import Path\n\n# Create Path('data') / 'scores.txt' and print it.\n",
+              "solutionCode": "from pathlib import Path\npath = Path('data') / 'scores.txt'\nprint(path)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak Path(...) pou konstwi chemen an."
+                },
+                "1": {
+                  "message": "Bati chemen an ak Path('data') / 'scores.txt'."
+                }
+              }
+            },
+            "try-working-with-paths-sketch2": {
+              "title": "Li nan yon chemen dosye",
+              "prompt": "Ouvri `data/message.txt`, li tèks ki nan chemen relatif sa a, epi enprime li.",
+              "hint": "Sèvi ak chemen relatif konplè `data/message.txt` andedan `open(...)`.",
+              "help": {
+                "concept": "Kat sa a pratike itilize yon chemen dosye lè fichye a pa bò kote`main.py`.",
+                "hint_1": "Ouvri `data/message.txt` anndan yon blòk `with open(...)`.",
+                "hint_2": "Li tèks fichye a epi enprime sèlman tèks sa a."
+              },
+              "starterCode": "# Open data/message.txt and print its text.\n",
+              "starterFiles": {
+                "data_message_txt": {
+                  "content": "Nested hello\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open('data/message.txt') as file:\n    print(file.read().strip())\n"
+                },
+                "data_message_txt": {
+                  "content": "Nested hello\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Ouvri data/message.txt olye pou w tape Nested hello."
+                }
+              },
+              "solutionCode": "with open('data/message.txt') as file:\n    print(file.read().strip())\n"
+            }
+          },
+          "tryIt": {
+            "try_working_with_paths_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Sèvi ak `Path` pou li `data/names.txt`, epi enprime tèks la san karaktè siplemantè."
+            },
+            "try_working_with_paths_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Bati chemen relatif `data/scores.txt` apati varyab `folder` ak `filename`, epi enprime chemen an."
+            },
+            "try_working_with_paths_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Itilize `Path(\"data\") / \"scores.txt\"`, sere li nan yon varyab, epi enprime chemen an."
+            },
+            "try_working_with_paths_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `data/message.txt`, li tèks ki nan chemen relatif sa a, epi enprime li."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "working-with-paths": {
+          "paths-relative-basics": {
+            "title": "Relative paths point to files from your current workspace",
+            "bodyMarkdown": "A **relative path** tells Python where a file is by starting from the current project folder, not from a full computer-specific location. In this lesson, that means paths like `notes.txt` or `data/input.txt`.\n\nHere is a simple example:\n\n```python\nwith open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)\n```\n\nStep by step:\n\n- `open(\"data/input.txt\", \"r\")` looks for a folder named `data` and then a file named `input.txt` inside it.\n- `\"r\"` means read mode.\n- `file.read()` gets the file's contents.\n- `print(text)` sends those contents to the output panel.\n\nIf the file is in the same folder as your code, the path can be shorter:\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    print(file.read())\n```\n\nConcrete example:\n\n- `notes.txt` means “open the file named `notes.txt` right here.”\n- `data/notes.txt` means “go into the `data` folder, then open `notes.txt`.”"
+          },
+          "paths-folders-and-organization": {
+            "title": "Folders help organize files clearly",
+            "bodyMarkdown": "Projects often keep files in folders so related data stays together. A path like `data/scores.txt` is easier to understand than a random file name with no structure.\n\nExample:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))\n```\n\nLine by line:\n\n- `open(\"data/scores.txt\", \"r\")` opens a file inside the `data` folder.\n- `readlines()` makes a list of lines from the file.\n- `len(lines)` counts how many lines were read.\n- `print(len(lines))` shows that count in the output panel.\n\nWorked example:\n\nIf `data/scores.txt` contains:\n\n```python\n90\n85\n100\n```\n\nthen `len(lines)` is `3`, so the output is:\n\n```python\n3\n```\n\nUsing folders also makes it easier to tell input files from output files, such as `data/input.txt` and `data/report.txt`."
+          },
+          "paths-safe-habits": {
+            "title": "Use simple relative paths, not machine-specific ones",
+            "bodyMarkdown": "A good beginner habit is to use **simple relative paths** that work inside the lesson workspace. These paths are portable because they do not depend on one specific computer.\n\nGood examples:\n\n```python\n\"notes.txt\"\n\"data/input.txt\"\n\"data/output.txt\"\n```\n\nAvoid machine-specific paths for this lesson. They are not needed here and often break when code runs somewhere else.\n\nWorked example:\n\nSuppose you want to copy text from one file to another:\n\n```python\nwith open(\"data/input.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/output.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)\n```\n\nWhat happens:\n\n- The first `with open(...)` reads from `data/input.txt`.\n- The second `with open(...)` writes to `data/output.txt`.\n- `print(text)` gives you visible output so you can confirm what was written."
+          }
+        }
+      }
+    }
+  }
+}

@@ -46,6 +46,22 @@ describe("review quiz pool helpers", () => {
         ).toEqual(["sc-a", "drag-a"]);
     });
 
+    it("maps authored try_it/practice/capstone purposes to project at runtime", () => {
+        const pool = readPoolFromTopicMeta({
+            pool: [
+                { key: "try-code", w: 1, kind: "code_input", purpose: "try_it" },
+                { key: "capstone-code", w: 1, kind: "code_input", purpose: "capstone" },
+                { key: "quiz-single", w: 1, kind: "single_choice", purpose: "quiz" },
+            ],
+        });
+
+        expect(filterPoolForPurposeAndKind(pool, "quiz", null).map((item) => item.key)).toEqual(["quiz-single"]);
+        expect(filterPoolForPurposeAndKind(pool, "project", PracticeKind.code_input).map((item) => item.key)).toEqual([
+            "try-code",
+            "capstone-code",
+        ]);
+    });
+
     it("normal quiz selection excludes project-purpose code_input items", () => {
         const pool = readPoolFromTopicMeta({
             pool: [

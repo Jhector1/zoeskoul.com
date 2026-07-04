@@ -14,6 +14,7 @@ export async function validatePythonSemanticCode(args: {
     expected: ProgrammingExpected;
     solutionCode: string;
     files?: Array<{ path: string; content: string }>;
+    semanticModuleNames?: string[];
 }): Promise<
     | { ok: true }
     | {
@@ -31,6 +32,7 @@ export async function validatePythonSemanticCode(args: {
         code: buildPythonSemanticHarness({
             userCode: args.solutionCode,
             semanticChecks,
+            semanticModuleNames: args.semanticModuleNames,
         }),
         stdin: "",
         files: args.files,

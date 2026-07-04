@@ -34,8 +34,6 @@
         "difficulty": "easy",
         "allowReveal": true,
         "preferKind": "code_input",
-        "displayKind": "capstone",
-        "uiKind": "capstone",
         "maxAttempts": null,
         "steps": [
           {
@@ -87,7 +85,9 @@
             "maxAttempts": null,
             "carryFromPrev": true
           }
-        ]
+        ],
+        "displayKind": "capstone",
+        "uiKind": "capstone"
       }
     }
   ],
@@ -118,29 +118,29 @@
         },
         {
           "path": "community-file-room/inbox/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_agenda_txt.content",
+          "content": "Community event agenda\n",
           "language": "bash"
         },
         {
           "path": "community-file-room/inbox/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_guest_list_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "content": "Guest list\n",
           "language": "bash"
         },
         {
           "path": "community-file-room/inbox/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_venue_txt.content",
+          "content": "Venue note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "temporary scratch\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir -p community-file-room/handoff\nls community-file-room/inbox > community-file-room/handoff/inventory.txt\ncat community-file-room/handoff/inventory.txt\n",
+          "content": "pwd\nls community-file-room\nmkdir -p community-file-room/handoff\nmkdir -p community-file-room/reports\nmkdir -p community-file-room/archive\nmkdir -p community-file-room/backup\nls community-file-room\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
@@ -156,40 +156,75 @@
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "Temporary scratch note\n",
-          "language": "bash"
-        },
-        {
           "path": "community-file-room/inbox/venue.txt",
-          "content": "Venue setup notes\n",
+          "content": "Venue note\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "temporary scratch\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/archive/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/.keep",
+          "content": "",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
-        "requiredFiles": [
-          "community-file-room/handoff/inventory.txt",
-          "community-file-room/inbox/agenda.txt",
-          "community-file-room/inbox/guest-list.txt",
-          "community-file-room/inbox/tmp-scratch.txt",
-          "community-file-room/inbox/venue.txt"
-        ],
         "requiredFolders": [
-          "community-file-room",
           "community-file-room/handoff",
-          "community-file-room/inbox"
+          "community-file-room/reports",
+          "community-file-room/archive",
+          "community-file-room/backup"
         ]
       },
       "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "\\bpwd\\b",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "\\bls\\b",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)mkdir(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.2.message"
+          }
+        ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.forbiddenCommands.3.message"
           }
         ]
       },
@@ -207,58 +242,52 @@
           },
           {
             "path": "community-file-room/inbox/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_agenda_txt.content",
+            "content": "Community event agenda\n",
             "language": "bash"
           },
           {
             "path": "community-file-room/inbox/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_guest_list_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "content": "Guest list\n",
             "language": "bash"
           },
           {
             "path": "community-file-room/inbox/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_venue_txt.content",
+            "content": "Venue note\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/tmp-scratch.txt",
+            "content": "temporary scratch\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
-          "requiredFiles": [
-            "community-file-room/handoff/inventory.txt",
-            "community-file-room/inbox/agenda.txt",
-            "community-file-room/inbox/guest-list.txt",
-            "community-file-room/inbox/tmp-scratch.txt",
-            "community-file-room/inbox/venue.txt"
-          ],
           "requiredFolders": [
-            "community-file-room",
             "community-file-room/handoff",
-            "community-file-room/inbox"
+            "community-file-room/reports",
+            "community-file-room/archive",
+            "community-file-room/backup"
           ]
         },
         "fixtureFiles": [
           {
             "path": "community-file-room/inbox/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_agenda_txt.content",
+            "content": "Community event agenda\n",
             "language": "bash"
           },
           {
             "path": "community-file-room/inbox/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_guest_list_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "content": "Guest list\n",
             "language": "bash"
           },
           {
             "path": "community-file-room/inbox/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_venue_txt.content",
+            "content": "Venue note\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/tmp-scratch.txt",
+            "content": "temporary scratch\n",
             "language": "bash"
           }
         ]
@@ -277,28 +306,28 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "project",
+        "terminalSessionScope": "exercise",
         "terminalCwd": "/workspace"
       },
       "fixtureFiles": [
         {
           "path": "community-file-room/inbox/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_agenda_txt.content",
+          "content": "Community event agenda\n",
           "language": "bash"
         },
         {
           "path": "community-file-room/inbox/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_guest_list_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "content": "Guest list\n",
           "language": "bash"
         },
         {
           "path": "community-file-room/inbox/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.starterFiles.community_file_room_inbox_venue_txt.content",
+          "content": "Venue note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "temporary scratch\n",
           "language": "bash"
         }
       ]
@@ -321,86 +350,135 @@
         },
         {
           "path": "community-file-room/inbox/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_agenda_txt.content",
+          "content": "Community event agenda\n",
           "language": "bash"
         },
         {
           "path": "community-file-room/inbox/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_guest_list_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "content": "Guest list\n",
           "language": "bash"
         },
         {
           "path": "community-file-room/inbox/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_venue_txt.content",
+          "content": "Venue note\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_handoff_inventory_txt.content",
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "temporary scratch\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/archive/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/.keep",
+          "content": "",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir -p community-file-room/agenda community-file-room/guests community-file-room/venue\nmv community-file-room/inbox/agenda.txt community-file-room/agenda/agenda.txt\nmv community-file-room/inbox/guest-list.txt community-file-room/guests/guest-list.txt\nmv community-file-room/inbox/venue.txt community-file-room/venue/venue.txt\nfind community-file-room -maxdepth 2 -type f | sort\n",
+          "content": "echo \"Community file room handoff\" > handoff/README.txt\necho \"Agenda, guest list, and venue notes prepared\" >> handoff/README.txt\ncat handoff/README.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "Temporary scratch note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/agenda/agenda.txt",
+          "path": "community-file-room/inbox/agenda.txt",
           "content": "Community event agenda\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/guests/guest-list.txt",
+          "path": "community-file-room/inbox/guest-list.txt",
           "content": "Guest list\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "Venue setup notes\n",
+          "path": "community-file-room/inbox/venue.txt",
+          "content": "Venue note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "temporary scratch\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/archive/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "community-file-room/agenda/agenda.txt",
-          "community-file-room/guests/guest-list.txt",
-          "community-file-room/handoff/inventory.txt",
-          "community-file-room/inbox/tmp-scratch.txt",
-          "community-file-room/venue/venue.txt"
-        ],
-        "requiredFolders": [
-          "community-file-room",
-          "community-file-room/agenda",
-          "community-file-room/guests",
-          "community-file-room/handoff",
-          "community-file-room/inbox",
-          "community-file-room/venue"
+          "community-file-room/handoff/README.txt"
         ]
       },
       "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "^\\s*echo\\b(?:(?!>>).)*>\\s*(?:\\./)?(?:community-file-room/)?handoff/README\\.txt\\s*$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^\\s*echo\\b.*>>\\s*(?:\\./)?(?:community-file-room/)?handoff/README\\.txt\\s*$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)cat\\s+(?:\\./)?(?:community-file-room/)?handoff/README\\.txt(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.2.message"
+          }
+        ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.forbiddenCommands.3.message"
           }
         ]
       },
@@ -418,71 +496,89 @@
           },
           {
             "path": "community-file-room/inbox/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_agenda_txt.content",
+            "content": "Community event agenda\n",
             "language": "bash"
           },
           {
             "path": "community-file-room/inbox/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_guest_list_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "content": "Guest list\n",
             "language": "bash"
           },
           {
             "path": "community-file-room/inbox/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_venue_txt.content",
+            "content": "Venue note\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/inventory.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_handoff_inventory_txt.content",
+            "path": "community-file-room/inbox/tmp-scratch.txt",
+            "content": "temporary scratch\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/handoff/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/reports/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/archive/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/backup/.keep",
+            "content": "",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "community-file-room/agenda/agenda.txt",
-            "community-file-room/guests/guest-list.txt",
-            "community-file-room/handoff/inventory.txt",
-            "community-file-room/inbox/tmp-scratch.txt",
-            "community-file-room/venue/venue.txt"
-          ],
-          "requiredFolders": [
-            "community-file-room",
-            "community-file-room/agenda",
-            "community-file-room/guests",
-            "community-file-room/handoff",
-            "community-file-room/inbox",
-            "community-file-room/venue"
+            "community-file-room/handoff/README.txt"
           ]
         },
         "fixtureFiles": [
           {
             "path": "community-file-room/inbox/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_agenda_txt.content",
+            "content": "Community event agenda\n",
             "language": "bash"
           },
           {
             "path": "community-file-room/inbox/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_guest_list_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "content": "Guest list\n",
             "language": "bash"
           },
           {
             "path": "community-file-room/inbox/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_venue_txt.content",
+            "content": "Venue note\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/inventory.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_handoff_inventory_txt.content",
+            "path": "community-file-room/inbox/tmp-scratch.txt",
+            "content": "temporary scratch\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/handoff/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/reports/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/archive/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/backup/.keep",
+            "content": "",
             "language": "bash"
           }
         ]
@@ -501,33 +597,48 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "project",
-        "terminalCwd": "/workspace"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-file-room"
       },
       "fixtureFiles": [
         {
           "path": "community-file-room/inbox/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_agenda_txt.content",
+          "content": "Community event agenda\n",
           "language": "bash"
         },
         {
           "path": "community-file-room/inbox/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_guest_list_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "content": "Guest list\n",
           "language": "bash"
         },
         {
           "path": "community-file-room/inbox/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_inbox_venue_txt.content",
+          "content": "Venue note\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.starterFiles.community_file_room_handoff_inventory_txt.content",
+          "path": "community-file-room/inbox/tmp-scratch.txt",
+          "content": "temporary scratch\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/archive/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/.keep",
+          "content": "",
           "language": "bash"
         }
       ]
@@ -549,94 +660,140 @@
           "entry": true
         },
         {
+          "path": "community-file-room/inbox/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/venue.txt",
+          "content": "Venue note\n",
+          "language": "bash"
+        },
+        {
           "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "content": "temporary scratch\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_handoff_inventory_txt.content",
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/agenda/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_agenda_agenda_txt.content",
+          "path": "community-file-room/reports/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/guests/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_guests_guest_list_txt.content",
+          "path": "community-file-room/archive/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_venue_venue_txt.content",
+          "path": "community-file-room/backup/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir -p community-file-room/backups\ncp community-file-room/agenda/agenda.txt community-file-room/backups/agenda.txt\nfind community-file-room -maxdepth 2 -type f | sort\n",
+          "content": "mkdir -p handoff reports\nmv inbox/agenda.txt handoff/agenda.txt\nmv inbox/venue.txt handoff/venue.txt\nmv inbox/guest-list.txt reports/guest-list.txt\nls handoff\nls reports\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/archive/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
           "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "Temporary scratch note\n",
+          "content": "temporary scratch\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/agenda/agenda.txt",
+          "path": "community-file-room/handoff/agenda.txt",
           "content": "Community event agenda\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/guests/guest-list.txt",
+          "path": "community-file-room/handoff/venue.txt",
+          "content": "Venue note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/guest-list.txt",
           "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "Venue setup notes\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/backups/agenda.txt",
-          "content": "Community event agenda\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "community-file-room/agenda/agenda.txt",
-          "community-file-room/backups/agenda.txt",
-          "community-file-room/guests/guest-list.txt",
-          "community-file-room/handoff/inventory.txt",
-          "community-file-room/inbox/tmp-scratch.txt",
-          "community-file-room/venue/venue.txt"
+          "community-file-room/handoff/agenda.txt",
+          "community-file-room/handoff/venue.txt",
+          "community-file-room/reports/guest-list.txt"
         ],
-        "requiredFolders": [
-          "community-file-room",
-          "community-file-room/agenda",
-          "community-file-room/backups",
-          "community-file-room/guests",
-          "community-file-room/handoff",
-          "community-file-room/inbox",
-          "community-file-room/venue"
+        "forbiddenFiles": [
+          "community-file-room/inbox/agenda.txt",
+          "community-file-room/inbox/venue.txt",
+          "community-file-room/inbox/guest-list.txt"
         ]
       },
       "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "(^|\\s)mv(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.requiredCommands.0.message"
+          }
+        ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.forbiddenCommands.3.message"
           }
         ]
       },
@@ -653,74 +810,107 @@
             "entry": true
           },
           {
+            "path": "community-file-room/inbox/agenda.txt",
+            "content": "Community event agenda\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/venue.txt",
+            "content": "Venue note\n",
+            "language": "bash"
+          },
+          {
             "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "content": "temporary scratch\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/inventory.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_handoff_inventory_txt.content",
+            "path": "community-file-room/handoff/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/agenda/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_agenda_agenda_txt.content",
+            "path": "community-file-room/reports/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/guests/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_guests_guest_list_txt.content",
+            "path": "community-file-room/archive/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/venue/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_venue_venue_txt.content",
+            "path": "community-file-room/backup/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/handoff/README.txt",
+            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "community-file-room/agenda/agenda.txt",
-            "community-file-room/backups/agenda.txt",
-            "community-file-room/guests/guest-list.txt",
-            "community-file-room/handoff/inventory.txt",
-            "community-file-room/inbox/tmp-scratch.txt",
-            "community-file-room/venue/venue.txt"
+            "community-file-room/handoff/agenda.txt",
+            "community-file-room/handoff/venue.txt",
+            "community-file-room/reports/guest-list.txt"
           ],
-          "requiredFolders": [
-            "community-file-room",
-            "community-file-room/agenda",
-            "community-file-room/backups",
-            "community-file-room/guests",
-            "community-file-room/handoff",
-            "community-file-room/inbox",
-            "community-file-room/venue"
+          "forbiddenFiles": [
+            "community-file-room/inbox/agenda.txt",
+            "community-file-room/inbox/venue.txt",
+            "community-file-room/inbox/guest-list.txt"
           ]
         },
         "fixtureFiles": [
           {
+            "path": "community-file-room/inbox/agenda.txt",
+            "content": "Community event agenda\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/inbox/venue.txt",
+            "content": "Venue note\n",
+            "language": "bash"
+          },
+          {
             "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "content": "temporary scratch\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/inventory.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_handoff_inventory_txt.content",
+            "path": "community-file-room/handoff/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/agenda/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_agenda_agenda_txt.content",
+            "path": "community-file-room/reports/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/guests/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_guests_guest_list_txt.content",
+            "path": "community-file-room/archive/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/venue/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_venue_venue_txt.content",
+            "path": "community-file-room/backup/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/handoff/README.txt",
+            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
             "language": "bash"
           }
         ]
@@ -739,33 +929,53 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "project",
-        "terminalCwd": "/workspace"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-file-room"
       },
       "fixtureFiles": [
         {
+          "path": "community-file-room/inbox/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/inbox/venue.txt",
+          "content": "Venue note\n",
+          "language": "bash"
+        },
+        {
           "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "content": "temporary scratch\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_handoff_inventory_txt.content",
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/agenda/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_agenda_agenda_txt.content",
+          "path": "community-file-room/reports/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/guests/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_guests_guest_list_txt.content",
+          "path": "community-file-room/archive/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.starterFiles.community_file_room_venue_venue_txt.content",
+          "path": "community-file-room/backup/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
           "language": "bash"
         }
       ]
@@ -787,105 +997,141 @@
           "entry": true
         },
         {
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/archive/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
           "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "content": "temporary scratch\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_handoff_inventory_txt.content",
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/agenda/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_agenda_agenda_txt.content",
+          "path": "community-file-room/handoff/agenda.txt",
+          "content": "Community event agenda\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/guests/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_guests_guest_list_txt.content",
+          "path": "community-file-room/handoff/venue.txt",
+          "content": "Venue note\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_venue_venue_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/backups/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_backups_agenda_txt.content",
+          "path": "community-file-room/reports/guest-list.txt",
+          "content": "Guest list\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "cat community-file-room/agenda/agenda.txt > /dev/null\ncat community-file-room/guests/guest-list.txt > /dev/null\nprintf 'Agenda and guest list reviewed for handoff\\n' > community-file-room/handoff/review-summary.txt\nfind community-file-room -maxdepth 2 -type f | sort\n",
+          "content": "mkdir -p backup\ncp reports/guest-list.txt backup/guest-list-backup.txt\nrm inbox/tmp-scratch.txt\nls inbox\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "Temporary scratch note\n",
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "path": "community-file-room/reports/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/review-summary.txt",
-          "content": "Agenda and guest list reviewed for handoff\n",
+          "path": "community-file-room/archive/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/agenda/agenda.txt",
+          "path": "community-file-room/backup/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/agenda.txt",
           "content": "Community event agenda\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/guests/guest-list.txt",
+          "path": "community-file-room/handoff/venue.txt",
+          "content": "Venue note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/guest-list.txt",
           "content": "Guest list\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "Venue setup notes\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/backups/agenda.txt",
-          "content": "Community event agenda\n",
+          "path": "community-file-room/backup/guest-list-backup.txt",
+          "content": "Guest list\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "community-file-room/agenda/agenda.txt",
-          "community-file-room/backups/agenda.txt",
-          "community-file-room/guests/guest-list.txt",
-          "community-file-room/handoff/inventory.txt",
-          "community-file-room/handoff/review-summary.txt",
-          "community-file-room/inbox/tmp-scratch.txt",
-          "community-file-room/venue/venue.txt"
+          "community-file-room/reports/guest-list.txt",
+          "community-file-room/backup/guest-list-backup.txt"
         ],
-        "requiredFolders": [
-          "community-file-room",
-          "community-file-room/agenda",
-          "community-file-room/backups",
-          "community-file-room/guests",
-          "community-file-room/handoff",
-          "community-file-room/inbox",
-          "community-file-room/venue"
+        "forbiddenFiles": [
+          "community-file-room/inbox/tmp-scratch.txt"
         ]
       },
       "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "(^|\\s)cp(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "(^|\\s)rm(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.1.message"
+          }
+        ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.forbiddenCommands.3.message"
           }
         ]
       },
@@ -902,85 +1148,104 @@
             "entry": true
           },
           {
+            "path": "community-file-room/handoff/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/reports/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/archive/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/backup/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
             "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "content": "temporary scratch\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/inventory.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_handoff_inventory_txt.content",
+            "path": "community-file-room/handoff/README.txt",
+            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/agenda/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_agenda_agenda_txt.content",
+            "path": "community-file-room/handoff/agenda.txt",
+            "content": "Community event agenda\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/guests/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_guests_guest_list_txt.content",
+            "path": "community-file-room/handoff/venue.txt",
+            "content": "Venue note\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/venue/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_venue_venue_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/backups/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_backups_agenda_txt.content",
+            "path": "community-file-room/reports/guest-list.txt",
+            "content": "Guest list\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "community-file-room/agenda/agenda.txt",
-            "community-file-room/backups/agenda.txt",
-            "community-file-room/guests/guest-list.txt",
-            "community-file-room/handoff/inventory.txt",
-            "community-file-room/handoff/review-summary.txt",
-            "community-file-room/inbox/tmp-scratch.txt",
-            "community-file-room/venue/venue.txt"
+            "community-file-room/reports/guest-list.txt",
+            "community-file-room/backup/guest-list-backup.txt"
           ],
-          "requiredFolders": [
-            "community-file-room",
-            "community-file-room/agenda",
-            "community-file-room/backups",
-            "community-file-room/guests",
-            "community-file-room/handoff",
-            "community-file-room/inbox",
-            "community-file-room/venue"
+          "forbiddenFiles": [
+            "community-file-room/inbox/tmp-scratch.txt"
           ]
         },
         "fixtureFiles": [
           {
+            "path": "community-file-room/handoff/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/reports/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/archive/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/backup/.keep",
+            "content": "",
+            "language": "bash"
+          },
+          {
             "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "content": "temporary scratch\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/inventory.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_handoff_inventory_txt.content",
+            "path": "community-file-room/handoff/README.txt",
+            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/agenda/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_agenda_agenda_txt.content",
+            "path": "community-file-room/handoff/agenda.txt",
+            "content": "Community event agenda\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/guests/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_guests_guest_list_txt.content",
+            "path": "community-file-room/handoff/venue.txt",
+            "content": "Venue note\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/venue/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_venue_venue_txt.content",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/backups/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_backups_agenda_txt.content",
+            "path": "community-file-room/reports/guest-list.txt",
+            "content": "Guest list\n",
             "language": "bash"
           }
         ]
@@ -999,38 +1264,53 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "project",
-        "terminalCwd": "/workspace"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-file-room"
       },
       "fixtureFiles": [
         {
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/archive/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
           "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "content": "temporary scratch\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_handoff_inventory_txt.content",
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/agenda/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_agenda_agenda_txt.content",
+          "path": "community-file-room/handoff/agenda.txt",
+          "content": "Community event agenda\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/guests/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_guests_guest_list_txt.content",
+          "path": "community-file-room/handoff/venue.txt",
+          "content": "Venue note\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_venue_venue_txt.content",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/backups/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.starterFiles.community_file_room_backups_agenda_txt.content",
+          "path": "community-file-room/reports/guest-list.txt",
+          "content": "Guest list\n",
           "language": "bash"
         }
       ]
@@ -1052,113 +1332,147 @@
           "entry": true
         },
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_handoff_inventory_txt.content",
+          "path": "community-file-room/reports/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/review-summary.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_handoff_review_summary_txt.content",
+          "path": "community-file-room/archive/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/agenda/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_agenda_agenda_txt.content",
+          "path": "community-file-room/backup/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/guests/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_guests_guest_list_txt.content",
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_venue_venue_txt.content",
+          "path": "community-file-room/handoff/agenda.txt",
+          "content": "Community event agenda\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backups/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_backups_agenda_txt.content",
+          "path": "community-file-room/handoff/venue.txt",
+          "content": "Venue note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/guest-list-backup.txt",
+          "content": "Guest list\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "rm -f community-file-room/inbox/tmp-scratch.txt\nprintf 'File room handoff ready\\n' > community-file-room/handoff/READY.txt\nfind community-file-room -maxdepth 2 -type f | sort\n",
+          "content": "wc -l reports/guest-list.txt\necho \"Ready for pickup\" >> handoff/README.txt\ntouch handoff/READY.txt\ncat handoff/README.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "agenda.txt\nguest-list.txt\ntmp-scratch.txt\nvenue.txt\n",
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/review-summary.txt",
-          "content": "Agenda and guest list reviewed for handoff\n",
+          "path": "community-file-room/reports/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/archive/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/.keep",
+          "content": "",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\nReady for pickup\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/agenda.txt",
+          "content": "Community event agenda\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/handoff/venue.txt",
+          "content": "Venue note\n",
           "language": "bash"
         },
         {
           "path": "community-file-room/handoff/READY.txt",
-          "content": "File room handoff ready\n",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/agenda/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/guests/guest-list.txt",
+          "path": "community-file-room/reports/guest-list.txt",
           "content": "Guest list\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "Venue setup notes\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/backups/agenda.txt",
-          "content": "Community event agenda\n",
+          "path": "community-file-room/backup/guest-list-backup.txt",
+          "content": "Guest list\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "community-file-room/agenda/agenda.txt",
-          "community-file-room/backups/agenda.txt",
-          "community-file-room/guests/guest-list.txt",
-          "community-file-room/handoff/READY.txt",
-          "community-file-room/handoff/inventory.txt",
-          "community-file-room/handoff/review-summary.txt",
-          "community-file-room/venue/venue.txt"
-        ],
-        "forbiddenFiles": [
-          "community-file-room/inbox/tmp-scratch.txt"
-        ],
-        "requiredFolders": [
-          "community-file-room",
-          "community-file-room/agenda",
-          "community-file-room/backups",
-          "community-file-room/guests",
-          "community-file-room/handoff",
-          "community-file-room/inbox",
-          "community-file-room/venue"
+          "community-file-room/handoff/README.txt",
+          "community-file-room/handoff/READY.txt"
         ]
       },
       "terminalExpectations": {
+        "requiredCommands": [
+          {
+            "pattern": "(^|\\s)wc\\s+-l\\s+(?:\\./)?(?:community-file-room/)?reports/guest-list\\.txt(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.0.message"
+          },
+          {
+            "pattern": "^\\s*echo\\b.*>>\\s*(?:\\./)?(?:community-file-room/)?handoff/README\\.txt\\s*$",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)touch(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.2.message"
+          }
+        ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.forbiddenCommands.3.message"
           }
         ]
       },
@@ -1175,98 +1489,101 @@
             "entry": true
           },
           {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "path": "community-file-room/handoff/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/inventory.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_handoff_inventory_txt.content",
+            "path": "community-file-room/reports/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/review-summary.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_handoff_review_summary_txt.content",
+            "path": "community-file-room/archive/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/agenda/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_agenda_agenda_txt.content",
+            "path": "community-file-room/backup/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/guests/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_guests_guest_list_txt.content",
+            "path": "community-file-room/handoff/README.txt",
+            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/venue/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_venue_venue_txt.content",
+            "path": "community-file-room/handoff/agenda.txt",
+            "content": "Community event agenda\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backups/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_backups_agenda_txt.content",
+            "path": "community-file-room/handoff/venue.txt",
+            "content": "Venue note\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/reports/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/backup/guest-list-backup.txt",
+            "content": "Guest list\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "community-file-room/agenda/agenda.txt",
-            "community-file-room/backups/agenda.txt",
-            "community-file-room/guests/guest-list.txt",
-            "community-file-room/handoff/READY.txt",
-            "community-file-room/handoff/inventory.txt",
-            "community-file-room/handoff/review-summary.txt",
-            "community-file-room/venue/venue.txt"
-          ],
-          "forbiddenFiles": [
-            "community-file-room/inbox/tmp-scratch.txt"
-          ],
-          "requiredFolders": [
-            "community-file-room",
-            "community-file-room/agenda",
-            "community-file-room/backups",
-            "community-file-room/guests",
-            "community-file-room/handoff",
-            "community-file-room/inbox",
-            "community-file-room/venue"
+            "community-file-room/handoff/README.txt",
+            "community-file-room/handoff/READY.txt"
           ]
         },
         "fixtureFiles": [
           {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+            "path": "community-file-room/handoff/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/inventory.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_handoff_inventory_txt.content",
+            "path": "community-file-room/reports/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/review-summary.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_handoff_review_summary_txt.content",
+            "path": "community-file-room/archive/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/agenda/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_agenda_agenda_txt.content",
+            "path": "community-file-room/backup/.keep",
+            "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/guests/guest-list.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_guests_guest_list_txt.content",
+            "path": "community-file-room/handoff/README.txt",
+            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/venue/venue.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_venue_venue_txt.content",
+            "path": "community-file-room/handoff/agenda.txt",
+            "content": "Community event agenda\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backups/agenda.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_backups_agenda_txt.content",
+            "path": "community-file-room/handoff/venue.txt",
+            "content": "Venue note\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/reports/guest-list.txt",
+            "content": "Guest list\n",
+            "language": "bash"
+          },
+          {
+            "path": "community-file-room/backup/guest-list-backup.txt",
+            "content": "Guest list\n",
             "language": "bash"
           }
         ]
@@ -1285,43 +1602,53 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "project",
-        "terminalCwd": "/workspace"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/community-file-room"
       },
       "fixtureFiles": [
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_inbox_tmp_scratch_txt.content",
+          "path": "community-file-room/handoff/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/inventory.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_handoff_inventory_txt.content",
+          "path": "community-file-room/reports/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/review-summary.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_handoff_review_summary_txt.content",
+          "path": "community-file-room/archive/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/agenda/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_agenda_agenda_txt.content",
+          "path": "community-file-room/backup/.keep",
+          "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/guests/guest-list.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_guests_guest_list_txt.content",
+          "path": "community-file-room/handoff/README.txt",
+          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/venue/venue.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_venue_venue_txt.content",
+          "path": "community-file-room/handoff/agenda.txt",
+          "content": "Community event agenda\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backups/agenda.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.starterFiles.community_file_room_backups_agenda_txt.content",
+          "path": "community-file-room/handoff/venue.txt",
+          "content": "Venue note\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/reports/guest-list.txt",
+          "content": "Guest list\n",
+          "language": "bash"
+        },
+        {
+          "path": "community-file-room/backup/guest-list-backup.txt",
+          "content": "Guest list\n",
           "language": "bash"
         }
       ]
@@ -1329,9 +1656,11 @@
   ],
   "topicMeta": {
     "learningGoals": [
-      "Inspect a messy file-room inbox before changing it.",
-      "Organize files into a clean handoff structure.",
-      "Back up important files and leave a final ready marker."
+      "Inspect and create the handoff area",
+      "Write the handoff README",
+      "Move files into clean folders",
+      "Back up the guest list and remove scratch",
+      "Verify and mark ready"
     ]
   },
   "serviceDefaults": {
@@ -1341,6 +1670,7 @@
       "files": true,
       "multiFile": true,
       "terminal": true
-    }
+    },
+    "terminalCwd": "/workspace"
   }
 }

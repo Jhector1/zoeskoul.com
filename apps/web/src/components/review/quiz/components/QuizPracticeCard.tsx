@@ -415,6 +415,20 @@ function firstRecord(...values: unknown[]) {
   return null;
 }
 
+function hasUsableSolutionFiles(value: unknown) {
+  if (Array.isArray(value)) return value.length > 0;
+  if (isRecord(value)) return Object.keys(value).length > 0;
+  return false;
+}
+
+function firstUsableSolutionFiles(...values: unknown[]) {
+  for (const value of values) {
+    if (hasUsableSolutionFiles(value)) return value;
+  }
+
+  return undefined;
+}
+
 function pickEntryFileFromFiles(files: unknown, fallback: string) {
   return pickEntryFileFromStarterFilesValue(files, fallback);
 }
@@ -482,6 +496,8 @@ function buildWorkspaceFallbackFromProjectStep(step: unknown) {
   if (!isRecord(step)) return null;
 
   const rawWorkspace = isRecord(step.workspace) ? step.workspace : null;
+  const rawRecipe = isRecord(step.recipe) ? step.recipe : null;
+  const workspaceRecipe = isRecord(rawWorkspace?.recipe) ? rawWorkspace.recipe : null;
 
   const starterFiles =
       step.starterFiles ??
@@ -526,6 +542,18 @@ function buildWorkspaceFallbackFromProjectStep(step: unknown) {
     entryFilePath: entryFile,
     starterCode,
     starterFiles,
+    solutionCode: firstNonBlankString(
+        step.solutionCode,
+        rawRecipe?.solutionCode,
+        rawWorkspace?.solutionCode,
+        workspaceRecipe?.solutionCode,
+    ),
+    solutionFiles: firstUsableSolutionFiles(
+        step.solutionFiles,
+        rawRecipe?.solutionFiles,
+        rawWorkspace?.solutionFiles,
+        workspaceRecipe?.solutionFiles,
+    ),
     files: step.files ?? rawWorkspace?.files,
     fixtureFiles: step.fixtureFiles ?? rawWorkspace?.fixtureFiles,
     initialFiles: step.initialFiles ?? rawWorkspace?.initialFiles,
@@ -580,6 +608,23 @@ function mergeProjectStepFallbackExercise(
     return exercise ?? null;
   }
 
+  const projectStepRecipe = isRecord(projectStepManifest.recipe)
+      ? projectStepManifest.recipe
+      : null;
+  const projectStepWorkspace = isRecord(projectStepManifest.workspace)
+      ? projectStepManifest.workspace
+      : null;
+  const projectStepWorkspaceRecipe = isRecord(projectStepWorkspace?.recipe)
+      ? projectStepWorkspace.recipe
+      : null;
+  const fallbackSolutionFiles = firstUsableSolutionFiles(
+      projectStepManifest.solutionFiles,
+      projectStepRecipe?.solutionFiles,
+      projectStepWorkspace?.solutionFiles,
+      projectStepWorkspaceRecipe?.solutionFiles,
+      (fallbackWorkspace as any).solutionFiles,
+  );
+
   const stepExerciseKey = firstNonBlankString(
       projectStepManifest.exerciseKey,
       projectStepManifest.id,
@@ -609,12 +654,14 @@ function mergeProjectStepFallbackExercise(
         projectStepManifest.ideConfig,
         isRecord(projectStepManifest.workspace) ? projectStepManifest.workspace.ideConfig : null,
     ),
-    solutionCode: firstNonBlankString(projectStepManifest.solutionCode),
-    solutionFiles:
-        projectStepManifest.solutionFiles ??
-        (isRecord(projectStepManifest.workspace)
-            ? projectStepManifest.workspace.solutionFiles
-            : undefined),
+    solutionCode: firstNonBlankString(
+        projectStepManifest.solutionCode,
+        projectStepRecipe?.solutionCode,
+        projectStepWorkspace?.solutionCode,
+        projectStepWorkspaceRecipe?.solutionCode,
+        (fallbackWorkspace as any).solutionCode,
+    ),
+    solutionFiles: fallbackSolutionFiles,
   };
 
   if (!exercise) {
@@ -727,8 +774,20 @@ function mergeProjectStepFallbackExercise(
     sqlInitialTableSnapshots:
         exAny.sqlInitialTableSnapshots ?? fallbackExercise.sqlInitialTableSnapshots,
 
-    solutionCode: firstNonBlankString(exAny.solutionCode, fallbackExercise.solutionCode),
-    solutionFiles: exAny.solutionFiles ?? fallbackExercise.solutionFiles,
+    solutionCode: firstNonBlankString(
+        exAny.solutionCode,
+        exAny.recipe?.solutionCode,
+        exWorkspace?.solutionCode,
+        exWorkspace?.recipe?.solutionCode,
+        fallbackExercise.solutionCode,
+    ),
+    solutionFiles: firstUsableSolutionFiles(
+        exAny.solutionFiles,
+        exAny.recipe?.solutionFiles,
+        exWorkspace?.solutionFiles,
+        exWorkspace?.recipe?.solutionFiles,
+        fallbackExercise.solutionFiles,
+    ),
   } as Exercise);
 }
 
@@ -1092,11 +1151,17 @@ export default function QuizPracticeCard(props: {
       hasNonBlankSqlSignal((livePracticeManifest as any)?.sqlSchemaSql);
   const practiceExerciseHasSqlSeed =
       hasNonBlankSqlSignal((livePracticeManifest as any)?.sqlSeedSql);
-  const practiceResolvedForToolBinding = Boolean(
+  const hasServerResolvedPracticeForToolBinding = Boolean(
       ps?.exercise &&
       ps?.item &&
       !ps.loading &&
       !ps.error,
+  );
+  const hasLocalProjectStepFallbackForToolBinding = Boolean(
+      resolvedProjectStepManifest && projectStepFallbackItem,
+  );
+  const practiceResolvedForToolBinding = Boolean(
+      hasServerResolvedPracticeForToolBinding || hasLocalProjectStepFallbackForToolBinding,
   );
   const practiceItemReady = Boolean(livePracticeItem);
   const practiceStarterCode = String(
@@ -1556,10 +1621,10 @@ export default function QuizPracticeCard(props: {
   const btnLabel = ps?.busy ? (
       <span className="inline-flex items-center gap-2">
       <span className="ui-quiz-spinner" />
-        {ui.t("practice.checking")}
+        {ui.t("practice.checking", {}, "Checking…")}
     </span>
   ) : (
-      ui.t("buttons.checkAnswer")
+      ui.t("buttons.checkAnswer", {}, "Check this answer")
   );
 
   const maxForRenderer = ps?.maxAttempts ?? Number.POSITIVE_INFINITY;
@@ -1755,7 +1820,7 @@ export default function QuizPracticeCard(props: {
             <div className="mt-1">
               {isRefreshing ? (
                   <div className="mb-2 ui-quiz-status-soft flex items-center gap-2">
-                    <span>{ui.t("practice.refreshing")}</span>
+                    <span>{ui.t("practice.refreshing", {}, "Refreshing…")}</span>
                   </div>
               ) : null}
 
@@ -1887,7 +1952,7 @@ export default function QuizPracticeCard(props: {
                             disableHelp ? "ui-quiz-action--disabled" : "ui-quiz-action--ghost",
                           ].join(" ")}
                       >
-                        {nextHelpLabel ?? ui.t("buttons.help")}
+                        {nextHelpLabel ?? ui.t("buttons.help", {}, "Help")}
                       </button>
                   ) : null}
                 </div>
@@ -1934,7 +1999,7 @@ export default function QuizPracticeCard(props: {
             </div>
         ) : (
             <div className="mt-2 ui-quiz-status-soft">
-              {ui.t("practice.noExercise")}
+              {ui.t("practice.noExercise", {}, "No exercise.")}
             </div>
         )}
       </div>

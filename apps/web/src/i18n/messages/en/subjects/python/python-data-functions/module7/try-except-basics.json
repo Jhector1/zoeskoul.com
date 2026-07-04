@@ -174,7 +174,16 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message."
+              "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
+              "solutionCode": "text = input()\n\ntry:\n    number = int(text)\n    print(f\"Number: {number}\")\nexcept ValueError:\n    print(\"Invalid number\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
             },
             "q10": {
               "title": "Add two inputs safely",
@@ -185,7 +194,16 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message."
+              "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
+              "solutionCode": "first_text = input()\nsecond_text = input()\n\ntry:\n    first_number = int(first_text)\n    second_number = int(second_text)\n    print(f\"Sum: {first_number + second_number}\")\nexcept ValueError:\n    print(\"Invalid input\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
             },
             "q11": {
               "title": "Count valid numbers",
@@ -196,7 +214,19 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count."
+              "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
+              "solutionCode": "parts = input().split(\",\")\nvalid_count = 0\n\nfor part in parts:\n    try:\n        int(part)\n        valid_count += 1\n    except ValueError:\n        pass\n\nprint(f\"Valid count: {valid_count}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through each part."
+                },
+                "1": {
+                  "message": "Use try/except around the int conversion."
+                },
+                "2": {
+                  "message": "Convert each value with int()."
+                }
+              }
             },
             "try-try-except-basics-checkpoint": {
               "title": "Handle a bad number",
@@ -207,7 +237,16 @@
                 "hint_1": "Use `try`, `except ValueError`.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "text = input()\n\n# Print Valid for an integer, otherwise Invalid.\n"
+              "starterCode": "text = input()\n\n# Print Valid for an integer, otherwise Invalid.\n",
+              "solutionCode": "text = input()\ntry:\n    int(text)\n    print(\"Valid\")\nexcept ValueError:\n    print(\"Invalid\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
             },
             "try-try-except-basics-sketch0": {
               "title": "Catch a ValueError",
@@ -218,7 +257,16 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "text = 'abc'\n\n# Try to convert text to int. Print 'bad number' if it fails.\n"
+              "starterCode": "text = 'abc'\n\n# Try to convert text to int. Print 'bad number' if it fails.\n",
+              "solutionCode": "text = 'abc'\ntry:\n    number = int(text)\n    print(number)\nexcept ValueError:\n    print('bad number')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
             },
             "try-try-except-basics-sketch1": {
               "title": "Use else after try",
@@ -229,7 +277,16 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "text = '42'\n\n# Convert text to int and print 'ok' only if conversion succeeds.\n"
+              "starterCode": "text = '42'\n\n# Convert text to int and print 'ok' only if conversion succeeds.\n",
+              "solutionCode": "text = '42'\ntry:\n    number = int(text)\nexcept ValueError:\n    print('bad number')\nelse:\n    print('ok')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
             },
             "try-try-except-basics-sketch2": {
               "title": "Keep looping after a bad value",
@@ -240,7 +297,19 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "values = ['10', 'bad', '3']\n\n# Print only the values that can be converted to int.\n"
+              "starterCode": "values = ['10', 'bad', '3']\n\n# Print only the values that can be converted to int.\n",
+              "solutionCode": "values = ['10', 'bad', '3']\nfor value in values:\n    try:\n        print(int(value))\n    except ValueError:\n        pass\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through values instead of typing 10 and 3 directly."
+                },
+                "1": {
+                  "message": "Use try/except around the int conversion."
+                },
+                "2": {
+                  "message": "Convert each value with int()."
+                }
+              }
             }
           },
           "tryIt": {

@@ -1,0 +1,700 @@
+{
+  "topicId": "module-8-account-tracker-project",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "applied-python-projects-python-8-module-project",
+  "prefix": "py8",
+  "minutes": 45,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.sketch0.title",
+      "sketchId": "module-8-account-tracker-project-sketch0",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "module_8_account_tracker_step1",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.module_8_account_tracker_step1.title",
+            "exerciseKey": "module-8-account-tracker-step1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "module_8_account_tracker_step2",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.module_8_account_tracker_step2.title",
+            "exerciseKey": "module-8-account-tracker-step2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module_8_account_tracker_step3",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.module_8_account_tracker_step3.title",
+            "exerciseKey": "module-8-account-tracker-step3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module_8_account_tracker_step4",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.module_8_account_tracker_step4.title",
+            "exerciseKey": "module-8-account-tracker-step4",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module_8_account_tracker_step5",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.module_8_account_tracker_step5.title",
+            "exerciseKey": "module-8-account-tracker-step5",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "module_8_account_tracker_step6",
+            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.module_8_account_tracker_step6.title",
+            "exerciseKey": "module-8-account-tracker-step6",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "module-8-account-tracker-project-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.module-8-account-tracker-project-sketch0.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.module-8-account-tracker-project-sketch0.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "module-8-account-tracker-step1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step1.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/account.py",
+          "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/account.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step1.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance",
+        "solutionFiles": [
+          {
+            "path": "models/account.py",
+            "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account"
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "John Doe",
+              1000
+            ]
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "John Doe",
+              1000
+            ],
+            "attributes": [
+              "name",
+              "balance"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-8-account-tracker-step2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step2.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/account.py",
+          "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/account.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step2.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount",
+        "solutionFiles": [
+          {
+            "path": "models/account.py",
+            "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "John Doe",
+              1000
+            ],
+            "attributes": [
+              "balance"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-8-account-tracker-step3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step3",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step3.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/account.py",
+          "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/account.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step3.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount",
+        "solutionFiles": [
+          {
+            "path": "models/account.py",
+            "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "John Doe",
+              1000
+            ],
+            "attributes": [
+              "balance"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-8-account-tracker-step4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step4",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step4.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step4.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step4.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# helpers/formatting.py\n\ndef format_currency(amount):\n    return f\"${amount:.2f}\"\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "\ndef format_currency(amount):\n    return f\"${amount:.2f}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step4.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step4.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "helpers/formatting.py",
+            "content": "def format_currency(amount):\n    return f\"${amount:.2f}\"}],",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# helpers/formatting.py\n\ndef format_currency(amount):\n    return f\"${amount:.2f}\"\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# helpers/formatting.py\n\ndef format_currency(amount):\n    return f\"${amount:.2f}\"\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "\ndef format_currency(amount):\n    return f\"${amount:.2f}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_currency",
+            "args": [
+              100
+            ],
+            "argKinds": [],
+            "expected": "$100.00"
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-8-account-tracker-step5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step5",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step5.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step5.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step5.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step5.starterFiles.helpers_formatting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# helpers/formatting.py\n\ndef format_currency(amount):\n    return f\"${amount:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/account.py",
+          "content": "\nfrom helpers.formatting import format_currency\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n\n    def __str__(self):\n        return f\"Account({self.name}, {format_currency(self.balance)})\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "\ndef format_currency(amount):\n    return f\"${amount:.2f}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/account.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step5.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step5.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step5.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step5.starterFiles.helpers_formatting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "\nfrom helpers.formatting import format_currency\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n\n    def __str__(self):\n        return f\"Account({self.name}, {format_currency(self.balance)})\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "# models/account.py\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n# helpers/formatting.py\n\ndef format_currency(amount):\n    return f\"${amount:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/account.py",
+            "content": "\nfrom helpers.formatting import format_currency\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n\n    def __str__(self):\n        return f\"Account({self.name}, {format_currency(self.balance)})\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "\ndef format_currency(amount):\n    return f\"${amount:.2f}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "John Doe",
+              1000
+            ],
+            "constructorArgKinds": [],
+            "methodName": "__str__",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Account(John Doe, $1000.00)"
+          }
+        ]
+      }
+    },
+    {
+      "id": "module-8-account-tracker-step6",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step6",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step6.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step6.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step6.starterFiles.models_account_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step6.starterFiles.helpers_formatting_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "\nfrom models.account import Account\n\n# Create an account instance\naccount = Account(\"John Doe\", 1000)\n\n# Perform operations\naccount.deposit(500)\naccount.withdraw(200)\n\n# Print account details\nprint(account)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "\nfrom helpers.formatting import format_currency\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n\n    def __str__(self):\n        return f\"Account({self.name}, {format_currency(self.balance)})\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "helpers/formatting.py",
+          "content": "\ndef format_currency(amount):\n    return f\"${amount:.2f}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step6.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step6.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step6.starterFiles.models_account_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.module_8_account_tracker_step6.starterFiles.helpers_formatting_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "\nfrom models.account import Account\n\n# Create an account instance\naccount = Account(\"John Doe\", 1000)\n\n# Perform operations\naccount.deposit(500)\naccount.withdraw(200)\n\n# Print account details\nprint(account)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "\nfrom models.account import Account\n\n# Create an account instance\naccount = Account(\"John Doe\", 1000)\n\n# Perform operations\naccount.deposit(500)\naccount.withdraw(200)\n\n# Print account details\nprint(account)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "\nfrom helpers.formatting import format_currency\n\nclass Account:\n    def __init__(self, name, balance):\n        self.name = name\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n\n    def withdraw(self, amount):\n        if self.balance >= amount:\n            self.balance -= amount\n\n    def __str__(self):\n        return f\"Account({self.name}, {format_currency(self.balance)})\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "helpers/formatting.py",
+            "content": "\ndef format_currency(amount):\n    return f\"${amount:.2f}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "min": 1
+          }
+        ]
+      }
+    }
+  ]
+}

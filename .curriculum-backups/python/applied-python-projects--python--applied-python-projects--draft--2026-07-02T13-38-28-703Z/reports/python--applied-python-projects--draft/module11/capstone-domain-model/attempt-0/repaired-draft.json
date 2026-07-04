@@ -1,0 +1,795 @@
+{
+  "title": "Capstone Domain Model",
+  "summary": "Build the Smart Task Tracker domain model with a reusable base task class, specialized subclasses, and a service that works polymorphically across mixed task objects.",
+  "minutes": 35,
+  "sketchBlocks": [
+    {
+      "id": "capstone-domain-model-sketch-0",
+      "title": "Smart Task Tracker capstone overview",
+      "bodyMarkdown": "In this capstone, you are building the **domain model** for a small workplace app called **Smart Task Tracker**. Your role is to create the core task objects that the rest of the project will depend on.\n\nThe app needs:\n\n- a reusable **base class** for shared task behavior\n- specialized subclasses for different task types\n- **encapsulation** so object state is updated through methods instead of random direct changes\n- **abstraction** through a base-class contract that every task can summarize itself\n- **inheritance** so subclasses reuse shared setup\n- **polymorphism** so one service can work with a mixed list of task objects\n\nA simple version of the model looks like this:\n\n```python\nclass BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = False\n\n    def mark_done(self):\n        self.completed = True\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary().\")\n```\n\nLine by line:\n\n- `class BaseTask:` starts the shared parent class.\n- `__init__` stores the common data every task needs.\n- `self.completed = False` gives each new task a starting state.\n- `mark_done()` changes object state through a method, which supports encapsulation.\n- `summary()` defines a base-class contract: every subclass must provide its own summary text.\n\nA subclass can reuse the parent setup with `super()` and then add its own field:\n\n```python\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity}\"\n```\n\nHere:\n\n- `BugTask` inherits from `BaseTask`.\n- `super().__init__(...)` runs the shared parent constructor.\n- `self.severity` stores bug-specific data.\n- `summary()` overrides the base method with bug-specific behavior.\n\nThat override is what makes polymorphism useful. If you store both `BugTask` and `FeatureTask` objects in one list, a service can call `task.summary()` on each object and let Python choose the right version automatically.\n\nBy the end of this topic, your handoff deliverable is a working multi-file domain model for Smart Task Tracker, including base and subclass models, a service layer that uses mixed task objects, and a small runner that prints a clean report from those objects."
+    },
+    {
+      "id": "try-it-yourself",
+      "title": "Try it yourself",
+      "bodyMarkdown": "Try it yourself: change one value in the example, predict the new output, then run the code to check your prediction."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-capstone-domain-model-sketch0",
+      "kind": "code_input",
+      "title": "Create the base task class",
+      "prompt": "Build the first Smart Task Tracker model layer. In `models/base_task.py`, define a `BaseTask` class with `title`, `priority`, and `completed` attributes. New tasks should start with `completed` set to `False`. Add a `mark_done()` method that changes `completed` to `True`. Keep the `summary()` method as an abstract-style base-class contract by raising `NotImplementedError`. In `main.py`, create one `BaseTask` object with title `Draft roadmap` and priority `high`, call `mark_done()`, and print its three attributes on separate lines so you can verify the object state in the output panel.",
+      "starterCode": "# main.py\nfrom models.base_task import BaseTask\n\n# Create a BaseTask, mark it done, and print its state.",
+      "solutionCode": "# main.py\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\n\nprint(task.title)\nprint(task.priority)\nprint(task.completed)",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "BaseTask",
+          "message": "Define a BaseTask class in models/base_task.py."
+        },
+        {
+          "type": "constructible",
+          "className": "BaseTask",
+          "constructorArgs": [
+            "Draft roadmap",
+            "high"
+          ],
+          "message": "BaseTask should be constructible with title and priority."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "BaseTask",
+          "constructorArgs": [
+            "Draft roadmap",
+            "high"
+          ],
+          "attributes": [
+            "title",
+            "priority",
+            "completed"
+          ],
+          "message": "BaseTask instances should store title, priority, and completed."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 3,
+          "message": "main.py should print the task state on three lines."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.base_task import BaseTask\n\n# Create a BaseTask, mark it done, and print its state.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\n\nprint(task.title)\nprint(task.priority)\nprint(task.completed)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self.title = title\n        self.priority = priority\n        self.completed = None",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "capstone-domain-model-step1-bug-task",
+      "kind": "code_input",
+      "title": "Add the BugTask subclass",
+      "prompt": "Continue the Smart Task Tracker workspace from the previous step. Keep the existing `BaseTask` class, then add `models/bug_task.py` with a `BugTask` subclass. It should inherit from `BaseTask`, call `super().__init__(title, priority)`, store a `severity` attribute, and override `summary()` to return exactly `BUG: <title> | priority=<priority> | severity=<severity> | done=<completed>`. In `main.py`, create a bug task for `Fix login redirect`, priority `high`, severity `critical`, and print its summary before and after calling `mark_done()`.",
+      "starterCode": "# main.py\nfrom models.bug_task import BugTask\n\n# Create the bug task, print its summary, mark it done, and print again.",
+      "solutionCode": "# main.py\nfrom models.bug_task import BugTask\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "BugTask",
+          "message": "Define a BugTask class in models/bug_task.py."
+        },
+        {
+          "type": "constructible",
+          "className": "BugTask",
+          "constructorArgs": [
+            "Fix login redirect",
+            "high",
+            "critical"
+          ],
+          "message": "BugTask should accept title, priority, and severity."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "BugTask",
+          "constructorArgs": [
+            "Fix login redirect",
+            "high",
+            "critical"
+          ],
+          "attributes": [
+            "title",
+            "priority",
+            "completed",
+            "severity"
+          ],
+          "message": "BugTask should keep inherited attributes plus severity."
+        },
+        {
+          "type": "method_returns",
+          "className": "BugTask",
+          "constructorArgs": [
+            "Fix login redirect",
+            "high",
+            "critical"
+          ],
+          "constructorArgKinds": [],
+          "methodName": "summary",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "BUG: Fix login redirect | priority=high | severity=critical | done=False",
+          "expectedKind": "value",
+          "message": "BugTask.summary() should use the required bug summary format."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "BugTask",
+          "constructorArgs": [
+            "Fix login redirect",
+            "high",
+            "critical"
+          ],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "mark_done",
+              "methodArgs": [],
+              "methodArgKinds": []
+            }
+          ],
+          "methodName": "summary",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "BUG: Fix login redirect | priority=high | severity=critical | done=True",
+          "expectedKind": "value",
+          "message": "After mark_done(), the summary should show done=True."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "main.py should print the bug summary before and after completion."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.bug_task import BugTask\n\n# Create the bug task, print its summary, mark it done, and print again.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.bug_task import BugTask\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(bug.summary())\nbug.mark_done()\nprint(bug.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "class BugTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.severity = None\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.completed} | done=False\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "capstone-domain-model-step2-feature-task",
+      "kind": "code_input",
+      "title": "Add the FeatureTask subclass with validation",
+      "prompt": "Build on the previous working workspace. Add `models/feature_task.py` with a `FeatureTask` subclass that inherits from `BaseTask`. It should accept `title`, `priority`, and `estimate_points`. Use `super()` for the shared fields. Add validation so `estimate_points` cannot be less than 1; if it is, store `1` instead. Override `summary()` to return exactly `FEATURE: <title> | priority=<priority> | points=<estimate_points> | done=<completed>`. In `main.py`, create one feature task with title `Add dark mode`, priority `medium`, and estimate points `0`, then print its summary. This step matters because the capstone needs encapsulated object rules, not unchecked raw data.",
+      "starterCode": "# main.py\nfrom models.feature_task import FeatureTask\n\n# Create the feature task with 0 points and print its summary.",
+      "solutionCode": "# main.py\nfrom models.feature_task import FeatureTask\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "defines_class",
+          "className": "FeatureTask",
+          "message": "Define a FeatureTask class in models/feature_task.py."
+        },
+        {
+          "type": "constructible",
+          "className": "FeatureTask",
+          "constructorArgs": [
+            "Add dark mode",
+            "medium",
+            0
+          ],
+          "message": "FeatureTask should accept title, priority, and estimate_points."
+        },
+        {
+          "type": "instance_attributes",
+          "className": "FeatureTask",
+          "constructorArgs": [
+            "Add dark mode",
+            "medium",
+            0
+          ],
+          "attributes": [
+            "title",
+            "priority",
+            "completed",
+            "estimate_points"
+          ],
+          "message": "FeatureTask should keep inherited attributes plus estimate_points."
+        },
+        {
+          "type": "attribute_sequence_equals",
+          "className": "FeatureTask",
+          "constructorArgs": [
+            "Add dark mode",
+            "medium",
+            0
+          ],
+          "constructorArgKinds": [],
+          "calls": [],
+          "attributeName": "estimate_points",
+          "expected": 1,
+          "expectedKind": "value",
+          "message": "estimate_points should be validated to at least 1."
+        },
+        {
+          "type": "method_returns",
+          "className": "FeatureTask",
+          "constructorArgs": [
+            "Add dark mode",
+            "medium",
+            0
+          ],
+          "constructorArgKinds": [],
+          "methodName": "summary",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "FEATURE: Add dark mode | priority=medium | points=1 | done=False",
+          "expectedKind": "value",
+          "message": "FeatureTask.summary() should show the validated points value."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 1,
+          "message": "main.py should print the feature summary."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.feature_task import FeatureTask\n\n# Create the feature task with 0 points and print its summary.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.feature_task import FeatureTask\n\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(feature.summary())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "class FeatureTask:\n    def __init__(self, title, priority, completed):\n        self.title = title\n        self.priority = priority\n        self.completed = completed\n        self.estimate_points = None\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points=1 | done=False\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "capstone-domain-model-step3-task-service",
+      "kind": "code_input",
+      "title": "Create a polymorphic task service",
+      "prompt": "Carry forward the full workspace from the previous step. Add `services/task_service.py` with a function named `build_report_lines(tasks)` that returns a list of summary strings for every task in order. The function must work with a mixed list of `BugTask` and `FeatureTask` objects by calling each object's `summary()` method. Do not hard-code separate formatting in the service. In `main.py`, create one bug task (`Fix login redirect`, `high`, `critical`) and one feature task (`Add dark mode`, `medium`, `3`), put them in a list, call `build_report_lines(tasks)`, and print each returned line. This step demonstrates polymorphism in the capstone architecture.",
+      "starterCode": "# main.py\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\n# Create a mixed task list, build report lines, and print them.",
+      "solutionCode": "# main.py\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 3)\n\ntasks = [bug, feature]\nlines = build_report_lines(tasks)\n\nfor line in lines:\n    print(line)",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "function_returns",
+          "functionName": "build_report_lines",
+          "args": [
+            [
+              [
+                [
+                  "kind",
+                  "bug"
+                ],
+                [
+                  "title",
+                  "Fix login redirect"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  "critical"
+                ],
+                [
+                  "completed",
+                  false
+                ]
+              ],
+              [
+                [
+                  "kind",
+                  "feature"
+                ],
+                [
+                  "title",
+                  "Add dark mode"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate_points",
+                  3
+                ],
+                [
+                  "completed",
+                  false
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries"
+          ],
+          "expected": [
+            "BUG: Fix login redirect | priority=high | severity=critical | done=False",
+            "FEATURE: Add dark mode | priority=medium | points=3 | done=False"
+          ],
+          "expectedKind": "value",
+          "message": "build_report_lines() should return summary strings in order for mixed task objects."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 2,
+          "message": "main.py should print both report lines."
+        }
+      ],
+      "hint": "Read the task \"Create a polymorphic task service\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Create a polymorphic task service\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\n# Create a mixed task list, build report lines, and print them.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "def build_report_lines(accounts):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dark mode\", \"medium\", 3)\n\ntasks = [bug, feature]\nlines = build_report_lines(tasks)\n\nfor line in lines:\n    print(line)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "def build_report_lines(value):\n    return [\"BUG: Fix login redirect | priority=high | severity=critical | done=False\", \"FEATURE: Add dark mode | priority=medium | points=3 | done=False\"]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "capstone-domain-model-step4-package-runner",
+      "kind": "code_input",
+      "title": "Organize the models package and runner",
+      "prompt": "Continue from the previous complete workspace. Add `models/__init__.py` so other files can import `BaseTask`, `BugTask`, and `FeatureTask` from the `models` package directly. Update `main.py` to use package imports instead of importing each model from its individual file. Then create three tasks: a bug task for `Fix login redirect`, a feature task for `Add dark mode`, and a feature task for `Export CSV`. Mark only the bug task as done. Use `build_report_lines(tasks)` and print the lines. This step improves the capstone architecture by making imports cleaner across workspace files.",
+      "starterCode": "# main.py\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\n# Create three tasks, mark only the bug task done, build report lines, and print them.",
+      "solutionCode": "# main.py\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature_one = FeatureTask(\"Add dark mode\", \"medium\", 3)\nfeature_two = FeatureTask(\"Export CSV\", \"low\", 5)\n\nbug.mark_done()\n\ntasks = [bug, feature_one, feature_two]\n\nfor line in build_report_lines(tasks):\n    print(line)",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "method_returns",
+          "className": "BugTask",
+          "constructorArgs": [
+            "Fix login redirect",
+            "high",
+            "critical"
+          ],
+          "constructorArgKinds": [],
+          "methodName": "summary",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "BUG: Fix login redirect | priority=high | severity=critical | done=False",
+          "expectedKind": "value",
+          "message": "BugTask should still be importable through the models package."
+        },
+        {
+          "type": "method_returns",
+          "className": "FeatureTask",
+          "constructorArgs": [
+            "Export CSV",
+            "low",
+            5
+          ],
+          "constructorArgKinds": [],
+          "methodName": "summary",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "FEATURE: Export CSV | priority=low | points=5 | done=False",
+          "expectedKind": "value",
+          "message": "FeatureTask should still be importable through the models package."
+        },
+        {
+          "type": "created_instances",
+          "className": "FeatureTask",
+          "min": 1,
+          "message": "main.py should create two FeatureTask objects."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "BugTask",
+          "constructorArgs": [
+            "Fix login redirect",
+            "high",
+            "critical"
+          ],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "mark_done",
+              "methodArgs": [],
+              "methodArgKinds": []
+            }
+          ],
+          "methodName": "summary",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": "BUG: Fix login redirect | priority=high | severity=critical | done=True",
+          "expectedKind": "value",
+          "message": "The bug task summary should reflect the completed state after mark_done()."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 3,
+          "message": "main.py should print three report lines."
+        }
+      ],
+      "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+      "help": {
+        "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+        "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
+        "hint_2": "Use the role or evidence named in the prompt instead of relying on answer wording."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\n# Create three tasks, mark only the bug task done, build report lines, and print them.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models.py",
+          "content": "class BugTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def summary(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\nbug = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nfeature_one = FeatureTask(\"Add dark mode\", \"medium\", 3)\nfeature_two = FeatureTask(\"Export CSV\", \"low\", 5)\n\nbug.mark_done()\n\ntasks = [bug, feature_one, feature_two]\n\nfor line in build_report_lines(tasks):\n    print(line)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models.py",
+          "content": "class BugTask:\n    def __init__(self, value_1, value_2, value_3):\n        pass\n\n    def summary(self):\n        return f\"BUG: {self.value_1} | priority={self.value_2} | severity={self.value_3} | done=False\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    },
+    {
+      "id": "capstone-domain-model-step5-final-domain-demo",
+      "kind": "code_input",
+      "title": "Finish the domain model handoff demo",
+      "prompt": "Finish this topic with a polished domain-model demo that carries forward the full workspace. Add a new method `is_open()` to `BaseTask` that returns `True` when a task is not completed and `False` when it is completed. Keep the subclasses working without duplicating that logic. Update `services/task_service.py` with a function named `count_open_tasks(tasks)` that returns how many tasks are still open. In `main.py`, create four tasks: bug `Fix login redirect` (`high`, `critical`), bug `Resolve crash on save` (`high`, `major`), feature `Add dark mode` (`medium`, `3`), and feature `Export CSV` (`low`, `5`). Mark the first bug and the export feature as done. Print all report lines, then print one final line exactly as `Open tasks: <count>`. This is the final handoff for the topic because it shows abstraction, inheritance, encapsulation, and polymorphism working together in one mini app.",
+      "starterCode": "# main.py\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines, count_open_tasks\n\n# Create four tasks, mark two as done, print all summaries, then print the open task count.",
+      "solutionCode": "# main.py\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines, count_open_tasks\n\nbug_one = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nbug_two = BugTask(\"Resolve crash on save\", \"high\", \"major\")\nfeature_one = FeatureTask(\"Add dark mode\", \"medium\", 3)\nfeature_two = FeatureTask(\"Export CSV\", \"low\", 5)\n\nbug_one.mark_done()\nfeature_two.mark_done()\n\ntasks = [bug_one, bug_two, feature_one, feature_two]\n\nfor line in build_report_lines(tasks):\n    print(line)\n\nprint(f\"Open tasks: {count_open_tasks(tasks)}\")",
+      "recipeType": "semantic",
+      "semanticChecks": [
+        {
+          "type": "method_returns",
+          "className": "BaseTask",
+          "constructorArgs": [
+            "Draft roadmap",
+            "high"
+          ],
+          "constructorArgKinds": [],
+          "methodName": "is_open",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": true,
+          "expectedKind": "value",
+          "message": "A new BaseTask should report that it is open."
+        },
+        {
+          "type": "method_sequence_returns",
+          "className": "BaseTask",
+          "constructorArgs": [
+            "Draft roadmap",
+            "high"
+          ],
+          "constructorArgKinds": [],
+          "calls": [
+            {
+              "methodName": "mark_done",
+              "methodArgs": [],
+              "methodArgKinds": []
+            }
+          ],
+          "methodName": "is_open",
+          "methodArgs": [],
+          "methodArgKinds": [],
+          "expected": false,
+          "expectedKind": "value",
+          "message": "After mark_done(), is_open() should return False."
+        },
+        {
+          "type": "function_returns",
+          "functionName": "count_open_tasks",
+          "args": [
+            [
+              [
+                [
+                  "kind",
+                  "bug"
+                ],
+                [
+                  "title",
+                  "Fix login redirect"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  "critical"
+                ],
+                [
+                  "completed",
+                  true
+                ]
+              ],
+              [
+                [
+                  "kind",
+                  "bug"
+                ],
+                [
+                  "title",
+                  "Resolve crash on save"
+                ],
+                [
+                  "priority",
+                  "high"
+                ],
+                [
+                  "severity",
+                  "major"
+                ],
+                [
+                  "completed",
+                  false
+                ]
+              ],
+              [
+                [
+                  "kind",
+                  "feature"
+                ],
+                [
+                  "title",
+                  "Add dark mode"
+                ],
+                [
+                  "priority",
+                  "medium"
+                ],
+                [
+                  "estimate_points",
+                  3
+                ],
+                [
+                  "completed",
+                  false
+                ]
+              ],
+              [
+                [
+                  "kind",
+                  "feature"
+                ],
+                [
+                  "title",
+                  "Export CSV"
+                ],
+                [
+                  "priority",
+                  "low"
+                ],
+                [
+                  "estimate_points",
+                  5
+                ],
+                [
+                  "completed",
+                  true
+                ]
+              ]
+            ]
+          ],
+          "argKinds": [
+            "list_of_dict_entries"
+          ],
+          "expected": 2,
+          "expectedKind": "value",
+          "message": "count_open_tasks() should count unfinished tasks in a mixed task list."
+        },
+        {
+          "type": "printed_line_count",
+          "min": 5,
+          "message": "main.py should print four summaries and one final open-task count line."
+        }
+      ],
+      "hint": "Read the task \"Finish the domain model handoff demo\" and identify the required result.",
+      "help": {
+        "concept": "This coding exercise checks whether your code produces the requested result for: \"Finish the domain model handoff demo\".",
+        "hint_1": "Use the statement or expression that matches the required behavior in the code editor.",
+        "hint_2": "Click Run and compare the output panel with the expected result."
+      },
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines, count_open_tasks\n\n# Create four tasks, mark two as done, print all summaries, then print the open task count.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def is_open(self):\n        pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "def count_open_tasks(items):\n    pass",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "# main.py\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines, count_open_tasks\n\nbug_one = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nbug_two = BugTask(\"Resolve crash on save\", \"high\", \"major\")\nfeature_one = FeatureTask(\"Add dark mode\", \"medium\", 3)\nfeature_two = FeatureTask(\"Export CSV\", \"low\", 5)\n\nbug_one.mark_done()\nfeature_two.mark_done()\n\ntasks = [bug_one, bug_two, feature_one, feature_two]\n\nfor line in build_report_lines(tasks):\n    print(line)\n\nprint(f\"Open tasks: {count_open_tasks(tasks)}\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def is_open(self):\n        return True",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/task_service.py",
+          "content": "def count_open_tasks(value):\n    return 2",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ]
+    }
+  ],
+  "projectDraft": {
+    "title": "Smart Task Tracker Domain Model Capstone",
+    "stepIds": [
+      "try-capstone-domain-model-sketch0",
+      "capstone-domain-model-step1-bug-task",
+      "capstone-domain-model-step2-feature-task",
+      "capstone-domain-model-step3-task-service",
+      "capstone-domain-model-step4-package-runner",
+      "capstone-domain-model-step5-final-domain-demo"
+    ]
+  }
+}

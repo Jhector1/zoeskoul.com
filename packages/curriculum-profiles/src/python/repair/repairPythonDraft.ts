@@ -6,7 +6,7 @@ import { getCodeRunner, runLocalCode } from "@zoeskoul/curriculum-runtime";
 import type { RepairReport } from "../../shared/profileServices.js";
 import { makeEmptyRepairReport } from "../../shared/noopReports.js";
 import { PYTHON_MINIMUM_FIXED_TESTS } from "../profile.js";
-import {SemanticCheck} from "@zoeskoul/practice-checks";
+import type { SemanticCheck } from "@zoeskoul/practice-checks";
 function hasTryItYourselfSketch(draft: TopicAuthoringDraft): boolean {
     return draft.sketchBlocks.some((block) =>
         /\btry it yourself\b|\btry this\b|\byour turn\b|\btry on your own\b/i.test(
@@ -41,6 +41,2516 @@ function looksLikeRunnableProjectProgram(exercise: PythonCodeInputExercise): boo
             /\bat the bottom\b/.test(prompt)
         )
     );
+}
+
+function looksLikeOopSemanticStructureExercise(exercise: PythonCodeInputExercise): boolean {
+    const semanticChecks = Array.isArray(exercise.semanticChecks)
+        ? exercise.semanticChecks
+        : [];
+
+    if (
+        semanticChecks.some((check) => {
+            const type = String((check as { type?: unknown }).type ?? "");
+            return (
+                type === "defines_class" ||
+                type === "constructible" ||
+                type === "instance_attributes" ||
+                type === "method_returns" ||
+                type === "created_instances"
+            );
+        })
+    ) {
+        return true;
+    }
+
+    const text = [
+        exercise.id,
+        exercise.title,
+        exercise.prompt,
+        exercise.starterCode,
+        exercise.solutionCode,
+    ]
+        .map((value) => String(value ?? ""))
+        .join("\n")
+        .toLowerCase();
+
+    const hasWorkspacePythonFiles = [exercise.starterFiles, exercise.solutionFiles]
+        .some((files) => Array.isArray(files) && files.some((file) => {
+            const path = String((file as { path?: unknown }).path ?? "");
+            return path.endsWith(".py") && path !== "main.py";
+        }));
+
+    return (
+        /\bclass\s+[a-z_][a-z0-9_]*\b/i.test(String(exercise.solutionCode ?? "")) ||
+        /\bdef\s+__init__\b/.test(String(exercise.solutionCode ?? "")) ||
+        /\bself\./.test(String(exercise.solutionCode ?? "")) ||
+        /\b(class|object|instance|attribute|constructor|method|subclass|inherits?|override|polymorphism|abstraction)\b/.test(text) ||
+        (hasWorkspacePythonFiles && /\b(import|models?\/|services?\/|helpers?\/)\b/.test(text))
+    );
+}
+
+
+function collectPythonExerciseSource(exercise: PythonCodeInputExercise): string {
+    const parts = [
+        exercise.id,
+        exercise.title,
+        exercise.prompt,
+        exercise.starterCode,
+        exercise.solutionCode,
+    ].map((value) => String(value ?? ""));
+
+    const appendFiles = (files: unknown) => {
+        if (!Array.isArray(files)) return;
+        for (const file of files) {
+            if (!file || typeof file !== "object") continue;
+            const path = String((file as { path?: unknown }).path ?? "");
+            const content = String((file as { content?: unknown }).content ?? "");
+            if (path || content) parts.push(`${path}\n${content}`);
+        }
+    };
+
+    appendFiles(exercise.files);
+    appendFiles(exercise.starterFiles);
+    appendFiles(exercise.solutionFiles);
+
+    for (const test of Array.isArray(exercise.tests) ? exercise.tests : []) {
+        appendFiles((test as { files?: unknown }).files);
+    }
+
+    return parts.join("\n");
+}
+
+function parseSimplePythonLiteralForSemantic(value: string): unknown {
+    const text = String(value ?? "").trim();
+    if (!text) return "";
+    if (/^-?\d+$/.test(text)) return Number.parseInt(text, 10);
+    if (/^-?\d+\.\d+$/.test(text)) return Number.parseFloat(text);
+    if (text === "True") return true;
+    if (text === "False") return false;
+    if (text === "None") return null;
+    if (
+        (text.startsWith("'") && text.endsWith("'")) ||
+        (text.startsWith('"') && text.endsWith('"'))
+    ) {
+        return text.slice(1, -1);
+    }
+    return text;
+}
+
+function splitSimplePythonArgs(source: string): unknown[] {
+    const args: string[] = [];
+    let current = "";
+    let quote: string | null = null;
+    let depth = 0;
+
+    for (const char of String(source ?? "")) {
+        if (quote) {
+            current += char;
+            if (char === quote) quote = null;
+            continue;
+        }
+        if (char === "'" || char === '"') {
+            quote = char;
+            current += char;
+            continue;
+        }
+        if (char === "(" || char === "[" || char === "{") depth += 1;
+        if (char === ")" || char === "]" || char === "}") depth = Math.max(0, depth - 1);
+        if (char === "," && depth === 0) {
+            args.push(current.trim());
+            current = "";
+            continue;
+        }
+        current += char;
+    }
+
+    if (current.trim()) args.push(current.trim());
+    return args.map(parseSimplePythonLiteralForSemantic);
+}
+
+function extractFirstClassNameForSemantic(exercise: PythonCodeInputExercise): string | null {
+    const source = collectPythonExerciseSource(exercise);
+    const definition = extractPythonClassDefinitions(source)[0];
+    if (definition?.name) return definition.name;
+
+    const promptBacktickMatch = String(exercise.prompt ?? "").match(/`([A-Z][A-Za-z0-9_]*)`/);
+    if (promptBacktickMatch?.[1]) return promptBacktickMatch[1];
+
+    const constructorMatch = source.match(/\b([A-Z][A-Za-z0-9_]*)\s*\(/);
+    return constructorMatch?.[1] ?? null;
+}
+
+function extractFirstConstructorArgsForClass(source: string, className: string): unknown[] {
+    const argsPattern = new RegExp(`\\b${escapeRegExp(className)}\\s*\\(([^)]*)\\)`);
+
+    for (const line of String(source ?? "").split("\n")) {
+        if (new RegExp(`^\\s*class\\s+${escapeRegExp(className)}\\b`).test(line)) {
+            continue;
+        }
+
+        const match = line.match(argsPattern);
+        if (!match) continue;
+
+        const rawArgs = String(match[1] ?? "").trim();
+        if (!rawArgs) return [];
+        return splitSimplePythonArgs(rawArgs);
+    }
+
+    return [];
+}
+
+function countConstructorCallsForClass(source: string, className: string): number {
+    const pattern = new RegExp(`\\b${escapeRegExp(className)}\\s*\\(`, "g");
+    let count = 0;
+
+    for (const line of String(source ?? "").split("\n")) {
+        if (new RegExp(`^\\s*class\\s+${escapeRegExp(className)}\\b`).test(line)) {
+            continue;
+        }
+        count += Array.from(line.matchAll(pattern)).length;
+    }
+
+    return count;
+}
+
+function firstNonEmptyStdoutLine(exercise: PythonCodeInputExercise): string | null {
+    for (const test of Array.isArray(exercise.tests) ? exercise.tests : []) {
+        const lines = String((test as { stdout?: unknown }).stdout ?? "")
+            .split(/\r?\n/)
+            .map((line) => line.trim())
+            .filter(Boolean);
+        if (lines.length > 0) return lines[0] ?? null;
+    }
+    return null;
+}
+
+function countExpectedStdoutLines(exercise: PythonCodeInputExercise): number {
+    const firstTest = Array.isArray(exercise.tests) ? exercise.tests[0] : null;
+    return String((firstTest as { stdout?: unknown } | null)?.stdout ?? "")
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .length;
+}
+
+function extractClassBaseNames(definition: PythonClassDefinition): string[] {
+    const match = definition.header.match(/^class\s+[A-Za-z_]\w*\s*\(([^)]*)\)/);
+    if (!match) return [];
+
+    return String(match[1] ?? "")
+        .split(",")
+        .map((part) => part.trim().split(".").pop() ?? "")
+        .map((part) => part.replace(/\s*=.*$/, "").trim())
+        .filter(Boolean);
+}
+
+function classDefinitionIsAbstract(definition: PythonClassDefinition): boolean {
+    if (/\bABC\b/.test(definition.header)) return true;
+
+    for (const methodLines of definition.methods.values()) {
+        if (methodLines.some((line) => /@abstractmethod\b/.test(line))) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function methodBodyPrints(definition: PythonClassDefinition, methodName: string): boolean {
+    const methodLines = definition.methods.get(methodName) ?? [];
+    return methodLines.some((line) => /\bprint\s*\(/.test(line));
+}
+
+function concreteSubclassesForMethod(args: {
+    definitions: PythonClassDefinition[];
+    baseClassName: string;
+    methodName: string;
+}): PythonClassDefinition[] {
+    return args.definitions.filter((definition) => {
+        if (definition.name === args.baseClassName) return false;
+        if (!definition.methods.has(args.methodName)) return false;
+        if (classDefinitionIsAbstract(definition)) return false;
+        return extractClassBaseNames(definition).includes(args.baseClassName);
+    });
+}
+
+function inferConcreteConstructibleClassChecks(args: {
+    source: string;
+    definitions: PythonClassDefinition[];
+    baseClassName: string;
+    methodName: string | null;
+}): SemanticCheck[] {
+    if (!args.methodName) return [];
+
+    const subclasses = concreteSubclassesForMethod({
+        definitions: args.definitions,
+        baseClassName: args.baseClassName,
+        methodName: args.methodName,
+    });
+
+    const checks: SemanticCheck[] = [];
+
+    for (const definition of subclasses.slice(0, 3)) {
+        const constructorArgs = extractFirstConstructorArgsForClass(args.source, definition.name);
+        const constructorParamCount = extractInitParams(args.source, definition.name).length;
+
+        checks.push({
+            type: "defines_class",
+            className: definition.name,
+            message: `Define the ${definition.name} subclass for this workspace exercise.`,
+        });
+
+        if (constructorArgs.length > 0 || constructorParamCount === 0) {
+            checks.push({
+                type: "constructible",
+                className: definition.name,
+                constructorArgs,
+                message: `${definition.name} should be constructible with the example arguments.`,
+            });
+        }
+
+        if (methodBodyPrints(definition, args.methodName)) {
+            checks.push({
+                type: "method_returns",
+                className: definition.name,
+                constructorArgs,
+                methodName: args.methodName,
+                methodArgs: [],
+                expected: null,
+                message: `${definition.name}.${args.methodName}() should run without returning a value while producing its output.`,
+            });
+        }
+    }
+
+    return checks;
+}
+
+function inferFirstPublicZeroArgMethodName(definitions: PythonClassDefinition[]): string | null {
+    for (const definition of definitions) {
+        for (const [methodName, methodLines] of definition.methods) {
+            if (methodName === "__init__" || methodName.startsWith("_")) continue;
+            const signature = methodLines[0] ?? "";
+            const args = signature.match(/def\s+[A-Za-z_]\w*\s*\(([^)]*)\)/)?.[1] ?? "";
+            const params = args
+                .split(",")
+                .map((part) => part.trim())
+                .filter(Boolean)
+                .map((part) => part.split("=")[0]?.trim() ?? "")
+                .map((part) => part.split(":")[0]?.trim() ?? "")
+                .filter((part) => part && part !== "self");
+
+            if (params.length === 0) return methodName;
+        }
+    }
+
+    return null;
+}
+
+function inferFirstZeroArgMethodCall(source: string): string | null {
+    const methodMatch = String(source ?? "").match(/\.([A-Za-z_]\w*)\s*\(\s*\)/);
+    const methodName = methodMatch?.[1] ?? "";
+    if (!methodName || methodName.startsWith("_")) return null;
+    if (methodName === "print") return null;
+    return methodName;
+}
+
+function normalizePythonWorkspaceFilesForSemantic(args: {
+    entryFilePath: string;
+    mergedFiles: Array<{ path: string; content: string; readOnly?: boolean }>;
+    markedStarterFiles: Map<string, string>;
+    markedSolutionFiles: Map<string, string>;
+}): Array<{
+    path: string;
+    content: string;
+    language: "python";
+    isEntry: boolean;
+    entry: boolean;
+    readOnly?: boolean;
+}> {
+    return args.mergedFiles.map((file) => ({
+        path: file.path,
+        content:
+            args.markedSolutionFiles.get(file.path) ??
+            args.markedStarterFiles.get(file.path) ??
+            file.content,
+        language: "python" as const,
+        isEntry: file.path === args.entryFilePath,
+        entry: file.path === args.entryFilePath,
+        ...(typeof file.readOnly === "boolean" ? { readOnly: file.readOnly } : {}),
+    }));
+}
+
+function convertOopFixedTestsToSemantic(
+    exercise: PythonCodeInputExercise,
+): PythonCodeInputExercise | null {
+    if ((exercise.recipeType ?? "fixed_tests") === "semantic") return null;
+    if (Array.isArray(exercise.semanticChecks) && exercise.semanticChecks.length > 0) return null;
+    if (!looksLikeOopSemanticStructureExercise(exercise)) return null;
+
+    const className = extractFirstClassNameForSemantic(exercise);
+    if (!className) return null;
+
+    const mergedFiles = mergePythonFixtureFiles(
+        exercise.files,
+        Array.isArray(exercise.tests) ? exercise.tests[0]?.files : undefined,
+    ) ?? [];
+    const multifileOrImportedWorkspace =
+        mergedFiles.some((file) => file.path.endsWith(".py") && file.path !== "main.py") ||
+        /\bfrom\s+(models|services|helpers)\.[A-Za-z0-9_.]+\s+import\b/.test(
+            `${String(exercise.starterCode ?? "")}\n${String(exercise.solutionCode ?? "")}`,
+        );
+    if (!multifileOrImportedWorkspace) return null;
+    const markedStarterFiles = extractMarkedPythonFiles(exercise.starterCode);
+    const markedSolutionFiles = extractMarkedPythonFiles(exercise.solutionCode);
+    const entryFilePath = String(
+        (exercise as { entryFilePath?: unknown }).entryFilePath ??
+        (mergedFiles.some((file) => file.path === "main.py") ? "main.py" : mergedFiles[0]?.path ?? "main.py"),
+    );
+    const solutionFiles = mergedFiles.length > 0
+        ? normalizePythonWorkspaceFilesForSemantic({
+            entryFilePath,
+            mergedFiles,
+            markedStarterFiles,
+            markedSolutionFiles,
+        })
+        : undefined;
+    const starterFiles = solutionFiles
+        ? solutionFiles.map((file) => ({
+            ...file,
+            content: markedStarterFiles.get(file.path) ?? (file.path === entryFilePath ? String(exercise.starterCode ?? "") : file.content),
+        }))
+        : undefined;
+
+    const semanticSource = [
+        collectPythonExerciseSource(exercise),
+        ...(solutionFiles ?? []).map((file) => file.content),
+    ].join("\n");
+    const definitions = extractPythonClassDefinitions(semanticSource);
+    const baseDefinition = definitions.find((definition) => definition.name === className);
+    const constructorArgs = extractFirstConstructorArgsForClass(semanticSource, className);
+    const constructorParamCount = extractInitParams(semanticSource, className).length;
+    const instanceCount = countConstructorCallsForClass(String(exercise.solutionCode ?? ""), className);
+    const stdoutLineCount = countExpectedStdoutLines(exercise);
+    const semanticChecks: SemanticCheck[] = [
+        {
+            type: "defines_class",
+            className,
+            message: `Define or import the ${className} class for this workspace exercise.`,
+        },
+    ];
+
+    const baseIsAbstract = baseDefinition ? classDefinitionIsAbstract(baseDefinition) : false;
+
+    if (!baseIsAbstract && (constructorArgs.length > 0 || constructorParamCount === 0)) {
+        semanticChecks.push({
+            type: "constructible",
+            className,
+            constructorArgs,
+            message: `${className} should be constructible with the example arguments.`,
+        });
+    }
+
+    const methodName = inferFirstZeroArgMethodCall(String(exercise.solutionCode ?? "")) ?? inferFirstPublicZeroArgMethodName(definitions);
+    const firstStdoutLine = firstNonEmptyStdoutLine(exercise);
+    const concreteChecks = inferConcreteConstructibleClassChecks({
+        source: semanticSource,
+        definitions,
+        baseClassName: className,
+        methodName,
+    });
+    semanticChecks.push(...concreteChecks);
+
+    if (
+        concreteChecks.length < 1 &&
+        methodName &&
+        firstStdoutLine !== null &&
+        !baseIsAbstract &&
+        (constructorArgs.length > 0 || constructorParamCount === 0)
+    ) {
+        semanticChecks.push({
+            type: "method_returns",
+            className,
+            constructorArgs,
+            methodName,
+            methodArgs: [],
+            expected: parseSimplePythonLiteralForSemantic(firstStdoutLine),
+            message: `${className}.${methodName}() should return the expected value.`,
+        });
+    }
+
+    if (!baseIsAbstract && instanceCount > 0) {
+        semanticChecks.push({
+            type: "created_instances",
+            className,
+            min: Math.min(instanceCount, 3),
+            message: `Create the required ${className} instance(s).`,
+        });
+    }
+
+    if (stdoutLineCount > 0) {
+        semanticChecks.push({
+            type: "printed_line_count",
+            min: stdoutLineCount,
+            message: `Print at least ${stdoutLineCount} non-empty output line(s).`,
+        });
+    }
+
+    if (semanticChecks.length < 2) return null;
+
+    const entryStarter = starterFiles?.find((file) => file.path === entryFilePath)?.content;
+    const entrySolution = solutionFiles?.find((file) => file.path === entryFilePath)?.content;
+    const { tests: _removedTests, files: _removedFiles, ...rest } = exercise;
+
+    return {
+        ...rest,
+        recipeType: "semantic",
+        semanticChecks,
+        ...(starterFiles ? { starterFiles } : {}),
+        ...(solutionFiles ? { solutionFiles } : {}),
+        ...(entryStarter !== undefined ? { starterCode: entryStarter } : {}),
+        ...(entrySolution !== undefined ? { solutionCode: entrySolution } : {}),
+        entryFilePath,
+    };
+}
+
+function extractMarkedPythonFiles(source: unknown): Map<string, string> {
+    const result = new Map<string, string>();
+    const lines = String(source ?? "").replace(/\r\n?/g, "\n").split("\n");
+    let currentPath: string | null = null;
+    let currentLines: string[] = [];
+
+    function flush() {
+        if (!currentPath) return;
+        result.set(currentPath, currentLines.join("\n").trimEnd());
+    }
+
+    for (const line of lines) {
+        const match = /^\s*#\s*([a-zA-Z0-9_.\/-]+\.py)\s*$/.exec(line);
+        if (match?.[1]) {
+            flush();
+            currentPath = match[1];
+            currentLines = [];
+            continue;
+        }
+
+        if (currentPath) {
+            currentLines.push(line);
+        }
+    }
+
+    flush();
+    return result;
+}
+
+function promoteSemanticOopFilesToWorkspaceFiles(exercise: PythonCodeInputExercise): {
+    exercise: PythonCodeInputExercise;
+    changed: boolean;
+} {
+    if (!isSemanticCodeExercise(exercise)) return { exercise, changed: false };
+    if (!looksLikeOopSemanticStructureExercise(exercise)) return { exercise, changed: false };
+
+    const fixtureFiles = normalizeDraftFixtureFiles(exercise.files);
+    const pythonFiles = fixtureFiles.filter((file) => file.path.endsWith(".py"));
+    const nonPythonFiles = fixtureFiles.filter((file) => !file.path.endsWith(".py"));
+
+    const existingStarterFiles = Array.isArray(exercise.starterFiles)
+        ? exercise.starterFiles
+        : [];
+    const existingSolutionFiles = Array.isArray(exercise.solutionFiles)
+        ? exercise.solutionFiles
+        : [];
+
+    if (pythonFiles.length < 1 && existingSolutionFiles.length > 0) {
+        return { exercise, changed: false };
+    }
+
+    const starterByPath = extractMarkedPythonFiles(exercise.starterCode);
+    const solutionByPath = extractMarkedPythonFiles(exercise.solutionCode);
+    const entryFilePath = String(
+        (exercise as { entryFilePath?: unknown }).entryFilePath ??
+        (pythonFiles.some((file) => file.path === "main.py") ? "main.py" : pythonFiles[0]?.path ?? "main.py"),
+    );
+
+    const starterFiles = existingStarterFiles.length > 0
+        ? existingStarterFiles
+        : pythonFiles.map((file) => ({
+            path: file.path,
+            content:
+                starterByPath.get(file.path) ??
+                (file.path === entryFilePath ? String(exercise.starterCode ?? "") : ""),
+            language: "python" as const,
+            isEntry: file.path === entryFilePath,
+            entry: file.path === entryFilePath,
+        }));
+
+    const solutionFiles = existingSolutionFiles.length > 0
+        ? existingSolutionFiles
+        : pythonFiles.map((file) => ({
+            path: file.path,
+            content: solutionByPath.get(file.path) ?? file.content,
+            language: "python" as const,
+            isEntry: file.path === entryFilePath,
+            entry: file.path === entryFilePath,
+        }));
+
+    const changed =
+        existingStarterFiles.length < 1 ||
+        existingSolutionFiles.length < 1 ||
+        pythonFiles.length !== fixtureFiles.length;
+
+    if (!changed) return { exercise, changed: false };
+
+    const nextExercise: PythonCodeInputExercise = {
+        ...exercise,
+        entryFilePath,
+        starterFiles,
+        solutionFiles,
+    };
+
+    if (nonPythonFiles.length > 0) {
+        nextExercise.files = nonPythonFiles;
+    } else {
+        delete nextExercise.files;
+    }
+
+    return { exercise: nextExercise, changed: true };
+}
+
+function toSnakeCase(value: string): string {
+    return String(value ?? "")
+        .replace(/([a-z0-9])([A-Z])/g, "$1_$2")
+        .replace(/[^A-Za-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "")
+        .toLowerCase();
+}
+
+function extractPythonImportsBySymbol(source: string): Map<string, string> {
+    const imports = new Map<string, string>();
+
+    for (const line of String(source ?? "").split("\n")) {
+        const match = line.match(/^\s*from\s+([A-Za-z0-9_.]+)\s+import\s+(.+)\s*$/);
+        if (!match) continue;
+
+        const moduleName = String(match[1] ?? "").trim();
+        const imported = String(match[2] ?? "")
+            .split(",")
+            .map((part) => part.trim())
+            .filter(Boolean);
+
+        for (const symbol of imported) {
+            const name = symbol.split(/\s+as\s+/i)[0]?.trim() ?? "";
+            if (name) imports.set(name, `${moduleName.replace(/\./g, "/")}.py`);
+        }
+    }
+
+    return imports;
+}
+
+function defaultPythonWorkspacePathForClass(className: string): string {
+    return `models/${toSnakeCase(className)}.py`;
+}
+
+function defaultPythonWorkspacePathForFunction(functionName: string): string {
+    return `services/${toSnakeCase(functionName)}.py`;
+}
+
+function inferMethodParamNames(methodName: string, methodArgs: unknown[]): string[] {
+    const normalized = methodName.toLowerCase();
+    if (methodArgs.length < 1) return [];
+    if (methodArgs.length === 1) {
+        if (/withdraw|deposit|credit|debit|increase|decrease|add|subtract|spend/.test(normalized)) {
+            return ["amount"];
+        }
+        if (/label|name|title|describe|summary|report/.test(normalized) && typeof methodArgs[0] === "string") {
+            return ["label"];
+        }
+        return [typeof methodArgs[0] === "number" ? "amount" : "value"];
+    }
+    if (methodArgs.length === 2) {
+        if (typeof methodArgs[0] === "string" && typeof methodArgs[1] === "number") {
+            return ["label", "amount"];
+        }
+        return ["value", "amount"];
+    }
+    return methodArgs.map((_, index) => `arg_${index + 1}`);
+}
+
+function inferFunctionParamNames(args: {
+    functionName: string;
+    checks: SemanticCheck[];
+    source: string;
+}): string[] {
+    const check = args.checks[0];
+    if (!check || semanticCheckType(check) !== "function_returns") return [];
+
+    const rawArgs = semanticCheckArray(check, "args");
+    const rawKinds = semanticCheckArray(check, "argKinds");
+    const normalized = args.functionName.toLowerCase();
+
+    return rawArgs.map((arg, index) => {
+        const kind = typeof rawKinds[index] === "string" ? String(rawKinds[index]) : "value";
+        if (kind === "dict_entries") {
+            if (/account|deposit|withdraw|balance|cover|afford/.test(normalized)) return "account";
+            return "item";
+        }
+        if (kind === "list_of_dict_entries") {
+            if (/account|report|summary/.test(normalized)) return "accounts";
+            return "items";
+        }
+        if (Array.isArray(arg)) {
+            if (index === 0 && /account|deposit|withdraw|balance|cover|afford/.test(normalized)) return "account";
+            return index === 0 ? "value" : `value_${index + 1}`;
+        }
+        if (typeof arg === "number") {
+            if (index === 0 && /format_money|price|cost|amount|total/.test(normalized)) return "amount";
+            if (index === 1 && /cover|afford|price|cost/.test(normalized)) return "cost";
+            if (index === 1 && /deposit|withdraw|credit|debit|amount|total/.test(normalized)) return "amount";
+            return index === 0 ? "amount" : `amount_${index + 1}`;
+        }
+        if (typeof arg === "string") {
+            if (index === 0 && /label|title|name|summary|report/.test(normalized)) return "label";
+            return index === 0 ? "value" : `value_${index + 1}`;
+        }
+        return index === 0 ? "value" : `value_${index + 1}`;
+    });
+}
+
+function buildStarterClassSkeleton(args: {
+    className: string;
+    constructorArgs: unknown[];
+    attributes: string[];
+    returnMethods: SemanticClassMethodPlan[];
+    mutators: SemanticClassMutatorPlan[];
+}): string {
+    const params = inferSemanticConstructorParams({
+        source: "",
+        className: args.className,
+        attributes: args.attributes,
+        constructorArgs: args.constructorArgs,
+    });
+    const constructorAttributes = uniqueOrderedStrings([
+        ...args.attributes,
+        ...params.filter((param) => !/^value_\d+$/.test(param)),
+    ]);
+
+    const lines = [`class ${args.className}:`];
+    lines.push(`    def __init__(self${params.length ? `, ${params.join(", ")}` : ""}):`);
+
+    if (constructorAttributes.length > 0) {
+        for (const attribute of constructorAttributes) {
+            const param = parameterForAttribute({
+                attribute,
+                attributes: constructorAttributes,
+                params,
+            });
+            lines.push(
+                `        self.${attribute} = ${param || defaultLiteralForAttribute(attribute)}`,
+            );
+        }
+    } else {
+        lines.push("        pass");
+    }
+
+    const emitted = new Set<string>(["__init__"]);
+    const methods = uniqueOrderedStrings([
+        ...args.returnMethods.map((method) => method.methodName),
+        ...args.mutators.map((method) => method.methodName),
+    ]);
+
+    for (const methodName of methods) {
+        if (!methodName || emitted.has(methodName)) continue;
+        emitted.add(methodName);
+        const example =
+            args.returnMethods.find((method) => method.methodName === methodName) ??
+            args.mutators.find((method) => method.methodName === methodName);
+        const paramNames = inferMethodParamNames(
+            methodName,
+            Array.isArray(example?.methodArgs) ? example.methodArgs : [],
+        );
+        lines.push("");
+        lines.push(`    def ${methodName}(self${paramNames.length ? `, ${paramNames.join(", ")}` : ""}):`);
+        lines.push("        pass");
+    }
+
+    return lines.join("\n");
+}
+
+function buildStarterFunctionSkeleton(functionName: string, checks: SemanticCheck[], source: string): string {
+    const params = inferFunctionParamNames({ functionName, checks, source });
+    return [`def ${functionName}(${params.join(", ")}):`, "    pass"].join("\n");
+}
+
+function synthesizeSemanticOopWorkspaceFiles(exercise: PythonCodeInputExercise): {
+    exercise: PythonCodeInputExercise;
+    changed: boolean;
+} {
+    if (!isSemanticCodeExercise(exercise)) return { exercise, changed: false };
+
+    const existingStarterFiles = Array.isArray(exercise.starterFiles) ? exercise.starterFiles : [];
+    const existingSolutionFiles = Array.isArray(exercise.solutionFiles) ? exercise.solutionFiles : [];
+    if (existingStarterFiles.length > 0 || existingSolutionFiles.length > 0) {
+        return { exercise, changed: false };
+    }
+
+    const checks = Array.isArray(exercise.semanticChecks) ? exercise.semanticChecks : [];
+    if (checks.length < 1) return { exercise, changed: false };
+
+    const entryFilePath = String(
+        (exercise as { entryFilePath?: unknown }).entryFilePath ?? "main.py",
+    );
+    const entryStarter = String(exercise.starterCode ?? "").trimEnd();
+    const entrySolution = String(exercise.solutionCode ?? exercise.starterCode ?? "").trimEnd();
+    const source = [entryStarter, entrySolution].filter(Boolean).join("\n\n");
+    const importPaths = extractPythonImportsBySymbol(source);
+    const hasFunctionChecks = checks.some((check) => semanticCheckType(check) === "function_returns");
+
+    if (
+        !looksLikeOopSemanticStructureExercise(exercise) &&
+        !(hasFunctionChecks && importPaths.size > 0)
+    ) {
+        return { exercise, changed: false };
+    }
+
+    const starterFiles: Array<{
+        path: string;
+        content: string;
+        language: "python";
+        isEntry: boolean;
+        entry: boolean;
+    }> = [
+        {
+            path: entryFilePath,
+            content: entryStarter || "# Write your answer below",
+            language: "python",
+            isEntry: true,
+            entry: true,
+        },
+    ];
+    const solutionFiles: Array<{
+        path: string;
+        content: string;
+        language: "python";
+        isEntry: boolean;
+        entry: boolean;
+    }> = [
+        {
+            path: entryFilePath,
+            content: entrySolution || entryStarter || "# Write your answer below",
+            language: "python",
+            isEntry: true,
+            entry: true,
+        },
+    ];
+
+    const starterByPath = new Map<string, string>();
+    const solutionByPath = new Map<string, string>();
+
+    const classPlans = collectSemanticClassImplementationPlans(checks);
+    for (const [className, plan] of classPlans) {
+        const path = importPaths.get(className) ?? defaultPythonWorkspacePathForClass(className);
+        if (path === entryFilePath) continue;
+        const starterContent = buildStarterClassSkeleton(plan);
+        const solutionContent = starterContent;
+        if (!starterByPath.has(path)) starterByPath.set(path, starterContent);
+        if (!solutionByPath.has(path)) solutionByPath.set(path, solutionContent);
+    }
+
+    const functionChecksByName = new Map<string, SemanticCheck[]>();
+    for (const check of checks) {
+        if (semanticCheckType(check) !== "function_returns") continue;
+        const functionName = semanticCheckString(check, "functionName");
+        if (!functionName) continue;
+        const group = functionChecksByName.get(functionName) ?? [];
+        group.push(check);
+        functionChecksByName.set(functionName, group);
+    }
+
+    for (const [functionName, groupedChecks] of functionChecksByName) {
+        const path = importPaths.get(functionName) ?? defaultPythonWorkspacePathForFunction(functionName);
+        if (path === entryFilePath) continue;
+        if (classPlans.size > 0 && solutionByPath.has(path)) continue;
+        const starterContent = buildStarterFunctionSkeleton(functionName, groupedChecks, source);
+        if (!starterByPath.has(path)) starterByPath.set(path, starterContent);
+        if (!solutionByPath.has(path)) solutionByPath.set(path, starterContent);
+    }
+
+    if (starterByPath.size < 1 && solutionByPath.size < 1) {
+        return { exercise, changed: false };
+    }
+
+    for (const [path, content] of starterByPath) {
+        starterFiles.push({
+            path,
+            content,
+            language: "python",
+            isEntry: false,
+            entry: false,
+        });
+    }
+
+    for (const [path, content] of solutionByPath) {
+        solutionFiles.push({
+            path,
+            content,
+            language: "python",
+            isEntry: false,
+            entry: false,
+        });
+    }
+
+    return {
+        exercise: {
+            ...exercise,
+            entryFilePath,
+            starterFiles,
+            solutionFiles,
+        },
+        changed: true,
+    };
+}
+
+
+function pythonLiteralForValue(value: unknown): string {
+    if (typeof value === "string") return JSON.stringify(value);
+    if (typeof value === "number" && Number.isFinite(value)) return String(value);
+    if (typeof value === "boolean") return value ? "True" : "False";
+    if (value === null || value === undefined) return "None";
+    if (Array.isArray(value)) {
+        return `[${value.map((item) => pythonLiteralForValue(item)).join(", ")}]`;
+    }
+    if (typeof value === "object") {
+        const entries = Object.entries(value as Record<string, unknown>).map(
+            ([key, item]) => `${pythonLiteralForValue(key)}: ${pythonLiteralForValue(item)}`,
+        );
+        return `{${entries.join(", ")}}`;
+    }
+    return JSON.stringify(String(value));
+}
+
+type SemanticEntryPlan = {
+    className: string;
+    constructorArgs: unknown[];
+    attributes: string[];
+    calls: Array<{ methodName: string; methodArgs: unknown[] }>;
+    resultMethods: Array<{ methodName: string; methodArgs: unknown[]; expected: unknown }>;
+};
+
+function semanticCheckRecord(check: SemanticCheck): Record<string, unknown> {
+    return check as unknown as Record<string, unknown>;
+}
+
+function semanticCheckType(check: SemanticCheck): string {
+    return String(semanticCheckRecord(check).type ?? "");
+}
+
+function semanticCheckString(check: SemanticCheck, field: string): string {
+    const value = semanticCheckRecord(check)[field];
+    return typeof value === "string" ? value.trim() : "";
+}
+
+function semanticCheckArray(check: SemanticCheck, field: string): unknown[] {
+    const value = semanticCheckRecord(check)[field];
+    return Array.isArray(value) ? value : [];
+}
+
+function normalizeSemanticExpectedValue(value: unknown): unknown {
+    if (
+        Array.isArray(value) &&
+        value.length === 1 &&
+        !Array.isArray(value[0]) &&
+        (value[0] === null || ["string", "number", "boolean"].includes(typeof value[0]))
+    ) {
+        return value[0];
+    }
+
+    return value;
+}
+
+function codeHasMeaningfulTopLevelWork(source: string): boolean {
+    const meaningful = String(source ?? "")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .filter((line) => !line.startsWith("#"))
+        .filter((line) => !/^from\s+[A-Za-z0-9_.]+\s+import\s+/.test(line))
+        .filter((line) => !/^import\s+[A-Za-z0-9_.,\s]+$/.test(line))
+        .filter((line) => line !== "pass" && line !== "..." && line !== "n");
+
+    if (meaningful.length < 1) return false;
+    return meaningful.some((line) =>
+        /=\s*[A-Z][A-Za-z0-9_]*\s*\(/.test(line) ||
+        /\bprint\s*\(/.test(line) ||
+        /\.[A-Za-z_]\w*\s*\(/.test(line) ||
+        /^class\s+[A-Za-z_]\w*\b/.test(line) ||
+        /^def\s+[A-Za-z_]\w*\b/.test(line),
+    );
+}
+
+function modulePathForPythonFile(path: string): string {
+    return path
+        .replace(/\.py$/, "")
+        .split("/")
+        .filter(Boolean)
+        .join(".");
+}
+
+function classDefinedInSource(source: string, className: string): boolean {
+    return new RegExp(`^\\s*class\\s+${escapeRegExp(className)}\\b`, "m").test(String(source ?? ""));
+}
+
+function classImportedOrDefinedInEntry(entrySource: string, className: string): boolean {
+    const source = String(entrySource ?? "");
+    return (
+        classDefinedInSource(source, className) ||
+        new RegExp(`\\bimport\\s+[^\\n]*\\b${escapeRegExp(className)}\\b`).test(source)
+    );
+}
+
+function findPythonFileForClass(files: Array<{ path: string; content: string }>, className: string): string | null {
+    const match = files.find((file) =>
+        file.path.endsWith(".py") && classDefinedInSource(file.content, className),
+    );
+    return match?.path ?? null;
+}
+
+function addSemanticEntryPlan(
+    plans: Map<string, SemanticEntryPlan[]>,
+    className: string,
+    constructorArgs: unknown[],
+): SemanticEntryPlan {
+    const existing = plans.get(className) ?? [];
+    const duplicate = existing.find((plan) =>
+        JSON.stringify(plan.constructorArgs) === JSON.stringify(constructorArgs),
+    );
+    if (duplicate) return duplicate;
+
+    const plan: SemanticEntryPlan = {
+        className,
+        constructorArgs,
+        attributes: [],
+        calls: [],
+        resultMethods: [],
+    };
+    existing.push(plan);
+    plans.set(className, existing);
+    return plan;
+}
+
+function collectSemanticEntryPlans(args: {
+    checks: SemanticCheck[];
+    source: string;
+}): Map<string, SemanticEntryPlan[]> {
+    const plans = new Map<string, SemanticEntryPlan[]>();
+
+    for (const check of args.checks) {
+        const type = semanticCheckType(check);
+        const className = semanticCheckString(check, "className");
+        if (!className) continue;
+
+        if (type === "instance_attributes") {
+            const plan = addSemanticEntryPlan(
+                plans,
+                className,
+                semanticCheckArray(check, "constructorArgs"),
+            );
+            for (const attr of semanticCheckArray(check, "attributes")) {
+                const name = typeof attr === "string" ? attr.trim() : "";
+                if (name && !plan.attributes.includes(name)) plan.attributes.push(name);
+            }
+            continue;
+        }
+
+        if (type === "constructible") {
+            addSemanticEntryPlan(plans, className, semanticCheckArray(check, "constructorArgs"));
+            continue;
+        }
+
+        if (type === "method_returns") {
+            const plan = addSemanticEntryPlan(
+                plans,
+                className,
+                semanticCheckArray(check, "constructorArgs"),
+            );
+            const methodName = semanticCheckString(check, "methodName");
+            if (methodName) {
+                plan.resultMethods.push({
+                    methodName,
+                    methodArgs: semanticCheckArray(check, "methodArgs"),
+                    expected: normalizeSemanticExpectedValue(semanticCheckRecord(check).expected),
+                });
+            }
+            continue;
+        }
+
+        if (type === "method_sequence_returns") {
+            const plan = addSemanticEntryPlan(
+                plans,
+                className,
+                semanticCheckArray(check, "constructorArgs"),
+            );
+            for (const call of semanticCheckArray(check, "calls")) {
+                if (!call || typeof call !== "object") continue;
+                const record = call as Record<string, unknown>;
+                const methodName = typeof record.methodName === "string" ? record.methodName.trim() : "";
+                if (!methodName) continue;
+                plan.calls.push({
+                    methodName,
+                    methodArgs: Array.isArray(record.methodArgs) ? record.methodArgs : [],
+                });
+            }
+            const methodName = semanticCheckString(check, "methodName");
+            if (methodName) {
+                plan.resultMethods.push({
+                    methodName,
+                    methodArgs: semanticCheckArray(check, "methodArgs"),
+                    expected: normalizeSemanticExpectedValue(semanticCheckRecord(check).expected),
+                });
+            }
+            continue;
+        }
+
+        if (type === "attribute_sequence_equals") {
+            const plan = addSemanticEntryPlan(
+                plans,
+                className,
+                semanticCheckArray(check, "constructorArgs"),
+            );
+            for (const call of semanticCheckArray(check, "calls")) {
+                if (!call || typeof call !== "object") continue;
+                const record = call as Record<string, unknown>;
+                const methodName = typeof record.methodName === "string" ? record.methodName.trim() : "";
+                if (!methodName) continue;
+                plan.calls.push({
+                    methodName,
+                    methodArgs: Array.isArray(record.methodArgs) ? record.methodArgs : [],
+                });
+            }
+            const attributeName = semanticCheckString(check, "attributeName");
+            if (attributeName && !plan.attributes.includes(attributeName)) {
+                plan.attributes.push(attributeName);
+            }
+            continue;
+        }
+    }
+
+    for (const check of args.checks) {
+        if (semanticCheckType(check) !== "created_instances") continue;
+        const className = semanticCheckString(check, "className");
+        if (!className) continue;
+        const min = Number(semanticCheckRecord(check).min ?? 1);
+        const existing = plans.get(className) ?? [];
+        const target = Number.isFinite(min) && min > 0 ? Math.min(Math.floor(min), 4) : 1;
+        while (existing.length < target) {
+            const params = extractInitParams(args.source, className);
+            const constructorArgs = params.map((param) => parseSimplePythonLiteralForSemantic(pythonLiteralForConstructorParam(param)));
+            existing.push({
+                className,
+                constructorArgs,
+                attributes: [],
+                calls: [],
+                resultMethods: [],
+            });
+        }
+        plans.set(className, existing);
+    }
+
+    return plans;
+}
+
+function inferRequestedZeroArgCalls(args: {
+    promptText: string;
+    entrySource: string;
+    definition: PythonClassDefinition | undefined;
+}): string[] {
+    const definition = args.definition;
+    if (!definition) return [];
+    const text = `${args.promptText}\n${args.entrySource}`.toLowerCase();
+    const calls: string[] = [];
+
+    for (const [methodName, methodLines] of definition.methods) {
+        if (methodName === "__init__" || methodName.startsWith("_")) continue;
+        const signature = methodLines[0] ?? "";
+        const params = signature.match(/def\s+[A-Za-z_]\w*\s*\(([^)]*)\)/)?.[1] ?? "";
+        const userParams = params
+            .split(",")
+            .map((part) => part.trim().split(":")[0]?.split("=")[0]?.trim() ?? "")
+            .filter((part) => part && part !== "self");
+        if (userParams.length > 0) continue;
+
+        const normalizedMethod = methodName.toLowerCase();
+        const words = normalizedMethod.split("_").filter(Boolean);
+        const mentioned = words.some((word) => word.length >= 3 && text.includes(word));
+        const likelyMutator = /^(switch|turn|toggle|mark|complete|finish|start|stop|open|close|activate|deactivate|enable|disable)/.test(normalizedMethod);
+        if (mentioned || likelyMutator) calls.push(methodName);
+    }
+
+    return calls;
+}
+
+function synthesizeEntrySolutionForSemanticOopExercise(exercise: PythonCodeInputExercise): {
+    exercise: PythonCodeInputExercise;
+    changed: boolean;
+} {
+    if (!isSemanticCodeExercise(exercise)) return { exercise, changed: false };
+    if (!looksLikeOopSemanticStructureExercise(exercise)) return { exercise, changed: false };
+    if (!Array.isArray(exercise.solutionFiles) || exercise.solutionFiles.length < 1) {
+        return { exercise, changed: false };
+    }
+
+    const checks = Array.isArray(exercise.semanticChecks) ? exercise.semanticChecks : [];
+    if (!checks.some((check) => ["created_instances", "printed_line_count"].includes(semanticCheckType(check)))) {
+        return { exercise, changed: false };
+    }
+
+    const entryFilePath = String(
+        (exercise as { entryFilePath?: unknown }).entryFilePath ??
+        exercise.solutionFiles.find((file) => (file as { isEntry?: unknown }).isEntry === true)?.path ??
+        "main.py",
+    );
+    const solutionFiles = exercise.solutionFiles.map((file) => ({
+        ...file,
+        path: String((file as { path?: unknown }).path ?? ""),
+        content: String((file as { content?: unknown }).content ?? ""),
+    }));
+    const entryFile = solutionFiles.find((file) => file.path === entryFilePath);
+    const entrySource = String(entryFile?.content ?? exercise.solutionCode ?? "");
+
+    if (codeHasMeaningfulTopLevelWork(entrySource)) {
+        return { exercise, changed: false };
+    }
+
+    const source = solutionFiles.map((file) => `# ${file.path}\n${file.content}`).join("\n\n");
+    const plans = collectSemanticEntryPlans({ checks, source });
+    if (plans.size < 1) return { exercise, changed: false };
+
+    const definitions = extractPythonClassDefinitions(source);
+    const promptText = `${exercise.title ?? ""}\n${exercise.prompt ?? ""}`;
+    const importLines = entrySource
+        .split("\n")
+        .map((line) => line.trimEnd())
+        .filter((line) => /^\s*(from\s+[A-Za-z0-9_.]+\s+import\s+|import\s+[A-Za-z0-9_.]+)/.test(line));
+    const bodyLines: string[] = [];
+    const printableExpressions: string[] = [];
+    const usedVarNames = new Set<string>();
+
+    function uniqueVarName(className: string, index: number): string {
+        const base = `${variableNameForClass(className)}_${index + 1}`;
+        if (!usedVarNames.has(base)) {
+            usedVarNames.add(base);
+            return base;
+        }
+        let suffix = index + 2;
+        while (usedVarNames.has(`${base}_${suffix}`)) suffix += 1;
+        const name = `${base}_${suffix}`;
+        usedVarNames.add(name);
+        return name;
+    }
+
+    for (const [className, classPlans] of plans) {
+        if (!classImportedOrDefinedInEntry(importLines.join("\n"), className)) {
+            const path = findPythonFileForClass(solutionFiles, className);
+            if (path && path !== entryFilePath) {
+                importLines.push(`from ${modulePathForPythonFile(path)} import ${className}`);
+            }
+        }
+
+        const definition = definitions.find((item) => item.name === className);
+        const requestedCalls = inferRequestedZeroArgCalls({
+            promptText,
+            entrySource,
+            definition,
+        });
+
+        classPlans.forEach((plan, index) => {
+            const varName = uniqueVarName(className, index);
+            bodyLines.push(
+                `${varName} = ${className}(${plan.constructorArgs.map((arg) => pythonLiteralForValue(arg)).join(", ")})`,
+            );
+
+            const allCalls = [...plan.calls];
+            for (const methodName of requestedCalls) {
+                if (!allCalls.some((call) => call.methodName === methodName)) {
+                    allCalls.push({ methodName, methodArgs: [] });
+                }
+            }
+            for (const call of allCalls) {
+                bodyLines.push(
+                    `${varName}.${call.methodName}(${call.methodArgs.map((arg) => pythonLiteralForValue(arg)).join(", ")})`,
+                );
+            }
+
+            for (const result of plan.resultMethods) {
+                if (result.expected === null || result.expected === undefined) {
+                    bodyLines.push(
+                        `${varName}.${result.methodName}(${result.methodArgs.map((arg) => pythonLiteralForValue(arg)).join(", ")})`,
+                    );
+                } else {
+                    printableExpressions.push(
+                        `${varName}.${result.methodName}(${result.methodArgs.map((arg) => pythonLiteralForValue(arg)).join(", ")})`,
+                    );
+                }
+            }
+
+            const preferredAttr = plan.attributes.find((attr) => /^(name|title|label|status|is_on|balance|room)$/i.test(attr)) ?? plan.attributes[0];
+            if (preferredAttr) printableExpressions.push(`${varName}.${preferredAttr}`);
+        });
+    }
+
+    const printedLineMin = Math.max(
+        0,
+        ...checks
+            .filter((check) => semanticCheckType(check) === "printed_line_count")
+            .map((check) => Number(semanticCheckRecord(check).min ?? 1))
+            .filter((value) => Number.isFinite(value)),
+    );
+    let printCount = 0;
+    for (const expression of printableExpressions) {
+        if (printCount >= printedLineMin && printedLineMin > 0) break;
+        bodyLines.push(`print(${expression})`);
+        printCount += 1;
+    }
+    while (printCount < printedLineMin) {
+        const fallback = printableExpressions[0] ?? "'done'";
+        bodyLines.push(`print(${fallback})`);
+        printCount += 1;
+    }
+
+    if (bodyLines.length < 1) return { exercise, changed: false };
+
+    const nextEntrySource = [...new Set(importLines), "", ...bodyLines].join("\n").trimEnd();
+    const nextSolutionFiles = solutionFiles.map((file) =>
+        file.path === entryFilePath ? { ...file, content: nextEntrySource } : file,
+    );
+
+    return {
+        exercise: {
+            ...exercise,
+            entryFilePath,
+            solutionCode: nextEntrySource,
+            solutionFiles: nextSolutionFiles,
+        },
+        changed: true,
+    };
+}
+
+
+function classSolutionLooksIncompleteForSemantic(source: string, className: string): boolean {
+    const definition = extractPythonClassDefinitions(source).find((item) => item.name === className);
+    if (!definition) return false;
+
+    const classBody = String(source ?? "");
+    if (/\bpass\b|\.\.\.|#\s*(store|return|increase|decrease|add|subtract|set|complete|TODO|write|implement)/i.test(classBody)) {
+        return true;
+    }
+
+    for (const [, methodLines] of definition.methods) {
+        const body = methodLines.slice(1).join("\n").trim();
+        const meaningful = body
+            .split("\n")
+            .map((line) => line.trim())
+            .filter(Boolean)
+            .filter((line) => !line.startsWith("#"));
+        if (meaningful.length < 1) return true;
+    }
+
+    return false;
+}
+
+function methodDefinedInSource(source: string, methodName: string): boolean {
+    return new RegExp(`^\\s+def\\s+${escapeRegExp(methodName)}\\s*\\(`, "m").test(String(source ?? ""));
+}
+
+function extractMethodSource(source: string, methodName: string): string {
+    const escaped = escapeRegExp(methodName);
+    const pattern = new RegExp(`def\\s+${escaped}\\s*\\([^)]*\\):[\\s\\S]*?(?=\\n\\s+def\\s+|\\nclass\\s+|(?![\\s\\S]))`, "m");
+    return String(source ?? "").match(pattern)?.[0] ?? "";
+}
+
+function semanticClassPlanNeedsRegeneration(args: {
+    source: string;
+    className: string;
+    plan: SemanticClassImplementationPlan;
+}): boolean {
+    if (classSolutionLooksIncompleteForSemantic(args.source, args.className)) return true;
+    const constructorParams = extractInitParams(args.source, args.className);
+
+    const requiredMethods = uniqueOrderedStrings([
+        ...args.plan.returnMethods.map((method) => method.methodName),
+        ...args.plan.mutators.map((method) => method.methodName),
+    ]);
+
+    for (const methodName of requiredMethods) {
+        if (methodName && !methodDefinedInSource(args.source, methodName)) return true;
+    }
+
+    const duplicateReturnMethods = new Map<string, SemanticClassMethodPlan[]>();
+    for (const method of args.plan.returnMethods) {
+        const group = duplicateReturnMethods.get(method.methodName) ?? [];
+        group.push(method);
+        duplicateReturnMethods.set(method.methodName, group);
+    }
+
+    for (const [methodName, examples] of duplicateReturnMethods) {
+        const methodSource = extractMethodSource(args.source, methodName);
+        if (!methodSource) return true;
+        const normalizedMethod = methodName.toLowerCase();
+
+        if (
+            examples.length > 1 &&
+            /return\s+(True|False|-?\d+(?:\.\d+)?|["']).*$/m.test(methodSource) &&
+            !/self\./.test(methodSource)
+        ) {
+            return true;
+        }
+
+        const methodIsPlannedMutator = args.plan.mutators.some(
+            (mutator) => mutator.methodName === methodName,
+        );
+        if (
+            methodIsPlannedMutator &&
+            methodNameLooksLikeNumericMutator(methodName) &&
+            !/self\.[A-Za-z_]\w*\s*[-+]=/.test(methodSource)
+        ) {
+            return true;
+        }
+
+        if (methodNameLooksLikeBooleanPredicate(methodName) && !/return\b[\s\S]*(self\.|arg_|amount|value)/.test(methodSource)) {
+            return true;
+        }
+
+        if (/rename/.test(normalizedMethod) && !/\.strip\(\)/.test(methodSource)) {
+            return true;
+        }
+
+        if (/^set_/.test(normalizedMethod) && /\+=|-=/.test(methodSource)) {
+            return true;
+        }
+    }
+
+    for (const attribute of args.plan.attributes) {
+        if (!attribute || constructorParams.includes(attribute)) continue;
+        if (!/^(available|is_|has_)/.test(attribute)) continue;
+        const attrPattern = new RegExp(`self\\.${escapeRegExp(attribute)}\\s*=\\s*(True|False)`);
+        if (!attrPattern.test(args.source)) {
+            return true;
+        }
+    }
+
+    for (const mutator of args.plan.mutators) {
+        const methodName = String(mutator.methodName ?? "").toLowerCase();
+        if (!/^(withdraw|debit|decrease|decrement|remove|subtract)$/.test(methodName)) continue;
+        const escaped = escapeRegExp(mutator.methodName);
+        const methodPattern = new RegExp(`def\\s+${escaped}\\s*\\([^)]*\\):[\\s\\S]*?(?=\\n\\s+def\\s+|\\nclass\\s+|(?![\\s\\S]))`, "m");
+        const match = args.source.match(methodPattern);
+        const methodSource = match?.[0] ?? "";
+        if (methodSource && !/\bif\b[\s\S]*<=/.test(methodSource)) return true;
+    }
+
+    return false;
+}
+
+type SemanticClassMethodPlan = {
+    methodName: string;
+    constructorArgs: unknown[];
+    methodArgs: unknown[];
+    expected: unknown;
+};
+
+type SemanticClassMutatorPlan = {
+    methodName: string;
+    methodArgs: unknown[];
+    attributeName: string;
+    expected: unknown;
+};
+
+type SemanticClassImplementationPlan = {
+    className: string;
+    constructorArgs: unknown[];
+    attributes: string[];
+    returnMethods: SemanticClassMethodPlan[];
+    mutators: SemanticClassMutatorPlan[];
+};
+
+function collectSemanticClassImplementationPlans(checks: SemanticCheck[]): Map<string, SemanticClassImplementationPlan> {
+    const plans = new Map<string, SemanticClassImplementationPlan>();
+
+    function getPlan(className: string): SemanticClassImplementationPlan {
+        const existing = plans.get(className);
+        if (existing) return existing;
+        const plan: SemanticClassImplementationPlan = {
+            className,
+            constructorArgs: [],
+            attributes: [],
+            returnMethods: [],
+            mutators: [],
+        };
+        plans.set(className, plan);
+        return plan;
+    }
+
+    for (const check of checks) {
+        const className = semanticCheckString(check, "className");
+        if (!className) continue;
+        const plan = getPlan(className);
+        const type = semanticCheckType(check);
+        const constructorArgs = semanticCheckArray(check, "constructorArgs");
+        if (plan.constructorArgs.length < 1 && constructorArgs.length > 0) {
+            plan.constructorArgs = constructorArgs;
+        }
+
+        if (type === "instance_attributes") {
+            for (const attr of semanticCheckArray(check, "attributes")) {
+                const name = typeof attr === "string" ? attr.trim() : "";
+                if (name && !plan.attributes.includes(name)) plan.attributes.push(name);
+            }
+            continue;
+        }
+
+        if (type === "method_returns") {
+            const methodName = semanticCheckString(check, "methodName");
+            if (methodName && methodName !== "__init__") {
+                plan.returnMethods.push({
+                    methodName,
+                    constructorArgs,
+                    methodArgs: semanticCheckArray(check, "methodArgs"),
+                    expected: normalizeSemanticExpectedValue(semanticCheckRecord(check).expected),
+                });
+            }
+            continue;
+        }
+
+        if (type === "method_sequence_returns") {
+            const methodName = semanticCheckString(check, "methodName");
+            if (methodName && methodName !== "__init__") {
+                plan.returnMethods.push({
+                    methodName,
+                    constructorArgs,
+                    methodArgs: semanticCheckArray(check, "methodArgs"),
+                    expected: normalizeSemanticExpectedValue(semanticCheckRecord(check).expected),
+                });
+            }
+
+            for (const call of semanticCheckArray(check, "calls")) {
+                if (!call || typeof call !== "object") continue;
+                const record = call as Record<string, unknown>;
+                const callMethodName = typeof record.methodName === "string" ? record.methodName.trim() : "";
+                if (!callMethodName || callMethodName === "__init__") continue;
+                const callArgs = Array.isArray(record.methodArgs) ? record.methodArgs : [];
+                const attributeName = inferSemanticMutatorAttribute({
+                    methodName: callMethodName,
+                    methodArgs: callArgs,
+                    attributes: plan.attributes,
+                    expected: normalizeSemanticExpectedValue(semanticCheckRecord(check).expected),
+                });
+                if (!attributeName) continue;
+                plan.mutators.push({
+                    methodName: callMethodName,
+                    methodArgs: callArgs,
+                    attributeName,
+                    expected: normalizeSemanticExpectedValue(semanticCheckRecord(check).expected),
+                });
+                if (!plan.attributes.includes(attributeName)) plan.attributes.push(attributeName);
+            }
+            continue;
+        }
+
+        if (type === "attribute_sequence_equals") {
+            const attributeName = semanticCheckString(check, "attributeName");
+            for (const call of semanticCheckArray(check, "calls")) {
+                if (!call || typeof call !== "object") continue;
+                const record = call as Record<string, unknown>;
+                const methodName = typeof record.methodName === "string" ? record.methodName.trim() : "";
+                if (!methodName || !attributeName) continue;
+                plan.mutators.push({
+                    methodName,
+                    methodArgs: Array.isArray(record.methodArgs) ? record.methodArgs : [],
+                    attributeName,
+                    expected: normalizeSemanticExpectedValue(semanticCheckRecord(check).expected),
+                });
+                if (!plan.attributes.includes(attributeName)) plan.attributes.push(attributeName);
+            }
+        }
+    }
+
+    return plans;
+}
+
+function inferSemanticMutatorAttribute(args: {
+    methodName: string;
+    methodArgs: unknown[];
+    attributes: string[];
+    expected: unknown;
+}): string {
+    const methodName = String(args.methodName ?? "").toLowerCase();
+    const attrs = args.attributes.map((attr) => String(attr ?? "").trim()).filter(Boolean);
+
+    function findAttr(pattern: RegExp): string {
+        return attrs.find((attr) => pattern.test(attr.toLowerCase())) ?? "";
+    }
+
+    if (/rename|name/.test(methodName)) return findAttr(/name|title|label|owner/) || attrs[attrs.length - 1] || "name";
+    if (/checkout|copy|copies/.test(methodName)) return findAttr(/copies|copy|count|available|stock/) || "copies";
+    if (/complete|task/.test(methodName)) return findAttr(/completed|complete|count|total|done/) || "completed";
+    if (/deposit|withdraw|balance|credit|debit/.test(methodName)) return findAttr(/balance|amount|total/) || "balance";
+    if (/increment|decrement|increase|decrease|add|remove|subtract/.test(methodName)) {
+        return findAttr(/count|completed|copies|balance|amount|total|score|quantity|stock/) || attrs.find((attr) => typeof args.expected === "number" || /count|total/i.test(attr)) || attrs[attrs.length - 1] || "count";
+    }
+    if (args.methodArgs.length > 0) return attrs[attrs.length - 1] || "value";
+    return "";
+}
+
+function uniqueOrderedStrings(values: string[]): string[] {
+    const seen = new Set<string>();
+    const result: string[] = [];
+    for (const value of values) {
+        const trimmed = String(value ?? "").trim();
+        if (!trimmed || seen.has(trimmed)) continue;
+        seen.add(trimmed);
+        result.push(trimmed);
+    }
+    return result;
+}
+
+function inferSemanticConstructorParams(args: {
+    source: string;
+    className: string;
+    attributes: string[];
+    constructorArgs: unknown[];
+}): string[] {
+    const fromSource = extractInitParams(args.source, args.className);
+    if (fromSource.length > 0) return fromSource;
+    if (args.attributes.length >= args.constructorArgs.length && args.constructorArgs.length > 0) {
+        return args.attributes.slice(0, args.constructorArgs.length);
+    }
+    if (args.attributes.length > 0) return args.attributes;
+    return args.constructorArgs.map((_, index) => `value_${index + 1}`);
+}
+
+function parameterForAttribute(args: {
+    attribute: string;
+    attributes: string[];
+    params: string[];
+}): string {
+    const exactParam = args.params.find((param) => param === args.attribute);
+    if (exactParam) return exactParam;
+    const attrIndex = args.attributes.indexOf(args.attribute);
+    if (
+        args.attributes.length === args.params.length &&
+        attrIndex >= 0 &&
+        args.params[attrIndex]
+    ) {
+        return args.params[attrIndex]!;
+    }
+    return "";
+}
+
+function defaultLiteralForAttribute(attribute: string): string {
+    const normalized = String(attribute ?? "").toLowerCase();
+    if (/^(is_|has_|can_)/.test(normalized) || normalized === "available") {
+        return "True";
+    }
+    if (/transactions|items|entries|records|logs|history|list/.test(normalized)) {
+        return "[]";
+    }
+    if (/count|total|balance|amount|score|stock|quantity|copies/.test(normalized)) {
+        return "0";
+    }
+    return "None";
+}
+
+function semanticPlanNeedsNonNegativeBalance(args: {
+    plan: SemanticClassImplementationPlan;
+    params: string[];
+}): boolean {
+    const balanceIndex = args.params.findIndex((param) => /balance|amount|total/i.test(param));
+    if (balanceIndex < 0) return false;
+    if (!args.plan.attributes.some((attr) => /balance|amount|total/i.test(attr))) return false;
+    return args.plan.constructorArgs.some((value, index) => index === balanceIndex && typeof value === "number" && value < 0);
+}
+
+function buildPythonFStringReturnExpression(args: {
+    expected: unknown;
+    params: string[];
+    attributes: string[];
+    constructorArgs: unknown[];
+    methodArgs?: unknown[];
+    methodParams?: string[];
+}): string {
+    if (typeof args.expected !== "string") {
+        return pythonLiteralForValue(args.expected);
+    }
+
+    let template = args.expected;
+    const replacements: Array<{ raw: string; expression: string }> = [];
+
+    args.params.forEach((param, index) => {
+        const value = args.constructorArgs[index];
+        const attribute = args.attributes.includes(param) ? param : args.attributes[index] ?? param;
+        if (value === undefined || value === null) return;
+        replacements.push({ raw: String(value), expression: `{self.${attribute}}` });
+    });
+
+    (args.methodParams ?? []).forEach((param, index) => {
+        const value = args.methodArgs?.[index];
+        if (value === undefined || value === null) return;
+        replacements.push({ raw: String(value), expression: `{${param}}` });
+    });
+
+    const methodHasNumericValue = (args.methodArgs ?? []).some(
+        (value) => typeof value === "number" && String(args.expected).includes(String(value)),
+    );
+
+    if (!methodHasNumericValue && args.attributes.some((attr) => /balance|amount|total|count/i.test(attr))) {
+        const numericAttr = args.attributes.find((attr) => /balance|amount|total|count/i.test(attr));
+        if (numericAttr) {
+            template = template.replace(/\$-?\d+(?:\.\d+)?/g, (match) => {
+                const formatSuffix = match.includes(".") ? ":.2f" : "";
+                return "$" + `{self.${numericAttr}${formatSuffix}}`;
+            });
+            template = template.replace(/(?<=:\s*)-?\d+(?:\.\d+)?/g, `{self.${numericAttr}}`);
+        }
+    }
+
+    for (const replacement of replacements.sort((a, b) => b.raw.length - a.raw.length)) {
+        if (!replacement.raw) continue;
+        template = template.split(replacement.raw).join(replacement.expression);
+    }
+
+    if (/\{(?:self\.)?[A-Za-z_]\w*(?::[^}]*)?\}/.test(template)) {
+        return `f${pythonLiteralForValue(template)}`;
+    }
+
+    return pythonLiteralForValue(args.expected);
+}
+
+function methodNameLooksLikeNumericMutator(methodName: string): boolean {
+    return /^(deposit|credit|add|increase|increment|withdraw|debit|decrease|decrement|subtract|spend|remove|set|update|change)(?:_|$)/.test(
+        String(methodName ?? "").toLowerCase(),
+    );
+}
+
+function methodNameLooksLikeBooleanPredicate(methodName: string): boolean {
+    return /^(is_|can_|has_|validate|valid|allows?|should_)/.test(
+        String(methodName ?? "").toLowerCase(),
+    );
+}
+
+function methodNameLooksLikeFormatter(methodName: string): boolean {
+    return /summary|label|describe|description|receipt|report|record|format|display/.test(
+        String(methodName ?? "").toLowerCase(),
+    );
+}
+
+function methodNameLooksLikePureArithmeticMethod(args: {
+    methodName: string;
+    methodArgs: unknown[];
+    attributes: string[];
+    hasMatchingMutators: boolean;
+}): boolean {
+    if (args.hasMatchingMutators) return false;
+    if (args.attributes.length > 0) return false;
+    if (args.methodArgs.length < 2) return false;
+    return /^(add|sum|subtract|minus|multiply|divide)$/.test(
+        String(args.methodName ?? "").toLowerCase(),
+    );
+}
+
+function buildPureArithmeticReturnMethod(args: {
+    methodName: string;
+    methodParams: string[];
+    expected: unknown;
+}): string[] {
+    const methodName = args.methodName;
+    const normalized = methodName.toLowerCase();
+    const [left = "value", right = "amount"] = args.methodParams;
+    const lines = [`    def ${methodName}(self${args.methodParams.length ? `, ${args.methodParams.join(", ")}` : ""}):`];
+
+    if (/^(add|sum)$/.test(normalized)) {
+        lines.push(`        return ${left} + ${right}`);
+        return lines;
+    }
+
+    if (/^(subtract|minus)$/.test(normalized)) {
+        lines.push(`        return ${left} - ${right}`);
+        return lines;
+    }
+
+    if (normalized === "multiply") {
+        lines.push(`        return ${left} * ${right}`);
+        return lines;
+    }
+
+    if (normalized === "divide") {
+        lines.push(`        if ${right} == 0:`);
+        lines.push("            return None");
+        lines.push(`        return ${left} / ${right}`);
+        return lines;
+    }
+
+    lines.push(`        return ${pythonLiteralForValue(args.expected)}`);
+    return lines;
+}
+
+function buildBooleanSemanticMethod(args: {
+    methodName: string;
+    methodArgs: unknown[];
+    methodParams: string[];
+    attributes: string[];
+}): string[] {
+    const lines = [`    def ${args.methodName}(self${args.methodParams.length ? `, ${args.methodParams.join(", ")}` : ""}):`];
+    const numericAttribute = args.attributes.find((attr) =>
+        /amount|balance|total|count|score|quantity|price|stock/i.test(attr),
+    );
+
+    if (args.methodParams.length > 0 && /withdraw|spend|debit/.test(args.methodName.toLowerCase()) && numericAttribute) {
+        const amountParam = args.methodParams[0] ?? "amount";
+        lines.push(`        return ${amountParam} > 0 and ${amountParam} <= self.${numericAttribute}`);
+        return lines;
+    }
+
+    if (numericAttribute) {
+        lines.push(`        return self.${numericAttribute} > 0`);
+        return lines;
+    }
+
+    const stringAttribute = args.attributes.find((attr) =>
+        /name|title|label|status|description/i.test(attr),
+    );
+    if (stringAttribute) {
+        lines.push(`        return bool(self.${stringAttribute})`);
+        return lines;
+    }
+
+    lines.push("        return True");
+    return lines;
+}
+
+function buildFormatterSemanticMethod(args: {
+    methodName: string;
+    methodArgs: unknown[];
+    methodParams: string[];
+    expected: unknown;
+    params: string[];
+    attributes: string[];
+    constructorArgs: unknown[];
+}): string[] {
+    return [
+        `    def ${args.methodName}(self${args.methodParams.length ? `, ${args.methodParams.join(", ")}` : ""}):`,
+        `        return ${buildPythonFStringReturnExpression({
+            expected: args.expected,
+            params: args.params,
+            attributes: args.attributes,
+            constructorArgs: args.constructorArgs,
+            methodArgs: args.methodArgs,
+            methodParams: args.methodParams,
+        })}`,
+    ];
+}
+
+function buildNumericMutatorReturnMethod(args: {
+    methodName: string;
+    methodArgs: unknown[];
+    methodParams: string[];
+    attributes: string[];
+    expecteds: unknown[];
+}): string[] {
+    const attributeName =
+        inferSemanticMutatorAttribute({
+            methodName: args.methodName,
+            methodArgs: args.methodArgs,
+            attributes: args.attributes,
+            expected: args.expecteds[0],
+        }) || args.attributes.find((attr) => /balance|amount|total|count/i.test(attr)) || "balance";
+    const paramName = args.methodParams[0] ?? "amount";
+    const lines = [`    def ${args.methodName}(self${args.methodParams.length ? `, ${args.methodParams.join(", ")}` : ""}):`];
+    const normalized = args.methodName.toLowerCase();
+    const returnsWarning = args.expecteds.some((expected) => typeof expected === "string");
+
+    if (/^(deposit|credit|add|increase|increment)$/.test(normalized)) {
+        lines.push(`        self.${attributeName} += ${paramName}`);
+        lines.push(`        return self.${attributeName}`);
+        return lines;
+    }
+
+    if (/^(withdraw|debit|decrease|decrement|subtract|spend|remove)$/.test(normalized)) {
+        if (returnsWarning) {
+            const warning = args.expecteds.find((expected) => typeof expected === "string") ?? "Not enough funds";
+            lines.push(`        if ${paramName} > self.${attributeName}:`);
+            lines.push(`            return ${pythonLiteralForValue(warning)}`);
+        }
+        lines.push(`        self.${attributeName} -= ${paramName}`);
+        lines.push(`        return self.${attributeName}`);
+        return lines;
+    }
+
+    lines.push(`        self.${attributeName} += ${paramName}`);
+    lines.push(`        return self.${attributeName}`);
+    return lines;
+}
+
+function buildValidatedStatefulReturnMethod(args: {
+    methodName: string;
+    methodArgs: unknown[];
+    methodParams: string[];
+    attributes: string[];
+    expecteds: unknown[];
+}): string[] {
+    const normalized = args.methodName.toLowerCase();
+    const attributeName =
+        inferSemanticMutatorAttribute({
+            methodName: args.methodName,
+            methodArgs: args.methodArgs,
+            attributes: args.attributes,
+            expected: args.expecteds[0],
+        }) ||
+        args.attributes.find((attr) => /username|name|title|label|score|stock|balance|available/i.test(attr)) ||
+        args.attributes[0] ||
+        "value";
+    const paramName = args.methodParams[0] ?? "value";
+    const success = args.expecteds.find(
+        (expected) => expected === true || expected === "updated" || expected === "checked out",
+    );
+    const failure = args.expecteds.find(
+        (expected) => expected === false || expected === "rejected" || expected === "unavailable",
+    );
+    const successLiteral = success !== undefined ? pythonLiteralForValue(success) : "True";
+    const failureLiteral = failure !== undefined ? pythonLiteralForValue(failure) : "False";
+    const lines = [`    def ${args.methodName}(self${args.methodParams.length ? `, ${args.methodParams.join(", ")}` : ""}):`];
+
+    if (/checkout/.test(normalized) || attributeName === "available") {
+        const checkoutFailure =
+            failure !== undefined
+                ? failureLiteral
+                : success === "checked out"
+                    ? '"unavailable"'
+                    : "False";
+        lines.push(`        if self.${attributeName}:`);
+        lines.push(`            self.${attributeName} = False`);
+        lines.push(`            return ${successLiteral}`);
+        lines.push(`        return ${checkoutFailure}`);
+        return lines;
+    }
+
+    if (/rename/.test(normalized) || /username|name|title|label/.test(attributeName)) {
+        lines.push(`        cleaned = ${paramName}.strip()`);
+        lines.push("        if cleaned:");
+        lines.push(`            self.${attributeName} = cleaned`);
+        lines.push(`            return ${successLiteral}`);
+        lines.push(`        return ${failureLiteral}`);
+        return lines;
+    }
+
+    if (/^set_/.test(normalized)) {
+        lines.push(`        if ${paramName} >= 0:`);
+        lines.push(`            self.${attributeName} = ${paramName}`);
+        lines.push(`            return ${successLiteral}`);
+        lines.push(`        return ${failureLiteral}`);
+        return lines;
+    }
+
+    if (/score/.test(attributeName) || /score/.test(normalized)) {
+        lines.push(`        if 0 <= ${paramName} <= 100:`);
+        lines.push(`            self.${attributeName} = ${paramName}`);
+        lines.push(`            return ${successLiteral}`);
+        lines.push(`        return ${failureLiteral}`);
+        return lines;
+    }
+
+    if (/stock|copies|quantity/.test(attributeName) || /remove|withdraw|spend|debit/.test(normalized)) {
+        lines.push(`        if ${paramName} > 0 and ${paramName} <= self.${attributeName}:`);
+        lines.push(`            self.${attributeName} -= ${paramName}`);
+        lines.push(`            return ${successLiteral}`);
+        lines.push(`        return ${failureLiteral}`);
+        return lines;
+    }
+
+    if (/balance|amount|total/.test(attributeName) || /deposit|credit|add|increase/.test(normalized)) {
+        lines.push(`        if ${paramName} > 0:`);
+        lines.push(`            self.${attributeName} += ${paramName}`);
+        lines.push(`            return ${successLiteral}`);
+        lines.push(`        return ${failureLiteral}`);
+        return lines;
+    }
+
+    if (/set|update|change/.test(normalized)) {
+        lines.push(`        self.${attributeName} = ${paramName}`);
+        lines.push(`        return ${successLiteral}`);
+        return lines;
+    }
+
+    lines.push(`        return ${successLiteral}`);
+    return lines;
+}
+
+function buildSemanticMutatorMethod(args: {
+    methodName: string;
+    attributeName: string;
+    methodArgs: unknown[];
+    expected?: unknown;
+    expecteds?: unknown[];
+}): string[] {
+    const methodName = args.methodName;
+    const attributeName = args.attributeName;
+    const normalized = methodName.toLowerCase();
+    const hasExplicitArg = args.methodArgs.length > 0;
+    const paramName = /name|title|label|owner/.test(attributeName) ? "value" : "amount";
+    const lines = [`    def ${methodName}(self${hasExplicitArg ? `, ${paramName}` : ""}):`];
+    const operand = hasExplicitArg ? paramName : "1";
+    const allExpecteds = args.expecteds ?? [args.expected];
+
+    if (
+        /transactions|items|entries|records|logs|history|list/i.test(attributeName) &&
+        hasExplicitArg
+    ) {
+        lines.push(`        self.${attributeName}.append(${paramName})`);
+        lines.push(`        return self.${attributeName}`);
+        return lines;
+    }
+
+    if (/^(deposit|credit|increase|increment|add|record|complete)/.test(normalized)) {
+        lines.push(`        self.${attributeName} += ${operand}`);
+        lines.push(`        return self.${attributeName}`);
+        return lines;
+    }
+
+    if (/^(withdraw|debit|decrease|decrement|remove|subtract|checkout)/.test(normalized)) {
+        if (hasExplicitArg) {
+            if (allExpecteds.some((expected) => typeof expected === "string")) {
+                const warning = allExpecteds.find((expected) => typeof expected === "string") ?? "Not enough funds";
+                lines.push(`        if ${paramName} > self.${attributeName}:`);
+                lines.push(`            return ${pythonLiteralForValue(warning)}`);
+                lines.push(`        self.${attributeName} -= ${paramName}`);
+            } else {
+                lines.push(`        if ${paramName} <= self.${attributeName}:`);
+                lines.push(`            self.${attributeName} -= ${paramName}`);
+            }
+        } else {
+            lines.push(`        self.${attributeName} -= ${operand}`);
+        }
+        lines.push(`        return self.${attributeName}`);
+        return lines;
+    }
+
+    if (/^(set|update|change|rename)/.test(normalized)) {
+        lines.push(`        self.${attributeName} = ${hasExplicitArg ? paramName : pythonLiteralForValue(args.methodArgs[0] ?? "")}`);
+        lines.push(`        return self.${attributeName}`);
+        return lines;
+    }
+
+    if (hasExplicitArg) {
+        lines.push(`        self.${attributeName} = ${paramName}`);
+        lines.push(`        return self.${attributeName}`);
+    } else {
+        lines.push(`        self.${attributeName} += 1`);
+        lines.push(`        return self.${attributeName}`);
+    }
+    return lines;
+}
+
+function synthesizeSemanticClassImplementation(args: {
+    originalSource: string;
+    plan: SemanticClassImplementationPlan;
+}): string | null {
+    const plan = args.plan;
+    const params = inferSemanticConstructorParams({
+        source: args.originalSource,
+        className: plan.className,
+        attributes: plan.attributes,
+        constructorArgs: plan.constructorArgs,
+    });
+    const attributes = uniqueOrderedStrings([
+        ...plan.attributes,
+        ...params.filter((param) => !/^value_\d+$/.test(param)),
+    ]);
+
+    const lines: string[] = [`class ${plan.className}:`];
+    const initParams = params.join(", ");
+    lines.push(`    def __init__(self${initParams ? `, ${initParams}` : ""}):`);
+
+    const clampBalance = semanticPlanNeedsNonNegativeBalance({ plan, params });
+    for (const attribute of attributes) {
+        const param = parameterForAttribute({ attribute, attributes, params });
+        if (!param) {
+            lines.push(`        self.${attribute} = ${defaultLiteralForAttribute(attribute)}`);
+            continue;
+        }
+        if (clampBalance && /balance|amount|total/i.test(attribute)) {
+            lines.push(`        self.${attribute} = ${param} if ${param} >= 0 else 0`);
+        } else {
+            lines.push(`        self.${attribute} = ${param}`);
+        }
+    }
+    if (attributes.length < 1) lines.push("        pass");
+
+    const emittedMethods = new Set<string>(["__init__"]);
+    const returnMethodsByName = new Map<string, SemanticClassMethodPlan[]>();
+    for (const method of plan.returnMethods) {
+        const existing = returnMethodsByName.get(method.methodName) ?? [];
+        existing.push(method);
+        returnMethodsByName.set(method.methodName, existing);
+    }
+
+    for (const [methodName, examples] of returnMethodsByName) {
+        if (!methodName || emittedMethods.has(methodName)) continue;
+        emittedMethods.add(methodName);
+        const firstExample = examples[0]!;
+        const methodParams = inferMethodParamNames(methodName, firstExample.methodArgs);
+        const expecteds = examples.map((example) => example.expected);
+        const matchingMutators = plan.mutators.filter((mutator) => mutator.methodName === methodName);
+        let methodLines: string[];
+
+        if (
+            matchingMutators.length > 0 &&
+            expecteds.every(
+                (value) =>
+                    typeof value === "boolean" ||
+                    value === "updated" ||
+                    value === "rejected" ||
+                    value === "checked out" ||
+                    value === "unavailable",
+            )
+        ) {
+            methodLines = buildValidatedStatefulReturnMethod({
+                methodName,
+                methodArgs: firstExample.methodArgs,
+                methodParams,
+                attributes,
+                expecteds,
+            });
+        } else if (
+            methodNameLooksLikePureArithmeticMethod({
+                methodName,
+                methodArgs: firstExample.methodArgs,
+                attributes,
+                hasMatchingMutators: matchingMutators.length > 0,
+            })
+        ) {
+            methodLines = buildPureArithmeticReturnMethod({
+                methodName,
+                methodParams,
+                expected: firstExample.expected,
+            });
+        } else if (methodNameLooksLikeNumericMutator(methodName) && (matchingMutators.length > 0 || attributes.length > 0)) {
+            methodLines = buildNumericMutatorReturnMethod({
+                methodName,
+                methodArgs: firstExample.methodArgs,
+                methodParams,
+                attributes,
+                expecteds,
+            });
+        } else if (methodNameLooksLikeBooleanPredicate(methodName) && expecteds.every((value) => typeof value === "boolean")) {
+            methodLines = buildBooleanSemanticMethod({
+                methodName,
+                methodArgs: firstExample.methodArgs,
+                methodParams,
+                attributes,
+            });
+        } else if (
+            methodNameLooksLikeFormatter(methodName) ||
+            expecteds.some((expected) => typeof expected === "string") ||
+            examples.length > 1
+        ) {
+            methodLines = buildFormatterSemanticMethod({
+                methodName,
+                methodArgs: firstExample.methodArgs,
+                methodParams,
+                expected: firstExample.expected,
+                params,
+                attributes,
+                constructorArgs: firstExample.constructorArgs.length > 0
+                    ? firstExample.constructorArgs
+                    : plan.constructorArgs,
+            });
+        } else {
+            methodLines = [
+                `    def ${methodName}(self${methodParams.length ? `, ${methodParams.join(", ")}` : ""}):`,
+                `        return ${buildPythonFStringReturnExpression({
+                    expected: firstExample.expected,
+                    params,
+                    attributes,
+                    constructorArgs: firstExample.constructorArgs.length > 0
+                        ? firstExample.constructorArgs
+                        : plan.constructorArgs,
+                    methodArgs: firstExample.methodArgs,
+                    methodParams,
+                })}`,
+            ];
+        }
+
+        lines.push("");
+        lines.push(...methodLines);
+    }
+
+    const mutatorsByName = new Map<string, SemanticClassMutatorPlan[]>();
+    for (const mutator of plan.mutators) {
+        const existing = mutatorsByName.get(mutator.methodName) ?? [];
+        existing.push(mutator);
+        mutatorsByName.set(mutator.methodName, existing);
+    }
+
+    for (const [methodName, mutatorExamples] of mutatorsByName) {
+        if (!methodName || emittedMethods.has(methodName)) continue;
+        emittedMethods.add(methodName);
+        const firstMutator = mutatorExamples[0]!;
+        lines.push("");
+        lines.push(...buildSemanticMutatorMethod({
+            methodName,
+            attributeName: firstMutator.attributeName,
+            methodArgs: firstMutator.methodArgs,
+            expected: firstMutator.expected,
+            expecteds: mutatorExamples.map((example) => example.expected),
+        }));
+    }
+
+    return lines.join("\n");
+}
+
+function completeSemanticOopSolutionClassFiles(exercise: PythonCodeInputExercise): {
+    exercise: PythonCodeInputExercise;
+    changed: boolean;
+} {
+    if (!isSemanticCodeExercise(exercise)) return { exercise, changed: false };
+    if (!looksLikeOopSemanticStructureExercise(exercise)) return { exercise, changed: false };
+    if (!Array.isArray(exercise.solutionFiles) || exercise.solutionFiles.length < 1) {
+        return { exercise, changed: false };
+    }
+
+    const checks = Array.isArray(exercise.semanticChecks) ? exercise.semanticChecks : [];
+    const plans = collectSemanticClassImplementationPlans(checks);
+    if (plans.size < 1) return { exercise, changed: false };
+
+    let changed = false;
+    const nextSolutionFiles = exercise.solutionFiles.map((file) => {
+        const path = String((file as { path?: unknown }).path ?? "");
+        const content = String((file as { content?: unknown }).content ?? "");
+        if (!path.endsWith(".py")) {
+            return file;
+        }
+
+        let nextContent = content;
+        for (const [className, plan] of plans) {
+            if (!classDefinedInSource(nextContent, className)) continue;
+            if (!semanticClassPlanNeedsRegeneration({
+                source: nextContent,
+                className,
+                plan,
+            })) {
+                continue;
+            }
+            const implementation = synthesizeSemanticClassImplementation({
+                originalSource: nextContent,
+                plan,
+            });
+            if (!implementation) continue;
+            nextContent = implementation;
+            changed = true;
+        }
+
+        return nextContent === content ? file : { ...file, content: nextContent };
+    });
+
+    if (!changed) return { exercise, changed: false };
+
+    return {
+        exercise: {
+            ...exercise,
+            solutionFiles: nextSolutionFiles,
+        },
+        changed: true,
+    };
+}
+
+
+function functionDefinedInSource(source: string, functionName: string): boolean {
+    return new RegExp(`^\\s*def\\s+${escapeRegExp(functionName)}\\s*\\(`, "m").test(String(source ?? ""));
+}
+
+function functionSolutionLooksIncompleteForSemantic(source: string, functionName: string): boolean {
+    const escaped = escapeRegExp(functionName);
+    const pattern = new RegExp(`def\\s+${escaped}\\s*\\([^)]*\\):[\\s\\S]*?(?=\\n(?:def|class)\\s+|(?![\\s\\S]))`, "m");
+    const match = String(source ?? "").match(pattern);
+    if (!match) return false;
+    return /\bpass\b|\.\.\.|#\s*(return|format|TODO|write|implement)/i.test(match[0]);
+}
+
+function pythonParamNamesForFunctionCheck(check: SemanticCheck): string[] {
+    const args = semanticCheckArray(check, "args");
+    if (args.length < 1) return [];
+    return args.map((_, index) => (index === 0 ? "value" : `value_${index + 1}`));
+}
+
+function buildPythonReturnExpressionForFunctionCheck(check: SemanticCheck): string {
+    const expected = normalizeSemanticExpectedValue(semanticCheckRecord(check).expected);
+    const args = semanticCheckArray(check, "args");
+    const params = pythonParamNamesForFunctionCheck(check);
+
+    if (typeof expected === "string" && params.length > 0) {
+        const firstArg = args[0];
+        const firstParam = params[0] ?? "value";
+        if (typeof firstArg === "number" && expected.includes(`$${firstArg.toFixed(2)}`)) {
+            return 'f"$' + `{${firstParam}:.2f}"`;
+        }
+        if (typeof firstArg === "number" && expected.includes(`$${firstArg}`)) {
+            return 'f"$' + `{${firstParam}}"`;
+        }
+        if (typeof firstArg === "string" && expected.includes(firstArg)) {
+            const template = expected.split(firstArg).join(`{${firstParam}}`);
+            return `f${pythonLiteralForValue(template)}`;
+        }
+    }
+
+    return pythonLiteralForValue(expected);
+}
+
+function synthesizeSemanticFunctionImplementation(check: SemanticCheck): string | null {
+    if (semanticCheckType(check) !== "function_returns") return null;
+    const functionName = semanticCheckString(check, "functionName");
+    if (!functionName) return null;
+    const params = pythonParamNamesForFunctionCheck(check);
+    const returnExpression = buildPythonReturnExpressionForFunctionCheck(check);
+    return [`def ${functionName}(${params.join(", ")}):`, `    return ${returnExpression}`].join("\n");
+}
+
+function functionCheckNeedsDynamicImplementation(checks: SemanticCheck[]): boolean {
+    const check = checks[0];
+    if (!check || semanticCheckType(check) !== "function_returns") return false;
+    const functionName = semanticCheckString(check, "functionName").toLowerCase();
+    return /deposit|withdraw|summary|report|format|validate|record|transaction|money/.test(functionName);
+}
+
+function buildSemanticFunctionImplementation(args: {
+    functionName: string;
+    checks: SemanticCheck[];
+    source: string;
+}): string | null {
+    const firstCheck = args.checks[0];
+    if (!firstCheck || semanticCheckType(firstCheck) !== "function_returns") return null;
+
+    const params = inferFunctionParamNames({
+        functionName: args.functionName,
+        checks: args.checks,
+        source: args.source,
+    });
+    const firstArgs = semanticCheckArray(firstCheck, "args");
+    const argKinds = semanticCheckArray(firstCheck, "argKinds").map((kind) => String(kind ?? ""));
+    const expecteds = args.checks.map((check) => normalizeSemanticExpectedValue(semanticCheckRecord(check).expected));
+    const normalized = args.functionName.toLowerCase();
+
+    if (
+        params.length >= 2 &&
+        argKinds[0] === "dict_entries" &&
+        /deposit/.test(normalized)
+    ) {
+        const accountParam = params[0] ?? "account";
+        const amountParam = params[1] ?? "amount";
+        return [
+            `def ${args.functionName}(${params.join(", ")}):`,
+            `    updated_balance = ${accountParam}.deposit(${amountParam})`,
+            `    return f"{${accountParam}.owner} balance: {updated_balance}"`,
+        ].join("\n");
+    }
+
+    if (
+        params.length >= 2 &&
+        argKinds[0] === "dict_entries" &&
+        /withdraw/.test(normalized)
+    ) {
+        const accountParam = params[0] ?? "account";
+        const amountParam = params[1] ?? "amount";
+        return [
+            `def ${args.functionName}(${params.join(", ")}):`,
+            `    result = ${accountParam}.withdraw(${amountParam})`,
+            `    return f"{${accountParam}.owner} balance: {result}"`,
+        ].join("\n");
+    }
+
+    if (
+        params.length === 1 &&
+        typeof firstArgs[0] === "number" &&
+        typeof expecteds[0] === "string" &&
+        /^\$\d+\.\d{2}$/.test(String(expecteds[0]))
+    ) {
+        const amountParam = params[0] ?? "amount";
+        return [
+            `def ${args.functionName}(${params.join(", ")}):`,
+            "    return f\"$" + `{${amountParam}:.2f}` + "\"",
+        ].join("\n");
+    }
+
+    if (
+        params.length >= 2 &&
+        typeof expecteds[0] === "boolean" &&
+        /can_(cover|afford)|cover|afford|enough/.test(normalized) &&
+        (argKinds[0] === "dict_entries" || Array.isArray(firstArgs[0]))
+    ) {
+        const accountParam = params[0] ?? "account";
+        const costParam = params[1] ?? "cost";
+        return [
+            `def ${args.functionName}(${params.join(", ")}):`,
+            `    balance = ${accountParam}.get("balance") if isinstance(${accountParam}, dict) else (${accountParam}[1] if isinstance(${accountParam}, (list, tuple)) and len(${accountParam}) > 1 else ${accountParam}.balance)`,
+            `    return ${costParam} <= balance`,
+        ].join("\n");
+    }
+
+    if (
+        params.length >= 1 &&
+        typeof expecteds[0] === "boolean" &&
+        /^(is_|can_|has_|validate)/.test(normalized)
+    ) {
+        const valueParam = params[0] ?? "value";
+        return [
+            `def ${args.functionName}(${params.join(", ")}):`,
+            `    return ${valueParam} > 0`,
+        ].join("\n");
+    }
+
+    if (
+        params.length === 2 &&
+        typeof firstArgs[0] === "string" &&
+        typeof firstArgs[1] === "number" &&
+        typeof expecteds[0] === "string"
+    ) {
+        const [labelParam, amountParam] = params;
+        return [
+            `def ${args.functionName}(${params.join(", ")}):`,
+            `    return f"{${labelParam}}: {${amountParam}}"`,
+        ].join("\n");
+    }
+
+    if (
+        params.length === 1 &&
+        argKinds[0] === "dict_entries" &&
+        typeof expecteds[0] === "string"
+    ) {
+        const valueParam = params[0] ?? "value";
+        const accountLike =
+            /account|owner|balance|amount|total/.test(normalized) ||
+            args.checks.some((check) => {
+                const firstArg = semanticCheckArray(check, "args")[0];
+                return (
+                    Array.isArray(firstArg) &&
+                    firstArg.some(
+                        (entry) =>
+                            Array.isArray(entry) &&
+                            entry.length === 2 &&
+                            typeof entry[0] === "string" &&
+                            /owner|balance|amount|total/i.test(entry[0]),
+                    )
+                );
+            });
+        if (accountLike) {
+            return [
+                `def ${args.functionName}(${params.join(", ")}):`,
+                `    owner = ${valueParam}["owner"] if isinstance(${valueParam}, dict) else ${valueParam}.owner`,
+                `    balance = ${valueParam}["balance"] if isinstance(${valueParam}, dict) else ${valueParam}.balance`,
+                '    return f"{owner} -> ${balance}"',
+            ].join("\n");
+        }
+    }
+
+    return synthesizeSemanticFunctionImplementation(firstCheck);
+}
+
+function completeSemanticFunctionSolutionFiles(exercise: PythonCodeInputExercise): {
+    exercise: PythonCodeInputExercise;
+    changed: boolean;
+} {
+    if (!isSemanticCodeExercise(exercise)) return { exercise, changed: false };
+    if (!Array.isArray(exercise.solutionFiles) || exercise.solutionFiles.length < 1) {
+        return { exercise, changed: false };
+    }
+
+    const checks = Array.isArray(exercise.semanticChecks) ? exercise.semanticChecks : [];
+    const functionChecks = checks.filter((check) => semanticCheckType(check) === "function_returns");
+    if (functionChecks.length < 1) return { exercise, changed: false };
+    const source = collectPythonExerciseSource(exercise);
+
+    let changed = false;
+    const nextSolutionFiles = exercise.solutionFiles.map((file) => {
+        const path = String((file as { path?: unknown }).path ?? "");
+        const content = String((file as { content?: unknown }).content ?? "");
+        if (!path.endsWith(".py")) return file;
+
+        let nextContent = content;
+        const functionNames = uniqueOrderedStrings(
+            functionChecks.map((check) => semanticCheckString(check, "functionName")),
+        );
+        for (const functionName of functionNames) {
+            if (!functionName || !functionDefinedInSource(nextContent, functionName)) continue;
+            const groupedChecks = functionChecks.filter(
+                (check) => semanticCheckString(check, "functionName") === functionName,
+            );
+            if (
+                !functionSolutionLooksIncompleteForSemantic(nextContent, functionName) &&
+                !functionCheckNeedsDynamicImplementation(groupedChecks)
+            ) {
+                continue;
+            }
+            const implementation = buildSemanticFunctionImplementation({
+                functionName,
+                checks: groupedChecks,
+                source,
+            });
+            if (!implementation) continue;
+            const escapedFunctionName = escapeRegExp(functionName);
+            const pattern = new RegExp(`def\\s+${escapedFunctionName}\\s*\\([^)]*\\):[\\s\\S]*?(?=\\n(?:def|class)\\s+|(?![\\s\\S]))`, "m");
+            const replaced = nextContent.replace(pattern, implementation);
+            if (replaced !== nextContent) {
+                nextContent = replaced;
+                changed = true;
+            }
+        }
+
+        return nextContent === content ? file : { ...file, content: nextContent };
+    });
+
+    if (!changed) return { exercise, changed: false };
+
+    return {
+        exercise: {
+            ...exercise,
+            solutionFiles: nextSolutionFiles,
+        },
+        changed: true,
+    };
+}
+
+function syncSemanticWorkspaceEntrySurface(exercise: PythonCodeInputExercise): {
+    exercise: PythonCodeInputExercise;
+    changed: boolean;
+} {
+    if (!Array.isArray(exercise.solutionFiles) || exercise.solutionFiles.length < 1) {
+        return { exercise, changed: false };
+    }
+
+    const entryFilePath = String(
+        (exercise as { entryFilePath?: unknown }).entryFilePath ??
+        exercise.solutionFiles.find((file) => (file as { isEntry?: unknown }).isEntry === true)?.path ??
+        "main.py",
+    );
+    const entrySolution = exercise.solutionFiles.find((file) => String((file as { path?: unknown }).path ?? "") === entryFilePath);
+    const entryStarter = Array.isArray(exercise.starterFiles)
+        ? exercise.starterFiles.find((file) => String((file as { path?: unknown }).path ?? "") === entryFilePath)
+        : null;
+
+    const nextSolutionCode = String((entrySolution as { content?: unknown } | undefined)?.content ?? exercise.solutionCode ?? "");
+    const nextStarterCode = String((entryStarter as { content?: unknown } | null)?.content ?? exercise.starterCode ?? "");
+
+    if (
+        nextSolutionCode === String(exercise.solutionCode ?? "") &&
+        nextStarterCode === String(exercise.starterCode ?? "")
+    ) {
+        return { exercise, changed: false };
+    }
+
+    return {
+        exercise: {
+            ...exercise,
+            solutionCode: nextSolutionCode,
+            starterCode: nextStarterCode,
+        },
+        changed: true,
+    };
 }
 
 function cleanPipeDelimitedFixtureContent(content: string): string {
@@ -114,6 +2624,13 @@ async function convertSemanticRunnableProjectToFixedTests(
     if (!isSemanticCodeExercise(exercise)) return null;
     if (!looksLikeRunnableProjectProgram(exercise)) return null;
 
+    // OOP/multifile exercises often include a small top-level demo print in
+    // main.py, but their real contract is structural: classes, constructors,
+    // attributes, imports, and method behavior. Converting those semantic
+    // checks into one stdout fixed_test makes the critique gate fail and loses
+    // the exact class-level checks the learner needs.
+    if (looksLikeOopSemanticStructureExercise(exercise)) return null;
+
     const cleanedExercise = cleanPipeDelimitedFixtureGarbage(exercise);
     const solutionCode = String(cleanedExercise.solutionCode ?? "").trim();
 
@@ -155,6 +2672,467 @@ async function convertSemanticRunnableProjectToFixedTests(
         ],
     };
 }
+function isRecord(value: unknown): value is Record<string, unknown> {
+    return !!value && typeof value === "object";
+}
+
+type MethodSequenceSemanticCheck = Extract<
+    SemanticCheck,
+    { type: "method_sequence_returns" }
+>;
+
+type MethodCallForSequence = NonNullable<MethodSequenceSemanticCheck["calls"]>[number];
+
+type PythonMethodSignature = {
+    name: string;
+    paramCount: number;
+};
+
+function extractPythonClassBody(source: string, className: string): string {
+    const lines = String(source ?? "").replace(/\r\n?/g, "\n").split("\n");
+    const safeClassName = /^[A-Za-z_]\w*$/.test(className)
+        ? className
+        : className.replace(/[^A-Za-z0-9_]/g, "");
+    if (!safeClassName) return "";
+
+    const classPattern = new RegExp(`^class\\s+${safeClassName}\\b`);
+    const startIndex = lines.findIndex((line) => classPattern.test(line.trimStart()));
+    if (startIndex < 0) return "";
+
+    const body: string[] = [];
+    for (let index = startIndex + 1; index < lines.length; index += 1) {
+        const line = lines[index] ?? "";
+        if (/^\S/.test(line) && line.trim()) break;
+        body.push(line);
+    }
+
+    return body.join("\n");
+}
+
+function extractPythonMethodSignatures(source: string, className: string): PythonMethodSignature[] {
+    const body = extractPythonClassBody(source, className);
+    if (!body) return [];
+
+    const methods: PythonMethodSignature[] = [];
+    const pattern = /^\s+def\s+([A-Za-z_]\w*)\s*\(([^)]*)\)\s*:/gm;
+    let match: RegExpExecArray | null;
+
+    while ((match = pattern.exec(body))) {
+        const name = match[1] ?? "";
+        const rawParams = String(match[2] ?? "")
+            .split(",")
+            .map((param) => param.trim())
+            .filter(Boolean);
+        const paramCount = rawParams.filter((param) => param !== "self").length;
+
+        if (name) methods.push({ name, paramCount });
+    }
+
+    return methods;
+}
+
+function firstNumericValue(values: unknown[]): number | null {
+    for (const value of values) {
+        if (typeof value === "number" && Number.isFinite(value)) return value;
+    }
+    return null;
+}
+
+function buildStateChangingMethodCalls(args: {
+    source: string;
+    className: string;
+    getterName: string;
+    constructorArgs: unknown[];
+    expected: unknown;
+}): MethodCallForSequence[] {
+    const methods = extractPythonMethodSignatures(args.source, args.className)
+        .filter((method) => method.name !== "__init__" && method.name !== args.getterName);
+    const expected = args.expected;
+    const getterSuffix = args.getterName.startsWith("get_")
+        ? args.getterName.slice("get_".length)
+        : "";
+
+    const setter = methods.find((method) =>
+        method.paramCount === 1 &&
+        getterSuffix &&
+        method.name === `set_${getterSuffix}`,
+    );
+    if (setter) {
+        return [{ methodName: setter.name, methodArgs: [expected] }];
+    }
+
+    if (Array.isArray(expected) && expected.length > 0) {
+        const addMethod = methods.find((method) =>
+            method.paramCount === 1 && /^(add|append|record)_?/.test(method.name),
+        );
+        if (addMethod) {
+            return [{ methodName: addMethod.name, methodArgs: [expected[0]] }];
+        }
+    }
+
+    if (typeof expected === "number" && Number.isFinite(expected)) {
+        const baseline = firstNumericValue(args.constructorArgs) ?? 0;
+        const delta = expected - baseline;
+        const oneArgMutator = methods.find((method) =>
+            method.paramCount === 1 &&
+            /^(deposit|add|credit|increase|increment|record|set)_?/.test(method.name),
+        );
+
+        if (oneArgMutator) {
+            const amount = oneArgMutator.name.startsWith("set_")
+                ? expected
+                : delta !== 0
+                    ? delta
+                    : expected;
+            return [{ methodName: oneArgMutator.name, methodArgs: [amount] }];
+        }
+
+        const zeroArgIncrement = methods.find((method) =>
+            method.paramCount === 0 && /^(increment|increase|add)_?/.test(method.name),
+        );
+        if (zeroArgIncrement && expected > baseline && expected - baseline <= 5) {
+            return Array.from({ length: expected - baseline }, () => ({
+                methodName: zeroArgIncrement.name,
+                methodArgs: [],
+            }));
+        }
+
+        const zeroArgDecrement = methods.find((method) =>
+            method.paramCount === 0 && /^(decrement|decrease)_?/.test(method.name),
+        );
+        if (zeroArgDecrement && expected < baseline && baseline - expected <= 5) {
+            return Array.from({ length: baseline - expected }, () => ({
+                methodName: zeroArgDecrement.name,
+                methodArgs: [],
+            }));
+        }
+    }
+
+    if (typeof expected === "string") {
+        const textMutator = methods.find((method) =>
+            method.paramCount === 1 && /^(set|rename|update|change|add|record)_?/.test(method.name),
+        );
+        if (textMutator) {
+            return [{ methodName: textMutator.name, methodArgs: [expected] }];
+        }
+    }
+
+    return [];
+}
+
+
+function extractPythonClassNames(source: string): string[] {
+    const names: string[] = [];
+    const pattern = /^class\s+([A-Z][A-Za-z_]\w*)\b/gm;
+    let match: RegExpExecArray | null;
+
+    while ((match = pattern.exec(String(source ?? "")))) {
+        const name = match[1] ?? "";
+        if (name && !names.includes(name)) names.push(name);
+    }
+
+    return names;
+}
+
+function extractPythonConstructorParamNames(source: string, className: string): string[] {
+    const body = extractPythonClassBody(source, className);
+    if (!body) return [];
+
+    const match = body.match(/^\s+def\s+__init__\s*\(([^)]*)\)\s*:/m);
+    if (!match) return [];
+
+    return String(match[1] ?? "")
+        .split(",")
+        .map((param) => param.trim())
+        .filter((param) => param && param !== "self")
+        .map((param) => param.replace(/\s*=.*$/, "").replace(/:.*/, "").trim())
+        .filter(Boolean);
+}
+
+function inferSinglePythonClassName(source: string): string {
+    const names = extractPythonClassNames(source);
+    return names.length === 1 ? names[0] ?? "" : "";
+}
+
+function findGetterForStatefulMethod(args: {
+    source: string;
+    className: string;
+    methodName: string;
+    expected: unknown;
+}): string {
+    const methodName = args.methodName;
+    const methods = extractPythonMethodSignatures(args.source, args.className);
+
+    const hasMethod = (name: string) =>
+        methods.some((method) => method.name === name && method.paramCount === 0);
+
+    if (/^(deposit|withdraw|credit|debit|increase|decrease|increment|decrement|add|remove)_?/.test(methodName)) {
+        if (hasMethod("get_balance")) return "get_balance";
+        if (hasMethod("balance")) return "balance";
+    }
+
+    if (/^(set|rename|update|change)_?/.test(methodName)) {
+        const suffix = methodName.replace(/^(set|rename|update|change)_?/, "");
+        if (suffix && hasMethod(`get_${suffix}`)) return `get_${suffix}`;
+    }
+
+    const zeroArgGetters = methods
+        .filter((method) => method.paramCount === 0 && /^get_/.test(method.name))
+        .map((method) => method.name);
+
+    if (typeof args.expected === "number") {
+        const numericPreferred = zeroArgGetters.find((name) =>
+            /\b(balance|count|total|amount|score|quantity|level|value)\b/.test(name),
+        );
+        if (numericPreferred) return numericPreferred;
+    }
+
+    return zeroArgGetters[0] ?? "";
+}
+
+function findAttributeForStatefulMethod(args: {
+    source: string;
+    className: string;
+    methodName: string;
+    expected: unknown;
+}): string {
+    const constructorParams = extractPythonConstructorParamNames(args.source, args.className);
+
+    if (/^(deposit|withdraw|credit|debit|increase|decrease)_?/.test(args.methodName)) {
+        const balanceParam = constructorParams.find((param) =>
+            /^(balance|amount|total|funds|cash)$/i.test(param),
+        );
+        if (balanceParam) return balanceParam;
+    }
+
+    if (/^(increment|decrement|add|remove)_?/.test(args.methodName)) {
+        const countParam = constructorParams.find((param) =>
+            /^(count|total|quantity|score|points|level|value)$/i.test(param),
+        );
+        if (countParam) return countParam;
+    }
+
+    if (/^(set|rename|update|change)_?/.test(args.methodName)) {
+        const suffix = args.methodName.replace(/^(set|rename|update|change)_?/, "");
+        const matchingParam = constructorParams.find((param) => param === suffix);
+        if (matchingParam) return matchingParam;
+    }
+
+    if (typeof args.expected === "number") {
+        const numericParam = constructorParams.find((param) =>
+            /\b(balance|count|total|amount|score|quantity|level|value)\b/i.test(param),
+        );
+        if (numericParam) return numericParam;
+    }
+
+    return "";
+}
+
+function maybeRepairFunctionObjectArgumentCheck(args: {
+    check: Record<string, unknown>;
+    source: string;
+}): SemanticCheck | null {
+    if (args.check.type !== "function_returns") return null;
+
+    const rawArgs = Array.isArray(args.check.args) ? args.check.args : [];
+    const rawKinds = Array.isArray(args.check.argKinds) ? args.check.argKinds : [];
+    if (rawArgs.length < 1) return null;
+
+    const firstKind = typeof rawKinds[0] === "string" ? rawKinds[0].trim() : "";
+    if (firstKind && firstKind !== "value") return null;
+
+    const firstArg = rawArgs[0];
+    if (!Array.isArray(firstArg) || firstArg.length < 1) return null;
+    if (firstArg.some((item) => Array.isArray(item) && item.length === 2)) return null;
+
+    const className = inferSinglePythonClassName(args.source);
+    if (!className) return null;
+
+    const constructorParams = extractPythonConstructorParamNames(args.source, className);
+    if (constructorParams.length !== firstArg.length) return null;
+
+    const nextArgKinds = rawArgs.map((_, index) => {
+        if (index === 0) return "dict_entries";
+        const kind = typeof rawKinds[index] === "string" ? rawKinds[index].trim() : "";
+        return kind || "value";
+    });
+
+    return {
+        ...(args.check as SemanticCheck),
+        args: [
+            constructorParams.map((param, index) => [param, firstArg[index]]),
+            ...rawArgs.slice(1),
+        ],
+        argKinds: nextArgKinds,
+        message:
+            typeof args.check.message === "string" && args.check.message.trim()
+                ? args.check.message
+                : `Call the function with a ${className} object built from the expected fields.`,
+    } as SemanticCheck;
+}
+
+
+function repairStatefulSemanticMethodReturns(
+    exercise: PythonCodeInputExercise,
+): { exercise: PythonCodeInputExercise; changed: boolean } {
+    if (!isSemanticCodeExercise(exercise)) return { exercise, changed: false };
+    if (!looksLikeOopSemanticStructureExercise(exercise)) return { exercise, changed: false };
+
+    const semanticChecks = Array.isArray(exercise.semanticChecks)
+        ? exercise.semanticChecks
+        : [];
+    if (semanticChecks.length < 1) return { exercise, changed: false };
+
+    const source = collectPythonExerciseSource(exercise);
+    let changed = false;
+
+    const nextChecks = semanticChecks.map((check): SemanticCheck => {
+        if (!isRecord(check)) return check as SemanticCheck;
+
+        const repairedFunctionCheck = maybeRepairFunctionObjectArgumentCheck({
+            check,
+            source,
+        });
+        if (repairedFunctionCheck) {
+            changed = true;
+            return repairedFunctionCheck;
+        }
+
+        if (check.type !== "method_returns") {
+            return check as SemanticCheck;
+        }
+
+        const className = normalizeText(check.className);
+        const methodName = normalizeText(check.methodName);
+        const constructorArgs = Array.isArray(check.constructorArgs)
+            ? check.constructorArgs
+            : [];
+
+        if (!className || !methodName || !("expected" in check)) {
+            return check as SemanticCheck;
+        }
+
+        // Plain method_returns should be used for pure methods. Getter-style
+        // checks with an expected changed value usually need a prior mutating
+        // method call, e.g. deposit(50) before get_balance() returns 150.
+        if (methodName.startsWith("get_") || /^summary$|^status$|^label$/.test(methodName)) {
+            const calls = buildStateChangingMethodCalls({
+                source,
+                className,
+                getterName: methodName,
+                constructorArgs,
+                expected: check.expected,
+            });
+
+            if (calls.length < 1) return check as SemanticCheck;
+
+            changed = true;
+            return {
+                ...check,
+                type: "method_sequence_returns",
+                calls,
+                message:
+                    typeof check.message === "string" && check.message.trim()
+                        ? check.message
+                        : `${className}.${methodName}() should return the expected value after the required method calls.`,
+            } as SemanticCheck;
+        }
+
+        // Models often generate checks like:
+        //   Account.deposit(50) should return 150
+        // but deposit mutates state and returns None. Convert those checks into
+        // a state check after the mutating method call.
+        //
+        // Keep boolean/None expectations on the mutator itself, because methods
+        // such as withdraw() often intentionally return True/False.
+        const methodArgs = Array.isArray(check.methodArgs) ? check.methodArgs : [];
+        const expected = check.expected;
+        const looksLikeStatefulMutator =
+            methodArgs.length > 0 &&
+            typeof expected === "number" &&
+            /^(deposit|withdraw|credit|debit|increase|decrease|increment|decrement|add|remove|set|rename|update|change)_?/.test(methodName);
+
+        if (!looksLikeStatefulMutator) return check as SemanticCheck;
+
+        const getterName = findGetterForStatefulMethod({
+            source,
+            className,
+            methodName,
+            expected,
+        });
+
+        if (getterName) {
+            changed = true;
+            return {
+                ...check,
+                type: "method_sequence_returns",
+                calls: [
+                    {
+                        methodName,
+                        methodArgs,
+                        ...(Array.isArray(check.methodArgKinds)
+                            ? { methodArgKinds: check.methodArgKinds }
+                            : {}),
+                    },
+                ],
+                methodName: getterName,
+                methodArgs: [],
+                methodArgKinds: [],
+                message:
+                    typeof check.message === "string" && check.message.trim()
+                        ? check.message
+                        : `${className}.${getterName}() should return the expected value after ${methodName}() updates the object.`,
+            } as SemanticCheck;
+        }
+
+        const attributeName = findAttributeForStatefulMethod({
+            source,
+            className,
+            methodName,
+            expected,
+        });
+
+        if (!attributeName) return check as SemanticCheck;
+
+        changed = true;
+        return {
+            type: "attribute_sequence_equals",
+            className,
+            constructorArgs,
+            ...(Array.isArray(check.constructorArgKinds)
+                ? { constructorArgKinds: check.constructorArgKinds }
+                : {}),
+            calls: [
+                {
+                    methodName,
+                    methodArgs,
+                    ...(Array.isArray(check.methodArgKinds)
+                        ? { methodArgKinds: check.methodArgKinds }
+                        : {}),
+                },
+            ],
+            attributeName,
+            expected,
+            ...(typeof check.expectedKind === "string" ? { expectedKind: check.expectedKind } : {}),
+            message:
+                typeof check.message === "string" && check.message.trim()
+                    ? check.message
+                    : `${className}.${attributeName} should equal the expected value after ${methodName}() updates the object.`,
+        } as SemanticCheck;
+    });
+
+    if (!changed) return { exercise, changed: false };
+
+    return {
+        exercise: {
+            ...exercise,
+            recipeType: "semantic",
+            semanticChecks: nextChecks,
+        },
+        changed: true,
+    };
+}
+
 function ensureTryItYourselfSketch(draft: TopicAuthoringDraft): TopicAuthoringDraft {
     if (hasTryItYourselfSketch(draft)) return draft;
 
@@ -297,6 +3275,10 @@ const PYTHON_WORKSPACE_DISTRACTORS = [
     "Keyboard shortcut guide",
 ];
 const PYTHON_MAX_FIXTURE_CONTENT_LENGTH = 600;
+
+function normalizeText(value: unknown): string {
+    return typeof value === "string" ? value.trim() : "";
+}
 
 function normalizeComparableText(value: string): string {
     return value
@@ -2652,6 +5634,10 @@ async function repairCrossExerciseClassDependencies(args: {
     draft: TopicAuthoringDraft;
     report: RepairReport;
 }): Promise<TopicAuthoringDraft> {
+    if (Array.isArray(args.draft.projectDraft?.stepIds) && args.draft.projectDraft.stepIds.length > 0) {
+        return args.draft;
+    }
+
     const classDefinitions = mergeClassDefinitions(args.draft.quizDraft);
     const setupDefinitions = mergeTopLevelSetupDefinitions(args.draft.quizDraft);
     if (classDefinitions.size < 1 && setupDefinitions.size < 1) return args.draft;
@@ -4027,6 +7013,14 @@ function appendPolicyFallbackExercisesForAllKinds(args: {
     draft: TopicAuthoringDraft;
     report: RepairReport;
 }): TopicAuthoringDraft {
+    if (
+        args.seed.sectionRole === "module_project" ||
+        args.seed.sectionRole === "capstone" ||
+        (Array.isArray(args.draft.projectDraft?.stepIds) && args.draft.projectDraft.stepIds.length > 0)
+    ) {
+        return args.draft;
+    }
+
     const planned = args.seed.plannedExerciseCounts;
     if (!planned) return args.draft;
 
@@ -4310,8 +7304,127 @@ export async function repairPythonDraft(args: {
                 });
             }
 
+            const fixedOopSemanticRepair = convertOopFixedTestsToSemantic(
+                semanticTestRepair.exercise,
+            );
+
+            if (fixedOopSemanticRepair) {
+                report.repairs.push({
+                    code: "PYTHON_OOP_FIXED_TESTS_CONVERTED_TO_SEMANTIC",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Converted an OOP/class multifile fixed_tests exercise into semantic checks so the critique gate validates structure instead of one stdout fixture.",
+                });
+            }
+
+            const semanticWorkspaceRepair = promoteSemanticOopFilesToWorkspaceFiles(
+                fixedOopSemanticRepair ?? semanticTestRepair.exercise,
+            );
+
+            if (semanticWorkspaceRepair.changed) {
+                report.repairs.push({
+                    code: "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace.",
+                });
+            }
+
+            const synthesizedWorkspaceRepair = synthesizeSemanticOopWorkspaceFiles(
+                semanticWorkspaceRepair.exercise,
+            );
+
+            if (synthesizedWorkspaceRepair.changed) {
+                report.repairs.push({
+                    code: "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file.",
+                });
+            }
+
+            const completedEntrySolutionRepair =
+                synthesizeEntrySolutionForSemanticOopExercise(synthesizedWorkspaceRepair.exercise);
+
+            if (completedEntrySolutionRepair.changed) {
+                report.repairs.push({
+                    code: "PYTHON_SEMANTIC_OOP_ENTRY_SOLUTION_SYNTHESIZED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Synthesized a complete runnable entry-file solution from semantic OOP checks when the generated main file only contained imports, comments, or placeholders.",
+                });
+            }
+
+            const statefulSemanticRepair = repairStatefulSemanticMethodReturns(
+                completedEntrySolutionRepair.exercise,
+            );
+
+            if (statefulSemanticRepair.changed) {
+                report.repairs.push({
+                    code: "PYTHON_STATEFUL_SEMANTIC_METHOD_SEQUENCE_ADDED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Converted getter-only method_returns checks into method_sequence_returns checks so state-changing OOP methods are called before the final getter is validated.",
+                });
+            }
+
+            const completedClassFileRepair = completeSemanticOopSolutionClassFiles(
+                statefulSemanticRepair.exercise,
+            );
+
+            if (completedClassFileRepair.changed) {
+                report.repairs.push({
+                    code: "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies.",
+                });
+            }
+
+            const completedFunctionFileRepair = completeSemanticFunctionSolutionFiles(
+                completedClassFileRepair.exercise,
+            );
+
+            if (completedFunctionFileRepair.changed) {
+                report.repairs.push({
+                    code: "PYTHON_SEMANTIC_FUNCTION_FILES_COMPLETED",
+                    category: "recipe",
+                    severity: "high",
+                    field: exercise.id,
+                    message:
+                        "Completed helper function implementation files from function_returns semantic checks when generated solution files still contained starter comments or pass statements.",
+                });
+            }
+
+            const syncedWorkspaceSurfaces = syncSemanticWorkspaceEntrySurface(
+                completedFunctionFileRepair.exercise,
+            );
+
+            if (syncedWorkspaceSurfaces.changed) {
+                report.repairs.push({
+                    code: "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+                    category: "recipe",
+                    severity: "medium",
+                    field: exercise.id,
+                    message:
+                        "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs.",
+                });
+            }
+
             const semanticRunnableProjectRepair =
-                await convertSemanticRunnableProjectToFixedTests(semanticTestRepair.exercise);
+                await convertSemanticRunnableProjectToFixedTests(syncedWorkspaceSurfaces.exercise);
 
             if (semanticRunnableProjectRepair) {
                 report.repairs.push({
@@ -4326,11 +7439,11 @@ export async function repairPythonDraft(args: {
                 return semanticRunnableProjectRepair;
             }
 
-            if (isSemanticCodeExercise(semanticTestRepair.exercise)) {
-                return semanticTestRepair.exercise;
+            if (isSemanticCodeExercise(completedFunctionFileRepair.exercise)) {
+                return completedFunctionFileRepair.exercise;
             }
 
-            const workingExercise = semanticTestRepair.exercise;
+            const workingExercise = completedFunctionFileRepair.exercise;
             const missingTestsRepair = synthesizeMissingTestsForExercise(workingExercise);
             const hasAuthoredTests =
                 Array.isArray(workingExercise.tests) && workingExercise.tests.length > 0;

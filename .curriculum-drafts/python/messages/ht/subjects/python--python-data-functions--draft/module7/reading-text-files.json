@@ -1,0 +1,387 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "reading-text-files": {
+          "label": "Li Fichye Tèks",
+          "summary": "Ouvri fichye, li tèks, epi fèmen resous yo an sekirite.",
+          "cards": {
+            "sketch0": {
+              "title": "Poukisa pou li fichye tèks?"
+            },
+            "sketch1": {
+              "title": "Li tout tèks la oswa liy pa liy"
+            },
+            "sketch2": {
+              "title": "Chemen relatif ak aksè sekirite nan fichye"
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Pratik lekti fichye tèks"
+            }
+          },
+          "projectSteps": {
+            "ci_read_and_print": {
+              "title": "Enprime sa ki nan yon fichye"
+            },
+            "ci_first_line": {
+              "title": "Enprime sèlman premye liy lan"
+            },
+            "ci_count_lines": {
+              "title": "Konte liy yo nan yon fichye tèks"
+            }
+          },
+          "quiz": {
+            "sc-read-mode": {
+              "title": "Mòd lekti",
+              "prompt": "Ki mòd fichye yo itilize pou louvri yon fichye tèks pou lekti?",
+              "hint": "Sèvi ak fason kesyon an poze a ak egzanp leson an pou limite chwa yo.",
+              "help": {
+                "concept": "Kesyon sa a verifye yon lide espesifik nan leson an, pa yon estrateji jeneral pou pran tès.",
+                "hint_1": "Konpare chak opsyon ak sijè egzak ki nonmen nan kesyon an.",
+                "hint_2": "Retire opsyon ki pa matche ak konsèp la oswa prèv ki site nan kesyon an."
+              },
+              "options": {
+                "a": "r",
+                "b": "w",
+                "c": "yon",
+                "d": "eks"
+              }
+            },
+            "sc-relative-path": {
+              "title": "Egzanp chemen relatif",
+              "prompt": "Ki chemen ki refere kòrèkteman a yon fichye ki rele `story.txt` ki anndan yon dosye ki rele `data`?",
+              "hint": "Sèvi ak non dosye a, epi non fichye a.",
+              "help": {
+                "concept": "Yon chemen relatif dekri kote yon fichye ye apati kote espas travay aktyèl la, lè l sèvi avèk non dosye ki separe pa yon bakslash (`/`).",
+                "hint_1": "Dosye a ta dwe vini anvan non fichye a.",
+                "hint_2": "Chwazi opsyon ki sanble ak dosye/fichye."
+              },
+              "options": {
+                "a": "story.txt/data",
+                "b": "data/story.txt",
+                "c": "/data/story.txt",
+                "d": "istwa-done.txt"
+              }
+            },
+            "mc-with-open-benefits": {
+              "title": "Poukisa pou itilize ak ouvè",
+              "prompt": "Chwazi tout deklarasyon ki kòrèk sou itilizasyon `with open(...) as file:` lè w ap li fichye tèks.",
+              "hint": "Panse sou sa `with` fè pou resous fichye a ak kijan ou jwenn aksè a fichye a andedan blòk la.",
+              "help": {
+                "concept": "`with open(...) as file:` Kreye yon blòk fichye jere. Ou itilize varyab fichye a andedan blòk la, epi Python okipe fèmen fichye a apre sa.",
+                "hint_1": "Chèche deklarasyon sou fèmen otomatik ak itilizasyon varyab la apre`as`.",
+                "hint_2": "De deklarasyon yo kòrèk: youn sou netwayaj la ak youn sou non varyab fichye a."
+              },
+              "options": {
+                "a": "Sa ede asire ke fichye a fèmen apre blòk la fini.",
+                "b": "Li kreye yon varyab tankou `file` ke ou ka rele `.read()` sou li.",
+                "c": "Li toujou ekri nouvo tèks nan fichye a anvan li li l.",
+                "d": "Li sèlman mache pou fichye ki nan menm dosye a, pa pou dosye ki anndan lòt dosye."
+              }
+            },
+            "mc-read-methods": {
+              "title": "Metòd lekti",
+              "prompt": "Chwazi tout deklarasyon ki vrè sou `read()` ak `readlines()`.",
+              "hint": "Youn retounen yon sèl chèn, epi lòt la retounen yon lis liy.",
+              "help": {
+                "concept": "`read()` Li pran tout fichye a kòm yon sèl chèn, tandiske `readlines()` retounen yon lis kote chak eleman se yon liy, souvan ak karaktè nouvo liy ladan l.",
+                "hint_1": "Chèche opsyon ki dekri yon gwo chèn ak yon lis liy.",
+                "hint_2": "De opsyon yo kòrèk: youn mansyone yon sèl chèn, epi lòt la mansyone karaktè nouvo liy nan atik liy yo."
+              },
+              "options": {
+                "a": "`read()` ka retounen tout fichye a kòm yon sèl chèn.",
+                "b": "`readlines()` retounen yon lis liy.",
+                "c": "`read()` Toujou retire chak karaktè nouvo liy otomatikman.",
+                "d": "`readlines()` retounen yon sèl nimewo pou chak liy."
+              }
+            },
+            "dr-read-file-steps": {
+              "title": "Kòmande etap lekti yo",
+              "prompt": "Mete etap sa yo nan lòd kòrèk pou li ak enprime kontni yon fichye.",
+              "hint": "Kòmanse pa louvri fichye a, apre sa li l, epi enprime l.",
+              "help": {
+                "concept": "Yon pwosesis debaz pou li yon fichye se: louvri fichye a, li kontni li nan yon varyab, epi itilize valè sa a, tankou enprime li.",
+                "hint_1": "Fichye a dwe louvri anvan yo ka itilize`.read()`.",
+                "hint_2": "Apre ou fin li nan yon varyab, dènye etap la se montre rezilta a nan panèl sòti a."
+              },
+              "tokens": {
+                "t1": "Ouvri fichye a ak `with open(..., \"r\") as file:`",
+                "t2": "Li tèks la avèk `file.read()`",
+                "t3": "Sere rezilta a nan yon varyab",
+                "t4": "Enprime varyab la"
+              }
+            },
+            "dr-build-path": {
+              "title": "Bati yon chemen relatif",
+              "prompt": "Aranje jeton yo pou kreye chemen relatif la pou `report.txt` andedan dosye `data` la.",
+              "hint": "Aranje moso kòd yo nan lòd Python ta dwe egzekite yo.",
+              "help": {
+                "concept": "Moso yo dwe fòme yon kòd Python valab nan lòd li dwe kouri.",
+                "hint_1": "Kòmanse ak liy ki prepare aksyon Python lan.",
+                "hint_2": "Mete liy ki depann de valè ki te egziste pi bonè apre valè sa yo fin egziste."
+              },
+              "tokens": {
+                "t1": "done",
+                "t2": "/",
+                "t3": "rapò.txt"
+              }
+            },
+            "fb-read-call": {
+              "title": "Konplete apèl lekti a",
+              "prompt": "Ranpli non metòd ki manke a pou li tout tèks ki nan yon fichye ki louvri.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Kesyon sa a verifye si ou ka konekte kòmand lan ak konsèp Python ki soti nan leson an.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Eseye chak opsyon nan fraz la oswa nan liy kòd la epi kenbe sa ki fè egzanp lan mache egzakteman jan yo dekri a."
+              },
+              "template": "tekst = fichye.[espas1]()",
+              "choices": [
+                "li",
+                "ekri",
+                "Fèmen",
+                "Ouvè"
+              ]
+            },
+            "fb-open-mode": {
+              "title": "Konplete mòd ouvè a",
+              "prompt": "Ranpli mòd ki manke a pou fichye a louvri pou lekti.",
+              "hint": "Konsantre sou konsèp ki manke a olye de tèm egzak ki manke a.",
+              "help": {
+                "concept": "Blank la dwe ranpli ak tèm ki koresponn ak travay k ap dekri a.",
+                "hint_1": "Panse sou sa pati ki manke a bezwen fè nan deklarasyon an.",
+                "hint_2": "Chwazi tèm ki pi byen konplete sans deklarasyon an."
+              },
+              "template": "with open(\"notes.txt\", \"[blank1]\") as file:",
+              "choices": [
+                "r",
+                "w",
+                "yon",
+                "eks"
+              ]
+            },
+            "ci-read-and-print": {
+              "title": "Enprime sa ki nan yon fichye",
+              "prompt": "Ouvri `data/message.txt`, li sa ki nan fichye a, epi enprime tèks ou jwenn lan.\n\nSòti ou a dwe egzakteman:\n`Hello from file reading!`.",
+              "hint": "Li tach la \"Enprime kontni yon fichye\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare rezilta a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
+              "solutionCode": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ouvri data/message.txt pou li fichye a."
+                }
+              }
+            },
+            "ci-first-line": {
+              "title": "Enprime sèlman premye liy lan",
+              "prompt": "Ouvri `data/notes.txt`, li sèlman premye liy la, epi enprime l san karaktè nouvo liy ki nan fen an.\n\nSòti ou a dwe egzakteman:\n`Apples`.",
+              "hint": "Li tach la \"Enprime sèlman premye liy lan\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an fonksyònman epi konpare sòti a ak egzanp ki atann lan anvan ou verifye repons ou."
+              },
+              "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
+              "solutionCode": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ouvri data/notes.txt pou li fichye a."
+                }
+              }
+            },
+            "ci-count-lines": {
+              "title": "Konte liy yo nan yon fichye tèks",
+              "prompt": "Ouvri `data/list.txt`, konte konbyen liy ki nan fichye a, epi enprime chif sa a.\n\nSòti ou a dwe egzakteman:\n`3`.",
+              "hint": "Li tach la \"Konte liy nan yon fichye tèks\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare rezilta a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
+              "solutionCode": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ouvri data/list.txt pou konte liy yo."
+                }
+              }
+            },
+            "try-reading-text-files-checkpoint": {
+              "title": "Li yon fichye tèks",
+              "prompt": "Li `data/note.txt` epi enprime kontni li san ajoute tèks siplemantè.",
+              "hint": "Itiliz`with open(\"data/note.txt\") as file:` ak `file.read()`.",
+              "help": {
+                "concept": "Ouvri fichye a, li tèks la, epi enprime egzakteman sa ki te estoke la.",
+                "hint_1": "Sèvi ak`with open(\"data/note.txt\") as file:`.",
+                "hint_2": "Rele `file.read()` epi enprime rezilta a san ajoute mo anplis."
+              },
+              "starterCode": "# Read data/note.txt and print its contents.\n",
+              "starterFiles": {
+                "data_note_txt": {
+                  "content": "Hello from a file!\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n"
+                },
+                "data_note_txt": {
+                  "content": "Hello from a file!\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Ouvri data/note.txt olye pou w tape kontni fichye a."
+                }
+              },
+              "solutionCode": "with open(\"data/note.txt\") as file:\n    print(file.read(), end=\"\")\n"
+            },
+            "try-reading-text-files-sketch0": {
+              "title": "Li epi enprime yon fichye nòt",
+              "prompt": "Ouvri `note.txt`, li tout tèks li, epi enprime egzakteman sa ki nan fichye a.",
+              "hint": "Sèvi ak `with open(\"note.txt\") as file:` epi enprime `file.read()`.",
+              "help": {
+                "concept": "Kat sa a pratike lekti yon fichye antye an menm tan.",
+                "hint_1": "Ouvri `note.txt` an premye, epi rele `file.read()` anndan blòk `with` la.",
+                "hint_2": "Enprime sèlman tèks ki anrejistre nan fichye a."
+              },
+              "starterCode": "# Read note.txt and print its contents without extra blank lines.\n",
+              "starterFiles": {
+                "note_txt": {
+                  "content": "Hello from a file\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open('note.txt') as file:\n    print(file.read().strip())\n"
+                },
+                "note_txt": {
+                  "content": "Hello from a file\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Ouvri note.txt olye pou w tape kontni fichye a."
+                }
+              },
+              "solutionCode": "with open('note.txt') as file:\n    print(file.read().strip())\n"
+            },
+            "try-reading-text-files-sketch1": {
+              "title": "Enprime chak liy ki nan yon fichye",
+              "prompt": "Ouvri `names.txt`, fè yon bouk sou fichye a, epi enprime chak non sou pwòp liy li.",
+              "hint": "Sèvi ak `for line in file:` epi enprime `line.strip()`.",
+              "help": {
+                "concept": "Kat sa a pratike lekti yon liy alafwa ak yon bouk.",
+                "hint_1": "Ouvri `names.txt`, epi itilize `for line in file:`.",
+                "hint_2": "Enprime `line.strip()` pou chak non parèt yon sèl fwa san liy vid anplis."
+              },
+              "starterCode": "# Read names.txt and print each line without extra blank lines.\n",
+              "starterFiles": {
+                "names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n"
+                },
+                "names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Ouvri names.txt olye pou w tape non yo dirèkteman."
+                }
+              },
+              "solutionCode": "with open('names.txt') as file:\n    for line in file:\n        print(line.strip())\n"
+            },
+            "try-reading-text-files-sketch2": {
+              "title": "Konte liy fichye yo",
+              "prompt": "Ouvri `names.txt`, konte konbyen liy li genyen, epi enprime nimewo a.",
+              "hint": "Kòmanse ak `count = 0`, epi ajoute 1 pou chak liy nan fichye a.",
+              "help": {
+                "concept": "Kat sa a pratike itilizasyon yon kontè pandan w ap li yon fichye liy pa liy.",
+                "hint_1": "Ouvri `names.txt`, fè yon bouk sou li, epi ogmante `count` andedan bouk la.",
+                "hint_2": "Apre bouk la fini, enprime kantite final la."
+              },
+              "starterCode": "count = 0\n\n# Read names.txt, count the lines, and print count.\n",
+              "starterFiles": {
+                "names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "solutionFiles": {
+                "main_py": {
+                  "content": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n"
+                },
+                "names_txt": {
+                  "content": "Ava\nMia\n"
+                }
+              },
+              "sourceChecks": {
+                "0": {
+                  "message": "Li names.txt olye pou w tape kantite final la."
+                },
+                "1": {
+                  "message": "Fè yon bouk sou liy fichye yo pou konte yo."
+                },
+                "2": {
+                  "message": "Sèvi ak open(...) pou li fichye a."
+                }
+              },
+              "solutionCode": "count = 0\nwith open('names.txt') as file:\n    for line in file:\n        count += 1\nprint(count)\n"
+            }
+          },
+          "tryIt": {
+            "try_reading_text_files_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Li `data/note.txt` epi enprime kontni li san ajoute tèks siplemantè."
+            },
+            "try_reading_text_files_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `note.txt`, li tout tèks li, epi enprime egzakteman sa ki nan fichye a."
+            },
+            "try_reading_text_files_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `names.txt`, fè yon bouk sou fichye a, epi enprime chak non sou pwòp liy li."
+            },
+            "try_reading_text_files_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ouvri `names.txt`, konte konbyen liy li genyen, epi enprime nimewo a."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "reading-text-files": {
+          "why-read-files": {
+            "title": "Poukisa li fichye tèks?",
+            "bodyMarkdown": "Pwogram souvan bezwen done ki deja egziste nan yon fichye, tankou nòt, jounal, oswa yon lis non. Lè w li yon fichye tèks, sa pèmèt pwogram ou an mete tèks sa a nan memwa epi itilize l.\n\nYon modèl ki bon pou moun ki fèk kòmanse se itilize ``with open(...)`\n\n` konsa Python fèmen fichye a pou ou lè w fin itilize l.\n\n```python\nwith open(\"notes.txt\", \"r\") as file:\n    text = file.read()\n    print(text)\n```\n\n\n\nEtap pa etap:\n\n-`open(\"notes.txt\", \"r\")`\n\nlouvri fichye a an mòd lekti.\n-`as file`\n\nbay fichye ki louvri a yon non varyab.\n-`file.read()`\n\npran tout tèks ki nan fichye a.\n-`print(text)`\n\nvoye tèks la nan panèl sòti a.\n-`with`\n\nfè netwayaj la otomatik.\n\nEgzanp pratik:\n\nSi`notes.txt`\n\ngenyen ladan l:\n\n```text\nBuy milk\nCall Sam\n```\n\nlè sa a, pwogram nan ap enprime:\n\n```text\nBuy milk\nCall Sam\n```"
+          },
+          "read-vs-lines": {
+            "title": "Li tout tèks la oswa liy pa liy",
+            "bodyMarkdown": "Ou ka li yon fichye antye yon sèl kou, oswa li liy li yo.\n\nLi fichye a antye:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    content = file.read()\n    print(content)\n```\n\nLi liy yo nan yon lis:\n\n```python\nwith open(\"poem.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(lines)\n```\n\n\n\nEgzanp ki fèt:\n\nSi`poem.txt`\n\ngenyen:\n\n```text\nred\nblue\n```\n\n\n\nlè sa a,`file.read()`\n\nbay yon sèl chèn ki gen toude liy yo, tandiske`file.readlines()`\n\nbay yon lis tankou:\n\n```python\n['red\\n', 'blue\\n']\n```\n\n\n\nKote`\\n`\n\nvle di yon karaktè nouvo liy nan fen yon liy."
+          },
+          "relative-paths-and-safety": {
+            "title": "Chemen relatif ak aksè an sekirite a fichye",
+            "bodyMarkdown": "Yon chemen relatif di Python ki kote yon fichye ye andedan espas travay leson an, tankou`data/story.txt`\n\n.\n\n```python\nwith open(\"data/story.txt\", \"r\") as file:\n    print(file.read())\n```\n\n\n\nMen:\n\n-`data/story.txt`\n\nvle di yon fichye ki rele`story.txt`\n\nki andedan dosye`data`\n\nla.\n- Ou pa bezwen yon kote absoli ki espesifik pou òdinatè a.\n- Nan leson sa a, itilize fichye ki disponib nan panèl fichye a.\n\nEgzanp travay:\n\nSi espas travay la gen ladan l yon dosye`data`\n\nepi anndan l gen yon fichye`story.txt`\n\nak:\n\n```text\nChapter 1\n```\n\nlè sa a, kòd la ap enprime:\n\n```text\nChapter 1\n```"
+          }
+        }
+      }
+    }
+  }
+}

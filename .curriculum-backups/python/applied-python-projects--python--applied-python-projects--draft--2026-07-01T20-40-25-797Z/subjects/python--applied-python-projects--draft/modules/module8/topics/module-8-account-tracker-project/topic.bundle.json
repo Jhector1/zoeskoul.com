@@ -1,0 +1,1124 @@
+{
+  "topicId": "module-8-account-tracker-project",
+  "subjectSlug": "python--applied-python-projects--draft",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "python--applied-python-projects--draft-python-8-module-project",
+  "prefix": "py8",
+  "minutes": 45,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.sketch0.title",
+      "sketchId": "module-8-account-tracker-project-sketch-0",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_module_8_account_tracker_project_sketch0",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.try_module_8_account_tracker_project_sketch0.title",
+            "exerciseKey": "try-module-8-account-tracker-project-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "account_tracker_step_2_add_methods",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_2_add_methods.title",
+            "exerciseKey": "account-tracker-step-2-add-methods",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "account_tracker_step_3_format_helper",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_3_format_helper.title",
+            "exerciseKey": "account-tracker-step-3-format-helper",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "account_tracker_step_4_validate_transactions",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_4_validate_transactions.title",
+            "exerciseKey": "account-tracker-step-4-validate-transactions",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "account_tracker_step_5_load_from_file",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_5_load_from_file.title",
+            "exerciseKey": "account-tracker-step-5-load-from-file",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "account_tracker_step_6_summary_report",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_6_summary_report.title",
+            "exerciseKey": "account-tracker-step-6-summary-report",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "module-8-account-tracker-project-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.module-8-account-tracker-project-sketch-0.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.module-8-account-tracker-project-sketch-0.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-module-8-account-tracker-project-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0",
+      "language": "python",
+      "starterCode": "# Open the workspace files and complete the TODOs.",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "# Open the workspace files and complete the TODOs.",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "# Open the workspace files and complete the TODOs.",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "# Open the workspace files and complete the TODOs.",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Define an Account class in the workspace."
+          },
+          {
+            "type": "constructible",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "message": "Account should be constructible with owner and balance."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "An Account instance should store owner and balance attributes."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "main.py should create one Account instance."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "The program should print at least two lines."
+          }
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-2-add-methods",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_add_methods",
+      "language": "python",
+      "starterCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\naccount_2 = Account(\"Ava\", 125)\naccount_2.deposit(25)\naccount_2.withdraw(40)\nprint(account_2.balance())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.balance)\nprint(account_1.balance)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\naccount_2 = Account(\"Ava\", 125)\naccount_2.deposit(25)\naccount_2.withdraw(40)\nprint(account_2.balance())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\naccount_2 = Account(\"Ava\", 125)\naccount_2.deposit(25)\naccount_2.withdraw(40)\nprint(account_2.balance())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Account",
+            "message": "Keep the Account class defined."
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "methodName": "balance",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 150,
+            "expectedKind": "value",
+            "message": "deposit(25) should return the updated balance."
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  40
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "methodName": "balance",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 85,
+            "expectedKind": "value",
+            "message": "withdraw(40) should return the updated balance when called on a fresh account."
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "deposit",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "withdraw",
+                "methodArgs": [
+                  40
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "methodName": "balance",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 110,
+            "expectedKind": "value",
+            "message": "After deposit then withdraw on the same account, the final balance should be 110."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "main.py should still create an Account instance."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 3,
+            "message": "The program should print at least three lines for the report."
+          }
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-3-format-helper",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_format_helper",
+      "language": "python",
+      "starterCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\naccount_2 = Account(\"Ava\", 125)\naccount_2.deposit(25)\naccount_2.withdraw(40)\nprint(account_2.balance())\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\naccount_2 = Account(\"Ava\", 125)\naccount_2.deposit(25)\naccount_2.withdraw(40)\nprint(account_2.balance())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(25)))\nprint(format_money(account_1.withdraw(40)))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\naccount_2 = Account(\"Ava\", 125)\naccount_2.deposit(25)\naccount_2.withdraw(40)\nprint(account_2.balance())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\n\naccount_1 = Account(\"Ava\", 125)\nprint(account_1.deposit(25))\nprint(account_1.withdraw(40))\naccount_2 = Account(\"Ava\", 125)\naccount_2.deposit(25)\naccount_2.withdraw(40)\nprint(account_2.balance())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(25)))\nprint(format_money(account_1.withdraw(40)))\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(25)))\nprint(format_money(account_1.withdraw(40)))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/format_money.py",
+            "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_money",
+            "args": [
+              125
+            ],
+            "argKinds": [],
+            "expected": "$125.00",
+            "expectedKind": "value",
+            "message": "format_money should format whole numbers with two decimal places."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_money",
+            "args": [
+              110.5
+            ],
+            "argKinds": [],
+            "expected": "$110.50",
+            "expectedKind": "value",
+            "message": "format_money should keep two decimal places for decimal amounts."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "deposit",
+            "methodArgs": [
+              25
+            ],
+            "methodArgKinds": [],
+            "expected": 150,
+            "expectedKind": "value",
+            "message": "deposit should still return a numeric balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "withdraw",
+            "methodArgs": [
+              40
+            ],
+            "methodArgKinds": [],
+            "expected": 85,
+            "expectedKind": "value",
+            "message": "withdraw should still return a numeric balance."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 3,
+            "message": "The program should print a small formatted report."
+          }
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-4-validate-transactions",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validate_transactions",
+      "language": "python",
+      "starterCode": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(25)))\nprint(format_money(account_1.withdraw(40)))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(25)))\nprint(format_money(account_1.withdraw(40)))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(-5)))\nprint(format_money(account_1.withdraw(500)))\nprint(format_money(account_1.withdraw(25)))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(25)))\nprint(format_money(account_1.withdraw(40)))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(25)))\nprint(format_money(account_1.withdraw(40)))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/format_money.py",
+            "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(-5)))\nprint(format_money(account_1.withdraw(500)))\nprint(format_money(account_1.withdraw(25)))\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(-5)))\nprint(format_money(account_1.withdraw(500)))\nprint(format_money(account_1.withdraw(25)))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/format_money.py",
+            "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "deposit",
+            "methodArgs": [
+              -5
+            ],
+            "methodArgKinds": [],
+            "expected": 125,
+            "expectedKind": "value",
+            "message": "deposit should leave the balance unchanged for non-positive amounts."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "withdraw",
+            "methodArgs": [
+              500
+            ],
+            "methodArgKinds": [],
+            "expected": 125,
+            "expectedKind": "value",
+            "message": "withdraw should leave the balance unchanged when the amount is larger than the balance."
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "withdraw",
+            "methodArgs": [
+              25
+            ],
+            "methodArgKinds": [],
+            "expected": 100,
+            "expectedKind": "value",
+            "message": "A valid withdrawal should still reduce the balance."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_money",
+            "args": [
+              100
+            ],
+            "argKinds": [],
+            "expected": "$100.00",
+            "expectedKind": "value",
+            "message": "Keep the formatting helper working with validated balances."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 4,
+            "message": "The program should print the starting balance and three transaction results."
+          }
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-5-load-from-file",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_5_load_from_file",
+      "language": "python",
+      "starterCode": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(-5)))\nprint(format_money(account_1.withdraw(500)))\nprint(format_money(account_1.withdraw(25)))\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(-5)))\nprint(format_money(account_1.withdraw(500)))\nprint(format_money(account_1.withdraw(25)))\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance:.2f}\"\n\n\ndef format_money(amount):\n    return f\"${amount:.2f}\"\n\n\ndef load_accounts(path):\n    return 3\n\n\naccounts = [\n    Account(\"Ava\", 125),\n    Account(\"Leo\", 80),\n    Account(\"Noor\", 210.5),\n]\n\nfor account in accounts:\n    print(account.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/load_accounts.py",
+          "content": "from models.account import Account\n\n\ndef load_accounts(path):\n    return [\n        Account(\"Ava\", 125),\n        Account(\"Leo\", 80),\n        Account(\"Noor\", 210.5),\n    ]\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(-5)))\nprint(format_money(account_1.withdraw(500)))\nprint(format_money(account_1.withdraw(25)))\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from models.account import Account\nfrom services.format_money import format_money\n\naccount_1 = Account(\"Ava\", 125)\nprint(format_money(account_1.balance()))\nprint(format_money(account_1.deposit(-5)))\nprint(format_money(account_1.withdraw(500)))\nprint(format_money(account_1.withdraw(25)))\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/format_money.py",
+            "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/accounts.txt",
+            "content": "Ava,125\nBen,80\nCara,210.5\n'}],"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance:.2f}\"\n\n\ndef format_money(amount):\n    return f\"${amount:.2f}\"\n\n\ndef load_accounts(path):\n    return 3\n\n\naccounts = [\n    Account(\"Ava\", 125),\n    Account(\"Leo\", 80),\n    Account(\"Noor\", 210.5),\n]\n\nfor account in accounts:\n    print(account.summary())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance:.2f}\"\n\n\ndef format_money(amount):\n    return f\"${amount:.2f}\"\n\n\ndef load_accounts(path):\n    return 3\n\n\naccounts = [\n    Account(\"Ava\", 125),\n    Account(\"Leo\", 80),\n    Account(\"Noor\", 210.5),\n]\n\nfor account in accounts:\n    print(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/format_money.py",
+            "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/load_accounts.py",
+            "content": "from models.account import Account\n\n\ndef load_accounts(path):\n    return [\n        Account(\"Ava\", 125),\n        Account(\"Leo\", 80),\n        Account(\"Noor\", 210.5),\n    ]\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_money",
+            "args": [
+              210.5
+            ],
+            "argKinds": [],
+            "expected": "$210.50",
+            "expectedKind": "value",
+            "message": "The formatting helper should still format loaded balances correctly."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "load_accounts",
+            "args": [
+              "data/accounts.txt"
+            ],
+            "argKinds": [],
+            "expected": 3,
+            "expectedKind": "value",
+            "message": "load_accounts should return a list with three Account objects for the provided file."
+          },
+          {
+            "type": "created_instances",
+            "className": "Account",
+            "min": 1,
+            "message": "Loading the file should create three Account instances."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 3,
+            "message": "The program should print one summary line per loaded account."
+          }
+        ]
+      }
+    },
+    {
+      "id": "account-tracker-step-6-summary-report",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_6_summary_report",
+      "language": "python",
+      "starterCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance:.2f}\"\n\n\ndef format_money(amount):\n    return f\"${amount:.2f}\"\n\n\ndef load_accounts(path):\n    return 3\n\n\naccounts = [\n    Account(\"Ava\", 125),\n    Account(\"Leo\", 80),\n    Account(\"Noor\", 210.5),\n]\n\nfor account in accounts:\n    print(account.summary())\n",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance:.2f}\"\n\n\ndef format_money(amount):\n    return f\"${amount:.2f}\"\n\n\ndef load_accounts(path):\n    return 3\n\n\naccounts = [\n    Account(\"Ava\", 125),\n    Account(\"Leo\", 80),\n    Account(\"Noor\", 210.5),\n]\n\nfor account in accounts:\n    print(account.summary())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/load_accounts.py",
+          "content": "from models.account import Account\n\n\ndef load_accounts(path):\n    return [\n        Account(\"Ava\", 125),\n        Account(\"Leo\", 80),\n        Account(\"Noor\", 210.5),\n    ]\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from services.load_accounts import load_accounts\nfrom services.format_money import format_money\nfrom services.total_balance import total_balance\n\naccounts = load_accounts(\"data/accounts.txt\")\nfor account in accounts:\n    print(account.summary())\nprint(f\"Total: {format_money(total_balance(accounts))}\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/account.py",
+          "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/format_money.py",
+          "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/load_accounts.py",
+          "content": "from models.account import Account\n\n\ndef load_accounts(path):\n    return [\n        Account(\"Ava\", 125),\n        Account(\"Leo\", 80),\n        Account(\"Noor\", 210.5),\n    ]\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/total_balance.py",
+          "content": "from services.load_accounts import load_accounts\n\n\ndef total_balance(paths):\n    path = paths[0] if isinstance(paths, list) else paths\n    accounts = load_accounts(path)\n    return sum(account.balance() for account in accounts)\n",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance:.2f}\"\n\n\ndef format_money(amount):\n    return f\"${amount:.2f}\"\n\n\ndef load_accounts(path):\n    return 3\n\n\naccounts = [\n    Account(\"Ava\", 125),\n    Account(\"Leo\", 80),\n    Account(\"Noor\", 210.5),\n]\n\nfor account in accounts:\n    print(account.summary())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self.balance:.2f}\"\n\n\ndef format_money(amount):\n    return f\"${amount:.2f}\"\n\n\ndef load_accounts(path):\n    return 3\n\n\naccounts = [\n    Account(\"Ava\", 125),\n    Account(\"Leo\", 80),\n    Account(\"Noor\", 210.5),\n]\n\nfor account in accounts:\n    print(account.summary())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/format_money.py",
+            "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/load_accounts.py",
+            "content": "from models.account import Account\n\n\ndef load_accounts(path):\n    return [\n        Account(\"Ava\", 125),\n        Account(\"Leo\", 80),\n        Account(\"Noor\", 210.5),\n    ]\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/accounts.txt",
+            "content": "Ava,125\nBen,80\nCara,210.5\n'}],"
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from services.load_accounts import load_accounts\nfrom services.format_money import format_money\nfrom services.total_balance import total_balance\n\naccounts = load_accounts(\"data/accounts.txt\")\nfor account in accounts:\n    print(account.summary())\nprint(f\"Total: {format_money(total_balance(accounts))}\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from services.load_accounts import load_accounts\nfrom services.format_money import format_money\nfrom services.total_balance import total_balance\n\naccounts = load_accounts(\"data/accounts.txt\")\nfor account in accounts:\n    print(account.summary())\nprint(f\"Total: {format_money(total_balance(accounts))}\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/account.py",
+            "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self._balance = balance\n\n    def balance(self):\n        return self._balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self._balance += amount\n        return self._balance\n\n    def withdraw(self, amount):\n        if 0 < amount <= self._balance:\n            self._balance -= amount\n        return self._balance\n\n    def summary(self):\n        return f\"{self.owner}: ${self._balance:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/format_money.py",
+            "content": "def format_money(amount):\n    return f\"${amount:.2f}\"\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/load_accounts.py",
+            "content": "from models.account import Account\n\n\ndef load_accounts(path):\n    return [\n        Account(\"Ava\", 125),\n        Account(\"Leo\", 80),\n        Account(\"Noor\", 210.5),\n    ]\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/total_balance.py",
+            "content": "from services.load_accounts import load_accounts\n\n\ndef total_balance(paths):\n    path = paths[0] if isinstance(paths, list) else paths\n    accounts = load_accounts(path)\n    return sum(account.balance() for account in accounts)\n",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "total_balance",
+            "args": [
+              [
+                "data/accounts.txt"
+              ]
+            ],
+            "argKinds": [],
+            "expected": 415.5,
+            "expectedKind": "value",
+            "message": "total_balance should return the sum of all loaded account balances."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "format_money",
+            "args": [
+              415.5
+            ],
+            "argKinds": [],
+            "expected": "$415.50",
+            "expectedKind": "value",
+            "message": "The total should be formatted with two decimal places."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 4,
+            "message": "The final report should print three account lines and one total line."
+          }
+        ]
+      }
+    }
+  ]
+}

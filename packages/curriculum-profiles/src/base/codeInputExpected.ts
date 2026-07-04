@@ -306,6 +306,54 @@ function normalizeSemanticCheck(check: SemanticCheck): SemanticCheck {
                 ),
             };
 
+        case "method_sequence_returns":
+            return {
+                ...check,
+                constructorArgs: normalizeSemanticArgs(
+                    check.constructorArgs,
+                    check.constructorArgKinds,
+                ),
+                calls: Array.isArray(check.calls)
+                    ? check.calls.map((call) => ({
+                        ...call,
+                        methodArgs: normalizeSemanticArgs(
+                            call.methodArgs,
+                            call.methodArgKinds,
+                        ),
+                    }))
+                    : [],
+                methodArgs: normalizeSemanticArgs(
+                    check.methodArgs,
+                    check.methodArgKinds,
+                ),
+                expected: normalizeSemanticValueByKind(
+                    check.expected,
+                    check.expectedKind,
+                ),
+            };
+
+        case "attribute_sequence_equals":
+            return {
+                ...check,
+                constructorArgs: normalizeSemanticArgs(
+                    check.constructorArgs,
+                    check.constructorArgKinds,
+                ),
+                calls: Array.isArray(check.calls)
+                    ? check.calls.map((call) => ({
+                        ...call,
+                        methodArgs: normalizeSemanticArgs(
+                            call.methodArgs,
+                            call.methodArgKinds,
+                        ),
+                    }))
+                    : [],
+                expected: normalizeSemanticValueByKind(
+                    check.expected,
+                    check.expectedKind,
+                ),
+            };
+
         default:
             return check;
     }

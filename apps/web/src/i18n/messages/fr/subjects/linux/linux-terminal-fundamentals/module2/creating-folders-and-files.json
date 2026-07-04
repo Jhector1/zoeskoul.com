@@ -3,141 +3,141 @@
     "linux-terminal-fundamentals": {
       "linux-module-2-files-and-folders": {
         "creating-folders-and-files": {
-          "label": "Créer des dossiers et des fichiers",
-          "summary": "Utiliser mkdir, mkdir -p et touch pour construire une structure de projet propre dans le terminal Linux.",
+          "label": "Création de dossiers et de fichiers",
+          "summary": "Utilisez les commandes `mkdir`, `mkdir -p` et `touch` pour créer une structure de projet bien organisée dans le terminal Linux.",
           "cards": {
             "sketch0": {
-              "title": "Créer un dossier avec mkdir"
+              "title": "Créer un dossier à l'aide de la commande mkdir"
             },
             "sketch1": {
               "title": "Créer des dossiers imbriqués avec mkdir -p"
             },
             "sketch2": {
-              "title": "Créer des fichiers vides avec touch"
+              "title": "Créer des fichiers vides avec la commande « touch »"
             },
             "quiz": {
-              "title": "Vérification de pratique"
+              "title": "Vérification des exercices"
             },
             "project": {
-              "title": "Organiser l’espace de travail d’étude de Maya"
+              "title": "Organiser l'espace de travail de Maya"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "exercises": {
               "creating-folders-and-files-try-it-1": {
-                "title": "Tâche terminal : créer un dossier avec mkdir",
-                "prompt": "Set up a dossier for class notes. Exécutez `mkdir school-notes`.",
-                "hint": "Utilisez les dossiers et noms de fichiers exacts de l’énoncé, puis exécutez ls, cat ou find pour vérifier votre travail.",
+                "title": "Tâche dans le terminal : créer un dossier à l'aide de la commande `mkdir`",
+                "prompt": "Créez un dossier pour vos notes de cours. Lancez l'`mkdir school-notes`.",
+                "hint": "Utilisez exactement les noms de dossiers et de fichiers indiqués dans l'invite de commande, puis exécutez les commandes `ls`, `cat` ou `find` pour vérifier votre travail.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `mkdir school-notes`."
+                      "message": "Exécutez la commande « `mkdir school-notes` »."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 }
               },
               "creating-folders-and-files-try-it-2": {
-                "title": "Tâche terminal : créer des dossiers imbriqués avec mkdir -p",
-                "prompt": "Set up a simple project skeleton. Exécutez `mkdir -p project-kit/src project-kit/docs`.",
-                "hint": "Utilisez les dossiers et noms de fichiers exacts de l’énoncé, puis exécutez ls, cat ou find pour vérifier votre travail.",
+                "title": "Tâche dans le terminal : créer des dossiers imbriqués avec la commande `mkdir -p`",
+                "prompt": "Créez une structure de projet simple. Exécutez la commande « `mkdir -p project-kit/src project-kit/docs` ».",
+                "hint": "Utilisez exactement les noms de dossiers et de fichiers indiqués dans l'invite de commande, puis exécutez les commandes `ls`, `cat` ou `find` pour vérifier votre travail.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `mkdir -p project-kit/src project-kit/docs`."
+                      "message": "Exécutez la commande « `mkdir -p project-kit/src project-kit/docs` »."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes de l'espace de travail."
                     }
                   }
                 }
               },
               "creating-folders-and-files-try-it-3": {
-                "title": "Tâche terminal : créer des fichiers vides avec touch",
-                "prompt": "The `touch-lab` dossier est ready for two planning fichiers. Exécutez `touch touch-lab/todo.txt touch-lab/agenda.txt`.",
-                "hint": "Utilisez les dossiers et noms de fichiers exacts de l’énoncé, puis exécutez ls, cat ou find pour vérifier votre travail.",
+                "title": "Tâche dans le terminal : créer des fichiers vides avec la commande « touch »",
+                "prompt": "Le dossier « `touch-lab` » est prêt à accueillir deux fichiers de planification. Exécutez « `touch touch-lab/todo.txt touch-lab/agenda.txt` ».",
+                "hint": "Utilisez exactement les noms de dossiers et de fichiers indiqués dans l'invite de commande, puis exécutez les commandes `ls`, `cat` ou `find` pour vérifier votre travail.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `touch touch-lab/todo.txt touch-lab/agenda.txt`."
+                      "message": "Exécutez la commande « `touch touch-lab/todo.txt touch-lab/agenda.txt` »."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
                 "starterFiles": {
                   "touch_lab_readme_txt": {
-                    "content": "This dossier est ready for touch practice.\n"
+                    "content": "This folder is ready for touch practice.\n"
                   }
                 }
               }
             },
             "try_creating_folders_and_files_sketch0": {
-              "title": "Essayez vous-même : créer un dossier avec mkdir",
-              "prompt": "Exécutez `mkdir school-notes` pour créer one dossier."
+              "title": "Essayez vous-même : créez un dossier à l'aide de la commande `mkdir`",
+              "prompt": "Exécutez la commande « `mkdir school-notes` » pour créer un dossier."
             },
             "try_creating_folders_and_files_sketch1": {
-              "title": "Essayez vous-même : créer des dossiers imbriqués avec mkdir -p",
-              "prompt": "Exécutez `mkdir -p project-kit/src project-kit/docs` pour créer nested dossiers dans one étape."
+              "title": "Essayez vous-même : créez des dossiers imbriqués avec la commande `mkdir -p`",
+              "prompt": "Exécutez la commande « `mkdir -p project-kit/src project-kit/docs` » pour créer des dossiers imbriqués en une seule étape."
             },
             "try_creating_folders_and_files_sketch2": {
-              "title": "Essayez vous-même : créer des fichiers vides avec touch",
-              "prompt": "Exécutez `touch touch-lab/todo.txt touch-lab/agenda.txt` pour add two empty fichiers pour the existing dossier."
+              "title": "Essayez vous-même : créez des fichiers vides avec la commande « touch »",
+              "prompt": "Exécutez la commande « `touch touch-lab/todo.txt touch-lab/agenda.txt` » pour ajouter deux fichiers vides au dossier existant."
             }
           },
           "practice": {
             "sc-mkdir-basic-purpose": {
-              "title": "Identifier le but de la commande",
-              "prompt": "Qu’est-ce que the main job of `mkdir` dans the Linux terminal?",
-              "hint": "Pensez à whether cela créers a dossier, créers a fichier, ou affichers existing items.",
+              "title": "Identifier l'objectif de la commande",
+              "prompt": "Quelle est la fonction principale de la commande « `mkdir` » dans le terminal Linux ?",
+              "hint": "Demandez-vous si l'opération crée un dossier, crée un fichier ou affiche des éléments existants.",
               "help": {
-                "concept": "`mkdir` stands for make directory, et a directory est another name for a dossier.",
-                "hint_1": "This commande changes the espace de travail structure by adding a container for fichiers.",
-                "hint_2": "It fait not display contenu et cela fait not créer a regular text fichier."
+                "concept": "`mkdir` signifie « créer un répertoire », et un répertoire est un autre nom pour désigner un dossier.",
+                "hint_1": "Cette commande modifie la structure de l'espace de travail en ajoutant un conteneur destiné à accueillir des fichiers.",
+                "hint_2": "Il n'affiche pas de contenu et ne crée pas de fichier texte classique."
               },
               "options": {
-                "a": "Create a new dossier",
-                "b": "Create an empty fichier",
-                "c": "List fichiers dans the dossier actuel",
-                "d": "Move into a different dossier"
+                "a": "Créer un nouveau dossier",
+                "b": "Créer un fichier vide",
+                "c": "Afficher la liste des fichiers du dossier actuel",
+                "d": "Déplacer vers un autre dossier"
               }
             },
             "mc-when-to-use-mkdir-p": {
-              "title": "Choisir les meilleurs usages de mkdir -p",
-              "prompt": "Quelle commandees correctly use `mkdir -p` pour créer nested dossiers for a class project? Choisissez toutes les réponses qui conviennent.",
-              "hint": "Cherchez commandes that créer a path avec parent dossiers included.",
+              "title": "Choisissez les meilleures utilisations de la commande « mkdir -p »",
+              "prompt": "Quelles commandes utilisent correctement la fonction « `mkdir -p` » pour créer des dossiers imbriqués dans le cadre d'un projet de classe ? Sélectionnez toutes les réponses qui s'appliquent.",
+              "hint": "Recherchez les commandes qui créent un chemin d'accès incluant les dossiers parents.",
               "help": {
-                "concept": "`mkdir -p` est used when vous want pour créer a full dossier path, including parent dossiers that may not exist yet.",
-                "hint_1": "A nested path has slashes, such as `course/week1/notes`.",
-                "hint_2": "Choisissez le commandes where one commande can créer multiple dossier levels sûrly."
+                "concept": "`mkdir -p` est utilisé lorsque vous souhaitez créer un chemin d'accès complet à un dossier, y compris les dossiers parents qui n'existent peut-être pas encore.",
+                "hint_1": "Un chemin imbriqué contient des barres obliques, comme par exemple `course/week1/notes`.",
+                "hint_2": "Choisissez les commandes qui permettent de créer plusieurs niveaux de dossiers en toute sécurité à l'aide d'une seule commande."
               },
               "options": {
                 "a": "mkdir -p school/math/week1",
@@ -147,13 +147,13 @@
               }
             },
             "mc-valid-project-setup": {
-              "title": "Choisir les commandes qui configurent correctement les fichiers et les dossiers",
-              "prompt": "Vous êtes starting a reading project. Quelle commandees would correctly créer the requested items? Choisissez toutes les réponses qui conviennent.",
-              "hint": "Cherchez commandes that match the item type: dossiers avec one commande, fichiers avec another.",
+              "title": "Sélectionnez les commandes qui permettent de configurer correctement les fichiers et les dossiers",
+              "prompt": "Vous lancez un projet de lecture. Quelles commandes permettraient de créer correctement les éléments demandés ? Sélectionnez toutes les réponses qui s'appliquent.",
+              "hint": "Recherchez les commandes correspondant au type d'élément : une commande pour les dossiers, une autre pour les fichiers.",
               "help": {
-                "concept": "Utilisez `mkdir` ou `mkdir -p` for dossiers et `touch` for fichiers. Matching the commande pour the item type est the key idea.",
-                "hint_1": "A dossier like `reading` needs a directory commande.",
-                "hint_2": "A fichier like `reading/list.txt` can be créerd avec `touch` once the dossier path exists, ou by using a full path après création de the dossier."
+                "concept": "Utilisez `mkdir` ou `mkdir -p` pour les dossiers, et `touch` pour les fichiers. L'idée principale est d'adapter la commande au type d'élément.",
+                "hint_1": "Un dossier tel que « `reading` » nécessite une commande de répertoire.",
+                "hint_2": "Un fichier tel que « `reading/list.txt` » peut être créé à l'aide de la commande « `touch` » dès lors que le chemin d'accès au dossier existe, ou en utilisant un chemin d'accès complet après avoir créé le dossier."
               },
               "options": {
                 "a": "mkdir reading",
@@ -163,13 +163,13 @@
               }
             },
             "dr-folder-setup-order": {
-              "title": "Mettre les étapes de configuration dans l’ordre",
-              "prompt": "Mettez ces terminal actions dans un ordre logique for création de a new notes espace de travail et vérifiering it.",
-              "hint": "Create the dossier avant moving into it, et créer the fichier après vous sont inside the dossier.",
+              "title": "Séquence des étapes d'installation",
+              "prompt": "Organisez ces commandes Terminal dans un ordre logique pour créer un nouvel espace de travail Notes et le valider.",
+              "hint": "Créez le dossier avant d'y accéder, puis créez le fichier une fois que vous vous trouvez dans ce dossier.",
               "help": {
-                "concept": "A sûr terminal workflow est pour créer a dossier, déplacer into cela if needed, créer fichiers there, et then inspecter the résultat.",
-                "hint_1": "You cannot créer `todo.txt` inside `notes` until `notes` exists ou vous specify a full path.",
-                "hint_2": "The verification étape belongs at the end, après the dossier et fichier have been créerd."
+                "concept": "Une procédure sûre à suivre dans le terminal consiste à créer un dossier, à y accéder si nécessaire, à y créer des fichiers, puis à vérifier le résultat.",
+                "hint_1": "Vous ne pouvez pas créer « `todo.txt` » dans « `notes` » tant que « `notes` » n'existe pas ou que vous n'avez pas spécifié un chemin d'accès complet.",
+                "hint_2": "L'étape de vérification doit être effectuée à la fin, une fois que le dossier et le fichier ont été créés."
               },
               "tokens": {
                 "t1": "mkdir notes",
@@ -180,31 +180,31 @@
             },
             "ci-create-single-folder": {
               "title": "Créer un dossier de projet",
-              "prompt": "You créer a `projects` dossier dans the terminal et want pour prove cela worked. Quel/quelle follow-up action makes the résultat visible?",
-              "hint": "Choose the action that affichers the new dossier après vous créer it.",
+              "prompt": "Vous avez créé un dossier « `projects` » dans le terminal et vous souhaitez vérifier que cela a bien fonctionné. Quelle action suivante permet de visualiser le résultat ?",
+              "hint": "Choisissez l'action qui affichera le nouveau dossier une fois que vous l'aurez créé.",
               "help": {
-                "concept": "`mkdir` créers a dossier dans the répertoire actuel, et `ls` est a quick way pour confirmer the dossier now appears dans the espace de travail.",
-                "hint_1": "Create exactly one dossier named `projects` where vous sont now.",
-                "hint_2": "After création de `projects`, run a listering commande dans the same emplacement so the vérifierer can see that vous verified it."
+                "concept": "`mkdir` crée un dossier dans le répertoire courant, et la commande « `ls` » permet de vérifier rapidement que ce dossier apparaît désormais dans l'espace de travail.",
+                "hint_1": "Créez exactement un dossier nommé « `projects` » à l'emplacement où vous vous trouvez actuellement.",
+                "hint_2": "Après avoir créé `projects`, exécutez une commande de liste dans le même répertoire afin que l'outil de vérification puisse constater que vous l'avez validé."
               },
-              "template": "After création de a dossier, cela helps pour ____ so vous can verify the change.",
+              "template": "Une fois le dossier créé, il est utile de ____ afin de pouvoir vérifier la modification.",
               "choices": [
                 "afficher un résultat observable",
-                "masquer toute sortie",
+                "masquer toutes les sorties",
                 "supprimer le fichier immédiatement",
-                "sauter le programme"
+                "passer le programme"
               ]
             },
             "fb-touch-purpose": {
-              "title": "Compléter l’idée de la commande",
-              "prompt": "Complétez la commandee manquante so the sentence matches Linux terminal behavior.",
-              "hint": "Utilisez the commande that créers an empty fichier if cela fait not already exist.",
+              "title": "Complétez l'idée de commande",
+              "prompt": "Complétez la commande manquante afin que la phrase corresponde au comportement du terminal Linux.",
+              "hint": "Utilisez la commande qui crée un fichier vide s'il n'existe pas encore.",
               "help": {
-                "concept": "`the missing term` est commonly used pour créer empty fichiers quickly depuis the terminal.",
-                "hint_1": "This commande works on fichiers, not dossiers.",
-                "hint_2": "It est the commande vous would use for something like `notes.txt` ou `todo.txt`."
+                "concept": "`the missing term` est couramment utilisé pour créer rapidement des fichiers vides depuis le terminal.",
+                "hint_1": "Cette commande s'applique aux fichiers, et non aux dossiers.",
+                "hint_2": "C'est la commande que vous utiliseriez pour des sites comme `notes.txt` ou `todo.txt`."
               },
-              "template": "To créer an empty fichier named `notes.txt`, use `[blank1] notes.txt`.",
+              "template": "Pour créer un fichier vide nommé « `notes.txt` », utilisez la commande « `[blank1] notes.txt` ».",
               "choices": [
                 "mkdir",
                 "touch",
@@ -222,16 +222,16 @@
       "linux-module-2-files-and-folders": {
         "creating-folders-and-files": {
           "sketch-1": {
-            "title": "Créer un dossier avec mkdir",
-            "bodyMarkdown": "`mkdir` créers a new dossier dans votre current emplacement. This est useful when vous want pour start organizing a project instead of keeping everything dans one place.\n\nFor example, if vous sont setting up school notes, vous might créer a dossier named `notes`:\n\n```bash\nmkdir notes\nls\n```\n\nStep by étape:\n- `mkdir notes` créers a dossier called `notes`.\n- `ls` listers what est dans the dossier actuel so vous can confirmer that `notes` now exists.\n\nIf `notes` appears dans the lister, the commande worked. A common habitude est pour run `ls` right après création de something so vous can verify the espace de travail changed the way vous expected."
+            "title": "Créer un dossier à l'aide de la commande mkdir",
+            "bodyMarkdown": "`mkdir` creates a new folder in your current location. This is useful when you want to start organizing a project instead of keeping everything in one place.\n\nFor example, if you are setting up school notes, you might create a folder named `notes`:\n\n```bash\nmkdir notes\nls\n```\n\nStep by step:\n- `mkdir notes` creates a folder called `notes`.\n- `ls` lists what is in the current folder so you can confirm that `notes` now exists.\n\nIf `notes` appears in the list, the command worked. A common habit is to run `ls` right after creating something so you can verify the workspace changed the way you expected."
           },
           "sketch-2": {
             "title": "Créer des dossiers imbriqués avec mkdir -p",
-            "bodyMarkdown": "Sometimes vous need several dossiers inside each other. `mkdir -p` créers the whole path at once.\n\nExample:\n\n```bash\nmkdir -p school/history/week1\nls school\n```\n\nStep by étape:\n- `mkdir -p school/history/week1` créers `school`, then `history` inside it, then `week1` inside that.\n- The `-p` option prevents vous depuis having pour créer each level one by one.\n- `ls school` lets vous inspecter the first dossier dans that path.\n\nWithout `-p`, trying pour créer a deep path all at once usually fails if the parent dossiers faire not exist yet."
+            "bodyMarkdown": "Sometimes you need several folders inside each other. `mkdir -p` creates the whole path at once.\n\nExample:\n\n```bash\nmkdir -p school/history/week1\nls school\n```\n\nStep by step:\n- `mkdir -p school/history/week1` creates `school`, then `history` inside it, then `week1` inside that.\n- The `-p` option prevents you from having to create each level one by one.\n- `ls school` lets you inspect the first folder in that path.\n\nWithout `-p`, trying to create a deep path all at once usually fails if the parent folders do not exist yet."
           },
           "sketch-3": {
-            "title": "Créer des fichiers vides avec touch",
-            "bodyMarkdown": "`touch` créers an empty fichier when that fichier fait not already exist. This est a fast way pour set up placeholders such as notes, drafts, ou vérifierlisters.\n\nExample:\n\n```bash\ntouch todo.txt ideas.txt\nls\n```\n\nStep by étape:\n- `touch todo.txt ideas.txt` créers two empty fichiers.\n- `ls` affichers both fichier names dans the dossier actuel.\n\nYou can also combine dossiers et fichiers dans a small project setup. For example, après création de a `school` dossier, vous might créer `school/reading-list.txt` so the dossier already contains a fichier vous plan pour use."
+            "title": "Créer des fichiers vides avec la commande « touch »",
+            "bodyMarkdown": "`touch` creates an empty file when that file does not already exist. This is a fast way to set up placeholders such as notes, drafts, or checklists.\n\nExample:\n\n```bash\ntouch todo.txt ideas.txt\nls\n```\n\nStep by step:\n- `touch todo.txt ideas.txt` creates two empty files.\n- `ls` shows both file names in the current folder.\n\nYou can also combine folders and files in a small project setup. For example, after creating a `school` folder, you might create `school/reading-list.txt` so the folder already contains a file you plan to use."
           }
         }
       }

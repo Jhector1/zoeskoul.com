@@ -8,6 +8,7 @@ import type {
     SemanticValidationReport,
 } from "@zoeskoul/curriculum-profiles";
 import type { CurriculumQualityReport } from "../quality/buildCurriculumQualityReport.js";
+import type { CompileValidationState } from "../compile/validationState.js";
 
 async function ensureDir(filePath: string) {
     await fs.mkdir(path.dirname(filePath), { recursive: true });
@@ -36,6 +37,7 @@ export async function writeTopicReports(args: {
     topicMessagesByLocale?: Record<string, unknown>;
     rebuildSource?: unknown;
     qualityReport?: CurriculumQualityReport;
+    validationState?: CompileValidationState;
 }) {
     const baseDir = path.join(
         getDraftReportsRoot(args.subjectSlug),
@@ -94,5 +96,9 @@ export async function writeTopicReports(args: {
 
     if (args.qualityReport !== undefined) {
         await writeJsonAtomic(path.join(baseDir, "quality-report.json"), args.qualityReport);
+    }
+
+    if (args.validationState !== undefined) {
+        await writeJsonAtomic(path.join(baseDir, "validation-state.json"), args.validationState);
     }
 }

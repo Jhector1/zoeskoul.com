@@ -16,25 +16,49 @@ export type SemanticHarnessResult =
 export function buildPythonSemanticHarness(args: {
     userCode: string;
     semanticChecks: SemanticCheck[];
+    semanticModuleNames?: string[];
 }): string {
     const userCodeJson = JSON.stringify(args.userCode ?? "");
     const checksJson = JSON.stringify(args.semanticChecks ?? []);
+    const modulesJson = JSON.stringify(args.semanticModuleNames ?? []);
 
     const userCodeJsonStringLiteral = JSON.stringify(userCodeJson);
     const checksJsonStringLiteral = JSON.stringify(checksJson);
+    const modulesJsonStringLiteral = JSON.stringify(modulesJson);
     return `
 import contextlib
+import importlib
 import inspect
 import io
 import json
+import re
 
 _SENTINEL = ${JSON.stringify(SEMANTIC_HARNESS_SENTINEL)}
 _USER_CODE = json.loads(${userCodeJsonStringLiteral})
 _CHECKS = json.loads(${checksJsonStringLiteral})
+_SEMANTIC_MODULE_NAMES = json.loads(${modulesJsonStringLiteral})
 
 _user_stdout_buffer = io.StringIO()
 _env = {"__name__": "__main__"}
 _errors = []
+
+def _semantic_public_symbols(module):
+    for name, value in vars(module).items():
+        if name.startswith("_"):
+            continue
+        if isinstance(value, type) or callable(value):
+            _env.setdefault(name, value)
+
+def _preload_semantic_modules():
+    for module_name in _SEMANTIC_MODULE_NAMES:
+        if not isinstance(module_name, str) or not module_name:
+            continue
+        try:
+            _semantic_public_symbols(importlib.import_module(module_name))
+        except BaseException:
+            # Normal execution/checks will still report a useful failure.
+            pass
+
 def _call_with_captured_stdout(callable_value, args):
     with contextlib.redirect_stdout(_user_stdout_buffer):
         return callable_value(*list(args or []))
@@ -106,11 +130,45 @@ def _constructor_param_names(cls):
         if name != "self" and parameter.kind in allowed_kinds
     ]
 
+def _pascal_case(value):
+    return "".join(part[:1].upper() + part[1:] for part in re.split(r"[_\s-]+", str(value)) if part)
+
+def _infer_class_name_from_dict(value):
+    if not isinstance(value, dict):
+        return None
+
+    for key in ["class", "className", "type"]:
+        raw = value.get(key)
+        if isinstance(raw, str) and _get_class(raw) is not None:
+            return raw
+
+    kind = value.get("kind")
+    if isinstance(kind, str):
+        base = _pascal_case(kind)
+        for candidate in [base, f"{base}Task", f"{base}Item"]:
+            if _get_class(candidate) is not None:
+                return candidate
+
+    # Last resort for semantic fixture dictionaries that omit a discriminator:
+    # choose a loaded class whose constructor parameter names are all present.
+    for name, candidate in list(_env.items()):
+        if not isinstance(candidate, type) or name.startswith("_"):
+            continue
+        params = _constructor_param_names(candidate)
+        if params and all(param in value for param in params):
+            return name
+
+    return None
+
 def _coerce_dict_to_instance(value, class_name):
-    if not class_name or not isinstance(value, dict):
+    if not isinstance(value, dict):
         return value
 
-    cls = _get_class(class_name)
+    resolved_class_name = class_name or _infer_class_name_from_dict(value)
+    if not resolved_class_name:
+        return value
+
+    cls = _get_class(resolved_class_name)
 
     if cls is None:
         return value
@@ -176,15 +234,14 @@ def _group_repeated_dict_entries_for_plural_constructor_arg(items, cls):
     return items
 
 def _coerce_list_of_dicts_to_instances(value, class_name):
-    if not class_name or not isinstance(value, list):
+    if not isinstance(value, list):
         return value
 
-    cls = _get_class(class_name)
+    cls = _get_class(class_name) if class_name else None
 
-    if cls is None:
-        return value
-
-    grouped_value = _group_repeated_dict_entries_for_plural_constructor_arg(value, cls)
+    grouped_value = value
+    if cls is not None:
+        grouped_value = _group_repeated_dict_entries_for_plural_constructor_arg(value, cls)
 
     return [_coerce_dict_to_instance(item, class_name) for item in grouped_value]
 
@@ -273,7 +330,17 @@ def _normalize_actual_for_expected(actual, expected):
 
     return actual
 
+def _unwrap_singleton_primitive_expected(value):
+    if (
+        isinstance(value, list)
+        and len(value) == 1
+        and not isinstance(value[0], (dict, list, tuple, set))
+    ):
+        return value[0]
+    return value
+
 def _semantic_equal(actual, expected):
+    expected = _unwrap_singleton_primitive_expected(expected)
     normalized_actual = _normalize_actual_for_expected(actual, expected)
     return normalized_actual == expected
 
@@ -328,8 +395,10 @@ def _get_function(function_name):
         return value
     return None
 try:
+    _preload_semantic_modules()
     with contextlib.redirect_stdout(_user_stdout_buffer):
         exec(_USER_CODE, _env, _env)
+    _preload_semantic_modules()
 except BaseException as exc:
     print(_SENTINEL + json.dumps({
         "ok": False,
@@ -421,6 +490,99 @@ for check in _CHECKS:
                             check.get("message")
                             or f"{method_name}() should return {expected!r}, but got {actual!r}."
                         )
+
+        elif ctype == "method_sequence_returns":
+            class_name = check.get("className")
+            method_name = check.get("methodName")
+
+            constructor_args = _decode_args(
+                check.get("constructorArgs") or [],
+                check.get("constructorArgKinds") or [],
+                class_name,
+            )
+            instance = _make_instance(class_name, constructor_args)
+
+            for call in check.get("calls") or []:
+                call_method_name = call.get("methodName")
+                call_args = _decode_args(
+                    call.get("methodArgs") or [],
+                    call.get("methodArgKinds") or [],
+                    class_name,
+                )
+
+                if not hasattr(instance, call_method_name):
+                    _fail(check.get("message") or f"Add a method named {call_method_name}.")
+                    break
+
+                call_method = getattr(instance, call_method_name)
+                if not callable(call_method):
+                    _fail(check.get("message") or f"{call_method_name} should be a method.")
+                    break
+
+                _call_with_captured_stdout(call_method, call_args)
+
+            method_args = _decode_args(
+                check.get("methodArgs") or [],
+                check.get("methodArgKinds") or [],
+                class_name,
+            )
+            expected = _decode_value(check.get("expected"), check.get("expectedKind"))
+
+            if not hasattr(instance, method_name):
+                _fail(check.get("message") or f"Add a method named {method_name}.")
+            else:
+                method = getattr(instance, method_name)
+                if not callable(method):
+                    _fail(check.get("message") or f"{method_name} should be a method.")
+                else:
+                    actual = _call_with_captured_stdout(method, method_args)
+                    if not _semantic_equal(actual, expected):
+                        _fail(
+                            check.get("message")
+                            or f"After the method calls, {method_name}() should return {expected!r}, but got {actual!r}."
+                        )
+
+        elif ctype == "attribute_sequence_equals":
+            class_name = check.get("className")
+            attribute_name = check.get("attributeName")
+
+            constructor_args = _decode_args(
+                check.get("constructorArgs") or [],
+                check.get("constructorArgKinds") or [],
+                class_name,
+            )
+            instance = _make_instance(class_name, constructor_args)
+
+            for call in check.get("calls") or []:
+                call_method_name = call.get("methodName")
+                call_args = _decode_args(
+                    call.get("methodArgs") or [],
+                    call.get("methodArgKinds") or [],
+                    class_name,
+                )
+
+                if not hasattr(instance, call_method_name):
+                    _fail(check.get("message") or f"Add a method named {call_method_name}.")
+                    break
+
+                call_method = getattr(instance, call_method_name)
+                if not callable(call_method):
+                    _fail(check.get("message") or f"{call_method_name} should be a method.")
+                    break
+
+                _call_with_captured_stdout(call_method, call_args)
+
+            expected = _decode_value(check.get("expected"), check.get("expectedKind"))
+
+            if not hasattr(instance, attribute_name):
+                _fail(check.get("message") or f"Instances should have a {attribute_name!r} attribute.")
+            else:
+                actual = getattr(instance, attribute_name)
+                if not _semantic_equal(actual, expected):
+                    _fail(
+                        check.get("message")
+                        or f"After the method calls, {attribute_name} should be {expected!r}, but got {actual!r}."
+                    )
 
         elif ctype == "created_instances":
             class_name = check.get("className")

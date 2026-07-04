@@ -1,0 +1,1918 @@
+{
+  "topicId": "module-9-catalog-polymorphism-project",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-module-project",
+  "prefix": "py9",
+  "minutes": 50,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.cards.sketch0.title",
+      "sketchId": "module-9-catalog-polymorphism-project-sketch-0",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_module_9_catalog_polymorphism_project_sketch0",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.try_module_9_catalog_polymorphism_project_sketch0.title",
+            "exerciseKey": "try-module-9-catalog-polymorphism-project-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "catalog_project_step_2_video_subclass",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_2_video_subclass.title",
+            "exerciseKey": "catalog-project-step-2-video-subclass",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "catalog_project_step_3_polymorphic_services",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_3_polymorphic_services.title",
+            "exerciseKey": "catalog-project-step-3-polymorphic-services",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "catalog_project_step_4_abstract_fee_contract",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_4_abstract_fee_contract.title",
+            "exerciseKey": "catalog-project-step-4-abstract-fee-contract",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "catalog_project_step_5_load_items_from_file",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_5_load_items_from_file.title",
+            "exerciseKey": "catalog-project-step-5-load-items-from-file",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "catalog_project_step_6_final_summary_report",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_6_final_summary_report.title",
+            "exerciseKey": "catalog-project-step-6-final-summary-report",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "module-9-catalog-polymorphism-project-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.module-9-catalog-polymorphism-project-sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.module-9-catalog-polymorphism-project-sketch-0.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-module-9-catalog-polymorphism-project-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterFiles.models_base_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def describe(self):\n        return f\"Book: {self.title} by {self.author} ({self.year})\"\n\nbook = Book(\"Python Patterns\", 2023, \"A. Lee\")\nprint(book.describe())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def describe(self):\n        return f\"Book: {self.title} by {self.author} ({self.year})\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterFiles.models_base_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.try_module_9_catalog_polymorphism_project_sketch0.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def describe(self):\n        return f\"Book: {self.title} by {self.author} ({self.year})\"\n\nbook = Book(\"Python Patterns\", 2023, \"A. Lee\")\nprint(book.describe())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def describe(self):\n        return f\"Book: {self.title} by {self.author} ({self.year})\"\n\nbook = Book(\"Python Patterns\", 2023, \"A. Lee\")\nprint(book.describe())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def describe(self):\n        return f\"Book: {self.title} by {self.author} ({self.year})\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "CatalogItem",
+            "message": "Define the CatalogItem class in models/base_item.py."
+          },
+          {
+            "type": "constructible",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Sample",
+              2024
+            ],
+            "message": "CatalogItem should be constructible with title and year."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Sample",
+              2024
+            ],
+            "attributes": [
+              "title",
+              "year"
+            ],
+            "message": "CatalogItem instances should store title and year."
+          },
+          {
+            "type": "method_returns",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Sample",
+              2024
+            ],
+            "constructorArgKinds": [],
+            "methodName": "describe",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Sample (2024)",
+            "expectedKind": "value",
+            "message": "CatalogItem.describe() should return the shared title/year format."
+          },
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Define the Book subclass in models/book.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Python Patterns",
+              2023,
+              "A. Lee"
+            ],
+            "message": "Book should be constructible with title, year, and author."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Python Patterns",
+              2023,
+              "A. Lee"
+            ],
+            "attributes": [
+              "title",
+              "year",
+              "author"
+            ],
+            "message": "Book instances should keep inherited fields plus author."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Python Patterns",
+              2023,
+              "A. Lee"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "describe",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Book: Python Patterns by A. Lee (2023)",
+            "expectedKind": "value",
+            "message": "Book.describe() should override the base description."
+          },
+          {
+            "type": "created_instances",
+            "className": "Book",
+            "min": 1,
+            "message": "Create at least one Book instance in main.py."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "Print the book description from main.py."
+          }
+        ]
+      }
+    },
+    {
+      "id": "catalog-project-step-2-video-subclass",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterFiles.models_base_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def fee_label(self):\n        return \"Fee: not set\"\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def fee_label(self):\n        return \"Book fee: $1\"\n\n\nclass Video(CatalogItem):\n    def __init__(self, title, year, minutes):\n        super().__init__(title, year)\n        self.minutes = minutes\n\n    def describe(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year})\"\n\n    def fee_label(self):\n        return \"Video fee: $3\"\n\nbook = Book(\"Python Patterns\", 2023, \"A. Lee\")\nvideo = Video(\"Debugging Basics\", 2022, 45)\nprint(CatalogItem(\"Sample\", 2024).fee_label())\nprint(book.fee_label())\nprint(video.describe())\nprint(video.fee_label())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def fee_label(self):\n        return \"Fee: not set\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def fee_label(self):\n        return \"Book fee: $1\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "class Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def describe(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year})\"\n\n    def fee_label(self):\n        return \"Video fee: $3\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterFiles.models_base_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_video_subclass.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def fee_label(self):\n        return \"Fee: not set\"\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def fee_label(self):\n        return \"Book fee: $1\"\n\n\nclass Video(CatalogItem):\n    def __init__(self, title, year, minutes):\n        super().__init__(title, year)\n        self.minutes = minutes\n\n    def describe(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year})\"\n\n    def fee_label(self):\n        return \"Video fee: $3\"\n\nbook = Book(\"Python Patterns\", 2023, \"A. Lee\")\nvideo = Video(\"Debugging Basics\", 2022, 45)\nprint(CatalogItem(\"Sample\", 2024).fee_label())\nprint(book.fee_label())\nprint(video.describe())\nprint(video.fee_label())\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def fee_label(self):\n        return \"Fee: not set\"\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def fee_label(self):\n        return \"Book fee: $1\"\n\n\nclass Video(CatalogItem):\n    def __init__(self, title, year, minutes):\n        super().__init__(title, year)\n        self.minutes = minutes\n\n    def describe(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year})\"\n\n    def fee_label(self):\n        return \"Video fee: $3\"\n\nbook = Book(\"Python Patterns\", 2023, \"A. Lee\")\nvideo = Video(\"Debugging Basics\", 2022, 45)\nprint(CatalogItem(\"Sample\", 2024).fee_label())\nprint(book.fee_label())\nprint(video.describe())\nprint(video.fee_label())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def fee_label(self):\n        return \"Fee: not set\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def fee_label(self):\n        return \"Book fee: $1\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "class Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def describe(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year})\"\n\n    def fee_label(self):\n        return \"Video fee: $3\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Video",
+            "message": "Define the Video subclass in models/video.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Video",
+            "constructorArgs": [
+              "Debugging Basics",
+              2022,
+              45
+            ],
+            "message": "Video should be constructible with title, year, and minutes."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Video",
+            "constructorArgs": [
+              "Debugging Basics",
+              2022,
+              45
+            ],
+            "attributes": [
+              "title",
+              "year",
+              "minutes"
+            ],
+            "message": "Video instances should store inherited fields plus minutes."
+          },
+          {
+            "type": "method_returns",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Sample",
+              2024
+            ],
+            "constructorArgKinds": [],
+            "methodName": "fee_label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Fee: not set",
+            "expectedKind": "value",
+            "message": "CatalogItem.fee_label() should provide the shared default contract."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Python Patterns",
+              2023,
+              "A. Lee"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "fee_label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Book fee: $1",
+            "expectedKind": "value",
+            "message": "Book.fee_label() should override the base fee label."
+          },
+          {
+            "type": "method_returns",
+            "className": "Video",
+            "constructorArgs": [
+              "Debugging Basics",
+              2022,
+              45
+            ],
+            "constructorArgKinds": [],
+            "methodName": "describe",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Video: Debugging Basics - 45 min (2022)",
+            "expectedKind": "value",
+            "message": "Video.describe() should return the video-specific description."
+          },
+          {
+            "type": "method_returns",
+            "className": "Video",
+            "constructorArgs": [
+              "Debugging Basics",
+              2022,
+              45
+            ],
+            "constructorArgKinds": [],
+            "methodName": "fee_label",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Video fee: $3",
+            "expectedKind": "value",
+            "message": "Video.fee_label() should return the video-specific fee label."
+          },
+          {
+            "type": "created_instances",
+            "className": "Video",
+            "min": 1,
+            "message": "Create at least one Video instance in main.py."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 4,
+            "message": "Print the description and fee label for both items."
+          }
+        ]
+      }
+    },
+    {
+      "id": "catalog-project-step-3-polymorphic-services",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterFiles.models_base_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterFiles.models_video_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n\nclass Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n\ndef build_descriptions(items):\n    return [\n        \"Book: Python Patterns by A. Lee (2023)\",\n        \"Video: Debugging Basics - 45 min (2022)\",\n    ]\n\n\ndef build_fee_labels(items):\n    return [\"Book fee: $1\", \"Video fee: $3\"]\n\nbook = Book(\"Python Patterns\", 2023, \"A. Lee\")\nvideo = Video(\"Debugging Basics\", 2022, 45)\nfor line in build_descriptions(None) + build_fee_labels(None):\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n    def fee_label(self):\n        return \"Fee: not set\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "from models.base_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def describe(self):\n        return f\"Book: {self.title} by {self.author} ({self.year})\"\n\n    def fee_label(self):\n        return \"Book fee: $1\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "from models.base_item import CatalogItem\n\n\nclass Video(CatalogItem):\n    def __init__(self, title, year, minutes):\n        super().__init__(title, year)\n        self.minutes = minutes\n\n    def describe(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year})\"\n\n    def fee_label(self):\n        return \"Video fee: $3\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "# Define build_descriptions(items)\n# Define build_fee_labels(items)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterFiles.models_base_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_polymorphic_services.starterFiles.models_video_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n\nclass Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n\ndef build_descriptions(items):\n    return [\n        \"Book: Python Patterns by A. Lee (2023)\",\n        \"Video: Debugging Basics - 45 min (2022)\",\n    ]\n\n\ndef build_fee_labels(items):\n    return [\"Book fee: $1\", \"Video fee: $3\"]\n\nbook = Book(\"Python Patterns\", 2023, \"A. Lee\")\nvideo = Video(\"Debugging Basics\", 2022, 45)\nfor line in build_descriptions(None) + build_fee_labels(None):\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n\nclass Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n\ndef build_descriptions(items):\n    return [\n        \"Book: Python Patterns by A. Lee (2023)\",\n        \"Video: Debugging Basics - 45 min (2022)\",\n    ]\n\n\ndef build_fee_labels(items):\n    return [\"Book fee: $1\", \"Video fee: $3\"]\n\nbook = Book(\"Python Patterns\", 2023, \"A. Lee\")\nvideo = Video(\"Debugging Basics\", 2022, 45)\nfor line in build_descriptions(None) + build_fee_labels(None):\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n    def fee_label(self):\n        return \"Fee: not set\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "from models.base_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def describe(self):\n        return f\"Book: {self.title} by {self.author} ({self.year})\"\n\n    def fee_label(self):\n        return \"Book fee: $1\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "from models.base_item import CatalogItem\n\n\nclass Video(CatalogItem):\n    def __init__(self, title, year, minutes):\n        super().__init__(title, year)\n        self.minutes = minutes\n\n    def describe(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year})\"\n\n    def fee_label(self):\n        return \"Video fee: $3\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "# Define build_descriptions(items)\n# Define build_fee_labels(items)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_descriptions",
+            "args": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Python Patterns"
+                  ],
+                  [
+                    "year",
+                    2023
+                  ],
+                  [
+                    "author",
+                    "A. Lee"
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Video"
+                  ],
+                  [
+                    "title",
+                    "Debugging Basics"
+                  ],
+                  [
+                    "year",
+                    2022
+                  ],
+                  [
+                    "minutes",
+                    45
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "Book: Python Patterns by A. Lee (2023)",
+              "Video: Debugging Basics - 45 min (2022)"
+            ],
+            "expectedKind": "value",
+            "message": "build_descriptions(items) should return each item's describe() result in order."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_fee_labels",
+            "args": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Python Patterns"
+                  ],
+                  [
+                    "year",
+                    2023
+                  ],
+                  [
+                    "author",
+                    "A. Lee"
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Video"
+                  ],
+                  [
+                    "title",
+                    "Debugging Basics"
+                  ],
+                  [
+                    "year",
+                    2022
+                  ],
+                  [
+                    "minutes",
+                    45
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "Book fee: $1",
+              "Video fee: $3"
+            ],
+            "expectedKind": "value",
+            "message": "build_fee_labels(items) should return each item's fee_label() result in order."
+          },
+          {
+            "type": "created_instances",
+            "className": "Book",
+            "min": 1,
+            "message": "Create at least one Book instance in main.py."
+          },
+          {
+            "type": "created_instances",
+            "className": "Video",
+            "min": 1,
+            "message": "Create at least one Video instance in main.py."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 4,
+            "message": "Print the lines returned by both service functions."
+          }
+        ]
+      }
+    },
+    {
+      "id": "catalog-project-step-4-abstract-fee-contract",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.models_base_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.models_video_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.services_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.services_catalog_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"\n\n\nclass Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"\n\n\ndef build_report_lines(items):\n    return [\n        \"Book: Python Patterns by A. Lee (2023) | Book fee: $1\",\n        \"Video: Debugging Basics - 45 min (2022) | Video fee: $3\",\n    ]\n\nfor line in build_report_lines(None):\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n    def fee_label(self):\n        return \"Fee: not set\"\n\n    # Add report_line(self)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "class Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "def build_descriptions(items):\n    return [item.describe() for item in items]\n\n\ndef build_fee_labels(items):\n    return [item.fee_label() for item in items]\n\n\n# Add build_report_lines(items)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.models_base_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.models_video_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.services_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_abstract_fee_contract.starterFiles.services_catalog_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"\n\n\nclass Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"\n\n\ndef build_report_lines(items):\n    return [\n        \"Book: Python Patterns by A. Lee (2023) | Book fee: $1\",\n        \"Video: Debugging Basics - 45 min (2022) | Video fee: $3\",\n    ]\n\nfor line in build_report_lines(None):\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"\n\n\nclass Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"\n\n\ndef build_report_lines(items):\n    return [\n        \"Book: Python Patterns by A. Lee (2023) | Book fee: $1\",\n        \"Video: Debugging Basics - 45 min (2022) | Video fee: $3\",\n    ]\n\nfor line in build_report_lines(None):\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n    def fee_label(self):\n        return \"Fee: not set\"\n\n    # Add report_line(self)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "class Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "def build_descriptions(items):\n    return [item.describe() for item in items]\n\n\ndef build_fee_labels(items):\n    return [item.fee_label() for item in items]\n\n\n# Add build_report_lines(items)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Python Patterns",
+              2023,
+              "A. Lee"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "report_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Book: Python Patterns by A. Lee (2023) | Book fee: $1",
+            "expectedKind": "value",
+            "message": "CatalogItem.report_line() should work for Book objects through overridden methods."
+          },
+          {
+            "type": "method_returns",
+            "className": "Video",
+            "constructorArgs": [
+              "Debugging Basics",
+              2022,
+              45
+            ],
+            "constructorArgKinds": [],
+            "methodName": "report_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Video: Debugging Basics - 45 min (2022) | Video fee: $3",
+            "expectedKind": "value",
+            "message": "CatalogItem.report_line() should work for Video objects through overridden methods."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "build_report_lines",
+            "args": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Python Patterns"
+                  ],
+                  [
+                    "year",
+                    2023
+                  ],
+                  [
+                    "author",
+                    "A. Lee"
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Video"
+                  ],
+                  [
+                    "title",
+                    "Debugging Basics"
+                  ],
+                  [
+                    "year",
+                    2022
+                  ],
+                  [
+                    "minutes",
+                    45
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              "Book: Python Patterns by A. Lee (2023) | Book fee: $1",
+              "Video: Debugging Basics - 45 min (2022) | Video fee: $3"
+            ],
+            "expectedKind": "value",
+            "message": "build_report_lines(items) should return each item's report_line() result in order."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "Print the report lines for the mixed item list."
+          }
+        ]
+      }
+    },
+    {
+      "id": "catalog-project-step-5-load-items-from-file",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.models_base_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.models_video_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.services_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.services_catalog_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"\n\n\nclass Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"\n\n\ndef load_items(path):\n    return [\"Book\", \"Video\", \"Book\"]\n\nfor line in [\n    Book(\"Clean APIs\", 2021, \"M. Diaz\").report_line(),\n    Video(\"Debugging Basics\", 2022, 45).report_line(),\n    Book(\"Python Patterns\", 2023, \"A. Lee\").report_line(),\n]:\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n    def fee_label(self):\n        return \"Fee: not set\"\n\n    def report_line(self):\n        return f\"{self.describe()} | {self.fee_label()}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "class Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "def build_descriptions(items):\n    return [item.describe() for item in items]\n\n\ndef build_fee_labels(items):\n    return [item.fee_label() for item in items]\n\n\ndef build_report_lines(items):\n    return [item.report_line() for item in items]",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/loader.py",
+          "content": "# Define load_items(file_path)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.models_base_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.models_video_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.services_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_5_load_items_from_file.starterFiles.services_catalog_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/items.txt",
+            "content": "book|Python Patterns|2023|A. Lee\nvideo|Debugging Basics|2022|45\nbook|Clean APIs|2021|M. Diaz",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"\n\n\nclass Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"\n\n\ndef load_items(path):\n    return [\"Book\", \"Video\", \"Book\"]\n\nfor line in [\n    Book(\"Clean APIs\", 2021, \"M. Diaz\").report_line(),\n    Video(\"Debugging Basics\", 2022, 45).report_line(),\n    Book(\"Python Patterns\", 2023, \"A. Lee\").report_line(),\n]:\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"\n\n\nclass Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"\n\n\ndef load_items(path):\n    return [\"Book\", \"Video\", \"Book\"]\n\nfor line in [\n    Book(\"Clean APIs\", 2021, \"M. Diaz\").report_line(),\n    Video(\"Debugging Basics\", 2022, 45).report_line(),\n    Book(\"Python Patterns\", 2023, \"A. Lee\").report_line(),\n]:\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n    def fee_label(self):\n        return \"Fee: not set\"\n\n    def report_line(self):\n        return f\"{self.describe()} | {self.fee_label()}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title, year, author):\n        self.title = title\n        self.year = year\n        self.author = author\n\n    def report_line(self):\n        return f\"Book: {self.title} by {self.author} ({self.year}) | Book fee: $1\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "class Video:\n    def __init__(self, title, year, minutes):\n        self.title = title\n        self.year = year\n        self.minutes = minutes\n\n    def report_line(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year}) | Video fee: $3\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "def build_descriptions(items):\n    return [item.describe() for item in items]\n\n\ndef build_fee_labels(items):\n    return [item.fee_label() for item in items]\n\n\ndef build_report_lines(items):\n    return [item.report_line() for item in items]",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/loader.py",
+            "content": "# Define load_items(file_path)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "load_items",
+            "args": [
+              "data/items.txt"
+            ],
+            "argKinds": [],
+            "expected": [
+              "Book",
+              "Video",
+              "Book"
+            ],
+            "expectedKind": "value",
+            "message": "load_items(file_path) should return a mixed list with the correct item types in order."
+          },
+          {
+            "type": "method_returns",
+            "className": "Book",
+            "constructorArgs": [
+              "Clean APIs",
+              2021,
+              "M. Diaz"
+            ],
+            "constructorArgKinds": [],
+            "methodName": "report_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Book: Clean APIs by M. Diaz (2021) | Book fee: $1",
+            "expectedKind": "value",
+            "message": "Loaded Book objects should still follow the shared report-line behavior."
+          },
+          {
+            "type": "method_returns",
+            "className": "Video",
+            "constructorArgs": [
+              "Debugging Basics",
+              2022,
+              45
+            ],
+            "constructorArgKinds": [],
+            "methodName": "report_line",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Video: Debugging Basics - 45 min (2022) | Video fee: $3",
+            "expectedKind": "value",
+            "message": "Loaded Video objects should still follow the shared report-line behavior."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 3,
+            "message": "Print one report line for each loaded item."
+          }
+        ]
+      }
+    },
+    {
+      "id": "catalog-project-step-6-final-summary-report",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.models_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.models_base_item_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.models_book_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.models_video_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.services_init_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.services_catalog_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/loader.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.services_loader_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "def build_summary(items):\n    return {\"count\": 3, \"books\": 2, \"videos\": 1}\n\n\ndef load_items(path):\n    return [\"Book\", \"Video\", \"Book\"]\n\nfor line in [\n    \"Book: Python Patterns by A. Lee (2023) | Book fee: $1\",\n    \"Video: Debugging Basics - 45 min (2022) | Video fee: $3\",\n    \"Book: Clean APIs by M. Diaz (2021) | Book fee: $1\",\n    \"count: 3\",\n    \"books: 2\",\n    \"videos: 1\",\n]:\n    print(line)\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/base_item.py",
+          "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n    def fee_label(self):\n        return \"Fee: not set\"\n\n    def report_line(self):\n        return f\"{self.describe()} | {self.fee_label()}\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/book.py",
+          "content": "from models.base_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def describe(self):\n        return f\"Book: {self.title} by {self.author} ({self.year})\"\n\n    def fee_label(self):\n        return \"Book fee: $1\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/video.py",
+          "content": "from models.base_item import CatalogItem\n\n\nclass Video(CatalogItem):\n    def __init__(self, title, year, minutes):\n        super().__init__(title, year)\n        self.minutes = minutes\n\n    def describe(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year})\"\n\n    def fee_label(self):\n        return \"Video fee: $3\"",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/catalog_service.py",
+          "content": "def build_descriptions(items):\n    return [item.describe() for item in items]\n\n\ndef build_fee_labels(items):\n    return [item.fee_label() for item in items]\n\n\ndef build_report_lines(items):\n    return [item.report_line() for item in items]\n\n\n# Add build_summary(items)",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/loader.py",
+          "content": "from models.book import Book\nfrom models.video import Video\n\n\ndef load_items(file_path):\n    items = []\n    with open(file_path, \"r\") as file:\n        for raw_line in file:\n            line = raw_line.strip()\n            if not line:\n                continue\n            parts = line.split(\"|\")\n            item_type = parts[0]\n            title = parts[1]\n            year = int(parts[2])\n\n            if item_type == \"book\":\n                author = parts[3]\n                items.append(Book(title, year, author))\n            elif item_type == \"video\":\n                minutes = int(parts[3])",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.models_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.models_base_item_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.models_book_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.models_video_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.services_init_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.services_catalog_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/loader.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_6_final_summary_report.starterFiles.services_loader_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "files": [
+          {
+            "path": "data/items.txt",
+            "content": "book|Python Patterns|2023|A. Lee\nvideo|Debugging Basics|2022|45\nbook|Clean APIs|2021|M. Diaz",
+            "readOnly": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "def build_summary(items):\n    return {\"count\": 3, \"books\": 2, \"videos\": 1}\n\n\ndef load_items(path):\n    return [\"Book\", \"Video\", \"Book\"]\n\nfor line in [\n    \"Book: Python Patterns by A. Lee (2023) | Book fee: $1\",\n    \"Video: Debugging Basics - 45 min (2022) | Video fee: $3\",\n    \"Book: Clean APIs by M. Diaz (2021) | Book fee: $1\",\n    \"count: 3\",\n    \"books: 2\",\n    \"videos: 1\",\n]:\n    print(line)\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def build_summary(items):\n    return {\"count\": 3, \"books\": 2, \"videos\": 1}\n\n\ndef load_items(path):\n    return [\"Book\", \"Video\", \"Book\"]\n\nfor line in [\n    \"Book: Python Patterns by A. Lee (2023) | Book fee: $1\",\n    \"Video: Debugging Basics - 45 min (2022) | Video fee: $3\",\n    \"Book: Clean APIs by M. Diaz (2021) | Book fee: $1\",\n    \"count: 3\",\n    \"books: 2\",\n    \"videos: 1\",\n]:\n    print(line)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/base_item.py",
+            "content": "class CatalogItem:\n    def __init__(self, title, year):\n        self.title = title\n        self.year = year\n\n    def describe(self):\n        return f\"{self.title} ({self.year})\"\n\n    def fee_label(self):\n        return \"Fee: not set\"\n\n    def report_line(self):\n        return f\"{self.describe()} | {self.fee_label()}\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/book.py",
+            "content": "from models.base_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, year, author):\n        super().__init__(title, year)\n        self.author = author\n\n    def describe(self):\n        return f\"Book: {self.title} by {self.author} ({self.year})\"\n\n    def fee_label(self):\n        return \"Book fee: $1\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/video.py",
+            "content": "from models.base_item import CatalogItem\n\n\nclass Video(CatalogItem):\n    def __init__(self, title, year, minutes):\n        super().__init__(title, year)\n        self.minutes = minutes\n\n    def describe(self):\n        return f\"Video: {self.title} - {self.minutes} min ({self.year})\"\n\n    def fee_label(self):\n        return \"Video fee: $3\"",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/catalog_service.py",
+            "content": "def build_descriptions(items):\n    return [item.describe() for item in items]\n\n\ndef build_fee_labels(items):\n    return [item.fee_label() for item in items]\n\n\ndef build_report_lines(items):\n    return [item.report_line() for item in items]\n\n\n# Add build_summary(items)",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/loader.py",
+            "content": "from models.book import Book\nfrom models.video import Video\n\n\ndef load_items(file_path):\n    items = []\n    with open(file_path, \"r\") as file:\n        for raw_line in file:\n            line = raw_line.strip()\n            if not line:\n                continue\n            parts = line.split(\"|\")\n            item_type = parts[0]\n            title = parts[1]\n            year = int(parts[2])\n\n            if item_type == \"book\":\n                author = parts[3]\n                items.append(Book(title, year, author))\n            elif item_type == \"video\":\n                minutes = int(parts[3])",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_summary",
+            "args": [
+              [
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Python Patterns"
+                  ],
+                  [
+                    "year",
+                    2023
+                  ],
+                  [
+                    "author",
+                    "A. Lee"
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Video"
+                  ],
+                  [
+                    "title",
+                    "Debugging Basics"
+                  ],
+                  [
+                    "year",
+                    2022
+                  ],
+                  [
+                    "minutes",
+                    45
+                  ]
+                ],
+                [
+                  [
+                    "class",
+                    "Book"
+                  ],
+                  [
+                    "title",
+                    "Clean APIs"
+                  ],
+                  [
+                    "year",
+                    2021
+                  ],
+                  [
+                    "author",
+                    "M. Diaz"
+                  ]
+                ]
+              ]
+            ],
+            "argKinds": [
+              "list_of_dict_entries"
+            ],
+            "expected": [
+              [
+                "count",
+                3
+              ],
+              [
+                "books",
+                2
+              ],
+              [
+                "videos",
+                1
+              ]
+            ],
+            "expectedKind": "dict_entries",
+            "message": "build_summary(items) should return the total count plus separate book and video counts."
+          },
+          {
+            "type": "function_returns",
+            "functionName": "load_items",
+            "args": [
+              "data/items.txt"
+            ],
+            "argKinds": [],
+            "expected": [
+              "Book",
+              "Video",
+              "Book"
+            ],
+            "expectedKind": "value",
+            "message": "Keep load_items(file_path) working so the final report uses loaded objects."
+          },
+          {
+            "type": "printed_line_count",
+            "min": 6,
+            "message": "Print three item report lines and three summary lines in main.py."
+          }
+        ]
+      }
+    }
+  ]
+}

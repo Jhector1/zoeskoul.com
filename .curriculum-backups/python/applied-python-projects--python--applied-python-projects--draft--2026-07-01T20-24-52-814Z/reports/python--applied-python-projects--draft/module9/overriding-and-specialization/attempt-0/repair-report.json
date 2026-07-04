@@ -1,0 +1,208 @@
+{
+  "topicId": "overriding-and-specialization",
+  "repairs": [
+    {
+      "code": "PYTHON_SKETCH_LINE_BY_LINE_EXPLANATION_ADDED",
+      "category": "text",
+      "severity": "medium",
+      "field": "sketchBlocks.overriding-and-specialization-sketch-2.bodyMarkdown",
+      "message": "Added a short line-by-line explanation after a multi-line code example."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-overriding-and-specialization-sketch0",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-overriding-and-specialization-sketch0",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-overriding-and-specialization-sketch0",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-overriding-and-specialization-sketch1",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-overriding-and-specialization-sketch1",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-overriding-and-specialization-sketch1",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-overriding-and-specialization-sketch2",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-overriding-and-specialization-sketch2",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-overriding-and-specialization-sketch2",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-book-and-movie",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-book-and-movie",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-book-and-movie",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-sale-price",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-sale-price",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-sale-price",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-mixed-report",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-mixed-report",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_ENTRY_SOLUTION_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-mixed-report",
+      "message": "Synthesized a complete runnable entry-file solution from semantic OOP checks when the generated main file only contained imports, comments, or placeholders."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-mixed-report",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-audio-specialization",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-audio-specialization",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-audio-specialization",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-shipping-service",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-shipping-service",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "catalog-step-shipping-service",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_POLICY_EXTRA_EXERCISE_DROPPED",
+      "category": "other",
+      "severity": "medium",
+      "field": "catalog-step-audio-specialization",
+      "message": "Dropped extra code_input exercise to satisfy the planned exercise mix for \"overriding-and-specialization\"."
+    },
+    {
+      "code": "PYTHON_POLICY_EXTRA_EXERCISE_DROPPED",
+      "category": "other",
+      "severity": "medium",
+      "field": "catalog-step-shipping-service",
+      "message": "Dropped extra code_input exercise to satisfy the planned exercise mix for \"overriding-and-specialization\"."
+    },
+    {
+      "code": "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+      "category": "other",
+      "severity": "medium",
+      "field": "sketchBlocks",
+      "message": "Added a Try it yourself learner action required by programming teaching validation."
+    }
+  ]
+}

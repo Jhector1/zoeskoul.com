@@ -13,7 +13,6 @@ describe("compile-course CLI args", () => {
             preferCurrentDraftOutput: false,
             preferReports: false,
             syncReports: true,
-            rebuildDraftSource: "reports",
         });
     });
 
@@ -28,7 +27,6 @@ describe("compile-course CLI args", () => {
             preferCurrentDraftOutput: false,
             preferReports: false,
             syncReports: true,
-            rebuildDraftSource: "reports",
         });
     });
 
@@ -43,8 +41,75 @@ describe("compile-course CLI args", () => {
             preferCurrentDraftOutput: false,
             preferReports: false,
             syncReports: true,
-            rebuildDraftSource: "reports",
         });
+    });
+
+    it("parses quality-gate bypass only for draft compiles", () => {
+        expect(
+            parseCompileCourseArgs(["--draft-only", "--skip-quality-gates"]),
+        ).toMatchObject({
+            draftOnly: true,
+            validation: {
+                skipQualityGates: true,
+                skipSemantic: false,
+                skipGolden: false,
+                unsafeSkipValidation: false,
+            },
+        });
+    });
+
+    it("parses semantic bypass only for draft compiles", () => {
+        expect(
+            parseCompileCourseArgs(["--draft-only", "--skip-semantic"]),
+        ).toMatchObject({
+            draftOnly: true,
+            validation: {
+                skipQualityGates: false,
+                skipSemantic: true,
+                skipGolden: false,
+                unsafeSkipValidation: false,
+            },
+        });
+    });
+
+    it("parses golden bypass only for draft compiles", () => {
+        expect(
+            parseCompileCourseArgs(["--draft-only", "--skip-golden"]),
+        ).toMatchObject({
+            draftOnly: true,
+            validation: {
+                skipQualityGates: false,
+                skipSemantic: false,
+                skipGolden: true,
+                unsafeSkipValidation: false,
+            },
+        });
+    });
+
+    it("makes unsafe validation bypass imply all downstream bypasses", () => {
+        expect(
+            parseCompileCourseArgs(["--draft-only", "--unsafe-skip-validation"]),
+        ).toMatchObject({
+            draftOnly: true,
+            validation: {
+                skipQualityGates: true,
+                skipSemantic: true,
+                skipGolden: true,
+                unsafeSkipValidation: true,
+            },
+        });
+    });
+
+    it("rejects unsafe validation bypass outside draft-only output", () => {
+        expect(() => parseCompileCourseArgs(["--unsafe-skip-validation"])).toThrow(
+            /Validation bypass flags require --draft-only/,
+        );
+    });
+
+    it("rejects downstream validation bypass outside draft-only output", () => {
+        expect(() => parseCompileCourseArgs(["--skip-golden"])).toThrow(
+            /Validation bypass flags require --draft-only/,
+        );
     });
 
     it("parses forced live overwrite", () => {
@@ -64,7 +129,6 @@ describe("compile-course CLI args", () => {
             preferCurrentDraftOutput: false,
             preferReports: false,
             syncReports: true,
-            rebuildDraftSource: "reports",
         });
     });
 
@@ -97,7 +161,6 @@ describe("compile-course CLI args", () => {
             preferCurrentDraftOutput: false,
             preferReports: false,
             syncReports: true,
-            rebuildDraftSource: "reports",
         });
     });
 

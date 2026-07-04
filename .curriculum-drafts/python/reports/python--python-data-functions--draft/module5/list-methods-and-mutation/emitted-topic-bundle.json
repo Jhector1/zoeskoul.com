@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch0.title",
       "sketchId": "sketch-1",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-list-methods-and-mutation-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch0.prompt",
+        "exerciseKey": "try-list-methods-and-mutation-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch1.title",
       "sketchId": "sketch-2",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-list-methods-and-mutation-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch1.prompt",
+        "exerciseKey": "try-list-methods-and-mutation-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.cards.sketch2.title",
       "sketchId": "sketch-3",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-list-methods-and-mutation-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.tryIt.try_list_methods_and_mutation_sketch2.prompt",
+        "exerciseKey": "try-list-methods-and-mutation-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -260,17 +296,18 @@
       }
     },
     {
-      "id": "ci-1",
+      "id": "try-list-methods-and-mutation-checkpoint",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint",
       "language": "python",
-      "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -279,11 +316,120 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "[3, 1, 2, 10]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "numbers",
+            "expected": [
+              3,
+              1,
+              2,
+              10
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint.sourceChecks.0.message",
+            "target": "numbers"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-checkpoint.sourceChecks.0.message",
+          "target": "numbers"
+        }
+      ]
+    },
+    {
+      "id": "ci-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -305,8 +451,42 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.sourceChecks.0.message",
+            "target": "items"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-1.sourceChecks.0.message",
+          "target": "items"
+        }
+      ]
     },
     {
       "id": "ci-2",
@@ -315,11 +495,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2",
       "language": "python",
-      "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -328,11 +508,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -354,8 +543,42 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "remove",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.sourceChecks.0.message",
+            "target": "colors"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "remove",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-2.sourceChecks.0.message",
+          "target": "colors"
+        }
+      ]
     },
     {
       "id": "ci-3",
@@ -364,11 +587,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3",
       "language": "python",
-      "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -377,11 +600,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -403,8 +635,352 @@
             "match": "exact"
           }
         ],
-        "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)"
-      }
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "sort",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.sourceChecks.0.message",
+            "target": "numbers"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "sort",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.ci-3.sourceChecks.0.message",
+          "target": "numbers"
+        }
+      ]
+    },
+    {
+      "id": "try-list-methods-and-mutation-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "[3, 1, 2, 10]\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "numbers",
+            "expected": [
+              3,
+              1,
+              2,
+              10
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "append",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message",
+            "target": "numbers"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "append",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch0.sourceChecks.0.message",
+          "target": "numbers"
+        }
+      ]
+    },
+    {
+      "id": "try-list-methods-and-mutation-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['apple']\ncherry\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "fruits",
+            "expected": [
+              "apple"
+            ],
+            "expectedKind": "json"
+          },
+          {
+            "type": "variable_equals",
+            "name": "last_item",
+            "expected": "cherry",
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
+          },
+          {
+            "type": "source_regex",
+            "pattern": "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bfruits\\.remove\\s*\\(\\s*['\\\"]banana['\\\"]\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.0.message"
+        },
+        {
+          "type": "source_regex",
+          "pattern": "\\blast_item\\s*=\\s*fruits\\.pop\\s*\\(\\s*\\)",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch1.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "try-list-methods-and-mutation-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "['Ava', 'Mia', 'Zoe']\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "names",
+            "expected": [
+              "Ava",
+              "Mia",
+              "Zoe"
+            ],
+            "expectedKind": "json"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_method",
+            "method": "sort",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message",
+            "target": "names"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_method",
+          "method": "sort",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.list-methods-and-mutation.quiz.try-list-methods-and-mutation-sketch2.sourceChecks.0.message",
+          "target": "names"
+        }
+      ]
     }
   ]
 }

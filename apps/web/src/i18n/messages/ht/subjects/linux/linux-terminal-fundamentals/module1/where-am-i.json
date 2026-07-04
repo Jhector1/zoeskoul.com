@@ -3,17 +3,17 @@
     "linux-terminal-fundamentals": {
       "linux-module-1-terminal-navigation": {
         "where-am-i": {
-          "label": "Kote mwen ye? pwd ak ls",
-          "summary": "Sèvi ak pwd ak ls pou enspekte katab aktyèl ou epi wè sa ki ladan li.",
+          "label": "Ki kote mwen ye? modpas ak ls",
+          "summary": "Sèvi ak pwd ak ls pou enspekte dosye kouran ou a epi wè sa ki ladan l.",
           "cards": {
             "sketch0": {
-              "title": "Sèvi ak `pwd` pou jwenn kote ou ye kounye a"
+              "title": "Sèvi ak `pwd` pou jwenn kote ou ye kounye a."
             },
             "sketch1": {
-              "title": "Sèvi ak `ls` pou wè sa ki nan katab aktyèl la"
+              "title": "Itilize `ls` pou wè sa ki nan dosye aktyèl la."
             },
             "sketch2": {
-              "title": "Sèvi ak `pwd` ak `ls` ansanm pou oryante tèt ou"
+              "title": "Sèvi ak `pwd` ak `ls` ansanm pou oryante tèt ou."
             },
             "quiz": {
               "title": "Tcheke pratik"
@@ -21,13 +21,13 @@
           },
           "practice": {
             "sc-pwd-purpose": {
-              "title": "Sa `pwd` di ou",
-              "prompt": "Ou se organizing fichyes for a student club ak want pou konfime ou katab aktyèl la anvan doing anything else. Ki kòmand montres ou current kote nan the fichye system?",
-              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon an ekri pou diminye chwa yo.",
+              "title": "Sa `pwd` di w",
+              "prompt": "Ou ap òganize fichye pou yon klib etidyan epi ou vle konfime dosye kouran ou an anvan ou fè anyen lòt. Ki kòmand ki montre kote ou ye kounye a nan sistèm fichye a?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
               "help": {
-                "concept": "Tèks èd sa a te korije paske premye vèsyon an te montre repons lan twò dirèkteman.",
-                "hint_1": "Compare the question pou the lesson example ak redeplase details that fè not match the requested concept.",
-                "hint_2": "Sèvi ak wòl oswa prèv ki nan enstriksyon an olye ou konte sèlman sou mo ki nan repons yo."
+                "concept": "Tèks sipò sa a te repare paske tèks orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Konpare kesyon an ak egzanp leson an epi retire detay ki pa matche ak konsèp ki mande a.",
+                "hint_2": "Sèvi ak wòl la oswa prèv ki nonmen nan enstriksyon an olye pou w konte sou fason ou ekri repons lan."
               },
               "options": {
                 "a": "pwd",
@@ -38,12 +38,12 @@
             },
             "sc-ls-purpose": {
               "title": "Sa `ls` montre",
-              "prompt": "Ou se inside a katab named `newsletter` ak want pou see whether li contains `drafts`, `images`, ak `todo.txt`. Ki kòmand should ou use?",
-              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon an ekri pou diminye chwa yo.",
+              "prompt": "Ou nan yon dosye ki rele `newsletter` epi ou vle wè si li genyen `drafts`, `images`, ak `todo.txt`. Ki kòmand ou ta dwe itilize?",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
               "help": {
-                "concept": "Tèks èd sa a te korije paske premye vèsyon an te montre repons lan twò dirèkteman.",
-                "hint_1": "Konpare chak opsyon ak sijè egzak ki site nan kesyon an.",
-                "hint_2": "Sèvi ak wòl oswa prèv ki nan enstriksyon an olye ou konte sèlman sou mo ki nan repons yo."
+                "concept": "Tèks sipò sa a te ranje paske tèks orijinal la te revele repons lan twò dirèkteman.",
+                "hint_1": "Konpare chak opsyon ak sijè egzak ki nonmen nan kesyon an.",
+                "hint_2": "Sèvi ak wòl la oswa prèv ki nonmen nan enstriksyon an olye pou w konte sou fason ou ekri repons lan."
               },
               "options": {
                 "a": "pwd",
@@ -53,13 +53,13 @@
               }
             },
             "mc-safe-inspection": {
-              "title": "Kòmand enspeksyon ki an sekirite",
-              "prompt": "Choose all kòmands below that enspekte ou kote oswa katab kontni san kreye, moving, oswa deleting fichyes.",
-              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon an ekri pou diminye chwa yo.",
+              "title": "Kòmand enspeksyon an sekirite",
+              "prompt": "Chwazi tout kòmand ki anba yo ki enspekte kote w oswa kontni dosye w san kreye, deplase, oswa efase fichye.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou limite repons lan.",
               "help": {
-                "concept": "Tèks èd sa a te korije paske premye vèsyon an te montre repons lan twò dirèkteman.",
-                "hint_1": "Konpare chak opsyon ak sijè egzak ki site nan kesyon an.",
-                "hint_2": "Sèvi ak wòl oswa prèv ki nan enstriksyon an olye ou konte sèlman sou mo ki nan repons yo."
+                "concept": "Tèks sipò sa a te repare paske mo orijinal yo te revele repons lan twò dirèkteman.",
+                "hint_1": "Konpare chak opsyon ak sijè egzak ki nonmen nan kesyon an.",
+                "hint_2": "Sèvi ak wòl la oswa prèv ki nonmen nan kesyon an olye pou w konte sou fason ou fòmile repons lan."
               },
               "options": {
                 "a": "pwd",
@@ -69,47 +69,47 @@
               }
             },
             "dr-orient-yourself": {
-              "title": "Yon bon abitid premye tchek",
-              "prompt": "Mete sa yo actions nan yon lòd ki fè sans for getting oriented nan a new espas travay katab anvan making changes.",
-              "hint": "First konfime kote, then enspekte kontni, then decide what pou fè next.",
+              "title": "Yon bon woutin pou premye verifikasyon",
+              "prompt": "Mete aksyon sa yo nan yon lòd ki fè sans pou w oryante w nan yon nouvo dosye espas travay anvan w fè chanjman.",
+              "hint": "Premyeman konfime kote a, apre sa enspekte sa ki ladan l, epi deside kisa pou w fè apre sa.",
               "help": {
-                "concept": "A an sekirite débutan workflow se pou identify ou repètwa aktyèl la first, enspekte its kontni second, ak only then choose ou next action.",
-                "hint_1": "The kòmand that montres ou path should come anvan the kòmand that liss fichyes.",
-                "hint_2": "The final etap se not another kòmand here; li se deciding based on what ou learned."
+                "concept": "Yon pwosesis travay ki an sekirite pou debutan se idantifye repètwa kouran ou an premye, enspekte sa ki ladan l an dezyèm, epi sèlman apre sa chwazi aksyon pwochen ou an.",
+                "hint_1": "Kòmand ki montre chemen ou a dwe vini anvan kòmand ki lisye fichye yo.",
+                "hint_2": "Dènye etap la se pa yon lòt kòmand isit la; se deside sou baz sa ou te aprann."
               },
               "tokens": {
                 "t1": "Kouri `pwd`",
                 "t2": "Kouri `ls`",
-                "t3": "Decide ou next kòmand"
+                "t3": "Deside kòmandman pwochen ou."
               }
             },
             "fb-pwd-expansion": {
-              "title": "Devlope non kòmand lan",
-              "prompt": "Konplete fraz la about `pwd`.",
-              "hint": "The `w` nan `pwd` refers pou the directory ou se currently using.",
+              "title": "Elaji non kòmand lan",
+              "prompt": "Konplete fraz la sou `pwd`.",
+              "hint": "`w` nan `pwd` refere a repètwa w ap itilize kounye a.",
               "help": {
-                "concept": "`pwd` expands pou 'print the missing term directory.' Knowing the full phrase helps connect the kòmand name pou its job.",
-                "hint_1": "The missing word se between 'print' ak 'directory.'",
-                "hint_2": "It describes the directory ou se actively nan right now."
+                "concept": "`pwd` Li elaji pou 'enprime direktwa tèm ki manke a.' Konnen fraz konplè a ede konekte non kòmand lan ak travay li.",
+                "hint_1": "Mo ki manke a se ant 'print' ak 'directory'.",
+                "hint_2": "Li dekri repètwa kote w ap aktif kounye a."
               },
-              "template": "`pwd` means print [blank1] directory.",
+              "template": "`pwd` Vle di enprime [blank1] repètwa.",
               "choices": [
-                "home",
-                "working",
-                "parent",
-                "listed"
+                "lakay",
+                "ap travay",
+                "Paran",
+                "nan lis"
               ]
             },
             "fb-ls-meaning": {
-              "title": "Chwazi bon kòmand pou kontni an",
-              "prompt": "Complete the kòmand sentence for tchekeing what se inside the katab aktyèl la.",
-              "hint": "Sèvi ak the kòmand that liss names nan the repètwa aktyèl la.",
+              "title": "Chwazi kòmand ki kòrèk la pou kontni an.",
+              "prompt": "Konplete fraz kòmand lan pou verifye sa ki anndan dosye aktyèl la.",
+              "hint": "Sèvi ak kòmand ki lis non yo nan repètwa aktyèl la.",
               "help": {
-                "concept": "`the missing term` se the kòmand for lising the kontni of the repètwa aktyèl la. It helps ou enspekte fichyes ak katabs san changing them.",
-                "hint_1": "This se not the kòmand that enprime the full path.",
-                "hint_2": "The correct kòmand has two letters ak starts avèk `l`."
+                "concept": "`the missing term` Se kòmand pou lis kontni repètwa aktyèl la. Li ede w enspekte fichye ak dosye san w pa chanje yo.",
+                "hint_1": "Sa a se pa kòmand ki enprime chemen konplè a.",
+                "hint_2": "Kòmand kòrèk la gen de lèt epi li kòmanse ak `l`."
               },
-              "template": "To see fichyes ak katabs nan the repètwa aktyèl la, run `[blank1]`.",
+              "template": "Pou wè fichye ak dosye ki nan repètwa aktyèl la, kouri `[blank1]`.",
               "choices": [
                 "pwd",
                 "ls",
@@ -122,52 +122,52 @@
             "allowReveal": true,
             "exercises": {
               "where-am-i-try-it-1": {
-                "title": "Travay tèminal: tcheke kote ou ye avèk pwd",
-                "prompt": "Ou fèk louvri a project katab. Kouri `pwd` pou tcheke ou current kote.",
-                "hint": "Kouri the kòmand named nan the enstriksyon. No fichyes need pou be kreyed oswa changed here.",
+                "title": "Travay final: verifye kote w ye ak pwd",
+                "prompt": "Ou fèk louvri yon dosye pwojè. Kouri `pwd` pou verifye kote ou ye kounye a.",
+                "hint": "Egzekite kòmand ki make nan prompt la. Pa gen okenn fichye ki bezwen kreye oswa chanje isit la.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach 'Try It' pèmèt ou pratike kòmand ki soti nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Tcheke."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Kouri `pwd` pou montre the katab aktyèl la."
+                      "message": "Kouri `pwd` pou montre dosye aktyèl la."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
                 "starterFiles": {
                   "orientation_demo_readme_txt": {
-                    "content": "Sèvi ak pwd pou print ou katab aktyèl la.\n"
+                    "content": "Use pwd to print your current folder.\n"
                   }
                 }
               },
               "where-am-i-try-it-2": {
-                "title": "Travay tèminal: lis katab aktyèl la avèk ls",
-                "prompt": "Ou se about pou start work nan this katab. Kouri `ls` pou see what se already here.",
-                "hint": "Kouri the kòmand named nan the enstriksyon. This task se only about tchekeing what se already here.",
+                "title": "Travay tèminal: lisye dosye aktyèl la ak ls",
+                "prompt": "Ou pral kòmanse travay nan dosye sa a. Kouri `ls` pou wè sa ki deja la.",
+                "hint": "Egzekite kòmand ki make nan prompt la. Travay sa a se sèlman pou verifye sa ki deja la.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Check."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Kouri `ls` pou lis the katab aktyèl la."
+                      "message": "Kouri `ls` pou lis dosye aktyèl la."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
@@ -176,24 +176,24 @@
                     "content": "orientation notes\n"
                   },
                   "orientation_demo_archive_readme_txt": {
-                    "content": "archive katab\n"
+                    "content": "archive folder\n"
                   }
                 }
               },
               "where-am-i-try-it-3": {
-                "title": "Travay tèminal: oryante ou avèk pwd ak ls",
-                "prompt": "Start like a careful teammate. Kouri `pwd`, then `ls`, pou orient yourself anvan making changes.",
-                "hint": "Sèvi ak `pwd` first, then `ls`, just like the enstriksyon asks.",
+                "title": "Travay final: oryante ak pwd ak ls",
+                "prompt": "Kòmanse tankou yon koekipye ki pran prekosyon. Kouri `pwd`, epi `ls`, pou oryante tèt ou anvan ou fè chanjman.",
+                "hint": "Itilize `pwd` an premye, epi `ls`, jis jan enstriksyon an mande.",
                 "help": {
-                  "concept": "Yon travay Eseye li ou menm pèmèt ou pratike kòmand nan leson an nan yon espas travay reyèl.",
-                  "hint_1": "Kreye katab paran yo anvan ou kreye oswa deplase fichye.",
-                  "hint_2": "Tcheke travay ou avèk ls, cat oswa find anvan ou klike sou Tcheke."
+                  "concept": "Yon tach \"Try It\" pèmèt ou pratike kòmand ki nan leson an nan yon espas travay reyèl.",
+                  "hint_1": "Kreye dosye paran anvan ou kreye oswa deplase fichye yo.",
+                  "hint_2": "Tcheke travay ou ak ls, cat, oswa find anvan ou klike sou Check."
                 },
-                "starterCode": "# Sèvi ak tèminal la pou travay Linux sa a.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Kouri `pwd` anvan lising fichyes."
+                      "message": "Kouri `pwd` anvan ou fè lis fichye yo."
                     },
                     "1": {
                       "message": "Kouri `ls` apre pwd."
@@ -201,7 +201,7 @@
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "Pa sèvi ak sudo pou travay débutan nan espas travay la."
+                      "message": "Pa itilize sudo pou travay espas travay pou debutan."
                     }
                   }
                 },
@@ -216,16 +216,16 @@
               }
             },
             "try_where_am_i_sketch0": {
-              "title": "Eseye li ou menm: tcheke kote ou ye avèk pwd",
-              "prompt": "Kouri `pwd` pou see ou katab aktyèl la."
+              "title": "Eseye li poukont ou: verifye kote w ak pwd",
+              "prompt": "Kouri `pwd` pou wè dosye aktyèl ou a."
             },
             "try_where_am_i_sketch1": {
-              "title": "Eseye li ou menm: lis katab aktyèl la avèk ls",
-              "prompt": "Kouri `ls` pou see what se nan the katab aktyèl la."
+              "title": "Eseye li poukont ou: lis dosye aktyèl la ak ls",
+              "prompt": "Kouri `ls` pou wè sa ki nan dosye aktyèl la."
             },
             "try_where_am_i_sketch2": {
-              "title": "Eseye li ou menm: oryante ou avèk pwd ak ls",
-              "prompt": "Kouri `pwd`, then `ls`, pou tcheke ou kote ak nearby fichyes anvan ou begin."
+              "title": "Eseye l poukont ou: oryante ak pwd ak ls",
+              "prompt": "Kouri `pwd`, epi `ls`, pou tcheke kote w ye ak dosye ki toupre w anvan ou kòmanse."
             }
           }
         }
@@ -237,16 +237,16 @@
       "linux-module-1-terminal-navigation": {
         "where-am-i": {
           "where-am-i-basics": {
-            "title": "Sèvi ak `pwd` pou jwenn kote ou ye kounye a",
-            "bodyMarkdown": "When ou open the Linux tèminal, ou se always **somewhere** nan the fichye system. The `pwd` kòmand tells ou exactly where ou are.\n\n`pwd` stands for **print repètwa travay la**. A directory se another word for a katab, ak ou repètwa travay la se the katab ou se currently using.\n\nFor example:\n\n```bash\npwd\n```\n\nPossible rezilta:\n\n```bash\n/home/learner/projects\n```\n\nThat rezilta se the full path pou ou katab aktyèl la.\n\nStep by etap:\n\n- `pwd` se the kòmand ou type.\n- The tèminal enprime the katab aktyèl la path.\n- You fè not change anything nan the espas travay by running `pwd`.\n\nImagine ou se helping organize a small school newsletter espas travay. Before kreye oswa moving fichyes, ou should first tcheke where ou are. If `pwd` montres `/home/learner/newsletter`, then ou know any next kòmand will happen inside that katab unless ou deplase somewhere else."
+            "title": "Sèvi ak `pwd` pou jwenn kote ou ye kounye a.",
+            "bodyMarkdown": "When you open the Linux terminal, you are always **somewhere** in the file system. The `pwd` command tells you exactly where you are.\n\n`pwd` stands for **print working directory**. A directory is another word for a folder, and your working directory is the folder you are currently using.\n\nFor example:\n\n```bash\npwd\n```\n\nPossible output:\n\n```bash\n/home/learner/projects\n```\n\nThat output is the full path to your current folder.\n\nStep by step:\n\n- `pwd` is the command you type.\n- The terminal prints the current folder path.\n- You do not change anything in the workspace by running `pwd`.\n\nImagine you are helping organize a small school newsletter workspace. Before creating or moving files, you should first check where you are. If `pwd` shows `/home/learner/newsletter`, then you know any next command will happen inside that folder unless you move somewhere else."
           },
           "list-files-with-ls": {
-            "title": "Sèvi ak `ls` pou wè sa ki nan katab aktyèl la",
-            "bodyMarkdown": "Once ou know where ou are, the next question se usually: **what se here?** That se what `ls` does.\n\n`ls` liss the kontni of the katab aktyèl la.\n\nExample:\n\n```bash\nls\n```\n\nPossible rezilta:\n\n```bash\ndrafts\nimages\nnotes.txt\n```\n\nStep by etap:\n\n- `ls` tchekes the katab ou se currently in.\n- It enprime the names of fichyes ak katabs inside it.\n- Like `pwd`, li se an enspekteion kòmand, so li fè not kreye, deplase, oswa efase anything.\n\nIn a real story, suppose ou se a volunteer tchekeing a community event katab. If `pwd` says ou se nan `/home/learner/event-kit`, then `ls` might montre katabs like `posters` ak `schedule`, plus a fichye like `todo.txt`. That helps ou decide what pou open oswa where pou go next."
+            "title": "Itiliz`ls` pou wè sa ki nan dosye aktyèl la.",
+            "bodyMarkdown": "Once you know where you are, the next question is usually: **what is here?** That is what `ls` does.\n\n`ls` lists the contents of the current folder.\n\nExample:\n\n```bash\nls\n```\n\nPossible output:\n\n```bash\ndrafts\nimages\nnotes.txt\n```\n\nStep by step:\n\n- `ls` checks the folder you are currently in.\n- It prints the names of files and folders inside it.\n- Like `pwd`, it is an inspection command, so it does not create, move, or delete anything.\n\nIn a real story, suppose you are a volunteer checking a community event folder. If `pwd` says you are in `/home/learner/event-kit`, then `ls` might show folders like `posters` and `schedule`, plus a file like `todo.txt`. That helps you decide what to open or where to go next."
           },
           "pwd-and-ls-together": {
-            "title": "Sèvi ak `pwd` ak `ls` ansanm pou oryante tèt ou",
-            "bodyMarkdown": "`pwd` ak `ls` work best as a pair:\n\n1. Sèvi ak `pwd` pou konfime ou kote.\n2. Sèvi ak `ls` pou enspekte what se inside that kote.\n\nExample session:\n\n```bash\npwd\nls\n```\n\nPossible rezilta:\n\n```bash\n/home/learner/reports\nsummary.txt\nweekly\narchive\n```\n\nRead this carefully:\n\n- `pwd` tells ou the katab aktyèl la se `/home/learner/reports`.\n- `ls` then montres that this katab contains `summary.txt`, `weekly`, ak `archive`.\n- Because both kòmands se an sekirite enspekteion kòmands, they se great first etaps when ou feel unsure.\n\nA débutan-friendly abitid is: **anvan changing anything, tcheke kote first, then tcheke kontni**. That abitid helps prevent mistakes, especially when several katabs have similar names."
+            "title": "Sèvi ak `pwd` ak `ls` ansanm pou oryante tèt ou.",
+            "bodyMarkdown": "`pwd` and `ls` work best as a pair:\n\n1. Use `pwd` to confirm your location.\n2. Use `ls` to inspect what is inside that location.\n\nExample session:\n\n```bash\npwd\nls\n```\n\nPossible output:\n\n```bash\n/home/learner/reports\nsummary.txt\nweekly\narchive\n```\n\nRead this carefully:\n\n- `pwd` tells you the current folder is `/home/learner/reports`.\n- `ls` then shows that this folder contains `summary.txt`, `weekly`, and `archive`.\n- Because both commands are safe inspection commands, they are great first steps when you feel unsure.\n\nA beginner-friendly habit is: **before changing anything, check location first, then check contents**. That habit helps prevent mistakes, especially when several folders have similar names."
           }
         }
       }

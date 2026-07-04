@@ -1,0 +1,875 @@
+{
+  "topicId": "capstone-tests-and-polish",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-11-oop-capstone-project",
+  "sectionSlug": "applied-python-projects-python-11-capstone-services-and-polish",
+  "prefix": "py11",
+  "minutes": 28,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.label",
+    "summaryKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.cards.sketch0.title",
+      "sketchId": "concept",
+      "height": 420,
+      "tryIt": {
+        "id": "try-capstone-tests-and-polish-sketch0",
+        "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.tryIt.try_capstone_tests_and_polish_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.tryIt.try_capstone_tests_and_polish_sketch0.prompt",
+        "exerciseKey": "try-capstone-tests-and-polish-sketch0",
+        "difficulty": "medium",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.cards.sketch1.title",
+      "sketchId": "multifile-shape",
+      "height": 420,
+      "tryIt": {
+        "id": "try-capstone-tests-and-polish-sketch1",
+        "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.tryIt.try_capstone_tests_and_polish_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.tryIt.try_capstone_tests_and_polish_sketch1.prompt",
+        "exerciseKey": "try-capstone-tests-and-polish-sketch1",
+        "difficulty": "medium",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.cards.sketch2.title",
+      "sketchId": "graded-habit",
+      "height": 420
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.cards.quiz.title",
+      "quiz": {
+        "difficulty": "medium",
+        "n": 4,
+        "min": 4,
+        "max": 4,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.cards.project.title",
+      "project": {
+        "difficulty": "medium",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "ci_capstone_polish_practice",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.projectSteps.ci_capstone_polish_practice.title",
+            "exerciseKey": "ci-capstone-polish-practice",
+            "difficulty": "medium",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "concept",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.concept.title",
+      "bodyKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.concept.bodyMarkdown"
+    },
+    {
+      "id": "multifile-shape",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.multifile-shape.title",
+      "bodyKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.multifile-shape.bodyMarkdown"
+    },
+    {
+      "id": "graded-habit",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.graded-habit.title",
+      "bodyKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.graded-habit.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-capstone-tests-and-polish-sketch0",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.quiz.try-capstone-tests-and-polish-sketch0",
+      "language": "python",
+      "entryFilePath": "tests/check_models.py",
+      "starterFiles": [
+        {
+          "path": "tests/check_models.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n# add assertions\nprint(\"model tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+          "language": "python"
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "tests/check_models.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbug = BugTask(\"Crash\", \"high\")\nfeature = FeatureTask(\"Export\", \"reports\", \"done\")\nassert bug.label() == \"BUG: Crash (high) [open]\"\nassert feature.label() == \"FEATURE: Export (reports) [done]\"\nprint(\"model tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+          "language": "python"
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "model tests passed\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'tests/check_models.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBtb2RlbHMuYnVnX3Rhc2sgaW1wb3J0IEJ1Z1Rhc2sKZnJvbSBtb2RlbHMuZmVhdHVyZV90YXNrIGltcG9ydCBGZWF0dXJlVGFzawoKYnVnID0gQnVnVGFzaygiQ3Jhc2giLCAiaGlnaCIpCmZlYXR1cmUgPSBGZWF0dXJlVGFzaygiRXhwb3J0IiwgInJlcG9ydHMiLCAiZG9uZSIpCmFzc2VydCBidWcubGFiZWwoKSA9PSAiQlVHOiBDcmFzaCAoaGlnaCkgW29wZW5dIgphc3NlcnQgZmVhdHVyZS5sYWJlbCgpID09ICJGRUFUVVJFOiBFeHBvcnQgKHJlcG9ydHMpIFtkb25lXSIKcHJpbnQoIm1vZGVsIHRlc3RzIHBhc3NlZCIpCg==',\n    'models/base_task.py': 'Y2xhc3MgQmFzZVRhc2s6CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUsIHN0YXR1cz0ib3BlbiIpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQogICAgICAgIHNlbGYuc3RhdHVzID0gc3RhdHVzCg==',\n    'models/bug_task.py': 'ZnJvbSBtb2RlbHMuYmFzZV90YXNrIGltcG9ydCBCYXNlVGFzawoKY2xhc3MgQnVnVGFzayhCYXNlVGFzayk6CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUsIHNldmVyaXR5LCBzdGF0dXM9Im9wZW4iKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlLCBzdGF0dXMpCiAgICAgICAgc2VsZi5zZXZlcml0eSA9IHNldmVyaXR5CgogICAgZGVmIGxhYmVsKHNlbGYpOgogICAgICAgIHJldHVybiBmIkJVRzoge3NlbGYudGl0bGV9ICh7c2VsZi5zZXZlcml0eX0pIFt7c2VsZi5zdGF0dXN9XSIK',\n    'models/feature_task.py': 'ZnJvbSBtb2RlbHMuYmFzZV90YXNrIGltcG9ydCBCYXNlVGFzawoKY2xhc3MgRmVhdHVyZVRhc2soQmFzZVRhc2spOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBhcmVhLCBzdGF0dXM9Im9wZW4iKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlLCBzdGF0dXMpCiAgICAgICAgc2VsZi5hcmVhID0gYXJlYQoKICAgIGRlZiBsYWJlbChzZWxmKToKICAgICAgICByZXR1cm4gZiJGRUFUVVJFOiB7c2VsZi50aXRsZX0gKHtzZWxmLmFyZWF9KSBbe3NlbGYuc3RhdHVzfV0iCg==',\n    'models/__init__.py': '',\n    'tests/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('tests/check_models.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "tests/check_models.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbug = BugTask(\"Crash\", \"high\")\nfeature = FeatureTask(\"Export\", \"reports\", \"done\")\nassert bug.label() == \"BUG: Crash (high) [open]\"\nassert feature.label() == \"FEATURE: Export (reports) [done]\"\nprint(\"model tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+            "language": "python"
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n# add assertions\nprint(\"model tests passed\")\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "tests/check_models.py",
+        "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n# add assertions\nprint(\"model tests passed\")\n",
+        "starterFiles": [
+          {
+            "path": "tests/check_models.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n# add assertions\nprint(\"model tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+            "language": "python"
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "tests/check_models.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbug = BugTask(\"Crash\", \"high\")\nfeature = FeatureTask(\"Export\", \"reports\", \"done\")\nassert bug.label() == \"BUG: Crash (high) [open]\"\nassert feature.label() == \"FEATURE: Export (reports) [done]\"\nprint(\"model tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+            "language": "python"
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "models",
+            "tests"
+          ],
+          "requiredFiles": [
+            "models/__init__.py",
+            "models/base_task.py",
+            "models/bug_task.py",
+            "models/feature_task.py",
+            "tests/__init__.py",
+            "tests/check_models.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "models",
+          "tests"
+        ],
+        "requiredFiles": [
+          "models/__init__.py",
+          "models/base_task.py",
+          "models/bug_task.py",
+          "models/feature_task.py",
+          "tests/__init__.py",
+          "tests/check_models.py"
+        ]
+      }
+    },
+    {
+      "id": "try-capstone-tests-and-polish-sketch1",
+      "kind": "code_input",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.quiz.try-capstone-tests-and-polish-sketch1",
+      "language": "python",
+      "entryFilePath": "tests/check_app.py",
+      "starterFiles": [
+        {
+          "path": "tests/check_app.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import load_tasks\nfrom services.reports import summary_report\n\n# add integration assertions\nprint(\"app tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/tasks.txt",
+          "content": "bug|Crash|high|open\nfeature|Export|reports|done\n",
+          "language": "text"
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+          "language": "python"
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+          "language": "python"
+        },
+        {
+          "path": "services/storage.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\ndef parse_task(raw):\n    kind, title, detail, status = raw.strip().split(\"|\")\n    if kind == \"bug\":\n        return BugTask(title, detail, status)\n    return FeatureTask(title, detail, status)\n\ndef load_tasks(path):\n    return [parse_task(line) for line in open(path) if line.strip()]\n",
+          "language": "python"
+        },
+        {
+          "path": "services/reports.py",
+          "content": "def summary_report(tasks):\n    lines = [\"Task Summary\"]\n    for task in tasks:\n        lines.append(task.label())\n    return \"\\n\".join(lines)\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "tests/check_app.py",
+          "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import load_tasks\nfrom services.reports import summary_report\n\ntasks = load_tasks(\"data/tasks.txt\")\nreport = summary_report(tasks)\nassert len(tasks) == 2\nassert \"BUG: Crash (high) [open]\" in report\nassert \"FEATURE: Export (reports) [done]\" in report\nprint(\"app tests passed\")\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "data/tasks.txt",
+          "content": "bug|Crash|high|open\nfeature|Export|reports|done\n",
+          "language": "text"
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+          "language": "python"
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+          "language": "python"
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+          "language": "python"
+        },
+        {
+          "path": "services/storage.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\ndef parse_task(raw):\n    kind, title, detail, status = raw.strip().split(\"|\")\n    if kind == \"bug\":\n        return BugTask(title, detail, status)\n    return FeatureTask(title, detail, status)\n\ndef load_tasks(path):\n    return [parse_task(line) for line in open(path) if line.strip()]\n",
+          "language": "python"
+        },
+        {
+          "path": "services/reports.py",
+          "content": "def summary_report(tasks):\n    lines = [\"Task Summary\"]\n    for task in tasks:\n        lines.append(task.label())\n    return \"\\n\".join(lines)\n",
+          "language": "python"
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "app tests passed\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'tests/check_app.py': 'aW1wb3J0IHN5cwpzeXMucGF0aC5pbnNlcnQoMCwgIi4iKQoKZnJvbSBzZXJ2aWNlcy5zdG9yYWdlIGltcG9ydCBsb2FkX3Rhc2tzCmZyb20gc2VydmljZXMucmVwb3J0cyBpbXBvcnQgc3VtbWFyeV9yZXBvcnQKCnRhc2tzID0gbG9hZF90YXNrcygiZGF0YS90YXNrcy50eHQiKQpyZXBvcnQgPSBzdW1tYXJ5X3JlcG9ydCh0YXNrcykKYXNzZXJ0IGxlbih0YXNrcykgPT0gMgphc3NlcnQgIkJVRzogQ3Jhc2ggKGhpZ2gpIFtvcGVuXSIgaW4gcmVwb3J0CmFzc2VydCAiRkVBVFVSRTogRXhwb3J0IChyZXBvcnRzKSBbZG9uZV0iIGluIHJlcG9ydApwcmludCgiYXBwIHRlc3RzIHBhc3NlZCIpCg==',\n    'data/tasks.txt': 'YnVnfENyYXNofGhpZ2h8b3BlbgpmZWF0dXJlfEV4cG9ydHxyZXBvcnRzfGRvbmUK',\n    'models/base_task.py': 'Y2xhc3MgQmFzZVRhc2s6CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUsIHN0YXR1cz0ib3BlbiIpOgogICAgICAgIHNlbGYudGl0bGUgPSB0aXRsZQogICAgICAgIHNlbGYuc3RhdHVzID0gc3RhdHVzCg==',\n    'models/bug_task.py': 'ZnJvbSBtb2RlbHMuYmFzZV90YXNrIGltcG9ydCBCYXNlVGFzawoKY2xhc3MgQnVnVGFzayhCYXNlVGFzayk6CiAgICBkZWYgX19pbml0X18oc2VsZiwgdGl0bGUsIHNldmVyaXR5LCBzdGF0dXM9Im9wZW4iKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlLCBzdGF0dXMpCiAgICAgICAgc2VsZi5zZXZlcml0eSA9IHNldmVyaXR5CgogICAgZGVmIGxhYmVsKHNlbGYpOgogICAgICAgIHJldHVybiBmIkJVRzoge3NlbGYudGl0bGV9ICh7c2VsZi5zZXZlcml0eX0pIFt7c2VsZi5zdGF0dXN9XSIK',\n    'models/feature_task.py': 'ZnJvbSBtb2RlbHMuYmFzZV90YXNrIGltcG9ydCBCYXNlVGFzawoKY2xhc3MgRmVhdHVyZVRhc2soQmFzZVRhc2spOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIHRpdGxlLCBhcmVhLCBzdGF0dXM9Im9wZW4iKToKICAgICAgICBzdXBlcigpLl9faW5pdF9fKHRpdGxlLCBzdGF0dXMpCiAgICAgICAgc2VsZi5hcmVhID0gYXJlYQoKICAgIGRlZiBsYWJlbChzZWxmKToKICAgICAgICByZXR1cm4gZiJGRUFUVVJFOiB7c2VsZi50aXRsZX0gKHtzZWxmLmFyZWF9KSBbe3NlbGYuc3RhdHVzfV0iCg==',\n    'services/storage.py': 'ZnJvbSBtb2RlbHMuYnVnX3Rhc2sgaW1wb3J0IEJ1Z1Rhc2sKZnJvbSBtb2RlbHMuZmVhdHVyZV90YXNrIGltcG9ydCBGZWF0dXJlVGFzawoKZGVmIHBhcnNlX3Rhc2socmF3KToKICAgIGtpbmQsIHRpdGxlLCBkZXRhaWwsIHN0YXR1cyA9IHJhdy5zdHJpcCgpLnNwbGl0KCJ8IikKICAgIGlmIGtpbmQgPT0gImJ1ZyI6CiAgICAgICAgcmV0dXJuIEJ1Z1Rhc2sodGl0bGUsIGRldGFpbCwgc3RhdHVzKQogICAgcmV0dXJuIEZlYXR1cmVUYXNrKHRpdGxlLCBkZXRhaWwsIHN0YXR1cykKCmRlZiBsb2FkX3Rhc2tzKHBhdGgpOgogICAgcmV0dXJuIFtwYXJzZV90YXNrKGxpbmUpIGZvciBsaW5lIGluIG9wZW4ocGF0aCkgaWYgbGluZS5zdHJpcCgpXQo=',\n    'services/reports.py': 'ZGVmIHN1bW1hcnlfcmVwb3J0KHRhc2tzKToKICAgIGxpbmVzID0gWyJUYXNrIFN1bW1hcnkiXQogICAgZm9yIHRhc2sgaW4gdGFza3M6CiAgICAgICAgbGluZXMuYXBwZW5kKHRhc2subGFiZWwoKSkKICAgIHJldHVybiAiXG4iLmpvaW4obGluZXMpCg==',\n    'models/__init__.py': '',\n    'services/__init__.py': '',\n    'tests/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('tests/check_app.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "tests/check_app.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import load_tasks\nfrom services.reports import summary_report\n\ntasks = load_tasks(\"data/tasks.txt\")\nreport = summary_report(tasks)\nassert len(tasks) == 2\nassert \"BUG: Crash (high) [open]\" in report\nassert \"FEATURE: Export (reports) [done]\" in report\nprint(\"app tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/tasks.txt",
+            "content": "bug|Crash|high|open\nfeature|Export|reports|done\n",
+            "language": "text"
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+            "language": "python"
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "services/storage.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\ndef parse_task(raw):\n    kind, title, detail, status = raw.strip().split(\"|\")\n    if kind == \"bug\":\n        return BugTask(title, detail, status)\n    return FeatureTask(title, detail, status)\n\ndef load_tasks(path):\n    return [parse_task(line) for line in open(path) if line.strip()]\n",
+            "language": "python"
+          },
+          {
+            "path": "services/reports.py",
+            "content": "def summary_report(tasks):\n    lines = [\"Task Summary\"]\n    for task in tasks:\n        lines.append(task.label())\n    return \"\\n\".join(lines)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import load_tasks\nfrom services.reports import summary_report\n\n# add integration assertions\nprint(\"app tests passed\")\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "tests/check_app.py",
+        "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import load_tasks\nfrom services.reports import summary_report\n\n# add integration assertions\nprint(\"app tests passed\")\n",
+        "starterFiles": [
+          {
+            "path": "tests/check_app.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import load_tasks\nfrom services.reports import summary_report\n\n# add integration assertions\nprint(\"app tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/tasks.txt",
+            "content": "bug|Crash|high|open\nfeature|Export|reports|done\n",
+            "language": "text"
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+            "language": "python"
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "services/storage.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\ndef parse_task(raw):\n    kind, title, detail, status = raw.strip().split(\"|\")\n    if kind == \"bug\":\n        return BugTask(title, detail, status)\n    return FeatureTask(title, detail, status)\n\ndef load_tasks(path):\n    return [parse_task(line) for line in open(path) if line.strip()]\n",
+            "language": "python"
+          },
+          {
+            "path": "services/reports.py",
+            "content": "def summary_report(tasks):\n    lines = [\"Task Summary\"]\n    for task in tasks:\n        lines.append(task.label())\n    return \"\\n\".join(lines)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "tests/check_app.py",
+            "content": "import sys\nsys.path.insert(0, \".\")\n\nfrom services.storage import load_tasks\nfrom services.reports import summary_report\n\ntasks = load_tasks(\"data/tasks.txt\")\nreport = summary_report(tasks)\nassert len(tasks) == 2\nassert \"BUG: Crash (high) [open]\" in report\nassert \"FEATURE: Export (reports) [done]\" in report\nprint(\"app tests passed\")\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "data/tasks.txt",
+            "content": "bug|Crash|high|open\nfeature|Export|reports|done\n",
+            "language": "text"
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "class BaseTask:\n    def __init__(self, title, status=\"open\"):\n        self.title = title\n        self.status = status\n",
+            "language": "python"
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, severity, status=\"open\"):\n        super().__init__(title, status)\n        self.severity = severity\n\n    def label(self):\n        return f\"BUG: {self.title} ({self.severity}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, area, status=\"open\"):\n        super().__init__(title, status)\n        self.area = area\n\n    def label(self):\n        return f\"FEATURE: {self.title} ({self.area}) [{self.status}]\"\n",
+            "language": "python"
+          },
+          {
+            "path": "services/storage.py",
+            "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\ndef parse_task(raw):\n    kind, title, detail, status = raw.strip().split(\"|\")\n    if kind == \"bug\":\n        return BugTask(title, detail, status)\n    return FeatureTask(title, detail, status)\n\ndef load_tasks(path):\n    return [parse_task(line) for line in open(path) if line.strip()]\n",
+            "language": "python"
+          },
+          {
+            "path": "services/reports.py",
+            "content": "def summary_report(tasks):\n    lines = [\"Task Summary\"]\n    for task in tasks:\n        lines.append(task.label())\n    return \"\\n\".join(lines)\n",
+            "language": "python"
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "data",
+            "models",
+            "services",
+            "tests"
+          ],
+          "requiredFiles": [
+            "data/tasks.txt",
+            "models/__init__.py",
+            "models/base_task.py",
+            "models/bug_task.py",
+            "models/feature_task.py",
+            "services/__init__.py",
+            "services/reports.py",
+            "services/storage.py",
+            "tests/__init__.py",
+            "tests/check_app.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "data",
+          "models",
+          "services",
+          "tests"
+        ],
+        "requiredFiles": [
+          "data/tasks.txt",
+          "models/__init__.py",
+          "models/base_task.py",
+          "models/bug_task.py",
+          "models/feature_task.py",
+          "services/__init__.py",
+          "services/reports.py",
+          "services/storage.py",
+          "tests/__init__.py",
+          "tests/check_app.py"
+        ]
+      }
+    },
+    {
+      "id": "ci-capstone-polish-practice",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.quiz.ci-capstone-polish-practice",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "from services.reports import save_summary\n\nsave_summary(\"reports/summary.txt\", \"Ready\")\nprint(open(\"reports/summary.txt\").read())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\n",
+          "language": "markdown"
+        },
+        {
+          "path": "services/reports.py",
+          "content": "def save_summary(path, text):\n    pass\n",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from services.reports import save_summary\n\nsave_summary(\"reports/summary.txt\", \"Ready\")\nprint(open(\"reports/summary.txt\").read())\n",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\n\nA multi-file OOP capstone using encapsulation, abstraction, inheritance, and polymorphism.\n",
+          "language": "markdown"
+        },
+        {
+          "path": "services/reports.py",
+          "content": "import os\n\ndef save_summary(path, text):\n    folder = os.path.dirname(path)\n    if folder:\n        os.makedirs(folder, exist_ok=True)\n    with open(path, \"w\") as target:\n        target.write(text)\n",
+          "language": "python"
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "",
+          "language": "python"
+        }
+      ],
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ready\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "from pathlib import Path\nimport base64\nimport runpy\n\n_FILES = {\n    'main.py': 'ZnJvbSBzZXJ2aWNlcy5yZXBvcnRzIGltcG9ydCBzYXZlX3N1bW1hcnkKCnNhdmVfc3VtbWFyeSgicmVwb3J0cy9zdW1tYXJ5LnR4dCIsICJSZWFkeSIpCnByaW50KG9wZW4oInJlcG9ydHMvc3VtbWFyeS50eHQiKS5yZWFkKCkpCg==',\n    'README.md': 'IyBTbWFydCBUYXNrIFRyYWNrZXIKCkEgbXVsdGktZmlsZSBPT1AgY2Fwc3RvbmUgdXNpbmcgZW5jYXBzdWxhdGlvbiwgYWJzdHJhY3Rpb24sIGluaGVyaXRhbmNlLCBhbmQgcG9seW1vcnBoaXNtLgo=',\n    'services/reports.py': 'aW1wb3J0IG9zCgpkZWYgc2F2ZV9zdW1tYXJ5KHBhdGgsIHRleHQpOgogICAgZm9sZGVyID0gb3MucGF0aC5kaXJuYW1lKHBhdGgpCiAgICBpZiBmb2xkZXI6CiAgICAgICAgb3MubWFrZWRpcnMoZm9sZGVyLCBleGlzdF9vaz1UcnVlKQogICAgd2l0aCBvcGVuKHBhdGgsICJ3IikgYXMgdGFyZ2V0OgogICAgICAgIHRhcmdldC53cml0ZSh0ZXh0KQo=',\n    'services/__init__.py': '',\n}\n\nfor _path, _data in _FILES.items():\n    _file = Path(_path)\n    _file.parent.mkdir(parents=True, exist_ok=True)\n    _file.write_text(base64.b64decode(_data).decode('utf-8'), encoding='utf-8')\n\nrunpy.run_path('main.py', run_name=\"__main__\")\n",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from services.reports import save_summary\n\nsave_summary(\"reports/summary.txt\", \"Ready\")\nprint(open(\"reports/summary.txt\").read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Smart Task Tracker\n\nA multi-file OOP capstone using encapsulation, abstraction, inheritance, and polymorphism.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "services/reports.py",
+            "content": "import os\n\ndef save_summary(path, text):\n    folder = os.path.dirname(path)\n    if folder:\n        os.makedirs(folder, exist_ok=True)\n    with open(path, \"w\") as target:\n        target.write(text)\n",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ]
+      },
+      "starterCode": "from services.reports import save_summary\n\nsave_summary(\"reports/summary.txt\", \"Ready\")\nprint(open(\"reports/summary.txt\").read())\n",
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "from services.reports import save_summary\n\nsave_summary(\"reports/summary.txt\", \"Ready\")\nprint(open(\"reports/summary.txt\").read())\n",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "from services.reports import save_summary\n\nsave_summary(\"reports/summary.txt\", \"Ready\")\nprint(open(\"reports/summary.txt\").read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Smart Task Tracker\n",
+            "language": "markdown"
+          },
+          {
+            "path": "services/reports.py",
+            "content": "def save_summary(path, text):\n    pass\n",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from services.reports import save_summary\n\nsave_summary(\"reports/summary.txt\", \"Ready\")\nprint(open(\"reports/summary.txt\").read())\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "README.md",
+            "content": "# Smart Task Tracker\n\nA multi-file OOP capstone using encapsulation, abstraction, inheritance, and polymorphism.\n",
+            "language": "markdown"
+          },
+          {
+            "path": "services/reports.py",
+            "content": "import os\n\ndef save_summary(path, text):\n    folder = os.path.dirname(path)\n    if folder:\n        os.makedirs(folder, exist_ok=True)\n    with open(path, \"w\") as target:\n        target.write(text)\n",
+            "language": "python"
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "",
+            "language": "python"
+          }
+        ],
+        "workspaceExpectations": {
+          "requiredFolders": [
+            "services"
+          ],
+          "requiredFiles": [
+            "README.md",
+            "main.py",
+            "services/__init__.py",
+            "services/reports.py"
+          ]
+        }
+      },
+      "workspaceExpectations": {
+        "requiredFolders": [
+          "services"
+        ],
+        "requiredFiles": [
+          "README.md",
+          "main.py",
+          "services/__init__.py",
+          "services/reports.py"
+        ]
+      }
+    },
+    {
+      "id": "sc-capstone-tests-and-polish-design",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.quiz.sc-capstone-tests-and-polish-design",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "b"
+      }
+    }
+  ]
+}

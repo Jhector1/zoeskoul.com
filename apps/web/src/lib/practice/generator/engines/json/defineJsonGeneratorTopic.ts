@@ -1,4 +1,5 @@
 import type { TopicBundle, AnyHandler, PoolItem } from "@/lib/practice/generator/engines/utils";
+import { normalizePracticePurpose } from "@/lib/practice/generator/engines/utils";
 import type { TopicBundleManifest } from "@/lib/subjects/_core/manifestTypes";
 import { buildExerciseFromManifest } from "./buildExerciseFromManifest";
 
@@ -9,7 +10,7 @@ export function defineJsonGeneratorTopic(manifest: TopicBundleManifest): TopicBu
         key: ex.id,
         w: ex.weight ?? 1,
         kind: ex.kind,
-        purpose: ex.purpose ?? "quiz",
+        purpose: normalizePracticePurpose(ex.purpose, ex.kind, ex.kind === "code_input" ? "project" : "quiz") ?? "quiz",
     }));
 
     const handlers: Record<string, AnyHandler> = Object.fromEntries(

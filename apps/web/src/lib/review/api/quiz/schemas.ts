@@ -42,6 +42,7 @@ const ReviewQuizSpecBaseSchema = z.object({
     topic: z.string().trim().optional(),
     difficulty: z.enum(["easy", "medium", "hard"]).optional(),
     n: z.number().int().min(1).max(20).optional(),
+    exerciseKeys: z.array(z.string().trim().min(1)).max(50).optional(),
 
     allowReveal: z.boolean().optional(),
     preferKind: z.nativeEnum(PracticeKind).nullable().optional(),

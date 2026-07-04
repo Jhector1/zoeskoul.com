@@ -16,8 +16,29 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         : Array.isArray((def as any).sourceChecks)
             ? (def as any).sourceChecks
             : undefined;
-    const expectedWithSourceChecks = {
+
+    // Keep full reveal answers in the server-only expected payload.
+    // The public exercise object intentionally omits solutionCode/solutionFiles,
+    // but the reveal endpoint needs them after the learner opens "Reveal answer".
+    // fixed_tests already preserved these fields; semantic exercises need the same
+    // behavior so project/capstone multifile reveals can show and fill every file.
+    const solutionCode =
+        typeof (expected as any).solutionCode === "string"
+            ? (expected as any).solutionCode
+            : typeof (def.recipe as any)?.solutionCode === "string"
+                ? (def.recipe as any).solutionCode
+                : typeof (def as any)?.solutionCode === "string"
+                    ? (def as any).solutionCode
+                    : undefined;
+    const solutionFiles =
+        (def as any).solutionFiles ??
+        (def.recipe as any)?.solutionFiles ??
+        (def.workspace as any)?.solutionFiles;
+
+    const expectedWithReveal = {
         ...(expected as any),
+        ...(solutionCode !== undefined ? { solutionCode } : {}),
+        ...(solutionFiles !== undefined ? { solutionFiles } : {}),
         ...(sourceChecks?.length ? { sourceChecks } : {}),
     };
 
@@ -51,7 +72,7 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         help: resolved.help,
         hint: resolved.hint,
         fixedSqlDialect: def.fixedSqlDialect,
-        expected: expectedWithSourceChecks as any,
+        expected: expectedWithReveal as any,
         expectedExample: null,
         ideConfig: def.serviceOverrides ?? null,
     });

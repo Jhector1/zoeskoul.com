@@ -1,0 +1,68 @@
+{
+  "topicId": "capstone-storage-and-reports",
+  "repairs": [
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-capstone-storage-and-reports-sketch0",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_WORKSPACE_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-capstone-storage-and-reports-sketch0",
+      "message": "Synthesized starterFiles/solutionFiles for a semantic OOP workspace when the generated draft only supplied a thin entry file."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_ENTRY_SOLUTION_SYNTHESIZED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-capstone-storage-and-reports-sketch0",
+      "message": "Synthesized a complete runnable entry-file solution from semantic OOP checks when the generated main file only contained imports, comments, or placeholders."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_CLASS_FILES_COMPLETED",
+      "category": "recipe",
+      "severity": "high",
+      "field": "try-capstone-storage-and-reports-sketch0",
+      "message": "Completed class implementation files from semantic OOP checks when generated model files still contained starter comments or empty method bodies."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-storage-step-2-loader",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "capstone-storage-step-2-loader",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_OOP_FILES_PROMOTED_TO_WORKSPACE",
+      "category": "recipe",
+      "severity": "high",
+      "field": "capstone-storage-step-3-report-service",
+      "message": "Promoted generated Python code files into starterFiles/solutionFiles so semantic OOP checks run against the full multifile workspace."
+    },
+    {
+      "code": "PYTHON_SEMANTIC_WORKSPACE_SURFACES_SYNCED",
+      "category": "recipe",
+      "severity": "medium",
+      "field": "capstone-storage-step-3-report-service",
+      "message": "Synced the solved entry file back into starterCode/solutionCode after workspace-file repairs."
+    },
+    {
+      "code": "PYTHON_TRY_IT_YOURSELF_SKETCH_ADDED",
+      "category": "other",
+      "severity": "medium",
+      "field": "sketchBlocks",
+      "message": "Added a Try it yourself learner action required by programming teaching validation."
+    }
+  ]
+}

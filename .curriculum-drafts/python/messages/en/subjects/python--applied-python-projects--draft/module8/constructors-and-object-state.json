@@ -1,0 +1,248 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "constructors-and-object-state": {
+          "label": "Constructors and Object State",
+          "summary": "Add `__init__`, store attributes on `self`, and see how different objects keep different state.",
+          "cards": {
+            "sketch0": {
+              "title": "Constructor"
+            },
+            "sketch1": {
+              "title": "Attributes"
+            },
+            "sketch2": {
+              "title": "Separate state"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_constructors_and_object_state_sketch0": {
+              "title": "Add a Car constructor",
+              "prompt": "In `models/car.py`, update the `Car` class so it has `__init__(self, make, model, miles)`. Store the values on `self.make`, `self.model`, and `self.miles`. In `main.py`, create `Car(\"Nissan\", \"Leaf\", 6000)`, then print the car's make and miles on separate lines.",
+              "hint": "The constructor receives starting values and stores them on `self`.",
+              "help": {
+                "concept": "`__init__` runs when a new object is created. It stores starting values as attributes on that object.",
+                "hint_1": "Use `self.make = make`, `self.model = model`, and `self.miles = miles`.",
+                "hint_2": "After creating the car, print `car.make` and `car.miles`."
+              },
+              "starterCode": "from models.car import Car\n\n# After updating the constructor, create a car and print two attributes.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\n# After updating the constructor, create a car and print two attributes."
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    pass"
+                }
+              },
+              "solutionCode": "from models.car import Car\n\ncar = Car(\"Nissan\", \"Leaf\", 6000)\n\nprint(car.make)\nprint(car.miles)",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\ncar = Car(\"Nissan\", \"Leaf\", 6000)\n\nprint(car.make)\nprint(car.miles)"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Keep the Car class defined."
+                },
+                "1": {
+                  "message": "Car should be constructible with make, model, and miles."
+                },
+                "2": {
+                  "message": "Store make, model, and miles as attributes on the object."
+                },
+                "3": {
+                  "message": "Print the requested attributes on separate lines."
+                }
+              }
+            },
+            "try_constructors_and_object_state_sketch1": {
+              "title": "Create two cars with different attributes",
+              "prompt": "Keep the `Car` constructor. In `main.py`, create `Car(\"Subaru\", \"Outback\", 40000)` and `Car(\"Mini\", \"Cooper\", 15000)`. Print the first car's model on one line and the second car's make on the next line.",
+              "hint": "Create two different Car objects, then use dot notation to read different attributes.",
+              "help": {
+                "concept": "Each object stores its own attributes. Two Car objects can have different make, model, and miles values.",
+                "hint_1": "Use two variables, such as `outback` and `mini`.",
+                "hint_2": "Print `outback.model` and `mini.make`."
+              },
+              "starterCode": "from models.car import Car\n\n# Create two Car objects with different values.\n# Print one attribute from each.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\n# Create two Car objects with different values.\n# Print one attribute from each."
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
+                }
+              },
+              "solutionCode": "from models.car import Car\n\noutback = Car(\"Subaru\", \"Outback\", 40000)\nmini = Car(\"Mini\", \"Cooper\", 15000)\n\nprint(outback.model)\nprint(mini.make)",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\noutback = Car(\"Subaru\", \"Outback\", 40000)\nmini = Car(\"Mini\", \"Cooper\", 15000)\n\nprint(outback.model)\nprint(mini.make)"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Keep the Car class defined."
+                },
+                "1": {
+                  "message": "Car should accept make, model, and miles."
+                },
+                "2": {
+                  "message": "Each Car object should keep its own attributes."
+                },
+                "3": {
+                  "message": "Create at least two Car objects."
+                },
+                "4": {
+                  "message": "Print the requested attributes on separate lines."
+                }
+              }
+            },
+            "try_constructors_and_object_state_sketch2": {
+              "title": "Show that each car keeps its own state",
+              "prompt": "Create `Car(\"Hyundai\", \"Elantra\", 25000)` and `Car(\"Chevrolet\", \"Bolt\", 9000)`. Change only the first car's `miles` attribute to `25100`, then print both cars' miles on separate lines. This shows that changing one object does not change the other.",
+              "hint": "Assign to the first object's attribute only: `first_car.miles = 25100`.",
+              "help": {
+                "concept": "Object state belongs to one object. Updating one car's miles should not update every car.",
+                "hint_1": "Create both cars first.",
+                "hint_2": "Update the first car only, then print both `miles` values."
+              },
+              "starterCode": "from models.car import Car\n\n# Create two cars.\n# Change only the first car's miles.\n# Print both miles values.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\n# Create two cars.\n# Change only the first car's miles.\n# Print both miles values."
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
+                }
+              },
+              "solutionCode": "from models.car import Car\n\nfirst_car = Car(\"Hyundai\", \"Elantra\", 25000)\nsecond_car = Car(\"Chevrolet\", \"Bolt\", 9000)\n\nfirst_car.miles = 25100\n\nprint(first_car.miles)\nprint(second_car.miles)",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.car import Car\n\nfirst_car = Car(\"Hyundai\", \"Elantra\", 25000)\nsecond_car = Car(\"Chevrolet\", \"Bolt\", 9000)\n\nfirst_car.miles = 25100\n\nprint(first_car.miles)\nprint(second_car.miles)"
+                },
+                "models_car_py": {
+                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Keep the Car class defined."
+                },
+                "1": {
+                  "message": "Car should accept make, model, and miles."
+                },
+                "2": {
+                  "message": "Each Car object should keep its own attributes."
+                },
+                "3": {
+                  "message": "Create at least two Car objects."
+                },
+                "4": {
+                  "message": "Print both miles values on separate lines."
+                }
+              }
+            }
+          },
+          "practice": {
+            "mc-constructors-and-object-state-storing-values": {
+              "title": "What does __init__ store?",
+              "prompt": "Which statements correctly describe the constructor and object state? Choose all that apply.",
+              "hint": "Think about values passed into the class call and stored on `self`.",
+              "help": {
+                "concept": "`__init__` receives starting values and stores them as attributes on the new object.",
+                "hint_1": "Look for choices about `self` and per-object values.",
+                "hint_2": "Reject choices that say every object shares one copy of every value."
+              },
+              "options": {
+                "a": "`__init__` runs when a new object is created.",
+                "b": "`self.make = make` stores a value on that object.",
+                "c": "Every object must share one global set of attributes.",
+                "d": "`__init__` can only print values, not store them."
+              }
+            },
+            "sc-constructors-and-object-state-purpose": {
+              "title": "Why use self?",
+              "prompt": "Why do constructor assignments use `self`?",
+              "hint": "`self` refers to the object being created or updated.",
+              "help": {
+                "concept": "`self` lets code inside the class store values on this specific object.",
+                "hint_1": "Think about where `make`, `model`, and `miles` should live.",
+                "hint_2": "Choose the answer about this object."
+              },
+              "options": {
+                "a": "`self` refers to the specific object receiving the attribute.",
+                "b": "`self` means the value is stored in every file.",
+                "c": "`self` imports the class.",
+                "d": "`self` prints the attribute automatically."
+              }
+            },
+            "fb-constructors-and-object-state-init-name": {
+              "title": "Name the constructor",
+              "prompt": "Fill in the method name Python calls when a new object is created.",
+              "hint": "It starts and ends with two underscores.",
+              "help": {
+                "concept": "`__init__` is the constructor method Python calls during object creation.",
+                "hint_1": "The name has two underscores on each side.",
+                "hint_2": "It sounds like initialize."
+              },
+              "template": "def [blank1](self, make, model, miles):",
+              "choices": [
+                "__init__",
+                "init",
+                "constructor",
+                "self"
+              ]
+            },
+            "dr-constructors-and-object-state-flow": {
+              "title": "Order the constructor flow",
+              "prompt": "Put these steps in order.",
+              "hint": "Start with the class definition, then create an object.",
+              "help": {
+                "concept": "The constructor flow is: define `__init__`, call the class with values, store values on `self`, then read attributes.",
+                "hint_1": "The class must know how to receive values before you pass values in.",
+                "hint_2": "Reading attributes happens after the object exists."
+              },
+              "tokens": {
+                "t1": "Define __init__ inside the class",
+                "t2": "Create an object with starting values",
+                "t3": "Store values on self attributes",
+                "t4": "Read attributes from the object"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-8-object-oriented-foundations": {
+        "constructors-and-object-state": {
+          "sketch-0": {
+            "title": "A constructor receives starting values",
+            "bodyMarkdown": "A class shell can create an object, but it cannot store useful values yet.\n\nTo give each object starting values, add a constructor method named `__init__`:\n\n```python\nclass Book:\n    def __init__(self, title, author, pages):\n        self.title = title\n        self.author = author\n        self.pages = pages\n```\n\nWhen you create a book object, Python calls `__init__` automatically:\n\n```python\nbook = Book(\"The Hobbit\", \"J. R. R. Tolkien\", 310)\n```\n\nThe values inside `Book(...)` flow into the constructor parameters."
+          },
+          "sketch-1": {
+            "title": "Attributes store values on this object",
+            "bodyMarkdown": "Inside the constructor, assignments like these create attributes:\n\n```python\nself.title = title\nself.author = author\nself.pages = pages\n```\n\n`self` means \"this object.\"\n\nSo `self.title = title` means: store the title value on this book object.\n\nLater, `main.py` can read those attributes with dot notation:\n\n```python\nbook = Book(\"The Hobbit\", \"J. R. R. Tolkien\", 310)\nprint(book.title)\nprint(book.pages)\n```\n\nAttributes are how an object remembers its state."
+          },
+          "sketch-2": {
+            "title": "Each object owns its own state",
+            "bodyMarkdown": "A constructor can create many objects from the same class, and each object keeps its own attribute values.\n\n```python\nfirst_book = Book(\"The Hobbit\", \"J. R. R. Tolkien\", 310)\nsecond_book = Book(\"Charlotte's Web\", \"E. B. White\", 192)\n\nprint(first_book.title)\nprint(second_book.title)\n```\n\nBoth objects come from `Book`, but their state is different.\n\nThat is why constructors matter: they let one class create many useful objects without hardcoding the same values into every object."
+          }
+        }
+      }
+    }
+  }
+}

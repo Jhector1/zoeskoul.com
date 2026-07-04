@@ -278,11 +278,11 @@
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-checkpoint",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -291,11 +291,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def double(number):\n    # Return twice the number.\n    pass\n\nprint(double(7))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-checkpoint.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -315,7 +315,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def double(number):\n    return number * 2\n\nprint(double(7))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-checkpoint.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -337,7 +337,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def double(number):\n    return number * 2\n\nprint(double(7))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-checkpoint.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -347,7 +347,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def double(number):\n    return number * 2\n\nprint(double(7))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-checkpoint.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -361,11 +361,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label",
       "language": "python",
-      "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -374,11 +374,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -398,7 +398,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def make_label(item, count):\n    return item + \": \" + str(count)",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -435,7 +435,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def make_label(item, count):\n    return item + \": \" + str(count)",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -445,7 +445,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def make_label(item, count):\n    return item + \": \" + str(count)",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-make-label.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -459,11 +459,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip",
       "language": "python",
-      "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -472,11 +472,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -496,7 +496,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def calculate_tip(bill, percent):\n    return bill * percent / 100",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -533,7 +533,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def calculate_tip(bill, percent):\n    return bill * percent / 100",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -543,7 +543,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def calculate_tip(bill, percent):\n    return bill * percent / 100",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-calculate-tip.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -557,11 +557,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item",
       "language": "python",
-      "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def first_item(items):\n    # return the first element from the list\n    pass",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -570,11 +570,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def first_item(items):\n    # return the first element from the list\n    pass",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -594,7 +594,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def first_item(items):\n    return items[0]",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -634,7 +634,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def first_item(items):\n    return items[0]",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -644,7 +644,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def first_item(items):\n    return items[0]",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.ci-first-item.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -658,11 +658,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0",
       "language": "python",
-      "starterCode": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -671,7 +671,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -680,11 +680,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -704,7 +704,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -728,7 +728,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch0.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -743,11 +743,11 @@
       "weight": 1,
       "messageBase": "topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1",
       "language": "python",
-      "starterCode": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
+      "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -756,7 +756,7 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n",
+          "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.solutionCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -765,11 +765,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
+        "starterCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -789,7 +789,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n",
+        "solutionCode": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -813,7 +813,7 @@
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n",
+            "content": "@:topics.python-data-functions.python-6-functions-and-modularity.parameters-and-return-values.quiz.try-parameters-and-return-values-sketch1.solutionCode",
             "language": "python",
             "isEntry": true,
             "entry": true

@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch0.title",
-      "sketchId": "sketch-1",
+      "sketchId": "cat-whole-file",
       "height": 420,
       "tryIt": {
         "id": "try-viewing-file-contents-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch1.title",
-      "sketchId": "sketch-2",
+      "sketchId": "head-tail-preview",
       "height": 420,
       "tryIt": {
         "id": "try-viewing-file-contents-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.cards.sketch2.title",
-      "sketchId": "sketch-3",
+      "sketchId": "wc-line-count",
       "height": 420,
       "tryIt": {
         "id": "try-viewing-file-contents-sketch2",
@@ -85,40 +85,39 @@
         "n": 4,
         "min": 4,
         "max": 6,
-        "selectionMode": "random",
-        "allowReveal": true,
-        "preferKind": null,
-        "maxAttempts": null
+        "select": {
+          "purpose": "quiz"
+        }
       }
     }
   ],
   "sketches": [
     {
-      "id": "sketch-1",
+      "id": "cat-whole-file",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-1.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.cat-whole-file.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.cat-whole-file.bodyMarkdown"
     },
     {
-      "id": "sketch-2",
+      "id": "head-tail-preview",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-2.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.head-tail-preview.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.head-tail-preview.bodyMarkdown"
     },
     {
-      "id": "sketch-3",
+      "id": "wc-line-count",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-3.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.wc-line-count.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.wc-line-count.bodyMarkdown"
     }
   ],
   "exercises": [
     {
-      "id": "sc-tail-purpose",
+      "id": "sc-cat-use",
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.sc-tail-purpose",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.sc-cat-use",
       "optionIds": [
         "a",
         "b",
@@ -127,15 +126,15 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "c"
+        "optionId": "a"
       }
     },
     {
-      "id": "mc-cat-uses",
+      "id": "mc-preview-long-file",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.mc-cat-uses",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.mc-preview-long-file",
       "optionIds": [
         "a",
         "b",
@@ -146,16 +145,16 @@
         "kind": "multi_choice",
         "optionIds": [
           "a",
-          "c"
+          "b"
         ]
       }
     },
     {
-      "id": "mc-wc-meaning",
-      "kind": "multi_choice",
+      "id": "sc-wc-lines",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.mc-wc-meaning",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.sc-wc-lines",
       "optionIds": [
         "a",
         "b",
@@ -163,20 +162,16 @@
         "d"
       ],
       "expected": {
-        "kind": "multi_choice",
-        "optionIds": [
-          "a",
-          "b",
-          "c"
-        ]
+        "kind": "single_choice",
+        "optionId": "a"
       }
     },
     {
-      "id": "dr-inspect-order",
+      "id": "dr-inspect-file",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.dr-inspect-order",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.dr-inspect-file",
       "tokenIds": [
         "t1",
         "t2",
@@ -189,30 +184,6 @@
           "t2",
           "t3"
         ]
-      }
-    },
-    {
-      "id": "fb-head-purpose",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.fb-head-purpose",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "head"
-      }
-    },
-    {
-      "id": "code-cat-menu",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.practice.code-cat-menu",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "print an observable result"
       }
     },
     {
@@ -232,42 +203,56 @@
           "entry": true
         },
         {
-          "path": "cafe/menu.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.cafe_menu_txt.content",
+          "path": "visitor-desk/welcome-note.txt",
+          "content": "Welcome table opens at 9:00.\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "cat cafe/menu.txt\n",
+          "content": "cat welcome-note.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "cafe/menu.txt",
-          "content": "Soup\nSalad\nTea\n",
+          "path": "visitor-desk/welcome-note.txt",
+          "content": "Welcome table opens at 9:00.\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "visitor-desk/welcome-note.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^cat\\s+cafe/menu\\.txt$",
+            "pattern": "\\bcat\\s+welcome-note\\.txt\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.requiredCommands.0.message"
           }
-        ],
-        "outputContains": [
-          "Soup",
-          "Salad"
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "visitor-desk"
       },
       "workspace": {
         "language": "bash",
@@ -282,15 +267,20 @@
             "entry": true
           },
           {
-            "path": "cafe/menu.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.cafe_menu_txt.content",
+            "path": "visitor-desk/welcome-note.txt",
+            "content": "Welcome table opens at 9:00.\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "visitor-desk/welcome-note.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "cafe/menu.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.cafe_menu_txt.content",
+            "path": "visitor-desk/welcome-note.txt",
+            "content": "Welcome table opens at 9:00.\n",
             "language": "bash"
           }
         ]
@@ -309,12 +299,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/visitor-desk"
       },
       "fixtureFiles": [
         {
-          "path": "cafe/menu.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-1.starterFiles.cafe_menu_txt.content",
+          "path": "visitor-desk/welcome-note.txt",
+          "content": "Welcome table opens at 9:00.\n",
           "language": "bash"
         }
       ]
@@ -336,46 +327,60 @@
           "entry": true
         },
         {
-          "path": "logs/event.log",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.logs_event_log.content",
+          "path": "dispatch/delivery-log.txt",
+          "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "head logs/event.log\ntail logs/event.log\n",
+          "content": "head delivery-log.txt\ntail delivery-log.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "logs/event.log",
-          "content": "setup started\nchairs placed\nsnacks delivered\ndoors opened\nguests arrived\ncleanup planned\n",
+          "path": "dispatch/delivery-log.txt",
+          "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Signs arrived\n09:10 Water arrived\n09:30 Radios arrived\n10:00 Lunch arrived\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "dispatch/delivery-log.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^head\\s+logs/event\\.log$",
+            "pattern": "\\bhead\\s+delivery-log\\.txt\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^tail\\s+logs/event\\.log$",
+            "pattern": "\\btail\\s+delivery-log\\.txt\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.requiredCommands.1.message"
           }
-        ],
-        "outputContains": [
-          "setup started",
-          "cleanup planned"
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "dispatch"
       },
       "workspace": {
         "language": "bash",
@@ -390,15 +395,20 @@
             "entry": true
           },
           {
-            "path": "logs/event.log",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.logs_event_log.content",
+            "path": "dispatch/delivery-log.txt",
+            "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "dispatch/delivery-log.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "logs/event.log",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.logs_event_log.content",
+            "path": "dispatch/delivery-log.txt",
+            "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n",
             "language": "bash"
           }
         ]
@@ -417,12 +427,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/dispatch"
       },
       "fixtureFiles": [
         {
-          "path": "logs/event.log",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-2.starterFiles.logs_event_log.content",
+          "path": "dispatch/delivery-log.txt",
+          "content": "08:00 Chairs arrived\n08:20 Tables arrived\n08:45 Direction signs arrived\n09:10 Water station arrived\n09:30 Radios arrived\n10:00 Lunch boxes arrived\n10:25 Volunteer badges arrived\n10:50 First-aid kit arrived\n11:15 Stage cables arrived\n11:40 Registration forms arrived\n12:05 Workshop supplies arrived\n12:30 Recycling bins arrived\n12:55 Sound equipment arrived\n13:20 Final delivery completed\n",
           "language": "bash"
         }
       ]
@@ -444,41 +455,56 @@
           "entry": true
         },
         {
-          "path": "logs/checklist.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.logs_checklist_txt.content",
+          "path": "kitchen/meal-requests.txt",
+          "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "wc -l logs/checklist.txt\n",
+          "content": "wc -l meal-requests.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "logs/checklist.txt",
-          "content": "open room\nset chairs\ncheck projector\nwelcome guests\n",
+          "path": "kitchen/meal-requests.txt",
+          "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "kitchen/meal-requests.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^wc\\s+-l\\s+logs/checklist\\.txt$",
+            "pattern": "\\bwc\\s+-l\\s+meal-requests\\.txt\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.requiredCommands.0.message"
           }
-        ],
-        "outputContains": [
-          "logs/checklist.txt"
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "kitchen"
       },
       "workspace": {
         "language": "bash",
@@ -493,15 +519,20 @@
             "entry": true
           },
           {
-            "path": "logs/checklist.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.logs_checklist_txt.content",
+            "path": "kitchen/meal-requests.txt",
+            "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "kitchen/meal-requests.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "logs/checklist.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.logs_checklist_txt.content",
+            "path": "kitchen/meal-requests.txt",
+            "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
             "language": "bash"
           }
         ]
@@ -520,12 +551,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/kitchen"
       },
       "fixtureFiles": [
         {
-          "path": "logs/checklist.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.viewing-file-contents.tryIt.exercises.viewing-file-contents-try-it-3.starterFiles.logs_checklist_txt.content",
+          "path": "kitchen/meal-requests.txt",
+          "content": "Vegetarian\nStandard\nVegetarian\nGluten-free\nStandard\n",
           "language": "bash"
         }
       ]
@@ -533,9 +565,9 @@
   ],
   "topicMeta": {
     "learningGoals": [
-      "Try it yourself: inspect a menu with cat",
-      "Try it yourself: preview first lines with head",
-      "Try it yourself: count lines with wc"
+      "Read a short note",
+      "Preview a longer log",
+      "Count checklist lines"
     ]
   },
   "serviceDefaults": {
@@ -545,6 +577,7 @@
       "files": true,
       "multiFile": true,
       "terminal": true
-    }
+    },
+    "terminalCwd": "/workspace"
   }
 }

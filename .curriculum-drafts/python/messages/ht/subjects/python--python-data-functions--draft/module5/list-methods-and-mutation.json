@@ -1,0 +1,332 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "list-methods-and-mutation": {
+          "label": "Lis Metòd ak Mutasyon",
+          "summary": "Sèvi ak metòd lis komen tankou append, remove, pop, ak sort, epi aprann kijan yo chanje lis orijinal la.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa mityasyon vle di pou lis yo"
+            },
+            "sketch1": {
+              "title": "Sèvi ak append, remove, ak pop"
+            },
+            "sketch2": {
+              "title": "Trie lis yo epi veye pou erè komen yo"
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Pratike Pwogram Mutasyon Lis"
+            }
+          },
+          "projectSteps": {
+            "ci_1": {
+              "title": "Ajoute yon atik epi enprime lis la."
+            },
+            "ci_2": {
+              "title": "Retire yon valè epi montre rezilta a"
+            },
+            "ci_3": {
+              "title": "Klase nimewo yo nan antre a"
+            }
+          },
+          "quiz": {
+            "sc-1": {
+              "title": "Ki metòd ki ajoute nan fen an?",
+              "prompt": "Ki metòd lis la ki ajoute yon nouvo atik nan fen yon lis?",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Kesyon sa a verifye si ou ka konekte kòmand lan ak konsèp Python ki soti nan leson an.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Eseye chak opsyon nan fraz la oswa nan liy kòd la epi kenbe sa ki fè egzanp lan mache egzakteman jan yo dekri a."
+              },
+              "options": {
+                "a": "Ajoute()",
+                "b": "retire()",
+                "c": "retire()",
+                "d": "klase()"
+              }
+            },
+            "sc-2": {
+              "title": "Ki sa pop retounen?",
+              "prompt": "Nan Python, kisa `items.pop(1)` retounen?",
+              "hint": "`pop()` Li chanje lis la epi li ba ou yon bagay an retou.",
+              "help": {
+                "concept": "`pop(index)` Li retire atik ki nan endèks bay la epi li retounen atik sa a ki te retire a.",
+                "hint_1": "Endèks `1` vle di dezyèm atik nan lis la.",
+                "hint_2": "Valè retou a se pa lis kout la li menm; se eleman ki te retire a."
+              },
+              "options": {
+                "a": "Atik ki te retire nan endèks 1",
+                "b": "Yon kopi tout lis la",
+                "c": "Longè lis la apre retire",
+                "d": "Anyen ditou"
+              }
+            },
+            "mc-1": {
+              "title": "Metòd ki modifye yon lis",
+              "prompt": "Ki nan operasyon sa yo ki chanje lis orijinal la? Chwazi tout sa ki aplike.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Kesyon sa a verifye si ou ka konekte kòmand lan ak konsèp Python ki soti nan leson an.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Eseye chak opsyon nan fraz la oswa nan liy kòd la epi kenbe sa ki fè egzanp lan mache egzakteman jan yo dekri l."
+              },
+              "options": {
+                "a": "Ajoute (5)",
+                "b": "retire(5)",
+                "c": "klase()",
+                "d": "longè(my_list)"
+              }
+            },
+            "mc-2": {
+              "title": "Metòd lis valab yo itilize",
+              "prompt": "Ki liy ki fason valab pou itilize metòd lis komen sou`numbers = [3, 1, 2]`? Chwazi tout sa ki aplike.",
+              "hint": "Tcheke si chak non metòd koresponn ak kalite agiman li espere a.",
+              "help": {
+                "concept": "Metòd lis diferan mande diferan antre: `append` pran yon valè, `remove` pran yon valè, epi `pop` anjeneral pran yon endèks.",
+                "hint_1": "Mande si metòd la ap retire pa valè oswa pa pozisyon.",
+                "hint_2": "Youn nan chwa yo melanje konpòtman `remove` ak endèks, epi yon lòt chwa itilize `sort` ak yon agiman li pa bezwen isit la."
+              },
+              "options": {
+                "a": "nimewo.ajoute(4)",
+                "b": "nimewo.retire(1)",
+                "c": "nimewo.pop(0)",
+                "d": "nimewo.klase(2)"
+              }
+            },
+            "dr-1": {
+              "title": "Ajoute apre sa enspekte",
+              "prompt": "Mete etap sa yo nan lòd kòrèk pou ajoute yon eleman nan yon lis epi afiche lis ki mete ajou a.",
+              "hint": "Premyeman kreye lis la, apre sa chanje li, epi enprime li.",
+              "help": {
+                "concept": "Yon pwogram lis kout anjeneral swiv yon sekans: kreye done, modifye done, epi enspekte rezilta a avèk `print()`.",
+                "hint_1": "Ou pa ka ajoute nan yon lis anvan lis la egziste.",
+                "hint_2": "Enprime a dwe fèt apre ajoute a si ou vle wè lis ki chanje a."
+              },
+              "tokens": {
+                "t1": "nimewo = [1, 2]",
+                "t2": "nimewo.ajoute(7)",
+                "t3": "print(numbers)"
+              }
+            },
+            "dr-2": {
+              "title": "Retire, gonfle, epi enprime",
+              "prompt": "Aranje liy yo pou kreye yon pwogram ki retire `\"b\"`, epi mete dènye atik ki rete a nan `taken`, epi enprime `taken`.",
+              "hint": "Aranje moso kòd yo nan lòd Python ta dwe egzekite yo.",
+              "help": {
+                "concept": "Moso yo dwe fòme yon kòd Python valab nan lòd li dwe egzekite.",
+                "hint_1": "Kòmanse ak liy ki prepare aksyon Python lan.",
+                "hint_2": "Mete liy ki depann de valè ki te egziste pi bonè apre valè sa yo fin egziste."
+              },
+              "tokens": {
+                "t1": "lèt = [\"a\", \"b\", \"c\"]",
+                "t2": "letters.remove(\"b\")",
+                "t3": "tire = pop() nan lèt yo",
+                "t4": "print(taken)"
+              }
+            },
+            "fb-1": {
+              "title": "Konplete yon apèl apendiks",
+              "prompt": "Chwazi valè ki fè `numbers.append(...)` ajoute `10` nan lis la.",
+              "hint": "`append()` bezwen atik ou vle ajoute a anndan parantèz yo.",
+              "help": {
+                "concept": "Pou ajoute yon atik nan fen yon lis, mete atik sa a kòm agiman pou `append()`.",
+                "hint_1": "Blank la se nouvo valè k ap ajoute a, se pa non lis la oswa non metòd la.",
+                "hint_2": "Chwazi opsyon ki ta fè lis la jwenn nimewo dis."
+              },
+              "template": "nimewo = [1, 2]\nnimewo.ajoute([blank1])",
+              "choices": [
+                "chif",
+                "Ajoute",
+                "diz",
+                "pòp"
+              ]
+            },
+            "fb-2": {
+              "title": "Konplete yon deklarasyon triyaj",
+              "prompt": "Chwazi non metòd la ki klase `scores` sou plas.",
+              "hint": "Metòd sa a mete atik lis yo nan lòd epi chanje lis la li menm.",
+              "help": {
+                "concept": "`the missing term()` se metòd entegre lis la pou ranje atik lis yo anplas.",
+                "hint_1": "Videyo a ta dwe yon metòd ki travay dirèkteman sou yon varyab lis.",
+                "hint_2": "Se pa yon metòd pou ajoute oswa retire atik."
+              },
+              "template": "scores = [4, 1, 3]\nscores.[blank1]()",
+              "choices": [
+                "Ajoute",
+                "retire",
+                "klase",
+                "pòp"
+              ]
+            },
+            "ci-1": {
+              "title": "Ajoute yon atik epi enprime lis la.",
+              "prompt": "Yon bwat kreyon deja gen `pen` ak `pencil`. Li yon lòt atik nan antre a, ajoute l nan `items`, epi enprime lis ki mete ajou a.\n\nPa egzanp, si antre a se `eraser`, pwogram ou an ta dwe enprime:\n`['pen', 'pencil', 'eraser']`.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap mache nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an kouri epi konpare sòti a ak egzanp ki te atann lan anvan ou verifye repons ou a."
+              },
+              "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
+              "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Itilize items.append(item) pou lis la vrèman modifye."
+                }
+              }
+            },
+            "ci-2": {
+              "title": "Retire yon valè epi montre rezilta a",
+              "prompt": "The list `colors` starts as `['red', 'blue', 'green']`. Read one color from input, remove that value from the list, and print the updated list.\n\nFor example, if the input is `blue`, your program should print:\n`['red', 'green']`.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
+              "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Itilize colors.remove(color) pou lis la vrèman modifye."
+                }
+              }
+            },
+            "ci-3": {
+              "title": "Klase nimewo yo nan antre a",
+              "prompt": "Twa nòt kwiz parèt nan yon lòd ki pa kòrèk. Mete chif ki antre yo nan fonksyon ``numbers`` la, klase lis la de pi piti a pi gwo, epi enprime lis ki klase a.\n\nPa egzanp, si chif ki antre yo se `9`, `2`, ak `5`, pwogram ou an ta dwe enprime:\n`[2, 5, 9]`.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
+              "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak numbers.sort() pou lis la vrèman klase an plas."
+                }
+              }
+            },
+            "try-list-methods-and-mutation-checkpoint": {
+              "title": "Ajoute 10 nan yon lis",
+              "prompt": "Kòmanse ak `numbers = [3, 1, 2]`. Ajoute `10` nan fen lis la, epi enprime lis ki mete ajou a.",
+              "hint": "Sèvi ak `append()` pou ajoute yon atik nan fen an.",
+              "help": {
+                "concept": "`append(value)` Li modifye lis orijinal la lè li ajoute yon atik nan fen an.",
+                "hint_1": "Sèvi ak `append()` pou ajoute yon atik nan fen an.",
+                "hint_2": "Kouri kòd ou a epi konpare sòti a ak rezilta espere a."
+              },
+              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
+              "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Itilize numbers.append(10) pou lis la vrèman chanje."
+                }
+              }
+            },
+            "try-list-methods-and-mutation-sketch0": {
+              "title": "Ajoute 10 epi enprime lis la.",
+              "prompt": "Sèvi ak `append(10)` pou ajoute `10` nan lis la, epi enprime lis ki mete ajou a.",
+              "hint": "Ajoute 10 nan fen lis la.",
+              "help": {
+                "concept": "Ajoute 10 nan fen lis la.",
+                "hint_1": "Ajoute 10 nan fen lis la, epi enprime lis ki mete ajou a.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
+              "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak numbers.append(10) pou lis la vrèman chanje."
+                }
+              }
+            },
+            "try-list-methods-and-mutation-sketch1": {
+              "title": "Retire bannann nan epi lage dènye atik la.",
+              "prompt": "Sèvi ak `remove()` ak `pop()` pou chanje lis la epi montre sa ki rete.",
+              "hint": "Retire 'banana'.",
+              "help": {
+                "concept": "Retire 'banana'.",
+                "hint_1": "Retire 'banana'. Apre sa, mete dènye atik ki rete a nan last_item.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n",
+              "solutionCode": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Rele fruits.remove('banana') olye pou w ranplase lis final la dirèkteman."
+                },
+                "1": {
+                  "message": "Sere rezilta fruits.pop() nan last_item olye pou w tape cherry dirèkteman."
+                }
+              }
+            },
+            "try-list-methods-and-mutation-sketch2": {
+              "title": "Triye epi enprime non yo",
+              "prompt": "Rele `sort()` anvan ou enprime pou lis orijinal la ka nan lòd.",
+              "hint": "Trie lis la alfabetikman.",
+              "help": {
+                "concept": "Trie lis la alfabetikman.",
+                "hint_1": "Trie lis la alfabetikman, epi enprime lis triye a.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n",
+              "solutionCode": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak names.sort() pou lis la vrèman triye."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_list_methods_and_mutation_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Kòmanse ak `numbers = [3, 1, 2]`. Ajoute `10` nan fen lis la, epi enprime lis ki mete ajou a."
+            },
+            "try_list_methods_and_mutation_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Sèvi ak `append(10)` pou ajoute `10` nan lis la, epi enprime lis ki mete ajou a."
+            },
+            "try_list_methods_and_mutation_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Sèvi ak `remove()` ak `pop()` pou chanje lis la epi montre sa ki rete."
+            },
+            "try_list_methods_and_mutation_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Rele `sort()` anvan ou enprime pou lis orijinal la ka nan lòd."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "list-methods-and-mutation": {
+          "sketch-1": {
+            "title": "Sa mityasyon vle di pou lis yo",
+            "bodyMarkdown": "A Python list is **mutable**, which means you can change the same list after you create it. Methods like `append()`, `remove()`, `pop()`, and `sort()` usually **mutate** the list instead of making a brand-new one.\n\nExample:\n\n```python\nnumbers = [3, 1, 2]\nnumbers.append(4)\nprint(numbers)\n```\n\nStep by step:\n- `numbers = [3, 1, 2]` creates a list.\n- `numbers.append(4)` adds `4` to the end of that same list.\n- `print(numbers)` shows the changed list.\n\nOutput:\n\n```python\n[3, 1, 2, 4]\n```\n\nThe important idea is that `append()` changes `numbers` itself."
+          },
+          "sketch-2": {
+            "title": "Sèvi ak append, remove, ak pop",
+            "bodyMarkdown": "These three methods all change a list, but they do different jobs:\n\n- `append(value)` adds one item to the end.\n- `remove(value)` removes the first matching value.\n- `pop(index)` removes and returns the item at an index.\n\nWorked example:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfruits.remove(\"banana\")\nlast_item = fruits.pop(1)\nprint(fruits)\nprint(last_item)\n```\n\nLine by line:\n- The list starts as `['apple', 'banana', 'cherry']`.\n- `remove(\"banana\")` changes it to `['apple', 'cherry']`.\n- `pop(1)` removes the item at index `1`, which is `'cherry'`.\n- Now `fruits` becomes `['apple']`.\n- `last_item` stores the removed value `'cherry'`.\n\nSo the output is:\n\n```python\n['apple']\ncherry\n```"
+          },
+          "sketch-3": {
+            "title": "Trie lis yo epi veye pou erè komen yo",
+            "bodyMarkdown": "`sort()` puts list items in order and mutates the list.\n\nExample:\n\n```python\nscores = [40, 10, 30, 20]\nscores.sort()\nprint(scores)\n```\n\nThis prints:\n\n```python\n[10, 20, 30, 40]\n```\n\nA common beginner mistake is expecting `sort()` to print something by itself or to leave the original list unchanged. But `sort()` changes the list directly.\n\nAnother useful pattern:\n\n```python\nnames = [\"Mia\", \"Ava\", \"Zoe\"]\nnames.sort()\nprint(names)\n```\n\nThis sorts strings in alphabetical order."
+          }
+        }
+      }
+    }
+  }
+}

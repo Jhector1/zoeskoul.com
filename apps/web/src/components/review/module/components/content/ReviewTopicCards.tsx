@@ -14,6 +14,7 @@ import CardRenderer from "@/components/review/module/CardRenderer";
 import FlowNavigator from "@/components/review/navigation/FlowNavigator";
 import { useReviewRuntimeStore } from "../../runtime/reviewRuntimeStore";
 import { mergeRuntimeIntoProgress } from "../../runtime/runtimeProgressBridge";
+import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorkspaceDrafts";
 import { reviewDebug } from "../../runtime/reviewDebug";
 
 import {
@@ -28,6 +29,7 @@ import {
   buildQuizPassProgress,
   buildQuizResetProgress,
   buildQuizStateProgress,
+  type QuizResetTarget,
 } from "../../actions";
 
 import { getCardStateKey } from "../../runtime/exerciseKeys";
@@ -48,6 +50,7 @@ type Props = {
   motionKey: string;
   viewCards: ReviewCard[];
   activeCardIndex: number;
+  unlockAll?: boolean;
   maxUnlockedCardIndex?: number;
   progressiveLockMessage?: string | null;
   onLockedNavigate?: () => void;
@@ -86,6 +89,7 @@ export default function ReviewTopicCards({
   motionKey,
   viewCards,
   activeCardIndex,
+  unlockAll = false,
                                            maxUnlockedCardIndex,
                                            progressiveLockMessage,
                                            onLockedNavigate,
@@ -119,15 +123,17 @@ export default function ReviewTopicCards({
   onBeforeCardNavigate,
 }: Props) {
   const storeCards = useReviewRuntimeStore((s) => s.cards);
-  const safeMaxUnlockedCardIndex = Math.max(
+  const safeMaxUnlockedCardIndex = unlockAll
+    ? Math.max(0, viewCards.length - 1)
+    : Math.max(
       0,
       Math.min(viewCards.length - 1, maxUnlockedCardIndex ?? activeCardIndex),
-  );
+    );
   const handleNavigate = React.useCallback(
       async (index: number) => {
         const clampedIndex = Math.max(0, Math.min(viewCards.length - 1, index));
         if (clampedIndex === activeCardIndex) return;
-        if (clampedIndex > safeMaxUnlockedCardIndex) {
+        if (!unlockAll && clampedIndex > safeMaxUnlockedCardIndex) {
           return;
         }
         const fromCard = viewCards[activeCardIndex] ?? null;
@@ -192,17 +198,19 @@ export default function ReviewTopicCards({
         viewTid,
         onLockedNavigate,
         safeMaxUnlockedCardIndex,
+        unlockAll,
       ],
   );
   const activeCard = viewCards[activeCardIndex] ?? null;
   const activeCardDone = activeCard ? isCardDoneFromState(activeCard, tp) : false;
   const activeCardCanAdvance =
+      unlockAll ||
       activeCardDone ||
       (activeCard
         ? !isQuizLikeCard(activeCard) && !hasRequiredEmbeddedTryIt(activeCard)
         : false);
   const hasNextCard = activeCardIndex < Math.max(0, viewCards.length - 1);
-  const nextCardUnlocked = activeCardIndex + 1 <= safeMaxUnlockedCardIndex;
+  const nextCardUnlocked = unlockAll || activeCardIndex + 1 <= safeMaxUnlockedCardIndex;
   return (
     <div className="flex min-h-0 shrink-0 flex-col">
       <AnimatePresence initial={false} mode="wait">
@@ -285,6 +293,7 @@ export default function ReviewTopicCards({
                     routeExerciseId={routeExerciseId}
                     defaultToolLanguage={defaultToolLanguage}
                     onNavigateToExerciseRoute={onNavigateToExerciseRoute}
+                    unlockAll={unlockAll}
                     onSketchStateChange={(_sketchCardId, state) => {
                       sketch?.saveSketchDebounced?.(cardKey, state, false);
                     }}
@@ -338,14 +347,25 @@ export default function ReviewTopicCards({
                       });
                     }}
 
-                    onQuizReset={(quizCardId) => {
-                      useReviewRuntimeStore.getState().clearRuntimeForCard(viewTid, quizCardId);
+                    onQuizReset={(target: string | QuizResetTarget) => {
+                      const resetTarget: QuizResetTarget =
+                          typeof target === "string"
+                              ? { progressId: target, runtimeCardId: target, cardProgressKeys: [target] }
+                              : target;
+
+                      useReviewRuntimeStore
+                          .getState()
+                          .clearRuntimeForCard(
+                              viewTid,
+                              resetTarget.runtimeCardId ?? resetTarget.progressId,
+                          );
+                      clearReviewWorkspaceDrafts();
 
                       setProgress((prev) => {
                         const next = buildQuizResetProgress(
                             prev,
                             viewTid,
-                            quizCardId,
+                            resetTarget,
                         );
 
                         queueMicrotask(() => flushNow(next));

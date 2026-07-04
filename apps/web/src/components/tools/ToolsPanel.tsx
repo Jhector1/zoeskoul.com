@@ -28,12 +28,6 @@ const PANE_TRANSITION = {
 const CODE_SPEC = TOOL_SPECS.find((t) => t.id === "code");
 const NOTES_SPEC = TOOL_SPECS.find((t) => t.id === "notes");
 
-function getToolLabel(id: ToolId, t: ReturnType<typeof useTranslations>) {
-    if (id === "code") return t("run");
-    if (id === "notes") return t("notes");
-    return id;
-}
-
 export type ToolsPanelProps = {
     onCollapse: () => void;
     onUnbind?: () => void;
@@ -188,7 +182,6 @@ function ToolsHeader({
     onCollapse: () => void;
 }) {
     const t = useTranslations("ide.tools.header");
-    const tabsT = useTranslations("ide.tools.tabs");
     const showDebugLearningUi = learnerUiFlags.showDebugLearningUi;
     const compactToolsHeader =
         learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
@@ -271,11 +264,11 @@ function ToolsHeader({
                                     onClick={() => activateTool(primarySpec.id)}
                                     className="ui-btn ui-btn-secondary px-3 py-2 text-[11px] font-extrabold"
                                     aria-pressed={active === primarySpec.id}
-                                    title={getToolLabel(primarySpec.id, tabsT)}
+                                    title={primarySpec.label}
                                 >
                                     <span className="inline-flex items-center gap-1.5">
                                         <primarySpec.Icon className="h-4 w-4" />
-                                        {getToolLabel(primarySpec.id, tabsT)}
+                                        {primarySpec.label}
                                     </span>
                                 </button>
                             ) : null}
@@ -311,7 +304,7 @@ function ToolsHeader({
                                             >
                                                 <span className="inline-flex items-center gap-2">
                                                     <spec.Icon className="h-4 w-4" />
-                                                    {getToolLabel(spec.id, tabsT)}
+                                                    {spec.label}
                                                 </span>
                                                 {active === spec.id ? (
                                                     <span className="text-neutral-500 dark:text-white/45">

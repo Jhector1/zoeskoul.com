@@ -24,21 +24,57 @@
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch0.title",
       "sketchId": "dict-idea",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-dictionary-basics-sketch0",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch0.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch0.prompt",
+        "exerciseKey": "try-dictionary-basics-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch1.title",
       "sketchId": "dict-lookup",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-dictionary-basics-sketch1",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch1.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch1.prompt",
+        "exerciseKey": "try-dictionary-basics-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.cards.sketch2.title",
       "sketchId": "dict-create-update",
-      "height": 420
+      "height": 420,
+      "tryIt": {
+        "id": "try-dictionary-basics-sketch2",
+        "titleKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch2.title",
+        "promptKey": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.tryIt.try_dictionary_basics_sketch2.prompt",
+        "exerciseKey": "try-dictionary-basics-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
     },
     {
       "id": "quiz",
@@ -258,17 +294,18 @@
       }
     },
     {
-      "id": "ci-make-dictionary",
+      "id": "try-dictionary-basics-checkpoint",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary",
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint",
       "language": "python",
-      "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -277,11 +314,132 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "student = {\"name\": \"Ava\", \"score\": 92}\nprint(student[\"score\"])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "92\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "student",
+            "expected": [
+              [
+                "name",
+                "Ava"
+              ],
+              [
+                "score",
+                92
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bstudent\\s*=",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "score",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.sourceChecks.1.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bstudent\\s*=",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "score",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-checkpoint.sourceChecks.1.message"
+        }
+      ]
+    },
+    {
+      "id": "ci-make-dictionary",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -292,7 +450,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -343,8 +501,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-make-dictionary.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-get-score",
@@ -353,11 +529,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score",
       "language": "python",
-      "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -366,11 +542,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def get_score(scores, name):\n    return scores[name]",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -381,7 +566,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def get_score(scores, name):\n    return scores[name]",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -432,8 +617,26 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-get-score.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
     },
     {
       "id": "ci-update-dictionary",
@@ -442,11 +645,11 @@
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary",
       "language": "python",
-      "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -455,11 +658,20 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -470,7 +682,7 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices",
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.solutionCode",
         "semanticChecks": [
           {
             "type": "function_returns",
@@ -539,8 +751,337 @@
           {
             "type": "no_stdout"
           }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
         ]
-      }
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.ci-update-dictionary.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "try-dictionary-basics-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "uses_dict_key",
+            "key": "name",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message",
+            "variable": "profile"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "uses_dict_key",
+          "key": "name",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch0.sourceChecks.0.message",
+          "variable": "profile"
+        }
+      ]
+    },
+    {
+      "id": "try-dictionary-basics-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "{'name': 'Mia', 'age': 12}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "profile",
+            "expected": [
+              [
+                "name",
+                "Mia"
+              ],
+              [
+                "age",
+                12
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bprofile\\s*\\[\\s*['\\\"]age['\\\"]\\s*\\]\\s*=\\s*12",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch1.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "try-dictionary-basics-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2",
+      "language": "python",
+      "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "{'Ava': 92, 'Mia': 85}\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "variable_equals",
+            "name": "scores",
+            "expected": [
+              [
+                "Ava",
+                92
+              ],
+              [
+                "Mia",
+                85
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bscores\\s*=",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Ava",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.1.message"
+          },
+          {
+            "type": "uses_dict_key",
+            "key": "Mia",
+            "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.2.message"
+          }
+        ]
+      },
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bscores\\s*=",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.0.message"
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Ava",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.1.message"
+        },
+        {
+          "type": "uses_dict_key",
+          "key": "Mia",
+          "message": "@:topics.python--python-data-functions--draft.python-5-lists-tuples-and-dictionaries.dictionary-basics.quiz.try-dictionary-basics-sketch2.sourceChecks.2.message"
+        }
+      ]
     }
   ]
 }

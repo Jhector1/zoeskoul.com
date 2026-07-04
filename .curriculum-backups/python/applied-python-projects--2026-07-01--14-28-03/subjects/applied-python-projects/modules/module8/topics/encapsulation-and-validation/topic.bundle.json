@@ -1,0 +1,619 @@
+{
+  "topicId": "encapsulation-and-validation",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-8-object-oriented-foundations",
+  "sectionSlug": "applied-python-projects-python-8-encapsulation-and-services",
+  "prefix": "py8",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.label",
+    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch0.title",
+      "sketchId": "encapsulation-and-validation-sketch0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-encapsulation-and-validation-sketch0",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.prompt",
+        "exerciseKey": "try-encapsulation-and-validation-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch1.title",
+      "sketchId": "encapsulation-and-validation-sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-encapsulation-and-validation-sketch1",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.prompt",
+        "exerciseKey": "try-encapsulation-and-validation-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.sketch2.title",
+      "sketchId": "try-it-yourself",
+      "height": 420,
+      "tryIt": {
+        "id": "try-encapsulation-and-validation-sketch2",
+        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.prompt",
+        "exerciseKey": "try-encapsulation-and-validation-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "encapsulation-and-validation-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.encapsulation-and-validation-sketch0.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.encapsulation-and-validation-sketch0.bodyMarkdown"
+    },
+    {
+      "id": "encapsulation-and-validation-sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.encapsulation-and-validation-sketch1.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.encapsulation-and-validation-sketch1.bodyMarkdown"
+    },
+    {
+      "id": "try-it-yourself",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.try-it-yourself.title",
+      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.try-it-yourself.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-encapsulation-and-validation-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Car:\n    def __init__(self):\n        self.__fuel_level = 0\n\n    def add_fuel(self, amount):\n        if amount > 0:\n            self.__fuel_level = min(100, self.__fuel_level + amount)\n\n    def drive(self, distance):\n        fuel_needed = distance * 0.1\n        if fuel_needed <= self.__fuel_level:\n            self.__fuel_level -= fuel_needed\n        else:\n            print(\"Not enough fuel\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Car:\n    def __init__(self):\n        self.__fuel_level = 0\n\n    def add_fuel(self, amount):\n        if amount > 0:\n            self.__fuel_level = min(100, self.__fuel_level + amount)\n\n    def drive(self, distance):\n        fuel_needed = distance * 0.1\n        if fuel_needed <= self.__fuel_level:\n            self.__fuel_level -= fuel_needed\n        else:\n            print(\"Not enough fuel\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Car:\n    def __init__(self):\n        self.__fuel_level = 0\n\n    def add_fuel(self, amount):\n        if amount > 0:\n            self.__fuel_level = min(100, self.__fuel_level + amount)\n\n    def drive(self, distance):\n        fuel_needed = distance * 0.1\n        if fuel_needed <= self.__fuel_level:\n            self.__fuel_level -= fuel_needed\n        else:\n            print(\"Not enough fuel\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Car"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-encapsulation-and-validation-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Temperature:\n    def __init__(self):\n        self.__celsius = 0\n\n    def set_temperature(self, value):\n        if -273.15 <= value <= 1000:\n            self.__celsius = value\n        else:\n            print(\"Invalid temperature\")\n\n    def get_temperature(self):\n        return self.__celsius",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Temperature:\n    def __init__(self):\n        self.__celsius = 0\n\n    def set_temperature(self, value):\n        if -273.15 <= value <= 1000:\n            self.__celsius = value\n        else:\n            print(\"Invalid temperature\")\n\n    def get_temperature(self):\n        return self.__celsius",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Temperature:\n    def __init__(self):\n        self.__celsius = 0\n\n    def set_temperature(self, value):\n        if -273.15 <= value <= 1000:\n            self.__celsius = value\n        else:\n            print(\"Invalid temperature\")\n\n    def get_temperature(self):\n        return self.__celsius",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Temperature"
+          },
+          {
+            "type": "method_sequence_returns",
+            "className": "Temperature",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "set_temperature",
+                "methodArgs": [
+                  25
+                ],
+                "methodArgKinds": []
+              }
+            ],
+            "methodName": "get_temperature",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 25,
+            "message": "Temperature.get_temperature() should return the expected value after the required method calls."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-encapsulation-and-validation-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class BankAccount:\n    def __init__(self, owner, balance=0):\n        self.owner = owner\n        self.__balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.__balance += amount\n\n    def withdraw(self, amount):\n        if 0 < amount <= self.__balance:\n            self.__balance -= amount\n\n    def get_balance(self):\n        return self.__balance\n\n    def transfer(self, target_account, amount):\n        if 0 < amount <= self.__balance:\n            self.withdraw(amount)\n            target_account.deposit(amount)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class BankAccount:\n    def __init__(self, owner, balance=0):\n        self.owner = owner\n        self.__balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.__balance += amount\n\n    def withdraw(self, amount):\n        if 0 < amount <= self.__balance:\n            self.__balance -= amount\n\n    def get_balance(self):\n        return self.__balance\n\n    def transfer(self, target_account, amount):\n        if 0 < amount <= self.__balance:\n            self.withdraw(amount)\n            target_account.deposit(amount)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class BankAccount:\n    def __init__(self, owner, balance=0):\n        self.owner = owner\n        self.__balance = balance\n\n    def deposit(self, amount):\n        if amount > 0:\n            self.__balance += amount\n\n    def withdraw(self, amount):\n        if 0 < amount <= self.__balance:\n            self.__balance -= amount\n\n    def get_balance(self):\n        return self.__balance\n\n    def transfer(self, target_account, amount):\n        if 0 < amount <= self.__balance:\n            self.withdraw(amount)\n            target_account.deposit(amount)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "BankAccount"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-encapsulation-and-validation-1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class User:\n    def __init__(self, name):\n        self.name = name\n        self.__age = 0\n\n    def set_age(self, age):\n        if isinstance(age, int) and age > 0:\n            self.__age = age\n        else:\n            print(\"Invalid age\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class User:\n    def __init__(self, name):\n        self.name = name\n        self.__age = 0\n\n    def set_age(self, age):\n        if isinstance(age, int) and age > 0:\n            self.__age = age\n        else:\n            print(\"Invalid age\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class User:\n    def __init__(self, name):\n        self.name = name\n        self.__age = 0\n\n    def set_age(self, age):\n        if isinstance(age, int) and age > 0:\n            self.__age = age\n        else:\n            print(\"Invalid age\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "User"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-encapsulation-and-validation-2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Product:\n    def __init__(self, name):\n        self.name = name\n        self.__stock = 0\n\n    def add_stock(self, amount):\n        if amount > 0:\n            self.__stock += amount\n\n    def remove_stock(self, amount):\n        if 0 < amount <= self.__stock:\n            self.__stock -= amount\n        else:\n            print(\"Invalid stock removal\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Product:\n    def __init__(self, name):\n        self.name = name\n        self.__stock = 0\n\n    def add_stock(self, amount):\n        if amount > 0:\n            self.__stock += amount\n\n    def remove_stock(self, amount):\n        if 0 < amount <= self.__stock:\n            self.__stock -= amount\n        else:\n            print(\"Invalid stock removal\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Product:\n    def __init__(self, name):\n        self.name = name\n        self.__stock = 0\n\n    def add_stock(self, amount):\n        if amount > 0:\n            self.__stock += amount\n\n    def remove_stock(self, amount):\n        if 0 < amount <= self.__stock:\n            self.__stock -= amount\n        else:\n            print(\"Invalid stock removal\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Product"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-encapsulation-and-validation-3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-3",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Library:\n    def __init__(self):\n        self.__books = []\n\n    def add_book(self, book):\n        if book not in self.__books:\n            self.__books.append(book)\n\n    def remove_book(self, book):\n        if book in self.__books:\n            self.__books.remove(book)\n        else:\n            print(\"Book not found\")",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.ci-encapsulation-and-validation-3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Library:\n    def __init__(self):\n        self.__books = []\n\n    def add_book(self, book):\n        if book not in self.__books:\n            self.__books.append(book)\n\n    def remove_book(self, book):\n        if book in self.__books:\n            self.__books.remove(book)\n        else:\n            print(\"Book not found\")",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Library:\n    def __init__(self):\n        self.__books = []\n\n    def add_book(self, book):\n        if book not in self.__books:\n            self.__books.append(book)\n\n    def remove_book(self, book):\n        if book in self.__books:\n            self.__books.remove(book)\n        else:\n            print(\"Book not found\")",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Library"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fb-encapsulation-and-validation-0",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.fb-encapsulation-and-validation-0",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "class"
+      }
+    },
+    {
+      "id": "fb-encapsulation-and-validation-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.fb-encapsulation-and-validation-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "constraints"
+      }
+    },
+    {
+      "id": "mc-encapsulation-and-validation-0",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.mc-encapsulation-and-validation-0",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "b",
+          "d"
+        ]
+      }
+    },
+    {
+      "id": "mc-encapsulation-and-validation-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.mc-encapsulation-and-validation-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "c"
+        ]
+      }
+    },
+    {
+      "id": "dr-encapsulation-and-validation-0",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.dr-encapsulation-and-validation-0",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "policy_single_choice_1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.practice.policy_single_choice_1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    }
+  ]
+}

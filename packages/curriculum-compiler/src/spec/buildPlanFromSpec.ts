@@ -69,6 +69,7 @@ export function buildPlanFromSpec(args: {
 
             return {
                 moduleSlug: module.moduleSlug,
+                moduleNumber: module.moduleNumber,
                 prefix: module.prefix ?? buildModulePrefix(args.blueprint.subjectSlug, logicalIndex),
                 order: normalizedOrder,
                 role: module.role,

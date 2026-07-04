@@ -63,6 +63,12 @@ export type SemanticValueKind =
     | "list_of_dict_entries";
 
 
+export type SemanticMethodCall = {
+    methodName: string;
+    methodArgs?: unknown[];
+    methodArgKinds?: SemanticValueKind[];
+};
+
 export type SemanticCheck =
     | {
     type: "function_returns";
@@ -99,6 +105,30 @@ export type SemanticCheck =
     methodName: string;
     methodArgs?: unknown[];
     methodArgKinds?: SemanticValueKind[];
+    expected: unknown;
+    expectedKind?: SemanticValueKind;
+    message?: string;
+}
+    | {
+    type: "method_sequence_returns";
+    className: string;
+    constructorArgs?: unknown[];
+    constructorArgKinds?: SemanticValueKind[];
+    calls?: SemanticMethodCall[];
+    methodName: string;
+    methodArgs?: unknown[];
+    methodArgKinds?: SemanticValueKind[];
+    expected: unknown;
+    expectedKind?: SemanticValueKind;
+    message?: string;
+}
+    | {
+    type: "attribute_sequence_equals";
+    className: string;
+    constructorArgs?: unknown[];
+    constructorArgKinds?: SemanticValueKind[];
+    calls?: SemanticMethodCall[];
+    attributeName: string;
     expected: unknown;
     expectedKind?: SemanticValueKind;
     message?: string;

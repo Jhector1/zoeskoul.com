@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import type { CompileValidationState } from "../compile/validationState.js";
 
 export async function writeTopicCompileStatus(args: {
     reportDir: string;
@@ -10,6 +11,7 @@ export async function writeTopicCompileStatus(args: {
     errorMessage?: string;
     mode?: "generate" | "rebuild-from-drafts" | "upgrade-drafts";
     sourceDraft?: string;
+    validationState?: CompileValidationState;
 }) {
     await fs.mkdir(args.reportDir, { recursive: true });
 

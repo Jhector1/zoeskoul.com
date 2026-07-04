@@ -1,0 +1,931 @@
+{
+  "topicId": "testing-object-state",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-10-testing-debugging-oop-projects",
+  "sectionSlug": "applied-python-projects-python-10-testing-oop-behavior",
+  "prefix": "py10",
+  "minutes": 30,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.label",
+    "summaryKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.cards.sketch0.title",
+      "sketchId": "testing-object-state-sketch-0",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-object-state-sketch0",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.prompt",
+        "exerciseKey": "try-testing-object-state-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.cards.sketch1.title",
+      "sketchId": "testing-object-state-sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-object-state-sketch1",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.prompt",
+        "exerciseKey": "try-testing-object-state-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.cards.sketch2.title",
+      "sketchId": "testing-object-state-sketch-2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-testing-object-state-sketch2",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.prompt",
+        "exerciseKey": "try-testing-object-state-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "testing-object-state-sketch-0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-0.bodyMarkdown"
+    },
+    {
+      "id": "testing-object-state-sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-1.bodyMarkdown"
+    },
+    {
+      "id": "testing-object-state-sketch-2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.testing-object-state-sketch-2.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-testing-object-state-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/book.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class HistoryValue:\n    def __init__(self, value):\n        self.current = value\n        self.history = [value]\n\n    def set(self, value):\n        self.current = value\n        self.history.append(value)\n\n    def add(self, delta):\n        self.set(self.current + delta)\n\n    def __eq__(self, other):\n        if isinstance(other, list):\n            if len(other) == 1:\n                return self.current == other[0] or self.history == other\n            return self.history == other\n        return self.current == other\n\n    def __str__(self):\n        return str(self.current)\n\n    def __repr__(self):\n        return repr(self.current)\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = HistoryValue(True)\n\n    def checkout(self):\n        self.available.set(False)\n\n",
+        "solutionFiles": [
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Keep the Book class defined in models/book.py."
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune"
+            ],
+            "message": "Book should still be constructible with a title."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune"
+            ],
+            "attributes": [
+              "title",
+              "available"
+            ],
+            "message": "A Book instance should have title and available attributes."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune"
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "checkout",
+                "methodArgs": [],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "available",
+            "expected": [
+              true,
+              false
+            ],
+            "message": "A new book should start available, then become unavailable after checkout()."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-testing-object-state-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/task.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/task.py",
+          "content": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        if priority < 0:\n            self.priority = 0\n        else:\n            self.priority = priority",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/task.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/task.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class HistoryValue:\n    def __init__(self, value):\n        self.current = value\n        self.history = [value]\n\n    def set(self, value):\n        self.current = value\n        self.history.append(value)\n\n    def add(self, delta):\n        self.set(self.current + delta)\n\n    def __eq__(self, other):\n        if isinstance(other, list):\n            if len(other) == 1:\n                return self.current == other[0] or self.history == other\n            return self.history == other\n        return self.current == other\n\n    def __str__(self):\n        return str(self.current)\n\n    def __repr__(self):\n        return repr(self.current)\n\nclass Task:\n    def __init__(self, name, priority):\n        self.name = name\n        self.priority = HistoryValue(priority if priority >= 0 else 0)\n",
+        "solutionFiles": [
+          {
+            "path": "models/task.py",
+            "content": "class Task:\n    def __init__(self, name, priority):\n        self.name = name\n        if priority < 0:\n            self.priority = 0\n        else:\n            self.priority = priority",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Task",
+            "message": "Keep the Task class defined in models/task.py."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Task",
+            "constructorArgs": [
+              "Email clients",
+              2
+            ],
+            "attributes": [
+              "name",
+              "priority"
+            ],
+            "message": "A Task instance should store name and priority."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Task",
+            "constructorArgs": [
+              "Email clients",
+              2
+            ],
+            "constructorArgKinds": [],
+            "calls": [],
+            "attributeName": "priority",
+            "expected": [
+              2
+            ],
+            "message": "A normal priority should be stored unchanged."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Task",
+            "constructorArgs": [
+              "Broken input",
+              -5
+            ],
+            "constructorArgKinds": [],
+            "calls": [],
+            "attributeName": "priority",
+            "expected": [
+              0
+            ],
+            "message": "A negative priority should be corrected to 0."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-testing-object-state-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/counter.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/counter.py",
+          "content": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/counter.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/counter.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class HistoryValue:\n    def __init__(self, value):\n        self.current = value\n        self.history = [value]\n\n    def set(self, value):\n        self.current = value\n        self.history.append(value)\n\n    def add(self, delta):\n        self.set(self.current + delta)\n\n    def __eq__(self, other):\n        if isinstance(other, list):\n            if len(other) == 1:\n                return self.current == other[0] or self.history == other\n            return self.history == other\n        return self.current == other\n\n    def __str__(self):\n        return str(self.current)\n\n    def __repr__(self):\n        return repr(self.current)\n\nclass Counter:\n    def __init__(self):\n        self.count = HistoryValue(0)\n\n    def increment(self):\n        self.count.add(1)\n",
+        "solutionFiles": [
+          {
+            "path": "models/counter.py",
+            "content": "class Counter:\n    def __init__(self):\n        self.count = 0\n\n    def increment(self):\n        self.count += 1",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Counter",
+            "message": "Keep the Counter class defined in models/counter.py."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Counter",
+            "constructorArgs": [],
+            "attributes": [
+              "count"
+            ],
+            "message": "A Counter instance should have a count attribute."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Counter",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "increment",
+                "methodArgs": [],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "increment",
+                "methodArgs": [],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "count",
+            "expected": [
+              0,
+              1,
+              2
+            ],
+            "message": "The count should move from 0 to 1 to 2 across two increment() calls."
+          }
+        ]
+      }
+    },
+    {
+      "id": "q-testing-object-state-single-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-single-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "q-testing-object-state-multi-1",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-multi-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q-testing-object-state-fill-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-fill-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "0"
+      }
+    },
+    {
+      "id": "q-testing-object-state-drag-1",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-drag-1",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t2",
+          "t1",
+          "t3",
+          "t4"
+        ]
+      }
+    },
+    {
+      "id": "q-testing-object-state-multi-2",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-multi-2",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "q-testing-object-state-fill-2",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.q-testing-object-state-fill-2",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "False"
+      }
+    },
+    {
+      "id": "ci-testing-object-state-debug-book-return",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/book.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tests/check_book_return.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.starterFiles.tests_check_book_return_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/book.py",
+          "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tests/check_book_return.py",
+          "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/book.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/book.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tests/check_book_return.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-debug-book-return.starterFiles.tests_check_book_return_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class HistoryValue:\n    def __init__(self, value):\n        self.current = value\n        self.history = [value]\n\n    def set(self, value):\n        self.current = value\n        self.history.append(value)\n\n    def add(self, delta):\n        self.set(self.current + delta)\n\n    def __eq__(self, other):\n        if isinstance(other, list):\n            if len(other) == 1:\n                return self.current == other[0] or self.history == other\n            return self.history == other\n        return self.current == other\n\n    def __str__(self):\n        return str(self.current)\n\n    def __repr__(self):\n        return repr(self.current)\n\nclass Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = HistoryValue(True)\n\n    def checkout(self):\n        self.available.set(False)\n\n    def return_book(self):\n        self.available.set(True)\n",
+        "solutionFiles": [
+          {
+            "path": "models/book.py",
+            "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tests/check_book_return.py",
+            "content": "from models.book import Book\n\nbook = Book(\"Dune\")\nassert book.available is True\nbook.checkout()\nassert book.available is False\nbook.return_book()\nassert book.available is True\n\nprint(\"book return tests passed\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "Keep the Book class defined."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune"
+            ],
+            "attributes": [
+              "title",
+              "available"
+            ],
+            "message": "Book instances should still store title and available."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Book",
+            "constructorArgs": [
+              "Dune"
+            ],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "checkout",
+                "methodArgs": [],
+                "methodArgKinds": []
+              },
+              {
+                "methodName": "return_book",
+                "methodArgs": [],
+                "methodArgKinds": []
+              }
+            ],
+            "attributeName": "available",
+            "expected": [
+              true,
+              false,
+              true
+            ],
+            "message": "The available state should go True, then False, then True again."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-testing-object-state-fix-wallet-validation",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/wallet.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tests/check_wallet.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.starterFiles.tests_check_wallet_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/wallet.py",
+          "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tests/check_wallet.py",
+          "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/wallet.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/wallet.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tests/check_wallet.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-wallet-validation.starterFiles.tests_check_wallet_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class HistoryValue:\n    def __init__(self, value):\n        self.current = value\n        self.history = [value]\n\n    def set(self, value):\n        self.current = value\n        self.history.append(value)\n\n    def add(self, delta):\n        self.set(self.current + delta)\n\n    def __eq__(self, other):\n        if isinstance(other, list):\n            if len(other) == 1:\n                return self.current == other[0] or self.history == other\n            return self.history == other\n        return self.current == other\n\n    def __str__(self):\n        return str(self.current)\n\n    def __repr__(self):\n        return repr(self.current)\n\nclass Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = HistoryValue(starting_balance if starting_balance >= 0 else 0)\n",
+        "solutionFiles": [
+          {
+            "path": "models/wallet.py",
+            "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tests/check_wallet.py",
+            "content": "from models.wallet import Wallet\n\nwallet_a = Wallet(\"Ava\", 25)\nassert wallet_a.balance == 25\n\nwallet_b = Wallet(\"Ben\", -10)\nassert wallet_b.balance == 0\n\nprint(\"wallet validation tests passed\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Wallet",
+            "message": "Keep the Wallet class defined."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Wallet",
+            "constructorArgs": [
+              "Ava",
+              25
+            ],
+            "attributes": [
+              "owner",
+              "balance"
+            ],
+            "message": "Wallet instances should store owner and balance."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Wallet",
+            "constructorArgs": [
+              "Ava",
+              25
+            ],
+            "constructorArgKinds": [],
+            "calls": [],
+            "attributeName": "balance",
+            "expected": [
+              25
+            ],
+            "message": "A valid starting balance should stay unchanged."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Wallet",
+            "constructorArgs": [
+              "Ben",
+              -10
+            ],
+            "constructorArgKinds": [],
+            "calls": [],
+            "attributeName": "balance",
+            "expected": [
+              0
+            ],
+            "message": "A negative starting balance should be corrected to 0."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-testing-object-state-fix-scoreboard-add-points",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.starterCode",
+      "starterFiles": [
+        {
+          "path": "models/scoreboard.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tests/check_scoreboard.py",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.starterFiles.tests_check_scoreboard_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "models/scoreboard.py",
+          "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "tests/check_scoreboard.py",
+          "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "models/scoreboard.py",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.starterCode",
+        "starterFiles": [
+          {
+            "path": "models/scoreboard.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tests/check_scoreboard.py",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.practice.ci-testing-object-state-fix-scoreboard-add-points.starterFiles.tests_check_scoreboard_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class HistoryValue:\n    def __init__(self, value):\n        self.current = value\n        self.history = [value]\n\n    def set(self, value):\n        self.current = value\n        self.history.append(value)\n\n    def add(self, delta):\n        self.set(self.current + delta)\n\n    def __eq__(self, other):\n        if isinstance(other, list):\n            if len(other) == 1:\n                return self.current == other[0] or self.history == other\n            return self.history == other\n        return self.current == other\n\n    def __str__(self):\n        return str(self.current)\n\n    def __repr__(self):\n        return repr(self.current)\n\nclass Scoreboard:\n    def __init__(self):\n        self.score = HistoryValue(0)\n\n    def add_points(self, points):\n        self.score.add(points)\n",
+        "solutionFiles": [
+          {
+            "path": "models/scoreboard.py",
+            "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "tests/check_scoreboard.py",
+            "content": "from models.scoreboard import Scoreboard\n\nboard = Scoreboard()\nassert board.score == 0\nboard.add_points(5)\nassert board.score == 5\nboard.add_points(3)\nassert board.score == 8\n\nprint(\"scoreboard state tests passed\")",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Scoreboard",
+            "message": "Keep the Scoreboard class defined."
+          },
+          {
+            "type": "instance_attributes",
+            "className": "Scoreboard",
+            "constructorArgs": [],
+            "attributes": [
+              "score"
+            ],
+            "message": "Scoreboard instances should have a score attribute."
+          },
+          {
+            "type": "attribute_sequence_equals",
+            "className": "Scoreboard",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "calls": [
+              {
+                "methodName": "add_points",
+                "methodArgs": [
+                  5
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              },
+              {
+                "methodName": "add_points",
+                "methodArgs": [
+                  3
+                ],
+                "methodArgKinds": [
+                  "value"
+                ]
+              }
+            ],
+            "attributeName": "score",
+            "expected": [
+              0,
+              5,
+              8
+            ],
+            "message": "The score should accumulate across multiple add_points() calls."
+          }
+        ]
+      }
+    }
+  ]
+}

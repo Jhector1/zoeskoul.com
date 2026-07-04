@@ -164,12 +164,38 @@ describe("/api/review/quiz route", () => {
         expect(res.status).toBe(200);
 
         const json = await res.json();
-        expect(json.quizKey).toContain("selection=purpose-v3");
+        expect(json.quizKey).toContain("selection=purpose-v4-explicit");
         expect(json.questions).toHaveLength(1);
         expect(json.questions[0].fetch.preferPurpose).toBe("quiz");
         expect(json.questions[0].fetch.exerciseKey).toBe("quiz-single");
         expect(json.questions[0].fetch.exerciseKey).not.toBe("project-code");
         expect(mockDb.practiceTopicFindMany).not.toHaveBeenCalled();
+    });
+
+    it("uses explicit authored quiz exercise keys deterministically", async () => {
+        const route = await import("./route");
+
+        const req = new Request("http://localhost:3000/api/review/quiz", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+                subject: "sql",
+                moduleSlug: "sql-module-1",
+                topic: "sql.quiz-topic",
+                n: 1,
+                mode: "quiz",
+                preferKind: null,
+                exerciseKeys: ["quiz-drag"],
+            }),
+        });
+
+        const res = await route.POST(req);
+        expect(res.status).toBe(200);
+
+        const json = await res.json();
+        expect(json.questions).toHaveLength(1);
+        expect(json.questions[0].fetch.preferPurpose).toBe("quiz");
+        expect(json.questions[0].fetch.exerciseKey).toBe("quiz-drag");
     });
 
     it("returns project-mode practice steps with project purpose and code_input kind", async () => {
@@ -196,7 +222,7 @@ describe("/api/review/quiz route", () => {
         expect(res.status).toBe(200);
 
         const json = await res.json();
-        expect(json.quizKey).toContain("selection=purpose-v3");
+        expect(json.quizKey).toContain("selection=purpose-v4-explicit");
         expect(json.questions).toHaveLength(1);
         expect(json.questions[0].fetch.preferPurpose).toBe("project");
         expect(json.questions[0].fetch.preferKind).toBe("code_input");
@@ -288,7 +314,7 @@ describe("/api/review/quiz route", () => {
         expect(mockDb.quizRows.get(`u:test-user|${quizKey}`)?.questions[0]?.fetch.topic).toBe("sql.quiz-topic");
     });
 
-    it("ignores stale purpose-v2 frozen rows and regenerates with purpose-v3", async () => {
+    it("ignores stale purpose-v3 frozen rows and regenerates with purpose-v4-explicit", async () => {
         const route = await import("./route");
         const { buildReviewQuizKey } = await import("@/lib/review/api/quiz/keys");
 
@@ -304,10 +330,10 @@ describe("/api/review/quiz route", () => {
             preferKind: null,
         });
 
-        const v3Key = buildReviewQuizKey(spec);
-        const v2Key = v3Key.replace("selection=purpose-v3", "selection=purpose-v2");
+        const v4Key = buildReviewQuizKey(spec);
+        const v3Key = v4Key.replace("selection=purpose-v4-explicit", "selection=purpose-v3");
 
-        mockDb.quizRows.set(`u:test-user|${v2Key}`, {
+        mockDb.quizRows.set(`u:test-user|${v3Key}`, {
             questions: [
                 {
                     kind: "practice",
@@ -331,12 +357,12 @@ describe("/api/review/quiz route", () => {
         expect(res.status).toBe(200);
 
         const json = await res.json();
-        expect(json.quizKey).toBe(v3Key);
+        expect(json.quizKey).toBe(v4Key);
         expect(json.questions[0].fetch.exerciseKey).toBe("quiz-single");
         expect(json.questions[0].fetch.exerciseKey).not.toBe("project-code");
     });
 
-    it("returns an existing matching frozen purpose-v3 quiz instance before regenerating", async () => {
+    it("returns an existing matching frozen purpose-v4-explicit quiz instance before regenerating", async () => {
         const route = await import("./route");
         const { buildReviewQuizKey } = await import("@/lib/review/api/quiz/keys");
 

@@ -174,7 +174,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def double_number(n):\n    # return double the input\n    pass"
+              "starterCode": "def double_number(n):\n    # return double the input\n    pass",
+              "solutionCode": "def double_number(n):\n    return n * 2"
             },
             "pvrs-code-2": {
               "title": "Return a greeting string",
@@ -185,7 +186,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass"
+              "starterCode": "def make_greeting(name):\n    # return a greeting like Hello, Ava\n    pass",
+              "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
             },
             "pvrs-code-3": {
               "title": "Return a total instead of printing it",
@@ -196,7 +198,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass"
+              "starterCode": "def add_prices(price1, price2):\n    # return the total of the two prices\n    pass",
+              "solutionCode": "def add_prices(price1, price2):\n    return price1 + price2"
             },
             "try-print-vs-return-checkpoint": {
               "title": "Return, then print",
@@ -207,7 +210,8 @@
                 "hint_1": "The function should return the value; the call site should print it.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "def add(a, b):\n    # Return the sum.\n    pass\n\n# Print the result of add(3, 4).\n"
+              "starterCode": "def add(a, b):\n    # Return the sum.\n    pass\n\n# Print the result of add(3, 4).\n",
+              "solutionCode": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n"
             },
             "try-print-vs-return-sketch0": {
               "title": "Return then print",
@@ -218,7 +222,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def make_message(name):\n    # Return 'Hi, ' + name instead of printing inside the function.\n    pass\n\nmessage = make_message('Ava')\nprint(message)\n"
+              "starterCode": "def make_message(name):\n    # Return 'Hi, ' + name instead of printing inside the function.\n    pass\n\nmessage = make_message('Ava')\nprint(message)\n",
+              "solutionCode": "def make_message(name):\n    return 'Hi, ' + name\n\nmessage = make_message('Ava')\nprint(message)\n"
             },
             "try-print-vs-return-sketch1": {
               "title": "Use a returned number",
@@ -229,7 +234,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def double(number):\n    return number * 2\n\n# Store double(6) in result, then print result + 1.\n"
+              "starterCode": "def double(number):\n    return number * 2\n\n# Store double(6) in result, then print result + 1.\n",
+              "solutionCode": "def double(number):\n    return number * 2\n\nresult = double(6)\nprint(result + 1)\n"
             },
             "try-print-vs-return-sketch2": {
               "title": "Avoid printing None",
@@ -240,7 +246,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def label(name):\n    return name.upper()\n\n# Print label('zoe').\n"
+              "starterCode": "def label(name):\n    return name.upper()\n\n# Print label('zoe').\n",
+              "solutionCode": "def label(name):\n    return name.upper()\n\nprint(label('zoe'))\n"
             }
           },
           "tryIt": {

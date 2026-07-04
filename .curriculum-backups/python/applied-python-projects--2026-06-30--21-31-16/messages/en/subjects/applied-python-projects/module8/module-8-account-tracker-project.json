@@ -1,0 +1,142 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "module-8-account-tracker-project": {
+          "label": "Module 8 Account Tracker Project",
+          "summary": "Build a multi-file account tracker that demonstrates encapsulation, helper imports, and lists of objects.",
+          "cards": {
+            "sketch0": {
+              "title": "Module 8 Account Tracker Project: project story"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "account_tracker_step_1_model_file": {
+              "title": "Step 1: Create the Account model file"
+            },
+            "account_tracker_step_2_constructor": {
+              "title": "Step 2: Add encapsulated starting state"
+            },
+            "account_tracker_step_3_methods": {
+              "title": "Step 3: Add account behavior methods"
+            },
+            "account_tracker_step_4_helper_formatting": {
+              "title": "Step 4: Create a formatting helper file"
+            },
+            "account_tracker_step_5_load_data": {
+              "title": "Step 5: Load accounts from a data file"
+            },
+            "account_tracker_step_6_final_summary": {
+              "title": "Step 6: Print the portfolio summary"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true
+          },
+          "quiz": {
+            "account-tracker-step-1-model-file": {
+              "title": "Step 1: Create the Account model file",
+              "prompt": "Create `models/account.py` with an `Account` class. Keep `main.py` importing the model from the models folder.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a multi-file account tracker that demonstrates encapsulation, helper imports, and lists of objects.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n"
+            },
+            "account-tracker-step-2-constructor": {
+              "title": "Step 2: Add encapsulated starting state",
+              "prompt": "Add `__init__(owner, balance)` and prevent negative starting balances by storing at least zero.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a multi-file account tracker that demonstrates encapsulation, helper imports, and lists of objects.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account()\nprint(\"Account model ready\")\n"
+            },
+            "account-tracker-step-3-methods": {
+              "title": "Step 3: Add account behavior methods",
+              "prompt": "Add `deposit`, `withdraw`, and `summary` methods. Keep validation inside the class.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a multi-file account tracker that demonstrates encapsulation, helper imports, and lists of objects.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\nprint(account.owner)\nprint(account.balance)\n"
+            },
+            "account-tracker-step-4-helper-formatting": {
+              "title": "Step 4: Create a formatting helper file",
+              "prompt": "Create `helpers/formatting.py`, import it in the model, and use it from `Account.summary()`.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a multi-file account tracker that demonstrates encapsulation, helper imports, and lists of objects.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\naccount.withdraw(999)\nprint(account.summary())\n"
+            },
+            "account-tracker-step-5-load-data": {
+              "title": "Step 5: Load accounts from a data file",
+              "prompt": "Create `data/accounts.txt`, read rows from it, and turn each row into an `Account` object.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a multi-file account tracker that demonstrates encapsulation, helper imports, and lists of objects.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\naccount.deposit(25)\naccount.withdraw(40)\nprint(account.summary())\n"
+            },
+            "account-tracker-step-6-final-summary": {
+              "title": "Step 6: Print the portfolio summary",
+              "prompt": "Finish the project by printing every account plus total account count and total balance.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Build a multi-file account tracker that demonstrates encapsulation, helper imports, and lists of objects.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.account import Account\n\naccounts = []\nwith open(\"data/accounts.txt\", \"r\") as source:\n    for line in source:\n        owner, balance_text = line.strip().split(\"|\")\n        accounts.append(Account(owner, int(balance_text)))\n\nfor account in accounts:\n    print(account.summary())\n"
+            },
+            "sc-module-8-account-tracker-project-project-design": {
+              "title": "Check the design choice",
+              "prompt": "Why does this module 8 account tracker project require each step to keep all files, not only the file changed in that step?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Cumulative project steps must preserve the whole runnable app state.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Because Python ignores unchanged files.",
+                "b": "Because the next step starts from the full previous project state and must still run.",
+                "c": "Because only README files are graded.",
+                "d": "Because imports work even when files are missing."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "module-8-account-tracker-project": {
+          "project-story": {
+            "title": "Module 8 Account Tracker Project: project story",
+            "bodyMarkdown": "This graded project is cumulative. Each step starts from the exact full solution of the previous step, so the project grows like a real multi-file app."
+          }
+        }
+      }
+    }
+  }
+}

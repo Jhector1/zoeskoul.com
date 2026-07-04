@@ -1,0 +1,752 @@
+{
+  "topicId": "inheritance-for-shared-behavior",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
+  "sectionSlug": "applied-python-projects-python-9-inheritance-and-overrides",
+  "prefix": "py9",
+  "minutes": 32,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch0.title",
+      "sketchId": "sketch1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inheritance-for-shared-behavior-sketch0",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.prompt",
+        "exerciseKey": "try-inheritance-for-shared-behavior-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch1",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch1.title",
+      "sketchId": "sketch2",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inheritance-for-shared-behavior-sketch1",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.prompt",
+        "exerciseKey": "try-inheritance-for-shared-behavior-sketch1",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch2",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch2.title",
+      "sketchId": "sketch3",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inheritance-for-shared-behavior-sketch2",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.prompt",
+        "exerciseKey": "try-inheritance-for-shared-behavior-sketch2",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "sketch3",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch3.title",
+      "sketchId": "try-it-yourself",
+      "height": 420,
+      "tryIt": {
+        "id": "try-inheritance-for-shared-behavior-sketch3",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.prompt",
+        "exerciseKey": "try-inheritance-for-shared-behavior-sketch3",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "quiz",
+      "kind": "quiz",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.quiz.title",
+      "quiz": {
+        "difficulty": "easy",
+        "n": 4,
+        "min": 4,
+        "max": 6,
+        "selectionMode": "random",
+        "allowReveal": true,
+        "preferKind": null,
+        "maxAttempts": null
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch1.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch1.bodyMarkdown"
+    },
+    {
+      "id": "sketch2",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch2.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch2.bodyMarkdown"
+    },
+    {
+      "id": "sketch3",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch3.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch3.bodyMarkdown"
+    },
+    {
+      "id": "try-it-yourself",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.try-it-yourself.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.try-it-yourself.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-inheritance-for-shared-behavior-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Vehicle:\n    def __init__(self, wheels):\n        self.wheels = wheels\n\n    def describe(self):\n        return f\"This vehicle has {self.wheels} wheels.\"\n\nclass Car(Vehicle):\n    def __init__(self, wheels, doors):\n        super().__init__(wheels)\n        self.doors = doors\n\n    def describe(self):\n        return f\"This car has {self.wheels} wheels and {self.doors} doors.\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Vehicle:\n    def __init__(self, wheels):\n        self.wheels = wheels\n\n    def describe(self):\n        return f\"This vehicle has {self.wheels} wheels.\"\n\nclass Car(Vehicle):\n    def __init__(self, wheels, doors):\n        super().__init__(wheels)\n        self.doors = doors\n\n    def describe(self):\n        return f\"This car has {self.wheels} wheels and {self.doors} doors.\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Vehicle:\n    def __init__(self, wheels):\n        self.wheels = wheels\n\n    def describe(self):\n        return f\"This vehicle has {self.wheels} wheels.\"\n\nclass Car(Vehicle):\n    def __init__(self, wheels, doors):\n        super().__init__(wheels)\n        self.doors = doors\n\n    def describe(self):\n        return f\"This car has {self.wheels} wheels and {self.doors} doors.\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Vehicle"
+          },
+          {
+            "type": "defines_class",
+            "className": "Car"
+          },
+          {
+            "type": "method_returns",
+            "className": "Car",
+            "constructorArgs": [
+              4,
+              4
+            ],
+            "constructorArgKinds": [],
+            "methodName": "describe",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "This car has 4 wheels and 4 doors."
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-inheritance-for-shared-behavior-sketch1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Animal:\n    def speak(self):\n        return \"Some sound\"\n\nclass Dog(Animal):\n    def speak(self):\n        return \"Woof!\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Animal"
+          },
+          {
+            "type": "defines_class",
+            "className": "Dog"
+          },
+          {
+            "type": "method_returns",
+            "className": "Dog",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "speak",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Woof!"
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-inheritance-for-shared-behavior-sketch2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "import math\n\nclass Shape:\n    def area(self):\n        pass\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n\n    def area(self):\n        return math.pi * self.radius ** 2\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n\n    def area(self):\n        return self.side ** 2\n\nshapes = [Circle(5), Square(4)]\nfor shape in shapes:\n    print(shape.area())",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "import math\n\nclass Shape:\n    def area(self):\n        pass\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n\n    def area(self):\n        return math.pi * self.radius ** 2\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n\n    def area(self):\n        return self.side ** 2\n\nshapes = [Circle(5), Square(4)]\nfor shape in shapes:\n    print(shape.area())",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "import math\n\nclass Shape:\n    def area(self):\n        pass\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n\n    def area(self):\n        return math.pi * self.radius ** 2\n\nclass Square(Shape):\n    def __init__(self, side):\n        self.side = side\n\n    def area(self):\n        return self.side ** 2\n\nshapes = [Circle(5), Square(4)]\nfor shape in shapes:\n    print(shape.area())",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Shape"
+          },
+          {
+            "type": "defines_class",
+            "className": "Circle"
+          },
+          {
+            "type": "defines_class",
+            "className": "Square"
+          },
+          {
+            "type": "method_returns",
+            "className": "Circle",
+            "constructorArgs": [
+              5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "area",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 78.53981633974483
+          },
+          {
+            "type": "method_returns",
+            "className": "Square",
+            "constructorArgs": [
+              4
+            ],
+            "constructorArgKinds": [],
+            "methodName": "area",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": 16
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "try-inheritance-for-shared-behavior-sketch3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nclass Student(Person):\n    def __init__(self, name, age, student_id):\n        super().__init__(name, age)\n        self.student_id = student_id",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nclass Student(Person):\n    def __init__(self, name, age, student_id):\n        super().__init__(name, age)\n        self.student_id = student_id",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Person:\n    def __init__(self, name, age):\n        self.name = name\n        self.age = age\n\nclass Student(Person):\n    def __init__(self, name, age, student_id):\n        super().__init__(name, age)\n        self.student_id = student_id",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Person"
+          },
+          {
+            "type": "defines_class",
+            "className": "Student"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-inheritance-for-shared-behavior-4",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-4",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-4.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-4.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "from abc import ABC, abstractmethod\n\nclass Appliance(ABC):\n    @abstractmethod\n    def operate(self):\n        pass\n\nclass WashingMachine(Appliance):\n    def operate(self):\n        return \"Washing clothes\"\n\nclass Refrigerator(Appliance):\n    def operate(self):\n        return \"Cooling food\"",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-4.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-4.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "from abc import ABC, abstractmethod\n\nclass Appliance(ABC):\n    @abstractmethod\n    def operate(self):\n        pass\n\nclass WashingMachine(Appliance):\n    def operate(self):\n        return \"Washing clothes\"\n\nclass Refrigerator(Appliance):\n    def operate(self):\n        return \"Cooling food\"",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "from abc import ABC, abstractmethod\n\nclass Appliance(ABC):\n    @abstractmethod\n    def operate(self):\n        pass\n\nclass WashingMachine(Appliance):\n    def operate(self):\n        return \"Washing clothes\"\n\nclass Refrigerator(Appliance):\n    def operate(self):\n        return \"Cooling food\"",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Appliance"
+          },
+          {
+            "type": "defines_class",
+            "className": "WashingMachine"
+          },
+          {
+            "type": "defines_class",
+            "className": "Refrigerator"
+          },
+          {
+            "type": "method_returns",
+            "className": "WashingMachine",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "operate",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Washing clothes"
+          },
+          {
+            "type": "method_returns",
+            "className": "Refrigerator",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "operate",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Cooling food"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ci-inheritance-for-shared-behavior-5",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-5",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-5.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-5.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "class Employee:\n    def work(self):\n        pass\n\nclass Manager(Employee):\n    def work(self):\n        return \"Managing team\"\n\nclass Developer(Employee):\n    def work(self):\n        return \"Writing code\"\n\n\ndef assign_tasks(employees):\n    for employee in employees:\n        print(employee.work())\n\nemployees = [Manager(), Developer()]\nassign_tasks(employees)",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-5.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.ci-inheritance-for-shared-behavior-5.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "class Employee:\n    def work(self):\n        pass\n\nclass Manager(Employee):\n    def work(self):\n        return \"Managing team\"\n\nclass Developer(Employee):\n    def work(self):\n        return \"Writing code\"\n\n\ndef assign_tasks(employees):\n    for employee in employees:\n        print(employee.work())\n\nemployees = [Manager(), Developer()]\nassign_tasks(employees)",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "class Employee:\n    def work(self):\n        pass\n\nclass Manager(Employee):\n    def work(self):\n        return \"Managing team\"\n\nclass Developer(Employee):\n    def work(self):\n        return \"Writing code\"\n\n\ndef assign_tasks(employees):\n    for employee in employees:\n        print(employee.work())\n\nemployees = [Manager(), Developer()]\nassign_tasks(employees)",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Employee"
+          },
+          {
+            "type": "defines_class",
+            "className": "Manager"
+          },
+          {
+            "type": "defines_class",
+            "className": "Developer"
+          },
+          {
+            "type": "method_returns",
+            "className": "Manager",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "work",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Managing team"
+          },
+          {
+            "type": "method_returns",
+            "className": "Developer",
+            "constructorArgs": [],
+            "constructorArgKinds": [],
+            "methodName": "work",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Writing code"
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2
+          }
+        ]
+      }
+    },
+    {
+      "id": "fb-inheritance-for-shared-behavior-0",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.fb-inheritance-for-shared-behavior-0",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "super"
+      }
+    },
+    {
+      "id": "fb-inheritance-for-shared-behavior-1",
+      "kind": "fill_blank_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.fb-inheritance-for-shared-behavior-1",
+      "choiceCount": 4,
+      "expected": {
+        "kind": "fill_blank_choice",
+        "value": "overriding"
+      }
+    },
+    {
+      "id": "sc-inheritance-for-shared-behavior-0",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.sc-inheritance-for-shared-behavior-0",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "sc-inheritance-for-shared-behavior-1",
+      "kind": "single_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.sc-inheritance-for-shared-behavior-1",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "single_choice",
+        "optionId": "a"
+      }
+    },
+    {
+      "id": "mc-inheritance-for-shared-behavior-0",
+      "kind": "multi_choice",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.mc-inheritance-for-shared-behavior-0",
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "expected": {
+        "kind": "multi_choice",
+        "optionIds": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    {
+      "id": "dr-inheritance-for-shared-behavior-0",
+      "kind": "drag_reorder",
+      "purpose": "quiz",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.dr-inheritance-for-shared-behavior-0",
+      "tokenIds": [
+        "t1",
+        "t2",
+        "t3",
+        "t4"
+      ],
+      "expected": {
+        "kind": "drag_reorder",
+        "tokenIds": [
+          "t1",
+          "t2",
+          "t3",
+          "t4"
+        ]
+      }
+    }
+  ]
+}

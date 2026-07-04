@@ -1,9 +1,5 @@
 {
-  "seedHash": "eecf347d4397b4f73e782e53136b7f5b958106a7061e1d03518f4191d4ac34fc",
-  "promptHash": "411b2e6c27cfe66a32a0bc2f77d0bbd29e43b8643185b3fec87aeb478dbd1751",
-  "rawModelOutputHash": "a531583e29bc71cc83ae215c7cb8eb0e6818d2cdf84caa4312ed6c801d6e6c26",
-  "parsedOutputHash": "b7e205f958660c001a2d2f44036b23fa30d959a98277c1aeba361a558c5894de",
-  "normalizedDraftHash": "af61f69ed8f9849719e4d813d7a9c3938170fe47c9dcad0d6410ff824634ead0",
-  "repairedDraftHash": "047f20a796e5e79d7d1abc37a1189077235bfaa42abc647762c14053e2692632",
-  "compiledTopicBundleHash": "44dd407b1ef8442b2f1c2f65f8bf4fc481b5c1a0d333ca0dc3cc13c3b0e9092d"
+  "seedHash": "4a73c79e4923736ee6fce3eed1af8eac578523498b981a43f27932edda90180f",
+  "promptHash": "f1c8ffc755ed90f130294c460812cb14238f194bdb5b6ee8f4d3bcc1cc4db634",
+  "compiledTopicBundleHash": "3fa30d40e3138c1e709cc34fd324f2c22cc675203eda7583114dbea73a6349b0"
 }

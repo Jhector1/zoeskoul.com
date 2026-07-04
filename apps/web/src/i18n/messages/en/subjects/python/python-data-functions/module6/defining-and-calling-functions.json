@@ -171,7 +171,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass"
+              "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
+              "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
             },
             "ci-square-number": {
               "title": "Return the square",
@@ -182,7 +183,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def square(number):\n    # return the square of number\n    pass"
+              "starterCode": "def square(number):\n    # return the square of number\n    pass",
+              "solutionCode": "def square(number):\n    return number * number"
             },
             "ci-full-name": {
               "title": "Combine first and last name",
@@ -193,7 +195,8 @@
                 "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
                 "hint_2": "Run the program and compare the output to the expected example before checking your answer."
               },
-              "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass"
+              "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
+              "solutionCode": "def full_name(first, last):\n    return first + \" \" + last"
             },
             "try-defining-and-calling-functions-checkpoint": {
               "title": "Define and call a function",
@@ -204,7 +207,16 @@
                 "hint_1": "Put the `print()` inside the function body, then call the function below it.",
                 "hint_2": "Run your code and compare the output with the expected result."
               },
-              "starterCode": "# Define say_hello() below.\n\n"
+              "starterCode": "# Define say_hello() below.\n\n",
+              "solutionCode": "def say_hello():\n    print(\"Hello from a function!\")\n\nsay_hello()\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Define a function named say_hello()."
+                },
+                "1": {
+                  "message": "Call say_hello() after defining it."
+                }
+              }
             },
             "try-defining-and-calling-functions-sketch0": {
               "title": "Define and call greet",
@@ -215,7 +227,8 @@
                 "hint_1": "Define greet(name) so it returns 'Hello, ' + name, then print greet('Ava').",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n"
+              "starterCode": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n",
+              "solutionCode": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n"
             },
             "try-defining-and-calling-functions-sketch1": {
               "title": "Call a square function",
@@ -226,7 +239,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def square(number):\n    return number * number\n\n# Print square(5).\n"
+              "starterCode": "def square(number):\n    return number * number\n\n# Print square(5).\n",
+              "solutionCode": "def square(number):\n    return number * number\n\nprint(square(5))\n"
             },
             "try-defining-and-calling-functions-sketch2": {
               "title": "Use a helper function twice",
@@ -237,7 +251,8 @@
                 "hint_1": "Write the line for this step, then run the program to see what changes.",
                 "hint_2": "When you run it, print only the value or lines the prompt asks for."
               },
-              "starterCode": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n"
+              "starterCode": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n",
+              "solutionCode": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n"
             }
           },
           "tryIt": {

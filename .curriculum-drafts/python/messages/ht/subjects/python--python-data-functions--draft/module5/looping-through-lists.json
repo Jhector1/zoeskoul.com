@@ -1,0 +1,325 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "looping-through-lists": {
+          "label": "Fè sik nan lis yo",
+          "summary": "Trete chak atik nan lis la epi konstwi rezilta derive yo.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa yon bouk lis fè"
+            },
+            "sketch1": {
+              "title": "Sèvi ak yon bouk pou konstwi yon nouvo lis"
+            },
+            "sketch2": {
+              "title": "Chwazi non varyab bouk ki klè"
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Egzèsis: Fè yon bouk sou lis yo"
+            }
+          },
+          "projectSteps": {
+            "ci_print_each_item": {
+              "title": "Enprime chak atik nan yon lis"
+            },
+            "ci_double_list_function": {
+              "title": "Retounen yon lis doub"
+            },
+            "ci_count_long_words": {
+              "title": "Konte mo ki gen plis pase 4 lèt"
+            }
+          },
+          "quiz": {
+            "sc-loop-item-name": {
+              "title": "Chwazi varyab bouk la",
+              "prompt": "Nan kòd sa a, kisa `fruit` reprezante?\n\n```python\nfruits = [\"apple\", \"banana\", \"pear\"]\nfor fruit in fruits:\n    print(fruit)\n```",
+              "hint": "Gade sa ki vini apre `for` epi anvan `in`.",
+              "help": {
+                "concept": "Nan yon bouk `for item in list`, varyab ki apre `for` estoke yon atik aktyèl nan lis la pandan chak bouk.",
+                "hint_1": "`fruit` Chanje pandan bouk la ap pase nan`\"apple\"`, epi `\"banana\"`, epi `\"pear\"`.",
+                "hint_2": "Se pa non lis la antye. Se valè endividyèl k ap trete chak fwa."
+              },
+              "options": {
+                "a": "Tout lis fwi yo",
+                "b": "Yon atik nan lis la chak fwa",
+                "c": "Nimewo endèks chak fwi",
+                "d": "Yon mo kle entegre nan Python"
+              }
+            },
+            "sc-empty-list-start": {
+              "title": "Kòmanse yon nouvo lis rezilta",
+              "prompt": "Ou vle pase atravè yon lis epi ranmase valè ki chanje yo nan yon nouvo lis. Ki liy ki kòrèkteman kreye yon lis vid pou kòmanse?",
+              "hint": "Ou bezwen sentaks pou yon literal lis vid.",
+              "help": {
+                "concept": "Lè w ap konstwi yon lis derive, ou anjeneral kòmanse ak yon lis vid epi ou ajoute atik yo avèk `append()` andedan bouk la.",
+                "hint_1": "Yon lis vid itilize kwochè kare san anyen andedan.",
+                "hint_2": "Chèche opsyon ki kreye yon lis, pa yon chèn, nimewo, oswa apèl enprime."
+              },
+              "options": {
+                "a": "rezilta = ()",
+                "b": "print(result)"
+              }
+            },
+            "mc-loop-uses": {
+              "title": "Sa yon bouk sou yon lis ka fè",
+              "prompt": "Ki aksyon ki rezon komen pou itilize yon bouk sou yon lis? Chwazi tout sa ki aplikab.",
+              "hint": "Panse sou travay ou repete yon fwa pou chak atik.",
+              "help": {
+                "concept": "Yo itilize bouk lis pou trete chak atik, tankou enprime valè yo, tcheke kondisyon yo, oswa konstwi yon nouvo lis apati atik ki transfòme.",
+                "hint_1": "Yon bouk itil lè menm aksyon an dwe fèt pou chak atik nan lis la.",
+                "hint_2": "Chèche opsyon sou pwosesis repete atik yo, pa sou chanje sentaks Python la li menm."
+              },
+              "options": {
+                "a": "Enprime chak atik",
+                "b": "Bati yon nouvo lis apati atik ki chanje yo",
+                "c": "Tcheke si atik yo satisfè yon kondisyon",
+                "d": "Chanje non mo kle Python yo"
+              }
+            },
+            "mc-good-loop-names": {
+              "title": "Chwazi non varyab bouk ki klè",
+              "prompt": "Pou lis `scores = [88, 91, 76]`, ki non varyab bouk yo ki klè e ki apwopriye? Chwazi tout sa ki aplike.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Kesyon sa a verifye si ou ka konekte kòmand lan ak konsèp Python ki soti nan leson an.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Eseye chak opsyon nan fraz la oswa nan liy kòd la epi kenbe sa ki fè egzanp lan mache egzakteman jan yo dekri l."
+              },
+              "options": {
+                "a": "pwen",
+                "b": "atik",
+                "c": "pwen",
+                "d": "Valè nòt"
+              }
+            },
+            "dr-build-derived-list": {
+              "title": "Kòmande etap yo pou konstwi yon lis derive",
+              "prompt": "Mete etap sa yo nan lòd kòrèk pou konstwi yon nouvo lis apati yon lis ki egziste deja.",
+              "hint": "Kòmanse pa kreye nouvo lis la anvan bouk la kòmanse.",
+              "help": {
+                "concept": "Pou konstwi yon lis derive, premye kreye yon lis vid, apre sa fè yon bouk sou lis orijinal la, kalkile chak nouvo valè, epi ajoute li.",
+                "hint_1": "Konfigirasyon lis vid la fèt anvan okenn atik trete.",
+                "hint_2": "Anndan bouk la, ou premye pran atik aktyèl la, apre sa ou kreye valè ki chanje a, epi ou ajoute li nan lis rezilta a."
+              },
+              "tokens": {
+                "t1": "Kreye yon lis rezilta vid",
+                "t2": "Kòmanse yon bouk sou lis orijinal la",
+                "t3": "Kalkile valè ki chanje pou atik aktyèl la.",
+                "t4": "Ajoute valè ki chanje a nan lis rezilta a."
+              }
+            },
+            "dr-read-loop-header": {
+              "title": "Li bouk la nan lòd",
+              "prompt": "Mete pati sa yo nan deklarasyon bouk la nan lòd kòrèk pou kreye yon tèt bouk Python ki valab.",
+              "hint": "Konsantre sou lòd lojik pati yo.",
+              "help": {
+                "concept": "Aranje moso yo selon estrikti fraz la.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Mete moso yo nan lòd ki fè fraz la valab."
+              },
+              "tokens": {
+                "t1": "pou",
+                "t2": "koulè",
+                "t3": "nan",
+                "t4": "koulè",
+                "t5": ":"
+              }
+            },
+            "fb-append-call": {
+              "title": "Konplete liy lan",
+              "prompt": "Ranpli non metòd ki manke a pou ajoute chak atik ki chanje nan lis rezilta a.",
+              "hint": "Sèvi ak metòd lis la ki ajoute yon atik nan fen an.",
+              "help": {
+                "concept": "Lè w ap konstwi yon nouvo lis nan yon bouk,`the missing term()` ajoute yon valè alafwa nan fen lis la.",
+                "hint_1": "Metòd la rele sou lis w ap konstwi a, tankou `result.method(value)`.",
+                "hint_2": "Se metòd lis komen ki itilize nan bouk pou debutan pou kolekte nouvo valè."
+              },
+              "template": "rezilta.[espas1](nimewo * 2)",
+              "choices": [
+                "Ajoute",
+                "ajoute",
+                "antre",
+                "Enprime"
+              ]
+            },
+            "fb-loop-keyword": {
+              "title": "Konplete antèt bouk la",
+              "prompt": "Ranpli mo kle ki manke a pou kòmanse yon bouk sou yon lis.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Kesyon sa a verifye si ou ka konekte kòmand lan ak konsèp Python ki soti nan leson an.",
+                "hint_1": "Konsantre sou sa espas vid la oswa repons lan reprezante: yon valè, yon metòd, yon kle, yon endèks, oswa yon non varyab.",
+                "hint_2": "Eseye chak opsyon nan fraz la oswa nan liy kòd la epi kenbe sa ki fè egzanp lan mache egzakteman jan yo dekri l."
+              },
+              "template": "[blank1] atik nan atik yo:",
+              "choices": [
+                "pou",
+                "si",
+                "pandan",
+                "defini"
+              ]
+            },
+            "ci-print-each-item": {
+              "title": "Enprime chak atik nan yon lis",
+              "prompt": "Yon apèl lis abri estoke twa non bèt nan`animals`\n. Fè yon bouk sou`animals`\nepi enprime chak non sou yon liy pa l.\n\nPa egzanp, si antre yo se`cat`\n,`dog`\n, ak`fox`\n, pwogram ou an ta dwe enprime:\n`cat`\n\n`dog`\n\n`fox`\n.",
+              "hint": "Bati lis la ak twa valè antre yo anvan bouk la kòmanse.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an fonksyon epi konpare sòti a ak egzanp ki atann lan anvan ou verifye repons ou."
+              },
+              "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
+              "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak yon bouk for sou bèt yo olye pou w enprime chak varyab manyèlman."
+                }
+              }
+            },
+            "ci-double-list-function": {
+              "title": "Retounen yon lis doub",
+              "prompt": "Ekri `double_numbers(numbers)` pou li konstwi yon nouvo lis ki gen chak nimewo doub, epi retounen nouvo lis sa a.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap mache nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an fonksyon epi konpare rezilta a ak egzanp ki atann lan anvan ou verifye repons ou."
+              },
+              "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
+              "solutionCode": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result"
+            },
+            "ci-count-long-words": {
+              "title": "Konte mo ki gen plis pase 4 lèt",
+              "prompt": "Ekri `count_long_words(words)` pou li retounen konbyen mo ki nan lis la ki gen plis pase 4 lèt.",
+              "hint": "Li tach la \"Konte mo ki gen plis pase 4 lèt\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap mache nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an fonksyònman epi konpare rezilta a ak egzanp ki atann lan anvan ou verifye repons ou a."
+              },
+              "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
+              "solutionCode": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count"
+            },
+            "try-looping-through-lists-checkpoint": {
+              "title": "Fè yon sik sou non yo",
+              "prompt": "Fè yon bouk sou `names = [\"Ava\", \"Mia\", \"Zoe\"]` epi enprime chak non sou pwòp liy li.",
+              "hint": "Sèvi ak yon bouk `for`.",
+              "help": {
+                "concept": "Yon bouk `for` ka vizite chak valè nan yon lis.",
+                "hint_1": "Sèvi ak yon bouk `for`.",
+                "hint_2": "Kouri kòd ou a epi konpare sòti a ak rezilta espere a."
+              },
+              "starterCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\n\n# Print each name on its own line.\n",
+              "solutionCode": "names = [\"Ava\", \"Mia\", \"Zoe\"]\nfor name in names:\n    print(name)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak yon bouk for sou non yo olye pou w enprime chak non manyèlman."
+                }
+              }
+            },
+            "try-looping-through-lists-sketch0": {
+              "title": "Enprime chak bèt",
+              "prompt": "Fè yon sik atravè lis la epi enprime chak atik.",
+              "hint": "Sèvi ak yon bouk for pou enprime chak bèt sou pwòp liy li.",
+              "help": {
+                "concept": "Sèvi ak yon bouk for pou enprime chak bèt sou pwòp liy li.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke pwomp la mande."
+              },
+              "starterCode": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n",
+              "solutionCode": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Sèvi ak yon bouk for sou bèt yo olye pou w tape chak bèt dirèkteman."
+                }
+              }
+            },
+            "try-looping-through-lists-sketch1": {
+              "title": "Adisyone nòt yo",
+              "prompt": "Sèvi ak yon total k ap kouri andedan yon bouk.",
+              "hint": "Ajoute chak nòt nan total la lè w itilize yon bouk.",
+              "help": {
+                "concept": "Ajoute chak nòt nan total la lè w itilize yon bouk.",
+                "hint_1": "Ajoute chak nòt nan total la ak yon bouk, epi enprime total la.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n",
+              "solutionCode": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Fè yon bouk sou nòt yo olye pou w tape total final la."
+                },
+                "1": {
+                  "message": "Ajoute chak nòt nan total la andedan bouk la."
+                }
+              }
+            },
+            "try-looping-through-lists-sketch2": {
+              "title": "Konstwi nimewo doub",
+              "prompt": "Ajoute yon rezilta derive pou chak atik nan lis antre a.",
+              "hint": "Fè yon bouk sou chif yo epi ajoute chak valè ki double.",
+              "help": {
+                "concept": "Fè yon bouk sou nimewo yo epi ajoute chak valè doub.",
+                "hint_1": "Fè yon bouk sou nimewo yo epi ajoute chak valè doub, apre sa enprime valè doub la.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n",
+              "solutionCode": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Fè yon bouk sou chif yo olye pou w tape lis doub final la."
+                },
+                "1": {
+                  "message": "Sèvi ak doubled.append(...) pou konstwi lis la."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_looping_through_lists_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Fè yon bouk sou `names = [\"Ava\", \"Mia\", \"Zoe\"]` epi enprime chak non sou pwòp liy li."
+            },
+            "try_looping_through_lists_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Fè yon sik atravè lis la epi enprime chak atik."
+            },
+            "try_looping_through_lists_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Sèvi ak yon total k ap kouri andedan yon bouk."
+            },
+            "try_looping_through_lists_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Ajoute yon rezilta derive pou chak atik nan lis antre a."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "looping-through-lists": {
+          "loop-basics": {
+            "title": "Sa yon bouk lis fè",
+            "bodyMarkdown": "Yon bouk `for` pèmèt ou vizite chak eleman nan yon lis youn apre lòt. Sa itil lè ou vle enprime chak valè, konte bagay, oswa konstwi yon nouvo rezilta apati lis orijinal la.\n\nMen yon egzanp senp:\n\n```python\ncolors = [\"red\", \"blue\", \"green\"]\n\nfor color in colors:\n    print(color)\n```\n\nEtap pa etap:\n\n- `colors` anrejistre twa chèn nan yon lis.\n- `for color in colors:` vle di: pran chak eleman nan lis la, youn apre lòt.\n- Nan premye bouk la, `color` se `\"red\"`.\n- Nan dezyèm bouk la, `color` se `\"blue\"`.\n- Nan twazyèm bouk la, `color` se `\"green\"`.\n- `print(color)` egzekite chak fwa, konsa tout twa eleman yo parèt nan panèl rezilta a.\n\nRezilta egzanp ki fonksyone a:\n\n```python\nred\nblue\ngreen\n```"
+          },
+          "loop-and-build": {
+            "title": "Sèvi ak yon bouk pou konstwi yon nouvo lis",
+            "bodyMarkdown": "Loops are not only for printing. You can also use them to create a new list from an existing one.\n\nExample:\n\n```python\nnumbers = [1, 2, 3, 4]\ndoubled = []\n\nfor number in numbers:\n    doubled.append(number * 2)\n\nprint(doubled)\n```\n\nLine by line:\n\n- `numbers` is the original list.\n- `doubled = []` starts an empty list.\n- The loop takes each `number` from `numbers`.\n- `doubled.append(number * 2)` calculates a new value and adds it to the new list.\n- At the end, `doubled` becomes `[2, 4, 6, 8]`.\n\nThis pattern is very common:\n\n1. Start with an empty list.\n2. Loop through the original list.\n3. Change each item.\n4. Append the changed item to the new list."
+          },
+          "loop-variables": {
+            "title": "Chwazi non varyab bouk ki klè",
+            "bodyMarkdown": "Varyab bouk la dwe dekri yon sèl atik ki nan lis la.\n\nEgzanp:\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\n\nfor animal in animals:\n    print(animal)\n```\n\n\n\n`animal`\n\nse yon bon non paske chak atik nan`animals`\n\nse yon bèt.\n\nYon kòd ki mwens klè ta ye:\n\n```python\nanimals = [\"cat\", \"dog\", \"fox\"]\n\nfor x in animals:\n    print(x)\n```\n\n\n\nSa toujou mache, men`x`\n\npa esplike sa valè a vle di.\n\nEgzanp ki mache:\n\n- Non lis la:`scores`\n\n\n- Bon varyab bouk:`score`\n\n\n\n```python\nscores = [88, 91, 76]\n\nfor score in scores:\n    print(score)\n```"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "thinking-in-objects": {
+          "label": "Thinking in Objects",
+          "summary": "Understand what objects are for before writing classes from scratch.",
+          "cards": {
+            "sketch0": {
+              "title": "Objects model real things in a program"
+            },
+            "sketch1": {
+              "title": "Each object keeps its own state"
+            },
+            "sketch2": {
+              "title": "Behavior belongs with the object that owns the data"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_thinking_in_objects_sketch0": {
+              "title": "Create and inspect two task objects",
+              "prompt": "A study tracker already includes a `Task` class in `models/task.py`. In `main.py`, create `Task(\"Read chapter\", 20)` and `Task(\"Review notes\", 10)`. Then print the first task's title on one line and the second task's minutes on the next line so you can see that each object stores its own data.",
+              "hint": "You are using a provided class here, not writing a new one yet.",
+              "help": {
+                "concept": "This exercise introduces the OOP idea that one class can create separate objects, and each object can keep different stored values.",
+                "hint_1": "Import `Task` from `models.task`, then create two different objects with different constructor values.",
+                "hint_2": "Print one attribute from the first object and a different attribute from the second object."
+              },
+              "starterCode": "from models.task import Task\n\n# Create two Task objects below.\n# Print the first task's title.\n# Then print the second task's minutes.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.task import Task\n\n# Create two Task objects below.\n# Print the first task's title.\n# Then print the second task's minutes."
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\""
+                }
+              }
+            },
+            "try_thinking_in_objects_sketch1": {
+              "title": "Change one object's state without changing another",
+              "prompt": "Keep using the provided `Task` model. In `main.py`, create `Task(\"Draft outline\", 30)` and `Task(\"Revise notes\", 15)`. Call `mark_done()` on the first task only. Then print `status_line()` for both tasks on separate lines so the output shows that each object keeps its own state.",
+              "hint": "Only one task should become done.",
+              "help": {
+                "concept": "This exercise shows that object state belongs to each individual instance, not to every object from the class at once.",
+                "hint_1": "Create two tasks first, then call `mark_done()` on only one of them.",
+                "hint_2": "Print both `status_line()` results to compare the updated object with the unchanged one."
+              },
+              "starterCode": "from models.task import Task\n\n# Create the two Task objects below.\n# Mark only the first one done.\n# Print both status lines.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.task import Task\n\n# Create the two Task objects below.\n# Mark only the first one done.\n# Print both status lines."
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\""
+                }
+              }
+            },
+            "try_thinking_in_objects_sketch2": {
+              "title": "Finish a method that updates object state",
+              "prompt": "The study tracker now needs to move a task to a different time estimate. In `models/task.py`, finish `reschedule(self, new_minutes)` so it updates the task's stored minutes. Then in `main.py`, create `Task(\"Review quiz\", 15)`, call `reschedule(25)`, and print `status_line()`.",
+              "hint": "The method should change the object's stored minutes on `self`.",
+              "help": {
+                "concept": "This exercise introduces the idea that object behavior belongs on the object and should update that object's own state.",
+                "hint_1": "Inside `reschedule`, assign the incoming `new_minutes` value to the task's stored `minutes` attribute.",
+                "hint_2": "After calling `reschedule(25)`, print `task.status_line()` so the updated minutes appear in the result."
+              },
+              "starterCode": "from models.task import Task\n\ntask = Task(\"Review quiz\", 15)\n\n# Call reschedule(25).\n# Print the updated status line.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.task import Task\n\ntask = Task(\"Review quiz\", 15)\n\n# Call reschedule(25).\n# Print the updated status line."
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def reschedule(self, new_minutes):\n        # Update the stored minutes for this task.\n        pass\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\""
+                }
+              }
+            }
+          },
+          "practice": {
+            "mc-thinking-in-objects-why-oop": {
+              "title": "Why think in objects?",
+              "prompt": "Which statements match the beginner-friendly idea of object-oriented programming from this topic? Choose all that apply.",
+              "hint": "Think about grouping related data and behavior around real things in the program.",
+              "help": {
+                "concept": "In this topic, OOP means modeling real things as objects that keep their own state and behavior together.",
+                "hint_1": "Look for the choices about grouping related information and behavior together.",
+                "hint_2": "Reject choices that claim every object always shares the same state or that OOP is only about syntax."
+              },
+              "options": {
+                "a": "Objects help model real things the program cares about.",
+                "b": "An object can keep related data and behavior together.",
+                "c": "Every object from one class must share the exact same state forever.",
+                "d": "OOP only matters when you memorize class syntax."
+              }
+            },
+            "sc-thinking-in-objects-instance-state": {
+              "title": "What is instance state?",
+              "prompt": "In this topic, what does it mean when we say each object has its own state?",
+              "hint": "Compare two tasks that started with different values or changed in different ways.",
+              "help": {
+                "concept": "Instance state means an individual object stores values that can be different from another object's values.",
+                "hint_1": "Think about one task being done while another task stays todo.",
+                "hint_2": "Choose the answer about one specific object keeping its own stored values."
+              },
+              "options": {
+                "a": "Each object stores its own values, which can differ from another object's values.",
+                "b": "Every object from a class automatically shares one title and one minutes value.",
+                "c": "State only exists in `main.py`, not on objects.",
+                "d": "State means comments placed above a method."
+              }
+            },
+            "fb-thinking-in-objects-method-call": {
+              "title": "Complete the method call",
+              "prompt": "Fill in the missing method name so this line marks the task as done.",
+              "hint": "Use the method from the lesson that changes a task from todo to done.",
+              "help": {
+                "concept": "A method call uses the object's name, a dot, and the method name to tell that object to do something.",
+                "hint_1": "The object name `task` is already written. The blank is the method name that updates the done state.",
+                "hint_2": "Choose the method that sounds like completing a task."
+              },
+              "template": "task.[blank1]()",
+              "choices": [
+                "mark_done",
+                "status_line",
+                "print",
+                "__init__"
+              ]
+            },
+            "dr-thinking-in-objects-flow": {
+              "title": "Order the object workflow",
+              "prompt": "Put these steps in the order a learner follows in this topic when using an object.",
+              "hint": "Start by creating the object before trying to change or print its state.",
+              "help": {
+                "concept": "A beginner object workflow is create an object, optionally call a method that changes state, then read back the result.",
+                "hint_1": "You cannot update or print an object's state before the object exists.",
+                "hint_2": "Printing the status line comes after the object has been created and any method call has happened."
+              },
+              "tokens": {
+                "t1": "Create the object with starting values",
+                "t2": "Call a method on that object",
+                "t3": "The object's stored state changes",
+                "t4": "Print the object's current status"
+              }
+            },
+            "ci-thinking-in-objects-check-in": {
+              "title": "Build a cumulative task check-in",
+              "prompt": "Use the provided `Task` model to show the full object workflow. In `main.py`, create `Task(\"Plan study block\", 20)`, call `reschedule(35)`, call `mark_done()`, and then print `status_line()`. Do not rewrite the model from scratch; use the provided class and methods.",
+              "hint": "This practice combines object creation, a state update, and a final report from the same object.",
+              "help": {
+                "concept": "This exercise combines the full beginner OOP flow from the topic: create an object, call methods that change its state, and then read the updated result.",
+                "hint_1": "Create the task first, then call `reschedule(35)` before calling `mark_done()`.",
+                "hint_2": "Print the result of `task.status_line()` after both method calls."
+              },
+              "starterCode": "from models.task import Task\n\ntask = Task(\"Plan study block\", 20)\n\n# Reschedule the task to 35 minutes.\n# Mark it done.\n# Print the final status line.",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.task import Task\n\ntask = Task(\"Plan study block\", 20)\n\n# Reschedule the task to 35 minutes.\n# Mark it done.\n# Print the final status line."
+                },
+                "models_task_py": {
+                  "content": "class Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def mark_done(self):\n        self.done = True\n\n    def reschedule(self, new_minutes):\n        self.minutes = new_minutes\n        return self.minutes\n\n    def status_line(self):\n        status = \"done\" if self.done else \"todo\"\n        return f\"{self.title} [{status}] - {self.minutes} min\""
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "thinking-in-objects": {
+          "sketch-0": {
+            "title": "Objects model real things in a program",
+            "bodyMarkdown": "Before writing class syntax, it helps to understand the idea behind object-oriented programming.\n\nAn **object** is a program thing that groups related data and behavior together. If you are building a study tracker, a task is a natural object because it has data like a title and time estimate, and it has behavior like being marked done.\n\nFor example:\n\n```python\nfrom models.task import Task\n\nreading_task = Task(\"Read chapter\", 20)\nreview_task = Task(\"Review notes\", 10)\n```\n\nLine by line:\n\n- `Task` is the model the program uses for study tasks.\n- `reading_task` is one object with its own title and minutes.\n- `review_task` is another object from the same model.\n- Even though both objects come from `Task`, they can store different values.\n\nThe beginner-friendly OOP idea is simple: if your program tracks real things, it often becomes cleaner to represent those things as objects instead of scattering their data across unrelated variables."
+          },
+          "sketch-1": {
+            "title": "Each object keeps its own state",
+            "bodyMarkdown": "The data stored on one object is that object's **state**. Different objects can have different state, even if they come from the same model.\n\nExample:\n\n```python\nfrom models.task import Task\n\nfirst_task = Task(\"Draft outline\", 30)\nsecond_task = Task(\"Revise notes\", 15)\n\nfirst_task.mark_done()\n\nprint(first_task.status_line())\nprint(second_task.status_line())\n```\n\nStep by step:\n\n- `first_task` starts with its own title, minutes, and done state.\n- `second_task` starts with different values.\n- `first_task.mark_done()` changes the first object's state only.\n- `print(first_task.status_line())` shows the updated state for the first task.\n- `print(second_task.status_line())` shows that the second task kept its own separate state.\n\nThis is one of the biggest OOP wins for beginners: instead of manually tracking many related variables, each object carries its own state with it."
+          },
+          "sketch-2": {
+            "title": "Behavior belongs with the object that owns the data",
+            "bodyMarkdown": "Objects are useful because the behavior that changes data can live with the same object that stores the data.\n\n```python\nclass Task:\n    def __init__(self, title, minutes):\n        self.title = title\n        self.minutes = minutes\n        self.done = False\n\n    def reschedule(self, new_minutes):\n        self.minutes = new_minutes\n```\n\nLine by line:\n\n- `self.minutes` is part of the task's stored state.\n- `reschedule` is behavior that belongs to a task because it changes the task's own time estimate.\n- `self.minutes = new_minutes` updates the object's state directly.\n\nWhen code is organized this way, the model owns both the data and the actions that make sense for that data. That idea will make the next topic feel more natural, because creating class files is really just a way to package this object behavior cleanly."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,496 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-0": {
+        "reading-error-messages": {
+          "label": "Li mesaj erè yo",
+          "summary": "Aprann kijan pou li traceback Python yo, remake liy ki enpòtan an, epi sèvi ak mesaj la pou deside sa pou korije.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa yon mesaj erè ap di ou"
+            },
+            "sketch1": {
+              "title": "Erè diferan vle di diferan kalite pwoblèm"
+            },
+            "sketch2": {
+              "title": "Sèvi ak nimewo liy lan pou redui rechèch ou"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Korije erè komen débutan yo"
+            }
+          },
+          "projectSteps": {
+            "ci_fix_missing_paren": {
+              "title": "Korije yon parantèz ki manke"
+            },
+            "ci_fix_missing_quote": {
+              "title": "Korije yon gilèm ki manke"
+            },
+            "ci_fix_nameerror_string": {
+              "title": "Fè yon non ki manke tounen yon chèn"
+            },
+            "ci_fix_second_line_error": {
+              "title": "Korije dezyèm liy ki kase a"
+            },
+            "ci_fix_three_line_program": {
+              "title": "Repare yon pwogram kout"
+            }
+          },
+          "quiz": {
+            "sc-bottom-of-traceback": {
+              "title": "Pi bon kote pou kòmanse li",
+              "prompt": "Lè yon débutan ap li yon traceback Python, ki pati anjeneral bay endis ki pi klè sou pwoblèm nan?",
+              "hint": "Chèche pati ki bay non kalite erè a epi ki dekri li.",
+              "help": {
+                "concept": "Nan traceback Python yo, rezime ki pi itil la anjeneral toupre anba a, kote Python bay non erè a epi li bay yon ti mesaj kout.",
+                "hint_1": "Nimewo liy lan enpòtan, men kalite erè a ak mesaj la souvan eksplike ki kalite koreksyon ou bezwen.",
+                "hint_2": "Chwazi opsyon ki montre dènye liy traceback la olye tèt la oswa yon liy o aza nan mitan an."
+              },
+              "options": {
+                "a": "Anba traceback la, kote kalite erè a ak mesaj la parèt",
+                "b": "Sèlman premye liy traceback la",
+                "c": "Nenpòt liy ki gen espas ladan l",
+                "d": "Liy ki pi long nan traceback la"
+              }
+            },
+            "sc-nameerror-meaning": {
+              "title": "Siyifikasyon NameError",
+              "prompt": "Kisa yon NameError anjeneral vle di nan kòd Python débutan yo?",
+              "hint": "Reflechi sou sa k rive lè Python wè yon non varyab li pa konnen.",
+              "help": {
+                "concept": "Yon NameError rive lè Python eseye sèvi ak yon non, tankou yon varyab, ki poko defini.",
+                "hint_1": "Sa diferan ak ponktiyasyon ki manke tankou yon gilèm oswa yon parantèz.",
+                "hint_2": "Chwazi opsyon ki pale de yon non enkoni, pa yon fòm kòd ki pa valab."
+              },
+              "options": {
+                "a": "Python jwenn yon non ki poko defini",
+                "b": "Python jwenn twòp kòmantè",
+                "c": "Python te afiche move rezilta a espre",
+                "d": "Python egzije chak liy kòmanse ak print"
+              }
+            },
+            "mc-traceback-clues": {
+              "title": "Endis traceback ki itil",
+              "prompt": "Ki pati nan yon mesaj erè ki espesyalman itil lè w ap eseye korije kòd Python débutan? Chwazi tout sa ki aplikab.",
+              "hint": "Reflechi sou sa ki di ou kote pwoblèm nan ye ak ki kalite pwoblèm li ye.",
+              "help": {
+                "concept": "Endis traceback ki pi itil yo anjeneral se nimewo liy lan ak kalite erè/mesaj la, paske yo di ou kote Python te kanpe ak poukisa.",
+                "hint_1": "Chèche yon endis sou kote a ak yon lòt endis sou kalite erè a.",
+                "hint_2": "Chwazi opsyon sou liy yo rapòte a ak erè yo bay non an, pa detay vizyèl tankou longè liy lan."
+              },
+              "options": {
+                "a": "Nimewo liy Python montre a",
+                "b": "Kalite erè a ak mesaj la toupre anba a",
+                "c": "Konbyen lèt ki nan liy kòd la",
+                "d": "Si fon editè kòd la klè oswa fonse"
+              }
+            },
+            "mc-syntaxerror-signs": {
+              "title": "Siy yon pwoblèm sentaks",
+              "prompt": "Ki sitiyasyon ki ka lakòz yon SyntaxError nan kòd Python débutan? Chwazi tout sa ki aplikab.",
+              "hint": "Reflechi sou kòd ki ekri nan yon fòm ki pa konplè oswa ki pa valab.",
+              "help": {
+                "concept": "Yon SyntaxError rive lè Python pa ka analize kòd la paske estrikti a pa valab, tankou ponktiyasyon oswa gilèm ki manke.",
+                "hint_1": "Senbòl fèmen ki manke yo se pwoblèm sentaks ki komen.",
+                "hint_2": "Chwazi opsyon ki gen estrikti kòd ki kase, pa sa ki pale de yon non varyab enkoni."
+              },
+              "options": {
+                "a": "Yon parantèz fèmen ki manke nan yon enstriksyon print",
+                "b": "Yon gilèm ki manke nan yon chèn",
+                "c": "Sèvi ak yon non varyab ki pa t janm defini",
+                "d": "Kite yon enstriksyon print pa fini"
+              }
+            },
+            "dr-read-traceback-order": {
+              "title": "Lòd pou li yon traceback",
+              "prompt": "Mete etap debogaj sa yo nan yon lòd ki lojik pou li yon traceback Python pou débutan.",
+              "hint": "Kòmanse pa jwenn kote pwoblèm nan ye, apre sa idantifye kalite erè a, epi enspekte kòd la.",
+              "help": {
+                "concept": "Yon bon pwosesis pou débutan se jwenn liy yo rapòte a, idantifye kalite erè/mesaj la, enspekte liy sa a, epi apre sa fè yon koreksyon.",
+                "hint_1": "Nimewo liy lan vini anvan ou modifye kòd la.",
+                "hint_2": "Dènye etap la ta dwe chanje kòd la apre ou fin konprann endis la."
+              },
+              "tokens": {
+                "t1": "Li nimewo liy Python montre a",
+                "t2": "Li kalite erè a ak mesaj la toupre anba a",
+                "t3": "Enspekte kòd sou liy sa a pou gilèm, parantèz, oswa non enkoni ki manke",
+                "t4": "Korije kòd la epi lanse l ankò"
+              }
+            },
+            "dr-what-happens-before-stop": {
+              "title": "Koule pwogram nan lè gen yon erè",
+              "prompt": "Ranje evènman sa yo nan lòd yo rive lè Python rankontre yon erè pandan ekzekisyon.",
+              "hint": "Reflechi sou sa ki kouri an premye ak sa ki rive tousuit apre liy pwoblèm nan.",
+              "help": {
+                "concept": "Python egzekite kòd soti anlè rive anba jiskaske li rive sou yon erè, apre sa li kanpe epi li montre yon traceback olye li kontinye.",
+                "hint_1": "Liy valab ki vini pi bonè yo egzekite anvan liy ki kase a fè pwogram nan kanpe.",
+                "hint_2": "Traceback la parèt apre Python frape pwoblèm nan, epi liy ki vini apre yo pa egzekite."
+              },
+              "tokens": {
+                "t1": "Python egzekite liy valab ki vini pi bonè yo",
+                "t2": "Python rive sou liy ki kase a",
+                "t3": "Python sispann ekzekisyon an",
+                "t4": "Python montre mesaj erè a"
+              }
+            },
+            "fb-nameerror-fill": {
+              "title": "Konplete kalite erè a",
+              "prompt": "Chwazi kalite erè ki koresponn ak sitiyasyon sa a: yo itilize `print(word)`, men `word` pa t janm defini.",
+              "hint": "Sa gen rapò ak yon non enkoni, pa ak ponktiyasyon ki kase.",
+              "help": {
+                "concept": "Lè Python wè yon non varyab ki poko egziste, li leve the missing term la.",
+                "hint_1": "Fòm kòd la valab, kidonk sa pa sitou yon pwoblèm sentaks.",
+                "hint_2": "Chwazi repons ki mansyone yon non ki manke oswa ki enkoni."
+              },
+              "template": "Erè ki pi posib la se [blank1].",
+              "choices": [
+                "NameError",
+                "SyntaxError",
+                "CommentError",
+                "PrintError"
+              ]
+            },
+            "fb-line-number-focus": {
+              "title": "Kisa pou enspekte an premye",
+              "prompt": "Chwazi pi bon mo pou konplete konsèy debogaj la.",
+              "hint": "Yon traceback ede ou redui rechèch ou an premye nan yon sèl kote.",
+              "help": {
+                "concept": "Nimewo the missing term yo rapòte a di ou kote pou kòmanse verifye kòd la.",
+                "hint_1": "Anjeneral ou enspekte the missing term espesifik yo rapòte a anvan ou pase sou tout lòt bagay.",
+                "hint_2": "Chwazi mo ki bay non kote ki nimewote Python montre a."
+              },
+              "template": "Lè yon traceback montre yon nimewo liy, enspekte [blank1] sa a an premye.",
+              "choices": [
+                "liy",
+                "kòmantè",
+                "espas",
+                "koulè"
+              ]
+            },
+            "ci-fix-missing-paren": {
+              "title": "Korije yon parantèz ki manke",
+              "prompt": "Ekri kòd Python ki afiche `Hello` egzakteman. Kòd depa a gen yon pwoblèm sentaks. Korije li, apre sa klike Run epi verifye panèl rezilta a.",
+              "hint": "Enstriksyon print sa a prèske kòrèk; verifye ponktiyasyon fèmen li.",
+              "help": {
+                "concept": "Yon parantèz fèmen ki manke fè yon enstriksyon print pa valab epi lakòz yon erè sentaks.",
+                "hint_1": "Chèn nan li menm bon. Gade jis deyò gilèm yo.",
+                "hint_2": "Yon apèl print ki valab bezwen parantèz ki koresponn otou agiman li."
+              },
+              "starterCode": "print(\"Hello\""
+            },
+            "ci-fix-missing-quote": {
+              "title": "Korije yon gilèm ki manke",
+              "prompt": "Ekri kòd Python ki afiche `Python is fun` egzakteman. Kòd depa a gen yon chèn ki pa fèmen kòrèkteman. Korije li epi lanse kòd la.",
+              "hint": "Verifye si chèn nan kòmanse epi fini ak gilèm ki koresponn.",
+              "help": {
+                "concept": "Chèn yo bezwen gilèm ouvèti ak fèmti ki koresponn. Si youn manke, Python pa ka li liy lan kòrèkteman.",
+                "hint_1": "Pwoblèm nan andedan enstriksyon print la, otou tèks la.",
+                "hint_2": "Asire w tèks la byen antoure nèt nan yon sèl pè gilèm anvan parantèz fèmen an."
+              },
+              "starterCode": "print(\"Python is fun)"
+            },
+            "ci-fix-nameerror-string": {
+              "title": "Fè yon non ki manke tounen yon chèn",
+              "prompt": "Kòd depa a eseye afiche yon mo tankou si se te yon varyab. Korije kòd la pou li afiche `banana` egzakteman.",
+              "hint": "Si ou vle afiche tèks dirèkteman, li bezwen gilèm.",
+              "help": {
+                "concept": "San gilèm, Python trete yon mo tankou yon non varyab. Avèk gilèm, Python trete li tankou yon valè chèn.",
+                "hint_1": "Mo a ta dwe afiche kòm tèks, pa chèche kòm yon varyab.",
+                "hint_2": "Kenbe apèl print la, men chanje agiman an pou Python li li kòm yon chèn."
+              },
+              "starterCode": "print(banana)"
+            },
+            "ci-fix-second-line-error": {
+              "title": "Korije dezyèm liy ki kase a",
+              "prompt": "Pwogram sa a ta dwe afiche de liy: `Start` ak `Done`. Premye liy lan deja kòrèk. Korije dezyèm liy lan pou tout pwogram nan mache.",
+              "hint": "Premye liy lan mache. Konpare ponktiyasyon sou dezyèm liy print la.",
+              "help": {
+                "concept": "Lè youn nan liy ki vini pita yo gen yon pwoblèm sentaks, liy valab ki vini pi bonè yo ka bon, men tout pwogram nan toujou kanpe sou liy ki kase a.",
+                "hint_1": "Dezyèm liy lan manke yon pati nan fòm nòmal yon enstriksyon print.",
+                "hint_2": "Fè dezyèm liy lan suiv menm modèl print ak premye liy lan."
+              },
+              "starterCode": "print(\"Start\")\nprint(\"Done\""
+            },
+            "ci-fix-three-line-program": {
+              "title": "Repare yon pwogram kout",
+              "prompt": "Korije kòd la pou li afiche twa liy egzakteman: `One`, `Two`, ak `Three`. Gen yon liy ki kase nan kòd depa a.",
+              "hint": "De liy deja valab. Jwenn liy ki gen ponktiyasyon chèn ki pa koresponn.",
+              "help": {
+                "concept": "Yon sèl erè sentaks nan yon liy ka sispann tout yon pwogram, kidonk ou ta dwe enspekte liy yo rapòte a ak anpil atansyon pou gilèm oswa parantèz ki manke.",
+                "hint_1": "Se liy nan mitan an ou dwe enspekte pi byen.",
+                "hint_2": "Fè dezyèm enstriksyon print la sèvi ak yon chèn konplè ant gilèm ak yon ponktiyasyon fèmen ki valab."
+              },
+              "starterCode": "print(\"One\")\nprint(\"Two)\nprint(\"Three\")"
+            }
+          }
+        }
+      },
+      "python-v2-0": {
+        "reading-error-messages": {
+          "label": "Li mesaj erè yo",
+          "summary": "Aprann kijan pou li traceback Python yo, remake liy ki enpòtan an, epi sèvi ak mesaj la pou deside sa pou korije.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa yon mesaj erè ap di ou"
+            },
+            "sketch1": {
+              "title": "Erè diferan vle di diferan kalite pwoblèm"
+            },
+            "sketch2": {
+              "title": "Sèvi ak nimewo liy lan pou redui rechèch ou"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Korije erè komen débutan yo"
+            }
+          },
+          "projectSteps": {
+            "ci_fix_missing_paren": {
+              "title": "Korije yon parantèz ki manke"
+            },
+            "ci_fix_missing_quote": {
+              "title": "Korije yon gilèm ki manke"
+            },
+            "ci_fix_nameerror_string": {
+              "title": "Fè yon non ki manke tounen yon chèn"
+            },
+            "ci_fix_second_line_error": {
+              "title": "Korije dezyèm liy ki kase a"
+            },
+            "ci_fix_three_line_program": {
+              "title": "Repare yon pwogram kout"
+            }
+          },
+          "quiz": {
+            "sc-bottom-of-traceback": {
+              "title": "Pi bon kote pou kòmanse li",
+              "prompt": "Lè yon débutan ap li yon traceback Python, ki pati anjeneral bay endis ki pi klè sou pwoblèm nan?",
+              "hint": "Chèche pati ki bay non kalite erè a epi ki dekri li.",
+              "help": {
+                "concept": "Nan traceback Python yo, rezime ki pi itil la anjeneral toupre anba a, kote Python bay non erè a epi li bay yon ti mesaj kout.",
+                "hint_1": "Nimewo liy lan enpòtan, men kalite erè a ak mesaj la souvan eksplike ki kalite koreksyon ou bezwen.",
+                "hint_2": "Chwazi opsyon ki montre dènye liy traceback la olye tèt la oswa yon liy o aza nan mitan an."
+              },
+              "options": {
+                "a": "Anba traceback la, kote kalite erè a ak mesaj la parèt",
+                "b": "Sèlman premye liy traceback la",
+                "c": "Nenpòt liy ki gen espas ladan l",
+                "d": "Liy ki pi long nan traceback la"
+              }
+            },
+            "sc-nameerror-meaning": {
+              "title": "Siyifikasyon NameError",
+              "prompt": "Kisa yon NameError anjeneral vle di nan kòd Python débutan yo?",
+              "hint": "Reflechi sou sa k rive lè Python wè yon non varyab li pa konnen.",
+              "help": {
+                "concept": "Yon NameError rive lè Python eseye sèvi ak yon non, tankou yon varyab, ki poko defini.",
+                "hint_1": "Sa diferan ak ponktiyasyon ki manke tankou yon gilèm oswa yon parantèz.",
+                "hint_2": "Chwazi opsyon ki pale de yon non enkoni, pa yon fòm kòd ki pa valab."
+              },
+              "options": {
+                "a": "Python jwenn yon non ki poko defini",
+                "b": "Python jwenn twòp kòmantè",
+                "c": "Python te afiche move rezilta a espre",
+                "d": "Python egzije chak liy kòmanse ak print"
+              }
+            },
+            "mc-traceback-clues": {
+              "title": "Endis traceback ki itil",
+              "prompt": "Ki pati nan yon mesaj erè ki espesyalman itil lè w ap eseye korije kòd Python débutan? Chwazi tout sa ki aplikab.",
+              "hint": "Reflechi sou sa ki di ou kote pwoblèm nan ye ak ki kalite pwoblèm li ye.",
+              "help": {
+                "concept": "Endis traceback ki pi itil yo anjeneral se nimewo liy lan ak kalite erè/mesaj la, paske yo di ou kote Python te kanpe ak poukisa.",
+                "hint_1": "Chèche yon endis sou kote a ak yon lòt endis sou kalite erè a.",
+                "hint_2": "Chwazi opsyon sou liy yo rapòte a ak erè yo bay non an, pa detay vizyèl tankou longè liy lan."
+              },
+              "options": {
+                "a": "Nimewo liy Python montre a",
+                "b": "Kalite erè a ak mesaj la toupre anba a",
+                "c": "Konbyen lèt ki nan liy kòd la",
+                "d": "Si fon editè kòd la klè oswa fonse"
+              }
+            },
+            "mc-syntaxerror-signs": {
+              "title": "Siy yon pwoblèm sentaks",
+              "prompt": "Ki sitiyasyon ki ka lakòz yon SyntaxError nan kòd Python débutan? Chwazi tout sa ki aplikab.",
+              "hint": "Reflechi sou kòd ki ekri nan yon fòm ki pa konplè oswa ki pa valab.",
+              "help": {
+                "concept": "Yon SyntaxError rive lè Python pa ka analize kòd la paske estrikti a pa valab, tankou ponktiyasyon oswa gilèm ki manke.",
+                "hint_1": "Senbòl fèmen ki manke yo se pwoblèm sentaks ki komen.",
+                "hint_2": "Chwazi opsyon ki gen estrikti kòd ki kase, pa sa ki pale de yon non varyab enkoni."
+              },
+              "options": {
+                "a": "Yon parantèz fèmen ki manke nan yon enstriksyon print",
+                "b": "Yon gilèm ki manke nan yon chèn",
+                "c": "Sèvi ak yon non varyab ki pa t janm defini",
+                "d": "Kite yon enstriksyon print pa fini"
+              }
+            },
+            "dr-read-traceback-order": {
+              "title": "Lòd pou li yon traceback",
+              "prompt": "Mete etap debogaj sa yo nan yon lòd ki lojik pou li yon traceback Python pou débutan.",
+              "hint": "Kòmanse pa jwenn kote pwoblèm nan ye, apre sa idantifye kalite erè a, epi enspekte kòd la.",
+              "help": {
+                "concept": "Yon bon pwosesis pou débutan se jwenn liy yo rapòte a, idantifye kalite erè/mesaj la, enspekte liy sa a, epi apre sa fè yon koreksyon.",
+                "hint_1": "Nimewo liy lan vini anvan ou modifye kòd la.",
+                "hint_2": "Dènye etap la ta dwe chanje kòd la apre ou fin konprann endis la."
+              },
+              "tokens": {
+                "t1": "Li nimewo liy Python montre a",
+                "t2": "Li kalite erè a ak mesaj la toupre anba a",
+                "t3": "Enspekte kòd sou liy sa a pou gilèm, parantèz, oswa non enkoni ki manke",
+                "t4": "Korije kòd la epi lanse l ankò"
+              }
+            },
+            "dr-what-happens-before-stop": {
+              "title": "Koule pwogram nan lè gen yon erè",
+              "prompt": "Ranje evènman sa yo nan lòd yo rive lè Python rankontre yon erè pandan ekzekisyon.",
+              "hint": "Reflechi sou sa ki kouri an premye ak sa ki rive tousuit apre liy pwoblèm nan.",
+              "help": {
+                "concept": "Python egzekite kòd soti anlè rive anba jiskaske li rive sou yon erè, apre sa li kanpe epi li montre yon traceback olye li kontinye.",
+                "hint_1": "Liy valab ki vini pi bonè yo egzekite anvan liy ki kase a fè pwogram nan kanpe.",
+                "hint_2": "Traceback la parèt apre Python frape pwoblèm nan, epi liy ki vini apre yo pa egzekite."
+              },
+              "tokens": {
+                "t1": "Python egzekite liy valab ki vini pi bonè yo",
+                "t2": "Python rive sou liy ki kase a",
+                "t3": "Python sispann ekzekisyon an",
+                "t4": "Python montre mesaj erè a"
+              }
+            },
+            "fb-nameerror-fill": {
+              "title": "Konplete kalite erè a",
+              "prompt": "Chwazi kalite erè ki koresponn ak sitiyasyon sa a: yo itilize `print(word)`, men `word` pa t janm defini.",
+              "hint": "Sa gen rapò ak yon non enkoni, pa ak ponktiyasyon ki kase.",
+              "help": {
+                "concept": "Lè Python wè yon non varyab ki poko egziste, li leve the missing term la.",
+                "hint_1": "Fòm kòd la valab, kidonk sa pa sitou yon pwoblèm sentaks.",
+                "hint_2": "Chwazi repons ki mansyone yon non ki manke oswa ki enkoni."
+              },
+              "template": "Erè ki pi posib la se [blank1].",
+              "choices": [
+                "NameError",
+                "SyntaxError",
+                "CommentError",
+                "PrintError"
+              ]
+            },
+            "fb-line-number-focus": {
+              "title": "Kisa pou enspekte an premye",
+              "prompt": "Chwazi pi bon mo pou konplete konsèy debogaj la.",
+              "hint": "Yon traceback ede ou redui rechèch ou an premye nan yon sèl kote.",
+              "help": {
+                "concept": "Nimewo the missing term yo rapòte a di ou kote pou kòmanse verifye kòd la.",
+                "hint_1": "Anjeneral ou enspekte the missing term espesifik yo rapòte a anvan ou pase sou tout lòt bagay.",
+                "hint_2": "Chwazi mo ki bay non kote ki nimewote Python montre a."
+              },
+              "template": "Lè yon traceback montre yon nimewo liy, enspekte [blank1] sa a an premye.",
+              "choices": [
+                "liy",
+                "kòmantè",
+                "espas",
+                "koulè"
+              ]
+            },
+            "ci-fix-missing-paren": {
+              "title": "Korije yon parantèz ki manke",
+              "prompt": "Ekri kòd Python ki afiche `Hello` egzakteman. Kòd depa a gen yon pwoblèm sentaks. Korije li, apre sa klike Run epi verifye panèl rezilta a.",
+              "hint": "Enstriksyon print sa a prèske kòrèk; verifye ponktiyasyon fèmen li.",
+              "help": {
+                "concept": "Yon parantèz fèmen ki manke fè yon enstriksyon print pa valab epi lakòz yon erè sentaks.",
+                "hint_1": "Chèn nan li menm bon. Gade jis deyò gilèm yo.",
+                "hint_2": "Yon apèl print ki valab bezwen parantèz ki koresponn otou agiman li."
+              },
+              "starterCode": "print(\"Hello\""
+            },
+            "ci-fix-missing-quote": {
+              "title": "Korije yon gilèm ki manke",
+              "prompt": "Ekri kòd Python ki afiche `Python is fun` egzakteman. Kòd depa a gen yon chèn ki pa fèmen kòrèkteman. Korije li epi lanse kòd la.",
+              "hint": "Verifye si chèn nan kòmanse epi fini ak gilèm ki koresponn.",
+              "help": {
+                "concept": "Chèn yo bezwen gilèm ouvèti ak fèmti ki koresponn. Si youn manke, Python pa ka li liy lan kòrèkteman.",
+                "hint_1": "Pwoblèm nan andedan enstriksyon print la, otou tèks la.",
+                "hint_2": "Asire w tèks la byen antoure nèt nan yon sèl pè gilèm anvan parantèz fèmen an."
+              },
+              "starterCode": "print(\"Python is fun)"
+            },
+            "ci-fix-nameerror-string": {
+              "title": "Fè yon non ki manke tounen yon chèn",
+              "prompt": "Kòd depa a eseye afiche yon mo tankou si se te yon varyab. Korije kòd la pou li afiche `banana` egzakteman.",
+              "hint": "Si ou vle afiche tèks dirèkteman, li bezwen gilèm.",
+              "help": {
+                "concept": "San gilèm, Python trete yon mo tankou yon non varyab. Avèk gilèm, Python trete li tankou yon valè chèn.",
+                "hint_1": "Mo a ta dwe afiche kòm tèks, pa chèche kòm yon varyab.",
+                "hint_2": "Kenbe apèl print la, men chanje agiman an pou Python li li kòm yon chèn."
+              },
+              "starterCode": "print(banana)"
+            },
+            "ci-fix-second-line-error": {
+              "title": "Korije dezyèm liy ki kase a",
+              "prompt": "Pwogram sa a ta dwe afiche de liy: `Start` ak `Done`. Premye liy lan deja kòrèk. Korije dezyèm liy lan pou tout pwogram nan mache.",
+              "hint": "Premye liy lan mache. Konpare ponktiyasyon sou dezyèm liy print la.",
+              "help": {
+                "concept": "Lè youn nan liy ki vini pita yo gen yon pwoblèm sentaks, liy valab ki vini pi bonè yo ka bon, men tout pwogram nan toujou kanpe sou liy ki kase a.",
+                "hint_1": "Dezyèm liy lan manke yon pati nan fòm nòmal yon enstriksyon print.",
+                "hint_2": "Fè dezyèm liy lan suiv menm modèl print ak premye liy lan."
+              },
+              "starterCode": "print(\"Start\")\nprint(\"Done\""
+            },
+            "ci-fix-three-line-program": {
+              "title": "Repare yon pwogram kout",
+              "prompt": "Korije kòd la pou li afiche twa liy egzakteman: `One`, `Two`, ak `Three`. Gen yon liy ki kase nan kòd depa a.",
+              "hint": "De liy deja valab. Jwenn liy ki gen ponktiyasyon chèn ki pa koresponn.",
+              "help": {
+                "concept": "Yon sèl erè sentaks nan yon liy ka sispann tout yon pwogram, kidonk ou ta dwe enspekte liy yo rapòte a ak anpil atansyon pou gilèm oswa parantèz ki manke.",
+                "hint_1": "Se liy nan mitan an ou dwe enspekte pi byen.",
+                "hint_2": "Fè dezyèm enstriksyon print la sèvi ak yon chèn konplè ant gilèm ak yon ponktiyasyon fèmen ki valab."
+              },
+              "starterCode": "print(\"One\")\nprint(\"Two)\nprint(\"Three\")"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-0": {
+        "reading-error-messages": {
+          "traceback-basics": {
+            "title": "Sa yon mesaj erè ap di ou",
+            "bodyMarkdown": "Lè Python pa ka egzekite kòd ou a, li montre yon mesaj erè yo rele yon **traceback**. Yon traceback ede ou reponn de kestyon itil:\n\n1. **Ki kote Python te bloke?**\n2. **Ki kalite pwoblèm li te jwenn?**\n\nYon fason ki fasil pou débutan li li se:\n\n- Chèche **nimewo liy** lan.\n- Gade **kalite erè** a toupre anba a.\n- Li mesaj ki vini apre kalite erè a.\n\nMen yon egzanp senp:\n\n```python\nprint(\"Hello\"\n```\n\nPython ap plenyen paske `)` fèmen an manke. Traceback la montre liy ki gen pwoblèm nan epi li montre yon mesaj ki gen rapò ak sentaks.\n\nEgzanp travay:\n\n```python\nprint(\"Start\")\nprint(\"Middle\")\nprint(\"End\"\n```\n\nSwiv li etap pa etap:\n\n- Liy 1 bon.\n- Liy 2 bon.\n- Liy 3 manke yon parantèz fèmen.\n- Traceback la montre ou liy 3 paske se la Python remake pwoblèm nan.\n\nLide prensipal la: **pati anba traceback la anjeneral bay endis ki pi klè a**."
+          },
+          "syntax-vs-name": {
+            "title": "Erè diferan vle di diferan kalite pwoblèm",
+            "bodyMarkdown": "Se pa tout erè ki vle di menm bagay la. De erè débutan ki komen se **SyntaxError** ak **NameError**.\n\n- **SyntaxError** vle di kòd la pa ekri nan yon fòm Python ki valab.\n- **NameError** vle di Python wè yon non li pa konnen.\n\nEgzanp yon pwoblèm sentaks:\n\n```python\nprint(\"Hi\"\n```\n\nSa se yon **SyntaxError** paske enstriksyon an pa konplè.\n\nEgzanp yon pwoblèm non:\n\n```python\nprint(message)\n```\n\nSi `message` pa t janm resevwa yon valè anvan, Python leve yon **NameError**.\n\nEgzanp travay:\n\n```python\nprint(\"A\")\nprint(word)\n```\n\nSwiv li etap pa etap:\n\n- Liy 1 afiche `A`.\n- Liy 2 mande Python pou afiche `word`.\n- Si `word` poko egziste, Python kanpe la ak yon `NameError`.\n\nKidonk lè ou li yon mesaj erè, mande tèt ou:\n\n- Èske fòm kòd la pa valab? Sa sijere **SyntaxError**.\n- Èske Python pa jwenn yon non varyab? Sa sijere **NameError**."
+          },
+          "using-line-numbers": {
+            "title": "Sèvi ak nimewo liy lan pou redui rechèch ou",
+            "bodyMarkdown": "Yon traceback souvan gen yon nimewo liy. Nimewo liy sa a se youn nan pi bon endis ou yo.\n\nEgzanp:\n\n```python\nprint(\"One\")\nprint(\"Two\")\nprint(three)\nprint(\"Four\")\n```\n\nSi Python rapòte yon pwoblèm sou liy 3, ou ta dwe enspekte liy 3 an premye:\n\n- `three` pa gen gilèm.\n- Python trete li tankou yon non varyab.\n- Si pa gen okenn varyab ki rele `three`, sa lakòz yon `NameError`.\n\nRemake yon bagay enpòtan: liy 4 pa egzekite, paske Python kanpe lè li frape erè a.\n\nEgzanp travay:\n\n```python\nprint(\"First\")\nprint(\"Second\")\nprint(\"Third\")\nprint(\"Fourth\"\n```\n\nSwiv li etap pa etap:\n\n- Twa premye liy yo valab.\n- Katriyèm liy lan gen yon `)` ki manke.\n- Python montre liy 4 paske se la li bloke.\n\nYon bon abitid debogaj se:\n\n1. Li nimewo liy lan.\n2. Li liy sa a ak anpil atansyon.\n3. Konpare ponktiyasyon, gilèm, ak non yo."
+          }
+        }
+      },
+      "python-v2-0": {
+        "reading-error-messages": {
+          "traceback-basics": {
+            "title": "Sa yon mesaj erè ap di ou",
+            "bodyMarkdown": "Lè Python pa ka egzekite kòd ou a, li montre yon mesaj erè yo rele yon **traceback**. Yon traceback ede ou reponn de kestyon itil:\n\n1. **Ki kote Python te bloke?**\n2. **Ki kalite pwoblèm li te jwenn?**\n\nYon fason ki fasil pou débutan li li se:\n\n- Chèche **nimewo liy** lan.\n- Gade **kalite erè** a toupre anba a.\n- Li mesaj ki vini apre kalite erè a.\n\nMen yon egzanp senp:\n\n```python\nprint(\"Hello\"\n```\n\nPython ap plenyen paske `)` fèmen an manke. Traceback la montre liy ki gen pwoblèm nan epi li montre yon mesaj ki gen rapò ak sentaks.\n\nEgzanp travay:\n\n```python\nprint(\"Start\")\nprint(\"Middle\")\nprint(\"End\"\n```\n\nSwiv li etap pa etap:\n\n- Liy 1 bon.\n- Liy 2 bon.\n- Liy 3 manke yon parantèz fèmen.\n- Traceback la montre ou liy 3 paske se la Python remake pwoblèm nan.\n\nLide prensipal la: **pati anba traceback la anjeneral bay endis ki pi klè a**."
+          },
+          "syntax-vs-name": {
+            "title": "Erè diferan vle di diferan kalite pwoblèm",
+            "bodyMarkdown": "Se pa tout erè ki vle di menm bagay la. De erè débutan ki komen se **SyntaxError** ak **NameError**.\n\n- **SyntaxError** vle di kòd la pa ekri nan yon fòm Python ki valab.\n- **NameError** vle di Python wè yon non li pa konnen.\n\nEgzanp yon pwoblèm sentaks:\n\n```python\nprint(\"Hi\"\n```\n\nSa se yon **SyntaxError** paske enstriksyon an pa konplè.\n\nEgzanp yon pwoblèm non:\n\n```python\nprint(message)\n```\n\nSi `message` pa t janm resevwa yon valè anvan, Python leve yon **NameError**.\n\nEgzanp travay:\n\n```python\nprint(\"A\")\nprint(word)\n```\n\nSwiv li etap pa etap:\n\n- Liy 1 afiche `A`.\n- Liy 2 mande Python pou afiche `word`.\n- Si `word` poko egziste, Python kanpe la ak yon `NameError`.\n\nKidonk lè ou li yon mesaj erè, mande tèt ou:\n\n- Èske fòm kòd la pa valab? Sa sijere **SyntaxError**.\n- Èske Python pa jwenn yon non varyab? Sa sijere **NameError**."
+          },
+          "using-line-numbers": {
+            "title": "Sèvi ak nimewo liy lan pou redui rechèch ou",
+            "bodyMarkdown": "Yon traceback souvan gen yon nimewo liy. Nimewo liy sa a se youn nan pi bon endis ou yo.\n\nEgzanp:\n\n```python\nprint(\"One\")\nprint(\"Two\")\nprint(three)\nprint(\"Four\")\n```\n\nSi Python rapòte yon pwoblèm sou liy 3, ou ta dwe enspekte liy 3 an premye:\n\n- `three` pa gen gilèm.\n- Python trete li tankou yon non varyab.\n- Si pa gen okenn varyab ki rele `three`, sa lakòz yon `NameError`.\n\nRemake yon bagay enpòtan: liy 4 pa egzekite, paske Python kanpe lè li frape erè a.\n\nEgzanp travay:\n\n```python\nprint(\"First\")\nprint(\"Second\")\nprint(\"Third\")\nprint(\"Fourth\"\n```\n\nSwiv li etap pa etap:\n\n- Twa premye liy yo valab.\n- Katriyèm liy lan gen yon `)` ki manke.\n- Python montre liy 4 paske se la li bloke.\n\nYon bon abitid debogaj se:\n\n1. Li nimewo liy lan.\n2. Li liy sa a ak anpil atansyon.\n3. Konpare ponktiyasyon, gilèm, ak non yo."
+          }
+        }
+      }
+    }
+  }
+}

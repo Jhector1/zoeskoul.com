@@ -1,0 +1,11 @@
+{
+  "mode": "rebuild-from-drafts",
+  "source": "current-draft-output",
+  "sourceBundlePath": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/subjects/python--python-data-functions--draft/modules/module7/topics/module-7-clean-student-records/topic.bundle.json",
+  "sourceMessagesPaths": {
+    "en": "/Users/admin/Documents/NextJSProject/zoeskoul.com/.curriculum-drafts/python/messages/en/subjects/python--python-data-functions--draft/module7/module-7-clean-student-records.json"
+  },
+  "identityNormalized": false,
+  "identityReplacements": [],
+  "syncedReports": true
+}

@@ -4,46 +4,46 @@
       "linux-module-2-files-and-folders": {
         "copy-move-rename": {
           "label": "Copier, déplacer et renommer",
-          "summary": "Utiliser cp et mv pour dupliquer, organiser et renommer des fichiers en toute sécurité.",
+          "summary": "Utilisez les commandes `cp` et `mv` pour copier, organiser et renommer des fichiers en toute sécurité.",
           "cards": {
             "sketch0": {
               "title": "Copier des fichiers avec cp"
             },
             "sketch1": {
-              "title": "Déplacer des fichiers et des dossiers avec mv"
+              "title": "Déplacer des fichiers et des dossiers avec la commande mv"
             },
             "sketch2": {
               "title": "Renommer avec mv"
             },
             "quiz": {
-              "title": "Vérification de pratique"
+              "title": "Vérification des exercices"
             },
             "project": {
-              "title": "Organiser les fichiers d’étude d’un élève"
+              "title": "Organiser les dossiers d'étude d'un élève"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "exercises": {
               "copy-move-rename-try-it-1": {
-                "title": "Tâche terminal : copier avec cp",
-                "prompt": "The destination dossier already exists. Utilisez `cp` pour copier `sample-inbox/agenda.txt` pour `warmup/backups/agenda.txt` while keeping the original.",
-                "hint": "Utilisez les dossiers et noms de fichiers exacts de l’énoncé, puis exécutez ls, cat ou find pour vérifier votre travail.",
+                "title": "Tâche du terminal : copier avec cp",
+                "prompt": "Le dossier de destination existe déjà. Utilisez la commande « `cp` » pour copier le fichier « `sample-inbox/agenda.txt` » vers « `warmup/backups/agenda.txt` » tout en conservant l'original.",
+                "hint": "Utilisez exactement les noms de dossiers et de fichiers indiqués dans l'invite de commande, puis exécutez les commandes `ls`, `cat` ou `find` pour vérifier votre travail.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez the cp commande affichern dans the énoncé."
+                      "message": "Exécutez la commande « cp » indiquée dans l'invite de commande."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
@@ -57,30 +57,30 @@
                 }
               },
               "copy-move-rename-try-it-2": {
-                "title": "Tâche terminal : déplacer avec mv",
-                "prompt": "The destination dossier already exists. Utilisez `mv` pour déplacer `sample-inbox/guest-list.txt` pour `warmup/guests/guest-list.txt`.",
-                "hint": "Utilisez les dossiers et noms de fichiers exacts de l’énoncé, puis exécutez ls, cat ou find pour vérifier votre travail.",
+                "title": "Tâche dans le terminal : déplacer avec mv",
+                "prompt": "Le dossier de destination existe déjà. Utilisez la commande « `mv` » pour déplacer le fichier « `sample-inbox/guest-list.txt` » vers « `warmup/guests/guest-list.txt` ».",
+                "hint": "Utilisez exactement les noms de dossiers et de fichiers indiqués dans l'invite de commande, puis exécutez les commandes `ls`, `cat` ou `find` pour vérifier votre travail.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez the mv commande affichern dans the énoncé."
+                      "message": "Exécutez la commande « mv » indiquée dans l'invite de commande."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
                 "starterFiles": {
                   "sample_inbox_guest_list_txt": {
-                    "content": "Liste des invités\n"
+                    "content": "Guest list\n"
                   },
                   "warmup_guests_keep": {
                     "content": ""
@@ -88,24 +88,24 @@
                 }
               },
               "copy-move-rename-try-it-3": {
-                "title": "Tâche terminal : renommer avec mv",
-                "prompt": "Utilisez `mv` pour renommer `sample-inbox/draft-report.txt` pour `sample-inbox/final-report.txt` dans the same dossier.",
-                "hint": "Utilisez les dossiers et noms de fichiers exacts de l’énoncé, puis exécutez ls, cat ou find pour vérifier votre travail.",
+                "title": "Tâche dans le terminal : renommer avec la commande « mv »",
+                "prompt": "Utilisez le fichier « `mv` » pour renommer « `sample-inbox/draft-report.txt` » en « `sample-inbox/final-report.txt` » dans le même dossier.",
+                "hint": "Utilisez exactement les noms de dossiers et de fichiers indiqués dans l'invite de commande, puis exécutez les commandes `ls`, `cat` ou `find` pour vérifier votre travail.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de vous exercer à utiliser la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez the mv renommer commande affichern dans the énoncé."
+                      "message": "Exécutez la commande « mv » suivie du nom de fichier à renommer, comme indiqué dans l'invite de commande."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
@@ -117,27 +117,27 @@
               }
             },
             "try_copy_move_rename_sketch0": {
-              "title": "Essayez vous-même : copier avec cp",
-              "prompt": "Exécutez `cp sample-inbox/agenda.txt warmup/backups/agenda.txt` pour practice copiering while keeping the original fichier."
+              "title": "Essayez vous-même : copiez avec la commande « cp »",
+              "prompt": "Exécutez la commande « `cp sample-inbox/agenda.txt warmup/backups/agenda.txt` » pour vous entraîner à copier un fichier tout en conservant l'original."
             },
             "try_copy_move_rename_sketch1": {
-              "title": "Essayez vous-même : déplacer avec mv",
-              "prompt": "Exécutez `mv sample-inbox/guest-list.txt warmup/guests/guest-list.txt` pour practice moving a fichier."
+              "title": "Essayez vous-même : déplacez-vous avec mv",
+              "prompt": "Exécutez la commande « `mv sample-inbox/guest-list.txt warmup/guests/guest-list.txt` » pour vous entraîner à déplacer un fichier."
             },
             "try_copy_move_rename_sketch2": {
-              "title": "Essayez vous-même : renommer avec mv",
-              "prompt": "Exécutez `mv sample-inbox/draft-report.txt sample-inbox/final-report.txt` pour practice renaming avec mv."
+              "title": "Essayez vous-même : renommer un fichier avec la commande « mv »",
+              "prompt": "Exécutez la commande « `mv sample-inbox/draft-report.txt sample-inbox/final-report.txt` » pour vous entraîner à renommer des fichiers avec la commande « mv »."
             }
           },
           "practice": {
             "sc-which-command-renames": {
               "title": "Identifier la commande de renommage",
-              "prompt": "Quelle commandee renommers `plan.txt` pour `project-plan.txt` dans the same dossier?",
-              "hint": "Renaming uses the same commande as moving.",
+              "prompt": "Quelle commande permet de renommer « `plan.txt` » en « `project-plan.txt` » dans le même dossier ?",
+              "hint": "Pour renommer un fichier, on utilise la même commande que pour le déplacer.",
               "help": {
-                "concept": "Linux uses `mv` for both moving et renaming because both actions change a fichier's path.",
-                "hint_1": "A copier commande would leave two fichiers behind, which est not a renommer.",
-                "hint_2": "Choose the commande that changes the old name into the new name directly."
+                "concept": "Linux utilise la commande « `mv` » aussi bien pour déplacer qu'en renommer un fichier, car ces deux opérations modifient le chemin d'accès du fichier.",
+                "hint_1": "Une commande de copie laisserait deux fichiers, ce qui n'est pas le cas d'un changement de nom.",
+                "hint_2": "Choisissez la commande qui permet de remplacer directement l'ancien nom par le nouveau."
               },
               "options": {
                 "a": "cp plan.txt project-plan.txt",
@@ -147,29 +147,29 @@
               }
             },
             "mc-copy-vs-move": {
-              "title": "Choisir les affirmations vraies sur cp et mv",
-              "prompt": "Quelles affirmations sont correctes ? Choisissez toutes les réponses qui conviennent.",
-              "hint": "One commande duplicates a fichier, et the other changes its emplacement ou name.",
+              "title": "Choisissez les affirmations vraies concernant les commandes « cp » et « mv ».",
+              "prompt": "Quelles affirmations sont correctes ? Sélectionnez toutes les réponses qui s'appliquent.",
+              "hint": "Une commande permet de dupliquer un fichier, tandis que l'autre permet de modifier son emplacement ou son nom.",
               "help": {
-                "concept": "`cp` créers an additional copier, while `mv` changes the fichier's path so the original emplacement ou name no longer remains the same.",
-                "hint_1": "Cherchez statements that match what happens pour the original fichier après each commande.",
-                "hint_2": "A correct choice should describe either duplication avec `cp` ou reemplacement/renaming avec `mv`."
+                "concept": "`cp` crée une copie supplémentaire, tandis que la commande « `mv` » modifie le chemin d'accès du fichier, de sorte que son emplacement ou son nom d'origine ne reste plus le même.",
+                "hint_1": "Recherchez les instructions qui correspondent à ce qui arrive au fichier d'origine après chaque commande.",
+                "hint_2": "La bonne réponse doit décrire soit un doublon avec `cp`, soit relocation/renaming avec `mv`."
               },
               "options": {
-                "a": "`cp notes.txt backup.txt` leaves `notes.txt` dans place et créers `backup.txt`.",
-                "b": "`mv draft.txt final.txt` can renommer a fichier dans the same dossier.",
-                "c": "`cp report.txt archive/` redéplacers `report.txt` depuis its original dossier.",
-                "d": "`mv essay.txt folder/` créers two copies of `essay.txt`."
+                "a": "`cp notes.txt backup.txt` conserve l'adresse `notes.txt` et crée l'adresse `backup.txt`.",
+                "b": "`mv draft.txt final.txt` Il est possible de renommer un fichier situé dans le même dossier.",
+                "c": "`cp report.txt archive/` supprime le fichier « `report.txt` » de son dossier d'origine.",
+                "d": "`mv essay.txt folder/` crée deux copies de « `essay.txt` »."
               }
             },
             "mc-safe-command-choice": {
-              "title": "Choisir les commandes qui correspondent à l’objectif",
-              "prompt": "Vous voulez pour keep the original fichier `notes.txt` et also créer another version avec a different name. Quelle commandees would achieve that objectif? Choisissez toutes les réponses qui conviennent.",
-              "hint": "Vous devez commandes that copier, not déplacer.",
+              "title": "Choisissez les commandes qui correspondent à l'objectif",
+              "prompt": "Vous souhaitez conserver le fichier d'origine `notes.txt` et créer une autre version sous un nom différent. Quelles commandes vous permettraient d'atteindre cet objectif ? Sélectionnez toutes les réponses qui s'appliquent.",
+              "hint": "Il vous faut des commandes qui copient, et non qui déplacent.",
               "help": {
-                "concept": "When the original must remain, use `cp`. A renommer ou déplacer avec `mv` changes the original path instead of preserving it.",
-                "hint_1": "Any correct commande should leave `notes.txt` still existing après cela runs.",
-                "hint_2": "Cherchez `cp` commandes that use `notes.txt` as the source et a different destination path ou name."
+                "concept": "Si vous souhaitez conserver le fichier d'origine, utilisez la commande `cp`. Une opération de renommage ou de déplacement effectuée avec la commande `mv` modifie le chemin d'accès d'origine au lieu de le conserver.",
+                "hint_1": "Toute commande correcte doit permettre à `notes.txt` de continuer d'exister après son exécution.",
+                "hint_2": "Recherchez les commandes « `cp` » qui utilisent « `notes.txt` » comme source et un chemin ou un nom de destination différent."
               },
               "options": {
                 "a": "`cp notes.txt notes-copy.txt`",
@@ -179,53 +179,53 @@
               }
             },
             "dr-copy-then-rename-flow": {
-              "title": "Mettre le flux de travail des fichiers dans l’ordre",
-              "prompt": "Mettez ces étapes dans le bon ordre for making a backup copier of `outline.txt` et then renaming the copier pour `outline-final.txt`.",
-              "hint": "First make the duplicate, then renommer the duplicate.",
+              "title": "Définir le flux de travail des fichiers",
+              "prompt": "Classez ces étapes dans l'ordre correct pour créer une copie de sauvegarde de `outline.txt`, puis renommer cette copie `outline-final.txt`.",
+              "hint": "Commencez par créer une copie, puis renommez-la.",
               "help": {
-                "concept": "A multi-étape fichier workflow depends on what exists après each commande. You cannot renommer the copied fichier until the copier has been créerd.",
-                "hint_1": "The backup fichier must exist avant cela can receive a new name.",
-                "hint_2": "Start avec the original fichier, créer a copier, then renommer that copied fichier."
+                "concept": "Le déroulement d'une opération sur plusieurs étapes dépend de ce qui se passe après chaque commande. Vous ne pouvez pas renommer le fichier copié tant que la copie n'a pas été créée.",
+                "hint_1": "Le fichier de sauvegarde doit déjà exister pour pouvoir être renommé.",
+                "hint_2": "Commencez par le fichier d'origine, créez une copie, puis renommez ce fichier copié."
               },
               "tokens": {
-                "t1": "Start avec `outline.txt` dans the dossier.",
-                "t2": "Exécutez `cp outline.txt outline-copy.txt`.",
-                "t3": "Exécutez `mv outline-copy.txt outline-final.txt`.",
-                "t4": "End avec both `outline.txt` et `outline-final.txt`."
+                "t1": "Commencez par le fichier « `outline.txt` » qui se trouve dans le dossier.",
+                "t2": "Exécutez la commande « `cp outline.txt outline-copy.txt` ».",
+                "t3": "Exécutez la commande « `mv outline-copy.txt outline-final.txt` ».",
+                "t4": "Terminez par les deux adresses suivantes : `outline.txt` et `outline-final.txt`."
               }
             },
             "ci-copy-class-notes": {
               "title": "Copier un fichier de notes de cours",
-              "prompt": "Vous voulez a backup avant editing class notes. Quel/quelle outcome affichers that `cp` was used correctly?",
-              "hint": "Utilisez `cp` avec the original fichier first et the backup name second.",
+              "prompt": "Il est recommandé de faire une sauvegarde avant de modifier vos notes de cours. Quelle réponse montre que la commande « `cp` » a été utilisée correctement ?",
+              "hint": "Utilisez d'abord « `cp` », en indiquant d'abord le nom du fichier d'origine, puis celui de la sauvegarde.",
               "help": {
-                "concept": "`cp` duplicates a fichier. The source stays dans place, et a new fichier est créerd at the destination path.",
-                "hint_1": "Vous devez two fichiers at the end: the original `class-notes.txt` et a new `class-notes-backup.txt`.",
-                "hint_2": "Exécutez a copier commande where `class-notes.txt` est the source et `class-notes-backup.txt` est the destination name."
+                "concept": "`cp` duplique un fichier. Le fichier source reste à sa place, et un nouveau fichier est créé à l'emplacement de destination.",
+                "hint_1": "À la fin, vous devez disposer de deux fichiers : le fichier d'origine « `class-notes.txt` » et un nouveau fichier « `class-notes-backup.txt` ».",
+                "hint_2": "Exécutez une commande de copie où `class-notes.txt` correspond au nom de la source et `class-notes-backup.txt` à celui de la destination."
               },
-              "template": "A correct backup étape should ____ so vous can see both the original et the copier.",
+              "template": "Une procédure de sauvegarde correcte devrait ____ afin que vous puissiez voir à la fois l'original et la copie.",
               "choices": [
                 "afficher un résultat observable",
-                "masquer toute sortie",
+                "masquer toutes les sorties",
                 "supprimer le fichier immédiatement",
-                "sauter le programme"
+                "passer le programme"
               ]
             },
             "ci-move-report-into-folder": {
-              "title": "Déplacer un rapport dans le bon dossier",
-              "prompt": "A report belongs dans `submissions`, not dans the dossier actuel. Quel/quelle résultat affichers that `mv` was used correctly?",
-              "hint": "Utilisez `mv` avec the fichier name et the destination dossier.",
+              "title": "Déplacer un rapport dans le dossier approprié",
+              "prompt": "Un rapport doit se trouver dans « `submissions` », et non dans le dossier actuel. Quel résultat montre que « `mv` » a été utilisé correctement ?",
+              "hint": "Utilisez la commande « `mv` » en indiquant le nom du fichier et le dossier de destination.",
               "help": {
-                "concept": "`mv` relocates a fichier ou dossier. After moving, the item exists dans the new emplacement instead of the old one.",
-                "hint_1": "The destination dossier already exists, so vous faire not need pour créer it.",
-                "hint_2": "Move `report.txt` so the final path becomes `submissions/report.txt`."
+                "concept": "`mv` déplace un fichier ou un dossier. Une fois déplacé, l'élément se trouve désormais à son nouvel emplacement et non plus à l'ancien.",
+                "hint_1": "Le dossier de destination existe déjà ; vous n'avez donc pas besoin de le créer.",
+                "hint_2": "Déplacez `report.txt` afin que le chemin d'accès final devienne `submissions/report.txt`."
               },
-              "template": "After moving a fichier, le meilleur vérifier est pour ____ so the new emplacement est visible.",
+              "template": "Après avoir déplacé un fichier, le mieux est de ____ afin de voir où il se trouve désormais.",
               "choices": [
                 "afficher un résultat observable",
-                "masquer toute sortie",
+                "masquer toutes les sorties",
                 "supprimer le fichier immédiatement",
-                "sauter le programme"
+                "passer le programme"
               ]
             }
           }
@@ -239,15 +239,15 @@
         "copy-move-rename": {
           "sketch-1": {
             "title": "Copier des fichiers avec cp",
-            "bodyMarkdown": "`cp` makes a duplicate of a fichier et leaves the original dans place. This est useful when vous want a backup ou when vous need the same contenu dans a second emplacement.\n\nWorked example:\n\n```bash\ncp notes.txt backup-notes.txt\n```\n\nStep by étape:\n- `cp` est the copier commande.\n- `notes.txt` est the source fichier vous already have.\n- `backup-notes.txt` est the new fichier that will be créerd.\n\nAfter this commande, both fichiers exist.\n\nIf vous copier into a dossier, the fichier keeps its name unless vous give a new one:\n\n```bash\ncp notes.txt archive/notes.txt\n```\n\nThat commande copies `notes.txt` into the `archive` dossier. The original fichier still stays where cela started."
+            "bodyMarkdown": "`cp` makes a duplicate of a file and leaves the original in place. This is useful when you want a backup or when you need the same content in a second location.\n\nWorked example:\n\n```bash\ncp notes.txt backup-notes.txt\n```\n\nStep by step:\n- `cp` is the copy command.\n- `notes.txt` is the source file you already have.\n- `backup-notes.txt` is the new file that will be created.\n\nAfter this command, both files exist.\n\nIf you copy into a folder, the file keeps its name unless you give a new one:\n\n```bash\ncp notes.txt archive/notes.txt\n```\n\nThat command copies `notes.txt` into the `archive` folder. The original file still stays where it started."
           },
           "sketch-2": {
-            "title": "Déplacer des fichiers et des dossiers avec mv",
-            "bodyMarkdown": "`mv` changes where a fichier ou dossier lives. Unlike `cp`, cela fait not leave the original behind.\n\nWorked example:\n\n```bash\nmv draft.txt school/\n```\n\nStep by étape:\n- `mv` est the déplacer commande.\n- `draft.txt` est the item vous want pour relocate.\n- `school/` est the destination dossier.\n\nAfter the commande, `draft.txt` est no longer dans the old emplacement. It est now inside `school/`.\n\nYou can also déplacer dossiers:\n\n```bash\nmv notes archive/\n```\n\nThat places the whole `notes` dossier inside `archive`."
+            "title": "Déplacer des fichiers et des dossiers avec la commande mv",
+            "bodyMarkdown": "`mv` changes where a file or folder lives. Unlike `cp`, it does not leave the original behind.\n\nWorked example:\n\n```bash\nmv draft.txt school/\n```\n\nStep by step:\n- `mv` is the move command.\n- `draft.txt` is the item you want to relocate.\n- `school/` is the destination folder.\n\nAfter the command, `draft.txt` is no longer in the old location. It is now inside `school/`.\n\nYou can also move folders:\n\n```bash\nmv notes archive/\n```\n\nThat places the whole `notes` folder inside `archive`."
           },
           "sketch-3": {
             "title": "Renommer avec mv",
-            "bodyMarkdown": "In Linux, renaming est also done avec `mv`. Vous êtes moving a fichier depuis its old name pour its new name dans the same dossier.\n\nWorked example:\n\n```bash\nmv todo.txt tasks.txt\n```\n\nStep by étape:\n- `mv` starts the renommer.\n- `todo.txt` est le/la actuel(le) name.\n- `tasks.txt` est the new name.\n\nAfter the commande, `todo.txt` no longer exists, et `tasks.txt` exists instead.\n\nYou can renommer while moving too:\n\n```bash\nmv draft.txt projects/final.txt\n```\n\nThat changes both the emplacement et the name dans one commande."
+            "bodyMarkdown": "In Linux, renaming is also done with `mv`. You are moving a file from its old name to its new name in the same folder.\n\nWorked example:\n\n```bash\nmv todo.txt tasks.txt\n```\n\nStep by step:\n- `mv` starts the rename.\n- `todo.txt` is the current name.\n- `tasks.txt` is the new name.\n\nAfter the command, `todo.txt` no longer exists, and `tasks.txt` exists instead.\n\nYou can rename while moving too:\n\n```bash\nmv draft.txt projects/final.txt\n```\n\nThat changes both the location and the name in one command."
           }
         }
       }

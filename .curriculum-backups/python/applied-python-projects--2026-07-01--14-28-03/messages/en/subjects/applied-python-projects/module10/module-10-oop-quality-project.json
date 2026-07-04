@@ -1,0 +1,142 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-10-testing-debugging-oop-projects": {
+        "module-10-oop-quality-project": {
+          "label": "Module 10 OOP Quality Project",
+          "summary": "Test, debug, and polish a multi-file OOP catalog without breaking inheritance or polymorphism.",
+          "cards": {
+            "sketch0": {
+              "title": "Module 10 OOP Quality Project: project story"
+            },
+            "quiz": {
+              "title": "Knowledge check"
+            },
+            "project": {
+              "title": "Graded multi-file practice"
+            }
+          },
+          "projectSteps": {
+            "quality_project_step_1_baseline": {
+              "title": "Step 1: Run the baseline OOP app"
+            },
+            "quality_project_step_2_model_tests": {
+              "title": "Step 2: Add model behavior tests"
+            },
+            "quality_project_step_3_service_tests": {
+              "title": "Step 3: Test catalog service behavior"
+            },
+            "quality_project_step_4_polymorphic_tests": {
+              "title": "Step 4: Extend tests to mixed subclasses"
+            },
+            "quality_project_step_5_storage_tests": {
+              "title": "Step 5: Add storage parsing tests"
+            },
+            "quality_project_step_6_final_regression": {
+              "title": "Step 6: Finish the tested catalog app"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true
+          },
+          "quiz": {
+            "quality-project-step-1-baseline": {
+              "title": "Step 1: Run the baseline OOP app",
+              "prompt": "Start from a working catalog baseline and keep the project runnable.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Test, debug, and polish a multi-file OOP catalog without breaking inheritance or polymorphism.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n"
+            },
+            "quality-project-step-2-model-tests": {
+              "title": "Step 2: Add model behavior tests",
+              "prompt": "Add tests for the book subclass label and fee behavior.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Test, debug, and polish a multi-file OOP catalog without breaking inheritance or polymorphism.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n"
+            },
+            "quality-project-step-3-service-tests": {
+              "title": "Step 3: Test catalog service behavior",
+              "prompt": "Add a service test for a list of objects and the total fee calculation.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Test, debug, and polish a multi-file OOP catalog without breaking inheritance or polymorphism.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\n"
+            },
+            "quality-project-step-4-polymorphic-tests": {
+              "title": "Step 4: Extend tests to mixed subclasses",
+              "prompt": "Add `VideoItem` and update the service test to prove polymorphism works.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Test, debug, and polish a multi-file OOP catalog without breaking inheritance or polymorphism.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "import sys\nsys.path.insert(0, \".\")\n\nfrom models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2), BookItem(\"SQL\", \"Ben\", 1)]\nassert catalog_lines(items) == [\"Book: Python by Ana\", \"Book: SQL by Ben\"]\nassert total_fees(items) == 6\nprint(\"catalog service tests passed\")\n"
+            },
+            "quality-project-step-5-storage-tests": {
+              "title": "Step 5: Add storage parsing tests",
+              "prompt": "Add a storage parser and tests that prove saved rows become the correct subclass.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Test, debug, and polish a multi-file OOP catalog without breaking inheritance or polymorphism.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n"
+            },
+            "quality-project-step-6-final-regression": {
+              "title": "Step 6: Finish the tested catalog app",
+              "prompt": "Connect data loading, services, tests, and README into the final runnable OOP project.",
+              "hint": "Read the imports first, then put each responsibility in the file named by that import.",
+              "help": {
+                "concept": "Test, debug, and polish a multi-file OOP catalog without breaking inheritance or polymorphism.",
+                "hint_1": "Run from the entry file and follow the first failing import or assertion.",
+                "hint_2": "Keep the full project state working, not just the one line you changed."
+              },
+              "starterCode": "from models.book_item import BookItem\nfrom services.catalog import catalog_lines, total_fees\n\nitems = [BookItem(\"Python\", \"Ana\", 2)]\nfor line in catalog_lines(items):\n    print(line)\nprint(total_fees(items))\n"
+            },
+            "sc-module-10-oop-quality-project-project-design": {
+              "title": "Check the design choice",
+              "prompt": "Why does this module 10 oop quality project require each step to keep all files, not only the file changed in that step?",
+              "hint": "Choose the option that keeps object responsibilities clear.",
+              "help": {
+                "concept": "Cumulative project steps must preserve the whole runnable app state.",
+                "hint_1": "Look for the answer that reduces duplication without hiding behavior.",
+                "hint_2": "A good OOP answer usually keeps behavior near the object that owns the data."
+              },
+              "options": {
+                "a": "Because Python ignores unchanged files.",
+                "b": "Because the next step starts from the full previous project state and must still run.",
+                "c": "Because only README files are graded.",
+                "d": "Because imports work even when files are missing."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-10-testing-debugging-oop-projects": {
+        "module-10-oop-quality-project": {
+          "project-story": {
+            "title": "Module 10 OOP Quality Project: project story",
+            "bodyMarkdown": "This graded project is cumulative. Each step starts from the exact full solution of the previous step, so the project grows like a real multi-file app."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,319 @@
+{
+  "topics": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "updating-and-looping-dictionaries": {
+          "label": "Mizajou ak Sikilasyon Diksyonè",
+          "summary": "Ajoute, mete ajou, efase, epi itilize yon bouk pou travèse done diksyonè yo.",
+          "cards": {
+            "sketch0": {
+              "title": "Ajoute, chanje, ak retire antre diksyonè"
+            },
+            "sketch1": {
+              "title": "Fè yon bouk nan kle yo ak valè yo"
+            },
+            "sketch2": {
+              "title": "Modèl diksyonè komen"
+            },
+            "quiz": {
+              "title": "Kwiz"
+            },
+            "project": {
+              "title": "Mizajou Diksyonè Pratik"
+            }
+          },
+          "projectSteps": {
+            "ci_update_score": {
+              "title": "Mete yon nòt ajou epi retounen diksyonè a"
+            },
+            "ci_remove_key": {
+              "title": "Retire yon kle si li egziste"
+            },
+            "ci_format_items": {
+              "title": "Bati liy apati pè diksyonè"
+            }
+          },
+          "quiz": {
+            "sc-dict-update-existing": {
+              "title": "Mizajou yon kle ki egziste deja",
+              "prompt": "Kisa k rive nan Python lè w kouri `profile[\"age\"] = 13` epi kle `\"age\"` la deja nan diksyonè a?",
+              "hint": "Asiyasyon ak yon kle ki egziste deja ranplase ansyen valè kle sa a.",
+              "help": {
+                "concept": "Asiyasyon diksyonè a itilize kle a pou deside kote valè a ale. Si kle a deja egziste, Python kenbe kle a epi li chanje sèlman valè ki estoke a.",
+                "hint_1": "Sa a se pa yon operasyon endèks lis. Python chèche kle a `\"age\"` nan diksyonè a.",
+                "hint_2": "Mande si kle a nouvo oswa si li deja egziste. Kle ki egziste deja yo chanje, yo pa kopye."
+              },
+              "options": {
+                "a": "Li mete ajou valè ki estoke pou `\"age\"`",
+                "b": "Li kreye yon dezyèm antre separe pou `\"age\"`.",
+                "c": "Li retire kle \"`\"age\"`\" la.",
+                "d": "Li tounen diksyonè a an yon lis"
+              }
+            },
+            "sc-loop-direct-dict": {
+              "title": "Sikle dirèkteman sou yon diksyonè",
+              "prompt": "Si `colors = {\"red\": 1, \"blue\": 2}`, kisa `for item in colors:` ba ou sou chak bouk?",
+              "hint": "Lè w itilize yon diksyonè poukont li, li ba ou yon sèl pati nan chak pè kle-valè, pa toude pati yo.",
+              "help": {
+                "concept": "Yon bouk `for` senp sou yon diksyonè iterate sou kle li yo. Pou jwenn kle yo ak valè yo ansanm, ou itilize `.items()`.",
+                "hint_1": "Panse sou sa `item` ta ye an premye: yon non koulè oswa yon nimewo?",
+                "hint_2": "Varyab bouk la koresponn ak etikèt rechèch diksyonè a, pati ou itilize yo ant krèy kare."
+              },
+              "options": {
+                "a": "Chak kle, tankou `\"red\"` ak `\"blue\"`",
+                "b": "Chak valè, tankou `1` ak `2`",
+                "c": "Chak kle ak valè ansanm otomatikman",
+                "d": "Longè diksyonè a chak fwa"
+              }
+            },
+            "mc-valid-dict-changes": {
+              "title": "Fason pou chanje yon diksyonè",
+              "prompt": "Ki deklarasyon ki ka chanje kontni yon diksyonè ki rele `stock`? Chwazi tout sa ki aplike.",
+              "hint": "Panse sou ajoute oswa mete ajou ak kwochè kare, epi retire ak `del`.",
+              "help": {
+                "concept": "Diksyonè yo ka chanje lè ou asiyen yon kle oswa lè ou efase yon kle. Lè ou li yon valè oswa enprime diksyonè a, sa pa modifye li.",
+                "hint_1": "Chèche deklarasyon ki swa estoke yon valè nan `stock[...]` oswa retire yon kle nan `stock`.",
+                "hint_2": "Yon chwa kòrèk ajoute oswa mete ajou yon kle, epi yon lòt chwa kòrèk retire yon kle nèt."
+              },
+              "options": {
+                "a": "`stock[\"pens\"] = 12`",
+                "b": "`del stock[\"pens\"]`",
+                "c": "`print(stock[\"pens\"])`",
+                "d": "`len(stock)`"
+              }
+            },
+            "mc-items-loop": {
+              "title": "Sèvi ak `.items()`",
+              "prompt": "Ki deklarasyon sou `for key, value in data.items():` ki kòrèk? Chwazi tout sa ki aplike.",
+              "hint": "Konsantre sou sa `.items()` bay nan bouk la.",
+              "help": {
+                "concept": "Metòd `.items()` la bay pè kle-valè, konsa bouk la ka dekonprese chak pè an de varyab.",
+                "hint_1": "Tcheke si bouk la resevwa yon sèl bagay oswa de bagay nan chak antre diksyonè.",
+                "hint_2": "De deklarasyon yo vre: youn sou fason pou jwenn toude pati nan chak antre, epi youn sou sans `key` ak `value`."
+              },
+              "options": {
+                "a": "Li pèmèt ou travay ak kle a ak valè a nan chak bouk.",
+                "b": "`key` Sere kle diksyonè a pou pè aktyèl la.",
+                "c": "Li mache sèlman pou lis, pa pou diksyonè.",
+                "d": "Li retire antre yo pandan li ap boukle."
+              }
+            },
+            "dr-update-sequence": {
+              "title": "Kòmande chanjman diksyonè yo",
+              "prompt": "Mete liy sa yo nan bon lòd pou kreye yon diksyonè, mete ajou yon valè, ajoute yon nouvo kle, epi enprime rezilta a.",
+              "hint": "Kòmanse pa kreye diksyonè a anvan ou eseye chanje li.",
+              "help": {
+                "concept": "Yon diksyonè dwe egziste anvan ou ka mete ajou oswa ajoute antre. Apre chanjman yo, enprime a montre eta final la.",
+                "hint_1": "Premye a se liy literal diksyonè a, epi dènye a se \"`print`\".",
+                "hint_2": "Ant yo, mete ajou kle `\"tea\"` ki egziste deja epi ajoute nouvo kle `\"juice\"` la."
+              },
+              "tokens": {
+                "t1": "bwason = {\"te\": 2}",
+                "t2": "bwason[\"te\"] = 3",
+                "t3": "bwason[\"ji\"] = 1",
+                "t4": "print(drinks)"
+              }
+            },
+            "dr-loop-items-order": {
+              "title": "Bati yon bouk ak `.items()`",
+              "prompt": "Aranje jeton yo pou fè yon bouk ki enprime chak kle ak valè ki soti nan`scores`.",
+              "hint": "Antèt bouk la vini an premye, apre sa liy enprime ki gen retresi a.",
+              "help": {
+                "concept": "Yon bouk diksyonè ak `.items()` itilize `for key, value in scores.items():` epi apre sa yon deklarasyon anndan bouk la.",
+                "hint_1": "Sèvi ak `.items()` nan antèt bouk la pou tou de varyab yo resevwa done.",
+                "hint_2": "Apre kolon an, pwochen liy lan ta dwe gen yon entansyon epi enprime tou de varyab bouk yo."
+              },
+              "tokens": {
+                "t1": "for non, nòt nan scores.items():",
+                "t2": "print(name, score)"
+              }
+            },
+            "fb-remove-key": {
+              "title": "Retire yon antre nan diksyonè a",
+              "prompt": "Chwazi kòd ki manke a pou retire kle `\"done\"` nan diksyonè a.",
+              "hint": "Li fraz la ki antoure espas vid la epi deside ki wòl mo ki manke a jwe.",
+              "help": {
+                "concept": "Espas vid la bezwen mo oswa senbòl Python egzak ki fè liy lan fè sa kòmand la dekri.",
+                "hint_1": "Gade kòd ki antoure espas vid la pou deside si ou bezwen yon mo kle, yon valè, yon metòd, oswa yon kle.",
+                "hint_2": "Chwazi opsyon ki fè tout liy lan valab an Python epi ki bay rezilta ke kòmand la mande."
+              },
+              "template": "[blank1] tach[\"fini\"]",
+              "choices": [
+                "del",
+                "Enprime",
+                "retounen",
+                "pou"
+              ]
+            },
+            "fb-items-method": {
+              "title": "Konplete metòd bouk la",
+              "prompt": "Chwazi metòd ki manke a pou bouk la jwenn tou de kle yo ak valè yo.",
+              "hint": "Itilize metòd diksyonè a ki retounen pè kle-valè.",
+              "help": {
+                "concept": "Metòd `.the missing term()` la retounen chak antre diksyonè kòm yon pè kle-valè, ki ka dekonpaké nan de varyab bouk.",
+                "hint_1": "Metòd tankou `.keys()` ak `.values()` bay sèlman yon pati chak.",
+                "hint_2": "Ou bezwen metòd ki koresponn ak `for key, value in ...`."
+              },
+              "template": "pou kle, valè nan done.[blank1]():",
+              "choices": [
+                "atik",
+                "Kle",
+                "valè",
+                "Ajoute"
+              ]
+            },
+            "ci-update-score": {
+              "title": "Mete yon nòt ajou epi retounen diksyonè a",
+              "prompt": "Ekri `update_score(scores, name, new_score)` pou mete ajou antre ki egziste deja pou `name` oswa ajoute li si li pa la, epi retounen diksyonè `scores` la.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
+              "solutionCode": "def update_score(scores, name, new_score):\n    scores[name] = new_score\n    return scores"
+            },
+            "ci-remove-key": {
+              "title": "Retire yon kle si li egziste",
+              "prompt": "Ekri `remove_item(data, key_name)` pou li retire `key_name` nan diksyonè a lè kle sa a prezan, epi li retounen diksyonè a.",
+              "hint": "Li tach la \"Retire yon kle si li egziste\" epi idantifye rezilta ki nesesè a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki ap fonksyone nan etap anvan an; ajoute nouvo konpòtman ki mande nan etap sa a.",
+                "hint_2": "Mete pwogram nan an kouri epi konpare rezilta a ak egzanp ki te atann lan anvan ou verifye repons ou a."
+              },
+              "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
+              "solutionCode": "def remove_item(data, key_name):\n    if key_name in data:\n        del data[key_name]\n    return data"
+            },
+            "ci-format-items": {
+              "title": "Bati liy apati pè diksyonè",
+              "prompt": "Ekri `format_inventory(items)` pou li konstwi epi retounen yon lis chenn nan fòma `\"name: count\"`, tankou `\"pens: 3\"`.",
+              "hint": "Li kòd la oswa kesyon an ak anpil atansyon epi chwazi opsyon ki kreye konpòtman egzak demann lan mande a.",
+              "help": {
+                "concept": "Etap pwojè sa a se pwogresif: kòd demaraj la se yon eta pwojè ki estab plis yon nouvo travay pou konplete.",
+                "hint_1": "Pa efase kòd ki deja ap mache nan etap anvan an; ajoute nouvo konpòtman yo mande nan etap sa a.",
+                "hint_2": "Kouri pwogram nan epi konpare sòti a ak egzanp ki atann lan anvan ou tcheke repons ou."
+              },
+              "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
+              "solutionCode": "def format_inventory(items):\n    result = []\n    for name, count in items.items():\n        result.append(f\"{name}: {count}\")\n    return result"
+            },
+            "try-updating-and-looping-dictionaries-checkpoint": {
+              "title": "Mizajou ak sik atravè nòt yo",
+              "prompt": "Mete nòt Mia a sou `91`, epi enprime chak non ak nòt kòm `name: score`.",
+              "hint": "Asiyen bay `scores[\"Mia\"]`, epi fè yon bouk ak `.items()`.",
+              "help": {
+                "concept": "Diksyonè yo ka mete ajou lè yo asiyen yon valè bay yon kle ki egziste deja.",
+                "hint_1": "Asiyen bay `scores[\"Mia\"]`, epi boukle ak `.items()`.",
+                "hint_2": "Kouri kòd ou a epi konpare sòti a ak rezilta espere a."
+              },
+              "starterCode": "scores = {\"Ava\": 88, \"Mia\": 79}\n\n# Update Mia to 91.\n# Print each name and score.\n",
+              "solutionCode": "scores = {\"Ava\": 88, \"Mia\": 79}\nscores[\"Mia\"] = 91\nfor name, score in scores.items():\n    print(f\"{name}: {score}\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Mete scores['Mia'] a 91 olye pou enprime rezilta final la dirèkteman."
+                }
+              }
+            },
+            "try-updating-and-looping-dictionaries-sketch0": {
+              "title": "Mizajou yon konte",
+              "prompt": "Li, mete ajou, epi estoke yon valè diksyonè.",
+              "hint": "Ogmante pòm yo pa 3.",
+              "help": {
+                "concept": "Ogmante pòm yo pa 3.",
+                "hint_1": "Ogmante pòm yo pa 3, epi enprime kantite yo.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "counts = {'apples': 2, 'bananas': 1}\n\n# Increase apples by 3.\n# Then print counts.\n",
+              "solutionCode": "counts = {'apples': 2, 'bananas': 1}\ncounts['apples'] += 3\nprint(counts)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Ogmante konte 'apples' pa 3 olye pou ranplase diksyonè final la."
+                }
+              }
+            },
+            "try-updating-and-looping-dictionaries-sketch1": {
+              "title": "Enprime liy envantè yo",
+              "prompt": "Itilize `.items()` pou sikle kle yo ak valè yo ansanm.",
+              "hint": "Fè yon bouk atravè envantè a epi enprime liy tankou: plim: 3.",
+              "help": {
+                "concept": "Fè yon bouk atravè envantè a epi enprime liy tankou: plim: 3.",
+                "hint_1": "Ekri liy pou etap sa a, epi kouri pwogram nan pou wè ki chanjman ki fèt.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "inventory = {'pens': 3, 'markers': 2}\n\n# Loop through inventory and print lines like: pens: 3\n",
+              "solutionCode": "inventory = {'pens': 3, 'markers': 2}\nfor item, count in inventory.items():\n    print(f'{item}: {count}')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Fè yon bouk atravè envantè a olye pou w tape liy envantè yo dirèkteman."
+                }
+              }
+            },
+            "try-updating-and-looping-dictionaries-sketch2": {
+              "title": "Konstwi yon diksyonè longè",
+              "prompt": "Fè yon bouk sou yon lis epi ranpli yon diksyonè.",
+              "hint": "Sere longè chak mo nan lengths.",
+              "help": {
+                "concept": "Sere longè chak mo nan lengths.",
+                "hint_1": "Sere longè chak mo nan lengths, epi enprime lengths yo.",
+                "hint_2": "Lè w kouri li, enprime sèlman valè a oswa liy ke kòmand la mande."
+              },
+              "starterCode": "words = ['red', 'blue']\nlengths = {}\n\n# Store each word's length in lengths.\n# Then print lengths.\n",
+              "solutionCode": "words = ['red', 'blue']\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Fè yon sik atravè mo yo olye pou w tape diksyonè longè final la."
+                },
+                "1": {
+                  "message": "Sèvi ak len(word) pou kalkile longè chak mo."
+                },
+                "2": {
+                  "message": "Stok chak longè ak lengths[word] = len(word)."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_updating_and_looping_dictionaries_checkpoint": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Mete nòt Mia a sou `91`, epi enprime chak non ak nòt kòm `name: score`."
+            },
+            "try_updating_and_looping_dictionaries_sketch0": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Li, mete ajou, epi estoke yon valè diksyonè."
+            },
+            "try_updating_and_looping_dictionaries_sketch1": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Itilize `.items()` pou sikle kle yo ak valè yo ansanm."
+            },
+            "try_updating_and_looping_dictionaries_sketch2": {
+              "title": "Eseye l poukont ou",
+              "prompt": "Fè yon bouk sou yon lis epi ranpli yon diksyonè."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-data-functions--draft": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "updating-and-looping-dictionaries": {
+          "dict-update-basics": {
+            "title": "Ajoute, chanje, ak retire antre diksyonè",
+            "bodyMarkdown": "A dictionary stores data as **key-value pairs**. You can change a dictionary after creating it.\n\nHere is a simple example:\n\n```python\nscores = {\"Ava\": 8, \"Ben\": 5}\n\nscores[\"Cara\"] = 7\nscores[\"Ben\"] = 6\ndel scores[\"Ava\"]\n\nprint(scores)\n```\n\nStep by step:\n\n- `scores[\"Cara\"] = 7` adds a new key called `\"Cara\"`.\n- `scores[\"Ben\"] = 6` updates the existing value for `\"Ben\"`.\n- `del scores[\"Ava\"]` removes the key `\"Ava\"` and its value.\n\nThe output is:\n\n```python\n{'Ben': 6, 'Cara': 7}\n```\n\nA useful rule:\n\n- If the key does **not** exist, assignment adds it.\n- If the key **does** exist, assignment updates it."
+          },
+          "dict-looping": {
+            "title": "Fè yon bouk sou kle yo ak valè yo",
+            "bodyMarkdown": "Ou ka fè yon bouk sou yon diksyonè pou w travay ak done li yo.\n\nSi w fè yon bouk dirèkteman sou diksyonè a, w ap jwenn **kle** li yo:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item in prices:\n    print(item)\n```\n\nKòd sa a enprime kle yo youn apre lòt:\n\n```python\napple\nbanana\npear\n```\n\n\n\nSi w vle genyen ni kle a ni valè a ansanm, itilize`.items()`\n\n:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item, price in prices.items():\n    print(item, price)\n```\n\n\n\nLiy pa liy:\n\n-`prices.items()`\n\nbay chak pè kle-valè.\n-`item, price`\n\ndekonpoze chak pè an de varyab.\n-`print(item, price)`\n\nmontre toude moso done yo.\n\nSòti posib:\n\n```python\napple 2\nbanana 1\npear 3\n```"
+          },
+          "dict-common-patterns": {
+            "title": "Modèl diksyonè komen",
+            "bodyMarkdown": "Yon modèl ki kouran se mete valè yo ajou epi answit fè yon bouk sou rezilta final la.\n\nEgzanp:\n\n```python\ninventory = {\"pens\": 10, \"notebooks\": 4}\n\ninventory[\"pens\"] = inventory[\"pens\"] - 2\ninventory[\"erasers\"] = 6\n\nfor name, count in inventory.items():\n    print(name, count)\n```\n\nKisa k ap pase la a?\n\n- `inventory[\"pens\"]` kòmanse nan `10`.\n- `inventory[\"pens\"] - 2` bay `8`, konsa valè a mete ajou.\n- `inventory[\"erasers\"] = 6` ajoute yon nouvo antre.\n- Bouk la enprime chak eleman ak kantite li.\n\nKalite modèl sa a itil pou kaye kontak, tablo nòt, ak sistèm pou swiv envantè."
+          }
+        }
+      }
+    }
+  }
+}

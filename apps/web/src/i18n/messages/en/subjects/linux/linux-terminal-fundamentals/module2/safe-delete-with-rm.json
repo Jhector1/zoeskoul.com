@@ -1,0 +1,251 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "safe-delete-with-rm": {
+          "label": "Safe Delete with rm",
+          "summary": "Remove only clear temporary files, and learn when moving to trash is safer than deleting.",
+          "cards": {
+            "sketch0": {
+              "title": "Check before deleting"
+            },
+            "sketch1": {
+              "title": "Remove one file with `rm`"
+            },
+            "sketch2": {
+              "title": "When unsure, move instead of delete"
+            },
+            "quiz": {
+              "title": "Practice check"
+            }
+          },
+          "practice": {
+            "sc-rm-purpose": {
+              "title": "What `rm` does",
+              "prompt": "What does `rm tmp.txt` do?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "Removes the file `tmp.txt`",
+                "b": "Copies the file",
+                "c": "Prints the file content",
+                "d": "Changes folder"
+              }
+            },
+            "mc-rm-safety": {
+              "title": "Safe delete habits",
+              "prompt": "Which habits make deletion safer?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "Use `ls` first",
+                "b": "Delete only the exact temporary file",
+                "c": "Use `rm -rf` when unsure",
+                "d": "Keep important files out of the command"
+              }
+            },
+            "sc-uncertain-file": {
+              "title": "When you are unsure",
+              "prompt": "What is safer when you are not sure a file should be deleted?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "Move it to a trash/archive folder",
+                "b": "Use sudo rm -rf",
+                "c": "Delete the whole folder",
+                "d": "Ignore all file names"
+              }
+            },
+            "dr-safe-delete-flow": {
+              "title": "Safe delete order",
+              "prompt": "Put the safe delete routine in order.",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "tokens": {
+                "t1": "List the folder",
+                "t2": "Remove only the exact temporary file",
+                "t3": "List again to verify"
+              }
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "exercises": {
+              "safe-delete-with-rm-try-it-1": {
+                "title": "Inspect the print room first",
+                "prompt": "The print room has a test page and an event plan. Type `ls` first so you can read both names before deciding what is temporary.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `ls` to inspect the print room first."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "print_room_print_test_txt": {
+                    "content": "Printer alignment test\n"
+                  },
+                  "print_room_event_plan_txt": {
+                    "content": "Keep this event plan\n"
+                  }
+                }
+              },
+              "safe-delete-with-rm-try-it-2": {
+                "title": "Remove one temporary label",
+                "prompt": "Remove only `temp-label.txt`, then type `ls` to confirm `display-plan.txt` is still there.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `rm temp-label.txt` to remove only the temporary file."
+                    },
+                    "1": {
+                      "message": "Use `ls` to confirm the important file remains."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "cleanup_desk_temp_label_txt": {
+                    "content": "Temporary printer label\n"
+                  },
+                  "cleanup_desk_display_plan_txt": {
+                    "content": "Keep the display plan\n"
+                  }
+                }
+              },
+              "safe-delete-with-rm-try-it-3": {
+                "title": "Set aside an uncertain note",
+                "prompt": "You are not sure whether `maybe-archive.txt` can be deleted. Create `review-later`, move the file into it, and list that folder.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Create the `review-later` folder."
+                    },
+                    "1": {
+                      "message": "Move the uncertain note instead of deleting it."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "archive_review_maybe_archive_txt": {
+                    "content": "Needs coordinator review\n"
+                  }
+                }
+              }
+            },
+            "try_safe_delete_with_rm_sketch0": {
+              "title": "Inspect the print room first",
+              "prompt": "List a new folder before removing anything."
+            },
+            "try_safe_delete_with_rm_sketch1": {
+              "title": "Remove one temporary label",
+              "prompt": "Delete a different temporary file."
+            },
+            "try_safe_delete_with_rm_sketch2": {
+              "title": "Set aside an uncertain note",
+              "prompt": "Move an uncertain file instead of deleting it."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "safe-delete-with-rm": {
+          "check-before-rm": {
+            "title": "Check before deleting",
+            "bodyMarkdown": "`rm` removes a file. In this beginner course, use it only for a clearly temporary file.\n\nBefore deleting, inspect the folder:\n\n```bash\nls\n```\n\nThen remove the exact file you mean to remove."
+          },
+          "rm-one-file": {
+            "title": "Remove one file with `rm`",
+            "bodyMarkdown": "To remove one file, type the exact file name.\n\n```bash\nrm tmp-scratch.txt\n```\n\nAfterward, use `ls` to confirm it is gone. Do not use `rm -rf` in this course."
+          },
+          "move-to-trash-alternative": {
+            "title": "When unsure, move instead of delete",
+            "bodyMarkdown": "If you are not sure a file should be deleted, move it into a trash or archive folder instead.\n\n```bash\nmkdir -p trash\nmv old-note.txt trash/old-note.txt\n```\n\nMoving is safer because someone can still recover the file later."
+          }
+        }
+      }
+    }
+  }
+}

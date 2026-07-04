@@ -6,7 +6,75 @@
   "profileId": "python",
   "workspaceProfileId": "browser-python-files-runner",
   "workspacePolicyId": "python-browser-workspace",
-  "title": "Applied Python Projects",
+  "title": "Applied Python Projects: Object-Oriented Apps",
   "level": "beginner",
-  "moduleCount": 3
+  "moduleCount": 4,
+  "description": "Build multifile Python apps with the four OOP pillars: encapsulation, abstraction, inheritance, and polymorphism.",
+  "sourceLocale": "en",
+  "targetLocales": [],
+  "accessPolicy": "paid",
+  "moduleAccessOverrideDefault": null,
+  "audience": [
+    "Learners who finished Python fundamentals and data/functions modules.",
+    "Beginners ready to build larger multifile Python projects."
+  ],
+  "goals": [
+    "Use class files, helper files, service files, tests, data files, and generated report files in one course path.",
+    "Practice encapsulation before inheritance, then add polymorphism and abstraction deliberately.",
+    "Finish with a cumulative OOP capstone where every step starts from the previous full solution."
+  ],
+  "teachingStyle": {
+    "tone": "practical, project-first, cumulative",
+    "quizWeight": 0.2,
+    "projectWeight": 0.4,
+    "codeInputWeight": 0.4
+  },
+  "constraints": {
+    "moduleCount": 4,
+    "topicsPerModuleMin": 5,
+    "topicsPerModuleMax": 5
+  },
+  "seedModules": [
+    "python-8-object-oriented-foundations",
+    "python-9-inheritance-polymorphism-and-abstraction",
+    "python-10-testing-debugging-oop-projects",
+    "python-11-oop-capstone-project"
+  ],
+  "versioning": {
+    "family": "python",
+    "version": 2,
+    "status": "active",
+    "defaultForNewEnrollments": true,
+    "supersedes": "python",
+    "supersededBy": null
+  },
+  "courseGenerationPolicy": {
+    "studentActionStyle": "multifile_editor_workspace",
+    "forbidUnavailableWorkspaceActions": true,
+    "avoidTerms": [
+      "terminal-first",
+      "single-file only",
+      "copy this giant solution"
+    ],
+    "preferredTerms": {
+      "exercise": "try-it or project step",
+      "file tree": "workspace files",
+      "interface": "base-class contract"
+    },
+    "notes": [
+      "Every technical sketch must receive a required embedded try-it code_input with id/exerciseKey formatted as try-<topic-id>-sketchN.",
+      "Embedded try-it exercises must carry their full starterFiles and solutionFiles just like larger practice/project exercises.",
+      "Do not put generated output files such as reports/summary.txt in requiredFiles; they may appear in solutionFiles or runtime outputs.",
+      "Module project and capstone steps are progressive: step N+1 starterFiles must equal step N full solutionFiles."
+    ]
+  },
+  "practiceDefaults": {
+    "tryIt": true,
+    "requiresTryIt": true,
+    "tryItPlacement": "all_sketches",
+    "runtimeMode": "editor_workspace",
+    "expectedPracticeKinds": [
+      "code_input"
+    ]
+  }
 }

@@ -3,162 +3,162 @@
     "linux-terminal-fundamentals": {
       "linux-module-1-terminal-navigation": {
         "moving-around": {
-          "label": "Se déplacer avec cd",
-          "summary": "Utiliser cd, .., . et ~ pour se déplacer entre les dossiers en toute sécurité.",
+          "label": "Se déplacer avec le CD",
+          "summary": "Utilisez les commandes « cd », « .. », « . » et « ~ » pour naviguer en toute sécurité entre les dossiers.",
           "cards": {
             "sketch0": {
-              "title": "Ce que `cd` change"
+              "title": "Quels sont les changements apportés par l'`cd` ?"
             },
             "sketch1": {
-              "title": "Utiliser `..`, `.` et `~`"
+              "title": "Sources : `..`, `.` et `~`"
             },
             "sketch2": {
-              "title": "Lire les chemins prudemment avant de se déplacer"
+              "title": "Vérifier les voies de circulation en toute sécurité avant de se déplacer"
             },
             "quiz": {
-              "title": "Vérification de pratique"
+              "title": "Vérification des exercices"
             },
             "project": {
-              "title": "Construire une carte de navigation simple pour l’espace de travail d’un client"
+              "title": "Créer une carte de navigation simple pour l'espace de travail d'un client"
             }
           },
           "tryIt": {
             "allowReveal": true,
             "exercises": {
               "moving-around-try-it-1": {
-                "title": "Tâche terminal : entrer dans un dossier avec cd",
-                "prompt": "Vous devez pour enter the `navigation-practice` dossier. Exécutez `ls`, then `cd navigation-practice`, then `pwd` pour confirmer vous déplacerd.",
-                "hint": "List first, déplacer second, then confirmer votre new emplacement avec `pwd`.",
+                "title": "Tâche dans le terminal : accéder à un dossier à l'aide de la commande « cd »",
+                "prompt": "Vous devez accéder au dossier « `navigation-practice` ». Exécutez les commandes suivantes : « `ls` », puis « `cd navigation-practice` », puis « `pwd` » pour vérifier que le déplacement a bien eu lieu.",
+                "hint": "Commencez par publier votre annonce, déménagez ensuite, puis confirmez votre nouvelle adresse auprès de `pwd`.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `ls` avant moving."
+                      "message": "Exécutez la commande « `ls` » avant de déménager."
                     },
                     "1": {
-                      "message": "Exécutez `cd navigation-practice`."
+                      "message": "Exécutez la commande « `cd navigation-practice` »."
                     },
                     "2": {
-                      "message": "Exécutez `pwd` après changing dossiers."
+                      "message": "Après avoir changé de dossier, lancez la commande « `pwd` »."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
                 "starterFiles": {
                   "navigation_practice_start_welcome_txt": {
-                    "content": "Start dossier\n"
+                    "content": "Start folder\n"
                   },
                   "navigation_practice_reports_today_txt": {
-                    "content": "Report dossier\n"
+                    "content": "Report folder\n"
                   }
                 }
               },
               "moving-around-try-it-2": {
-                "title": "Tâche terminal : remonter avec cd ..",
-                "prompt": "Start inside `navigation-practice/start`, then déplacer up one level. Exécutez `cd navigation-practice/start`, `pwd`, `cd ..`, et `pwd` again.",
-                "hint": "After `cd ..`, the second `pwd` should afficher the parent dossier.",
+                "title": "Tâche dans le terminal : remonter d'un niveau avec « cd .. »",
+                "prompt": "Commencez par « `navigation-practice/start` », puis passez au niveau supérieur. Exécutez à nouveau « `cd navigation-practice/start` », « `pwd` », « `cd ..` » et « `pwd` ».",
+                "hint": "Après avoir saisi « `cd ..` », la deuxième commande « `pwd` » devrait afficher le dossier parent.",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `cd navigation-practice/start`."
+                      "message": "Exécutez la commande « `cd navigation-practice/start` »."
                     },
                     "1": {
-                      "message": "Exécutez `cd ..` pour déplacer up one dossier."
+                      "message": "Exécutez la commande « `cd ..` » pour remonter d'un dossier."
                     },
                     "2": {
-                      "message": "Exécutez `pwd` pour confirmer where vous are."
+                      "message": "Exécutez la commande « `pwd` » pour vérifier où vous vous trouvez."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
                 "starterFiles": {
                   "navigation_practice_start_welcome_txt": {
-                    "content": "Start dossier\n"
+                    "content": "Start folder\n"
                   },
                   "navigation_practice_reports_today_txt": {
-                    "content": "Report dossier\n"
+                    "content": "Report folder\n"
                   }
                 }
               },
               "moving-around-try-it-3": {
-                "title": "Tâche terminal : revenir au dossier personnel avec cd ~",
-                "prompt": "Jump depuis a nested dossier back pour votre home dossier. Exécutez `cd navigation-practice/reports`, `pwd`, `cd ~`, et `pwd` again.",
-                "hint": "Utilisez `~` as the shortcut back pour votre home dossier, then confirmer avec `pwd`.",
+                "title": "Tâche finale : rentrer chez soi avec la commande « cd ~ »",
+                "prompt": "Revenez de votre dossier imbriqué à votre dossier d'accueil. Relancez les pages `cd navigation-practice/reports`, `pwd`, `cd ~` et `pwd`.",
+                "hint": "Utilisez « `~` » comme raccourci vers votre dossier personnel, puis confirmez en saisissant « `pwd` ».",
                 "help": {
-                  "concept": "Une tâche Essayez vous-même vous permet de pratiquer la commande de la leçon dans un vrai espace de travail.",
-                  "hint_1": "Créez les dossiers parents avant de créer ou déplacer des fichiers.",
-                  "hint_2": "Vérifiez votre travail avec ls, cat ou find avant de cliquer sur Vérifier."
+                  "concept": "Une activité « Try It » vous permet de mettre en pratique la commande présentée dans la leçon dans un environnement de travail réel.",
+                  "hint_1": "Créez les dossiers parents avant de créer ou de déplacer des fichiers.",
+                  "hint_2": "Vérifiez votre travail à l'aide des commandes ls, cat ou find avant de cliquer sur « Vérifier »."
                 },
-                "starterCode": "# Utilisez le terminal pour cette tâche Linux.",
+                "starterCode": "# Use the terminal for this Linux task.",
                 "terminalExpectations": {
                   "requiredCommands": {
                     "0": {
-                      "message": "Exécutez `cd navigation-practice/reports`."
+                      "message": "Exécutez la commande « `cd navigation-practice/reports` »."
                     },
                     "1": {
-                      "message": "Exécutez `cd ~` pour jump back home."
+                      "message": "Exécutez la commande « `cd ~` » pour revenir à la page d'accueil."
                     },
                     "2": {
-                      "message": "Exécutez `pwd` pour confirmer votre emplacement."
+                      "message": "Exécutez la commande « `pwd` » pour vérifier votre emplacement."
                     }
                   },
                   "forbiddenCommands": {
                     "0": {
-                      "message": "N’utilisez pas sudo pour les tâches d’espace de travail destinées aux débutants."
+                      "message": "N'utilisez pas « sudo » pour les tâches courantes dans l'espace de travail."
                     }
                   }
                 },
                 "starterFiles": {
                   "navigation_practice_start_welcome_txt": {
-                    "content": "Start dossier\n"
+                    "content": "Start folder\n"
                   },
                   "navigation_practice_reports_today_txt": {
-                    "content": "Report dossier\n"
+                    "content": "Report folder\n"
                   }
                 }
               }
             },
             "try_moving_around_sketch0": {
-              "title": "Essayez vous-même : entrer dans un dossier avec cd",
-              "prompt": "Exécutez `ls`, then `cd navigation-practice`, then `pwd` pour confirmer the dossier change."
+              "title": "Essayez vous-même : accédez à un dossier à l'aide de la commande « cd »",
+              "prompt": "Exécutez la commande « `ls` », puis « `cd navigation-practice` », puis « `pwd` » pour valider la modification du dossier."
             },
             "try_moving_around_sketch1": {
-              "title": "Essayez vous-même : remonter avec cd ..",
-              "prompt": "Exécutez `cd navigation-practice/start`, `pwd`, `cd ..`, et `pwd` again pour practice moving pour the parent dossier."
+              "title": "Essayez vous-même : remontez d'un niveau avec la commande « cd .. »",
+              "prompt": "Relancez les commandes suivantes : ``cd navigation-practice/start``, ``pwd``, ``cd ..`` et ``pwd`` pour vous entraîner à accéder au dossier parent."
             },
             "try_moving_around_sketch2": {
-              "title": "Essayez vous-même : revenir au dossier personnel avec cd ~",
-              "prompt": "Exécutez `cd navigation-practice/reports`, `pwd`, `cd ~`, et `pwd` again pour practice the home-dossier shortcut."
+              "title": "Essayez vous-même : retournez à l'accueil avec la commande « cd ~ »",
+              "prompt": "Lancez à nouveau les pages `cd navigation-practice/reports`, `pwd`, `cd ~` et `pwd` pour vous entraîner à utiliser le raccourci vers le dossier d'accueil."
             }
           },
           "practice": {
             "q1": {
-              "title": "Ce que fait `cd`",
-              "prompt": "Quelle commandee changes votre dossier actuel dans the Linux Terminal?",
-              "hint": "Utilisez l’explication de la leçon et la formulation de cette question pour réduire les choix.",
+              "title": "En quoi consiste «`cd`» ?",
+              "prompt": "Quelle commande permet de changer de répertoire dans le terminal Linux ?",
+              "hint": "Servez-vous de l'explication donnée dans la leçon et de la formulation de cette question pour affiner votre réponse.",
               "help": {
-                "concept": "Ce texte d’aide a été corrigé parce que la formulation originale révélait la réponse trop directement.",
-                "hint_1": "Compare the question pour the lesson example et redéplacer details that faire not match the requested concept.",
-                "hint_2": "Utilisez le rôle ou les indices nommés dans l’énoncé au lieu de vous appuyer sur la formulation des réponses."
+                "concept": "Ce texte d'aide a été modifié, car la formulation initiale révélait la réponse de manière trop directe.",
+                "hint_1": "Comparez la question à l'exemple donné dans la leçon et supprimez les détails qui ne correspondent pas au concept demandé.",
+                "hint_2": "Utilisez le rôle ou l'élément de preuve mentionné dans l'énoncé plutôt que de vous fier à la formulation de la réponse."
               },
               "options": {
                 "a": "pwd",
@@ -168,61 +168,61 @@
               }
             },
             "moving-around-single-choice-2": {
-              "title": "Choisir la meilleure description",
-              "prompt": "Quel/quelle statement best matches Moving Around avec cd?",
-              "hint": "Cherchez the answer that describes the main concept depuis the lesson.",
+              "title": "Choisissez la description la plus appropriée",
+              "prompt": "Quelle affirmation correspond le mieux à la rubrique « Se déplacer avec un CD » ?",
+              "hint": "Choisissez la réponse qui décrit le concept principal de la leçon.",
               "help": {
-                "concept": "This question vérifiers the main idea depuis Moving Around avec cd.",
-                "hint_1": "Utilisez the lesson explanation, then eliminate answers that faire not match it.",
-                "hint_2": "Choisissez le answer that matches the course concept, not a random detail."
+                "concept": "Cette question permet de vérifier la compréhension de l'idée principale du chapitre « Se déplacer avec un CD ».",
+                "hint_1": "Suis les explications données dans la leçon, puis élimine les réponses qui ne correspondent pas à celles-ci.",
+                "hint_2": "Choisissez la réponse qui correspond au concept abordé dans le cours, et non un détail pris au hasard."
               },
               "options": {
-                "a": "It describes the main concept depuis the lesson.",
-                "b": "It est unrelated pour the course topic.",
-                "c": "It skips the learner objectif.",
-                "d": "It replaces the concept avec an unsûr shortcut."
+                "a": "Il décrit le concept principal de la leçon.",
+                "b": "Cela n'a aucun rapport avec le sujet du cours.",
+                "c": "Cela ne tient pas compte de l'objectif de l'apprenant.",
+                "d": "Cela remplace le concept par un raccourci peu sûr."
               }
             },
             "moving-around-multi-choice-1": {
-              "title": "Sélectionner de bonnes habitudes d’apprentissage",
-              "prompt": "Quel/quelle actions sont good habitudes while apprentissage this topic?",
-              "hint": "Good habitudes keep the learner focused on the lesson objectif et visible résultats.",
+              "title": "Adoptez des habitudes d'apprentissage sûres",
+              "prompt": "Quelles sont les bonnes habitudes à adopter pour apprendre ce sujet ?",
+              "hint": "Les bonnes habitudes permettent à l'apprenant de rester concentré sur l'objectif de la leçon et sur les résultats concrets.",
               "help": {
-                "concept": "This question vérifiers the main idea depuis Moving Around avec cd.",
-                "hint_1": "Utilisez the lesson explanation, then eliminate answers that faire not match it.",
-                "hint_2": "Choisissez le answer that matches the course concept, not a random detail."
+                "concept": "Cette question porte sur l'idée principale du chapitre « Se déplacer avec un CD ».",
+                "hint_1": "Suis les explications données dans la leçon, puis élimine les réponses qui ne correspondent pas à celles-ci.",
+                "hint_2": "Choisissez la réponse qui correspond au concept abordé dans le cours, et non un détail pris au hasard."
               },
               "options": {
-                "a": "Read the énoncé carefully avant acting",
-                "b": "Check votre résultat après making a change",
-                "c": "Ignore the exact names dans the task",
-                "d": "Utilisez unrelated shortcuts sans understanding them"
+                "a": "Lisez attentivement les instructions avant d'agir.",
+                "b": "Vérifiez le résultat après avoir effectué une modification",
+                "c": "Ne tenez pas compte des noms exacts indiqués dans la tâche",
+                "d": "Utiliser des raccourcis sans rapport les uns avec les autres sans les comprendre"
               }
             },
             "moving-around-drag-reorder-1": {
-              "title": "Mettre un flux de pratique sûr dans l’ordre",
-              "prompt": "Mettez ces apprentissage étapes dans a sûr order.",
-              "hint": "Lisez chaque élément et placez-les dans l’ordre où l’énoncé doit être compris.",
+              "title": "Commander un protocole d'entraînement sécurisé",
+              "prompt": "Organisez ces étapes d'apprentissage dans un ordre logique.",
+              "hint": "Lisez chaque élément et classez-les dans l'ordre dans lequel l'énoncé doit être compris.",
               "help": {
-                "concept": "Les éléments doivent former un énoncé valide dans un ordre logique.",
-                "hint_1": "Commencez par l’élément qui introduit l’idée ou l’action.",
-                "hint_2": "Placez les éléments dépendants après la partie qu’ils décrivent ou complètent."
+                "concept": "Les éléments doivent former un ensemble cohérent, présenté dans un ordre logique.",
+                "hint_1": "Commencez par le passage qui présente l'idée ou l'action.",
+                "hint_2": "Placez les pièces liées à un emplacement précis après l'élément qu'elles décrivent ou complètent."
               },
               "tokens": {
-                "t1": "Read the objectif",
-                "t2": "Try one step",
-                "t3": "Check the résultat",
-                "t4": "Reflect on what changed"
+                "t1": "Lire l'objectif",
+                "t2": "Essayez une étape",
+                "t3": "Vérifiez le résultat",
+                "t4": "Réfléchissez à ce qui a changé"
               }
             },
             "q2": {
-              "title": "Remonter d’un niveau",
-              "prompt": "Complete the commande that déplacers depuis the dossier actuel pour its parent dossier.",
-              "hint": "Utilisez the special path that means 'parent dossier.'",
+              "title": "Monter d'un niveau",
+              "prompt": "Complétez la commande qui permet de passer du dossier actuel à son dossier parent.",
+              "hint": "Utilisez le chemin d'accès spécial qui désigne le « dossier parent ».",
               "help": {
-                "concept": "In Linux paths, `..` refers pour the directory one level above votre current emplacement.",
-                "hint_1": "This est not a commande by itself here; cela est the target used après `cd`.",
-                "hint_2": "The parent-dossier shortcut uses two dots."
+                "concept": "Dans les chemins d'accès sous Linux, « `..` » désigne le répertoire situé un niveau au-dessus de votre emplacement actuel.",
+                "hint_1": "Il ne s'agit pas ici d'une commande à part entière ; c'est la cible utilisée après « `cd` ».",
+                "hint_2": "Le raccourci vers le dossier parent utilise deux points."
               },
               "template": "cd [blank1]",
               "choices": [
@@ -233,20 +233,20 @@
               ]
             },
             "q3": {
-              "title": "Naviguer dans un dossier de projet",
-              "prompt": "A script changes dossiers avant doing other work. Quel should cela also faire so vous can confirmer cela ended up dans the right place?",
-              "hint": "Cherchez the option that makes the dossier change visible dans the sortie.",
+              "title": "Accéder au dossier d'un projet",
+              "prompt": "Un script change de dossier avant d'effectuer d'autres opérations. Que devrait-il faire de plus pour que vous puissiez vérifier qu'il se trouve bien au bon endroit ?",
+              "hint": "Recherchez l'option qui permet d'afficher la modification du dossier dans le résultat.",
               "help": {
-                "concept": "A common navigation workflow est créer a dossier avec `mkdir`, enter cela avec `cd`, et verify the new répertoire de travail avec `pwd`.",
-                "hint_1": "Vous devez one commande pour créer the dossier et another pour déplacer into it.",
-                "hint_2": "After entering `client-site`, run the commande that affiche le/la actuel(le) répertoire de travail so the terminal sortie affichers the new emplacement."
+                "concept": "Une procédure de navigation courante consiste à créer un dossier avec la commande « `mkdir` », à y accéder avec « `cd` », puis à vérifier le nouveau répertoire de travail avec « `pwd` ».",
+                "hint_1": "Il faut une commande pour créer le dossier et une autre pour y accéder.",
+                "hint_2": "Après avoir saisi « `client-site` », exécutez la commande qui affiche le répertoire de travail actuel afin que la sortie du terminal indique le nouvel emplacement."
               },
-              "template": "A script that changes dossiers should also ____ so the résultat est easy pour verify.",
+              "template": "Un script qui modifie des dossiers devrait également ____ afin que le résultat soit facile à vérifier.",
               "choices": [
                 "afficher un résultat observable",
-                "masquer toute sortie",
+                "masquer toutes les sorties",
                 "supprimer le fichier immédiatement",
-                "sauter le programme"
+                "passer le programme"
               ]
             }
           }
@@ -259,16 +259,16 @@
       "linux-module-1-terminal-navigation": {
         "moving-around": {
           "sketch-1": {
-            "title": "Ce que `cd` change",
-            "bodyMarkdown": "`cd` means **change directory**. A directory est just another word for a dossier. When vous run `cd`, vous déplacer votre terminal's current emplacement pour a different dossier.\n\nA good habitude est pour vérifier where vous sont avant et après moving:\n\n```bash\npwd\ncd projects\npwd\n```\n\nStep by étape:\n\n- `pwd` affiche votre dossier actuel.\n- `cd projects` déplacers into the `projects` dossier if cela exists dans votre current emplacement.\n- The second `pwd` confirmers the new emplacement.\n\nExample:\n\n```bash\n/home/learner\ncd projects\n/home/learner/projects\n```\n\nThis matters because many terminal commandes act on votre **dossier actuel**. If vous sont dans the wrong place, `ls`, `touch`, `mkdir`, `cp`, ou `mv` may affect the wrong fichiers."
+            "title": "Quels sont les changements apportés par l'`cd` ?",
+            "bodyMarkdown": "`cd` means **change directory**. A directory is just another word for a folder. When you run `cd`, you move your terminal's current location to a different folder.\n\nA good habit is to check where you are before and after moving:\n\n```bash\npwd\ncd projects\npwd\n```\n\nStep by step:\n\n- `pwd` prints your current folder.\n- `cd projects` moves into the `projects` folder if it exists in your current location.\n- The second `pwd` confirms the new location.\n\nExample:\n\n```bash\n/home/learner\ncd projects\n/home/learner/projects\n```\n\nThis matters because many terminal commands act on your **current folder**. If you are in the wrong place, `ls`, `touch`, `mkdir`, `cp`, or `mv` may affect the wrong files."
           },
           "sketch-2": {
-            "title": "Utiliser `..`, `.` et `~`",
-            "bodyMarkdown": "Some `cd` targets sont shortcuts:\n\n- `..` means **the parent dossier**\n- `.` means **the dossier actuel**\n- `~` means **your home dossier**\n\nWorked example:\n\n```bash\npwd\ncd ..\npwd\ncd ~\npwd\n```\n\nLine by line:\n\n- The first `pwd` affichers where vous start.\n- `cd ..` déplacers up one level.\n- The next `pwd` affichers the parent dossier.\n- `cd ~` jumps pour votre home dossier depuis anywhere.\n- The last `pwd` confirmers that jump.\n\n`cd .` usually keeps vous dans the same place. It can still be useful when vous sont practicing path ideas et want pour afficher “stay here.”"
+            "title": "Sources : `..`, `.` et `~`",
+            "bodyMarkdown": "Some `cd` targets are shortcuts:\n\n- `..` means **the parent folder**\n- `.` means **the current folder**\n- `~` means **your home folder**\n\nWorked example:\n\n```bash\npwd\ncd ..\npwd\ncd ~\npwd\n```\n\nLine by line:\n\n- The first `pwd` shows where you start.\n- `cd ..` moves up one level.\n- The next `pwd` shows the parent folder.\n- `cd ~` jumps to your home folder from anywhere.\n- The last `pwd` confirms that jump.\n\n`cd .` usually keeps you in the same place. It can still be useful when you are practicing path ideas and want to show “stay here.”"
           },
           "sketch-3": {
-            "title": "Lire les chemins prudemment avant de se déplacer",
-            "bodyMarkdown": "A path tells the terminal **which dossier** vous want. Before using `cd`, cela helps pour inspecter the dossier actuel avec `ls`.\n\nExample:\n\n```bash\npwd\nls\ncd reports\nls\n```\n\nQuel happens:\n\n- `pwd` affichers votre starting emplacement.\n- `ls` listers dossiers et fichiers there.\n- `cd reports` déplacers into the `reports` dossier.\n- `ls` now affichers what est inside `reports`.\n\nIf `reports` est not listered avant vous try `cd reports`, the commande will fail because that dossier est not dans votre current emplacement. Checking avec `ls` first helps vous déplacer confidently et avoid mistakes."
+            "title": "Vérifier les voies de circulation en toute sécurité avant de se déplacer",
+            "bodyMarkdown": "A path tells the terminal **which folder** you want. Before using `cd`, it helps to inspect the current folder with `ls`.\n\nExample:\n\n```bash\npwd\nls\ncd reports\nls\n```\n\nWhat happens:\n\n- `pwd` shows your starting location.\n- `ls` lists folders and files there.\n- `cd reports` moves into the `reports` folder.\n- `ls` now shows what is inside `reports`.\n\nIf `reports` is not listed before you try `cd reports`, the command will fail because that folder is not in your current location. Checking with `ls` first helps you move confidently and avoid mistakes."
           }
         }
       }

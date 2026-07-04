@@ -1,0 +1,938 @@
+{
+  "title": "Capstone Scope and Architecture",
+  "summary": "Plan the Smart Task Tracker capstone by choosing a realistic scope, mapping the workspace files, and setting up the first multifile OOP structure that will grow through the rest of the project.",
+  "minutes": 30,
+  "sketchBlocks": [
+    {
+      "id": "capstone-scope-and-architecture-sketch-0",
+      "title": "Smart Task Tracker capstone overview",
+      "bodyMarkdown": "In this capstone, you are building a **Smart Task Tracker** for a small product team. The finished app will organize tasks, separate different task types, save and load data, generate reports, include tests, and end with clear README notes.\n\nYour job in this first step is **not** to finish the whole app yet. Instead, you will define a realistic scope and create a clean architecture so later steps can build on it without confusion.\n\nA strong capstone architecture usually answers these questions:\n\n- **What are the main objects?**\n- **Which files hold the classes?**\n- **Which file runs the app?**\n- **Which files handle storage, reports, and tests?**\n- **How will inheritance and polymorphism fit into the design?**\n\nFor this project, a good starting design is:\n\n```python\n# src/models/base_task.py\nclass BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def summary(self):\n        return f\"{self._title} ({self._priority})\"\n```\n\nThis example shows an early version of a base class:\n\n- `class BaseTask:` defines the shared task blueprint.\n- `__init__(self, title, priority)` sets up each new task object.\n- `self._title` and `self._priority` store task data with encapsulated attribute names.\n- `summary()` gives one shared behavior that subclasses can reuse or extend later.\n\nA matching project layout might look like this:\n\n```python\nsrc/\n  main.py\n  models/\n    __init__.py\n    base_task.py\n    bug_task.py\n    feature_task.py\n  services/\n    __init__.py\n    tracker_service.py\n  reports/\n    __init__.py\n    report_builder.py\ntests/\n  test_tasks.py\nREADME.md\n```\n\nThis layout supports the full capstone goals:\n\n- **Encapsulation** through protected-style attributes like `_title`\n- **Abstraction** through a shared base class contract\n- **Inheritance** through `BugTask` and `FeatureTask`\n- **Polymorphism** by treating mixed task objects through shared methods like `summary()` or `estimate()`\n\nBy the end of this topic, you will have the first working workspace snapshot for the capstone handoff: a scoped project structure, starter classes, a service layer, a report layer, and a main program that proves the architecture works."
+    }
+  ],
+  "quizDraft": [
+    {
+      "id": "try-capstone-scope-and-architecture-sketch0",
+      "kind": "code_input",
+      "title": "Create the capstone workspace map",
+      "prompt": "Set up the first Smart Task Tracker workspace snapshot. Complete the provided files so the app prints a clear architecture summary. Keep the existing folder structure and imports. Requirements: `BaseTask.summary()` must return `\"<title> [<priority>]\"`; `TrackerService.project_scope()` must return the exact string `\"Smart Task Tracker: models, services, reports, tests, README\"`; `build_report_line(task)` must return `\"REPORT: \"` plus the task summary; and `src/main.py` must create one `BaseTask(\"Plan architecture\", \"high\")` and print the scope line and then the report line.",
+      "starterCode": "# Open src/main.py in the files panel and complete the workspace.\n",
+      "solutionCode": "from models.base_task import BaseTask\nfrom services.tracker_service import TrackerService\nfrom reports.report_builder import build_report_line\n\nservice = TrackerService()\ntask = BaseTask(\"Plan architecture\", \"high\")\n\nprint(service.project_scope())\nprint(build_report_line(task))",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Smart Task Tracker: models, services, reports, tests, README\nREPORT: Plan architecture [high]\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "src/main.py",
+              "content": "from models.base_task import BaseTask\nfrom services.tracker_service import TrackerService\nfrom reports.report_builder import build_report_line\n\nservice = TrackerService()\ntask = BaseTask(\"Plan architecture\", \"high\")\n\nprint(service.project_scope())\nprint(build_report_line(task))",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/base_task.py",
+              "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/tracker_service.py",
+              "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/report_builder.py",
+              "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()}\"",
+              "readOnly": false
+            },
+            {
+              "path": "README.md",
+              "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+              "readOnly": false
+            },
+            {
+              "path": "tests/test_tasks.py",
+              "content": "# Tests will be added in a later step.",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "src/main.py",
+          "content": "from models.base_task import BaseTask\nfrom services.tracker_service import TrackerService\nfrom reports.report_builder import build_report_line\n\n# TODO: create the service\n# TODO: create one BaseTask with title \"Plan architecture\" and priority \"high\"\n# TODO: print the project scope line\n# TODO: print the report line for the task",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        # TODO: store title and priority\n        pass\n\n    def summary(self):\n        # TODO: return \"<title> [<priority>]\"\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/tracker_service.py",
+          "content": "class TrackerService:\n    def project_scope(self):\n        # TODO: return the exact project scope string\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/report_builder.py",
+          "content": "def build_report_line(task):\n    # TODO: return \"REPORT: \" plus the task summary\n    pass",
+          "readOnly": false
+        },
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+          "readOnly": false
+        },
+        {
+          "path": "tests/test_tasks.py",
+          "content": "# Tests will be added in a later step.",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Fill each file with one small responsibility, then let `main.py` connect them.",
+      "help": {
+        "concept": "This step practices project architecture by separating a model, a service, a report helper, and the entry file into different workspace files.",
+        "hint_1": "Implement the class in `src/models/base_task.py` first, then the service method, then the report function.",
+        "hint_2": "`main.py` should import both helpers, create one task object, and print exactly two lines in the required order."
+      }
+    },
+    {
+      "id": "capstone-define-base-task-contract",
+      "kind": "code_input",
+      "title": "Build the base class contract",
+      "prompt": "Continue from the previous workspace snapshot. Upgrade `BaseTask` into the shared contract for all task types. Requirements: keep `_title` and `_priority`; add `get_title()` and `get_priority()` methods; add `summary()` returning `\"<title> [<priority>]\"`; add `task_type()` returning `\"generic\"`; and update `src/main.py` so it prints three lines for `BaseTask(\"Plan architecture\", \"high\")`: the summary, the task type, and the report line. Keep the service and report files working.",
+      "starterCode": "# Continue editing the provided workspace files.\n",
+      "solutionCode": "from models.base_task import BaseTask\nfrom services.tracker_service import TrackerService\nfrom reports.report_builder import build_report_line\n\nservice = TrackerService()\ntask = BaseTask(\"Plan architecture\", \"high\")\n\nprint(task.summary())\nprint(task.task_type())\nprint(build_report_line(task))",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Plan architecture [high]\ngeneric\nREPORT: Plan architecture [high]\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "src/main.py",
+              "content": "from models.base_task import BaseTask\nfrom services.tracker_service import TrackerService\nfrom reports.report_builder import build_report_line\n\nservice = TrackerService()\ntask = BaseTask(\"Plan architecture\", \"high\")\n\nprint(task.summary())\nprint(task.task_type())\nprint(build_report_line(task))",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/base_task.py",
+              "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/tracker_service.py",
+              "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/report_builder.py",
+              "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()}\"",
+              "readOnly": false
+            },
+            {
+              "path": "README.md",
+              "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+              "readOnly": false
+            },
+            {
+              "path": "tests/test_tasks.py",
+              "content": "# Tests will be added in a later step.",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "src/main.py",
+          "content": "from models.base_task import BaseTask\nfrom services.tracker_service import TrackerService\nfrom reports.report_builder import build_report_line\n\nservice = TrackerService()\ntask = BaseTask(\"Plan architecture\", \"high\")\n\n# TODO: print the task summary\n# TODO: print the task type\n# TODO: print the report line",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    # TODO: add get_title\n    # TODO: add get_priority\n    # TODO: keep summary returning \"<title> [<priority>]\"\n    # TODO: add task_type returning \"generic\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/tracker_service.py",
+          "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/report_builder.py",
+          "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()}\"",
+          "readOnly": false
+        },
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+          "readOnly": false
+        },
+        {
+          "path": "tests/test_tasks.py",
+          "content": "# Tests will be added in a later step.",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Add small getter methods and one default type method to the base class.",
+      "help": {
+        "concept": "A base class contract defines shared attributes and methods that subclasses can inherit and override later.",
+        "hint_1": "`BaseTask` should now expose behavior through methods instead of making other files depend on raw attributes.",
+        "hint_2": "After adding `task_type()`, update `main.py` to print summary first, then task type, then the report line."
+      }
+    },
+    {
+      "id": "capstone-add-subclasses-and-inheritance",
+      "kind": "code_input",
+      "title": "Add BugTask and FeatureTask subclasses",
+      "prompt": "Continue from the previous full workspace. Add inheritance by creating `BugTask` and `FeatureTask` in their own model files. Both must inherit from `BaseTask` and call `super().__init__(title, priority)`. `BugTask` must store `_severity` and return `\"bug\"` from `task_type()`. `FeatureTask` must store `_team` and return `\"feature\"` from `task_type()`. Update `src/models/__init__.py` if needed. Then update `src/main.py` to create one bug task `(\"Fix login\", \"high\", \"critical\")` and one feature task `(\"Add dashboard\", \"medium\", \"product\")`, and print each task's summary and type on separate lines in this order: bug summary, bug type, feature summary, feature type.",
+      "starterCode": "# Continue editing the provided workspace files.\n",
+      "solutionCode": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\n\nprint(bug.summary())\nprint(bug.task_type())\nprint(feature.summary())\nprint(feature.task_type())",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "Fix login [high]\nbug\nAdd dashboard [medium]\nfeature\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "src/main.py",
+              "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\n\nprint(bug.summary())\nprint(bug.task_type())\nprint(feature.summary())\nprint(feature.task_type())",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/base_task.py",
+              "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/bug_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self._severity = severity\n\n    def task_type(self):\n        return \"bug\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/feature_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        super().__init__(title, priority)\n        self._team = team\n\n    def task_type(self):\n        return \"feature\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/tracker_service.py",
+              "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/report_builder.py",
+              "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()}\"",
+              "readOnly": false
+            },
+            {
+              "path": "README.md",
+              "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+              "readOnly": false
+            },
+            {
+              "path": "tests/test_tasks.py",
+              "content": "# Tests will be added in a later step.",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "src/main.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n# TODO: create the bug task\n# TODO: create the feature task\n# TODO: print bug summary\n# TODO: print bug type\n# TODO: print feature summary\n# TODO: print feature type",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        # TODO: call the base constructor\n        # TODO: store severity\n        pass\n\n    def task_type(self):\n        # TODO: return \"bug\"\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        # TODO: call the base constructor\n        # TODO: store team\n        pass\n\n    def task_type(self):\n        # TODO: return \"feature\"\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/tracker_service.py",
+          "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/report_builder.py",
+          "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()}\"",
+          "readOnly": false
+        },
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+          "readOnly": false
+        },
+        {
+          "path": "tests/test_tasks.py",
+          "content": "# Tests will be added in a later step.",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Each subclass should reuse the base constructor with `super()` and add one extra attribute of its own.",
+      "help": {
+        "concept": "Inheritance lets subclasses share common setup and behavior from a base class while adding specialized state or overriding methods.",
+        "hint_1": "`BugTask` and `FeatureTask` should both inherit `summary()` from `BaseTask`, so you only need to override `task_type()` and store the extra field.",
+        "hint_2": "Make sure `main.py` imports the subclass files, creates both objects, and prints four lines in the required order."
+      }
+    },
+    {
+      "id": "capstone-add-polymorphic-reporting",
+      "kind": "code_input",
+      "title": "Use polymorphism in the report layer",
+      "prompt": "Continue from the previous full workspace. Add polymorphic behavior by overriding `report_details()` in each class. In `BaseTask`, `report_details()` must return `\"type=generic\"`. In `BugTask`, it must return `\"type=bug severity=<severity>\"`. In `FeatureTask`, it must return `\"type=feature team=<team>\"`. Update `reports/report_builder.py` so `build_report_line(task)` returns `\"REPORT: <summary> | <report_details>\"`. Then update `src/main.py` to create the same bug and feature tasks as before and print the report line for each one. This step should show that one report function can work with different task objects through the same method names.",
+      "starterCode": "# Continue editing the provided workspace files.\n",
+      "solutionCode": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom reports.report_builder import build_report_line\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\n\nprint(build_report_line(bug))\nprint(build_report_line(feature))",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "REPORT: Fix login [high] | type=bug severity=critical\nREPORT: Add dashboard [medium] | type=feature team=product\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "src/main.py",
+              "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom reports.report_builder import build_report_line\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\n\nprint(build_report_line(bug))\nprint(build_report_line(feature))",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/base_task.py",
+              "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"\n\n    def report_details(self):\n        return \"type=generic\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/bug_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self._severity = severity\n\n    def task_type(self):\n        return \"bug\"\n\n    def report_details(self):\n        return f\"type=bug severity={self._severity}\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/feature_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        super().__init__(title, priority)\n        self._team = team\n\n    def task_type(self):\n        return \"feature\"\n\n    def report_details(self):\n        return f\"type=feature team={self._team}\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/tracker_service.py",
+              "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/report_builder.py",
+              "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()} | {task.report_details()}\"",
+              "readOnly": false
+            },
+            {
+              "path": "README.md",
+              "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+              "readOnly": false
+            },
+            {
+              "path": "tests/test_tasks.py",
+              "content": "# Tests will be added in a later step.",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "src/main.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom reports.report_builder import build_report_line\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\n\n# TODO: print the bug report line\n# TODO: print the feature report line",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"\n\n    def report_details(self):\n        # TODO: return \"type=generic\"\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self._severity = severity\n\n    def task_type(self):\n        return \"bug\"\n\n    def report_details(self):\n        # TODO: return the bug details string\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        super().__init__(title, priority)\n        self._team = team\n\n    def task_type(self):\n        return \"feature\"\n\n    def report_details(self):\n        # TODO: return the feature details string\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/tracker_service.py",
+          "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/report_builder.py",
+          "content": "def build_report_line(task):\n    # TODO: return \"REPORT: <summary> | <report_details>\"\n    pass",
+          "readOnly": false
+        },
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+          "readOnly": false
+        },
+        {
+          "path": "tests/test_tasks.py",
+          "content": "# Tests will be added in a later step.",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Give each class the same method name, but let each class return its own details string.",
+      "help": {
+        "concept": "Polymorphism works when different subclasses respond to the same method call in their own way, allowing shared service or report code to stay simple.",
+        "hint_1": "Add `report_details()` to the base class and override it in both subclasses.",
+        "hint_2": "`build_report_line(task)` should call both `task.summary()` and `task.report_details()` without checking the task type manually."
+      }
+    },
+    {
+      "id": "capstone-add-service-for-mixed-task-lists",
+      "kind": "code_input",
+      "title": "Add a service that works with mixed task objects",
+      "prompt": "Continue from the previous full workspace. Expand `TrackerService` with a method named `build_overview(tasks)` that accepts a list of task objects and returns one string with each task on its own line in this format: `\"<task_type>: <summary>\"`. Use `\"\\n\".join(...)` so the returned string has line breaks between tasks. Then update `src/main.py` to create the same bug and feature tasks, put them in a list, call `build_overview(tasks)`, and print the returned overview. This step should demonstrate a service working with a mixed list of subclass objects through shared methods.",
+      "starterCode": "# Continue editing the provided workspace files.\n",
+      "solutionCode": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\nservice = TrackerService()\n\ntasks = [bug, feature]\nprint(service.build_overview(tasks))",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "bug: Fix login [high]\nfeature: Add dashboard [medium]\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "src/main.py",
+              "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\nservice = TrackerService()\n\ntasks = [bug, feature]\nprint(service.build_overview(tasks))",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/base_task.py",
+              "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"\n\n    def report_details(self):\n        return \"type=generic\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/bug_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self._severity = severity\n\n    def task_type(self):\n        return \"bug\"\n\n    def report_details(self):\n        return f\"type=bug severity={self._severity}\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/feature_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        super().__init__(title, priority)\n        self._team = team\n\n    def task_type(self):\n        return \"feature\"\n\n    def report_details(self):\n        return f\"type=feature team={self._team}\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/tracker_service.py",
+              "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"\n\n    def build_overview(self, tasks):\n        lines = []\n        for task in tasks:\n            lines.append(f\"{task.task_type()}: {task.summary()}\")\n        return \"\\n\".join(lines)",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/report_builder.py",
+              "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()} | {task.report_details()}\"",
+              "readOnly": false
+            },
+            {
+              "path": "README.md",
+              "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+              "readOnly": false
+            },
+            {
+              "path": "tests/test_tasks.py",
+              "content": "# Tests will be added in a later step.",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "src/main.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\nservice = TrackerService()\n\n# TODO: put the tasks into a list\n# TODO: print the overview returned by the service",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"\n\n    def report_details(self):\n        return \"type=generic\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self._severity = severity\n\n    def task_type(self):\n        return \"bug\"\n\n    def report_details(self):\n        return f\"type=bug severity={self._severity}\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        super().__init__(title, priority)\n        self._team = team\n\n    def task_type(self):\n        return \"feature\"\n\n    def report_details(self):\n        return f\"type=feature team={self._team}\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/tracker_service.py",
+          "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"\n\n    def build_overview(self, tasks):\n        # TODO: return one string with each task on its own line\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/report_builder.py",
+          "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()} | {task.report_details()}\"",
+          "readOnly": false
+        },
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+          "readOnly": false
+        },
+        {
+          "path": "tests/test_tasks.py",
+          "content": "# Tests will be added in a later step.",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Loop through the task list and call the same methods on each object instead of checking class names.",
+      "help": {
+        "concept": "A service can use polymorphism by calling shared methods like `task_type()` and `summary()` on every object in a mixed list.",
+        "hint_1": "Inside `build_overview`, build a list of formatted lines and join them with newline characters.",
+        "hint_2": "`main.py` should create a list like `[bug, feature]`, pass it to the service, and print the single returned string."
+      }
+    },
+    {
+      "id": "capstone-add-tests-and-readme-handoff",
+      "kind": "code_input",
+      "title": "Add starter tests and README handoff notes",
+      "prompt": "Continue from the previous full workspace. Add a simple test file and README handoff summary to make the architecture feel like a real capstone. In `tests/test_tasks.py`, write two `assert` statements: one that checks `BugTask(\"Fix login\", \"high\", \"critical\").task_type()` is `\"bug\"`, and one that checks `FeatureTask(\"Add dashboard\", \"medium\", \"product\").report_details()` is `\"type=feature team=product\"`. In `README.md`, replace the placeholder text with exactly these four lines:\n`# Smart Task Tracker`\n`Models: BaseTask, BugTask, FeatureTask`\n`Services: TrackerService`\n`Reports: report_builder`\nThen update `src/main.py` so it prints three lines: the service overview for the bug and feature tasks, then `TESTS READY`, then `README READY`.",
+      "starterCode": "# Continue editing the provided workspace files.\n",
+      "solutionCode": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\nservice = TrackerService()\n\ntasks = [bug, feature]\nprint(service.build_overview(tasks))\nprint(\"TESTS READY\")\nprint(\"README READY\")",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "bug: Fix login [high]\nfeature: Add dashboard [medium]\nTESTS READY\nREADME READY\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "src/main.py",
+              "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\nservice = TrackerService()\n\ntasks = [bug, feature]\nprint(service.build_overview(tasks))\nprint(\"TESTS READY\")\nprint(\"README READY\")",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/base_task.py",
+              "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"\n\n    def report_details(self):\n        return \"type=generic\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/bug_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self._severity = severity\n\n    def task_type(self):\n        return \"bug\"\n\n    def report_details(self):\n        return f\"type=bug severity={self._severity}\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/feature_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        super().__init__(title, priority)\n        self._team = team\n\n    def task_type(self):\n        return \"feature\"\n\n    def report_details(self):\n        return f\"type=feature team={self._team}\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/tracker_service.py",
+              "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"\n\n    def build_overview(self, tasks):\n        lines = []\n        for task in tasks:\n            lines.append(f\"{task.task_type()}: {task.summary()}\")\n        return \"\\n\".join(lines)",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/report_builder.py",
+              "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()} | {task.report_details()}\"",
+              "readOnly": false
+            },
+            {
+              "path": "README.md",
+              "content": "# Smart Task Tracker\nModels: BaseTask, BugTask, FeatureTask\nServices: TrackerService\nReports: report_builder",
+              "readOnly": false
+            },
+            {
+              "path": "tests/test_tasks.py",
+              "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nassert BugTask(\"Fix login\", \"high\", \"critical\").task_type() == \"bug\"\nassert FeatureTask(\"Add dashboard\", \"medium\", \"product\").report_details() == \"type=feature team=product\"",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "src/main.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\nservice = TrackerService()\n\ntasks = [bug, feature]\nprint(service.build_overview(tasks))\n# TODO: print TESTS READY\n# TODO: print README READY",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"\n\n    def report_details(self):\n        return \"type=generic\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self._severity = severity\n\n    def task_type(self):\n        return \"bug\"\n\n    def report_details(self):\n        return f\"type=bug severity={self._severity}\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        super().__init__(title, priority)\n        self._team = team\n\n    def task_type(self):\n        return \"feature\"\n\n    def report_details(self):\n        return f\"type=feature team={self._team}\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/tracker_service.py",
+          "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"\n\n    def build_overview(self, tasks):\n        lines = []\n        for task in tasks:\n            lines.append(f\"{task.task_type()}: {task.summary()}\")\n        return \"\\n\".join(lines)",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/report_builder.py",
+          "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()} | {task.report_details()}\"",
+          "readOnly": false
+        },
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\n\nCapstone project workspace.",
+          "readOnly": false
+        },
+        {
+          "path": "tests/test_tasks.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n# TODO: add two assert statements",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "This step is mostly file completion: one test file, one README, and a small update to `main.py`.",
+      "help": {
+        "concept": "A polished capstone architecture includes not only code modules, but also tests and documentation that explain and verify the design.",
+        "hint_1": "Keep the existing classes and service behavior, then add two asserts in the test file and replace the README text exactly.",
+        "hint_2": "After printing the overview in `main.py`, print the two readiness lines on separate lines."
+      }
+    },
+    {
+      "id": "capstone-final-architecture-handoff",
+      "kind": "code_input",
+      "title": "Produce the final architecture handoff snapshot",
+      "prompt": "Continue from the previous full workspace and finish this topic's handoff snapshot. Add one more service method named `architecture_checklist()` that returns the exact string `\"Checklist: models, inheritance, polymorphism, reports, tests, README\"`. Then update `src/main.py` so it prints five lines in this order: the overview for the bug and feature tasks, `TESTS READY`, `README READY`, and the checklist line. Keep all previous files working exactly as before. This final step should leave the capstone with a believable architecture handoff before later topics add storage, loading, and richer reports.",
+      "starterCode": "# Continue editing the provided workspace files.\n",
+      "solutionCode": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\nservice = TrackerService()\n\ntasks = [bug, feature]\nprint(service.build_overview(tasks))\nprint(\"TESTS READY\")\nprint(\"README READY\")\nprint(service.architecture_checklist())",
+      "tests": [
+        {
+          "stdin": "",
+          "stdout": "bug: Fix login [high]\nfeature: Add dashboard [medium]\nTESTS READY\nREADME READY\nChecklist: models, inheritance, polymorphism, reports, tests, README\n",
+          "match": "exact",
+          "files": [
+            {
+              "path": "src/main.py",
+              "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\nservice = TrackerService()\n\ntasks = [bug, feature]\nprint(service.build_overview(tasks))\nprint(\"TESTS READY\")\nprint(\"README READY\")\nprint(service.architecture_checklist())",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/base_task.py",
+              "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"\n\n    def report_details(self):\n        return \"type=generic\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/bug_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self._severity = severity\n\n    def task_type(self):\n        return \"bug\"\n\n    def report_details(self):\n        return f\"type=bug severity={self._severity}\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/models/feature_task.py",
+              "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        super().__init__(title, priority)\n        self._team = team\n\n    def task_type(self):\n        return \"feature\"\n\n    def report_details(self):\n        return f\"type=feature team={self._team}\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/services/tracker_service.py",
+              "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"\n\n    def build_overview(self, tasks):\n        lines = []\n        for task in tasks:\n            lines.append(f\"{task.task_type()}: {task.summary()}\")\n        return \"\\n\".join(lines)\n\n    def architecture_checklist(self):\n        return \"Checklist: models, inheritance, polymorphism, reports, tests, README\"",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/__init__.py",
+              "content": "",
+              "readOnly": false
+            },
+            {
+              "path": "src/reports/report_builder.py",
+              "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()} | {task.report_details()}\"",
+              "readOnly": false
+            },
+            {
+              "path": "README.md",
+              "content": "# Smart Task Tracker\nModels: BaseTask, BugTask, FeatureTask\nServices: TrackerService\nReports: report_builder",
+              "readOnly": false
+            },
+            {
+              "path": "tests/test_tasks.py",
+              "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nassert BugTask(\"Fix login\", \"high\", \"critical\").task_type() == \"bug\"\nassert FeatureTask(\"Add dashboard\", \"medium\", \"product\").report_details() == \"type=feature team=product\"",
+              "readOnly": false
+            }
+          ]
+        }
+      ],
+      "files": [
+        {
+          "path": "src/main.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\nfrom services.tracker_service import TrackerService\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Add dashboard\", \"medium\", \"product\")\nservice = TrackerService()\n\ntasks = [bug, feature]\nprint(service.build_overview(tasks))\nprint(\"TESTS READY\")\nprint(\"README READY\")\n# TODO: print the architecture checklist line",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/base_task.py",
+          "content": "class BaseTask:\n    def __init__(self, title, priority):\n        self._title = title\n        self._priority = priority\n\n    def get_title(self):\n        return self._title\n\n    def get_priority(self):\n        return self._priority\n\n    def summary(self):\n        return f\"{self._title} [{self._priority}]\"\n\n    def task_type(self):\n        return \"generic\"\n\n    def report_details(self):\n        return \"type=generic\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/bug_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self._severity = severity\n\n    def task_type(self):\n        return \"bug\"\n\n    def report_details(self):\n        return f\"type=bug severity={self._severity}\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/models/feature_task.py",
+          "content": "from models.base_task import BaseTask\n\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, team):\n        super().__init__(title, priority)\n        self._team = team\n\n    def task_type(self):\n        return \"feature\"\n\n    def report_details(self):\n        return f\"type=feature team={self._team}\"",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/services/tracker_service.py",
+          "content": "class TrackerService:\n    def project_scope(self):\n        return \"Smart Task Tracker: models, services, reports, tests, README\"\n\n    def build_overview(self, tasks):\n        lines = []\n        for task in tasks:\n            lines.append(f\"{task.task_type()}: {task.summary()}\")\n        return \"\\n\".join(lines)\n\n    def architecture_checklist(self):\n        # TODO: return the exact checklist string\n        pass",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/__init__.py",
+          "content": "",
+          "readOnly": false
+        },
+        {
+          "path": "src/reports/report_builder.py",
+          "content": "def build_report_line(task):\n    return f\"REPORT: {task.summary()} | {task.report_details()}\"",
+          "readOnly": false
+        },
+        {
+          "path": "README.md",
+          "content": "# Smart Task Tracker\nModels: BaseTask, BugTask, FeatureTask\nServices: TrackerService\nReports: report_builder",
+          "readOnly": false
+        },
+        {
+          "path": "tests/test_tasks.py",
+          "content": "from models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\nassert BugTask(\"Fix login\", \"high\", \"critical\").task_type() == \"bug\"\nassert FeatureTask(\"Add dashboard\", \"medium\", \"product\").report_details() == \"type=feature team=product\"",
+          "readOnly": false
+        }
+      ],
+      "recipeType": "fixed_tests",
+      "hint": "Only add one new service method and one final print line while preserving the existing workspace.",
+      "help": {
+        "concept": "A capstone handoff snapshot should preserve earlier working pieces and add one clear summary of what the architecture already includes.",
+        "hint_1": "Add `architecture_checklist()` to `TrackerService` without changing `build_overview(tasks)`.",
+        "hint_2": "After the existing readiness lines, print the exact checklist string returned by the new service method."
+      }
+    }
+  ],
+  "projectDraft": {
+    "title": "Smart Task Tracker capstone architecture handoff",
+    "stepIds": [
+      "try-capstone-scope-and-architecture-sketch0",
+      "capstone-define-base-task-contract",
+      "capstone-add-subclasses-and-inheritance",
+      "capstone-add-polymorphic-reporting",
+      "capstone-add-service-for-mixed-task-lists",
+      "capstone-add-tests-and-readme-handoff",
+      "capstone-final-architecture-handoff"
+    ]
+  }
+}

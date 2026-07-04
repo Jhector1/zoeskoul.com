@@ -1,0 +1,496 @@
+{
+  "topics": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-0": {
+        "operators-and-expressions": {
+          "label": "Operatè ak Ekspresyon",
+          "summary": "Konbine nimewo ak chenn karaktè ak operatè aritmetik ak parantèz.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa ekspresyon yo fè"
+            },
+            "sketch1": {
+              "title": "Plis modèl ekspresyon aritmetik"
+            },
+            "sketch2": {
+              "title": "Parantèz chanje lòd la"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Pratike ak operatè ak ekspresyon"
+            }
+          },
+          "projectSteps": {
+            "ci_arithmetic_output": {
+              "title": "Afiche yon rezilta aritmetik"
+            },
+            "ci_parentheses_output": {
+              "title": "Sèvi ak parantèz nan print"
+            },
+            "ci_comparison_output": {
+              "title": "Afiche yon rezilta soustraksyon"
+            },
+            "ci_boolean_and_output": {
+              "title": "Afiche yon rezilta aritmetik gwoupe"
+            },
+            "ci_two_line_expression_check": {
+              "title": "Konpare de ekspresyon gwoupe"
+            }
+          },
+          "quiz": {
+            "sc-expression-definition": {
+              "title": "Idantifye yon ekspresyon",
+              "prompt": "Ki deskripsyon ki pi byen koresponn ak yon ekspresyon Python?",
+              "hint": "Panse ak kòd Python ka evalye pou bay yon valè.",
+              "help": {
+                "concept": "Yon ekspresyon se yon moso kòd Python ke Python evalye pou jwenn yon valè, tankou `2 + 3`, `\"Hi\"`, oswa `4 * 5`.",
+                "hint_1": "Mande ki chwa ki dekri yon bagay Python ka evalye pou bay yon rezilta.",
+                "hint_2": "Yon pwogram konplè ka gen anpil pati, men yon ekspresyon se pati ki vin tounen yon valè tankou yon nimewo oswa yon chenn karaktè."
+              },
+              "options": {
+                "a": "Kòd ki pwodui yon valè lè Python evalye li",
+                "b": "Yon kòmantè ki eksplike sa pwogram nan fè",
+                "c": "Yon liy vid ant de enstriksyon",
+                "d": "Sèlman yon liy ki sèvi ak print()"
+              }
+            },
+            "sc-parentheses-effect": {
+              "title": "Gade sa parantèz chanje",
+              "prompt": "Ki sa ki sòti nan `print((2 + 3) * 4)`?",
+              "hint": "Evalye pati ki anndan parantèz yo an premye.",
+              "help": {
+                "concept": "Parantèz nan ekspresyon Python fòse pati ki gwoupe a pou evalye anvan operasyon ki bò kote li yo.",
+                "hint_1": "Premye jwenn valè `2 + 3`, apre sa sèvi ak rezilta sa a nan miltiplikasyon an.",
+                "hint_2": "San parantèz, miltiplikasyon ta fèt anvan adisyon, men ekspresyon sa a chanje lòd sa a."
+              },
+              "options": {
+                "a": "12",
+                "b": "14",
+                "c": "20",
+                "d": "24"
+              }
+            },
+            "mc-comparison-results": {
+              "title": "Chwazi ekspresyon aritmetik yo",
+              "prompt": "Ki egzanp ki ekspresyon aritmetik? Chwazi tout sa ki aplikab.",
+              "hint": "Ekspresyon aritmetik sèvi ak nimewo ak operatè tankou +, -, *, oswa /.",
+              "help": {
+                "concept": "Ekspresyon aritmetik konbine nimewo ak operatè pou pwodui yon rezilta nimewo.",
+                "hint_1": "Chèche egzanp Python ka kalkile kòm ekspresyon nimewo.",
+                "hint_2": "Pa chwazi mo senp oswa fraz konplè."
+              },
+              "options": {
+                "a": "`3 + 4`",
+                "b": "`\"hello\"`",
+                "c": "`10 - 2 * 3`",
+                "d": "`print`"
+              }
+            },
+            "mc-boolean-operators": {
+              "title": "Chwazi ekspresyon ki sèvi byen ak parantèz",
+              "prompt": "Ki ekspresyon ki sèvi ak parantèz pou fè lòd la pi klè? Chwazi tout sa ki aplikab.",
+              "hint": "Parantèz ka montre ki pati ki dwe kalkile an premye.",
+              "help": {
+                "concept": "Parantèz gwoupe yon pati nan yon ekspresyon pou Python evalye gwoup sa a an premye.",
+                "hint_1": "Chèche ekspresyon ki gen `(` ak `)` otou yon kalkil ki pi piti.",
+                "hint_2": "Bon parantèz fè kalkil yo vle a pi fasil pou li."
+              },
+              "options": {
+                "a": "`(2 + 3) * 4`",
+                "b": "`10 - (2 * 3)`",
+                "c": "`7 + 5`",
+                "d": "`(8 / 2) + 1`"
+              }
+            },
+            "dr-arithmetic-order": {
+              "title": "Mete etap evalyasyon yo nan lòd",
+              "prompt": "Ranje etap yo pou evalye `2 + 3 * 4` nan bon lòd la.",
+              "hint": "Miltiplikasyon fèt anvan adisyon isit la.",
+              "help": {
+                "concept": "Python swiv priyorite operatè yo, kidonk miltiplikasyon evalye anvan adisyon sof si parantèz chanje gwoupman an.",
+                "hint_1": "Pa ajoute 2 ak 3 an premye nan ekspresyon sa a.",
+                "hint_2": "Jwenn pwodui `3 * 4`, apre sa konbine rezilta sa a ak 2."
+              },
+              "tokens": {
+                "t1": "Evalye `3 * 4`",
+                "t2": "Jwenn `12`",
+                "t3": "Ajoute `2 + 12`",
+                "t4": "Jwenn `14`"
+              }
+            },
+            "dr-boolean-evaluation": {
+              "title": "Mete yon ekspresyon aritmetik gwoupe nan lòd",
+              "prompt": "Ranje etap yo pou evalye `(5 + 2) * 3` nan bon lòd la.",
+              "hint": "Evalye ekspresyon ki anndan parantèz yo an premye.",
+              "help": {
+                "concept": "Python evalye parantèz anvan li miltipliye, ajoute, oswa soustrae deyò gwoup la.",
+                "hint_1": "Kòmanse ak ekspresyon ki anndan parantèz yo.",
+                "hint_2": "Apre parantèz yo vin tounen yon sèl valè, miltipliye valè sa a pa 3."
+              },
+              "tokens": {
+                "t1": "Evalye `5 + 2`",
+                "t2": "Jwenn `7`",
+                "t3": "Miltipliye `7 * 3`",
+                "t4": "Jwenn `21`"
+              }
+            },
+            "fb-equality-operator": {
+              "title": "Konplete yon ekspresyon adisyon",
+              "prompt": "Chwazi operatè ki ajoute de nimewo yo.",
+              "hint": "Sèvi ak senbòl aritmetik pou adisyon.",
+              "help": {
+                "concept": "Operatè `+` a ajoute nimewo nan Python.",
+                "hint_1": "Li ekspresyon an tankou yon fraz matematik.",
+                "hint_2": "Chwazi senbòl ki vle di ajoute."
+              },
+              "template": "print(4 [blank1] 4)",
+              "choices": [
+                "+",
+                "-",
+                "*",
+                "/"
+              ]
+            },
+            "fb-boolean-or": {
+              "title": "Konplete yon ekspresyon miltiplikasyon",
+              "prompt": "Chwazi operatè ki miltipliye de nimewo yo.",
+              "hint": "Sèvi ak senbòl aritmetik Python pou miltiplikasyon.",
+              "help": {
+                "concept": "Operatè `*` a miltipliye nimewo nan Python.",
+                "hint_1": "Panse ak senbòl Python itilize olye de siy miltiplikasyon × la.",
+                "hint_2": "Chwazi operatè ki fè `3 fwa 4`."
+              },
+              "template": "print(3 [blank1] 4)",
+              "choices": [
+                "+",
+                "-",
+                "*",
+                "/"
+              ]
+            },
+            "ci-arithmetic-output": {
+              "title": "Afiche yon rezilta aritmetik",
+              "prompt": "Ekri kòd Python ki afiche rezilta `7 + 5 * 2`.",
+              "hint": "Sèvi ak `print()` ak ekspresyon an anndan li.",
+              "help": {
+                "concept": "Yon ekspresyon aritmetik ka mete dirèkteman anndan `print()`, epi Python ap evalye li anvan li montre rezilta a.",
+                "hint_1": "Ou pa bezwen afiche nimewo yo separeman; afiche tout ekspresyon an.",
+                "hint_2": "Miltiplikasyon fèt anvan adisyon, kidonk sòti a dwe soti nan evalyasyon ekspresyon an jan li ekri a."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-parentheses-output": {
+              "title": "Sèvi ak parantèz nan print",
+              "prompt": "Ekri kòd Python ki afiche rezilta `(7 + 5) * 2`.",
+              "hint": "Mete ekspresyon gwoupe a anndan `print()`.",
+              "help": {
+                "concept": "Parantèz chanje lòd evalyasyon an lè yo fè Python kalkile pati gwoupe a an premye.",
+                "hint_1": "Ajoute 7 ak 5 anvan ou miltipliye pa 2.",
+                "hint_2": "Kòd ou a dwe montre yon sèl nimewo final nan panèl sòti a, pa tèks ekspresyon an."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-comparison-output": {
+              "title": "Afiche yon rezilta soustraksyon",
+              "prompt": "Ekri kòd Python ki afiche rezilta `9 - 4`.",
+              "hint": "Mete ekspresyon aritmetik la anndan `print()`.",
+              "help": {
+                "concept": "Python ka kalkile yon ekspresyon aritmetik epi montre valè li nan panèl sòti a.",
+                "hint_1": "Ou pa ap afiche mo yo tèt ou; kite Python evalye ekspresyon aritmetik la.",
+                "hint_2": "Sòti a dwe yon sèl nimewo."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-boolean-and-output": {
+              "title": "Afiche yon rezilta aritmetik gwoupe",
+              "prompt": "Ekri kòd Python ki afiche rezilta `(6 + 2) * 3`.",
+              "hint": "Sèvi ak parantèz pou Python ajoute anvan li miltipliye.",
+              "help": {
+                "concept": "Parantèz pèmèt ou gwoupe yon ekspresyon aritmetik pou pati sa a evalye an premye.",
+                "hint_1": "Premye remake ki pati aritmetik ki dwe evalye anndan parantèz yo.",
+                "hint_2": "Sòti a dwe yon sèl nimewo."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-two-line-expression-check": {
+              "title": "Konpare de ekspresyon gwoupe",
+              "prompt": "Ekri kòd Python ki afiche de liy: premye rezilta `2 + 3 * 4`, apre sa rezilta `(2 + 3) * 4`.",
+              "hint": "Sèvi ak de apèl `print()` separe.",
+              "help": {
+                "concept": "De ekspresyon ki sèvi ak menm nimewo yo ka pwodui rezilta diferan lè parantèz chanje gwoupman an.",
+                "hint_1": "Premye liy la dwe sèvi ak ekspresyon an san parantèz anplis otou `2 + 3`.",
+                "hint_2": "Dezyèm liy la dwe gwoupe `2 + 3` anvan miltiplikasyon, konsa de sòti yo ap diferan."
+              },
+              "starterCode": "# Write Python code below\n# Print the first result\n# Print the second result"
+            }
+          }
+        }
+      },
+      "python-v2-0": {
+        "operators-and-expressions": {
+          "label": "Operatè ak Ekspresyon",
+          "summary": "Konbine nimewo ak chenn karaktè ak operatè aritmetik ak parantèz.",
+          "cards": {
+            "sketch0": {
+              "title": "Sa ekspresyon yo fè"
+            },
+            "sketch1": {
+              "title": "Plis modèl ekspresyon aritmetik"
+            },
+            "sketch2": {
+              "title": "Parantèz chanje lòd la"
+            },
+            "quiz": {
+              "title": "Tès"
+            },
+            "project": {
+              "title": "Pratike ak operatè ak ekspresyon"
+            }
+          },
+          "projectSteps": {
+            "ci_arithmetic_output": {
+              "title": "Afiche yon rezilta aritmetik"
+            },
+            "ci_parentheses_output": {
+              "title": "Sèvi ak parantèz nan print"
+            },
+            "ci_comparison_output": {
+              "title": "Afiche yon rezilta soustraksyon"
+            },
+            "ci_boolean_and_output": {
+              "title": "Afiche yon rezilta aritmetik gwoupe"
+            },
+            "ci_two_line_expression_check": {
+              "title": "Konpare de ekspresyon gwoupe"
+            }
+          },
+          "quiz": {
+            "sc-expression-definition": {
+              "title": "Idantifye yon ekspresyon",
+              "prompt": "Ki deskripsyon ki pi byen koresponn ak yon ekspresyon Python?",
+              "hint": "Panse ak kòd Python ka evalye pou bay yon valè.",
+              "help": {
+                "concept": "Yon ekspresyon se yon moso kòd Python ke Python evalye pou jwenn yon valè, tankou `2 + 3`, `\"Hi\"`, oswa `4 * 5`.",
+                "hint_1": "Mande ki chwa ki dekri yon bagay Python ka evalye pou bay yon rezilta.",
+                "hint_2": "Yon pwogram konplè ka gen anpil pati, men yon ekspresyon se pati ki vin tounen yon valè tankou yon nimewo oswa yon chenn karaktè."
+              },
+              "options": {
+                "a": "Kòd ki pwodui yon valè lè Python evalye li",
+                "b": "Yon kòmantè ki eksplike sa pwogram nan fè",
+                "c": "Yon liy vid ant de enstriksyon",
+                "d": "Sèlman yon liy ki sèvi ak print()"
+              }
+            },
+            "sc-parentheses-effect": {
+              "title": "Gade sa parantèz chanje",
+              "prompt": "Ki sa ki sòti nan `print((2 + 3) * 4)`?",
+              "hint": "Evalye pati ki anndan parantèz yo an premye.",
+              "help": {
+                "concept": "Parantèz nan ekspresyon Python fòse pati ki gwoupe a pou evalye anvan operasyon ki bò kote li yo.",
+                "hint_1": "Premye jwenn valè `2 + 3`, apre sa sèvi ak rezilta sa a nan miltiplikasyon an.",
+                "hint_2": "San parantèz, miltiplikasyon ta fèt anvan adisyon, men ekspresyon sa a chanje lòd sa a."
+              },
+              "options": {
+                "a": "12",
+                "b": "14",
+                "c": "20",
+                "d": "24"
+              }
+            },
+            "mc-comparison-results": {
+              "title": "Chwazi ekspresyon aritmetik yo",
+              "prompt": "Ki egzanp ki ekspresyon aritmetik? Chwazi tout sa ki aplikab.",
+              "hint": "Ekspresyon aritmetik sèvi ak nimewo ak operatè tankou +, -, *, oswa /.",
+              "help": {
+                "concept": "Ekspresyon aritmetik konbine nimewo ak operatè pou pwodui yon rezilta nimewo.",
+                "hint_1": "Chèche egzanp Python ka kalkile kòm ekspresyon nimewo.",
+                "hint_2": "Pa chwazi mo senp oswa fraz konplè."
+              },
+              "options": {
+                "a": "`3 + 4`",
+                "b": "`\"hello\"`",
+                "c": "`10 - 2 * 3`",
+                "d": "`print`"
+              }
+            },
+            "mc-boolean-operators": {
+              "title": "Chwazi ekspresyon ki sèvi byen ak parantèz",
+              "prompt": "Ki ekspresyon ki sèvi ak parantèz pou fè lòd la pi klè? Chwazi tout sa ki aplikab.",
+              "hint": "Parantèz ka montre ki pati ki dwe kalkile an premye.",
+              "help": {
+                "concept": "Parantèz gwoupe yon pati nan yon ekspresyon pou Python evalye gwoup sa a an premye.",
+                "hint_1": "Chèche ekspresyon ki gen `(` ak `)` otou yon kalkil ki pi piti.",
+                "hint_2": "Bon parantèz fè kalkil yo vle a pi fasil pou li."
+              },
+              "options": {
+                "a": "`(2 + 3) * 4`",
+                "b": "`10 - (2 * 3)`",
+                "c": "`7 + 5`",
+                "d": "`(8 / 2) + 1`"
+              }
+            },
+            "dr-arithmetic-order": {
+              "title": "Mete etap evalyasyon yo nan lòd",
+              "prompt": "Ranje etap yo pou evalye `2 + 3 * 4` nan bon lòd la.",
+              "hint": "Miltiplikasyon fèt anvan adisyon isit la.",
+              "help": {
+                "concept": "Python swiv priyorite operatè yo, kidonk miltiplikasyon evalye anvan adisyon sof si parantèz chanje gwoupman an.",
+                "hint_1": "Pa ajoute 2 ak 3 an premye nan ekspresyon sa a.",
+                "hint_2": "Jwenn pwodui `3 * 4`, apre sa konbine rezilta sa a ak 2."
+              },
+              "tokens": {
+                "t1": "Evalye `3 * 4`",
+                "t2": "Jwenn `12`",
+                "t3": "Ajoute `2 + 12`",
+                "t4": "Jwenn `14`"
+              }
+            },
+            "dr-boolean-evaluation": {
+              "title": "Mete yon ekspresyon aritmetik gwoupe nan lòd",
+              "prompt": "Ranje etap yo pou evalye `(5 + 2) * 3` nan bon lòd la.",
+              "hint": "Evalye ekspresyon ki anndan parantèz yo an premye.",
+              "help": {
+                "concept": "Python evalye parantèz anvan li miltipliye, ajoute, oswa soustrae deyò gwoup la.",
+                "hint_1": "Kòmanse ak ekspresyon ki anndan parantèz yo.",
+                "hint_2": "Apre parantèz yo vin tounen yon sèl valè, miltipliye valè sa a pa 3."
+              },
+              "tokens": {
+                "t1": "Evalye `5 + 2`",
+                "t2": "Jwenn `7`",
+                "t3": "Miltipliye `7 * 3`",
+                "t4": "Jwenn `21`"
+              }
+            },
+            "fb-equality-operator": {
+              "title": "Konplete yon ekspresyon adisyon",
+              "prompt": "Chwazi operatè ki ajoute de nimewo yo.",
+              "hint": "Sèvi ak senbòl aritmetik pou adisyon.",
+              "help": {
+                "concept": "Operatè `+` a ajoute nimewo nan Python.",
+                "hint_1": "Li ekspresyon an tankou yon fraz matematik.",
+                "hint_2": "Chwazi senbòl ki vle di ajoute."
+              },
+              "template": "print(4 [blank1] 4)",
+              "choices": [
+                "+",
+                "-",
+                "*",
+                "/"
+              ]
+            },
+            "fb-boolean-or": {
+              "title": "Konplete yon ekspresyon miltiplikasyon",
+              "prompt": "Chwazi operatè ki miltipliye de nimewo yo.",
+              "hint": "Sèvi ak senbòl aritmetik Python pou miltiplikasyon.",
+              "help": {
+                "concept": "Operatè `*` a miltipliye nimewo nan Python.",
+                "hint_1": "Panse ak senbòl Python itilize olye de siy miltiplikasyon × la.",
+                "hint_2": "Chwazi operatè ki fè `3 fwa 4`."
+              },
+              "template": "print(3 [blank1] 4)",
+              "choices": [
+                "+",
+                "-",
+                "*",
+                "/"
+              ]
+            },
+            "ci-arithmetic-output": {
+              "title": "Afiche yon rezilta aritmetik",
+              "prompt": "Ekri kòd Python ki afiche rezilta `7 + 5 * 2`.",
+              "hint": "Sèvi ak `print()` ak ekspresyon an anndan li.",
+              "help": {
+                "concept": "Yon ekspresyon aritmetik ka mete dirèkteman anndan `print()`, epi Python ap evalye li anvan li montre rezilta a.",
+                "hint_1": "Ou pa bezwen afiche nimewo yo separeman; afiche tout ekspresyon an.",
+                "hint_2": "Miltiplikasyon fèt anvan adisyon, kidonk sòti a dwe soti nan evalyasyon ekspresyon an jan li ekri a."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-parentheses-output": {
+              "title": "Sèvi ak parantèz nan print",
+              "prompt": "Ekri kòd Python ki afiche rezilta `(7 + 5) * 2`.",
+              "hint": "Mete ekspresyon gwoupe a anndan `print()`.",
+              "help": {
+                "concept": "Parantèz chanje lòd evalyasyon an lè yo fè Python kalkile pati gwoupe a an premye.",
+                "hint_1": "Ajoute 7 ak 5 anvan ou miltipliye pa 2.",
+                "hint_2": "Kòd ou a dwe montre yon sèl nimewo final nan panèl sòti a, pa tèks ekspresyon an."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-comparison-output": {
+              "title": "Afiche yon rezilta soustraksyon",
+              "prompt": "Ekri kòd Python ki afiche rezilta `9 - 4`.",
+              "hint": "Mete ekspresyon aritmetik la anndan `print()`.",
+              "help": {
+                "concept": "Python ka kalkile yon ekspresyon aritmetik epi montre valè li nan panèl sòti a.",
+                "hint_1": "Ou pa ap afiche mo yo tèt ou; kite Python evalye ekspresyon aritmetik la.",
+                "hint_2": "Sòti a dwe yon sèl nimewo."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-boolean-and-output": {
+              "title": "Afiche yon rezilta aritmetik gwoupe",
+              "prompt": "Ekri kòd Python ki afiche rezilta `(6 + 2) * 3`.",
+              "hint": "Sèvi ak parantèz pou Python ajoute anvan li miltipliye.",
+              "help": {
+                "concept": "Parantèz pèmèt ou gwoupe yon ekspresyon aritmetik pou pati sa a evalye an premye.",
+                "hint_1": "Premye remake ki pati aritmetik ki dwe evalye anndan parantèz yo.",
+                "hint_2": "Sòti a dwe yon sèl nimewo."
+              },
+              "starterCode": "# Write Python code below"
+            },
+            "ci-two-line-expression-check": {
+              "title": "Konpare de ekspresyon gwoupe",
+              "prompt": "Ekri kòd Python ki afiche de liy: premye rezilta `2 + 3 * 4`, apre sa rezilta `(2 + 3) * 4`.",
+              "hint": "Sèvi ak de apèl `print()` separe.",
+              "help": {
+                "concept": "De ekspresyon ki sèvi ak menm nimewo yo ka pwodui rezilta diferan lè parantèz chanje gwoupman an.",
+                "hint_1": "Premye liy la dwe sèvi ak ekspresyon an san parantèz anplis otou `2 + 3`.",
+                "hint_2": "Dezyèm liy la dwe gwoupe `2 + 3` anvan miltiplikasyon, konsa de sòti yo ap diferan."
+              },
+              "starterCode": "# Write Python code below\n# Print the first result\n# Print the second result"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--python-v2--draft": {
+      "python--python-v2--draft-0": {
+        "operators-and-expressions": {
+          "sk-what-is-an-expression": {
+            "title": "Sa ekspresyon yo fè",
+            "bodyMarkdown": "Yon **ekspresyon** se kòd ki pwodui yon valè. Python ka evalye ekspresyon ki fèt ak nimewo, chenn karaktè, ak operatè.\n\nPa egzanp:\n\n```python\nprint(2 + 3)\nprint(10 - 4)\nprint(3 * 5)\nprint(8 / 2)\n```\n\nSa ap afiche:\n\n```python\n5\n6\n15\n4.0\n```\n\nAnn pase ladan l etap pa etap:\n- `2 + 3` ajoute de nimewo.\n- `10 - 4` soustrae.\n- `3 * 5` miltipliye.\n- `8 / 2` divize epi bay `4.0`.\n\nOu ka mete ekspresyon tou anndan `print()` pou wè rezilta a touswit."
+          },
+          "sk-comparison-and-boolean": {
+            "title": "Plis modèl ekspresyon aritmetik",
+            "bodyMarkdown": "Python ka konbine operatè aritmetik nan menm ekspresyon an. Parantèz ede fè lòd la pi fasil pou wè.\n\n```python\nprint(5 + 2 * 3)\nprint((5 + 2) * 3)\nprint(10 - 4 / 2)\n```\n\nSòti:\n\n```text\n11\n21\n8.0\n```\n\nAnn pase ladan l:\n- `5 + 2 * 3` miltipliye an premye, apre sa ajoute.\n- `(5 + 2) * 3` ajoute anndan parantèz yo an premye.\n- `10 - 4 / 2` divize an premye, apre sa soustrae.\n\n**Fè prediksyon anvan ou lanse li:** Kisa ou panse `print((8 - 3) * 2)` ap montre? Tape li nan editè a, klike **Run**, epi verifye panèl sòti a."
+          },
+          "sk-parentheses-order": {
+            "title": "Parantèz chanje lòd la",
+            "bodyMarkdown": "Python swiv yon lòd lè li evalye ekspresyon yo. Miltiplikasyon ak divizyon fèt anvan adisyon ak soustraksyon sof si ou sèvi ak parantèz.\n\n```python\nprint(2 + 3 * 4)\nprint((2 + 3) * 4)\n```\n\nSòti:\n\n```python\n14\n20\n```\n\nPoukisa?\n- Nan `2 + 3 * 4`, Python fè `3 * 4` an premye, apre sa li ajoute 2.\n- Nan `(2 + 3) * 4`, parantèz yo fè Python ajoute an premye.\n\nParantèz itil lè ou vle kòd ou a koresponn ak fason ou panse a byen klè.\n\nYon lòt egzanp:\n\n```python\nprint(10 - 2 * 3)\nprint((10 - 2) * 3)\n```\n\nSa yo bay repons diferan paske gwoupman an diferan.\n\nAnn pase ladan l: li chak enstriksyon depi anlè jouk anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki sòti kòd la sipoze montre."
+          }
+        }
+      },
+      "python-v2-0": {
+        "operators-and-expressions": {
+          "sk-what-is-an-expression": {
+            "title": "Sa ekspresyon yo fè",
+            "bodyMarkdown": "Yon **ekspresyon** se kòd ki pwodui yon valè. Python ka evalye ekspresyon ki fèt ak nimewo, chenn karaktè, ak operatè.\n\nPa egzanp:\n\n```python\nprint(2 + 3)\nprint(10 - 4)\nprint(3 * 5)\nprint(8 / 2)\n```\n\nSa ap afiche:\n\n```python\n5\n6\n15\n4.0\n```\n\nAnn pase ladan l etap pa etap:\n- `2 + 3` ajoute de nimewo.\n- `10 - 4` soustrae.\n- `3 * 5` miltipliye.\n- `8 / 2` divize epi bay `4.0`.\n\nOu ka mete ekspresyon tou anndan `print()` pou wè rezilta a touswit."
+          },
+          "sk-comparison-and-boolean": {
+            "title": "Plis modèl ekspresyon aritmetik",
+            "bodyMarkdown": "Python ka konbine operatè aritmetik nan menm ekspresyon an. Parantèz ede fè lòd la pi fasil pou wè.\n\n```python\nprint(5 + 2 * 3)\nprint((5 + 2) * 3)\nprint(10 - 4 / 2)\n```\n\nSòti:\n\n```text\n11\n21\n8.0\n```\n\nAnn pase ladan l:\n- `5 + 2 * 3` miltipliye an premye, apre sa ajoute.\n- `(5 + 2) * 3` ajoute anndan parantèz yo an premye.\n- `10 - 4 / 2` divize an premye, apre sa soustrae.\n\n**Fè prediksyon anvan ou lanse li:** Kisa ou panse `print((8 - 3) * 2)` ap montre? Tape li nan editè a, klike **Run**, epi verifye panèl sòti a."
+          },
+          "sk-parentheses-order": {
+            "title": "Parantèz chanje lòd la",
+            "bodyMarkdown": "Python swiv yon lòd lè li evalye ekspresyon yo. Miltiplikasyon ak divizyon fèt anvan adisyon ak soustraksyon sof si ou sèvi ak parantèz.\n\n```python\nprint(2 + 3 * 4)\nprint((2 + 3) * 4)\n```\n\nSòti:\n\n```python\n14\n20\n```\n\nPoukisa?\n- Nan `2 + 3 * 4`, Python fè `3 * 4` an premye, apre sa li ajoute 2.\n- Nan `(2 + 3) * 4`, parantèz yo fè Python ajoute an premye.\n\nParantèz itil lè ou vle kòd ou a koresponn ak fason ou panse a byen klè.\n\nYon lòt egzanp:\n\n```python\nprint(10 - 2 * 3)\nprint((10 - 2) * 3)\n```\n\nSa yo bay repons diferan paske gwoupman an diferan.\n\nAnn pase ladan l: li chak enstriksyon depi anlè jouk anba. Remake ki non yo kreye, ki valè yo pase nan zouti entegre yo, ak ki sòti kòd la sipoze montre."
+          }
+        }
+      }
+    }
+  }
+}

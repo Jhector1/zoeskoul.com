@@ -1,0 +1,248 @@
+{
+  "topics": {
+    "python--applied-python-projects--draft": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "polymorphic-collections": {
+          "label": "Polymorphic Collections",
+          "summary": "Use one mixed catalog list of Book and Movie objects, then loop through the list and call the shared `label()` method without type-checking branches.",
+          "cards": {
+            "sketch0": {
+              "title": "Make a mixed catalog list"
+            },
+            "sketch1": {
+              "title": "Loop through the shared method"
+            },
+            "sketch2": {
+              "title": "Build labels with one helper"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_polymorphic_collections_sketch0": {
+              "title": "Create a mixed list",
+              "prompt": "Use the provided `Book` and `Movie` classes. In `main.py`, create a mixed `catalog` list with `Book(\"The Giver\")` and `Movie(\"Soul\")`, then print `len(catalog)`.",
+              "hint": "The list should contain one object of each subclass.",
+              "help": {
+                "concept": "Polymorphic collections can hold different subclasses together.",
+                "hint_1": "Put both objects inside one list.",
+                "hint_2": "Then print the length of that list."
+              },
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Giver\"), Movie(\"Soul\")]\nprint(len(catalog))\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Giver\"), Movie(\"Soul\")]\nprint(len(catalog))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Giver\"), Movie(\"Soul\")]\nprint(len(catalog))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Giver\"), Movie(\"Soul\")]\nprint(len(catalog))\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Create at least one Book object."
+                },
+                "1": {
+                  "message": "Create at least one Movie object."
+                }
+              }
+            },
+            "try_polymorphic_collections_sketch1": {
+              "title": "Loop through Book and Movie objects",
+              "prompt": "Use the provided classes and mixed list. In `main.py`, loop through `catalog` and print each object's `label()` result for `Book(\"The Lightning Thief\")` and `Movie(\"Up\")`.",
+              "hint": "Call the same method name inside the loop.",
+              "help": {
+                "concept": "Polymorphism lets one loop call the same method on different subclasses.",
+                "hint_1": "The loop variable can be named `item`.",
+                "hint_2": "Call `item.label()` in the loop body."
+              },
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Lightning Thief\"), Movie(\"Up\")]\n\nfor item in catalog:\n    print(item.label())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Lightning Thief\"), Movie(\"Up\")]\n\nfor item in catalog:\n    print(item.label())\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Lightning Thief\"), Movie(\"Up\")]\n\nfor item in catalog:\n    print(item.label())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Lightning Thief\"), Movie(\"Up\")]\n\nfor item in catalog:\n    print(item.label())\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Book.label() should return the expected label."
+                },
+                "1": {
+                  "message": "Movie.label() should return the expected label."
+                }
+              }
+            },
+            "try_polymorphic_collections_sketch2": {
+              "title": "Return labels from a helper function",
+              "prompt": "Finish the idea with a helper function. Keep the provided `build_labels(items)` function in `services/catalog_report.py` and use `main.py` to print the returned labels for `Book(\"Charlotte's Web\")` and `Movie(\"Encanto\")`.",
+              "hint": "The helper should build a list by calling `item.label()` on each object.",
+              "help": {
+                "concept": "A helper can stay generic when every object follows the same method contract.",
+                "hint_1": "Append `item.label()` inside the loop.",
+                "hint_2": "Return the finished labels list from the function."
+              },
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [Book(\"Charlotte's Web\"), Movie(\"Encanto\")]\nfor label in build_labels(catalog):\n    print(label)\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [Book(\"Charlotte's Web\"), Movie(\"Encanto\")]\nfor label in build_labels(catalog):\n    print(label)\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                },
+                "services_catalog_report_py": {
+                  "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [Book(\"Charlotte's Web\"), Movie(\"Encanto\")]\nfor label in build_labels(catalog):\n    print(label)\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [Book(\"Charlotte's Web\"), Movie(\"Encanto\")]\nfor label in build_labels(catalog):\n    print(label)\n"
+                },
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                },
+                "services_catalog_report_py": {
+                  "content": "def build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Book.label() should still return the expected label."
+                },
+                "1": {
+                  "message": "Movie.label() should still return the expected label."
+                }
+              }
+            }
+          },
+          "practice": {
+            "sc-polymorphism-mixed-list": {
+              "title": "Why the mixed list works",
+              "prompt": "Why can one `catalog` list hold both `Book` and `Movie` objects?",
+              "hint": "Think about what lists can store in Python.",
+              "help": {
+                "concept": "A list can store different objects, and later code can use shared behavior across them.",
+                "hint_1": "The objects do not need to be the same subclass.",
+                "hint_2": "The shared method name matters when the loop uses the list."
+              },
+              "options": {
+                "a": "Because Python turns both objects into strings first",
+                "b": "Because a list can store different objects together",
+                "c": "Because Book secretly becomes Movie inside the list",
+                "d": "Because lists only allow subclasses of the same name"
+              }
+            },
+            "fb-polymorphism-shared-call": {
+              "title": "Fill in the shared method call",
+              "prompt": "Complete the shared method: `print(item.[blank1]())`",
+              "hint": "Use the method name both subclasses provide.",
+              "help": {
+                "concept": "Polymorphism depends on one shared method name.",
+                "hint_1": "The method returns the display text for the catalog item.",
+                "hint_2": "It is not `title` or `self`."
+              },
+              "template": "for item in catalog:\n    print(item.[blank1]())",
+              "choices": [
+                "label",
+                "title",
+                "Book",
+                "super"
+              ]
+            },
+            "dr-polymorphism-loop-order": {
+              "title": "Order the loop steps",
+              "prompt": "Put these steps in order for a polymorphic helper.",
+              "hint": "Start with the list, then loop, then call the shared method.",
+              "help": {
+                "concept": "A polymorphic helper follows a simple receive-loop-call-store pattern.",
+                "hint_1": "The list comes before the loop.",
+                "hint_2": "The append step happens after the method returns a value."
+              },
+              "tokens": {
+                "t1": "Receive the mixed items list",
+                "t2": "Loop through each item",
+                "t3": "Call `item.label()`",
+                "t4": "Add the returned label to the results list"
+              }
+            },
+            "sc-polymorphism-no-type-check": {
+              "title": "Avoid the wrong pattern",
+              "prompt": "Which approach best matches polymorphism in this module?",
+              "hint": "Pick the choice that avoids class-by-class branches.",
+              "help": {
+                "concept": "Polymorphism keeps later code generic by depending on shared method names.",
+                "hint_1": "The loop should call one shared method.",
+                "hint_2": "It should not need `if item is Book` checks."
+              },
+              "options": {
+                "a": "Write a separate loop for every subclass forever",
+                "b": "Rename the method in each subclass so they are all different",
+                "c": "Check each object type before every method call",
+                "d": "Call the same method on each object in the mixed list"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python--applied-python-projects--draft": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "polymorphic-collections": {
+          "sketch-0": {
+            "title": "A list can hold different subclasses",
+            "bodyMarkdown": "A single list can store both `Book` and `Movie` objects.\n\n```python\ncatalog = [Book(\"Dune\"), Movie(\"Arrival\")]\n```\n\nThe list does not need every object to be the same subclass."
+          },
+          "sketch-1": {
+            "title": "The loop calls one shared method",
+            "bodyMarkdown": "Polymorphism appears when the loop uses the same method on different objects.\n\n```python\nfor item in catalog:\n    print(item.label())\n```\n\nThe loop does not ask whether each object is a `Book` or a `Movie` first."
+          },
+          "sketch-2": {
+            "title": "Shared method names replace type-checking branches",
+            "bodyMarkdown": "When subclasses share the same method name, code can stay simple.\n\nInstead of writing `if` or `elif` checks for each subclass, we let each object decide what its own `label()` should return."
+          }
+        }
+      }
+    }
+  }
+}

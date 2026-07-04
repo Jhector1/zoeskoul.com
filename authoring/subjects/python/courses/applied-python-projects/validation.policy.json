@@ -1,5 +1,5 @@
 {
-  "policyId": "applied-python-projects-validation",
+  "policyId": "applied-python-projects-oop-validation",
   "allowedConcepts": [
     "classes",
     "instances",
@@ -7,44 +7,115 @@
     "attributes",
     "methods",
     "self",
+    "encapsulation",
+    "validation",
     "imports",
     "modules",
+    "packages",
+    "__init__.py",
     "helper files",
+    "service files",
     "filesystem paths",
     "file input",
     "file output",
     "lists of objects",
+    "base classes",
+    "subclasses",
+    "inheritance",
+    "super",
+    "overriding",
+    "polymorphism",
+    "abstraction",
+    "base-class contract",
     "assert",
     "testing",
+    "fixtures",
     "debugging",
+    "tracebacks",
     "refactoring",
+    "storage",
+    "reports",
+    "README",
     "project planning"
   ],
   "disallowedConcepts": [
     "external packages",
-    "terminal-first workflows"
+    "terminal-first workflows",
+    "SQL datasets",
+    "advanced metaclasses",
+    "multiple inheritance"
+  ],
+  "globalRules": [
+    "Every technical sketch must have a required embedded try-it unless explicitly conceptualOnly.",
+    "Embedded try-it IDs and exercise keys must start with try- and follow try-<topic-id>-sketchN.",
+    "Every code_input exercise must include full starterFiles and full solutionFiles when it uses a workspace.",
+    "solutionFiles must include unchanged starter files too; solutionFiles are snapshots, not diffs.",
+    "Module project and capstone step N+1 starterFiles must equal step N solutionFiles.",
+    "Do not place generated output files such as reports/summary.txt in requiredFiles."
   ],
   "moduleRules": {
     "8": {
       "notes": [
-        "For classes-and-instances, attributes-and-init, and methods-and-self, prefer recipeType semantic instead of fixed_tests.",
-        "Use semantic class/object checks such as defines_class, constructible, instance_attributes, and method_returns for class behavior tasks.",
-        "Treat create-an-instance-and-call-a-method exercises as semantic class behavior checks too, even if the prompt mentions printing the result.",
-        "Do not wrap class-return or method-return tasks in stdin/stdout harness code.",
-        "Do not expose helper harness code such as ast.literal_eval, _parse_arg, or hidden parser utilities in starterCode or solutionCode."
+        "Teach class files, constructors, methods, object state, encapsulation, validation, imports, and helpers.",
+        "Do not introduce inheritance, polymorphism, or abstraction yet.",
+        "Use multifile try-it exercises from the start: main.py plus models/ or helpers/."
       ],
       "validationRequirements": {
-        "requireSemanticForClassExercises": true,
-        "requireSemanticForMethodReturnExercises": true
+        "requireEncapsulationPractice": true,
+        "forbidInheritanceBeforeModule9": true,
+        "requireTryItPrefix": true,
+        "requireFullWorkspaceSolutions": true
+      }
+    },
+    "9": {
+      "notes": [
+        "Teach inheritance, overriding, polymorphism, and abstraction/base-class contracts cumulatively.",
+        "Use models/base_item.py, subclass files, and services that operate on mixed object lists."
+      ],
+      "validationRequirements": {
+        "requireInheritancePractice": true,
+        "requirePolymorphismPractice": true,
+        "requireAbstractionPractice": true,
+        "requireFullWorkspaceSolutions": true
+      }
+    },
+    "10": {
+      "notes": [
+        "Testing/debugging/refactoring exercises must target multifile OOP apps.",
+        "Use tests/check_*.py, services/, data fixtures, and import/state debugging."
+      ],
+      "validationRequirements": {
+        "requireModelTests": true,
+        "requireServiceTests": true,
+        "requireFixtureCoverage": true,
+        "forbidOutputFilesInRequiredFiles": true
+      }
+    },
+    "11": {
+      "notes": [
+        "Final capstone must integrate encapsulation, abstraction, inheritance, and polymorphism.",
+        "Each capstone step must carry forward the previous complete workspace."
+      ],
+      "validationRequirements": {
+        "requireAllFourOopPillars": true,
+        "requireCapstoneRubric": true,
+        "requireProjectStepChaining": true,
+        "forbidOutputFilesInRequiredFiles": true
       }
     }
   },
   "validationRequirements": {
     "goldenTestsRequired": true,
-    "requireSemanticForClassExercises": true,
-    "requireSemanticForMethodReturnExercises": true,
+    "requireTryItPrefix": true,
+    "requireTryItOnAllTechnicalSketches": true,
+    "requireFullWorkspaceSolutions": true,
+    "requireMultiFilePractice": true,
     "requireProjectRubric": true,
     "requireCapstoneRubric": true,
-    "requireDeliverableChecklist": true
+    "requireDeliverableChecklist": true,
+    "requireProjectStepChaining": true,
+    "requireAllFourOopPillars": true,
+    "forbidOutputFilesInRequiredFiles": true,
+    "requireQuizNoCodeInput": true
   }
 }

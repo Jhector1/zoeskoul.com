@@ -4,7 +4,7 @@
   "moduleSlug": "linux-module-1-terminal-navigation",
   "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation",
   "prefix": "linux_module_1",
-  "minutes": 16,
+  "minutes": 18,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -23,7 +23,7 @@
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.cards.sketch0.title",
-      "sketchId": "where-am-i-basics",
+      "sketchId": "pwd-current-folder",
       "height": 420,
       "tryIt": {
         "id": "try-where-am-i-sketch0",
@@ -42,7 +42,7 @@
       "id": "sketch1",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.cards.sketch1.title",
-      "sketchId": "list-files-with-ls",
+      "sketchId": "ls-current-folder",
       "height": 420,
       "tryIt": {
         "id": "try-where-am-i-sketch1",
@@ -61,7 +61,7 @@
       "id": "sketch2",
       "kind": "sketch",
       "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.cards.sketch2.title",
-      "sketchId": "pwd-and-ls-together",
+      "sketchId": "pwd-ls-habit",
       "height": 420,
       "tryIt": {
         "id": "try-where-am-i-sketch2",
@@ -85,31 +85,30 @@
         "n": 4,
         "min": 4,
         "max": 6,
-        "selectionMode": "random",
-        "allowReveal": true,
-        "preferKind": null,
-        "maxAttempts": null
+        "select": {
+          "purpose": "quiz"
+        }
       }
     }
   ],
   "sketches": [
     {
-      "id": "where-am-i-basics",
+      "id": "pwd-current-folder",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.where-am-i-basics.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.where-am-i-basics.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.pwd-current-folder.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.pwd-current-folder.bodyMarkdown"
     },
     {
-      "id": "list-files-with-ls",
+      "id": "ls-current-folder",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.list-files-with-ls.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.list-files-with-ls.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.ls-current-folder.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.ls-current-folder.bodyMarkdown"
     },
     {
-      "id": "pwd-and-ls-together",
+      "id": "pwd-ls-habit",
       "archetype": "paragraph",
-      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.pwd-and-ls-together.title",
-      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.pwd-and-ls-together.bodyMarkdown"
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.pwd-ls-habit.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.pwd-ls-habit.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -148,11 +147,11 @@
       }
     },
     {
-      "id": "mc-safe-inspection",
+      "id": "mc-inspection-commands",
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.practice.mc-safe-inspection",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.practice.mc-inspection-commands",
       "optionIds": [
         "a",
         "b",
@@ -168,11 +167,11 @@
       }
     },
     {
-      "id": "dr-orient-yourself",
+      "id": "dr-safe-check-order",
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.practice.dr-orient-yourself",
+      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.practice.dr-safe-check-order",
       "tokenIds": [
         "t1",
         "t2",
@@ -185,30 +184,6 @@
           "t2",
           "t3"
         ]
-      }
-    },
-    {
-      "id": "fb-pwd-expansion",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.practice.fb-pwd-expansion",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "working"
-      }
-    },
-    {
-      "id": "fb-ls-meaning",
-      "kind": "fill_blank_choice",
-      "purpose": "quiz",
-      "weight": 1,
-      "messageBase": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.practice.fb-ls-meaning",
-      "choiceCount": 4,
-      "expected": {
-        "kind": "fill_blank_choice",
-        "value": "ls"
       }
     },
     {
@@ -228,8 +203,8 @@
           "entry": true
         },
         {
-          "path": "orientation-demo/readme.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.orientation_demo_readme_txt.content",
+          "path": "newsroom/assignment.txt",
+          "content": "Draft the Saturday update\n",
           "language": "bash"
         }
       ],
@@ -242,15 +217,20 @@
           "entry": true
         },
         {
-          "path": "orientation-demo/readme.txt",
-          "content": "Use pwd to print your current folder.\n",
+          "path": "newsroom/assignment.txt",
+          "content": "Draft the Saturday update\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "newsroom/assignment.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^pwd$",
+            "pattern": "\\bpwd\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.terminalExpectations.requiredCommands.0.message"
           }
         ],
@@ -258,8 +238,21 @@
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "newsroom"
       },
       "workspace": {
         "language": "bash",
@@ -274,15 +267,20 @@
             "entry": true
           },
           {
-            "path": "orientation-demo/readme.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.orientation_demo_readme_txt.content",
+            "path": "newsroom/assignment.txt",
+            "content": "Draft the Saturday update\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "newsroom/assignment.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "orientation-demo/readme.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.orientation_demo_readme_txt.content",
+            "path": "newsroom/assignment.txt",
+            "content": "Draft the Saturday update\n",
             "language": "bash"
           }
         ]
@@ -301,12 +299,13 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/newsroom"
       },
       "fixtureFiles": [
         {
-          "path": "orientation-demo/readme.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-1.starterFiles.orientation_demo_readme_txt.content",
+          "path": "newsroom/assignment.txt",
+          "content": "Draft the Saturday update\n",
           "language": "bash"
         }
       ]
@@ -328,13 +327,13 @@
           "entry": true
         },
         {
-          "path": "orientation-demo/notes.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_notes_txt.content",
+          "path": "art-table/brushes.txt",
+          "content": "Small brush\nLarge brush\n",
           "language": "bash"
         },
         {
-          "path": "orientation-demo/archive/README.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_archive_readme_txt.content",
+          "path": "art-table/paint-list.txt",
+          "content": "Blue\nYellow\n",
           "language": "bash"
         }
       ],
@@ -347,32 +346,48 @@
           "entry": true
         },
         {
-          "path": "orientation-demo/notes.txt",
-          "content": "orientation notes\n",
+          "path": "art-table/brushes.txt",
+          "content": "Small brush\nLarge brush\n",
           "language": "bash"
         },
         {
-          "path": "orientation-demo/archive/README.txt",
-          "content": "archive folder\n",
+          "path": "art-table/paint-list.txt",
+          "content": "Blue\nYellow\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "art-table/brushes.txt",
+          "art-table/paint-list.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^ls$",
+            "pattern": "\\bls\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.terminalExpectations.requiredCommands.0.message"
           }
-        ],
-        "outputContains": [
-          "orientation-demo"
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "art-table"
       },
       "workspace": {
         "language": "bash",
@@ -387,25 +402,31 @@
             "entry": true
           },
           {
-            "path": "orientation-demo/notes.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_notes_txt.content",
+            "path": "art-table/brushes.txt",
+            "content": "Small brush\nLarge brush\n",
             "language": "bash"
           },
           {
-            "path": "orientation-demo/archive/README.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_archive_readme_txt.content",
+            "path": "art-table/paint-list.txt",
+            "content": "Blue\nYellow\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "art-table/brushes.txt",
+            "art-table/paint-list.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "orientation-demo/notes.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_notes_txt.content",
+            "path": "art-table/brushes.txt",
+            "content": "Small brush\nLarge brush\n",
             "language": "bash"
           },
           {
-            "path": "orientation-demo/archive/README.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_archive_readme_txt.content",
+            "path": "art-table/paint-list.txt",
+            "content": "Blue\nYellow\n",
             "language": "bash"
           }
         ]
@@ -424,17 +445,18 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/art-table"
       },
       "fixtureFiles": [
         {
-          "path": "orientation-demo/notes.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_notes_txt.content",
+          "path": "art-table/brushes.txt",
+          "content": "Small brush\nLarge brush\n",
           "language": "bash"
         },
         {
-          "path": "orientation-demo/archive/README.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-2.starterFiles.orientation_demo_archive_readme_txt.content",
+          "path": "art-table/paint-list.txt",
+          "content": "Blue\nYellow\n",
           "language": "bash"
         }
       ]
@@ -456,13 +478,13 @@
           "entry": true
         },
         {
-          "path": "reports/summary.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_summary_txt.content",
+          "path": "event-desk/run-sheet.txt",
+          "content": "Doors open at 6:00\n",
           "language": "bash"
         },
         {
-          "path": "reports/archive/README.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_archive_readme_txt.content",
+          "path": "event-desk/contact.txt",
+          "content": "Call the coordinator\n",
           "language": "bash"
         }
       ],
@@ -475,36 +497,52 @@
           "entry": true
         },
         {
-          "path": "reports/summary.txt",
-          "content": "weekly summary\n",
+          "path": "event-desk/run-sheet.txt",
+          "content": "Doors open at 6:00\n",
           "language": "bash"
         },
         {
-          "path": "reports/archive/README.txt",
-          "content": "archive\n",
+          "path": "event-desk/contact.txt",
+          "content": "Call the coordinator\n",
           "language": "bash"
         }
       ],
+      "workspaceExpectations": {
+        "requiredFiles": [
+          "event-desk/run-sheet.txt",
+          "event-desk/contact.txt"
+        ]
+      },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^pwd$",
+            "pattern": "\\bpwd\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.requiredCommands.0.message"
           },
           {
-            "pattern": "^ls$",
+            "pattern": "\\bls\\b",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.requiredCommands.1.message"
           }
-        ],
-        "outputContains": [
-          "reports"
         ],
         "forbiddenCommands": [
           {
             "pattern": "(^|\\s)sudo(\\s|$)",
             "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.forbiddenCommands.0.message"
+          },
+          {
+            "pattern": "rm\\s+-rf|rm\\s+-fr|rm\\s+-r",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.forbiddenCommands.1.message"
+          },
+          {
+            "pattern": "(^|\\s)(chmod|chown)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.forbiddenCommands.2.message"
+          },
+          {
+            "pattern": "(^|\\s)(curl|wget)(\\s|$)",
+            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.terminalExpectations.forbiddenCommands.3.message"
           }
-        ]
+        ],
+        "cwdEndsWith": "event-desk"
       },
       "workspace": {
         "language": "bash",
@@ -519,25 +557,31 @@
             "entry": true
           },
           {
-            "path": "reports/summary.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_summary_txt.content",
+            "path": "event-desk/run-sheet.txt",
+            "content": "Doors open at 6:00\n",
             "language": "bash"
           },
           {
-            "path": "reports/archive/README.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_archive_readme_txt.content",
+            "path": "event-desk/contact.txt",
+            "content": "Call the coordinator\n",
             "language": "bash"
           }
         ],
+        "workspaceExpectations": {
+          "requiredFiles": [
+            "event-desk/run-sheet.txt",
+            "event-desk/contact.txt"
+          ]
+        },
         "fixtureFiles": [
           {
-            "path": "reports/summary.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_summary_txt.content",
+            "path": "event-desk/run-sheet.txt",
+            "content": "Doors open at 6:00\n",
             "language": "bash"
           },
           {
-            "path": "reports/archive/README.txt",
-            "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_archive_readme_txt.content",
+            "path": "event-desk/contact.txt",
+            "content": "Call the coordinator\n",
             "language": "bash"
           }
         ]
@@ -556,17 +600,18 @@
           "multiFile": true,
           "terminal": true
         },
-        "terminalSessionScope": "exercise"
+        "terminalSessionScope": "exercise",
+        "terminalCwd": "/workspace/event-desk"
       },
       "fixtureFiles": [
         {
-          "path": "reports/summary.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_summary_txt.content",
+          "path": "event-desk/run-sheet.txt",
+          "content": "Doors open at 6:00\n",
           "language": "bash"
         },
         {
-          "path": "reports/archive/README.txt",
-          "content": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.where-am-i.tryIt.exercises.where-am-i-try-it-3.starterFiles.reports_archive_readme_txt.content",
+          "path": "event-desk/contact.txt",
+          "content": "Call the coordinator\n",
           "language": "bash"
         }
       ]
@@ -574,9 +619,9 @@
   ],
   "topicMeta": {
     "learningGoals": [
-      "Try it yourself: save a pwd check",
-      "Try it yourself: save an ls check",
-      "Try it yourself: combine pwd and ls"
+      "Confirm the current folder",
+      "List the current folder",
+      "Orient yourself before changing anything"
     ]
   },
   "serviceDefaults": {
@@ -586,6 +631,7 @@
       "files": true,
       "multiFile": true,
       "terminal": true
-    }
+    },
+    "terminalCwd": "/workspace"
   }
 }

@@ -1,6 +1,7 @@
 export type TerminalWorkspaceEvidenceLike = {
     commands?: unknown;
     outputText?: unknown;
+    cwd?: unknown;
 };
 
 export type TerminalWorkspaceEntry =
@@ -40,6 +41,110 @@ export function normalizeTerminalWorkspacePath(input: unknown) {
 
     return parts.join("/");
 }
+
+
+function normalizeTerminalWorkspaceCwd(input: unknown) {
+    let value = String(input ?? "")
+        .trim()
+        .replace(/\\/g, "/");
+
+    if (!value) return "";
+
+    value = value.replace(/^~\/?/, "");
+    value = value.replace(/^\/workspace(?:\/|$)/, "");
+    value = value.replace(/^\/+/, "");
+
+    return normalizeTerminalWorkspacePath(value);
+}
+
+function joinTerminalWorkspacePath(base: string, input: unknown) {
+    const raw = String(input ?? "")
+        .trim()
+        .replace(/\\/g, "/");
+
+    if (!raw || raw.includes("\0")) return "";
+
+    if (raw === "/workspace") return "";
+
+    if (raw.startsWith("/workspace/")) {
+        return normalizeTerminalWorkspacePath(
+            raw.slice("/workspace/".length),
+        );
+    }
+
+    if (raw.startsWith("/")) {
+        return normalizeTerminalWorkspacePath(raw);
+    }
+
+    const stack = base.split("/").filter(Boolean);
+
+    for (const part of raw.split("/")) {
+        if (!part || part === ".") continue;
+
+        if (part === "..") {
+            stack.pop();
+            continue;
+        }
+
+        stack.push(part);
+    }
+
+    return normalizeTerminalWorkspacePath(stack.join("/"));
+}
+
+function terminalWorkspacePathExists(
+    state: WorkspaceHintState,
+    path: string,
+) {
+    if (!path) return false;
+
+    return (
+        state.hasFile(path) ||
+        state.hasFolder(path) ||
+        state.filesUnder(path).length > 0 ||
+        state.foldersUnder(path).length > 0
+    );
+}
+
+function resolveTerminalWorkspaceOperand(args: {
+    state: WorkspaceHintState;
+    input: unknown;
+    cwd?: unknown;
+    preferExisting?: boolean;
+}) {
+    const raw = String(args.input ?? "").trim();
+    if (!raw) return "";
+
+    const rawPath = raw.startsWith("/workspace/")
+        ? normalizeTerminalWorkspacePath(raw.slice("/workspace/".length))
+        : normalizeTerminalWorkspacePath(raw);
+
+    if (
+        rawPath &&
+        (
+            raw.startsWith("/") ||
+            terminalWorkspacePathExists(args.state, rawPath)
+        )
+    ) {
+        return rawPath;
+    }
+
+    const cwd = normalizeTerminalWorkspaceCwd(args.cwd);
+    const cwdRelativePath = joinTerminalWorkspacePath(cwd, raw);
+
+    if (
+        cwdRelativePath &&
+        (
+            !args.preferExisting ||
+            terminalWorkspacePathExists(args.state, cwdRelativePath)
+        )
+    ) {
+        return cwdRelativePath;
+    }
+
+    return rawPath || cwdRelativePath;
+}
+
 
 export function tokenizeTerminalWorkspaceCommand(command: string): string[] {
     const tokens: string[] = [];
@@ -237,31 +342,66 @@ function applyMoveOrCopyHint(args: {
 function applyWorkspaceCommandHint(args: {
     state: WorkspaceHintState;
     command: string;
+    cwd?: unknown;
 }) {
     const tokens = tokenizeTerminalWorkspaceCommand(args.command);
     const executable = tokens[0] ?? "";
     const operands = nonOptionTokens(tokens.slice(1));
 
     if (executable === "mkdir") {
-        for (const token of operands) args.state.addFolder(token);
+        for (const token of operands) {
+            const path = resolveTerminalWorkspaceOperand({
+                state: args.state,
+                input: token,
+                cwd: args.cwd,
+            });
+            if (path) args.state.addFolder(path);
+        }
         return;
     }
 
     if (executable === "touch") {
-        for (const token of operands) args.state.addFile(token);
+        for (const token of operands) {
+            const path = resolveTerminalWorkspaceOperand({
+                state: args.state,
+                input: token,
+                cwd: args.cwd,
+            });
+            if (path) args.state.addFile(path);
+        }
         return;
     }
 
     if (executable === "rm") {
-        for (const token of operands) args.state.removePath(token);
+        for (const token of operands) {
+            const path = resolveTerminalWorkspaceOperand({
+                state: args.state,
+                input: token,
+                cwd: args.cwd,
+                preferExisting: true,
+            });
+            if (path) args.state.removePath(path);
+        }
         return;
     }
 
     if ((executable === "mv" || executable === "cp") && operands.length >= 2) {
-        const destinationPath = operands.at(-1) ?? "";
-        const sourcePaths = operands.slice(0, -1);
+        const rawDestinationPath = operands.at(-1) ?? "";
+        const rawSourcePaths = operands.slice(0, -1);
 
-        for (const sourcePath of sourcePaths) {
+        for (const rawSourcePath of rawSourcePaths) {
+            const sourcePath = resolveTerminalWorkspaceOperand({
+                state: args.state,
+                input: rawSourcePath,
+                cwd: args.cwd,
+                preferExisting: true,
+            });
+            const destinationPath = resolveTerminalWorkspaceOperand({
+                state: args.state,
+                input: rawDestinationPath,
+                cwd: args.cwd,
+            });
+
             applyMoveOrCopyHint({
                 command: executable,
                 state: args.state,
@@ -275,7 +415,12 @@ function applyWorkspaceCommandHint(args: {
 
     const redirectIndex = tokens.indexOf(">");
     if (redirectIndex >= 0 && tokens[redirectIndex + 1]) {
-        args.state.addFile(tokens[redirectIndex + 1]);
+        const path = resolveTerminalWorkspaceOperand({
+            state: args.state,
+            input: tokens[redirectIndex + 1],
+            cwd: args.cwd,
+        });
+        if (path) args.state.addFile(path);
     }
 }
 
@@ -371,7 +516,11 @@ export function applyTerminalWorkspaceHintsToPathSets(args: {
     };
 
     for (const command of collectTerminalWorkspaceCommands(args.terminalEvidence)) {
-        applyWorkspaceCommandHint({ state, command });
+        applyWorkspaceCommandHint({
+            state,
+            command,
+            cwd: args.terminalEvidence?.cwd,
+        });
     }
 }
 
@@ -482,7 +631,11 @@ export function applyTerminalWorkspaceHintsToEntries(args: {
     };
 
     for (const command of collectTerminalWorkspaceCommands(args.terminalEvidence)) {
-        applyWorkspaceCommandHint({ state, command });
+        applyWorkspaceCommandHint({
+            state,
+            command,
+            cwd: args.terminalEvidence?.cwd,
+        });
     }
 
     return entries;

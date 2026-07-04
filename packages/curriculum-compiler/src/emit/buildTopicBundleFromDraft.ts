@@ -19,6 +19,7 @@ import {
     effectiveSketchBlocks,
     projectStepIdFromExerciseId,
     resolveTopicProjectKind,
+    tryItExerciseId,
     tryItMessageId,
 } from "./exerciseMessageBase.js";
 import { applyProgressiveProjectFlow } from "./progressiveProjectFlow.js";
@@ -41,19 +42,29 @@ function uniqueNonEmpty(values: string[]) {
     return Array.from(new Set(values.map((x) => x.trim()).filter(Boolean)));
 }
 
+function isGeneratedPolicyExerciseId(id: string) {
+    return /^policy_[a-z_]+_\d+$/i.test(id.trim());
+}
+
 function buildProjectStepIds(
     draft: TopicAuthoringDraft,
     sourceExercises: DraftExercise[],
     maxSteps = 5,
 ) {
-    const sourceIds = sourceExercises.map((exercise) => exercise.id);
+    const sourceIds = sourceExercises
+        .map((exercise) => exercise.id)
+        .filter((id) => !isGeneratedPolicyExerciseId(id));
     const sourceIdSet = new Set(sourceIds);
 
     const explicitStepIds = (draft.projectDraft?.stepIds ?? []).filter((id) =>
-        sourceIdSet.has(id),
+        sourceIdSet.has(id) && !isGeneratedPolicyExerciseId(id),
     );
 
-    return uniqueNonEmpty([...explicitStepIds, ...sourceIds]).slice(0, maxSteps);
+    if (explicitStepIds.length > 0) {
+        return uniqueNonEmpty(explicitStepIds).slice(0, maxSteps);
+    }
+
+    return uniqueNonEmpty(sourceIds).slice(0, maxSteps);
 }
 
 function quizExercises(draft: TopicAuthoringDraft) {
@@ -136,9 +147,10 @@ export function buildTopicBundleFromDraft(args: {
         ),
     );
     const tryItExerciseIdToMessageId = new Map<string, string>();
+    const tryItSourceIdToCanonicalId = new Map<string, string>();
     const sketchCards: ManifestCard[] = sketchBlocks.map((block, index) => {
         const tryItEnabled = seed.practice?.tryIt === true && !isProjectOnlyTopic;
-        const tryItExerciseId =
+        const sourceTryItExerciseId =
             tryItEnabled && tryItSketchIndexes.has(index)
                 ? resolveTryItExerciseIdForSketch({
                     draft,
@@ -149,12 +161,15 @@ export function buildTopicBundleFromDraft(args: {
                     sketchIndex: index,
                 })
                 : undefined;
+        const canonicalTryItExerciseId = sourceTryItExerciseId
+            ? tryItExerciseId(seed.topicId, index)
+            : undefined;
 
-        if (tryItExerciseId) {
-            tryItExerciseIdToMessageId.set(
-                tryItExerciseId,
-                tryItMessageId(seed.topicId, index),
-            );
+        if (sourceTryItExerciseId && canonicalTryItExerciseId) {
+            tryItSourceIdToCanonicalId.set(sourceTryItExerciseId, canonicalTryItExerciseId);
+            const messageId = tryItMessageId(seed.topicId, index);
+            tryItExerciseIdToMessageId.set(sourceTryItExerciseId, messageId);
+            tryItExerciseIdToMessageId.set(canonicalTryItExerciseId, messageId);
         }
 
         return {
@@ -168,10 +183,10 @@ export function buildTopicBundleFromDraft(args: {
             ),
             sketchId: block.id,
             height: 420,
-            ...(tryItExerciseId
+            ...(canonicalTryItExerciseId
                 ? {
                     tryIt: {
-                        id: `try-${seed.topicId}-sketch${index}`,
+                        id: canonicalTryItExerciseId,
                         titleKey: `${topicMessageRoot(
                             seed.subjectSlug,
                             logicalModuleSlug,
@@ -182,7 +197,7 @@ export function buildTopicBundleFromDraft(args: {
                             logicalModuleSlug,
                             seed.topicId,
                         )}.tryIt.${tryItMessageId(seed.topicId, index)}.prompt`,
-                        exerciseKey: tryItExerciseId,
+                        exerciseKey: canonicalTryItExerciseId,
                         difficulty: "easy" as const,
                         preferKind: manifestPreferredKind(preferredTryItKind),
                         seedPolicy: "global" as const,
@@ -322,7 +337,12 @@ export function buildTopicBundleFromDraft(args: {
         seed,
     });
 
-    const exercises: ManifestExercise[] = progressiveExercises.map((exercise) => {
+    const canonicalExercises = progressiveExercises.map((exercise) => {
+        const canonicalId = tryItSourceIdToCanonicalId.get(exercise.id);
+        return canonicalId ? { ...exercise, id: canonicalId } : exercise;
+    });
+
+    const exercises: ManifestExercise[] = canonicalExercises.map((exercise) => {
         const optionIdsForKeys =
             exercise.kind === "single_choice" || exercise.kind === "multi_choice"
                 ? optionIdsFromCount(exercise.options.length)
