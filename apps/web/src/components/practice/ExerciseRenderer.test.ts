@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+    resolveExerciseInteractionState,
     resolveExerciseRuntimeDefaultsLayers,
     shouldSkipEmbeddedEnsureExercise,
 } from "./ExerciseRenderer";
@@ -93,5 +94,36 @@ describe("shouldSkipEmbeddedEnsureExercise", () => {
                 manifestIdeConfig: null,
             }),
         ).toBe(true);
+    });
+});
+
+
+describe("resolveExerciseInteractionState", () => {
+    it("keeps revealed exercises interactive while grading stays finalized elsewhere", () => {
+        expect(
+            resolveExerciseInteractionState({
+                readOnly: false,
+                busy: false,
+                ok: null,
+                finalized: true,
+                revealed: true,
+                attempts: 0,
+                maxAttempts: 3,
+            }),
+        ).toEqual({ outOfAttempts: false, lockInputs: false });
+    });
+
+    it("still locks a finalized non-reveal result", () => {
+        expect(
+            resolveExerciseInteractionState({
+                readOnly: false,
+                busy: false,
+                ok: false,
+                finalized: true,
+                revealed: false,
+                attempts: 3,
+                maxAttempts: 3,
+            }),
+        ).toEqual({ outOfAttempts: true, lockInputs: true });
     });
 });

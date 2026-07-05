@@ -50,6 +50,9 @@ export function usePracticeController(args: {
     returnUrlFromQuery,
 
     isAssignmentRun,
+    isPublicChallengeRun,
+    isOnboardingTrialRun,
+    isDailyFiveRun,
     isSessionRun,
     isLockedRun,
     topicLocked,
@@ -206,8 +209,10 @@ export function usePracticeController(args: {
   // lock selected values when run says so
   useEffect(() => {
     if (!run) return;
-    if (run.mode === "assignment" || run.mode === "session") {
+    if (!run.filters.difficultyEditable && run.lockDifficulty) {
       setDifficulty(run.lockDifficulty as any);
+    }
+    if (!run.filters.topicEditable && run.lockTopic) {
       setTopic(run.lockTopic as any);
     }
   }, [run]);
@@ -403,8 +408,22 @@ export function usePracticeController(args: {
   const shellProps: React.ComponentProps<typeof PracticeShell> = useMemo(
     () => ({
       returnUrl: resolvedReturnUrl,
+      leaderboardUrl: (() => {
+        const locale = pathname.split("/").filter(Boolean)[0] || "en";
+        return `/${locale}/leaderboard`;
+      })(),
       reviewStack: engine.reviewStack,
-      isOnboardingTrial: isTrial, // ✅ add here
+      experienceMode: run?.mode ?? "practice",
+      viewer: run?.viewer ?? {
+        tier: "guest",
+        authenticated: false,
+        subscribed: false,
+      },
+      isOnboardingTrial: isOnboardingTrialRun,
+      isSharedChallenge: isPublicChallengeRun,
+      isDailyFive: isDailyFiveRun,
+      challengeTitle: run?.challenge?.title ?? null,
+      helpPolicy: run?.help ?? null,
 
       // ...existing props...
       excuseAndNext: (reason?: string | null) => engine.excuseAndNext?.(reason),
@@ -413,6 +432,20 @@ export function usePracticeController(args: {
       onReturn: () => {
         const parts = pathname.split("/").filter(Boolean);
         const locale = parts[0] || "en";
+
+        if (run?.mode === "daily_five") {
+          if (!run.viewer.subscribed) {
+            router.replace(`/${locale}/billing`, { scroll: false });
+            return;
+          }
+          if (subjectSlug && moduleSlug) {
+            router.replace(
+              `/${locale}/subjects/${encodeURIComponent(subjectSlug)}/modules/${encodeURIComponent(moduleSlug)}/practice`,
+              { scroll: false },
+            );
+            return;
+          }
+        }
 
         const raw = String(resolvedReturnUrl ?? "").trim();
 
@@ -506,7 +539,10 @@ export function usePracticeController(args: {
       goPrev: engine.goPrev,
       goNext: engine.goNext,
       submit: engine.submit,
-      reveal: engine.openHelp,
+      openHelp: engine.openHelp,
+      reveal: () => engine.openHelp("reveal"),
+      pendingRevealCompletion: engine.deferredRevealCompletion,
+      finishRevealedSession: engine.finishDeferredReveal,
       retryLoad: engine.retryLoad,
       submitBusy: engine.submitBusy,
       padRef,
@@ -515,11 +551,19 @@ export function usePracticeController(args: {
     }),
     [
       completionReturnUrl,
+      resolvedReturnUrl,
+      returnUrlFromQuery,
+      pathname,
+      subjectSlug,
+      run,
       router,
       t,
     engine.reviewStack, // ✅ add this
 
       isAssignmentRun,
+      isPublicChallengeRun,
+      isOnboardingTrialRun,
+      isDailyFiveRun,
       isSessionRun,
       isLockedRun,
       topicLocked,
@@ -528,6 +572,9 @@ export function usePracticeController(args: {
       showDebug,
       maxAttempts,
       engine.submitBusy,
+      engine.deferredRevealCompletion,
+      engine.openHelp,
+      engine.finishDeferredReveal,
       sessionSize,
       topic,
       difficulty,

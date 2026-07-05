@@ -110,6 +110,7 @@ export function usePracticeStatePersistence(args: {
     const sectionParam = sp.get("section");
     const difficultyParam = sp.get("difficulty");
     const topicParam = sp.get("topic");
+    const sessionIdParam = sp.get("sessionId");
 
     const nextSection = sectionParam ?? null;
 
@@ -130,12 +131,19 @@ export function usePracticeStatePersistence(args: {
     const initialSize = sizeFromParam ?? SESSION_DEFAULT;
 
     if (!subjectSlug || !moduleSlug) {
-      resolvedSessionIdRef.current = null;
+      // Trial/challenge pages are session-only routes: they intentionally do not
+      // provide subjectSlug/moduleSlug to the practice controller. Preserve the
+      // explicit session from the URL or component prop instead of clearing it.
+      // Clearing it here made every refresh call /api/practice without a
+      // sessionId, which generated a new question instead of resuming the
+      // persisted challenge instance.
+      const sessionOnlyId = sessionIdParam ?? sessionId ?? null;
+      resolvedSessionIdRef.current = sessionOnlyId;
 
       setSection(nextSection);
       setTopic(nextTopic as TopicValue);
       setDifficulty(nextDifficulty);
-      setSessionId(null);
+      setSessionId(sessionOnlyId);
       setRun(null);
 
       setSessionSize(initialSize);
@@ -156,7 +164,7 @@ export function usePracticeStatePersistence(args: {
       return;
     }
 
-    let sidParam = sp.get("sessionId");
+    let sidParam = sessionIdParam;
     if (!sidParam) {
       try {
         sidParam = localStorage.getItem(lastSessionKey(subjectSlug, moduleSlug)) || null;
@@ -260,6 +268,7 @@ export function usePracticeStatePersistence(args: {
     hydrated,
     subjectSlug,
     moduleSlug,
+    sessionId,
     setSection,
     setTopic,
     setDifficulty,

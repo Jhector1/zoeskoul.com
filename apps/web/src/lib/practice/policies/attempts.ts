@@ -1,5 +1,11 @@
 // src/lib/practice/policies/attempts.ts
-export type RunMode = "assignment" | "session" | "practice" | "onboarding_trial";
+export type RunMode =
+    | "assignment"
+    | "public_challenge"
+    | "daily_five"
+    | "onboarding_trial"
+    | "standard"
+    | "practice";
 
 /**
  * Parse attempts from:
@@ -33,9 +39,10 @@ function parseEnvInt(name: string, fallback: number | null) {
 
 /**
  * Attempts policy (server truth):
- * - assignment: finite default 3 (override by assignmentMaxAttempts)
- * - session: finite default 3 (override by sessionMaxAttempts)
- * - practice: unlimited default (null) (override by practiceMaxAttempts)
+ * - assignment: finite default 3 (override by assignmentQuestionMaxAttempts)
+ * - assignment/daily practice/onboarding trial: finite
+ * - public challenge: unlimited
+ * - standard/subscriber practice and ad-hoc practice: unlimited by default
  *
  * If you want a global finite cap for free practice, set:
  *   PRACTICE_DEFAULT_MAX_ATTEMPTS="5"
@@ -45,24 +52,28 @@ function parseEnvInt(name: string, fallback: number | null) {
 export function computeMaxAttemptsCore(args: {
     mode: RunMode;
 
-    assignmentMaxAttempts?: any; // number | string | null
+    assignmentQuestionMaxAttempts?: any; // number | string | null
     sessionMaxAttempts?: any;    // number | string | null
     practiceMaxAttempts?: any;   // number | string | null
 }): number | null {
     const mode = args.mode;
 
-    const assignmentDefault = parseEnvInt("ASSIGNMENT_DEFAULT_MAX_ATTEMPTS", 3);
+    const assignmentDefault = parseEnvInt("ASSIGNMENT_QUESTION_DEFAULT_MAX_ATTEMPTS", 3);
     const sessionDefault = parseEnvInt("SESSION_DEFAULT_MAX_ATTEMPTS", 3);
     const practiceDefault = parseEnvInt("PRACTICE_DEFAULT_MAX_ATTEMPTS", null); // null => unlimited
 
     if (mode === "assignment") {
-        return parseMaxAttemptsAny(args.assignmentMaxAttempts) ?? assignmentDefault;
+        return parseMaxAttemptsAny(args.assignmentQuestionMaxAttempts) ?? assignmentDefault;
     }
 
-    if (mode === "session") {
+    if (mode === "public_challenge") {
+        return null;
+    }
+
+    if (mode === "daily_five" || mode === "onboarding_trial") {
         return parseMaxAttemptsAny(args.sessionMaxAttempts) ?? sessionDefault;
     }
 
-    // practice
+    // standard subscriber practice and non-session practice are unlimited by default.
     return parseMaxAttemptsAny(args.practiceMaxAttempts) ?? practiceDefault;
 }

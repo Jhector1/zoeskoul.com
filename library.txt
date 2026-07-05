@@ -276,3 +276,6 @@ After edits:
 - fix any issues caused by the copy changes
 - summarize what changed
 - point out any remaining awkward copy that may still need a second pass
+
+
+http://localhost:3000/en/practice/trial?challenge=eyJ2IjoxLCJzdWJqZWN0U2x1ZyI6InB5dGhvbi12MiIsIm1vZHVsZVNsdWciOiJweXRob24tdjItMCIsInNlY3Rpb25TbHVnIjoicHl0aG9uLXYyLXB5dGhvbi12Mi0wLXNldHVwLWFuZC1maXJzdC1wcm9ncmFtcyIsInRvcGljU2x1ZyI6IndoYXQtcHl0aG9uLWlzIiwiZXhlcmNpc2VLZXkiOiJjaS10d28tdXNlY2FzZXMiLCJleGVyY2lzZVB1cnBvc2UiOiJwcm9qZWN0IiwiaWF0IjoxNzgzMjE0MzQ1LCJleHAiOjE4MTQ3NTAzNDV9.kejj9BwMX1h9T-sgx7B8AyznymDlqGDXn5nBYIJJ7Gg

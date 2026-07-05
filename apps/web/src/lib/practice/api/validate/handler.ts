@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
 import { attachGuestCookie } from "@/lib/practice/actor";
-import { isOnboardingTrialSession } from "@/lib/onboarding/trialPolicy";
 import { awardValidateGamification } from "@/lib/gamification/awardValidateGamification";
 
 import type { PracticeValidateContext } from "./types";
@@ -27,9 +26,18 @@ import {
 } from "../shared/http";
 import {
     assertSessionOwnerMatchesActor,
-    enforceSessionAssignmentEntitlement,
+    assertAssignmentSessionAccess,
 } from "../shared/sessionAccess";
 import { resolvePracticeRunMode } from "../shared/run";
+import {
+    getSessionMaxAttempts,
+    readSharedChallengeMeta,
+} from "@/lib/practice/challenges/session";
+import {
+    assertPracticeExperienceInvariant,
+    resolvePracticeExperienceMode,
+} from "@/lib/practice/experience/resolve";
+import { readDailyFiveMeta } from "@/lib/practice/experience/dailyFive";
 
 export async function handlePracticeValidate(ctx: PracticeValidateContext) {
     const { prisma, req, requestId, body, payload, actor, setGuestId, instance, session } = ctx;
@@ -48,18 +56,22 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         );
     }
 
-    const isAssignment = Boolean(session?.assignmentId);
-
-    if (isOnboardingTrialSession(session) && isAssignment) {
+    try {
+        assertPracticeExperienceInvariant(session);
+    } catch (e: any) {
         return attachGuestCookie(
             jsonApiResponse({
                 requestId,
-                message: "Invalid trial session state.",
-                status: 400,
+                message: e?.message ?? "Invalid practice session state.",
+                status: Number(e?.status) || 500,
+                extra: { code: e?.code ?? "INVALID_PRACTICE_EXPERIENCE" },
             }),
             setGuestId ?? undefined,
         );
     }
+
+    const experienceMode = resolvePracticeExperienceMode(session);
+    const isAssignment = experienceMode === "assignment";
 
     try {
         assertAnswerKindMatchesInstance({
@@ -113,10 +125,7 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
     }
 
     try {
-        const gate = await enforceSessionAssignmentEntitlement(session);
-        if (gate.kind === "res") {
-            return attachGuestCookie(gate.res as NextResponse, setGuestId ?? undefined);
-        }
+        assertAssignmentSessionAccess(session, actor);
     } catch (e: any) {
         return attachGuestCookie(
             jsonApiResponse({
@@ -146,13 +155,19 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
     }
 
     const mode = resolvePracticeRunMode(session);
+    const challenge = readSharedChallengeMeta(session?.meta ?? null);
     const maxAttempts = computeMaxAttempts({
         mode,
-        assignmentMaxAttempts: session?.assignment?.maxAttempts ?? null,
+        assignmentQuestionMaxAttempts: session?.assignment?.maxQuestionAttempts ?? null,
+        sessionMaxAttempts:
+            getSessionMaxAttempts(session?.meta ?? null) ??
+            readDailyFiveMeta(session?.meta ?? null)?.maxAttempts ??
+            null,
     });
 
     const priorNonRevealAttempts = await countPriorNonRevealAttempts(prisma, {
         instanceId: instance.id,
+        sessionId: challenge ? session?.id ?? null : null,
         actor,
     });
 
@@ -196,7 +211,10 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         isReveal ? priorNonRevealAttempts : priorNonRevealAttempts + 1;
 
     const finalizeOnExhaust =
-        mode === "assignment" || mode === "session" || mode === "onboarding_trial";
+        mode === "assignment" ||
+        mode === "public_challenge" ||
+        mode === "daily_five" ||
+        mode === "onboarding_trial";
 
     const exhausted = maxAttempts != null && nextNonRevealAttempts >= maxAttempts;
     const finalized = isReveal ? false : Boolean(graded.ok) || (finalizeOnExhaust && exhausted);

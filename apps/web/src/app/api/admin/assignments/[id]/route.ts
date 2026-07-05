@@ -20,9 +20,6 @@ function serializeAssignment(a: any) {
 
 export async function GET(req: Request, ctx: Ctx) {
   await requireAdmin(req);
-  if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
   const { id } = await ctx.params;
 
   const assignment = await prisma.assignment.findUnique({
@@ -60,9 +57,6 @@ export async function GET(req: Request, ctx: Ctx) {
 
 export async function PATCH(req: Request, ctx: Ctx) {
   await requireAdmin(req);
-  if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
   const { id } = await ctx.params;
 
   const body = await req.json().catch(() => null);
@@ -102,6 +96,15 @@ export async function PATCH(req: Request, ctx: Ctx) {
   if (data.status !== undefined) updateData.status = data.status;
   if (data.difficulty !== undefined) updateData.difficulty = data.difficulty;
   if (data.questionCount !== undefined) updateData.questionCount = data.questionCount;
+  if (data.timeLimitSec !== undefined) updateData.timeLimitSec = data.timeLimitSec ?? null;
+  if (data.maxAttempts !== undefined) updateData.maxAttempts = data.maxAttempts ?? null;
+  if (data.maxQuestionAttempts !== undefined) {
+    updateData.maxQuestionAttempts = data.maxQuestionAttempts;
+  }
+  if (data.allowReveal !== undefined) updateData.allowReveal = data.allowReveal;
+  if (data.showDebug !== undefined) updateData.showDebug = data.showDebug;
+  if (data.slug !== undefined) updateData.slug = data.slug;
+  if (data.title !== undefined) updateData.title = data.title;
 
   if (data.availableFrom !== undefined) updateData.availableFrom = data.availableFrom ?? null;
   if (data.dueAt !== undefined) updateData.dueAt = data.dueAt ?? null;
@@ -153,9 +156,6 @@ export async function PATCH(req: Request, ctx: Ctx) {
 
 export async function DELETE(req: Request, ctx: Ctx) {
   await requireAdmin(req);
-  if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
   const { id } = await ctx.params;
 
   const count = await prisma.practiceSession.count({ where: { assignmentId: id } });

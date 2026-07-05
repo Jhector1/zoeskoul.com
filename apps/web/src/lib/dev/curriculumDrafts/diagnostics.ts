@@ -53,8 +53,8 @@ type JsonObject = Record<string, unknown>;
 
 type FileLike = {
   path: string;
-  content?: unknown;
-  language?: string | null;
+  content: unknown;
+  language: string | null;
 };
 
 function asObject(value: unknown): JsonObject | null {
@@ -129,13 +129,16 @@ function filesFromExercise(exercise: JsonObject, field: "starterFiles" | "soluti
   const recipeFiles = asArray(recipe?.[field]) as JsonObject[];
   const files = direct.length ? direct : recipeFiles;
 
-  return files
-    .map((file) => ({
-      path: asString(file.path) ?? "",
+  return files.flatMap((file): FileLike[] => {
+    const path = asString(file.path);
+    if (!path) return [];
+
+    return [{
+      path,
       content: file.content,
       language: asString(file.language),
-    }))
-    .filter((file): file is FileLike => Boolean(file.path));
+    }];
+  });
 }
 
 function semanticChecksFromExercise(exercise: JsonObject) {

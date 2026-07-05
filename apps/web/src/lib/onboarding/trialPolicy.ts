@@ -2,6 +2,7 @@ import "server-only";
 
 import { prisma } from "@/lib/prisma";
 import type { PracticeDifficulty } from "@zoeskoul/db";
+import { isOnboardingTrialExperience } from "@/lib/practice/experience/resolve";
 
 export function difficultyFromLevel(
     level: string | null | undefined,
@@ -17,9 +18,12 @@ export function difficultyFromLevel(
 }
 
 export function isOnboardingTrialSession(session: {
+    id?: string | null;
     mode?: string | null;
+    assignmentId?: string | null;
+    meta?: unknown;
 } | null | undefined) {
-    return session?.mode === "onboarding_trial";
+    return isOnboardingTrialExperience(session);
 }
 
 /**

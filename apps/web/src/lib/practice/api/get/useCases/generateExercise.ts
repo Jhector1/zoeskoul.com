@@ -17,13 +17,14 @@ import { toPracticeKindOrThrow } from "../../shared/prismaMappers";
 import { resolveRequestSalt } from "../services/requestSalt.service";
 import { createPracticeInstance } from "../repositories/instance.repo";
 import { signKey } from "../mappers/key.mapper";
-import { buildRunMeta } from "../policies/runMeta.policy";
+import { buildRunMetaWithChallengeAttempts } from "../policies/runMeta.policy";
 import {
     computeAllowRevealEffective,
     getAssignmentDifficulty,
 } from "../policies/session.policy";
 import { resolveTopicFromScope } from "../services/topicResolver.service";
 import { toDbTopicSlug } from "@/lib/practice/topicSlugs";
+import { readSharedChallengeMeta } from "@/lib/practice/challenges/session";
 
 function isGeneratorTopicMismatch(e: any) {
     const code = String((e as any)?.code ?? "");
@@ -335,7 +336,10 @@ export async function generatePracticeExercise(
         seedPolicy,
     } = params;
 
-    const isTrial = session?.mode === "onboarding_trial";
+    const isOnboardingTrial = session?.mode === "onboarding_trial";
+    const isDailyPractice = session?.mode === "daily_five";
+    const sharedChallenge = readSharedChallengeMeta(session?.meta ?? null);
+    const isSharedChallenge = Boolean(sharedChallenge);
     const allowRevealEffective = computeAllowRevealEffective(session, allowReveal);
 
     const assignmentDiff = getAssignmentDifficulty(session);
@@ -353,9 +357,60 @@ export async function generatePracticeExercise(
 
     const { reqSalt } = resolveRequestSalt(salt);
 
+    // Persisted sessions must resume their current unanswered instance instead
+    // of silently creating a second question on refresh or React retry. This is
+    // especially important for public challenges and daily-practice uniqueness.
+    if (session?.id) {
+        const openInstance = await prisma.practiceQuestionInstance.findFirst({
+            where: {
+                sessionId: session.id,
+                answeredAt: null,
+            },
+            orderBy: { createdAt: "desc" },
+            select: {
+                id: true,
+                sessionId: true,
+                publicPayload: true,
+            },
+        });
+
+        if (openInstance) {
+            const key = signKey({
+                instanceId: openInstance.id,
+                sessionId: openInstance.sessionId ?? null,
+                userId: actor.userId ?? null,
+                guestId: actor.guestId ?? null,
+                allowReveal: allowRevealEffective,
+            });
+            const run = await buildRunMetaWithChallengeAttempts({
+                prisma,
+                actor,
+                session,
+                diff,
+                allowRevealEffective,
+            });
+
+            return {
+                kind: "json",
+                status: 200,
+                body: {
+                    exercise: openInstance.publicPayload as any,
+                    key,
+                    sessionId: session.id,
+                    run,
+                    meta: { resumedOpenInstance: true },
+                },
+            };
+        }
+    }
+
     const purposeMode = decision.effective;
     const preferPurposeForGenerator: "quiz" | "project" | null =
-        isTrial ? "quiz" : purposeMode === "mixed" ? null : purposeMode;
+        isOnboardingTrial && !isSharedChallenge
+            ? "quiz"
+            : purposeMode === "mixed"
+                ? null
+                : purposeMode;
     const effectiveSubjectSlug =
         subject ??
         session?.section?.subject?.slug ??
@@ -363,6 +418,13 @@ export async function generatePracticeExercise(
 
     const moduleIdFromSession = session?.section?.moduleId ?? null;
     const assignmentIdFromSession = session?.assignmentId ?? null;
+    // Daily practice stores one anchor section on the session, but its queue may
+    // intentionally contain exercises from other sections in the same module.
+    // The queued section is server-authored in applyDailyFiveParams, so it is
+    // safe—and necessary—to use it instead of the anchor section here.
+    const effectiveSectionSlug = isDailyPractice
+        ? section
+        : session?.section?.slug ?? section;
     const excludedTopicSlugs = new Set<string>();
 
     const hasRequestedTopic = Boolean(topic && topic !== "all");
@@ -386,7 +448,7 @@ export async function generatePracticeExercise(
             };
 
     const canResolveExactAuthoredProjectExercise =
-        !isTrial &&
+        (!isOnboardingTrial || isSharedChallenge) &&
         purposeMode === "project" &&
         hasRequestedTopic &&
         hasRequestedExerciseKey &&
@@ -397,7 +459,7 @@ export async function generatePracticeExercise(
             prisma,
             subjectSlug: session ? undefined : subject,
             moduleSlug: session ? undefined : module,
-            sectionSlug: session?.section?.slug ?? section,
+            sectionSlug: effectiveSectionSlug,
             rawTopic: topic,
             subjectIdFromSession: session?.section?.subjectId ?? null,
             moduleIdFromSession,
@@ -446,6 +508,7 @@ export async function generatePracticeExercise(
         const instance = await createPracticeInstance({
             prisma,
             sessionId: session?.id ?? null,
+            sessionMode: session?.mode ?? null,
             exercise: authored.exercise,
             expected: authored.expected,
             topicSlug: authoredResolved.topicSlug as TopicSlug,
@@ -462,7 +525,7 @@ export async function generatePracticeExercise(
             allowReveal: allowRevealEffective,
         });
 
-        const run = buildRunMeta({ session, diff, allowRevealEffective });
+        const run = await buildRunMetaWithChallengeAttempts({ prisma, actor, session, diff, allowRevealEffective });
 
         return {
             kind: "json",
@@ -505,7 +568,7 @@ export async function generatePracticeExercise(
             prisma,
             subjectSlug: session ? undefined : subject,
             moduleSlug: session ? undefined : module,
-            sectionSlug: session?.section?.slug ?? section,
+            sectionSlug: effectiveSectionSlug,
             rawTopic: attempt === 0 ? topic : null,
             subjectIdFromSession: session?.section?.subjectId ?? null,
             moduleIdFromSession,
@@ -660,7 +723,7 @@ export async function generatePracticeExercise(
         (out as any)?.meta?.purpose === "project" ? "project" : "quiz";
 
     const persistedPurpose: "quiz" | "project" =
-        isTrial
+        isOnboardingTrial && !isSharedChallenge
             ? "quiz"
             : purposeMode === "mixed"
                 ? chosenPurpose
@@ -671,6 +734,7 @@ export async function generatePracticeExercise(
     const instance = await createPracticeInstance({
         prisma,
         sessionId: session?.id ?? null,
+        sessionMode: session?.mode ?? null,
         exercise,
         expected: out?.expected,
         topicSlug,
@@ -687,7 +751,7 @@ export async function generatePracticeExercise(
         allowReveal: allowRevealEffective,
     });
 
-    const run = buildRunMeta({ session, diff, allowRevealEffective });
+    const run = await buildRunMetaWithChallengeAttempts({ prisma, actor, session, diff, allowRevealEffective });
 
     return {
         kind: "json",

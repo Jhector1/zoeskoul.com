@@ -153,6 +153,8 @@ export default function CodeInputExerciseUI({
                                                 autoBindMode = "whenUnbound",
                                                 showPrompt = true,
                                                 frame = "plain",
+                                                showStdinEditor: showStdinEditorOverride,
+                                                runnerHeight,
                                                 feedback = null,
                                                 explanation = null,
                                                 runFeedback = null,
@@ -220,6 +222,8 @@ export default function CodeInputExerciseUI({
     autoBindMode?: CodeInputAutoBindMode;
     showPrompt?: boolean;
     frame?: CodeRunnerFrame;
+    showStdinEditor?: boolean;
+    runnerHeight?: number | "auto";
     feedback?: CodeFeedback | null;
     explanation?: string | null;
     runFeedback?: CodeFeedback | null;
@@ -727,6 +731,11 @@ export default function CodeInputExerciseUI({
         workspace?.activeFileId || workspace?.entryFileId || "entry",
     ].join(":");
 
+    const showStdinEditor = showStdinEditorOverride ?? true;
+
+    const resolvedRunnerHeight =
+        runnerHeight ?? exercise.editorHeight ?? 420;
+
     if (workspace && !isWorkspaceValid) {
         if (process.env.NODE_ENV === "development") {
             console.warn("[CodeInputExerciseUI] Invalid workspace provided:", workspace);
@@ -740,7 +749,7 @@ export default function CodeInputExerciseUI({
 
     return (
         <div
-            className="grid gap-3"
+            className="grid min-w-0 gap-3"
             data-testid="code-input-exercise"
             data-exercise-key={runnerExerciseKey}
         >
@@ -761,11 +770,11 @@ export default function CodeInputExerciseUI({
                 title={runnerTitle as any}
                 frame={frame}
                 hintMarkdown={exercise.hint}
-                height={320}
+                height={resolvedRunnerHeight}
                 disabled={disabled || readOnly}
                 allowReset={!readOnly}
                 allowRun={!readOnly}
-                showStdinEditor
+                showStdinEditor={showStdinEditor}
                 runtime={{ backend: "judge0", terminalView: "plain" }}
                 showHint={false}
                 showEditorThemeToggle={!readOnly}

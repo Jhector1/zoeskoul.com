@@ -287,6 +287,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const t = useTranslations("ide.codeRunner");
     const {
         frame = "card" as CodeRunnerFrame,
+        className,
         title = t("defaultTitle"),
         height = 320,
         hintMarkdown,
@@ -354,6 +355,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const { resolvedTheme } = useTheme();
     const [editorTheme, setEditorTheme] = useState<"vs" | "vs-dark">("vs-dark");
+    const runnerRootRef = useRef<HTMLDivElement | null>(null);
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
     const [mobilePane, setMobilePane] = useState<MobilePane>("editor");
 
@@ -364,20 +366,28 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     }, [resolvedTheme, showEditorThemeToggle]);
 
     useEffect(() => {
-        if (typeof window === "undefined" || !window.matchMedia) return;
+        const node = runnerRootRef.current;
+        if (!node || typeof window === "undefined") return;
 
-        const mq = window.matchMedia("(max-width: 767px)");
-        const update = () => setIsNarrowScreen(mq.matches);
+        const updateFromWidth = (width: number) => {
+            setIsNarrowScreen(width <= 767);
+        };
 
-        update();
+        updateFromWidth(node.getBoundingClientRect().width);
 
-        if (typeof mq.addEventListener === "function") {
-            mq.addEventListener("change", update);
-            return () => mq.removeEventListener("change", update);
+        if (typeof ResizeObserver !== "undefined") {
+            const observer = new ResizeObserver((entries) => {
+                const width = entries[0]?.contentRect.width;
+                if (typeof width === "number") updateFromWidth(width);
+            });
+
+            observer.observe(node);
+            return () => observer.disconnect();
         }
 
-        mq.addListener(update);
-        return () => mq.removeListener(update);
+        const update = () => updateFromWidth(node.getBoundingClientRect().width);
+        window.addEventListener("resize", update);
+        return () => window.removeEventListener("resize", update);
     }, []);
 
     const allowedLangs = useMemo(() => {
@@ -1015,10 +1025,12 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const showRestartWorkspaceTerminalUI =
         showHeaderBar && workspaceTerminalEnabled && !isWeb && lang !== "sql";
 
-    const outerCls =
+    const outerCls = cx(
         frame === "plain"
-            ? "flex h-full min-h-0 w-full flex-col"
-            : "ui-card flex min-h-0 w-full flex-col p-4";
+            ? "flex h-full min-h-0 min-w-0 w-full flex-col"
+            : "ui-card flex min-h-0 min-w-0 w-full flex-col p-3 sm:p-4",
+        className,
+    );
 
     const shouldFillParentHeight = frame === "plain" && height === "auto";
     const needsBoundedRunnerHeight = showEditor && showTerminal && !shouldFillParentHeight;
@@ -1247,7 +1259,7 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     );
 
     return (
-        <div className={outerCls} data-testid={testId} style={rootStyle}>
+        <div ref={runnerRootRef} className={outerCls} data-testid={testId} style={rootStyle}>
             {showHeaderBar ? (
                 <div className="relative px-2 z-20 overflow-visible @container">
                     <HeaderBar

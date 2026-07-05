@@ -6,9 +6,6 @@ type Ctx = { params: Promise<{ id: string }> };
 
 export async function POST(req: Request, ctx: Ctx) {
   await requireAdmin(req);
-  if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
 
   const { id } = await ctx.params;
 

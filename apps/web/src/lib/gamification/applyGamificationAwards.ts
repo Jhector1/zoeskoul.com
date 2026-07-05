@@ -18,6 +18,7 @@ import type {
 export type PendingXpAward = {
     sourceType: XpSourceType;
     xpDelta: number;
+    rankedXpDelta?: number;
     reason: string;
     idempotencyKey: string;
     sourceId?: string | null;
@@ -37,32 +38,31 @@ async function createXpEventIfMissing(
         userId: string | null;
         award: PendingXpAward;
     },
-): Promise<number> {
-    const existing = await tx.xpEvent.findUnique({
-        where: { idempotencyKey: args.award.idempotencyKey },
-        select: { id: true },
+): Promise<{ xp: number; rankedXp: number }> {
+    const inserted = await tx.xpEvent.createMany({
+        data: [
+            {
+                actorKey: args.actorKey,
+                userId: args.userId,
+                sourceType: args.award.sourceType,
+                sourceId: args.award.sourceId ?? null,
+                subjectId: args.award.subjectId ?? null,
+                moduleId: args.award.moduleId ?? null,
+                topicId: args.award.topicId ?? null,
+                instanceId: args.award.instanceId ?? null,
+                sessionId: args.award.sessionId ?? null,
+                xpDelta: args.award.xpDelta,
+                rankedXpDelta: args.award.rankedXpDelta ?? 0,
+                reason: args.award.reason,
+                idempotencyKey: args.award.idempotencyKey,
+            },
+        ],
+        skipDuplicates: true,
     });
 
-    if (existing) return 0;
-
-    await tx.xpEvent.create({
-        data: {
-            actorKey: args.actorKey,
-            userId: args.userId,
-            sourceType: args.award.sourceType,
-            sourceId: args.award.sourceId ?? null,
-            subjectId: args.award.subjectId ?? null,
-            moduleId: args.award.moduleId ?? null,
-            topicId: args.award.topicId ?? null,
-            instanceId: args.award.instanceId ?? null,
-            sessionId: args.award.sessionId ?? null,
-            xpDelta: args.award.xpDelta,
-            reason: args.award.reason,
-            idempotencyKey: args.award.idempotencyKey,
-        },
-    });
-
-    return args.award.xpDelta;
+    return inserted.count === 1
+        ? { xp: args.award.xpDelta, rankedXp: args.award.rankedXpDelta ?? 0 }
+        : { xp: 0, rankedXp: 0 };
 }
 
 export async function applyGamificationAwards(args: {
@@ -97,6 +97,7 @@ export async function applyGamificationAwards(args: {
 
         const awarded: GamificationAwardEvent[] = [];
         let xpGained = 0;
+        let rankedXpGained = 0;
 
         const hadMeaningfulActivityToday =
             (existingDaily?.correctCount ?? 0) > 0 ||
@@ -116,6 +117,7 @@ export async function applyGamificationAwards(args: {
                 userId,
                 day: today,
                 xpEarned: 0,
+                rankedXpEarned: 0,
                 answeredCount: 0,
                 correctCount: 0,
                 sessionCount: 0,
@@ -133,11 +135,13 @@ export async function applyGamificationAwards(args: {
                 award,
             });
 
-            if (added > 0) {
-                xpGained += added;
+            if (added.xp > 0 || added.rankedXp > 0) {
+                xpGained += added.xp;
+                rankedXpGained += added.rankedXp;
                 awarded.push({
                     sourceType: award.sourceType as GamificationAwardEvent["sourceType"],
-                    xpDelta: award.xpDelta,
+                    xpDelta: added.xp,
+                    rankedXpDelta: added.rankedXp,
                     reason: award.reason,
                 });
             }
@@ -169,24 +173,29 @@ export async function applyGamificationAwards(args: {
                 award: {
                     sourceType: streakRule.sourceType,
                     xpDelta: streakRule.xpDelta,
+                    rankedXpDelta: 0,
                     reason: streakRule.reason,
                     idempotencyKey: `xp:streak:${actorKey}:${todayKey}`,
                     sourceId: todayKey,
                 },
             });
 
-            if (streakAdded > 0) {
-                xpGained += streakAdded;
+            if (streakAdded.xp > 0 || streakAdded.rankedXp > 0) {
+                xpGained += streakAdded.xp;
+                rankedXpGained += streakAdded.rankedXp;
                 awarded.push({
                     sourceType: "streak_bonus",
-                    xpDelta: streakRule.xpDelta,
+                    xpDelta: streakAdded.xp,
+                    rankedXpDelta: streakAdded.rankedXp,
                     reason: streakRule.reason,
                 });
             }
         }
 
         const previousTotalXp = existingProgress?.totalXp ?? 0;
+        const previousRankedXp = existingProgress?.rankedXp ?? 0;
         const nextTotalXp = previousTotalXp + xpGained;
+        const nextRankedXp = previousRankedXp + rankedXpGained;
         const previousLevel = getLevelForXp(previousTotalXp);
         const nextLevel = getLevelForXp(nextTotalXp);
 
@@ -196,6 +205,7 @@ export async function applyGamificationAwards(args: {
                 actorKey,
                 userId,
                 totalXp: nextTotalXp,
+                rankedXp: nextRankedXp,
                 level: nextLevel,
                 currentStreak: nextCurrentStreak,
                 longestStreak: nextLongestStreak,
@@ -205,6 +215,7 @@ export async function applyGamificationAwards(args: {
             update: {
                 userId,
                 totalXp: nextTotalXp,
+                rankedXp: nextRankedXp,
                 level: nextLevel,
                 currentStreak: nextCurrentStreak,
                 longestStreak: nextLongestStreak,
@@ -212,7 +223,7 @@ export async function applyGamificationAwards(args: {
             },
         });
 
-        if (xpGained > 0) {
+        if (xpGained > 0 || rankedXpGained > 0) {
             await tx.dailyLearningStat.update({
                 where: {
                     actorKey_day: {
@@ -222,18 +233,21 @@ export async function applyGamificationAwards(args: {
                 },
                 data: {
                     xpEarned: { increment: xpGained },
+                    rankedXpEarned: { increment: rankedXpGained },
                 },
             });
         }
 
         const summary = buildGamificationSummary({
             totalXp: nextTotalXp,
+            rankedXp: nextRankedXp,
             currentStreak: nextCurrentStreak,
             longestStreak: nextLongestStreak,
         });
 
         return {
             xpGained,
+            rankedXpGained,
             leveledUp: nextLevel > previousLevel,
             streakExtended,
             awarded,

@@ -64,6 +64,7 @@ export async function startOrResumePracticeSession(args: StartOrResumeArgs) {
 
     const created = await prisma.practiceSession.create({
         data: {
+            mode: createData.mode ?? "standard",
             ...createData,
             userId: actor.userId ?? null,
             guestId: actor.userId ? null : actor.guestId ?? null,

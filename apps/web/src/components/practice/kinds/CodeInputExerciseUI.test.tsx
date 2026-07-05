@@ -5,7 +5,13 @@ import { describe, expect, it, vi } from "vitest";
 import CodeInputExerciseUI from "./CodeInputExerciseUI";
 
 vi.mock("@/components/code/CodeRunner", () => ({
-    default: () => <div data-testid="mock-code-runner" />,
+    default: (props: { showStdinEditor?: boolean; height?: number | "auto" }) => (
+        <div
+            data-testid="mock-code-runner"
+            data-show-stdin={String(Boolean(props.showStdinEditor))}
+            data-height={String(props.height ?? "")}
+        />
+    ),
 }));
 
 vi.mock("@/components/practice/kinds/KindHelper", () => ({
@@ -72,4 +78,26 @@ describe("CodeInputExerciseUI", () => {
 
         expect(html).toContain('data-testid="mock-code-runner"');
     });
+    it("keeps stdin enabled by default outside shared challenges", () => {
+        const html = renderToStaticMarkup(
+            <CodeInputExerciseUI {...baseProps({ variant: "embedded" })} />,
+        );
+
+        expect(html).toContain('data-show-stdin="true"');
+        expect(html).toContain('data-height="420"');
+    });
+
+    it("honors an explicit false stdin setting for shared challenges", () => {
+        const html = renderToStaticMarkup(
+            <CodeInputExerciseUI
+                {...baseProps({
+                    variant: "embedded",
+                    showStdinEditor: false,
+                })}
+            />,
+        );
+
+        expect(html).toContain('data-show-stdin="false"');
+    });
+
 });

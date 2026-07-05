@@ -67,7 +67,8 @@
       "errorTitle": "⚠️ Error",
       "revealed": "👁️ Revealed (answer shown)",
       "correct": "✅ Correct",
-      "incorrect": "❌ Not quite"
+      "incorrect": "❌ Not quite",
+      "revealedPractice": "La notation est terminée. Vous pouvez encore remplir, modifier, réinitialiser et exécuter la solution avant de continuer."
     },
     "loadError": {
       "title": "Couldn’t load a question"
@@ -143,6 +144,39 @@
       "incompleteAnswer": "Answer is incomplete or invalid.",
       "failedToSubmit": "Failed to submit",
       "failedToLoad": "Failed to load question"
+    },
+    "mobile": {
+      "leaderboard": "Classement",
+      "controls": "Commandes",
+      "controlsTitle": "Progression et commandes",
+      "leaderboardTitle": "Classement de pratique",
+      "close": "Fermer",
+      "submitting": "Envoi…",
+      "statusReady": "Prêt à envoyer",
+      "statusCorrect": "Correct — continuer",
+      "statusTryAgain": "Pas encore — réessayer",
+      "statusRevealed": "Réponse révélée",
+      "statusError": "Une action demande votre attention",
+      "help": "Aide",
+      "helpTitle": "Indices et réponse",
+      "helpUnavailable": "L’aide sera disponible une fois l’exercice chargé.",
+      "helpIntroTitle": "Besoin d’aide ?",
+      "helpIntro": "Ouvrez les indices un par un. Révéler la réponse termine l’exercice et ne rapporte aucun XP.",
+      "attemptsRemaining": "{count} essais restants",
+      "hintsUsed": "Indices utilisés : {used}/{total}",
+      "showHint": "Afficher un indice",
+      "openingHelp": "Ouverture…",
+      "noMoreHints": "Vous avez ouvert tous les indices disponibles.",
+      "revealTitle": "Révéler la réponse",
+      "revealWarning": "Cela termine l’exercice et ne rapporte aucun XP.",
+      "revealAnswer": "Révéler la réponse",
+      "revealConfirmTitle": "Révéler la réponse ?",
+      "revealConfirmBody": "L’exercice sera marqué comme révélé. Vous ne gagnerez aucun XP.",
+      "cancel": "Annuler",
+      "answerRevealedTitle": "Réponse révélée",
+      "answerRevealedBody": "Examinez la solution, puis continuez lorsque vous êtes prêt.",
+      "continue": "Continuer",
+      "backToExercise": "Retour à l’exercice"
     }
   }
 }

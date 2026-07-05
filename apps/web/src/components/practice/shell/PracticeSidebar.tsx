@@ -46,12 +46,15 @@ export default function PracticeSidebar(
         outOfAttempts: boolean;
         resultBoxClass: string;
         concept: UseConceptExplainResult;
+        compact?: boolean;
+        onOpenHelp?: () => void;
     },
 ) {
     const {
         t,
         returnUrl,
         onReturn,
+        experienceMode,
 
         isAssignmentRun,
         isSessionRun,
@@ -90,12 +93,17 @@ export default function PracticeSidebar(
         outOfAttempts,
         resultBoxClass,
         concept,
+        compact = false,
+        onOpenHelp,
     } = props;
 
-    return (
-        <div className="ui-page-surface overflow-hidden">
+    const showTopicFilter = topicOptionsFixed.length > 0 && (!compact || !topicLocked);
+    const showDifficultyFilter = difficultyOptions.length > 0 && (!compact || !difficultyLocked);
 
-            <div className="border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.82)] p-4">
+    return (
+        <div className={compact ? "overflow-hidden" : "ui-page-surface overflow-hidden"}>
+
+            <div className={`border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.82)] ${compact ? "p-3" : "p-4"}`}>
                 { onReturn ? (
                     <div className="mb-3">
                         <button
@@ -111,18 +119,34 @@ export default function PracticeSidebar(
 
                 <div className="flex items-center justify-between gap-3">
                     <div>
-                        {isAssignmentRun ? (
-                            <div className="mt-2 inline-flex">
-                                <span className="ui-pill-warn">{t("filters.assignmentLocked")}</span>
-                            </div>
-                        ) : isSessionRun ? (
-                            <div className="mt-2 inline-flex">
-                                <span className="ui-pill-info">{t("filters.sessionLocked")}</span>
-                            </div>
-                        ) : null}
+                        <div className={compact ? "hidden" : "mb-2 inline-flex"}>
+                            <span
+                                className={
+                                    experienceMode === "assignment"
+                                        ? "ui-pill-warn"
+                                        : experienceMode === "public_challenge"
+                                            ? "ui-pill-info"
+                                            : experienceMode === "daily_five"
+                                                ? "ui-pill-success"
+                                                : "ui-pill-neutral"
+                                }
+                            >
+                                {experienceMode === "assignment"
+                                    ? "Assignment • teacher controlled"
+                                    : experienceMode === "public_challenge"
+                                        ? "Public challenge • exact exercise"
+                                        : experienceMode === "onboarding_trial"
+                                            ? "Onboarding trial • starter questions"
+                                            : experienceMode === "daily_five"
+                                                ? "Daily Practice • ranked free practice"
+                                                : experienceMode === "standard"
+                                                    ? "Subscriber practice • configurable"
+                                                    : "Practice"}
+                            </span>
+                        </div>
 
-                        <div className="ui-title-sm">{t("title")}</div>
-                        <div className="mt-1 ui-meta">{t("subtitle")}</div>
+                        <div className={compact ? "hidden" : "ui-title-sm"}>{t("title")}</div>
+                        <div className={compact ? "hidden" : "mt-1 ui-meta"}>{t("subtitle")}</div>
 
                         <div className="mt-2 ui-meta">
                             {t("progress.label")}:{" "}
@@ -139,31 +163,37 @@ export default function PracticeSidebar(
                             <div className="mt-1 ui-meta">
                                 {t("progress.attempts")}:{" "}
                                 <span className="font-medium text-[rgb(var(--ui-text)/0.96)]">
-                  {attempts}/{isLockedRun ? maxAttempts : "∞"}
+                  {attempts}/{Number.isFinite(maxAttempts) ? maxAttempts : "∞"}
                 </span>
                             </div>
                         ) : null}
                     </div>
 
-                    <span className="ui-pill-neutral">{badge || t("status.dash")}</span>
+                    {!compact ? (
+                        <span className="ui-pill-neutral">{badge || t("status.dash")}</span>
+                    ) : null}
                 </div>
 
                 <div className="mt-3 grid gap-3">
-                    <SelectField
-                        label={t("filters.topic")}
-                        value={String(topic)}
-                        onChange={(v) => setTopic(v as any)}
-                        disabled={topicLocked}
-                        options={topicOptionsFixed as any}
-                    />
+                    {showTopicFilter ? (
+                        <SelectField
+                            label={t("filters.topic")}
+                            value={String(topic)}
+                            onChange={(v) => setTopic(v as any)}
+                            disabled={topicLocked}
+                            options={topicOptionsFixed as any}
+                        />
+                    ) : null}
 
-                    <SelectField
-                        label={t("filters.difficulty")}
-                        value={String(difficulty)}
-                        onChange={(v) => setDifficulty(v as any)}
-                        disabled={difficultyLocked}
-                        options={difficultyOptions as any}
-                    />
+                    {showDifficultyFilter ? (
+                        <SelectField
+                            label={t("filters.difficulty")}
+                            value={String(difficulty)}
+                            onChange={(v) => setDifficulty(v as any)}
+                            disabled={difficultyLocked}
+                            options={difficultyOptions as any}
+                        />
+                    ) : null}
 
                     <div className="mt-2 flex flex-wrap gap-2">
                         <button
@@ -196,14 +226,33 @@ export default function PracticeSidebar(
               </span>
                         </button>
 
-                        <button
-                            type="button"
-                            className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
-                            onClick={() => reveal()}
-                            disabled={busy || !props.exercise || !allowReveal}
-                        >
-                            {t("buttons.reveal")}
-                        </button>
+                        {compact && onOpenHelp ? (
+                            <button
+                                type="button"
+                                className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
+                                onClick={onOpenHelp}
+                                disabled={busy || !props.exercise}
+                            >
+                                {t("mobile.help")}
+                            </button>
+                        ) : (
+                            <button
+                                type="button"
+                                className="ui-btn-secondary px-3 disabled:cursor-not-allowed disabled:opacity-50"
+                                onClick={() => reveal()}
+                                disabled={
+                                    busy ||
+                                    !props.exercise ||
+                                    !allowReveal ||
+                                    Boolean(
+                                        current?.revealed ||
+                                        (current?.result as any)?.revealUsed,
+                                    )
+                                }
+                            >
+                                {t("buttons.reveal")}
+                            </button>
+                        )}
                     </div>
 
                     {isLockedRun && !allowReveal ? (
@@ -227,6 +276,10 @@ export default function PracticeSidebar(
                 concept={concept}
                 excuseAndNext={props.excuseAndNext}
                 codeInputId={props.codeInputId}
+                pendingRevealCompletion={props.pendingRevealCompletion}
+                finishRevealedSession={props.finishRevealedSession}
+                canGoNext={props.canGoNext}
+                goNext={props.goNext}
             />
         </div>
     );

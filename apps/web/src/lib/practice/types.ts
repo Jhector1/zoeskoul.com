@@ -260,15 +260,18 @@ export type SubmitAnswer =
 
 export type ValidateGamificationPayload = {
     xpGained: number;
+    rankedXpGained: number;
     leveledUp: boolean;
     streakExtended: boolean;
     awarded: Array<{
         sourceType: string;
         xpDelta: number;
+        rankedXpDelta: number;
         reason: string;
     }>;
     summary: {
         totalXp: number;
+        rankedXp: number;
         level: number;
         currentStreak: number;
         longestStreak: number;

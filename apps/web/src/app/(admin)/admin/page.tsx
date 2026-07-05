@@ -126,6 +126,12 @@ export default async function AdminDashboardPage() {
             Assignments
           </Link>
           <Link
+            href="/admin/public-challenges"
+            className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium hover:bg-neutral-50"
+          >
+            Public challenges
+          </Link>
+          <Link
             href="/practice/sections"
             className="rounded-lg bg-black px-4 py-2 text-sm font-medium text-white hover:bg-neutral-800"
           >
@@ -183,6 +189,12 @@ export default async function AdminDashboardPage() {
               className="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium hover:bg-neutral-50"
             >
               Manage assignments
+            </Link>
+            <Link
+              href="/admin/public-challenges"
+              className="rounded-lg border border-neutral-300 px-4 py-2 text-sm font-medium hover:bg-neutral-50"
+            >
+              Create public challenge
             </Link>
           </div>
         </div>

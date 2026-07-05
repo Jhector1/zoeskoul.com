@@ -20,6 +20,7 @@ export default function QuestionPanel(props: PracticeShellProps) {
         isAssignmentRun,
         maxAttempts,
         skipLoadError,
+        experienceMode,
     } = props;
 
     const { raw } = useTaggedT();
@@ -30,14 +31,14 @@ export default function QuestionPanel(props: PracticeShellProps) {
     }, [exercise, raw]);
 
     return (
-        <div className="ui-page-surface overflow-hidden">
+        <div className="ui-page-surface min-w-0 overflow-hidden">
             <div className="border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface)/0.82)] p-4">
                 <div className="ui-title-sm">
                     {ex?.title ?? (busy ? t("status.loadingDots") : t("status.dash"))}
                 </div>
             </div>
 
-            <div className="p-4">
+            <div className="min-w-0 p-3 sm:p-4">
                 {loadErr ? (
                     <div className="ui-surface-danger p-3 text-sm">
                         <div className="ui-title-sm">{t("loadError.title")}</div>
@@ -78,11 +79,18 @@ export default function QuestionPanel(props: PracticeShellProps) {
                         padRef={padRef}
                         updateCurrent={updateCurrent}
                         showPrompt={true}
+                        embeddedRunnerHeight={props.isSharedChallenge ? 440 : undefined}
+                        showStdinEditor={
+                            experienceMode === "public_challenge" ||
+                            experienceMode === "daily_five"
+                                ? false
+                                : undefined
+                        }
                     />
                 )}
             </div>
 
-            <div className="border-t border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] p-3 ui-meta">
+            <div className="hidden border-t border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] p-3 ui-meta xl:block">
                 {t("questionPanel.footerTip")}
             </div>
         </div>

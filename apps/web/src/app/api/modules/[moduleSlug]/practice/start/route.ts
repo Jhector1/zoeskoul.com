@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { getActor, ensureGuestId, attachGuestCookie } from "@/lib/practice/actor";
+import { getActor } from "@/lib/practice/actor";
+import { resolveSubscriberPracticeAccess } from "@/lib/practice/experience/access";
 import { startOrResumePracticeSession } from "@/lib/practice/sessionStart";
 
 export const runtime = "nodejs";
@@ -15,10 +16,19 @@ export async function POST(
   const raw = typeof body?.returnUrl === "string" ? body.returnUrl : null;
   const returnUrl = raw && raw.startsWith("/") && !raw.startsWith("//") ? raw : null;
 
-  const actor0 = await getActor();
-  const ensured = ensureGuestId(actor0);
-  const actor = ensured.actor;
-  const setGuestId = ensured.setGuestId ?? null;
+  const actor = await getActor();
+  const access = await resolveSubscriberPracticeAccess(prisma, actor);
+  if (!access.ok) {
+    return NextResponse.json(
+      {
+        message: access.message,
+        code: access.code,
+        dailyFiveUrl: "/practice/daily",
+        billingUrl: "/billing",
+      },
+      { status: access.status },
+    );
+  }
 
   const preferPurpose = "quiz" as const;
 
@@ -43,8 +53,7 @@ export async function POST(
   });
 
   if (!mod) {
-    const res = NextResponse.json({ message: "Module not found." }, { status: 404 });
-    return attachGuestCookie(res, setGuestId);
+    return NextResponse.json({ message: "Module not found." }, { status: 404 });
   }
 
   const presetId = mod.practicePresetId ?? null;
@@ -52,8 +61,7 @@ export async function POST(
   const homeSection = mod.sections[0] ?? null;
 
   if (!homeSection) {
-    const res = NextResponse.json({ message: "Module has no sections." }, { status: 400 });
-    return attachGuestCookie(res, setGuestId);
+    return NextResponse.json({ message: "Module has no sections." }, { status: 400 });
   }
 
   const topicSlugs = Array.from(
@@ -83,12 +91,14 @@ export async function POST(
     prisma,
     actor,
     findWhere: {
+      mode: "standard",
       status: "active",
       assignmentId: null,
       sectionId: { in: sectionIds },
     },
     resumeData,
     createData: {
+      mode: "standard",
       status: "active",
       assignmentId: null,
       sectionId: homeSection.id,
@@ -97,15 +107,15 @@ export async function POST(
       returnUrl: returnUrl ? String(returnUrl) : null,
       presetId,
       preferPurpose,
+      meta: { kind: "subscriber_practice" },
     },
     select: { id: true },
   });
 
-  const res = NextResponse.json({
+  return NextResponse.json({
     sessionId: (session as any).id,
     resumed,
+    experienceMode: "standard",
     ...payload,
   });
-
-  return attachGuestCookie(res, setGuestId);
 }

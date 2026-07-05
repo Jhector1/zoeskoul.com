@@ -2,11 +2,16 @@ import { PracticePurpose } from "@zoeskoul/db";
 
 import type { PracticeGetContext, PracticeGetResult } from "./types";
 import { isOnboardingTrialSession } from "@/lib/onboarding/trialPolicy";
-import { assertSessionOwnerMatchesActor, enforceSessionAssignmentEntitlement } from "../shared/sessionAccess";
+import { assertSessionOwnerMatchesActor, assertAssignmentSessionAccess } from "../shared/sessionAccess";
 import { assertPracticeSessionActive } from "./guards/session.guard";
 import { computePurposeDecision } from "./policies/purpose.policy";
 import { getPracticeStatus } from "./useCases/getStatus";
 import { generatePracticeExercise } from "./useCases/generateExercise";
+import { readSharedChallengeMeta } from "@/lib/practice/challenges/session";
+import {
+    assertPracticeExperienceInvariant,
+    resolvePracticeExperienceMode,
+} from "@/lib/practice/experience/resolve";
 
 function statusOf(err: any, fallback = 500) {
     return Number(err?.status) || fallback;
@@ -36,12 +41,15 @@ export async function handlePracticeGet(
 
     if (session) {
         try {
+            assertPracticeExperienceInvariant(session);
             assertSessionOwnerMatchesActor(session, actor);
         } catch (e: any) {
             const code = String(e?.code ?? "");
 
+            const experienceMode = resolvePracticeExperienceMode(session);
             const recoverableTrialMismatch =
-                session.mode === "onboarding_trial" &&
+                (experienceMode === "onboarding_trial" ||
+                    experienceMode === "public_challenge") &&
                 code === "SESSION_OWNER_GUEST_MISMATCH";
 
             if (recoverableTrialMismatch) {
@@ -80,10 +88,7 @@ export async function handlePracticeGet(
             };
         }
 
-        const gate = await enforceSessionAssignmentEntitlement(session);
-        if (gate.kind === "res") {
-            return { kind: "res", res: gate.res as any };
-        }
+        assertAssignmentSessionAccess(session, actor);
 
         const ru =
             typeof returnUrl === "string"
@@ -102,7 +107,12 @@ export async function handlePracticeGet(
         }
     }
 
-    const isTrial = isOnboardingTrialSession(session);
+    const experienceMode = resolvePracticeExperienceMode(session);
+    const isOnboardingTrial = isOnboardingTrialSession(session);
+    const isSharedChallenge = experienceMode === "public_challenge" && Boolean(
+        readSharedChallengeMeta(session?.meta ?? null),
+    );
+    const isDailyFive = experienceMode === "daily_five";
 
     const decision = computePurposeDecision({
         session,
@@ -132,7 +142,7 @@ export async function handlePracticeGet(
         }
     }
 
-    if (isTrial) {
+    if (isOnboardingTrial) {
         if (session?.assignmentId) {
             return {
                 kind: "json",
@@ -141,13 +151,32 @@ export async function handlePracticeGet(
             };
         }
 
-        if (purposeMode !== "quiz" && purposeMode !== "mixed") {
+        if (
+            !isSharedChallenge &&
+            purposeMode !== "quiz" &&
+            purposeMode !== "mixed"
+        ) {
             return {
                 kind: "json",
                 status: 403,
-                body: { message: "Trial sessions only allow quiz questions." },
+                body: { message: "Standard trial sessions only allow quiz questions." },
             };
         }
+    }
+
+    if (
+        isDailyFive &&
+        purposeMode !== "quiz" &&
+        purposeMode !== "project"
+    ) {
+        return {
+            kind: "json",
+            status: 403,
+            body: {
+                message:
+                    "Daily practice only allows its queued standalone single-file code exercises.",
+            },
+        };
     }
 
     if (statusOnly === "true") {

@@ -3,7 +3,7 @@ import type { Difficulty } from "@/lib/practice/types";
 import type { PracticeGetContext, PracticeGetResult } from "../types";
 import type { PracticePurposeDecision } from "../policies/purpose.policy";
 import { buildActorOrWhere } from "../../shared/prismaFilters";
-import { buildRunMeta } from "../policies/runMeta.policy";
+import { buildRunMetaWithChallengeAttempts } from "../policies/runMeta.policy";
 import {
     computeAllowRevealEffective,
     getAssignmentDifficulty,
@@ -90,7 +90,7 @@ export async function getPracticeStatus(
     const allowRevealEffective = computeAllowRevealEffective(session, params.allowReveal);
     const assignmentDiff = getAssignmentDifficulty(session);
     const diff: Difficulty = assignmentDiff ?? (session?.difficulty as any as Difficulty) ?? "easy";
-    const run = buildRunMeta({ session, diff, allowRevealEffective });
+    const run = await buildRunMetaWithChallengeAttempts({ prisma, actor, session, diff, allowRevealEffective });
 
     const actorOR = buildActorOrWhere(actor);
     const includeMissed = params.includeMissed === "true";

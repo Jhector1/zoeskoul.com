@@ -27,7 +27,7 @@ function commandArgs(args: { command: string; catalog?: string; subject?: string
   throw new Error(`Unsupported command: ${args.command}`);
 }
 
-async function runCommand(args: { command: string; argv: string[]; cwd: string }) {
+async function runCommand(args: { command: string; argv: readonly string[]; cwd: string }) {
   return new Promise<{ exitCode: number | null; output: string }>((resolve) => {
     const child = spawn(args.command, args.argv, {
       cwd: args.cwd,

@@ -6,10 +6,13 @@ import { getActor } from "@/lib/practice/actor";
 export const runtime = "nodejs";
 
 export async function GET() {
-  if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  const actor = await getActor();
+  if (!actor.userId) {
+    return NextResponse.json(
+      { message: "Sign in to view assignments.", code: "AUTH_REQUIRED" },
+      { status: 401 },
+    );
   }
-  const actor = await getActor(); // ok if empty
   const now = new Date();
 
   const assignmentsPromise = prisma.assignment.findMany({
@@ -41,6 +44,7 @@ export async function GET() {
       dueAt: true,
       timeLimitSec: true,
       maxAttempts: true,
+      maxQuestionAttempts: true,
     },
   });
 
@@ -50,14 +54,13 @@ export async function GET() {
   // optional: attempts remaining (only if actor exists)
   let counts = new Map<string, number>();
 
-  if (actor.userId || actor.guestId) {
+  if (actor.userId) {
     const rows = await prisma.practiceSession.groupBy({
       by: ["assignmentId"],
       where: {
+        mode: "assignment",
         assignmentId: { in: assignments.map((a: AssignmentRow) => a.id) },
-        ...(actor.userId
-          ? { userId: actor.userId }
-          : { guestId: actor.guestId }),
+        userId: actor.userId,
       },
       _count: { _all: true },
     });

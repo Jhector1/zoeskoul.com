@@ -11,7 +11,7 @@ import { defaultMainFile } from "@/components/ide/languageDefaults";
 import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 import { useTaggedT } from "@/i18n/tagged";
 import { resolveDeepTagged } from "@/i18n/resolveDeepTagged";
-import { useReviewTools } from "@/components/review/module/context/ReviewToolsContext";
+import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 
 async function copyToClipboard(text: string) {
     try {
@@ -351,9 +351,12 @@ export function buildRevealFillPatches(args: {
     const itemPatch: RevealFillPatch = {
         ...args.fillPatch,
         ...(args.isCodeInput ? { codeTouched: true } : {}),
-        submitted: false,
-        feedbackDismissed: true,
-        dismissFeedbackOnEdit: true,
+        // Fill answer is a study action after reveal. Keep the question
+        // finalized so grading/XP cannot reopen and navigation stays enabled.
+        submitted: true,
+        revealed: true,
+        feedbackDismissed: false,
+        dismissFeedbackOnEdit: false,
         updateOrigin: "user",
     };
 
@@ -440,7 +443,7 @@ export default function RevealAnswerCard({
     const [copied, setCopied] = useState(false);
     const [filled, setFilled] = useState(false);
     const rootRef = useRef<HTMLDivElement | null>(null);
-    const tools = useReviewTools();
+    const tools = useOptionalReviewTools();
 
     const { raw } = useTaggedT();
     const resolveTaggedValue = useCallback(

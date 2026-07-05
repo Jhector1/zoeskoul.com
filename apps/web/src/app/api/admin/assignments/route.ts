@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin/requireAdmin";
-import { AssignmentCreateSchema } from "@/lib/validators/assignment"; // or whatever you use
+import { AssignmentCreateSchema } from "@/lib/validators/assignment";
 
 export async function POST(req: Request) {
   await requireAdmin(req);
-  if (process.env.NODE_ENV === "production") {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
 
   const body = await req.json().catch(() => null);
   const parsed = AssignmentCreateSchema.safeParse(body);
@@ -19,26 +16,23 @@ export async function POST(req: Request) {
     );
   }
 
-  // ✅ pull topicIds out (NOT a Prisma field)
-  const { topicIds, ...rest } = parsed.data as any;
+  // Join-table inputs are API fields, not scalar Assignment columns.
+  const { topicIds, topics, ...rest } = parsed.data as any;
+  const topicRows: Array<{ topicId: string; order: number }> = Array.isArray(topics)
+    ? topics.map((row: any, index: number) => ({
+        topicId: String(row.topicId),
+        order: Number.isFinite(row.order) ? row.order : index,
+      }))
+    : Array.isArray(topicIds)
+      ? topicIds.map((topicId: string, index: number) => ({ topicId, order: index }))
+      : [];
 
   const created = await prisma.assignment.create({
     data: {
       ...rest,
-
-      // normalize nullable strings
       description: rest.description ?? null,
-
-      // ✅ write join table
-      topics: Array.isArray(topicIds)
-        ? {
-            createMany: {
-              data: topicIds.map((topicId: string, i: number) => ({
-                topicId,
-                order: i,
-              })),
-            },
-          }
+      topics: topicRows.length
+        ? { createMany: { data: topicRows } }
         : undefined,
     },
     include: {

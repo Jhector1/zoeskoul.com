@@ -20,6 +20,11 @@ const zNullableInt = z.preprocess((v) => {
   return Number.isFinite(n) ? n : null;
 }, z.number().int().nullable());
 
+const zNullablePositiveInt = zNullableInt.refine(
+  (value) => value == null || value >= 1,
+  "Must be a positive whole number.",
+);
+
 const zBool = z.preprocess((v) => {
   if (typeof v === "boolean") return v;
   if (v === "true") return true;
@@ -42,9 +47,12 @@ topics: z.array(z.object({ topicId: z.string(), order: z.number().optional() }))
 
   availableFrom: zNullableDate.optional(),
   dueAt: zNullableDate.optional(),
-  timeLimitSec: zNullableInt.optional(),
+  timeLimitSec: zNullablePositiveInt.optional(),
 
-  maxAttempts: zNullableInt.optional(),
+  // Maximum number of whole assignment runs a learner may start.
+  maxAttempts: zNullablePositiveInt.optional(),
+  // Maximum graded submissions for each question in a run.
+  maxQuestionAttempts: z.number().int().min(1).max(20).default(3),
   allowReveal: zBool.default(false),
   showDebug: zBool.default(false),
 });

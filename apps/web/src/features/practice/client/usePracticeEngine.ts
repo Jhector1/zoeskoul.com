@@ -33,6 +33,7 @@ import {
   computePracticeCounts,
   computePracticePct,
   historyRowToQItem,
+  isPracticeItemFinalized,
   requestPracticeHelpItem,
   submitPracticeItem,
 } from "@/lib/practice/runtime";
@@ -235,6 +236,7 @@ export function usePracticeEngine(args: {
 
   const appliedRunCountRef = useRef(false);
   const [submitBusy, setSubmitBusy] = useState(false);
+  const [deferredRevealCompletion, setDeferredRevealCompletion] = useState(false);
   const current = stack[idx] ?? null;
   const exercise = current?.exercise ?? null;
 
@@ -436,6 +438,12 @@ export function usePracticeEngine(args: {
       const item = initItemFromExercise(resolvedEx, key, {
         resolveText: (value) => resolveTextRef.current(value),
       });
+      const challengeAttemptsUsed = Number(
+          runFromApi?.challenge?.attemptsUsed ?? 0,
+      );
+      if (Number.isFinite(challengeAttemptsUsed) && challengeAttemptsUsed > 0) {
+        item.attempts = Math.floor(challengeAttemptsUsed);
+      }
 
       setStack((prev) => {
         const next = [...prev, item];
@@ -567,6 +575,7 @@ export function usePracticeEngine(args: {
   useEffect(() => {
     if (!hydrated) return;
     if (completed) return;
+    if (deferredRevealCompletion) return;
 
     if (!autoSummarized && answeredCount >= sessionSize) {
       setCompleted(true);
@@ -582,6 +591,7 @@ export function usePracticeEngine(args: {
     setCompleted,
     setAutoSummarized,
     setPhase,
+    deferredRevealCompletion,
   ]);
 
   function canGoPrev() {
@@ -592,10 +602,13 @@ export function usePracticeEngine(args: {
     if (!current) return true;
     if (idx < stack.length - 1) return true;
 
-    const attempts = current.attempts ?? 0;
-    const outOfAttempts = attempts >= maxAttempts;
+    // Navigation must follow the same finalization rule used by progress
+    // counting. In particular, a revealed answer is final even after the
+    // learner fills or edits the revealed solution for study.
+    if (!isPracticeItemFinalized(current, maxAttempts, isLockedRun)) {
+      return false;
+    }
 
-    if (!current.submitted && !outOfAttempts) return false;
     return answeredCount < sessionSize;
   }
 
@@ -622,6 +635,7 @@ export function usePracticeEngine(args: {
 
   async function submit() {
     if (completed) return;
+    if (deferredRevealCompletion) return;
     if (submitLockRef.current) return;
     if (!current || !exercise) return;
     if (submitBusy) return;
@@ -699,6 +713,23 @@ export function usePracticeEngine(args: {
       updateCurrent({
         ...(opened.dragA ? { dragA: opened.dragA } : {}),
         ...(opened.dragB ? { dragB: opened.dragB } : {}),
+        ...(opened.data.finalized
+          ? {
+              revealed: true,
+              submitted: true,
+              result: {
+                ok: false,
+                finalized: true,
+                revealUsed: true,
+                explanation: opened.data.content ?? null,
+                sessionComplete: Boolean(opened.data.sessionComplete),
+                returnUrl:
+                  (opened.data as any)?.returnUrl ??
+                  (opened.data as any)?.run?.returnUrl ??
+                  null,
+              } as any,
+            }
+          : {}),
         help: {
           ...current.help,
           openedStepKeys: nextOpenedKeys,
@@ -712,6 +743,25 @@ export function usePracticeEngine(args: {
         },
       });
 
+      if (opened.data.sessionComplete) {
+        const serverReturn =
+          (opened.data as any)?.returnUrl ??
+          (opened.data as any)?.run?.returnUrl ??
+          null;
+        if (serverReturn) setCompletionReturnUrl(serverReturn);
+
+        if (chosenKey === "reveal") {
+          // Keep the revealed answer visible until the learner explicitly
+          // continues. This prevents the answer card from being skipped by an
+          // immediate transition to the summary screen.
+          setDeferredRevealCompletion(true);
+        } else {
+          setCompleted(true);
+          setAutoSummarized(true);
+          setPhase("summary");
+        }
+      }
+
       if (opened.dragA) padRef.current.a = cloneVec(opened.dragA) as any;
       if (opened.dragB) padRef.current.b = cloneVec(opened.dragB) as any;
     } catch (e: any) {
@@ -719,6 +769,14 @@ export function usePracticeEngine(args: {
     } finally {
       setBusy(false);
     }
+  }
+
+  function finishDeferredReveal() {
+    if (!deferredRevealCompletion) return;
+    setDeferredRevealCompletion(false);
+    setCompleted(true);
+    setAutoSummarized(true);
+    setPhase("summary");
   }
 
   const { excuseAndNext, skipLoadError } = usePracticeExcuseActions({
@@ -758,6 +816,8 @@ export function usePracticeEngine(args: {
     goNext,
     submit,
     openHelp,
+    deferredRevealCompletion,
+    finishDeferredReveal,
 
     excuseAndNext,
     skipLoadError,

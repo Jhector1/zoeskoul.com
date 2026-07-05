@@ -4,7 +4,6 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { attachGuestCookie, ensureGuestId, getActor } from "@/lib/practice/actor";
 import { verifyPracticeKey } from "@/lib/practice/key";
-import { requireEntitledUser } from "@/lib/billing/requireEntitledUser";
 import { explainPracticeConcept } from "@/lib/ai/explainPractice";
 import { rateLimit } from "@/lib/security/ratelimit";
 import {
@@ -12,6 +11,7 @@ import {
     hardenApiResponse,
 } from "@/lib/practice/api/shared/http";
 import { getExpectedCanon } from "@/lib/practice/api/validate/mappers/expected.mapper";
+import { persistAttemptAndFinalize } from "@/lib/practice/api/validate/repositories/attempt.repo";
 import { buildRevealForInstance } from "@/lib/practice/api/help/reveal/buildRevealForInstance";
 import {
     canOpenHelpStep,
@@ -21,6 +21,7 @@ import {
     resolveEffectivePracticeHelpPolicy,
 } from "@/lib/practice/help/steps";
 import { assertSessionOwnerMatchesActor } from "@/lib/practice/api/shared/sessionAccess";
+import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -206,22 +207,18 @@ export async function POST(req: Request) {
         return attachGuestCookie(hardenApiResponse(res), setGuestId);
     }
 
-    if (session?.assignmentId) {
-        const gate = await requireEntitledUser();
-        if (!gate.ok) return gate.res;
-
-        if (session.userId && session.userId !== gate.userId) {
-            const res = NextResponse.json(
-                { message: "Forbidden.", requestId },
-                { status: 403 },
-            );
-            res.headers.set("X-Request-Id", requestId);
-            return attachGuestCookie(hardenApiResponse(res), setGuestId);
-        }
+    const experienceMode = resolvePracticeExperienceMode(session);
+    if (experienceMode === "assignment" && !actor.userId) {
+        const res = NextResponse.json(
+            { message: "Sign in to use assignment help.", requestId },
+            { status: 401 },
+        );
+        res.headers.set("X-Request-Id", requestId);
+        return attachGuestCookie(hardenApiResponse(res), setGuestId);
     }
 
     const helpPolicy = resolveEffectivePracticeHelpPolicy({
-        isAssignment: Boolean(session?.assignmentId),
+        isAssignment: experienceMode === "assignment",
         payloadAllowReveal: Boolean((payload as any).allowReveal),
         assignmentAllowReveal: Boolean(session?.assignment?.allowReveal),
         sessionHelpPolicy: session?.helpPolicy ?? null,
@@ -297,6 +294,17 @@ export async function POST(req: Request) {
         },
     });
 
+    const revealFinalization = isRevealStepKey(stepKey)
+        ? await persistAttemptAndFinalize(prisma, {
+            instance: instance as any,
+            actor,
+            isReveal: true,
+            answerPayload: { reveal: true },
+            ok: false,
+            finalized: true,
+        })
+        : null;
+
     const res = NextResponse.json({
         requestId,
         stepKey,
@@ -308,6 +316,9 @@ export async function POST(req: Request) {
         source,
         content,
         reveal,
+        finalized: Boolean(revealFinalization),
+        sessionComplete: Boolean(revealFinalization?.sessionComplete),
+        summary: revealFinalization?.sessionSummary ?? null,
     });
 
     res.headers.set("X-Request-Id", requestId);

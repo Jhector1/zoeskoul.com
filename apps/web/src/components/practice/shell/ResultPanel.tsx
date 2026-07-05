@@ -24,6 +24,10 @@ export default function ResultPanel({
                                         concept,
                                         excuseAndNext,
                                         codeInputId,
+                                        pendingRevealCompletion,
+                                        finishRevealedSession,
+                                        canGoNext,
+                                        goNext,
 
                                     }: {
     t: any;
@@ -36,12 +40,21 @@ export default function ResultPanel({
     current: QItem | null;
     exercise: Exercise | null;
     codeInputId?: string;
+    pendingRevealCompletion?: boolean;
+    finishRevealedSession?: () => Promise<void> | void;
+    canGoNext?: boolean;
+    goNext?: () => Promise<void> | void;
     updateCurrent: (patch: Partial<QItem>) => void;
     resultBoxClass: string;
     concept: UseConceptExplainResult;
     excuseAndNext?: (reason?: string | null) => Promise<void> | void;
 }) {
     const excused = isExcusedPracticeItem(current);
+    const revealed = Boolean(
+        current?.revealed ||
+        (current?.result as any)?.revealUsed ||
+        (current?.result as any)?.revealAnswer,
+    );
     const activeHelpEntry =
         current?.help?.activeStepKey
             ? current.help.entries[current.help.activeStepKey]
@@ -80,10 +93,18 @@ export default function ResultPanel({
                 ) : (
                     <>
                         <div className="ui-title-sm">
-                            {current.result.ok
-                                ? t("result.correct")
-                                : t("result.incorrect")}
+                            {revealed
+                                ? t("result.revealed")
+                                : current.result.ok
+                                  ? t("result.correct")
+                                  : t("result.incorrect")}
                         </div>
+
+                        {revealed ? (
+                            <div className="mt-1 ui-meta">
+                                {t("result.revealedPractice")}
+                            </div>
+                        ) : null}
 
                         {activeHelpEntry?.reveal ? (
                             <RevealAnswerCard
@@ -93,6 +114,25 @@ export default function ResultPanel({
                                 updateCurrent={updateCurrent}
                                 codeInputId={codeInputId}
                             />
+                        ) : null}
+
+                        {pendingRevealCompletion ? (
+                            <button
+                                type="button"
+                                className="ui-btn-primary mt-3 min-h-10 px-4 text-xs"
+                                onClick={() => void finishRevealedSession?.()}
+                            >
+                                {t("mobile.continue")}
+                            </button>
+                        ) : revealed && canGoNext ? (
+                            <button
+                                type="button"
+                                className="ui-btn-primary mt-3 min-h-10 px-4 text-xs"
+                                onClick={() => void goNext?.()}
+                                disabled={busy || !goNext}
+                            >
+                                {t("buttons.next")}
+                            </button>
                         ) : null}
 
                         {isLockedRun && !current.result.ok && !current.submitted ? (

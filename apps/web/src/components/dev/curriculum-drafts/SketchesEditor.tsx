@@ -6,11 +6,11 @@ type JsonObject = Record<string, unknown>;
 
 type SketchRow = {
   id: string;
-  archetype?: string | null;
-  titleKey?: string | null;
-  bodyKey?: string | null;
-  cardId?: string | null;
-  cardTitleKey?: string | null;
+  archetype: string | null;
+  titleKey: string | null;
+  bodyKey: string | null;
+  cardId: string | null;
+  cardTitleKey: string | null;
   raw: unknown;
 };
 
@@ -73,27 +73,30 @@ function sketchId(value: unknown) {
 function getSketchRows(bundleJson: unknown): SketchRow[] {
   const bundle = asObject(bundleJson);
   const sketches = asArray(bundle?.sketches);
-  const cards = asArray(bundle?.cards).map(asObject).filter(Boolean) as JsonObject[];
+  const cards = asArray(bundle?.cards).flatMap((card) => {
+    const object = asObject(card);
+    return object ? [object] : [];
+  });
+  const rows: SketchRow[] = [];
 
-  return sketches
-    .map((sketch) => {
-      const object = asObject(sketch);
-      const id = asString(object?.id);
-      if (!object || !id) return null;
+  for (const sketch of sketches) {
+    const object = asObject(sketch);
+    const id = asString(object?.id);
+    if (!object || !id) continue;
 
-      const card = cards.find((candidate) => asString(candidate.sketchId) === id) ?? null;
+    const card = cards.find((candidate) => asString(candidate.sketchId) === id) ?? null;
+    rows.push({
+      id,
+      archetype: asString(object.archetype),
+      titleKey: normalizeMessageKey(object.titleKey),
+      bodyKey: normalizeMessageKey(object.bodyKey),
+      cardId: asString(card?.id),
+      cardTitleKey: normalizeMessageKey(card?.titleKey),
+      raw: sketch,
+    });
+  }
 
-      return {
-        id,
-        archetype: asString(object.archetype),
-        titleKey: normalizeMessageKey(object.titleKey),
-        bodyKey: normalizeMessageKey(object.bodyKey),
-        cardId: asString(card?.id),
-        cardTitleKey: normalizeMessageKey(card?.titleKey),
-        raw: sketch,
-      } satisfies SketchRow;
-    })
-    .filter((row): row is SketchRow => Boolean(row));
+  return rows;
 }
 
 function messageValue(messagesJson: unknown | null, keyPath: string | null) {

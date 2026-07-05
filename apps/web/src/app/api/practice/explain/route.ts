@@ -1,9 +1,9 @@
 // src/app/api/practice/explain/route.ts
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 import { attachGuestCookie, ensureGuestId, getActor } from "@/lib/practice/actor";
 import { verifyPracticeKey } from "@/lib/practice/key";
-import { requireEntitledUser } from "@/lib/billing/requireEntitledUser";
 import { explainPracticeConcept } from "@/lib/ai/explainPractice";
 
 export const runtime = "nodejs";
@@ -66,19 +66,24 @@ export async function POST(req: Request) {
   const sess = instance.sessionId
     ? await prisma.practiceSession.findUnique({
         where: { id: instance.sessionId },
-        select: { assignmentId: true, userId: true, guestId: true },
+        select: {
+          id: true,
+          mode: true,
+          meta: true,
+          assignmentId: true,
+          userId: true,
+          guestId: true,
+        },
       })
     : null;
 
-  const isAssignment = Boolean(sess?.assignmentId);
+  const experienceMode = resolvePracticeExperienceMode(sess);
 
-  if (isAssignment) {
-    const gate = await requireEntitledUser();
-    if (!gate.ok) return gate.res;
-
-    if (sess?.userId && sess.userId !== gate.userId) {
-      return NextResponse.json({ message: "Forbidden." }, { status: 403 });
-    }
+  if (experienceMode === "assignment" && !actor.userId) {
+    return NextResponse.json(
+      { message: "Sign in to use assignment help." },
+      { status: 401 },
+    );
   }
 
   if (

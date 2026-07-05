@@ -67,7 +67,8 @@
       "errorTitle": "⚠️ Erè",
       "revealed": "👁️ Montre (repons lan parèt)",
       "correct": "✅ Kòrèk",
-      "incorrect": "❌ Pa fin sa"
+      "incorrect": "❌ Pa fin sa",
+      "revealedPractice": "Nòt la fini. Ou ka toujou ranpli, modifye, rekòmanse, epi kouri solisyon an anvan ou kontinye."
     },
     "loadError": {
       "title": "Nou pa t ka chaje yon kesyon"
@@ -143,6 +144,39 @@
       "incompleteAnswer": "Repons lan pa konplè oswa li pa valab.",
       "failedToSubmit": "Nou pa t ka soumèt",
       "failedToLoad": "Nou pa t ka chaje kesyon an"
+    },
+    "mobile": {
+      "leaderboard": "Klasman",
+      "controls": "Kontwòl",
+      "controlsTitle": "Pwogrè ak kontwòl",
+      "leaderboardTitle": "Klasman pratik",
+      "close": "Fèmen",
+      "submitting": "Ap soumèt…",
+      "statusReady": "Pare pou soumèt",
+      "statusCorrect": "Kòrèk — kontinye",
+      "statusTryAgain": "Poko sa — eseye ankò",
+      "statusRevealed": "Repons lan montre",
+      "statusError": "Yon aksyon bezwen atansyon",
+      "help": "Èd",
+      "helpTitle": "Endis ak repons",
+      "helpUnavailable": "Èd la ap disponib lè egzèsis la fin chaje.",
+      "helpIntroTitle": "Bezwen èd?",
+      "helpIntro": "Louvri endis yo youn apre lòt. Montre repons lan ap fini egzèsis la epi li pap bay XP.",
+      "attemptsRemaining": "{count} tantativ rete",
+      "hintsUsed": "Endis itilize: {used}/{total}",
+      "showHint": "Montre yon endis",
+      "openingHelp": "Ap louvri…",
+      "noMoreHints": "Ou louvri tout endis ki disponib yo.",
+      "revealTitle": "Montre repons lan",
+      "revealWarning": "Sa ap fini egzèsis la epi li pap bay XP.",
+      "revealAnswer": "Montre repons lan",
+      "revealConfirmTitle": "Montre repons lan?",
+      "revealConfirmBody": "Egzèsis la ap make kòm repons montre. Ou pap resevwa XP pou li.",
+      "cancel": "Anile",
+      "answerRevealedTitle": "Repons lan montre",
+      "answerRevealedBody": "Revize solisyon an, apre sa kontinye lè ou pare.",
+      "continue": "Kontinye",
+      "backToExercise": "Tounen nan egzèsis la"
     }
   }
 }

@@ -84,7 +84,8 @@
       "errorTitle": "⚠️ Error",
       "revealed": "👁️ Revealed (answer shown)",
       "correct": "✅ Correct",
-      "incorrect": "❌ Not quite"
+      "incorrect": "❌ Not quite",
+      "revealedPractice": "Scoring is complete. You can still fill, edit, reset, and run the solution before continuing."
     },
     "loadError": {
       "title": "Couldn’t load a question"
@@ -160,6 +161,39 @@
       "incompleteAnswer": "Answer is incomplete or invalid.",
       "failedToSubmit": "Failed to submit",
       "failedToLoad": "Failed to load question"
+    },
+    "mobile": {
+      "leaderboard": "Leaderboard",
+      "controls": "Controls",
+      "controlsTitle": "Progress and controls",
+      "leaderboardTitle": "Practice leaderboard",
+      "close": "Close",
+      "submitting": "Submitting…",
+      "statusReady": "Ready to submit",
+      "statusCorrect": "Correct — continue",
+      "statusTryAgain": "Not quite — try again",
+      "statusRevealed": "Answer revealed",
+      "statusError": "Action needs attention",
+      "help": "Help",
+      "helpTitle": "Hints and reveal",
+      "helpUnavailable": "Help is not available until the exercise loads.",
+      "helpIntroTitle": "Need help?",
+      "helpIntro": "Open hints one at a time. Revealing the answer finishes this exercise and awards no XP.",
+      "attemptsRemaining": "{count} attempts left",
+      "hintsUsed": "Hints used: {used}/{total}",
+      "showHint": "Show a hint",
+      "openingHelp": "Opening…",
+      "noMoreHints": "You have opened every available hint.",
+      "revealTitle": "Reveal the answer",
+      "revealWarning": "This finishes the exercise and awards no XP.",
+      "revealAnswer": "Reveal answer",
+      "revealConfirmTitle": "Reveal the answer?",
+      "revealConfirmBody": "The exercise will be marked as revealed. You will earn no XP for it.",
+      "cancel": "Cancel",
+      "answerRevealedTitle": "Answer revealed",
+      "answerRevealedBody": "Review the solution, then continue when you are ready.",
+      "continue": "Continue",
+      "backToExercise": "Back to exercise"
     }
   }
 }

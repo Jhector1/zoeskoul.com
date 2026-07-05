@@ -46,7 +46,7 @@ vi.mock("../mappers/key.mapper", () => ({
 }));
 
 vi.mock("../policies/runMeta.policy", () => ({
-    buildRunMeta: buildRunMetaMock,
+    buildRunMetaWithChallengeAttempts: buildRunMetaMock,
 }));
 
 vi.mock("../services/topicResolver.service", () => ({

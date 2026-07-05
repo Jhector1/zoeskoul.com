@@ -7,6 +7,9 @@ export const practiceGetSessionSelect = {
     guestId: true,
     mode: true,
     meta: true,
+    experienceKey: true,
+    dayKey: true,
+    helpPolicy: true,
     preferPurpose: true,
 
     difficulty: true,
@@ -33,9 +36,19 @@ export const practiceGetSessionSelect = {
         select: {
             allowReveal: true,
             maxAttempts: true,
+            maxQuestionAttempts: true,
             difficulty: true,
             showDebug: true,
             questionCount: true,
+        },
+    },
+
+    instances: {
+        orderBy: { createdAt: "asc" },
+        select: {
+            id: true,
+            exerciseKey: true,
+            answeredAt: true,
         },
     },
 

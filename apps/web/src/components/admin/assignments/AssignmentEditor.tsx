@@ -138,6 +138,7 @@ export default function AssignmentEditor({
       timeLimitSec: a?.timeLimitSec ?? "",
 
       maxAttempts: a?.maxAttempts ?? "",
+      maxQuestionAttempts: a?.maxQuestionAttempts ?? 3,
       allowReveal: Boolean(a?.allowReveal ?? false),
       showDebug: Boolean(a?.showDebug ?? false),
     };
@@ -187,6 +188,7 @@ export default function AssignmentEditor({
         dueAt: state.dueAt || null,
         timeLimitSec: state.timeLimitSec === "" ? null : Number(state.timeLimitSec),
         maxAttempts: state.maxAttempts === "" ? null : Number(state.maxAttempts),
+        maxQuestionAttempts: Number(state.maxQuestionAttempts) || 3,
         allowReveal: Boolean(state.allowReveal),
         showDebug: Boolean(state.showDebug),
       };
@@ -441,7 +443,7 @@ export default function AssignmentEditor({
                 <Label>Time Limit (sec)</Label>
                 <Input
                   type="number"
-                  min={0}
+                  min={1}
                   value={state.timeLimitSec}
                   onChange={(e) => setState((s: any) => ({ ...s, timeLimitSec: e.target.value }))}
                   placeholder="(optional)"
@@ -468,15 +470,33 @@ export default function AssignmentEditor({
               </div>
             </div>
 
-            <div>
-              <Label>Max Attempts</Label>
-              <Input
-                type="number"
-                min={0}
-                value={state.maxAttempts}
-                onChange={(e) => setState((s: any) => ({ ...s, maxAttempts: e.target.value }))}
-                placeholder="(optional, blank = unlimited)"
-              />
+            <div className="grid gap-3 sm:grid-cols-2">
+              <div>
+                <Label>Assignment run attempts</Label>
+                <Input
+                  type="number"
+                  min={1}
+                  value={state.maxAttempts}
+                  onChange={(e) => setState((s: any) => ({ ...s, maxAttempts: e.target.value }))}
+                  placeholder="Blank = unlimited runs"
+                />
+                <p className="mt-1 text-xs text-neutral-500">
+                  How many complete assignment sessions a learner may start.
+                </p>
+              </div>
+              <div>
+                <Label>Attempts per question</Label>
+                <Input
+                  type="number"
+                  min={1}
+                  max={20}
+                  value={state.maxQuestionAttempts}
+                  onChange={(e) => setState((s: any) => ({ ...s, maxQuestionAttempts: e.target.value }))}
+                />
+                <p className="mt-1 text-xs text-neutral-500">
+                  Graded submissions allowed for each question in one run.
+                </p>
+              </div>
             </div>
 
             <div className="flex flex-col gap-2 pt-2">

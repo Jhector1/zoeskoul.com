@@ -1,7 +1,7 @@
-// src/app/api/practice/session/route.ts
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getActor } from "@/lib/practice/actor";
+import { resolveSubscriberPracticeAccess } from "@/lib/practice/experience/access";
 import { PracticeDifficulty, PracticeSessionStatus } from "@zoeskoul/db";
 
 export const runtime = "nodejs";
@@ -12,46 +12,67 @@ export async function POST(req: Request) {
     | null;
 
   if (!body?.sectionSlug || !body?.difficulty) {
-    return NextResponse.json({ message: "sectionSlug and difficulty are required." }, { status: 400 });
+    return NextResponse.json(
+      { message: "sectionSlug and difficulty are required." },
+      { status: 400 },
+    );
   }
 
   const actor = await getActor();
+  const access = await resolveSubscriberPracticeAccess(prisma, actor);
+  if (!access.ok) {
+    return NextResponse.json(
+      {
+        message: access.message,
+        code: access.code,
+        dailyFiveUrl: "/practice/daily",
+        billingUrl: "/billing",
+      },
+      { status: access.status },
+    );
+  }
 
   const section = await prisma.practiceSection.findUnique({
     where: { slug: body.sectionSlug },
   });
-
   if (!section) {
     return NextResponse.json({ message: "Section not found." }, { status: 404 });
   }
 
-  // Optional: auto-complete any active session for same actor+section+difficulty
+  // Only standard subscriber practice is replaced. Assignment, challenge,
+  // onboarding, and daily-practice sessions are separate products and never match.
   await prisma.practiceSession.updateMany({
     where: {
+      mode: "standard",
       status: PracticeSessionStatus.active,
       sectionId: section.id,
       difficulty: body.difficulty,
-      OR: [
-        actor.userId ? { userId: actor.userId } : undefined,
-        actor.guestId ? { guestId: actor.guestId } : undefined,
-      ].filter(Boolean) as any,
+      userId: actor.userId!,
     },
     data: { status: PracticeSessionStatus.completed, completedAt: new Date() },
   });
 
+  const requestedTargetCount = Number(body.targetCount ?? 10);
+  const targetCount = Number.isFinite(requestedTargetCount)
+    ? Math.max(1, Math.min(100, Math.floor(requestedTargetCount)))
+    : 10;
+
   const session = await prisma.practiceSession.create({
     data: {
+      mode: "standard",
       sectionId: section.id,
       difficulty: body.difficulty,
-      targetCount: body.targetCount ?? 10,
-      userId: actor.userId ?? null,
-      guestId: actor.guestId ?? null,
+      targetCount,
+      userId: actor.userId!,
+      guestId: null,
+      meta: { kind: "subscriber_practice" },
     },
   });
 
   return NextResponse.json({
     session: {
       id: session.id,
+      mode: session.mode,
       status: session.status,
       targetCount: session.targetCount,
       correct: session.correct,

@@ -6,6 +6,8 @@ export async function loadValidateInstance(prisma: PrismaClient, instanceId: str
         select: {
             id: true,
             kind: true,
+            difficulty: true,
+            exerciseKey: true,
             title: true,
             prompt: true,
             answeredAt: true,
@@ -17,14 +19,17 @@ export async function loadValidateInstance(prisma: PrismaClient, instanceId: str
                 select: {
                     id: true,
                     slug: true,
+                    subjectId: true,
+                    moduleId: true,
                     subject: {
-                        select: { slug: true },
+                        select: { id: true, slug: true },
                     },
                     module: {
                         select: {
+                            id: true,
                             slug: true,
                             subject: {
-                                select: { slug: true },
+                                select: { id: true, slug: true },
                             },
                         },
                     },
@@ -40,6 +45,8 @@ export async function loadValidateInstance(prisma: PrismaClient, instanceId: str
                     userId: true,
                     guestId: true,
                     assignmentId: true,
+                    moduleId: true,
+                    difficulty: true,
                     targetCount: true,
                     total: true,
                     correct: true,
@@ -49,6 +56,7 @@ export async function loadValidateInstance(prisma: PrismaClient, instanceId: str
                             id: true,
                             allowReveal: true,
                             maxAttempts: true,
+                            maxQuestionAttempts: true,
                             difficulty: true,
                             showDebug: true,
                         },

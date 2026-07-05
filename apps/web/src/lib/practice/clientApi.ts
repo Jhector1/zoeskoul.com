@@ -267,6 +267,9 @@ export type PracticeHelpClientResponse = {
   source?: string | null;
   content?: string | null;
   reveal?: any | null;
+  finalized?: boolean;
+  sessionComplete?: boolean;
+  summary?: unknown;
 };
 
 export async function fetchPracticeHelp(args: {

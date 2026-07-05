@@ -8,7 +8,7 @@ import {
     readJsonSafe,
 } from "@/lib/practice/api/shared/http";
 import { buildTrialStartContext } from "@/lib/practice/api/trial/context";
-import { handleTrialStart } from "@/lib/practice/api/trial/handler";
+import { startOrResumeOnboardingTrial } from "@/lib/practice/api/trial/services/trialStart.service";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -33,6 +33,18 @@ export async function POST(req: Request) {
 
     const { ctx } = built;
 
+    if (ctx.body.challenge) {
+        const res = NextResponse.json(
+            {
+                message: "Public challenges use /api/practice/challenge/start.",
+                code: "PUBLIC_CHALLENGE_ENDPOINT_REQUIRED",
+                requestId,
+            },
+            { status: 400 },
+        );
+        return attachGuestCookie(hardenApiResponse(res), ctx.setGuestId);
+    }
+
     const ip = getClientIp(req);
     const rl = await rateLimit(`practice-trial-start:${ip}`);
 
@@ -45,7 +57,7 @@ export async function POST(req: Request) {
     }
 
     try {
-        const out = await handleTrialStart(ctx);
+        const out = await startOrResumeOnboardingTrial(ctx);
 
         if (!out.ok) {
             const res = NextResponse.json(out.body, { status: out.statusCode });

@@ -13,6 +13,7 @@ type TrialPracticeClientProps = {
     sessionId: string | null;
     subject: string | null;
     level: string | null;
+    challenge: string | null;
 };
 
 type GateState = "booting" | "checking" | "recovering" | "ready" | "error";
@@ -23,6 +24,11 @@ type PreflightResult = {
 };
 
 const TRIAL_LAST_SESSION_KEY = "zoeskoul.trial.lastSessionId";
+
+function getTrialSessionStorageKey(challenge: string | null) {
+    if (!challenge) return TRIAL_LAST_SESSION_KEY;
+    return `zoeskoul.trial.challenge:${challenge.slice(-48)}`;
+}
 
 function clearStalePracticePointers() {
     if (typeof window === "undefined") return;
@@ -37,44 +43,76 @@ function clearStalePracticePointers() {
     }
 }
 
-function getRecoveryStorageKey(subject: string | null, level: string | null) {
-    return `zoeskoul.trial.recovery:${subject ?? "none"}:${level ?? "none"}`;
+function getRecoveryStorageKey(
+    subject: string | null,
+    level: string | null,
+    challenge: string | null,
+) {
+    return challenge
+        ? `zoeskoul.trial.recovery:challenge:${challenge.slice(-48)}`
+        : `zoeskoul.trial.recovery:${subject ?? "none"}:${level ?? "none"}`;
 }
 
-function getRecoveryCount(subject: string | null, level: string | null) {
+function getRecoveryCount(
+    subject: string | null,
+    level: string | null,
+    challenge: string | null,
+) {
     if (typeof window === "undefined") return 0;
-    const raw = window.sessionStorage.getItem(getRecoveryStorageKey(subject, level));
+    const raw = window.sessionStorage.getItem(
+        getRecoveryStorageKey(subject, level, challenge),
+    );
     const n = Number(raw ?? "0");
     return Number.isFinite(n) ? n : 0;
 }
 
-function setRecoveryCount(subject: string | null, level: string | null, value: number) {
+function setRecoveryCount(
+    subject: string | null,
+    level: string | null,
+    challenge: string | null,
+    value: number,
+) {
     if (typeof window === "undefined") return;
-    window.sessionStorage.setItem(getRecoveryStorageKey(subject, level), String(value));
+    window.sessionStorage.setItem(
+        getRecoveryStorageKey(subject, level, challenge),
+        String(value),
+    );
 }
 
-function clearRecoveryCount(subject: string | null, level: string | null) {
+function clearRecoveryCount(
+    subject: string | null,
+    level: string | null,
+    challenge: string | null,
+) {
     if (typeof window === "undefined") return;
-    window.sessionStorage.removeItem(getRecoveryStorageKey(subject, level));
+    window.sessionStorage.removeItem(
+        getRecoveryStorageKey(subject, level, challenge),
+    );
 }
 
-function getStoredTrialSessionId() {
+function getStoredTrialSessionId(challenge: string | null) {
     if (typeof window === "undefined") return null;
-    const raw = window.sessionStorage.getItem(TRIAL_LAST_SESSION_KEY);
+    const raw = window.sessionStorage.getItem(
+        getTrialSessionStorageKey(challenge),
+    );
     const value = String(raw ?? "").trim();
     return value || null;
 }
 
-function setStoredTrialSessionId(sessionId: string | null | undefined) {
+function setStoredTrialSessionId(
+    sessionId: string | null | undefined,
+    challenge: string | null,
+) {
     if (typeof window === "undefined") return;
     const value = String(sessionId ?? "").trim();
+    const key = getTrialSessionStorageKey(challenge);
 
     if (!value) {
-        window.sessionStorage.removeItem(TRIAL_LAST_SESSION_KEY);
+        window.sessionStorage.removeItem(key);
         return;
     }
 
-    window.sessionStorage.setItem(TRIAL_LAST_SESSION_KEY, value);
+    window.sessionStorage.setItem(key, value);
 }
 
 async function preflightTrialSession(sessionId: string): Promise<PreflightResult> {
@@ -204,6 +242,7 @@ export default function TrialPracticeClient({
                                                 sessionId,
                                                 subject,
                                                 level,
+                                                challenge,
                                             }: TrialPracticeClientProps) {
     const router = useRouter();
 
@@ -214,22 +253,22 @@ export default function TrialPracticeClient({
     const [gateErr, setGateErr] = useState<string | null>(null);
 
     useEffect(() => {
-        const stored = getStoredTrialSessionId();
+        const stored = getStoredTrialSessionId(challenge);
         setStoredSessionIdState(stored);
         setStorageReady(true);
-    }, []);
+    }, [challenge]);
 
     useEffect(() => {
         if (!sessionId) return;
-        setStoredTrialSessionId(sessionId);
+        setStoredTrialSessionId(sessionId, challenge);
         setStoredSessionIdState(sessionId);
-    }, [sessionId]);
+    }, [sessionId, challenge]);
 
     const effectiveSessionId = sessionId ?? storedSessionId ?? null;
 
     const missingRecoveryInputs = useMemo(
-        () => !subject || !level,
-        [subject, level],
+        () => !challenge && (!subject || !level),
+        [subject, level, challenge],
     );
 
     const goHome = useCallback(() => {
@@ -237,7 +276,7 @@ export default function TrialPracticeClient({
     }, [router, locale]);
 
     const startFreshTrial = useCallback(async () => {
-        if (!subject || !level) {
+        if (!challenge && (!subject || !level)) {
             goHome();
             return;
         }
@@ -247,15 +286,15 @@ export default function TrialPracticeClient({
             setGateErr(null);
 
             clearStalePracticePointers();
-            clearRecoveryCount(subject, level);
+            clearRecoveryCount(subject, level, challenge);
 
-            const out = await startTrialSession({
-                subject,
-                level,
-                locale,
-            });
+            const out = await startTrialSession(
+                challenge
+                    ? { challenge, locale }
+                    : { subject: subject!, level: level!, locale },
+            );
 
-            setStoredTrialSessionId(out.sessionId);
+            setStoredTrialSessionId(out.sessionId, challenge);
             setStoredSessionIdState(out.sessionId);
 
             router.replace(
@@ -266,6 +305,7 @@ export default function TrialPracticeClient({
                     level,
                     status: out.status,
                     completed: out.completed,
+                    challenge,
                 }),
             );
         } catch (err) {
@@ -273,7 +313,7 @@ export default function TrialPracticeClient({
             setGateState("error");
             setGateErr("We couldn’t start a new trial right now. Please try again.");
         }
-    }, [subject, level, locale, router, goHome]);
+    }, [subject, level, challenge, locale, router, goHome]);
 
     useEffect(() => {
         let cancelled = false;
@@ -282,6 +322,28 @@ export default function TrialPracticeClient({
             if (!storageReady) return;
 
             if (!effectiveSessionId) {
+                if (challenge) {
+                    setGateState("recovering");
+                    setGateErr(null);
+                    clearStalePracticePointers();
+
+                    const out = await startTrialSession({ challenge, locale });
+                    if (cancelled) return;
+
+                    setStoredTrialSessionId(out.sessionId, challenge);
+                    setStoredSessionIdState(out.sessionId);
+                    router.replace(
+                        buildTrialHref({
+                            locale,
+                            sessionId: out.sessionId,
+                            status: out.status,
+                            completed: out.completed,
+                            challenge,
+                        }),
+                    );
+                    return;
+                }
+
                 setGateState("error");
                 setGateErr("We couldn’t find an active trial session for this page.");
                 return;
@@ -303,7 +365,7 @@ export default function TrialPracticeClient({
                     return;
                 }
 
-                const attempts = getRecoveryCount(subject, level);
+                const attempts = getRecoveryCount(subject, level, challenge);
 
                 if (attempts >= 1) {
                     clearStalePracticePointers();
@@ -314,20 +376,20 @@ export default function TrialPracticeClient({
                     return;
                 }
 
-                setRecoveryCount(subject, level, attempts + 1);
+                setRecoveryCount(subject, level, challenge, attempts + 1);
                 setGateState("recovering");
 
                 clearStalePracticePointers();
 
-                const out = await startTrialSession({
-                    subject: subject!,
-                    level: level!,
-                    locale,
-                });
+                const out = await startTrialSession(
+                    challenge
+                        ? { challenge, locale }
+                        : { subject: subject!, level: level!, locale },
+                );
 
                 if (cancelled) return;
 
-                setStoredTrialSessionId(out.sessionId);
+                setStoredTrialSessionId(out.sessionId, challenge);
                 setStoredSessionIdState(out.sessionId);
 
                 const ok = await verifyRecoveredSession(out.sessionId);
@@ -342,7 +404,7 @@ export default function TrialPracticeClient({
                     return;
                 }
 
-                clearRecoveryCount(subject, level);
+                clearRecoveryCount(subject, level, challenge);
 
                 router.replace(
                     buildTrialHref({
@@ -352,13 +414,14 @@ export default function TrialPracticeClient({
                         level,
                         status: out.status,
                         completed: out.completed,
+                        challenge,
                     }),
                 );
                 return;
             }
 
             if (!res.ok) {
-                clearRecoveryCount(subject, level);
+                clearRecoveryCount(subject, level, challenge);
 
                 setGateState("error");
                 setGateErr(
@@ -370,7 +433,7 @@ export default function TrialPracticeClient({
                 return;
             }
 
-            clearRecoveryCount(subject, level);
+            clearRecoveryCount(subject, level, challenge);
             setGateState("ready");
         }
 
@@ -384,21 +447,29 @@ export default function TrialPracticeClient({
         return () => {
             cancelled = true;
         };
-    }, [storageReady, effectiveSessionId, subject, level, locale, router, missingRecoveryInputs]);
+    }, [storageReady, effectiveSessionId, subject, level, challenge, locale, router, missingRecoveryInputs]);
 
     if (!storageReady || gateState === "booting") {
         return (
             <TrialStateCard
-                title="Preparing your trial"
-                description="Please wait a moment while we restore your guest session."
+                title={challenge ? "Preparing your challenge" : "Preparing your trial"}
+                description={
+                    challenge
+                        ? "Please wait while we open the selected challenge."
+                        : "Please wait a moment while we restore your guest session."
+                }
             />
         );
     }
 
-    if (!effectiveSessionId) {
+    if (
+        !effectiveSessionId &&
+        gateState !== "checking" &&
+        gateState !== "recovering"
+    ) {
         return (
             <TrialStateCard
-                title="Missing trial session"
+                title={challenge ? "Missing challenge session" : "Missing trial session"}
                 description={
                     subject && level
                         ? "We couldn’t find an active trial session for this page. Start a new trial to continue."
@@ -406,7 +477,7 @@ export default function TrialPracticeClient({
                 }
                 note="Guest trials are tied to this browser and guest cookie."
                 primaryAction={
-                    subject && level
+                    challenge || (subject && level)
                         ? {
                             label: "Start new trial",
                             onClick: startFreshTrial,
@@ -416,7 +487,7 @@ export default function TrialPracticeClient({
                 secondaryAction={{
                     label: "Go to home",
                     onClick: goHome,
-                    variant: subject && level ? "ghost" : "primary",
+                    variant: challenge || (subject && level) ? "ghost" : "primary",
                 }}
             />
         );
@@ -425,10 +496,20 @@ export default function TrialPracticeClient({
     if (gateState === "checking" || gateState === "recovering") {
         return (
             <TrialStateCard
-                title={gateState === "recovering" ? "Restoring your trial" : "Preparing your trial"}
+                title={
+                    gateState === "recovering"
+                        ? challenge
+                            ? "Opening your challenge"
+                            : "Restoring your trial"
+                        : challenge
+                            ? "Preparing your challenge"
+                            : "Preparing your trial"
+                }
                 description={
                     gateState === "recovering"
-                        ? "Your previous guest session is no longer valid, so we’re starting a fresh trial for you."
+                        ? challenge
+                            ? "We’re opening the selected exercise and preparing your three attempts."
+                            : "Your previous guest session is no longer valid, so we’re starting a fresh trial for you."
                         : "Please wait a moment while we check your session."
                 }
                 note="Guest trials are tied to this browser and guest cookie."
@@ -439,11 +520,11 @@ export default function TrialPracticeClient({
     if (gateState === "error") {
         return (
             <TrialStateCard
-                title="Trial unavailable"
+                title={challenge ? "Challenge unavailable" : "Trial unavailable"}
                 description={gateErr ?? "We could not open your trial session."}
                 note="Guest trials are tied to this browser and guest cookie."
                 primaryAction={
-                    subject && level
+                    challenge || (subject && level)
                         ? {
                             label: "Start new trial",
                             onClick: startFreshTrial,
@@ -453,7 +534,34 @@ export default function TrialPracticeClient({
                 secondaryAction={{
                     label: "Go to home",
                     onClick: goHome,
-                    variant: subject && level ? "ghost" : "primary",
+                    variant: challenge || (subject && level) ? "ghost" : "primary",
+                }}
+            />
+        );
+    }
+
+    // The gate state should only become ready after a concrete session id has
+    // passed preflight. Keep an explicit runtime guard here so the render path
+    // remains safe if URL/storage state changes between effects, and so
+    // TrialShellInner always receives the non-null string its contract requires.
+    if (!effectiveSessionId) {
+        return (
+            <TrialStateCard
+                title={challenge ? "Missing challenge session" : "Missing trial session"}
+                description="We couldn’t find an active session for this page. Start a new session to continue."
+                note="Guest sessions are tied to this browser and guest cookie."
+                primaryAction={
+                    challenge || (subject && level)
+                        ? {
+                            label: challenge ? "Start challenge" : "Start new trial",
+                            onClick: startFreshTrial,
+                        }
+                        : undefined
+                }
+                secondaryAction={{
+                    label: "Go to home",
+                    onClick: goHome,
+                    variant: challenge || (subject && level) ? "ghost" : "primary",
                 }}
             />
         );

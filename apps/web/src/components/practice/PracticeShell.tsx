@@ -11,6 +11,9 @@ import SummaryView from "./shell/SummaryView";
 import PracticeView from "./shell/PracticeView";
 import { useConceptExplain } from "./hooks/useConceptExplain";
 import { isExcusedPracticeItem } from "@/lib/flow/excuse";
+import { isPracticeItemFinalized } from "@/lib/practice/runtime";
+import type { PracticeExperienceMode, PracticeRunViewer } from "@/lib/practice/experience/types";
+import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";
 
 export type TFn = (key: string, values?: Record<string, any>) => string;
 
@@ -23,8 +26,15 @@ export type PracticeShellProps = {
   submitBusy: boolean;
 
   returnUrl?: string | null;
+  leaderboardUrl?: string | null;
   onReturn?: () => void;
+  experienceMode: PracticeExperienceMode;
+  viewer: PracticeRunViewer;
   isOnboardingTrial?: boolean;
+  isSharedChallenge?: boolean;
+  isDailyFive?: boolean;
+  challengeTitle?: string | null;
+  helpPolicy?: PracticeHelpPolicy | null;
 
   allowReveal: boolean;
   showDebug: boolean;
@@ -83,7 +93,10 @@ export type PracticeShellProps = {
   goPrev: () => void;
   goNext: () => Promise<void> | void;
   submit: () => Promise<void> | void;
+  openHelp: (stepKey?: string) => Promise<void> | void;
   reveal: () => Promise<void> | void;
+  pendingRevealCompletion?: boolean;
+  finishRevealedSession?: () => Promise<void> | void;
   retryLoad: () => void;
 
   padRef: React.MutableRefObject<VectorPadState>;
@@ -119,7 +132,7 @@ export default function PracticeShell(props: PracticeShellProps) {
       [current],
   );
 
-  const finalized = Boolean((current as any)?.result?.finalized);
+  const finalized = isPracticeItemFinalized(current, maxAttempts, isLockedRun);
   const attempts = current?.attempts ?? 0;
 
   const outOfAttempts =

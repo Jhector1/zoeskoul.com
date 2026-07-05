@@ -42,6 +42,29 @@ import {
 } from "@/components/review/module/runtime/resolveWorkspaceForTarget";
 import { isUsableStarterCode } from "@/components/review/module/runtime/starterContent";
 
+
+export function resolveExerciseInteractionState(args: {
+    readOnly: boolean;
+    busy: boolean;
+    ok: boolean | null;
+    finalized: boolean;
+    revealed: boolean;
+    attempts: number;
+    maxAttempts: number;
+}) {
+    const finiteMax = Number.isFinite(args.maxAttempts);
+    const outOfAttempts =
+        !args.revealed &&
+        (args.finalized ||
+            (finiteMax && args.attempts >= args.maxAttempts && args.ok !== true));
+
+    return {
+        outOfAttempts,
+        lockInputs:
+            args.readOnly || args.busy || args.ok === true || outOfAttempts,
+    };
+}
+
 type SqlTableSnapshot = {
     name: string;
     columns: Array<{
@@ -1551,6 +1574,8 @@ export default function ExerciseRenderer({
                                              readOnly = false,
                                              reviewCorrectItem = null,
                                              codeRunnerMode = "embedded",
+                                             embeddedRunnerHeight,
+                                             showStdinEditor,
                                              codeTools = null,
                                              codeInputId,
                                              codeOwnerCardId,
@@ -1581,6 +1606,8 @@ export default function ExerciseRenderer({
     reviewCorrectItem?: QItem | null;
 
     codeRunnerMode?: "embedded" | "tools";
+    embeddedRunnerHeight?: number | "auto";
+    showStdinEditor?: boolean;
     codeTools?: CodeToolsApi | null;
     codeInputId?: string;
     codeOwnerCardId?: string | null;
@@ -1711,6 +1738,7 @@ export default function ExerciseRenderer({
     const hasAnyResult = Boolean((current as any).submitted || (current as any).result);
 
     const isRevealResult = Boolean(
+        (current as any)?.revealed ||
         (current as any)?.result?.revealUsed ||
         (current as any)?.result?.revealAnswer,
     );
@@ -1736,14 +1764,31 @@ export default function ExerciseRenderer({
     );
 
     const finalized = Boolean((current as any)?.result?.finalized);
-    const outOfAttempts =
-        finalized || (maxA !== Number.POSITIVE_INFINITY && attempts >= maxA && ok !== true);
+    const interaction = resolveExerciseInteractionState({
+        readOnly,
+        busy,
+        ok,
+        finalized,
+        revealed: isRevealResult,
+        attempts,
+        maxAttempts: maxA,
+    });
+    const { outOfAttempts, lockInputs } = interaction;
 
-    const lockInputs = readOnly || busy || ok === true || outOfAttempts;
+    // Revealing closes grading and XP, but it should not turn the exercise into a
+    // dead screenshot. Keep the editor/input controls interactive so learners
+    // can fill, edit, reset, and run the revealed solution before continuing.
+    // Submit remains disabled by PracticeShell because the result is finalized.
     const lastRuntimeWorkspaceSyncKeyRef = useRef<string | null>(null);
 
     function resetCheckPatch() {
         if (readOnly) return {};
+
+        // After reveal, edits are study-only. Preserve submitted/finalized state
+        // so Next stays available and the learner cannot resubmit for XP.
+        if (isRevealResult) {
+            return { updateOrigin: "user" as const };
+        }
 
         /**
          * Do not remove result here.
@@ -2188,11 +2233,17 @@ export default function ExerciseRenderer({
                     state: activeState,
                 });
 
+        const exampleStdin =
+            exCode.expectedExample?.kind === "terminal"
+                ? exCode.expectedExample.stdin ?? ""
+                : "";
         const activeStdin =
-            activeWorkspace?.stdin ??
-            compatibleStoreExercise?.stdin ??
-            compatibleCurrentState?.codeStdin ??
-            "";
+            firstNonBlank(
+                activeWorkspace?.stdin,
+                compatibleStoreExercise?.stdin,
+                compatibleCurrentState?.codeStdin,
+                showStdinEditor === false ? exampleStdin : undefined,
+            ) ?? "";
         const activeLanguage = manifestLanguage;
         const runtimeLayers = resolveExerciseRuntimeDefaultsLayers({
             exercise: exCode,
@@ -2266,6 +2317,8 @@ export default function ExerciseRenderer({
                 topicId={topicId}
                 cardId={cardId}
                 frame="card"
+                runnerHeight={embeddedRunnerHeight}
+                showStdinEditor={showStdinEditor}
                 language={activeLanguage}
                 onChangeCode={(code) =>
                     onPatch({

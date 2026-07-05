@@ -308,7 +308,6 @@ export default function CurriculumDraftEditor() {
   const messagesParse = useMemo(() => parseJsonOrError(messagesText), [messagesText]);
   const dirtyBundle = loadedTopic ? bundleText !== jsonPretty(loadedTopic.bundleJson) : false;
   const dirtyMessages = loadedTopic ? messagesText !== jsonPretty(loadedTopic.messagesJson ?? {}) : false;
-
   const selectCatalog = (value: string) => {
     const catalog = catalogs.find((item) => item.catalog === value);
     const subject = catalog?.subjects[0];

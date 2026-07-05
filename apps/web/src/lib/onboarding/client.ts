@@ -36,15 +36,15 @@ export type StartTrialSessionResponse = {
 };
 
 export async function startTrialSession(input: {
-    subject: string;
-    level: string;
+    subject?: string;
+    level?: string;
     locale?: string;
+    challenge?: string;
 }) {
-    // IMPORTANT:
-    // Use the path that matches your actual route file.
-    // If your route is src/app/api/practice/trial/route.ts, use "/api/practice/trial".
-    // If your route is src/app/api/practice/trial/start/route.ts, keep "/api/practice/trial/start".
-    const res = await fetch("/api/practice/trial/start", {
+    const endpoint = input.challenge
+        ? "/api/practice/challenge/start"
+        : "/api/practice/trial/start";
+    const res = await fetch(endpoint, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -83,6 +83,7 @@ export function buildTrialHref(args: {
     level?: string | null;
     status?: "active" | "completed";
     completed?: boolean;
+    challenge?: string | null;
 }) {
     const qs = new URLSearchParams();
 
@@ -97,6 +98,7 @@ export function buildTrialHref(args: {
     if (args.subject) qs.set("subject", args.subject);
     if (args.level) qs.set("level", args.level);
     if (args.status) qs.set("status", args.status);
+    if (args.challenge) qs.set("challenge", args.challenge);
 
     if (typeof args.completed === "boolean") {
         qs.set("completed", args.completed ? "1" : "0");

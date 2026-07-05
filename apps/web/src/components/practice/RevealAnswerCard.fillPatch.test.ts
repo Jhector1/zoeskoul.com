@@ -45,9 +45,10 @@ describe("buildRevealFillPatches", () => {
             codeLang: "python",
             codeStdin: "input value",
             codeTouched: true,
-            submitted: false,
-            feedbackDismissed: true,
-            dismissFeedbackOnEdit: true,
+            submitted: true,
+            revealed: true,
+            feedbackDismissed: false,
+            dismissFeedbackOnEdit: false,
             updateOrigin: "user",
         });
 
@@ -56,9 +57,10 @@ describe("buildRevealFillPatches", () => {
             codeLang: "python",
             codeStdin: "input value",
             codeTouched: true,
-            submitted: false,
-            feedbackDismissed: true,
-            dismissFeedbackOnEdit: true,
+            submitted: true,
+            revealed: true,
+            feedbackDismissed: false,
+            dismissFeedbackOnEdit: false,
             updateOrigin: "user",
             userEdited: true,
             preferSnapshot: true,
@@ -76,9 +78,10 @@ describe("buildRevealFillPatches", () => {
 
         expect(itemPatch).toMatchObject({
             shortText: "Paris",
-            submitted: false,
-            feedbackDismissed: true,
-            dismissFeedbackOnEdit: true,
+            submitted: true,
+            revealed: true,
+            feedbackDismissed: false,
+            dismissFeedbackOnEdit: false,
             updateOrigin: "user",
         });
 

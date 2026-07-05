@@ -22,6 +22,7 @@ function toDbPurpose(purpose?: "quiz" | "project" | PracticePurpose | null) {
 export async function createPracticeInstance(args: {
     prisma: PrismaClient;
     sessionId: string | null;
+    sessionMode?: string | null;
     exercise: Exercise;
     expected: unknown;
     topicSlug: TopicSlug;
@@ -32,6 +33,7 @@ export async function createPracticeInstance(args: {
     const {
         prisma,
         sessionId,
+        sessionMode,
         exercise,
         expected,
         topicSlug,
@@ -98,22 +100,46 @@ export async function createPracticeInstance(args: {
     const dbPurpose = toDbPurpose(purpose);
     publicPayload.purpose = String(dbPurpose);
 
-    return prisma.practiceQuestionInstance.create({
-        data: {
-            sessionId,
-            kind: kindEnum,
-            topicId,
-            difficulty: dbDifficulty,
-            purpose: dbPurpose,
-            title: String((exercise as any).title ?? "Practice"),
-            prompt: String((exercise as any).prompt ?? ""),
-            publicPayload,
-            secretPayload: {
-                expected: expectedCanon,
-                expectedAnswerPayload,
-                explanation,
-            },
+    const exerciseKeyRaw =
+        (exercise as any).exerciseKey ?? (exercise as any).id ?? null;
+    const exerciseKey =
+        typeof exerciseKeyRaw === "string" && exerciseKeyRaw.trim()
+            ? exerciseKeyRaw.trim()
+            : null;
+    const experienceItemKey =
+        sessionMode === "daily_five" && sessionId && exerciseKey
+            ? `daily-five:${sessionId}:${exerciseKey}`
+            : null;
+
+    const data = {
+        sessionId,
+        exerciseKey,
+        experienceItemKey,
+        kind: kindEnum,
+        topicId,
+        difficulty: dbDifficulty,
+        purpose: dbPurpose,
+        title: String((exercise as any).title ?? "Practice"),
+        prompt: String((exercise as any).prompt ?? ""),
+        publicPayload,
+        secretPayload: {
+            expected: expectedCanon,
+            expectedAnswerPayload,
+            explanation,
         },
+    };
+
+    if (experienceItemKey) {
+        return prisma.practiceQuestionInstance.upsert({
+            where: { experienceItemKey },
+            update: {},
+            create: data,
+            select: { id: true, sessionId: true },
+        });
+    }
+
+    return prisma.practiceQuestionInstance.create({
+        data,
         select: { id: true, sessionId: true },
     });
 }

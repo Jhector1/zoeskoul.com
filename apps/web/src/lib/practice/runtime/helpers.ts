@@ -277,10 +277,11 @@ export function isPracticeItemFinalized(
     isLockedRun: boolean,
 ) {
     if (!q) return false;
-    if (q.submitted) return true;
+    if (q.submitted || q.revealed) return true;
 
     const r: any = q.result;
     if (!r) return false;
+    if (r.revealUsed === true || Boolean(r.revealAnswer)) return true;
 
     if (r.ok === true) return true;
     if (r.finalized === true) return true;

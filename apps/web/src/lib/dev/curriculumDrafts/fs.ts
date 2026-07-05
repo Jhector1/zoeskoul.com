@@ -481,6 +481,7 @@ export async function loadDraftModuleTopics(ref: DraftRef): Promise<LoadedDraftM
       catalog: ref.catalog,
       subject: ref.subject,
       module: ref.module,
+      topic: topicDir,
       locale,
       repoRoot,
       draftRoot,

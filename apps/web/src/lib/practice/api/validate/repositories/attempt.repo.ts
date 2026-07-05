@@ -26,6 +26,7 @@ export async function countPriorNonRevealAttempts(
     prisma: PrismaClient,
     args: {
         instanceId: string;
+        sessionId?: string | null;
         actor: { userId?: string | null; guestId?: string | null };
     },
 ) {
@@ -36,7 +37,9 @@ export async function countPriorNonRevealAttempts(
 
     return prisma.practiceAttempt.count({
         where: {
-            instanceId: args.instanceId,
+            ...(args.sessionId
+                ? { sessionId: args.sessionId }
+                : { instanceId: args.instanceId }),
             revealUsed: false,
             OR,
         },
@@ -192,7 +195,7 @@ export async function persistAttemptAndFinalize(
         let wonFinalization = false;
         let session: SessionSnapshot | null = null;
 
-        if (!args.isReveal && args.finalized) {
+        if (args.finalized) {
             const mark = await tx.practiceQuestionInstance.updateMany({
                 where: {
                     id: instance.id,

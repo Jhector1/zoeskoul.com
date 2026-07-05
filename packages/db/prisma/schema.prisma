@@ -227,6 +227,8 @@ model AssignmentTopic {
 model PracticeQuestionInstance {
   id                 String              @id @default(cuid())
   sessionId          String?
+  exerciseKey        String?
+  experienceItemKey  String?             @unique
   kind               PracticeKind
   difficulty         PracticeDifficulty
   title              String
@@ -243,6 +245,7 @@ model PracticeQuestionInstance {
   topic              PracticeTopic       @relation(fields: [topicId], references: [id])
 
   @@index([sessionId])
+  @@index([sessionId, exerciseKey])
   @@index([topicId, difficulty])
   @@index([purpose])
   @@index([sessionId, answeredAt])
@@ -341,6 +344,8 @@ model PracticeSection {
 model PracticeSession {
   id             String                     @id @default(cuid())
   status         PracticeSessionStatus      @default(active)
+  experienceKey  String?                    @unique
+  dayKey         DateTime?                  @db.Date
   userId         String?
   guestId        String?
   sectionId      String
@@ -368,6 +373,7 @@ model PracticeSession {
   section        PracticeSection            @relation(fields: [sectionId], references: [id])
 
   @@index([mode])
+  @@index([mode, dayKey])
   @@index([presetId])
   @@index([assignmentId])
   @@index([moduleId])
@@ -375,22 +381,23 @@ model PracticeSession {
 }
 
 model Assignment {
-  id            String             @id @default(cuid())
-  slug          String             @unique
-  title         String
-  description   String?
-  status        AssignmentStatus   @default(draft)
-  sectionId     String
-  difficulty    PracticeDifficulty
-  questionCount Int                @default(10)
-  availableFrom DateTime?
-  dueAt         DateTime?
-  timeLimitSec  Int?
-  maxAttempts   Int?
-  allowReveal   Boolean            @default(false)
-  showDebug     Boolean            @default(false)
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
+  id                  String             @id @default(cuid())
+  slug                String             @unique
+  title               String
+  description         String?
+  status              AssignmentStatus   @default(draft)
+  sectionId           String
+  difficulty          PracticeDifficulty
+  questionCount       Int                @default(10)
+  availableFrom       DateTime?
+  dueAt               DateTime?
+  timeLimitSec        Int?
+  maxAttempts         Int?
+  maxQuestionAttempts Int                @default(3)
+  allowReveal         Boolean            @default(false)
+  showDebug           Boolean            @default(false)
+  createdAt           DateTime           @default(now())
+  updatedAt           DateTime           @updatedAt
   helpPolicy    Json?
   section       PracticeSection    @relation("SectionAssignments", fields: [sectionId], references: [id])
   topics        AssignmentTopic[]
@@ -768,7 +775,10 @@ enum AssignmentStatus {
 
 enum PracticeSessionMode {
   standard
+  daily_five
   onboarding_trial
+  public_challenge
+  assignment
 }
 
 enum StripeSubscriptionStatus {
@@ -813,6 +823,7 @@ model LearnerProgress {
   actorKey      String    @unique
   userId        String?
   totalXp       Int       @default(0)
+  rankedXp      Int       @default(0)
   level         Int       @default(1)
   currentStreak Int       @default(0)
   longestStreak Int       @default(0)
@@ -822,6 +833,7 @@ model LearnerProgress {
   updatedAt     DateTime  @updatedAt
 
   @@index([userId])
+  @@index([rankedXp])
 }
 
 model DailyLearningStat {
@@ -830,6 +842,7 @@ model DailyLearningStat {
   userId         String?
   day            DateTime @db.Date
   xpEarned       Int      @default(0)
+  rankedXpEarned Int      @default(0)
   answeredCount  Int      @default(0)
   correctCount   Int      @default(0)
   sessionCount   Int      @default(0)
@@ -854,6 +867,7 @@ model XpEvent {
   instanceId     String?
   sessionId      String?
   xpDelta        Int
+  rankedXpDelta  Int          @default(0)
   reason         String
   idempotencyKey String?      @unique
   createdAt      DateTime     @default(now())
@@ -862,6 +876,7 @@ model XpEvent {
   @@index([userId])
   @@index([sourceType, sourceId])
   @@index([subjectId, moduleId])
+  @@index([rankedXpDelta, createdAt])
 }
 
 enum XpSourceType {
@@ -872,5 +887,8 @@ enum XpSourceType {
   module_complete
   streak_bonus
   daily_goal
+  daily_five_complete
+  public_challenge_complete
+  assignment_complete
   project_step
 }

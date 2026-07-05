@@ -3,6 +3,7 @@ import {
     coercePurposeMode,
     coercePurposePolicy,
 } from "@/lib/subjects/quizClient";
+import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 
 export type PracticePurposeDecision =
     | {
@@ -22,6 +23,10 @@ export type PracticePurposeDecision =
 };
 
 function pickAllowedPurposesFromSession(session: any): Array<"quiz" | "project"> {
+    if (resolvePracticeExperienceMode(session) === "daily_five") {
+        return ["quiz", "project"];
+    }
+
     const p1 = session?.preset?.allowedPurposes;
     if (Array.isArray(p1) && p1.length) {
         return p1.map(String) as Array<"quiz" | "project">;
@@ -45,7 +50,7 @@ export function computePurposeDecision(args: {
     const policy: PurposePolicy =
         coercePurposePolicy(args.purposePolicyParam) ?? "fallback";
 
-    if (session?.assignmentId) {
+    if (resolvePracticeExperienceMode(session) === "assignment") {
         return {
             ok: true,
             effective: "quiz",

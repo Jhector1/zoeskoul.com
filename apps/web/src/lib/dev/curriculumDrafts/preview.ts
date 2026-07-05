@@ -113,21 +113,32 @@ function normalizeExercisePurpose(value: unknown, kind?: unknown) {
   return raw;
 }
 
-function buildPool(manifest: TopicBundleManifest) {
+type DraftPoolItem = {
+  key: string;
+  w: number;
+  kind: string | null;
+  purpose: string;
+};
+
+function buildPool(manifest: TopicBundleManifest): DraftPoolItem[] {
   const exercises = Array.isArray(manifest.exercises) ? manifest.exercises : [];
-  return exercises
-    .map((exercise) => {
-      const record = asRecord(exercise);
-      const key = asString(record?.id);
-      if (!key) return null;
-      return {
-        key,
-        w: asNumber(record?.weight) ?? 1,
-        kind: record?.kind,
-        purpose: normalizeExercisePurpose(record?.purpose, record?.kind),
-      };
-    })
-    .filter((item): item is { key: string; w: number; kind?: unknown; purpose?: unknown } => Boolean(item));
+  const pool: DraftPoolItem[] = [];
+
+  for (const exercise of exercises) {
+    const record = asRecord(exercise);
+    const key = asString(record?.id);
+    if (!key) continue;
+
+    const kind = asString(record?.kind) || null;
+    pool.push({
+      key,
+      w: asNumber(record?.weight) ?? 1,
+      kind,
+      purpose: normalizeExercisePurpose(record?.purpose, kind),
+    });
+  }
+
+  return pool;
 }
 
 function pickExerciseStepFields(exercise: JsonObject | null, resolveMessage: (key: string, fallback?: string) => string) {

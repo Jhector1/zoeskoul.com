@@ -5,7 +5,7 @@ import {
 
 export function computeMaxAttempts(args: {
     mode: RunMode;
-    assignmentMaxAttempts?: any;
+    assignmentQuestionMaxAttempts?: any;
     sessionMaxAttempts?: any;
     practiceMaxAttempts?: any;
 }) {
