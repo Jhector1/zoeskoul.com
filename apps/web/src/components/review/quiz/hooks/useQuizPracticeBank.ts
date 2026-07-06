@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef, useState, useCallback, useMemo} from "react";
+import React, {useEffect, useLayoutEffect, useRef, useState, useCallback, useMemo} from "react";
 import type { ReviewQuestion, ReviewQuizSpec } from "@/lib/subjects/types";
 import type { VectorPadState } from "@/components/vectorpad/types";
 import { defaultVectorPadState } from "@/components/vectorpad/defaultState";
@@ -39,6 +39,7 @@ export type PracticeState = PracticeItemState & {
   subjectSlug?: string;
   moduleSlug?: string;
   sectionSlug?: string;
+  runtimeGeneration?: number;
 };
 
 
@@ -1290,6 +1291,17 @@ export function useQuizPracticeBank(args: {
 
   const [practice, setPractice] = useState<Record<string, PracticeState>>({});
   const practiceRef = useRef(practice);
+  const renderedResetKeyRef = useRef(resetKey);
+
+  /**
+   * A module/topic/card reset clears the canonical runtime store while this hook
+   * can remain mounted. During the first render after reset, React has not run
+   * effects yet, so returning the previous practice item would let
+   * QuizPracticeCard immediately seed the old user workspace back into the
+   * cleared runtime. Hide that stale state synchronously for the new reset key.
+   */
+  const visiblePractice: Record<string, PracticeState> =
+      renderedResetKeyRef.current === resetKey ? practice : {};
 
   const loadTokenRef = useRef<Record<string, number>>({});
   const loadFailureKeyRef = useRef<Record<string, string>>({});
@@ -1337,8 +1349,10 @@ export function useQuizPracticeBank(args: {
     return padRefs.current[key];
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    renderedResetKeyRef.current = resetKey;
     loadCycleRef.current += 1;
+    practiceRef.current = {};
     setPractice({});
     padRefs.current = {};
     loadTokenRef.current = {};
@@ -1475,6 +1489,7 @@ export function useQuizPracticeBank(args: {
           });
 
           const fetchSpec = ((q as any).fetch ?? {}) as Record<string, any>;
+          const startedGeneration = useReviewRuntimeStore.getState().resetRevision;
 
           const resolvedExerciseKey =
               fetchSpec.exerciseKey ??
@@ -1555,6 +1570,7 @@ export function useQuizPracticeBank(args: {
           if (cancelledRef?.current) return;
           if (loadCycleRef.current !== cycle) return;
           if (loadTokenRef.current[stableKey] !== token) return;
+          if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) return;
 
           const baseForLoaded =
               practiceRef.current[stableKey] ??
@@ -1586,6 +1602,7 @@ export function useQuizPracticeBank(args: {
             ...baseForLoaded,
             loading: false,
             error: null,
+            runtimeGeneration: startedGeneration,
             exerciseKey: questionIdentity.exerciseKey || stableKey,
             topicId: questionIdentity.topicId,
             subjectSlug: questionIdentity.subjectSlug,
@@ -1902,6 +1919,7 @@ export function useQuizPracticeBank(args: {
         });
 
         try {
+          const startedGeneration = useReviewRuntimeStore.getState().resetRevision;
           useReviewRuntimeStore.getState().flushToolSnapshot();
 
           await new Promise<void>((resolve) => {
@@ -1927,10 +1945,13 @@ export function useQuizPracticeBank(args: {
               : null;
 
           if (runtimeStoreKey && runtimePatchForSubmit) {
+            if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) return;
             useReviewRuntimeStore.getState().patchExercise(runtimeStoreKey, {
               ...runtimePatchForSubmit,
+              generation: startedGeneration,
               userEdited: true,
               workspaceOrigin: "user",
+              updateOrigin: "quiz-practice-submit",
               updatedAt: Date.now(),
             } as any);
           }
@@ -2044,7 +2065,7 @@ export function useQuizPracticeBank(args: {
         if (isCompleted || locked) return;
 
         const key = getStablePracticeQuestionKey(q);
-        const ps = practice[key] ?? practice[q.id];
+        const ps = visiblePractice[key] ?? visiblePractice[q.id];
 
         if (!ps || ps.loading || ps.busy || !ps.item || !ps.exercise) return;
         if (ps.ok === true) return;
@@ -2216,17 +2237,17 @@ export function useQuizPracticeBank(args: {
           });
         }
       },
-      [practice, isCompleted, locked, loadPracticeQuestion],  );
+      [visiblePractice, isCompleted, locked, loadPracticeQuestion],  );
 
   function isPracticeChecked(q: Extract<ReviewQuestion, { kind: "practice" }>) {
     const key = getStablePracticeQuestionKey(q);
-    const ps = practice[key] ?? practice[q.id];
+    const ps = visiblePractice[key] ?? visiblePractice[q.id];
 
     return Boolean(ps && ps.attempts > 0);
   }
 
   return {
-    practice,
+    practice: visiblePractice,
     setPractice,
     getPadRef,
     updatePracticeItem,

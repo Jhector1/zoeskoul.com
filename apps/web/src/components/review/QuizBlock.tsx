@@ -651,7 +651,8 @@ export default function QuizBlock({
   );
 
   const [reloadNonce, setReloadNonce] = useState(0);
-  const resetKey = `${stableKey}:${reloadNonce}`;
+  const runtimeResetRevision = useReviewRuntimeStore((state) => state.resetRevision);
+  const resetKey = `${stableKey}:${reloadNonce}:${runtimeResetRevision}`;
 
   const { quizLoading, quizError, questions, serverQuizKey } =
       useReviewQuizQuestions({

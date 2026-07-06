@@ -75,6 +75,9 @@
                   },
                   "tests_check_tasks_py": {
                     "content": "# TODO: add assert-based checks for validation, priority labels, and done counts"
+                  },
+                  "main_py": {
+                    "content": "# Complete the provided workspace files.\n# Click Run to see the sample summary output."
                   }
                 },
                 "solutionFiles": {

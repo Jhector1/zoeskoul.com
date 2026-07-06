@@ -149,6 +149,15 @@
                   },
                   "services_init_py": {
                     "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
                   }
                 },
                 "solutionCode": "class BaseTask:\n    def __init__(self, title, status):\n        self.title = title\n        self.status = status\n\n    def summary(self):\n        return f\"{self.title} [{self.status}]\"\n\n\ndef build_summary(tasks):\n    return 'SMART TASK TRACKER'\n\nprint('SMART TASK TRACKER')\nprint(BaseTask('Write docs', 'todo').summary())\nprint('done')\n",
@@ -266,6 +275,15 @@
                   },
                   "services_init_py": {
                     "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
                   }
                 },
                 "solutionFiles": {
@@ -321,6 +339,15 @@
                     "content": "# Package marker for imports."
                   },
                   "services_init_py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
                     "content": "# Package marker for imports."
                   }
                 },
@@ -442,6 +469,15 @@
                   },
                   "services_init_py": {
                     "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
                   }
                 },
                 "solutionFiles": {
@@ -500,6 +536,18 @@
                     "content": "# Package marker for imports."
                   },
                   "services_init_py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "services___init___py": {
                     "content": "# Package marker for imports."
                   }
                 },
@@ -621,6 +669,18 @@
                   },
                   "services_init_py": {
                     "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "services___init___py": {
+                    "content": "# Package marker for imports."
                   }
                 },
                 "solutionFiles": {
@@ -679,6 +739,18 @@
                     "content": "# Package marker for imports."
                   },
                   "services_init_py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "services___init___py": {
                     "content": "# Package marker for imports."
                   }
                 },
@@ -800,6 +872,18 @@
                   },
                   "services_init_py": {
                     "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "services___init___py": {
+                    "content": "# Package marker for imports."
                   }
                 },
                 "solutionFiles": {
@@ -858,6 +942,18 @@
                     "content": "# Package marker for imports."
                   },
                   "services_init_py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "services___init___py": {
                     "content": "# Package marker for imports."
                   }
                 },
@@ -985,6 +1081,18 @@
                   },
                   "services_init_py": {
                     "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "services___init___py": {
+                    "content": "# Package marker for imports."
                   }
                 },
                 "solutionFiles": {
@@ -1043,6 +1151,18 @@
                     "content": "# Package marker for imports."
                   },
                   "services_init_py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "storage___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "reports___init___py": {
+                    "content": "# Package marker for imports."
+                  },
+                  "services___init___py": {
                     "content": "# Package marker for imports."
                   }
                 },

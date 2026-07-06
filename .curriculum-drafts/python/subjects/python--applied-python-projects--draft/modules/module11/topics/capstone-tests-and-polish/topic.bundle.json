@@ -120,7 +120,7 @@
     {
       "id": "try-capstone-tests-and-polish-sketch0",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0",
       "language": "python",
@@ -128,7 +128,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -290,7 +290,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -463,7 +463,7 @@
     {
       "id": "capstone-tests-and-polish-step2-service-tests",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests",
       "language": "python",
@@ -471,14 +471,14 @@
       "starterFiles": [
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -633,14 +633,14 @@
         "starterFiles": [
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -823,7 +823,7 @@
     {
       "id": "capstone-tests-and-polish-step3-report-file",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file",
       "language": "python",
@@ -831,14 +831,14 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -993,14 +993,14 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1188,7 +1188,7 @@
     {
       "id": "capstone-tests-and-polish-step4-readme",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme",
       "language": "python",
@@ -1196,14 +1196,14 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1365,14 +1365,14 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1557,7 +1557,7 @@
     {
       "id": "capstone-tests-and-polish-step5-final-polish",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish",
       "language": "python",
@@ -1565,7 +1565,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1741,7 +1741,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1940,7 +1940,7 @@
     {
       "id": "capstone-tests-and-polish-step6-final-handoff",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff",
       "language": "python",
@@ -1948,7 +1948,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -2124,7 +2124,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true

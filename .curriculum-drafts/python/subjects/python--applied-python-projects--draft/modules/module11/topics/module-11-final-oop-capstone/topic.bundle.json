@@ -120,7 +120,7 @@
     {
       "id": "try-module-11-final-oop-capstone-sketch0",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0",
       "language": "python",
@@ -128,7 +128,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -242,21 +242,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.bundleMoved.solutionFiles.models_init_py_4.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.bundleMoved.solutionFiles.storage_init_py_5.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.bundleMoved.solutionFiles.reports_init_py_6.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -339,7 +339,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -466,21 +466,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.bundleMoved.recipeSolutionFiles.models_init_py_4.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.bundleMoved.recipeSolutionFiles.storage_init_py_5.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.bundleMoved.recipeSolutionFiles.reports_init_py_6.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -621,7 +621,7 @@
     {
       "id": "project-smart-task-tracker-step-2-models",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models",
       "language": "python",
@@ -629,7 +629,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -657,21 +657,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.models_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.storage_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.reports_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -778,21 +778,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.bundleMoved.solutionFiles.models_init_py_4.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.bundleMoved.solutionFiles.storage_init_py_5.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.solutionFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.bundleMoved.solutionFiles.reports_init_py_6.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.solutionFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -875,7 +875,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -903,21 +903,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.models_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.storage_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.reports_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.starterFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1037,21 +1037,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.bundleMoved.recipeSolutionFiles.models_init_py_4.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.bundleMoved.recipeSolutionFiles.storage_init_py_5.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.solutionFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.bundleMoved.recipeSolutionFiles.reports_init_py_6.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.solutionFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1211,7 +1211,7 @@
     {
       "id": "project-smart-task-tracker-step-3-service",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service",
       "language": "python",
@@ -1219,7 +1219,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1247,21 +1247,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.storage_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.reports_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1368,21 +1368,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.bundleMoved.solutionFiles.models_init_py_4.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.bundleMoved.solutionFiles.storage_init_py_5.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.solutionFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.bundleMoved.solutionFiles.reports_init_py_6.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.solutionFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1410,7 +1410,7 @@
         },
         {
           "path": "services/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.bundleMoved.solutionFiles.services_init_py_10.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.solutionFiles.services___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1479,7 +1479,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1507,21 +1507,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.storage_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.reports_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.starterFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1641,21 +1641,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.bundleMoved.recipeSolutionFiles.models_init_py_4.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.bundleMoved.recipeSolutionFiles.storage_init_py_5.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.solutionFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.bundleMoved.recipeSolutionFiles.reports_init_py_6.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.solutionFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1683,7 +1683,7 @@
           },
           {
             "path": "services/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.bundleMoved.recipeSolutionFiles.services_init_py_10.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.solutionFiles.services___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1787,7 +1787,7 @@
     {
       "id": "project-smart-task-tracker-step-4-storage",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage",
       "language": "python",
@@ -1795,7 +1795,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1823,21 +1823,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.storage_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.reports_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1865,7 +1865,7 @@
         },
         {
           "path": "services/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.services_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.services___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1958,21 +1958,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.bundleMoved.solutionFiles.models_init_py_4.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.bundleMoved.solutionFiles.storage_init_py_5.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.solutionFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.bundleMoved.solutionFiles.reports_init_py_6.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.solutionFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -2000,7 +2000,7 @@
         },
         {
           "path": "services/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.bundleMoved.solutionFiles.services_init_py_10.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.solutionFiles.services___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -2069,7 +2069,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -2097,21 +2097,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.storage_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.reports_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -2139,7 +2139,7 @@
           },
           {
             "path": "services/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.services_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.starterFiles.services___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -2245,21 +2245,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.bundleMoved.recipeSolutionFiles.models_init_py_4.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.bundleMoved.recipeSolutionFiles.storage_init_py_5.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.solutionFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.bundleMoved.recipeSolutionFiles.reports_init_py_6.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.solutionFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -2287,7 +2287,7 @@
           },
           {
             "path": "services/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.bundleMoved.recipeSolutionFiles.services_init_py_10.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.solutionFiles.services___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -2384,7 +2384,7 @@
     {
       "id": "project-smart-task-tracker-step-5-reports-tests",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests",
       "language": "python",
@@ -2392,7 +2392,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -2420,21 +2420,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.storage_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.reports_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -2462,7 +2462,7 @@
         },
         {
           "path": "services/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.services_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.services___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -2555,21 +2555,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.bundleMoved.solutionFiles.models_init_py_4.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.bundleMoved.solutionFiles.storage_init_py_5.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.solutionFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.bundleMoved.solutionFiles.reports_init_py_6.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.solutionFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -2597,7 +2597,7 @@
         },
         {
           "path": "services/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.bundleMoved.solutionFiles.services_init_py_10.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.solutionFiles.services___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -2666,7 +2666,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -2694,21 +2694,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.storage_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.reports_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -2736,7 +2736,7 @@
           },
           {
             "path": "services/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.services_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.starterFiles.services___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -2857,21 +2857,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.bundleMoved.recipeSolutionFiles.models_init_py_4.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.bundleMoved.recipeSolutionFiles.storage_init_py_5.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.solutionFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.bundleMoved.recipeSolutionFiles.reports_init_py_6.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.solutionFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -2899,7 +2899,7 @@
           },
           {
             "path": "services/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.bundleMoved.recipeSolutionFiles.services_init_py_10.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.solutionFiles.services___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -2990,7 +2990,7 @@
     {
       "id": "project-smart-task-tracker-step-6-final-handoff",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff",
       "language": "python",
@@ -2998,7 +2998,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -3026,21 +3026,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.storage_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.reports_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -3068,7 +3068,7 @@
         },
         {
           "path": "services/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.services_init_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.services___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -3161,21 +3161,21 @@
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.bundleMoved.solutionFiles.models_init_py_4.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "storage/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.bundleMoved.solutionFiles.storage_init_py_5.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "reports/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.bundleMoved.solutionFiles.reports_init_py_6.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.reports___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -3203,7 +3203,7 @@
         },
         {
           "path": "services/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.bundleMoved.solutionFiles.services_init_py_10.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.services___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -3272,7 +3272,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -3300,21 +3300,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.storage_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.reports_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -3342,7 +3342,7 @@
           },
           {
             "path": "services/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.services_init_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.services___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -3468,21 +3468,21 @@
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.bundleMoved.recipeSolutionFiles.models_init_py_4.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "storage/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.bundleMoved.recipeSolutionFiles.storage_init_py_5.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "reports/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.bundleMoved.recipeSolutionFiles.reports_init_py_6.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.reports___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -3510,7 +3510,7 @@
           },
           {
             "path": "services/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.bundleMoved.recipeSolutionFiles.services_init_py_10.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.services___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false

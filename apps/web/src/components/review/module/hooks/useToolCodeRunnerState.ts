@@ -695,6 +695,7 @@ export function useToolCodeRunnerState(args: {
     const exercises = useReviewRuntimeStore((s) => s.exercises);
     const patchCard = useReviewRuntimeStore((s) => s.patchCard);
     const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
+    const runtimeResetRevision = useReviewRuntimeStore((s) => s.resetRevision);
 
     const versionStr = useMemo(() => {
         const moduleV = (progress as any)?.quizVersion ?? 0;
@@ -1023,6 +1024,7 @@ export function useToolCodeRunnerState(args: {
 
                     if (!runtimeAlreadyMatches) {
                         runtimeApi.patchExercise(exerciseKey, {
+                            generation: runtimeResetRevision,
                             language: latest.lang,
                             lang: latest.lang,
                             workspace: latest.workspace,
@@ -1786,6 +1788,7 @@ export function useToolCodeRunnerState(args: {
 
             if (shouldPatchRuntimeForBind) {
                 patchExercise(targetKey, {
+                    generation: runtimeResetRevision,
                     language: nextSnap.lang,
                     lang: nextSnap.lang,
                     workspace: nextSnap.workspace ?? undefined,

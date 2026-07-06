@@ -1033,14 +1033,31 @@ export function useReviewProgress(args: {
             options?: {
                 keepalive?: boolean;
                 reason?: string;
+                mergeRuntime?: boolean;
+                discardPendingSaves?: boolean;
             },
         ) => {
             if (!subjectSlug || !moduleSlug) return;
             if (!hydrationCompleteRef.current) return;
 
-            const latestRuntime = useReviewRuntimeStore.getState();
-            const mergedState = mergeRuntimeIntoProgress(state, latestRuntime);
-            const meaningfulPayload = buildPayloadFromState(withoutSaveRevision(mergedState) as ReviewProgressState);
+            const mergeRuntime = options?.mergeRuntime !== false;
+            const stateForSave = mergeRuntime
+                ? mergeRuntimeIntoProgress(state, useReviewRuntimeStore.getState())
+                : state;
+
+            if (options?.discardPendingSaves) {
+                if (pendingSaveTimerRef.current != null) {
+                    window.clearTimeout(pendingSaveTimerRef.current);
+                    pendingSaveTimerRef.current = null;
+                }
+                if (runtimeSaveTimerRef.current != null) {
+                    window.clearTimeout(runtimeSaveTimerRef.current);
+                    runtimeSaveTimerRef.current = null;
+                }
+                pendingSavePayloadRef.current = null;
+            }
+
+            const meaningfulPayload = buildPayloadFromState(withoutSaveRevision(stateForSave) as ReviewProgressState);
             const meaningfulBody = meaningfulBodyForPayload(meaningfulPayload as any);
 
             if (meaningfulBody === lastSavedMeaningfulBodyRef.current) {
@@ -1050,7 +1067,7 @@ export function useReviewProgress(args: {
             }
 
             const saveSeq = ++saveSeqRef.current;
-            const stateToSave = makeSaveState(mergedState);
+            const stateToSave = makeSaveState(stateForSave);
             const nextPayload = buildPayloadFromState(stateToSave);
 
             if (options?.keepalive) {
@@ -1084,7 +1101,11 @@ export function useReviewProgress(args: {
     );
 
     const hydrateRuntimeFromProgress = useCallback(
-        (normalizedProgress: ReviewProgressState, reason: string) => {
+        (
+            normalizedProgress: ReviewProgressState,
+            reason: string,
+            runtimeGeneration = useReviewRuntimeStore.getState().resetRevision,
+        ) => {
             pendingRuntimeHydrationRef.current = false;
             const topics = (normalizedProgress as any).topics ?? {};
             if (!topics) return;
@@ -1345,6 +1366,12 @@ export function useReviewProgress(args: {
                 });
 
                 const runtimeApi = useReviewRuntimeStore.getState();
+                const incomingExerciseGeneration =
+                    isWorkspaceState((incomingExercise as any)?.workspace) ||
+                    isWorkspaceState((incomingExercise as any)?.codeWorkspace) ||
+                    isWorkspaceState((incomingExercise as any)?.ideWorkspace)
+                        ? runtimeGeneration
+                        : undefined;
                 runtimeApi.ensureExercise({
                     exerciseKey: canonicalExerciseKey,
                     subjectSlug: incomingExercise.subjectSlug,
@@ -1355,7 +1382,20 @@ export function useReviewProgress(args: {
                     manifest: incomingExercise as any,
                     saved: incomingExercise as any,
                 });
-                runtimeApi.patchExercise(canonicalExerciseKey, incomingExercise as any);
+                runtimeApi.patchExercise(canonicalExerciseKey, {
+                    ...(incomingExercise as any),
+                    ...(typeof incomingExerciseGeneration === "number"
+                        ? {
+                            generation: incomingExerciseGeneration,
+                            updateOrigin: "review-progress-hydrate",
+                            workspaceMutation: {
+                                generation: incomingExerciseGeneration,
+                                source: "review-progress-hydrate",
+                                mutation: "hydrate",
+                            },
+                        }
+                        : {}),
+                } as any);
             };
 
             Object.entries(topics).forEach(([tidRaw, tp]: any) => {
@@ -1518,7 +1558,11 @@ export function useReviewProgress(args: {
         if (!hydrated) return;
         if (!pendingRuntimeHydrationRef.current) return;
 
-        hydrateRuntimeFromProgress(progressRef.current, "runtime-contract-ready");
+        hydrateRuntimeFromProgress(
+            progressRef.current,
+            "runtime-contract-ready",
+            useReviewRuntimeStore.getState().resetRevision,
+        );
     }, [hydrated, hydrateRuntimeFromProgress, runtimeExerciseContractsKey]);
 
     useEffect(() => {
@@ -1531,17 +1575,21 @@ export function useReviewProgress(args: {
 
         (async () => {
             try {
+                const startedGeneration = useReviewRuntimeStore.getState().resetRevision;
                 const fetchedProgress = await fetchReviewProgressGET({
                     subjectSlug,
                     moduleSlug,
                     locale,
                     signal: ctrl.signal,
                 });
+                if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) {
+                    return;
+                }
 
                 const normalizedProgress = normalizeProgressTopics(fetchedProgress);
 
                 setProgressSafe(normalizedProgress);
-                hydrateRuntimeFromProgress(normalizedProgress, "initial");
+                hydrateRuntimeFromProgress(normalizedProgress, "initial", startedGeneration);
 
                 const nextActive = normalizeTopicProgressKey(
                     (normalizedProgress as any).activeTopicId || firstTopicId,
@@ -1622,6 +1670,7 @@ export function useReviewProgress(args: {
                     return;
                 }
 
+                const startedGeneration = useReviewRuntimeStore.getState().resetRevision;
                 const remoteProgress = normalizeProgressTopics(
                     await fetchReviewProgressGET({
                         subjectSlug,
@@ -1630,6 +1679,9 @@ export function useReviewProgress(args: {
                         signal,
                     }),
                 );
+                if (useReviewRuntimeStore.getState().resetRevision !== startedGeneration) {
+                    return;
+                }
 
                 const remoteRevision = getSaveRevision(remoteProgress);
                 const localRevision = getSaveRevision(progressRef.current);
@@ -1661,7 +1713,7 @@ export function useReviewProgress(args: {
                 applyingRemoteRef.current = true;
                 cancel();
 
-                hydrateRuntimeFromProgress(remoteProgress, reason);
+                hydrateRuntimeFromProgress(remoteProgress, reason, startedGeneration);
 
                 const nextActive = normalizeTopicProgressKey(
                     (remoteProgress as any).activeTopicId || activeTopicIdRef.current || firstTopicId,

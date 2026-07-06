@@ -886,7 +886,7 @@ export function useReviewModuleController({
     const moduleV = (progress as any)?.quizVersion ?? 0;
     const topicV = (viewProg as any)?.quizVersion ?? 0;
     const versionStr = `${moduleV}.${topicV}`;
-    const toolsResetKey = `${viewTid}:${versionStr}`;
+    const toolsResetKey = `${viewTid}:${versionStr}:reset:${store.resetRevision}`;
 
     const scrollSync = useReviewScrollSync({
         subjectSlug,
@@ -1352,7 +1352,13 @@ export function useReviewModuleController({
     const handleResetCurrentTopic = useCallback(() => {
         resetFlow.requestResetTopic(viewTid);
     }, [resetFlow, viewTid]);
-    const activeCardResetTarget = useMemo(() => {
+    const activeCardResetTarget = useMemo<{
+        resetTarget: QuizResetTarget;
+        menuLabel: string;
+        menuDescription: string;
+        dialogTitle: string;
+        dialogDescription: string;
+    } | null>(() => {
         if (!activeCard) return null;
 
         const embeddedTryIt = getEmbeddedTryIt(activeCard);
@@ -1362,6 +1368,7 @@ export function useReviewModuleController({
                     progressId: embeddedTryIt.id,
                     runtimeCardId: activeCard.id,
                     cardProgressKeys: [activeCard.id, embeddedTryIt.id],
+                    exerciseId: embeddedTryIt.exerciseKey,
                 } satisfies QuizResetTarget,
                 menuLabel: "This exercise",
                 menuDescription: "Clear the current Try it yourself answer and editor state.",
@@ -1404,23 +1411,56 @@ export function useReviewModuleController({
         if (!activeCardResetTarget) return;
 
         const resetTarget = activeCardResetTarget.resetTarget;
+        const runtimeStore = useReviewRuntimeStore.getState();
+        const runtimeCardId =
+            resetTarget.runtimeCardId ?? resetTarget.progressId;
 
-        useReviewRuntimeStore
-            .getState()
-            .clearRuntimeForCard(
-                viewTid,
-                resetTarget.runtimeCardId ?? resetTarget.progressId,
+        const resetResult = resetTarget.exerciseId
+            ? runtimeStore.resetExerciseToStarter({
+                topicId: viewTid,
+                cardId: runtimeCardId,
+                exerciseId: resetTarget.exerciseId,
+                exerciseStateKey: resetTarget.exerciseStateKey,
+            })
+            : null;
+
+        if (!resetTarget.exerciseId) {
+            runtimeStore.clearRuntimeForCard(viewTid, runtimeCardId);
+        }
+
+        if (resetResult?.exerciseKey) {
+            clearReviewWorkspaceDrafts(
+                (ownerKey) => ownerKey === resetResult.exerciseKey,
             );
-        clearReviewWorkspaceDrafts();
+        } else {
+            clearReviewWorkspaceDrafts((ownerKey) => {
+                const parts = ownerKey.split(":").filter(Boolean);
+                const ownerTopicId = parts[3] ?? "";
+                const ownerCardId = parts[4] ?? "";
+                return ownerTopicId === viewTid && ownerCardId === runtimeCardId;
+            });
+        }
 
-        setProgress((prev: ReviewProgressState) => {
-            const next = buildQuizResetProgress(prev, viewTid, resetTarget);
-            queueMicrotask(() => flushNow(next));
-            return next;
+        const next = buildQuizResetProgress(progress, viewTid, resetTarget);
+        setProgress(next);
+        void Promise.resolve(
+            flushNow(next, {
+                reason: "reset-card",
+                mergeRuntime: false,
+                discardPendingSaves: true,
+            }),
+        ).catch((error) => {
+            console.error("[review-reset] failed to persist exercise reset", error);
         });
 
         setConfirmResetCurrentCard(false);
-    }, [activeCardResetTarget, flushNow, setProgress, viewTid]);
+    }, [
+        activeCardResetTarget,
+        flushNow,
+        progress,
+        setProgress,
+        viewTid,
+    ]);
     const headerResetOptions = useMemo(() => {
         const options: Array<{
             id: string;
@@ -1991,6 +2031,10 @@ export function useReviewModuleController({
                 toolWorkspace: tool.toolWorkspace,
 
                 ideConfig: rightRailIdeConfig,
+                // Review workspaces are persisted only through the runtime store
+                // and ReviewProgress DB. Disable both CodeToolPane local drafts
+                // and FullIDE local draft storage with the same policy prop.
+                draftStorageMode: "off" as const,
                 onChangeCode: tool.setToolCode,
                 onChangeStdin: tool.setToolStdin,
                 onChangeWorkspace: tool.setToolWorkspace,

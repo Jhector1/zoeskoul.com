@@ -2,9 +2,11 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
 
+type PrismaPgPool = ConstructorParameters<typeof PrismaPg>[0];
+
 const globalForPrisma = globalThis as unknown as {
     prisma?: PrismaClient;
-    prismaPgPool?: Pool;
+    prismaPgPool?: PrismaPgPool;
 };
 
 function getDatabaseUrl() {
@@ -25,9 +27,11 @@ function getDatabaseUrl() {
 function createPrismaClient() {
     const pool =
         globalForPrisma.prismaPgPool ??
-        new Pool({
+        // `pg` and `@prisma/adapter-pg` can resolve different `@types/pg` versions.
+        // Cast to the adapter's accepted pool type to avoid a types-only mismatch.
+        (new Pool({
             connectionString: getDatabaseUrl(),
-        });
+        }) as unknown as PrismaPgPool);
 
     if (process.env.NODE_ENV !== "production") {
         globalForPrisma.prismaPgPool = pool;

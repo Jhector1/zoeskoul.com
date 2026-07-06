@@ -46,6 +46,7 @@ export type ToolsPanelProps = {
     toolWorkspace?: WorkspaceStateV2 | null;
     toolSqlDialect: SqlDialect;
     ideConfig?: LearningIdeConfig | null;
+    draftStorageMode?: "off" | "local";
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
     onChangeWorkspace?: (workspace: WorkspaceStateV2 | null) => void;
@@ -137,6 +138,7 @@ function ToolsPanelInner(props: ToolsPanelProps) {
                         toolWorkspace={props.toolWorkspace}
                         toolSqlDialect={props.toolSqlDialect}
                         ideConfig={props.ideConfig}
+                        draftStorageMode={props.draftStorageMode}
                         onChangeLang={props.onChangeLang}
                         onChangeCode={props.onChangeCode}
                         onChangeStdin={props.onChangeStdin}
@@ -405,6 +407,7 @@ function CodePaneLayer(props: {
     toolWorkspace?: WorkspaceStateV2 | null;
     toolSqlDialect: SqlDialect;
     ideConfig?: LearningIdeConfig | null;
+    draftStorageMode?: "off" | "local";
     onChangeLang?: (l: WorkspaceLanguage) => void;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;
@@ -450,6 +453,7 @@ function CodePaneLayer(props: {
             toolWorkspace: props.toolWorkspace,
             toolSqlDialect: props.toolSqlDialect,
             ideConfig: props.ideConfig,
+            draftStorageMode: props.draftStorageMode,
             onChangeLang: props.onChangeLang,
             onChangeCode: props.onChangeCode,
             onChangeStdin: props.onChangeStdin,
@@ -498,6 +502,7 @@ const MemoCodePaneLayer = React.memo(
         prev.toolWorkspace === next.toolWorkspace &&
         prev.toolSqlDialect === next.toolSqlDialect &&
         prev.ideConfig === next.ideConfig &&
+        prev.draftStorageMode === next.draftStorageMode &&
         prev.onChangeLang === next.onChangeLang &&
         prev.onChangeCode === next.onChangeCode &&
         prev.onChangeStdin === next.onChangeStdin &&
@@ -563,6 +568,7 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.toolWorkspace === next.toolWorkspace &&
         prev.toolSqlDialect === next.toolSqlDialect &&
         prev.ideConfig === next.ideConfig &&
+        prev.draftStorageMode === next.draftStorageMode &&
         prev.onChangeCode === next.onChangeCode &&
         prev.onChangeStdin === next.onChangeStdin &&
         prev.onChangeWorkspace === next.onChangeWorkspace &&

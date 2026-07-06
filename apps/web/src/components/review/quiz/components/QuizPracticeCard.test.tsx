@@ -2,9 +2,12 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import QuizPracticeCard, {
+    applyPracticeWorkspaceHydration,
     flushReviewToolsBeforeSubmit,
     workspaceStableKey,
 } from "./QuizPracticeCard";
+import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
+import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { CodeInputExercise, ValidateResponse } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
 import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
@@ -31,6 +34,10 @@ vi.mock("@/i18n/tagged", () => ({
     }),
     isTaggedKey: (value: string) => typeof value === "string" && value.startsWith("@:"),
     stripTag: (value: string) => value.replace(/^@:/, ""),
+}));
+
+vi.mock("next-intl", () => ({
+    useTranslations: () => (_key: string, fallback?: string) => fallback ?? "",
 }));
 
 vi.mock("@/components/practice/ExerciseRenderer", () => ({
@@ -132,6 +139,126 @@ function makePracticeState(args: {
     };
 }
 
+function makeWorkspace(files: Array<{ path: string; content: string }>): WorkspaceStateV2 {
+    const now = Date.now();
+    const nodes: WorkspaceStateV2["nodes"] = [];
+    const folderIds = new Map<string, string>();
+
+    for (const file of files) {
+        const parts = file.path.split("/").filter(Boolean);
+        const name = parts[parts.length - 1] ?? "main.py";
+        let parentId: string | null = null;
+        let folderPath = "";
+
+        for (const part of parts.slice(0, -1)) {
+            folderPath = folderPath ? `${folderPath}/${part}` : part;
+            let folderId = folderIds.get(folderPath);
+            if (!folderId) {
+                folderId = `folder:${folderPath}`;
+                folderIds.set(folderPath, folderId);
+                nodes.push({
+                    id: folderId,
+                    kind: "folder",
+                    name: part,
+                    parentId,
+                    createdAt: now,
+                    updatedAt: now,
+                });
+            }
+            parentId = folderId;
+        }
+
+        nodes.push({
+            id: `file:${file.path}`,
+            kind: "file",
+            name,
+            parentId,
+            content: file.content,
+            createdAt: now,
+            updatedAt: now,
+        });
+    }
+
+    const firstFileId = String(nodes.find((node) => node.kind === "file")?.id ?? "file:main.py");
+    const activeFileId = String(
+        nodes.find((node) => node.kind === "file" && node.name === "main.py")?.id ?? firstFileId,
+    );
+
+    return {
+        version: 2,
+        language: "python",
+        nodes,
+        openTabs: [activeFileId],
+        activeFileId,
+        entryFileId: activeFileId,
+        stdin: "",
+        expanded: Array.from(folderIds.values()),
+        leftPct: 40,
+    };
+}
+
+function resetRuntimeStore() {
+    useReviewRuntimeStore.setState({
+        subjectSlug: null,
+        moduleSlug: null,
+        sectionSlug: null,
+        activeTopicId: null,
+        viewTopicId: null,
+        activeCardIndex: 0,
+        activeExerciseKey: null,
+        resetRevision: 0,
+        boundToolWorkspace: null,
+        cards: {},
+        exercises: {},
+        editorRuntimes: {},
+        tool: {
+            boundExerciseKey: null,
+        },
+        persistence: {
+            dirty: false,
+            pendingExerciseKeys: new Set(),
+            pendingCardKeys: new Set(),
+        },
+        targetRegistry: null,
+        _flushToolSnapshotCb: null,
+    } as any);
+}
+
+function fileContent(workspace: WorkspaceStateV2 | null | undefined, path: string) {
+    if (!workspace?.nodes) return null;
+    const segments = path.split("/").filter(Boolean);
+    const fileName = segments[segments.length - 1] ?? "";
+    const folderPathById = new Map<string, string>();
+    let changed = true;
+
+    while (changed) {
+        changed = false;
+        for (const node of workspace.nodes) {
+            if (node.kind !== "folder") continue;
+            if (folderPathById.has(node.id)) continue;
+            const parentPath =
+                node.parentId && folderPathById.has(node.parentId)
+                    ? folderPathById.get(node.parentId) ?? ""
+                    : node.parentId
+                        ? null
+                        : "";
+            if (parentPath == null) continue;
+            folderPathById.set(node.id, parentPath ? `${parentPath}/${node.name}` : node.name);
+            changed = true;
+        }
+    }
+
+    const resolved = workspace.nodes.find((node) => {
+        if (node.kind !== "file") return false;
+        if (node.name !== fileName) return false;
+        const parentPath = node.parentId ? folderPathById.get(node.parentId) ?? "" : "";
+        const fullPath = parentPath ? `${parentPath}/${node.name}` : node.name;
+        return fullPath === path;
+    });
+
+    return resolved && resolved.kind === "file" ? resolved.content : null;
+}
+
 describe("QuizPracticeCard project-step fallback", () => {
     beforeEach(() => {
         mocked.exerciseRendererProps.length = 0;
@@ -140,6 +267,7 @@ describe("QuizPracticeCard project-step fallback", () => {
         mocked.requestBind.mockClear();
         mocked.ensureVisible.mockClear();
         mocked.setCodeInputMeta.mockClear();
+        resetRuntimeStore();
     });
 
     it("awaits the latest tools flush before practice submit", async () => {
@@ -801,5 +929,120 @@ describe("QuizPracticeCard project-step fallback", () => {
 
         const props = mocked.exerciseRendererProps.at(-1);
         expect(props?.codeRunnerMode).toBe("tools");
+    });
+});
+
+describe("applyPracticeWorkspaceHydration", () => {
+    beforeEach(() => {
+        resetRuntimeStore();
+    });
+
+    it("replays the practice hydration path through the real runtime store and rejects stale blank snapshots after reset", () => {
+        const exerciseKey =
+            "python:python-8-object-oriented-foundations:section:thinking-in-objects:card-2:read-values-from-car-objects";
+        const starterWorkspace = makeWorkspace([
+            { path: "main.py", content: 'from models.car import Car\nprint("starter")\n' },
+            { path: "models/car.py", content: "class Car:\n    pass\n" },
+        ]);
+        const blankShellWorkspace = makeWorkspace([
+            { path: "main.py", content: 'from models.car import Car\nprint("learner")\n' },
+            { path: "models/car.py", content: "" },
+        ]);
+        const entry = {
+            targetKey: exerciseKey,
+            routeKey: exerciseKey,
+            targetKind: "exercise",
+            sectionSlug: "section",
+            topicId: "thinking-in-objects",
+            topicSlug: "thinking-in-objects",
+            cardId: "card-2",
+            cardType: "project",
+            targetSlug: "read-values-from-car-objects",
+            ownerKind: "exercise",
+            ownerKey: exerciseKey,
+            cardKey: "thinking-in-objects:card-2",
+            toolScopeKey: exerciseKey,
+            exerciseId: "read-values-from-car-objects",
+            exerciseStateKey: exerciseKey,
+            language: "python",
+            starterFiles: [
+                { path: "main.py", content: 'from models.car import Car\nprint("starter")\n' },
+                { path: "models/car.py", content: "class Car:\n    pass\n" },
+            ],
+            item: {
+                workspace: starterWorkspace,
+            },
+        } as any;
+
+        const runtime = useReviewRuntimeStore.getState();
+        runtime.ensureEditorSource({
+            ownerKey: exerciseKey,
+            ownerKind: "exercise",
+            targetKey: exerciseKey,
+            toolScopeKey: exerciseKey,
+            language: "python",
+            manifest: entry.item,
+            entry,
+            workspaceSeedMode: "starter",
+        });
+        runtime.patchEditorWorkspace(exerciseKey, starterWorkspace, {
+            generation: 0,
+            source: "authoritative-reset",
+        });
+        runtime.patchExercise(exerciseKey, {
+            generation: 0,
+            updateOrigin: "authoritative-reset",
+            language: "python",
+            lang: "python",
+            workspace: starterWorkspace,
+            codeWorkspace: starterWorkspace,
+            ideWorkspace: starterWorkspace,
+            code: 'from models.car import Car\nprint("starter")\n',
+            source: 'from models.car import Car\nprint("starter")\n',
+            stdin: "",
+            codeStdin: "",
+            workspaceOrigin: "starter",
+            userEdited: false,
+        });
+
+        runtime.clearRuntimeForCard("thinking-in-objects", "card-2");
+        runtime.ensureEditorSource({
+            ownerKey: exerciseKey,
+            ownerKind: "exercise",
+            targetKey: exerciseKey,
+            toolScopeKey: exerciseKey,
+            language: "python",
+            manifest: entry.item,
+            entry,
+            workspaceSeedMode: "starter",
+        });
+
+        const postResetRuntime = useReviewRuntimeStore.getState();
+        applyPracticeWorkspaceHydration({
+            exerciseKeyForTools: exerciseKey,
+            generation: 0,
+            runtimeExercise: postResetRuntime.exercises[exerciseKey] ?? null,
+            livePracticeItem: {
+                workspace: blankShellWorkspace,
+                workspaceOrigin: "starter",
+                userEdited: false,
+                kind: "code_input",
+            },
+            livePracticeManifest: {
+                id: "read-values-from-car-objects",
+                kind: "code_input",
+                language: "python",
+                starterCode: 'from models.car import Car\nprint("starter")\n',
+            } as any,
+            patchRuntimeExercise: useReviewRuntimeStore.getState().patchExercise,
+            patchEditorWorkspace: useReviewRuntimeStore.getState().patchEditorWorkspace,
+        });
+
+        expect(fileContent(useReviewRuntimeStore.getState().editorRuntimes[exerciseKey]?.workspace, "main.py")).toBe(
+            'from models.car import Car\nprint("starter")\n',
+        );
+        expect(fileContent(useReviewRuntimeStore.getState().editorRuntimes[exerciseKey]?.workspace, "models/car.py")).toBe(
+            "class Car:\n    pass\n",
+        );
     });
 });

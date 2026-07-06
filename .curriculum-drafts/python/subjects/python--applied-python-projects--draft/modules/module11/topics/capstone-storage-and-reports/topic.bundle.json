@@ -120,7 +120,7 @@
     {
       "id": "try-capstone-storage-and-reports-sketch0",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0",
       "language": "python",
@@ -128,7 +128,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -262,7 +262,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -514,7 +514,7 @@
     {
       "id": "capstone-storage-step-2-loader",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader",
       "language": "python",
@@ -522,7 +522,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -663,7 +663,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -834,7 +834,7 @@
     {
       "id": "capstone-storage-step-3-report-service",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service",
       "language": "python",
@@ -842,7 +842,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -997,7 +997,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1220,7 +1220,7 @@
     {
       "id": "capstone-storage-step-4-save-report",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report",
       "language": "python",
@@ -1228,7 +1228,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1390,7 +1390,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1575,7 +1575,7 @@
     {
       "id": "capstone-storage-step-5-assert-checks",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks",
       "language": "python",
@@ -1583,7 +1583,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -1745,7 +1745,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -1935,7 +1935,7 @@
     {
       "id": "capstone-storage-step-6-readme-handoff",
       "kind": "code_input",
-      "purpose": "capstone",
+      "purpose": "project",
       "weight": 1,
       "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff",
       "language": "python",
@@ -1943,7 +1943,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -2105,7 +2105,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true

@@ -131,7 +131,7 @@
       "starterFiles": [
         {
           "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.models_book_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -140,7 +140,7 @@
       "solutionFiles": [
         {
           "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionCode",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -153,7 +153,7 @@
         "starterFiles": [
           {
             "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterCode",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.starterFiles.models_book_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -168,7 +168,7 @@
         "solutionFiles": [
           {
             "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionCode",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch0.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -232,7 +232,7 @@
       "starterFiles": [
         {
           "path": "models/task.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.models_task_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -241,7 +241,7 @@
       "solutionFiles": [
         {
           "path": "models/task.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionCode",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -254,7 +254,7 @@
         "starterFiles": [
           {
             "path": "models/task.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterCode",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.starterFiles.models_task_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -269,7 +269,7 @@
         "solutionFiles": [
           {
             "path": "models/task.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionCode",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.solutionFiles.models_task_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -338,7 +338,7 @@
       "starterFiles": [
         {
           "path": "models/counter.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.models_counter_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -347,7 +347,7 @@
       "solutionFiles": [
         {
           "path": "models/counter.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionCode",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -360,7 +360,7 @@
         "starterFiles": [
           {
             "path": "models/counter.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterCode",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.starterFiles.models_counter_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -375,7 +375,7 @@
         "solutionFiles": [
           {
             "path": "models/counter.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionCode",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch2.solutionFiles.models_counter_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true

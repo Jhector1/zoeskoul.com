@@ -27,6 +27,7 @@ import {languagesCompatible} from "@/components/review/module/utils";
 import {defaultMainFile} from "@/components/ide/languageDefaults";
 import { normalizeCodeWorkspacePair } from "@/components/review/module/runtime/workspaceCodeSource";
 import {
+    clearReviewWorkspaceDraft,
     isWorkspaceState,
     readReviewWorkspaceDraft,
     ReviewWorkspaceDraft,
@@ -307,6 +308,26 @@ function asWorkspaceLanguage(language: string | null | undefined): WorkspaceLang
     return "python";
 }
 
+export function buildReviewFullIdeExerciseStateKey(
+    workspaceOwnerIdentityKey: string,
+    resetRevision: number,
+) {
+    /**
+     * Monaco models and the editor safety cache are keyed by exerciseStateKey.
+     *
+     * FullIDE already remounts when resetRevision changes, but a remount alone is
+     * not enough because @monaco-editor/react keeps inactive file models alive and
+     * EditorPane restores them from sessionStorage. Give every reset generation a
+     * fresh editor identity so every starter file, not only the active entry file,
+     * is recreated from the authoritative runtime workspace.
+     */
+    const normalizedRevision = Number.isFinite(resetRevision)
+        ? Math.max(0, Math.trunc(resetRevision))
+        : 0;
+
+    return `${workspaceOwnerIdentityKey}:reset:${normalizedRevision}`;
+}
+
 export function resolveCodeToolPaneFullIdeMode(args: {
     ideConfig?: LearningIdeConfig | null;
     reviewDirectWorkspaceReady: boolean;
@@ -539,6 +560,16 @@ function ensurePaneWorkspaceFolder(args: {
 function mergeMissingFilesFromRuntimeWorkspace(
     baseWorkspace: WorkspaceStateV2 | null | undefined,
     runtimeWorkspace: WorkspaceStateV2 | null | undefined,
+    options?: {
+        /**
+         * Starter resolution can first produce a multi-file shell where a fixture
+         * path exists but its localized content has not arrived yet. During that
+         * non-user-owned hydration only, fill an existing blank file from the
+         * later deterministic runtime candidate. Never enable this for learner or
+         * saved work because clearing a file can be an intentional edit.
+         */
+        hydrateBlankFiles?: boolean;
+    },
 ): WorkspaceStateV2 | null {
     if (!baseWorkspace || baseWorkspace.version !== 2) {
         return baseWorkspace ?? runtimeWorkspace ?? null;
@@ -550,6 +581,12 @@ function mergeMissingFilesFromRuntimeWorkspace(
 
     const baseNodes = Array.isArray(baseWorkspace.nodes) ? baseWorkspace.nodes : [];
     const runtimeNodes = Array.isArray(runtimeWorkspace.nodes) ? runtimeWorkspace.nodes : [];
+    const runtimeFiles = runtimeNodes.filter((node: any) => node?.kind === "file");
+    const runtimeFileByPath = new Map(
+        runtimeFiles
+            .map((node: any) => [workspaceNodePathForPane(runtimeNodes, node), node] as const)
+            .filter(([path]) => Boolean(path)),
+    );
 
     const existingPaths = new Set(
         baseNodes
@@ -558,20 +595,50 @@ function mergeMissingFilesFromRuntimeWorkspace(
             .filter(Boolean),
     );
 
-    const runtimeFiles = runtimeNodes.filter((node: any) => node?.kind === "file");
-
     const missingFiles = runtimeFiles.filter((node: any) => {
         const path = workspaceNodePathForPane(runtimeNodes, node);
         return path && !existingPaths.has(path);
     });
 
-    if (missingFiles.length === 0) {
+    const blankFileIdsToHydrate = new Set<string>();
+
+    if (options?.hydrateBlankFiles) {
+        for (const node of baseNodes) {
+            if (node?.kind !== "file") continue;
+            if (String(node.content ?? "").trim().length > 0) continue;
+
+            const path = workspaceNodePathForPane(baseNodes, node);
+            const runtimeFile = path ? runtimeFileByPath.get(path) : null;
+
+            if (!runtimeFile) continue;
+            if (String(runtimeFile.content ?? "").trim().length === 0) continue;
+
+            blankFileIdsToHydrate.add(String(node.id));
+        }
+    }
+
+    if (missingFiles.length === 0 && blankFileIdsToHydrate.size === 0) {
         return baseWorkspace;
     }
 
     const merged: WorkspaceStateV2 = {
         ...baseWorkspace,
-        nodes: baseNodes.map((node: any) => ({ ...node })),
+        nodes: baseNodes.map((node: any) => {
+            if (node?.kind !== "file" || !blankFileIdsToHydrate.has(String(node.id))) {
+                return { ...node };
+            }
+
+            const path = workspaceNodePathForPane(baseNodes, node);
+            const runtimeFile = path ? runtimeFileByPath.get(path) : null;
+
+            return runtimeFile
+                ? {
+                    ...node,
+                    content: String(runtimeFile.content ?? ""),
+                    updatedAt: runtimeFile.updatedAt ?? node.updatedAt ?? 0,
+                }
+                : { ...node };
+        }),
         openTabs: [...(baseWorkspace.openTabs ?? [])],
         expanded: [...(baseWorkspace.expanded ?? [])],
     };
@@ -603,6 +670,39 @@ function mergeMissingFilesFromRuntimeWorkspace(
 
     return merged;
 }
+
+export function resolveCodeToolPaneReviewWorkspace(args: {
+    draftStorageMode: "off" | "local";
+    draft: ReviewWorkspaceDraft | null;
+    runtimeWorkspace: WorkspaceStateV2 | null | undefined;
+    runtimeUpdatedAt?: number | null;
+    runtimeUserEdited?: boolean | null;
+    runtimeOrigin?: string | null;
+    runtimeProtected?: boolean | null;
+}): WorkspaceStateV2 | null {
+    if (args.draftStorageMode !== "local") {
+        return args.runtimeWorkspace ?? null;
+    }
+
+    if (
+        shouldUseLocalReviewDraft({
+            draft: args.draft,
+            runtimeWorkspace: args.runtimeWorkspace,
+            runtimeUpdatedAt: args.runtimeUpdatedAt,
+            runtimeUserEdited: args.runtimeUserEdited,
+            runtimeOrigin: args.runtimeOrigin,
+            runtimeProtected: args.runtimeProtected,
+        })
+    ) {
+        return mergeMissingFilesFromRuntimeWorkspace(
+            args.draft?.workspace ?? null,
+            args.runtimeWorkspace,
+        );
+    }
+
+    return args.runtimeWorkspace ?? null;
+}
+
 function forceWorkspaceHasContent(workspace: WorkspaceStateV2 | null | undefined) {
     // Non-review tool routes may intentionally open an empty file workspace.
     return workspaceHasAnyFile(workspace);
@@ -724,14 +824,20 @@ function runtimeCandidateMatchesTarget(
 }
 
 function mergeMissingFilesFromRuntimeCandidates(
-    selectedWorkspace: WorkspaceStateV2 | null | undefined,
+    selectedCandidate: {
+        workspace: WorkspaceStateV2;
+        runtime?: any;
+    } | null,
     candidates: Array<{
         workspace: WorkspaceStateV2;
         runtime?: any;
     } | null>,
     targetKey: string | null | undefined,
 ) {
-    let mergedWorkspace = selectedWorkspace ?? null;
+    let mergedWorkspace = selectedCandidate?.workspace ?? null;
+    const selectedIsLearnerOwned = isUserOwnedReviewRuntimeState(
+        selectedCandidate?.runtime,
+    );
 
     for (const candidate of candidates) {
         if (!candidate?.workspace) continue;
@@ -739,6 +845,9 @@ function mergeMissingFilesFromRuntimeCandidates(
         mergedWorkspace = mergeMissingFilesFromRuntimeWorkspace(
             mergedWorkspace,
             candidate.workspace,
+            {
+                hydrateBlankFiles: !selectedIsLearnerOwned,
+            },
         );
     }
 
@@ -791,7 +900,7 @@ export function pickDirectReviewRuntimeWorkspace(args: {
     if (userOwnedCandidates.length > 0) {
         const selectedCandidate = userOwnedCandidates[0] ?? null;
         return mergeMissingFilesFromRuntimeCandidates(
-            selectedCandidate?.workspace ?? null,
+            selectedCandidate,
             readyCandidates.filter((candidate) => candidate !== selectedCandidate),
             args.targetKey,
         );
@@ -807,24 +916,30 @@ export function pickDirectReviewRuntimeWorkspace(args: {
     if (correctCandidates.length > 0) {
         const selectedCandidate = correctCandidates[0] ?? null;
         return mergeMissingFilesFromRuntimeCandidates(
-            selectedCandidate?.workspace ?? null,
+            selectedCandidate,
             readyCandidates.filter((candidate) => candidate !== selectedCandidate),
+            args.targetKey,
+        );
+    }
+
+    /**
+     * For unedited starter state, the route exercise runtime is canonical. The
+     * editor runtime can be registered one render earlier with a partially
+     * localized multi-file shell, so preferring it here can make fixture files
+     * such as models/car.py flash and then become blank after reset.
+     */
+    if (exerciseCandidate) {
+        return mergeMissingFilesFromRuntimeCandidates(
+            exerciseCandidate,
+            readyCandidates.filter((candidate) => candidate !== exerciseCandidate),
             args.targetKey,
         );
     }
 
     if (editorCandidate) {
         return mergeMissingFilesFromRuntimeCandidates(
-            editorCandidate.workspace,
+            editorCandidate,
             readyCandidates.filter((candidate) => candidate !== editorCandidate),
-            args.targetKey,
-        );
-    }
-
-    if (exerciseCandidate) {
-        return mergeMissingFilesFromRuntimeCandidates(
-            exerciseCandidate.workspace,
-            readyCandidates.filter((candidate) => candidate !== exerciseCandidate),
             args.targetKey,
         );
     }
@@ -1027,6 +1142,50 @@ function workspaceFilePathsForDebug(workspace: WorkspaceStateV2 | null | undefin
         .sort((a, b) => a.localeCompare(b));
 }
 
+function workspaceActiveFilePath(workspace: WorkspaceStateV2 | null | undefined) {
+    if (!workspace || workspace.version !== 2 || !Array.isArray(workspace.nodes)) {
+        return null;
+    }
+
+    const folderPathById = new Map<string, string>();
+
+    let changed = true;
+    while (changed) {
+        changed = false;
+
+        for (const node of workspace.nodes as any[]) {
+            if (!node || node.kind !== "folder") continue;
+
+            const id = String(node.id ?? "");
+            if (!id || folderPathById.has(id)) continue;
+
+            const name = String(node.name ?? "");
+            const parentId = node.parentId == null ? null : String(node.parentId);
+            if (parentId && !folderPathById.has(parentId)) continue;
+
+            const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+            folderPathById.set(id, parentPath ? `${parentPath}/${name}` : name);
+            changed = true;
+        }
+    }
+
+    const activeNode =
+        (workspace.nodes as any[]).find(
+            (node) => node?.kind === "file" && node.id === workspace.activeFileId,
+        ) ??
+        (workspace.nodes as any[]).find(
+            (node) => node?.kind === "file" && node.id === workspace.entryFileId,
+        ) ??
+        (workspace.nodes as any[]).find((node) => node?.kind === "file");
+
+    if (!activeNode) return null;
+
+    const name = String(activeNode.name ?? "");
+    const parentId = activeNode.parentId == null ? null : String(activeNode.parentId);
+    const parentPath = parentId ? folderPathById.get(parentId) || "" : "";
+    return parentPath ? `${parentPath}/${name}` : name;
+}
+
 function extractWorkspaceSnapshot(workspace: WorkspaceStateV2 | null) {
     return extractRuntimeSnapshotFromWorkspace(workspace);
 }
@@ -1083,6 +1242,11 @@ export default function CodeToolPane(props: {
     onChangeWorkspace?: (workspace: WorkspaceStateV2 | null) => void;
     onBeforeRun?: () => void | Promise<void>;
     ideConfig?: LearningIdeConfig | null;
+    /**
+     * Stack-wide browser-local persistence policy. "off" disables both this
+     * pane's reviewWorkspaceDrafts layer and FullIDE's own local draft store.
+     */
+    draftStorageMode?: "off" | "local";
     sqlDialect?: SqlDialect;
     sqlDatasetId?: string;
     sqlResultShape?: "table";
@@ -1107,6 +1271,7 @@ export default function CodeToolPane(props: {
         onChangeWorkspace,
         onBeforeRun,
         ideConfig,
+        draftStorageMode = "local",
         sqlDialect = "sqlite",
         sqlDatasetId,
         sqlResultShape,
@@ -1116,6 +1281,8 @@ export default function CodeToolPane(props: {
         sqlSetupSql,
         sqlInitialTableSnapshots,
     } = props;
+
+    const localWorkspacePersistenceEnabled = draftStorageMode === "local";
 
     const tools = useReviewTools();
     const boundId = tools?.boundId ?? null;
@@ -1221,6 +1388,12 @@ export default function CodeToolPane(props: {
     const editorRuntime = useReviewRuntimeStore((s) =>
         resolvedEditorOwnerKey ? s.editorRuntimes[resolvedEditorOwnerKey] ?? null : null,
     );
+    const runtimeResetRevision = useReviewRuntimeStore((s) => s.resetRevision);
+    const [forceResetHydration, setForceResetHydration] = useState(false);
+    const observedResetRevisionRef = useRef(runtimeResetRevision);
+    const resetHydrationActive =
+        forceResetHydration ||
+        observedResetRevisionRef.current !== runtimeResetRevision;
 
     const subscribedExerciseRuntime = useReviewRuntimeStore((s) =>
         exerciseKey ? s.exercises[exerciseKey] ?? null : null,
@@ -1386,7 +1559,9 @@ export default function CodeToolPane(props: {
                     targetKey: reviewTargetKey,
                     editorRuntime,
                     exerciseRuntime: canonicalReviewRuntime,
-                    normalizedToolWorkspace,
+                    normalizedToolWorkspace: resetHydrationActive
+                        ? null
+                        : normalizedToolWorkspace,
                     effectiveLanguage,
                 })
                 : null,
@@ -1396,6 +1571,7 @@ export default function CodeToolPane(props: {
             effectiveLanguage,
             isReviewRouteMode,
             normalizedToolWorkspace,
+            resetHydrationActive,
             reviewTargetKey,
         ],
     );
@@ -1480,13 +1656,62 @@ export default function CodeToolPane(props: {
     const [localWorkspaceDraft, setLocalWorkspaceDraft] = useState<ReviewWorkspaceDraft | null>(null);
 
     useEffect(() => {
-        if (!isReviewRouteMode || !workspaceOwnerIdentityKey) {
+        if (
+            !localWorkspacePersistenceEnabled ||
+            !isReviewRouteMode ||
+            !workspaceOwnerIdentityKey
+        ) {
             setLocalWorkspaceDraft(null);
             return;
         }
 
         setLocalWorkspaceDraft(readReviewWorkspaceDraft(workspaceOwnerIdentityKey));
-    }, [isReviewRouteMode, workspaceOwnerIdentityKey, workspaceContextKey]);
+    }, [
+        isReviewRouteMode,
+        localWorkspacePersistenceEnabled,
+        workspaceOwnerIdentityKey,
+        workspaceContextKey,
+    ]);
+
+    useEffect(() => {
+        if (localWorkspacePersistenceEnabled || !workspaceOwnerIdentityKey) return;
+
+        // "off" is authoritative for the whole stack. Remove an older same-tab
+        // snapshot so it cannot become eligible if this pane later remounts.
+        clearReviewWorkspaceDraft(workspaceOwnerIdentityKey);
+        setLocalWorkspaceDraft(null);
+    }, [localWorkspacePersistenceEnabled, workspaceOwnerIdentityKey]);
+
+    useLayoutEffect(() => {
+        if (observedResetRevisionRef.current === runtimeResetRevision) return;
+
+        observedResetRevisionRef.current = runtimeResetRevision;
+
+        /**
+         * Reset is authoritative. Cancel every same-tab editor snapshot before
+         * the old Monaco value can be flushed back into the freshly cleared
+         * runtime store. The new reset revision also remounts FullIDE below.
+         */
+        if (persistTimerRef.current != null) {
+            window.clearTimeout(persistTimerRef.current);
+            persistTimerRef.current = null;
+        }
+
+        pendingWorkspaceRef.current = undefined;
+        pendingWorkspaceForceUserEditRef.current = false;
+        pendingTerminalEvidenceRef.current = undefined;
+        latestTerminalEvidenceRef.current = null;
+        lastTerminalEvidenceKeyRef.current = "";
+        lastHandledWorkspaceKeyRef.current = "";
+        lastHandledStructureKeyRef.current = "";
+        lastUpstreamWorkspaceKeyRef.current = "";
+        lastEmittedRef.current = null;
+        lastIncomingRef.current = null;
+
+        setLocalWorkspaceDraft(null);
+        setIdeReady(false);
+        setForceResetHydration(true);
+    }, [runtimeResetRevision]);
 
     const exerciseWorkspaceReady = Boolean(
         exerciseKey && forceWorkspaceHasContent(exerciseRuntime?.workspace),
@@ -1572,36 +1797,59 @@ export default function CodeToolPane(props: {
     const finalReviewRuntimeUpdatedAt = Number(canonicalReviewRuntime?.updatedAt ?? 0);
 
     const finalReviewWorkspace = useMemo(() => {
-        if (
-            isReviewRouteMode &&
-            shouldUseLocalReviewDraft({
-                draft: localWorkspaceDraft,
-                runtimeWorkspace: directRuntimeWorkspace,
-                runtimeUpdatedAt: finalReviewRuntimeUpdatedAt,
-                runtimeUserEdited: finalReviewRuntimeUserEdited,
-                runtimeOrigin: finalReviewRuntimeOrigin,
-                runtimeProtected: finalReviewRuntimeProtected,
-            })
-        ) {
-            /**
-             * Local drafts are same-tab safety snapshots. They may be older one-file
-             * snapshots, so never let them hide deterministic runtime fixture files.
-             */
-            return mergeMissingFilesFromRuntimeWorkspace(
-                localWorkspaceDraft?.workspace ?? null,
-                directRuntimeWorkspace,
-            );
-        }
+        if (!isReviewRouteMode) return directRuntimeWorkspace;
 
-        return directRuntimeWorkspace;
+        return resolveCodeToolPaneReviewWorkspace({
+            draftStorageMode,
+            draft: localWorkspaceDraft,
+            runtimeWorkspace: directRuntimeWorkspace,
+            runtimeUpdatedAt: finalReviewRuntimeUpdatedAt,
+            runtimeUserEdited: finalReviewRuntimeUserEdited,
+            runtimeOrigin: finalReviewRuntimeOrigin,
+            runtimeProtected: finalReviewRuntimeProtected,
+        });
     }, [
         directRuntimeWorkspace,
+        draftStorageMode,
         finalReviewRuntimeOrigin,
         finalReviewRuntimeProtected,
         finalReviewRuntimeUpdatedAt,
         finalReviewRuntimeUserEdited,
         isReviewRouteMode,
         localWorkspaceDraft,
+    ]);
+
+    useEffect(() => {
+        if (!forceResetHydration) return;
+
+        const authoritativeStarterReady = Boolean(
+            canonicalReviewRuntime?.workspaceStatus === "ready" &&
+            canonicalReviewRuntime?.userEdited !== true &&
+            canonicalReviewRuntime?.workspaceOrigin !== "user" &&
+            canonicalReviewRuntime?.workspaceOrigin !== "saved" &&
+            forceWorkspaceHasContent(canonicalReviewRuntime?.workspace) &&
+            forceWorkspaceHasContent(finalReviewWorkspace),
+        );
+
+        if (!authoritativeStarterReady) return;
+
+        /**
+         * Keep FullIDE controlled for one task after the deterministic starter
+         * arrives. This lets its external-workspace hydration effect replace the
+         * pre-reset Monaco model before returning to local-first editing.
+         */
+        const timer = window.setTimeout(() => {
+            setForceResetHydration(false);
+        }, 0);
+
+        return () => window.clearTimeout(timer);
+    }, [
+        canonicalReviewRuntime?.workspace,
+        canonicalReviewRuntime?.workspaceOrigin,
+        canonicalReviewRuntime?.workspaceStatus,
+        canonicalReviewRuntime?.userEdited,
+        finalReviewWorkspace,
+        forceResetHydration,
     ]);
 
 
@@ -1629,7 +1877,9 @@ export default function CodeToolPane(props: {
             directRuntimeWorkspace,
             canonicalReviewRuntime?.workspace,
             normalizedToolWorkspace,
-            localWorkspaceDraft?.workspace ?? null,
+            localWorkspacePersistenceEnabled
+                ? localWorkspaceDraft?.workspace ?? null
+                : null,
         ].some((workspace) => workspaceNeedsMultiFile(workspace)),
     );
     const runtimeWorkspacePending = Boolean(
@@ -1687,7 +1937,8 @@ export default function CodeToolPane(props: {
     const shouldControlFullIdeWorkspace = Boolean(
         !isReviewRouteMode ||
         !ideReady ||
-        pendingExerciseBinding,
+        pendingExerciseBinding ||
+        resetHydrationActive,
     );
     /**
      * Do not show the editor loading fallback when the tools rail is not bound
@@ -1755,7 +2006,10 @@ export default function CodeToolPane(props: {
             const runtimeApi = useReviewRuntimeStore.getState();
             const existing = runtimeApi.editorRuntimes[resolvedEditorOwnerKey];
             if (existing?.workspace) {
-                runtimeApi.patchEditorWorkspace(resolvedEditorOwnerKey, existing.workspace);
+                runtimeApi.patchEditorWorkspace(resolvedEditorOwnerKey, existing.workspace, {
+                    generation: runtimeResetRevision,
+                    source: "code-tool-retry-load",
+                });
             }
         }
     }, [resolvedEditorOwnerKey]);
@@ -1868,9 +2122,24 @@ export default function CodeToolPane(props: {
                 );
 
             lastEmittedRef.current = next;
+            const activePath = workspaceActiveFilePath(workspace);
+            const workspaceMutation = shouldEmitCodeFields
+                ? {
+                    generation: runtimeResetRevision,
+                    source: "code-tool-emit-upstream",
+                    mutation: "user-content" as const,
+                    changedFilePaths: activePath ? [activePath] : undefined,
+                }
+                : {
+                    generation: runtimeResetRevision,
+                    source: "code-tool-emit-upstream",
+                    mutation: "runtime-sync" as const,
+                };
 
             if ((!isReviewRouteMode || shouldEmitCodeFields) && boundId) {
                 syncCodeInputSnapshot?.(boundId, {
+                    generation: runtimeResetRevision,
+                    workspaceMutation,
                     ...workspacePatch,
                     code: next.code,
                     source: next.code,
@@ -1897,9 +2166,15 @@ export default function CodeToolPane(props: {
             }
 
             if (shouldEmitCodeFields && resolvedEditorOwnerKey && workspace) {
-                patchEditorWorkspace(resolvedEditorOwnerKey, workspace);
-                writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, workspace);
-                setLocalWorkspaceDraft({ savedAt: Date.now(), workspace });
+                patchEditorWorkspace(resolvedEditorOwnerKey, workspace, {
+                    generation: runtimeResetRevision,
+                    source: "code-tool-emit-upstream",
+                    mutation: workspaceMutation,
+                });
+                if (localWorkspacePersistenceEnabled) {
+                    writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, workspace);
+                    setLocalWorkspaceDraft({ savedAt: Date.now(), workspace });
+                }
 
                 /**
                  * In review-route mode the route runtime store is the source of truth.
@@ -1938,6 +2213,7 @@ export default function CodeToolPane(props: {
             onChangeCode,
             onChangeStdin,
             onChangeWorkspace,
+            localWorkspacePersistenceEnabled,
             patchEditorWorkspace,
             syncCodeInputSnapshot,
         ],
@@ -1958,6 +2234,7 @@ export default function CodeToolPane(props: {
                 lastTerminalEvidenceKeyRef.current = nextKey;
 
                 syncCodeInputSnapshot?.(boundId, {
+                    generation: runtimeResetRevision,
                     terminalEvidence: nextEvidence ?? undefined,
                     submitted: false,
                     feedbackDismissed: true,
@@ -2003,6 +2280,7 @@ export default function CodeToolPane(props: {
              */
             if (isReviewRouteMode && resolvedEditorOwnerKey) {
                 patchExerciseRuntime(resolvedEditorOwnerKey, {
+                    generation: runtimeResetRevision,
                     terminalEvidence: evidence,
                     submitted: false,
                     feedbackDismissed: true,
@@ -2120,7 +2398,11 @@ export default function CodeToolPane(props: {
                 persistTimerRef.current = null;
 
                 const pending = pendingWorkspaceRef.current;
-                if (pending && forceWorkspaceHasContent(pending)) {
+                if (
+                    localWorkspacePersistenceEnabled &&
+                    pending &&
+                    forceWorkspaceHasContent(pending)
+                ) {
                     writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, pending);
                 }
             }, 500);
@@ -2183,6 +2465,7 @@ export default function CodeToolPane(props: {
         emitWorkspaceUpstream,
         finalReviewWorkspace,
         isReviewRouteMode,
+        localWorkspacePersistenceEnabled,
         onChangeCode,
         onChangeStdin,
         onChangeWorkspace,
@@ -2235,9 +2518,15 @@ export default function CodeToolPane(props: {
         ) {
             const next = extractWorkspaceSnapshot(workspaceForRun);
 
-            patchEditorWorkspace(resolvedEditorOwnerKey, workspaceForRun);
-            writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, workspaceForRun);
+            patchEditorWorkspace(resolvedEditorOwnerKey, workspaceForRun, {
+                generation: runtimeResetRevision,
+                source: "code-tool-before-run",
+            });
+            if (localWorkspacePersistenceEnabled) {
+                writeReviewWorkspaceDraft(workspaceOwnerIdentityKey, workspaceForRun);
+            }
             patchExerciseRuntime(resolvedEditorOwnerKey, {
+                generation: runtimeResetRevision,
                 language: effectiveLanguage,
                 lang: effectiveLanguage,
                 workspace: workspaceForRun,
@@ -2270,7 +2559,9 @@ export default function CodeToolPane(props: {
         patchEditorWorkspace,
         patchExerciseRuntime,
         resolvedEditorOwnerKey,
-        writeReviewWorkspaceDraft,
+        localWorkspacePersistenceEnabled,
+        runtimeResetRevision,
+        workspaceOwnerIdentityKey,
     ]);
 
     const handleRunResult = useCallback(({ result, runArgs }: { result: any; runArgs: any }) => {
@@ -2295,8 +2586,12 @@ export default function CodeToolPane(props: {
      *
      * route target -> runtime store workspace -> FullIDE
      */
-    const fullIdeKey = [
+    const fullIdeExerciseStateKey = buildReviewFullIdeExerciseStateKey(
         workspaceOwnerIdentityKey,
+        runtimeResetRevision,
+    );
+    const fullIdeKey = [
+        fullIdeExerciseStateKey,
         effectiveLanguage,
         usesWorkspaceShell ? "workspace" : "single",
         reviewWorkspaceNeedsMultiFile ? "multi" : "mono",
@@ -2524,7 +2819,7 @@ export default function CodeToolPane(props: {
                         }}
                         loginHref="/authenticate"
                         billingHref="/billing"
-                        draftStorageMode="off"
+                        draftStorageMode={draftStorageMode}
                         servicePreset={ideShell.servicePreset}
                         forceDesktopLayout={paneIdeMode.forceDesktopLayout}
                         services={{
@@ -2542,7 +2837,7 @@ export default function CodeToolPane(props: {
                                 ? finalReviewWorkspace
                                 : undefined
                         }
-                        exerciseStateKey={workspaceOwnerIdentityKey}
+                        exerciseStateKey={fullIdeExerciseStateKey}
                         projectScope={{
                             kind: "review-tool" as any,
                             scopeKey: `review-tool:${workspaceOwnerIdentityKey}`,

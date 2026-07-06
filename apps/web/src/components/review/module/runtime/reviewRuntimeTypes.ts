@@ -23,8 +23,54 @@ export type WorkspaceOrigin =
   | "restored"
   | "sync";
 
+export type RuntimeFileEditOrigin =
+  | "starter"
+  | "learner"
+  | "saved"
+  | "runtime-shell"
+  | "cache";
+
+export type RuntimeFileEditEntry = {
+  generation: number;
+  origin: RuntimeFileEditOrigin;
+  hasUserEdited: boolean;
+};
+
+export type RuntimeFileEditState = Record<string, RuntimeFileEditEntry>;
+
+export type RuntimeWorkspaceMutationType =
+  | "user-content"
+  | "user-structure"
+  | "hydrate"
+  | "runtime-sync"
+  | "cache-sync"
+  | "reset";
+
+export type RuntimeWorkspaceMutation = {
+  generation: number;
+  source: string;
+  mutation: RuntimeWorkspaceMutationType;
+  changedFilePaths?: string[];
+};
+
+export type ResetExerciseToStarterArgs = {
+  topicId: string;
+  cardId: string;
+  exerciseId: string;
+  exerciseStateKey?: ExerciseStateKey | null;
+};
+
+export type ResetExerciseToStarterResult = {
+  exerciseKey: ExerciseStateKey | null;
+  resetRevision: number;
+  restored: boolean;
+};
+
 export type ExerciseRuntimeState = {
   exerciseKey: ExerciseStateKey;
+  workspaceGeneration?: number;
+  fileEditState?: RuntimeFileEditState;
+  starterWorkspace?: WorkspaceStateV2 | null;
 
   subjectSlug: string;
   moduleSlug: string;
@@ -101,6 +147,9 @@ export type ExerciseRuntimeState = {
 
 export type CardRuntimeState = {
   cardKey: CardStateKey;
+  workspaceGeneration?: number;
+  fileEditState?: RuntimeFileEditState;
+  starterWorkspace?: WorkspaceStateV2 | null;
   topicId: string;
   cardId: string;
   visited: boolean;
@@ -127,6 +176,9 @@ export type CardRuntimeState = {
 
 export type EditorRuntimeState = {
   ownerKey: string;
+  workspaceGeneration?: number;
+  fileEditState?: RuntimeFileEditState;
+  starterWorkspace?: WorkspaceStateV2 | null;
   ownerKind: "card" | "exercise";
   targetKey: string;
   toolScopeKey: string;
@@ -152,6 +204,15 @@ export type ReviewRuntimeState = {
   viewTopicId: string | null;
   activeCardIndex: number;
   activeExerciseKey: ExerciseStateKey | null;
+
+  /**
+   * Monotonic reset generation for mounted review consumers.
+   *
+   * Progress/runtime reset can happen while QuizBlock and FullIDE stay mounted.
+   * Those components use this revision to discard same-tab practice/editor state
+   * before an old workspace can be written back into the freshly cleared store.
+   */
+  resetRevision: number;
 
   /**
    * The current workspace used by the side-car tool (e.g. CodeToolPane).
@@ -207,7 +268,12 @@ export type ReviewRuntimeActions = {
 
   patchExercise: (
     key: ExerciseStateKey,
-    patch: Partial<ExerciseRuntimeState> & UnknownRecord,
+    patch: Partial<ExerciseRuntimeState> &
+      UnknownRecord & {
+        generation?: number;
+        updateOrigin?: string;
+        workspaceMutation?: RuntimeWorkspaceMutation;
+      },
   ) => void;
 
   ensureCard: (args: {
@@ -223,7 +289,9 @@ export type ReviewRuntimeActions = {
 
   patchCard: (
     key: CardStateKey,
-    patch: Partial<CardRuntimeState>,
+    patch: Partial<CardRuntimeState> & {
+      generation?: number;
+    },
   ) => void;
 
   ensureEditorSource: (
@@ -233,6 +301,11 @@ export type ReviewRuntimeActions = {
   patchEditorWorkspace: (
     ownerKey: string,
     workspace: WorkspaceStateV2 | null,
+    options?: {
+      generation?: number;
+      source?: string;
+      mutation?: RuntimeWorkspaceMutation;
+    },
   ) => void;
 
   bindExerciseTool: (key: ExerciseStateKey) => void;
@@ -267,6 +340,9 @@ export type ReviewRuntimeActions = {
 
   clearRuntimeForTopic: (topicId: string) => void;
   clearRuntimeForCard: (topicId: string, cardId: string) => void;
+  resetExerciseToStarter: (
+    args: ResetExerciseToStarterArgs,
+  ) => ResetExerciseToStarterResult;
   clearRuntimeForModule: () => void;
   flushNow: () => Promise<void>;
 };

@@ -131,7 +131,7 @@
       "starterFiles": [
         {
           "path": "tests/check_book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterFiles.tests_check_book_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -181,7 +181,7 @@
         "starterFiles": [
           {
             "path": "tests/check_book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch0.starterFiles.tests_check_book_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -328,7 +328,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -392,7 +392,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch1.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -487,7 +487,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -523,7 +523,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.testing-inheritance-and-polymorphism.tryIt.try_testing_inheritance_and_polymorphism_sketch2.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true

@@ -23,7 +23,15 @@ type UseReviewResetArgs = {
     setProgress: React.Dispatch<any>;
     setActiveTopicId: (tid: string) => void;
     setViewTopicId: (tid: string) => void;
-    flushNow: (next: any) => Promise<void> | void;
+    flushNow: (
+        next: any,
+        options?: {
+            keepalive?: boolean;
+            reason?: string;
+            mergeRuntime?: boolean;
+            discardPendingSaves?: boolean;
+        },
+    ) => Promise<void> | void;
     toolUnbindCodeInput: () => void;
     onAfterResetModule?: () => void;
     onAfterResetTopic?: (topicId: string) => void;
@@ -124,7 +132,13 @@ export function useReviewReset({
             setActiveTopicId(firstTopicId || "");
             setViewTopicId(firstTopicId || "");
             onResetStatusChange?.("Resetting this module...");
-            void Promise.resolve(flushNow(next)).finally(() => {
+            void Promise.resolve(
+                flushNow(next, {
+                    reason: "reset-module",
+                    mergeRuntime: false,
+                    discardPendingSaves: true,
+                }),
+            ).finally(() => {
                 onResetStatusChange?.(null);
             });
             cancelPendingChange();
@@ -145,7 +159,13 @@ export function useReviewReset({
 
         setProgress(next);
         onResetStatusChange?.("Resetting this topic...");
-        void Promise.resolve(flushNow(next)).finally(() => {
+        void Promise.resolve(
+            flushNow(next, {
+                reason: "reset-topic",
+                mergeRuntime: false,
+                discardPendingSaves: true,
+            }),
+        ).finally(() => {
             onResetStatusChange?.(null);
         });
 

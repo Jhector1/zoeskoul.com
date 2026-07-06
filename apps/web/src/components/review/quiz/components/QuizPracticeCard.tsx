@@ -13,6 +13,7 @@ import {
   shouldSkipEmbeddedEnsureExercise,
 } from "@/components/practice/ExerciseRenderer";
 import { exerciseDebug, summarizeExercisePatch } from "@/components/review/module/runtime/exerciseDebug";
+import { reviewSaveDebug } from "@/components/review/module/runtime/reviewSaveDebug";
 import PracticeHelpPanel from "@/components/practice/PracticeHelpPanel";
 import { useOptionalReviewTools } from "@/components/review/module/context/ReviewToolsContext";
 import { getExerciseStateKey } from "@/components/review/module/runtime/exerciseKeys";
@@ -403,6 +404,106 @@ function firstNonBlankString(...values: unknown[]) {
   }
 
   return "";
+}
+
+type PracticeWorkspaceHydrationArgs = {
+  exerciseKeyForTools: string;
+  generation: number;
+  runtimeExercise: any;
+  livePracticeItem: any;
+  livePracticeManifest: Exercise;
+  patchRuntimeExercise: (key: string, patch: any) => void;
+  patchEditorWorkspace: (
+    key: string,
+    workspace: WorkspaceStateV2 | null,
+    options?: { generation?: number; source?: string; mutation?: any },
+  ) => void;
+};
+
+export function applyPracticeWorkspaceHydration(
+  args: PracticeWorkspaceHydrationArgs,
+) {
+  const itemWorkspace =
+    getWorkspaceFromAnyState(args.livePracticeItem) ??
+    getWorkspaceFromAnyState(args.livePracticeManifest);
+
+  if (!itemWorkspace) return "no-workspace";
+
+  const existingWorkspace = getWorkspaceFromAnyState(args.runtimeExercise);
+  const existingEntryCode = getWorkspaceEntryCodeForPracticeCard(existingWorkspace);
+  const starterEntryCode = getWorkspaceEntryCodeForPracticeCard(itemWorkspace);
+  const itemWorkspaceIsLearnerOwned = isLearnerOwnedPracticeSnapshot(args.livePracticeItem);
+  const existingIsProtected =
+    args.runtimeExercise?.userEdited === true ||
+    args.runtimeExercise?.workspaceOrigin === "user" ||
+    args.runtimeExercise?.workspaceOrigin === "saved";
+  const protectedButBlank =
+    existingIsProtected &&
+    !existingEntryCode.trim() &&
+    starterEntryCode.trim().length > 0;
+
+  if (existingIsProtected && !protectedButBlank) return "protected-existing";
+  if (!itemWorkspaceIsLearnerOwned && existingWorkspace && !protectedButBlank) {
+    return "passive-existing";
+  }
+
+  const existingWorkspaceKey = workspaceStableKey(existingWorkspace);
+  const liveWorkspaceKey = workspaceStableKey(itemWorkspace);
+  if (existingWorkspaceKey === liveWorkspaceKey) return "same-workspace";
+
+  const code = deriveEntryCode(itemWorkspace) || "";
+  const stdin = typeof itemWorkspace.stdin === "string" ? itemWorkspace.stdin : "";
+  const language = getManifestExerciseLanguage(args.livePracticeManifest);
+
+  const hydratedWorkspaceOrigin = itemWorkspaceIsLearnerOwned
+    ? String((args.livePracticeItem as any)?.workspaceOrigin ?? "").trim().toLowerCase() === "user"
+      ? "user"
+      : "saved"
+    : "starter";
+
+  reviewSaveDebug("quiz practice hydrate workspace", {
+    writer: "QuizPracticeCard.applyPracticeWorkspaceHydration",
+    generation: args.generation,
+    exerciseKey: args.exerciseKeyForTools,
+    workspaceOrigin: hydratedWorkspaceOrigin,
+    userEdited: itemWorkspaceIsLearnerOwned,
+    accepted: true,
+    workspace: itemWorkspace,
+  });
+
+  args.patchRuntimeExercise(args.exerciseKeyForTools, {
+    generation: args.generation,
+    updateOrigin: "quiz-practice-hydrate",
+    workspaceMutation: {
+      generation: args.generation,
+      source: "quiz-practice-hydrate",
+      mutation: "hydrate",
+    },
+    workspace: itemWorkspace,
+    codeWorkspace: itemWorkspace,
+    ideWorkspace: itemWorkspace,
+    code,
+    source: code,
+    stdin,
+    codeStdin: stdin,
+    language,
+    lang: language,
+    codeLang: language,
+    userEdited: itemWorkspaceIsLearnerOwned,
+    workspaceOrigin: hydratedWorkspaceOrigin,
+    updatedAt: Date.now(),
+  });
+  args.patchEditorWorkspace(args.exerciseKeyForTools, itemWorkspace, {
+    generation: args.generation,
+    source: "quiz-practice-hydrate",
+    mutation: {
+      generation: args.generation,
+      source: "quiz-practice-hydrate",
+      mutation: "hydrate",
+    },
+  });
+
+  return "patched";
 }
 
 function firstRecord(...values: unknown[]) {
@@ -1129,6 +1230,13 @@ export default function QuizPracticeCard(props: {
   const runtimeExercise = useReviewRuntimeStore(
       (s) => s.exercises[exerciseKeyForTools] ?? null,
   );
+  const runtimeResetRevision = useReviewRuntimeStore((s) => s.resetRevision);
+  const practiceSnapshotGeneration =
+      typeof ps?.runtimeGeneration === "number"
+          ? ps.runtimeGeneration
+          : null;
+  const practiceSnapshotIsCurrent =
+      practiceSnapshotGeneration === runtimeResetRevision;
   const ensureRuntimeExercise = useReviewRuntimeStore((s) => s.ensureExercise);
   const patchRuntimeExercise = useReviewRuntimeStore((s) => s.patchExercise);
   const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
@@ -1218,6 +1326,8 @@ export default function QuizPracticeCard(props: {
       practiceStarterFilesKey,
       practiceWorkspaceKey,
       practiceIdeConfigKey,
+      String(runtimeResetRevision),
+      practiceSnapshotIsCurrent ? "current-snapshot" : "manifest-only",
     ].join("|");
 
     const existing = useReviewRuntimeStore.getState().exercises[exerciseKeyForTools];
@@ -1274,7 +1384,7 @@ export default function QuizPracticeCard(props: {
       topicId: fetchTopicId,
       cardId: fetchOwnerCardId,
       manifest: livePracticeManifest,
-      saved: livePracticeItem ?? livePracticeManifest,
+      saved: practiceSnapshotIsCurrent ? livePracticeItem : undefined,
     });
 
     // Register the live dynamic practice contract before child tool-binding
@@ -1303,77 +1413,50 @@ export default function QuizPracticeCard(props: {
     practiceStarterFilesKey,
     practiceWorkspaceKey,
     practiceIdeConfigKey,
+    practiceSnapshotIsCurrent,
     resolvedProjectStepManifest,
+    runtimeResetRevision,
   ]);
 
   useEffect(() => {
     if (!livePracticeManifest) return;
     if (livePracticeManifest.kind !== "code_input") return;
-
     const itemWorkspace =
-        getWorkspaceFromAnyState(livePracticeItem) ??
-        getWorkspaceFromAnyState(livePracticeManifest);
-
+      getWorkspaceFromAnyState(livePracticeItem) ??
+      getWorkspaceFromAnyState(livePracticeManifest);
     if (!itemWorkspace) return;
 
-    const existingWorkspace = getWorkspaceFromAnyState(runtimeExercise);
-    const existingEntryCode = getWorkspaceEntryCodeForPracticeCard(existingWorkspace);
-    const starterEntryCode = getWorkspaceEntryCodeForPracticeCard(itemWorkspace);
-    const itemWorkspaceIsLearnerOwned = isLearnerOwnedPracticeSnapshot(livePracticeItem);
-    const existingIsProtected =
-        runtimeExercise?.userEdited === true ||
-        runtimeExercise?.workspaceOrigin === "user" ||
-        runtimeExercise?.workspaceOrigin === "saved";
-    const protectedButBlank = existingIsProtected && !existingEntryCode.trim() && starterEntryCode.trim().length > 0;
+    const capturedGeneration =
+      practiceSnapshotGeneration ??
+      (
+        !ps && resolvedProjectStepManifest && projectStepFallbackItem
+          ? runtimeResetRevision
+          : null
+      );
 
-    if (existingIsProtected && !protectedButBlank) return;
+    if (capturedGeneration == null) return;
+    if (capturedGeneration !== runtimeResetRevision) return;
 
-    /**
-     * Passive practice items are often synthetic starter snapshots.
-     * ensureExercise is the single owner of starter seeding; this hydration
-     * effect should only restore real learner/saved work or replace an old
-     * blank protected shell. Without this guard, a passive item workspace and
-     * the manifest-resolved workspace can alternate forever during embedded
-     * try-it/project rendering.
-     */
-    if (!itemWorkspaceIsLearnerOwned && existingWorkspace && !protectedButBlank) return;
-
-    const existingWorkspaceKey = workspaceStableKey(existingWorkspace);
-    const liveWorkspaceKey = workspaceStableKey(itemWorkspace);
-    if (existingWorkspaceKey === liveWorkspaceKey) return;
-
-    const code = deriveEntryCode(itemWorkspace) || "";
-    const stdin = typeof itemWorkspace.stdin === "string" ? itemWorkspace.stdin : "";
-    const language = getManifestExerciseLanguage(livePracticeManifest);
-
-    const hydratedWorkspaceOrigin = itemWorkspaceIsLearnerOwned
-        ? String((livePracticeItem as any)?.workspaceOrigin ?? "").trim().toLowerCase() === "user"
-            ? "user"
-            : "saved"
-        : "starter";
-
-    patchRuntimeExercise(exerciseKeyForTools, {
-      workspace: itemWorkspace,
-      codeWorkspace: itemWorkspace,
-      ideWorkspace: itemWorkspace,
-      code,
-      source: code,
-      stdin,
-      codeStdin: stdin,
-      language,
-      lang: language,
-      codeLang: language,
-      userEdited: itemWorkspaceIsLearnerOwned,
-      workspaceOrigin: hydratedWorkspaceOrigin,
-      updatedAt: Date.now(),
+    applyPracticeWorkspaceHydration({
+      exerciseKeyForTools,
+      generation: capturedGeneration,
+      runtimeExercise,
+      livePracticeItem,
+      livePracticeManifest,
+      patchRuntimeExercise,
+      patchEditorWorkspace,
     });
-    patchEditorWorkspace(exerciseKeyForTools, itemWorkspace);
   }, [
     exerciseKeyForTools,
     livePracticeItem,
     livePracticeManifest,
     patchEditorWorkspace,
     patchRuntimeExercise,
+    practiceSnapshotGeneration,
+    projectStepFallbackItem,
+    ps,
+    resolvedProjectStepManifest,
+    runtimeResetRevision,
     runtimeExercise,
   ]);
 
@@ -1685,7 +1768,7 @@ export default function QuizPracticeCard(props: {
         topicId: fetchTopicId,
         cardId: fetchOwnerCardId,
         manifest: livePracticeManifest,
-        saved: livePracticeItem ?? livePracticeManifest,
+        saved: practiceSnapshotIsCurrent ? livePracticeItem : undefined,
       });
 
       existing = useReviewRuntimeStore.getState().exercises[exerciseKeyForTools];
@@ -1714,6 +1797,8 @@ export default function QuizPracticeCard(props: {
     }
 
     patchRuntimeExercise(exerciseKeyForTools, {
+      generation: runtimeExercise?.workspaceGeneration ?? runtimeResetRevision,
+      updateOrigin: "quiz-practice-status",
       workspaceStatus: nextWorkspaceStatus,
       workspaceError: nextWorkspaceError,
       workspace: existing.workspace,
@@ -1739,6 +1824,9 @@ export default function QuizPracticeCard(props: {
     patchRuntimeExercise,
     practiceLoadErrorForTools,
     practiceResolvedForToolBinding,
+    practiceSnapshotIsCurrent,
+    runtimeExercise?.workspaceGeneration,
+    runtimeResetRevision,
     showStuckLoading,
   ]);
 

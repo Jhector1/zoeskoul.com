@@ -1,5 +1,46 @@
 import type { FileNode, WorkspaceStateV2 } from "@/components/ide/types";
 
+function debugWorkspaceFileLength(
+  workspace: Partial<WorkspaceStateV2> | null,
+  path: string,
+) {
+  const nodes = Array.isArray(workspace?.nodes) ? workspace.nodes : [];
+  const folderPathById = new Map<string, string>();
+  let changed = true;
+
+  while (changed) {
+    changed = false;
+    for (const node of nodes) {
+      if (node?.kind !== "folder") continue;
+      if (folderPathById.has(String(node.id))) continue;
+      const parentPath =
+        node.parentId == null
+          ? ""
+          : folderPathById.has(String(node.parentId))
+            ? folderPathById.get(String(node.parentId)) ?? ""
+            : null;
+      if (parentPath == null) continue;
+      folderPathById.set(
+        String(node.id),
+        parentPath ? `${parentPath}/${String(node.name ?? "")}` : String(node.name ?? ""),
+      );
+      changed = true;
+    }
+  }
+
+  const file = nodes.find((node) => {
+    if (node?.kind !== "file") return false;
+    const parentPath =
+      node.parentId == null ? "" : folderPathById.get(String(node.parentId)) ?? "";
+    const fullPath = parentPath
+      ? `${parentPath}/${String(node.name ?? "")}`
+      : String(node.name ?? "");
+    return fullPath === path;
+  }) as FileNode | undefined;
+
+  return file ? String(file.content ?? "").length : null;
+}
+
 export function reviewSaveDebug(
   label: string,
   data: Record<string, unknown> = {},
@@ -41,6 +82,8 @@ export function summarizeWorkspaceForSave(workspace: unknown) {
     activeFileId: safeWorkspace?.activeFileId,
     entryFileId: safeWorkspace?.entryFileId,
     openTabs: Array.isArray(safeWorkspace?.openTabs) ? safeWorkspace.openTabs : [],
+    mainPyLength: debugWorkspaceFileLength(safeWorkspace, "main.py"),
+    carPyLength: debugWorkspaceFileLength(safeWorkspace, "models/car.py"),
     files: files.map((file) => ({
       id: file.id,
       name: file.name,

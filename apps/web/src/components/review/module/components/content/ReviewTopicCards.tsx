@@ -353,13 +353,35 @@ export default function ReviewTopicCards({
                               ? { progressId: target, runtimeCardId: target, cardProgressKeys: [target] }
                               : target;
 
-                      useReviewRuntimeStore
-                          .getState()
-                          .clearRuntimeForCard(
-                              viewTid,
-                              resetTarget.runtimeCardId ?? resetTarget.progressId,
+                      const runtimeStore = useReviewRuntimeStore.getState();
+                      const runtimeCardId =
+                          resetTarget.runtimeCardId ?? resetTarget.progressId;
+                      const resetResult = resetTarget.exerciseId
+                          ? runtimeStore.resetExerciseToStarter({
+                              topicId: viewTid,
+                              cardId: runtimeCardId,
+                              exerciseId: resetTarget.exerciseId,
+                              exerciseStateKey: resetTarget.exerciseStateKey,
+                          })
+                          : null;
+
+                      if (!resetTarget.exerciseId) {
+                        runtimeStore.clearRuntimeForCard(viewTid, runtimeCardId);
+                      }
+
+                      if (resetResult?.exerciseKey) {
+                        clearReviewWorkspaceDrafts(
+                            (ownerKey) => ownerKey === resetResult.exerciseKey,
+                        );
+                      } else {
+                        clearReviewWorkspaceDrafts((ownerKey) => {
+                          const parts = ownerKey.split(":").filter(Boolean);
+                          return (
+                              (parts[3] ?? "") === viewTid &&
+                              (parts[4] ?? "") === runtimeCardId
                           );
-                      clearReviewWorkspaceDrafts();
+                        });
+                      }
 
                       setProgress((prev) => {
                         const next = buildQuizResetProgress(

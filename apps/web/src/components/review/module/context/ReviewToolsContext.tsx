@@ -20,6 +20,7 @@ import type {
 } from "@/lib/practice/types";
 import type { SqlPaneOptions } from "@/components/code/runner/components/sql/results-pane";
 import type {
+  RuntimeWorkspaceMutation,
   UnknownRecord,
   WorkspaceOrigin,
 } from "../runtime/reviewRuntimeTypes";
@@ -40,6 +41,8 @@ type SqlTableSnapshot = {
 
 type SqlTableSnapshots = Record<string, SqlTableSnapshot>;
 type CodeInputPatch = UnknownRecord & {
+  generation?: number;
+  workspaceMutation?: RuntimeWorkspaceMutation;
   userEdited?: boolean;
   workspaceOrigin?: WorkspaceOrigin;
   updateOrigin?: string;
@@ -67,6 +70,8 @@ type CodeInputPatch = UnknownRecord & {
 };
 
 export type RegisterArgs = {
+  generation?: number;
+  workspaceMutation?: RuntimeWorkspaceMutation;
   lang: WorkspaceLanguage;
   code: string;
   stdin?: string;
@@ -290,6 +295,7 @@ function registerArgsKey(args: RegisterArgs | undefined) {
     sqlSeedSql: args.sqlSeedSql ?? null,
     sqlInitialTableSnapshots: args.sqlInitialTableSnapshots ?? null,
     sqlPaneOptions: args.sqlPaneOptions ?? null,
+    generation: args.generation ?? null,
   });
 }
 
@@ -336,6 +342,7 @@ export function ReviewToolsProvider({
   const storeUnbindExerciseTool = useReviewRuntimeStore((s) => s.unbindExerciseTool);
   const patchExercise = useReviewRuntimeStore((s) => s.patchExercise);
   const patchEditorWorkspace = useReviewRuntimeStore((s) => s.patchEditorWorkspace);
+  const currentResetRevision = useReviewRuntimeStore((s) => s.resetRevision);
   const setFlushToolSnapshotCallback = useReviewRuntimeStore((s) => s.setFlushToolSnapshotCallback);
   const flushToolSnapshot = useReviewRuntimeStore((s) => s.flushToolSnapshot);
 
@@ -468,6 +475,7 @@ export function ReviewToolsProvider({
                 snap.workspaceOrigin === "user" ||
                 snap.workspaceOrigin === "saved";
             patchExercise(targetKey, {
+                generation: snap.generation,
                 language: snap.lang,
                 lang: snap.lang,
                 workspace: snap.workspace ?? undefined,
@@ -504,6 +512,11 @@ export function ReviewToolsProvider({
       const snap = registryRef.current.get(id);
       if (!snap) {
         setRequestedId(id);
+        return;
+      }
+
+      if (typeof snap.generation === "number" && snap.generation < currentResetRevision) {
+        setRequestedId(null);
         return;
       }
 
@@ -544,6 +557,7 @@ export function ReviewToolsProvider({
           : "starter";
 
       patchExercise(targetKey, {
+        generation: snap.generation,
         language: snap.lang,
         lang: snap.lang,
         workspace: boundWorkspace ?? undefined,
@@ -558,13 +572,24 @@ export function ReviewToolsProvider({
       });
 
       if (boundWorkspace && (boundOrigin === "user" || boundOrigin === "saved")) {
-        patchEditorWorkspace(targetKey, boundWorkspace);
+        patchEditorWorkspace(targetKey, boundWorkspace, {
+          generation: snap.generation,
+          source: "review-tools-bind",
+        });
       }
 
       bindExerciseTool(targetKey);
       setRequestedId(null);
     },
-    [ensureVisible, onBindToToolsPanel, bindExerciseTool, flushByToolKey, patchEditorWorkspace, patchExercise],
+    [
+      ensureVisible,
+      onBindToToolsPanel,
+      bindExerciseTool,
+      flushByToolKey,
+      patchEditorWorkspace,
+      patchExercise,
+      currentResetRevision,
+    ],
   );
 
     const syncCodeInputSnapshot = useCallback(
@@ -573,6 +598,14 @@ export function ReviewToolsProvider({
 
             const cur = registryRef.current.get(id);
             if (!cur) return;
+            const effectiveGeneration =
+                typeof patch?.generation === "number" ? patch.generation : cur.generation;
+            if (
+                typeof effectiveGeneration === "number" &&
+                effectiveGeneration < currentResetRevision
+            ) {
+                return;
+            }
 
             const targetKey = patch?.exerciseKey ?? cur.exerciseKey ?? id;
             const userEdited = isRealUserWorkspaceEdit(patch);
@@ -667,6 +700,10 @@ export function ReviewToolsProvider({
 
             const next: RegisterArgs = {
                 ...cur,
+                generation:
+                    typeof effectiveGeneration === "number"
+                        ? effectiveGeneration
+                        : cur.generation ?? currentResetRevision,
                 exerciseKey: targetKey,
                 lang: patch?.codeLang ?? patch?.language ?? cur.lang,
                 code: nextCode,
@@ -732,6 +769,13 @@ export function ReviewToolsProvider({
                     : {};
 
             const runtimePatch = {
+                generation:
+                    typeof effectiveGeneration === "number"
+                        ? effectiveGeneration
+                        : currentResetRevision,
+                workspaceMutation:
+                    patch?.workspaceMutation ??
+                    cur.workspaceMutation,
                 language: next.lang,
                 lang: next.lang,
 
@@ -788,7 +832,16 @@ export function ReviewToolsProvider({
                 );
 
                 for (const ownerKey of mirrorOwnerKeys) {
-                    runtimeState.patchEditorWorkspace(ownerKey, next.workspace);
+                    runtimeState.patchEditorWorkspace(ownerKey, next.workspace, {
+                        generation:
+                            typeof effectiveGeneration === "number"
+                                ? effectiveGeneration
+                                : currentResetRevision,
+                        source: "review-tools-sync-user",
+                        mutation:
+                            patch?.workspaceMutation ??
+                            cur.workspaceMutation,
+                    });
 
                     if (ownerKey !== targetKey) {
                         runtimeState.patchExercise(ownerKey, runtimePatch);
@@ -809,7 +862,7 @@ export function ReviewToolsProvider({
                 defer(() => bindNow(id));
             }
         },
-        [bindNow, patchExercise],
+        [bindNow, currentResetRevision, patchExercise],
     );
 
     const patchCodeInput = useCallback(
@@ -882,6 +935,7 @@ export function ReviewToolsProvider({
 
                     runtimeStore.patchExercise(ownerKey, {
                         language: incomingLang,
+                        generation: currentResetRevision,
                         lang: incomingLang,
                         workspace: normalizedPair.workspace ?? undefined,
                         codeWorkspace: normalizedPair.workspace ?? undefined,
@@ -899,7 +953,10 @@ export function ReviewToolsProvider({
                     });
 
                     if (normalizedPair.workspace) {
-                        runtimeStore.patchEditorWorkspace(ownerKey, normalizedPair.workspace);
+                        runtimeStore.patchEditorWorkspace(ownerKey, normalizedPair.workspace, {
+                            generation: currentResetRevision,
+                            source: "review-tools-patch-user",
+                        });
                     }
                 }
 
@@ -917,7 +974,7 @@ export function ReviewToolsProvider({
 
             defer(() => bindNow(id));
         },
-        [bindNow, clearRunFeedback, syncCodeInputSnapshot],
+        [bindNow, clearRunFeedback, currentResetRevision, syncCodeInputSnapshot],
     );
 
     const requestBind = useCallback(
@@ -983,6 +1040,10 @@ export function ReviewToolsProvider({
 
         const normalizedArgs: RegisterArgs = {
             ...args,
+            generation:
+                typeof args.generation === "number"
+                    ? args.generation
+                    : currentResetRevision,
             workspace: normalizedPair.workspace,
             code: normalizedPair.code,
         };
@@ -1107,7 +1168,7 @@ export function ReviewToolsProvider({
         defer(() => bindNow(id));
       }
     },
-    [clearUnbindTimer, requestedId, bindNow],
+    [clearUnbindTimer, requestedId, bindNow, currentResetRevision],
   );
 
   const unregisterCodeInput = useCallback(

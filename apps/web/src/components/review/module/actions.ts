@@ -19,6 +19,8 @@ export type QuizResetTarget = {
     progressId: string;
     runtimeCardId?: string;
     cardProgressKeys?: string[];
+    exerciseId?: string;
+    exerciseStateKey?: string;
 };
 type ExtendedTopicProgress = ReviewTopicProgress & {
     runtimeStateV2?: RuntimeStateRecord;
@@ -318,6 +320,8 @@ export function buildQuizResetProgress(
                       target.cardProgressKeys && target.cardProgressKeys.length > 0
                           ? target.cardProgressKeys
                           : [target.runtimeCardId ?? target.progressId],
+                  exerciseId: target.exerciseId,
+                  exerciseStateKey: target.exerciseStateKey,
               };
     const tp0 = getTopicProgress(progress, viewTid);
     const nextQuizState = { ...(tp0.quizState ?? {}) };

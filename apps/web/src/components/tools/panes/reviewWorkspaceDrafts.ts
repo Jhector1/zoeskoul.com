@@ -70,6 +70,21 @@ export function writeReviewWorkspaceDraft(
     }
 }
 
+export function clearReviewWorkspaceDraft(
+    ownerKey: string | null | undefined,
+) {
+    if (typeof window === "undefined") return;
+
+    const key = String(ownerKey ?? "").trim();
+    if (!key) return;
+
+    try {
+        window.localStorage.removeItem(reviewWorkspaceDraftKey(key));
+    } catch {
+        // Best effort only. Runtime/progress persistence remains canonical.
+    }
+}
+
 export function clearReviewWorkspaceDrafts(
     shouldClear?: (ownerKey: string, storageKey: string) => boolean,
 ) {

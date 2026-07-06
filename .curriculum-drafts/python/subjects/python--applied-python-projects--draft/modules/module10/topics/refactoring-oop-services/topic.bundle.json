@@ -131,7 +131,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -167,7 +167,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -265,7 +265,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -301,7 +301,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -450,7 +450,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterCode",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -486,7 +486,7 @@
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterCode",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true

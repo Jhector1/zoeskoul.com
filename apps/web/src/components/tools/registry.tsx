@@ -24,6 +24,13 @@ export type CodeToolProps = {
     toolSqlDialect?: SqlDialect;
     ideConfig?: LearningIdeConfig | null;
 
+    /**
+     * Controls every browser-local workspace persistence layer owned by the
+     * CodeToolPane -> FullIDE stack. Review modules pass "off" so only the
+     * runtime store and ReviewProgress DB can restore learner work.
+     */
+    draftStorageMode?: "off" | "local";
+
     onChangeLang?: (l: RunnerLanguage) => void;
     onChangeCode: (c: string) => void;
     onChangeStdin: (s: string) => void;

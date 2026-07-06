@@ -265,6 +265,7 @@ export default function CardRenderer(props: {
                             progressId: tryItId,
                             runtimeCardId: card.id,
                             cardProgressKeys: [card.id, tryItId],
+                            exerciseId: tryIt.exerciseKey,
                         })}
                         sequential={true}
                         strictSequential={true}
