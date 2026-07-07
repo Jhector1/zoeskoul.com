@@ -33,6 +33,7 @@ export function usePracticeController(args: {
   isTrial?: boolean;
   authoritativeSessionId?: boolean;
   expectedExperienceMode?: PracticeExperienceMode;
+  clientStatePersistence?: "session" | "off";
 }) {
   const {
     subjectSlug,
@@ -41,6 +42,7 @@ export function usePracticeController(args: {
     isTrial = false,
     authoritativeSessionId = false,
     expectedExperienceMode,
+    clientStatePersistence = "session",
   } = args;
 
   const t = useTranslations("Practice");
@@ -137,6 +139,7 @@ export function usePracticeController(args: {
     initialSessionId: initialSessionId ?? null,
     authoritativeSessionId,
     expectedExperienceMode,
+    clientStatePersistence,
     run,
 
     phase,
@@ -223,6 +226,8 @@ export function usePracticeController(args: {
     preferPurpose,
     purposePolicy,
     expectedExperienceMode,
+    authoritativeSessionId,
+    initialSessionId: initialSessionId ?? null,
   } as any);
 
   // lock selected values when run says so

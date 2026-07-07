@@ -266,11 +266,27 @@ export function readReturnUrlFromSearchParams(sp: URLSearchParams): string | nul
 export function getEffectiveSid(args: {
   sessionId: string | null;
   resolvedSessionIdRef: MutableRefObject<string | null>;
+  authoritativeSessionId?: boolean;
+  initialSessionId?: string | null;
 }) {
+  const initialSessionId = String(args.initialSessionId ?? "").trim() || null;
+  const stateSessionId = String(args.sessionId ?? "").trim() || null;
+  const resolvedSessionId =
+    String(args.resolvedSessionIdRef.current ?? "").trim() || null;
+
+  // Server-started experiences pass an authoritative session id. A URL left
+  // behind by a previously visited assignment must never replace that id.
+  if (args.authoritativeSessionId) {
+    return initialSessionId ?? stateSessionId ?? resolvedSessionId;
+  }
+
   if (typeof window !== "undefined") {
-    const fromUrl = new URLSearchParams(window.location.search).get("sessionId");
+    const fromUrl =
+      String(
+        new URLSearchParams(window.location.search).get("sessionId") ?? "",
+      ).trim() || null;
     if (fromUrl) return fromUrl;
   }
 
-  return args.sessionId ?? args.resolvedSessionIdRef.current ?? null;
+  return stateSessionId ?? resolvedSessionId;
 }

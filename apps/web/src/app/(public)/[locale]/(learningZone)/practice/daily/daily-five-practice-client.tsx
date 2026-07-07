@@ -36,6 +36,7 @@ function DailyFiveShell({ result }: { result: StartResult }) {
     moduleSlug: result.moduleSlug ?? undefined,
     authoritativeSessionId: true,
     expectedExperienceMode: "daily_five",
+    clientStatePersistence: "off",
   });
   return <PracticeShell {...shellProps} t={t} />;
 }
@@ -174,7 +175,9 @@ export default function DailyFivePracticeClient(props: {
     void start(props.subjectSlug);
   }, [props.subjectSlug, start]);
 
-  if (result) return <DailyFiveShell result={result} />;
+  if (result) {
+    return <DailyFiveShell key={result.sessionId} result={result} />;
+  }
 
   if (subjects) {
     return (

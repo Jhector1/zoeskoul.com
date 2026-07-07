@@ -33,6 +33,7 @@ export function usePracticeStatePersistence(args: {
   initialSessionId?: string | null;
   authoritativeSessionId?: boolean;
   expectedExperienceMode?: PracticeExperienceMode;
+  clientStatePersistence?: "session" | "off";
   run: RunMeta | null;
 
   phase: Phase;
@@ -75,6 +76,7 @@ export function usePracticeStatePersistence(args: {
     initialSessionId = null,
     authoritativeSessionId = false,
     expectedExperienceMode,
+    clientStatePersistence = "session",
     run,
 
     phase,
@@ -196,18 +198,20 @@ export function usePracticeStatePersistence(args: {
     setSessionSize(initialSize);
 
     let loaded: ReturnType<typeof loadSavedState> = null;
-    try {
-      loaded = loadSavedState({
-        subjectSlug,
-        moduleSlug,
-        section: nextSection,
-        topic: String(nextTopic),
-        difficulty: String(nextDifficulty),
-        n: initialSize,
-        sessionId: sidParam ?? null,
-      });
-    } catch {
-      loaded = null;
+    if (clientStatePersistence === "session") {
+      try {
+        loaded = loadSavedState({
+          subjectSlug,
+          moduleSlug,
+          section: nextSection,
+          topic: String(nextTopic),
+          difficulty: String(nextDifficulty),
+          n: initialSize,
+          sessionId: sidParam ?? null,
+        });
+      } catch {
+        loaded = null;
+      }
     }
 
     if (
@@ -231,7 +235,11 @@ export function usePracticeStatePersistence(args: {
       setDifficulty((saved.difficulty ?? nextDifficulty) as Difficulty | "all");
 
       if (saved.run?.mode) setRun(saved.run);
-      setSessionId(saved.sessionId ?? sidParam ?? null);
+      setSessionId(
+        authoritativeSessionId
+          ? sidParam
+          : saved.sessionId ?? sidParam ?? null,
+      );
 
       const restoredStack = Array.isArray(saved.stack) ? saved.stack : [];
       const cleaned = pruneExpiredStack(restoredStack);
@@ -305,6 +313,7 @@ export function usePracticeStatePersistence(args: {
     initialSessionId,
     authoritativeSessionId,
     expectedExperienceMode,
+    clientStatePersistence,
     setSection,
     setTopic,
     setDifficulty,
@@ -324,6 +333,7 @@ export function usePracticeStatePersistence(args: {
 
   useEffect(() => {
     if (!hydrated) return;
+    if (clientStatePersistence === "off") return;
     if (!subjectSlug || !moduleSlug) return;
 
     const payload = {
@@ -376,6 +386,7 @@ export function usePracticeStatePersistence(args: {
     stack,
     idx,
     sessionSize,
+    clientStatePersistence,
   ]);
 
   useEffect(() => {

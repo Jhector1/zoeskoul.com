@@ -152,6 +152,8 @@ export function usePracticeEngine(args: {
   preferPurpose?: string;
   purposePolicy?: string;
   expectedExperienceMode?: PracticeExperienceMode;
+  authoritativeSessionId?: boolean;
+  initialSessionId?: string | null;
 
   hydrated: boolean;
   resolvedSessionIdRef: MutableRefObject<string | null>;
@@ -213,6 +215,8 @@ export function usePracticeEngine(args: {
     preferPurpose,
     purposePolicy,
     expectedExperienceMode,
+    authoritativeSessionId = false,
+    initialSessionId = null,
     phase,
     setPhase,
     autoSummarized,
@@ -259,6 +263,11 @@ export function usePracticeEngine(args: {
       expectedExperienceMode &&
       candidate.mode !== expectedExperienceMode
     ) {
+      // Fail closed instead of leaving a previously hydrated assignment stack
+      // visible on the Daily Practice surface.
+      setRun(null);
+      setStack([]);
+      setIdx(0);
       setLoadErr(
         `This session belongs to ${candidate.mode}, not ${expectedExperienceMode}.`,
       );
@@ -414,7 +423,12 @@ export function usePracticeEngine(args: {
   async function refreshCurrentPracticeKey() {
     if (!current || !exercise) return null;
 
-    const sid = getEffectiveSid({ sessionId, resolvedSessionIdRef });
+    const sid = getEffectiveSid({
+      sessionId,
+      resolvedSessionIdRef,
+      authoritativeSessionId,
+      initialSessionId,
+    });
     if (!sid) return null;
 
     const response = await fetchPracticeExercise(
@@ -507,7 +521,12 @@ export function usePracticeEngine(args: {
     setLoadErr(null);
 
     try {
-      const effectiveSid = getEffectiveSid({ sessionId, resolvedSessionIdRef });
+      const effectiveSid = getEffectiveSid({
+        sessionId,
+        resolvedSessionIdRef,
+        authoritativeSessionId,
+        initialSessionId,
+      });
       const sid = opts?.forceNew ? null : effectiveSid;
       const useSession = Boolean(sid);
 
@@ -605,7 +624,12 @@ export function usePracticeEngine(args: {
     if (phase === "summary") return;
     if (completed) return;
 
-    const effectiveSid = getEffectiveSid({ sessionId, resolvedSessionIdRef });
+    const effectiveSid = getEffectiveSid({
+      sessionId,
+      resolvedSessionIdRef,
+      authoritativeSessionId,
+      initialSessionId,
+    });
     let alive = true;
 
     (async () => {
@@ -657,6 +681,8 @@ export function usePracticeEngine(args: {
     resolvedSessionIdRef,
     setRun,
     expectedExperienceMode,
+    authoritativeSessionId,
+    initialSessionId,
     setSessionSize,
     setCompleted,
     setAutoSummarized,
@@ -668,7 +694,12 @@ export function usePracticeEngine(args: {
     if (!hydrated) return;
     if (phase !== "summary") return;
 
-    const effectiveSid = getEffectiveSid({ sessionId, resolvedSessionIdRef });
+    const effectiveSid = getEffectiveSid({
+      sessionId,
+      resolvedSessionIdRef,
+      authoritativeSessionId,
+      initialSessionId,
+    });
     if (!effectiveSid) return;
 
     if (serverMissed.length > 0 && serverHistoryStack.length > 0) return;
@@ -711,6 +742,8 @@ export function usePracticeEngine(args: {
     moduleSlug,
     setRun,
     expectedExperienceMode,
+    authoritativeSessionId,
+    initialSessionId,
     setCompletionReturnUrl,
   ]);
 
@@ -990,6 +1023,8 @@ export function usePracticeEngine(args: {
     setActionErr,
     sessionId,
     resolvedSessionIdRef,
+    authoritativeSessionId,
+    initialSessionId,
   });
 
   const badge = useMemo(() => {

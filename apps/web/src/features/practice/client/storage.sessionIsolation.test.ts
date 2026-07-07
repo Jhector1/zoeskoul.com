@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   buildSavedStateLookupKeys,
+  getEffectiveSid,
   isSavedRunCompatible,
   resolveHydrationSessionId,
 } from "./storage";
@@ -16,6 +17,57 @@ describe("practice session isolation", () => {
         rememberedSessionId: "old-module-session",
       }),
     ).toBe("daily-session");
+  });
+
+
+  it("never lets an assignment URL override an authoritative Daily Practice session", () => {
+    const previousWindow = globalThis.window;
+    Object.defineProperty(globalThis, "window", {
+      configurable: true,
+      value: {
+        location: {
+          search: "?sessionId=assignment-session&type=assignment",
+        },
+      },
+    });
+
+    try {
+      expect(
+        getEffectiveSid({
+          sessionId: "daily-session",
+          initialSessionId: "daily-session",
+          authoritativeSessionId: true,
+          resolvedSessionIdRef: { current: "daily-session" },
+        }),
+      ).toBe("daily-session");
+    } finally {
+      Object.defineProperty(globalThis, "window", {
+        configurable: true,
+        value: previousWindow,
+      });
+    }
+  });
+
+  it("still honors the URL session for non-authoritative module practice", () => {
+    const previousWindow = globalThis.window;
+    Object.defineProperty(globalThis, "window", {
+      configurable: true,
+      value: { location: { search: "?sessionId=assignment-session" } },
+    });
+
+    try {
+      expect(
+        getEffectiveSid({
+          sessionId: "remembered-session",
+          resolvedSessionIdRef: { current: "remembered-session" },
+        }),
+      ).toBe("assignment-session");
+    } finally {
+      Object.defineProperty(globalThis, "window", {
+        configurable: true,
+        value: previousWindow,
+      });
+    }
   });
 
   it("uses URL, then component, then remembered session for non-authoritative surfaces", () => {

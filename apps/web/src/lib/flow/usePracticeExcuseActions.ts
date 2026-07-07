@@ -21,6 +21,8 @@ export function usePracticeExcuseActions(args: {
 
     sessionId: string | null;
     resolvedSessionIdRef: MutableRefObject<string | null>;
+    authoritativeSessionId?: boolean;
+    initialSessionId?: string | null;
 }) {
     const {
         current,
@@ -32,6 +34,8 @@ export function usePracticeExcuseActions(args: {
         setActionErr,
         sessionId,
         resolvedSessionIdRef,
+        authoritativeSessionId = false,
+        initialSessionId = null,
     } = args;
 
     const excuseCurrent = useCallback(
@@ -66,9 +70,20 @@ export function usePracticeExcuseActions(args: {
     );
 
     const skipLoadError = useCallback(async () => {
-        const effectiveSid = getEffectiveSid({ sessionId, resolvedSessionIdRef });
+        const effectiveSid = getEffectiveSid({
+            sessionId,
+            resolvedSessionIdRef,
+            authoritativeSessionId,
+            initialSessionId,
+        });
         await loadNextExercise({ forceNew: !effectiveSid });
-    }, [sessionId, resolvedSessionIdRef, loadNextExercise]);
+    }, [
+        sessionId,
+        resolvedSessionIdRef,
+        authoritativeSessionId,
+        initialSessionId,
+        loadNextExercise,
+    ]);
 
     return { excuseCurrent, excuseAndNext, skipLoadError };
 }
