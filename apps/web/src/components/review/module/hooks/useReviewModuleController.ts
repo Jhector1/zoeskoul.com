@@ -1173,29 +1173,38 @@ export function useReviewModuleController({
             encodeURIComponent(moduleSlug),
         )}`;
 
-        if (assignmentSessionId && assignmentStatus.phase !== "idle") {
-            beginRouteTransition();
-            router.push(
-                `/${ROUTES.practicePath(
-                    encodeURIComponent(subjectSlug),
-                    encodeURIComponent(moduleSlug),
-                )}` +
-                `?sessionId=${encodeURIComponent(assignmentSessionId)}` +
-                `&returnTo=${encodeURIComponent(returnToCurrentModule)}`,
-            );
-            return;
-        }
-
+        // Always resolve the module-assignment session through the dedicated
+        // start/resume endpoint. Older builds stored a subscriber-practice
+        // session id in assignmentSessionId; routing directly to that id caused
+        // the assignment CTA to open the configurable subscriber workspace.
         const practiceModuleSlug = (mod as any).practiceSectionSlug ?? moduleSlug;
         const r = await fetch(`/api/modules/${encodeURIComponent(practiceModuleSlug)}/practice/start`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({returnUrl: returnToCurrentModule}),
+            body: JSON.stringify({
+                returnUrl: returnToCurrentModule,
+                resumeSessionId: assignmentSessionId || null,
+            }),
         });
 
-        const data = await r.json().catch(() => null);
+        const rawResponse = await r.text();
+        let data: any = null;
+        try {
+            data = rawResponse ? JSON.parse(rawResponse) : null;
+        } catch {
+            data = null;
+        }
+
         if (!r.ok) {
-            alert(data?.message ?? "Unable to start.");
+            const fallback = rawResponse.trim().startsWith("<")
+                ? `Unable to start the assignment (${r.status}).`
+                : rawResponse.trim() || `Unable to start the assignment (${r.status}).`;
+            alert(data?.message ?? fallback);
+            return;
+        }
+
+        if (!data?.sessionId) {
+            alert("The assignment started without returning a session. Please try again.");
             return;
         }
 
@@ -1206,7 +1215,11 @@ export function useReviewModuleController({
             assignmentSessionId: newSid as any,
         };
         setProgress(next);
-        flushNow(next);
+        await flushNow(next, {
+            discardPendingSaves: true,
+            mergeRuntime: true,
+            reason: "module-assignment-session",
+        });
         beginRouteTransition();
         router.push(
             `/${ROUTES.practicePath(
@@ -1214,17 +1227,17 @@ export function useReviewModuleController({
                 encodeURIComponent(practiceModuleSlug),
             )}` +
             `?sessionId=${encodeURIComponent(newSid)}` +
+            `&type=assignment` +
             `&returnTo=${encodeURIComponent(returnToCurrentModule)}`,
         );
     }, [
         locale,
         subjectSlug,
         moduleSlug,
-        assignmentSessionId,
-        assignmentStatus.phase,
         router,
         mod,
         progress,
+        assignmentSessionId,
         setProgress,
         flushNow,
         beginRouteTransition,

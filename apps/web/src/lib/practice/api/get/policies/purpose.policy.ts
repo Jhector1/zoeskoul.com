@@ -23,8 +23,9 @@ export type PracticePurposeDecision =
 };
 
 function pickAllowedPurposesFromSession(session: any): Array<"quiz" | "project"> {
-    if (resolvePracticeExperienceMode(session) === "daily_five") {
-        return ["quiz", "project"];
+    const experienceMode = resolvePracticeExperienceMode(session);
+    if (experienceMode === "daily_five" || experienceMode === "standard" || experienceMode === "practice") {
+        return ["project"];
     }
 
     const p1 = session?.preset?.allowedPurposes;
@@ -50,7 +51,9 @@ export function computePurposeDecision(args: {
     const policy: PurposePolicy =
         coercePurposePolicy(args.purposePolicyParam) ?? "fallback";
 
-    if (resolvePracticeExperienceMode(session) === "assignment") {
+    const experienceMode = resolvePracticeExperienceMode(session);
+
+    if (experienceMode === "assignment") {
         return {
             ok: true,
             effective: "quiz",
@@ -59,6 +62,18 @@ export function computePurposeDecision(args: {
             policy,
             source: "assignment",
             reason: "assignments_ignore_preferPurpose",
+        };
+    }
+
+    if (experienceMode === "daily_five" || experienceMode === "standard" || experienceMode === "practice") {
+        return {
+            ok: true,
+            effective: "project",
+            requested: coercePurposeMode(args.preferPurposeParam),
+            allowed: ["project"],
+            policy: "strict",
+            source: session ? "session" : "default",
+            reason: "practice_modes_use_project_purpose",
         };
     }
 

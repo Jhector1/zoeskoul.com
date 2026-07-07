@@ -34,20 +34,36 @@ export function usePracticeRunMeta({
   const [run, setRun] = useState<RunMeta | null>(null);
   const hasModuleContext = Boolean(subjectSlug && moduleSlug);
 
-  const isAssignmentRun = run?.mode === "assignment";
-  const isPublicChallengeRun = run?.mode === "public_challenge";
-  const isOnboardingTrialRun = run?.mode === "onboarding_trial";
-  const isDailyFiveRun = run?.mode === "daily_five";
-  const isSessionRun = Boolean(run && run.mode !== "practice");
+  // Route intent is available before the session status request finishes. Keep
+  // assignment links on the embedded assignment surface from the first render
+  // instead of briefly (or, with stale state, permanently) mounting subscriber
+  // practice controls. The server run remains authoritative for every other
+  // experience.
+  const requestedAssignment = sp.get("type") === "assignment";
+  const experienceMode = requestedAssignment
+    ? "assignment"
+    : run?.mode ?? "practice";
 
-  const topicLocked = Boolean(run && !run.filters.topicEditable);
-  const difficultyLocked = Boolean(run && !run.filters.difficultyEditable);
+  const isAssignmentRun = experienceMode === "assignment";
+  const isPublicChallengeRun = experienceMode === "public_challenge";
+  const isOnboardingTrialRun = experienceMode === "onboarding_trial";
+  const isDailyFiveRun = experienceMode === "daily_five";
+  const isSessionRun = Boolean(
+    isAssignmentRun || (run && run.mode !== "practice"),
+  );
+
+  const topicLocked = Boolean(
+    isAssignmentRun || (run && !run.filters.topicEditable),
+  );
+  const difficultyLocked = Boolean(
+    isAssignmentRun || (run && !run.filters.difficultyEditable),
+  );
   const isLockedRun = Boolean(
-    run &&
-      (run.maxAttempts != null ||
-        topicLocked ||
-        difficultyLocked ||
-        !run.filters.purposeEditable),
+    isAssignmentRun ||
+      (run &&
+        (run.maxAttempts != null ||
+          topicLocked ||
+          difficultyLocked)),
   );
 
   const topicOptionsFixed = useTopicOptions(subjectSlug ?? "", moduleSlug ?? "");
@@ -93,6 +109,7 @@ export function usePracticeRunMeta({
     sp,
     run,
     setRun: setRun as Dispatch<SetStateAction<RunMeta | null>>,
+    experienceMode,
     returnUrlFromQuery,
     isAssignmentRun,
     isPublicChallengeRun,

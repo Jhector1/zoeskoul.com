@@ -4,9 +4,9 @@ import type {
   PracticeExperiencePolicy,
   PracticeViewerTier,
 } from "./types";
+import { DEFAULT_DAILY_PRACTICE_TARGET_COUNT } from "./defaults";
 
 const FULL_HELP = true;
-const DEFAULT_DAILY_PRACTICE_TARGET_COUNT = 3;
 
 function positiveWholeNumber(value: unknown, fallback: number) {
   const parsed = Number(value);
@@ -45,8 +45,8 @@ export function getPracticeExperiencePolicy(args: {
         eligibility: {
           allowedKinds: null,
           allowedPurposes: ["quiz"],
-          allowMultiFile: true,
-          allowTerminal: true,
+          allowMultiFile: false,
+          allowTerminal: false,
         },
         rewards: {
           learningXp: true,
@@ -120,7 +120,7 @@ export function getPracticeExperiencePolicy(args: {
         mode: "daily_five",
         label: "Daily Practice",
         targetCount,
-        maxAttempts: 3,
+        maxAttempts: null,
         allowReveal: FULL_HELP,
         lockDifficulty: difficulty,
         lockTopic: topic,
@@ -132,7 +132,7 @@ export function getPracticeExperiencePolicy(args: {
         },
         eligibility: {
           allowedKinds: ["code_input"],
-          allowedPurposes: ["quiz", "project"],
+          allowedPurposes: ["project"],
           allowMultiFile: false,
           allowTerminal: false,
         },
@@ -164,7 +164,7 @@ export function getPracticeExperiencePolicy(args: {
         },
         eligibility: {
           allowedKinds: null,
-          allowedPurposes: null,
+          allowedPurposes: ["project"],
           allowMultiFile: true,
           allowTerminal: true,
         },

@@ -6,8 +6,10 @@ import type { PublishedPracticeExerciseOption } from "@/lib/practice/challenges/
 import {
   applyDailyFiveParams,
   isDailyFiveEligible,
+  listDailyPracticeSubjectOptions,
   pickDailyFiveQueue,
   resolveNextDailyFiveTarget,
+  readDailyFiveMeta,
 } from "./dailyFive";
 
 const TEST_TARGET_COUNT = 3;
@@ -33,7 +35,7 @@ function option(
     exerciseKey,
     exerciseTitle: exerciseKey,
     exerciseKind: "code_input",
-    exercisePurpose: "quiz",
+    exercisePurpose: "project",
     isMultiFile: false,
     requiresTerminal: false,
     isStandaloneTryIt: true,
@@ -42,13 +44,11 @@ function option(
 }
 
 describe("daily practice selection", () => {
-  it("accepts standalone single-file code try-its regardless of authored purpose", () => {
-    expect(isDailyFiveEligible(option("quiz"))).toBe(true);
+  it("accepts only standalone single-file project code try-its", () => {
     expect(
-      isDailyFiveEligible(
-        option("project", { exercisePurpose: "project" }),
-      ),
-    ).toBe(true);
+      isDailyFiveEligible(option("quiz", { exercisePurpose: "quiz" })),
+    ).toBe(false);
+    expect(isDailyFiveEligible(option("project"))).toBe(true);
     expect(
       isDailyFiveEligible(option("not-try-it", { isStandaloneTryIt: false })),
     ).toBe(false);
@@ -112,7 +112,7 @@ describe("daily practice selection", () => {
     );
   });
 
-  it("does not combine exercises from different modules", () => {
+  it("balances one subject across several modules", () => {
     const options = [
       option("m1-a", { moduleSlug: "module-1", sectionSlug: "one-a" }),
       option("m1-b", { moduleSlug: "module-1", sectionSlug: "one-b" }),
@@ -120,14 +120,40 @@ describe("daily practice selection", () => {
       option("m2-b", { moduleSlug: "module-2", sectionSlug: "two-b" }),
     ];
 
-    expect(
-      pickDailyFiveQueue({
-        options,
-        userId: "user-1",
-        dayKey: "2026-07-05",
-        targetCount: 3,
+    const queue = pickDailyFiveQueue({
+      options,
+      userId: "user-1",
+      dayKey: "2026-07-05",
+      subjectSlug: "python-v2",
+      targetCount: 3,
+    });
+
+    expect(queue).toHaveLength(3);
+    expect(new Set(queue.map((row) => row.moduleSlug)).size).toBe(2);
+  });
+
+  it("offers only subjects with enough unique eligible exercises", () => {
+    const options = [
+      option("py-a"),
+      option("py-b", { moduleSlug: "python-v2-1" }),
+      option("py-c", { moduleSlug: "python-v2-2" }),
+      option("sql-a", {
+        subjectSlug: "sql-v2",
+        subjectTitle: "SQL",
+        moduleSlug: "sql-v2-0",
       }),
-    ).toEqual([]);
+      option("sql-b", {
+        subjectSlug: "sql-v2",
+        subjectTitle: "SQL",
+        moduleSlug: "sql-v2-1",
+      }),
+    ];
+
+    expect(
+      listDailyPracticeSubjectOptions({ options, targetCount: 3 }).map(
+        (subject) => subject.subjectSlug,
+      ),
+    ).toEqual(["python-v2"]);
   });
 
   it("deduplicates repeated authored exercise references", () => {
@@ -163,7 +189,7 @@ describe("daily practice selection", () => {
           locale: "en",
           queue: [projectTarget],
           targetCount: 1,
-          maxAttempts: 3,
+          maxAttempts: null,
         },
         instances: [],
       },
@@ -186,11 +212,25 @@ describe("daily practice selection", () => {
           locale: "en",
           queue,
           targetCount: queue.length,
-          maxAttempts: 3,
+          maxAttempts: null,
         },
         usedExerciseKeys: ["ci-0", "ci-1"],
       })?.exerciseKey,
     ).toBe("ci-2");
+  });
+
+  it("normalizes legacy finite attempt caps to unlimited", () => {
+    const meta = {
+      kind: "daily_five",
+      dayKey: "2026-07-05",
+      locale: "en",
+      queue: [option("legacy-cap")],
+      targetCount: 1,
+      maxAttempts: 3,
+    };
+
+    const parsed = readDailyFiveMeta(meta);
+    expect(parsed?.maxAttempts).toBeNull();
   });
 
   it("keeps an older stored run valid after the environment default changes", () => {

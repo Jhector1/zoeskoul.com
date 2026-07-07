@@ -1,8 +1,16 @@
 import "server-only";
 
-export const DEFAULT_DAILY_PRACTICE_TARGET_COUNT = 3;
-export const MIN_DAILY_PRACTICE_TARGET_COUNT = 1;
-export const MAX_DAILY_PRACTICE_TARGET_COUNT = 20;
+import {
+  DEFAULT_DAILY_PRACTICE_TARGET_COUNT,
+  MAX_DAILY_PRACTICE_TARGET_COUNT,
+  MIN_DAILY_PRACTICE_TARGET_COUNT,
+} from "./defaults";
+
+export {
+  DEFAULT_DAILY_PRACTICE_TARGET_COUNT,
+  MAX_DAILY_PRACTICE_TARGET_COUNT,
+  MIN_DAILY_PRACTICE_TARGET_COUNT,
+} from "./defaults";
 
 export function normalizeDailyPracticeTargetCount(
   value: unknown,

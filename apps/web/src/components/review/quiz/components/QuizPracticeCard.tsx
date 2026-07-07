@@ -996,6 +996,8 @@ export default function QuizPracticeCard(props: {
   ps?: PracticeState;
   toolScopedId?: string;
   toolsActive?: boolean;
+  codeSurfaceOverride?: "auto" | "embedded" | "tools";
+  suppressInlineHint?: boolean;
   subjectRuntimeDefaults?: unknown;
   courseRuntimeDefaults?: unknown;
   moduleRuntimeDefaults?: unknown;
@@ -1025,6 +1027,8 @@ export default function QuizPracticeCard(props: {
     ps,
     toolScopedId,
     toolsActive = true,
+    codeSurfaceOverride = "auto",
+    suppressInlineHint = false,
     subjectRuntimeDefaults,
     courseRuntimeDefaults,
     moduleRuntimeDefaults,
@@ -1179,13 +1183,26 @@ export default function QuizPracticeCard(props: {
       [ex, livePracticeItem, resolvedProjectStepManifest],
   );
 
+  const rendererExercise = useMemo<Exercise | null>(() => {
+    const source = (livePracticeManifest as Exercise | null) ?? ex;
+    if (!source || !suppressInlineHint) return source;
+
+    const copy = { ...(source as any) };
+    delete copy.hint;
+    return copy as Exercise;
+  }, [ex, livePracticeManifest, suppressInlineHint]);
+
   const toolsEnabled = Boolean(toolsAny?.enabled);
+  const toolsBoundId = toolsAny?.boundId ?? null;
   const isCodeInput = ex?.kind === "code_input";
   const resolvedCodeSurface = resolveCodeSurface({
     exercise: livePracticeManifest ?? ex,
     projectStepManifest: resolvedProjectStepManifest,
   });
-  const useToolsCodeSurface = toolsEnabled && isCodeInput && resolvedCodeSurface === "tools";
+  const effectiveCodeSurface =
+      codeSurfaceOverride === "auto" ? resolvedCodeSurface : codeSurfaceOverride;
+  const useToolsCodeSurface =
+      toolsEnabled && isCodeInput && effectiveCodeSurface === "tools";
   const codeRunnerMode: "embedded" | "tools" = useToolsCodeSurface ? "tools" : "embedded";
 
   const codeTools = useToolsCodeSurface ? toolsAny : null;
@@ -1638,8 +1655,8 @@ export default function QuizPracticeCard(props: {
 
     const bindKey = `${codeInputId}:${exerciseKeyForTools}`;
     const alreadyBoundToThisExercise =
-        toolsAny.boundId === codeInputId ||
-        toolsAny.boundId === exerciseKeyForTools;
+        toolsBoundId === codeInputId ||
+        toolsBoundId === exerciseKeyForTools;
 
     if (lastToolsBindKeyRef.current === bindKey && alreadyBoundToThisExercise) return;
     lastToolsBindKeyRef.current = bindKey;
@@ -1659,7 +1676,7 @@ export default function QuizPracticeCard(props: {
     ex,
     Boolean(livePracticeItem),
     exerciseKeyForTools,
-    toolsAny.boundId,
+    toolsBoundId,
   ]);
 
 
@@ -1952,7 +1969,7 @@ export default function QuizPracticeCard(props: {
 
                 <ExerciseRenderer
                     key={stableExerciseSlotId}
-                    exercise={(livePracticeManifest as Exercise) ?? ex}
+                    exercise={(rendererExercise ?? ex) as Exercise}
                     current={
                       isCorrect || isCompleted
                           ? {

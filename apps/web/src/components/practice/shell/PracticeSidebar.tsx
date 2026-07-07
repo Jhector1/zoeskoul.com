@@ -97,8 +97,14 @@ export default function PracticeSidebar(
         onOpenHelp,
     } = props;
 
-    const showTopicFilter = topicOptionsFixed.length > 0 && (!compact || !topicLocked);
-    const showDifficultyFilter = difficultyOptions.length > 0 && (!compact || !difficultyLocked);
+    const showTopicFilter =
+        !isAssignmentRun &&
+        topicOptionsFixed.length > 0 &&
+        (!compact || !topicLocked);
+    const showDifficultyFilter =
+        !isAssignmentRun &&
+        difficultyOptions.length > 0 &&
+        (!compact || !difficultyLocked);
 
     return (
         <div className={compact ? "overflow-hidden" : "ui-page-surface overflow-hidden"}>
@@ -112,7 +118,11 @@ export default function PracticeSidebar(
                             className="ui-btn-secondary px-3"
                         >
                             <span aria-hidden>←</span>
-                            <span>{t("summary.return")}</span>
+                            <span>
+                                {isAssignmentRun
+                                    ? t("summary.assignmentReturn")
+                                    : t("summary.return")}
+                            </span>
                         </button>
                     </div>
                 ) : null}

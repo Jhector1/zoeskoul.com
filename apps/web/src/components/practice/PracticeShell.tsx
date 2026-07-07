@@ -9,16 +9,23 @@ import { buildSubmitAnswerFromItem } from "@/lib/practice/uiHelpers";
 
 import SummaryView from "./shell/SummaryView";
 import PracticeView from "./shell/PracticeView";
+import PracticeReviewWorkspace from "./review/PracticeReviewWorkspace";
+import AssignmentReviewWorkspace from "./review/AssignmentReviewWorkspace";
 import { useConceptExplain } from "./hooks/useConceptExplain";
 import { isExcusedPracticeItem } from "@/lib/flow/excuse";
 import { isPracticeItemFinalized } from "@/lib/practice/runtime";
 import type { PracticeExperienceMode, PracticeRunViewer } from "@/lib/practice/experience/types";
 import type { PracticeHelpPolicy } from "@/lib/practice/help/steps";
+import { resolvePracticeExerciseSurface } from "@/lib/practice/experience/surface";
 
 export type TFn = (key: string, values?: Record<string, any>) => string;
 
 export type PracticeShellProps = {
   t: TFn;
+
+  locale?: string;
+  subjectSlug?: string;
+  moduleSlug?: string;
 
   isAssignmentRun: boolean;
   isSessionRun: boolean;
@@ -27,6 +34,7 @@ export type PracticeShellProps = {
 
   returnUrl?: string | null;
   leaderboardUrl?: string | null;
+  dailyResetAt?: string | null;
   onReturn?: () => void;
   experienceMode: PracticeExperienceMode;
   viewer: PracticeRunViewer;
@@ -98,6 +106,8 @@ export type PracticeShellProps = {
   pendingRevealCompletion?: boolean;
   finishRevealedSession?: () => Promise<void> | void;
   retryLoad: () => void;
+  resetCurrentExercise?: () => Promise<void> | void;
+  restartPractice?: () => Promise<void> | void;
 
   padRef: React.MutableRefObject<VectorPadState>;
   zHeldRef: React.MutableRefObject<boolean>;
@@ -140,6 +150,28 @@ export default function PracticeShell(props: PracticeShellProps) {
 
   const resultBoxClass = useMemo(() => getResultBoxClass(current), [current]);
   const concept = useConceptExplain({ current, exercise });
+  const surface = resolvePracticeExerciseSurface({
+    mode: props.experienceMode,
+    exerciseKind: exercise?.kind ?? null,
+  });
+
+  const sharedViewProps = {
+    ...props,
+    canSubmitNow,
+    finalized,
+    attempts,
+    outOfAttempts,
+    resultBoxClass,
+    concept,
+  };
+
+  if (props.experienceMode === "assignment") {
+    return <AssignmentReviewWorkspace {...props} />;
+  }
+
+  if (surface === "tools") {
+    return <PracticeReviewWorkspace {...sharedViewProps} />;
+  }
 
   if (phase === "summary") return <SummaryView {...props} />;
 

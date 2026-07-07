@@ -10,10 +10,10 @@ import {
 } from "./config";
 
 describe("daily practice environment config", () => {
-  it("defaults to three exercises", () => {
-    expect(DEFAULT_DAILY_PRACTICE_TARGET_COUNT).toBe(3);
-    expect(normalizeDailyPracticeTargetCount(undefined)).toBe(3);
-    expect(normalizeDailyPracticeTargetCount("not-a-number")).toBe(3);
+  it("defaults to five exercises", () => {
+    expect(DEFAULT_DAILY_PRACTICE_TARGET_COUNT).toBe(5);
+    expect(normalizeDailyPracticeTargetCount(undefined)).toBe(5);
+    expect(normalizeDailyPracticeTargetCount("not-a-number")).toBe(5);
   });
 
   it("accepts whole numeric strings and clamps unsafe values", () => {

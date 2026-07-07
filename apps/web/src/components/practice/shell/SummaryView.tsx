@@ -2,6 +2,7 @@
 
 import React, { useMemo } from "react";
 import { cn } from "@/lib/cn";
+import DailyResetCountdown from "@/components/practice/completion/DailyResetCountdown";
 import type { PracticeShellProps } from "../PracticeShell";
 import PracticeReviewList from "@/components/practice/MissedPracticeCard";
 import SummaryViewSkeleton from "@/components/practice/shell/SummaryViewSkeleton";
@@ -65,12 +66,23 @@ function completionCopy(props: PracticeShellProps, challengePassed: boolean) {
           : "Come back tomorrow for another ranked daily practice, or subscribe for unlimited practice.",
       };
     }
-    case "assignment":
+    case "assignment": {
+      const revealedCount = Array.isArray(props.stack)
+        ? props.stack.filter((item) => Boolean(item?.revealed)).length
+        : 0;
+
       return {
-        title: "Assignment submitted",
-        subtitle: `${props.correctCount} of ${props.answeredCount} finalized answers were correct.`,
-        note: "Your assignment result has been saved.",
+        title: props.t("workspace.assignment.summaryTitle"),
+        subtitle: props.t("workspace.assignment.summarySubtitle", {
+          completed: props.answeredCount,
+          total: props.sessionSize,
+        }),
+        note: props.t("workspace.assignment.summaryNote", {
+          correct: props.correctCount,
+          revealed: revealedCount,
+        }),
       };
+    }
     default:
       return {
         title: `${props.t("summary.title")} 🎉`,
@@ -84,6 +96,20 @@ function completionCopy(props: PracticeShellProps, challengePassed: boolean) {
 }
 
 function CompletionAction(props: PracticeShellProps) {
+  if (props.experienceMode === "assignment") {
+    return (
+      <div className="flex justify-start">
+        <button
+          className="ui-btn-primary min-h-11 px-4 py-2.5 text-sm"
+          onClick={() => props.onReturn?.()}
+          type="button"
+        >
+          {props.t("summary.assignmentReturn")}
+        </button>
+      </div>
+    );
+  }
+
   const guestAcquisition =
     props.viewer.tier === "guest" &&
     (props.experienceMode === "public_challenge" ||
@@ -118,28 +144,31 @@ function CompletionAction(props: PracticeShellProps) {
       <div className="ui-page-surface overflow-hidden">
         <div className="border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] px-4 py-4 sm:px-5">
           <div className="text-base font-semibold tracking-tight sm:text-lg">
-            Today’s free practice is complete
+            {props.t("completion.daily.title")}
           </div>
           <div className="mt-1 text-sm text-[rgb(var(--ui-text-muted)/0.84)]">
-            Subscribe for unlimited configurable practice, or return tomorrow for another ranked daily session.
+            {props.t("completion.daily.freeNote")}
           </div>
         </div>
-        <div className="flex flex-wrap gap-2 p-4 sm:p-5">
-          <button
-            className="ui-btn-primary min-h-11 px-4 py-2.5 text-sm"
-            onClick={() => props.onReturn?.()}
-            type="button"
-          >
-            View subscription plans
-          </button>
-          {props.leaderboardUrl ? (
-            <a
-              className="ui-btn-secondary min-h-11 px-4 py-2.5 text-sm"
-              href={props.leaderboardUrl}
+        <div className="grid gap-4 p-4 sm:p-5">
+          <DailyResetCountdown nextResetAt={props.dailyResetAt} compact />
+          <div className="flex flex-wrap gap-2">
+            <button
+              className="ui-btn-primary min-h-11 px-4 py-2.5 text-sm"
+              onClick={() => props.onReturn?.()}
+              type="button"
             >
-              View leaderboard
-            </a>
-          ) : null}
+              {props.t("completion.daily.freePrimary")}
+            </button>
+            {props.leaderboardUrl ? (
+              <a
+                className="ui-btn-secondary min-h-11 px-4 py-2.5 text-sm"
+                href={props.leaderboardUrl}
+              >
+                {props.t("completion.leaderboard")}
+              </a>
+            ) : null}
+          </div>
         </div>
       </div>
     );
@@ -152,24 +181,31 @@ function CompletionAction(props: PracticeShellProps) {
       props.experienceMode === "standard")
   ) {
     return (
-      <div className="flex flex-wrap justify-start gap-2">
-        <button
-          className="ui-btn-primary min-h-11 px-4 py-2.5 text-sm"
-          onClick={() => props.onReturn?.()}
-          type="button"
-        >
-          {props.experienceMode === "public_challenge"
-            ? "Practice more like this"
-            : "Practice more"}
-        </button>
-        {props.experienceMode === "daily_five" && props.leaderboardUrl ? (
-          <a
-            className="ui-btn-secondary min-h-11 px-4 py-2.5 text-sm"
-            href={props.leaderboardUrl}
-          >
-            View leaderboard
-          </a>
+      <div className="grid gap-3">
+        {props.experienceMode === "daily_five" ? (
+          <DailyResetCountdown nextResetAt={props.dailyResetAt} compact />
         ) : null}
+        <div className="flex flex-wrap justify-start gap-2">
+          <button
+            className="ui-btn-primary min-h-11 px-4 py-2.5 text-sm"
+            onClick={() => props.onReturn?.()}
+            type="button"
+          >
+            {props.experienceMode === "public_challenge"
+              ? "Practice more like this"
+              : props.experienceMode === "daily_five"
+                ? props.t("completion.daily.subscriberPrimary")
+                : "Practice more"}
+          </button>
+          {props.experienceMode === "daily_five" && props.leaderboardUrl ? (
+            <a
+              className="ui-btn-secondary min-h-11 px-4 py-2.5 text-sm"
+              href={props.leaderboardUrl}
+            >
+              {props.t("completion.leaderboard")}
+            </a>
+          ) : null}
+        </div>
       </div>
     );
   }
@@ -191,7 +227,7 @@ function CompletionAction(props: PracticeShellProps) {
   return null;
 }
 
-export default function SummaryView(props: PracticeShellProps) {
+export default function SummaryView(props: PracticeShellProps & { layoutMode?: "page" | "embedded" }) {
   const {
     t,
     answeredCount,
@@ -223,18 +259,22 @@ export default function SummaryView(props: PracticeShellProps) {
   const reviewCount = showMissed
     ? list.filter((question: any) => question?.result?.ok === false).length
     : list.length;
-  const isSingleQuestionChallenge = props.experienceMode === "public_challenge";
+  const hideDetailedReview =
+    props.experienceMode === "public_challenge" ||
+    props.experienceMode === "assignment";
+
+  const embedded = props.layoutMode === "embedded";
 
   return (
     <div
-      className="min-h-screen"
+      className={embedded ? "w-full" : "min-h-screen"}
       style={{
         backgroundColor: "rgb(var(--ui-bg) / 1)",
         color: "rgb(var(--ui-text) / 1)",
       }}
     >
-      <div className="ui-container py-4 md:py-6">
-        <div className="mx-auto grid max-w-5xl gap-4 md:gap-5">
+      <div className={embedded ? "p-3 sm:p-4" : "ui-container py-4 md:py-6"}>
+        <div className={embedded ? "grid gap-4 md:gap-5" : "mx-auto grid max-w-5xl gap-4 md:gap-5"}>
           <div className="ui-page-surface overflow-hidden">
             <div className="border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] px-4 py-4 sm:px-5 sm:py-5">
               <div className="text-lg font-semibold tracking-tight sm:text-xl">
@@ -267,7 +307,7 @@ export default function SummaryView(props: PracticeShellProps) {
 
           <CompletionAction {...props} />
 
-          {!isSingleQuestionChallenge ? (
+          {!hideDetailedReview ? (
             <div className="ui-page-surface overflow-hidden">
               <div className="flex flex-col gap-3 border-b border-[rgb(var(--ui-border)/0.9)] bg-[rgb(var(--ui-surface-2)/0.72)] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
                 <div className="min-w-0">

@@ -11,6 +11,7 @@ import { getPracticeExperiencePolicy } from "@/lib/practice/experience/policy";
 import { resolvePracticeViewer } from "@/lib/practice/experience/viewer";
 import type { PracticeRunViewer } from "@/lib/practice/experience/types";
 import { normalizePracticeHelpPolicy } from "@/lib/practice/help/steps";
+import { nextUtcDayStartIso } from "@/lib/practice/experience/completion";
 
 const GUEST_VIEWER: PracticeRunViewer = {
   tier: "guest",
@@ -72,6 +73,14 @@ export function buildRunMeta(args: {
           exerciseKey: challenge.exerciseKey,
           title: challenge.exerciseTitle,
           maxAttempts: challenge.maxAttempts,
+        }
+      : null,
+    daily: daily
+      ? {
+          dayKey: daily.dayKey,
+          nextResetAt:
+            nextUtcDayStartIso(daily.dayKey) ?? new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+          targetCount: daily.targetCount,
         }
       : null,
   };

@@ -12,11 +12,17 @@ type Props = {
     locale: string;
     toolsUiEnabled: boolean;
     toolsToggleAllowed?: boolean;
+    topicsToggleAllowed?: boolean;
     showDesktopLeft: boolean;
     showDesktopRight: boolean;
     leftCollapsed: boolean;
     rightCollapsed: boolean;
     modulesHref: string;
+    showModulesButton?: boolean;
+    modulesButtonLabel?: string;
+    modulesButtonTitle?: string;
+    modulesButtonLoadingText?: string;
+    showResetButton?: boolean;
     onToggleLeftPanel: () => void;
     onToggleRightPanel: () => void;
     resetOptions: Array<{
@@ -52,11 +58,17 @@ function clamp(value: number, min: number, max: number) {
 export default function ReviewModuleHeader({
                                                toolsUiEnabled,
                                                toolsToggleAllowed = true,
+                                               topicsToggleAllowed = true,
                                                showDesktopLeft,
                                                showDesktopRight,
                                                leftCollapsed,
                                                rightCollapsed,
                                                modulesHref,
+                                               showModulesButton = true,
+                                               modulesButtonLabel,
+                                               modulesButtonTitle,
+                                               modulesButtonLoadingText,
+                                               showResetButton = true,
                                                onToggleLeftPanel,
                                                onToggleRightPanel,
                                                resetOptions,
@@ -171,7 +183,8 @@ export default function ReviewModuleHeader({
     const compactModeActive =
         learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
     const showTopicsButton =
-        !compactModeActive || !showDesktopLeft || leftCollapsed;
+        topicsToggleAllowed &&
+        (!compactModeActive || !showDesktopLeft || leftCollapsed);
     const showToolsButton =
         toolsUiEnabled &&
         toolsToggleAllowed &&
@@ -243,14 +256,16 @@ export default function ReviewModuleHeader({
             slot={
                 <div className="flex w-full items-center justify-between gap-3">
                     <div className="inline-flex min-w-0 flex-wrap items-center gap-2 [&>button]:shrink-0">
-                        <NavButton
-                            href={modulesHref}
-                            className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                            title={t("modulesTitle")}
-                            loadingText={t("modulesLoading")}
-                        >
-                            {t("modulesButton")}
-                        </NavButton>
+                        {showModulesButton ? (
+                            <NavButton
+                                href={modulesHref}
+                                className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                title={modulesButtonTitle ?? t("modulesTitle")}
+                                loadingText={modulesButtonLoadingText ?? t("modulesLoading")}
+                            >
+                                {modulesButtonLabel ?? t("modulesButton")}
+                            </NavButton>
+                        ) : null}
 
                         {showTopicsButton ? (
                             <button
@@ -278,25 +293,27 @@ export default function ReviewModuleHeader({
                             </button>
                         ) : null}
 
-                        <div className="relative">
-                            <button
-                                type="button"
-                                data-testid="review-reset-menu-button"
-                                onClick={(event) => toggleResetMenu(event.currentTarget)}
-                                aria-expanded={resetMenuOpen}
-                                aria-haspopup="menu"
-                                aria-controls={resetMenuOpen ? resetMenuId : undefined}
-                                className="ui-btn ui-btn-secondary gap-1.5 text-xs font-extrabold whitespace-nowrap"
-                            >
-                                <span>{t("resetButton")}</span>
-                                <span
-                                    aria-hidden="true"
-                                    className={`text-[10px] leading-none opacity-75 transition-transform ${resetMenuOpen ? "rotate-180" : ""}`}
+                        {showResetButton && resetOptions.length > 0 ? (
+                            <div className="relative">
+                                <button
+                                    type="button"
+                                    data-testid="review-reset-menu-button"
+                                    onClick={(event) => toggleResetMenu(event.currentTarget)}
+                                    aria-expanded={resetMenuOpen}
+                                    aria-haspopup="menu"
+                                    aria-controls={resetMenuOpen ? resetMenuId : undefined}
+                                    className="ui-btn ui-btn-secondary gap-1.5 text-xs font-extrabold whitespace-nowrap"
                                 >
-                                    ▾
-                                </span>
-                            </button>
-                        </div>
+                                    <span>{t("resetButton")}</span>
+                                    <span
+                                        aria-hidden="true"
+                                        className={`text-[10px] leading-none opacity-75 transition-transform ${resetMenuOpen ? "rotate-180" : ""}`}
+                                    >
+                                        ▾
+                                    </span>
+                                </button>
+                            </div>
+                        ) : null}
 
                         <button
                             type="button"

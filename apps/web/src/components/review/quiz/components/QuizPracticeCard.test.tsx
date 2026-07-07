@@ -19,6 +19,7 @@ const mocked = vi.hoisted(() => ({
     requestBind: vi.fn(),
     ensureVisible: vi.fn(),
     setCodeInputMeta: vi.fn(),
+    toolsValue: null as any,
     rawMessages: {
         "topics.python-v2.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode":
             "print(\"Welcome to Python Club\")\n\n# Replace the preview line with the real event title.\n",
@@ -54,17 +55,7 @@ vi.mock("@/components/practice/ExerciseRenderer", () => ({
 }));
 
 vi.mock("@/components/review/module/context/ReviewToolsContext", () => ({
-    useOptionalReviewTools: () => ({
-        enabled: true,
-        registerCodeInput: mocked.registerCodeInput,
-        unregisterCodeInput: mocked.unregisterCodeInput,
-        isBound: () => false,
-        requestBind: mocked.requestBind,
-        ensureVisible: mocked.ensureVisible,
-        getRunFeedbackEntry: () => null,
-        boundId: null,
-        setCodeInputMeta: mocked.setCodeInputMeta,
-    }),
+    useOptionalReviewTools: () => mocked.toolsValue,
 }));
 
 function makeCodeInputExercise(
@@ -267,6 +258,17 @@ describe("QuizPracticeCard project-step fallback", () => {
         mocked.requestBind.mockClear();
         mocked.ensureVisible.mockClear();
         mocked.setCodeInputMeta.mockClear();
+        mocked.toolsValue = {
+            enabled: true,
+            registerCodeInput: mocked.registerCodeInput,
+            unregisterCodeInput: mocked.unregisterCodeInput,
+            isBound: () => false,
+            requestBind: mocked.requestBind,
+            ensureVisible: mocked.ensureVisible,
+            getRunFeedbackEntry: () => null,
+            boundId: null,
+            setCodeInputMeta: mocked.setCodeInputMeta,
+        };
         resetRuntimeStore();
     });
 
@@ -823,6 +825,58 @@ describe("QuizPracticeCard project-step fallback", () => {
         const props = mocked.exerciseRendererProps.at(-1);
         expect(props?.codeRunnerMode).toBe("tools");
         expect(props?.codeTools).toBeTruthy();
+    });
+
+
+    it("renders an embedded assignment exercise without a tools provider", () => {
+        mocked.toolsValue = null;
+
+        const exercise = makeCodeInputExercise({
+            id: "assignment-embedded-ex",
+            title: "Embedded assignment exercise",
+            prompt: "Type one line",
+            ui: { codeSurface: "embedded" },
+        });
+
+        expect(() =>
+            renderToStaticMarkup(
+                <QuizPracticeCard
+                    q={{
+                        id: "assignment-embedded-practice",
+                        kind: "practice",
+                        fetch: {
+                            subject: "python",
+                            module: "module-1",
+                            section: "section-1",
+                            topic: "topic-1",
+                        },
+                    } as any}
+                    ownerCardId="assignment-card"
+                    ps={makePracticeState({
+                        item: makeQItem({ code: "print('hi')", exercise }),
+                        exercise,
+                    })}
+                    toolsActive={false}
+                    codeSurfaceOverride="embedded"
+                    unlocked
+                    isCompleted={false}
+                    locked={false}
+                    unlimitedAttempts
+                    strictSequential={false}
+                    seqOrder={0}
+                    padRef={{ current: null } as any}
+                    onUpdateItem={vi.fn()}
+                    onSubmit={vi.fn()}
+                    onHelp={vi.fn()}
+                    onRetryExercise={vi.fn()}
+                    onExcused={vi.fn()}
+                />,
+            ),
+        ).not.toThrow();
+
+        const rendererProps = mocked.exerciseRendererProps.at(-1);
+        expect(rendererProps?.codeRunnerMode).toBe("embedded");
+        expect(rendererProps?.codeTools).toBeNull();
     });
 
     it("keeps simple inline code_input exercises embedded when the manifest opts in", () => {

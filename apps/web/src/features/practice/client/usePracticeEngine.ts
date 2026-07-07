@@ -34,10 +34,13 @@ import {
   computePracticePct,
   historyRowToQItem,
   isPracticeItemFinalized,
+  isRecoverablePracticeKeyError,
   requestPracticeHelpItem,
   submitPracticeItem,
 } from "@/lib/practice/runtime";
 import { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
+import { samePracticeExerciseIdentity } from "@/lib/practice/exerciseIdentity";
+import { resolveRevealCompletionTransition } from "@/lib/practice/experience/revealCompletion";
 
 export type Phase = "practice" | "summary";
 
@@ -304,6 +307,31 @@ export function usePracticeEngine(args: {
     });
   }
 
+  function resetCurrentExercise() {
+    if (!current || !exercise) return;
+
+    const resetItem = initItemFromExercise(exercise, current.key, {
+      resolveText: (value) => resolveTextRef.current(value),
+    });
+
+    // Reset the learner workspace and answer, but never refund ranked/limited
+    // attempts that have already been recorded by the server.
+    resetItem.attempts = current.attempts ?? 0;
+
+    setStack((prev) => {
+      if (idx < 0 || idx >= prev.length) return prev;
+      const next = prev.slice();
+      next[idx] = resetItem;
+      return next;
+    });
+
+    padRef.current.a = cloneVec(resetItem.dragA) as any;
+    padRef.current.b = cloneVec(resetItem.dragB) as any;
+    setDeferredRevealCompletion(false);
+    setLoadErr(null);
+    setActionErr(null);
+  }
+
   const {
     answeredCount: localAnswered,
     correctCount: localCorrect,
@@ -344,6 +372,107 @@ export function usePracticeEngine(args: {
     excusedAnswered: localExcusedAnswered,
   });
 
+  function buildPracticeRequest(args: {
+    sid: string | null;
+    signal?: AbortSignal;
+  }) {
+    const useSession = Boolean(args.sid);
+
+    return {
+      sessionId: useSession ? args.sid ?? undefined : undefined,
+      allowReveal: allowReveal ? true : undefined,
+      signal: args.signal,
+      subject: useSession ? undefined : subjectSlug,
+      module: useSession ? undefined : moduleSlug,
+      topic: useSession ? undefined : String(topic === "all" ? "" : topic),
+      difficulty:
+        useSession || difficulty === "all" ? undefined : difficulty,
+      section: useSession ? undefined : section ?? undefined,
+      preferPurpose: preferPurpose as any,
+      purposePolicy: purposePolicy as any,
+    };
+  }
+
+  async function refreshCurrentPracticeKey() {
+    if (!current || !exercise) return null;
+
+    const sid = getEffectiveSid({ sessionId, resolvedSessionIdRef });
+    if (!sid) return null;
+
+    const response = await fetchPracticeExercise(
+      buildPracticeRequest({ sid }),
+    );
+
+    const runFromApi = (response as any)?.run;
+    if (runFromApi?.mode) setRun(runFromApi);
+
+    if ((response as any)?.complete) {
+      setCompleted(true);
+      setAutoSummarized(true);
+      setPhase("summary");
+      return null;
+    }
+
+    const rawExercise = (response as any)?.exercise;
+    const freshKey = (response as any)?.key;
+    if (
+      !rawExercise ||
+      typeof rawExercise?.kind !== "string" ||
+      typeof freshKey !== "string"
+    ) {
+      throw new Error("Unable to refresh this practice exercise.");
+    }
+
+    if ((response as any)?.sessionId) {
+      setSessionId(String((response as any).sessionId));
+    }
+
+    const freshExercise = resolveDeepTagged(
+      rawExercise,
+      (key) => rawKeyRef.current(key),
+    ) as Exercise;
+    const freshBase = initItemFromExercise(freshExercise, freshKey, {
+      resolveText: (value) => resolveTextRef.current(value),
+    });
+    const sameExercise = samePracticeExerciseIdentity({
+      leftItem: current,
+      leftExercise: exercise,
+      rightItem: freshBase,
+      rightExercise: freshExercise,
+    });
+
+    const freshItem: QItem = sameExercise
+      ? {
+          ...freshBase,
+          ...current,
+          key: freshKey,
+          exercise: freshExercise,
+          help: {
+            ...freshBase.help,
+            ...current.help,
+            entries: {
+              ...freshBase.help.entries,
+              ...current.help.entries,
+            },
+          },
+        }
+      : freshBase;
+
+    setStack((prev) => {
+      if (idx < 0 || idx >= prev.length) return prev;
+      const next = prev.slice();
+      next[idx] = freshItem;
+      return next;
+    });
+
+    if (!sameExercise) {
+      padRef.current.a = cloneVec(freshItem.dragA) as any;
+      padRef.current.b = cloneVec(freshItem.dragB) as any;
+    }
+
+    return { item: freshItem, exercise: freshExercise };
+  }
+
   async function loadNextExercise(opts?: { forceNew?: boolean }) {
     if (phase === "summary" && !opts?.forceNew) return;
     if (completed && !opts?.forceNew) return;
@@ -364,20 +493,9 @@ export function usePracticeEngine(args: {
       const sid = opts?.forceNew ? null : effectiveSid;
       const useSession = Boolean(sid);
 
-      const response = await fetchPracticeExercise({
-        sessionId: useSession ? (sid ?? undefined) : undefined,
-        allowReveal: allowReveal ? true : undefined,
-        signal: controller.signal,
-
-        subject: useSession ? undefined : subjectSlug,
-        module: useSession ? undefined : moduleSlug,
-        topic: useSession ? undefined : String(topic === "all" ? "" : topic),
-        difficulty: useSession ? undefined : difficulty === "all" ? undefined : difficulty,
-        section: useSession ? undefined : (section ?? undefined),
-
-        preferPurpose: preferPurpose as any,
-        purposePolicy: purposePolicy as any,
-      });
+      const response = await fetchPracticeExercise(
+        buildPracticeRequest({ sid, signal: controller.signal }),
+      );
 
       const runFromApi = (response as any)?.run;
       if (runFromApi?.mode) setRun(runFromApi);
@@ -649,13 +767,40 @@ export function usePracticeEngine(args: {
     try {
       setSubmitBusy(true);
 
-      const submitted = await submitPracticeItem({
-        item: current,
-        exercise,
-        padRef,
-        maxAttempts,
-        isLockedRun,
-      });
+      let activeItem = current;
+      let activeExercise = exercise;
+      let submitted: Awaited<ReturnType<typeof submitPracticeItem>>;
+      // Reuse this UUID if an expired signed key forces a refresh/retry. The
+      // server maps it to PracticeAttempt.id, making the retry durable and
+      // idempotent across processes and tabs.
+      const submissionId = crypto.randomUUID();
+
+      try {
+        submitted = await submitPracticeItem({
+          item: activeItem,
+          exercise: activeExercise,
+          padRef,
+          maxAttempts,
+          isLockedRun,
+          submissionId,
+        });
+      } catch (error) {
+        if (!isRecoverablePracticeKeyError(error)) throw error;
+
+        const refreshed = await refreshCurrentPracticeKey();
+        if (!refreshed) return;
+        activeItem = refreshed.item;
+        activeExercise = refreshed.exercise;
+
+        submitted = await submitPracticeItem({
+          item: activeItem,
+          exercise: activeExercise,
+          padRef,
+          maxAttempts,
+          isLockedRun,
+          submissionId,
+        });
+      }
 
       emitSfx(submitted.ok ? "answer:correct" : "answer:wrong");
 
@@ -690,25 +835,47 @@ export function usePracticeEngine(args: {
   async function openHelp(stepKey?: string) {
     if (completed) return;
     if (!current || !exercise || busy) return;
+    if (isPracticeItemFinalized(current, maxAttempts, isLockedRun)) return;
 
     setBusy(true);
     setActionErr(null);
 
     try {
       const chosenKey =
-          stepKey ??
-          (allowReveal ? "reveal" : "hint_1");
+        stepKey ??
+        (allowReveal ? "reveal" : "hint_1");
 
-      const opened = await requestPracticeHelpItem({
-        item: current,
-        exercise,
-        stepKey: chosenKey,
-        padRef,
-      });
+      let activeItem = current;
+      let activeExercise = exercise;
+      let opened: Awaited<ReturnType<typeof requestPracticeHelpItem>>;
 
-      const nextOpenedKeys = current.help.openedStepKeys.includes(chosenKey)
-          ? current.help.openedStepKeys
-          : [...current.help.openedStepKeys, chosenKey];
+      try {
+        opened = await requestPracticeHelpItem({
+          item: activeItem,
+          exercise: activeExercise,
+          stepKey: chosenKey,
+          padRef,
+        });
+      } catch (error) {
+        if (!isRecoverablePracticeKeyError(error)) throw error;
+
+        const refreshed = await refreshCurrentPracticeKey();
+        if (!refreshed) return;
+        activeItem = refreshed.item;
+        activeExercise = refreshed.exercise;
+
+        opened = await requestPracticeHelpItem({
+          item: activeItem,
+          exercise: activeExercise,
+          stepKey: chosenKey,
+          padRef,
+        });
+      }
+
+      const previousHelp = activeItem.help;
+      const nextOpenedKeys = previousHelp.openedStepKeys.includes(chosenKey)
+        ? previousHelp.openedStepKeys
+        : [...previousHelp.openedStepKeys, chosenKey];
 
       updateCurrent({
         ...(opened.dragA ? { dragA: opened.dragA } : {}),
@@ -731,13 +898,13 @@ export function usePracticeEngine(args: {
             }
           : {}),
         help: {
-          ...current.help,
+          ...previousHelp,
           openedStepKeys: nextOpenedKeys,
           activeStepKey: chosenKey,
           busyStepKey: null,
           error: null,
           entries: {
-            ...current.help.entries,
+            ...previousHelp.entries,
             [chosenKey]: opened.entry,
           },
         },
@@ -750,12 +917,14 @@ export function usePracticeEngine(args: {
           null;
         if (serverReturn) setCompletionReturnUrl(serverReturn);
 
-        if (chosenKey === "reveal") {
-          // Keep the revealed answer visible until the learner explicitly
-          // continues. This prevents the answer card from being skipped by an
-          // immediate transition to the summary screen.
+        const revealTransition = resolveRevealCompletionTransition(run?.mode);
+        const shouldWaitForExplicitContinue =
+          chosenKey === "reveal" && revealTransition === "explicit";
+
+        if (shouldWaitForExplicitContinue) {
           setDeferredRevealCompletion(true);
         } else {
+          setDeferredRevealCompletion(false);
           setCompleted(true);
           setAutoSummarized(true);
           setPhase("summary");
@@ -807,6 +976,7 @@ export function usePracticeEngine(args: {
     reviewStack,
     submitBusy,
     updateCurrent,
+    resetCurrentExercise,
     loadNextExercise,
     retryLoad: () => loadNextExercise({ forceNew: false }),
 

@@ -11,7 +11,7 @@ import {
 
 /** @deprecated Prefer DAILY_PRACTICE_TARGET_COUNT for new code. */
 export const DAILY_FIVE_TARGET_COUNT = DAILY_PRACTICE_TARGET_COUNT;
-export const DAILY_FIVE_MAX_ATTEMPTS = 3;
+export const DAILY_FIVE_MAX_ATTEMPTS = null;
 
 export type DailyFiveTarget = Pick<
   PublishedPracticeExerciseOption,
@@ -29,9 +29,19 @@ export type DailyFiveSessionMeta = {
   kind: "daily_five";
   dayKey: string;
   locale: string;
+  subjectSlug?: string;
   queue: DailyFiveTarget[];
   targetCount: number;
-  maxAttempts: number;
+  maxAttempts: null;
+};
+
+export type DailyPracticeSubjectOption = {
+  subjectSlug: string;
+  subjectTitle: string;
+  catalogSlug: string;
+  catalogTitle: string;
+  eligibleExerciseCount: number;
+  eligibleModuleCount: number;
 };
 
 function asRecord(value: unknown): Record<string, unknown> | null {
@@ -85,18 +95,19 @@ export function readDailyFiveMeta(meta: unknown): DailyFiveSessionMeta | null {
 
   if (normalized.length !== targetCount) return null;
 
-  const maxAttempts = Number(record.maxAttempts);
-
   return {
     kind: "daily_five",
     dayKey,
     locale,
+    subjectSlug:
+      typeof record.subjectSlug === "string" && record.subjectSlug.trim()
+        ? record.subjectSlug.trim()
+        : normalized[0]?.subjectSlug,
     queue: normalized,
     targetCount,
-    maxAttempts:
-      Number.isInteger(maxAttempts) && maxAttempts > 0
-        ? maxAttempts
-        : DAILY_FIVE_MAX_ATTEMPTS,
+    // Daily Practice is unlimited. Ignore finite values written by older
+    // sessions so an in-progress set receives the current policy immediately.
+    maxAttempts: DAILY_FIVE_MAX_ATTEMPTS,
   };
 }
 
@@ -109,6 +120,7 @@ export function buildDailyFiveMeta(args: {
     kind: "daily_five",
     dayKey: args.dayKey,
     locale: args.locale,
+    subjectSlug: args.queue[0]?.subjectSlug ?? null,
     queue: args.queue,
     targetCount: args.queue.length,
     maxAttempts: DAILY_FIVE_MAX_ATTEMPTS,
@@ -120,8 +132,7 @@ export function isDailyFiveEligible(option: PublishedPracticeExerciseOption) {
     option.exerciseKind === "code_input" &&
     option.isStandaloneTryIt === true &&
     option.sectionRole === "lesson" &&
-    (option.exercisePurpose === "quiz" ||
-      option.exercisePurpose === "project") &&
+    option.exercisePurpose === "project" &&
     option.isMultiFile !== true &&
     option.requiresTerminal !== true
   );
@@ -133,6 +144,87 @@ function score(seed: string, option: PublishedPracticeExerciseOption) {
     .digest("hex");
 }
 
+export function listDailyPracticeSubjectOptions(args: {
+  options: PublishedPracticeExerciseOption[];
+  targetCount?: number;
+}): DailyPracticeSubjectOption[] {
+  const targetCount = normalizeDailyPracticeTargetCount(
+    args.targetCount ?? DAILY_PRACTICE_TARGET_COUNT,
+  );
+  const bySubject = new Map<
+    string,
+    {
+      subjectTitle: string;
+      catalogSlug: string;
+      catalogTitle: string;
+      exercises: Set<string>;
+      modules: Set<string>;
+    }
+  >();
+
+  for (const option of args.options) {
+    if (!isDailyFiveEligible(option)) continue;
+
+    const current = bySubject.get(option.subjectSlug) ?? {
+      subjectTitle: option.subjectTitle,
+      catalogSlug: option.catalogSlug,
+      catalogTitle: option.catalogTitle,
+      exercises: new Set<string>(),
+      modules: new Set<string>(),
+    };
+
+    current.exercises.add(option.exerciseKey);
+    current.modules.add(option.moduleSlug);
+    bySubject.set(option.subjectSlug, current);
+  }
+
+  return [...bySubject.entries()]
+    .map(([subjectSlug, value]) => ({
+      subjectSlug,
+      subjectTitle: value.subjectTitle,
+      catalogSlug: value.catalogSlug,
+      catalogTitle: value.catalogTitle,
+      eligibleExerciseCount: value.exercises.size,
+      eligibleModuleCount: value.modules.size,
+    }))
+    .filter((subject) => subject.eligibleExerciseCount >= targetCount)
+    .sort(
+      (a, b) =>
+        a.catalogTitle.localeCompare(b.catalogTitle) ||
+        a.subjectTitle.localeCompare(b.subjectTitle) ||
+        a.subjectSlug.localeCompare(b.subjectSlug),
+    );
+}
+
+function uniqueEligibleOptions(options: PublishedPracticeExerciseOption[]) {
+  const unique = new Map<string, PublishedPracticeExerciseOption>();
+
+  for (const option of options) {
+    const key = `${option.subjectSlug}|${option.exerciseKey}`;
+    if (!unique.has(key)) unique.set(key, option);
+  }
+
+  return [...unique.values()];
+}
+
+function deterministicOrder(
+  seed: string,
+  options: PublishedPracticeExerciseOption[],
+) {
+  return [...options].sort((a, b) =>
+    score(seed, a).localeCompare(score(seed, b)),
+  );
+}
+
+/**
+ * Build one deterministic daily queue for the selected subject.
+ *
+ * The queue is intentionally not pinned to one module. It round-robins across
+ * eligible modules so a learner who chooses Python does not receive a session
+ * that is permanently tied to one arbitrarily selected module. The session
+ * still stores the first target as its database anchor; every queued target is
+ * resolved from the server-authored daily metadata.
+ */
 export function pickDailyFiveQueue(args: {
   options: PublishedPracticeExerciseOption[];
   userId: string;
@@ -144,66 +236,96 @@ export function pickDailyFiveQueue(args: {
   const targetCount = normalizeDailyPracticeTargetCount(
     args.targetCount ?? DAILY_PRACTICE_TARGET_COUNT,
   );
-  const eligible = args.options.filter((option) => {
-    if (!isDailyFiveEligible(option)) return false;
-    if (args.subjectSlug && option.subjectSlug !== args.subjectSlug) return false;
-    if (args.moduleSlug && option.moduleSlug !== args.moduleSlug) return false;
-    return true;
-  });
+  const eligible = uniqueEligibleOptions(
+    args.options.filter((option) => {
+      if (!isDailyFiveEligible(option)) return false;
+      if (args.subjectSlug && option.subjectSlug !== args.subjectSlug) return false;
+      if (args.moduleSlug && option.moduleSlug !== args.moduleSlug) return false;
+      return true;
+    }),
+  );
 
-  // A daily run may span several sections, but it must stay inside one
-  // published module because PracticeSession owns a single module scope.
-  // Grouping by section was too strict: many real courses intentionally spread
-  // one or two eligible code quizzes across several topics/sections.
-  const groups = new Map<string, Map<string, PublishedPracticeExerciseOption>>();
+  const bySubject = new Map<string, PublishedPracticeExerciseOption[]>();
   for (const option of eligible) {
-    const moduleKey = `${option.subjectSlug}|${option.moduleSlug}`;
-    const byExerciseKey = groups.get(moduleKey) ?? new Map();
-
-    // The same authored exercise can be referenced by more than one card/topic.
-    // Count it once so the daily queue is genuinely unique.
-    if (!byExerciseKey.has(option.exerciseKey)) {
-      byExerciseKey.set(option.exerciseKey, option);
-    }
-    groups.set(moduleKey, byExerciseKey);
+    const rows = bySubject.get(option.subjectSlug) ?? [];
+    rows.push(option);
+    bySubject.set(option.subjectSlug, rows);
   }
 
-  const candidates = [...groups.entries()]
-    .map(([moduleKey, byExerciseKey]) => ({
-      moduleKey,
-      rows: [...byExerciseKey.values()],
-    }))
-    .filter(({ rows }) => rows.length >= targetCount)
-    .sort((a, b) =>
-      score(`${args.userId}|${args.dayKey}`, {
-        ...a.rows[0],
-        id: a.moduleKey,
+  const subjectCandidates = [...bySubject.entries()]
+    .filter(([, rows]) => rows.length >= targetCount)
+    .sort(([subjectA, rowsA], [subjectB, rowsB]) =>
+      score(`${args.userId}|${args.dayKey}|subject`, {
+        ...rowsA[0],
+        id: subjectA,
       }).localeCompare(
-        score(`${args.userId}|${args.dayKey}`, {
-          ...b.rows[0],
-          id: b.moduleKey,
+        score(`${args.userId}|${args.dayKey}|subject`, {
+          ...rowsB[0],
+          id: subjectB,
         }),
       ),
     );
 
-  const pool = candidates[0]?.rows ?? [];
-  return [...pool]
-    .sort((a, b) =>
-      score(`${args.userId}|${args.dayKey}`, a).localeCompare(
-        score(`${args.userId}|${args.dayKey}`, b),
+  const pool = subjectCandidates[0]?.[1] ?? [];
+  if (pool.length < targetCount) return [];
+
+  const byModule = new Map<string, PublishedPracticeExerciseOption[]>();
+  for (const option of pool) {
+    const rows = byModule.get(option.moduleSlug) ?? [];
+    rows.push(option);
+    byModule.set(option.moduleSlug, rows);
+  }
+
+  const moduleGroups = [...byModule.entries()]
+    .map(([moduleSlug, rows]) => ({
+      moduleSlug,
+      rows: deterministicOrder(
+        `${args.userId}|${args.dayKey}|${moduleSlug}`,
+        rows,
       ),
-    )
-    .slice(0, targetCount)
-    .map((option) => ({
-      subjectSlug: option.subjectSlug,
-      moduleSlug: option.moduleSlug,
-      sectionSlug: option.sectionSlug,
-      topicSlug: option.topicSlug,
-      exerciseKey: option.exerciseKey,
-      exerciseTitle: option.exerciseTitle,
-      exerciseKind: option.exerciseKind,
-      exercisePurpose: option.exercisePurpose,
-    }));
+    }))
+    .sort((a, b) => {
+      const aFirst = a.rows[0];
+      const bFirst = b.rows[0];
+      if (!aFirst || !bFirst) return a.moduleSlug.localeCompare(b.moduleSlug);
+      return score(`${args.userId}|${args.dayKey}|module`, {
+        ...aFirst,
+        id: a.moduleSlug,
+      }).localeCompare(
+        score(`${args.userId}|${args.dayKey}|module`, {
+          ...bFirst,
+          id: b.moduleSlug,
+        }),
+      );
+    });
+
+  const selected: PublishedPracticeExerciseOption[] = [];
+  let round = 0;
+  while (selected.length < targetCount) {
+    let added = false;
+
+    for (const group of moduleGroups) {
+      const option = group.rows[round];
+      if (!option) continue;
+      selected.push(option);
+      added = true;
+      if (selected.length >= targetCount) break;
+    }
+
+    if (!added) break;
+    round += 1;
+  }
+
+  return selected.slice(0, targetCount).map((option) => ({
+    subjectSlug: option.subjectSlug,
+    moduleSlug: option.moduleSlug,
+    sectionSlug: option.sectionSlug,
+    topicSlug: option.topicSlug,
+    exerciseKey: option.exerciseKey,
+    exerciseTitle: option.exerciseTitle,
+    exerciseKind: option.exerciseKind,
+    exercisePurpose: option.exercisePurpose,
+  }));
 }
 
 export function resolveNextDailyFiveTarget(args: {
@@ -239,7 +361,7 @@ export function applyDailyFiveParams(
     topic: target.topicSlug,
     exerciseKey: target.exerciseKey,
     preferKind: "code_input",
-    preferPurpose: target.exercisePurpose,
+    preferPurpose: "project",
     purposePolicy: "strict",
     seedPolicy: "global",
     salt: `daily-five:${meta?.dayKey ?? "today"}:${target.exerciseKey}`,

@@ -1470,7 +1470,12 @@ export function useQuizPracticeBank(args: {
             item: reusablePrevState?.item ?? null,
             attempts: initMeta?.attempts ?? reusablePrevState?.attempts ?? 0,
             ok: initMeta?.ok ?? reusablePrevState?.ok ?? null,
-            maxAttempts: reusablePrevState?.maxAttempts ?? fallbackMax,
+            // The experience policy is authoritative. A saved finite cap must
+            // not survive when Daily Practice, Challenge, or subscriber
+            // practice switches the current run to unlimited attempts.
+            maxAttempts: unlimitedAttempts
+              ? null
+              : reusablePrevState?.maxAttempts ?? fallbackMax,
             helpPolicy: reusablePrevState?.helpPolicy ?? DEFAULT_PRACTICE_HELP_POLICY,
           };
 
@@ -1612,7 +1617,9 @@ export function useQuizPracticeBank(args: {
             item: nextItem,
             attempts: meta?.attempts ?? baseForLoaded.attempts ?? 0,
             ok: meta?.ok ?? baseForLoaded.ok ?? null,
-            maxAttempts: loaded.maxAttempts ?? baseForLoaded.maxAttempts ?? null,
+            maxAttempts: unlimitedAttempts
+              ? null
+              : loaded.maxAttempts ?? baseForLoaded.maxAttempts ?? null,
             helpPolicy:
                 loaded.helpPolicy ??
                 baseForLoaded.helpPolicy ??
@@ -1996,7 +2003,9 @@ export function useQuizPracticeBank(args: {
               busy: false,
               attempts: nextAttempts,
               ok: submitted.ok,
-              maxAttempts: submitted.serverMaxAttempts ?? current.maxAttempts ?? null,
+              maxAttempts: unlimitedAttempts
+                ? null
+                : submitted.serverMaxAttempts ?? current.maxAttempts ?? null,
               item: {
                 ...current.item,
                 ...(runtimePatchForSubmit ?? {}),

@@ -21,6 +21,23 @@ type StartOrResumeArgs = {
     orderBy?: Prisma.PracticeSessionOrderByWithRelationInput;
 };
 
+function isUniqueConstraintError(error: unknown) {
+    return String((error as any)?.code ?? "") === "P2002";
+}
+
+async function applyResumeData(args: {
+    prisma: PrismaClient;
+    session: any;
+    resumeData?: Prisma.PracticeSessionUncheckedUpdateInput;
+}) {
+    if (!args.resumeData || Object.keys(args.resumeData).length === 0) return;
+
+    await args.prisma.practiceSession.update({
+        where: { id: args.session.id },
+        data: args.resumeData,
+    });
+}
+
 export async function startOrResumePracticeSession(args: StartOrResumeArgs) {
     const {
         prisma,
@@ -39,41 +56,59 @@ export async function startOrResumePracticeSession(args: StartOrResumeArgs) {
         throw err;
     }
 
+    const winnerWhere = {
+        ...findWhere,
+        ...ownerWhere,
+    } satisfies Prisma.PracticeSessionWhereInput;
+
     const existing = await prisma.practiceSession.findFirst({
-        where: {
-            ...findWhere,
-            ...ownerWhere,
-        },
+        where: winnerWhere,
         orderBy,
         select,
     });
 
     if (existing) {
-        if (resumeData && Object.keys(resumeData).length > 0) {
-            await prisma.practiceSession.update({
-                where: { id: (existing as any).id },
-                data: resumeData,
-            });
-        }
-
+        await applyResumeData({ prisma, session: existing, resumeData });
         return {
             session: existing,
             resumed: true as const,
         };
     }
 
-    const created = await prisma.practiceSession.create({
-        data: {
-            mode: createData.mode ?? "standard",
-            ...createData,
-            userId: actor.userId ?? null,
-            guestId: actor.userId ? null : actor.guestId ?? null,
-        },
-        select,
-    });
+    try {
+        const created = await prisma.practiceSession.create({
+            data: {
+                mode: createData.mode ?? "standard",
+                ...createData,
+                userId: actor.userId ?? null,
+                guestId: actor.userId ? null : actor.guestId ?? null,
+            },
+            select,
+        });
 
-    return {
-        session: created,
-        resumed: false as const,
-    };
+        return {
+            session: created,
+            resumed: false as const,
+        };
+    } catch (error) {
+        if (!isUniqueConstraintError(error)) throw error;
+
+        // Another request/tab can win after our initial read but before create.
+        // Reload that canonical row instead of surfacing a false 500. If the
+        // unique error came from an unrelated constraint, no winner will match
+        // and the original error is preserved.
+        const raced = await prisma.practiceSession.findFirst({
+            where: winnerWhere,
+            orderBy,
+            select,
+        });
+
+        if (!raced) throw error;
+
+        await applyResumeData({ prisma, session: raced, resumeData });
+        return {
+            session: raced,
+            resumed: true as const,
+        };
+    }
 }

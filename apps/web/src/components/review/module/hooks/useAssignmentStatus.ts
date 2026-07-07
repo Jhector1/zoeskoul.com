@@ -112,6 +112,15 @@ export function useAssignmentStatus(args: {
           if (!mountedRef.current || !d) return;
           if (reqId !== requestSeqRef.current) return;
 
+          // Progress created by older builds may still point at a normal
+          // subscriber-practice session. Never present that session as the
+          // module assignment; the CTA will replace it through the dedicated
+          // assignment start/resume endpoint.
+          if (d?.run?.mode !== "assignment") {
+            setStatus({ phase: "idle" });
+            return;
+          }
+
           const targetCount = Number(d?.targetCount ?? 0);
           const answeredCount = Number(d?.answeredCount ?? 0);
 

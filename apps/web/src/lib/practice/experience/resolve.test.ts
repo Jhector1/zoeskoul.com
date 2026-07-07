@@ -49,6 +49,19 @@ describe("practice experience resolution", () => {
     ).toBe("public_challenge");
   });
 
+
+  it("treats review module assignments as assignment intent", () => {
+    const session = {
+      id: "module-assignment",
+      mode: "standard",
+      assignmentId: null,
+      meta: { kind: "module_assignment", moduleSlug: "python-v2-0" },
+    };
+
+    expect(resolvePracticeExperienceMode(session)).toBe("assignment");
+    expect(() => assertPracticeExperienceInvariant(session)).not.toThrow();
+  });
+
   it("rejects assignment rows without assignment identity", () => {
     expect(() =>
       assertPracticeExperienceInvariant({ id: "bad", mode: "assignment" }),

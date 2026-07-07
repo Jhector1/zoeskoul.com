@@ -1,11 +1,12 @@
 import type { Difficulty, TopicSlug } from "@/lib/practice/types";
 
 /**
- * Stable product experiences. Keep these names aligned with
- * PracticeSessionMode in the Prisma schema.
+ * Stable product experiences. These are product-level intents, not always a
+ * one-to-one mirror of PracticeSession.mode. In particular, a review-module
+ * assignment is stored as mode="standard" with module_assignment metadata
+ * because it has no Assignment row/assignmentId.
  *
- * `practice` is the only non-persisted mode. Every other value represents a
- * persisted PracticeSession and must be written explicitly at creation time.
+ * `practice` is the only non-persisted experience.
  */
 export type PracticeExperienceMode =
   | "practice"

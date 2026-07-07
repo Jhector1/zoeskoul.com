@@ -40,13 +40,12 @@ function parseEnvInt(name: string, fallback: number | null) {
 /**
  * Attempts policy (server truth):
  * - assignment: finite default 3 (override by assignmentQuestionMaxAttempts)
- * - assignment/daily practice/onboarding trial: finite
- * - public challenge: unlimited
- * - standard/subscriber practice and ad-hoc practice: unlimited by default
+ * - onboarding trial: finite
+ * - daily practice, public challenge, subscriber practice, and ad-hoc practice: unlimited
  *
  * If you want a global finite cap for free practice, set:
  *   PRACTICE_DEFAULT_MAX_ATTEMPTS="5"
- * If you want a different session default:
+ * If you want a different onboarding-trial default:
  *   SESSION_DEFAULT_MAX_ATTEMPTS="3"
  */
 export function computeMaxAttemptsCore(args: {
@@ -66,11 +65,13 @@ export function computeMaxAttemptsCore(args: {
         return parseMaxAttemptsAny(args.assignmentQuestionMaxAttempts) ?? assignmentDefault;
     }
 
-    if (mode === "public_challenge") {
+    if (mode === "public_challenge" || mode === "daily_five") {
+        // Ranked daily sets and shared challenges measure correctness/help usage,
+        // not retry scarcity. Ignore legacy finite metadata immediately.
         return null;
     }
 
-    if (mode === "daily_five" || mode === "onboarding_trial") {
+    if (mode === "onboarding_trial") {
         return parseMaxAttemptsAny(args.sessionMaxAttempts) ?? sessionDefault;
     }
 

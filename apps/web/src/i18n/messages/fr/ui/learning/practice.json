@@ -1,5 +1,15 @@
 {
   "Practice": {
+    "dailyStart": {
+      "kicker": "Pratique quotidienne",
+      "title": "Choisissez la matière du jour",
+      "subtitle": "Choisissez une matière. Nous créerons une série équilibrée de {count} exercices parmi ses modules admissibles et la verrouillerons pour aujourd’hui.",
+      "exerciseCount": "{count} exercices admissibles",
+      "moduleCount": "{count} modules",
+      "start": "Commencer cette matière →",
+      "starting": "Démarrage…",
+      "empty": "Aucune matière publiée ne contient actuellement {count} exercices admissibles pour la pratique quotidienne."
+    },
     "ai": {
       "explainConcept": "Expliquer le concept",
       "explaining": "Explication…",
@@ -112,7 +122,8 @@
       "toggleMissedShow": "Show missed",
       "backToQuestions": "Back to questions",
       "missedHidden": "Missed list hidden.",
-      "urlTip": "Tip: changing topic/difficulty updates the URL params."
+      "urlTip": "Tip: changing topic/difficulty updates the URL params.",
+      "assignmentReturn": "Retour à la révision"
     },
     "summaryCards": {
       "score": "Score",
@@ -177,6 +188,141 @@
       "answerRevealedBody": "Examinez la solution, puis continuez lorsque vous êtes prêt.",
       "continue": "Continuer",
       "backToExercise": "Retour à l’exercice"
+    },
+    "workspace": {
+      "assignment": {
+        "title": "Devoir",
+        "kicker": "Devoir du module",
+        "returnToReview": "Retourner à la révision",
+        "returnTitle": "Quitter le devoir et retourner à la révision",
+        "returnLoading": "Retour…",
+        "completeTitle": "Devoir terminé",
+        "completeSubtitle": "{correct} bonnes réponses sur {answered} exercices terminés.",
+        "summaryTitle": "Devoir terminé 🎉",
+        "summarySubtitle": "{completed} questions terminées sur {total}.",
+        "summaryNote": "{correct} bonnes réponses • {revealed} réponses révélées."
+      },
+      "scopeTitle": "Portée de la pratique",
+      "subscriber": "Abonné",
+      "locked": "Verrouillé",
+      "fixed": "Fixe",
+      "subject": "Matière",
+      "module": "Module",
+      "chooseSubject": "Choisir une matière",
+      "chooseModule": "Choisir un module",
+      "loadingSubjects": "Chargement des matières…",
+      "subjectsUnavailable": "Les matières sont temporairement indisponibles.",
+      "subscriberLockedReason": "Abonnez-vous pour choisir une matière, un sujet et une difficulté.",
+      "fixedScopeReason": "Cette session utilise une matière et un module fixes.",
+      "dailyFallback": "Pratique quotidienne",
+      "challengeLabel": "Défi",
+      "exerciseTab": "Exercice",
+      "codeTab": "Code",
+      "openWorkspace": "Ouvrir l’espace de code",
+      "badges": {
+        "assignment": "Devoir • contrôlé par l’enseignant",
+        "challenge": "Défi public • exercice précis",
+        "trial": "Essai d’intégration • questions de départ",
+        "daily": "Pratique quotidienne • classement équitable",
+        "standard": "Pratique abonné • configurable",
+        "practice": "Pratique"
+      },
+      "titles": {
+        "assignment": "Devoir",
+        "challenge": "Défi",
+        "trial": "Pratique d’essai",
+        "daily": "Pratique quotidienne",
+        "standard": "Espace de pratique",
+        "practice": "Espace de pratique"
+      },
+      "subtitles": {
+        "assignment": "Répondez aux questions sélectionnées et remettez votre travail.",
+        "challenge": "Résolvez l’exercice partagé et comparez votre résultat.",
+        "trial": "Essayez un exercice de départ ciblé.",
+        "daily": "Terminez la série classée du jour.",
+        "standard": "Choisissez une matière et un sujet, puis pratiquez dans l’espace complet.",
+        "practice": "Choisissez un sujet et pratiquez dans l’espace complet."
+      },
+      "navigator": {
+        "dailyEyebrow": "Pratique quotidienne",
+        "dailyTitle": "Les {count} exercices du jour",
+        "dailySubtitle": "Une série classée fixe sélectionnée pour aujourd’hui.",
+        "challengeEyebrow": "Défi",
+        "challengeDefaultTitle": "Défi de programmation partagé",
+        "challengeSubtitle": "Résolvez exactement l’exercice qui vous a été partagé.",
+        "subscriberEyebrow": "Pratique abonné",
+        "freeEyebrow": "Pratique",
+        "chooseTitle": "Choisir quoi pratiquer",
+        "subscriberSubtitle": "Choisissez une matière, un module, un sujet et une difficulté.",
+        "freeSubtitle": "Abonnez-vous pour choisir une matière, un module, un sujet et une difficulté.",
+        "defaultEyebrow": "Pratique",
+        "defaultTitle": "Espace de pratique",
+        "defaultSubtitle": "Progressez dans la série d’exercices actuelle.",
+        "progress": "Progression",
+        "correct": "Correct",
+        "fixedReason": "Cette série d’exercices est fixe pour cette expérience.",
+        "dailySubjectReason": "La matière du jour est verrouillée après le démarrage de la série.",
+        "dailyMixReason": "Le système répartit les exercices du jour entre les modules admissibles de cette matière. Le choix précis du module, du sujet et de la difficulté appartient à la pratique illimitée.",
+        "subscribeReason": "Abonnez-vous pour choisir une autre matière ou un autre module.",
+        "queue": "File d’exercices",
+        "fallbackBadge": "Pratique",
+        "exerciseFallback": "Exercice {number}",
+        "statusCorrect": "Correct",
+        "statusCompleted": "Terminé",
+        "statusInProgress": "En cours",
+        "statusRevealed": "Réponse révélée",
+        "statusCurrent": "En cours",
+        "statusNotStarted": "Non commencé",
+        "sidebarTabsAria": "Contrôles de pratique et classement",
+        "controlsTab": "Pratique",
+        "leaderboardTab": "Classement",
+        "resetExercise": "Réinitialiser cet exercice",
+        "resetExerciseDescription": "Restaure l’espace de départ sans rendre les tentatives déjà utilisées."
+      },
+      "stage": {
+        "completeTitle": "Pratique terminée",
+        "completeSubtitle": "{correct} bonnes réponses sur {answered} exercices terminés.",
+        "challengeDefaultTitle": "Défi de programmation",
+        "challengeDefaultSubtitle": "Utilisez l’espace de travail, puis vérifiez votre réponse lorsque vous êtes prêt.",
+        "dailyDefaultTitle": "Pratique quotidienne",
+        "dailyDefaultSubtitle": "Terminez les exercices classés du jour.",
+        "practiceDefaultTitle": "Pratique",
+        "practiceDefaultSubtitle": "Choisissez un sujet dans le navigateur, puis résolvez l’exercice.",
+        "questionProgress": "Question {current} sur {total}",
+        "tabsAria": "Exercice et espace de code",
+        "loadingTitle": "Préparation de votre exercice…",
+        "errorTitle": "Impossible de charger cet exercice",
+        "loadingBody": "L’espace de pratique apparaîtra ici lorsqu’il sera prêt.",
+        "retry": "Réessayer"
+      },
+      "header": {
+        "restartTitle": "Recommencer la pratique",
+        "restartDescription": "Effacer cette session et charger une nouvelle série.",
+        "navigatorDrawerTitle": "Choisir la pratique",
+        "resizeNavigator": "Faire glisser pour redimensionner le navigateur de pratique"
+      }
+    },
+    "completion": {
+      "kicker": "Pratique terminée",
+      "title": "Session terminée 🎉",
+      "score": "{correct} sur {total} bonnes réponses.",
+      "defaultNote": "Votre progression a été enregistrée.",
+      "defaultPrimary": "Continuer",
+      "leaderboard": "Voir le classement",
+      "reviewResults": "Revoir les résultats",
+      "daily": {
+        "kicker": "Pratique quotidienne terminée",
+        "title": "Vous avez terminé la pratique du jour 🎉",
+        "freeNote": "Votre pratique classée est terminée. Abonnez-vous pour débloquer une pratique illimitée par sujet.",
+        "subscriberNote": "Votre pratique classée est terminée. La pratique illimitée par sujet reste disponible.",
+        "freePrimary": "S’abonner pour une pratique illimitée",
+        "subscriberPrimary": "Continuer à pratiquer",
+        "nextLabel": "Prochaine pratique quotidienne classée",
+        "countdown": "{hours}:{minutes}:{seconds}",
+        "ready": "Disponible maintenant",
+        "utcNote": "La pratique quotidienne se réinitialise à minuit UTC.",
+        "revealedNote": "{count} réponse(s) révélée(s) comptent comme terminées, mais pas comme correctes et ne rapportent aucun point classé de réponse."
+      }
     }
   }
 }

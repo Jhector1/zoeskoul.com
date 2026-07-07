@@ -22,12 +22,13 @@ describe("practice purpose policy", () => {
     expect(decision).toMatchObject({
       ok: true,
       effective: "project",
-      allowed: ["quiz", "project"],
-      source: "param",
+      allowed: ["project"],
+      source: "session",
+      reason: "practice_modes_use_project_purpose",
     });
   });
 
-  it("does not change ordinary quiz-only module practice", () => {
+  it("forces subscriber practice to project purpose even under a quiz-only module preset", () => {
     const decision = computePurposeDecision({
       session: {
         mode: "standard",
@@ -42,6 +43,11 @@ describe("practice purpose policy", () => {
       purposePolicyParam: "strict",
     });
 
-    expect(decision.ok).toBe(false);
+    expect(decision).toMatchObject({
+      ok: true,
+      effective: "project",
+      allowed: ["project"],
+      reason: "practice_modes_use_project_purpose",
+    });
   });
 });

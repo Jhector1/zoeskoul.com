@@ -17,6 +17,16 @@
     }
   },
   "Practice": {
+    "dailyStart": {
+      "kicker": "Daily practice",
+      "title": "Choose today’s subject",
+      "subtitle": "Choose one subject. We’ll build a balanced set of {count} exercises across its eligible modules and lock it for today.",
+      "exerciseCount": "{count} eligible exercises",
+      "moduleCount": "{count} modules",
+      "start": "Start this subject →",
+      "starting": "Starting…",
+      "empty": "No published subject currently has {count} eligible daily-practice exercises."
+    },
     "ai": {
       "explainConcept": "Explain concept",
       "explaining": "Explaining…",
@@ -129,7 +139,8 @@
       "toggleMissedShow": "Show missed",
       "backToQuestions": "Back to questions",
       "missedHidden": "Missed list hidden.",
-      "urlTip": "Tip: changing topic/difficulty updates the URL params."
+      "urlTip": "Tip: changing topic/difficulty updates the URL params.",
+      "assignmentReturn": "Return to review"
     },
     "summaryCards": {
       "score": "Score",
@@ -194,6 +205,141 @@
       "answerRevealedBody": "Review the solution, then continue when you are ready.",
       "continue": "Continue",
       "backToExercise": "Back to exercise"
+    },
+    "workspace": {
+      "assignment": {
+        "title": "Assignment",
+        "kicker": "Module assignment",
+        "returnToReview": "Return to review",
+        "returnTitle": "Leave the assignment and return to review",
+        "returnLoading": "Returning…",
+        "completeTitle": "Assignment complete",
+        "completeSubtitle": "{correct} correct out of {answered} completed.",
+        "summaryTitle": "Assignment complete 🎉",
+        "summarySubtitle": "{completed} of {total} questions completed.",
+        "summaryNote": "{correct} correct • {revealed} revealed."
+      },
+      "scopeTitle": "Practice scope",
+      "subscriber": "Subscriber",
+      "locked": "Locked",
+      "fixed": "Fixed",
+      "subject": "Subject",
+      "module": "Module",
+      "chooseSubject": "Choose a subject",
+      "chooseModule": "Choose a module",
+      "loadingSubjects": "Loading practice subjects…",
+      "subjectsUnavailable": "Practice subjects are temporarily unavailable.",
+      "subscriberLockedReason": "Subscribe to choose any subject, topic, and difficulty.",
+      "fixedScopeReason": "This practice run has a fixed subject and module.",
+      "dailyFallback": "Daily practice",
+      "challengeLabel": "Challenge",
+      "exerciseTab": "Exercise",
+      "codeTab": "Code",
+      "openWorkspace": "Open code workspace",
+      "badges": {
+        "assignment": "Assignment • teacher controlled",
+        "challenge": "Public challenge • exact exercise",
+        "trial": "Onboarding trial • starter questions",
+        "daily": "Daily Practice • ranked free practice",
+        "standard": "Subscriber practice • configurable",
+        "practice": "Practice"
+      },
+      "titles": {
+        "assignment": "Assignment",
+        "challenge": "Challenge",
+        "trial": "Trial practice",
+        "daily": "Daily Practice",
+        "standard": "Practice workspace",
+        "practice": "Practice workspace"
+      },
+      "subtitles": {
+        "assignment": "Complete the selected questions and submit your work.",
+        "challenge": "Solve the shared exercise and compare your result.",
+        "trial": "Try a focused starter exercise.",
+        "daily": "Complete today’s ranked practice set.",
+        "standard": "Choose a subject and topic, then practice in the full workspace.",
+        "practice": "Choose a topic and practice in the full workspace."
+      },
+      "navigator": {
+        "dailyEyebrow": "Daily practice",
+        "dailyTitle": "Today’s {count} exercises",
+        "dailySubtitle": "A fixed ranked set selected for today.",
+        "challengeEyebrow": "Challenge",
+        "challengeDefaultTitle": "Shared coding challenge",
+        "challengeSubtitle": "Solve the exact exercise shared with you.",
+        "subscriberEyebrow": "Subscriber practice",
+        "freeEyebrow": "Practice",
+        "chooseTitle": "Choose what to practice",
+        "subscriberSubtitle": "Select a subject, module, topic, and difficulty.",
+        "freeSubtitle": "Subscribe to choose any subject, module, topic, and difficulty.",
+        "defaultEyebrow": "Practice",
+        "defaultTitle": "Practice workspace",
+        "defaultSubtitle": "Work through the current exercise set.",
+        "progress": "Progress",
+        "correct": "Correct",
+        "fixedReason": "This exercise set is fixed for this experience.",
+        "dailySubjectReason": "Today’s subject is fixed after the daily set starts.",
+        "dailyMixReason": "The system balances today’s exercises across eligible modules in this subject. Exact module, topic, and difficulty controls belong to Unlimited Practice.",
+        "subscribeReason": "Subscribe to choose a different subject or module.",
+        "queue": "Exercise queue",
+        "fallbackBadge": "Practice",
+        "exerciseFallback": "Exercise {number}",
+        "statusCorrect": "Correct",
+        "statusCompleted": "Completed",
+        "statusInProgress": "In progress",
+        "statusRevealed": "Revealed",
+        "statusCurrent": "Current",
+        "statusNotStarted": "Not started",
+        "sidebarTabsAria": "Practice controls and leaderboard",
+        "controlsTab": "Practice",
+        "leaderboardTab": "Leaderboard",
+        "resetExercise": "Reset this exercise",
+        "resetExerciseDescription": "Restore the starter workspace without refunding attempts already used."
+      },
+      "stage": {
+        "completeTitle": "Practice complete",
+        "completeSubtitle": "{correct} correct out of {answered} completed.",
+        "challengeDefaultTitle": "Coding challenge",
+        "challengeDefaultSubtitle": "Use the workspace, then check your answer when you are ready.",
+        "dailyDefaultTitle": "Daily practice",
+        "dailyDefaultSubtitle": "Complete today’s ranked practice exercises.",
+        "practiceDefaultTitle": "Practice",
+        "practiceDefaultSubtitle": "Choose a topic from the practice navigator and solve the exercise.",
+        "questionProgress": "Question {current} of {total}",
+        "tabsAria": "Exercise and code workspace",
+        "loadingTitle": "Preparing your exercise…",
+        "errorTitle": "Unable to load this exercise",
+        "loadingBody": "The practice workspace will appear here when it is ready.",
+        "retry": "Retry"
+      },
+      "header": {
+        "restartTitle": "Restart practice",
+        "restartDescription": "Clear this practice run and load a fresh set.",
+        "navigatorDrawerTitle": "Choose practice",
+        "resizeNavigator": "Drag to resize practice navigator"
+      }
+    },
+    "completion": {
+      "kicker": "Practice complete",
+      "title": "Session complete 🎉",
+      "score": "{correct} of {total} correct.",
+      "defaultNote": "Your progress has been saved.",
+      "defaultPrimary": "Continue",
+      "leaderboard": "View leaderboard",
+      "reviewResults": "Review results",
+      "daily": {
+        "kicker": "Daily practice complete",
+        "title": "You finished today’s practice 🎉",
+        "freeNote": "Your ranked practice is complete. Subscribe to unlock unlimited topic practice now.",
+        "subscriberNote": "Your ranked practice is complete. Unlimited topic practice is ready whenever you are.",
+        "freePrimary": "Subscribe for unlimited practice",
+        "subscriberPrimary": "Practice more",
+        "nextLabel": "Next ranked daily practice",
+        "countdown": "{hours}:{minutes}:{seconds}",
+        "ready": "Ready now",
+        "utcNote": "Daily practice resets at midnight UTC.",
+        "revealedNote": "{count} revealed answer(s) counted as completed, not correct, and earned no ranked-answer points."
+      }
     }
   }
 }

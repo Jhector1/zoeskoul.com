@@ -42,6 +42,12 @@ export async function POST(
       maxQuestionAttempts: true,
       allowReveal: true,
       helpPolicy: true,
+      section: {
+        select: {
+          subject: { select: { slug: true } },
+          module: { select: { slug: true } },
+        },
+      },
     },
   });
 
@@ -57,6 +63,11 @@ export async function POST(
   if (assignment.dueAt && now > assignment.dueAt) {
     return NextResponse.json({ message: "Past due." }, { status: 403 });
   }
+  const reviewReturnUrl =
+    assignment.section?.subject?.slug && assignment.section?.module?.slug
+      ? `/subjects/${encodeURIComponent(assignment.section.subject.slug)}` +
+        `/modules/${encodeURIComponent(assignment.section.module.slug)}`
+      : null;
 
   // Reopening an assignment resumes the learner's unfinished run instead of
   // silently consuming another whole-assignment attempt.
@@ -77,11 +88,19 @@ export async function POST(
         : null;
     const runNumber = Math.max(1, Number(meta?.runNumber ?? 1) || 1);
 
+    if (reviewReturnUrl) {
+      await prisma.practiceSession.update({
+        where: { id: activeRun.id },
+        data: { returnUrl: reviewReturnUrl },
+      });
+    }
+
     return NextResponse.json({
       sessionId: activeRun.id,
       experienceMode: "assignment",
       runNumber,
       resumed: true,
+      returnUrl: reviewReturnUrl,
     });
   }
 
@@ -114,6 +133,7 @@ export async function POST(
         experienceKey,
         assignmentId: assignment.id,
         sectionId: assignment.sectionId,
+        returnUrl: reviewReturnUrl,
         difficulty: assignment.difficulty,
         targetCount: assignment.questionCount,
         preferPurpose: "quiz",
@@ -141,6 +161,7 @@ export async function POST(
       experienceMode: "assignment",
       runNumber,
       resumed: false,
+      returnUrl: reviewReturnUrl,
     });
   } catch (error: any) {
     if (String(error?.code ?? "") === "P2002") {
@@ -154,6 +175,7 @@ export async function POST(
           experienceMode: "assignment",
           runNumber,
           resumed: true,
+          returnUrl: reviewReturnUrl,
         });
       }
     }

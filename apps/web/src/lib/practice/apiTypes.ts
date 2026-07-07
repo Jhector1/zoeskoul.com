@@ -13,6 +13,12 @@ import type {
   PracticeRunViewer,
 } from "@/lib/practice/experience/types";
 
+export type PracticeDailyRunMeta = {
+  dayKey: string;
+  nextResetAt: string;
+  targetCount: number;
+};
+
 export type PracticeChallengeRunMeta = {
   exerciseKey: string;
   title: string;
@@ -37,6 +43,7 @@ export type PracticeRunMetaApi = {
   filters: PracticeExperienceFilters;
   viewer: PracticeRunViewer;
   challenge?: PracticeChallengeRunMeta | null;
+  daily?: PracticeDailyRunMeta | null;
   help?: { stepKeys: string[] } | null;
 };
 

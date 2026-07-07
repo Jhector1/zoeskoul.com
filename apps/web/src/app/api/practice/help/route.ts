@@ -280,20 +280,6 @@ export async function POST(req: Request) {
         }
     }
 
-    await prisma.practiceHelpEvent.create({
-        data: {
-            sessionId: session?.id ?? null,
-            instanceId: instance.id,
-            userId: actor.userId ?? null,
-            guestId: actor.guestId ?? null,
-            stepKey,
-            stepIndex: getPracticeHelpStepIndex(stepKey),
-            kind: stepDef.kind,
-            source,
-            content: { text: content, reveal },
-        },
-    });
-
     const revealFinalization = isRevealStepKey(stepKey)
         ? await persistAttemptAndFinalize(prisma, {
             instance: instance as any,
@@ -304,6 +290,24 @@ export async function POST(req: Request) {
             finalized: true,
         })
         : null;
+
+    // Hints may be opened repeatedly, but a concurrent/retried reveal should
+    // create only one durable reveal event and one reveal attempt.
+    if (!revealFinalization || revealFinalization.created) {
+        await prisma.practiceHelpEvent.create({
+            data: {
+                sessionId: session?.id ?? null,
+                instanceId: instance.id,
+                userId: actor.userId ?? null,
+                guestId: actor.guestId ?? null,
+                stepKey,
+                stepIndex: getPracticeHelpStepIndex(stepKey),
+                kind: stepDef.kind,
+                source,
+                content: { text: content, reveal },
+            },
+        });
+    }
 
     const res = NextResponse.json({
         requestId,
@@ -316,7 +320,7 @@ export async function POST(req: Request) {
         source,
         content,
         reveal,
-        finalized: Boolean(revealFinalization),
+        finalized: Boolean(revealFinalization?.finalized),
         sessionComplete: Boolean(revealFinalization?.sessionComplete),
         summary: revealFinalization?.sessionSummary ?? null,
     });

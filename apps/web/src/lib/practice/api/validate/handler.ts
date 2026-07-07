@@ -6,14 +6,11 @@ import { awardValidateGamification } from "@/lib/gamification/awardValidateGamif
 import type { PracticeValidateContext } from "./types";
 import { getExpectedCanon } from "./mappers/expected.mapper";
 import { gradeInstance } from "./services/grading.service";
-import {
-    assertAnswerKindMatchesInstance,
-    assertInstanceNotFinalized,
-} from "./guards/instance.guard";
+import { assertAnswerKindMatchesInstance } from "./guards/instance.guard";
 import { computeCanReveal } from "./policies/validate.policy";
 import {
-    countPriorNonRevealAttempts,
-    persistAttemptAndFinalize,
+    loadFinalizedValidateSnapshot,
+    persistValidatedAttempt,
 } from "./repositories/attempt.repo";
 import {
     computeMaxAttempts,
@@ -39,8 +36,65 @@ import {
 } from "@/lib/practice/experience/resolve";
 import { readDailyFiveMeta } from "@/lib/practice/experience/dailyFive";
 
+function duplicateValidateResponse(args: {
+    req: Request;
+    requestId: string;
+    session: any;
+    setGuestId: string | null;
+    ok: boolean;
+    revealUsed: boolean;
+    finalized: boolean;
+    attemptsUsed: number;
+    maxAttempts: number | null;
+    sessionComplete: boolean;
+    explanation: string | null;
+    feedback?: unknown;
+}) {
+    const left = computeAttemptsLeft({
+        used: args.attemptsUsed,
+        max: args.maxAttempts,
+    });
+    const returnUrl = safeSameOriginUrl(args.req, args.session?.returnUrl ?? null);
+    const res = NextResponse.json({
+        ok: args.ok,
+        revealUsed: args.revealUsed,
+        revealAnswer: null,
+        expected: null,
+        explanation: args.explanation,
+        feedback: args.feedback ?? null,
+        finalized: args.finalized,
+        duplicate: true,
+        attempts: {
+            used: args.attemptsUsed,
+            max: args.maxAttempts,
+            left,
+        },
+        sessionComplete: args.sessionComplete,
+        summary: null,
+        gamification: null,
+        returnUrl,
+        requestId: args.requestId,
+    });
+
+    res.headers.set("X-Request-Id", args.requestId);
+    return attachGuestCookie(
+        hardenApiResponse(res),
+        args.setGuestId ?? undefined,
+    );
+}
+
 export async function handlePracticeValidate(ctx: PracticeValidateContext) {
-    const { prisma, req, requestId, body, payload, actor, setGuestId, instance, session } = ctx;
+    const {
+        prisma,
+        req,
+        requestId,
+        body,
+        payload,
+        actor,
+        setGuestId,
+        instance,
+        session,
+    } = ctx;
 
     const isReveal = Boolean(body.reveal);
     const answer = body.answer;
@@ -58,13 +112,13 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
 
     try {
         assertPracticeExperienceInvariant(session);
-    } catch (e: any) {
+    } catch (error: any) {
         return attachGuestCookie(
             jsonApiResponse({
                 requestId,
-                message: e?.message ?? "Invalid practice session state.",
-                status: Number(e?.status) || 500,
-                extra: { code: e?.code ?? "INVALID_PRACTICE_EXPERIENCE" },
+                message: error?.message ?? "Invalid practice session state.",
+                status: Number(error?.status) || 500,
+                extra: { code: error?.code ?? "INVALID_PRACTICE_EXPERIENCE" },
             }),
             setGuestId ?? undefined,
         );
@@ -79,18 +133,13 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
             answer: answer ?? null,
             instanceKind: instance.kind,
         });
-
-        assertInstanceNotFinalized({
-            isReveal,
-            answeredAt: instance.answeredAt,
-        });
-    } catch (e: any) {
+    } catch (error: any) {
         return attachGuestCookie(
             jsonApiResponse({
                 requestId,
-                message: e?.message ?? "Invalid request.",
-                status: Number(e?.status) || 400,
-                extra: e?.extra,
+                message: error?.message ?? "Invalid request.",
+                status: Number(error?.status) || 400,
+                extra: error?.extra,
             }),
             setGuestId ?? undefined,
         );
@@ -98,16 +147,16 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
 
     try {
         assertSessionOwnerMatchesActor(session, actor);
-    } catch (e: any) {
+    } catch (error: any) {
         return attachGuestCookie(
             jsonApiResponse({
                 requestId,
-                message: e?.message ?? "Forbidden.",
-                status: Number(e?.status) || 403,
+                message: error?.message ?? "Forbidden.",
+                status: Number(error?.status) || 403,
                 extra:
                     process.env.NODE_ENV === "development"
                         ? {
-                            code: e?.code ?? "SESSION_OWNER_MISMATCH",
+                            code: error?.code ?? "SESSION_OWNER_MISMATCH",
                             debug: {
                                 actor,
                                 session: {
@@ -118,7 +167,7 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
                                 },
                             },
                         }
-                        : { code: e?.code ?? "SESSION_OWNER_MISMATCH" },
+                        : { code: error?.code ?? "SESSION_OWNER_MISMATCH" },
             }),
             setGuestId ?? undefined,
         );
@@ -126,12 +175,12 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
 
     try {
         assertAssignmentSessionAccess(session, actor);
-    } catch (e: any) {
+    } catch (error: any) {
         return attachGuestCookie(
             jsonApiResponse({
                 requestId,
-                message: e?.message ?? "Forbidden.",
-                status: Number(e?.status) || 403,
+                message: error?.message ?? "Forbidden.",
+                status: Number(error?.status) || 403,
             }),
             setGuestId ?? undefined,
         );
@@ -158,32 +207,35 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
     const challenge = readSharedChallengeMeta(session?.meta ?? null);
     const maxAttempts = computeMaxAttempts({
         mode,
-        assignmentQuestionMaxAttempts: session?.assignment?.maxQuestionAttempts ?? null,
+        assignmentQuestionMaxAttempts:
+            session?.assignment?.maxQuestionAttempts ?? null,
         sessionMaxAttempts:
             getSessionMaxAttempts(session?.meta ?? null) ??
             readDailyFiveMeta(session?.meta ?? null)?.maxAttempts ??
             null,
     });
 
-    const priorNonRevealAttempts = await countPriorNonRevealAttempts(prisma, {
-        instanceId: instance.id,
-        sessionId: challenge ? session?.id ?? null : null,
-        actor,
-    });
+    if (!isReveal && instance.answeredAt) {
+        const snapshot = await loadFinalizedValidateSnapshot(prisma, {
+            instance,
+            actor,
+        });
 
-    if (!isReveal && maxAttempts != null && priorNonRevealAttempts >= maxAttempts) {
-        return attachGuestCookie(
-            jsonApiResponse({
-                requestId,
-                message: "No attempts left for this question.",
-                status: 409,
-                extra: {
-                    attempts: { used: priorNonRevealAttempts, max: maxAttempts, left: 0 },
-                    finalized: true,
-                },
-            }),
-            setGuestId ?? undefined,
-        );
+        return duplicateValidateResponse({
+            req,
+            requestId,
+            session,
+            setGuestId,
+            ok: snapshot.ok,
+            revealUsed: snapshot.revealUsed,
+            finalized: true,
+            attemptsUsed: snapshot.attemptsUsed,
+            maxAttempts,
+            sessionComplete: snapshot.sessionComplete,
+            explanation: snapshot.ok
+                ? "Already completed."
+                : "This question is already finalized.",
+        });
     }
 
     const expectedCanon = getExpectedCanon(instance);
@@ -198,17 +250,12 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         );
     }
 
-    const showDebug = Boolean(session?.assignment?.showDebug);
-
     const graded = await gradeInstance({
         instance,
         expectedCanon,
         answer: isReveal ? null : answer!,
-        showDebug,
+        showDebug: Boolean(session?.assignment?.showDebug),
     });
-
-    const nextNonRevealAttempts =
-        isReveal ? priorNonRevealAttempts : priorNonRevealAttempts + 1;
 
     const finalizeOnExhaust =
         mode === "assignment" ||
@@ -216,17 +263,76 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         mode === "daily_five" ||
         mode === "onboarding_trial";
 
-    const exhausted = maxAttempts != null && nextNonRevealAttempts >= maxAttempts;
-    const finalized = isReveal ? false : Boolean(graded.ok) || (finalizeOnExhaust && exhausted);
+    let persisted;
+    try {
+        persisted = await persistValidatedAttempt(prisma, {
+            instance,
+            actor,
+            submissionId: body.submissionId ?? requestId,
+            isReveal,
+            answerPayload: isReveal ? { reveal: true } : answer!,
+            ok: isReveal ? false : Boolean(graded.ok),
+            maxAttempts,
+            attemptScopeSessionId: challenge ? session?.id ?? null : null,
+            finalizeOnExhaust,
+        });
+    } catch (error: any) {
+        if (Number(error?.status) === 409) {
+            return attachGuestCookie(
+                jsonApiResponse({
+                    requestId,
+                    message: error?.message ?? "Conflicting validation request.",
+                    status: 409,
+                    extra: { code: error?.code ?? "VALIDATION_CONFLICT" },
+                }),
+                setGuestId ?? undefined,
+            );
+        }
+        throw error;
+    }
 
-    const persisted = await persistAttemptAndFinalize(prisma, {
-        instance,
-        actor,
-        isReveal,
-        answerPayload: isReveal ? { reveal: true } : answer!,
-        ok: isReveal ? false : Boolean(graded.ok),
-        finalized,
-    });
+    if (persisted.kind === "attempts_exhausted") {
+        return attachGuestCookie(
+            jsonApiResponse({
+                requestId,
+                message: "No attempts left for this question.",
+                status: 409,
+                extra: {
+                    attempts: {
+                        used: persisted.attemptsUsed,
+                        max: maxAttempts,
+                        left: 0,
+                    },
+                    finalized: true,
+                    sessionComplete: persisted.sessionComplete,
+                },
+            }),
+            setGuestId ?? undefined,
+        );
+    }
+
+    if (persisted.duplicate) {
+        const duplicateExplanation = persisted.finalized
+            ? persisted.ok
+                ? "Already completed."
+                : "This question is already finalized."
+            : graded.explanation;
+
+        return duplicateValidateResponse({
+            req,
+            requestId,
+            session,
+            setGuestId,
+            ok: persisted.ok,
+            revealUsed: persisted.revealUsed,
+            finalized: persisted.finalized,
+            attemptsUsed: persisted.attemptsUsed,
+            maxAttempts,
+            sessionComplete: persisted.sessionComplete,
+            explanation: duplicateExplanation,
+            feedback: persisted.finalized ? null : graded.feedback ?? null,
+        });
+    }
 
     let gamification = null;
     try {
@@ -237,30 +343,27 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
             session,
             isReveal,
             gradedOk: Boolean(graded.ok),
-            priorNonRevealAttempts,
+            priorNonRevealAttempts: persisted.priorNonRevealAttempts,
             persisted,
         });
-    } catch (e) {
+    } catch (error) {
         console.error("awardValidateGamification failed", {
             requestId,
             instanceId: instance?.id,
             sessionId: session?.id ?? null,
-            error: e,
+            error,
         });
     }
 
-    const includeExpected = isReveal;
-
     let publicExplanation = graded.explanation;
-    if (!includeExpected && instance.kind === "numeric" && !graded.ok) {
+    if (!isReveal && instance.kind === "numeric" && !graded.ok) {
         publicExplanation = "Not correct.";
     }
 
     const left = computeAttemptsLeft({
-        used: nextNonRevealAttempts,
+        used: persisted.attemptsUsed,
         max: maxAttempts,
     });
-
     const returnUrl = safeSameOriginUrl(req, session?.returnUrl ?? null);
 
     const res = NextResponse.json({
@@ -270,8 +373,13 @@ export async function handlePracticeValidate(ctx: PracticeValidateContext) {
         expected: null,
         explanation: publicExplanation,
         feedback: graded.feedback ?? null,
-        finalized,
-        attempts: { used: nextNonRevealAttempts, max: maxAttempts, left },
+        finalized: persisted.finalized,
+        duplicate: false,
+        attempts: {
+            used: persisted.attemptsUsed,
+            max: maxAttempts,
+            left,
+        },
         sessionComplete: persisted.sessionComplete,
         summary: persisted.sessionSummary,
         gamification,

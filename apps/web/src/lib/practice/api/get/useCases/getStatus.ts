@@ -1,4 +1,5 @@
 import type { Difficulty } from "@/lib/practice/types";
+import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 
 import type { PracticeGetContext, PracticeGetResult } from "../types";
 import type { PracticePurposeDecision } from "../policies/purpose.policy";
@@ -9,9 +10,19 @@ import {
     getAssignmentDifficulty,
 } from "../policies/session.policy";
 
-function canRevealExpectedForStatusOnly(session: any): boolean {
+export function canRevealExpectedForStatusOnly(
+    session: any,
+    allowRevealEffective: boolean,
+): boolean {
     if (!session) return false;
-    if (session.assignmentId) return Boolean(session.assignment?.allowReveal);
+
+    // Product intent is not equivalent to assignmentId. Review-module
+    // assignments are stored as standard sessions with module_assignment meta,
+    // so assignmentId-only checks leak expected answers in status/history JSON.
+    if (resolvePracticeExperienceMode(session) === "assignment") {
+        return allowRevealEffective;
+    }
+
     return true;
 }
 
@@ -95,7 +106,10 @@ export async function getPracticeStatus(
     const actorOR = buildActorOrWhere(actor);
     const includeMissed = params.includeMissed === "true";
     const includeHistory = params.includeHistory === "true";
-    const canRevealExpected = canRevealExpectedForStatusOnly(session);
+    const canRevealExpected = canRevealExpectedForStatusOnly(
+        session,
+        allowRevealEffective,
+    );
 
     let missed: any[] = [];
     if (includeMissed) {

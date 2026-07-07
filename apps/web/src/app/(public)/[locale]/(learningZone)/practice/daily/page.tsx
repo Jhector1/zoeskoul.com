@@ -34,7 +34,6 @@ export default async function DailyFivePage({
     <DailyFivePracticeClient
       locale={locale}
       subjectSlug={query.subject ?? null}
-      moduleSlug={query.module ?? null}
     />
   );
 }

@@ -21,6 +21,10 @@ import { useQuizLocalAnswers } from "./quiz/hooks/useQuizLocalAnswers";
 import { useQuizPracticeBank } from "./quiz/hooks/useQuizPracticeBank";
 import { useDebouncedEmit } from "./quiz/hooks/useDebouncedEmit";
 import { useReviewQuizQuestions } from "./quiz/hooks/useReviewQuizQuestions";
+import {
+  useQuizAutoAdvanceController,
+  useQuizAutoAdvancePreference,
+} from "./quiz/hooks/useQuizAutoAdvance";
 
 import QuizPracticeCard from "./quiz/components/QuizPracticeCard";
 import QuizLocalCard from "./quiz/components/QuizLocalCard";
@@ -51,7 +55,6 @@ import {
     resolveReviewPracticeCompletionStatus,
 } from "@/components/review/quiz/projectPracticeCompletion";
 
-const LS_AUTO_ADV = "learnoir.quiz.autoAdvance";
 type PracticeRuntimeQuestion = Extract<ReviewQuestion, { kind: "practice" }> &
   UnknownRecord & {
     fetch?: UnknownRecord & {
@@ -200,16 +203,6 @@ function getProjectStepManifestForQuestion(
      * still pass the matching step by index so Tools has the authored starter.
      */
     return matched ?? projectSpec.steps[index] ?? null;
-}
-
-function readAutoAdvance(defaultVal = true) {
-  try {
-    const v = window.localStorage.getItem(LS_AUTO_ADV);
-    if (v == null) return defaultVal;
-    return v === "1" || v === "true";
-  } catch {
-    return defaultVal;
-  }
 }
 
 function computeLocalOkNow(
@@ -663,7 +656,7 @@ export default function QuizBlock({
       });
 
   const [excusedById, setExcusedById] = useState<Record<string, boolean>>({});
-  const [autoAdvance, setAutoAdvance] = useState(true);
+  const [autoAdvance, setAutoAdvance] = useQuizAutoAdvancePreference(true);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [confirmResetQuiz, setConfirmResetQuiz] = useState(false);
@@ -677,7 +670,6 @@ export default function QuizBlock({
   const autoKeyRef = useRef<string>("");
   const restoreQuestionKeyRef = useRef<string>("");
   const lastActionQidRef = useRef<string | null>(null);
-  const advanceTimerRef = useRef<number | null>(null);
 
   const qElRef = useRef(new Map<string, HTMLDivElement | null>());
   const footerElRef = useRef<HTMLDivElement | null>(null);
@@ -1177,17 +1169,6 @@ export default function QuizBlock({
   ]);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    setAutoAdvance(readAutoAdvance(true));
-  }, []);
-
-  useEffect(() => {
-    try {
-      window.localStorage.setItem(LS_AUTO_ADV, autoAdvance ? "1" : "0");
-    } catch {}
-  }, [autoAdvance]);
-
-  useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return;
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const apply = () => setReduceMotion(Boolean(mq.matches));
@@ -1253,18 +1234,7 @@ export default function QuizBlock({
     useEffect(() => {
         setAwaitNextQid(null);
         lastActionQidRef.current = null;
-
-        if (advanceTimerRef.current) {
-            window.clearTimeout(advanceTimerRef.current);
-            advanceTimerRef.current = null;
-        }
     }, [resetKey]);
-
-  useEffect(() => {
-    return () => {
-      if (advanceTimerRef.current) window.clearTimeout(advanceTimerRef.current);
-    };
-  }, []);
 
   function scheduleScroll(qid: string, mode: "explain" | "end") {
     setPendingScrollMode(mode);
@@ -1484,46 +1454,39 @@ export default function QuizBlock({
     return typeof ex === "string" && ex.trim().length > 0;
   }
 
-  useEffect(() => {
-    if (!prereqsMet || locked || isCompleted) return;
+  const autoAdvanceActionQid = lastActionQidRef.current;
+  const autoAdvanceQuestion = autoAdvanceActionQid
+    ? questions.find((question) => question.id === autoAdvanceActionQid) ?? null
+    : null;
+  const autoAdvanceResolved = Boolean(
+    prereqsMet &&
+      !locked &&
+      !isCompleted &&
+      autoAdvanceQuestion &&
+      isFlowDone(autoAdvanceQuestion),
+  );
 
-    const qid = lastActionQidRef.current;
-    if (!qid) return;
-
-    const q = questions.find((x) => x.id === qid);
-    if (!q) return;
-
-    if (!isFlowDone(q)) return;
-
-      if (!autoAdvance) {
-          setAwaitNextQid(qid);
-          lastActionQidRef.current = null;
-          return;
-      }
-
+  useQuizAutoAdvanceController({
+    actionKey: autoAdvanceActionQid,
+    resolved: autoAdvanceResolved,
+    enabled: autoAdvance,
+    onManualAdvanceRequired: (qid) => {
+      if (lastActionQidRef.current !== qid) return;
+      setAwaitNextQid(qid);
+    },
+    onAdvance: (qid) => {
+      // Reset/navigation can invalidate a queued action before the shared
+      // timer fires. Never advance a stale question.
+      if (lastActionQidRef.current !== qid) return;
       setAwaitNextQid(null);
-
-      const delay = 220;
-
-    if (advanceTimerRef.current) window.clearTimeout(advanceTimerRef.current);
-    advanceTimerRef.current = window.setTimeout(() => {
       advanceFrom(qid);
-      lastActionQidRef.current = null;
-      advanceTimerRef.current = null;
-    }, delay);
-  }, [
-    prereqsMet,
-    locked,
-    isCompleted,
-    questions,
-    local.checkedById,
-    local.answers,
-    practiceBank.practice,
-    excusedById,
-    strictSequential,
-    unlimitedAttempts,
-    autoAdvance,
-  ]);  
+    },
+    onConsumed: (qid) => {
+      if (lastActionQidRef.current === qid) {
+        lastActionQidRef.current = null;
+      }
+    },
+  });
 
   const emitState = useCallback(
       (s: SavedQuizState) => onStateChange?.(s),

@@ -214,12 +214,35 @@ export async function fetchPracticeExercise(args: Record<string, any>) {
   }
 }
 
+type PracticeRequestError = Error & {
+  status?: number;
+  code?: string;
+};
+
+function createPracticeRequestError(args: {
+  status: number;
+  fallback: string;
+  data: any;
+}): PracticeRequestError {
+  const error = new Error(
+    String(args.data?.message ?? args.fallback),
+  ) as PracticeRequestError;
+  error.status = args.status;
+  if (typeof args.data?.code === "string" && args.data.code.trim()) {
+    error.code = args.data.code.trim();
+  }
+  return error;
+}
+
 export async function submitPracticeAnswer(args: {
   key: string;
+  submissionId?: string;
   answer?: SubmitAnswer;
   reveal?: boolean;
 }) {
+  const submissionId = args.submissionId ?? crypto.randomUUID();
   const dedupeKey = stableJsonForPracticeRequest({
+    submissionId,
     key: args.key,
     answer: args.answer ?? null,
     reveal: Boolean(args.reveal),
@@ -234,6 +257,7 @@ export async function submitPracticeAnswer(args: {
       credentials: "include",
       body: JSON.stringify({
         key: args.key,
+        submissionId,
         ...(args.answer ? { answer: args.answer } : {}),
         ...(args.reveal ? { reveal: true } : {}),
       }),
@@ -242,9 +266,11 @@ export async function submitPracticeAnswer(args: {
     const data = await res.json().catch(() => null);
 
     if (!res.ok) {
-      throw new Error(
-          String(data?.message ?? `Practice validate failed (${res.status}).`),
-      );
+      throw createPracticeRequestError({
+        status: res.status,
+        fallback: `Practice validate failed (${res.status}).`,
+        data,
+      });
     }
 
     return data as PracticeValidateClientResponse;
@@ -294,9 +320,11 @@ export async function fetchPracticeHelp(args: {
   const data = await res.json().catch(() => null);
 
   if (!res.ok) {
-    throw new Error(
-        String(data?.message ?? `Practice help failed (${res.status}).`),
-    );
+    throw createPracticeRequestError({
+      status: res.status,
+      fallback: `Practice help failed (${res.status}).`,
+      data,
+    });
   }
 
   return data as PracticeHelpClientResponse;

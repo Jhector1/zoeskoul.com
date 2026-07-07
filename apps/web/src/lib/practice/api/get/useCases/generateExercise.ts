@@ -418,10 +418,26 @@ export async function generatePracticeExercise(
 
     const moduleIdFromSession = session?.section?.moduleId ?? null;
     const assignmentIdFromSession = session?.assignmentId ?? null;
-    // Daily practice stores one anchor section on the session, but its queue may
-    // intentionally contain exercises from other sections in the same module.
-    // The queued section is server-authored in applyDailyFiveParams, so it is
-    // safe—and necessary—to use it instead of the anchor section here.
+    const scopedSubjectSlug = isDailyPractice
+        ? subject
+        : session
+            ? undefined
+            : subject;
+    const scopedModuleSlug = isDailyPractice
+        ? module
+        : session
+            ? undefined
+            : module;
+    const scopedSubjectIdFromSession = isDailyPractice
+        ? null
+        : session?.section?.subjectId ?? null;
+    const scopedModuleIdFromSession = isDailyPractice
+        ? null
+        : moduleIdFromSession;
+    // Daily practice stores one anchor section/module on the session, but its
+    // server-authored queue may span several modules inside the chosen subject.
+    // Use the queued subject/module/section instead of constraining generation to
+    // the anchor row. Other session modes keep their normal database scope.
     const effectiveSectionSlug = isDailyPractice
         ? section
         : session?.section?.slug ?? section;
@@ -457,12 +473,12 @@ export async function generatePracticeExercise(
     if (canResolveExactAuthoredProjectExercise) {
         let authoredResolved = await resolveTopicFromScope({
             prisma,
-            subjectSlug: session ? undefined : subject,
-            moduleSlug: session ? undefined : module,
+            subjectSlug: scopedSubjectSlug,
+            moduleSlug: scopedModuleSlug,
             sectionSlug: effectiveSectionSlug,
             rawTopic: topic,
-            subjectIdFromSession: session?.section?.subjectId ?? null,
-            moduleIdFromSession,
+            subjectIdFromSession: scopedSubjectIdFromSession,
+            moduleIdFromSession: scopedModuleIdFromSession,
             assignmentIdFromSession,
             rngSeedParts: {
                 userId: actor.userId,
@@ -566,12 +582,12 @@ export async function generatePracticeExercise(
     for (let attempt = 0; attempt < maxTopicResolveAttempts; attempt++) {
         resolved = await resolveTopicFromScope({
             prisma,
-            subjectSlug: session ? undefined : subject,
-            moduleSlug: session ? undefined : module,
+            subjectSlug: scopedSubjectSlug,
+            moduleSlug: scopedModuleSlug,
             sectionSlug: effectiveSectionSlug,
             rawTopic: attempt === 0 ? topic : null,
-            subjectIdFromSession: session?.section?.subjectId ?? null,
-            moduleIdFromSession,
+            subjectIdFromSession: scopedSubjectIdFromSession,
+            moduleIdFromSession: scopedModuleIdFromSession,
             assignmentIdFromSession,
             rngSeedParts: {
                 userId: actor.userId,

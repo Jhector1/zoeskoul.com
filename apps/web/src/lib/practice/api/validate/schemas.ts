@@ -192,6 +192,7 @@ const SubmitAnswerSchema = z.discriminatedUnion("kind", [
 export const BodySchema = z
     .object({
         key: KeySchema,
+        submissionId: z.string().uuid().optional(),
         reveal: z.boolean().optional(),
         answer: SubmitAnswerSchema.optional(),
     })

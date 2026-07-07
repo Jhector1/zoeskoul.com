@@ -671,8 +671,16 @@ export async function submitPracticeItem(args: {
     padRef?: MutableRefObject<VectorPadState>;
     maxAttempts?: number | null;
     isLockedRun?: boolean;
+    submissionId?: string;
 }) {
-    const { item, exercise, padRef, maxAttempts = null, isLockedRun = false } = args;
+    const {
+        item,
+        exercise,
+        padRef,
+        maxAttempts = null,
+        isLockedRun = false,
+        submissionId,
+    } = args;
 
     const { answer, statePatch } = buildPracticeAnswer({
         item,
@@ -686,6 +694,7 @@ export async function submitPracticeItem(args: {
 
     const data: PracticeValidateClientResponse = await submitPracticeAnswer({
         key: item.key,
+        submissionId,
         answer,
     });
 

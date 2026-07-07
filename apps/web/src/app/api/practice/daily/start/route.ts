@@ -6,18 +6,34 @@ import { listPublishedPracticeExerciseOptions } from "@/lib/practice/challenges/
 import {
   buildDailyFiveMeta,
   dailyFiveExperienceKey,
+  listDailyPracticeSubjectOptions,
   pickDailyFiveQueue,
   utcDayKey,
 } from "@/lib/practice/experience/dailyFive";
 import { DAILY_PRACTICE_TARGET_COUNT } from "@/lib/practice/experience/config";
+import { filterDailyPracticeOptionsForActor } from "@/lib/practice/experience/dailyAccess";
 
 export const runtime = "nodejs";
 
 type StartDailyFiveBody = {
   locale?: string;
   subjectSlug?: string;
-  moduleSlug?: string;
 };
+
+function subjectSelectionResponse(
+  subjects: ReturnType<typeof listDailyPracticeSubjectOptions>,
+  message = "Choose a subject for today’s practice.",
+) {
+  return NextResponse.json(
+    {
+      message,
+      code: "DAILY_SUBJECT_REQUIRED",
+      targetCount: DAILY_PRACTICE_TARGET_COUNT,
+      subjects,
+    },
+    { status: 428 },
+  );
+}
 
 export async function POST(req: Request) {
   const actor = await getActor();
@@ -33,9 +49,13 @@ export async function POST(req: Request) {
 
   const body = (await req.json().catch(() => ({}))) as StartDailyFiveBody;
   const locale = String(body.locale ?? "en");
+  const requestedSubjectSlug = String(body.subjectSlug ?? "").trim() || null;
   const dayKey = utcDayKey();
   const experienceKey = dailyFiveExperienceKey(actor.userId, dayKey);
 
+  // A daily set is immutable after creation. Always resume today's existing
+  // session before asking for a subject so refreshes and deep links cannot
+  // silently replace the learner's queue.
   const existing = await prisma.practiceSession.findUnique({
     where: { experienceKey },
     select: {
@@ -60,28 +80,54 @@ export async function POST(req: Request) {
     });
   }
 
-  const options = await listPublishedPracticeExerciseOptions();
+  const publishedOptions = await listPublishedPracticeExerciseOptions();
+  const options = await filterDailyPracticeOptionsForActor({
+    prisma,
+    actor,
+    options: publishedOptions,
+  });
+  const subjects = listDailyPracticeSubjectOptions({
+    options,
+    targetCount: DAILY_PRACTICE_TARGET_COUNT,
+  });
+
+  if (!requestedSubjectSlug) {
+    return subjectSelectionResponse(subjects);
+  }
+
+  const selectedSubject = subjects.find(
+    (subject) => subject.subjectSlug === requestedSubjectSlug,
+  );
+  if (!selectedSubject) {
+    return subjectSelectionResponse(
+      subjects,
+      "That subject does not currently have enough eligible daily-practice exercises.",
+    );
+  }
+
   const queue = pickDailyFiveQueue({
     options,
     userId: actor.userId,
     dayKey,
-    subjectSlug: body.subjectSlug ?? null,
-    moduleSlug: body.moduleSlug ?? null,
+    subjectSlug: selectedSubject.subjectSlug,
     targetCount: DAILY_PRACTICE_TARGET_COUNT,
   });
 
   if (queue.length !== DAILY_PRACTICE_TARGET_COUNT) {
     return NextResponse.json(
       {
-        message: body.moduleSlug
-          ? `The selected published module does not currently have ${DAILY_PRACTICE_TARGET_COUNT} unique eligible standalone single-file code exercises.`
-          : `No published module currently has ${DAILY_PRACTICE_TARGET_COUNT} unique eligible standalone single-file code exercises.`,
+        message: `The selected subject does not currently have ${DAILY_PRACTICE_TARGET_COUNT} unique eligible standalone single-file code exercises.`,
         code: "DAILY_PRACTICE_POOL_INCOMPLETE",
+        targetCount: DAILY_PRACTICE_TARGET_COUNT,
+        subjects,
       },
       { status: 409 },
     );
   }
 
+  // PracticeSession keeps one section/module as a database anchor. The queue
+  // itself can span modules inside the chosen subject; each next target is
+  // resolved from the signed server-authored daily metadata.
   const first = queue[0];
   const subject = await prisma.practiceSubject.findUnique({
     where: { slug: first.subjectSlug },
@@ -145,15 +191,24 @@ export async function POST(req: Request) {
     if (String(error?.code ?? "") === "P2002") {
       const raced = await prisma.practiceSession.findUnique({
         where: { experienceKey },
-        select: { id: true, status: true },
+        select: {
+          id: true,
+          status: true,
+          section: {
+            select: {
+              subject: { select: { slug: true } },
+              module: { select: { slug: true } },
+            },
+          },
+        },
       });
       if (raced) {
         return NextResponse.json({
           sessionId: raced.id,
           resumed: true,
           completed: raced.status === "completed",
-          subjectSlug: first.subjectSlug,
-          moduleSlug: first.moduleSlug,
+          subjectSlug: raced.section.subject?.slug ?? first.subjectSlug,
+          moduleSlug: raced.section.module?.slug ?? first.moduleSlug,
         });
       }
     }

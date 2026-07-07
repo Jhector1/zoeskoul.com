@@ -25,28 +25,28 @@ describe("attempt policy", () => {
     expect(computeMaxAttemptsCore({ mode: "assignment" })).toBe(2);
   });
 
-  it("keeps public challenges unlimited even when old metadata has a cap", () => {
-    expect(computeMaxAttemptsCore({ mode: "public_challenge" })).toBeNull();
-    expect(
-      computeMaxAttemptsCore({
-        mode: "public_challenge",
-        sessionMaxAttempts: 2,
-      }),
-    ).toBeNull();
-  });
-
-  it.each(["daily_five", "onboarding_trial"] as const)(
-    "uses the finite session cap for %s",
+  it.each(["public_challenge", "daily_five"] as const)(
+    "keeps %s unlimited even when old metadata has a cap",
     (mode) => {
-      expect(computeMaxAttemptsCore({ mode })).toBe(3);
+      expect(computeMaxAttemptsCore({ mode })).toBeNull();
       expect(
         computeMaxAttemptsCore({
           mode,
           sessionMaxAttempts: 2,
         }),
-      ).toBe(2);
+      ).toBeNull();
     },
   );
+
+  it("keeps onboarding trial on the finite session cap", () => {
+    expect(computeMaxAttemptsCore({ mode: "onboarding_trial" })).toBe(3);
+    expect(
+      computeMaxAttemptsCore({
+        mode: "onboarding_trial",
+        sessionMaxAttempts: 2,
+      }),
+    ).toBe(2);
+  });
 
   it("keeps subscriber and ad-hoc practice unlimited by default", () => {
     expect(computeMaxAttemptsCore({ mode: "standard" })).toBeNull();

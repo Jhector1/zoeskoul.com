@@ -18,6 +18,11 @@ describe("practice experience policy", () => {
       maxAttempts: 2,
       allowReveal: false,
       lockDifficulty: "hard",
+      eligibility: {
+        allowedPurposes: ["quiz"],
+        allowMultiFile: false,
+        allowTerminal: false,
+      },
       rewards: { rankedXp: false },
     });
   });
@@ -55,9 +60,10 @@ describe("practice experience policy", () => {
 
     expect(daily).toMatchObject({
       targetCount: 3,
+      maxAttempts: null,
       eligibility: {
         allowedKinds: ["code_input"],
-        allowedPurposes: ["quiz", "project"],
+        allowedPurposes: ["project"],
         allowMultiFile: false,
         allowTerminal: false,
       },
@@ -66,7 +72,7 @@ describe("practice experience policy", () => {
     expect(subscriber.filters).toEqual({
       topicEditable: true,
       difficultyEditable: true,
-      purposeEditable: true,
+      purposeEditable: false,
       countEditable: true,
     });
   });

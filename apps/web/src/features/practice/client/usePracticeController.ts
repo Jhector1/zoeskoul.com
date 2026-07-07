@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef, useState, useEffect } from "react";
+import React, { useCallback, useMemo, useRef, useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
@@ -47,6 +47,7 @@ export function usePracticeController(args: {
     sp,
     run,
     setRun,
+    experienceMode,
     returnUrlFromQuery,
 
     isAssignmentRun,
@@ -104,12 +105,21 @@ export function usePracticeController(args: {
   const purposePolicyFromQuery = coercePurposePolicy((sp as any)?.get?.("purposePolicy"));
 
   // defaults (good long-term)
-  const preferPurposeRaw: PurposeMode = preferPurposeFromQuery ?? "quiz";
-  const purposePolicyRaw: PurposePolicy = purposePolicyFromQuery ?? "fallback";
+  const projectPracticeRun =
+    experienceMode === "daily_five" ||
+    experienceMode === "standard" ||
+    experienceMode === "practice";
+
+  const preferPurposeRaw: PurposeMode = projectPracticeRun
+    ? "project"
+    : preferPurposeFromQuery ?? "quiz";
+  const purposePolicyRaw: PurposePolicy = projectPracticeRun
+    ? "strict"
+    : purposePolicyFromQuery ?? "fallback";
 
 // ✅ assignments/sessions: don't let URL params influence purpose on client
-  const preferPurpose: PurposeMode = isLockedRun ? "quiz" : preferPurposeRaw;
-  const purposePolicy: PurposePolicy = isLockedRun ? "fallback" : purposePolicyRaw;
+  const preferPurpose: PurposeMode = isLockedRun && !projectPracticeRun ? "quiz" : preferPurposeRaw;
+  const purposePolicy: PurposePolicy = isLockedRun && !projectPracticeRun ? "fallback" : purposePolicyRaw;
 // ✅ persistence hydrates + persists stack/idx (+ completed)
   const { hydrated, resolvedSessionIdRef } = usePracticeStatePersistence({
     subjectSlug,
@@ -404,16 +414,47 @@ export function usePracticeController(args: {
     setConfirmOpen(false);
     setPendingChange(null);
   }
+  const restartPractice = useCallback(async () => {
+    setLoadErr(null);
+    setActionErr(null);
+    setCompleted(false);
+    forcedSummaryOnceRef.current = false;
+    setPhase("practice");
+    setAutoSummarized(false);
+    setShowMissed(true);
+    setSessionId(null);
+    resolvedSessionIdRef.current = null;
+    setStack([]);
+    setIdx(0);
+    await engine.loadNextExercise({ forceNew: true });
+  }, [
+    engine.loadNextExercise,
+    resolvedSessionIdRef,
+    setActionErr,
+    setAutoSummarized,
+    setCompleted,
+    setIdx,
+    setLoadErr,
+    setPhase,
+    setSessionId,
+    setShowMissed,
+    setStack,
+  ]);
+
   const resolvedReturnUrl = completionReturnUrl || returnUrlFromQuery || null;
   const shellProps: React.ComponentProps<typeof PracticeShell> = useMemo(
     () => ({
+      locale: pathname.split("/").filter(Boolean)[0] || "en",
+      subjectSlug,
+      moduleSlug,
       returnUrl: resolvedReturnUrl,
       leaderboardUrl: (() => {
         const locale = pathname.split("/").filter(Boolean)[0] || "en";
         return `/${locale}/leaderboard`;
       })(),
+      dailyResetAt: run?.daily?.nextResetAt ?? null,
       reviewStack: engine.reviewStack,
-      experienceMode: run?.mode ?? "practice",
+      experienceMode,
       viewer: run?.viewer ?? {
         tier: "guest",
         authenticated: false,
@@ -544,6 +585,8 @@ export function usePracticeController(args: {
       pendingRevealCompletion: engine.deferredRevealCompletion,
       finishRevealedSession: engine.finishDeferredReveal,
       retryLoad: engine.retryLoad,
+      resetCurrentExercise: engine.resetCurrentExercise,
+      restartPractice,
       submitBusy: engine.submitBusy,
       padRef,
       zHeldRef,
@@ -556,6 +599,7 @@ export function usePracticeController(args: {
       pathname,
       subjectSlug,
       run,
+      experienceMode,
       router,
       t,
     engine.reviewStack, // ✅ add this
@@ -575,6 +619,8 @@ export function usePracticeController(args: {
       engine.deferredRevealCompletion,
       engine.openHelp,
       engine.finishDeferredReveal,
+      engine.resetCurrentExercise,
+      restartPractice,
       sessionSize,
       topic,
       difficulty,
