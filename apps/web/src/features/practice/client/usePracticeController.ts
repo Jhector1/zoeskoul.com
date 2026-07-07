@@ -19,6 +19,7 @@ import { SESSION_DEFAULT } from "./constants";
 import {lastSessionKey} from "@/features/practice/client/storage";
 import {coercePurposeMode, coercePurposePolicy} from "@/lib/subjects/quizClient";
 import {PurposeMode, PurposePolicy} from "@/lib/subjects/types";
+import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 
 type PendingChange =
   | { kind: "topic"; value: TopicValue }
@@ -30,12 +31,16 @@ export function usePracticeController(args: {
   moduleSlug?: string;
   sessionId?: string;
   isTrial?: boolean;
+  authoritativeSessionId?: boolean;
+  expectedExperienceMode?: PracticeExperienceMode;
 }) {
   const {
     subjectSlug,
     moduleSlug,
     sessionId: initialSessionId,
     isTrial = false,
+    authoritativeSessionId = false,
+    expectedExperienceMode,
   } = args;
 
   const t = useTranslations("Practice");
@@ -129,6 +134,9 @@ export function usePracticeController(args: {
     topic,
     difficulty,
     sessionId,
+    initialSessionId: initialSessionId ?? null,
+    authoritativeSessionId,
+    expectedExperienceMode,
     run,
 
     phase,
@@ -214,6 +222,7 @@ export function usePracticeController(args: {
     // ✅ NEW
     preferPurpose,
     purposePolicy,
+    expectedExperienceMode,
   } as any);
 
   // lock selected values when run says so

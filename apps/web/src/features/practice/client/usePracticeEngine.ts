@@ -41,6 +41,7 @@ import {
 import { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
 import { samePracticeExerciseIdentity } from "@/lib/practice/exerciseIdentity";
 import { resolveRevealCompletionTransition } from "@/lib/practice/experience/revealCompletion";
+import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 
 export type Phase = "practice" | "summary";
 
@@ -150,6 +151,7 @@ export function usePracticeEngine(args: {
 
   preferPurpose?: string;
   purposePolicy?: string;
+  expectedExperienceMode?: PracticeExperienceMode;
 
   hydrated: boolean;
   resolvedSessionIdRef: MutableRefObject<string | null>;
@@ -210,6 +212,7 @@ export function usePracticeEngine(args: {
     setSessionId,
     preferPurpose,
     purposePolicy,
+    expectedExperienceMode,
     phase,
     setPhase,
     autoSummarized,
@@ -249,6 +252,21 @@ export function usePracticeEngine(args: {
 
   rawKeyRef.current = (key: string) => tt.raw(key, key);
   resolveTextRef.current = (value: string) => tt.resolve(value, value);
+
+  function acceptRunMeta(candidate: RunMeta | null | undefined) {
+    if (!candidate?.mode) return true;
+    if (
+      expectedExperienceMode &&
+      candidate.mode !== expectedExperienceMode
+    ) {
+      setLoadErr(
+        `This session belongs to ${candidate.mode}, not ${expectedExperienceMode}.`,
+      );
+      return false;
+    }
+    setRun(candidate);
+    return true;
+  }
 
   useEffect(() => {
     setActionErr(null);
@@ -404,7 +422,7 @@ export function usePracticeEngine(args: {
     );
 
     const runFromApi = (response as any)?.run;
-    if (runFromApi?.mode) setRun(runFromApi);
+    if (runFromApi?.mode && !acceptRunMeta(runFromApi)) return null;
 
     if ((response as any)?.complete) {
       setCompleted(true);
@@ -498,7 +516,9 @@ export function usePracticeEngine(args: {
       );
 
       const runFromApi = (response as any)?.run;
-      if (runFromApi?.mode) setRun(runFromApi);
+      if (runFromApi?.mode && !acceptRunMeta(runFromApi)) {
+        throw new Error("Practice session experience mismatch.");
+      }
 
       if ((response as any)?.complete) {
         const sid2 = (response as any)?.sessionId;
@@ -518,7 +538,9 @@ export function usePracticeEngine(args: {
             }
             setServerStatus(st);
             if (st?.missed) setServerMissed(st.missed);
-            if (st?.run?.mode) setRun(st.run as any);
+            if (st?.run?.mode && !acceptRunMeta(st.run as any)) {
+              throw new Error("Practice session experience mismatch.");
+            }
             setCompletionReturnUrl(st.returnUrl || returnUrlFromQuery);
           } else {
             const serverReturn =
@@ -598,7 +620,7 @@ export function usePracticeEngine(args: {
         if (st) {
           setServerStatus(st);
           if (st?.missed) setServerMissed(st.missed);
-          if (st?.run?.mode) setRun(st.run as any);
+          if (st?.run?.mode && !acceptRunMeta(st.run as any)) return;
 
           const tc = st?.targetCount;
           if (typeof tc === "number" && tc > 0) {
@@ -634,6 +656,7 @@ export function usePracticeEngine(args: {
     moduleSlug,
     resolvedSessionIdRef,
     setRun,
+    expectedExperienceMode,
     setSessionSize,
     setCompleted,
     setAutoSummarized,
@@ -664,7 +687,7 @@ export function usePracticeEngine(args: {
       if (st) {
         setServerStatus(st);
         if (st?.missed) setServerMissed(st.missed);
-        if (st?.run?.mode) setRun(st.run as any);
+        if (st?.run?.mode && !acceptRunMeta(st.run as any)) return;
         if (st?.complete) setCompletionReturnUrl(st.returnUrl || returnUrlFromQuery);
 
         if (Array.isArray(st.history) && st.history.length) {
@@ -687,6 +710,7 @@ export function usePracticeEngine(args: {
     subjectSlug,
     moduleSlug,
     setRun,
+    expectedExperienceMode,
     setCompletionReturnUrl,
   ]);
 
@@ -806,9 +830,17 @@ export function usePracticeEngine(args: {
 
       updateCurrent({
         ...(submitted.statePatch ?? {}),
-        result: submitted.data as any,
+        result: {
+          ...(submitted.data as any),
+          ok: submitted.ok,
+          finalized: submitted.finalized,
+        },
         attempts: submitted.used,
         submitted: submitted.finalized,
+
+        // Every new validation result must control feedback visibility.
+        // Wrong feedback remains visible until the learner makes another real edit.
+        feedbackDismissed: submitted.ok,
       });
 
       if ((submitted.data as any)?.sessionComplete) {

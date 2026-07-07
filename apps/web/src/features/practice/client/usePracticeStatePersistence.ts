@@ -9,11 +9,14 @@ import { normalizeTopicValue } from "@/lib/practice/uiHelpers";
 
 import { SESSION_DEFAULT, STORAGE_VERSION } from "./constants";
 import {
+  isSavedRunCompatible,
   lastSessionKey,
   loadSavedState,
   pruneExpiredStack,
+  resolveHydrationSessionId,
   storageKeyForState,
 } from "./storage";
+import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 
 export type Phase = "practice" | "summary";
 export type RunMeta = PracticeRunMetaApi;
@@ -27,6 +30,9 @@ export function usePracticeStatePersistence(args: {
   topic: TopicValue;
   difficulty: Difficulty | "all";
   sessionId: string | null;
+  initialSessionId?: string | null;
+  authoritativeSessionId?: boolean;
+  expectedExperienceMode?: PracticeExperienceMode;
   run: RunMeta | null;
 
   phase: Phase;
@@ -66,6 +72,9 @@ export function usePracticeStatePersistence(args: {
     topic,
     difficulty,
     sessionId,
+    initialSessionId = null,
+    authoritativeSessionId = false,
+    expectedExperienceMode,
     run,
 
     phase,
@@ -101,6 +110,7 @@ export function usePracticeStatePersistence(args: {
   const [hydrated, setHydrated] = useState(false);
 
   const resolvedSessionIdRef = useRef<string | null>(null);
+  const explicitSessionRef = useRef(false);
 
   useEffect(() => {
     if (hydrated) return;
@@ -164,15 +174,24 @@ export function usePracticeStatePersistence(args: {
       return;
     }
 
-    let sidParam = sessionIdParam;
-    if (!sidParam) {
+    let rememberedSessionId: string | null = null;
+    if (!sessionIdParam && !initialSessionId && !authoritativeSessionId) {
       try {
-        sidParam = localStorage.getItem(lastSessionKey(subjectSlug, moduleSlug)) || null;
+        rememberedSessionId =
+          localStorage.getItem(lastSessionKey(subjectSlug, moduleSlug)) || null;
       } catch {}
     }
 
-    resolvedSessionIdRef.current = sidParam ?? null;
-    if (sidParam) setSessionId(sidParam);
+    const sidParam = resolveHydrationSessionId({
+      authoritativeSessionId,
+      initialSessionId,
+      sessionIdParam,
+      rememberedSessionId,
+    });
+
+    explicitSessionRef.current = Boolean(sessionIdParam || initialSessionId);
+    resolvedSessionIdRef.current = sidParam;
+    setSessionId(sidParam);
 
     setSessionSize(initialSize);
 
@@ -188,6 +207,19 @@ export function usePracticeStatePersistence(args: {
         sessionId: sidParam ?? null,
       });
     } catch {
+      loaded = null;
+    }
+
+    if (
+      loaded &&
+      !isSavedRunCompatible({
+        expectedExperienceMode,
+        savedRunMode: loaded.payload?.run?.mode,
+      })
+    ) {
+      try {
+        sessionStorage.removeItem(loaded.key);
+      } catch {}
       loaded = null;
     }
 
@@ -250,6 +282,7 @@ export function usePracticeStatePersistence(args: {
     setSection(nextSection);
     setTopic(nextTopic as TopicValue);
     setDifficulty(nextDifficulty);
+    setRun(null);
 
     setCompleted(false);
     setPhase("practice");
@@ -269,6 +302,9 @@ export function usePracticeStatePersistence(args: {
     subjectSlug,
     moduleSlug,
     sessionId,
+    initialSessionId,
+    authoritativeSessionId,
+    expectedExperienceMode,
     setSection,
     setTopic,
     setDifficulty,
@@ -346,6 +382,7 @@ export function usePracticeStatePersistence(args: {
     if (!hydrated) return;
     if (!subjectSlug || !moduleSlug) return;
     if (!sessionId) return;
+    if (explicitSessionRef.current) return;
 
     try {
       localStorage.setItem(lastSessionKey(subjectSlug, moduleSlug), sessionId);

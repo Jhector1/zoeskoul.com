@@ -6,12 +6,14 @@ import { listPublishedPracticeExerciseOptions } from "@/lib/practice/challenges/
 import {
   buildDailyFiveMeta,
   dailyFiveExperienceKey,
+  readDailyFiveMeta,
   listDailyPracticeSubjectOptions,
   pickDailyFiveQueue,
   utcDayKey,
 } from "@/lib/practice/experience/dailyFive";
 import { DAILY_PRACTICE_TARGET_COUNT } from "@/lib/practice/experience/config";
 import { filterDailyPracticeOptionsForActor } from "@/lib/practice/experience/dailyAccess";
+import { resolvePracticeExperienceMode } from "@/lib/practice/experience/resolve";
 
 export const runtime = "nodejs";
 
@@ -19,6 +21,43 @@ type StartDailyFiveBody = {
   locale?: string;
   subjectSlug?: string;
 };
+
+type DailySessionCandidate = {
+  id: string;
+  status: string;
+  mode: string;
+  meta: unknown;
+  targetCount: number;
+  section: {
+    subject: { slug: string } | null;
+    module: { slug: string } | null;
+  };
+};
+
+function isValidDailySession(session: DailySessionCandidate) {
+  const daily = readDailyFiveMeta(session.meta);
+  return (
+    resolvePracticeExperienceMode(session) === "daily_five" &&
+    daily != null &&
+    daily.targetCount === session.targetCount &&
+    session.targetCount > 0
+  );
+}
+
+function dailySessionResponse(
+  session: DailySessionCandidate,
+  args: { resumed: boolean; fallbackSubjectSlug?: string; fallbackModuleSlug?: string },
+) {
+  return NextResponse.json({
+    sessionId: session.id,
+    resumed: args.resumed,
+    completed: session.status === "completed",
+    subjectSlug: session.section.subject?.slug ?? args.fallbackSubjectSlug ?? null,
+    moduleSlug: session.section.module?.slug ?? args.fallbackModuleSlug ?? null,
+    experienceMode: "daily_five" as const,
+    targetCount: session.targetCount,
+  });
+}
 
 function subjectSelectionResponse(
   subjects: ReturnType<typeof listDailyPracticeSubjectOptions>,
@@ -61,6 +100,9 @@ export async function POST(req: Request) {
     select: {
       id: true,
       status: true,
+      mode: true,
+      meta: true,
+      targetCount: true,
       section: {
         select: {
           subject: { select: { slug: true } },
@@ -71,13 +113,23 @@ export async function POST(req: Request) {
   });
 
   if (existing) {
-    return NextResponse.json({
-      sessionId: existing.id,
-      resumed: true,
-      completed: existing.status === "completed",
-      subjectSlug: existing.section.subject?.slug ?? null,
-      moduleSlug: existing.section.module?.slug ?? null,
-    });
+    if (!isValidDailySession(existing)) {
+      console.error("[daily-practice] invalid session behind daily experience key", {
+        sessionId: existing.id,
+        experienceKey,
+        mode: existing.mode,
+        targetCount: existing.targetCount,
+      });
+      return NextResponse.json(
+        {
+          message: "Today’s Daily Practice session is invalid. Please contact support.",
+          code: "INVALID_DAILY_SESSION",
+        },
+        { status: 409 },
+      );
+    }
+
+    return dailySessionResponse(existing, { resumed: true });
   }
 
   const publishedOptions = await listPublishedPracticeExerciseOptions();
@@ -176,15 +228,25 @@ export async function POST(req: Request) {
           stepKeys: ["concept", "hint_1", "hint_2", "reveal"],
         },
       },
-      select: { id: true },
+      select: {
+        id: true,
+        status: true,
+        mode: true,
+        meta: true,
+        targetCount: true,
+        section: {
+          select: {
+            subject: { select: { slug: true } },
+            module: { select: { slug: true } },
+          },
+        },
+      },
     });
 
-    return NextResponse.json({
-      sessionId: session.id,
+    return dailySessionResponse(session, {
       resumed: false,
-      completed: false,
-      subjectSlug: first.subjectSlug,
-      moduleSlug: first.moduleSlug,
+      fallbackSubjectSlug: first.subjectSlug,
+      fallbackModuleSlug: first.moduleSlug,
     });
   } catch (error: any) {
     // The unique experienceKey closes the double-click/concurrent request race.
@@ -194,6 +256,9 @@ export async function POST(req: Request) {
         select: {
           id: true,
           status: true,
+          mode: true,
+          meta: true,
+          targetCount: true,
           section: {
             select: {
               subject: { select: { slug: true } },
@@ -203,12 +268,26 @@ export async function POST(req: Request) {
         },
       });
       if (raced) {
-        return NextResponse.json({
-          sessionId: raced.id,
+        if (!isValidDailySession(raced)) {
+          console.error("[daily-practice] concurrent create returned invalid session", {
+            sessionId: raced.id,
+            experienceKey,
+            mode: raced.mode,
+            targetCount: raced.targetCount,
+          });
+          return NextResponse.json(
+            {
+              message: "Today’s Daily Practice session is invalid. Please contact support.",
+              code: "INVALID_DAILY_SESSION",
+            },
+            { status: 409 },
+          );
+        }
+
+        return dailySessionResponse(raced, {
           resumed: true,
-          completed: raced.status === "completed",
-          subjectSlug: raced.section.subject?.slug ?? first.subjectSlug,
-          moduleSlug: raced.section.module?.slug ?? first.moduleSlug,
+          fallbackSubjectSlug: first.subjectSlug,
+          fallbackModuleSlug: first.moduleSlug,
         });
       }
     }

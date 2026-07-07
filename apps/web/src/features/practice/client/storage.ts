@@ -1,6 +1,7 @@
 import type { MutableRefObject } from "react";
 import type { QItem, TopicValue } from "@/lib/practice/uiTypes";
 import type { Difficulty } from "@/lib/practice/types";
+import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
 import { STORAGE_VERSION } from "./constants";
 
 /** canonical: no n in key (recommended) */
@@ -151,6 +152,58 @@ function findBestLegacyAnyN(args: {
       : null;
 }
 
+export function buildSavedStateLookupKeys(args: {
+  subjectSlug: string;
+  moduleSlug: string;
+  section: string | null;
+  topic: TopicValue | string;
+  difficulty: Difficulty | "all" | string;
+  n: number;
+  sessionId: string | null;
+}) {
+  if (args.sessionId) {
+    return [`practice:v${STORAGE_VERSION}:session:${args.sessionId}`];
+  }
+
+  return [storageKeyV6(args), storageKeyV6Legacy(args)];
+}
+
+export function resolveHydrationSessionId(args: {
+  authoritativeSessionId?: boolean;
+  initialSessionId?: string | null;
+  sessionIdParam?: string | null;
+  rememberedSessionId?: string | null;
+}) {
+  const initialSessionId = String(args.initialSessionId ?? "").trim() || null;
+  const sessionIdParam = String(args.sessionIdParam ?? "").trim() || null;
+  const rememberedSessionId =
+    String(args.rememberedSessionId ?? "").trim() || null;
+
+  if (args.authoritativeSessionId) {
+    return initialSessionId;
+  }
+
+  return sessionIdParam ?? initialSessionId ?? rememberedSessionId;
+}
+
+export function isSavedRunCompatible(args: {
+  expectedExperienceMode?: PracticeExperienceMode | null;
+  savedRunMode?: unknown;
+}) {
+  const expected = args.expectedExperienceMode ?? null;
+  if (!expected) return true;
+
+  const saved =
+    typeof args.savedRunMode === "string" && args.savedRunMode.trim()
+      ? args.savedRunMode.trim()
+      : null;
+
+  // A state written before run metadata arrived is safe to hydrate because it
+  // is still scoped by the exact session id. A conflicting explicit mode is
+  // never safe to promote into the current experience.
+  return saved == null || saved === expected;
+}
+
 export function loadSavedState(args: {
   subjectSlug: string;
   moduleSlug: string;
@@ -160,17 +213,9 @@ export function loadSavedState(args: {
   n: number;
   sessionId: string | null;
 }) {
-  const keysToTry: string[] = [];
-
-  if (args.sessionId) {
-    keysToTry.push(`practice:v${STORAGE_VERSION}:session:${args.sessionId}`);
-  }
+  const keysToTry = buildSavedStateLookupKeys(args);
 
   const canonical = storageKeyV6(args);
-  keysToTry.push(canonical);
-
-  const legacyGuess = storageKeyV6Legacy(args);
-  keysToTry.push(legacyGuess);
 
   for (const k of keysToTry) {
     const payload = tryParseV(sessionStorage.getItem(k));
@@ -178,6 +223,8 @@ export function loadSavedState(args: {
       return { key: k, payload, canonicalKey: canonical };
     }
   }
+
+  if (args.sessionId) return null;
 
   const bestLegacy = findBestLegacyAnyN({
     subjectSlug: args.subjectSlug,

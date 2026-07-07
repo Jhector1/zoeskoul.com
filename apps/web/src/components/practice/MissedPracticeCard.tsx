@@ -188,6 +188,7 @@ function ReadOnlyPracticeCard({
                   exercise={exercise as any}
                   code={(q as any).code ?? ""}
                   stdin={(q as any).codeStdin ?? ""}
+                  showStdinEditor={false}
                   language={(((q as any).codeLang ?? "python") as RunnerLanguage)}
                   onChangeCode={() => {}}
                   onChangeStdin={() => {}}

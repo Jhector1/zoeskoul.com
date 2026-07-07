@@ -86,3 +86,5 @@ apps/runner/Archive.zip
 .zip.*
 **/.zip
 **/.zip.*
+.vercel
+.env*

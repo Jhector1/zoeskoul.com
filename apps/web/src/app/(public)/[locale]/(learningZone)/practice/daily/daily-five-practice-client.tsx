@@ -9,6 +9,7 @@ type StartResult = {
   sessionId: string;
   subjectSlug: string | null;
   moduleSlug: string | null;
+  experienceMode: "daily_five";
 };
 
 type DailySubjectOption = {
@@ -33,6 +34,8 @@ function DailyFiveShell({ result }: { result: StartResult }) {
     sessionId: result.sessionId,
     subjectSlug: result.subjectSlug ?? undefined,
     moduleSlug: result.moduleSlug ?? undefined,
+    authoritativeSessionId: true,
+    expectedExperienceMode: "daily_five",
   });
   return <PracticeShell {...shellProps} t={t} />;
 }
@@ -134,9 +137,18 @@ export default function DailyFivePracticeClient(props: {
         });
         const data = await response.json().catch(() => null);
 
-        if (response.ok && data?.sessionId) {
+        if (
+          response.ok &&
+          data?.sessionId &&
+          data?.experienceMode === "daily_five"
+        ) {
           setSubjects(null);
           setResult(data as StartResult);
+          return;
+        }
+
+        if (response.ok && data?.sessionId) {
+          setError("Daily Practice received an incompatible session. Please try again.");
           return;
         }
 
