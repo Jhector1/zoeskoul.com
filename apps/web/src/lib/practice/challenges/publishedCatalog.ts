@@ -235,5 +235,10 @@ export async function listPublishedPracticeExerciseOptions(): Promise<
 export async function listPublishedChallengeExerciseOptions(): Promise<
   PublishedChallengeExerciseOption[]
 > {
-  return listPublishedPracticeExerciseOptions();
+  const options = await listPublishedPracticeExerciseOptions();
+  return options.filter(
+    (option) =>
+      option.exercisePurpose === "project" &&
+      option.exerciseKind === "code_input",
+  );
 }

@@ -3,6 +3,7 @@
 import React, { useMemo } from "react";
 import { cn } from "@/lib/cn";
 import DailyResetCountdown from "@/components/practice/completion/DailyResetCountdown";
+import { resolvePracticeDisplayStack } from "@/lib/practice/experience/reviewDisplayStack";
 import type { PracticeShellProps } from "../PracticeShell";
 import PracticeReviewList from "@/components/practice/MissedPracticeCard";
 import SummaryViewSkeleton from "@/components/practice/shell/SummaryViewSkeleton";
@@ -245,11 +246,15 @@ export default function SummaryView(props: PracticeShellProps & { layoutMode?: "
     !Array.isArray(stack) ||
     (reviewStack != null && !Array.isArray(reviewStack));
 
-  const list = useMemo(() => {
-    const rs = Array.isArray(reviewStack) ? reviewStack : [];
-    const st = Array.isArray(stack) ? stack : [];
-    return rs.length ? rs : st;
-  }, [reviewStack, stack]);
+  const list = useMemo(
+    () =>
+      resolvePracticeDisplayStack({
+        stack,
+        reviewStack,
+        answeredCount,
+      }),
+    [answeredCount, reviewStack, stack],
+  );
 
   if (loading) return <SummaryViewSkeleton />;
 

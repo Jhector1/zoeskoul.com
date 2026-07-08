@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Public challenges · Admin",
-  description: "Create public three-attempt links for published exercises.",
+  description: "Create public links for published code-input projects.",
   robots: { index: false, follow: false },
 };
 
@@ -62,12 +62,7 @@ export default async function PublicChallengesPage({
   }
 
   const options = await listPublishedChallengeExerciseOptions();
-  const quizCount = options.filter(
-    (option) => option.exercisePurpose === "quiz",
-  ).length;
-  const projectCount = options.filter(
-    (option) => option.exercisePurpose === "project",
-  ).length;
+  const projectCount = options.length;
 
   return (
     <main className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
@@ -80,9 +75,9 @@ export default async function PublicChallengesPage({
             Published public challenges
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600">
-            Select one exercise from the generated, seeded live curriculum and
-            create an anonymous practice-trial link. The exercise is referenced,
-            not copied, and no challenge database table is required.
+            Select one code-input project from the generated, seeded live
+            curriculum and create an anonymous practice-trial link. The exercise
+            is referenced, not copied, and no challenge database table is required.
           </p>
         </div>
 
@@ -94,7 +89,7 @@ export default async function PublicChallengesPage({
         </Link>
       </div>
 
-      <div className="mb-6 grid gap-3 sm:grid-cols-3">
+      <div className="mb-6 grid gap-3 sm:grid-cols-2">
         <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-sm">
           <div className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
             Shareable exercises
@@ -103,17 +98,9 @@ export default async function PublicChallengesPage({
             {options.length}
           </div>
         </div>
-        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 shadow-sm">
-          <div className="text-xs font-semibold uppercase tracking-wide text-emerald-700">
-            Quiz
-          </div>
-          <div className="mt-1 text-2xl font-semibold text-emerald-950">
-            {quizCount}
-          </div>
-        </div>
         <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 shadow-sm">
           <div className="text-xs font-semibold uppercase tracking-wide text-amber-700">
-            Project
+            Code projects
           </div>
           <div className="mt-1 text-2xl font-semibold text-amber-950">
             {projectCount}
@@ -127,9 +114,8 @@ export default async function PublicChallengesPage({
       />
 
       <div className="mt-6 rounded-2xl border border-neutral-200 bg-neutral-50 p-4 text-sm leading-6 text-neutral-600">
-        Terminal-backed PTY exercises are intentionally omitted because the
-        existing anonymous trial does not grant a terminal runner identity.
-        Standard quiz, code, SQL, and non-PTY project exercises are supported.
+        Only non-PTY code-input projects are shareable. Quiz exercises and
+        terminal-backed projects are intentionally excluded from this publisher.
       </div>
     </main>
   );

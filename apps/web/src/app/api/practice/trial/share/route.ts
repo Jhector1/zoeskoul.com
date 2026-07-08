@@ -9,6 +9,7 @@ import {
 } from "@/lib/practice/api/shared/http";
 import { requireChallengePublisherApi } from "@/lib/practice/challenges/publisherAccess";
 import { assertPublishedChallengeTargetAvailable } from "@/lib/practice/challenges/publishedAvailability";
+import { assertEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligibility";
 import { resolveSharedChallengeTarget } from "@/lib/practice/challenges/target";
 import { signSharedChallenge } from "@/lib/practice/challenges/token";
 
@@ -71,6 +72,7 @@ export async function POST(req: Request) {
 
   try {
     const target = resolveSharedChallengeTarget(parsed.data);
+    assertEligiblePublicChallengeTarget(target);
     await assertPublishedChallengeTargetAvailable({ prisma, target });
 
     const expiresAt = new Date(

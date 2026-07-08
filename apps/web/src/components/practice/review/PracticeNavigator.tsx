@@ -9,6 +9,10 @@ import PracticeLeaderboardRail from "@/components/practice/leaderboard/PracticeL
 import { shouldShowPracticeLeaderboard } from "@/components/practice/leaderboard/visibility";
 import { cn } from "@/lib/cn";
 import { resolvePracticeQueueStatus } from "@/lib/practice/experience/queueStatus";
+import {
+  resolvePracticeDisplayStack,
+  resolvePracticeQueuePlaceholderStatus,
+} from "@/lib/practice/experience/reviewDisplayStack";
 
 type NavigatorPanel = "controls" | "leaderboard";
 
@@ -93,6 +97,11 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
   const copy = experienceCopy(props, tw);
   const locale = props.locale || "en";
   const isDailyPractice = props.experienceMode === "daily_five";
+  const queueStack = resolvePracticeDisplayStack({
+    stack: props.stack,
+    reviewStack: props.reviewStack,
+    answeredCount: props.answeredCount,
+  });
   const canChooseCatalog =
     props.experienceMode === "standard" && props.viewer.subscribed;
   const catalogVisible =
@@ -240,10 +249,15 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
             <ol className="grid gap-1.5">
               {Array.from({ length: Math.max(1, props.sessionSize) }).map(
                 (_, index) => {
-                  const item = props.stack[index] ?? null;
+                  const item = queueStack[index] ?? null;
                   const isActive =
                     index === props.idx && props.phase === "practice";
-                  const queueStatus = resolvePracticeQueueStatus(item);
+                  const queueStatus = item
+                    ? resolvePracticeQueueStatus(item)
+                    : resolvePracticeQueuePlaceholderStatus({
+                        index,
+                        answeredCount: props.answeredCount,
+                      });
                   const isCorrect = queueStatus === "correct";
                   const isRevealed = queueStatus === "revealed";
                   const isFinalized = queueStatus === "completed";
@@ -254,15 +268,17 @@ export default function PracticeNavigator(props: PracticeNavigatorProps) {
                       <button
                         type="button"
                         onClick={() => {
-                          if (index < props.stack.length) props.setIdx(index);
+                          if (index < queueStack.length && index < props.stack.length) {
+                            props.setIdx(index);
+                          }
                         }}
-                        disabled={index >= props.stack.length}
+                        disabled={index >= queueStack.length || index >= props.stack.length}
                         className={[
                           "flex w-full items-center gap-3 rounded-xl border px-3 py-2.5 text-left transition",
                           isActive
                             ? "border-emerald-300/70 bg-emerald-50/80 dark:border-emerald-300/30 dark:bg-emerald-300/10"
                             : "border-[rgb(var(--ui-border)/0.72)] bg-[rgb(var(--ui-surface)/0.82)]",
-                          index >= props.stack.length
+                          index >= queueStack.length || index >= props.stack.length
                             ? "cursor-default opacity-55"
                             : "hover:bg-[rgb(var(--ui-muted)/0.72)]",
                         ].join(" ")}

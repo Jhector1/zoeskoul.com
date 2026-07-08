@@ -423,6 +423,41 @@ export function usePracticeEngine(args: {
     };
   }
 
+  async function hydrateCompletedSessionSnapshot() {
+    const sid = getEffectiveSid({
+      sessionId,
+      resolvedSessionIdRef,
+      authoritativeSessionId,
+      initialSessionId,
+    });
+
+    if (!sid) return;
+
+    try {
+      const status = await getSessionStatus(String(sid), {
+        includeMissed: true,
+        includeHistory: true,
+        subject: subjectSlug,
+        module: moduleSlug,
+      });
+
+      if (!status) return;
+      if (status.run?.mode && !acceptRunMeta(status.run as any)) return;
+
+      setServerStatus(status);
+      setServerMissed(Array.isArray(status.missed) ? status.missed : []);
+
+      if (Array.isArray(status.history) && status.history.length > 0) {
+        setServerHistoryStack(status.history.map(historyRowToQItem));
+      }
+
+      setCompletionReturnUrl(status.returnUrl || returnUrlFromQuery);
+    } catch {
+      // Completion can still render from the local item. The summary refresh
+      // effect will retry the authoritative history request.
+    }
+  }
+
   async function refreshCurrentPracticeKey() {
     if (!current || !exercise) return null;
 
@@ -904,6 +939,7 @@ export function usePracticeEngine(args: {
       });
 
       if ((submitted.data as any)?.sessionComplete) {
+        await hydrateCompletedSessionSnapshot();
         setCompleted(true);
         setAutoSummarized(true);
         setPhase("summary");
@@ -1003,6 +1039,7 @@ export function usePracticeEngine(args: {
       });
 
       if (opened.data.sessionComplete) {
+        await hydrateCompletedSessionSnapshot();
         const serverReturn =
           (opened.data as any)?.returnUrl ??
           (opened.data as any)?.run?.returnUrl ??

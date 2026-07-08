@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import type { PublishedChallengeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
+import { isEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligibility";
 
 type ShareResponse = {
   ok: true;
@@ -10,13 +11,12 @@ type ShareResponse = {
   title: string;
   exerciseKey: string;
   exerciseKind: string;
-  exercisePurpose: "quiz" | "project";
+  exercisePurpose: "project";
   expiresAt: string;
   maxAttempts: number | null;
   attemptPolicy: "unlimited";
 };
 
-type PurposeFilter = "all" | "quiz" | "project";
 
 function uniqueBy<T>(items: T[], keyOf: (item: T) => string) {
   const seen = new Set<string>();
@@ -98,9 +98,9 @@ function EmptyState() {
         No published challenge exercises found
       </div>
       <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-neutral-600">
-        This page only shows generated, seeded, active exercises that can run
-        anonymously through the existing practice-trial runtime. Run Gen manifests
-        and seed the published course if an exercise is missing.
+        This page only shows generated, seeded, active code-input projects that
+        can run anonymously through the existing practice-trial runtime. Run Gen
+        manifests and seed the published course if an exercise is missing.
       </p>
     </div>
   );
@@ -110,7 +110,12 @@ export default function PublicChallengePublisher(props: {
   options: PublishedChallengeExerciseOption[];
   initialLocale?: string;
 }) {
-  const first = props.options[0] ?? null;
+  const eligibleOptions = useMemo(
+    () =>
+      props.options.filter(isEligiblePublicChallengeTarget),
+    [props.options],
+  );
+  const first = eligibleOptions[0] ?? null;
   const initialLocale = ["en", "fr", "ht"].includes(props.initialLocale ?? "")
     ? (props.initialLocale as string)
     : "en";
@@ -120,7 +125,6 @@ export default function PublicChallengePublisher(props: {
   const [moduleSlug, setModuleSlug] = useState(first?.moduleSlug ?? "");
   const [sectionSlug, setSectionSlug] = useState(first?.sectionSlug ?? "");
   const [topicSlug, setTopicSlug] = useState(first?.topicSlug ?? "");
-  const [purpose, setPurpose] = useState<PurposeFilter>("all");
   const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState(first?.id ?? "");
   const [creating, setCreating] = useState(false);
@@ -129,8 +133,8 @@ export default function PublicChallengePublisher(props: {
   const [error, setError] = useState<string | null>(null);
 
   const catalogs = useMemo(
-    () => uniqueBy(props.options, (option) => option.catalogSlug),
-    [props.options],
+    () => uniqueBy(eligibleOptions, (option) => option.catalogSlug),
+    [eligibleOptions],
   );
   const effectiveCatalog = catalogs.some((item) => item.catalogSlug === catalogSlug)
     ? catalogSlug
@@ -139,10 +143,10 @@ export default function PublicChallengePublisher(props: {
   const subjects = useMemo(
     () =>
       uniqueBy(
-        props.options.filter((option) => option.catalogSlug === effectiveCatalog),
+        eligibleOptions.filter((option) => option.catalogSlug === effectiveCatalog),
         (option) => option.subjectSlug,
       ),
-    [effectiveCatalog, props.options],
+    [effectiveCatalog, eligibleOptions],
   );
   const effectiveSubject = subjects.some((item) => item.subjectSlug === subjectSlug)
     ? subjectSlug
@@ -151,14 +155,14 @@ export default function PublicChallengePublisher(props: {
   const modules = useMemo(
     () =>
       uniqueBy(
-        props.options.filter(
+        eligibleOptions.filter(
           (option) =>
             option.catalogSlug === effectiveCatalog &&
             option.subjectSlug === effectiveSubject,
         ),
         (option) => option.moduleSlug,
       ),
-    [effectiveCatalog, effectiveSubject, props.options],
+    [effectiveCatalog, effectiveSubject, eligibleOptions],
   );
   const effectiveModule = modules.some((item) => item.moduleSlug === moduleSlug)
     ? moduleSlug
@@ -167,7 +171,7 @@ export default function PublicChallengePublisher(props: {
   const sections = useMemo(
     () =>
       uniqueBy(
-        props.options.filter(
+        eligibleOptions.filter(
           (option) =>
             option.catalogSlug === effectiveCatalog &&
             option.subjectSlug === effectiveSubject &&
@@ -175,7 +179,7 @@ export default function PublicChallengePublisher(props: {
         ),
         (option) => option.sectionSlug,
       ),
-    [effectiveCatalog, effectiveModule, effectiveSubject, props.options],
+    [effectiveCatalog, effectiveModule, effectiveSubject, eligibleOptions],
   );
   const effectiveSection = sections.some((item) => item.sectionSlug === sectionSlug)
     ? sectionSlug
@@ -184,7 +188,7 @@ export default function PublicChallengePublisher(props: {
   const topics = useMemo(
     () =>
       uniqueBy(
-        props.options.filter(
+        eligibleOptions.filter(
           (option) =>
             option.catalogSlug === effectiveCatalog &&
             option.subjectSlug === effectiveSubject &&
@@ -198,7 +202,7 @@ export default function PublicChallengePublisher(props: {
       effectiveModule,
       effectiveSection,
       effectiveSubject,
-      props.options,
+      eligibleOptions,
     ],
   );
   const effectiveTopic = topics.some((item) => item.topicSlug === topicSlug)
@@ -208,13 +212,12 @@ export default function PublicChallengePublisher(props: {
   const filteredExercises = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    return props.options.filter((option) => {
+    return eligibleOptions.filter((option) => {
       if (option.catalogSlug !== effectiveCatalog) return false;
       if (option.subjectSlug !== effectiveSubject) return false;
       if (option.moduleSlug !== effectiveModule) return false;
       if (option.sectionSlug !== effectiveSection) return false;
       if (option.topicSlug !== effectiveTopic) return false;
-      if (purpose !== "all" && option.exercisePurpose !== purpose) return false;
       if (!normalizedQuery) return true;
 
       return [option.exerciseTitle, option.exerciseKey, option.exerciseKind]
@@ -228,8 +231,7 @@ export default function PublicChallengePublisher(props: {
     effectiveSection,
     effectiveSubject,
     effectiveTopic,
-    props.options,
-    purpose,
+    eligibleOptions,
     query,
   ]);
 
@@ -245,7 +247,7 @@ export default function PublicChallengePublisher(props: {
   }, [locale, selected?.id]);
 
   function chooseCatalog(value: string) {
-    const next = props.options.find((option) => option.catalogSlug === value);
+    const next = eligibleOptions.find((option) => option.catalogSlug === value);
     setCatalogSlug(value);
     setSubjectSlug(next?.subjectSlug ?? "");
     setModuleSlug(next?.moduleSlug ?? "");
@@ -255,7 +257,7 @@ export default function PublicChallengePublisher(props: {
   }
 
   function chooseSubject(value: string) {
-    const next = props.options.find(
+    const next = eligibleOptions.find(
       (option) =>
         option.catalogSlug === effectiveCatalog && option.subjectSlug === value,
     );
@@ -267,7 +269,7 @@ export default function PublicChallengePublisher(props: {
   }
 
   function chooseModule(value: string) {
-    const next = props.options.find(
+    const next = eligibleOptions.find(
       (option) =>
         option.catalogSlug === effectiveCatalog &&
         option.subjectSlug === effectiveSubject &&
@@ -280,7 +282,7 @@ export default function PublicChallengePublisher(props: {
   }
 
   function chooseSection(value: string) {
-    const next = props.options.find(
+    const next = eligibleOptions.find(
       (option) =>
         option.catalogSlug === effectiveCatalog &&
         option.subjectSlug === effectiveSubject &&
@@ -293,7 +295,7 @@ export default function PublicChallengePublisher(props: {
   }
 
   function chooseTopic(value: string) {
-    const next = props.options.find(
+    const next = eligibleOptions.find(
       (option) =>
         option.catalogSlug === effectiveCatalog &&
         option.subjectSlug === effectiveSubject &&
@@ -381,7 +383,7 @@ export default function PublicChallengePublisher(props: {
     await copyLink();
   }
 
-  if (!props.options.length) return <EmptyState />;
+  if (!eligibleOptions.length) return <EmptyState />;
 
   return (
     <div className="grid gap-6">
@@ -455,29 +457,12 @@ export default function PublicChallengePublisher(props: {
                 Select the exact published exercise
               </h2>
               <p className="mt-1 text-sm text-neutral-600">
-                Quiz and project exercises use the same public trial, guest session,
-                grader, and unlimited-attempt policy.
+                Only published code-input project exercises are eligible for public
+                challenge links.
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <div className="inline-flex rounded-xl border border-neutral-300 bg-neutral-50 p-1">
-                {(["all", "quiz", "project"] as const).map((value) => (
-                  <button
-                    key={value}
-                    type="button"
-                    onClick={() => setPurpose(value)}
-                    className={`rounded-lg px-3 py-2 text-xs font-semibold capitalize transition ${
-                      purpose === value
-                        ? "bg-neutral-950 text-white"
-                        : "text-neutral-700 hover:bg-white"
-                    }`}
-                  >
-                    {value}
-                  </button>
-                ))}
-              </div>
-
               <input
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}

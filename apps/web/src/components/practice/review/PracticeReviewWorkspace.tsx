@@ -7,6 +7,7 @@ import type { PracticeShellProps } from "@/components/practice/PracticeShell";
 import SummaryView from "@/components/practice/shell/SummaryView";
 import PracticeNavigator from "./PracticeNavigator";
 import PracticeCompletionCelebration from "@/components/practice/completion/PracticeCompletionCelebration";
+import { resolvePracticeDisplayStack } from "@/lib/practice/experience/reviewDisplayStack";
 import StandaloneReviewExerciseFlow from "./StandaloneReviewExerciseFlow";
 
 import ReviewModuleLayout from "@/components/review/module/components/layout/ReviewModuleLayout";
@@ -275,16 +276,25 @@ export default function PracticeReviewWorkspace(props: PracticeShellProps) {
   );
   const [completionOpen, setCompletionOpen] = useState(false);
   const completionShownRef = useRef(false);
+  const completionStack = useMemo(
+    () =>
+      resolvePracticeDisplayStack({
+        stack: props.stack,
+        reviewStack: props.reviewStack,
+        answeredCount: props.answeredCount,
+      }),
+    [props.answeredCount, props.reviewStack, props.stack],
+  );
   const revealedCount = useMemo(
     () =>
-      props.stack.filter((item) =>
+      completionStack.filter((item) =>
         Boolean(
           item?.revealed ||
             (item?.result as any)?.revealUsed ||
             (item?.result as any)?.revealAnswer,
         ),
       ).length,
-    [props.stack],
+    [completionStack],
   );
 
   useEffect(() => {
