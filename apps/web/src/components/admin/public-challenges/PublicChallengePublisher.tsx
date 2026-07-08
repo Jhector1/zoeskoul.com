@@ -1,10 +1,16 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, DragEvent } from "react";
 
 import type { PublishedChallengeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
 import { isEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligibility";
+import {
+  CHALLENGE_SHARE_IMAGE_HEIGHT,
+  CHALLENGE_SHARE_IMAGE_WIDTH,
+  challengeScreenshotFilename,
+  computeChallengeShareCoverCrop,
+} from "@/lib/practice/challenges/capture";
 
 type ShareResponse = {
   ok: true;
@@ -20,6 +26,13 @@ type ShareResponse = {
   expiresAt: string;
   maxAttempts: number | null;
   attemptPolicy: "unlimited";
+};
+
+type PreviewResponse = {
+  ok: true;
+  url: string;
+  title: string;
+  expiresAt: string;
 };
 
 const MAX_PREVIEW_IMAGE_BYTES = 4 * 1024 * 1024;
@@ -75,6 +88,37 @@ async function readShareResponse(response: Response) {
   }
 
   return body as ShareResponse;
+}
+
+async function readPreviewResponse(response: Response) {
+  const body = (await response.json().catch(() => null)) as
+    | (PreviewResponse & { error?: string })
+    | { error?: string }
+    | null;
+
+  if (!response.ok || !body || !("url" in body)) {
+    throw new Error(body?.error || "Could not create the exercise preview.");
+  }
+
+  return body as PreviewResponse;
+}
+
+function nextAnimationFrame() {
+  return new Promise<void>((resolve) => {
+    window.requestAnimationFrame(() => resolve());
+  });
+}
+
+function canvasToPngBlob(canvas: HTMLCanvasElement) {
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob((blob) => {
+      if (blob) {
+        resolve(blob);
+        return;
+      }
+      reject(new Error("The browser could not create the screenshot image."));
+    }, "image/png");
+  });
 }
 
 function SelectField(props: {
@@ -152,6 +196,11 @@ export default function PublicChallengePublisher(props: {
   );
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const [previewing, setPreviewing] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewExpiresAt, setPreviewExpiresAt] = useState<string | null>(null);
+  const [capturing, setCapturing] = useState(false);
+  const [dragActive, setDragActive] = useState(false);
   const imageInputRef = useRef<HTMLInputElement | null>(null);
 
   const catalogs = useMemo(
@@ -266,6 +315,8 @@ export default function PublicChallengePublisher(props: {
     setResult(null);
     setError(null);
     setCopyState("idle");
+    setPreviewUrl(null);
+    setPreviewExpiresAt(null);
   }, [locale, selected?.id]);
 
   useEffect(() => {
@@ -352,36 +403,239 @@ export default function PublicChallengePublisher(props: {
     setSelectedId(next?.id ?? "");
   }
 
-  function choosePreviewImage(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0] ?? null;
+  function acceptPreviewImage(file: File | null) {
     if (!file) {
       setImageFile(null);
-      return;
+      return false;
     }
 
     if (!PREVIEW_IMAGE_TYPES.has(file.type)) {
       setError("Choose a JPEG, PNG, or WebP image.");
-      event.target.value = "";
       setImageFile(null);
-      return;
+      return false;
     }
 
     if (file.size > MAX_PREVIEW_IMAGE_BYTES) {
       setError("The preview image must be 4 MB or smaller.");
-      event.target.value = "";
       setImageFile(null);
-      return;
+      return false;
     }
 
     setError(null);
     setResult(null);
     setImageFile(file);
+    return true;
+  }
+
+  function choosePreviewImage(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0] ?? null;
+    if (!acceptPreviewImage(file)) event.target.value = "";
   }
 
   function removePreviewImage() {
     setImageFile(null);
     setResult(null);
     if (imageInputRef.current) imageInputRef.current.value = "";
+  }
+
+  async function createExercisePreview() {
+    if (!selected) return null;
+
+    const response = await fetch("/api/practice/trial/preview", {
+      method: "POST",
+      credentials: "include",
+      cache: "no-store",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        locale,
+        subjectSlug: selected.subjectSlug,
+        moduleSlug: selected.moduleSlug,
+        sectionSlug: selected.sectionSlug,
+        topicSlug: selected.topicSlug,
+        exerciseKey: selected.exerciseKey,
+      }),
+    });
+
+    const created = await readPreviewResponse(response);
+    setPreviewUrl(created.url);
+    setPreviewExpiresAt(created.expiresAt);
+    return created;
+  }
+
+  async function openExercisePreview() {
+    if (!selected || previewing) return;
+
+    const popup = window.open("", "zoeskoul-challenge-exercise-preview");
+    if (popup) {
+      popup.opener = null;
+      popup.document.title = "Loading ZoeSkoul challenge preview…";
+      popup.document.body.textContent = "Loading exercise preview…";
+      popup.document.body.style.font = "16px system-ui";
+      popup.document.body.style.padding = "32px";
+    }
+
+    setPreviewing(true);
+    setError(null);
+
+    try {
+      const created = await createExercisePreview();
+      if (!created) return;
+
+      if (popup && !popup.closed) {
+        popup.location.replace(created.url);
+      } else {
+        setError(
+          "The preview link is ready, but the browser blocked the new tab. Allow pop-ups and use Open preview again.",
+        );
+      }
+    } catch (cause) {
+      if (popup && !popup.closed) popup.close();
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : "Could not open the exercise preview.",
+      );
+    } finally {
+      setPreviewing(false);
+    }
+  }
+
+  function openExistingPreview() {
+    if (!previewUrl) return;
+    window.open(previewUrl, "_blank", "noopener,noreferrer");
+  }
+
+  async function capturePreviewTab() {
+    if (!selected || capturing) return;
+
+    if (!navigator.mediaDevices?.getDisplayMedia) {
+      setError(
+        "This browser cannot capture a tab. Use Paste screenshot or upload an image instead.",
+      );
+      return;
+    }
+
+    setCapturing(true);
+    setError(null);
+    let stream: MediaStream | null = null;
+    let video: HTMLVideoElement | null = null;
+
+    try {
+      stream = await navigator.mediaDevices.getDisplayMedia({
+        video: true,
+        audio: false,
+      });
+
+      video = document.createElement("video");
+      video.muted = true;
+      video.playsInline = true;
+      video.srcObject = stream;
+
+      await new Promise<void>((resolve, reject) => {
+        video?.addEventListener("loadedmetadata", () => resolve(), { once: true });
+        video?.addEventListener(
+          "error",
+          () => reject(new Error("The selected preview tab could not be read.")),
+          { once: true },
+        );
+      });
+      await video.play();
+      await nextAnimationFrame();
+      await nextAnimationFrame();
+
+      const sourceWidth = video.videoWidth;
+      const sourceHeight = video.videoHeight;
+      const crop = computeChallengeShareCoverCrop(sourceWidth, sourceHeight);
+      const canvas = document.createElement("canvas");
+      canvas.width = CHALLENGE_SHARE_IMAGE_WIDTH;
+      canvas.height = CHALLENGE_SHARE_IMAGE_HEIGHT;
+      const context = canvas.getContext("2d", { alpha: false });
+      if (!context) throw new Error("The browser could not prepare the screenshot.");
+
+      context.drawImage(
+        video,
+        crop.sourceX,
+        crop.sourceY,
+        crop.sourceWidth,
+        crop.sourceHeight,
+        0,
+        0,
+        CHALLENGE_SHARE_IMAGE_WIDTH,
+        CHALLENGE_SHARE_IMAGE_HEIGHT,
+      );
+
+      const blob = await canvasToPngBlob(canvas);
+      const file = new File(
+        [blob],
+        challengeScreenshotFilename(selected.exerciseKey),
+        { type: "image/png", lastModified: Date.now() },
+      );
+
+      if (acceptPreviewImage(file) && imageInputRef.current) {
+        imageInputRef.current.value = "";
+      }
+    } catch (cause) {
+      if (cause instanceof DOMException && cause.name === "AbortError") return;
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : "Could not capture the exercise preview.",
+      );
+    } finally {
+      video?.pause();
+      if (video) video.srcObject = null;
+      stream?.getTracks().forEach((track) => track.stop());
+      setCapturing(false);
+    }
+  }
+
+  async function pasteScreenshot() {
+    if (!navigator.clipboard?.read) {
+      setError(
+        "Clipboard image access is unavailable. Upload the screenshot file instead.",
+      );
+      return;
+    }
+
+    setError(null);
+
+    try {
+      const items = await navigator.clipboard.read();
+      for (const item of items) {
+        const type = item.types.find((candidate) =>
+          PREVIEW_IMAGE_TYPES.has(candidate),
+        );
+        if (!type) continue;
+
+        const blob = await item.getType(type);
+        const extension = type === "image/jpeg" ? "jpg" : type.split("/")[1];
+        const file = new File(
+          [blob],
+          `${challengeScreenshotFilename(selected?.exerciseKey ?? "challenge").replace(/\.png$/, "")}.${extension}`,
+          { type, lastModified: Date.now() },
+        );
+        acceptPreviewImage(file);
+        if (imageInputRef.current) imageInputRef.current.value = "";
+        return;
+      }
+
+      setError("The clipboard does not contain a supported image.");
+    } catch (cause) {
+      setError(
+        cause instanceof Error
+          ? cause.message
+          : "Could not read an image from the clipboard.",
+      );
+    }
+  }
+
+  function handlePreviewImageDrop(event: DragEvent<HTMLDivElement>) {
+    event.preventDefault();
+    setDragActive(false);
+    const file = event.dataTransfer.files?.[0] ?? null;
+    if (acceptPreviewImage(file) && imageInputRef.current) {
+      imageInputRef.current.value = "";
+    }
   }
 
   async function createLink() {
@@ -605,6 +859,118 @@ export default function PublicChallengePublisher(props: {
         </div>
       </section>
 
+      <section className="rounded-2xl border border-sky-200 bg-sky-50/60 p-5 shadow-sm">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-3xl">
+            <div className="text-xs font-semibold uppercase tracking-wide text-sky-700">
+              Preview before publishing
+            </div>
+            <h2 className="mt-1 text-lg font-semibold text-neutral-950">
+              Open the real exercise and capture its IDE
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-neutral-600">
+              This creates a temporary 15-minute preview only. It does not create a
+              public challenge-link record. Arrange the IDE in the preview tab, then
+              capture that tab into an exact 1200 × 630 social image.
+            </p>
+          </div>
+
+          <div className="flex shrink-0 flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => void openExercisePreview()}
+              disabled={!selected || previewing}
+              className="min-h-11 rounded-xl bg-sky-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-800 disabled:cursor-not-allowed disabled:opacity-40"
+            >
+              {previewing ? "Opening…" : "Open live exercise preview"}
+            </button>
+            {previewUrl ? (
+              <button
+                type="button"
+                onClick={openExistingPreview}
+                className="min-h-11 rounded-xl border border-sky-300 bg-white px-4 py-2.5 text-sm font-semibold text-sky-800 hover:bg-sky-50"
+              >
+                Open preview again
+              </button>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)]">
+          <div className="rounded-2xl border border-sky-200 bg-white p-4">
+            <ol className="grid gap-2 text-sm leading-6 text-neutral-700">
+              <li>
+                <span className="font-semibold">1.</span> Open the live preview and
+                wait for the IDE to finish loading.
+              </li>
+              <li>
+                <span className="font-semibold">2.</span> Select the file and layout
+                you want people to see.
+              </li>
+              <li>
+                <span className="font-semibold">3.</span> Click Capture preview tab
+                and choose that browser tab in the browser picker.
+              </li>
+            </ol>
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => void capturePreviewTab()}
+                disabled={!selected || !previewUrl || capturing}
+                className="rounded-xl bg-neutral-950 px-4 py-2.5 text-sm font-semibold text-white hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {capturing ? "Capturing…" : "Capture preview tab"}
+              </button>
+              <button
+                type="button"
+                onClick={() => void pasteScreenshot()}
+                disabled={!selected}
+                className="rounded-xl border border-neutral-300 bg-white px-4 py-2.5 text-sm font-semibold text-neutral-800 hover:bg-neutral-50 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                Paste screenshot
+              </button>
+            </div>
+
+            <p className="mt-3 text-xs leading-5 text-neutral-500">
+              Chrome and Edge can capture a tab directly. Safari or restricted
+              browsers can use a normal macOS screenshot and Paste screenshot, or the
+              upload field below.
+            </p>
+            {previewExpiresAt ? (
+              <p className="mt-2 text-xs text-sky-800">
+                Temporary preview expires {new Date(previewExpiresAt).toLocaleTimeString()}.
+              </p>
+            ) : null}
+          </div>
+
+          <div
+            onDragEnter={(event) => {
+              event.preventDefault();
+              setDragActive(true);
+            }}
+            onDragOver={(event) => event.preventDefault()}
+            onDragLeave={() => setDragActive(false)}
+            onDrop={handlePreviewImageDrop}
+            className={`flex min-h-48 items-center justify-center rounded-2xl border-2 border-dashed p-5 text-center transition ${
+              dragActive
+                ? "border-sky-500 bg-sky-100"
+                : "border-sky-200 bg-white"
+            }`}
+          >
+            <div>
+              <div className="text-sm font-semibold text-neutral-900">
+                {imageFile ? imageFile.name : "Drop an IDE screenshot here"}
+              </div>
+              <p className="mt-1 text-xs leading-5 text-neutral-500">
+                Captured, pasted, dropped, and uploaded images all use the same
+                Cloudinary upload when the link is created.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
         <div>
           <h2 className="text-lg font-semibold text-neutral-950">
@@ -646,7 +1012,7 @@ export default function PublicChallengePublisher(props: {
                 htmlFor="challenge-preview-image"
                 className="text-sm font-medium text-neutral-800"
               >
-                Preview image
+                Preview image (captured or uploaded)
               </label>
               <input
                 ref={imageInputRef}
@@ -657,7 +1023,8 @@ export default function PublicChallengePublisher(props: {
                 className="block w-full rounded-xl border border-neutral-300 bg-white px-3 py-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-indigo-50 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-indigo-700"
               />
               <p className="text-xs leading-5 text-neutral-500">
-                Recommended 1200 × 630. JPEG, PNG, or WebP. Maximum 4 MB.
+                Capture creates 1200 × 630 automatically. Uploads may be JPEG,
+                PNG, or WebP up to 4 MB.
               </p>
               {imageFile ? (
                 <button
