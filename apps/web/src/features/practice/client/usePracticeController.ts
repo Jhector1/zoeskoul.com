@@ -20,6 +20,7 @@ import {lastSessionKey} from "@/features/practice/client/storage";
 import {coercePurposeMode, coercePurposePolicy} from "@/lib/subjects/quizClient";
 import {PurposeMode, PurposePolicy} from "@/lib/subjects/types";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
+import { resolvePracticeResumePolicy } from "./assignmentResumePolicy";
 
 type PendingChange =
   | { kind: "topic"; value: TopicValue }
@@ -127,6 +128,13 @@ export function usePracticeController(args: {
 // ✅ assignments/sessions: don't let URL params influence purpose on client
   const preferPurpose: PurposeMode = isLockedRun && !projectPracticeRun ? "quiz" : preferPurposeRaw;
   const purposePolicy: PurposePolicy = isLockedRun && !projectPracticeRun ? "fallback" : purposePolicyRaw;
+
+  const resumePolicy = resolvePracticeResumePolicy({
+    experienceMode,
+    requestedPersistence: clientStatePersistence,
+    expectedExperienceMode,
+  });
+
 // ✅ persistence hydrates + persists stack/idx (+ completed)
   const { hydrated, resolvedSessionIdRef } = usePracticeStatePersistence({
     subjectSlug,
@@ -138,8 +146,8 @@ export function usePracticeController(args: {
     sessionId,
     initialSessionId: initialSessionId ?? null,
     authoritativeSessionId,
-    expectedExperienceMode,
-    clientStatePersistence,
+    expectedExperienceMode: resumePolicy.expectedExperienceMode,
+    clientStatePersistence: resumePolicy.clientStatePersistence,
     run,
 
     phase,
@@ -225,7 +233,8 @@ export function usePracticeController(args: {
     // ✅ NEW
     preferPurpose,
     purposePolicy,
-    expectedExperienceMode,
+    expectedExperienceMode: resumePolicy.expectedExperienceMode,
+    resumeHistoryOnBoot: resumePolicy.resumeHistoryOnBoot,
     authoritativeSessionId,
     initialSessionId: initialSessionId ?? null,
   } as any);

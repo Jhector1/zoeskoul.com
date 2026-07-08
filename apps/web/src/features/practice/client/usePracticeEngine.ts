@@ -42,6 +42,7 @@ import { PurposeMode, PurposePolicy } from "@/lib/subjects/types";
 import { samePracticeExerciseIdentity } from "@/lib/practice/exerciseIdentity";
 import { resolveRevealCompletionTransition } from "@/lib/practice/experience/revealCompletion";
 import type { PracticeExperienceMode } from "@/lib/practice/experience/types";
+import { buildServerResumePlan } from "./assignmentResumePolicy";
 
 export type Phase = "practice" | "summary";
 
@@ -152,6 +153,7 @@ export function usePracticeEngine(args: {
   preferPurpose?: string;
   purposePolicy?: string;
   expectedExperienceMode?: PracticeExperienceMode;
+  resumeHistoryOnBoot?: boolean;
   authoritativeSessionId?: boolean;
   initialSessionId?: string | null;
 
@@ -215,6 +217,7 @@ export function usePracticeEngine(args: {
     preferPurpose,
     purposePolicy,
     expectedExperienceMode,
+    resumeHistoryOnBoot = false,
     authoritativeSessionId = false,
     initialSessionId = null,
     phase,
@@ -633,9 +636,12 @@ export function usePracticeEngine(args: {
     let alive = true;
 
     (async () => {
+      let shouldLoadCurrent = stack.length === 0;
+
       if (effectiveSid) {
         const st = await getSessionStatus(String(effectiveSid), {
           includeMissed: true,
+          includeHistory: resumeHistoryOnBoot,
           subject: subjectSlug,
           module: moduleSlug,
         });
@@ -645,6 +651,26 @@ export function usePracticeEngine(args: {
           setServerStatus(st);
           if (st?.missed) setServerMissed(st.missed);
           if (st?.run?.mode && !acceptRunMeta(st.run as any)) return;
+
+          const historyStack = Array.isArray(st.history)
+            ? st.history.map(historyRowToQItem)
+            : [];
+          if (historyStack.length > 0) {
+            setServerHistoryStack(historyStack);
+          }
+
+          const resumePlan = buildServerResumePlan({
+            enabled: resumeHistoryOnBoot,
+            complete: Boolean(st.complete),
+            localStack: stack,
+            history: historyStack,
+          });
+
+          if (resumePlan.seedStack) {
+            setStack(resumePlan.seedStack);
+            setIdx(Math.max(0, resumePlan.seedStack.length - 1));
+          }
+          shouldLoadCurrent = resumePlan.shouldLoadCurrent;
 
           const tc = st?.targetCount;
           if (typeof tc === "number" && tc > 0) {
@@ -662,7 +688,7 @@ export function usePracticeEngine(args: {
         }
       }
 
-      if (stack.length > 0) return;
+      if (!shouldLoadCurrent) return;
       await loadNextExercise({ forceNew: !effectiveSid });
     })();
 
@@ -681,6 +707,7 @@ export function usePracticeEngine(args: {
     resolvedSessionIdRef,
     setRun,
     expectedExperienceMode,
+    resumeHistoryOnBoot,
     authoritativeSessionId,
     initialSessionId,
     setSessionSize,
