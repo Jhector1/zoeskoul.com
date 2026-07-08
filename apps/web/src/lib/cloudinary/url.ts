@@ -1,4 +1,4 @@
-type CloudinaryImageOpts = {
+export type CloudinaryImageOpts = {
   w?: number;
   h?: number;
   crop?: "fill" | "fit" | "scale" | "crop";
@@ -13,9 +13,12 @@ function encPublicId(publicId: string) {
   return encodeURIComponent(publicId).replace(/%2F/g, "/");
 }
 
-export function cloudinaryImageUrl(publicId: string, opts: CloudinaryImageOpts = {}) {
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
-  if (!cloudName) return "";
+export function buildCloudinaryImageUrl(
+  cloudName: string,
+  publicId: string,
+  opts: CloudinaryImageOpts = {},
+) {
+  if (!cloudName.trim() || !publicId.trim()) return "";
 
   const {
     w = 1200,
@@ -28,19 +31,35 @@ export function cloudinaryImageUrl(publicId: string, opts: CloudinaryImageOpts =
     v,
   } = opts;
 
-  const trParts: string[] = [`f_${format}`, `q_${quality}`, `c_${crop}`, `w_${w}`, `dpr_${dpr}`];
+  const trParts: string[] = [
+    `f_${format}`,
+    `q_${quality}`,
+    `c_${crop}`,
+    `w_${w}`,
+    `dpr_${dpr}`,
+  ];
 
-  // Only include gravity when it matters
-  if ((crop === "fill" || crop === "crop") && gravity) trParts.push(`g_${gravity}`);
+  if ((crop === "fill" || crop === "crop") && gravity) {
+    trParts.push(`g_${gravity}`);
+  }
 
-  // Only include height when it makes sense (prevents unexpected aspect behavior)
-  if (typeof h === "number" && (crop === "fill" || crop === "crop")) trParts.push(`h_${h}`);
+  if (typeof h === "number" && (crop === "fill" || crop === "crop")) {
+    trParts.push(`h_${h}`);
+  }
 
   const tr = trParts.join(",");
-
   const versionSeg = v ? `v${v}/` : "";
 
-  return `https://res.cloudinary.com/${cloudName}/image/upload/${tr}/${versionSeg}${encPublicId(
-    publicId,
-  )}`;
+  return `https://res.cloudinary.com/${encodeURIComponent(
+    cloudName,
+  )}/image/upload/${tr}/${versionSeg}${encPublicId(publicId)}`;
+}
+
+export function cloudinaryImageUrl(
+  publicId: string,
+  opts: CloudinaryImageOpts = {},
+) {
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  if (!cloudName) return "";
+  return buildCloudinaryImageUrl(cloudName, publicId, opts);
 }

@@ -429,6 +429,7 @@ model User {
   subjectEnrollments   SubjectEnrollment[]
   subscriptions        Subscription[]
   onboardingProfile    UserOnboardingProfile?
+  practiceChallengeLinks PracticeChallengeLink[] @relation("UserPracticeChallengeLinks")
 }
 
 model Account {
@@ -563,6 +564,35 @@ model ReviewQuizInstance {
 
   @@unique([actorKey, quizKey], name: "actorKey_quizKey")
   @@index([actorKey])
+}
+
+model PracticeChallengeLink {
+  id               String          @id @default(cuid())
+  code             String          @unique @db.VarChar(24)
+  locale           String          @default("en") @db.VarChar(8)
+  subjectSlug      String
+  moduleSlug       String
+  sectionSlug      String
+  topicSlug        String
+  exerciseKey      String
+  exercisePurpose  PracticePurpose @default(project)
+  signedToken      String
+  shareTitle       String?
+  shareDescription String?
+  ogImagePublicId  String?
+  ogImageAlt       String?
+  createdById      String?
+  expiresAt        DateTime?
+  revokedAt        DateTime?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  createdBy        User?           @relation("UserPracticeChallengeLinks", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([exerciseKey])
+  @@index([subjectSlug, moduleSlug])
+  @@index([createdById, createdAt])
+  @@index([expiresAt])
+  @@index([revokedAt])
 }
 
 model StripeEvent {

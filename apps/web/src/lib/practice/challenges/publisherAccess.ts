@@ -62,16 +62,27 @@ export async function resolveChallengePublisherAccess(): Promise<ChallengePublis
   };
 }
 
-export async function requireChallengePublisherApi() {
+export async function requireChallengePublisherAccessApi() {
   const access = await resolveChallengePublisherAccess();
 
   if (!access.authenticated) {
-    return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+    return {
+      access,
+      denied: NextResponse.json({ error: "Unauthorized." }, { status: 401 }),
+    };
   }
 
   if (!access.allowed) {
-    return NextResponse.json({ error: "Forbidden." }, { status: 403 });
+    return {
+      access,
+      denied: NextResponse.json({ error: "Forbidden." }, { status: 403 }),
+    };
   }
 
-  return null;
+  return { access, denied: null };
+}
+
+export async function requireChallengePublisherApi() {
+  const { denied } = await requireChallengePublisherAccessApi();
+  return denied;
 }

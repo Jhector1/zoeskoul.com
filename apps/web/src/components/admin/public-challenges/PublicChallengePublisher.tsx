@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { ChangeEvent } from "react";
 
 import type { PublishedChallengeExerciseOption } from "@/lib/practice/challenges/publishedCatalog";
 import { isEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligibility";
@@ -8,7 +9,11 @@ import { isEligiblePublicChallengeTarget } from "@/lib/practice/challenges/eligi
 type ShareResponse = {
   ok: true;
   url: string;
+  code: string;
   title: string;
+  shareTitle: string;
+  shareDescription: string;
+  imageUrl: string | null;
   exerciseKey: string;
   exerciseKind: string;
   exercisePurpose: "project";
@@ -16,6 +21,13 @@ type ShareResponse = {
   maxAttempts: number | null;
   attemptPolicy: "unlimited";
 };
+
+const MAX_PREVIEW_IMAGE_BYTES = 4 * 1024 * 1024;
+const PREVIEW_IMAGE_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+]);
 
 
 function uniqueBy<T>(items: T[], keyOf: (item: T) => string) {
@@ -131,6 +143,16 @@ export default function PublicChallengePublisher(props: {
   const [copyState, setCopyState] = useState<"idle" | "copied">("idle");
   const [result, setResult] = useState<ShareResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [shareTitle, setShareTitle] = useState(first?.exerciseTitle ?? "");
+  const [shareDescription, setShareDescription] = useState(
+    "Can you complete this coding project challenge? No account is required to try it.",
+  );
+  const [ogImageAlt, setOgImageAlt] = useState(
+    first ? `${first.exerciseTitle} challenge preview` : "",
+  );
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
+  const imageInputRef = useRef<HTMLInputElement | null>(null);
 
   const catalogs = useMemo(
     () => uniqueBy(eligibleOptions, (option) => option.catalogSlug),
@@ -246,6 +268,29 @@ export default function PublicChallengePublisher(props: {
     setCopyState("idle");
   }, [locale, selected?.id]);
 
+  useEffect(() => {
+    setShareTitle(selected?.exerciseTitle ?? "");
+    setShareDescription(
+      "Can you complete this coding project challenge? No account is required to try it.",
+    );
+    setOgImageAlt(
+      selected ? `${selected.exerciseTitle} challenge preview` : "",
+    );
+    setImageFile(null);
+    if (imageInputRef.current) imageInputRef.current.value = "";
+  }, [selected?.id, selected?.exerciseTitle]);
+
+  useEffect(() => {
+    if (!imageFile) {
+      setImagePreviewUrl(null);
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(imageFile);
+    setImagePreviewUrl(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [imageFile]);
+
   function chooseCatalog(value: string) {
     const next = eligibleOptions.find((option) => option.catalogSlug === value);
     setCatalogSlug(value);
@@ -307,6 +352,38 @@ export default function PublicChallengePublisher(props: {
     setSelectedId(next?.id ?? "");
   }
 
+  function choosePreviewImage(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0] ?? null;
+    if (!file) {
+      setImageFile(null);
+      return;
+    }
+
+    if (!PREVIEW_IMAGE_TYPES.has(file.type)) {
+      setError("Choose a JPEG, PNG, or WebP image.");
+      event.target.value = "";
+      setImageFile(null);
+      return;
+    }
+
+    if (file.size > MAX_PREVIEW_IMAGE_BYTES) {
+      setError("The preview image must be 4 MB or smaller.");
+      event.target.value = "";
+      setImageFile(null);
+      return;
+    }
+
+    setError(null);
+    setResult(null);
+    setImageFile(file);
+  }
+
+  function removePreviewImage() {
+    setImageFile(null);
+    setResult(null);
+    if (imageInputRef.current) imageInputRef.current.value = "";
+  }
+
   async function createLink() {
     if (!selected) return;
 
@@ -315,19 +392,28 @@ export default function PublicChallengePublisher(props: {
     setCopyState("idle");
 
     try {
+      const form = new FormData();
+      form.set("locale", locale);
+      form.set("subjectSlug", selected.subjectSlug);
+      form.set("moduleSlug", selected.moduleSlug);
+      form.set("sectionSlug", selected.sectionSlug);
+      form.set("topicSlug", selected.topicSlug);
+      form.set("exerciseKey", selected.exerciseKey);
+
+      if (shareTitle.trim()) form.set("shareTitle", shareTitle.trim());
+      if (shareDescription.trim()) {
+        form.set("shareDescription", shareDescription.trim());
+      }
+      if (imageFile) {
+        form.set("image", imageFile, imageFile.name);
+        if (ogImageAlt.trim()) form.set("ogImageAlt", ogImageAlt.trim());
+      }
+
       const response = await fetch("/api/practice/trial/share", {
         method: "POST",
         credentials: "include",
         cache: "no-store",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          locale,
-          subjectSlug: selected.subjectSlug,
-          moduleSlug: selected.moduleSlug,
-          sectionSlug: selected.sectionSlug,
-          topicSlug: selected.topicSlug,
-          exerciseKey: selected.exerciseKey,
-        }),
+        body: form,
       });
 
       const created = await readShareResponse(response);
@@ -366,8 +452,8 @@ export default function PublicChallengePublisher(props: {
     if (!result) return;
 
     const data = {
-      title: result.title || "ZoeSkoul challenge",
-      text: `Can you complete this ${result.exercisePurpose} challenge?`,
+      title: result.shareTitle || result.title || "ZoeSkoul challenge",
+      text: result.shareDescription,
       url: result.url,
     };
 
@@ -519,6 +605,117 @@ export default function PublicChallengePublisher(props: {
         </div>
       </section>
 
+      <section className="rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+        <div>
+          <h2 className="text-lg font-semibold text-neutral-950">
+            Facebook and social preview
+          </h2>
+          <p className="mt-1 text-sm leading-6 text-neutral-600">
+            These values become the Open Graph and Twitter metadata for the short
+            challenge link. The uploaded file is stored in Cloudinary; Prisma stores
+            only its public ID and text metadata.
+          </p>
+        </div>
+
+        <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(280px,420px)]">
+          <div className="grid gap-4">
+            <label className="grid gap-1.5 text-sm font-medium text-neutral-800">
+              <span>Share title</span>
+              <input
+                value={shareTitle}
+                onChange={(event) => setShareTitle(event.target.value)}
+                maxLength={100}
+                placeholder={selected?.exerciseTitle ?? "Challenge title"}
+                className="min-h-11 rounded-xl border border-neutral-300 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+              />
+            </label>
+
+            <label className="grid gap-1.5 text-sm font-medium text-neutral-800">
+              <span>Share description</span>
+              <textarea
+                value={shareDescription}
+                onChange={(event) => setShareDescription(event.target.value)}
+                maxLength={240}
+                rows={3}
+                className="rounded-xl border border-neutral-300 px-3 py-2.5 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+              />
+            </label>
+
+            <div className="grid gap-2">
+              <label
+                htmlFor="challenge-preview-image"
+                className="text-sm font-medium text-neutral-800"
+              >
+                Preview image
+              </label>
+              <input
+                ref={imageInputRef}
+                id="challenge-preview-image"
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                onChange={choosePreviewImage}
+                className="block w-full rounded-xl border border-neutral-300 bg-white px-3 py-2 text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-indigo-50 file:px-3 file:py-2 file:text-sm file:font-semibold file:text-indigo-700"
+              />
+              <p className="text-xs leading-5 text-neutral-500">
+                Recommended 1200 × 630. JPEG, PNG, or WebP. Maximum 4 MB.
+              </p>
+              {imageFile ? (
+                <button
+                  type="button"
+                  onClick={removePreviewImage}
+                  className="w-fit rounded-lg border border-neutral-300 bg-white px-3 py-2 text-xs font-semibold text-neutral-700 hover:bg-neutral-50"
+                >
+                  Remove image
+                </button>
+              ) : null}
+            </div>
+
+            <label className="grid gap-1.5 text-sm font-medium text-neutral-800">
+              <span>Image alt text</span>
+              <input
+                value={ogImageAlt}
+                onChange={(event) => setOgImageAlt(event.target.value)}
+                maxLength={160}
+                disabled={!imageFile}
+                className="min-h-11 rounded-xl border border-neutral-300 px-3 text-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 disabled:cursor-not-allowed disabled:bg-neutral-100"
+              />
+            </label>
+          </div>
+
+          <div>
+            <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 shadow-sm">
+              <div
+                className="aspect-[1200/630] bg-cover bg-center"
+                style={
+                  imagePreviewUrl
+                    ? { backgroundImage: `url("${imagePreviewUrl}")` }
+                    : undefined
+                }
+                role={imagePreviewUrl ? "img" : undefined}
+                aria-label={imagePreviewUrl ? ogImageAlt || "Challenge preview" : undefined}
+              >
+                {!imagePreviewUrl ? (
+                  <div className="flex h-full items-center justify-center p-6 text-center text-sm text-neutral-500">
+                    The default ZoeSkoul social image will be used.
+                  </div>
+                ) : null}
+              </div>
+              <div className="border-t border-neutral-200 bg-white p-4">
+                <div className="truncate text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                  zoeskoul.com
+                </div>
+                <div className="mt-1 line-clamp-2 text-sm font-semibold text-neutral-950">
+                  {shareTitle || selected?.exerciseTitle || "ZoeSkoul challenge"}
+                </div>
+                <div className="mt-1 line-clamp-2 text-xs leading-5 text-neutral-600">
+                  {shareDescription}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="rounded-2xl border border-indigo-200 bg-indigo-50/70 p-5 shadow-sm">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div className="min-w-0">
@@ -585,6 +782,17 @@ export default function PublicChallengePublisher(props: {
               readOnly
               className="mt-2 w-full rounded-lg border border-emerald-200 bg-white px-3 py-2 font-mono text-xs text-neutral-900"
             />
+            {result.imageUrl ? (
+              <div
+                className="mt-3 aspect-[1200/630] max-w-xl rounded-xl bg-cover bg-center shadow-sm"
+                style={{ backgroundImage: `url("${result.imageUrl}")` }}
+                role="img"
+                aria-label={ogImageAlt || result.shareTitle}
+              />
+            ) : null}
+            <p className="mt-2 font-mono text-xs text-emerald-800">
+              Short code: {result.code}
+            </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <button
                 type="button"

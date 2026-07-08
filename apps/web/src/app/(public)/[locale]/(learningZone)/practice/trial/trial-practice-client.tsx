@@ -14,6 +14,7 @@ type TrialPracticeClientProps = {
     subject: string | null;
     level: string | null;
     challenge: string | null;
+    canonicalPath?: string | null;
 };
 
 type GateState = "booting" | "checking" | "recovering" | "ready" | "error";
@@ -243,6 +244,7 @@ export default function TrialPracticeClient({
                                                 subject,
                                                 level,
                                                 challenge,
+                                                canonicalPath = null,
                                             }: TrialPracticeClientProps) {
     const router = useRouter();
 
@@ -297,23 +299,25 @@ export default function TrialPracticeClient({
             setStoredTrialSessionId(out.sessionId, challenge);
             setStoredSessionIdState(out.sessionId);
 
-            router.replace(
-                buildTrialHref({
-                    locale,
-                    sessionId: out.sessionId,
-                    subject,
-                    level,
-                    status: out.status,
-                    completed: out.completed,
-                    challenge,
-                }),
-            );
+            if (!canonicalPath) {
+                router.replace(
+                    buildTrialHref({
+                        locale,
+                        sessionId: out.sessionId,
+                        subject,
+                        level,
+                        status: out.status,
+                        completed: out.completed,
+                        challenge,
+                    }),
+                );
+            }
         } catch (err) {
             console.error("[trial restart]", err);
             setGateState("error");
             setGateErr("We couldn’t start a new trial right now. Please try again.");
         }
-    }, [subject, level, challenge, locale, router, goHome]);
+    }, [subject, level, challenge, locale, router, goHome, canonicalPath]);
 
     useEffect(() => {
         let cancelled = false;
@@ -332,15 +336,17 @@ export default function TrialPracticeClient({
 
                     setStoredTrialSessionId(out.sessionId, challenge);
                     setStoredSessionIdState(out.sessionId);
-                    router.replace(
-                        buildTrialHref({
-                            locale,
-                            sessionId: out.sessionId,
-                            status: out.status,
-                            completed: out.completed,
-                            challenge,
-                        }),
-                    );
+                    if (!canonicalPath) {
+                        router.replace(
+                            buildTrialHref({
+                                locale,
+                                sessionId: out.sessionId,
+                                status: out.status,
+                                completed: out.completed,
+                                challenge,
+                            }),
+                        );
+                    }
                     return;
                 }
 
@@ -406,17 +412,19 @@ export default function TrialPracticeClient({
 
                 clearRecoveryCount(subject, level, challenge);
 
-                router.replace(
-                    buildTrialHref({
-                        locale,
-                        sessionId: out.sessionId,
-                        subject,
-                        level,
-                        status: out.status,
-                        completed: out.completed,
-                        challenge,
-                    }),
-                );
+                if (!canonicalPath) {
+                    router.replace(
+                        buildTrialHref({
+                            locale,
+                            sessionId: out.sessionId,
+                            subject,
+                            level,
+                            status: out.status,
+                            completed: out.completed,
+                            challenge,
+                        }),
+                    );
+                }
                 return;
             }
 
@@ -447,7 +455,7 @@ export default function TrialPracticeClient({
         return () => {
             cancelled = true;
         };
-    }, [storageReady, effectiveSessionId, subject, level, challenge, locale, router, missingRecoveryInputs]);
+    }, [storageReady, effectiveSessionId, subject, level, challenge, locale, router, missingRecoveryInputs, canonicalPath]);
 
     if (!storageReady || gateState === "booting") {
         return (

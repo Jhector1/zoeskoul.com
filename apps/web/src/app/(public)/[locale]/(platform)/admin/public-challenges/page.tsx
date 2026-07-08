@@ -76,8 +76,9 @@ export default async function PublicChallengesPage({
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600">
             Select one code-input project from the generated, seeded live
-            curriculum and create an anonymous practice-trial link. The exercise
-            is referenced, not copied, and no challenge database table is required.
+            curriculum and create an anonymous short link with a custom social
+            preview. The exercise is referenced rather than copied; link metadata
+            is stored in Prisma and uploaded preview images are stored in Cloudinary.
           </p>
         </div>
 
