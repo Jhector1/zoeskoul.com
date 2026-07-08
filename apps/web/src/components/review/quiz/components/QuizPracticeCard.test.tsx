@@ -1,6 +1,7 @@
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import QuizPracticeCard, {
     applyPracticeWorkspaceHydration,
     flushReviewToolsBeforeSubmit,
@@ -11,6 +12,13 @@ import type { WorkspaceStateV2 } from "@/components/ide/types";
 import type { CodeInputExercise, ValidateResponse } from "@/lib/practice/types";
 import type { QItem } from "@/lib/practice/uiTypes";
 import { DEFAULT_PRACTICE_HELP_POLICY } from "@/lib/practice/help/steps";
+
+vi.mock("@/lib/config/learnerUiFlags", () => ({
+    learnerUiFlags: {
+        compactLearnerUi: false,
+        showDebugLearningUi: false,
+    },
+}));
 
 const mocked = vi.hoisted(() => ({
     exerciseRendererProps: [] as any[],
@@ -38,7 +46,14 @@ vi.mock("@/i18n/tagged", () => ({
 }));
 
 vi.mock("next-intl", () => ({
-    useTranslations: () => (_key: string, fallback?: string) => fallback ?? "",
+    useTranslations: () => (key: string, paramsOrFallback?: unknown, fallback?: string) => {
+        if (key === "attempts" && paramsOrFallback && typeof paramsOrFallback === "object") {
+            const params = paramsOrFallback as { n?: unknown; max?: unknown };
+            return `Attempts: ${params.n ?? 0}/${params.max ?? "∞"}`;
+        }
+        if (typeof paramsOrFallback === "string") return paramsOrFallback;
+        return fallback ?? "";
+    },
 }));
 
 vi.mock("@/components/practice/ExerciseRenderer", () => ({
@@ -983,6 +998,56 @@ describe("QuizPracticeCard project-step fallback", () => {
 
         const props = mocked.exerciseRendererProps.at(-1);
         expect(props?.codeRunnerMode).toBe("tools");
+    });
+
+    it("keeps attempts visible in compact learner UI", () => {
+        learnerUiFlags.compactLearnerUi = true;
+
+        const exercise = makeCodeInputExercise();
+
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "practice-compact-attempts",
+                    kind: "practice",
+                    fetch: {
+                        subject: "python",
+                        module: "module-1",
+                        section: "section-1",
+                        topic: "topic-1",
+                    },
+                } as any}
+                ownerCardId="card-1"
+                ps={{
+                    loading: false,
+                    error: null,
+                    busy: false,
+                    item: makeQItem({ exercise }),
+                    exercise,
+                    attempts: 0,
+                    maxAttempts: null,
+                    ok: null,
+                    helpPolicy: DEFAULT_PRACTICE_HELP_POLICY,
+                }}
+                toolsActive={false}
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts
+                strictSequential={false}
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                onHelp={vi.fn()}
+                onRetryExercise={vi.fn()}
+                onExcused={vi.fn()}
+            />,
+        );
+
+        expect(html).toContain("Attempts: 0/∞");
+
+        learnerUiFlags.compactLearnerUi = false;
     });
 });
 

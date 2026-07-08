@@ -2062,16 +2062,13 @@ export default function QuizPracticeCard(props: {
                   ) : null}
                 </div>
 
-                {!compactLearnerUi || isCorrect || (!feedbackDismissed && resultOk === false && ps?.item?.result) ? (
-                  <div className="ui-quiz-checkrow-status">
-                    {!compactLearnerUi ? (
-                      <span className="whitespace-normal">
-                        {t("attempts", {
-                          n: ps?.attempts ?? 0,
-                          max: ps?.maxAttempts == null ? "∞" : ps.maxAttempts,
-                        })}
-                      </span>
-                    ) : null}
+                <div className="ui-quiz-checkrow-status">
+                    <span className="whitespace-normal">
+                      {t("attempts", {
+                        n: ps?.attempts ?? 0,
+                        max: ps?.maxAttempts == null ? "∞" : ps.maxAttempts,
+                      })}
+                    </span>
 
                     {isCorrect ? (
                         <span
@@ -2089,7 +2086,6 @@ export default function QuizPracticeCard(props: {
       </span>
                     ) : null}
                   </div>
-                ) : null}
               </div>
 
               <PracticeHelpPanel
