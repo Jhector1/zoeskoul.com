@@ -319,7 +319,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.4.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n125\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -458,7 +466,15 @@
             "min": 3,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava\n150\n110\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -604,7 +620,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Ava: $110.00\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     }
   ]

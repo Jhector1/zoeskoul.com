@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import MathMarkdown from "@/components/markdown/MathMarkdown";
@@ -229,6 +229,77 @@ export function shouldCollapseIdleOutputPanel(args: IdleOutputCollapseArgs) {
     return true;
 }
 
+export function shouldOpenEditorForWorkspaceFileSelection(args: {
+    previousFileId: string | null;
+    nextFileId: string | null;
+    previousSelectionVersion?: number | null;
+    nextSelectionVersion?: number | null;
+    isNarrowScreen: boolean;
+    showEditor: boolean;
+    showTerminal: boolean;
+}) {
+    const fileChanged = Boolean(
+        args.previousFileId &&
+        args.nextFileId &&
+        args.previousFileId !== args.nextFileId,
+    );
+    const explicitSelectionChanged = Boolean(
+        args.nextFileId &&
+        args.previousSelectionVersion != null &&
+        args.nextSelectionVersion != null &&
+        args.previousSelectionVersion !== args.nextSelectionVersion,
+    );
+
+    return Boolean(
+        (fileChanged || explicitSelectionChanged) &&
+        args.isNarrowScreen &&
+        args.showEditor &&
+        args.showTerminal,
+    );
+}
+
+export function resolveMobileKeyboardViewport(args: {
+    visualViewportHeight: number;
+    visualViewportOffsetTop: number;
+    layoutViewportHeight: number;
+    baselineViewportHeight: number;
+    rootTop: number;
+    editorHasTextFocus: boolean;
+    keyboardThreshold?: number;
+    bottomPadding?: number;
+}) {
+    const keyboardThreshold = Math.max(48, args.keyboardThreshold ?? 96);
+    const bottomPadding = Math.max(0, args.bottomPadding ?? 8);
+    const baselineHeight = Math.max(
+        args.visualViewportHeight,
+        args.baselineViewportHeight,
+    );
+    const visualShrink = Math.max(0, baselineHeight - args.visualViewportHeight);
+    const layoutShrink = Math.max(
+        0,
+        args.layoutViewportHeight -
+            args.visualViewportHeight -
+            args.visualViewportOffsetTop,
+    );
+    const keyboardOpen = Boolean(
+        args.editorHasTextFocus &&
+            Math.max(visualShrink, layoutShrink) >= keyboardThreshold,
+    );
+    const viewportTop = Math.max(0, args.visualViewportOffsetTop);
+    const viewportBottom = viewportTop + Math.max(0, args.visualViewportHeight);
+    const availableHeight = Math.max(
+        0,
+        Math.floor(viewportBottom - Math.max(args.rootTop, viewportTop) - bottomPadding),
+    );
+
+    return {
+        keyboardOpen,
+        availableHeight,
+        visualShrink,
+        layoutShrink,
+    };
+}
+
 export function shouldAutoOpenWorkspaceTerminal(args: WorkspaceTerminalAutoOpenArgs) {
     if (args.outputTab !== "terminal" || !args.workspaceTerminalEnabled) {
         return false;
@@ -358,6 +429,16 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const runnerRootRef = useRef<HTMLDivElement | null>(null);
     const [isNarrowScreen, setIsNarrowScreen] = useState(false);
     const [mobilePane, setMobilePane] = useState<MobilePane>("editor");
+    const previousWorkspaceFileIdRef = useRef<string | null>(
+        typeof props.activeWorkspaceFileId === "string"
+            ? props.activeWorkspaceFileId
+            : null,
+    );
+    const previousWorkspaceFileSelectionVersionRef = useRef<number | null>(
+        typeof props.workspaceFileSelectionVersion === "number"
+            ? props.workspaceFileSelectionVersion
+            : null,
+    );
 
     useEffect(() => {
         if (!showEditorThemeToggle) {
@@ -534,8 +615,15 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
     const monacoEditorRef = useRef<any>(null);
     const terminalAutoOpenRequestedKeyRef = useRef<string | null>(null);
-
-
+    const mobileKeyboardBaselineRef = useRef(0);
+    const mobileKeyboardMeasureRafRef = useRef<number | null>(null);
+    const mobileKeyboardOwnerId = useId();
+    const mobileKeyboardOwnerRef = useRef(
+        `code-runner-${mobileKeyboardOwnerId.replace(/:/g, "")}`,
+    );
+    const [mobileKeyboardOpen, setMobileKeyboardOpen] = useState(false);
+    const [mobileKeyboardAvailableHeight, setMobileKeyboardAvailableHeight] =
+        useState<number | null>(null);
 
     const readLiveEditorCode = useCallback(() => {
         const editor = monacoEditorRef.current;
@@ -569,11 +657,188 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         });
     }, []);
 
+    const keepMobileCursorVisible = useCallback(() => {
+        requestLayout();
+
+        requestAnimationFrame(() => {
+            const ed = monacoEditorRef.current;
+            if (!ed || ed.isDisposed?.() === true) return;
+
+            try {
+                ed.layout?.();
+                const position = ed.getPosition?.();
+                if (position) {
+                    ed.revealPositionInCenterIfOutsideViewport?.(position);
+                }
+            } catch {}
+        });
+    }, [requestLayout]);
+
+    useEffect(() => {
+        if (!isNarrowScreen || !showEditor || typeof window === "undefined") {
+            setMobileKeyboardOpen(false);
+            setMobileKeyboardAvailableHeight(null);
+            mobileKeyboardBaselineRef.current = 0;
+            return;
+        }
+
+        const visualViewport = window.visualViewport;
+        if (!visualViewport) return;
+
+        const measure = () => {
+            mobileKeyboardMeasureRafRef.current = null;
+
+            const root = runnerRootRef.current;
+            if (!root) return;
+
+            const editor = monacoEditorRef.current;
+            let editorHasTextFocus = false;
+
+            try {
+                editorHasTextFocus = editor?.hasTextFocus?.() === true;
+            } catch {}
+
+            const viewportHeight = Math.max(0, visualViewport.height);
+            mobileKeyboardBaselineRef.current = Math.max(
+                mobileKeyboardBaselineRef.current,
+                viewportHeight,
+            );
+
+            const next = resolveMobileKeyboardViewport({
+                visualViewportHeight: viewportHeight,
+                visualViewportOffsetTop: visualViewport.offsetTop,
+                layoutViewportHeight: Math.max(
+                    window.innerHeight || 0,
+                    document.documentElement.clientHeight || 0,
+                ),
+                baselineViewportHeight: mobileKeyboardBaselineRef.current,
+                rootTop: root.getBoundingClientRect().top,
+                editorHasTextFocus,
+            });
+
+            setMobileKeyboardOpen((previous) =>
+                previous === next.keyboardOpen ? previous : next.keyboardOpen,
+            );
+            setMobileKeyboardAvailableHeight((previous) => {
+                const value = next.keyboardOpen ? next.availableHeight : null;
+                return previous === value ? previous : value;
+            });
+
+            if (next.keyboardOpen) {
+                keepMobileCursorVisible();
+            }
+        };
+
+        const scheduleMeasure = () => {
+            if (mobileKeyboardMeasureRafRef.current != null) return;
+            mobileKeyboardMeasureRafRef.current = requestAnimationFrame(measure);
+        };
+
+        const handleOrientationChange = () => {
+            mobileKeyboardBaselineRef.current = Math.max(0, visualViewport.height);
+            scheduleMeasure();
+        };
+
+        measure();
+        visualViewport.addEventListener("resize", scheduleMeasure);
+        visualViewport.addEventListener("scroll", scheduleMeasure);
+        window.addEventListener("resize", scheduleMeasure);
+        window.addEventListener("orientationchange", handleOrientationChange);
+        document.addEventListener("focusin", scheduleMeasure);
+        document.addEventListener("focusout", scheduleMeasure);
+
+        return () => {
+            visualViewport.removeEventListener("resize", scheduleMeasure);
+            visualViewport.removeEventListener("scroll", scheduleMeasure);
+            window.removeEventListener("resize", scheduleMeasure);
+            window.removeEventListener("orientationchange", handleOrientationChange);
+            document.removeEventListener("focusin", scheduleMeasure);
+            document.removeEventListener("focusout", scheduleMeasure);
+
+            if (mobileKeyboardMeasureRafRef.current != null) {
+                cancelAnimationFrame(mobileKeyboardMeasureRafRef.current);
+                mobileKeyboardMeasureRafRef.current = null;
+            }
+        };
+    }, [isNarrowScreen, keepMobileCursorVisible, showEditor]);
+
+    useEffect(() => {
+        if (!mobileKeyboardOpen || typeof document === "undefined") return;
+
+        const root = document.documentElement;
+        const owner = mobileKeyboardOwnerRef.current;
+        root.dataset.zoeMobileKeyboard = "open";
+        root.dataset.zoeMobileKeyboardOwner = owner;
+
+        return () => {
+            if (root.dataset.zoeMobileKeyboardOwner !== owner) return;
+            delete root.dataset.zoeMobileKeyboard;
+            delete root.dataset.zoeMobileKeyboardOwner;
+        };
+    }, [mobileKeyboardOpen]);
+
+    useEffect(() => {
+        if (
+            !mobileKeyboardOpen ||
+            !isNarrowScreen ||
+            typeof window === "undefined"
+        ) {
+            return;
+        }
+
+        const visualViewport = window.visualViewport;
+        if (!visualViewport) return;
+
+        let firstRaf = 0;
+        let secondRaf = 0;
+
+        /**
+         * The mobile Exercise/Code chrome is hidden once the keyboard state is
+         * committed. Measure again after that layout change so the editor gets
+         * every newly available pixel instead of keeping the pre-hide height.
+         */
+        firstRaf = requestAnimationFrame(() => {
+            secondRaf = requestAnimationFrame(() => {
+                const root = runnerRootRef.current;
+                if (!root) return;
+
+                const next = resolveMobileKeyboardViewport({
+                    visualViewportHeight: Math.max(0, visualViewport.height),
+                    visualViewportOffsetTop: visualViewport.offsetTop,
+                    layoutViewportHeight: Math.max(
+                        window.innerHeight || 0,
+                        document.documentElement.clientHeight || 0,
+                    ),
+                    baselineViewportHeight: mobileKeyboardBaselineRef.current,
+                    rootTop: root.getBoundingClientRect().top,
+                    editorHasTextFocus: true,
+                });
+
+                setMobileKeyboardAvailableHeight((previous) =>
+                    previous === next.availableHeight
+                        ? previous
+                        : next.availableHeight,
+                );
+                keepMobileCursorVisible();
+            });
+        });
+
+        return () => {
+            cancelAnimationFrame(firstRaf);
+            cancelAnimationFrame(secondRaf);
+        };
+    }, [isNarrowScreen, keepMobileCursorVisible, mobileKeyboardOpen]);
+
     useEffect(() => {
         return () => {
             if (layoutRafRef.current != null) {
                 cancelAnimationFrame(layoutRafRef.current);
                 layoutRafRef.current = null;
+            }
+
+            if (mobileKeyboardMeasureRafRef.current != null) {
+                cancelAnimationFrame(mobileKeyboardMeasureRafRef.current);
+                mobileKeyboardMeasureRafRef.current = null;
             }
         };
     }, []);
@@ -963,6 +1228,43 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
 
     useEffect(() => {
+        const nextFileId =
+            typeof props.activeWorkspaceFileId === "string"
+                ? props.activeWorkspaceFileId
+                : null;
+        const previousFileId = previousWorkspaceFileIdRef.current;
+        const nextSelectionVersion =
+            typeof props.workspaceFileSelectionVersion === "number"
+                ? props.workspaceFileSelectionVersion
+                : null;
+        const previousSelectionVersion =
+            previousWorkspaceFileSelectionVersionRef.current;
+
+        previousWorkspaceFileIdRef.current = nextFileId;
+        previousWorkspaceFileSelectionVersionRef.current = nextSelectionVersion;
+
+        if (
+            shouldOpenEditorForWorkspaceFileSelection({
+                previousFileId,
+                nextFileId,
+                previousSelectionVersion,
+                nextSelectionVersion,
+                isNarrowScreen,
+                showEditor,
+                showTerminal,
+            })
+        ) {
+            setMobilePane("editor");
+        }
+    }, [
+        props.activeWorkspaceFileId,
+        props.workspaceFileSelectionVersion,
+        isNarrowScreen,
+        showEditor,
+        showTerminal,
+    ]);
+
+    useEffect(() => {
         if (!isNarrowScreen) return;
         if (!showEditor || !showTerminal) return;
         if (term.runState !== "idle" && !isWeb) {
@@ -1037,25 +1339,51 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
     const fallbackRegionHeight = isNarrowScreen
         ? "min(72dvh, 680px)"
         : "min(68dvh, 760px)";
+    const keyboardBoundedRootHeight =
+        isNarrowScreen &&
+        mobileKeyboardOpen &&
+        mobileKeyboardAvailableHeight != null
+            ? Math.max(96, mobileKeyboardAvailableHeight)
+            : null;
     const resolvedRootHeight =
-        typeof height === "number"
-            ? isNarrowScreen
-                ? `min(${numericHeight}px, 78dvh)`
-                : `${numericHeight}px`
-            : needsBoundedRunnerHeight
-                ? fallbackRegionHeight
-                : undefined;
+        keyboardBoundedRootHeight != null
+            ? `${keyboardBoundedRootHeight}px`
+            : typeof height === "number"
+                ? isNarrowScreen
+                    ? `min(${numericHeight}px, 78dvh)`
+                    : `${numericHeight}px`
+                : needsBoundedRunnerHeight
+                    ? fallbackRegionHeight
+                    : undefined;
 
     const rootStyle: React.CSSProperties | undefined = resolvedRootHeight
         ? { height: resolvedRootHeight }
         : undefined;
     const regionStyle: React.CSSProperties | undefined =
-        typeof height === "number" ? undefined : rootStyle;
+        keyboardBoundedRootHeight != null || typeof height === "number"
+            ? undefined
+            : rootStyle;
 
     const outputLabel = isWeb ? t("previewTab") : lang === "sql" ? t("resultsTab") : t("outputTab");
     const mobileTabAttention = !isWeb && (term.runState !== "idle" || !!term.lastResult);
-    const mobileBodyHeight = Math.max(240, (split.mainH || numericHeight) - 48);
-    const surfaceBodyHeight = Math.max(240, split.mainH || numericHeight);
+    const measuredSurfaceHeight = split.mainH || numericHeight;
+    const keyboardChromeHeight =
+        (showHeaderBar ? 48 : 0) +
+        (showEditor && showTerminal ? 48 : 0) +
+        12;
+    const keyboardSurfaceCap =
+        keyboardBoundedRootHeight != null
+            ? Math.max(80, keyboardBoundedRootHeight - keyboardChromeHeight)
+            : Number.POSITIVE_INFINITY;
+    const minimumSurfaceHeight = mobileKeyboardOpen ? 80 : 240;
+    const mobileBodyHeight = Math.max(
+        minimumSurfaceHeight,
+        Math.min(measuredSurfaceHeight - 48, keyboardSurfaceCap),
+    );
+    const surfaceBodyHeight = Math.max(
+        minimumSurfaceHeight,
+        Math.min(measuredSurfaceHeight, keyboardSurfaceCap),
+    );
 
     const showStdinEditorUI =
         showStdinEditor && showEditor && !terminalOnlyMode && lang !== "sql" && !isWeb;

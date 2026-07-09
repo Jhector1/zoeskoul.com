@@ -1,5 +1,9 @@
 import type { ReviewTargetEntry, ReviewTargetRegistry } from "./reviewTargetRegistry";
 import { isCardDoneFromState } from "../progressKeys";
+import {
+    findReviewPracticeCompletionForExercise,
+    isReviewPracticeStepComplete,
+} from "../../quiz/projectPracticeCompletion";
 
 function getTopicState(progress: any, topicId: string) {
     return progress?.topics?.[topicId] ?? {};
@@ -11,15 +15,25 @@ function doneLike(value: any) {
         value?.correct === true ||
         value?.completed === true ||
         value?.done === true ||
-        value?.passed === true,
+        value?.passed === true ||
+        value?.finalized === true ||
+        value?.revealed === true ||
+        value?.revealUsed === true ||
+        value?.result?.finalized === true ||
+        value?.result?.revealUsed === true ||
+        value?.result?.revealAnswer != null,
     );
 }
 
-function getProjectPracticeMeta(progress: any, entry: ReviewTargetEntry) {
-    return (
-        getTopicState(progress, entry.topicId)?.quizState?.[entry.cardId]
-            ?.practiceMeta ?? {}
-    );
+function getProjectPracticeCompletion(progress: any, entry: ReviewTargetEntry) {
+    const quizState =
+        getTopicState(progress, entry.topicId)?.quizState?.[entry.cardId] ?? {};
+
+    return findReviewPracticeCompletionForExercise({
+        exerciseId: entry.exerciseId ?? "",
+        practiceMeta: quizState.practiceMeta ?? {},
+        practiceItemPatch: quizState.practiceItemPatch ?? {},
+    });
 }
 
 function getExerciseProgressState(progress: any, entry: ReviewTargetEntry) {
@@ -49,11 +63,18 @@ export function isReviewTargetComplete(args: {
     if (entry.ownerKind === "exercise") {
         if (topic?.quizzesDone?.[entry.cardId]) return true;
 
-        const practiceMeta = entry.exerciseId
-            ? getProjectPracticeMeta(args.progress, entry)?.[entry.exerciseId]
-            : null;
+        const practiceCompletion = entry.exerciseId
+            ? getProjectPracticeCompletion(args.progress, entry)
+            : { meta: null, item: null };
 
-        if (doneLike(practiceMeta)) return true;
+        if (
+            isReviewPracticeStepComplete({
+                meta: practiceCompletion.meta,
+                item: practiceCompletion.item,
+            })
+        ) {
+            return true;
+        }
 
         return doneLike(getExerciseProgressState(args.progress, entry));
     }

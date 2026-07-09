@@ -211,11 +211,13 @@
         "semanticChecks": [
           {
             "type": "defines_class",
+            "path": "models/car.py",
             "className": "Car",
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.checks.0.message"
           },
           {
             "type": "constructible",
+            "path": "models/car.py",
             "className": "Car",
             "constructorArgs": [],
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch0.checks.1.message"
@@ -308,17 +310,20 @@
         "semanticChecks": [
           {
             "type": "defines_class",
+            "path": "models/car.py",
             "className": "Car",
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.checks.0.message"
           },
           {
             "type": "constructible",
+            "path": "models/car.py",
             "className": "Car",
             "constructorArgs": [],
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.checks.1.message"
           },
           {
             "type": "created_instances",
+            "path": "main.py",
             "className": "Car",
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch1.checks.2.message"
@@ -411,27 +416,39 @@
         "semanticChecks": [
           {
             "type": "defines_class",
+            "path": "models/car.py",
             "className": "Car",
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.0.message"
           },
           {
             "type": "constructible",
+            "path": "models/car.py",
             "className": "Car",
             "constructorArgs": [],
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.1.message"
           },
           {
             "type": "created_instances",
+            "path": "main.py",
             "className": "Car",
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.2.message"
           },
           {
             "type": "printed_line_count",
+            "path": "main.py",
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.class-files-and-instances.tryIt.try_class_files_and_instances_sketch2.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Car object ready\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {

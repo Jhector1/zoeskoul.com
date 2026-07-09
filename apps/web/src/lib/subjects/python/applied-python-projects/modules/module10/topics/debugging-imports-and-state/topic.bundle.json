@@ -237,7 +237,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "The Hobbit by Tolkien\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {

@@ -247,7 +247,15 @@
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hidden Figures\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -385,7 +393,15 @@
             ],
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "The Martian\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -519,7 +535,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "The Hobbit\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {

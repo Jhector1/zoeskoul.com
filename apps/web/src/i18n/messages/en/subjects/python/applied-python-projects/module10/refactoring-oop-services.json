@@ -36,7 +36,7 @@
                   "content": "# Write your answer below"
                 },
                 "services_report_service_py": {
-                  "content": "class ReportService:\n    def __init__(self):\n        pass\n\n    def build_book_report(self, value):\n        pass"
+                  "content": "# TODO: Update services/report_service.py to complete this step: Extract report formatting into a service.\nclass ReportService:\n    def __init__(self):\n        pass\n\n    def build_book_report(self, value):\n        pass"
                 }
               },
               "solutionFiles": {
@@ -75,7 +75,7 @@
                   "content": "# Write your answer below"
                 },
                 "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def __init__(self):\n        pass\n\n    def total_price(self, value):\n        pass"
+                  "content": "# TODO: Update services/catalog_service.py to complete this step: Move total-price logic into CatalogService.\nclass CatalogService:\n    def __init__(self):\n        pass\n\n    def total_price(self, value):\n        pass"
                 }
               },
               "solutionFiles": {
@@ -120,7 +120,7 @@
                   "content": "# Write your answer below"
                 },
                 "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def __init__(self):\n        pass\n\n    def count_books(self, value):\n        pass"
+                  "content": "# TODO: Update services/catalog_service.py to complete this step: Refactor counting into a service method.\nclass CatalogService:\n    def __init__(self):\n        pass\n\n    def count_books(self, value):\n        pass"
                 }
               },
               "solutionFiles": {
@@ -197,7 +197,7 @@
                   "content": "# Write your answer below"
                 },
                 "services_pricing_service_py": {
-                  "content": "class PricingService:\n    def __init__(self):\n        pass\n\n    def discounted_total(self, value, amount):\n        pass"
+                  "content": "# TODO: Update services/pricing_service.py to complete this step: Create a pricing service method.\nclass PricingService:\n    def __init__(self):\n        pass\n\n    def discounted_total(self, value, amount):\n        pass"
                 }
               }
             },
@@ -249,7 +249,7 @@
                   "content": "# Write your answer below"
                 },
                 "services_summary_service_py": {
-                  "content": "class SummaryService:\n    def __init__(self):\n        pass\n\n    def build_summary(self, value):\n        pass"
+                  "content": "# TODO: Update services/summary_service.py to complete this step: Build a one-line catalog summary service.\nclass SummaryService:\n    def __init__(self):\n        pass\n\n    def build_summary(self, value):\n        pass"
                 }
               }
             },
@@ -300,7 +300,7 @@
                   "content": "# Write your answer below"
                 },
                 "services_inventory_service_py": {
-                  "content": "class InventoryService:\n    def __init__(self):\n        pass\n\n    def affordable_titles(self, value, amount):\n        pass"
+                  "content": "# TODO: Update services/inventory_service.py to complete this step: Move filtering logic into InventoryService.\nclass InventoryService:\n    def __init__(self):\n        pass\n\n    def affordable_titles(self, value, amount):\n        pass"
                 }
               }
             }

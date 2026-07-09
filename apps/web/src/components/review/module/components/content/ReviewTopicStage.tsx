@@ -219,7 +219,10 @@ export default function ReviewTopicStage({
             >
                 <div className="flex h-full min-h-0 flex-col">
                     {/*{topicsButton}*/}
-                    <div className="shrink-0 border-b border-[rgb(var(--ui-border)/0.75)] bg-[rgb(var(--ui-surface)/0.94)] p-3 backdrop-blur">
+                    <div
+                        data-mobile-workspace-chrome="true"
+                        className="shrink-0 border-b border-[rgb(var(--ui-border)/0.75)] bg-[rgb(var(--ui-surface)/0.94)] p-3 backdrop-blur"
+                    >
                         <div
                             className="mx-auto grid max-w-xl grid-cols-2 rounded-full bg-[rgb(var(--ui-muted)/0.7)] p-1 text-sm font-black"
                             role="tablist"

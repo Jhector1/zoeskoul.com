@@ -36,10 +36,10 @@
                   "content": "from models.book import Book\n\n\ndef build_book_label():\n    # Create the Book and return its label.\n    return \"\"\n\n\nassert build_book_label() == \"Book: Dune by Frank Herbert\"\nprint(\"book test passed\")"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")"
+                  "content": "# Keep models/catalog_item.py unchanged for this step: Test a subclass override.\nclass CatalogItem:\n    def label(self):\n        raise NotImplementedError(\"Subclasses must implement label().\")"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "# Keep models/book.py unchanged for this step: Test a subclass override.\nfrom models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
                 }
               },
               "solutionFiles": {
@@ -78,10 +78,10 @@
                   "content": "# TODO: complete this step in main.py.\n"
                 },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
+                  "content": "# Keep models/book.py unchanged for this step: Test a polymorphic label service.\nclass Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\""
                 },
                 "models_game_py": {
-                  "content": "class Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
+                  "content": "# Keep models/game.py unchanged for this step: Test a polymorphic label service.\nclass Game:\n    def __init__(self, title, platform):\n        self.title = title\n        self.platform = platform\n\n    def label(self):\n        return f\"Game: {self.title} on {self.platform}\""
                 },
                 "services_catalog_report_py": {
                   "content": "def build_labels(items):\n    # Return one label() result for each item in order.\n    return []"

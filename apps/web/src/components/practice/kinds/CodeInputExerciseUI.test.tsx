@@ -2,6 +2,7 @@ import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it, vi } from "vitest";
 
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import CodeInputExerciseUI from "./CodeInputExerciseUI";
 
 vi.mock("@/components/code/CodeRunner", () => ({
@@ -65,6 +66,48 @@ describe("CodeInputExerciseUI", () => {
         );
 
         expect(html).not.toContain('data-testid="mock-code-runner"');
+    });
+
+    it("hides the Tools launch card when compact learner UI is disabled", () => {
+        const original = learnerUiFlags.compactLearnerUi;
+        (learnerUiFlags as any).compactLearnerUi = false;
+
+        try {
+            const html = renderToStaticMarkup(
+                <CodeInputExerciseUI
+                    {...baseProps({
+                        variant: "tools",
+                        toolsBound: false,
+                        onUseTools: vi.fn(),
+                    })}
+                />,
+            );
+
+            expect(html).not.toContain('data-testid="code-input-tools-launch-card"');
+        } finally {
+            (learnerUiFlags as any).compactLearnerUi = original;
+        }
+    });
+
+    it("shows the Tools launch card only for compact learner UI while unbound", () => {
+        const original = learnerUiFlags.compactLearnerUi;
+        (learnerUiFlags as any).compactLearnerUi = true;
+
+        try {
+            const html = renderToStaticMarkup(
+                <CodeInputExerciseUI
+                    {...baseProps({
+                        variant: "tools",
+                        toolsBound: false,
+                        onUseTools: vi.fn(),
+                    })}
+                />,
+            );
+
+            expect(html).toContain('data-testid="code-input-tools-launch-card"');
+        } finally {
+            (learnerUiFlags as any).compactLearnerUi = original;
+        }
     });
 
     it("renders the embedded CodeRunner in embedded mode", () => {

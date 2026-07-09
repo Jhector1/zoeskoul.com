@@ -198,6 +198,49 @@ describe("gradeProgrammingCodeInput", () => {
         expect(mockedRunCode).toHaveBeenCalledOnce();
     });
 
+    it("runs semantic validation before stdout when semanticFirst is enabled", async () => {
+        mockedRunCode.mockResolvedValue({
+            ok: true,
+            stdout: `__ZOE_SEMANTIC_RESULT__${JSON.stringify({
+                ok: false,
+                errors: ["Ignore non-positive miles before changing the object."],
+                userStdout: "",
+            })}`,
+        } as any);
+
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "stdout",
+            semanticFirst: true,
+            tests: [{ stdin: "", stdout: "110\n100\n", match: "exact" }],
+            semanticChecks: [
+                {
+                    type: "method_returns",
+                    className: "Car",
+                    constructorArgs: ["Honda", "Civic", 100],
+                    methodName: "drive",
+                    methodArgs: [-5],
+                    expected: 100,
+                    message: "Ignore non-positive miles before changing the object.",
+                },
+            ],
+        } as any;
+
+        const result = await gradeProgrammingCodeInput({
+            expected,
+            code: "print(110)\nprint(100)\n",
+            language: "python",
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toContain("non-positive miles");
+        expect(mockedRunCode).toHaveBeenCalledOnce();
+        expect(mockedSharedRunner).not.toHaveBeenCalled();
+    });
+
     it("does not run semantic state checks when stdout already fails", async () => {
         mockedSharedRunner.mockResolvedValue({
             ok: true,
@@ -1754,6 +1797,174 @@ for book in books:
         });
 
         expect(result.ok).toBe(true);
+    });
+
+    it("runs multifile semantic checks against each declared file", async () => {
+        mockedRunCode.mockResolvedValue({
+            ok: true,
+            stdout:
+                '__ZOE_SEMANTIC_RESULT__{"ok":true,"errors":[],"userStdout":""}',
+        } as any);
+
+        const mainCode =
+            'from models.car import Car\n\ncar = Car()\nprint("Car object ready")\n';
+        const modelCode = "class Car:\n    pass\n";
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "semantic",
+            tests: [],
+            semanticChecks: [
+                {
+                    type: "defines_class",
+                    path: "models/car.py",
+                    className: "Car",
+                },
+                {
+                    type: "constructible",
+                    path: "models/car.py",
+                    className: "Car",
+                    constructorArgs: [],
+                },
+                {
+                    type: "created_instances",
+                    path: "main.py",
+                    className: "Car",
+                    min: 1,
+                },
+                {
+                    type: "printed_line_count",
+                    path: "main.py",
+                    min: 1,
+                },
+            ],
+        } as any;
+
+        const result = await gradeSemanticCodeInput({
+            expected,
+            code: mainCode,
+            language: "python",
+            entry: "main.py",
+            files: [
+                { path: "main.py", content: mainCode },
+                { path: "models/car.py", content: modelCode },
+            ],
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(true);
+        expect(mockedRunCode).toHaveBeenCalledTimes(2);
+
+        const firstRequest = mockedRunCode.mock.calls[0]?.[0];
+        const secondRequest = mockedRunCode.mock.calls[1]?.[0];
+        const firstFiles =
+            firstRequest &&
+            "files" in firstRequest &&
+            Array.isArray(firstRequest.files)
+                ? firstRequest.files
+                : undefined;
+        const secondFiles =
+            secondRequest &&
+            "files" in secondRequest &&
+            Array.isArray(secondRequest.files)
+                ? secondRequest.files
+                : undefined;
+        const firstHarness = firstFiles?.find(
+            (file) => file.path === "main.py",
+        )?.content;
+        const secondHarness = secondFiles?.find(
+            (file) => file.path === "main.py",
+        )?.content;
+
+        const modelChecks = expected.semanticChecks?.slice(0, 2);
+        const mainChecks = expected.semanticChecks?.slice(2);
+
+        expect(firstHarness).toEqual(expect.any(String));
+        expect(secondHarness).toEqual(expect.any(String));
+
+        // The shared semantic harness now JSON-decodes embedded source and checks.
+        // Assert the file-scoped contract instead of its private Python variable names.
+        expect(firstHarness).toContain(
+            JSON.stringify(JSON.stringify(modelCode)),
+        );
+        expect(firstHarness).toContain(
+            JSON.stringify(JSON.stringify(modelChecks)),
+        );
+        expect(secondHarness).toContain(
+            JSON.stringify(JSON.stringify(mainCode)),
+        );
+        expect(secondHarness).toContain(
+            JSON.stringify(JSON.stringify(mainChecks)),
+        );
+    });
+
+    it("returns clear feedback when a semantic-check file is missing", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "semantic",
+            tests: [],
+            semanticChecks: [
+                {
+                    type: "defines_class",
+                    path: "models/car.py",
+                    className: "Car",
+                },
+            ],
+        } as any;
+
+        const result = await gradeSemanticCodeInput({
+            expected,
+            code: "# main.py\n",
+            language: "python",
+            entry: "main.py",
+            files: [{ path: "main.py", content: "# main.py\n" }],
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.explanation).toBe("Missing file: models/car.py");
+        expect(result.feedback).toMatchObject({
+            title: "File missing",
+            message:
+                "Create or restore models/car.py, then check your answer again.",
+        });
+        expect(mockedRunCode).not.toHaveBeenCalled();
+    });
+
+    it("rejects unsafe semantic-check paths before invoking the runner", async () => {
+        const expected: ProgrammingExpected = {
+            kind: "code_input",
+            strategy: "programming",
+            language: "python",
+            checkMode: "semantic",
+            tests: [],
+            semanticChecks: [
+                {
+                    type: "defines_class",
+                    path: "../models/car.py",
+                    className: "Car",
+                },
+            ],
+        } as any;
+
+        const result = await gradeSemanticCodeInput({
+            expected,
+            code: "# main.py\n",
+            language: "python",
+            entry: "main.py",
+            files: [{ path: "main.py", content: "# main.py\n" }],
+            showDebug: false,
+        });
+
+        expect(result.ok).toBe(false);
+        expect(result.feedback).toMatchObject({
+            title: "Validation setup error",
+            tone: "danger",
+        });
+        expect(mockedRunCode).not.toHaveBeenCalled();
     });
 
 });

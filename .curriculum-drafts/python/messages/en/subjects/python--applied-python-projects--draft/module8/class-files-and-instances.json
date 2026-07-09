@@ -72,7 +72,7 @@
                   "content": "# Import the Car class.\n# Then create one Car object."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    pass"
+                  "content": "# Keep models/car.py unchanged for this step: Import Car and create one object.\nclass Car:\n    pass"
                 }
               },
               "solutionCode": "from models.car import Car\n\ncar = Car()",
@@ -111,7 +111,7 @@
                   "content": "from models.car import Car\n\ncar = Car()\n\n# Print a short ready message below."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    pass"
+                  "content": "# Keep models/car.py unchanged for this step: Keep the model and main script separate.\nclass Car:\n    pass"
                 }
               },
               "solutionCode": "from models.car import Car\n\ncar = Car()\nprint(\"Car object ready\")",
@@ -136,7 +136,8 @@
                 "3": {
                   "message": "Print one short ready message from main.py."
                 }
-              }
+              },
+              "expectedOutput": "Car object ready"
             }
           },
           "practice": {

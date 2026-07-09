@@ -36,7 +36,7 @@
                   "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 100)\n\n# Print drive(10).\n# Then print drive(-5)."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n"
+                  "content": "# TODO: Update models/car.py to complete this step: Validate positive miles.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n"
                 }
               },
               "solutionCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 100)\n\nprint(car.drive(10))\nprint(car.drive(-5))",
@@ -64,7 +64,8 @@
                 "4": {
                   "message": "Print both drive results."
                 }
-              }
+              },
+              "expectedOutput": "110\n110"
             },
             "try_encapsulation_and_validation_sketch1": {
               "title": "Keep invalid drives from changing state",
@@ -81,7 +82,7 @@
                   "content": "from models.car import Car\n\ncar = Car(\"Ford\", \"Escape\", 130)\n\n# Drive 30 miles.\n# Try to drive -70 miles.\n# Print the final miles."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
+                  "content": "# Keep models/car.py unchanged for this step: Keep invalid drives from changing state.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
                 }
               },
               "solutionCode": "from models.car import Car\n\ncar = Car(\"Ford\", \"Escape\", 130)\ncar.drive(30)\ncar.drive(-70)\n\nprint(car.miles)",
@@ -106,7 +107,8 @@
                 "3": {
                   "message": "Print the final miles."
                 }
-              }
+              },
+              "expectedOutput": "160"
             },
             "try_encapsulation_and_validation_sketch2": {
               "title": "Use validated behavior with a summary",
@@ -123,7 +125,7 @@
                   "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 0)\n\n# Drive 20 miles, ignore -3, then drive 50 more.\n# Print the final summary."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
+                  "content": "# Keep models/car.py unchanged for this step: Use validated behavior with a summary.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        if miles > 0:\n            self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\""
                 }
               },
               "solutionCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Civic\", 0)\ncar.drive(20)\ncar.drive(-3)\ncar.drive(50)\n\nprint(car.summary())",
@@ -145,7 +147,8 @@
                 "2": {
                   "message": "Print one clean summary line."
                 }
-              }
+              },
+              "expectedOutput": "Honda Civic - 70 miles"
             }
           },
           "practice": {

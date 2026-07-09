@@ -3,8 +3,10 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import CodeRunner, {
     restartWorkspaceTerminalSession,
+    resolveMobileKeyboardViewport,
     shouldCollapseIdleOutputPanel,
     shouldAutoOpenWorkspaceTerminal,
+    shouldOpenEditorForWorkspaceFileSelection,
 } from "@/components/code/runner/CodeRunner";
 
 const mockedWorkspaceTerminalControllerCalls: any[] = [];
@@ -95,6 +97,104 @@ vi.mock("@/components/code/runner/hooks/pty/useWorkspaceTerminalController", () 
         };
     },
 }));
+
+describe("CodeRunner mobile keyboard viewport", () => {
+    it("detects a focused editor keyboard and returns the visible height below the runner", () => {
+        expect(
+            resolveMobileKeyboardViewport({
+                visualViewportHeight: 390,
+                visualViewportOffsetTop: 0,
+                layoutViewportHeight: 780,
+                baselineViewportHeight: 780,
+                rootTop: 210,
+                editorHasTextFocus: true,
+            }),
+        ).toMatchObject({
+            keyboardOpen: true,
+            availableHeight: 172,
+        });
+    });
+
+    it("does not enter keyboard mode for a viewport resize without editor focus", () => {
+        expect(
+            resolveMobileKeyboardViewport({
+                visualViewportHeight: 390,
+                visualViewportOffsetTop: 0,
+                layoutViewportHeight: 780,
+                baselineViewportHeight: 780,
+                rootTop: 210,
+                editorHasTextFocus: false,
+            }).keyboardOpen,
+        ).toBe(false);
+    });
+
+    it("accounts for the visual viewport offset when the browser pans the page", () => {
+        expect(
+            resolveMobileKeyboardViewport({
+                visualViewportHeight: 360,
+                visualViewportOffsetTop: 40,
+                layoutViewportHeight: 780,
+                baselineViewportHeight: 780,
+                rootTop: 120,
+                editorHasTextFocus: true,
+                bottomPadding: 10,
+            }).availableHeight,
+        ).toBe(270);
+    });
+});
+
+describe("CodeRunner narrow-screen file navigation", () => {
+    it("opens the editor when the selected workspace file changes", () => {
+        expect(
+            shouldOpenEditorForWorkspaceFileSelection({
+                previousFileId: "main.py",
+                nextFileId: "models/car.py",
+                isNarrowScreen: true,
+                showEditor: true,
+                showTerminal: true,
+            }),
+        ).toBe(true);
+    });
+
+    it("opens the editor when the learner reselects the active file", () => {
+        expect(
+            shouldOpenEditorForWorkspaceFileSelection({
+                previousFileId: "main.py",
+                nextFileId: "main.py",
+                previousSelectionVersion: 2,
+                nextSelectionVersion: 3,
+                isNarrowScreen: true,
+                showEditor: true,
+                showTerminal: true,
+            }),
+        ).toBe(true);
+    });
+
+    it("does not change panes on desktop or without a selection", () => {
+        expect(
+            shouldOpenEditorForWorkspaceFileSelection({
+                previousFileId: "main.py",
+                nextFileId: "models/car.py",
+                previousSelectionVersion: 2,
+                nextSelectionVersion: 3,
+                isNarrowScreen: false,
+                showEditor: true,
+                showTerminal: true,
+            }),
+        ).toBe(false);
+        expect(
+            shouldOpenEditorForWorkspaceFileSelection({
+                previousFileId: "main.py",
+                nextFileId: "main.py",
+                previousSelectionVersion: 2,
+                nextSelectionVersion: 2,
+                isNarrowScreen: true,
+                showEditor: true,
+                showTerminal: true,
+            }),
+        ).toBe(false);
+    });
+});
 
 describe("CodeRunner terminal-only mode", () => {
     beforeEach(() => {

@@ -248,17 +248,6 @@
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.1.message"
           },
           {
-            "type": "instance_attributes",
-            "className": "CatalogItem",
-            "constructorArgs": [
-              "Sample"
-            ],
-            "attributes": [
-              "title"
-            ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.2.message"
-          },
-          {
             "type": "defines_class",
             "className": "Book",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.3.message"
@@ -271,6 +260,17 @@
               "J.R.R. Tolkien"
             ],
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.4.message"
+          },
+          {
+            "type": "instance_attributes",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Sample"
+            ],
+            "attributes": [
+              "title"
+            ],
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.2.message"
           },
           {
             "type": "instance_attributes",
@@ -442,6 +442,20 @@
         ],
         "semanticChecks": [
           {
+            "type": "defines_class",
+            "className": "Movie",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.1.message"
+          },
+          {
+            "type": "constructible",
+            "className": "Movie",
+            "constructorArgs": [
+              "Toy Story",
+              81
+            ],
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.2.message"
+          },
+          {
             "type": "method_returns",
             "className": "Book",
             "constructorArgs": [
@@ -455,20 +469,6 @@
             "expected": "Book: The Hobbit by J.R.R. Tolkien",
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.0.message"
-          },
-          {
-            "type": "defines_class",
-            "className": "Movie",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.1.message"
-          },
-          {
-            "type": "constructible",
-            "className": "Movie",
-            "constructorArgs": [
-              "Toy Story",
-              81
-            ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.2.message"
           },
           {
             "type": "instance_attributes",
@@ -914,7 +914,15 @@
             ],
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: The Hobbit by J.R.R. Tolkien\nMovie: Toy Story (81 min)\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     }
   ]

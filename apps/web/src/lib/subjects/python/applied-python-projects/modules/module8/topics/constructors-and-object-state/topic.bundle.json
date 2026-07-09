@@ -244,7 +244,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Nissan\n6000\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -371,7 +379,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.4.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Outback\nMini\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -498,7 +514,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.4.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "25100\n9000\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {

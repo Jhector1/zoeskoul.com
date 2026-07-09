@@ -5,7 +5,7 @@ export type SavedQuizState = {
     practiceItemPatch?: Record<string, any>;
     practiceMeta?: Record<
         string,
-        { attempts: number; ok: boolean | null }
+        { attempts: number; ok: boolean | null; finalized?: boolean }
     >;
 
     updatedAt?: number;

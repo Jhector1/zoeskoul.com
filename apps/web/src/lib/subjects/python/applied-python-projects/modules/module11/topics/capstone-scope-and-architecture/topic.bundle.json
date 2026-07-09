@@ -355,7 +355,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.try_capstone_scope_and_architecture_sketch0.checks.6.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG: Fix login redirect (3 pts)\nFEATURE: Add dark mode (5 pts)\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -574,7 +582,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_storage_layout.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG: Fix login redirect (3 pts)\nFEATURE: Add dark mode (5 pts)\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -821,7 +837,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_encapsulation_and_status.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "todo\nFEATURE: Add dark mode (5 pts) - todo\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1177,7 +1201,15 @@
             "min": 4,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_polymorphic_report.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG: Fix login redirect (3 pts) - done\nFEATURE: Add dark mode (5 pts) - todo\n8\n1\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1478,7 +1510,15 @@
             "min": 5,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_abstraction_priority.checks.4.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n4\n5\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1767,7 +1807,15 @@
             "min": 6,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-scope-and-architecture.finalCapstone.steps.capstone_add_tests_and_readme_handoff.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n4\n5\n6\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     }
   ]

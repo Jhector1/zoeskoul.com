@@ -3,8 +3,11 @@ import {
     doesPracticeStateMatchQuestion,
     getPracticeQuestionIdentity,
     getPracticeStateIdentity,
+    mergeSavedPatchIntoPracticeItem,
     sanitizeSavedPracticePatch,
+    stablePracticeItemJsonForNoopCompare,
     shouldTreatPatchAsExplicitFeedbackDismiss,
+    shouldTreatPatchAsRevealFill,
 } from "@/components/review/quiz/hooks/useQuizPracticeBank";
 import { collectTerminalWorkspaceCommands } from "@/lib/practice/terminalWorkspaceHints";
 import { normalizeVisibleTerminalTranscriptText } from "@/lib/practice/visibleTerminalTranscript";
@@ -22,6 +25,84 @@ describe("useQuizPracticeBank practice identity guards", () => {
         topicId,
         exerciseId,
     ].join(":");
+
+    it("keeps the current item reference when restore only changes timestamps", () => {
+        const item = {
+            exercise: {
+                id: "question-1",
+                kind: "mcq",
+            },
+            single: "answer-a",
+            result: {
+                ok: false,
+                finalized: true,
+            },
+            updatedAt: 100,
+        } as any;
+
+        const merged = mergeSavedPatchIntoPracticeItem(item, {
+            single: "answer-a",
+            result: {
+                ok: false,
+                finalized: true,
+            },
+            updatedAt: 200,
+        });
+
+        expect(merged).toBe(item);
+    });
+
+    it("ignores nested workspace timestamps in semantic no-op comparisons", () => {
+        const before = {
+            workspace: {
+                version: 2,
+                nodes: [
+                    {
+                        id: "main.py",
+                        kind: "file",
+                        content: "print('ready')\n",
+                        updatedAt: 100,
+                    },
+                ],
+            },
+        };
+        const after = {
+            workspace: {
+                version: 2,
+                nodes: [
+                    {
+                        id: "main.py",
+                        kind: "file",
+                        content: "print('ready')\n",
+                        updatedAt: 999,
+                    },
+                ],
+            },
+        };
+
+        expect(stablePracticeItemJsonForNoopCompare(after)).toBe(
+            stablePracticeItemJsonForNoopCompare(before),
+        );
+    });
+
+    it("still applies meaningful saved-answer changes", () => {
+        const item = {
+            exercise: {
+                id: "question-1",
+                kind: "mcq",
+            },
+            single: "answer-a",
+            updatedAt: 100,
+        } as any;
+
+        const merged = mergeSavedPatchIntoPracticeItem(item, {
+            single: "answer-b",
+            updatedAt: 200,
+        });
+
+        expect(merged).not.toBe(item);
+        expect((merged as any).single).toBe("answer-b");
+    });
 
     it("treats matching question and practice state as reusable", () => {
         const question = {
@@ -214,6 +295,32 @@ describe("useQuizPracticeBank practice identity guards", () => {
         expect(sanitized).not.toHaveProperty("feedbackDismissed");
         expect((sanitized as any).result?.ok).toBe(false);
         expect((sanitized as any).submitted).toBe(true);
+    });
+
+    it("recognizes only explicit finalized reveal-fill patches", () => {
+        expect(
+            shouldTreatPatchAsRevealFill({
+                updateOrigin: "reveal-fill",
+                revealed: true,
+                submitted: true,
+            }),
+        ).toBe(true);
+
+        expect(
+            shouldTreatPatchAsRevealFill({
+                updateOrigin: "user",
+                revealed: true,
+                submitted: true,
+            }),
+        ).toBe(false);
+
+        expect(
+            shouldTreatPatchAsRevealFill({
+                updateOrigin: "reveal-fill",
+                revealed: true,
+                submitted: false,
+            }),
+        ).toBe(false);
     });
 
     it("does not dismiss wrong-answer feedback for no-op sync patches", () => {

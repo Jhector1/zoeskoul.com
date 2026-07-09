@@ -6,7 +6,7 @@ export type SavedQuizState = {
     practiceItemPatch?: Record<string /* questionId */, any>;
     practiceMeta?: Record<
         string /* questionId */,
-        { attempts: number; ok: boolean | null }
+        { attempts: number; ok: boolean | null; finalized?: boolean }
     >;
 
     updatedAt?: number;

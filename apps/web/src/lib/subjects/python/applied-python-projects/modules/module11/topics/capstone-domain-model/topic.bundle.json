@@ -373,7 +373,15 @@
             "min": 3,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Draft roadmap\nhigh\nFalse\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -674,7 +682,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.5.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG: Fix login redirect | priority=high | severity=critical | done=False\nBUG: Fix login redirect | priority=high | severity=critical | done=True\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -967,7 +983,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.5.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "FEATURE: Add dark mode | priority=medium | points=1 | done=False\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1273,7 +1297,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG: Fix login redirect | priority=high | severity=critical | done=False\nFEATURE: Add dark mode | priority=medium | points=3 | done=False\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1607,7 +1639,15 @@
             "min": 3,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.4.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG: Fix login redirect | priority=high | severity=critical | done=False\nFEATURE: Export CSV | priority=low | points=5 | done=False\nBUG: Fix login redirect | priority=high | severity=critical | done=True\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -2033,7 +2073,15 @@
             "min": 5,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "a\nb\nc\nd\ne\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     }
   ]

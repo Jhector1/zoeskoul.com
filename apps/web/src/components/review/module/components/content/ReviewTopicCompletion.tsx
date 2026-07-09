@@ -49,6 +49,7 @@ export default function ReviewTopicCompletion({
                         "shadow-[0_18px_50px_rgb(0_0_0/0.22)]",
                     ].join(" ")}
                     aria-label="Topic complete"
+                    data-review-topic-completion="true"
                 >
                     <div className="flex items-start gap-3">
                         <div className="ui-celebrate-icon ui-celebrate-icon-success">
@@ -95,6 +96,7 @@ export default function ReviewTopicCompletion({
                                 type="button"
                                 onClick={onContinue}
                                 className="ui-btn-primary h-10 px-5 text-sm font-semibold"
+                                data-review-next-topic="true"
                             >
                                 {continueLabel} <span aria-hidden>→</span>
                             </button>

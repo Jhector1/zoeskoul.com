@@ -2,7 +2,7 @@
   "topicId": "module-9-catalog-polymorphism-project",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
-  "sectionSlug": "python--applied-python-projects--draft-python-9-module-project",
+  "sectionSlug": "applied-python-projects-python-9-module-project",
   "prefix": "py9",
   "minutes": 55,
   "runtimeDefaults": {
@@ -22,21 +22,21 @@
     }
   },
   "topic": {
-    "labelKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.label",
-    "summaryKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.summary"
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.cards.sketch0.title",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.cards.sketch0.title",
       "sketchId": "module-9-catalog-polymorphism-project-sketch-0",
       "height": 420
     },
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.cards.project.title",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -45,7 +45,7 @@
         "steps": [
           {
             "id": "catalog_project_step_1_base_and_book",
-            "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_1_base_and_book.title",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_1_base_and_book.title",
             "exerciseKey": "catalog-project-step-1-base-and-book",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -54,7 +54,7 @@
           },
           {
             "id": "catalog_project_step_2_add_movie_override",
-            "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_2_add_movie_override.title",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_2_add_movie_override.title",
             "exerciseKey": "catalog-project-step-2-add-movie-override",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -64,7 +64,7 @@
           },
           {
             "id": "catalog_project_step_3_mixed_catalog_loop",
-            "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_3_mixed_catalog_loop.title",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_3_mixed_catalog_loop.title",
             "exerciseKey": "catalog-project-step-3-mixed-catalog-loop",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -74,7 +74,7 @@
           },
           {
             "id": "catalog_project_step_4_catalog_class_report",
-            "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_4_catalog_class_report.title",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_4_catalog_class_report.title",
             "exerciseKey": "catalog-project-step-4-catalog-class-report",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -90,8 +90,8 @@
     {
       "id": "module-9-catalog-polymorphism-project-sketch-0",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.module-9-catalog-polymorphism-project-sketch-0.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.module-9-catalog-polymorphism-project-sketch-0.bodyMarkdown"
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.module-9-catalog-polymorphism-project-sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.module-9-catalog-polymorphism-project-sketch-0.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -100,34 +100,34 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -136,28 +136,28 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -166,32 +166,32 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -202,32 +202,32 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -237,7 +237,7 @@
           {
             "type": "defines_class",
             "className": "CatalogItem",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.0.message"
           },
           {
             "type": "constructible",
@@ -245,7 +245,21 @@
             "constructorArgs": [
               "Sample"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.1.message"
+          },
+          {
+            "type": "defines_class",
+            "className": "Book",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.3.message"
+          },
+          {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "The Hobbit",
+              "J.R.R. Tolkien"
+            ],
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.4.message"
           },
           {
             "type": "instance_attributes",
@@ -256,21 +270,7 @@
             "attributes": [
               "title"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.2.message"
-          },
-          {
-            "type": "defines_class",
-            "className": "Book",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.3.message"
-          },
-          {
-            "type": "constructible",
-            "className": "Book",
-            "constructorArgs": [
-              "The Hobbit",
-              "J.R.R. Tolkien"
-            ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.4.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.2.message"
           },
           {
             "type": "instance_attributes",
@@ -283,7 +283,7 @@
               "title",
               "author"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.5.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.5.message"
           }
         ]
       }
@@ -293,34 +293,34 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -329,35 +329,35 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_movie_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_movie_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -366,32 +366,32 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -402,45 +402,59 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_movie_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_movie_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           }
         ],
         "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "Movie",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.1.message"
+          },
+          {
+            "type": "constructible",
+            "className": "Movie",
+            "constructorArgs": [
+              "Toy Story",
+              81
+            ],
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.2.message"
+          },
           {
             "type": "method_returns",
             "className": "Book",
@@ -454,21 +468,7 @@
             "methodArgKinds": [],
             "expected": "Book: The Hobbit by J.R.R. Tolkien",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.0.message"
-          },
-          {
-            "type": "defines_class",
-            "className": "Movie",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.1.message"
-          },
-          {
-            "type": "constructible",
-            "className": "Movie",
-            "constructorArgs": [
-              "Toy Story",
-              81
-            ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.0.message"
           },
           {
             "type": "instance_attributes",
@@ -481,7 +481,7 @@
               "title",
               "minutes"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.3.message"
           },
           {
             "type": "method_returns",
@@ -496,7 +496,7 @@
             "methodArgKinds": [],
             "expected": "Movie: Toy Story (81 min)",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.4.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.4.message"
           }
         ]
       }
@@ -506,41 +506,41 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_movie_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_movie_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -549,35 +549,35 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_movie_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_movie_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -586,39 +586,39 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_movie_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_movie_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -629,39 +629,39 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_movie_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_movie_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -672,13 +672,13 @@
             "type": "created_instances",
             "className": "Book",
             "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.0.message"
           },
           {
             "type": "created_instances",
             "className": "Movie",
             "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.1.message"
           },
           {
             "type": "method_returns",
@@ -693,7 +693,7 @@
             "methodArgKinds": [],
             "expected": "Book: The Hobbit by J.R.R. Tolkien",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.2.message"
           },
           {
             "type": "method_returns",
@@ -708,7 +708,7 @@
             "methodArgKinds": [],
             "expected": "Movie: Toy Story (81 min)",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.3.message"
           }
         ]
       }
@@ -718,41 +718,41 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_movie_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_movie_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -761,42 +761,42 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/movie.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_movie_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_movie_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/catalog.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -805,39 +805,39 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_movie_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_movie_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -848,46 +848,46 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/movie.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_movie_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_movie_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/catalog.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -897,13 +897,13 @@
           {
             "type": "defines_class",
             "className": "Catalog",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.0.message"
           },
           {
             "type": "constructible",
             "className": "Catalog",
             "constructorArgs": [],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.1.message"
           },
           {
             "type": "instance_attributes",
@@ -912,9 +912,17 @@
             "attributes": [
               "items"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: The Hobbit by J.R.R. Tolkien\nMovie: Toy Story (81 min)\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     }
   ]

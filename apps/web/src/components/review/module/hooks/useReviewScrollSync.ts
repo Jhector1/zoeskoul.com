@@ -3,6 +3,7 @@ import type { ReviewCard } from "@/lib/subjects/types";
 import { isCardDoneFromState, isQuizLikeCard } from "../progressKeys";
 import { prereqsMetForAnyQuizOrProject } from "../utils";
 import { useReviewRuntimeStore } from "../runtime/reviewRuntimeStore";
+import { scrollIntoViewSmart } from "@/lib/ui/flowScroll";
 
 type Args = {
     subjectSlug: string;
@@ -164,6 +165,36 @@ export function useReviewScrollSync({
         [findCurrentActivityCardId, viewCards],
     );
 
+    const scrollToTopicCompletion = useCallback(() => {
+        if (typeof document === "undefined") return;
+
+        let attempts = 0;
+        const maxAttempts = 24;
+
+        const tryScroll = () => {
+            const target = document.querySelector<HTMLElement>(
+                '[data-review-topic-completion="true"]',
+            );
+
+            if (target) {
+                scrollIntoViewSmart(target, {
+                    reduceMotion,
+                    block: "start",
+                    force: true,
+                    offsetPx: 16,
+                    focus: true,
+                    focusSelector: '[data-review-next-topic="true"]',
+                });
+                return;
+            }
+
+            attempts += 1;
+            if (attempts < maxAttempts) requestAnimationFrame(tryScroll);
+        };
+
+        requestAnimationFrame(tryScroll);
+    }, [reduceMotion]);
+
     const findNextActionableCardIndex = useCallback(
         (fromIndex: number, nextProgress: any) => {
             const tp0 = nextProgress?.topics?.[viewTid] ?? {};
@@ -186,7 +217,10 @@ export function useReviewScrollSync({
     const scrollToNextActionable = useCallback(
         (fromIndex: number, nextProgress: any) => {
             const nextIndex = findNextActionableCardIndex(fromIndex, nextProgress);
-            if (nextIndex < 0) return;
+            if (nextIndex < 0) {
+                scrollToTopicCompletion();
+                return;
+            }
 
             if (navModes.cards === "slideshow") {
                 if (routeOwned && onNavigateToCardIndex) {
@@ -211,6 +245,7 @@ export function useReviewScrollSync({
             setActiveCardIndex,
             viewCards,
             scrollToCardId,
+            scrollToTopicCompletion,
         ],
     );
 

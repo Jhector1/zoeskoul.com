@@ -7,6 +7,10 @@ import type { RecipeHandler } from "./types";
 import type { ManifestCodeInput } from "@/lib/subjects/_core/manifestTypes";
 import { buildTerminalExpectedExample } from "./expectedExample";
 import { buildFixedTestsExpected } from "@zoeskoul-code-input-expected";
+import {
+    assertSemanticCheckPaths,
+    stripSemanticCheckPaths,
+} from "@/lib/practice/semanticCheckPaths";
 
 export const buildFixedTestsRecipe: RecipeHandler<any> = (
     def: ManifestCodeInput & {
@@ -17,28 +21,45 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
             solutionFiles?: unknown;
             semanticChecks?: unknown;
             sourceChecks?: unknown;
+            semanticFirst?: boolean;
         };
     },    args,
     resolved,
 ) => {
+    const semanticChecks = Array.isArray((def.recipe as any).semanticChecks)
+        ? (def.recipe as any).semanticChecks
+        : Array.isArray((def as any).semanticChecks)
+            ? (def as any).semanticChecks
+            : undefined;
     const expected = buildFixedTestsExpected(
-        def.recipe,
+        {
+            ...(def.recipe as any),
+            ...(semanticChecks?.length
+                ? {
+                    semanticChecks: stripSemanticCheckPaths(semanticChecks),
+                }
+                : {}),
+        },
         def.workspaceExpectations ?? def.workspace?.workspaceExpectations,
     );
     const solutionFiles =
         (def as any).solutionFiles ??
         (def.recipe as any).solutionFiles ??
         (def.workspace as any)?.solutionFiles;
-    const semanticChecks = Array.isArray((def.recipe as any).semanticChecks)
-        ? (def.recipe as any).semanticChecks
-        : Array.isArray((def as any).semanticChecks)
-            ? (def as any).semanticChecks
-            : undefined;
     const sourceChecks = Array.isArray((def.recipe as any).sourceChecks)
         ? (def.recipe as any).sourceChecks
         : Array.isArray((def as any).sourceChecks)
             ? (def as any).sourceChecks
             : undefined;
+
+    assertSemanticCheckPaths({
+        checks: semanticChecks,
+        availableFiles:
+            solutionFiles ??
+            (def as any).starterFiles ??
+            (def.workspace as any)?.starterFiles,
+        exerciseId: String(def.id ?? args.id),
+    });
 
     const expectedWithRevealFiles = {
         ...(expected as any),
@@ -50,6 +71,9 @@ export const buildFixedTestsRecipe: RecipeHandler<any> = (
         ...(solutionFiles !== undefined ? { solutionFiles } : {}),
         ...(semanticChecks?.length ? { semanticChecks } : {}),
         ...(sourceChecks?.length ? { sourceChecks } : {}),
+        ...((def.recipe as any).semanticFirst === true
+            ? { semanticFirst: true }
+            : {}),
     };
     const tests = expected.tests;
 

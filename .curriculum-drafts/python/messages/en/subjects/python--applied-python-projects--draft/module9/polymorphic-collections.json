@@ -36,10 +36,10 @@
                   "content": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create a mixed catalog list with one Book and one Movie.\n# Do not print yet.\n"
                 },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                  "content": "# Keep models/book.py unchanged for this step: Create a mixed catalog list.\nclass Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
                 },
                 "models_movie_py": {
-                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                  "content": "# Keep models/movie.py unchanged for this step: Create a mixed catalog list.\nclass Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
                 }
               },
               "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Giver\"), Movie(\"Soul\")]\nprint(len(catalog))\n",
@@ -78,10 +78,10 @@
                   "content": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\n# TODO: loop through catalog and print item.label() for each item.\n"
                 },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                  "content": "# Keep models/book.py unchanged for this step: Loop through Book and Movie objects.\nclass Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
                 },
                 "models_movie_py": {
-                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                  "content": "# Keep models/movie.py unchanged for this step: Loop through Book and Movie objects.\nclass Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
                 }
               },
               "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [Book(\"The Lightning Thief\"), Movie(\"Up\")]\n\nfor item in catalog:\n    print(item.label())\n",
@@ -103,7 +103,8 @@
                 "1": {
                   "message": "Movie.label() should return the expected label."
                 }
-              }
+              },
+              "expectedOutput": "Book: The Lightning Thief\nMovie: Up"
             },
             "try_polymorphic_collections_sketch2": {
               "title": "Return labels from a helper",
@@ -120,10 +121,10 @@
                   "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\n# TODO: call build_labels(catalog) and print each returned label.\n"
                 },
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                  "content": "# Keep models/book.py unchanged for this step: Return labels from a helper.\nclass Book:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
                 },
                 "models_movie_py": {
-                  "content": "class Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                  "content": "# Keep models/movie.py unchanged for this step: Return labels from a helper.\nclass Movie:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
                 },
                 "services_catalog_report_py": {
                   "content": "def build_labels(items):\n    # TODO: return a list of item.label() results.\n    pass\n"
@@ -172,8 +173,8 @@
               }
             },
             "fb-polymorphism-shared-call": {
-              "title": "Fill in the shared method call",
-              "prompt": "Complete the shared method: `print(item.[blank1]())`",
+              "title": "Choose the shared method",
+              "prompt": "Which shared method should be called on each item?",
               "hint": "Use the method name both subclasses provide.",
               "help": {
                 "concept": "Polymorphism depends on one shared method name.",

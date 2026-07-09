@@ -20,6 +20,12 @@ vi.mock("@/lib/config/learnerUiFlags", () => ({
     },
 }));
 
+type MutableLearnerUiFlags = {
+    -readonly [Key in keyof typeof learnerUiFlags]: (typeof learnerUiFlags)[Key];
+};
+
+const mutableLearnerUiFlags = learnerUiFlags as MutableLearnerUiFlags;
+
 const mocked = vi.hoisted(() => ({
     exerciseRendererProps: [] as any[],
     registerCodeInput: vi.fn(),
@@ -1001,7 +1007,7 @@ describe("QuizPracticeCard project-step fallback", () => {
     });
 
     it("keeps attempts visible in compact learner UI", () => {
-        learnerUiFlags.compactLearnerUi = true;
+        mutableLearnerUiFlags.compactLearnerUi = true;
 
         const exercise = makeCodeInputExercise();
 
@@ -1047,7 +1053,7 @@ describe("QuizPracticeCard project-step fallback", () => {
 
         expect(html).toContain("Attempts: 0/∞");
 
-        learnerUiFlags.compactLearnerUi = false;
+        mutableLearnerUiFlags.compactLearnerUi = false;
     });
 });
 
@@ -1164,4 +1170,194 @@ describe("applyPracticeWorkspaceHydration", () => {
             "class Car:\n    pass\n",
         );
     });
+    it("shows Next instead of Check this answer after a revealed answer is finalized", () => {
+        const exercise = makeCodeInputExercise();
+        const item = {
+            ...makeQItem({
+                exercise,
+                code: "print('revealed')",
+                result: {
+                    ok: false,
+                    finalized: true,
+                    revealAnswer: { kind: "code", code: "print('revealed')" },
+                } as any,
+            }),
+            submitted: true,
+            revealed: true,
+            feedbackDismissed: true,
+        } as any;
+
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "practice-revealed-next",
+                    kind: "practice",
+                    fetch: {
+                        subject: "python",
+                        module: "module-1",
+                        section: "section-1",
+                        topic: "topic-1",
+                    },
+                } as any}
+                ownerCardId="card-1"
+                ps={makePracticeState({
+                    item,
+                    exercise,
+                    attempts: 1,
+                    ok: false,
+                })}
+                toolsActive={false}
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts
+                strictSequential
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                finalizedAction="next"
+                onFinalizedNext={vi.fn()}
+                onHelp={vi.fn()}
+            />,
+        );
+
+        expect(html).toContain('data-testid="review-practice-next-button"');
+        expect(html).toContain('data-finalized-action-state="ready"');
+        expect(html).toContain("ui-quiz-status-warn");
+        expect(html).toContain("Next →");
+        expect(html).not.toContain('data-testid="review-practice-submit-button"');
+        expect(html).not.toContain("Check this answer");
+    });
+
+    it("shows Finish for the last revealed answer even if parent completion arrives early", () => {
+        const exercise = makeCodeInputExercise();
+        const item = {
+            ...makeQItem({
+                exercise,
+                code: "print('revealed')",
+                result: {
+                    ok: false,
+                    finalized: true,
+                    revealAnswer: { kind: "code", code: "print('revealed')" },
+                } as any,
+            }),
+            submitted: true,
+            revealed: true,
+            feedbackDismissed: true,
+        } as any;
+
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "practice-revealed-finish",
+                    kind: "practice",
+                    fetch: {
+                        subject: "python",
+                        module: "module-1",
+                        section: "section-1",
+                        topic: "topic-1",
+                    },
+                } as any}
+                ownerCardId="card-1"
+                ps={makePracticeState({
+                    item,
+                    exercise,
+                    attempts: 1,
+                    ok: false,
+                })}
+                toolsActive={false}
+                unlocked
+                isCompleted
+                locked={false}
+                unlimitedAttempts
+                strictSequential
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                finalizedAction="finish"
+                onFinalizedNext={vi.fn()}
+                onHelp={vi.fn()}
+            />,
+        );
+
+        expect(html).toContain('data-testid="review-practice-finish-button"');
+        expect(html).toContain('data-finalized-action-state="consumed"');
+        expect(html).toContain("ui-quiz-action--disabled");
+        expect(html).toContain("disabled");
+        expect(html).toContain("Finish →");
+        expect(html).not.toContain('data-testid="review-practice-submit-button"');
+        expect(html).not.toContain("Check this answer");
+    });
+
+    it("keeps a revealed project-step Next action disabled after remount", () => {
+        const exercise = makeCodeInputExercise();
+        const item = {
+            ...makeQItem({
+                exercise,
+                code: "print('revealed project step')",
+                result: {
+                    ok: false,
+                    finalized: true,
+                    revealAnswer: {
+                        kind: "code",
+                        code: "print('revealed project step')",
+                    },
+                } as any,
+            }),
+            submitted: true,
+            revealed: true,
+            finalizedActionConsumed: true,
+            feedbackDismissed: true,
+        } as any;
+
+        const html = renderToStaticMarkup(
+            <QuizPracticeCard
+                q={{
+                    id: "project-step-revealed-next-consumed",
+                    kind: "practice",
+                    fetch: {
+                        subject: "python",
+                        module: "module-1",
+                        section: "section-1",
+                        topic: "topic-1",
+                        exerciseKey: "add-drive-method",
+                    },
+                } as any}
+                ownerCardId="project-card"
+                projectStepManifest={{
+                    id: "add-drive-method",
+                    exerciseKey: "add-drive-method",
+                    title: "Add a drive method",
+                } as any}
+                ps={makePracticeState({
+                    item,
+                    exercise,
+                    attempts: 0,
+                    ok: false,
+                })}
+                toolsActive={false}
+                unlocked
+                isCompleted={false}
+                locked={false}
+                unlimitedAttempts={false}
+                strictSequential
+                seqOrder={1}
+                padRef={{ current: null } as any}
+                onUpdateItem={vi.fn()}
+                onSubmit={vi.fn()}
+                finalizedAction="next"
+                onFinalizedNext={vi.fn()}
+                onHelp={vi.fn()}
+            />,
+        );
+
+        expect(html).toContain('data-testid="review-practice-next-button"');
+        expect(html).toContain('data-finalized-action-state="consumed"');
+        expect(html).toContain("ui-quiz-action--disabled");
+        expect(html).toContain("disabled");
+        expect(html).toContain("Next →");
+    });
+
 });

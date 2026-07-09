@@ -314,7 +314,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "if"
+        "value": "CatalogItem"
       }
     },
     {

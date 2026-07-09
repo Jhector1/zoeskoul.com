@@ -155,4 +155,65 @@ describe("normalizeExpectedForSave", () => {
         expect((normalized as any).language).toBe("sql");
         expect((normalized as any).terminalExpectations).toBeUndefined();
     });
+    it("preserves semanticFirst for behavior-before-output programming checks", () => {
+        const normalized = normalizeExpectedForSave(PracticeKind.code_input, {
+            kind: "code_input",
+            language: "python",
+            checkMode: "stdout",
+            semanticFirst: true,
+            tests: [{ stdin: "", stdout: "100\n", match: "exact" }],
+            semanticChecks: [
+                {
+                    type: "method_returns",
+                    className: "Car",
+                    constructorArgs: ["Honda", "Civic", 100],
+                    methodName: "drive",
+                    methodArgs: [-5],
+                    expected: 100,
+                },
+            ],
+        });
+
+        expect((normalized as any).semanticFirst).toBe(true);
+        expect((normalized as any).tests).toEqual([
+            { stdin: "", stdout: "100\n", match: "exact" },
+        ]);
+    });
+
+    it("preserves semanticChecks[].path for multifile Python validation", () => {
+        const normalized = normalizeExpectedForSave(PracticeKind.code_input, {
+            kind: "code_input",
+            language: "python",
+            checkMode: "semantic",
+            tests: [],
+            semanticChecks: [
+                {
+                    type: "defines_class",
+                    path: "models/car.py",
+                    className: "Car",
+                },
+                {
+                    type: "created_instances",
+                    path: "main.py",
+                    className: "Car",
+                    min: 1,
+                },
+            ],
+        });
+
+        expect((normalized as any).semanticChecks).toEqual([
+            {
+                type: "defines_class",
+                path: "models/car.py",
+                className: "Car",
+            },
+            {
+                type: "created_instances",
+                path: "main.py",
+                className: "Car",
+                min: 1,
+            },
+        ]);
+    });
+
 });

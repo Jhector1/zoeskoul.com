@@ -36,7 +36,7 @@
                   "content": "from models.book import Book\n\n# TODO: create Book(\"Project Hail Mary\").\n# TODO: print the book label.\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "content": "# Keep models/catalog_item.py unchanged for this step: Override label() for Book.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
                 },
                 "models_book_py": {
                   "content": "from models.catalog_item import CatalogItem\n\n\nclass Book(CatalogItem):\n    # TODO: override label() so it returns \"Book: <title>\".\n    pass\n"
@@ -58,7 +58,8 @@
                 "0": {
                   "message": "Book.label() should return the book-specific label."
                 }
-              }
+              },
+              "expectedOutput": "Book: Project Hail Mary"
             },
             "try_overriding_and_specialization_sketch1": {
               "title": "Override label() for Movie",
@@ -75,7 +76,7 @@
                   "content": "from models.movie import Movie\n\n# TODO: create Movie(\"Inside Out\").\n# TODO: print the movie label.\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "content": "# Keep models/catalog_item.py unchanged for this step: Override label() for Movie.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
                 },
                 "models_movie_py": {
                   "content": "from models.catalog_item import CatalogItem\n\n\nclass Movie(CatalogItem):\n    # TODO: override label() so it returns \"Movie: <title>\".\n    pass\n"
@@ -97,7 +98,8 @@
                 "0": {
                   "message": "Movie.label() should return the movie-specific label."
                 }
-              }
+              },
+              "expectedOutput": "Movie: Inside Out"
             },
             "try_overriding_and_specialization_sketch2": {
               "title": "Print both specialized labels",
@@ -114,13 +116,13 @@
                   "content": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create a Book for \"Coraline\".\n# TODO: create a Movie for \"Coco\".\n# TODO: print each object's label on its own line.\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "content": "# Keep models/catalog_item.py unchanged for this step: Print both specialized labels.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                  "content": "# Keep models/book.py unchanged for this step: Print both specialized labels.\nfrom models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
                 },
                 "models_movie_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                  "content": "# Keep models/movie.py unchanged for this step: Print both specialized labels.\nfrom models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
                 }
               },
               "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\nbook = Book(\"Coraline\")\nmovie = Movie(\"Coco\")\nprint(book.label())\nprint(movie.label())\n",
@@ -145,7 +147,8 @@
                 "1": {
                   "message": "Movie.label() should stay specialized."
                 }
-              }
+              },
+              "expectedOutput": "Book: Coraline\nMovie: Coco"
             }
           },
           "practice": {

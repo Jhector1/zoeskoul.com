@@ -612,10 +612,10 @@ export default function CodeInputExerciseUI({
         onUseTools();
     }, [variant, onUseTools, toolsBound, toolsUnbound, autoBindMode, exerciseKey, exercise.id]);
 
-    const hideBoundToolsCard =
+    const showCompactToolsLaunchCard =
         learnerUiFlags.compactLearnerUi &&
         variant === "tools" &&
-        toolsBound;
+        !toolsBound;
 
     useEffect(() => {
         if (variant !== "tools") return;
@@ -638,8 +638,11 @@ export default function CodeInputExerciseUI({
                     <ExpectedExampleCard example={exercise.expectedExample} />
                 ) : null}
 
-                {!hideBoundToolsCard ? (
-                    <div className="ui-page-surface p-3">
+                {showCompactToolsLaunchCard ? (
+                    <div
+                        className="ui-page-surface p-3"
+                        data-testid="code-input-tools-launch-card"
+                    >
                         <div className="flex items-center justify-between gap-3">
                             <div className="min-w-0">
                                 <div className="ui-title-sm">

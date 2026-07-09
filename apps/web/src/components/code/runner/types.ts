@@ -96,6 +96,11 @@ export type CommonProps = {
     exerciseStateKey?: string;
     workspace?: WorkspaceStateV2 | null;
     activeWorkspaceFileId?: string;
+    /**
+     * Increments whenever the learner explicitly selects a workspace file.
+     * The file id alone cannot represent a second click on the active file.
+     */
+    workspaceFileSelectionVersion?: number;
 
     preserveCodeOnLanguageSwitch?: boolean;
 

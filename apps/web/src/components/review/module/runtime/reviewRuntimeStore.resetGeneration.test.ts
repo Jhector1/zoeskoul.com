@@ -434,6 +434,10 @@ describe("reviewRuntimeStore reset generation boundary", () => {
         content:
           "class Car:\n    def __init__(self, make, model, miles):\n        self.milessggggg = miles\n",
       },
+      {
+        path: "models/base_item.py",
+        content: "class Car:\n    pass\n",
+      },
     ]);
 
     const runtime = useReviewRuntimeStore.getState();
@@ -521,6 +525,18 @@ describe("reviewRuntimeStore reset generation boundary", () => {
     expect(fileContent(useReviewRuntimeStore.getState().editorRuntimes[ownerKey]?.workspace, "models/car.py")).toBe(
       "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n",
     );
+    expect(
+      fileContent(
+        useReviewRuntimeStore.getState().exercises[ownerKey]?.workspace,
+        "models/base_item.py",
+      ),
+    ).toBeNull();
+    expect(
+      fileContent(
+        useReviewRuntimeStore.getState().editorRuntimes[ownerKey]?.workspace,
+        "models/base_item.py",
+      ),
+    ).toBeNull();
     expect(useReviewRuntimeStore.getState().exercises[ownerKey]?.workspaceOrigin).toBe("starter");
     expect(useReviewRuntimeStore.getState().exercises[ownerKey]?.userEdited).toBe(false);
     expect(useReviewRuntimeStore.getState().tool.boundExerciseKey).toBe(ownerKey);

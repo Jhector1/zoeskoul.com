@@ -47,6 +47,11 @@ import {
 } from "@/components/review/module/runtime/starterContent";
 import type { CodeFeedback } from "@/lib/code/feedback/types";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import {
+  resolveReviewFinalizedPracticeAction,
+  type ReviewFinalizedPracticeAction,
+} from "@/components/review/quiz/reviewQuizCompletion";
+import { isReviewFinalizedActionConsumed } from "@/components/review/quiz/projectPracticeCompletion";
 
 function uniqueTruthyStrings(values: Array<unknown>) {
   return Array.from(
@@ -1015,6 +1020,9 @@ export default function QuizPracticeCard(props: {
   padRef: React.MutableRefObject<VectorPadState>;
   onUpdateItem: (patch: any) => void;
   onSubmit: () => void;
+  /** Which terminal action a revealed, zero-credit item should show. */
+  finalizedAction?: ReviewFinalizedPracticeAction | null;
+  onFinalizedNext?: () => void | Promise<void>;
   onHelp: (stepKey?: string) => void;
   onRetryExercise?: () => void;
   excused?: boolean;
@@ -1043,6 +1051,8 @@ export default function QuizPracticeCard(props: {
     padRef,
     onUpdateItem,
     onSubmit,
+    finalizedAction: requestedFinalizedAction = null,
+    onFinalizedNext,
     onHelp,
   } = props;
 
@@ -1063,6 +1073,10 @@ export default function QuizPracticeCard(props: {
   );
 
   const [loadTimedOut, setLoadTimedOut] = useState(false);
+  const persistedFinalizedActionConsumed = isReviewFinalizedActionConsumed(ps?.item);
+  const [finalizedActionConsumed, setFinalizedActionConsumed] = useState(
+      persistedFinalizedActionConsumed,
+  );
   const [submitAfterToolsFlushToken, setSubmitAfterToolsFlushToken] = useState(0);
   const submitAfterToolsFlushInFlightRef = useRef(false);
   const latestOnSubmitRef = useRef(onSubmit);
@@ -1533,18 +1547,32 @@ export default function QuizPracticeCard(props: {
       ps?.ok === true ||
       resultOk === true;
 
+  const isRevealed = Boolean(
+      (ps?.item as any)?.revealed ||
+      checkedResult?.revealUsed ||
+      checkedResult?.revealAnswer != null,
+  );
+
+  useEffect(() => {
+    setFinalizedActionConsumed(persistedFinalizedActionConsumed);
+  }, [
+    q.id,
+    requestedFinalizedAction,
+    isRevealed,
+    persistedFinalizedActionConsumed,
+  ]);
+
   useEffect(() => {
     if (!toolsEnabled) return;
     if (!isCodeInput) return;
     if (!codeInputId) return;
 
-    if (resultOk === true) {
+    if (resultOk === true || isRevealed || feedbackDismissed) {
       toolsAny?.clearRunFeedback?.(codeInputId);
       return;
     }
 
     if (resultOk !== false) return;
-    if (feedbackDismissed) return;
 
     const feedback = buildCheckFeedbackFromResult(checkedResult, {
       checkAnswerTryAgain: practiceT("checkAnswerTryAgain"),
@@ -1564,6 +1592,7 @@ export default function QuizPracticeCard(props: {
     isCodeInput,
     codeInputId,
     resultOk,
+    isRevealed,
     feedbackDismissed,
     checkedResult,
     toolsAny,
@@ -1571,6 +1600,7 @@ export default function QuizPracticeCard(props: {
 
   const isFinalized =
       Boolean(checkedResult?.finalized) ||
+      isRevealed ||
       isCorrect ||
       attemptsCapped ||
       isCompleted ||
@@ -1578,9 +1608,30 @@ export default function QuizPracticeCard(props: {
 
   const updateItemSafe = useCallback(
       (patch: any) => {
+        const isRevealFill =
+            patch?.updateOrigin === "reveal-fill" &&
+            patch?.revealed === true;
         const isDismissFeedbackEdit =
             Boolean(patch?.dismissFeedbackOnEdit) &&
             Boolean(patch?.feedbackDismissed);
+
+        /**
+         * Filling the revealed answer is a post-finalization study action.
+         * It may update the visible input/workspace, but it must never reopen
+         * grading or hide the fact that the item was finalized by reveal.
+         */
+        if (isRevealFill) {
+          onUpdateItem({
+            ...patch,
+            submitted: true,
+            revealed: true,
+            feedbackDismissed: true,
+            dismissFeedbackOnEdit: false,
+            updateOrigin: "reveal-fill",
+            ...(isCodeInput ? { workspaceOrigin: "reveal-fill" } : {}),
+          });
+          return;
+        }
 
         // Always allow real typing/edit patches to dismiss stale feedback.
         // Even if the item is finalized/completed, the old red feedback should not remain visible.
@@ -1601,7 +1652,15 @@ export default function QuizPracticeCard(props: {
 
         onUpdateItem(patch);
       },
-      [unlocked, isCompleted, locked, excused, isFinalized, onUpdateItem],
+      [
+        unlocked,
+        isCompleted,
+        locked,
+        excused,
+        isFinalized,
+        isCodeInput,
+        onUpdateItem,
+      ],
   );
 
   useEffect(() => {
@@ -1680,6 +1739,17 @@ export default function QuizPracticeCard(props: {
   ]);
 
 
+  const finalizedAction = resolveReviewFinalizedPracticeAction({
+    action: requestedFinalizedAction,
+    revealed: isRevealed,
+    correct: isCorrect,
+    unlocked,
+    locked,
+    excused,
+    hasHandler: Boolean(onFinalizedNext),
+  });
+  const showFinalizedAction = finalizedAction != null;
+
   const disableCheck =
       (!isCodeExerciseWithInput && !unlocked) ||
       isCompleted ||
@@ -1688,6 +1758,10 @@ export default function QuizPracticeCard(props: {
       (ps?.busy ?? false) ||
       isFinalized ||
       !hasInput;
+
+  const primaryActionDisabled = showFinalizedAction
+      ? finalizedActionConsumed || isCompleted
+      : disableCheck;
 
   const enabledHelpSteps = ps?.helpPolicy?.stepKeys?.length
       ? ps.helpPolicy.stepKeys
@@ -1718,7 +1792,11 @@ export default function QuizPracticeCard(props: {
 
   const hasOpenedHelp = Boolean(ps?.item?.help?.openedStepKeys?.length);
 
-  const btnLabel = ps?.busy ? (
+  const btnLabel = finalizedAction === "finish" ? (
+      ui.t("buttons.finish", {}, "Finish →")
+  ) : finalizedAction === "next" ? (
+      ui.t("buttons.next", {}, "Next →")
+  ) : ps?.busy ? (
       <span className="inline-flex items-center gap-2">
       <span className="ui-quiz-spinner" />
         {ui.t("practice.checking", {}, "Checking…")}
@@ -2010,6 +2088,21 @@ export default function QuizPracticeCard(props: {
                   <button
                       type="button"
                       onClick={async () => {
+                        if (showFinalizedAction) {
+                          if (finalizedActionConsumed) return;
+
+                          setFinalizedActionConsumed(true);
+
+                          try {
+                            await onFinalizedNext?.();
+                          } catch (error) {
+                            setFinalizedActionConsumed(false);
+                            throw error;
+                          }
+
+                          return;
+                        }
+
                         if (submitAfterToolsFlushInFlightRef.current) return;
 
                         submitAfterToolsFlushInFlightRef.current = true;
@@ -2035,19 +2128,33 @@ export default function QuizPracticeCard(props: {
                           throw error;
                         }
                       }}
-                      disabled={disableCheck}
-                      data-testid="review-practice-submit-button"
+                      disabled={primaryActionDisabled}
+                      data-testid={
+                        finalizedAction === "finish"
+                            ? "review-practice-finish-button"
+                            : finalizedAction === "next"
+                                ? "review-practice-next-button"
+                                : "review-practice-submit-button"
+                      }
                       data-flow-focus="1"
+                      data-finalized-action-state={
+                        showFinalizedAction
+                            ? primaryActionDisabled
+                                ? "consumed"
+                                : "ready"
+                            : undefined
+                      }
                       className={[
                         "ui-quiz-action",
-                        "ui-btn-primary",
-                        disableCheck ? "ui-quiz-action--disabled" : "ui-btn-primary",
+                        primaryActionDisabled
+                            ? "ui-quiz-action--disabled"
+                            : "ui-btn-primary",
                       ].join(" ")}
                   >
                     {btnLabel}
                   </button>
 
-                  {!hasOpenedHelp ? (
+                  {!showFinalizedAction && !hasOpenedHelp ? (
                       <button
                           type="button"
                           onClick={() => onHelp(nextHelpStepKey ?? undefined)}
@@ -2076,6 +2183,13 @@ export default function QuizPracticeCard(props: {
                             data-testid="review-practice-result-correct"
                         >
         {t("correct")}
+      </span>
+                    ) : isRevealed ? (
+                        <span
+                            className={!compactLearnerUi ? "ml-2 whitespace-nowrap ui-quiz-status-warn" : "whitespace-nowrap ui-quiz-status-warn"}
+                            data-testid="review-practice-result-revealed"
+                        >
+        {ui.t("status.revealed", {}, "Answer revealed")}
       </span>
                     ) : !feedbackDismissed && resultOk === false && ps?.item?.result ? (
                         <span

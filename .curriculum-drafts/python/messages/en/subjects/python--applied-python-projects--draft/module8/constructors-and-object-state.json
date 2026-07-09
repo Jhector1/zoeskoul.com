@@ -36,7 +36,7 @@
                   "content": "from models.car import Car\n\n# After updating the constructor, create a car and print two attributes."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    pass"
+                  "content": "# TODO: Update models/car.py to complete this step: Add a Car constructor.\nclass Car:\n    pass"
                 }
               },
               "solutionCode": "from models.car import Car\n\ncar = Car(\"Nissan\", \"Leaf\", 6000)\n\nprint(car.make)\nprint(car.miles)",
@@ -61,7 +61,8 @@
                 "3": {
                   "message": "Print the requested attributes on separate lines."
                 }
-              }
+              },
+              "expectedOutput": "Nissan\n6000"
             },
             "try_constructors_and_object_state_sketch1": {
               "title": "Create two cars with different attributes",
@@ -78,7 +79,7 @@
                   "content": "from models.car import Car\n\n# Create two Car objects with different values.\n# Print one attribute from each."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
+                  "content": "# Keep models/car.py unchanged for this step: Create two cars with different attributes.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
                 }
               },
               "solutionCode": "from models.car import Car\n\noutback = Car(\"Subaru\", \"Outback\", 40000)\nmini = Car(\"Mini\", \"Cooper\", 15000)\n\nprint(outback.model)\nprint(mini.make)",
@@ -106,7 +107,8 @@
                 "4": {
                   "message": "Print the requested attributes on separate lines."
                 }
-              }
+              },
+              "expectedOutput": "Outback\nMini"
             },
             "try_constructors_and_object_state_sketch2": {
               "title": "Show that each car keeps its own state",
@@ -123,7 +125,7 @@
                   "content": "from models.car import Car\n\n# Create two cars.\n# Change only the first car's miles.\n# Print both miles values."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
+                  "content": "# Keep models/car.py unchanged for this step: Show that each car keeps its own state.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles"
                 }
               },
               "solutionCode": "from models.car import Car\n\nfirst_car = Car(\"Hyundai\", \"Elantra\", 25000)\nsecond_car = Car(\"Chevrolet\", \"Bolt\", 9000)\n\nfirst_car.miles = 25100\n\nprint(first_car.miles)\nprint(second_car.miles)",
@@ -151,7 +153,8 @@
                 "4": {
                   "message": "Print both miles values on separate lines."
                 }
-              }
+              },
+              "expectedOutput": "25100\n9000"
             }
           },
           "practice": {

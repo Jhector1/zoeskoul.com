@@ -106,7 +106,9 @@ export default function ReviewModuleLayout({
                 rightW={rightW}
             >
                 <div className="h-full w-full flex flex-col min-h-0">
-                    <div className="shrink-0">{header}</div>
+                    <div data-mobile-workspace-header="true" className="shrink-0">
+                        {header}
+                    </div>
                     <div className="flex-1 min-h-0 w-full">
                         <div className="h-full min-h-0 flex">
                             {leftRail}

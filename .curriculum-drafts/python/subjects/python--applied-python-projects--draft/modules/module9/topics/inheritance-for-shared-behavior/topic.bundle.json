@@ -2,7 +2,7 @@
   "topicId": "inheritance-for-shared-behavior",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-9-inheritance-polymorphism-and-abstraction",
-  "sectionSlug": "python--applied-python-projects--draft-python-9-inheritance-and-overrides",
+  "sectionSlug": "applied-python-projects-python-9-inheritance-and-overrides",
   "prefix": "py9",
   "minutes": 30,
   "runtimeDefaults": {
@@ -22,20 +22,20 @@
     }
   },
   "topic": {
-    "labelKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.label",
-    "summaryKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.summary"
+    "labelKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.label",
+    "summaryKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch0.title",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch0.title",
       "sketchId": "sketch-0",
       "height": 420,
       "tryIt": {
         "id": "try-inheritance-for-shared-behavior-sketch0",
-        "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.prompt",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.prompt",
         "exerciseKey": "try-inheritance-for-shared-behavior-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -48,13 +48,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch1.title",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch1.title",
       "sketchId": "sketch-1",
       "height": 420,
       "tryIt": {
         "id": "try-inheritance-for-shared-behavior-sketch1",
-        "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.prompt",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.prompt",
         "exerciseKey": "try-inheritance-for-shared-behavior-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -67,13 +67,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch2.title",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.sketch2.title",
       "sketchId": "sketch-2",
       "height": 420,
       "tryIt": {
         "id": "try-inheritance-for-shared-behavior-sketch2",
-        "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.prompt",
+        "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.prompt",
         "exerciseKey": "try-inheritance-for-shared-behavior-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -86,7 +86,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.quiz.title",
+      "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -109,20 +109,20 @@
     {
       "id": "sketch-0",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-0.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-0.bodyMarkdown"
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-0.bodyMarkdown"
     },
     {
       "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-1.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-1.bodyMarkdown"
     },
     {
       "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-2.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -131,20 +131,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -153,14 +153,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -169,18 +169,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.starterFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -191,18 +191,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.solutionFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -212,7 +212,7 @@
           {
             "type": "defines_class",
             "className": "CatalogItem",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.0.message"
           },
           {
             "type": "constructible",
@@ -220,7 +220,7 @@
             "constructorArgs": [
               "Hidden Figures"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.1.message"
           },
           {
             "type": "instance_attributes",
@@ -231,7 +231,7 @@
             "attributes": [
               "title"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.2.message"
           },
           {
             "type": "method_returns",
@@ -245,9 +245,17 @@
             "methodArgKinds": [],
             "expected": "Hidden Figures",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Hidden Figures\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -255,27 +263,27 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -284,21 +292,21 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -307,25 +315,25 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.starterFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -336,25 +344,25 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -364,7 +372,7 @@
           {
             "type": "defines_class",
             "className": "Book",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.0.message"
           },
           {
             "type": "constructible",
@@ -372,7 +380,7 @@
             "constructorArgs": [
               "The Martian"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.1.message"
           },
           {
             "type": "instance_attributes",
@@ -383,9 +391,17 @@
             "attributes": [
               "title"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "The Martian\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -393,27 +409,27 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -422,21 +438,21 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/catalog_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_catalog_item_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_catalog_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_book_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -445,25 +461,25 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.starterFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -474,25 +490,25 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/catalog_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_catalog_item_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_catalog_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_book_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.solutionFiles.models_book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -511,15 +527,23 @@
             "methodArgKinds": [],
             "expected": "The Hobbit",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.0.message"
           },
           {
             "type": "created_instances",
             "className": "Book",
             "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "The Hobbit\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -527,7 +551,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.sc-inheritance-shared-work",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.sc-inheritance-shared-work",
       "optionIds": [
         "a",
         "b",
@@ -544,7 +568,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.fb-inheritance-subclass-name",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.fb-inheritance-subclass-name",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -556,7 +580,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.dr-inheritance-build-order",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.dr-inheritance-build-order",
       "tokenIds": [
         "t1",
         "t2",
@@ -578,7 +602,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.sc-inheritance-method-reuse",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.practice.sc-inheritance-method-reuse",
       "optionIds": [
         "a",
         "b",

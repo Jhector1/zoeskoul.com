@@ -11,7 +11,8 @@
       "read": "Make kòm li",
       "readDone": "✓ Li",
       "watched": "Make kòm gade",
-      "watchedDone": "✓ Gade"
+      "watchedDone": "✓ Gade",
+      "readTitle": "Make leson sa a kòm li"
     }
   }
 }

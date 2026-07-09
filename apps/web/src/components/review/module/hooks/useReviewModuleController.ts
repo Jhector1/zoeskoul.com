@@ -2056,6 +2056,9 @@ export function useReviewModuleController({
                 moduleId: moduleSlug,
                 locale,
                 codeEnabled: runtime.codeEnabled,
+                // Course lessons already expose Exercise/Code navigation. Keep the
+                // secondary Tools/Run/More header for dedicated review/practice only.
+                showHeader: false,
                 showLanguagePicker: false,
                 showSqlDialectPicker: false,
                 toolSqlDialect: rightRailSqlProps.toolSqlDialect,

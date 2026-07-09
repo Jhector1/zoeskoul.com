@@ -6,6 +6,13 @@ import IdeEditorPane from "@/components/ide/fullide/panes/IdeEditorPane";
 
 const capturedRunnerProps: any[] = [];
 
+vi.mock("next-intl", () => ({
+    useTranslations:
+        (namespace?: string) =>
+        (key: string) =>
+            namespace ? `${namespace}.${key}` : key,
+}));
+
 vi.mock("@/components/code/CodeRunner", () => ({
     default: (props: any) => {
         capturedRunnerProps.push(props);
@@ -87,6 +94,7 @@ describe("IdeEditorPane", () => {
                 onChangeSqlDialect={vi.fn()}
                 onRun={vi.fn(async () => null)}
                 setActiveFileId={vi.fn()}
+                workspaceFileSelectionVersion={0}
                 closeTab={vi.fn()}
                 isDesktop
             />,

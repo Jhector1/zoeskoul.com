@@ -2,7 +2,7 @@
   "topicId": "debugging-imports-and-state",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-10-testing-debugging-oop-projects",
-  "sectionSlug": "python--applied-python-projects--draft-python-10-debugging-and-refactoring",
+  "sectionSlug": "applied-python-projects-python-10-debugging-and-refactoring",
   "prefix": "py10",
   "minutes": 30,
   "runtimeDefaults": {
@@ -22,20 +22,20 @@
     }
   },
   "topic": {
-    "labelKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.label",
-    "summaryKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.summary"
+    "labelKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.label",
+    "summaryKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch0.title",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch0.title",
       "sketchId": "debugging-imports-and-state-sketch-1",
       "height": 420,
       "tryIt": {
         "id": "try-debugging-imports-and-state-sketch0",
-        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.prompt",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.prompt",
         "exerciseKey": "try-debugging-imports-and-state-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -48,13 +48,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch1.title",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch1.title",
       "sketchId": "debugging-imports-and-state-sketch-2",
       "height": 420,
       "tryIt": {
         "id": "try-debugging-imports-and-state-sketch1",
-        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.prompt",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.prompt",
         "exerciseKey": "try-debugging-imports-and-state-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -67,13 +67,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch2.title",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.sketch2.title",
       "sketchId": "debugging-imports-and-state-sketch-3",
       "height": 420,
       "tryIt": {
         "id": "try-debugging-imports-and-state-sketch2",
-        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.title",
-        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.prompt",
+        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.title",
+        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.prompt",
         "exerciseKey": "try-debugging-imports-and-state-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -86,7 +86,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.quiz.title",
+      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -103,20 +103,20 @@
     {
       "id": "debugging-imports-and-state-sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-1.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-1.bodyMarkdown"
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-1.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-1.bodyMarkdown"
     },
     {
       "id": "debugging-imports-and-state-sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-2.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-2.bodyMarkdown"
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-2.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-2.bodyMarkdown"
     },
     {
       "id": "debugging-imports-and-state-sketch-3",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-3.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-3.bodyMarkdown"
+      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-3.title",
+      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.debugging-imports-and-state-sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -125,20 +125,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0",
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterFiles.book_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterFiles.book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -147,14 +147,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "book.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.book_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.book_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -163,18 +163,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterFiles.book_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.starterFiles.book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -185,18 +185,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "book.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.book_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.solutionFiles.book_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -206,7 +206,7 @@
           {
             "type": "defines_class",
             "className": "Book",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.0.message"
           },
           {
             "type": "constructible",
@@ -215,7 +215,7 @@
               "The Hobbit",
               "Tolkien"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.1.message"
           },
           {
             "type": "method_returns",
@@ -230,14 +230,22 @@
             "methodArgKinds": [],
             "expected": "The Hobbit by Tolkien",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.2.message"
           },
           {
             "type": "printed_line_count",
             "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch0.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "The Hobbit by Tolkien\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -245,20 +253,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1",
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/reading_list.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.models_reading_list_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.models_reading_list_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -267,14 +275,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/reading_list.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.models_reading_list_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.models_reading_list_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -283,18 +291,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/reading_list.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.models_reading_list_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.starterFiles.models_reading_list_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -305,18 +313,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/reading_list.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.models_reading_list_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.solutionFiles.models_reading_list_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -326,7 +334,7 @@
           {
             "type": "defines_class",
             "className": "ReadingList",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.0.message"
           },
           {
             "type": "constructible",
@@ -334,7 +342,7 @@
             "constructorArgs": [
               "Ava"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.1.message"
           },
           {
             "type": "method_returns",
@@ -348,7 +356,7 @@
             "methodArgKinds": [],
             "expected": 0,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.2.message"
           },
           {
             "type": "method_sequence_returns",
@@ -373,7 +381,7 @@
             "methodArgKinds": [],
             "expected": 1,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch1.checks.3.message"
           }
         ]
       }
@@ -383,20 +391,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2",
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/stock_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -405,14 +413,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/stock_item.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_stock_item_py.content",
+          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_stock_item_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -421,18 +429,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/stock_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.starterFiles.models_stock_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -443,18 +451,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/stock_item.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_stock_item_py.content",
+            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.solutionFiles.models_stock_item_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -464,7 +472,7 @@
           {
             "type": "defines_class",
             "className": "StockItem",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.0.message"
           },
           {
             "type": "method_sequence_returns",
@@ -490,7 +498,7 @@
             "methodArgKinds": [],
             "expected": 3,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.1.message"
           },
           {
             "type": "method_sequence_returns",
@@ -516,7 +524,7 @@
             "methodArgKinds": [],
             "expected": 5,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.tryIt.try_debugging_imports_and_state_sketch2.checks.2.message"
           }
         ]
       }
@@ -526,7 +534,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-single-1",
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-single-1",
       "optionIds": [
         "a",
         "b",
@@ -543,7 +551,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-multi-1",
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-multi-1",
       "optionIds": [
         "a",
         "b",
@@ -563,7 +571,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-multi-2",
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-multi-2",
       "optionIds": [
         "a",
         "b",
@@ -583,7 +591,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-1",
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -595,7 +603,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-2",
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-fill-2",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -607,7 +615,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-order-1",
+      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.debugging-imports-and-state.practice.q-debugging-imports-state-order-1",
       "tokenIds": [
         "t1",
         "t2",

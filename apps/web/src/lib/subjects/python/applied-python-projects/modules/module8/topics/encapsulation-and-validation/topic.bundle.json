@@ -235,12 +235,12 @@
             "constructorArgKinds": [],
             "methodName": "drive",
             "methodArgs": [
-              10
+              -5
             ],
             "methodArgKinds": [],
-            "expected": 110,
+            "expected": 100,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.3.message"
           },
           {
             "type": "method_returns",
@@ -253,19 +253,27 @@
             "constructorArgKinds": [],
             "methodName": "drive",
             "methodArgs": [
-              -5
+              10
             ],
             "methodArgKinds": [],
-            "expected": 100,
+            "expected": 110,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.2.message"
           },
           {
             "type": "printed_line_count",
             "min": 2,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch0.checks.4.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "110\n110\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -357,24 +365,6 @@
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.0.message"
           },
           {
-            "type": "method_returns",
-            "className": "Car",
-            "constructorArgs": [
-              "Ford",
-              "Escape",
-              130
-            ],
-            "constructorArgKinds": [],
-            "methodName": "drive",
-            "methodArgs": [
-              30
-            ],
-            "methodArgKinds": [],
-            "expected": 160,
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.1.message"
-          },
-          {
             "type": "method_sequence_returns",
             "className": "Car",
             "constructorArgs": [
@@ -402,11 +392,37 @@
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.2.message"
           },
           {
+            "type": "method_returns",
+            "className": "Car",
+            "constructorArgs": [
+              "Ford",
+              "Escape",
+              130
+            ],
+            "constructorArgKinds": [],
+            "methodName": "drive",
+            "methodArgs": [
+              30
+            ],
+            "methodArgKinds": [],
+            "expected": 160,
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.1.message"
+          },
+          {
             "type": "printed_line_count",
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch1.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "160\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -541,7 +557,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.encapsulation-and-validation.tryIt.try_encapsulation_and_validation_sketch2.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Honda Civic - 70 miles\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {

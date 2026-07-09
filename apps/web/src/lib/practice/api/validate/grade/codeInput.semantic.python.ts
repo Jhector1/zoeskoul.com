@@ -1,13 +1,18 @@
 // src/lib/practice/api/validate/grade/codeInput.semantic.python.ts
 import { runCode } from "@/lib/code/runCode";
+import type { FileEntry } from "@/lib/code/types";
+import { replaceEntryFileContent } from "@/lib/code/workspaceSubmission";
+import type { GradeResult } from "@/lib/practice/api/validate/grade/index";
 import type { ProgrammingExpected } from "@/lib/practice/api/validate/schemas";
-import { GradeResult } from "@/lib/practice/api/validate/grade/index";
+import {
+    asSemanticChecks,
+    normalizeSemanticCheckPath,
+    type SemanticCheckRecord,
+} from "@/lib/practice/semanticCheckPaths";
 import {
     buildPythonSemanticHarness,
     parseSemanticHarnessResult,
 } from "@zoeskoul/practice-checks";
-import type { FileEntry } from "@/lib/code/types";
-import { replaceEntryFileContent } from "@/lib/code/workspaceSubmission";
 
 const DEFAULT_LIMITS = {
     cpu_time_limit: 2,
@@ -25,11 +30,13 @@ function debugRaw(value: unknown): string | null {
     }
 }
 
-
-type SemanticCheckInput = Record<string, unknown>;
-
-function isVariableEqualsCheck(check: unknown): check is SemanticCheckInput {
-    return Boolean(check) && typeof check === "object" && (check as any).type === "variable_equals";
+function isVariableEqualsCheck(check: unknown): check is SemanticCheckRecord {
+    return (
+        Boolean(check) &&
+        typeof check === "object" &&
+        !Array.isArray(check) &&
+        (check as SemanticCheckRecord).type === "variable_equals"
+    );
 }
 
 function normalizeExpectedKind(value: unknown): string {
@@ -37,7 +44,9 @@ function normalizeExpectedKind(value: unknown): string {
     return raw === "value" ? "json" : raw;
 }
 
-function normalizeVariableEqualsChecks(checks: SemanticCheckInput[]): SemanticCheckInput[] {
+function normalizeVariableEqualsChecks(
+    checks: SemanticCheckRecord[],
+): SemanticCheckRecord[] {
     return checks.map((check) => ({
         ...check,
         expectedKind: normalizeExpectedKind(check.expectedKind),
@@ -46,7 +55,7 @@ function normalizeVariableEqualsChecks(checks: SemanticCheckInput[]): SemanticCh
 
 function buildPythonVariableEqualsHarness(args: {
     userCode: string;
-    checks: SemanticCheckInput[];
+    checks: SemanticCheckRecord[];
 }): string {
     return `
 import contextlib
@@ -118,33 +127,141 @@ print("__ZOE_SEMANTIC_RESULT__" + json.dumps(__zoe_result, default=str))
 `;
 }
 
-async function gradePythonVariableEqualsChecks(args: {
-    checks: SemanticCheckInput[];
+type SemanticCheckGroup = {
+    path: string | null;
+    source: string;
+    checks: SemanticCheckRecord[];
+};
+
+type ResolveCheckGroupsResult =
+    | { groups: SemanticCheckGroup[]; error?: never }
+    | { groups?: never; error: GradeResult };
+
+function filesWithCurrentEntry(args: {
+    code: string;
+    entry?: string;
+    files?: FileEntry[];
+}): FileEntry[] | undefined {
+    if (!args.entry || !args.files?.length) return args.files;
+
+    return replaceEntryFileContent({
+        entry: args.entry,
+        files: args.files,
+        content: args.code,
+    });
+}
+
+function resolveSemanticCheckGroups(args: {
+    checks: SemanticCheckRecord[];
     code: string;
     entry?: string;
     files?: FileEntry[];
     showDebug: boolean;
+}): ResolveCheckGroupsResult {
+    const currentFiles = filesWithCurrentEntry(args) ?? [];
+    const normalizedEntry = normalizeSemanticCheckPath(args.entry);
+    const groups: SemanticCheckGroup[] = [];
+
+    for (const [index, check] of args.checks.entries()) {
+        const rawPath = typeof check.path === "string" ? check.path.trim() : "";
+        const path = normalizeSemanticCheckPath(rawPath);
+
+        if (rawPath && !path) {
+            return {
+                error: {
+                    ok: false,
+                    explanation: "This exercise has an invalid validation path.",
+                    feedback: {
+                        area: "code",
+                        source: "check",
+                        kind: "runtime",
+                        tone: "danger",
+                        title: "Validation setup error",
+                        message:
+                            "This exercise has an unsafe semantic-check file path. Fix the authored validation contract.",
+                        raw: args.showDebug
+                            ? debugRaw({ index, path: rawPath })
+                            : null,
+                    },
+                },
+            };
+        }
+
+        let source = args.code;
+
+        if (path) {
+            if (normalizedEntry === path) {
+                source = args.code;
+            } else {
+                const file = currentFiles.find(
+                    (candidate) =>
+                        normalizeSemanticCheckPath(candidate.path) === path,
+                );
+
+                if (!file) {
+                    return {
+                        error: {
+                            ok: false,
+                            explanation: `Missing file: ${path}`,
+                            feedback: {
+                                area: "code",
+                                source: "check",
+                                kind: "logic",
+                                tone: "warning",
+                                title: "File missing",
+                                message: `Create or restore ${path}, then check your answer again.`,
+                                raw: args.showDebug
+                                    ? debugRaw({ index, path })
+                                    : null,
+                            },
+                        },
+                    };
+                }
+
+                source = file.content;
+            }
+        }
+
+        const groupPath = path || null;
+        const previous = groups.at(-1);
+
+        if (previous?.path === groupPath) {
+            previous.checks.push(check);
+            continue;
+        }
+
+        groups.push({
+            path: groupPath,
+            source,
+            checks: [check],
+        });
+    }
+
+    return { groups };
+}
+
+async function runSemanticHarness(args: {
+    harness: string;
+    code: string;
+    entry?: string;
+    files?: FileEntry[];
+    sourcePath: string | null;
+    showDebug: boolean;
 }): Promise<GradeResult | null> {
-    if (!args.checks.length) return null;
-
-    const harness = buildPythonVariableEqualsHarness({
-        userCode: args.code,
-        checks: args.checks,
-    });
-
+    const currentFiles = filesWithCurrentEntry(args);
     const run = await runCode({
         language: "python",
-        ...(args.entry && args.files?.length
+        ...(args.entry && currentFiles?.length
             ? {
-                entry: args.entry,
-                files: replaceEntryFileContent({
-                    entry: args.entry,
-                    files: args.files,
-                    content: harness,
-                }),
+                  entry: args.entry,
+                  files: replaceEntryFileContent({
+                      entry: args.entry,
+                      files: currentFiles,
+                      content: args.harness,
+                  }),
               }
             : {
-                code: harness,
+                  code: args.harness,
               }),
         stdin: "",
         limits: DEFAULT_LIMITS,
@@ -161,7 +278,9 @@ async function gradePythonVariableEqualsChecks(args: {
                 tone: "warning",
                 title: "Could not check code",
                 message: String((run as any)?.error ?? "The code runner failed."),
-                raw: args.showDebug ? debugRaw(run) : null,
+                raw: args.showDebug
+                    ? debugRaw({ sourcePath: args.sourcePath, run })
+                    : null,
             },
         };
     }
@@ -179,14 +298,17 @@ async function gradePythonVariableEqualsChecks(args: {
                 tone: "warning",
                 title: "Checker failed",
                 message: "The semantic checker did not return a valid result.",
-                raw: args.showDebug ? debugRaw(run) : null,
+                raw: args.showDebug
+                    ? debugRaw({ sourcePath: args.sourcePath, run })
+                    : null,
             },
         };
     }
 
     if (!parsed.ok) {
         const errors = parsed.errors.filter(Boolean);
-        const message = errors[0] ?? "Your code does not satisfy the exercise yet.";
+        const message =
+            errors[0] ?? "Your code does not satisfy the exercise yet.";
 
         return {
             ok: false,
@@ -200,12 +322,49 @@ async function gradePythonVariableEqualsChecks(args: {
                 message,
                 raw: args.showDebug
                     ? debugRaw({
-                        errors,
-                        userStdout: parsed.userStdout,
-                    })
+                          sourcePath: args.sourcePath,
+                          errors,
+                          userStdout: parsed.userStdout,
+                      })
                     : null,
             },
         };
+    }
+
+    return null;
+}
+
+async function gradeCheckGroups(args: {
+    checks: SemanticCheckRecord[];
+    code: string;
+    entry?: string;
+    files?: FileEntry[];
+    showDebug: boolean;
+    buildHarness: (args: {
+        userCode: string;
+        checks: SemanticCheckRecord[];
+    }) => string;
+}): Promise<GradeResult | null> {
+    if (!args.checks.length) return null;
+
+    const resolved = resolveSemanticCheckGroups(args);
+
+    if (resolved.error) return resolved.error;
+
+    for (const group of resolved.groups) {
+        const result = await runSemanticHarness({
+            harness: args.buildHarness({
+                userCode: group.source,
+                checks: group.checks,
+            }),
+            code: args.code,
+            entry: args.entry,
+            files: args.files,
+            sourcePath: group.path,
+            showDebug: args.showDebug,
+        });
+
+        if (result) return result;
     }
 
     return null;
@@ -219,114 +378,39 @@ export async function gradePythonSemanticCodeInput(args: {
     files?: FileEntry[];
     showDebug: boolean;
 }): Promise<GradeResult> {
-    const semanticChecks = Array.isArray((args.expected as any).semanticChecks)
-        ? (args.expected as any).semanticChecks.filter(Boolean)
-        : [];
+    const semanticChecks = asSemanticChecks(
+        (args.expected as any).semanticChecks,
+    );
     const variableEqualsChecks = semanticChecks.filter(isVariableEqualsCheck);
     const remainingSemanticChecks = semanticChecks.filter(
-        (check: unknown) => !isVariableEqualsCheck(check),
+        (check) => !isVariableEqualsCheck(check),
     );
 
-    const variableEqualsResult = await gradePythonVariableEqualsChecks({
+    const variableEqualsResult = await gradeCheckGroups({
         checks: variableEqualsChecks,
         code: args.code,
         entry: args.entry,
         files: args.files,
         showDebug: args.showDebug,
+        buildHarness: buildPythonVariableEqualsHarness,
     });
 
-    if (variableEqualsResult) {
-        return variableEqualsResult;
-    }
+    if (variableEqualsResult) return variableEqualsResult;
 
-    if (!remainingSemanticChecks.length) {
-        return {
-            ok: true,
-            explanation: "Correct.",
-            feedback: null,
-        };
-    }
-
-    const harness = buildPythonSemanticHarness({
-        userCode: args.code,
-        semanticChecks: remainingSemanticChecks,
+    const semanticResult = await gradeCheckGroups({
+        checks: remainingSemanticChecks,
+        code: args.code,
+        entry: args.entry,
+        files: args.files,
+        showDebug: args.showDebug,
+        buildHarness: ({ userCode, checks }) =>
+            buildPythonSemanticHarness({
+                userCode,
+                semanticChecks: checks as any,
+            }),
     });
 
-    const run = await runCode({
-        language: "python",
-        ...(args.entry && args.files?.length
-            ? {
-                entry: args.entry,
-                files: replaceEntryFileContent({
-                    entry: args.entry,
-                    files: args.files,
-                    content: harness,
-                }),
-              }
-            : {
-                code: harness,
-              }),
-        stdin: "",
-        limits: DEFAULT_LIMITS,
-    } as any);
-
-    if (!run?.ok) {
-        return {
-            ok: false,
-            explanation: "Your code could not be checked.",
-            feedback: {
-                area: "code",
-                source: "check",
-                kind: "runtime",
-                tone: "warning",
-                title: "Could not check code",
-                message: String((run as any)?.error ?? "The code runner failed."),
-                raw: args.showDebug ? debugRaw(run) : null,
-            },
-        };
-    }
-
-    const parsed = parseSemanticHarnessResult(run.stdout ?? "");
-
-    if (!parsed) {
-        return {
-            ok: false,
-            explanation: "The semantic checker did not return a result.",
-            feedback: {
-                area: "code",
-                source: "check",
-                kind: "runtime",
-                tone: "warning",
-                title: "Checker failed",
-                message: "The semantic checker did not return a valid result.",
-                raw: args.showDebug ? debugRaw(run) : null,
-            },
-        };
-    }
-
-    if (!parsed.ok) {
-        const errors = parsed.errors.filter(Boolean);
-        const message = errors[0] ?? "Your code does not satisfy the exercise yet.";
-
-        return {
-            ok: false,
-            explanation: message,
-            feedback: {
-                area: "code",
-                source: "check",
-                kind: "logic",
-                tone: "warning",
-                title: "Not correct yet",
-                message,
-                raw: args.showDebug
-                    ? debugRaw({
-                        errors,
-                        userStdout: parsed.userStdout,
-                    })
-                    : null,
-            },
-        };
-    }
+    if (semanticResult) return semanticResult;
 
     return {
         ok: true,

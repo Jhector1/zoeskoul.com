@@ -47,6 +47,7 @@ type Props = {
     onRunResult?: (args: { result: any; runArgs: any }) => void;
     onRun: (args: any) => Promise<any>;
     setActiveFileId: (id: string | null) => void;
+    workspaceFileSelectionVersion: number;
     closeTab: (id: string) => void;
     isDesktop: boolean;
 
@@ -107,6 +108,7 @@ export default function IdeEditorPane({
                                           onRunResult,
                                           onRun,
                                           setActiveFileId,
+                                          workspaceFileSelectionVersion,
                                           closeTab,
                                           isDesktop,
                                           isAuthenticated,
@@ -254,6 +256,7 @@ export default function IdeEditorPane({
                             }
                             showEditor={services.editor.showEditor !== false}
                             activeWorkspaceFileId={activeFile?.id ?? activeFileId ?? undefined}
+                            workspaceFileSelectionVersion={workspaceFileSelectionVersion}
                             onBeforeRun={onBeforeRun}
                             onRun={
                                 isAuthenticated && !isWeb

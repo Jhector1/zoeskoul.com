@@ -457,7 +457,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "h\nt\nd\no\nb\nf\nok\nhandoff\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -817,7 +825,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "service assertions passed\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1182,7 +1198,15 @@
             "min": 3,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "line1\nline2\nline3\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1551,7 +1575,15 @@
             "min": 6,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n4\n5\n6\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1934,7 +1966,15 @@
             "min": 6,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n4\n5\n6\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -2317,7 +2357,15 @@
             "min": 7,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "1\n2\n3\n4\n5\n6\n7\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     }
   ]

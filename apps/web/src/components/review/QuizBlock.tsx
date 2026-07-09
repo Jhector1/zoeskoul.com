@@ -8,6 +8,7 @@ import React, {
   useCallback,
   useRef,
 } from "react";
+import { flushSync } from "react-dom";
 import type {ReviewProjectSpec, ReviewProjectStep, ReviewQuestion, ReviewQuizSpec} from "@/lib/subjects/types";
 import type { SavedQuizState } from "@/lib/subjects/progressTypes";
 import type {
@@ -48,11 +49,17 @@ import FlowNavigator, {
 } from "@/components/review/navigation/FlowNavigator";
 import {
     computeReviewQuizCompletionSummary,
-    shouldAutoCompleteReviewCard
+    resolveReviewCardAutoCompletionReason,
+    resolveReviewFinalizedNavigationAction,
+    shouldFinalizeReviewCardFromManualNext,
 } from "@/components/review/quiz/reviewQuizCompletion";
 import {
+    buildReviewFinalizedActionConsumedPatch,
+    findReviewPracticeCompletionForExercise,
     flushBeforeExerciseRouteNavigation,
+    getReviewPracticeItemCompletionState,
     resolveReviewPracticeCompletionStatus,
+    type ReviewPracticeItemCompletionState,
 } from "@/components/review/quiz/projectPracticeCompletion";
 
 type PracticeRuntimeQuestion = Extract<ReviewQuestion, { kind: "practice" }> &
@@ -80,13 +87,25 @@ type PracticeRuntimeQuestion = Extract<ReviewQuestion, { kind: "practice" }> &
 type PracticeItemRecord = UnknownRecord & {
   key?: string;
   kind?: string;
+  submitted?: boolean;
+  revealed?: boolean;
+  finalizedActionConsumed?: boolean;
   ui?: UnknownRecord & {
     reorderTouched?: boolean;
   };
   result?: {
     ok?: boolean;
+    finalized?: boolean;
+    revealUsed?: boolean;
+    revealAnswer?: unknown;
   } | null;
 };
+
+function getPracticeItemCompletionState(
+  item: PracticeItemRecord | null | undefined,
+): ReviewPracticeItemCompletionState | null {
+  return getReviewPracticeItemCompletionState(item);
+}
 
 type RuntimePracticePatch = UnknownRecord & {
   exerciseKey?: string;
@@ -255,6 +274,7 @@ function serializePracticeItemForSave(
     voiceTranscript: itemAny.voiceTranscript,
     voiceAudioId: itemAny.voiceAudioId,
     revealed: itemAny.revealed,
+    finalizedActionConsumed: itemAny.finalizedActionConsumed,
     codeRunOutput: itemAny.codeRunOutput,
     userEdited: itemAny.userEdited,
     workspaceOrigin: itemAny.workspaceOrigin,
@@ -590,6 +610,7 @@ export default function QuizBlock({
                                     initialState,
                                     onStateChange,
                                     isCompleted = false,
+                                    isLastTopicCard = false,
                                     quizCardId,
                                     locked = false,
                                     strictSequential = false,
@@ -603,6 +624,7 @@ export default function QuizBlock({
                                     sectionRuntimeDefaults = null,
                                     topicRuntimeDefaults = null,
                                     onNavigateToExerciseRoute,
+                                    onFinalize,
                                   }: {
   prereqsMet?: boolean;
   quizId: string;
@@ -611,6 +633,7 @@ export default function QuizBlock({
   navigationMode?: FlowNavMode;
   passScore: number;
   onPass: () => void;
+  onFinalize?: () => void;
   sequential?: boolean;
   unlimitedAttempts?: boolean;
 
@@ -618,6 +641,8 @@ export default function QuizBlock({
   onStateChange?: (s: SavedQuizState) => void;
 
   isCompleted?: boolean;
+  /** True only when the containing review card is the final card in the topic. */
+  isLastTopicCard?: boolean;
   quizCardId?: string;
   locked?: boolean;
   strictSequential?: boolean;
@@ -667,6 +692,7 @@ export default function QuizBlock({
   );
 
   const onPassRef = useRef(onPass);
+  const onFinalizeRef = useRef(onFinalize);
   const autoKeyRef = useRef<string>("");
   const restoreQuestionKeyRef = useRef<string>("");
   const lastActionQidRef = useRef<string | null>(null);
@@ -729,6 +755,10 @@ export default function QuizBlock({
   useEffect(() => {
     onPassRef.current = onPass;
   }, [onPass]);
+
+  useEffect(() => {
+    onFinalizeRef.current = onFinalize;
+  }, [onFinalize]);
 
   useEffect(() => {
     setExcusedById(initState?.excusedById ?? {});
@@ -820,38 +850,39 @@ export default function QuizBlock({
 
   function getSavedPracticeCompletion(q: ReviewQuestion) {
     const restoreKeys = getSavedPracticeRestoreKeys(q);
+    const practiceMeta = initState?.practiceMeta ?? {};
+    const practiceItemPatch = initState?.practiceItemPatch ?? {};
 
-    for (const key of restoreKeys) {
-      const savedMeta = initState?.practiceMeta?.[key] ?? null;
-      const savedPatch = initState?.practiceItemPatch?.[key] as
-        | PracticeItemRecord
-        | undefined;
-      const savedItemResultOk =
-        typeof savedPatch?.result?.ok === "boolean"
-          ? savedPatch.result.ok
-          : null;
+    for (const exerciseId of restoreKeys) {
+      const completion = findReviewPracticeCompletionForExercise({
+        exerciseId,
+        practiceMeta,
+        practiceItemPatch,
+      });
+      const status = resolveReviewPracticeCompletionStatus({
+        saved: completion.meta,
+        savedItem: completion.item,
+      });
 
-      if (savedMeta || typeof savedItemResultOk === "boolean") {
+      if (status.checked || status.finalized || typeof status.ok === "boolean") {
         return {
-          savedMeta,
-          savedItemResultOk,
+          savedMeta: completion.meta,
+          savedItem: completion.item,
         };
       }
     }
 
     return {
       savedMeta: null,
-      savedItemResultOk: null,
+      savedItem: null,
     };
   }
 
   function getPracticeCompletionStatus(q: ReviewQuestion) {
     const ps = getPracticeStateForQuestion(q);
-    const liveItemResultOk =
-      typeof (ps?.item as PracticeItemRecord | undefined)?.result?.ok ===
-      "boolean"
-        ? Boolean((ps?.item as PracticeItemRecord).result?.ok)
-        : null;
+    const liveItem = getPracticeItemCompletionState(
+      ps?.item as PracticeItemRecord | undefined,
+    );
     const saved = getSavedPracticeCompletion(q);
 
     return resolveReviewPracticeCompletionStatus({
@@ -859,13 +890,30 @@ export default function QuizBlock({
         ? {
             attempts: ps.attempts,
             ok: ps.ok,
-            itemResultOk: liveItemResultOk,
+            finalized: ps.finalized ?? liveItem?.finalized ?? false,
           }
         : null,
+      liveItem,
       saved: saved.savedMeta,
-      savedItemResultOk: saved.savedItemResultOk,
+      savedItem: saved.savedItem,
     });
   }
+
+  function isPracticeFinalizedActionConsumed(q: ReviewQuestion) {
+    if (q.kind !== "practice") return false;
+
+    const ps = getPracticeStateForQuestion(q);
+    const liveItem = getPracticeItemCompletionState(
+      ps?.item as PracticeItemRecord | undefined,
+    );
+    const saved = getSavedPracticeCompletion(q);
+
+    return Boolean(
+      liveItem?.finalizedActionConsumed ||
+      saved.savedItem?.finalizedActionConsumed,
+    );
+  }
+
     function isFlowDone(q: ReviewQuestion): boolean {
         if (isExcused(q.id)) return true;
 
@@ -878,7 +926,7 @@ export default function QuizBlock({
              * Route-owned project steps are not all mounted at the same time,
              * so inactive steps must still count from persisted metadata.
              */
-            if (completion.ok === true) return true;
+            if (completion.ok === true || completion.finalized) return true;
 
             const maxA = ps?.maxAttempts;
             const outOfAttempts =
@@ -1008,23 +1056,52 @@ export default function QuizBlock({
         initState?.practiceMeta,
         initState?.practiceItemPatch,
     ]);  
+    const allQuestionsFlowDone =
+        questions.length > 0 && questions.every((question) => isFlowDone(question));
+    const hasFinalizedZeroCreditQuestion = questions.some((question) => {
+        if (question.kind !== "practice") return false;
+        const completion = getPracticeCompletionStatus(question);
+        return completion.finalized && completion.ok !== true;
+    });
+    const terminalQuestion = questions[questions.length - 1] ?? null;
+    const terminalQuestionOk = terminalQuestion
+        ? getQuestionOk(terminalQuestion)
+        : null;
+    const terminalFinalizedActionConsumed = terminalQuestion
+        ? isPracticeFinalizedActionConsumed(terminalQuestion)
+        : false;
+    const autoCompletionReason = resolveReviewCardAutoCompletionReason({
+        prereqsMet,
+        locked,
+        isCompleted,
+        summary,
+        allQuestionsFlowDone,
+        hasFinalizedZeroCreditQuestion,
+        terminalQuestionOk,
+        terminalFinalizedActionConsumed,
+    });
+
     useEffect(() => {
-        if (
-            !shouldAutoCompleteReviewCard({
-                prereqsMet,
-                locked,
-                isCompleted,
-                summary,
-            })
-        ) {
+        if (!autoCompletionReason) return;
+        if (autoKeyRef.current === resetKey) return;
+
+        autoKeyRef.current = resetKey;
+
+        if (autoCompletionReason === "passed") {
+            onPassRef.current();
             return;
         }
 
-        if (autoKeyRef.current === resetKey) return;
-        autoKeyRef.current = resetKey;
+        (onFinalizeRef.current ?? onPassRef.current)();
+    }, [autoCompletionReason, resetKey]);
 
-        onPassRef.current();
-    }, [prereqsMet, locked, isCompleted, summary.passed, resetKey]);
+  const finalizeCardOnce = useCallback(() => {
+    if (autoKeyRef.current === resetKey) return false;
+
+    autoKeyRef.current = resetKey;
+    (onFinalizeRef.current ?? onPassRef.current)();
+    return true;
+  }, [resetKey]);
 
   const nextState = useMemo<SavedQuizState>(() => {
     const base = initState;
@@ -1032,7 +1109,10 @@ export default function QuizBlock({
     const practiceItemPatch: Record<string, UnknownRecord> = {
       ...(base?.practiceItemPatch ?? {}),
     };
-    const practiceMeta: Record<string, { attempts: number; ok: boolean | null }> = {
+    const practiceMeta: Record<
+      string,
+      { attempts: number; ok: boolean | null; finalized?: boolean }
+    > = {
       ...(base?.practiceMeta ?? {}),
     };
 
@@ -1043,10 +1123,9 @@ export default function QuizBlock({
       const ps = practiceBank.practice[stablePracticeKey] ?? practiceBank.practice[q.id];
 
       if (ps) {
-          const itemResultOk =
-              typeof (ps.item as PracticeItemRecord | undefined)?.result?.ok === "boolean"
-                  ? Boolean((ps.item as PracticeItemRecord).result?.ok)
-                  : null;
+          const itemCompletion = getPracticeItemCompletionState(
+              ps.item as PracticeItemRecord | undefined,
+          );
 
           const nextMeta = {
               attempts:
@@ -1055,11 +1134,22 @@ export default function QuizBlock({
                   practiceMeta[q.id]?.attempts ??
                   0,
               ok:
-                  itemResultOk ??
+                  itemCompletion?.ok ??
                   ps.ok ??
                   practiceMeta[stablePracticeKey]?.ok ??
                   practiceMeta[q.id]?.ok ??
                   null,
+              finalized:
+                  Boolean(
+                      ps.finalized ||
+                      itemCompletion?.finalized ||
+                      itemCompletion?.revealed ||
+                      itemCompletion?.revealUsed ||
+                      itemCompletion?.hasRevealAnswer ||
+                      itemCompletion?.ok === true ||
+                      practiceMeta[stablePracticeKey]?.finalized ||
+                      practiceMeta[q.id]?.finalized,
+                  ),
           };
 
         practiceMeta[stablePracticeKey] = nextMeta;
@@ -1504,6 +1594,25 @@ export default function QuizBlock({
     emitterFlushRef.current = () => emitter.flush();
   }, [emitter.flush]);
 
+  const persistFinalizedActionConsumed = useCallback(
+      (practiceKey: string, consumed: boolean) => {
+        /**
+         * Route-owned project steps unmount as soon as Next is clicked. Force the
+         * consumed marker into the practice bank before flushing so it survives
+         * route changes/back navigation and the terminal action stays disabled.
+         */
+        flushSync(() => {
+          practiceBank.updatePracticeItem(
+              practiceKey,
+              buildReviewFinalizedActionConsumedPatch(consumed),
+          );
+        });
+
+        emitterFlushRef.current();
+      },
+      [practiceBank.updatePracticeItem],
+  );
+
   useEffect(() => {
     return () => {
       emitterFlushRef.current();
@@ -1620,6 +1729,10 @@ export default function QuizBlock({
 
     const nextIdx = findNextUnlockedIndex(idx);
     const isLast = nextIdx < 0;
+    const finalizedNavigationAction = resolveReviewFinalizedNavigationAction({
+      isLastQuestion: isLast,
+      isLastTopicCard,
+    });
     const practiceRuntimeDefaults = resolveQuizPracticeRuntimeDefaults({
       spec,
       subjectRuntimeDefaults,
@@ -1660,6 +1773,56 @@ export default function QuizBlock({
                   seqOrder={orderBase + idx}
                   padRef={practiceBank.getPadRef(stablePracticeKey)}
                   excused={isExcused(q.id)}
+                  finalizedAction={finalizedNavigationAction}
+                  onFinalizedNext={() => {
+                    persistFinalizedActionConsumed(stablePracticeKey, true);
+                    setAwaitNextQid(null);
+
+                    if (!isLast) {
+                      advanceFrom(q.id);
+                      return;
+                    }
+
+                    /**
+                     * Treat the clicked revealed question as terminal even if the
+                     * debounced practice state has not completed its next render yet.
+                     * Earlier questions still have to be genuinely flow-complete.
+                     */
+                    const allQuestionsFlowDone = questions.every((question) =>
+                      question.id === q.id ? true : isFlowDone(question),
+                    );
+
+                    if (isCompleted) {
+                      // Restored/eager parent completion is already durable. Keep the
+                      // terminal action useful without firing completion twice.
+                      scrollToFooter();
+                      return;
+                    }
+
+                    if (
+                      shouldFinalizeReviewCardFromManualNext({
+                        prereqsMet,
+                        locked,
+                        isCompleted,
+                        isLast,
+                        allQuestionsFlowDone,
+                      })
+                    ) {
+                      finalizeCardOnce();
+                      return;
+                    }
+
+                    const firstIncompleteIndex = questions.findIndex(
+                      (question) => question.id !== q.id && !isFlowDone(question),
+                    );
+
+                    if (firstIncompleteIndex >= 0) {
+                      navigateToQuestionIndex(firstIncompleteIndex);
+                      return;
+                    }
+
+                    scrollToFooter();
+                  }}
                   onRetryExercise={() => practiceBank.retryPracticeQuestion(stablePracticeKey)}
                   onExcused={() => {
                     if (!unlocked) return;

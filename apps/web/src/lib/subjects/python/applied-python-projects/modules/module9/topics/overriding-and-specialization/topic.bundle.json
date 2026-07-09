@@ -251,7 +251,15 @@
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch0.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: Project Hail Mary\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -379,7 +387,15 @@
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch1.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Movie: Inside Out\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -549,7 +565,15 @@
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.overriding-and-specialization.tryIt.try_overriding_and_specialization_sketch2.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: Coraline\nMovie: Coco\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {

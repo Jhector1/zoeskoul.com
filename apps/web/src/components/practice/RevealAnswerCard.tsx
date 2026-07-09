@@ -355,9 +355,11 @@ export function buildRevealFillPatches(args: {
         // finalized so grading/XP cannot reopen and navigation stays enabled.
         submitted: true,
         revealed: true,
-        feedbackDismissed: false,
+        // Filling a revealed answer is study-only. Hide the stale incorrect
+        // status while preserving the finalized zero-credit result.
+        feedbackDismissed: true,
         dismissFeedbackOnEdit: false,
-        updateOrigin: "user",
+        updateOrigin: "reveal-fill",
     };
 
     const toolsPatch: RevealFillPatch = args.isCodeInput
@@ -365,7 +367,7 @@ export function buildRevealFillPatches(args: {
             ...itemPatch,
             userEdited: true,
             preferSnapshot: true,
-            workspaceOrigin: "user",
+            workspaceOrigin: "reveal-fill",
         }
         : itemPatch;
 

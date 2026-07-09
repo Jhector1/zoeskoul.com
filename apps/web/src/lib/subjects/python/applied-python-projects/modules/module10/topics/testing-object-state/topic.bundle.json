@@ -282,6 +282,21 @@
             "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.0.message"
           },
           {
+            "type": "attribute_sequence_equals",
+            "className": "Task",
+            "constructorArgs": [
+              "Broken input",
+              -5
+            ],
+            "constructorArgKinds": [],
+            "calls": [],
+            "attributeName": "priority",
+            "expected": [
+              0
+            ],
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.3.message"
+          },
+          {
             "type": "instance_attributes",
             "className": "Task",
             "constructorArgs": [
@@ -308,21 +323,6 @@
               2
             ],
             "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.2.message"
-          },
-          {
-            "type": "attribute_sequence_equals",
-            "className": "Task",
-            "constructorArgs": [
-              "Broken input",
-              -5
-            ],
-            "constructorArgKinds": [],
-            "calls": [],
-            "attributeName": "priority",
-            "expected": [
-              0
-            ],
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.testing-object-state.tryIt.try_testing_object_state_sketch1.checks.3.message"
           }
         ]
       }

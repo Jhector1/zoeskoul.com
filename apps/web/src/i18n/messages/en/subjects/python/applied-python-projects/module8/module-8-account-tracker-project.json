@@ -80,10 +80,10 @@
                 "starterCode": "from models.account import Account\n\naccount = Account()",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\naccount = Account()"
+                    "content": "# TODO: Update main.py to complete this step: Add a constructor and attributes.\nfrom models.account import Account\n\naccount = Account()"
                   },
                   "models_account_py": {
-                    "content": "class Account:\n    pass"
+                    "content": "# TODO: Update models/account.py to complete this step: Add a constructor and attributes.\nclass Account:\n    pass"
                   }
                 },
                 "solutionFiles": {
@@ -111,7 +111,8 @@
                   "4": {
                     "message": "Print the owner and balance on separate lines."
                   }
-                }
+                },
+                "expectedOutput": "Ava\n125"
               },
               "account_tracker_step_3_add_methods": {
                 "title": "Add deposit and withdraw methods",
@@ -125,10 +126,10 @@
                 "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.owner)\nprint(account.balance)",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.owner)\nprint(account.balance)"
+                    "content": "# TODO: Update main.py to complete this step: Add deposit and withdraw methods.\nfrom models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nprint(account.owner)\nprint(account.balance)"
                   },
                   "models_account_py": {
-                    "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance"
+                    "content": "# TODO: Update models/account.py to complete this step: Add deposit and withdraw methods.\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance"
                   }
                 },
                 "solutionFiles": {
@@ -153,7 +154,8 @@
                   "3": {
                     "message": "Print the owner, deposit result, and withdrawal result."
                   }
-                }
+                },
+                "expectedOutput": "Ava\n150\n110"
               },
               "account_tracker_step_4_validation_summary": {
                 "title": "Add validation and a summary method",
@@ -167,10 +169,10 @@
                 "starterCode": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nbalance_after_deposit = account.deposit(25)\nbalance_after_withdraw = account.withdraw(40)\n\nprint(account.owner)\nprint(balance_after_deposit)\nprint(balance_after_withdraw)",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nbalance_after_deposit = account.deposit(25)\nbalance_after_withdraw = account.withdraw(40)\n\nprint(account.owner)\nprint(balance_after_deposit)\nprint(balance_after_withdraw)"
+                    "content": "# TODO: Update main.py to complete this step: Add validation and a summary method.\nfrom models.account import Account\n\naccount = Account(\"Ava\", 125)\n\nbalance_after_deposit = account.deposit(25)\nbalance_after_withdraw = account.withdraw(40)\n\nprint(account.owner)\nprint(balance_after_deposit)\nprint(balance_after_withdraw)"
                   },
                   "models_account_py": {
-                    "content": "class Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance"
+                    "content": "# TODO: Update models/account.py to complete this step: Add validation and a summary method.\nclass Account:\n    def __init__(self, owner, balance):\n        self.owner = owner\n        self.balance = balance\n\n    def deposit(self, amount):\n        self.balance += amount\n        return self.balance\n\n    def withdraw(self, amount):\n        self.balance -= amount\n        return self.balance"
                   }
                 },
                 "solutionFiles": {
@@ -192,7 +194,8 @@
                   "2": {
                     "message": "Print the final summary from main.py."
                   }
-                }
+                },
+                "expectedOutput": "Ava: $110.00"
               }
             }
           }

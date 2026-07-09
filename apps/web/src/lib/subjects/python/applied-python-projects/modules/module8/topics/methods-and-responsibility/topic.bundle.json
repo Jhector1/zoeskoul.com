@@ -262,7 +262,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.4.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "10040\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -384,7 +392,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Subaru Outback - 60000 miles\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -515,7 +531,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Toyota RAV4 - 15125 miles\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -564,7 +588,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "withdraw"
+        "value": "drive"
       }
     },
     {

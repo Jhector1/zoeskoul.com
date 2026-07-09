@@ -2,7 +2,7 @@
   "topicId": "capstone-domain-model",
   "subjectSlug": "python--applied-python-projects--draft",
   "moduleSlug": "python-11-oop-capstone-project",
-  "sectionSlug": "python--applied-python-projects--draft-python-11-capstone-architecture",
+  "sectionSlug": "applied-python-projects-python-11-capstone-architecture",
   "prefix": "py11",
   "minutes": 35,
   "runtimeDefaults": {
@@ -22,21 +22,21 @@
     }
   },
   "topic": {
-    "labelKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.label",
-    "summaryKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.summary"
+    "labelKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.label",
+    "summaryKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.cards.sketch0.title",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.cards.sketch0.title",
       "sketchId": "capstone-domain-model-sketch-0",
       "height": 420
     },
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.cards.project.title",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -47,7 +47,7 @@
         "steps": [
           {
             "id": "try_capstone_domain_model_sketch0",
-            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.projectSteps.try_capstone_domain_model_sketch0.title",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.projectSteps.try_capstone_domain_model_sketch0.title",
             "exerciseKey": "try-capstone-domain-model-sketch0",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -56,7 +56,7 @@
           },
           {
             "id": "capstone_domain_model_step1_bug_task",
-            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step1_bug_task.title",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step1_bug_task.title",
             "exerciseKey": "capstone-domain-model-step1-bug-task",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -66,7 +66,7 @@
           },
           {
             "id": "capstone_domain_model_step2_feature_task",
-            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step2_feature_task.title",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step2_feature_task.title",
             "exerciseKey": "capstone-domain-model-step2-feature-task",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -76,7 +76,7 @@
           },
           {
             "id": "capstone_domain_model_step3_task_service",
-            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step3_task_service.title",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step3_task_service.title",
             "exerciseKey": "capstone-domain-model-step3-task-service",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -86,7 +86,7 @@
           },
           {
             "id": "capstone_domain_model_step4_package_runner",
-            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step4_package_runner.title",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step4_package_runner.title",
             "exerciseKey": "capstone-domain-model-step4-package-runner",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -96,7 +96,7 @@
           },
           {
             "id": "capstone_domain_model_step5_final_domain_demo",
-            "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step5_final_domain_demo.title",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.projectSteps.capstone_domain_model_step5_final_domain_demo.title",
             "exerciseKey": "capstone-domain-model-step5-final-domain-demo",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -112,8 +112,8 @@
     {
       "id": "capstone-domain-model-sketch-0",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.capstone-domain-model-sketch-0.title",
-      "bodyKey": "sketches.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.capstone-domain-model-sketch-0.bodyMarkdown"
+      "titleKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.capstone-domain-model-sketch-0.title",
+      "bodyKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.capstone-domain-model-sketch-0.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -122,55 +122,55 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0",
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -179,49 +179,49 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -230,53 +230,53 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.starterFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -287,53 +287,53 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.solutionFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -343,7 +343,7 @@
           {
             "type": "defines_class",
             "className": "BaseTask",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.checks.0.message"
           },
           {
             "type": "constructible",
@@ -352,7 +352,7 @@
               "Draft roadmap",
               "high"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.checks.1.message"
           },
           {
             "type": "instance_attributes",
@@ -366,14 +366,22 @@
               "priority",
               "completed"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.checks.2.message"
           },
           {
             "type": "printed_line_count",
             "min": 3,
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.try_capstone_domain_model_sketch0.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Draft roadmap\nhigh\nFalse\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -381,55 +389,55 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task",
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -438,49 +446,49 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -489,53 +497,53 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.starterFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -546,53 +554,53 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.solutionFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -602,7 +610,7 @@
           {
             "type": "defines_class",
             "className": "BugTask",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.0.message"
           },
           {
             "type": "constructible",
@@ -612,7 +620,7 @@
               "high",
               "critical"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.1.message"
           },
           {
             "type": "instance_attributes",
@@ -628,7 +636,7 @@
               "completed",
               "severity"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.2.message"
           },
           {
             "type": "method_returns",
@@ -644,7 +652,7 @@
             "methodArgKinds": [],
             "expected": "BUG: Fix login redirect | priority=high | severity=critical | done=False",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.3.message"
           },
           {
             "type": "method_sequence_returns",
@@ -667,14 +675,22 @@
             "methodArgKinds": [],
             "expected": "BUG: Fix login redirect | priority=high | severity=critical | done=True",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.4.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.4.message"
           },
           {
             "type": "printed_line_count",
             "min": 2,
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.5.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step1_bug_task.checks.5.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG: Fix login redirect | priority=high | severity=critical | done=False\nBUG: Fix login redirect | priority=high | severity=critical | done=True\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -682,55 +698,55 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task",
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -739,49 +755,49 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -790,53 +806,53 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.starterFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -847,53 +863,53 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.solutionFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -903,7 +919,7 @@
           {
             "type": "defines_class",
             "className": "FeatureTask",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.0.message"
           },
           {
             "type": "constructible",
@@ -913,7 +929,7 @@
               "medium",
               0
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.1.message"
           },
           {
             "type": "instance_attributes",
@@ -929,7 +945,7 @@
               "completed",
               "estimate_points"
             ],
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.2.message"
           },
           {
             "type": "attribute_sequence_equals",
@@ -944,7 +960,7 @@
             "attributeName": "estimate_points",
             "expected": 1,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.3.message"
           },
           {
             "type": "method_returns",
@@ -960,14 +976,22 @@
             "methodArgKinds": [],
             "expected": "FEATURE: Add dark mode | priority=medium | points=1 | done=False",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.4.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.4.message"
           },
           {
             "type": "printed_line_count",
             "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.5.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step2_feature_task.checks.5.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "FEATURE: Add dark mode | priority=medium | points=1 | done=False\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -975,55 +999,55 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service",
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1032,56 +1056,56 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/task_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_task_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_task_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1090,53 +1114,53 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.starterFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1147,60 +1171,60 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/task_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_task_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_task_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.solutionFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1266,14 +1290,22 @@
               "FEATURE: Add dark mode | priority=medium | points=3 | done=False"
             ],
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.checks.0.message"
           },
           {
             "type": "printed_line_count",
             "min": 2,
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step3_task_service.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG: Fix login redirect | priority=high | severity=critical | done=False\nFEATURE: Add dark mode | priority=medium | points=3 | done=False\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1281,62 +1313,62 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner",
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/task_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_task_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_task_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1345,63 +1377,63 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/task_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_task_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_task_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1410,60 +1442,60 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/task_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_task_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_task_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.starterFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1474,67 +1506,67 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/task_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_task_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_task_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.models_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.solutionFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1555,7 +1587,7 @@
             "methodArgKinds": [],
             "expected": "BUG: Fix login redirect | priority=high | severity=critical | done=False",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.0.message"
           },
           {
             "type": "method_returns",
@@ -1571,13 +1603,13 @@
             "methodArgKinds": [],
             "expected": "FEATURE: Export CSV | priority=low | points=5 | done=False",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.1.message"
           },
           {
             "type": "created_instances",
             "className": "FeatureTask",
             "min": 1,
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.2.message"
           },
           {
             "type": "method_sequence_returns",
@@ -1600,14 +1632,22 @@
             "methodArgKinds": [],
             "expected": "BUG: Fix login redirect | priority=high | severity=critical | done=True",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.3.message"
           },
           {
             "type": "printed_line_count",
             "min": 3,
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.4.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step4_package_runner.checks.4.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG: Fix login redirect | priority=high | severity=critical | done=False\nFEATURE: Export CSV | priority=low | points=5 | done=False\nBUG: Fix login redirect | priority=high | severity=critical | done=True\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1615,69 +1655,69 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo",
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo",
       "language": "python",
-      "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/task_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_task_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_task_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1686,63 +1726,63 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/base_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_base_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_base_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/bug_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_bug_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_bug_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models/feature_task.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_feature_task_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_feature_task_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/task_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_task_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_task_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "models.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_report_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "services/storage_service.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_storage_service_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_storage_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
           "path": "tests/check_tasks.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.tests_check_tasks_py.content",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.tests_check_tasks_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1751,67 +1791,67 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/task_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_task_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_task_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.models_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.starterFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1822,67 +1862,67 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/base_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_base_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_base_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/bug_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_bug_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_bug_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models/feature_task.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_feature_task_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_feature_task_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/task_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_task_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_task_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "models.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.models_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_report_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "services/storage_service.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_storage_service_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.services_storage_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
             "path": "tests/check_tasks.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.tests_check_tasks_py.content",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.solutionFiles.tests_check_tasks_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1902,7 +1942,7 @@
             "methodArgKinds": [],
             "expected": true,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.checks.0.message"
           },
           {
             "type": "method_sequence_returns",
@@ -1924,7 +1964,7 @@
             "methodArgKinds": [],
             "expected": false,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.checks.1.message"
           },
           {
             "type": "function_returns",
@@ -2026,14 +2066,22 @@
             ],
             "expected": 2,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.checks.2.message"
           },
           {
             "type": "printed_line_count",
             "min": 5,
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-domain-model.finalCapstone.steps.capstone_domain_model_step5_final_domain_demo.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "a\nb\nc\nd\ne\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     }
   ]

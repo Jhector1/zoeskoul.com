@@ -615,7 +615,15 @@
             "min": 3,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.5.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "SMART TASK TRACKER\nWrite docs [todo]\ndone\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1205,7 +1213,15 @@
             "min": 3,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_2_models.checks.6.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "SMART TASK TRACKER\nBUG: Fix login bug [todo] severity=high\nFEATURE: Add dark mode [in progress] points=5\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1781,7 +1797,15 @@
             "min": 4,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_3_service.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "SMART TASK TRACKER\ntask1\ntask2\ntask3\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -2378,7 +2402,15 @@
             "min": 5,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_4_storage.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "SMART TASK TRACKER\na\nb\nc\nd\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -2979,12 +3011,16 @@
             "type": "printed_line_count",
             "min": 6,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.checks.1.message"
-          },
-          {
-            "type": "no_stdout",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_5_reports_tests.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "SMART TASK TRACKER\nBUG: Fix login bug [done] severity=critical\nFEATURE: Add dark mode [todo] points=3\nFEATURE: Export CSV [in progress] points=5\nFEATURE: Add tests [done] points=2\nOPEN: 2 | DONE: 2\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -3128,6 +3164,13 @@
           "language": "python",
           "isEntry": false,
           "entry": false
+        },
+        {
+          "path": "README.md",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.README_md.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
@@ -3261,6 +3304,13 @@
           "path": "tests/check_tasks.py",
           "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.tests_check_tasks_py.content",
           "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "README.md",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.README_md.content",
+          "language": "text",
           "isEntry": false,
           "entry": false
         }
@@ -3400,6 +3450,13 @@
             "path": "tests/check_tasks.py",
             "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.tests_check_tasks_py.content",
             "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.starterFiles.README_md.content",
+            "language": "text",
             "isEntry": false,
             "entry": false
           }
@@ -3570,6 +3627,13 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.solutionFiles.README_md.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
           }
         ],
         "semanticChecks": [
@@ -3577,12 +3641,16 @@
             "type": "printed_line_count",
             "min": 6,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.checks.0.message"
-          },
-          {
-            "type": "no_stdout",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_smart_task_tracker_step_6_final_handoff.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "SMART TASK TRACKER\nBUG: Fix login bug [done] severity=critical\nFEATURE: Add dark mode [done] points=3\nFEATURE: Export CSV [in progress] points=5\nFEATURE: Add tests [done] points=2\nOPEN: 1 | DONE: 3\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     }
   ]

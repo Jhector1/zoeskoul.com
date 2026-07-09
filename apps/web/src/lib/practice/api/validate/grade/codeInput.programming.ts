@@ -1236,6 +1236,25 @@ export async function gradeProgrammingCodeInput(args: {
         });
     }
 
+    const semanticFirst = (expected as ProgrammingExpected & {
+        semanticFirst?: boolean;
+    }).semanticFirst === true;
+
+    if (semanticFirst) {
+        const semanticValidation = await gradeAdditionalSemanticChecks({
+            expected,
+            code,
+            language,
+            entry,
+            files,
+            showDebug,
+        });
+
+        if (semanticValidation) {
+            return semanticValidation;
+        }
+    }
+
     const sharedRunner = createJudge0CodeRunnerFromEnv();
 
     if (!sharedRunner) {
@@ -1273,17 +1292,19 @@ export async function gradeProgrammingCodeInput(args: {
     });
 
     if (run.ok) {
-        const semanticValidation = await gradeAdditionalSemanticChecks({
-            expected,
-            code,
-            language,
-            entry,
-            files,
-            showDebug,
-        });
+        if (!semanticFirst) {
+            const semanticValidation = await gradeAdditionalSemanticChecks({
+                expected,
+                code,
+                language,
+                entry,
+                files,
+                showDebug,
+            });
 
-        if (semanticValidation) {
-            return semanticValidation;
+            if (semanticValidation) {
+                return semanticValidation;
+            }
         }
 
         return {

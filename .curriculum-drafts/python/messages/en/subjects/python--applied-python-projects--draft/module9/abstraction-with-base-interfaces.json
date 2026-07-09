@@ -67,7 +67,8 @@
                 "3": {
                   "message": "Book.label() should return the book label."
                 }
-              }
+              },
+              "expectedOutput": "Book: The Wild Robot"
             },
             "try_abstraction_with_base_interfaces_sketch1": {
               "title": "Add Movie to the same interface",
@@ -84,10 +85,10 @@
                   "content": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create Book(\"Dune\") and Movie(\"Moana\").\n# TODO: print each label.\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        raise NotImplementedError(\"Subclasses must define label().\")\n"
+                  "content": "# Keep models/catalog_item.py unchanged for this step: Add Movie to the same interface.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        raise NotImplementedError(\"Subclasses must define label().\")\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                  "content": "# Keep models/book.py unchanged for this step: Add Movie to the same interface.\nfrom models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
                 },
                 "models_movie_py": {
                   "content": "from models.catalog_item import CatalogItem\n\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        # TODO: return \"Movie: <title>\".\n        pass\n"
@@ -115,7 +116,8 @@
                 "1": {
                   "message": "Movie.label() should return the movie label."
                 }
-              }
+              },
+              "expectedOutput": "Book: Wonder\nMovie: Moana"
             },
             "try_abstraction_with_base_interfaces_sketch2": {
               "title": "Use a helper that trusts the interface",
@@ -132,13 +134,13 @@
                   "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\n\n# TODO: print the result from show_labels(items).\n"
                 },
                 "models_catalog_item_py": {
-                  "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        raise NotImplementedError(\"Subclasses must define label().\")\n"
+                  "content": "# Keep models/catalog_item.py unchanged for this step: Use a helper that trusts the interface.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        raise NotImplementedError(\"Subclasses must define label().\")\n"
                 },
                 "models_book_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                  "content": "# Keep models/book.py unchanged for this step: Use a helper that trusts the interface.\nfrom models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def label(self):\n        return f\"Book: {self.title}\"\n"
                 },
                 "models_movie_py": {
-                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                  "content": "# Keep models/movie.py unchanged for this step: Use a helper that trusts the interface.\nfrom models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
                 },
                 "services_catalog_view_py": {
                   "content": "def show_labels(items):\n    # TODO: build and return one string with each item.label() on its own line.\n    pass\n"

@@ -238,7 +238,7 @@
               "starterCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False",
               "starterFiles": {
                 "models_book_py": {
-                  "content": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False"
+                  "content": "# TODO: Update models/book.py to complete this step: Fix a broken return method after state changes.\nclass Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False"
                 }
               }
             },
@@ -254,7 +254,7 @@
               "starterCode": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance",
               "starterFiles": {
                 "models_wallet_py": {
-                  "content": "class Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance"
+                  "content": "# TODO: Update models/wallet.py to complete this step: Fix wallet validation so balance never starts negative.\nclass Wallet:\n    def __init__(self, owner, starting_balance):\n        self.owner = owner\n        self.balance = starting_balance"
                 }
               }
             },
@@ -270,7 +270,7 @@
               "starterCode": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points",
               "starterFiles": {
                 "models_scoreboard_py": {
-                  "content": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points"
+                  "content": "# TODO: Update models/scoreboard.py to complete this step: Fix a method that updates score incorrectly.\nclass Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points"
                 }
               }
             }

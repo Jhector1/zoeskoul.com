@@ -11,6 +11,7 @@ import type {
 import MathMarkdown from "@/components/markdown/MathMarkdown";
 import QuizBlock from "@/components/review/QuizBlock";
 import { buildReviewQuizKey } from "@/lib/subjects/quizClient";
+import type { ReviewAssessmentCompletionReason } from "@/components/review/quiz/reviewQuizCompletion";
 
 import SketchBlock from "@/components/sketches/subjects/SketchBlock";
 import type { SavedSketchState } from "@/components/sketches/subjects/types";
@@ -39,10 +40,14 @@ export default function CardRenderer(props: {
     card: ReviewCard;
     active?: boolean;
     cardIndex?: number;
+    isLastTopicCard?: boolean;
 
     done: boolean;
     onMarkDone: () => void;
-    onEmbeddedTryItPass?: (tryItId: string) => void;
+    onEmbeddedTryItPass?: (
+        tryItId: string,
+        reason: ReviewAssessmentCompletionReason,
+    ) => void;
 
     prereqsMet: boolean;
     locked?: boolean;
@@ -51,7 +56,10 @@ export default function CardRenderer(props: {
 
     savedQuiz: SavedQuizState | null;
     versionStr: string;
-    onQuizPass: (quizId: string) => void;
+    onQuizPass: (
+        quizId: string,
+        reason: ReviewAssessmentCompletionReason,
+    ) => void;
     onQuizStateChange: (quizCardId: string, s: SavedQuizState) => void;
     onQuizReset: (target: string | QuizResetTarget) => void;
 
@@ -89,6 +97,7 @@ export default function CardRenderer(props: {
         card,
         active = true,
         cardIndex = 0,
+        isLastTopicCard = false,
         done,
         onMarkDone,
         onEmbeddedTryItPass,
@@ -258,8 +267,10 @@ export default function CardRenderer(props: {
                         prereqsMet={prereqsMet}
                         locked={locked}
                         isCompleted={tryItDone}
+                        isLastTopicCard={isLastTopicCard}
                         initialState={savedTryIt}
-                        onPass={() => onEmbeddedTryItPass?.(tryItId)}
+                        onPass={() => onEmbeddedTryItPass?.(tryItId, "passed")}
+                        onFinalize={() => onEmbeddedTryItPass?.(tryItId, "finalized")}
                         onStateChange={(s: SavedQuizState) => onQuizStateChange(tryItId, s)}
                         onReset={() => onQuizReset({
                             progressId: tryItId,
@@ -352,8 +363,10 @@ export default function CardRenderer(props: {
                             prereqsMet={prereqsMet}
                             locked={locked}
                             isCompleted={Boolean(done)}
+                            isLastTopicCard={isLastTopicCard}
                             initialState={savedQuiz ?? null}
-                            onPass={() => onQuizPass(card.id)}
+                            onPass={() => onQuizPass(card.id, "passed")}
+                            onFinalize={() => onQuizPass(card.id, "finalized")}
                             onStateChange={(s: SavedQuizState) => onQuizStateChange(card.id, s)}
                             onReset={() => onQuizReset(card.id)}
                             sequential={quizBlockProps.sequential}
@@ -409,11 +422,7 @@ export default function CardRenderer(props: {
 
     if (card.type === "sketch") {
         const tryIt = getCardTryIt(card);
-        const tryItRequired = Boolean(tryIt && tryIt.required !== false);
-        const tryItDone = tryIt ? Boolean(tp?.quizzesDone?.[tryIt.id]) : true;
-        const forceUnlock = Boolean(props.unlockAll);
-        const markReadDisabled = !forceUnlock && tryItRequired && !tryItDone;
-        const tryItCopy = tryItButtonCopy(tryItRequired);
+        const hasEmbeddedTryIt = Boolean(tryIt);
 
         return (
             <div>
@@ -428,14 +437,24 @@ export default function CardRenderer(props: {
                     initialState={savedSketch}
                     onStateChange={(s) => onSketchStateChange(card.id, s)}
                     done={done}
-                    onMarkDone={onMarkDone}
+                    onMarkDone={hasEmbeddedTryIt ? undefined : onMarkDone}
                     prereqsMet={prereqsMet}
                     locked={locked}
-                    markDoneDisabled={markReadDisabled}
-                    markDoneDisabledReason={tryItCopy.disabledReason}
-                    markDoneLabel={tryItRequired ? ui.t("actions.done", {}, "Mark as done") : undefined}
-                    markDoneDoneLabel={tryItRequired ? ui.t("actions.doneDone", {}, "✓ Done") : undefined}
-                    markDoneTitle={tryItRequired ? tryItCopy.title : undefined}
+                    markDoneLabel={
+                        hasEmbeddedTryIt
+                            ? undefined
+                            : ui.t("actions.read", {}, "Mark as read")
+                    }
+                    markDoneDoneLabel={
+                        hasEmbeddedTryIt
+                            ? undefined
+                            : ui.t("actions.readDone", {}, "✓ Read")
+                    }
+                    markDoneTitle={
+                        hasEmbeddedTryIt
+                            ? undefined
+                            : ui.t("actions.readTitle", {}, "Mark this lesson as read")
+                    }
                 />
                 {renderEmbeddedTryIt()}
             </div>

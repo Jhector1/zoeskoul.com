@@ -22,6 +22,7 @@
       "notChecked": "Not checked yet",
       "correct": "✓ Correct",
       "notCorrect": "✕ Not correct",
+      "revealed": "Answer revealed",
       "skipped": "↷ Skipped",
       "locked": "Locked",
       "completed": "✓ Completed",

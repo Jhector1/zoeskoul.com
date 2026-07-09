@@ -47,9 +47,9 @@ describe("buildRevealFillPatches", () => {
             codeTouched: true,
             submitted: true,
             revealed: true,
-            feedbackDismissed: false,
+            feedbackDismissed: true,
             dismissFeedbackOnEdit: false,
-            updateOrigin: "user",
+            updateOrigin: "reveal-fill",
         });
 
         expect(toolsPatch).toMatchObject({
@@ -59,12 +59,12 @@ describe("buildRevealFillPatches", () => {
             codeTouched: true,
             submitted: true,
             revealed: true,
-            feedbackDismissed: false,
+            feedbackDismissed: true,
             dismissFeedbackOnEdit: false,
-            updateOrigin: "user",
+            updateOrigin: "reveal-fill",
             userEdited: true,
             preferSnapshot: true,
-            workspaceOrigin: "user",
+            workspaceOrigin: "reveal-fill",
         });
     });
 
@@ -80,9 +80,9 @@ describe("buildRevealFillPatches", () => {
             shortText: "Paris",
             submitted: true,
             revealed: true,
-            feedbackDismissed: false,
+            feedbackDismissed: true,
             dismissFeedbackOnEdit: false,
-            updateOrigin: "user",
+            updateOrigin: "reveal-fill",
         });
 
         expect(itemPatch).not.toHaveProperty("codeTouched");
@@ -174,10 +174,11 @@ describe("buildRevealFillPatches", () => {
                 codeLang: "python",
                 codeStdin: "input value",
                 codeTouched: true,
-                submitted: false,
+                submitted: true,
+                revealed: true,
                 feedbackDismissed: true,
-                dismissFeedbackOnEdit: true,
-                updateOrigin: "user",
+                dismissFeedbackOnEdit: false,
+                updateOrigin: "reveal-fill",
                 workspace,
                 codeWorkspace: workspace,
                 ideWorkspace: workspace,
@@ -191,13 +192,14 @@ describe("buildRevealFillPatches", () => {
                 codeLang: "python",
                 codeStdin: "input value",
                 codeTouched: true,
-                submitted: false,
+                submitted: true,
+                revealed: true,
                 feedbackDismissed: true,
-                dismissFeedbackOnEdit: true,
-                updateOrigin: "user",
+                dismissFeedbackOnEdit: false,
+                updateOrigin: "reveal-fill",
                 userEdited: true,
                 preferSnapshot: true,
-                workspaceOrigin: "user",
+                workspaceOrigin: "reveal-fill",
                 workspace,
                 codeWorkspace: workspace,
                 ideWorkspace: workspace,

@@ -33,7 +33,7 @@
               "starterCode": "# main.py\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
               "starterFiles": {
                 "main_py": {
-                  "content": "from book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())"
+                  "content": "# Keep main.py unchanged for this step: Fix the broken model import.\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())"
                 },
                 "book_py": {
                   "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        # return a readable summary string\n        pass"
@@ -61,7 +61,8 @@
                 "3": {
                   "message": "Program should print the book summary."
                 }
-              }
+              },
+              "expectedOutput": "The Hobbit by Tolkien"
             },
             "try_debugging_imports_and_state_sketch1": {
               "title": "Stop two reading lists from sharing one list",
@@ -75,10 +76,10 @@
               "starterCode": "class ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)",
               "starterFiles": {
                 "main_py": {
-                  "content": "class ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)"
+                  "content": "# TODO: Update main.py to complete this step: Stop two reading lists from sharing one list.\nclass ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)"
                 },
                 "models_reading_list_py": {
-                  "content": "class ReadingList:\n    def __init__(self, value_1):\n        pass\n\n    def count(self):\n        pass"
+                  "content": "# TODO: Update models/reading_list.py to complete this step: Stop two reading lists from sharing one list.\nclass ReadingList:\n    def __init__(self, value_1):\n        pass\n\n    def count(self):\n        pass"
                 }
               },
               "solutionFiles": {
@@ -120,7 +121,7 @@
                   "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        # update quantity only when the sale is valid\n        pass\n\n    def get_quantity(self):\n        return self.quantity"
                 },
                 "models_stock_item_py": {
-                  "content": "class StockItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def get_quantity(self):\n        pass"
+                  "content": "# TODO: Update models/stock_item.py to complete this step: Fix stock state changes after sales.\nclass StockItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def get_quantity(self):\n        pass"
                 }
               },
               "solutionFiles": {
@@ -272,7 +273,7 @@
               "starterCode": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)",
               "starterFiles": {
                 "main_py": {
-                  "content": "class Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)"
+                  "content": "# TODO: Update main.py to complete this step: Repair independent cart state in a model file.\nclass Cart:\n    def __init__(self, owner, items=[]):\n        self.owner = owner\n        self.items = items\n\n    def add_item(self, name):\n        self.items.append(name)\n\n    def item_count(self):\n        return len(self.items)"
                 }
               }
             },
@@ -288,7 +289,7 @@
               "starterCode": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done",
               "starterFiles": {
                 "main_py": {
-                  "content": "class Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done"
+                  "content": "# TODO: Update main.py to complete this step: Fix a state-changing method in a task model.\nclass Task:\n    def __init__(self, title):\n        self.title = title\n        self.done = False\n\n    def complete(self):\n        return True\n\n    def is_done(self):\n        return self.done"
                 }
               }
             }

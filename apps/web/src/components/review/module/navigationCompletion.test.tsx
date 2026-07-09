@@ -592,6 +592,8 @@ describe("review module completion/navigation source of truth", () => {
         expect(matches).toHaveLength(1);
         expect(html).toContain("Nice");
         expect(html).toContain("topic complete");
+        expect(html).toContain('data-review-topic-completion="true"');
+        expect(html).toContain('data-review-next-topic="true"');
     });
 
     it("renders exactly one Next module CTA when the module is complete and a next module exists", () => {

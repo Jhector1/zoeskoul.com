@@ -11,7 +11,8 @@
       "read": "Marquer comme lu",
       "readDone": "✓ Lu",
       "watched": "Marquer comme vu",
-      "watchedDone": "✓ Vu"
+      "watchedDone": "✓ Vu",
+      "readTitle": "Marquer cette leçon comme lue"
     }
   }
 }

@@ -72,6 +72,8 @@ export type QItem = {
     ui?: PracticeUiMeta;
 
     revealed?: boolean;
+    /** Persisted after a revealed Next/Finish action has been consumed. */
+    finalizedActionConsumed?: boolean;
     codeRunOutput?: string;
 };
 

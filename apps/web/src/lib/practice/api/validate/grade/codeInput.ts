@@ -11,6 +11,10 @@ import type { LoadedValidateInstance } from "@/lib/practice/api/validate/reposit
 import { gradeProgrammingCodeInput } from "./codeInput.programming";
 import { gradeSqlCodeInput } from "./codeInput.sql";
 import {GradeResult} from "@/lib/practice/api/validate/grade/index";
+import {
+  restoreSemanticCheckPaths,
+  stripSemanticCheckPaths,
+} from "@/lib/practice/semanticCheckPaths";
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
@@ -41,7 +45,24 @@ export async function gradeCodeInput(args: {
         const { expectedForSchema, sourceChecks } =
             prepareCodeExpectedForSchema(expectedCanon);
 
-        const parsed = parseCodeExpected(expectedForSchema);
+        const rawSemanticChecks = isRecord(expectedCanon)
+            ? expectedCanon.semanticChecks
+            : undefined;
+        const semanticFirst =
+            isRecord(expectedCanon) && expectedCanon.semanticFirst === true;
+        const schemaSafeExpected = isRecord(expectedForSchema)
+            ? {
+                ...expectedForSchema,
+                ...(Array.isArray(expectedForSchema.semanticChecks)
+                    ? {
+                        semanticChecks: stripSemanticCheckPaths(
+                            expectedForSchema.semanticChecks,
+                        ),
+                    }
+                    : {}),
+              }
+            : expectedForSchema;
+        const parsed = parseCodeExpected(schemaSafeExpected);
 
         if (!parsed.success) {
           return {
@@ -50,9 +71,16 @@ export async function gradeCodeInput(args: {
           };
         }
 
+        const semanticChecks = restoreSemanticCheckPaths({
+          parsedChecks: (parsed.data as any).semanticChecks,
+          rawChecks: rawSemanticChecks,
+        });
+
         return {
           ...(parsed.data as any),
+          ...(semanticChecks.length ? { semanticChecks } : {}),
           ...(sourceChecks.length ? { sourceChecks } : {}),
+          ...(semanticFirst ? { semanticFirst: true } : {}),
         };
       })();
 

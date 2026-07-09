@@ -31,6 +31,7 @@ import {
   normalizeWorkspaceLanguage,
   stateLanguageMatches,
 } from "@/components/review/module/runtime/workspaceCodeSource";
+import { buildReviewPracticeRevealCompletionPatch } from "@/components/review/quiz/reviewPracticeRevealCompletion";
 
 export { isEmptyPracticeAnswer } from "@/lib/practice/runtime";
 export type PracticeState = PracticeItemState & {
@@ -40,6 +41,7 @@ export type PracticeState = PracticeItemState & {
   moduleSlug?: string;
   sectionSlug?: string;
   runtimeGeneration?: number;
+  finalized?: boolean;
 };
 
 
@@ -344,6 +346,14 @@ function patchChangesLearnerAnswer(currentItem: any, patch: any) {
   }
 
   return false;
+}
+
+export function shouldTreatPatchAsRevealFill(patch: any) {
+  return (
+      patch?.updateOrigin === "reveal-fill" &&
+      patch?.revealed === true &&
+      patch?.submitted === true
+  );
 }
 
 export function shouldTreatPatchAsExplicitFeedbackDismiss(
@@ -1097,13 +1107,48 @@ function buildPracticeLoadFailureKey(
   });
 }
 
-function stablePracticeItemJsonForNoopCompare(value: any) {
-  if (!value || typeof value !== "object") {
-    return stablePracticeJson(value);
+function normalizePracticeValueForNoopCompare(
+    value: unknown,
+    seen: WeakSet<object>,
+): unknown {
+  if (Array.isArray(value)) {
+    return value.map((entry) => normalizePracticeValueForNoopCompare(entry, seen));
   }
 
-  const { updatedAt: _updatedAt, ...rest } = value as Record<string, unknown>;
-  return stablePracticeJson(rest);
+  if (!value || typeof value !== "object") {
+    return value;
+  }
+
+  if (seen.has(value)) {
+    return "[Circular]";
+  }
+
+  seen.add(value);
+
+  const normalized: Record<string, unknown> = {};
+
+  for (const key of Object.keys(value as Record<string, unknown>).sort()) {
+    /**
+     * Runtime/editor timestamps are ordering metadata, not learner answer data.
+     * Rehydrating the same saved patch with a newer timestamp must not create a
+     * new practice item and restart the load effect forever.
+     */
+    if (key === "updatedAt") continue;
+
+    const entry = (value as Record<string, unknown>)[key];
+    if (entry === undefined) continue;
+
+    normalized[key] = normalizePracticeValueForNoopCompare(entry, seen);
+  }
+
+  seen.delete(value);
+  return normalized;
+}
+
+export function stablePracticeItemJsonForNoopCompare(value: unknown) {
+  return stablePracticeJson(
+      normalizePracticeValueForNoopCompare(value, new WeakSet<object>()),
+  );
 }
 
 function hasNonBlankSqlSignal(value: unknown) {
@@ -1128,7 +1173,7 @@ function getPracticeExerciseLanguage(exercise: any) {
 }
 
 
-function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
+export function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
   if (!item || !savedPatch) return item;
 
   const currentItem = normalizeCurrentPracticeItem(
@@ -1228,9 +1273,21 @@ function mergeSavedPatchIntoPracticeItem(item: any, savedPatch: any) {
       currentItem,
   );
 
-  return stablePracticeJson(normalizedNext) === stablePracticeJson(currentItem)
-      ? currentItem
-      : normalizedNext;
+  const currentItemKey = stablePracticeItemJsonForNoopCompare(currentItem);
+  const normalizedNextKey = stablePracticeItemJsonForNoopCompare(normalizedNext);
+
+  if (normalizedNextKey !== currentItemKey) {
+    return normalizedNext;
+  }
+
+  /**
+   * normalizeCurrentPracticeItem returns a fresh object even when the live item
+   * was already normalized. Return the caller's original reference for a true
+   * semantic no-op so setPractice(prev => prev) can break restore/load loops.
+   */
+  return stablePracticeItemJsonForNoopCompare(item) === currentItemKey
+      ? item
+      : currentItem;
 }
 
 export function useQuizPracticeBank(args: {
@@ -1284,9 +1341,23 @@ export function useQuizPracticeBank(args: {
   rawKeyRef.current = (key: string) => tt.raw(key, key);
   resolveTextRef.current = (value: string) => tt.resolve(value, value);
 
+  const initialStateRef = useRef(initialState);
+  const questionsRef = useRef(questions);
+
+  initialStateRef.current = initialState;
+  questionsRef.current = questions;
+
   const initialPracticePatchKey = useMemo(
-      () => JSON.stringify(initialState?.practiceItemPatch ?? {}),
+      () => stablePracticeItemJsonForNoopCompare(
+          initialState?.practiceItemPatch ?? {},
+      ),
       [initialState?.practiceItemPatch],
+  );
+  const practiceQuestionsKey = useMemo(
+      () => stablePracticeItemJsonForNoopCompare(
+          questions.filter((question) => question.kind === "practice"),
+      ),
+      [questions],
   );
 
   const [practice, setPractice] = useState<Record<string, PracticeState>>({});
@@ -1359,21 +1430,18 @@ export function useQuizPracticeBank(args: {
   }, [resetKey]);
 
   useEffect(() => {
-    if (!initialState?.practiceItemPatch) return;
+    const savedState = initialStateRef.current;
+    if (!savedState?.practiceItemPatch) return;
 
     setPractice((prev) => {
       let next = prev;
       let changed = false;
 
-      for (const q of questions) {
+      for (const q of questionsRef.current) {
         if (q.kind !== "practice") continue;
 
         const stableKey = getStablePracticeQuestionKey(q);
-        const savedPatch =
-            initialState.practiceItemPatch?.[stableKey] ??
-            (mayRestoreQuestionIdPatch(q, stableKey)
-                ? initialState.practiceItemPatch?.[q.id] ?? null
-                : null);
+        const savedPatch = getSavedPracticePatch(savedState, q);
 
         if (!savedPatch) continue;
 
@@ -1398,7 +1466,7 @@ export function useQuizPracticeBank(args: {
 
       return changed ? next : prev;
     });
-  }, [initialPracticePatchKey, initialState, questions]);
+  }, [initialPracticePatchKey, practiceQuestionsKey]);
 
   const loadPracticeQuestion = useCallback(
       async (
@@ -1425,7 +1493,7 @@ export function useQuizPracticeBank(args: {
         }
 
         if (!force && alreadyResolved) {
-          const savedPatch = getSavedPracticePatch(initialState, q);
+          const savedPatch = getSavedPracticePatch(initialStateRef.current, q);
 
           if (savedPatch && existing?.item) {
             setPractice((prev) => {
@@ -1450,7 +1518,7 @@ export function useQuizPracticeBank(args: {
         const token = (loadTokenRef.current[stableKey] ?? 0) + 1;
         loadTokenRef.current[stableKey] = token;
 
-        const initMeta = getSavedPracticeMeta(initialState, q);
+        const initMeta = getSavedPracticeMeta(initialStateRef.current, q);
         const fallbackMax = unlimitedAttempts
             ? null
             : coerceMaxAttempts((q as any).maxAttempts ?? specMaxAttempts ?? null);
@@ -1470,6 +1538,8 @@ export function useQuizPracticeBank(args: {
             item: reusablePrevState?.item ?? null,
             attempts: initMeta?.attempts ?? reusablePrevState?.attempts ?? 0,
             ok: initMeta?.ok ?? reusablePrevState?.ok ?? null,
+            finalized:
+                initMeta?.finalized ?? reusablePrevState?.finalized ?? false,
             // The experience policy is authoritative. A saved finite cap must
             // not survive when Daily Practice, Challenge, or subscriber
             // practice switches the current run to unlimited attempts.
@@ -1489,7 +1559,7 @@ export function useQuizPracticeBank(args: {
             force,
             alreadyResolved,
             fetch: (q as any).fetch,
-            savedPatch: summarizeExercisePatch(getSavedPracticePatch(initialState, q)),
+            savedPatch: summarizeExercisePatch(getSavedPracticePatch(initialStateRef.current, q)),
             existingItem: summarizeExercisePatch(existing?.item),
           });
 
@@ -1540,7 +1610,7 @@ export function useQuizPracticeBank(args: {
                   resolveText: (value) => resolveTextRef.current(value),
                 },
                 savedPatch: sanitizeSavedPracticePatch(
-                    getSavedPracticePatch(initialState, q),
+                    getSavedPracticePatch(initialStateRef.current, q),
                     resolvedPreferKind,
                 ),
                 transformItem: (baseItem, resolvedEx) => {
@@ -1569,7 +1639,7 @@ export function useQuizPracticeBank(args: {
             qid: q.id,
             stableKey,
             loadedItem: summarizePracticePatch(loaded.item),
-            savedPatch: summarizePracticePatch(getSavedPracticePatch(initialState, q)),
+            savedPatch: summarizePracticePatch(getSavedPracticePatch(initialStateRef.current, q)),
           });
 
           if (cancelledRef?.current) return;
@@ -1588,12 +1658,13 @@ export function useQuizPracticeBank(args: {
                 item: null,
                 attempts: 0,
                 ok: null,
+                finalized: false,
                 maxAttempts: fallbackMax,
                 helpPolicy: DEFAULT_PRACTICE_HELP_POLICY,
               } as PracticeState);
 
-          const meta = getSavedPracticeMeta(initialState, q);
-          const savedPatch = getSavedPracticePatch(initialState, q);
+          const meta = getSavedPracticeMeta(initialStateRef.current, q);
+          const savedPatch = getSavedPracticePatch(initialStateRef.current, q);
           const nextItem = mergeSavedPatchIntoPracticeItem(
               normalizeCurrentPracticeItem(
                   loaded.item,
@@ -1617,6 +1688,15 @@ export function useQuizPracticeBank(args: {
             item: nextItem,
             attempts: meta?.attempts ?? baseForLoaded.attempts ?? 0,
             ok: meta?.ok ?? baseForLoaded.ok ?? null,
+            finalized:
+                meta?.finalized ??
+                Boolean(
+                    (nextItem.result as any)?.finalized === true ||
+                    nextItem.revealed === true ||
+                    (nextItem.result as any)?.revealUsed === true ||
+                    (nextItem.result as any)?.revealAnswer != null ||
+                    baseForLoaded.finalized,
+                ),
             maxAttempts: unlimitedAttempts
               ? null
               : loaded.maxAttempts ?? baseForLoaded.maxAttempts ?? null,
@@ -1674,15 +1754,16 @@ export function useQuizPracticeBank(args: {
           return null;
         }
       },
-      [initialState, questions, spec, specMaxAttempts, unlimitedAttempts],
+      [specMaxAttempts, unlimitedAttempts],
   );
 
   useEffect(() => {
-    if (!questions.length) return;
+    const currentQuestions = questionsRef.current;
+    if (!currentQuestions.length) return;
 
     const cancelledRef = { current: false };
 
-    const practiceQuestions = questions.filter(
+    const practiceQuestions = currentQuestions.filter(
         (q): q is Extract<ReviewQuestion, { kind: "practice" }> => q.kind === "practice",
     );
 
@@ -1753,7 +1834,7 @@ export function useQuizPracticeBank(args: {
       }
     };
   }, [
-    questions,
+    practiceQuestionsKey,
     loadPracticeQuestion,
     resetKey,
     activeQuestionIdsKey,
@@ -1762,12 +1843,12 @@ export function useQuizPracticeBank(args: {
 
   const retryPracticeQuestion = useCallback(
       async (id: string) => {
-        const q = resolveQuestionByAnyId(questions, id);
+        const q = resolveQuestionByAnyId(questionsRef.current, id);
         if (!q) return;
 
         await loadPracticeQuestion(q, { force: true });
       },
-      [questions, loadPracticeQuestion],
+      [practiceQuestionsKey, loadPracticeQuestion],
   );
 
   const updatePracticeItem = useCallback(
@@ -1806,11 +1887,12 @@ export function useQuizPracticeBank(args: {
               ps.item,
               patch,
           );
+          const explicitRevealFill = shouldTreatPatchAsRevealFill(patch);
 
           const patchForItem = { ...(patch as any) };
           delete patchForItem.dismissFeedbackOnEdit;
 
-          if (!explicitUserDismiss) {
+          if (!explicitUserDismiss && !explicitRevealFill) {
             if (patchForItem.feedbackDismissed === true) {
               delete patchForItem.feedbackDismissed;
             }
@@ -1827,7 +1909,7 @@ export function useQuizPracticeBank(args: {
           const nextFeedbackDismissed =
               patchForItem.feedbackDismissed === false
                   ? false
-                  : explicitUserDismiss
+                  : explicitUserDismiss || explicitRevealFill
                       ? true
                       : Boolean((ps.item as any).feedbackDismissed);
 
@@ -1847,6 +1929,15 @@ export function useQuizPracticeBank(args: {
             ...ps,
             item: nextItem,
             ok: explicitUserDismiss ? null : ps.ok,
+            finalized:
+                Boolean(
+                    ps.finalized ||
+                    explicitRevealFill ||
+                    (nextItem.result as any)?.finalized === true ||
+                    nextItem.revealed === true ||
+                    (nextItem.result as any)?.revealUsed === true ||
+                    ((nextItem.result as any)?.revealAnswer != null),
+                ),
           };
 
           if (
@@ -2003,6 +2094,7 @@ export function useQuizPracticeBank(args: {
               busy: false,
               attempts: nextAttempts,
               ok: submitted.ok,
+              finalized: submitted.finalized,
               maxAttempts: unlimitedAttempts
                 ? null
                 : submitted.serverMaxAttempts ?? current.maxAttempts ?? null,
@@ -2077,7 +2169,12 @@ export function useQuizPracticeBank(args: {
         const ps = visiblePractice[key] ?? visiblePractice[q.id];
 
         if (!ps || ps.loading || ps.busy || !ps.item || !ps.exercise) return;
-        if (ps.ok === true) return;
+        if (ps.ok === true || (ps.item.result as any)?.ok === true) return;
+        if (
+          ps.item.revealed === true ||
+          (ps.item.result as any)?.revealUsed === true ||
+          (ps.item.result as any)?.revealAnswer != null
+        ) return;
 
         const enabledStepKeys = ps.helpPolicy?.stepKeys?.length
             ? ps.helpPolicy.stepKeys
@@ -2098,10 +2195,32 @@ export function useQuizPracticeBank(args: {
             const current = prev[key] ?? prev[q.id];
             if (!current?.item) return prev;
 
+            /**
+             * Backward-compatible repair for progress saved before reveal
+             * finalization was copied onto the item. A persisted reveal entry
+             * is sufficient evidence that the server finalized the question.
+             */
+            const revealCompletionPatch = existing.reveal
+                ? buildReviewPracticeRevealCompletionPatch({
+                  current: current.item,
+                  response: {
+                    reveal: existing.reveal,
+                    finalized: true,
+                  },
+                })
+                : null;
+
             const nextState: PracticeState = {
               ...current,
+              finalized: revealCompletionPatch ? true : current.finalized,
+              ok:
+                  revealCompletionPatch &&
+                  typeof (revealCompletionPatch.result as any)?.ok === "boolean"
+                      ? Boolean((revealCompletionPatch.result as any).ok)
+                      : current.ok,
               item: {
                 ...current.item,
+                ...(revealCompletionPatch ?? {}),
                 help: {
                   ...current.item.help,
                   activeStepKey: stepKey,
@@ -2167,11 +2286,24 @@ export function useQuizPracticeBank(args: {
                 ? prevOpenedStepKeys
                 : [...prevOpenedStepKeys, stepKey];
 
+            const revealCompletionPatch =
+                buildReviewPracticeRevealCompletionPatch({
+                  current: current.item,
+                  response: opened.data,
+                });
+
             const nextState: PracticeState = {
               ...current,
               busy: false,
+              finalized: revealCompletionPatch ? true : current.finalized,
+              ok:
+                  revealCompletionPatch &&
+                  typeof (revealCompletionPatch.result as any)?.ok === "boolean"
+                      ? Boolean((revealCompletionPatch.result as any).ok)
+                      : current.ok,
               item: {
                 ...current.item,
+                ...(revealCompletionPatch ?? {}),
                 dragA: opened.dragA ?? current.item.dragA,
                 dragB: opened.dragB ?? current.item.dragB,
                 help: {

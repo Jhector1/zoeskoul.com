@@ -85,3 +85,19 @@
     animation: app-global-navigation-toast-in 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
     transform-origin: top center;
 }
+
+/*
+ * Mobile code focus mode.
+ *
+ * Virtual keyboards shrink the visual viewport without consistently resizing
+ * the layout viewport (especially on iOS). While Monaco owns keyboard focus,
+ * remove the review header and redundant Exercise/Code switcher so the editor
+ * keeps enough visible room to show the active line and caret. Both return as
+ * soon as the keyboard closes.
+ */
+@media (max-width: 767px) {
+    html[data-zoe-mobile-keyboard="open"] [data-mobile-workspace-header="true"],
+    html[data-zoe-mobile-keyboard="open"] [data-mobile-workspace-chrome="true"] {
+        display: none !important;
+    }
+}

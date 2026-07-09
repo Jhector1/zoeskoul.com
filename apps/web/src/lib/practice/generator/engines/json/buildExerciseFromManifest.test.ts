@@ -7,6 +7,16 @@ vi.mock("@zoeskoul-code-input-expected", () => ({
     recipeType: "fixed_tests",
     tests: recipe?.tests ?? [],
   })),
+  buildSemanticExpected: vi.fn((recipe: any) => ({
+    kind: "code_input",
+    strategy: "programming",
+    language: recipe?.language ?? "python",
+    checkMode: "semantic",
+    tests: [],
+    semanticChecks: Array.isArray(recipe?.semanticChecks)
+      ? recipe.semanticChecks.map(({ path: _path, ...check }: any) => check)
+      : [],
+  })),
 }));
 
 import { buildExerciseFromManifest } from "./buildExerciseFromManifest";
@@ -539,6 +549,75 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
   });
 
 
+  it("preserves semanticFirst on fixed-test exercises", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        recipe: {
+          type: "fixed_tests",
+          tests: [{ stdin: "", stdout: "100\n", match: "exact" }],
+          semanticFirst: true,
+          semanticChecks: [
+            {
+              type: "method_returns",
+              className: "Car",
+              constructorArgs: ["Honda", "Civic", 100],
+              methodName: "drive",
+              methodArgs: [-5],
+              expected: 100,
+            },
+          ],
+        },
+      }),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "python",
+          supportsTerminal: false,
+        },
+      } as any,
+    );
+
+    expect((result.expected as any).semanticFirst).toBe(true);
+  });
+
+  it("builds semantic recipes with runtime tests as behavior-first hybrid checks", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        recipe: {
+          type: "semantic",
+          language: "python",
+          tests: [{ stdin: "", stdout: "110\n100\n", match: "exact" }],
+          semanticFirst: true,
+          semanticChecks: [
+            {
+              type: "method_returns",
+              className: "Car",
+              constructorArgs: ["Honda", "Civic", 100],
+              methodName: "drive",
+              methodArgs: [-5],
+              expected: 100,
+            },
+          ],
+        },
+      }),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "python",
+          supportsTerminal: false,
+        },
+      } as any,
+    );
+
+    expect((result.expected as any).checkMode).toBe("stdout");
+    expect((result.expected as any).semanticFirst).toBe(true);
+    expect((result.expected as any).tests).toEqual([
+      { stdin: "", stdout: "110\n100\n", match: "exact" },
+    ]);
+  });
+
   it("keeps source checks on fixed-test exercises for anti-cheat validation", () => {
     const sourceChecks = [
       {
@@ -567,6 +646,91 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     );
 
     expect((result.expected as any).sourceChecks).toEqual(sourceChecks);
+  });
+
+  it("preserves file-scoped semantic-check paths after shared normalization", () => {
+    const semanticChecks = [
+      {
+        type: "defines_class",
+        path: "models/car.py",
+        className: "Car",
+      },
+      {
+        type: "created_instances",
+        path: "main.py",
+        className: "Car",
+        min: 1,
+      },
+    ];
+
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        starterFiles: [
+          { path: "main.py", content: "from models.car import Car\n" },
+          { path: "models/car.py", content: "class Car:\n    pass\n" },
+        ],
+        solutionFiles: [
+          { path: "main.py", content: "from models.car import Car\ncar = Car()\n" },
+          { path: "models/car.py", content: "class Car:\n    pass\n" },
+        ],
+        recipe: {
+          type: "semantic",
+          language: "python",
+          solutionFiles: [
+            { path: "main.py", content: "from models.car import Car\ncar = Car()\n" },
+            { path: "models/car.py", content: "class Car:\n    pass\n" },
+          ],
+          semanticChecks,
+        },
+      }),
+      makeArgs(),
+    );
+
+    expect((result.expected as any).semanticChecks).toEqual(semanticChecks);
+  });
+
+  it("rejects unsafe or unknown semantic-check paths during generation", () => {
+    expect(() =>
+      buildExerciseFromManifest(
+        makeCodeInputDef({
+          solutionFiles: [{ path: "main.py", content: "print('ok')\n" }],
+          recipe: {
+            type: "semantic",
+            language: "python",
+            solutionFiles: [{ path: "main.py", content: "print('ok')\n" }],
+            semanticChecks: [
+              {
+                type: "printed_line_count",
+                path: "../main.py",
+                min: 1,
+              },
+            ],
+          },
+        }),
+        makeArgs(),
+      ),
+    ).toThrow(/semanticChecks\[0\]\.path is unsafe/);
+
+    expect(() =>
+      buildExerciseFromManifest(
+        makeCodeInputDef({
+          solutionFiles: [{ path: "main.py", content: "print('ok')\n" }],
+          recipe: {
+            type: "semantic",
+            language: "python",
+            solutionFiles: [{ path: "main.py", content: "print('ok')\n" }],
+            semanticChecks: [
+              {
+                type: "defines_class",
+                path: "models/car.py",
+                className: "Car",
+              },
+            ],
+          },
+        }),
+        makeArgs(),
+      ),
+    ).toThrow(/is not present in the authored files/);
   });
 
 });

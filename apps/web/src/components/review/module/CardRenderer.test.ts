@@ -214,6 +214,32 @@ describe("CardRenderer try it handling", () => {
         expect(mocked.quizBlockProps[2]?.unlimitedAttempts).toBe(true);
     });
 
+    it("forwards whether the containing card is the last card in the topic", () => {
+        renderToStaticMarkup(
+            React.createElement(
+                CardRenderer,
+                {
+                    ...baseProps(textCard({ tryIt: embeddedTryIt("try-first-card") })),
+                    isLastTopicCard: false,
+                },
+            ),
+        );
+
+        expect(mocked.quizBlockProps.at(-1)?.isLastTopicCard).toBe(false);
+
+        renderToStaticMarkup(
+            React.createElement(
+                CardRenderer,
+                {
+                    ...baseProps(quizCard()),
+                    isLastTopicCard: true,
+                },
+            ),
+        );
+
+        expect(mocked.quizBlockProps.at(-1)?.isLastTopicCard).toBe(true);
+    });
+
     it("uses try-it copy for detected try projects and keeps project copy for normal projects", () => {
         const tryGateHtml = renderToStaticMarkup(
             React.createElement(
@@ -305,10 +331,19 @@ describe("CardRenderer try it handling", () => {
         expect(mocked.quizBlockProps.at(-1)?.isCompleted).toBe(true);
 
         (mocked.quizBlockProps.at(-1)?.onPass as (() => void) | undefined)?.();
-        expect(onEmbeddedTryItPass).toHaveBeenCalledWith("try-append-ten-to-list");
+        expect(onEmbeddedTryItPass).toHaveBeenCalledWith(
+            "try-append-ten-to-list",
+            "passed",
+        );
+
+        (mocked.quizBlockProps.at(-1)?.onFinalize as (() => void) | undefined)?.();
+        expect(onEmbeddedTryItPass).toHaveBeenCalledWith(
+            "try-append-ten-to-list",
+            "finalized",
+        );
     });
 
-    it("passes mark-done disabling props into SketchBlock when embedded try it is required and incomplete", () => {
+    it("hides the sketch mark-done action when the sketch owns an embedded try it", () => {
         renderToStaticMarkup(
             React.createElement(
                 CardRenderer,
@@ -317,10 +352,31 @@ describe("CardRenderer try it handling", () => {
         );
 
         expect(mocked.sketchBlockProps).toHaveLength(1);
-        expect(mocked.sketchBlockProps[0]?.markDoneDisabled).toBe(true);
-        expect(String(mocked.sketchBlockProps[0]?.markDoneDisabledReason)).toContain("mark this lesson as done");
-        expect(mocked.sketchBlockProps[0]?.markDoneLabel).toBe("Mark as done");
-        expect(mocked.sketchBlockProps[0]?.markDoneDoneLabel).toBe("✓ Done");
+        expect(mocked.sketchBlockProps[0]?.onMarkDone).toBeUndefined();
+        expect(mocked.sketchBlockProps[0]?.markDoneLabel).toBeUndefined();
+        expect(mocked.sketchBlockProps[0]?.markDoneDoneLabel).toBeUndefined();
         expect(mocked.quizBlockProps.at(-1)?.quizId).toBe("try-append-ten-to-list");
+    });
+
+    it("keeps a manual Mark as read action for sketches without an embedded try it", () => {
+        const onMarkDone = vi.fn();
+
+        renderToStaticMarkup(
+            React.createElement(
+                CardRenderer,
+                {
+                    ...baseProps(sketchCard()),
+                    onMarkDone,
+                },
+            ),
+        );
+
+        expect(mocked.sketchBlockProps).toHaveLength(1);
+        expect(mocked.sketchBlockProps[0]?.onMarkDone).toBe(onMarkDone);
+        expect(mocked.sketchBlockProps[0]?.markDoneLabel).toBe("Mark as read");
+        expect(mocked.sketchBlockProps[0]?.markDoneDoneLabel).toBe("✓ Read");
+        expect(mocked.sketchBlockProps[0]?.markDoneTitle).toBe(
+            "Mark this lesson as read",
+        );
     });
 });

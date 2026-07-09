@@ -193,6 +193,8 @@ function FullIDEInner({
 
     const { activeFile, entryFile, tabFiles, currentWorkspace } = derived;
     const [explorerCollapsed, setExplorerCollapsed] = useState(false);
+    const [workspaceFileSelectionVersion, setWorkspaceFileSelectionVersion] =
+        useState(0);
     const currentWorkspaceRef = useRef(currentWorkspace);
     const emitImmediateWorkspaceChange = useCallback(
         (workspace: WorkspaceStateV2 | null) => {
@@ -414,6 +416,21 @@ function FullIDEInner({
         },
         [actions, emitImmediateWorkspaceChange],
     );
+    const handleOpenWorkspaceFile = useCallback(
+        (id: string) => {
+            setWorkspaceFileSelectionVersion((version) => version + 1);
+            actions.openFile(id);
+        },
+        [actions],
+    );
+    const handleSelectWorkspaceTab = useCallback(
+        (id: string | null) => {
+            if (!id) return;
+            setWorkspaceFileSelectionVersion((version) => version + 1);
+            actions.setActiveFileId(id);
+        },
+        [actions],
+    );
     const explorerPane = (
         <IdeExplorerPane
             isSql={isSql}
@@ -448,7 +465,7 @@ function FullIDEInner({
             actions={{
                 setInlineEdit: actions.setInlineEdit,
                 setToast: actions.setToast,
-                openFile: actions.openFile,
+                openFile: handleOpenWorkspaceFile,
                 toggleFolder: actions.toggleFolder,
                 startNewFile: actions.startNewFile,
                 startNewFolder: actions.startNewFolder,
@@ -503,7 +520,8 @@ function FullIDEInner({
             onBeforeRun={onBeforeRun}
             onRunResult={onRunResult}
             onRun={runner.onRunProject}
-            setActiveFileId={(id) => actions.setActiveFileId(id ?? "")}
+            setActiveFileId={handleSelectWorkspaceTab}
+            workspaceFileSelectionVersion={workspaceFileSelectionVersion}
             closeTab={actions.closeTab}
             isDesktop={viewport.isDesktop}
             projectId={projectSession.projectId}

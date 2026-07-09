@@ -166,4 +166,57 @@ describe("gradeCodeInput", () => {
         expect(result.feedback?.title).toBe("Terminal activity missing");
         expect(gradeProgrammingCodeInputMock).not.toHaveBeenCalled();
     });
+    it("preserves semanticChecks[].path through request-time schema parsing", async () => {
+        await gradeCodeInput({
+            instance: {} as any,
+            expectedCanon: {
+                kind: "code_input",
+                strategy: "programming",
+                language: "python",
+                checkMode: "semantic",
+                tests: [],
+                semanticChecks: [
+                    {
+                        type: "defines_class",
+                        path: "models/car.py",
+                        className: "Car",
+                    },
+                ],
+            },
+            answer: {
+                kind: "code_input",
+                language: "python",
+                code: "# main.py\n",
+                entry: "main.py",
+                files: [
+                    {
+                        kind: "file",
+                        path: "main.py",
+                        content: "# main.py\n",
+                    },
+                    {
+                        kind: "file",
+                        path: "models/car.py",
+                        content: "class Car:\n    pass\n",
+                    },
+                ],
+            },
+            showDebug: false,
+        });
+
+        expect(gradeProgrammingCodeInputMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+                expected: expect.objectContaining({
+                    semanticChecks: [
+                        expect.objectContaining({
+                            type: "defines_class",
+                            path: "models/car.py",
+                            className: "Car",
+                        }),
+                    ],
+                }),
+            }),
+        );
+    });
+
 });

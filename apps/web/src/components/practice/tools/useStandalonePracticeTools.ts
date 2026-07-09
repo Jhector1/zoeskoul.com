@@ -151,6 +151,10 @@ export function useStandalonePracticeTools(args: {
       moduleId: props.moduleSlug ?? props.experienceMode,
       locale: props.locale ?? "en",
       codeEnabled: true,
+      // Only the standard review/practice experience exposes Notes and the
+      // collapse menu. Daily Practice and public challenges stay task-focused.
+      showHeader:
+        props.experienceMode === "standard" || props.experienceMode === "practice",
       showLanguagePicker: false,
       showSqlDialectPicker: false,
       toolSqlDialect: tool.toolSqlDialect,

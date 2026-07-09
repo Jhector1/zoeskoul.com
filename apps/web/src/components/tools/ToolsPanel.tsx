@@ -78,6 +78,13 @@ export type ToolsPanelProps = {
     >;
     showLanguagePicker?: boolean;
     showSqlDialectPicker?: boolean;
+
+    /**
+     * The course lesson workspace already has its own Exercise/Code navigation.
+     * Hide this secondary Tools/Run/More chrome there, while keeping it in
+     * review/practice workspaces where Notes and collapse controls are useful.
+     */
+    showHeader?: boolean;
 };
 
 function ToolsPanelInner(props: ToolsPanelProps) {
@@ -94,6 +101,15 @@ function ToolsPanelInner(props: ToolsPanelProps) {
     );
 
     const { active, setActive } = useActiveTool(ctx);
+    const showHeader = props.showHeader !== false;
+
+    useEffect(() => {
+        if (showHeader || !ctx.codeEnabled || active === "code") return;
+
+        // A previously persisted Notes tab must not strand a headerless lesson
+        // workspace on a pane the learner can no longer switch away from.
+        setActive("code");
+    }, [active, ctx.codeEnabled, setActive, showHeader]);
 
     const scopeKey = props.toolScopeKey ?? (props.boundId ? `exercise:${props.boundId}` : "general");
 
@@ -112,17 +128,22 @@ function ToolsPanelInner(props: ToolsPanelProps) {
 
     return (
         <div className="flex h-full min-h-0 flex-col overflow-visible ui-surface-muted rounded-none">
-            <MemoToolsHeader
-                ctx={ctx}
-                active={active}
-                setActive={setActive}
-                boundId={props.boundId ?? null}
-                pendingExerciseBinding={props.pendingExerciseBinding === true}
-                onUnbind={props.onUnbind}
-                onCollapse={props.onCollapse}
-            />
+            {showHeader ? (
+                <MemoToolsHeader
+                    ctx={ctx}
+                    active={active}
+                    setActive={setActive}
+                    boundId={props.boundId ?? null}
+                    pendingExerciseBinding={props.pendingExerciseBinding === true}
+                    onUnbind={props.onUnbind}
+                    onCollapse={props.onCollapse}
+                />
+            ) : null}
 
-            <div ref={props.rightBodyRef} className="min-h-0 flex-1 overflow-hidden pt-1">
+            <div
+                ref={props.rightBodyRef}
+                className={`min-h-0 flex-1 overflow-hidden${showHeader ? " pt-1" : ""}`}
+            >
                 <div className="relative h-full min-h-0">
                     <MemoCodePaneLayer
                         isActive={active === "code"}
@@ -587,7 +608,8 @@ function areToolsPanelPropsEqual(prev: ToolsPanelProps, next: ToolsPanelProps) {
         prev.sqlSetupSql === next.sqlSetupSql &&
         prev.sqlInitialTableSnapshots === next.sqlInitialTableSnapshots &&
         prev.showLanguagePicker === next.showLanguagePicker &&
-        prev.showSqlDialectPicker === next.showSqlDialectPicker
+        prev.showSqlDialectPicker === next.showSqlDialectPicker &&
+        prev.showHeader === next.showHeader
     );
 }
 

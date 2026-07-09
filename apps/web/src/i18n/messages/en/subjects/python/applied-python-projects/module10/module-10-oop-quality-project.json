@@ -50,7 +50,7 @@
                     "content": "# Write your answer below"
                   },
                   "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        pass"
+                    "content": "# TODO: Update models/catalog_item.py to complete this step: Milestone 1: Add model validation tests.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        pass"
                   }
                 },
                 "solutionFiles": {
@@ -95,10 +95,10 @@
                 "starterCode": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.is_in_stock())\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.is_in_stock())\n"
+                    "content": "# TODO: Update main.py to complete this step: Milestone 2: Test and fix the reporting service.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.is_in_stock())\n"
                   },
                   "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
+                    "content": "# Keep models/catalog_item.py unchanged for this step: Milestone 2: Test and fix the reporting service.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
                   }
                 },
                 "solutionFiles": {
@@ -137,13 +137,13 @@
                 "starterCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_quantity(items):\n    return sum(get_field(item, 'quantity') for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n\nprint(total_quantity([{'quantity': 4}, {'quantity': 0}, {'quantity': 2}]))\nprint(', '.join(low_stock_names([{'name': 'Notebook', 'quantity': 4}, {'name': 'Marker', 'quantity': 0}, {'name': 'Tape', 'quantity': 2}], 2)))\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_quantity(items):\n    return sum(get_field(item, 'quantity') for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n\nprint(total_quantity([{'quantity': 4}, {'quantity': 0}, {'quantity': 2}]))\nprint(', '.join(low_stock_names([{'name': 'Notebook', 'quantity': 4}, {'name': 'Marker', 'quantity': 0}, {'name': 'Tape', 'quantity': 2}], 2)))\n"
+                    "content": "# TODO: Update main.py to complete this step: Milestone 3: Load catalog items from fixture data.\ndef get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_quantity(items):\n    return sum(get_field(item, 'quantity') for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n\nprint(total_quantity([{'quantity': 4}, {'quantity': 0}, {'quantity': 2}]))\nprint(', '.join(low_stock_names([{'name': 'Notebook', 'quantity': 4}, {'name': 'Marker', 'quantity': 0}, {'name': 'Tape', 'quantity': 2}], 2)))\n"
                   },
                   "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
+                    "content": "# Keep models/catalog_item.py unchanged for this step: Milestone 3: Load catalog items from fixture data.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
                   },
                   "services_reporting_py": {
-                    "content": "def total_quantity(items):\n    return sum(item[\"quantity\"] for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [item[\"name\"] for item in items if item[\"quantity\"] <= threshold]"
+                    "content": "# TODO: Update services/reporting.py to complete this step: Milestone 3: Load catalog items from fixture data.\ndef total_quantity(items):\n    return sum(item[\"quantity\"] for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [item[\"name\"] for item in items if item[\"quantity\"] <= threshold]"
                   }
                 },
                 "solutionFiles": {
@@ -168,7 +168,8 @@
                   "1": {
                     "message": "Running the workspace should still print the report after loading from the CSV file."
                   }
-                }
+                },
+                "expectedOutput": "Notebook\nMarker"
               },
               "project_step_debug_imports_state": {
                 "title": "Milestone 4: Debug imports and state updates",
@@ -182,16 +183,16 @@
                 "starterCode": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def __eq__(self, other):\n        return (\n            hasattr(other, \"name\")\n            and hasattr(other, \"category\")\n            and hasattr(other, \"quantity\")\n            and self.name == other.name\n            and self.category == other.category\n            and self.quantity == other.quantity\n        )\n\n\ndef load_items(path):\n    return [\n        CatalogItem(\"Notebook\", \"Office\", 4),\n        CatalogItem(\"Marker\", \"Office\", 0),\n        CatalogItem(\"Tape\", \"Office\", 2),\n    ]\n\nitems = load_items('data/catalog.csv')\nprint(items[0].name)\nprint(items[1].name)\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "from storage.catalog_loader import load_items\n\nitems = load_items('data/catalog.csv')\nprint(items[0].name)\nprint(items[1].name)\n"
+                    "content": "# TODO: Update main.py to complete this step: Milestone 4: Debug imports and state updates.\nfrom storage.catalog_loader import load_items\n\nitems = load_items('data/catalog.csv')\nprint(items[0].name)\nprint(items[1].name)\n"
                   },
                   "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
+                    "content": "# TODO: Update models/catalog_item.py to complete this step: Milestone 4: Debug imports and state updates.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
                   },
                   "services_reporting_py": {
-                    "content": "def total_quantity(items):\n    return sum(item.quantity for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]"
+                    "content": "# TODO: Update services/reporting.py to complete this step: Milestone 4: Debug imports and state updates.\ndef total_quantity(items):\n    return sum(item.quantity for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]"
                   },
                   "storage_catalog_loader_py": {
-                    "content": "from models.catalog_item import CatalogItem\n\n\ndef load_items(path):\n    return [\n        CatalogItem(\"Notebook\", \"Office\", 4),\n        CatalogItem(\"Marker\", \"Office\", 0),\n        CatalogItem(\"Tape\", \"Office\", 2),\n    ]"
+                    "content": "# TODO: Update storage/catalog_loader.py to complete this step: Milestone 4: Debug imports and state updates.\nfrom models.catalog_item import CatalogItem\n\n\ndef load_items(path):\n    return [\n        CatalogItem(\"Notebook\", \"Office\", 4),\n        CatalogItem(\"Marker\", \"Office\", 0),\n        CatalogItem(\"Tape\", \"Office\", 2),\n    ]"
                   }
                 },
                 "solutionFiles": {
@@ -216,7 +217,8 @@
                   "1": {
                     "message": "Running the workspace should still print the updated report after restocking."
                   }
-                }
+                },
+                "expectedOutput": "Marker\n3"
               },
               "project_step_regression_summary": {
                 "title": "Milestone 5: Add a reusable summary service and regression tests",
@@ -230,16 +232,16 @@
                 "starterCode": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def restock(self, amount):\n        self.quantity += amount\n        return self.quantity\n\nitem = CatalogItem('Marker', 'Office', 0)\nitem.restock(3)\nprint(item.name)\nprint(item.quantity)\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def restock(self, amount):\n        self.quantity += amount\n        return self.quantity\n\nitem = CatalogItem('Marker', 'Office', 0)\nitem.restock(3)\nprint(item.name)\nprint(item.quantity)\n"
+                    "content": "# TODO: Update main.py to complete this step: Milestone 5: Add a reusable summary service and regression tests.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def restock(self, amount):\n        self.quantity += amount\n        return self.quantity\n\nitem = CatalogItem('Marker', 'Office', 0)\nitem.restock(3)\nprint(item.name)\nprint(item.quantity)\n"
                   },
                   "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def restock(self, amount):\n        if amount > 0:\n            self.quantity += amount\n        return self.quantity"
+                    "content": "# TODO: Update models/catalog_item.py to complete this step: Milestone 5: Add a reusable summary service and regression tests.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def restock(self, amount):\n        if amount > 0:\n            self.quantity += amount\n        return self.quantity"
                   },
                   "services_reporting_py": {
-                    "content": "def total_quantity(value):\n    return 6"
+                    "content": "# TODO: Update services/reporting.py to complete this step: Milestone 5: Add a reusable summary service and regression tests.\ndef total_quantity(value):\n    return 6"
                   },
                   "storage_catalog_loader_py": {
-                    "content": "def load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]"
+                    "content": "# Keep storage/catalog_loader.py unchanged for this step: Milestone 5: Add a reusable summary service and regression tests.\ndef load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]"
                   }
                 },
                 "solutionFiles": {
@@ -264,7 +266,8 @@
                   "1": {
                     "message": "Running the workspace should print total quantity, low-stock names, and in-stock count."
                   }
-                }
+                },
+                "expectedOutput": "9\n['Tape']\n3"
               },
               "project_step_final_regression": {
                 "title": "Milestone 6: Finish the end-to-end regression workspace",
@@ -278,16 +281,16 @@
                 "starterCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef build_summary(items, threshold):\n    total = sum(get_field(item, 'quantity') for item in items)\n    low = [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n    in_stock = sum(1 for item in items if get_field(item, 'quantity') > 0)\n    return {\n        'total_quantity': total,\n        'low_stock_names': low,\n        'in_stock_count': in_stock,\n    }\n\nsummary = build_summary([\n    {'name': 'Notebook', 'quantity': 4},\n    {'name': 'Marker', 'quantity': 3},\n    {'name': 'Tape', 'quantity': 2},\n], 2)\nprint(summary['total_quantity'])\nprint(summary['low_stock_names'])\nprint(summary['in_stock_count'])\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef build_summary(items, threshold):\n    total = sum(get_field(item, 'quantity') for item in items)\n    low = [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n    in_stock = sum(1 for item in items if get_field(item, 'quantity') > 0)\n    return {\n        'total_quantity': total,\n        'low_stock_names': low,\n        'in_stock_count': in_stock,\n    }\n\nsummary = build_summary([\n    {'name': 'Notebook', 'quantity': 4},\n    {'name': 'Marker', 'quantity': 3},\n    {'name': 'Tape', 'quantity': 2},\n], 2)\nprint(summary['total_quantity'])\nprint(summary['low_stock_names'])\nprint(summary['in_stock_count'])\n"
+                    "content": "# TODO: Update main.py to complete this step: Milestone 6: Finish the end-to-end regression workspace.\ndef get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef build_summary(items, threshold):\n    total = sum(get_field(item, 'quantity') for item in items)\n    low = [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n    in_stock = sum(1 for item in items if get_field(item, 'quantity') > 0)\n    return {\n        'total_quantity': total,\n        'low_stock_names': low,\n        'in_stock_count': in_stock,\n    }\n\nsummary = build_summary([\n    {'name': 'Notebook', 'quantity': 4},\n    {'name': 'Marker', 'quantity': 3},\n    {'name': 'Tape', 'quantity': 2},\n], 2)\nprint(summary['total_quantity'])\nprint(summary['low_stock_names'])\nprint(summary['in_stock_count'])\n"
                   },
                   "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self):\n        pass"
+                    "content": "# Keep models/catalog_item.py unchanged for this step: Milestone 6: Finish the end-to-end regression workspace.\nclass CatalogItem:\n    def __init__(self):\n        pass"
                   },
                   "services_reporting_py": {
-                    "content": "def build_summary(items, threshold):\n    total = sum(item[\"quantity\"] for item in items)\n    low_stock = [item[\"name\"] for item in items if item[\"quantity\"] <= threshold]\n    in_stock = sum(1 for item in items if item[\"quantity\"] > 0)\n    return {\n        \"total_quantity\": total,\n        \"low_stock_names\": low_stock,\n        \"in_stock_count\": in_stock,\n    }"
+                    "content": "# TODO: Update services/reporting.py to complete this step: Milestone 6: Finish the end-to-end regression workspace.\ndef build_summary(items, threshold):\n    total = sum(item[\"quantity\"] for item in items)\n    low_stock = [item[\"name\"] for item in items if item[\"quantity\"] <= threshold]\n    in_stock = sum(1 for item in items if item[\"quantity\"] > 0)\n    return {\n        \"total_quantity\": total,\n        \"low_stock_names\": low_stock,\n        \"in_stock_count\": in_stock,\n    }"
                   },
                   "storage_catalog_loader_py": {
-                    "content": "def load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]"
+                    "content": "# Keep storage/catalog_loader.py unchanged for this step: Milestone 6: Finish the end-to-end regression workspace.\ndef load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]"
                   }
                 },
                 "solutionFiles": {

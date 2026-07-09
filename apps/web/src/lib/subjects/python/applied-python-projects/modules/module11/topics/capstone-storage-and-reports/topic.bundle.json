@@ -411,6 +411,16 @@
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.1.message"
           },
           {
+            "type": "defines_class",
+            "className": "BugTask",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.5.message"
+          },
+          {
+            "type": "defines_class",
+            "className": "FeatureTask",
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.7.message"
+          },
+          {
             "type": "instance_attributes",
             "className": "BaseTask",
             "constructorArgs": [
@@ -462,11 +472,6 @@
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.4.message"
           },
           {
-            "type": "defines_class",
-            "className": "BugTask",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.5.message"
-          },
-          {
             "type": "method_returns",
             "className": "BugTask",
             "constructorArgs": [
@@ -481,11 +486,6 @@
             "expected": "BUG high: Fix login [open] - 5 pts",
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.6.message"
-          },
-          {
-            "type": "defines_class",
-            "className": "FeatureTask",
-            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.7.message"
           },
           {
             "type": "method_returns",
@@ -508,7 +508,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.try_capstone_storage_and_reports_sketch0.checks.9.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG high: Fix login [open] - 5 pts\nFEATURE reports: Add export [open] - 8 pts\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -828,7 +836,15 @@
             "min": 3,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_2_loader.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "BUG high: Fix login [open] - 5 pts\nFEATURE reports: Add export [open] - 8 pts\nFEATURE analytics: Add charts [open] - 3 pts\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1214,7 +1230,15 @@
             "min": 6,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_3_report_service.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "SMART TASK TRACKER REPORT\nTotal tasks: 2\nDone tasks: 1\nOpen tasks: 1\nBUG high: Fix login [done] - 5 pts\nFEATURE reports: Add export [open] - 8 pts\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1569,7 +1593,15 @@
             "min": 6,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_4_save_report.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "h\nt\nd\no\nb\nf\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1929,7 +1961,15 @@
             "min": 7,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_5_assert_checks.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "h\nt\nd\no\nb\nf\nok\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -2294,7 +2334,15 @@
             "min": 8,
             "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-storage-and-reports.finalCapstone.steps.capstone_storage_step_6_readme_handoff.checks.0.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "h\nt\nd\no\nb\nf\nok\nhandoff\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     }
   ]

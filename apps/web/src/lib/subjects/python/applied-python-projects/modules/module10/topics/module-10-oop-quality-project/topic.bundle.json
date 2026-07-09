@@ -214,6 +214,22 @@
             "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.checks.1.message"
           },
           {
+            "type": "method_returns",
+            "className": "CatalogItem",
+            "constructorArgs": [
+              "Marker",
+              "Office",
+              0
+            ],
+            "constructorArgKinds": [],
+            "methodName": "is_in_stock",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.checks.4.message"
+          },
+          {
             "type": "instance_attributes",
             "className": "CatalogItem",
             "constructorArgs": [
@@ -243,22 +259,6 @@
             "expected": true,
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.checks.3.message"
-          },
-          {
-            "type": "method_returns",
-            "className": "CatalogItem",
-            "constructorArgs": [
-              "Marker",
-              "Office",
-              0
-            ],
-            "constructorArgKinds": [],
-            "methodName": "is_in_stock",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": false,
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.try_module_10_oop_quality_project_sketch0.checks.4.message"
           },
           {
             "type": "printed_line_count",
@@ -676,7 +676,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_storage_loader.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Notebook\nMarker\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -828,7 +836,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_debug_imports_state.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Marker\n3\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -1048,7 +1064,15 @@
             "min": 3,
             "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.module-10-oop-quality-project.moduleProject.steps.project_step_regression_summary.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "9\n['Tape']\n3\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {

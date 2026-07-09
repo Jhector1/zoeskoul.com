@@ -2,8 +2,42 @@ import { describe, expect, it } from "vitest";
 import {
     computeReviewQuizCompletionSummary,
     isPracticeOutOfAttempts,
+    resolveReviewCardAutoCompletionReason,
+    resolveReviewFinalizedNavigationAction,
+    resolveReviewFinalizedPracticeAction,
     shouldAutoCompleteReviewCard,
+    shouldFinalizeReviewCardFromManualNext,
 } from "./reviewQuizCompletion";
+
+
+describe("resolveReviewFinalizedNavigationAction", () => {
+    it("uses Finish only for the final question on the final topic card", () => {
+        expect(
+            resolveReviewFinalizedNavigationAction({
+                isLastQuestion: false,
+                isLastTopicCard: false,
+            }),
+        ).toBe("next");
+        expect(
+            resolveReviewFinalizedNavigationAction({
+                isLastQuestion: true,
+                isLastTopicCard: false,
+            }),
+        ).toBe("next");
+        expect(
+            resolveReviewFinalizedNavigationAction({
+                isLastQuestion: false,
+                isLastTopicCard: true,
+            }),
+        ).toBe("next");
+        expect(
+            resolveReviewFinalizedNavigationAction({
+                isLastQuestion: true,
+                isLastTopicCard: true,
+            }),
+        ).toBe("finish");
+    });
+});
 
 describe("computeReviewQuizCompletionSummary", () => {
     it("does not pass when all questions are checked but some answers are wrong", () => {
@@ -122,6 +156,62 @@ describe("computeReviewQuizCompletionSummary", () => {
     });
 });
 
+describe("resolveReviewCardAutoCompletionReason", () => {
+    const base = {
+        prereqsMet: true,
+        locked: false,
+        isCompleted: false,
+        summary: { passed: false },
+        allQuestionsFlowDone: true,
+        hasFinalizedZeroCreditQuestion: true,
+        terminalQuestionOk: true as boolean | null,
+        terminalFinalizedActionConsumed: false,
+    };
+
+    it("keeps all-correct completion on the passed/credit path", () => {
+        expect(
+            resolveReviewCardAutoCompletionReason({
+                ...base,
+                summary: { passed: true },
+                hasFinalizedZeroCreditQuestion: false,
+            }),
+        ).toBe("passed");
+    });
+
+    it("finalizes a project when an earlier step was revealed and the last step is correct", () => {
+        expect(resolveReviewCardAutoCompletionReason(base)).toBe("finalized");
+    });
+
+    it("waits for the explicit Finish click when the terminal revealed action is not consumed", () => {
+        expect(
+            resolveReviewCardAutoCompletionReason({
+                ...base,
+                terminalQuestionOk: false,
+                terminalFinalizedActionConsumed: false,
+            }),
+        ).toBeNull();
+    });
+
+    it("repairs completion after a consumed terminal reveal remount", () => {
+        expect(
+            resolveReviewCardAutoCompletionReason({
+                ...base,
+                terminalQuestionOk: false,
+                terminalFinalizedActionConsumed: true,
+            }),
+        ).toBe("finalized");
+    });
+
+    it("does not finalize without a zero-credit finalized step", () => {
+        expect(
+            resolveReviewCardAutoCompletionReason({
+                ...base,
+                hasFinalizedZeroCreditQuestion: false,
+            }),
+        ).toBeNull();
+    });
+});
+
 describe("shouldAutoCompleteReviewCard", () => {
     it("does not auto-complete when the summary has not passed", () => {
         expect(
@@ -176,6 +266,116 @@ describe("shouldAutoCompleteReviewCard", () => {
                 summary: { passed: true },
             }),
         ).toBe(false);
+    });
+});
+
+
+describe("shouldFinalizeReviewCardFromManualNext", () => {
+    it("finalizes only from the last resolved question", () => {
+        expect(
+            shouldFinalizeReviewCardFromManualNext({
+                prereqsMet: true,
+                locked: false,
+                isCompleted: false,
+                isLast: true,
+                allQuestionsFlowDone: true,
+            }),
+        ).toBe(true);
+
+        expect(
+            shouldFinalizeReviewCardFromManualNext({
+                prereqsMet: true,
+                locked: false,
+                isCompleted: false,
+                isLast: false,
+                allQuestionsFlowDone: true,
+            }),
+        ).toBe(false);
+
+        expect(
+            shouldFinalizeReviewCardFromManualNext({
+                prereqsMet: true,
+                locked: false,
+                isCompleted: false,
+                isLast: true,
+                allQuestionsFlowDone: false,
+            }),
+        ).toBe(false);
+    });
+
+    it("does not finalize locked, completed, or gated cards", () => {
+        const base = {
+            prereqsMet: true,
+            locked: false,
+            isCompleted: false,
+            isLast: true,
+            allQuestionsFlowDone: true,
+        };
+
+        expect(
+            shouldFinalizeReviewCardFromManualNext({
+                ...base,
+                prereqsMet: false,
+            }),
+        ).toBe(false);
+        expect(
+            shouldFinalizeReviewCardFromManualNext({
+                ...base,
+                locked: true,
+            }),
+        ).toBe(false);
+        expect(
+            shouldFinalizeReviewCardFromManualNext({
+                ...base,
+                isCompleted: true,
+            }),
+        ).toBe(false);
+    });
+});
+
+describe("resolveReviewFinalizedPracticeAction", () => {
+    const base = {
+        action: "next" as const,
+        revealed: true,
+        correct: false,
+        unlocked: true,
+        locked: false,
+        excused: false,
+        hasHandler: true,
+    };
+
+    it("returns Next or Finish for a revealed zero-credit item", () => {
+        expect(resolveReviewFinalizedPracticeAction(base)).toBe("next");
+        expect(
+            resolveReviewFinalizedPracticeAction({
+                ...base,
+                action: "finish",
+            }),
+        ).toBe("finish");
+    });
+
+    it("does not expose a terminal action for non-reveal or blocked states", () => {
+        expect(
+            resolveReviewFinalizedPracticeAction({ ...base, revealed: false }),
+        ).toBeNull();
+        expect(
+            resolveReviewFinalizedPracticeAction({ ...base, correct: true }),
+        ).toBeNull();
+        expect(
+            resolveReviewFinalizedPracticeAction({ ...base, unlocked: false }),
+        ).toBeNull();
+        expect(
+            resolveReviewFinalizedPracticeAction({ ...base, locked: true }),
+        ).toBeNull();
+        expect(
+            resolveReviewFinalizedPracticeAction({ ...base, excused: true }),
+        ).toBeNull();
+        expect(
+            resolveReviewFinalizedPracticeAction({ ...base, hasHandler: false }),
+        ).toBeNull();
+        expect(
+            resolveReviewFinalizedPracticeAction({ ...base, action: null }),
+        ).toBeNull();
     });
 });
 

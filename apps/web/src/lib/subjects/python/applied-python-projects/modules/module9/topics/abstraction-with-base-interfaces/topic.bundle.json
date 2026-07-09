@@ -275,7 +275,15 @@
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: The Wild Robot\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -445,7 +453,15 @@
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: Wonder\nMovie: Moana\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {

@@ -36,7 +36,7 @@
                   "content": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\n\n# Call drive(40) and print the returned miles."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n"
+                  "content": "# TODO: Update models/car.py to complete this step: Add a drive method.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n"
                 }
               },
               "solutionCode": "from models.car import Car\n\ncar = Car(\"Honda\", \"Fit\", 10000)\nprint(car.drive(40))",
@@ -64,7 +64,8 @@
                 "4": {
                   "message": "Print the returned miles value."
                 }
-              }
+              },
+              "expectedOutput": "10040"
             },
             "try_methods_and_responsibility_sketch1": {
               "title": "Add a summary method",
@@ -81,7 +82,7 @@
                   "content": "from models.car import Car\n\ncar = Car(\"Subaru\", \"Outback\", 60000)\n\n# Print the car summary after you add the method."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n"
+                  "content": "# TODO: Update models/car.py to complete this step: Add a summary method.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n"
                 }
               },
               "solutionCode": "from models.car import Car\n\ncar = Car(\"Subaru\", \"Outback\", 60000)\nprint(car.summary())",
@@ -106,7 +107,8 @@
                 "3": {
                   "message": "Print the summary returned by the object."
                 }
-              }
+              },
+              "expectedOutput": "Subaru Outback - 60000 miles"
             },
             "try_methods_and_responsibility_sketch2": {
               "title": "Use methods together",
@@ -123,7 +125,7 @@
                   "content": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\n\n# Drive 125 miles.\n# Then print the updated summary."
                 },
                 "models_car_py": {
-                  "content": "class Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\"\n"
+                  "content": "# Keep models/car.py unchanged for this step: Use methods together.\nclass Car:\n    def __init__(self, make, model, miles):\n        self.make = make\n        self.model = model\n        self.miles = miles\n\n    def drive(self, miles):\n        self.miles += miles\n        return self.miles\n\n    def summary(self):\n        return f\"{self.make} {self.model} - {self.miles} miles\"\n"
                 }
               },
               "solutionCode": "from models.car import Car\n\ncar = Car(\"Toyota\", \"RAV4\", 15000)\ncar.drive(125)\n\nprint(car.summary())",
@@ -148,7 +150,8 @@
                 "3": {
                   "message": "Print the updated summary."
                 }
-              }
+              },
+              "expectedOutput": "Toyota RAV4 - 15125 miles"
             }
           },
           "practice": {

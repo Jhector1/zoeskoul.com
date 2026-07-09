@@ -148,11 +148,17 @@ export function useIdeViewport({
 
     scheduleMeasure();
 
+    const visualViewport = window.visualViewport;
+
     if (typeof ResizeObserver === "undefined") {
       window.addEventListener("resize", scheduleMeasure);
+      visualViewport?.addEventListener("resize", scheduleMeasure);
+      visualViewport?.addEventListener("scroll", scheduleMeasure);
 
       return () => {
         window.removeEventListener("resize", scheduleMeasure);
+        visualViewport?.removeEventListener("resize", scheduleMeasure);
+        visualViewport?.removeEventListener("scroll", scheduleMeasure);
 
         if (rafRef.current != null) {
           cancelAnimationFrame(rafRef.current);
@@ -167,10 +173,14 @@ export function useIdeViewport({
 
     ro.observe(el);
     window.addEventListener("resize", scheduleMeasure);
+    visualViewport?.addEventListener("resize", scheduleMeasure);
+    visualViewport?.addEventListener("scroll", scheduleMeasure);
 
     return () => {
       ro.disconnect();
       window.removeEventListener("resize", scheduleMeasure);
+      visualViewport?.removeEventListener("resize", scheduleMeasure);
+      visualViewport?.removeEventListener("scroll", scheduleMeasure);
 
       if (rafRef.current != null) {
         cancelAnimationFrame(rafRef.current);

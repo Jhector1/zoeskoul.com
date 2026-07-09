@@ -281,6 +281,7 @@ export default function ReviewTopicCards({
                     active={cardIndex === activeCardIndex}
                     done={done}
                     cardIndex={cardIndex}
+                    isLastTopicCard={cardIndex === viewCards.length - 1}
                     quizNavMode={navModes.quiz}
                     prereqsMet={prereqsMet}
                     progressHydrated={progressHydrated}
@@ -307,8 +308,10 @@ export default function ReviewTopicCards({
                         return next;
                       });
                     }}
-                    onEmbeddedTryItPass={(tryItId) => {
-                      onSubmit?.();
+                    onEmbeddedTryItPass={(tryItId, reason) => {
+                      // Reveal finalization completes navigation with zero credit.
+                      // Only a real pass triggers the existing submit/credit hook.
+                      if (reason === "passed") onSubmit?.();
 
                       setProgress((prev) => {
                         let next = buildEmbeddedTryItPassProgress(prev, viewTid, tryItId);
@@ -322,8 +325,9 @@ export default function ReviewTopicCards({
                       });
                     }}
                     tp={tp}
-                    onQuizPass={(quizId) => {
-                      onSubmit?.();
+                    onQuizPass={(quizId, reason) => {
+                      // Keep completion separate from correctness/credit.
+                      if (reason === "passed") onSubmit?.();
 
                       setProgress((prev) => {
                         const next = buildQuizPassProgress(prev, viewTid, quizId, viewCards);

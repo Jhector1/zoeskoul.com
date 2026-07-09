@@ -372,7 +372,15 @@
             "min": 2,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch1.checks.4.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Toyota\n18000\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -499,7 +507,15 @@
             "min": 1,
             "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.tryIt.try_thinking_in_objects_sketch2.checks.3.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Kia Soul - 30050 miles\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -541,15 +557,20 @@
     },
     {
       "id": "fb-thinking-in-objects-method-call",
-      "kind": "fill_blank_choice",
+      "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
       "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.thinking-in-objects.practice.fb-thinking-in-objects-method-call",
-      "choiceCount": 4,
       "expected": {
-        "kind": "fill_blank_choice",
-        "value": "deposit"
-      }
+        "kind": "single_choice",
+        "optionId": "a"
+      },
+      "optionIds": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ]
     },
     {
       "id": "dr-thinking-in-objects-workflow",
