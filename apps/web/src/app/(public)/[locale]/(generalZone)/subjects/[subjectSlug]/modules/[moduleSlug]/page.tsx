@@ -3,6 +3,9 @@ import { prisma } from "@/lib/prisma";
 import { SUBJECT_ARTIFACTS } from "@/lib/subjects";
 import ModuleIntroClient from "./ModuleIntroClient";
 import { getResolvedModuleIntroFromManifest } from "@/lib/subjects/server/resolveSubjectPresentation";
+import { auth } from "@/lib/auth";
+import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
+import { getManifestSubjectPublicationStatus } from "@/lib/subjects/server/subjectPublication";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -15,6 +18,12 @@ export default async function ModuleIntroPage({
     const { locale, subjectSlug, moduleSlug } = await params;
     if (!subjectSlug || !moduleSlug) notFound();
 
+    const session = await auth();
+    const { canUnlockAll } = await resolvePrivilegedLearningAccess({
+        userId: (session?.user as any)?.id ?? null,
+        email: session?.user?.email ?? null,
+    });
+
     const moduleDb = await prisma.practiceModule.findFirst({
         where: {
             slug: moduleSlug,
@@ -26,10 +35,22 @@ export default async function ModuleIntroPage({
             order: true,
             weekStart: true,
             weekEnd: true,
+            subject: {
+                select: { status: true },
+            },
         },
     });
 
     if (!moduleDb) notFound();
+    if (!moduleDb.subject) notFound();
+
+    const manifestStatus = getManifestSubjectPublicationStatus(subjectSlug);
+    if (
+        !canUnlockAll &&
+        (moduleDb.subject.status !== "active" || manifestStatus !== "active")
+    ) {
+        notFound();
+    }
 
     const manifestView = await getResolvedModuleIntroFromManifest(subjectSlug, moduleSlug);
 

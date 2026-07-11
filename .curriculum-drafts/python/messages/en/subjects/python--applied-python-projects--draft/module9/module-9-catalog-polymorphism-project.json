@@ -3,272 +3,281 @@
     "python--applied-python-projects--draft": {
       "python-9-inheritance-polymorphism-and-abstraction": {
         "module-9-catalog-polymorphism-project": {
-          "label": "Module 9 Catalog Polymorphism Project",
-          "summary": "Build a community media catalog that uses a base class, subclasses, overriding, a mixed collection, and one report method.",
+          "label": "Module 9 Greenhouse Sensor Project",
+          "summary": "Build a greenhouse monitor with an abstract Sensor contract, child constructors that call `super()`, and one polymorphic report.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Community Media Catalog"
+              "title": "Greenhouse Sensor Monitor"
             }
           },
           "projectSteps": {
-            "catalog_project_step_1_base_and_book": {
-              "title": "Create CatalogItem and Book"
+            "greenhouse_project_step_1_base_and_temperature": {
+              "title": "Create Sensor and TemperatureSensor"
             },
-            "catalog_project_step_2_add_movie_override": {
-              "title": "Add Movie and override label()"
+            "greenhouse_project_step_2_add_humidity_override": {
+              "title": "Add HumiditySensor and override reading()"
             },
-            "catalog_project_step_3_mixed_catalog_loop": {
-              "title": "Build a mixed catalog list"
+            "greenhouse_project_step_3_mixed_sensor_loop": {
+              "title": "Build one mixed sensor list"
             },
-            "catalog_project_step_4_catalog_class_report": {
-              "title": "Add the Catalog class report"
+            "greenhouse_project_step_4_monitor_class_report": {
+              "title": "Add the GreenhouseMonitor report"
             }
           },
           "moduleProject": {
             "steps": {
-              "catalog_project_step_1_base_and_book": {
-                "title": "Create CatalogItem and Book",
-                "prompt": "A small community center wants one catalog for books and movies. Start the project by creating the shared foundation. Build `CatalogItem` with a title, then create a `Book` subclass that also stores an author. Keep the first step small: prove a book object can be created and labeled cleanly.",
-                "hint": "This step should end with a Book object using the inherited base method.",
+              "greenhouse_project_step_1_base_and_temperature": {
+                "title": "Create an abstract Sensor and one concrete child",
+                "prompt": "Create the shared `Sensor(ABC)` base class with a constructor that stores `zone` and an abstract `reading()` method. Then complete `TemperatureSensor`: call `super().__init__(zone)`, store `celsius`, and return `Temperature: <zone> = <value> C` from `reading()`. Run `main.py` to print the North Bed reading.",
+                "hint": "Define the abstract contract first, then make TemperatureSensor concrete by implementing reading().",
                 "help": {
-                  "concept": "Project steps are cumulative: each solution becomes the next starter.",
-                  "hint_1": "Begin with the shared title behavior in `CatalogItem`.",
-                  "hint_2": "Then connect `Book` to that base class with `super().__init__(title)`."
+                  "concept": "The ABC makes `reading()` a required method. `super().__init__(zone)` reuses the parent setup instead of copying it.",
+                  "hint_1": "Import `ABC` and `abstractmethod` in models/sensor.py.",
+                  "hint_2": "Implement reading() in TemperatureSensor so Python can instantiate it."
                 },
-                "starterCode": "# TODO: complete this step in main.py.\n# TODO: create the object or collection described in the instructions.\n",
+                "starterCode": "# TODO: import TemperatureSensor, create the North Bed sensor, and print reading().\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: complete this step in main.py.\n# TODO: create the object or collection described in the instructions.\n"
+                    "content": "# TODO: import TemperatureSensor from models.temperature_sensor.\n# Create TemperatureSensor(\"North Bed\", 21.5) and print sensor.reading().\n"
                   },
                   "models___init___py": {
-                    "content": "# Package marker for imports."
+                    "content": "# Package marker for greenhouse model imports.\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# TODO: Update models/catalog_item.py to complete this step: Create CatalogItem and Book.\nclass CatalogItem:\n    def __init__(self, title):\n        pass\n\n    def label(self):\n        return self.title\n"
+                  "models_sensor_py": {
+                    "content": "# TODO: import ABC and abstractmethod.\n\nclass Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    # TODO: make reading an abstract method.\n    def reading(self):\n        pass\n"
                   },
-                  "models_book_py": {
-                    "content": "# TODO: Update models/book.py to complete this step: Create CatalogItem and Book.\nfrom models.catalog_item import CatalogItem\n\nclass Book:\n    pass\n"
+                  "models_temperature_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        # TODO: call the parent constructor and store celsius.\n        pass\n\n    def reading(self):\n        # TODO: return the formatted temperature reading.\n        pass\n"
                   }
                 },
-                "solutionCode": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nprint(book.label())\n",
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n",
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nprint(book.label())\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n"
                   },
                   "models___init___py": {
-                    "content": "# Package marker for imports."
+                    "content": "# Package marker for greenhouse model imports.\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "models_sensor_py": {
+                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
-                  "models_book_py": {
-                    "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n"
+                  "models_temperature_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   }
                 },
                 "checks": {
                   "0": {
-                    "message": "Define the CatalogItem class."
+                    "message": "Define the Sensor abstract base class."
                   },
                   "1": {
-                    "message": "CatalogItem should accept a title."
+                    "message": "Keep Sensor abstract instead of creating Sensor objects directly."
                   },
                   "2": {
-                    "message": "CatalogItem should store the title attribute."
+                    "message": "Store the shared zone in the parent constructor."
                   },
                   "3": {
-                    "message": "Define the Book class."
+                    "message": "Define TemperatureSensor as a concrete Sensor child."
                   },
                   "4": {
-                    "message": "Book should accept title and author."
+                    "message": "TemperatureSensor should accept zone and celsius."
                   },
                   "5": {
-                    "message": "Book should store title and author."
+                    "message": "TemperatureSensor should store its state and return the expected reading."
                   }
                 }
               },
-              "catalog_project_step_2_add_movie_override": {
-                "title": "Add Movie and override label()",
-                "prompt": "Continue from the working base-and-book version. Add a `Movie` subclass that stores minutes and overrides `label()` with movie-specific wording. Keep `Book` working while you add the second media type.",
-                "hint": "Keep the shared method name `label()` in both subclasses.",
+              "greenhouse_project_step_2_add_humidity_override": {
+                "title": "Add HumiditySensor and override reading()",
+                "prompt": "Continue from the working base and temperature sensor. Override `TemperatureSensor.reading()` so it returns `Temperature: <zone> = <celsius> C`. Add `HumiditySensor` with a `percent` value and its own `reading()` result: `Humidity: <zone> = <percent>%`. Print both readings from `main.py`.",
+                "hint": "Keep the shared method name `reading()` in both subclasses.",
                 "help": {
-                  "concept": "This step turns inherited behavior into specialized subclass behavior.",
-                  "hint_1": "Override `Book.label()` first.",
-                  "hint_2": "Then give `Movie` its own matching `label()` method."
+                  "concept": "Overriding lets each sensor type format its own reading while callers use one method name.",
+                  "hint_1": "TemperatureSensor should format its zone and celsius value.",
+                  "hint_2": "HumiditySensor should inherit Sensor, store percent, and override reading()."
                 },
-                "starterCode": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nprint(book.label())\n",
+                "starterCode": "# Add HumiditySensor and print both specialized readings.\nfrom models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: Update main.py to complete this step: Add Movie and override label().\nfrom models.book import Book\n\nbook = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nprint(book.label())\n"
+                    "content": "# Import HumiditySensor, create both sensors, and print both readings.\nfrom models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n"
                   },
                   "models___init___py": {
-                    "content": "# Package marker for imports."
+                    "content": "# Package marker for greenhouse model imports.\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# Keep models/catalog_item.py unchanged for this step: Add Movie and override label().\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "models_sensor_py": {
+                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
-                  "models_book_py": {
-                    "content": "# TODO: Update models/book.py to complete this step: Add Movie and override label().\nfrom models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n"
+                  "models_temperature_sensor_py": {
+                    "content": "# Override reading() with a temperature-specific result.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        # TODO: return Temperature: <zone> = <celsius> C\n        pass\n"
+                  },
+                  "models_humidity_sensor_py": {
+                    "content": "# Create a HumiditySensor with zone, percent, and reading().\n"
                   }
                 },
-                "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\nbook = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nmovie = Movie(\"Toy Story\", 81)\nprint(book.label())\nprint(movie.label())\n",
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature = TemperatureSensor(\"North Bed\", 21.5)\nhumidity = HumiditySensor(\"Seedling Bench\", 64)\nprint(temperature.reading())\nprint(humidity.reading())\n",
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.book import Book\nfrom models.movie import Movie\n\nbook = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nmovie = Movie(\"Toy Story\", 81)\nprint(book.label())\nprint(movie.label())\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature = TemperatureSensor(\"North Bed\", 21.5)\nhumidity = HumiditySensor(\"Seedling Bench\", 64)\nprint(temperature.reading())\nprint(humidity.reading())\n"
                   },
                   "models___init___py": {
-                    "content": "# Package marker for imports."
+                    "content": "# Package marker for greenhouse model imports.\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "models_sensor_py": {
+                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
-                  "models_book_py": {
-                    "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
+                  "models_temperature_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
-                  "models_movie_py": {
-                    "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def label(self):\n        return f\"Movie: {self.title} ({self.minutes} min)\"\n"
+                  "models_humidity_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
                   }
                 },
                 "checks": {
                   "0": {
-                    "message": "Book.label() should return the specialized book label."
+                    "message": "TemperatureSensor.reading() should return the specialized temperature reading."
                   },
                   "1": {
-                    "message": "Define the Movie class."
+                    "message": "Define the HumiditySensor class."
                   },
                   "2": {
-                    "message": "Movie should accept title and minutes."
+                    "message": "HumiditySensor should accept zone and percent."
                   },
                   "3": {
-                    "message": "Movie should store title and minutes."
+                    "message": "HumiditySensor should store zone and percent."
                   },
                   "4": {
-                    "message": "Movie.label() should return the specialized movie label."
+                    "message": "HumiditySensor.reading() should return the specialized humidity reading."
                   }
                 }
               },
-              "catalog_project_step_3_mixed_catalog_loop": {
-                "title": "Build a mixed catalog list",
-                "prompt": "Continue from the working Book and Movie classes. Build a mixed `catalog` list and loop through it. The loop should call `label()` on each object without checking whether the item is a Book or Movie.",
-                "hint": "Use one list and one loop instead of separate print calls.",
+              "greenhouse_project_step_3_mixed_sensor_loop": {
+                "title": "Build one mixed sensor list",
+                "prompt": "Continue from the two working sensor classes. Put a `TemperatureSensor` and a `HumiditySensor` in one `sensors` list. Loop through the list and print `sensor.reading()` for every object. Do not branch on the sensor type.",
+                "hint": "Use one list and one loop; the shared reading() method handles both objects.",
                 "help": {
-                  "concept": "This step shows polymorphism directly with a mixed list.",
-                  "hint_1": "Put both objects inside `catalog = [...]`.",
-                  "hint_2": "Loop with `for item in catalog:` and print `item.label()`."
+                  "concept": "This milestone applies polymorphism to a greenhouse monitoring problem that was not used in the lessons.",
+                  "hint_1": "Create both sensor objects inside `sensors = [...]`.",
+                  "hint_2": "Loop with `for sensor in sensors:` and print `sensor.reading()`."
                 },
-                "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\nbook = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nmovie = Movie(\"Toy Story\", 81)\nprint(book.label())\nprint(movie.label())\n",
+                "starterCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\n# TODO: print every reading with one shared loop.\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: Update main.py to complete this step: Build a mixed catalog list.\nfrom models.book import Book\nfrom models.movie import Movie\n\nbook = Book(\"The Hobbit\", \"J.R.R. Tolkien\")\nmovie = Movie(\"Toy Story\", 81)\nprint(book.label())\nprint(movie.label())\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\n# TODO: loop through sensors and print sensor.reading().\n"
                   },
                   "models___init___py": {
-                    "content": "# Package marker for imports."
+                    "content": "# Package marker for greenhouse model imports.\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# Keep models/catalog_item.py unchanged for this step: Build a mixed catalog list.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "models_sensor_py": {
+                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
-                  "models_book_py": {
-                    "content": "# Keep models/book.py unchanged for this step: Build a mixed catalog list.\nfrom models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
+                  "models_temperature_sensor_py": {
+                    "content": "# Temperature implementation; keep it working.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
-                  "models_movie_py": {
-                    "content": "# Keep models/movie.py unchanged for this step: Build a mixed catalog list.\nfrom models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def label(self):\n        return f\"Movie: {self.title} ({self.minutes} min)\"\n"
+                  "models_humidity_sensor_py": {
+                    "content": "# Humidity implementation; keep it working.\nfrom models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
                   }
                 },
-                "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"The Hobbit\", \"J.R.R. Tolkien\"),\n    Movie(\"Toy Story\", 81),\n]\n\nfor item in catalog:\n    print(item.label())\n",
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n",
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"The Hobbit\", \"J.R.R. Tolkien\"),\n    Movie(\"Toy Story\", 81),\n]\n\nfor item in catalog:\n    print(item.label())\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n"
                   },
                   "models___init___py": {
-                    "content": "# Package marker for imports."
+                    "content": "# Package marker for greenhouse model imports.\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "models_sensor_py": {
+                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
-                  "models_book_py": {
-                    "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
+                  "models_temperature_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
-                  "models_movie_py": {
-                    "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def label(self):\n        return f\"Movie: {self.title} ({self.minutes} min)\"\n"
+                  "models_humidity_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
                   }
                 },
                 "checks": {
                   "0": {
-                    "message": "Create at least one Book object."
+                    "message": "Create at least one TemperatureSensor object."
                   },
                   "1": {
-                    "message": "Create at least one Movie object."
+                    "message": "Create at least one HumiditySensor object."
                   },
                   "2": {
-                    "message": "Book.label() should still return the correct label."
+                    "message": "TemperatureSensor.reading() should still return the expected reading."
                   },
                   "3": {
-                    "message": "Movie.label() should still return the correct label."
+                    "message": "HumiditySensor.reading() should still return the expected reading."
+                  },
+                  "4": {
+                    "message": "Print both readings from one shared loop."
                   }
                 }
               },
-              "catalog_project_step_4_catalog_class_report": {
-                "title": "Add the Catalog class report",
-                "prompt": "Finish the community media catalog by adding a small `Catalog` class. It should manage the list of items and produce a clean report. Keep `main.py` thin: create the catalog, add items, and print the report.",
-                "hint": "The Catalog class should manage the mixed collection instead of `main.py` doing all the looping.",
+              "greenhouse_project_step_4_monitor_class_report": {
+                "title": "Add the GreenhouseMonitor report",
+                "prompt": "Finish the greenhouse project by adding `GreenhouseMonitor`. It should own a `sensors` list, add sensors with `add_sensor(sensor)`, and print each sensor reading from `print_report()`. Keep `main.py` thin: create the monitor, add both sensors, and print the report.",
+                "hint": "The monitor should own the mixed collection instead of main.py managing the loop.",
                 "help": {
-                  "concept": "This final step wraps the mixed list inside its own class.",
-                  "hint_1": "Initialize `self.items` as an empty list.",
-                  "hint_2": "Use `self.items.append(item)` in `add_item()` and loop through the list in `print_report()`."
+                  "concept": "The final milestone gives collection ownership to a dedicated class.",
+                  "hint_1": "Initialize `self.sensors` as an empty list.",
+                  "hint_2": "Append in `add_sensor()` and loop over `self.sensors` in `print_report()`."
                 },
-                "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"The Hobbit\", \"J.R.R. Tolkien\"),\n    Movie(\"Toy Story\", 81),\n]\n\nfor item in catalog:\n    print(item.label())\n",
+                "starterCode": "# Run this greenhouse demo after completing models/greenhouse_monitor.py.\nfrom models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: Update main.py to complete this step: Add the Catalog class report.\nfrom models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"The Hobbit\", \"J.R.R. Tolkien\"),\n    Movie(\"Toy Story\", 81),\n]\n\nfor item in catalog:\n    print(item.label())\n"
+                    "content": "# Run this greenhouse demo after completing models/greenhouse_monitor.py.\nfrom models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n"
                   },
                   "models___init___py": {
-                    "content": "# Package marker for imports."
+                    "content": "# Package marker for greenhouse model imports.\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# Keep models/catalog_item.py unchanged for this step: Add the Catalog class report.\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "models_sensor_py": {
+                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
-                  "models_book_py": {
-                    "content": "# Keep models/book.py unchanged for this step: Add the Catalog class report.\nfrom models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
+                  "models_temperature_sensor_py": {
+                    "content": "# Temperature sensor; keep it unchanged.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
-                  "models_movie_py": {
-                    "content": "# Keep models/movie.py unchanged for this step: Add the Catalog class report.\nfrom models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def label(self):\n        return f\"Movie: {self.title} ({self.minutes} min)\"\n"
+                  "models_humidity_sensor_py": {
+                    "content": "# Humidity sensor; keep it unchanged.\nfrom models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                  },
+                  "models_greenhouse_monitor_py": {
+                    "content": "class GreenhouseMonitor:\n    def __init__(self):\n        # TODO: create an empty sensors list.\n        pass\n\n    def add_sensor(self, sensor):\n        # TODO: append the sensor.\n        pass\n\n    def print_report(self):\n        # TODO: print sensor.reading() for each stored sensor.\n        pass\n"
                   }
                 },
-                "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom models.catalog import Catalog\n\ncatalog = Catalog()\ncatalog.add_item(Book(\"The Hobbit\", \"J.R.R. Tolkien\"))\ncatalog.add_item(Movie(\"Toy Story\", 81))\ncatalog.print_report()\n",
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n",
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from models.book import Book\nfrom models.movie import Movie\nfrom models.catalog import Catalog\n\ncatalog = Catalog()\ncatalog.add_item(Book(\"The Hobbit\", \"J.R.R. Tolkien\"))\ncatalog.add_item(Movie(\"Toy Story\", 81))\ncatalog.print_report()\n"
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n"
                   },
                   "models___init___py": {
-                    "content": "# Package marker for imports."
+                    "content": "# Package marker for greenhouse model imports.\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    def label(self):\n        return self.title\n"
+                  "models_sensor_py": {
+                    "content": "from abc import ABC, abstractmethod\n\nclass Sensor(ABC):\n    def __init__(self, zone):\n        self.zone = zone\n\n    @abstractmethod\n    def reading(self):\n        pass\n"
                   },
-                  "models_book_py": {
-                    "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title, author):\n        super().__init__(title)\n        self.author = author\n\n    def label(self):\n        return f\"Book: {self.title} by {self.author}\"\n"
+                  "models_temperature_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
                   },
-                  "models_movie_py": {
-                    "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title, minutes):\n        super().__init__(title)\n        self.minutes = minutes\n\n    def label(self):\n        return f\"Movie: {self.title} ({self.minutes} min)\"\n"
+                  "models_humidity_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
                   },
-                  "models_catalog_py": {
-                    "content": "class Catalog:\n    def __init__(self):\n        self.items = []\n\n    def add_item(self, item):\n        self.items.append(item)\n\n    def print_report(self):\n        for item in self.items:\n            print(item.label())\n"
+                  "models_greenhouse_monitor_py": {
+                    "content": "class GreenhouseMonitor:\n    def __init__(self):\n        self.sensors = []\n\n    def add_sensor(self, sensor):\n        self.sensors.append(sensor)\n\n    def print_report(self):\n        for sensor in self.sensors:\n            print(sensor.reading())\n"
                   }
                 },
                 "checks": {
                   "0": {
-                    "message": "Define the Catalog class."
+                    "message": "Define the GreenhouseMonitor class."
                   },
                   "1": {
-                    "message": "Catalog should be constructible."
+                    "message": "GreenhouseMonitor should be constructible without arguments."
                   },
                   "2": {
-                    "message": "Catalog should store an items list."
+                    "message": "GreenhouseMonitor should own a sensors list."
                   }
                 },
-                "expectedOutput": "Book: The Hobbit by J.R.R. Tolkien\nMovie: Toy Story (81 min)"
+                "expectedOutput": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%"
               }
             }
           }
@@ -281,8 +290,8 @@
       "python-9-inheritance-polymorphism-and-abstraction": {
         "module-9-catalog-polymorphism-project": {
           "module-9-catalog-polymorphism-project-sketch-0": {
-            "title": "Project brief: community media catalog",
-            "bodyMarkdown": "The community center has a shelf of books and a small movie night collection. They want one Python app that can list both kinds of media without separate report code for every type.\n\nThis project is independent from the lesson examples. The lessons used vehicles and notifications to explain the concepts. Here, you will apply the same patterns to a **media catalog**.\n\nYou will build it in four steps:\n\n1. Create a shared `CatalogItem` base class and a `Book` subclass.\n2. Add a `Movie` subclass that overrides `label()`.\n3. Put Book and Movie objects in one mixed list and loop through it.\n4. Add a small `Catalog` class that owns the collection and prints a report.\n\nThe goal is not a large app. The goal is a clean inheritance and polymorphism pattern that feels real: shared base class, specialized subclasses, one mixed collection, and a thin `main.py`."
+            "title": "Project brief: greenhouse sensor monitor",
+            "bodyMarkdown": "A neighborhood greenhouse has temperature and humidity sensors in different growing zones. The staff want one program that can read every sensor through the same method.\n\nThis project uses a fresh greenhouse problem while applying the Python tools from the lessons:\n\n1. Define an abstract `Sensor` contract and build `TemperatureSensor` with `super()`.\n2. Add `HumiditySensor`, again reusing the parent constructor.\n3. Put both concrete sensor types in one list and call `reading()` in one loop.\n4. Add `GreenhouseMonitor` to own the collection and print the report.\n\nThe result combines an enforceable ABC, shared parent setup, concrete overrides, and polymorphism."
           }
         }
       }

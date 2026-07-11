@@ -22,20 +22,20 @@
     }
   },
   "topic": {
-    "labelKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.label",
-    "summaryKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.summary"
+    "labelKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch0.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch0.title",
       "sketchId": "refactoring-oop-services-sketch-0",
       "height": 420,
       "tryIt": {
         "id": "try-refactoring-oop-services-sketch0",
-        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.title",
-        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.prompt",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.prompt",
         "exerciseKey": "try-refactoring-oop-services-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -48,13 +48,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch1.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch1.title",
       "sketchId": "refactoring-oop-services-sketch-1",
       "height": 420,
       "tryIt": {
         "id": "try-refactoring-oop-services-sketch1",
-        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.title",
-        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.prompt",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.prompt",
         "exerciseKey": "try-refactoring-oop-services-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -67,13 +67,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch2.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.sketch2.title",
       "sketchId": "refactoring-oop-services-sketch-2",
       "height": 420,
       "tryIt": {
         "id": "try-refactoring-oop-services-sketch2",
-        "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.title",
-        "promptKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.prompt",
+        "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.prompt",
         "exerciseKey": "try-refactoring-oop-services-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -86,7 +86,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.quiz.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -103,20 +103,20 @@
     {
       "id": "refactoring-oop-services-sketch-0",
       "archetype": "paragraph",
-      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-0.title",
-      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-0.bodyMarkdown"
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-0.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-0.bodyMarkdown"
     },
     {
       "id": "refactoring-oop-services-sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-1.title",
-      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-1.bodyMarkdown"
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-1.bodyMarkdown"
     },
     {
       "id": "refactoring-oop-services-sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-2.title",
-      "bodyKey": "sketches.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-2.bodyMarkdown"
+      "titleKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.refactoring-oop-services-sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -125,20 +125,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0",
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.services_report_service_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -147,14 +147,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "services/report_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.services_report_service_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.services_report_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -163,18 +163,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.services_report_service_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.starterFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -185,18 +185,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "services/report_service.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.services_report_service_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.solutionFiles.services_report_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -205,53 +205,25 @@
         "semanticChecks": [
           {
             "type": "defines_class",
+            "path": "services/report_service.py",
             "className": "ReportService",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.checks.0.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.checks.0.message"
           },
           {
-            "type": "constructible",
-            "className": "ReportService",
-            "constructorArgs": [],
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.checks.1.message"
-          },
-          {
-            "type": "method_returns",
-            "className": "ReportService",
-            "constructorArgs": [],
-            "constructorArgKinds": [],
-            "methodName": "build_book_report",
-            "methodArgs": [
-              [
-                [
-                  [
-                    "title",
-                    "Python Basics"
-                  ],
-                  [
-                    "price",
-                    12
-                  ]
-                ],
-                [
-                  [
-                    "title",
-                    "Debugging Guide"
-                  ],
-                  [
-                    "price",
-                    18
-                  ]
-                ]
-              ]
-            ],
-            "methodArgKinds": [
-              "list_of_dict_entries"
-            ],
-            "expected": "Python Basics: $12\nDebugging Guide: $18",
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.checks.2.message"
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 2,
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch0.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Python Basics: $12\nDebugging Guide: $18\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -259,20 +231,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1",
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "services/catalog_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.services_catalog_service_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.services_catalog_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -281,14 +253,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "services/catalog_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.services_catalog_service_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.services_catalog_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -297,18 +269,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "services/catalog_service.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.services_catalog_service_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.starterFiles.services_catalog_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -319,18 +291,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "services/catalog_service.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.services_catalog_service_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.solutionFiles.services_catalog_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -339,104 +311,50 @@
         "semanticChecks": [
           {
             "type": "defines_class",
+            "path": "services/catalog_service.py",
             "className": "CatalogService",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.0.message"
-          },
-          {
-            "type": "constructible",
-            "className": "CatalogService",
-            "constructorArgs": [],
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.1.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.0.message"
           },
           {
             "type": "method_returns",
+            "path": "services/catalog_service.py",
             "className": "CatalogService",
             "constructorArgs": [],
             "constructorArgKinds": [],
             "methodName": "total_price",
             "methodArgs": [
               [
-                [
-                  [
-                    "title",
-                    "Python Basics"
-                  ],
-                  [
-                    "price",
-                    12
-                  ]
-                ],
-                [
-                  [
-                    "title",
-                    "Debugging Guide"
-                  ],
-                  [
-                    "price",
-                    18
-                  ]
-                ],
-                [
-                  [
-                    "title",
-                    "Testing Notes"
-                  ],
-                  [
-                    "price",
-                    10
-                  ]
-                ]
+                {
+                  "price": 12
+                },
+                {
+                  "price": 18
+                },
+                {
+                  "price": 10
+                }
               ]
             ],
-            "methodArgKinds": [
-              "list_of_dict_entries"
-            ],
+            "methodArgKinds": [],
             "expected": 40,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.1.message"
           },
           {
-            "type": "method_returns",
-            "className": "CatalogService",
-            "constructorArgs": [],
-            "constructorArgKinds": [],
-            "methodName": "total_price",
-            "methodArgs": [
-              [
-                [
-                  [
-                    "title",
-                    "One"
-                  ],
-                  [
-                    "price",
-                    5
-                  ]
-                ],
-                [
-                  [
-                    "title",
-                    "Two"
-                  ],
-                  [
-                    "price",
-                    0
-                  ]
-                ]
-              ]
-            ],
-            "methodArgKinds": [
-              "list_of_dict_entries"
-            ],
-            "expected": 5,
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.3.message"
-          },
-          {
-            "type": "no_stdout",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.4.message"
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 1,
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch1.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "40\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -444,20 +362,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2",
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "services/catalog_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.services_catalog_service_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.services_catalog_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -466,14 +384,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "services/catalog_service.py",
-          "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.services_catalog_service_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.services_catalog_service_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -482,18 +400,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "services/catalog_service.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.services_catalog_service_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.starterFiles.services_catalog_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -504,18 +422,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "services/catalog_service.py",
-            "content": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.services_catalog_service_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.solutionFiles.services_catalog_service_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -523,55 +441,30 @@
         ],
         "semanticChecks": [
           {
-            "type": "defines_class",
-            "className": "CatalogService",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.0.message"
-          },
-          {
-            "type": "constructible",
-            "className": "CatalogService",
-            "constructorArgs": [],
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.1.message"
-          },
-          {
             "type": "method_returns",
+            "path": "services/catalog_service.py",
             "className": "CatalogService",
             "constructorArgs": [],
             "constructorArgKinds": [],
             "methodName": "count_books",
             "methodArgs": [
               [
-                [
-                  [
-                    "title",
-                    "Python Basics"
-                  ],
-                  [
-                    "price",
-                    12
-                  ]
-                ],
-                [
-                  [
-                    "title",
-                    "Debugging Guide"
-                  ],
-                  [
-                    "price",
-                    18
-                  ]
-                ]
+                {
+                  "title": "Dune"
+                },
+                {
+                  "title": "Beloved"
+                }
               ]
             ],
-            "methodArgKinds": [
-              "list_of_dict_entries"
-            ],
+            "methodArgKinds": [],
             "expected": 2,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.0.message"
           },
           {
             "type": "method_returns",
+            "path": "services/catalog_service.py",
             "className": "CatalogService",
             "constructorArgs": [],
             "constructorArgKinds": [],
@@ -579,14 +472,26 @@
             "methodArgs": [
               []
             ],
-            "methodArgKinds": [
-              "list_of_dict_entries"
-            ],
+            "methodArgKinds": [],
             "expected": 0,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.3.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.1.message"
+          },
+          {
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 2,
+            "message": "@:topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.tryIt.try_refactoring_oop_services_sketch2.checks.2.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "2\n0\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -594,7 +499,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.mc-refactor-benefits",
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.mc-refactor-benefits",
       "optionIds": [
         "a",
         "b",
@@ -614,7 +519,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.fb-service-home",
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.fb-service-home",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -626,7 +531,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.mc-safe-refactor-steps",
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.mc-safe-refactor-steps",
       "optionIds": [
         "a",
         "b",
@@ -647,7 +552,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.fb-import-line",
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.fb-import-line",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -659,7 +564,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.sc-main-role",
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.sc-main-role",
       "optionIds": [
         "a",
         "b",
@@ -676,7 +581,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.dr-refactor-order",
+      "messageBase": "topics.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.refactoring-oop-services.practice.dr-refactor-order",
       "tokenIds": [
         "t1",
         "t2",

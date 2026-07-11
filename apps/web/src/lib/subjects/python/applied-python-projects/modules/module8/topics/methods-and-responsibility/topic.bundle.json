@@ -212,7 +212,8 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.0.message",
+            "path": "models/car.py"
           },
           {
             "type": "constructible",
@@ -222,7 +223,8 @@
               "Fit",
               10000
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.1.message",
+            "path": "models/car.py"
           },
           {
             "type": "instance_attributes",
@@ -237,7 +239,8 @@
               "model",
               "miles"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.2.message",
+            "path": "models/car.py"
           },
           {
             "type": "method_returns",
@@ -255,12 +258,14 @@
             "methodArgKinds": [],
             "expected": 10040,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.3.message",
+            "path": "models/car.py"
           },
           {
             "type": "printed_line_count",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.4.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch0.checks.4.message",
+            "path": "main.py"
           }
         ],
         "tests": [
@@ -359,44 +364,37 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.0.message"
-          },
-          {
-            "type": "constructible",
-            "className": "Car",
-            "constructorArgs": [
-              "Subaru",
-              "Outback",
-              60000
-            ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.0.message",
+            "path": "models/car.py"
           },
           {
             "type": "method_returns",
             "className": "Car",
             "constructorArgs": [
-              "Subaru",
-              "Outback",
-              60000
+              "Toyota",
+              "Prius",
+              62
             ],
             "constructorArgKinds": [],
             "methodName": "summary",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Subaru Outback - 60000 miles",
+            "expected": "Toyota Prius - 62 miles",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.1.message",
+            "path": "models/car.py"
           },
           {
             "type": "printed_line_count",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch1.checks.2.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Subaru Outback - 60000 miles\n",
+            "stdout": "Toyota Prius - 62 miles\n",
             "match": "exact"
           }
         ],
@@ -487,11 +485,6 @@
         ],
         "semanticChecks": [
           {
-            "type": "defines_class",
-            "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.0.message"
-          },
-          {
             "type": "constructible",
             "className": "Car",
             "constructorArgs": [
@@ -499,10 +492,11 @@
               "RAV4",
               15000
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.0.message",
+            "path": "models/car.py"
           },
           {
-            "type": "method_sequence_returns",
+            "type": "method_returns",
             "className": "Car",
             "constructorArgs": [
               "Toyota",
@@ -510,32 +504,46 @@
               15000
             ],
             "constructorArgKinds": [],
-            "calls": [
-              {
-                "methodName": "drive",
-                "methodArgs": [
-                  125
-                ],
-                "methodArgKinds": []
-              }
+            "methodName": "is_valid_miles",
+            "methodArgs": [
+              120
             ],
-            "methodName": "summary",
-            "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Toyota RAV4 - 15125 miles",
+            "expected": true,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.1.message",
+            "path": "models/car.py"
+          },
+          {
+            "type": "method_returns",
+            "className": "Car",
+            "constructorArgs": [
+              "Toyota",
+              "RAV4",
+              15000
+            ],
+            "constructorArgKinds": [],
+            "methodName": "is_valid_miles",
+            "methodArgs": [
+              -5
+            ],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.2.message",
+            "path": "models/car.py"
           },
           {
             "type": "printed_line_count",
-            "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.3.message"
+            "min": 2,
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.methods-and-responsibility.tryIt.try_methods_and_responsibility_sketch2.checks.3.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Toyota RAV4 - 15125 miles\n",
+            "stdout": "True\nFalse\n",
             "match": "exact"
           }
         ],
@@ -557,6 +565,7 @@
       "expected": {
         "kind": "multi_choice",
         "optionIds": [
+          "a",
           "b",
           "c"
         ]
@@ -576,7 +585,7 @@
       ],
       "expected": {
         "kind": "single_choice",
-        "optionId": "b"
+        "optionId": "a"
       }
     },
     {
@@ -588,7 +597,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "drive"
+        "value": "@staticmethod"
       }
     },
     {

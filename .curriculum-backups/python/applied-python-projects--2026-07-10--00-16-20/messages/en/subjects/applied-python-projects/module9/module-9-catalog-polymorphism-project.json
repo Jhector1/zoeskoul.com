@@ -1,0 +1,300 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "module-9-catalog-polymorphism-project": {
+          "label": "Module 9 Greenhouse Sensor Project",
+          "summary": "Build a greenhouse monitor with a shared sensor base class, specialized readings, one mixed collection, and a monitor-owned report.",
+          "cards": {
+            "sketch0": {
+              "title": "Project brief"
+            },
+            "project": {
+              "title": "Greenhouse Sensor Monitor"
+            }
+          },
+          "projectSteps": {
+            "greenhouse_project_step_1_base_and_temperature": {
+              "title": "Create Sensor and TemperatureSensor"
+            },
+            "greenhouse_project_step_2_add_humidity_override": {
+              "title": "Add HumiditySensor and override reading()"
+            },
+            "greenhouse_project_step_3_mixed_sensor_loop": {
+              "title": "Build one mixed sensor list"
+            },
+            "greenhouse_project_step_4_monitor_class_report": {
+              "title": "Add the GreenhouseMonitor report"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "greenhouse_project_step_1_base_and_temperature": {
+                "title": "Create Sensor and TemperatureSensor",
+                "prompt": "A neighborhood greenhouse needs one program that can monitor different kinds of sensors. Start with a shared `Sensor` class that stores a `zone`. Add a `TemperatureSensor` subclass that also stores `celsius`. For this first milestone, let it inherit the base `reading()` method and print the zone from `main.py`.",
+                "hint": "Store the shared zone in Sensor, then call `super().__init__(zone)` from TemperatureSensor.",
+                "help": {
+                  "concept": "The project uses a new greenhouse problem while applying the inheritance pattern from the lessons.",
+                  "hint_1": "`Sensor.__init__` should assign `self.zone`.",
+                  "hint_2": "`TemperatureSensor` should inherit from `Sensor` and store `self.celsius`."
+                },
+                "starterCode": "# TODO: import TemperatureSensor, create the North Bed sensor, and print reading().\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# TODO: import TemperatureSensor from models.temperature_sensor.\n# Create TemperatureSensor(\"North Bed\", 21.5) and print sensor.reading().\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for greenhouse model imports.\n"
+                  },
+                  "models_sensor_py": {
+                    "content": "# Complete the shared sensor setup.\nclass Sensor:\n    def __init__(self, zone):\n        # TODO: store the greenhouse zone.\n        pass\n\n    def reading(self):\n        # The first milestone returns the shared zone.\n        return self.zone\n"
+                  },
+                  "models_temperature_sensor_py": {
+                    "content": "# Build the first specialized sensor.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor:\n    # TODO: inherit from Sensor and store celsius.\n    pass\n"
+                  }
+                },
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n",
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for greenhouse model imports.\n"
+                  },
+                  "models_sensor_py": {
+                    "content": "class Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        return self.zone\n"
+                  },
+                  "models_temperature_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n"
+                  }
+                },
+                "checks": {
+                  "0": {
+                    "message": "Define the Sensor class."
+                  },
+                  "1": {
+                    "message": "Sensor should accept a zone."
+                  },
+                  "2": {
+                    "message": "Sensor should store the zone attribute."
+                  },
+                  "3": {
+                    "message": "Define the TemperatureSensor class."
+                  },
+                  "4": {
+                    "message": "TemperatureSensor should accept zone and celsius."
+                  },
+                  "5": {
+                    "message": "TemperatureSensor should store zone and celsius."
+                  }
+                }
+              },
+              "greenhouse_project_step_2_add_humidity_override": {
+                "title": "Add HumiditySensor and override reading()",
+                "prompt": "Continue from the working base and temperature sensor. Override `TemperatureSensor.reading()` so it returns `Temperature: <zone> = <celsius> C`. Add `HumiditySensor` with a `percent` value and its own `reading()` result: `Humidity: <zone> = <percent>%`. Print both readings from `main.py`.",
+                "hint": "Keep the shared method name `reading()` in both subclasses.",
+                "help": {
+                  "concept": "Overriding lets each sensor type format its own reading while callers use one method name.",
+                  "hint_1": "TemperatureSensor should format its zone and celsius value.",
+                  "hint_2": "HumiditySensor should inherit Sensor, store percent, and override reading()."
+                },
+                "starterCode": "# Add HumiditySensor and print both specialized readings.\nfrom models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Import HumiditySensor, create both sensors, and print both readings.\nfrom models.temperature_sensor import TemperatureSensor\n\nsensor = TemperatureSensor(\"North Bed\", 21.5)\nprint(sensor.reading())\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for greenhouse model imports.\n"
+                  },
+                  "models_sensor_py": {
+                    "content": "# Keep the shared Sensor class unchanged.\nclass Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        return self.zone\n"
+                  },
+                  "models_temperature_sensor_py": {
+                    "content": "# Override reading() with a temperature-specific result.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        # TODO: return Temperature: <zone> = <celsius> C\n        pass\n"
+                  },
+                  "models_humidity_sensor_py": {
+                    "content": "# Create a HumiditySensor with zone, percent, and reading().\n"
+                  }
+                },
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature = TemperatureSensor(\"North Bed\", 21.5)\nhumidity = HumiditySensor(\"Seedling Bench\", 64)\nprint(temperature.reading())\nprint(humidity.reading())\n",
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\ntemperature = TemperatureSensor(\"North Bed\", 21.5)\nhumidity = HumiditySensor(\"Seedling Bench\", 64)\nprint(temperature.reading())\nprint(humidity.reading())\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for greenhouse model imports.\n"
+                  },
+                  "models_sensor_py": {
+                    "content": "class Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        return self.zone\n"
+                  },
+                  "models_temperature_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                  },
+                  "models_humidity_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                  }
+                },
+                "checks": {
+                  "0": {
+                    "message": "TemperatureSensor.reading() should return the specialized temperature reading."
+                  },
+                  "1": {
+                    "message": "Define the HumiditySensor class."
+                  },
+                  "2": {
+                    "message": "HumiditySensor should accept zone and percent."
+                  },
+                  "3": {
+                    "message": "HumiditySensor should store zone and percent."
+                  },
+                  "4": {
+                    "message": "HumiditySensor.reading() should return the specialized humidity reading."
+                  }
+                }
+              },
+              "greenhouse_project_step_3_mixed_sensor_loop": {
+                "title": "Build one mixed sensor list",
+                "prompt": "Continue from the two working sensor classes. Put a `TemperatureSensor` and a `HumiditySensor` in one `sensors` list. Loop through the list and print `sensor.reading()` for every object. Do not branch on the sensor type.",
+                "hint": "Use one list and one loop; the shared reading() method handles both objects.",
+                "help": {
+                  "concept": "This milestone applies polymorphism to a greenhouse monitoring problem that was not used in the lessons.",
+                  "hint_1": "Create both sensor objects inside `sensors = [...]`.",
+                  "hint_2": "Loop with `for sensor in sensors:` and print `sensor.reading()`."
+                },
+                "starterCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\n# TODO: print every reading with one shared loop.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\n# TODO: loop through sensors and print sensor.reading().\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for greenhouse model imports.\n"
+                  },
+                  "models_sensor_py": {
+                    "content": "# Shared base class; no changes are needed in this milestone.\nclass Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        return self.zone\n"
+                  },
+                  "models_temperature_sensor_py": {
+                    "content": "# Temperature implementation; keep it working.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                  },
+                  "models_humidity_sensor_py": {
+                    "content": "# Humidity implementation; keep it working.\nfrom models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                  }
+                },
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n",
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\n\nsensors = [\n    TemperatureSensor(\"North Bed\", 21.5),\n    HumiditySensor(\"Seedling Bench\", 64),\n]\n\nfor sensor in sensors:\n    print(sensor.reading())\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for greenhouse model imports.\n"
+                  },
+                  "models_sensor_py": {
+                    "content": "class Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        return self.zone\n"
+                  },
+                  "models_temperature_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                  },
+                  "models_humidity_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                  }
+                },
+                "checks": {
+                  "0": {
+                    "message": "Create at least one TemperatureSensor object."
+                  },
+                  "1": {
+                    "message": "Create at least one HumiditySensor object."
+                  },
+                  "2": {
+                    "message": "TemperatureSensor.reading() should still return the expected reading."
+                  },
+                  "3": {
+                    "message": "HumiditySensor.reading() should still return the expected reading."
+                  },
+                  "4": {
+                    "message": "Print both readings from one shared loop."
+                  }
+                }
+              },
+              "greenhouse_project_step_4_monitor_class_report": {
+                "title": "Add the GreenhouseMonitor report",
+                "prompt": "Finish the greenhouse project by adding `GreenhouseMonitor`. It should own a `sensors` list, add sensors with `add_sensor(sensor)`, and print each sensor reading from `print_report()`. Keep `main.py` thin: create the monitor, add both sensors, and print the report.",
+                "hint": "The monitor should own the mixed collection instead of main.py managing the loop.",
+                "help": {
+                  "concept": "The final milestone gives collection ownership to a dedicated class.",
+                  "hint_1": "Initialize `self.sensors` as an empty list.",
+                  "hint_2": "Append in `add_sensor()` and loop over `self.sensors` in `print_report()`."
+                },
+                "starterCode": "# Run this greenhouse demo after completing models/greenhouse_monitor.py.\nfrom models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this greenhouse demo after completing models/greenhouse_monitor.py.\nfrom models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for greenhouse model imports.\n"
+                  },
+                  "models_sensor_py": {
+                    "content": "# Shared base class; keep it unchanged.\nclass Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        return self.zone\n"
+                  },
+                  "models_temperature_sensor_py": {
+                    "content": "# Temperature sensor; keep it unchanged.\nfrom models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                  },
+                  "models_humidity_sensor_py": {
+                    "content": "# Humidity sensor; keep it unchanged.\nfrom models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                  },
+                  "models_greenhouse_monitor_py": {
+                    "content": "class GreenhouseMonitor:\n    def __init__(self):\n        # TODO: create an empty sensors list.\n        pass\n\n    def add_sensor(self, sensor):\n        # TODO: append the sensor.\n        pass\n\n    def print_report(self):\n        # TODO: print sensor.reading() for each stored sensor.\n        pass\n"
+                  }
+                },
+                "solutionCode": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n",
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.temperature_sensor import TemperatureSensor\nfrom models.humidity_sensor import HumiditySensor\nfrom models.greenhouse_monitor import GreenhouseMonitor\n\nmonitor = GreenhouseMonitor()\nmonitor.add_sensor(TemperatureSensor(\"North Bed\", 21.5))\nmonitor.add_sensor(HumiditySensor(\"Seedling Bench\", 64))\nmonitor.print_report()\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Package marker for greenhouse model imports.\n"
+                  },
+                  "models_sensor_py": {
+                    "content": "class Sensor:\n    def __init__(self, zone):\n        self.zone = zone\n\n    def reading(self):\n        return self.zone\n"
+                  },
+                  "models_temperature_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass TemperatureSensor(Sensor):\n    def __init__(self, zone, celsius):\n        super().__init__(zone)\n        self.celsius = celsius\n\n    def reading(self):\n        return f\"Temperature: {self.zone} = {self.celsius} C\"\n"
+                  },
+                  "models_humidity_sensor_py": {
+                    "content": "from models.sensor import Sensor\n\nclass HumiditySensor(Sensor):\n    def __init__(self, zone, percent):\n        super().__init__(zone)\n        self.percent = percent\n\n    def reading(self):\n        return f\"Humidity: {self.zone} = {self.percent}%\"\n"
+                  },
+                  "models_greenhouse_monitor_py": {
+                    "content": "class GreenhouseMonitor:\n    def __init__(self):\n        self.sensors = []\n\n    def add_sensor(self, sensor):\n        self.sensors.append(sensor)\n\n    def print_report(self):\n        for sensor in self.sensors:\n            print(sensor.reading())\n"
+                  }
+                },
+                "checks": {
+                  "0": {
+                    "message": "Define the GreenhouseMonitor class."
+                  },
+                  "1": {
+                    "message": "GreenhouseMonitor should be constructible without arguments."
+                  },
+                  "2": {
+                    "message": "GreenhouseMonitor should own a sensors list."
+                  }
+                },
+                "expectedOutput": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "module-9-catalog-polymorphism-project": {
+          "module-9-catalog-polymorphism-project-sketch-0": {
+            "title": "Project brief: greenhouse sensor monitor",
+            "bodyMarkdown": "A neighborhood greenhouse has temperature and humidity sensors in different growing zones. The staff want one Python program that can read every sensor without separate reporting code for each type.\n\nThis project deliberately uses a **greenhouse monitoring problem**, not the catalog examples from the lessons. You will transfer the same inheritance and polymorphism ideas to a fresh domain.\n\nYou will build it in four cumulative steps:\n\n1. Create a shared `Sensor` base class and a `TemperatureSensor` subclass.\n2. Add `HumiditySensor` and specialize the shared `reading()` method.\n3. Put both sensor types in one mixed list and process them with one loop.\n4. Add `GreenhouseMonitor` to own the collection and print the report.\n\nThe goal is a clean pattern: shared state, specialized behavior, one mixed collection, and a thin `main.py`."
+          }
+        }
+      }
+    }
+  }
+}

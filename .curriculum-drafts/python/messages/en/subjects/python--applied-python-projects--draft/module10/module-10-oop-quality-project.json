@@ -3,31 +3,31 @@
     "python--applied-python-projects--draft": {
       "python-10-testing-debugging-oop-projects": {
         "module-10-oop-quality-project": {
-          "label": "Module 10 OOP Quality Project",
-          "summary": "Stabilize a small catalog app with tests, import fixes, service helpers, and a clean final report.",
+          "label": "Module 10 Animal Shelter Quality Project",
+          "summary": "Stabilize a small animal-shelter intake app with model tests, a CSV loader, state-change checks, reporting helpers, and final regression coverage.",
           "cards": {
             "sketch0": {
               "title": "Project brief"
             },
             "project": {
-              "title": "Catalog App Quality Pass"
+              "title": "Animal Shelter Quality Pass"
             }
           },
           "projectSteps": {
             "try_module_10_oop_quality_project_sketch0": {
-              "title": "Milestone 1: Add model validation tests"
+              "title": "Milestone 1: Validate the pet model"
             },
             "project_step_report_service_tests": {
-              "title": "Milestone 2: Test and fix the reporting service"
+              "title": "Milestone 2: Test the shelter reporting service"
             },
             "project_step_storage_loader": {
-              "title": "Milestone 3: Load catalog items from fixture data"
+              "title": "Milestone 3: Load pets from fixture data"
             },
             "project_step_debug_imports_state": {
-              "title": "Milestone 4: Debug imports and state updates"
+              "title": "Milestone 4: Verify adoption state changes"
             },
             "project_step_regression_summary": {
-              "title": "Milestone 5: Add a reusable summary service and regression tests"
+              "title": "Milestone 5: Add a reusable shelter summary"
             },
             "project_step_final_regression": {
               "title": "Milestone 6: Finish the end-to-end regression workspace"
@@ -36,289 +36,337 @@
           "moduleProject": {
             "steps": {
               "try_module_10_oop_quality_project_sketch0": {
-                "title": "Milestone 1: Add model validation tests",
-                "prompt": "The catalog app is ready for a quality pass. Start by adding model tests in `tests/check_model.py` for `CatalogItem`. Prove that a valid item stores its name, category, and quantity; prove `is_in_stock()` reports correctly; and prove a negative quantity raises `ValueError`. Keep `main.py` runnable so the sample summary still appears in the output panel.",
-                "hint": "This is the first project step. Build a clean starting version, then run it before moving on.",
+                "title": "Milestone 1: validate the shelter pet model",
+                "prompt": "Complete `ShelterPet` in `models/shelter_pet.py`. Store `name`, `species`, and `age`; reject a negative age with `ValueError`; start `adopted` as `False`; and make `is_available()` return whether the pet is still available. Keep the runnable demo in `main.py`.",
+                "hint": "Validate age before assigning the object state.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "This is the first project step. Build a clean starting version, then run it before moving on.",
-                  "hint_2": "Click Run and compare the output panel with the expected result."
+                  "concept": "Model tests should cover stored state, normal behavior, and invalid constructor input.",
+                  "hint_1": "Set `self.adopted = False` for every new pet.",
+                  "hint_2": "`is_available()` should return `not self.adopted`."
                 },
-                "starterCode": "# Write your answer below",
+                "starterCode": "# Run this provided shelter model demo.\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# Write your answer below"
+                    "content": "# Run this provided shelter model demo after completing ShelterPet.\nfrom models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# TODO: Update models/catalog_item.py to complete this step: Milestone 1: Add model validation tests.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        pass"
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        # TODO: reject a negative age, store the three values, and start adopted as False.\n        pass\n\n    def is_available(self):\n        # TODO: return whether the pet has not been adopted.\n        pass\n\n    def mark_adopted(self):\n        # TODO: set adopted to True and return the new value.\n        pass\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "# Add assertions for pet attributes, availability, and negative age validation.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.is_in_stock())\n"
+                    "content": "from models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "from models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nassert pet.name == \"Milo\"\nassert pet.species == \"cat\"\nassert pet.age == 3\nassert pet.is_available() is True\ntry:\n    ShelterPet(\"Broken\", \"dog\", -1)\n    raise AssertionError(\"negative age should fail\")\nexcept ValueError:\n    pass\n"
                   }
                 },
-                "solutionCode": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.is_in_stock())\n",
+                "solutionCode": "from models.shelter_pet import ShelterPet\n\npet = ShelterPet(\"Milo\", \"cat\", 3)\nprint(pet.name)\nprint(pet.is_available())\n",
                 "checks": {
                   "0": {
-                    "message": "Define the CatalogItem class in models/catalog_item.py."
+                    "message": "Store all pet attributes and the adopted state."
                   },
                   "1": {
-                    "message": "A valid CatalogItem should be constructible with name, category, and quantity."
+                    "message": "A new pet should be available."
                   },
                   "2": {
-                    "message": "CatalogItem instances should store name, category, and quantity attributes."
-                  },
-                  "3": {
-                    "message": "is_in_stock() should return True when quantity is greater than 0."
-                  },
-                  "4": {
-                    "message": "is_in_stock() should return False when quantity is 0."
-                  },
-                  "5": {
-                    "message": "Running the workspace should still print at least one line from main.py."
+                    "message": "Keep main.py runnable."
                   }
-                }
+                },
+                "expectedOutput": "Milo\nTrue"
               },
               "project_step_report_service_tests": {
-                "title": "Milestone 2: Test and fix the reporting service",
-                "prompt": "Carry forward the working model tests. Now add service tests in `tests/check_reporting.py` for `total_quantity(items)` and `low_stock_names(items, threshold)`. Then fix the reporting code so the tests pass. `low_stock_names` should return item names whose quantity is less than or equal to the threshold, in the same order as the input list. Keep the sample run in `main.py` working.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "title": "Milestone 2: test the shelter reporting service",
+                "prompt": "Complete `total_age(pets)` and `young_pet_names(pets, max_age)` in `services/reporting.py`. Return the sum of all ages and the names of pets at or below the age limit in their original order. Do not print inside the service.",
+                "hint": "Build the name list from each pet object instead of hard-coding the sample output.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "Small pure reporting helpers are easy to test because they return values without changing state.",
+                  "hint_1": "Use each pet's `age` for the total.",
+                  "hint_2": "Include a name when `pet.age <= max_age`."
                 },
-                "starterCode": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.is_in_stock())\n",
+                "starterCode": "# Run this report demo after completing services/reporting.py.\nfrom models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: Update main.py to complete this step: Milestone 2: Test and fix the reporting service.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.is_in_stock())\n"
+                    "content": "# Run this report demo after completing the reporting helpers.\nfrom models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# Keep models/catalog_item.py unchanged for this step: Milestone 2: Test and fix the reporting service.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
+                  "models_shelter_pet_py": {
+                    "content": "# Validated shelter model from milestone 1.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def total_age(pets):\n    # TODO: return the sum of every pet's age.\n    pass\n\ndef young_pet_names(pets, max_age):\n    # TODO: return names for pets at or below max_age, preserving order.\n    pass\n\ndef build_summary(pets, max_age):\n    # TODO: return total_pets, available_names, and young_pet_count.\n    pass\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "# Add assertions for total_age() and young_pet_names().\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_quantity(items):\n    return sum(get_field(item, 'quantity') for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n\nprint(total_quantity([{'quantity': 4}, {'quantity': 0}, {'quantity': 2}]))\nprint(', '.join(low_stock_names([{'name': 'Notebook', 'quantity': 4}, {'name': 'Marker', 'quantity': 0}, {'name': 'Tape', 'quantity': 2}], 2)))\n"
+                    "content": "from models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_quantity(items):\n    return sum(item[\"quantity\"] for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [item[\"name\"] for item in items if item[\"quantity\"] <= threshold]"
+                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "from models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nassert total_age(pets) == 9\nassert young_pet_names(pets, 3) == [\"Milo\", \"Pepper\"]\n"
                   }
                 },
-                "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_quantity(items):\n    return sum(get_field(item, 'quantity') for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n\nprint(total_quantity([{'quantity': 4}, {'quantity': 0}, {'quantity': 2}]))\nprint(', '.join(low_stock_names([{'name': 'Notebook', 'quantity': 4}, {'name': 'Marker', 'quantity': 0}, {'name': 'Tape', 'quantity': 2}], 2)))\n",
+                "solutionCode": "from models.shelter_pet import ShelterPet\nfrom services.reporting import total_age, young_pet_names\n\npets = [ShelterPet(\"Milo\", \"cat\", 3), ShelterPet(\"Luna\", \"dog\", 5), ShelterPet(\"Pepper\", \"rabbit\", 1)]\nprint(total_age(pets))\nprint(\", \".join(young_pet_names(pets, 3)))\n",
                 "checks": {
                   "0": {
-                    "message": "total_quantity(items) should add the quantity from every CatalogItem."
-                  },
-                  "1": {
-                    "message": "low_stock_names(items, threshold) should include names whose quantity is less than or equal to the threshold."
-                  },
-                  "2": {
-                    "message": "Running the workspace should print both the total quantity and low-stock summary."
+                    "message": "Return values that produce the exact two-line shelter report."
                   }
-                }
+                },
+                "expectedOutput": "9\nMilo, Pepper"
               },
               "project_step_storage_loader": {
-                "title": "Milestone 3: Load catalog items from fixture data",
-                "prompt": "Carry forward the tested model and reporting service. Implement `load_items(path)` in `storage/catalog_loader.py`. It should read `data/catalog.csv`, skip the header row, create `CatalogItem` objects, and return the list. Add tests in `tests/check_loader.py` that verify the loader returns the right number of objects and preserves names and quantities from the fixture file. Update `main.py` to load from the CSV before printing the report.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "title": "Milestone 3: load shelter pets from CSV",
+                "prompt": "Complete `load_pets(path)` in `storage/pet_loader.py`. Read the CSV with `csv.DictReader`, convert `age` to `int`, create `ShelterPet` objects, and return them in file order.",
+                "hint": "Create one ShelterPet for each row and append it to a list.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "A storage layer translates file rows into domain objects.",
+                  "hint_1": "Open the path with `newline=\"\"`.",
+                  "hint_2": "Convert `row[\"age\"]` before calling the constructor."
                 },
-                "starterCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_quantity(items):\n    return sum(get_field(item, 'quantity') for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n\nprint(total_quantity([{'quantity': 4}, {'quantity': 0}, {'quantity': 2}]))\nprint(', '.join(low_stock_names([{'name': 'Notebook', 'quantity': 4}, {'name': 'Marker', 'quantity': 0}, {'name': 'Tape', 'quantity': 2}], 2)))\n",
+                "starterCode": "# Run this loader demo after completing storage/pet_loader.py.\nfrom storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: Update main.py to complete this step: Milestone 3: Load catalog items from fixture data.\ndef get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef total_quantity(items):\n    return sum(get_field(item, 'quantity') for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n\nprint(total_quantity([{'quantity': 4}, {'quantity': 0}, {'quantity': 2}]))\nprint(', '.join(low_stock_names([{'name': 'Notebook', 'quantity': 4}, {'name': 'Marker', 'quantity': 0}, {'name': 'Tape', 'quantity': 2}], 2)))\n"
+                    "content": "# Run this loader demo after completing load_pets().\nfrom storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# Keep models/catalog_item.py unchanged for this step: Milestone 3: Load catalog items from fixture data.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
+                  "models_shelter_pet_py": {
+                    "content": "# Validated shelter model; keep it working.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
                   },
                   "services_reporting_py": {
-                    "content": "# TODO: Update services/reporting.py to complete this step: Milestone 3: Load catalog items from fixture data.\ndef total_quantity(items):\n    return sum(item[\"quantity\"] for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [item[\"name\"] for item in items if item[\"quantity\"] <= threshold]"
+                    "content": "# Reporting helpers from milestone 2.\ndef total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
+                  },
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    # TODO: read the CSV, convert age to int, create ShelterPet objects, and return them.\n    pass\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# Add assertions for row order, object types, and converted ages.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "from storage.catalog_loader import load_items\n\nitems = load_items('data/catalog.csv')\nprint(items[0].name)\nprint(items[1].name)\n"
+                    "content": "from storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_quantity(items):\n    return sum(item.quantity for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]"
+                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
-                  "storage_catalog_loader_py": {
-                    "content": "from models.catalog_item import CatalogItem\n\n\ndef load_items(path):\n    return [\n        CatalogItem(\"Notebook\", \"Office\", 4),\n        CatalogItem(\"Marker\", \"Office\", 0),\n        CatalogItem(\"Tape\", \"Office\", 2),\n    ]"
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "from storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert [pet.age for pet in pets] == [3, 5, 1]\n"
                   }
                 },
-                "solutionCode": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def __eq__(self, other):\n        return (\n            hasattr(other, \"name\")\n            and hasattr(other, \"category\")\n            and hasattr(other, \"quantity\")\n            and self.name == other.name\n            and self.category == other.category\n            and self.quantity == other.quantity\n        )\n\n\ndef load_items(path):\n    return [\n        CatalogItem(\"Notebook\", \"Office\", 4),\n        CatalogItem(\"Marker\", \"Office\", 0),\n        CatalogItem(\"Tape\", \"Office\", 2),\n    ]\n\nitems = load_items('data/catalog.csv')\nprint(items[0].name)\nprint(items[1].name)\n",
+                "solutionCode": "from storage.pet_loader import load_pets\n\nfor pet in load_pets(\"data/pets.csv\"):\n    print(pet.name)\n",
                 "checks": {
                   "0": {
-                    "message": "load_items(path) should return CatalogItem objects built from the CSV fixture."
-                  },
-                  "1": {
-                    "message": "Running the workspace should still print the report after loading from the CSV file."
+                    "message": "Load all three CSV rows as ShelterPet objects."
                   }
                 },
-                "expectedOutput": "Notebook\nMarker"
+                "expectedOutput": "Milo\nLuna\nPepper"
               },
               "project_step_debug_imports_state": {
-                "title": "Milestone 4: Debug imports and state updates",
-                "prompt": "Carry forward the loader and reporting work. The app now needs a restock feature. Add `add_stock(amount)` to `CatalogItem`; it should increase quantity for positive amounts and raise `ValueError` for negative amounts. Add tests in `tests/check_restock.py` for both the successful state change and the invalid amount case. Update `main.py` so it restocks `Marker` by 3 before printing the final summary.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "title": "Milestone 4: validate adoption state changes",
+                "prompt": "Finish `ShelterPet.mark_adopted()` in `models/shelter_pet.py`. It should set `adopted` to `True` and return the new value. The provided main script loads Luna, marks her adopted, and confirms she is no longer available.",
+                "hint": "Change the object state before returning it.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "A state-changing method should update one object and return a value that can be tested.",
+                  "hint_1": "Assign `self.adopted = True`.",
+                  "hint_2": "`is_available()` should become `False` after the change."
                 },
-                "starterCode": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def __eq__(self, other):\n        return (\n            hasattr(other, \"name\")\n            and hasattr(other, \"category\")\n            and hasattr(other, \"quantity\")\n            and self.name == other.name\n            and self.category == other.category\n            and self.quantity == other.quantity\n        )\n\n\ndef load_items(path):\n    return [\n        CatalogItem(\"Notebook\", \"Office\", 4),\n        CatalogItem(\"Marker\", \"Office\", 0),\n        CatalogItem(\"Tape\", \"Office\", 2),\n    ]\n\nitems = load_items('data/catalog.csv')\nprint(items[0].name)\nprint(items[1].name)\n",
+                "starterCode": "# Verify one adoption state change.\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: Update main.py to complete this step: Milestone 4: Debug imports and state updates.\nfrom storage.catalog_loader import load_items\n\nitems = load_items('data/catalog.csv')\nprint(items[0].name)\nprint(items[1].name)\n"
+                    "content": "# Run this state-change check after completing mark_adopted().\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# TODO: Update models/catalog_item.py to complete this step: Milestone 4: Debug imports and state updates.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0"
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        # TODO: set adopted to True and return the new value.\n        pass\n"
                   },
                   "services_reporting_py": {
-                    "content": "# TODO: Update services/reporting.py to complete this step: Milestone 4: Debug imports and state updates.\ndef total_quantity(items):\n    return sum(item.quantity for item in items)\n\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]"
+                    "content": "# Keep the report helpers unchanged.\ndef total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
-                  "storage_catalog_loader_py": {
-                    "content": "# TODO: Update storage/catalog_loader.py to complete this step: Milestone 4: Debug imports and state updates.\nfrom models.catalog_item import CatalogItem\n\n\ndef load_items(path):\n    return [\n        CatalogItem(\"Notebook\", \"Office\", 4),\n        CatalogItem(\"Marker\", \"Office\", 0),\n        CatalogItem(\"Tape\", \"Office\", 2),\n    ]"
+                  "storage_pet_loader_py": {
+                    "content": "# Keep the CSV loader unchanged.\nimport csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "# Add assertions for mark_adopted() and is_available().\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def restock(self, amount):\n        self.quantity += amount\n        return self.quantity\n\nitem = CatalogItem('Marker', 'Office', 0)\nitem.restock(3)\nprint(item.name)\nprint(item.quantity)\n"
+                    "content": "from storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def restock(self, amount):\n        if amount > 0:\n            self.quantity += amount\n        return self.quantity"
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
                   },
                   "services_reporting_py": {
-                    "content": "def total_quantity(value):\n    return 6"
+                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
-                  "storage_catalog_loader_py": {
-                    "content": "def load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]"
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                  },
+                  "tests_check_adoption_py": {
+                    "content": "from storage.pet_loader import load_pets\n\nluna = load_pets(\"data/pets.csv\")[1]\nassert luna.mark_adopted() is True\nassert luna.is_available() is False\n"
                   }
                 },
-                "solutionCode": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def restock(self, amount):\n        self.quantity += amount\n        return self.quantity\n\nitem = CatalogItem('Marker', 'Office', 0)\nitem.restock(3)\nprint(item.name)\nprint(item.quantity)\n",
+                "solutionCode": "from storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nluna = pets[1]\nprint(luna.mark_adopted())\nprint(luna.is_available())\n",
                 "checks": {
                   "0": {
-                    "message": "Keep the CatalogItem class available for the restock feature."
+                    "message": "mark_adopted() should return the new adopted state."
                   },
                   "1": {
-                    "message": "Running the workspace should still print the updated report after restocking."
+                    "message": "Print the adopted result and the updated availability."
                   }
                 },
-                "expectedOutput": "Marker\n3"
+                "expectedOutput": "True\nFalse"
               },
               "project_step_regression_summary": {
-                "title": "Milestone 5: Add a reusable summary service and regression tests",
-                "prompt": "Carry forward the restock behavior. Create `build_summary(items, threshold)` in `services/reporting.py`. It should return a dictionary with `total_quantity`, `low_stock_names`, and `in_stock_count`. Add tests in `tests/check_summary.py` that verify the dictionary for the loaded fixture data after `Marker` has been restocked by 3. Update `main.py` to call `build_summary` and print each part of the summary.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "title": "Milestone 5: build a reusable shelter summary",
+                "prompt": "Complete `build_summary(pets, max_age)` in `services/reporting.py`. Return a dictionary with `total_pets`, `available_names`, and `young_pet_count`. The main script loads the fixture, marks Luna adopted, and prints all three summary values.",
+                "hint": "Reuse `young_pet_names()` instead of duplicating the age rule.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "A regression summary combines tested helpers into one stable service result.",
+                  "hint_1": "Filter availability with `pet.is_available()`.",
+                  "hint_2": "Count the list returned by `young_pet_names()`."
                 },
-                "starterCode": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def restock(self, amount):\n        self.quantity += amount\n        return self.quantity\n\nitem = CatalogItem('Marker', 'Office', 0)\nitem.restock(3)\nprint(item.name)\nprint(item.quantity)\n",
+                "starterCode": "# Print the cumulative shelter summary after completing build_summary().\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: Update main.py to complete this step: Milestone 5: Add a reusable summary service and regression tests.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def restock(self, amount):\n        self.quantity += amount\n        return self.quantity\n\nitem = CatalogItem('Marker', 'Office', 0)\nitem.restock(3)\nprint(item.name)\nprint(item.quantity)\n"
+                    "content": "# Run this cumulative summary after completing build_summary().\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# TODO: Update models/catalog_item.py to complete this step: Milestone 5: Add a reusable summary service and regression tests.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def restock(self, amount):\n        if amount > 0:\n            self.quantity += amount\n        return self.quantity"
+                  "models_shelter_pet_py": {
+                    "content": "# Keep the validated model unchanged.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
                   },
                   "services_reporting_py": {
-                    "content": "# TODO: Update services/reporting.py to complete this step: Milestone 5: Add a reusable summary service and regression tests.\ndef total_quantity(value):\n    return 6"
+                    "content": "def total_age(pets):\n    # TODO: return the sum of every pet's age.\n    pass\n\ndef young_pet_names(pets, max_age):\n    # TODO: return names for pets at or below max_age, preserving order.\n    pass\n\ndef build_summary(pets, max_age):\n    # TODO: return total_pets, available_names, and young_pet_count.\n    pass\n"
                   },
-                  "storage_catalog_loader_py": {
-                    "content": "# Keep storage/catalog_loader.py unchanged for this step: Milestone 5: Add a reusable summary service and regression tests.\ndef load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]"
+                  "storage_pet_loader_py": {
+                    "content": "# Keep the CSV loader unchanged.\nimport csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# Add assertions for every key returned by build_summary().\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef build_summary(items, threshold):\n    total = sum(get_field(item, 'quantity') for item in items)\n    low = [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n    in_stock = sum(1 for item in items if get_field(item, 'quantity') > 0)\n    return {\n        'total_quantity': total,\n        'low_stock_names': low,\n        'in_stock_count': in_stock,\n    }\n\nsummary = build_summary([\n    {'name': 'Notebook', 'quantity': 4},\n    {'name': 'Marker', 'quantity': 3},\n    {'name': 'Tape', 'quantity': 2},\n], 2)\nprint(summary['total_quantity'])\nprint(summary['low_stock_names'])\nprint(summary['in_stock_count'])\n"
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self):\n        pass"
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
                   },
                   "services_reporting_py": {
-                    "content": "def build_summary(items, threshold):\n    total = sum(item[\"quantity\"] for item in items)\n    low_stock = [item[\"name\"] for item in items if item[\"quantity\"] <= threshold]\n    in_stock = sum(1 for item in items if item[\"quantity\"] > 0)\n    return {\n        \"total_quantity\": total,\n        \"low_stock_names\": low_stock,\n        \"in_stock_count\": in_stock,\n    }"
+                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
-                  "storage_catalog_loader_py": {
-                    "content": "def load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]"
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nassert summary == {\"total_pets\": 3, \"available_names\": [\"Milo\", \"Pepper\"], \"young_pet_count\": 2}\n"
                   }
                 },
-                "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef build_summary(items, threshold):\n    total = sum(get_field(item, 'quantity') for item in items)\n    low = [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n    in_stock = sum(1 for item in items if get_field(item, 'quantity') > 0)\n    return {\n        'total_quantity': total,\n        'low_stock_names': low,\n        'in_stock_count': in_stock,\n    }\n\nsummary = build_summary([\n    {'name': 'Notebook', 'quantity': 4},\n    {'name': 'Marker', 'quantity': 3},\n    {'name': 'Tape', 'quantity': 2},\n], 2)\nprint(summary['total_quantity'])\nprint(summary['low_stock_names'])\nprint(summary['in_stock_count'])\n",
+                "solutionCode": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\n",
                 "checks": {
                   "0": {
-                    "message": "build_summary(items, threshold) should return the combined report values in a dictionary."
-                  },
-                  "1": {
-                    "message": "Running the workspace should print total quantity, low-stock names, and in-stock count."
+                    "message": "Return all three shelter summary values so main.py prints the expected report."
                   }
                 },
-                "expectedOutput": "9\n['Tape']\n3"
+                "expectedOutput": "3\nMilo, Pepper\n2"
               },
               "project_step_final_regression": {
-                "title": "Milestone 6: Finish the end-to-end regression workspace",
-                "prompt": "Finish the quality pass. Add `tests/check_regression.py` to exercise the full flow: load fixture data, restock `Marker` by 3, build the summary with threshold 2, and assert the final values. Add a short `README.md` that explains what each folder does. Keep `main.py` as the runnable demonstration of the final deliverable.",
-                "hint": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
+                "title": "Milestone 6: finish the shelter regression workspace",
+                "prompt": "Finish the cumulative shelter quality workspace. Keep the validated model, CSV loader, adoption state, and summary service working; add meaningful assertions in `tests/check_regression.py`; and complete `README.md` with the responsibility of each folder. The runnable demo must print the final summary and confirmation line.",
+                "hint": "Run the complete workflow from fixture loading through the final report.",
                 "help": {
-                  "concept": "This module project is progressive. Each step starts from the previous working solution and adds one focused feature.",
-                  "hint_1": "Begin with the working code from the previous step. Keep that code, follow the new comments, and add only the next focused behavior.",
-                  "hint_2": "Run the previous working code first, then make only the focused change for this step."
+                  "concept": "A final regression workspace protects the behavior that the project now promises.",
+                  "hint_1": "Assert the loaded names, adoption state, and summary dictionary.",
+                  "hint_2": "Document models, storage, services, tests, and the runner."
                 },
-                "starterCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef build_summary(items, threshold):\n    total = sum(get_field(item, 'quantity') for item in items)\n    low = [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n    in_stock = sum(1 for item in items if get_field(item, 'quantity') > 0)\n    return {\n        'total_quantity': total,\n        'low_stock_names': low,\n        'in_stock_count': in_stock,\n    }\n\nsummary = build_summary([\n    {'name': 'Notebook', 'quantity': 4},\n    {'name': 'Marker', 'quantity': 3},\n    {'name': 'Tape', 'quantity': 2},\n], 2)\nprint(summary['total_quantity'])\nprint(summary['low_stock_names'])\nprint(summary['in_stock_count'])\n",
+                "starterCode": "# Finish the regression assertions and README, then run this final demo.\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n",
                 "starterFiles": {
                   "main_py": {
-                    "content": "# TODO: Update main.py to complete this step: Milestone 6: Finish the end-to-end regression workspace.\ndef get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef build_summary(items, threshold):\n    total = sum(get_field(item, 'quantity') for item in items)\n    low = [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n    in_stock = sum(1 for item in items if get_field(item, 'quantity') > 0)\n    return {\n        'total_quantity': total,\n        'low_stock_names': low,\n        'in_stock_count': in_stock,\n    }\n\nsummary = build_summary([\n    {'name': 'Notebook', 'quantity': 4},\n    {'name': 'Marker', 'quantity': 3},\n    {'name': 'Tape', 'quantity': 2},\n], 2)\nprint(summary['total_quantity'])\nprint(summary['low_stock_names'])\nprint(summary['in_stock_count'])\n"
+                    "content": "# Finish the regression assertions and README, then run this final demo.\nfrom services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "# Keep models/catalog_item.py unchanged for this step: Milestone 6: Finish the end-to-end regression workspace.\nclass CatalogItem:\n    def __init__(self):\n        pass"
+                  "models_shelter_pet_py": {
+                    "content": "# Keep the validated model unchanged.\nclass ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
                   },
                   "services_reporting_py": {
-                    "content": "# TODO: Update services/reporting.py to complete this step: Milestone 6: Finish the end-to-end regression workspace.\ndef build_summary(items, threshold):\n    total = sum(item[\"quantity\"] for item in items)\n    low_stock = [item[\"name\"] for item in items if item[\"quantity\"] <= threshold]\n    in_stock = sum(1 for item in items if item[\"quantity\"] > 0)\n    return {\n        \"total_quantity\": total,\n        \"low_stock_names\": low_stock,\n        \"in_stock_count\": in_stock,\n    }"
+                    "content": "# Keep the tested report service unchanged.\ndef total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
-                  "storage_catalog_loader_py": {
-                    "content": "# Keep storage/catalog_loader.py unchanged for this step: Milestone 6: Finish the end-to-end regression workspace.\ndef load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]"
+                  "storage_pet_loader_py": {
+                    "content": "# Keep the tested CSV loader unchanged.\nimport csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# TODO: assert the full shelter workflow from CSV to summary.\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\nTODO: explain the responsibility of models, storage, services, tests, and main.py.\n"
                   }
                 },
                 "solutionFiles": {
                   "main_py": {
-                    "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef load_items(path):\n    return [\n        {'name': 'Notebook', 'category': 'Office', 'quantity': 4},\n        {'name': 'Marker', 'category': 'Office', 'quantity': 0},\n        {'name': 'Tape', 'category': 'Office', 'quantity': 2},\n    ]\n\n\ndef build_summary(items, threshold):\n    total = sum(get_field(item, 'quantity') for item in items)\n    low = [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n    in_stock = sum(1 for item in items if get_field(item, 'quantity') > 0)\n    return {\n        'total_quantity': total,\n        'low_stock_names': low,\n        'in_stock_count': in_stock,\n    }\n\nsummary = build_summary([\n    {'name': 'Notebook', 'quantity': 4},\n    {'name': 'Marker', 'quantity': 3},\n    {'name': 'Tape', 'quantity': 2},\n], 2)\nprint(summary['total_quantity'])\nprint(summary['low_stock_names'])\nprint(summary['in_stock_count'])\n"
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n"
                   },
-                  "models_catalog_item_py": {
-                    "content": "class CatalogItem:\n    def __init__(self):\n        pass"
+                  "models_shelter_pet_py": {
+                    "content": "class ShelterPet:\n    def __init__(self, name, species, age):\n        if age < 0:\n            raise ValueError(\"age cannot be negative\")\n        self.name = name\n        self.species = species\n        self.age = age\n        self.adopted = False\n\n    def is_available(self):\n        return not self.adopted\n\n    def mark_adopted(self):\n        self.adopted = True\n        return self.adopted\n"
                   },
                   "services_reporting_py": {
-                    "content": "def build_summary(value, priority):\n    return [[\"total_quantity\", 9], [\"low_stock_names\", [\"Tape\"]], [\"in_stock_count\", 3]]"
+                    "content": "def total_age(pets):\n    return sum(pet.age for pet in pets)\n\ndef young_pet_names(pets, max_age):\n    return [pet.name for pet in pets if pet.age <= max_age]\n\ndef build_summary(pets, max_age):\n    return {\n        \"total_pets\": len(pets),\n        \"available_names\": [pet.name for pet in pets if pet.is_available()],\n        \"young_pet_count\": len(young_pet_names(pets, max_age)),\n    }\n"
                   },
-                  "storage_catalog_loader_py": {
-                    "content": "def load_items(value):\n    return [[[\"name\", \"Notebook\"], [\"category\", \"Office\"], [\"quantity\", 4]], [[\"name\", \"Marker\"], [\"category\", \"Office\"], [\"quantity\", 0]], [[\"name\", \"Tape\"], [\"category\", \"Office\"], [\"quantity\", 2]]]"
+                  "storage_pet_loader_py": {
+                    "content": "import csv\n\nfrom models.shelter_pet import ShelterPet\n\ndef load_pets(path):\n    pets = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            pets.append(ShelterPet(row[\"name\"], row[\"species\"], int(row[\"age\"])))\n    return pets\n"
+                  },
+                  "data_pets_csv": {
+                    "content": "name,species,age\nMilo,cat,3\nLuna,dog,5\nPepper,rabbit,1\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\nassert [pet.name for pet in pets] == [\"Milo\", \"Luna\", \"Pepper\"]\nassert pets[1].mark_adopted() is True\nassert build_summary(pets, 3) == {\"total_pets\": 3, \"available_names\": [\"Milo\", \"Pepper\"], \"young_pet_count\": 2}\n"
+                  },
+                  "README_md": {
+                    "content": "# Animal Shelter Quality Pass\n\n- `models/` owns pet state and adoption behavior.\n- `storage/` converts CSV rows into ShelterPet objects.\n- `services/` returns report data without printing.\n- `tests/` protects model, loader, state, and summary behavior.\n- `main.py` runs the final demonstration.\n"
                   }
                 },
-                "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\ndef load_items(path):\n    return [\n        {'name': 'Notebook', 'category': 'Office', 'quantity': 4},\n        {'name': 'Marker', 'category': 'Office', 'quantity': 0},\n        {'name': 'Tape', 'category': 'Office', 'quantity': 2},\n    ]\n\n\ndef build_summary(items, threshold):\n    total = sum(get_field(item, 'quantity') for item in items)\n    low = [get_field(item, 'name') for item in items if get_field(item, 'quantity') <= threshold]\n    in_stock = sum(1 for item in items if get_field(item, 'quantity') > 0)\n    return {\n        'total_quantity': total,\n        'low_stock_names': low,\n        'in_stock_count': in_stock,\n    }\n\nsummary = build_summary([\n    {'name': 'Notebook', 'quantity': 4},\n    {'name': 'Marker', 'quantity': 3},\n    {'name': 'Tape', 'quantity': 2},\n], 2)\nprint(summary['total_quantity'])\nprint(summary['low_stock_names'])\nprint(summary['in_stock_count'])\n",
+                "solutionCode": "from services.reporting import build_summary\nfrom storage.pet_loader import load_pets\n\npets = load_pets(\"data/pets.csv\")\npets[1].mark_adopted()\nsummary = build_summary(pets, 3)\nprint(summary[\"total_pets\"])\nprint(\", \".join(summary[\"available_names\"]))\nprint(summary[\"young_pet_count\"])\nprint(\"regression checks passed\")\n",
                 "checks": {
                   "0": {
-                    "message": "The loader should still return the expected objects from the fixture file."
-                  },
-                  "1": {
-                    "message": "The final summary should match the expected regression values after restocking."
-                  },
-                  "2": {
-                    "message": "Running the final workspace should print the three summary lines."
+                    "message": "Keep the full shelter report and print the regression confirmation line."
                   }
-                }
+                },
+                "expectedOutput": "3\nMilo, Pepper\n2\nregression checks passed"
               }
             }
           }
@@ -331,8 +379,8 @@
       "python-10-testing-debugging-oop-projects": {
         "module-10-oop-quality-project": {
           "module-10-oop-quality-project-sketch0": {
-            "title": "Project brief: stabilize a catalog app before handoff",
-            "bodyMarkdown": "A teammate built a small catalog app, but the team does not trust it yet. Some methods work only for the happy path, some imports are fragile, and the report code is too hard to test.\n\nYour job is a **quality pass**, not a total rewrite. You will keep the app recognizable while making it safer.\n\nYou will practice the Module 10 skills in a real workflow:\n\n1. Add small assertion-based tests for model behavior.\n2. Fix state and import bugs that the tests reveal.\n3. Move messy report logic into a service.\n4. Add a final regression check so future changes do not break the app silently.\n\nThe lesson examples use smaller objects so the ideas are easy to see. This project applies those ideas to a catalog app that feels closer to a real code handoff."
+            "title": "Project brief: stabilize an animal-shelter intake app",
+            "bodyMarkdown": "A neighborhood animal shelter has a small intake app, but staff do not trust it yet. Pet ages can be invalid, adoption state is not fully tested, and the CSV/report workflow needs regression coverage.\n\nThis project uses an **animal-shelter problem**, not the books, catalogs, stock items, counters, or task examples from the lessons. The coding skills transfer, but the situation is new.\n\nYou will complete six cumulative milestones:\n\n1. Validate the `ShelterPet` model and write focused assertions.\n2. Test pure reporting helpers.\n3. Load pet objects from CSV fixture data.\n4. Verify adoption state changes.\n5. Build one reusable shelter summary.\n6. Finish a documented end-to-end regression workspace.\n\nEach milestone starts from the previous working version, so the final result feels like a real quality pass rather than disconnected exercises."
           }
         }
       }

@@ -22,21 +22,21 @@
     }
   },
   "topic": {
-    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.label",
-    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.summary"
+    "labelKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.sketch0.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.sketch0.title",
       "sketchId": "module-8-account-tracker-project-sketch-0",
       "height": 420
     },
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.project.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -45,7 +45,7 @@
         "steps": [
           {
             "id": "try_module_8_account_tracker_project_sketch0",
-            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.try_module_8_account_tracker_project_sketch0.title",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.try_module_8_account_tracker_project_sketch0.title",
             "exerciseKey": "try-module-8-account-tracker-project-sketch0",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -54,7 +54,7 @@
           },
           {
             "id": "account_tracker_step_2_constructor_attributes",
-            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_2_constructor_attributes.title",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_2_constructor_attributes.title",
             "exerciseKey": "account-tracker-step-2-constructor-attributes",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -64,7 +64,7 @@
           },
           {
             "id": "account_tracker_step_3_add_methods",
-            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_3_add_methods.title",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_3_add_methods.title",
             "exerciseKey": "account-tracker-step-3-add-methods",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -74,7 +74,7 @@
           },
           {
             "id": "account_tracker_step_4_validation_summary",
-            "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_4_validation_summary.title",
+            "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.projectSteps.account_tracker_step_4_validation_summary.title",
             "exerciseKey": "account-tracker-step-4-validation-summary",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -90,8 +90,8 @@
     {
       "id": "module-8-account-tracker-project-sketch-0",
       "archetype": "paragraph",
-      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.module-8-account-tracker-project-sketch-0.title",
-      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.module-8-account-tracker-project-sketch-0.bodyMarkdown"
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.module-8-account-tracker-project-sketch-0.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.module-8-account-tracker-project-sketch-0.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -100,20 +100,20 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.models_account_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -122,14 +122,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionFiles.models_account_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -138,40 +138,40 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.models_account_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.starterFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionFiles.models_account_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.solutionFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -181,19 +181,22 @@
           {
             "type": "defines_class",
             "className": "Account",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.0.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "constructible",
             "className": "Account",
             "constructorArgs": [],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.1.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "created_instances",
             "className": "Account",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.2.message",
+            "path": "main.py"
           }
         ]
       }
@@ -203,20 +206,20 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.models_account_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -225,14 +228,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionFiles.models_account_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -241,18 +244,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.models_account_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.starterFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -263,18 +266,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionFiles.models_account_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.solutionFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -284,7 +287,8 @@
           {
             "type": "defines_class",
             "className": "Account",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.0.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "constructible",
@@ -293,7 +297,8 @@
               "Ava",
               125
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.1.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "instance_attributes",
@@ -306,24 +311,27 @@
               "owner",
               "balance"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.2.message",
+            "path": "models/account.py"
           },
           {
             "type": "created_instances",
             "className": "Account",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message",
+            "path": "main.py"
           },
           {
             "type": "printed_line_count",
-            "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.4.message"
+            "min": 3,
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.4.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Ava\n125\n",
+            "stdout": "Riverside Club\nAva\n125\n",
             "match": "exact"
           }
         ],
@@ -335,20 +343,20 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.models_account_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -357,14 +365,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionFiles.models_account_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -373,18 +381,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.models_account_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.starterFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -395,29 +403,24 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionFiles.models_account_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.solutionFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           }
         ],
         "semanticChecks": [
-          {
-            "type": "defines_class",
-            "className": "Account",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.0.message"
-          },
           {
             "type": "method_returns",
             "className": "Account",
@@ -433,7 +436,8 @@
             "methodArgKinds": [],
             "expected": 150,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.1.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "method_sequence_returns",
@@ -459,18 +463,38 @@
             "methodArgKinds": [],
             "expected": 110,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.1.message",
+            "path": "models/account.py"
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "is_valid_amount",
+            "methodArgs": [
+              -5
+            ],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.2.message",
+            "path": "models/account.py"
           },
           {
             "type": "printed_line_count",
             "min": 3,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.3.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.3.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Ava\n150\n110\n",
+            "stdout": "150\n110\nFalse\n",
             "match": "exact"
           }
         ],
@@ -482,20 +506,20 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.models_account_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -504,14 +528,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/account.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionFiles.models_account_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionFiles.models_account_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -520,18 +544,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.models_account_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.starterFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -542,18 +566,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/account.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionFiles.models_account_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.solutionFiles.models_account_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -575,7 +599,8 @@
             "methodArgKinds": [],
             "expected": 125,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.0.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "method_sequence_returns",
@@ -611,20 +636,22 @@
             "methodName": "summary",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Ava: $110.00",
+            "expected": "Riverside Club | Ava: $110.00",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.1.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "printed_line_count",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.2.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Ava: $110.00\n",
+            "stdout": "Riverside Club | Ava: $40.00\n",
             "match": "exact"
           }
         ],

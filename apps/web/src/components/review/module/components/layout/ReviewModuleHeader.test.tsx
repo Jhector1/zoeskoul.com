@@ -11,9 +11,9 @@ vi.mock("next-intl", () => ({
             "review.header.resetMenuTitle": "Reset progress",
             "review.header.resetMenuDescription":
                 "Choose how much work to clear. You will confirm before anything is deleted.",
-            "review.header.modulesTitle": "Go to modules",
+            "review.header.modulesTitle": "Open course modules",
             "review.header.modulesLoading": "Opening modules...",
-            "review.header.modulesButton": "← Modules",
+            "review.header.modulesButton": "Modules",
             "review.header.topicsTitle": "Topics",
             "review.header.topicsButton": "Topics",
             "review.header.topicsButtonCollapsed": "Topics ▶",
@@ -74,6 +74,7 @@ function renderHeader(overrides: Partial<React.ComponentProps<typeof ReviewModul
             leftCollapsed={true}
             rightCollapsed={true}
             modulesHref="/en/subjects/python/modules"
+            onOpenModulesDrawer={vi.fn()}
             onToggleLeftPanel={vi.fn()}
             onToggleRightPanel={vi.fn()}
             resetOptions={[
@@ -103,6 +104,14 @@ describe("ReviewModuleHeader compact toolbar", () => {
         expect(html).toContain("Topics");
         expect(html).toContain("Tools");
         expect(html).toContain("Reset");
+    });
+
+    it("opens the course outline without rendering a modules navigation link", () => {
+        const html = renderHeader();
+
+        expect(html).toContain('data-testid="review-course-modules-button"');
+        expect(html).toContain('aria-haspopup="dialog"');
+        expect(html).not.toContain('href="/en/subjects/python/modules"');
     });
 
     it("hides the duplicate desktop Topics and Tools buttons in compact mode", () => {

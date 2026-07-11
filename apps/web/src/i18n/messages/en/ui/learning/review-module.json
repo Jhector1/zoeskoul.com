@@ -50,9 +50,9 @@
       "resetMenuAriaLabel": "Reset progress options",
       "resetMenuTitle": "Reset progress",
       "resetMenuDescription": "Choose how much work to clear. You will confirm before anything is deleted.",
-      "modulesTitle": "Go to modules",
+      "modulesTitle": "Open course modules",
       "modulesLoading": "Opening modules...",
-      "modulesButton": "← Modules",
+      "modulesButton": "Modules",
       "topicsTitle": "Topics",
       "topicsButton": "Topics",
       "topicsButtonCollapsed": "Topics ▶",
@@ -91,6 +91,19 @@
         "getCertificate": "Get certificate →",
         "viewCertificate": "View certificate →"
       }
+    },
+    "courseDrawer": {
+      "title": "Course modules",
+      "kicker": "Course outline",
+      "description": "Jump to another module without leaving your lesson workspace.",
+      "current": "Current",
+      "locked": "Locked",
+      "currentDescription": "You are working in this module.",
+      "lockedDescription": "Open the access page for this module.",
+      "openDescription": "Open this module.",
+      "loading": "Loading course modules...",
+      "error": "Course modules could not be loaded. Close the drawer and try again.",
+      "empty": "No published modules are available yet."
     }
   }
 }

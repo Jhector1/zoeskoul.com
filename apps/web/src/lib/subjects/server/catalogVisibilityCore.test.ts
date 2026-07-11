@@ -8,6 +8,45 @@ import {
 } from "./catalogVisibilityCore";
 
 describe("selectSeededVisibleSubjectsForActor", () => {
+    it("shows an unseeded coming-soon subject without making it enrollable", () => {
+        const visible = selectSeededVisibleSubjectsForActor([
+            {
+                slug: "linux-terminal-fundamentals",
+                subjectId: null,
+                enrolled: false,
+                status: "coming_soon" as const,
+                versioning: {
+                    family: "linux",
+                    status: "active" as const,
+                    defaultForNewEnrollments: true,
+                },
+            },
+        ]);
+
+        expect(visible.map((subject) => subject.slug)).toEqual([
+            "linux-terminal-fundamentals",
+        ]);
+        expect(visible[0]?.subjectId).toBeNull();
+    });
+
+    it("hides an unseeded active subject because it would otherwise look enrollable", () => {
+        const visible = selectSeededVisibleSubjectsForActor([
+            {
+                slug: "python-v2",
+                subjectId: null,
+                enrolled: false,
+                status: "active" as const,
+                versioning: {
+                    family: "python",
+                    status: "active" as const,
+                    defaultForNewEnrollments: true,
+                },
+            },
+        ]);
+
+        expect(visible).toEqual([]);
+    });
+
     it("hides manifest subjects that are not seeded in Prisma", () => {
         const visible = selectSeededVisibleSubjectsForActor([
             {

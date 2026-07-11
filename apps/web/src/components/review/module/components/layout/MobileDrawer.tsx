@@ -21,7 +21,7 @@ export default function MobileDrawer(props: {
                     <motion.button
                         type="button"
                         aria-label="Close drawer"
-                        className="fixed inset-0 z-[90] bg-black/30 backdrop-blur-[2px]"
+                        className="ui-review-drawer-backdrop"
                         onClick={onClose}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -31,10 +31,7 @@ export default function MobileDrawer(props: {
 
                     <motion.aside
                         className={cn(
-                            "fixed top-0 bottom-0 z-[100] w-[min(92vw,380px)]",
-                            "bg-white/85 backdrop-blur border border-neutral-200/70",
-                            "dark:bg-[#0b0d12]/85 dark:border-white/10",
-                            "shadow-2xl",
+                            "ui-review-mobile-drawer",
                             side === "left" ? "left-0 rounded-r-2xl" : "right-0 rounded-l-2xl",
                         )}
                         initial={{ x: side === "left" ? -24 : 24, opacity: 0 }}
@@ -46,13 +43,13 @@ export default function MobileDrawer(props: {
                         }}
                     >
                         <div className="h-full min-h-0 flex flex-col">
-                            <div className="shrink-0 flex items-center justify-between gap-2 p-3">
-                                <div className="text-sm font-black text-neutral-900 dark:text-white/90">
+                            <div className="ui-review-mobile-drawer-header">
+                                <div className="ui-title-sm">
                                     {title}
                                 </div>
                                 <button
                                     type="button"
-                                    className="ui-btn ui-btn-secondary text-xs font-extrabold"
+                                    className="ui-btn-secondary"
                                     onClick={onClose}
                                 >
                                     Close

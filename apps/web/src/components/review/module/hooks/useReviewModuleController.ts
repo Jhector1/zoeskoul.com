@@ -8,7 +8,10 @@ import {ROUTES} from "@/utils";
 
 import {useReviewProgress} from "@/components/review/module/hooks/useReviewProgress";
 import {useAssignmentStatus} from "@/components/review/module/hooks/useAssignmentStatus";
-import {useModuleNav} from "@/components/review/module/hooks/useModuleNav";
+import {
+    useModuleNav,
+    type CourseModuleNavItem,
+} from "@/components/review/module/hooks/useModuleNav";
 import {useDebouncedSketchState} from "../hooks/useDebouncedSketchState";
 import {useToolCodeRunnerState} from "../hooks/useToolCodeRunnerState";
 import {useSkeletonGate} from "@/components/review/module/hooks/useSkeletonGate";
@@ -700,7 +703,7 @@ export function useReviewModuleController({
                 ? `${assignmentStatus.answeredCount}/${assignmentStatus.targetCount} questions`
                 : undefined;
 
-    const nav = useModuleNav({subjectSlug, moduleSlug});
+    const nav = useModuleNav({subjectSlug, moduleSlug, catalogSlug});
 
     const canGoNextModule =
         unlockAll ||
@@ -708,6 +711,47 @@ export function useReviewModuleController({
 
     const navLoading = nav === undefined;
     const navError = nav === null;
+    const [courseModulesOpen, setCourseModulesOpen] = useState(false);
+
+    useEffect(() => {
+        setCourseModulesOpen(false);
+    }, [moduleSlug]);
+
+    const buildCourseModuleHref = useCallback(
+        (targetModuleSlug: string) => {
+            const catalogPrefix = catalogSlug
+                ? `/catalog/${encodeURIComponent(catalogSlug)}`
+                : "";
+
+            return (
+                `/${encodeURIComponent(locale)}` +
+                catalogPrefix +
+                `/subjects/${encodeURIComponent(subjectSlug)}` +
+                `/modules/${encodeURIComponent(targetModuleSlug)}` +
+                "/learn"
+            );
+        },
+        [catalogSlug, locale, subjectSlug],
+    );
+
+    const handleSelectCourseModule = useCallback(
+        async (item: CourseModuleNavItem) => {
+            if (item.current || item.slug === moduleSlug) {
+                setCourseModulesOpen(false);
+                return;
+            }
+
+            await flushAll();
+            setCourseModulesOpen(false);
+            beginRouteTransition();
+            router.push(
+                item.locked && item.billingHref
+                    ? item.billingHref
+                    : buildCourseModuleHref(item.slug),
+            );
+        },
+        [beginRouteTransition, buildCourseModuleHref, flushAll, moduleSlug, router],
+    );
 
     const topicFlow = useReviewTopicFlow({
         topics,
@@ -1040,6 +1084,11 @@ export function useReviewModuleController({
         rightRailDefaultScopeKey,
         allowDesktopRightRail: toolsRailVisibility.isAvailable,
     });
+
+    const handleOpenCourseModules = useCallback(() => {
+        panels.setMobileTopicsOpen(false);
+        setCourseModulesOpen(true);
+    }, [panels.setMobileTopicsOpen]);
 
     const activeToolScopeKey = resolveActiveToolScopeKey({
         activeExerciseStateKey: activeExerciseTarget?.exerciseStateKey ?? null,
@@ -1903,7 +1952,13 @@ export function useReviewModuleController({
             showDesktopRight: panels.showDesktopRight,
             leftCollapsed: panels.leftCollapsed,
             rightCollapsed: panels.rightCollapsed,
-            modulesHref: `/${locale}/subjects/${encodeURIComponent(subjectSlug)}/modules`,
+            modulesHref:
+                `/${encodeURIComponent(locale)}` +
+                (catalogSlug
+                    ? `/catalog/${encodeURIComponent(catalogSlug)}`
+                    : "") +
+                `/subjects/${encodeURIComponent(subjectSlug)}/modules`,
+            onOpenModulesDrawer: handleOpenCourseModules,
             onToggleLeftPanel: panels.handleToggleLeftPanel,
             onToggleRightPanel: panels.handleToggleRightPanel,
             resetOptions: headerResetOptions,
@@ -2221,6 +2276,16 @@ export function useReviewModuleController({
             topicToast: celebrations.topicToast,
             setTopicToastPaused: celebrations.setTopicToastPaused,
             dismissTopicToast: celebrations.dismissTopicToast,
+        },
+
+        courseDrawer: {
+            open: courseModulesOpen,
+            reduceMotion,
+            onClose: () => setCourseModulesOpen(false),
+            modules: nav?.modules ?? [],
+            loading: navLoading,
+            error: navError,
+            onSelectModule: handleSelectCourseModule,
         },
 
         resetDialog: {

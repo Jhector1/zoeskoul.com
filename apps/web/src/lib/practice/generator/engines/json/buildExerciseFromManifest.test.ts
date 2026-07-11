@@ -581,6 +581,66 @@ describe("buildExerciseFromManifest runtime IDE mapping", () => {
     expect((result.expected as any).semanticFirst).toBe(true);
   });
 
+  it("builds an expected-output preview for semantic recipes with runtime tests", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        showExpectedExample: true,
+        recipe: {
+          type: "semantic",
+          language: "python",
+          tests: [
+            {
+              stdin: "",
+              stdout: "Book: A Wrinkle in Time\nMovie: Up\n",
+              match: "exact",
+            },
+          ],
+          semanticChecks: [
+            {
+              type: "printed_line_count",
+              min: 2,
+            },
+          ],
+        },
+      }),
+      makeArgs(),
+      {
+        runtimeDefaults: {
+          kind: "code",
+          language: "python",
+          supportsTerminal: false,
+        },
+      } as any,
+    );
+
+    expect((result.exercise as any).expectedExample).toMatchObject({
+      kind: "terminal",
+      stdout: "Book: A Wrinkle in Time\nMovie: Up\n",
+    });
+  });
+
+  it("keeps semantic expected-output previews hidden when authoring disables them", () => {
+    const result = buildExerciseFromManifest(
+      makeCodeInputDef({
+        showExpectedExample: false,
+        recipe: {
+          type: "semantic",
+          language: "python",
+          tests: [{ stdout: "ok\n", match: "exact" }],
+          semanticChecks: [
+            {
+              type: "printed_line_count",
+              min: 1,
+            },
+          ],
+        },
+      }),
+      makeArgs(),
+    );
+
+    expect((result.exercise as any).expectedExample).toBeUndefined();
+  });
+
   it("builds semantic recipes with runtime tests as behavior-first hybrid checks", () => {
     const result = buildExerciseFromManifest(
       makeCodeInputDef({

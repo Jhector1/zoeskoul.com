@@ -22,6 +22,7 @@ type Props = {
     modulesButtonLabel?: string;
     modulesButtonTitle?: string;
     modulesButtonLoadingText?: string;
+    onOpenModulesDrawer?: () => void;
     showResetButton?: boolean;
     onToggleLeftPanel: () => void;
     onToggleRightPanel: () => void;
@@ -68,6 +69,7 @@ export default function ReviewModuleHeader({
                                                modulesButtonLabel,
                                                modulesButtonTitle,
                                                modulesButtonLoadingText,
+                                               onOpenModulesDrawer,
                                                showResetButton = true,
                                                onToggleLeftPanel,
                                                onToggleRightPanel,
@@ -257,14 +259,27 @@ export default function ReviewModuleHeader({
                 <div className="flex w-full items-center justify-between gap-3">
                     <div className="inline-flex min-w-0 flex-wrap items-center gap-2 [&>button]:shrink-0">
                         {showModulesButton ? (
-                            <NavButton
-                                href={modulesHref}
-                                className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                                title={modulesButtonTitle ?? t("modulesTitle")}
-                                loadingText={modulesButtonLoadingText ?? t("modulesLoading")}
-                            >
-                                {modulesButtonLabel ?? t("modulesButton")}
-                            </NavButton>
+                            onOpenModulesDrawer ? (
+                                <button
+                                    type="button"
+                                    data-testid="review-course-modules-button"
+                                    onClick={onOpenModulesDrawer}
+                                    className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                    title={modulesButtonTitle ?? t("modulesTitle")}
+                                    aria-haspopup="dialog"
+                                >
+                                    {modulesButtonLabel ?? t("modulesButton")}
+                                </button>
+                            ) : (
+                                <NavButton
+                                    href={modulesHref}
+                                    className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                    title={modulesButtonTitle ?? t("modulesTitle")}
+                                    loadingText={modulesButtonLoadingText ?? t("modulesLoading")}
+                                >
+                                    {modulesButtonLabel ?? t("modulesButton")}
+                                </NavButton>
+                            )
                         ) : null}
 
                         {showTopicsButton ? (

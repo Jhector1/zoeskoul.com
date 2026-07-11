@@ -24,11 +24,11 @@
         "certificateEnabledByDefault": true
       },
       "versioning": {
-        "family": "python",
-        "version": 2,
+        "family": "applied-python-projects",
+        "version": 1,
         "status": "active",
         "defaultForNewEnrollments": true,
-        "supersedes": "python",
+        "supersedes": null,
         "supersededBy": null
       }
     }

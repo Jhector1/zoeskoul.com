@@ -76,6 +76,15 @@ const mocked = vi.hoisted(() => ({
             padStyle: {},
             sidebarProps: {},
         },
+        courseDrawer: {
+            open: false,
+            reduceMotion: true,
+            onClose: vi.fn(),
+            modules: [],
+            loading: false,
+            error: false,
+            onSelectModule: vi.fn(),
+        },
         resetDialog: {
             open: false,
             kind: "topic",
@@ -184,6 +193,10 @@ vi.mock("./components/layout/ReviewModuleMobileDrawer", () => ({
     default: () => <div data-testid="review-mobile-drawer" />,
 }));
 
+vi.mock("./components/layout/ReviewCourseModulesDrawer", () => ({
+    default: () => <div data-testid="review-course-modules-drawer" />,
+}));
+
 vi.mock("./components/layout/ReviewModuleStackedTools", () => ({
     default: (props: any) =>
         !props.showDesktopRight && !props.rightCollapsed && props.shouldRenderStackedTools ? (
@@ -224,6 +237,13 @@ describe("ReviewModulePage responsive tools mount", () => {
         expect(html).toContain('data-testid="review-topic-stage"');
         expect(html).toContain('data-testid="review-stacked-tools"');
         expect(html).not.toContain('data-testid="review-right-rail"');
+    });
+
+    it("mounts both the topic drawer and the course modules drawer", () => {
+        const html = renderToStaticMarkup(<ReviewModulePage {...({} as any)} />);
+
+        expect(html).toContain('data-testid="review-mobile-drawer"');
+        expect(html).toContain('data-testid="review-course-modules-drawer"');
     });
 
     it("keeps desktop right rail rendering without the stacked mobile tools shell", () => {

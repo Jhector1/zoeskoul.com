@@ -239,47 +239,21 @@
         "semanticChecks": [
           {
             "type": "defines_class",
+            "path": "models/catalog_item.py",
             "className": "CatalogItem",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.checks.0.message"
           },
           {
-            "type": "constructible",
-            "className": "CatalogItem",
-            "constructorArgs": [
-              "Sample"
-            ],
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 1,
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.checks.1.message"
-          },
-          {
-            "type": "instance_attributes",
-            "className": "CatalogItem",
-            "constructorArgs": [
-              "Sample"
-            ],
-            "attributes": [
-              "title"
-            ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.checks.2.message"
-          },
-          {
-            "type": "method_returns",
-            "className": "Book",
-            "constructorArgs": [
-              "The Wild Robot"
-            ],
-            "constructorArgKinds": [],
-            "methodName": "label",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "Book: The Wild Robot",
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch0.checks.3.message"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Book: The Wild Robot\n",
+            "stdout": "CatalogItem is abstract\n",
             "match": "exact"
           }
         ],
@@ -427,20 +401,22 @@
         "semanticChecks": [
           {
             "type": "method_returns",
+            "path": "models/book.py",
             "className": "Book",
             "constructorArgs": [
-              "Wonder"
+              "Dune"
             ],
             "constructorArgKinds": [],
             "methodName": "label",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Book: Wonder",
+            "expected": "Book: Dune",
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.checks.0.message"
           },
           {
             "type": "method_returns",
+            "path": "models/movie.py",
             "className": "Movie",
             "constructorArgs": [
               "Moana"
@@ -452,12 +428,18 @@
             "expected": "Movie: Moana",
             "expectedKind": "value",
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.checks.1.message"
+          },
+          {
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 2,
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch1.checks.2.message"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Book: Wonder\nMovie: Moana\n",
+            "stdout": "Book: Dune\nMovie: Moana\n",
             "match": "exact"
           }
         ],
@@ -632,34 +614,20 @@
         ],
         "semanticChecks": [
           {
-            "type": "method_returns",
-            "className": "Book",
-            "constructorArgs": [
-              "Frindle"
-            ],
-            "constructorArgKinds": [],
-            "methodName": "label",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "Book: Frindle",
-            "expectedKind": "value",
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 2,
             "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.checks.0.message"
-          },
-          {
-            "type": "method_returns",
-            "className": "Movie",
-            "constructorArgs": [
-              "Luca"
-            ],
-            "constructorArgKinds": [],
-            "methodName": "label",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "Movie: Luca",
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.abstraction-with-base-interfaces.tryIt.try_abstraction_with_base_interfaces_sketch2.checks.1.message"
           }
-        ]
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Book: Dune\nMovie: Moana\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
       }
     },
     {
@@ -688,7 +656,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "label"
+        "value": "@abstractmethod"
       }
     },
     {

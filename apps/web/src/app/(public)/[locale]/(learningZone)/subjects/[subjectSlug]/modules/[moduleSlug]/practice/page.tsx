@@ -5,7 +5,8 @@ import { enforceModuleAccessOrRedirect } from "@/lib/billing/enforceModuleAccess
 import { prisma } from "@/lib/prisma";
 import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
 import { resolvePracticeViewer } from "@/lib/practice/experience/viewer";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
+import { getSubjectPublicationState } from "@/lib/subjects/server/subjectPublication";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -36,10 +37,17 @@ export default async function ModulePracticePage({
   const sessionUser: any = (session as any)?.user ?? null;
   const userId: string | null = sessionUser?.id ?? null;
   const email: string | null = sessionUser?.email ?? null;
-  const { bypass } = await resolvePrivilegedLearningAccess({
-    userId,
-    email,
-  });
+  const [{ bypass }, publication] = await Promise.all([
+    resolvePrivilegedLearningAccess({
+      userId,
+      email,
+    }),
+    getSubjectPublicationState(subjectSlug),
+  ]);
+
+  if (!bypass && !publication.isAvailable) {
+    notFound();
+  }
 
   const viewer = await resolvePracticeViewer(prisma, { userId, guestId: null });
   if (!bypass && !viewer.subscribed) {

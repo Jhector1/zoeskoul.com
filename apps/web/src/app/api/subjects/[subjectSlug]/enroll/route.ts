@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getSubjectPublicationState } from "@/lib/subjects/server/subjectPublication";
 import {
     getActor,
     ensureGuestId,
@@ -22,14 +23,20 @@ export async function POST(
     const { subjectSlug } = await ctx.params;
     const slug = decodeURIComponent(subjectSlug);
 
-    const subject = await prisma.practiceSubject.findUnique({
-        where: { slug },
-        select: { id: true, slug: true },
-    });
+    const publication = await getSubjectPublicationState(slug);
 
-    if (!subject) {
+    if (!publication.subjectId || !publication.manifestStatus) {
         return json({ message: "Subject not found" }, 404);
     }
+
+    if (!publication.isAvailable) {
+        return json({ message: "Subject is not available yet" }, 409);
+    }
+
+    const subject = {
+        id: publication.subjectId,
+        slug: publication.slug,
+    };
 
     const actor0 = await getActor();
     const ensured = ensureGuestId(actor0);

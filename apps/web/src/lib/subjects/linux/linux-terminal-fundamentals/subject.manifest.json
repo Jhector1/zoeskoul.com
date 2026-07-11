@@ -6,7 +6,7 @@
     "genKey": "bash_course",
     "order": 0,
     "accessPolicy": "paid",
-    "status": "active",
+    "status": "coming_soon",
     "imagePublicId": null,
     "imageAlt": null,
     "titleKey": "subjects.linux-terminal-fundamentals.title",

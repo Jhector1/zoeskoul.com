@@ -49,7 +49,7 @@
       },
       "python-11-oop-capstone-project": {
         "title": "Final OOP Capstone Project",
-        "description": "Build and polish a smart task tracker that uses encapsulation, abstraction, inheritance, and polymorphism.",
+        "description": "Transfer the course architecture to a Neighborhood Pantry Request Coordinator with models, services, CSV storage, reports, tests, and documentation.",
         "outcomes": [
           "Design a clear file architecture for a multifile OOP app.",
           "Use all four OOP pillars in one working project.",
@@ -114,10 +114,10 @@
         },
         "python--applied-python-projects--draft-python-9-module-project": {
           "title": "Module Project",
-          "description": "Build a polymorphic catalog one cumulative step at a time.",
+          "description": "Build a greenhouse sensor monitor one cumulative step at a time.",
           "weeks": null,
           "bullets": [
-            "Module 9 Catalog Polymorphism Project"
+            "Module 9 Greenhouse Sensor Project"
           ]
         }
       },
@@ -142,10 +142,10 @@
         },
         "python--applied-python-projects--draft-python-10-module-project": {
           "title": "Module Project",
-          "description": "Harden an OOP project with tests, storage, and regression coverage.",
+          "description": "Harden an animal-shelter intake app with tests, storage, state checks, and regression coverage.",
           "weeks": null,
           "bullets": [
-            "Module 10 OOP Quality Project"
+            "Module 10 Animal Shelter Quality Project"
           ]
         }
       },
@@ -170,7 +170,7 @@
         },
         "python--applied-python-projects--draft-python-11-final-capstone": {
           "title": "Final Capstone",
-          "description": "Complete the Smart Task Tracker through cumulative graded steps.",
+          "description": "Complete the Neighborhood Pantry Request Coordinator through cumulative graded steps.",
           "weeks": null,
           "bullets": [
             "Module 11 Final OOP Capstone"

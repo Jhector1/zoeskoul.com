@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import { resolvePrivilegedLearningAccess } from "@/lib/access/resolvePrivilegedLearningAccess";
+import { getSubjectPublicationState } from "@/lib/subjects/server/subjectPublication";
 import {
     getResolvedCatalogMap,
     getResolvedReviewModule,
@@ -15,16 +16,24 @@ export async function loadReviewModulePageData(args: {
     const userId: string | null = sessionUser?.id ?? null;
     const email: string | null = sessionUser?.email ?? null;
 
-    const mod = await getResolvedReviewModule(subjectSlug, moduleSlug);
-    const catalogs = await getResolvedCatalogMap();
+    const [{ canUnlockAll }, publication, catalogs] = await Promise.all([
+        resolvePrivilegedLearningAccess({
+            userId,
+            email,
+        }),
+        getSubjectPublicationState(subjectSlug),
+        getResolvedCatalogMap(),
+    ]);
+
     const catalogSlug =
         Object.values(catalogs).find((catalog) =>
             catalog.subjects.some((subject) => subject.slug === subjectSlug),
         )?.slug ?? null;
-    const { canUnlockAll } = await resolvePrivilegedLearningAccess({
-        userId,
-        email,
-    });
+
+    const mod =
+        canUnlockAll || publication.isAvailable
+            ? await getResolvedReviewModule(subjectSlug, moduleSlug)
+            : null;
 
     return {
         mod,

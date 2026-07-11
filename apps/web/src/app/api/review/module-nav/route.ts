@@ -13,13 +13,37 @@ import { resolveReviewModuleForSubject } from "@/lib/review/api/shared/modules";
 import { resolveSubjectRuntimeWindow } from "@/lib/review/api/shared/resolveSubjectFinishState";
 import { SUBJECTS } from "@/lib/subjects";
 import { buildBillingHref } from "@/lib/billing/moduleAccess";
-import { ROUTES } from "@/utils";
+
+function cleanSegment(value: string | null | undefined, fallback = "") {
+    const normalized = String(value ?? "").trim();
+    return encodeURIComponent(normalized || fallback);
+}
+
+function buildModuleLearnHref(args: {
+    locale: string;
+    catalogSlug: string | null;
+    subjectSlug: string;
+    moduleSlug: string;
+}) {
+    const catalogPrefix = args.catalogSlug
+        ? `/catalog/${cleanSegment(args.catalogSlug)}`
+        : "";
+
+    return (
+        `/${cleanSegment(args.locale, "en")}` +
+        catalogPrefix +
+        `/subjects/${cleanSegment(args.subjectSlug)}` +
+        `/modules/${cleanSegment(args.moduleSlug)}` +
+        "/learn"
+    );
+}
 
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const subjectSlug = (searchParams.get("subjectSlug") ?? "").trim();
     const moduleSlug =
         (searchParams.get("moduleSlug") ?? searchParams.get("moduleId") ?? "").trim();
+    const catalogSlug = (searchParams.get("catalogSlug") ?? "").trim() || null;
 
     if (!subjectSlug || !moduleSlug) {
         return bodyJsonResponse(
@@ -77,12 +101,11 @@ export async function GET(req: Request) {
         );
     }
 
-    const visibleModules = resolved.modules.filter((m) =>
-        runtime.publishedModules.some((pm) => pm.slug === m.slug),
-    );
+    const publishedSlugs = new Set(runtime.publishedModules.map((module) => module.slug));
+    const visibleModules = resolved.modules.filter((module) => publishedSlugs.has(module.slug));
 
     const visibleIndex = visibleModules.findIndex(
-        (m) => m.slug === resolved.module.slug,
+        (module) => module.slug === resolved.module.slug,
     );
 
     if (visibleIndex < 0) {
@@ -99,55 +122,85 @@ export async function GET(req: Request) {
         );
     }
 
-    const prev =
-        visibleIndex > 0 ? visibleModules[visibleIndex - 1] : null;
+    const currentHref = buildModuleLearnHref({
+        locale,
+        catalogSlug,
+        subjectSlug: subject.slug,
+        moduleSlug: resolved.module.slug,
+    });
 
-    const next =
-        visibleIndex < visibleModules.length - 1
-            ? visibleModules[visibleIndex + 1]
-            : null;
+    const modules = await Promise.all(
+        visibleModules.map(async (module, index) => {
+            const current = module.slug === resolved.module.slug;
 
-    let nextLocked = false;
-    let nextBillingHref: string | null = null;
+            if (current) {
+                return {
+                    slug: module.slug,
+                    title: module.title,
+                    order: module.order,
+                    index,
+                    current: true,
+                    locked: false,
+                    billingHref: null,
+                };
+            }
 
-    if (next) {
-        const nextAccess = await resolvePracticeAccess({
-            prisma,
-            actor,
-            locale,
-            req,
-            params: {
-                subject: subject.slug,
-                module: next.slug,
-                sessionId: null,
-                returnUrl: null,
-                returnTo: null,
-            },
-            session: null,
-        });
-
-        nextLocked = !nextAccess.ok;
-
-        if (nextLocked) {
-            nextBillingHref = buildBillingHref({
+            const access = await resolvePracticeAccess({
+                prisma,
+                actor,
                 locale,
-                next: `/${ROUTES.learningPath(subject.slug, next.slug)}`,
-                back: `/${ROUTES.learningPath(subject.slug, resolved.module.slug)}`,
-                reason: "module",
-                subject: subject.slug,
-                module: next.slug,
+                req,
+                params: {
+                    subject: subject.slug,
+                    module: module.slug,
+                    sessionId: null,
+                    returnUrl: null,
+                    returnTo: null,
+                },
+                session: null,
             });
-        }
-    }
+
+            const locked = !access.ok;
+            const moduleHref = buildModuleLearnHref({
+                locale,
+                catalogSlug,
+                subjectSlug: subject.slug,
+                moduleSlug: module.slug,
+            });
+
+            return {
+                slug: module.slug,
+                title: module.title,
+                order: module.order,
+                index,
+                current: false,
+                locked,
+                billingHref: locked
+                    ? buildBillingHref({
+                        locale,
+                        next: moduleHref,
+                        back: currentHref,
+                        reason: "module",
+                        subject: subject.slug,
+                        module: module.slug,
+                    })
+                    : null,
+            };
+        }),
+    );
+
+    const prev = visibleIndex > 0 ? modules[visibleIndex - 1] : null;
+    const next = visibleIndex < modules.length - 1 ? modules[visibleIndex + 1] : null;
 
     return bodyJsonWithGuestCookie(
         {
             index: visibleIndex,
-            total: visibleModules.length,
+            total: modules.length,
             prevModuleId: prev?.slug ?? null,
             nextModuleId: next?.slug ?? null,
-            nextLocked,
-            nextBillingHref,
+            nextLocked: Boolean(next?.locked),
+            nextBillingHref: next?.billingHref ?? null,
+            modules,
         },
         200,
         setGuestId,

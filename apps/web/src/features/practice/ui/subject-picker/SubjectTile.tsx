@@ -18,9 +18,9 @@ export default function SubjectTile({
   enrolling: boolean;
 }) {
   const { t } = useTaggedT("subjectsUi");
-    const isEnterable = Boolean(s.subjectId);
-    const isMissingFromDb = !isEnterable;
     const isComingSoon = s.status === "coming_soon";
+    const isEnterable = Boolean(s.subjectId) && !isComingSoon;
+    const isMissingFromDb = !s.subjectId && !isComingSoon;
     const disabled = !isEnterable || !s.defaultModuleSlug || enrolling || isComingSoon;
     const imageUrl = s.imagePublicId
       ? cloudinaryImageUrl(s.imagePublicId, {
@@ -35,8 +35,8 @@ export default function SubjectTile({
       : null;
 
     const cta = useMemo(() => {
-        if (!isEnterable) return "Not seeded";
         if (isComingSoon) return t("comingSoon");
+        if (!isEnterable) return "Not seeded";
         if (enrolling) return t("enrolling");
         if (s.enrolled) return t("continue");
         return t("openModules");
@@ -86,7 +86,7 @@ export default function SubjectTile({
             </div>
 
               <div className="flex flex-wrap items-center justify-end gap-2">
-                  {s.availabilityStatus === "unseeded" || !s.subjectId ? (
+                  {isMissingFromDb ? (
                       <Pill tone="warn">Not seeded</Pill>
                   ) : null}
 
@@ -121,7 +121,12 @@ export default function SubjectTile({
 
           <div className="mt-4 flex items-center justify-between gap-3">
             <div className="min-w-0">
-                {!isEnterable ? (
+                {isComingSoon ? (
+                    <div className="inline-flex items-center gap-2 text-[11px] font-medium text-amber-700 dark:text-amber-300">
+                        <span className="h-2 w-2 rounded-full bg-amber-500 dark:bg-amber-300" />
+                        <span>{cta}</span>
+                    </div>
+                ) : !isEnterable ? (
                     <div className="text-[11px] font-medium text-red-700 dark:text-red-300">
                         Not seeded in Prisma
                     </div>

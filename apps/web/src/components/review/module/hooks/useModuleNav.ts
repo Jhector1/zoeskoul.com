@@ -2,6 +2,16 @@
 
 import { useEffect, useState } from "react";
 
+export type CourseModuleNavItem = {
+    slug: string;
+    title: string;
+    order: number;
+    index: number;
+    current: boolean;
+    locked: boolean;
+    billingHref: string | null;
+};
+
 export type ModuleNavInfo = {
     prevModuleId: string | null;
     nextModuleId: string | null;
@@ -9,10 +19,15 @@ export type ModuleNavInfo = {
     nextBillingHref?: string | null;
     index: number;
     total: number;
+    modules: CourseModuleNavItem[];
 } | null;
 
-export function useModuleNav(args: { subjectSlug: string; moduleSlug: string }) {
-    const { subjectSlug, moduleSlug } = args;
+export function useModuleNav(args: {
+    subjectSlug: string;
+    moduleSlug: string;
+    catalogSlug?: string | null;
+}) {
+    const { subjectSlug, moduleSlug, catalogSlug = null } = args;
     const [nav, setNav] = useState<ModuleNavInfo | undefined>(undefined);
 
     useEffect(() => {
@@ -20,14 +35,19 @@ export function useModuleNav(args: { subjectSlug: string; moduleSlug: string }) 
         setNav(undefined);
 
         const ctrl = new AbortController();
+        const search = new URLSearchParams({
+            subjectSlug,
+            moduleSlug,
+        });
 
-        fetch(
-            `/api/review/module-nav?subjectSlug=${encodeURIComponent(subjectSlug)}&moduleSlug=${encodeURIComponent(moduleSlug)}`,
-            {
-                cache: "no-store",
-                signal: ctrl.signal,
-            },
-        )
+        if (catalogSlug) {
+            search.set("catalogSlug", catalogSlug);
+        }
+
+        fetch(`/api/review/module-nav?${search.toString()}`, {
+            cache: "no-store",
+            signal: ctrl.signal,
+        })
             .then((r) => (r.ok ? r.json() : null))
             .then((d) => setNav(d))
             .catch((e) => {
@@ -35,7 +55,7 @@ export function useModuleNav(args: { subjectSlug: string; moduleSlug: string }) 
             });
 
         return () => ctrl.abort();
-    }, [subjectSlug, moduleSlug]);
+    }, [catalogSlug, subjectSlug, moduleSlug]);
 
     return nav;
 }

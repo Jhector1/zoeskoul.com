@@ -212,7 +212,8 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.0.message",
+            "path": "models/car.py"
           },
           {
             "type": "constructible",
@@ -222,7 +223,8 @@
               "Leaf",
               6000
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.1.message",
+            "path": "models/car.py"
           },
           {
             "type": "instance_attributes",
@@ -237,12 +239,14 @@
               "model",
               "miles"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.2.message",
+            "path": "models/car.py"
           },
           {
             "type": "printed_line_count",
             "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.3.message",
+            "path": "main.py"
           }
         ],
         "tests": [
@@ -341,7 +345,8 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.0.message",
+            "path": "models/car.py"
           },
           {
             "type": "constructible",
@@ -351,7 +356,8 @@
               "Outback",
               40000
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.1.message",
+            "path": "models/car.py"
           },
           {
             "type": "instance_attributes",
@@ -366,24 +372,27 @@
               "model",
               "miles"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.2.message",
+            "path": "models/car.py"
           },
           {
             "type": "created_instances",
             "className": "Car",
             "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.3.message",
+            "path": "main.py"
           },
           {
             "type": "printed_line_count",
-            "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.4.message"
+            "min": 3,
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.4.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Outback\nMini\n",
+            "stdout": "4\nSubaru\nMini\n",
             "match": "exact"
           }
         ],
@@ -476,7 +485,8 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.0.message",
+            "path": "models/car.py"
           },
           {
             "type": "constructible",
@@ -486,7 +496,8 @@
               "Elantra",
               25000
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.1.message",
+            "path": "models/car.py"
           },
           {
             "type": "instance_attributes",
@@ -499,26 +510,30 @@
             "attributes": [
               "make",
               "model",
-              "miles"
+              "miles",
+              "service_notes"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.2.message",
+            "path": "models/car.py"
           },
           {
             "type": "created_instances",
             "className": "Car",
             "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.3.message",
+            "path": "main.py"
           },
           {
             "type": "printed_line_count",
             "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.4.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.4.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "25100\n9000\n",
+            "stdout": "['oil change']\n[]\n",
             "match": "exact"
           }
         ],
@@ -571,7 +586,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "__init__"
+        "value": "Car"
       }
     },
     {

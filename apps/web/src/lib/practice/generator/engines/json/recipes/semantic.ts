@@ -4,6 +4,7 @@ import {
     starterCodeForGeneratedExercise
 } from "@/lib/practice/generator/engines/utils";
 import type { RecipeHandler } from "./types";
+import { buildTerminalExpectedExample } from "./expectedExample";
 import {
     buildFixedTestsExpected,
     buildSemanticExpected,
@@ -73,6 +74,16 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         exerciseId: String(def.id ?? args.id),
     });
 
+    const expectedExample = hasRuntimeTests
+        ? buildTerminalExpectedExample({
+            def,
+            resolved,
+            tests: Array.isArray((expected as any).tests)
+                ? (expected as any).tests
+                : [],
+        })
+        : null;
+
     const expectedWithReveal = {
         ...(expected as any),
         ...(solutionCode !== undefined ? { solutionCode } : {}),
@@ -115,7 +126,7 @@ export const buildSemanticRecipe: RecipeHandler<any> = (def, args, resolved) => 
         hint: resolved.hint,
         fixedSqlDialect: def.fixedSqlDialect,
         expected: expectedWithReveal as any,
-        expectedExample: null,
+        expectedExample,
         ideConfig: def.serviceOverrides ?? null,
     });
 };

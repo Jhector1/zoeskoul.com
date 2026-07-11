@@ -14,6 +14,7 @@ import {
 } from "@/lib/subjects/server/resolveSubjectPresentation";
 import { notFound } from "next/navigation";
 import { normalizeTopicProgressKey } from "@/lib/review/progressTopicKeys";
+import { getManifestSubjectPublicationStatus } from "@/lib/subjects/server/subjectPublication";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -55,6 +56,7 @@ export default async function SubjectModulesPage({
       slug: true,
       accessPolicy: true as any,
       entitlementKey: true,
+      status: true,
       modules: {
         orderBy: [{ order: "asc" }, { slug: "asc" }],
         select: {
@@ -82,6 +84,14 @@ export default async function SubjectModulesPage({
   });
 
   if (!subject) notFound();
+
+  const manifestStatus = getManifestSubjectPublicationStatus(subjectSlug);
+  if (
+    !canUnlockAll &&
+    (subject.status !== "active" || manifestStatus !== "active")
+  ) {
+    notFound();
+  }
 
   const manifestView = await getResolvedSubjectModulesFromManifest(subjectSlug);
   if (!manifestView) notFound();

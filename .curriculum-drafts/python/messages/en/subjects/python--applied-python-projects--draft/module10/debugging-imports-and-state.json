@@ -23,127 +23,117 @@
             "allowReveal": true,
             "try_debugging_imports_and_state_sketch0": {
               "title": "Fix the broken model import",
-              "prompt": "The lesson used a shipping app to trace import paths. Now fix a library app. `main.py` imports the model from the wrong place. Correct the import so the program creates the `Book` object and prints its summary.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Fix the import in `main.py` so it imports `Book` from `models.book`, creates the provided object, and prints its summary.",
+              "hint": "Use `from models.book import Book`.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "concept": "A multifile program must import from the module path that matches the workspace folders.",
+                "hint_1": "Use `from models.book import Book`.",
+                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
               },
-              "starterCode": "# main.py\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())",
+              "starterCode": "# TODO: fix this import path.\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Keep main.py unchanged for this step: Fix the broken model import.\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())"
+                  "content": "# TODO: fix this import path.\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n"
                 },
-                "book_py": {
-                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        # return a readable summary string\n        pass"
+                "models_book_py": {
+                  "content": "# Keep this Book model unchanged.\nclass Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "from book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n"
+                  "content": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n"
                 },
-                "book_py": {
-                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\""
+                "models_book_py": {
+                  "content": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"\n"
                 }
               },
-              "solutionCode": "class Book:\n    def __init__(self, title, author):\n        self.title = title\n        self.author = author\n\n    def summary(self):\n        return f\"{self.title} by {self.author}\"\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
+              "solutionCode": "from models.book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
               "checks": {
                 "0": {
-                  "message": "Define the Book class in book.py."
+                  "message": "Keep Book.summary() working."
                 },
                 "1": {
-                  "message": "Book should be constructible with a title and author."
-                },
-                "2": {
-                  "message": "summary() should return the title and author in a readable format."
-                },
-                "3": {
-                  "message": "Program should print the book summary."
+                  "message": "Fix the import so main.py prints the summary."
                 }
               },
               "expectedOutput": "The Hobbit by Tolkien"
             },
             "try_debugging_imports_and_state_sketch1": {
-              "title": "Stop two reading lists from sharing one list",
-              "prompt": "The lesson used team rosters to show shared-list bugs. Now fix a reading club app. Two `ReadingList` objects should not share the same list. Update the constructor so each object gets its own `books` list when no list is provided.",
-              "hint": "Read the task \"Stop two reading lists from sharing one list\" and identify the required result.",
+              "title": "Stop objects from sharing one list",
+              "prompt": "Fix `ReadingList.__init__` in `models/reading_list.py` so each object receives its own list when no books are provided. The supplied main script adds a book to the first list and proves the second stays empty.",
+              "hint": "Use `books=None`, then create a new list inside the constructor.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Stop two reading lists from sharing one list\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "Mutable default arguments are shared between calls. Creating the list inside the constructor gives each object independent state.",
+                "hint_1": "Use `books=None`, then create a new list inside the constructor.",
+                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
               },
-              "starterCode": "class ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)",
+              "starterCode": "# Run this provided two-object test after fixing the model.\nfrom models.reading_list import ReadingList\n\nfirst = ReadingList(\"Ava\")\nsecond = ReadingList(\"Noah\")\nfirst.add_book(\"Dune\")\nprint(first.count())\nprint(second.count())\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# TODO: Update main.py to complete this step: Stop two reading lists from sharing one list.\nclass ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)"
+                  "content": "# Run this provided two-object test after fixing the model.\nfrom models.reading_list import ReadingList\n\nfirst = ReadingList(\"Ava\")\nsecond = ReadingList(\"Noah\")\nfirst.add_book(\"Dune\")\nprint(first.count())\nprint(second.count())\n"
                 },
                 "models_reading_list_py": {
-                  "content": "# TODO: Update models/reading_list.py to complete this step: Stop two reading lists from sharing one list.\nclass ReadingList:\n    def __init__(self, value_1):\n        pass\n\n    def count(self):\n        pass"
+                  "content": "# Starter guidance: Stop objects from sharing one list. Follow the prompt and edit the requested code below.\nclass ReadingList:\n    def __init__(self, owner, books=[]):\n        self.owner = owner\n        self.books = books\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nprint(reading_list.count())\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())"
+                  "content": "from models.reading_list import ReadingList\n\nfirst = ReadingList(\"Ava\")\nsecond = ReadingList(\"Noah\")\nfirst.add_book(\"Dune\")\nprint(first.count())\nprint(second.count())\n"
                 },
                 "models_reading_list_py": {
-                  "content": "class ReadingList:\n    def __init__(self, owner):\n        self.owner = owner\n        self.books = []\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)"
+                  "content": "class ReadingList:\n    def __init__(self, owner, books=None):\n        self.owner = owner\n        self.books = [] if books is None else list(books)\n\n    def add_book(self, title):\n        self.books.append(title)\n\n    def count(self):\n        return len(self.books)\n"
                 }
               },
-              "solutionCode": "from models.reading_list import ReadingList\n\nreading_list = ReadingList(\"Ava\")\nprint(reading_list.count())\nreading_list.add_book(\"Dune\")\nprint(reading_list.count())",
+              "solutionCode": "from models.reading_list import ReadingList\n\nfirst = ReadingList(\"Ava\")\nsecond = ReadingList(\"Noah\")\nfirst.add_book(\"Dune\")\nprint(first.count())\nprint(second.count())\n",
               "checks": {
                 "0": {
-                  "message": "Define the ReadingList class."
+                  "message": "Keep the ReadingList class in the model file."
                 },
                 "1": {
-                  "message": "ReadingList should be constructible with an owner."
-                },
-                "2": {
-                  "message": "A new reading list should start empty."
-                },
-                "3": {
-                  "message": "Adding one book should change only that instance's count."
+                  "message": "The first list should contain one book while the second remains empty."
                 }
-              }
+              },
+              "expectedOutput": "1\n0"
             },
             "try_debugging_imports_and_state_sketch2": {
-              "title": "Fix stock state changes after sales",
-              "prompt": "The lesson used a vending machine to trace state changes. Now fix a stationery shop model. Complete `sell()` so it subtracts the amount only when enough stock is available and otherwise leaves quantity unchanged.",
-              "hint": "Read the task \"Fix stock state changes after sales\" and identify the required result.",
+              "title": "Validate stock before changing state",
+              "prompt": "Complete `sell(amount)` in `models/stock_item.py`. Subtract only when the amount is positive and no greater than the available quantity. Return the current quantity for both valid and invalid requests.",
+              "hint": "Check `0 < amount <= self.quantity` before subtracting.",
               "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix stock state changes after sales\".",
-                "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "concept": "Validate a requested state change before mutating the object.",
+                "hint_1": "Check `0 < amount <= self.quantity` before subtracting.",
+                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
               },
-              "starterCode": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        # update quantity only when the sale is valid\n        pass\n\n    def get_quantity(self):\n        return self.quantity",
+              "starterCode": "# Run this provided valid-and-invalid sale test.\nfrom models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nprint(item.sell(2))\nprint(item.sell(10))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        # update quantity only when the sale is valid\n        pass\n\n    def get_quantity(self):\n        return self.quantity"
+                  "content": "# Run this provided valid-and-invalid sale test.\nfrom models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nprint(item.sell(2))\nprint(item.sell(10))\n"
                 },
                 "models_stock_item_py": {
-                  "content": "# TODO: Update models/stock_item.py to complete this step: Fix stock state changes after sales.\nclass StockItem:\n    def __init__(self, value_1, value_2):\n        pass\n\n    def get_quantity(self):\n        pass"
+                  "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        # TODO: subtract only a positive amount that is not greater than quantity.\n        pass\n\n    def get_quantity(self):\n        return self.quantity\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())\nprint(StockItem(\"Pen\", 5).sell(10))"
+                  "content": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nprint(item.sell(2))\nprint(item.sell(10))\n"
                 },
                 "models_stock_item_py": {
-                  "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        if amount <= self.quantity:\n            self.quantity -= amount\n        return self.quantity\n\n    def get_quantity(self):\n        return self.quantity"
+                  "content": "class StockItem:\n    def __init__(self, name, quantity):\n        self.name = name\n        self.quantity = quantity\n\n    def sell(self, amount):\n        if 0 < amount <= self.quantity:\n            self.quantity -= amount\n        return self.quantity\n\n    def get_quantity(self):\n        return self.quantity\n"
                 }
               },
-              "solutionCode": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nitem.sell(2)\nprint(item.get_quantity())\nprint(StockItem(\"Pen\", 5).sell(10))",
+              "solutionCode": "from models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nprint(item.sell(2))\nprint(item.sell(10))\n",
               "checks": {
                 "0": {
-                  "message": "Define the StockItem class."
+                  "message": "A valid sale should reduce the quantity."
                 },
                 "1": {
-                  "message": "A valid sale should reduce quantity."
+                  "message": "An oversized sale should leave the quantity unchanged."
                 },
                 "2": {
-                  "message": "An invalid sale should leave quantity unchanged."
+                  "message": "Print both returned quantities."
                 }
-              }
+              },
+              "expectedOutput": "3\n3"
             }
           },
           "practice": {

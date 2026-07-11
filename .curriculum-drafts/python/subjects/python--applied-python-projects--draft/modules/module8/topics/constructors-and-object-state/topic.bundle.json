@@ -22,20 +22,20 @@
     }
   },
   "topic": {
-    "labelKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.label",
-    "summaryKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.summary"
+    "labelKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.label",
+    "summaryKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch0.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch0.title",
       "sketchId": "sketch-0",
       "height": 420,
       "tryIt": {
         "id": "try-constructors-and-object-state-sketch0",
-        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.title",
-        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.prompt",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.prompt",
         "exerciseKey": "try-constructors-and-object-state-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -48,13 +48,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch1.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch1.title",
       "sketchId": "sketch-1",
       "height": 420,
       "tryIt": {
         "id": "try-constructors-and-object-state-sketch1",
-        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.title",
-        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.prompt",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.prompt",
         "exerciseKey": "try-constructors-and-object-state-sketch1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -67,13 +67,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch2.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.cards.sketch2.title",
       "sketchId": "sketch-2",
       "height": 420,
       "tryIt": {
         "id": "try-constructors-and-object-state-sketch2",
-        "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.title",
-        "promptKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.prompt",
+        "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.title",
+        "promptKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.prompt",
         "exerciseKey": "try-constructors-and-object-state-sketch2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -86,7 +86,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.cards.quiz.title",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -109,20 +109,20 @@
     {
       "id": "sketch-0",
       "archetype": "paragraph",
-      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.sketch-0.title",
-      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.sketch-0.bodyMarkdown"
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-0.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-0.bodyMarkdown"
     },
     {
       "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.sketch-1.title",
-      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-1.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-1.bodyMarkdown"
     },
     {
       "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.sketch-2.title",
-      "bodyKey": "sketches.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-2.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.sketch-2.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -131,20 +131,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.models_car_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.models_car_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -153,14 +153,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionFiles.models_car_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionFiles.models_car_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -169,18 +169,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/car.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.models_car_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.starterFiles.models_car_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -191,18 +191,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/car.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionFiles.models_car_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.solutionFiles.models_car_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -212,7 +212,8 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.0.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.0.message",
+            "path": "models/car.py"
           },
           {
             "type": "constructible",
@@ -222,7 +223,8 @@
               "Leaf",
               6000
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.1.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.1.message",
+            "path": "models/car.py"
           },
           {
             "type": "instance_attributes",
@@ -237,12 +239,14 @@
               "model",
               "miles"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.2.message",
+            "path": "models/car.py"
           },
           {
             "type": "printed_line_count",
             "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.3.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch0.checks.3.message",
+            "path": "main.py"
           }
         ],
         "tests": [
@@ -260,20 +264,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.models_car_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.models_car_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -282,14 +286,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionFiles.models_car_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionFiles.models_car_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -298,18 +302,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/car.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.models_car_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.starterFiles.models_car_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -320,18 +324,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/car.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionFiles.models_car_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.solutionFiles.models_car_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -341,7 +345,8 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.0.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.0.message",
+            "path": "models/car.py"
           },
           {
             "type": "constructible",
@@ -351,7 +356,8 @@
               "Outback",
               40000
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.1.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.1.message",
+            "path": "models/car.py"
           },
           {
             "type": "instance_attributes",
@@ -366,24 +372,27 @@
               "model",
               "miles"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.2.message",
+            "path": "models/car.py"
           },
           {
             "type": "created_instances",
             "className": "Car",
             "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.3.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.3.message",
+            "path": "main.py"
           },
           {
             "type": "printed_line_count",
-            "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.4.message"
+            "min": 3,
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch1.checks.4.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Outback\nMini\n",
+            "stdout": "4\nSubaru\nMini\n",
             "match": "exact"
           }
         ],
@@ -395,20 +404,20 @@
       "kind": "code_input",
       "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterCode",
+      "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.models_car_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.models_car_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -417,14 +426,14 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionFiles.main_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/car.py",
-          "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionFiles.models_car_py.content",
+          "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionFiles.models_car_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -433,18 +442,18 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterCode",
+        "starterCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/car.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.models_car_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.starterFiles.models_car_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -455,18 +464,18 @@
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionCode",
+        "solutionCode": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionFiles.main_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/car.py",
-            "content": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionFiles.models_car_py.content",
+            "content": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.solutionFiles.models_car_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -476,7 +485,8 @@
           {
             "type": "defines_class",
             "className": "Car",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.0.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.0.message",
+            "path": "models/car.py"
           },
           {
             "type": "constructible",
@@ -486,7 +496,8 @@
               "Elantra",
               25000
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.1.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.1.message",
+            "path": "models/car.py"
           },
           {
             "type": "instance_attributes",
@@ -499,26 +510,30 @@
             "attributes": [
               "make",
               "model",
-              "miles"
+              "miles",
+              "service_notes"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.2.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.2.message",
+            "path": "models/car.py"
           },
           {
             "type": "created_instances",
             "className": "Car",
             "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.3.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.3.message",
+            "path": "main.py"
           },
           {
             "type": "printed_line_count",
             "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.4.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.tryIt.try_constructors_and_object_state_sketch2.checks.4.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "25100\n9000\n",
+            "stdout": "['oil change']\n[]\n",
             "match": "exact"
           }
         ],
@@ -530,7 +545,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.mc-constructors-and-object-state-storing-values",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.mc-constructors-and-object-state-storing-values",
       "optionIds": [
         "a",
         "b",
@@ -550,7 +565,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.sc-constructors-and-object-state-purpose",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.sc-constructors-and-object-state-purpose",
       "optionIds": [
         "a",
         "b",
@@ -567,11 +582,11 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.fb-constructors-and-object-state-init-name",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.fb-constructors-and-object-state-init-name",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "__init__"
+        "value": "Car"
       }
     },
     {
@@ -579,7 +594,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-8-object-oriented-foundations.constructors-and-object-state.practice.dr-constructors-and-object-state-flow",
+      "messageBase": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.constructors-and-object-state.practice.dr-constructors-and-object-state-flow",
       "tokenIds": [
         "t1",
         "t2",

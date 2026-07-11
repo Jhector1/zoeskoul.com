@@ -164,7 +164,9 @@ export default async function CatalogsPage() {
                                                         </div>
                                                         <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-xs text-neutral-500 dark:text-white/40">
                                                             <span>
-                                                                {statusLabel(subject.versioning?.status)}
+                                                                {subject.status === "coming_soon"
+                                                                    ? "Coming soon"
+                                                                    : statusLabel(subject.versioning?.status)}
                                                             </span>
 
                                                             {catalog.actorAccess.canSeeAllCatalogSubjects ? (
@@ -180,7 +182,8 @@ export default async function CatalogsPage() {
                                                         </div>
                                                     </div>
 
-                                                    {subject.availabilityStatus === "unseeded" ? (
+                                                    {catalog.actorAccess.canSeeAllCatalogSubjects &&
+                                                    subject.availabilityStatus === "unseeded" ? (
                                                         <span className="shrink-0 rounded-full bg-red-50 px-2 py-0.5 text-[11px] font-semibold text-red-700 dark:bg-red-400/10 dark:text-red-200">
                                                             Unseeded
                                                         </span>

@@ -88,6 +88,15 @@ describe("catalog manifest validation", () => {
         ]);
     });
 
+    it("publishes Linux and Applied Python as coming soon", () => {
+        expect(
+            SUBJECT_MANIFESTS["linux-terminal-fundamentals"]?.subject.status,
+        ).toBe("coming_soon");
+        expect(
+            SUBJECT_MANIFESTS["applied-python-projects"]?.subject.status,
+        ).toBe("coming_soon");
+    });
+
     it("has at most one active default per version family", () => {
         const families = new Map<
             string,

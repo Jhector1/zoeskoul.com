@@ -156,7 +156,7 @@
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -181,19 +181,22 @@
           {
             "type": "defines_class",
             "className": "Account",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "constructible",
             "className": "Account",
             "constructorArgs": [],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "created_instances",
             "className": "Account",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.try_module_8_account_tracker_project_sketch0.checks.2.message",
+            "path": "main.py"
           }
         ]
       }
@@ -284,7 +287,8 @@
           {
             "type": "defines_class",
             "className": "Account",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "constructible",
@@ -293,7 +297,8 @@
               "Ava",
               125
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "instance_attributes",
@@ -306,24 +311,27 @@
               "owner",
               "balance"
             ],
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.2.message",
+            "path": "models/account.py"
           },
           {
             "type": "created_instances",
             "className": "Account",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.3.message",
+            "path": "main.py"
           },
           {
             "type": "printed_line_count",
-            "min": 2,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.4.message"
+            "min": 3,
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_2_constructor_attributes.checks.4.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Ava\n125\n",
+            "stdout": "Riverside Club\nAva\n125\n",
             "match": "exact"
           }
         ],
@@ -414,11 +422,6 @@
         ],
         "semanticChecks": [
           {
-            "type": "defines_class",
-            "className": "Account",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.0.message"
-          },
-          {
             "type": "method_returns",
             "className": "Account",
             "constructorArgs": [
@@ -433,7 +436,8 @@
             "methodArgKinds": [],
             "expected": 150,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "method_sequence_returns",
@@ -459,18 +463,38 @@
             "methodArgKinds": [],
             "expected": 110,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.1.message",
+            "path": "models/account.py"
+          },
+          {
+            "type": "method_returns",
+            "className": "Account",
+            "constructorArgs": [
+              "Ava",
+              125
+            ],
+            "constructorArgKinds": [],
+            "methodName": "is_valid_amount",
+            "methodArgs": [
+              -5
+            ],
+            "methodArgKinds": [],
+            "expected": false,
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.2.message",
+            "path": "models/account.py"
           },
           {
             "type": "printed_line_count",
             "min": 3,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_3_add_methods.checks.3.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Ava\n150\n110\n",
+            "stdout": "150\n110\nFalse\n",
             "match": "exact"
           }
         ],
@@ -575,7 +599,8 @@
             "methodArgKinds": [],
             "expected": 125,
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.0.message",
+            "path": "models/account.py"
           },
           {
             "type": "method_sequence_returns",
@@ -611,20 +636,22 @@
             "methodName": "summary",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Ava: $110.00",
+            "expected": "Riverside Club | Ava: $110.00",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.1.message",
+            "path": "models/account.py"
           },
           {
             "type": "printed_line_count",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-8-object-oriented-foundations.module-8-account-tracker-project.moduleProject.steps.account_tracker_step_4_validation_summary.checks.2.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Ava: $110.00\n",
+            "stdout": "Riverside Club | Ava: $40.00\n",
             "match": "exact"
           }
         ],

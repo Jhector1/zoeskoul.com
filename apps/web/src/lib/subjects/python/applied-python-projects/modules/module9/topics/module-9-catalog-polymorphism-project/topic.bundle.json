@@ -44,18 +44,18 @@
         "maxAttempts": null,
         "steps": [
           {
-            "id": "catalog_project_step_1_base_and_book",
-            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_1_base_and_book.title",
-            "exerciseKey": "catalog-project-step-1-base-and-book",
+            "id": "greenhouse_project_step_1_base_and_temperature",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.greenhouse_project_step_1_base_and_temperature.title",
+            "exerciseKey": "greenhouse-project-step-1-base-and-temperature",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
           },
           {
-            "id": "catalog_project_step_2_add_movie_override",
-            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_2_add_movie_override.title",
-            "exerciseKey": "catalog-project-step-2-add-movie-override",
+            "id": "greenhouse_project_step_2_add_humidity_override",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.greenhouse_project_step_2_add_humidity_override.title",
+            "exerciseKey": "greenhouse-project-step-2-add-humidity-override",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -63,9 +63,9 @@
             "carryFromPrev": true
           },
           {
-            "id": "catalog_project_step_3_mixed_catalog_loop",
-            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_3_mixed_catalog_loop.title",
-            "exerciseKey": "catalog-project-step-3-mixed-catalog-loop",
+            "id": "greenhouse_project_step_3_mixed_sensor_loop",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.greenhouse_project_step_3_mixed_sensor_loop.title",
+            "exerciseKey": "greenhouse-project-step-3-mixed-sensor-loop",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -73,9 +73,9 @@
             "carryFromPrev": true
           },
           {
-            "id": "catalog_project_step_4_catalog_class_report",
-            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.catalog_project_step_4_catalog_class_report.title",
-            "exerciseKey": "catalog-project-step-4-catalog-class-report",
+            "id": "greenhouse_project_step_4_monitor_class_report",
+            "titleKey": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.projectSteps.greenhouse_project_step_4_monitor_class_report.title",
+            "exerciseKey": "greenhouse-project-step-4-monitor-class-report",
             "difficulty": "easy",
             "preferKind": "code_input",
             "seedPolicy": "global",
@@ -96,38 +96,38 @@
   ],
   "exercises": [
     {
-      "id": "catalog-project-step-1-base-and-book",
+      "id": "greenhouse-project-step-1-base-and-temperature",
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book",
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature",
       "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterCode",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_catalog_item_py.content",
+          "path": "models/sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_sensor_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_book_py.content",
+          "path": "models/temperature_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_temperature_sensor_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -136,28 +136,28 @@
       "solutionFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.main_py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.main_py.content",
           "language": "python",
           "isEntry": true,
           "entry": true
         },
         {
           "path": "models/__init__.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models___init___py.content",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_catalog_item_py.content",
+          "path": "models/sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_sensor_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_book_py.content",
+          "path": "models/temperature_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_temperature_sensor_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -166,68 +166,68 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterCode",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_catalog_item_py.content",
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_sensor_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
-            "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.starterFiles.models_book_py.content",
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.starterFiles.models_temperature_sensor_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           }
         ]
       },
-      "showExpectedExample": true,
+      "showExpectedExample": false,
       "recipe": {
         "type": "semantic",
         "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionCode",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionCode",
         "solutionFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.main_py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.main_py.content",
             "language": "python",
             "isEntry": true,
             "entry": true
           },
           {
             "path": "models/__init__.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models___init___py.content",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_catalog_item_py.content",
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_sensor_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
-            "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.solutionFiles.models_book_py.content",
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.solutionFiles.models_temperature_sensor_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -236,689 +236,744 @@
         "semanticChecks": [
           {
             "type": "defines_class",
-            "className": "CatalogItem",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.0.message"
-          },
-          {
-            "type": "constructible",
-            "className": "CatalogItem",
-            "constructorArgs": [
-              "Sample"
-            ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.1.message"
+            "className": "Sensor",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.0.message",
+            "path": "models/sensor.py"
           },
           {
             "type": "defines_class",
-            "className": "Book",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.3.message"
+            "className": "TemperatureSensor",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.3.message",
+            "path": "models/temperature_sensor.py"
           },
           {
             "type": "constructible",
-            "className": "Book",
+            "className": "TemperatureSensor",
             "constructorArgs": [
-              "The Hobbit",
-              "J.R.R. Tolkien"
+              "North Bed",
+              21.5
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.4.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.4.message",
+            "path": "models/temperature_sensor.py"
           },
           {
             "type": "instance_attributes",
-            "className": "CatalogItem",
+            "className": "TemperatureSensor",
             "constructorArgs": [
-              "Sample"
+              "North Bed",
+              21.5
             ],
             "attributes": [
-              "title"
+              "zone",
+              "celsius"
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.2.message"
-          },
-          {
-            "type": "instance_attributes",
-            "className": "Book",
-            "constructorArgs": [
-              "The Hobbit",
-              "J.R.R. Tolkien"
-            ],
-            "attributes": [
-              "title",
-              "author"
-            ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_1_base_and_book.checks.5.message"
-          }
-        ]
-      }
-    },
-    {
-      "id": "catalog-project-step-2-add-movie-override",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override",
-      "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/__init__.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models___init___py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/__init__.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models___init___py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/__init__.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models___init___py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.starterFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/__init__.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models___init___py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.solutionFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "defines_class",
-            "className": "Movie",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.1.message"
-          },
-          {
-            "type": "constructible",
-            "className": "Movie",
-            "constructorArgs": [
-              "Toy Story",
-              81
-            ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.5.message",
+            "path": "models/temperature_sensor.py"
           },
           {
             "type": "method_returns",
-            "className": "Book",
+            "className": "TemperatureSensor",
             "constructorArgs": [
-              "The Hobbit",
-              "J.R.R. Tolkien"
+              "North Bed",
+              21.5
             ],
             "constructorArgKinds": [],
-            "methodName": "label",
+            "methodName": "reading",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Book: The Hobbit by J.R.R. Tolkien",
+            "expected": "Temperature: North Bed = 21.5 C",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.0.message"
-          },
-          {
-            "type": "instance_attributes",
-            "className": "Movie",
-            "constructorArgs": [
-              "Toy Story",
-              81
-            ],
-            "attributes": [
-              "title",
-              "minutes"
-            ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.3.message"
-          },
-          {
-            "type": "method_returns",
-            "className": "Movie",
-            "constructorArgs": [
-              "Toy Story",
-              81
-            ],
-            "constructorArgKinds": [],
-            "methodName": "label",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "Movie: Toy Story (81 min)",
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_2_add_movie_override.checks.4.message"
-          }
-        ]
-      }
-    },
-    {
-      "id": "catalog-project-step-3-mixed-catalog-loop",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop",
-      "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/__init__.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models___init___py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/__init__.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models___init___py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/__init__.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models___init___py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.starterFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/__init__.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models___init___py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.solutionFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "created_instances",
-            "className": "Book",
-            "min": 1,
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.0.message"
-          },
-          {
-            "type": "created_instances",
-            "className": "Movie",
-            "min": 1,
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.1.message"
-          },
-          {
-            "type": "method_returns",
-            "className": "Book",
-            "constructorArgs": [
-              "The Hobbit",
-              "J.R.R. Tolkien"
-            ],
-            "constructorArgKinds": [],
-            "methodName": "label",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "Book: The Hobbit by J.R.R. Tolkien",
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.2.message"
-          },
-          {
-            "type": "method_returns",
-            "className": "Movie",
-            "constructorArgs": [
-              "Toy Story",
-              81
-            ],
-            "constructorArgKinds": [],
-            "methodName": "label",
-            "methodArgs": [],
-            "methodArgKinds": [],
-            "expected": "Movie: Toy Story (81 min)",
-            "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_3_mixed_catalog_loop.checks.3.message"
-          }
-        ]
-      }
-    },
-    {
-      "id": "catalog-project-step-4-catalog-class-report",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report",
-      "language": "python",
-      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterCode",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/__init__.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models___init___py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.main_py.content",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        },
-        {
-          "path": "models/__init__.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models___init___py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/catalog_item.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_item_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/book.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_book_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/movie.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_movie_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        },
-        {
-          "path": "models/catalog.py",
-          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_py.content",
-          "language": "python",
-          "isEntry": false,
-          "entry": false
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/__init__.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models___init___py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.starterFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ]
-      },
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "semantic",
-        "language": "python",
-        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionCode",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.main_py.content",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          },
-          {
-            "path": "models/__init__.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models___init___py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/catalog_item.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_item_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/book.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_book_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/movie.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_movie_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          },
-          {
-            "path": "models/catalog.py",
-            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.solutionFiles.models_catalog_py.content",
-            "language": "python",
-            "isEntry": false,
-            "entry": false
-          }
-        ],
-        "semanticChecks": [
-          {
-            "type": "defines_class",
-            "className": "Catalog",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.0.message"
-          },
-          {
-            "type": "constructible",
-            "className": "Catalog",
-            "constructorArgs": [],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.1.message"
-          },
-          {
-            "type": "instance_attributes",
-            "className": "Catalog",
-            "constructorArgs": [],
-            "attributes": [
-              "items"
-            ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.catalog_project_step_4_catalog_class_report.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_1_base_and_temperature.checks.5.message",
+            "path": "models/temperature_sensor.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "Book: The Hobbit by J.R.R. Tolkien\nMovie: Toy Story (81 min)\n",
+            "stdout": "Temperature: North Bed = 21.5 C\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
+      }
+    },
+    {
+      "id": "greenhouse-project-step-2-add-humidity-override",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/temperature_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_temperature_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/humidity_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/temperature_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_temperature_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/humidity_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.starterFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.solutionFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "HumiditySensor",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.1.message",
+            "path": "models/humidity_sensor.py"
+          },
+          {
+            "type": "constructible",
+            "className": "HumiditySensor",
+            "constructorArgs": [
+              "Seedling Bench",
+              64
+            ],
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.2.message",
+            "path": "models/humidity_sensor.py"
+          },
+          {
+            "type": "method_returns",
+            "className": "TemperatureSensor",
+            "constructorArgs": [
+              "North Bed",
+              21.5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "reading",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Temperature: North Bed = 21.5 C",
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.0.message",
+            "path": "models/temperature_sensor.py"
+          },
+          {
+            "type": "instance_attributes",
+            "className": "HumiditySensor",
+            "constructorArgs": [
+              "Seedling Bench",
+              64
+            ],
+            "attributes": [
+              "zone",
+              "percent"
+            ],
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.3.message",
+            "path": "models/humidity_sensor.py"
+          },
+          {
+            "type": "method_returns",
+            "className": "HumiditySensor",
+            "constructorArgs": [
+              "Seedling Bench",
+              64
+            ],
+            "constructorArgKinds": [],
+            "methodName": "reading",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Humidity: Seedling Bench = 64%",
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_2_add_humidity_override.checks.4.message",
+            "path": "models/humidity_sensor.py"
+          }
+        ]
+      }
+    },
+    {
+      "id": "greenhouse-project-step-3-mixed-sensor-loop",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/temperature_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_temperature_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/humidity_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/temperature_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_temperature_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/humidity_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.starterFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": false,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.solutionFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "created_instances",
+            "className": "TemperatureSensor",
+            "min": 1,
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.0.message",
+            "path": "main.py"
+          },
+          {
+            "type": "created_instances",
+            "className": "HumiditySensor",
+            "min": 1,
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.1.message",
+            "path": "main.py"
+          },
+          {
+            "type": "method_returns",
+            "className": "TemperatureSensor",
+            "constructorArgs": [
+              "North Bed",
+              21.5
+            ],
+            "constructorArgKinds": [],
+            "methodName": "reading",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Temperature: North Bed = 21.5 C",
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.2.message",
+            "path": "models/temperature_sensor.py"
+          },
+          {
+            "type": "method_returns",
+            "className": "HumiditySensor",
+            "constructorArgs": [
+              "Seedling Bench",
+              64
+            ],
+            "constructorArgKinds": [],
+            "methodName": "reading",
+            "methodArgs": [],
+            "methodArgKinds": [],
+            "expected": "Humidity: Seedling Bench = 64%",
+            "expectedKind": "value",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.3.message",
+            "path": "models/humidity_sensor.py"
+          },
+          {
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 2,
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_3_mixed_sensor_loop.checks.4.message"
+          }
+        ]
+      }
+    },
+    {
+      "id": "greenhouse-project-step-4-monitor-class-report",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/temperature_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models_temperature_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/humidity_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/greenhouse_monitor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models_greenhouse_monitor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/temperature_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_temperature_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/humidity_sensor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_humidity_sensor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/greenhouse_monitor.py",
+          "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_greenhouse_monitor_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.starterFiles.models_greenhouse_monitor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/temperature_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_temperature_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/humidity_sensor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_humidity_sensor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/greenhouse_monitor.py",
+            "content": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.solutionFiles.models_greenhouse_monitor_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "defines_class",
+            "className": "GreenhouseMonitor",
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.0.message",
+            "path": "models/greenhouse_monitor.py"
+          },
+          {
+            "type": "constructible",
+            "className": "GreenhouseMonitor",
+            "constructorArgs": [],
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.1.message",
+            "path": "models/greenhouse_monitor.py"
+          },
+          {
+            "type": "instance_attributes",
+            "className": "GreenhouseMonitor",
+            "constructorArgs": [],
+            "attributes": [
+              "sensors"
+            ],
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.module-9-catalog-polymorphism-project.moduleProject.steps.greenhouse_project_step_4_monitor_class_report.checks.2.message",
+            "path": "models/greenhouse_monitor.py"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Temperature: North Bed = 21.5 C\nHumidity: Seedling Bench = 64%\n",
             "match": "exact"
           }
         ],

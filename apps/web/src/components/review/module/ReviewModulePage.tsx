@@ -11,6 +11,7 @@ import ReviewModuleHeader from "./components/layout/ReviewModuleHeader";
 import ReviewModuleLeftRail from "./components/layout/ReviewModuleLeftRail";
 import ReviewModuleRightRail from "./components/layout/ReviewModuleRightRail";
 import ReviewModuleMobileDrawer from "./components/layout/ReviewModuleMobileDrawer";
+import ReviewCourseModulesDrawer from "./components/layout/ReviewCourseModulesDrawer";
 import ReviewModuleStackedTools from "./components/layout/ReviewModuleStackedTools";
 
 import ReviewTopicStage from "./components/content/ReviewTopicStage";
@@ -41,7 +42,12 @@ export default function ReviewModulePage(props: ReviewModulePageProps) {
                 header={<ReviewModuleHeader {...vm.header} />}
                 leftRail={<ReviewModuleLeftRail {...vm.leftRail} />}
                 rightRail={<ReviewModuleRightRail {...vm.rightRail} />}
-                mobileDrawer={<ReviewModuleMobileDrawer {...vm.mobileDrawer} />}
+                mobileDrawer={
+                    <>
+                        <ReviewModuleMobileDrawer {...vm.mobileDrawer} />
+                        <ReviewCourseModulesDrawer {...vm.courseDrawer} />
+                    </>
+                }
                 overlays={
                     <>
                         <ReviewResetDialog {...vm.resetDialog} />

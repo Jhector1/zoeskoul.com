@@ -212,7 +212,8 @@
           {
             "type": "defines_class",
             "className": "CatalogItem",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.0.message",
+            "path": "models/catalog_item.py"
           },
           {
             "type": "constructible",
@@ -220,7 +221,8 @@
             "constructorArgs": [
               "Hidden Figures"
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.1.message",
+            "path": "models/catalog_item.py"
           },
           {
             "type": "instance_attributes",
@@ -231,7 +233,8 @@
             "attributes": [
               "title"
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.2.message",
+            "path": "models/catalog_item.py"
           },
           {
             "type": "method_returns",
@@ -245,7 +248,8 @@
             "methodArgKinds": [],
             "expected": "Hidden Figures",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.3.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch0.checks.3.message",
+            "path": "models/catalog_item.py"
           }
         ],
         "tests": [
@@ -372,32 +376,44 @@
           {
             "type": "defines_class",
             "className": "Book",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.0.message",
+            "path": "models/book.py"
           },
           {
             "type": "constructible",
             "className": "Book",
             "constructorArgs": [
-              "The Martian"
+              "The Martian",
+              "Andy Weir"
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.1.message",
+            "path": "models/book.py"
           },
           {
             "type": "instance_attributes",
             "className": "Book",
             "constructorArgs": [
-              "The Martian"
+              "The Martian",
+              "Andy Weir"
             ],
             "attributes": [
-              "title"
+              "title",
+              "author"
             ],
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.2.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.2.message",
+            "path": "models/book.py"
+          },
+          {
+            "type": "printed_line_count",
+            "min": 2,
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch1.checks.3.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "The Martian\n",
+            "stdout": "The Martian\nAndy Weir\n",
             "match": "exact"
           }
         ],
@@ -516,30 +532,49 @@
         ],
         "semanticChecks": [
           {
+            "type": "constructible",
+            "className": "Book",
+            "constructorArgs": [
+              "The Hobbit",
+              "J. R. R. Tolkien"
+            ],
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.0.message",
+            "path": "models/book.py"
+          },
+          {
             "type": "method_returns",
             "className": "Book",
             "constructorArgs": [
-              "The Hobbit"
+              "The Hobbit",
+              "J. R. R. Tolkien"
             ],
             "constructorArgKinds": [],
             "methodName": "label",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "The Hobbit",
+            "expected": "The Hobbit by J. R. R. Tolkien",
             "expectedKind": "value",
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.0.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.1.message",
+            "path": "models/book.py"
           },
           {
             "type": "created_instances",
             "className": "Book",
             "min": 1,
-            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.1.message"
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.2.message",
+            "path": "main.py"
+          },
+          {
+            "type": "printed_line_count",
+            "min": 1,
+            "message": "@:topics.applied-python-projects.python-9-inheritance-polymorphism-and-abstraction.inheritance-for-shared-behavior.tryIt.try_inheritance_for_shared_behavior_sketch2.checks.3.message",
+            "path": "main.py"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "The Hobbit\n",
+            "stdout": "The Hobbit by J. R. R. Tolkien\n",
             "match": "exact"
           }
         ],
@@ -572,7 +607,7 @@
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
-        "value": "CatalogItem"
+        "value": "super()"
       }
     },
     {

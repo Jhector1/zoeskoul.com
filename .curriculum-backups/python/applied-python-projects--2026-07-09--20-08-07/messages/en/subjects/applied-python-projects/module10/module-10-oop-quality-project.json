@@ -1,0 +1,389 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-10-testing-debugging-oop-projects": {
+        "module-10-oop-quality-project": {
+          "label": "Module 10 OOP Quality Project",
+          "summary": "Stabilize a small catalog app with tests, import fixes, service helpers, and a clean final report.",
+          "cards": {
+            "sketch0": {
+              "title": "Project brief"
+            },
+            "project": {
+              "title": "Catalog App Quality Pass"
+            }
+          },
+          "projectSteps": {
+            "try_module_10_oop_quality_project_sketch0": {
+              "title": "Milestone 1: Add model validation tests"
+            },
+            "project_step_report_service_tests": {
+              "title": "Milestone 2: Test and fix the reporting service"
+            },
+            "project_step_storage_loader": {
+              "title": "Milestone 3: Load catalog items from fixture data"
+            },
+            "project_step_debug_imports_state": {
+              "title": "Milestone 4: Debug imports and state updates"
+            },
+            "project_step_regression_summary": {
+              "title": "Milestone 5: Add a reusable summary service and regression tests"
+            },
+            "project_step_final_regression": {
+              "title": "Milestone 6: Finish the end-to-end regression workspace"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "try_module_10_oop_quality_project_sketch0": {
+                "title": "Milestone 1: validate the catalog model",
+                "prompt": "Complete `CatalogItem` in `models/catalog_item.py`. Store `name`, `category`, and `quantity`; reject negative quantities with `ValueError`; and make `is_in_stock()` return whether quantity is greater than zero. Keep the runnable demo in main.py.",
+                "hint": "Validate before assigning the attributes.",
+                "help": {
+                  "concept": "Model tests should cover stored state, normal behavior, and invalid constructor input.",
+                  "hint_1": "Validate before assigning the attributes.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided model demo.\nfrom models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.name)\nprint(item.is_in_stock())\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided model demo.\nfrom models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.name)\nprint(item.is_in_stock())\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        # TODO: reject negative quantity, then store all three values.\n        pass\n\n    def is_in_stock(self):\n        # TODO: return whether quantity is greater than zero.\n        pass\n\n    def add_stock(self, amount):\n        # TODO: reject negative amounts, update quantity, and return it.\n        pass\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "# TODO: add assertions for attributes, stock state, and negative quantity.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.name)\nprint(item.is_in_stock())\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "tests_check_model_py": {
+                    "content": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nassert item.name == \"Notebook\"\nassert item.is_in_stock() is True\ntry:\n    CatalogItem(\"Broken\", \"Office\", -1)\n    raise AssertionError(\"negative quantity should fail\")\nexcept ValueError:\n    pass\n"
+                  }
+                },
+                "solutionCode": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Notebook\", \"Office\", 4)\nprint(item.name)\nprint(item.is_in_stock())\n",
+                "checks": {
+                  "0": {
+                    "message": "Store all model attributes."
+                  },
+                  "1": {
+                    "message": "Report zero quantity as out of stock."
+                  },
+                  "2": {
+                    "message": "Keep main.py runnable."
+                  }
+                },
+                "expectedOutput": "Notebook\nTrue"
+              },
+              "project_step_report_service_tests": {
+                "title": "Milestone 2: test the reporting service",
+                "prompt": "Complete `total_quantity(items)` and `low_stock_names(items, threshold)` in `services/reporting.py`. Return item names at or below the threshold in their original order. Keep the supplied model and main demo working.",
+                "hint": "Use item.quantity for the total and a list comprehension for low-stock names.",
+                "help": {
+                  "concept": "Reporting functions should return deterministic values that tests can compare exactly.",
+                  "hint_1": "Use item.quantity for the total and a list comprehension for low-stock names.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided reporting demo.\nfrom models.catalog_item import CatalogItem\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = [\n    CatalogItem(\"Notebook\", \"Office\", 4),\n    CatalogItem(\"Marker\", \"Office\", 0),\n    CatalogItem(\"Tape\", \"Office\", 2),\n]\nprint(total_quantity(items))\nprint(\", \".join(low_stock_names(items, 2)))\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided reporting demo.\nfrom models.catalog_item import CatalogItem\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = [\n    CatalogItem(\"Notebook\", \"Office\", 4),\n    CatalogItem(\"Marker\", \"Office\", 0),\n    CatalogItem(\"Tape\", \"Office\", 2),\n]\nprint(total_quantity(items))\nprint(\", \".join(low_stock_names(items, 2)))\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "# Keep the validated model unchanged.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def total_quantity(items):\n    # TODO: return the combined quantity.\n    pass\n\ndef low_stock_names(items, threshold):\n    # TODO: return names at or below the threshold.\n    pass\n\ndef build_summary(items, threshold):\n    # TODO: return total_quantity, low_stock_names, and in_stock_count.\n    pass\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "# TODO: assert the total and low-stock names.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.catalog_item import CatalogItem\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = [\n    CatalogItem(\"Notebook\", \"Office\", 4),\n    CatalogItem(\"Marker\", \"Office\", 0),\n    CatalogItem(\"Tape\", \"Office\", 2),\n]\nprint(total_quantity(items))\nprint(\", \".join(low_stock_names(items, 2)))\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def total_quantity(items):\n    return sum(item.quantity for item in items)\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]\n\ndef build_summary(items, threshold):\n    return {\n        \"total_quantity\": total_quantity(items),\n        \"low_stock_names\": low_stock_names(items, threshold),\n        \"in_stock_count\": sum(1 for item in items if item.is_in_stock()),\n    }\n"
+                  },
+                  "tests_check_reporting_py": {
+                    "content": "from models.catalog_item import CatalogItem\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = [CatalogItem(\"A\", \"Office\", 4), CatalogItem(\"B\", \"Office\", 1)]\nassert total_quantity(items) == 5\nassert low_stock_names(items, 1) == [\"B\"]\n"
+                  }
+                },
+                "solutionCode": "from models.catalog_item import CatalogItem\nfrom services.reporting import total_quantity, low_stock_names\n\nitems = [\n    CatalogItem(\"Notebook\", \"Office\", 4),\n    CatalogItem(\"Marker\", \"Office\", 0),\n    CatalogItem(\"Tape\", \"Office\", 2),\n]\nprint(total_quantity(items))\nprint(\", \".join(low_stock_names(items, 2)))\n",
+                "checks": {
+                  "0": {
+                    "message": "Return values that produce the exact two-line report."
+                  }
+                },
+                "expectedOutput": "6\nMarker, Tape"
+              },
+              "project_step_storage_loader": {
+                "title": "Milestone 3: load catalog items from CSV",
+                "prompt": "Complete `load_items(path)` in `storage/catalog_loader.py`. Read the CSV with `csv.DictReader`, convert quantity to int, create `CatalogItem` objects, and return them in file order.",
+                "hint": "Loop over DictReader rows and append a CatalogItem for each row.",
+                "help": {
+                  "concept": "A storage layer converts text rows into validated domain objects.",
+                  "hint_1": "Loop over DictReader rows and append a CatalogItem for each row.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided loader demo.\nfrom storage.catalog_loader import load_items\n\nfor item in load_items(\"data/catalog.csv\"):\n    print(item.name)\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided loader demo.\nfrom storage.catalog_loader import load_items\n\nfor item in load_items(\"data/catalog.csv\"):\n    print(item.name)\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "# Keep the model unchanged.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "# Keep reporting helpers available for later milestones.\ndef total_quantity(items):\n    return sum(item.quantity for item in items)\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]\n\ndef build_summary(items, threshold):\n    return {\n        \"total_quantity\": total_quantity(items),\n        \"low_stock_names\": low_stock_names(items, threshold),\n        \"in_stock_count\": sum(1 for item in items if item.is_in_stock()),\n    }\n"
+                  },
+                  "storage_catalog_loader_py": {
+                    "content": "import csv\nfrom models.catalog_item import CatalogItem\n\ndef load_items(path):\n    # TODO: read the CSV rows and return CatalogItem objects.\n    pass\n"
+                  },
+                  "data_catalog_csv": {
+                    "content": "name,category,quantity\nNotebook,Office,4\nMarker,Office,0\nTape,Office,2\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "# TODO: assert the loaded names and quantities.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from storage.catalog_loader import load_items\n\nfor item in load_items(\"data/catalog.csv\"):\n    print(item.name)\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def total_quantity(items):\n    return sum(item.quantity for item in items)\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]\n\ndef build_summary(items, threshold):\n    return {\n        \"total_quantity\": total_quantity(items),\n        \"low_stock_names\": low_stock_names(items, threshold),\n        \"in_stock_count\": sum(1 for item in items if item.is_in_stock()),\n    }\n"
+                  },
+                  "storage_catalog_loader_py": {
+                    "content": "import csv\nfrom models.catalog_item import CatalogItem\n\ndef load_items(path):\n    items = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            items.append(CatalogItem(row[\"name\"], row[\"category\"], int(row[\"quantity\"])))\n    return items\n"
+                  },
+                  "data_catalog_csv": {
+                    "content": "name,category,quantity\nNotebook,Office,4\nMarker,Office,0\nTape,Office,2\n"
+                  },
+                  "tests_check_loader_py": {
+                    "content": "from storage.catalog_loader import load_items\n\nitems = load_items(\"data/catalog.csv\")\nassert [item.name for item in items] == [\"Notebook\", \"Marker\", \"Tape\"]\nassert [item.quantity for item in items] == [4, 0, 2]\n"
+                  }
+                },
+                "solutionCode": "from storage.catalog_loader import load_items\n\nfor item in load_items(\"data/catalog.csv\"):\n    print(item.name)\n",
+                "checks": {
+                  "0": {
+                    "message": "Load all three CSV rows as CatalogItem objects."
+                  }
+                },
+                "expectedOutput": "Notebook\nMarker\nTape"
+              },
+              "project_step_debug_imports_state": {
+                "title": "Milestone 4: validate restock state changes",
+                "prompt": "Finish `CatalogItem.add_stock(amount)` in `models/catalog_item.py`. Reject negative amounts with `ValueError`, add valid amounts to quantity, and return the new quantity. The provided main script restocks Marker by 3.",
+                "hint": "Validate the amount before changing self.quantity.",
+                "help": {
+                  "concept": "A model should protect its own state instead of relying on callers to validate every change.",
+                  "hint_1": "Validate the amount before changing self.quantity.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided restock demo.\nfrom storage.catalog_loader import load_items\n\nitems = load_items(\"data/catalog.csv\")\nmarker = next(item for item in items if item.name == \"Marker\")\nprint(marker.add_stock(3))\nprint(marker.quantity)\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided restock demo.\nfrom storage.catalog_loader import load_items\n\nitems = load_items(\"data/catalog.csv\")\nmarker = next(item for item in items if item.name == \"Marker\")\nprint(marker.add_stock(3))\nprint(marker.quantity)\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        # TODO: reject negative quantity, then store all three values.\n        pass\n\n    def is_in_stock(self):\n        # TODO: return whether quantity is greater than zero.\n        pass\n\n    def add_stock(self, amount):\n        # TODO: reject negative amounts, update quantity, and return it.\n        pass\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "# Keep reporting helpers unchanged.\ndef total_quantity(items):\n    return sum(item.quantity for item in items)\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]\n\ndef build_summary(items, threshold):\n    return {\n        \"total_quantity\": total_quantity(items),\n        \"low_stock_names\": low_stock_names(items, threshold),\n        \"in_stock_count\": sum(1 for item in items if item.is_in_stock()),\n    }\n"
+                  },
+                  "storage_catalog_loader_py": {
+                    "content": "# Keep the CSV loader unchanged.\nimport csv\nfrom models.catalog_item import CatalogItem\n\ndef load_items(path):\n    items = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            items.append(CatalogItem(row[\"name\"], row[\"category\"], int(row[\"quantity\"])))\n    return items\n"
+                  },
+                  "data_catalog_csv": {
+                    "content": "name,category,quantity\nNotebook,Office,4\nMarker,Office,0\nTape,Office,2\n"
+                  },
+                  "tests_check_restock_py": {
+                    "content": "# TODO: assert a successful restock and a rejected negative amount.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from storage.catalog_loader import load_items\n\nitems = load_items(\"data/catalog.csv\")\nmarker = next(item for item in items if item.name == \"Marker\")\nprint(marker.add_stock(3))\nprint(marker.quantity)\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def total_quantity(items):\n    return sum(item.quantity for item in items)\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]\n\ndef build_summary(items, threshold):\n    return {\n        \"total_quantity\": total_quantity(items),\n        \"low_stock_names\": low_stock_names(items, threshold),\n        \"in_stock_count\": sum(1 for item in items if item.is_in_stock()),\n    }\n"
+                  },
+                  "storage_catalog_loader_py": {
+                    "content": "import csv\nfrom models.catalog_item import CatalogItem\n\ndef load_items(path):\n    items = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            items.append(CatalogItem(row[\"name\"], row[\"category\"], int(row[\"quantity\"])))\n    return items\n"
+                  },
+                  "data_catalog_csv": {
+                    "content": "name,category,quantity\nNotebook,Office,4\nMarker,Office,0\nTape,Office,2\n"
+                  },
+                  "tests_check_restock_py": {
+                    "content": "from models.catalog_item import CatalogItem\n\nitem = CatalogItem(\"Marker\", \"Office\", 0)\nassert item.add_stock(3) == 3\ntry:\n    item.add_stock(-1)\n    raise AssertionError(\"negative stock should fail\")\nexcept ValueError:\n    pass\n"
+                  }
+                },
+                "solutionCode": "from storage.catalog_loader import load_items\n\nitems = load_items(\"data/catalog.csv\")\nmarker = next(item for item in items if item.name == \"Marker\")\nprint(marker.add_stock(3))\nprint(marker.quantity)\n",
+                "checks": {
+                  "0": {
+                    "message": "A valid restock should return the new quantity."
+                  },
+                  "1": {
+                    "message": "Print the returned and stored quantities."
+                  }
+                },
+                "expectedOutput": "3\n3"
+              },
+              "project_step_regression_summary": {
+                "title": "Milestone 5: build a reusable regression summary",
+                "prompt": "Complete `build_summary(items, threshold)` in `services/reporting.py`. Return a dictionary with `total_quantity`, `low_stock_names`, and `in_stock_count`. The main script loads the fixture and restocks Marker before printing the summary.",
+                "hint": "Reuse the two existing reporting helpers and count items whose is_in_stock() returns True.",
+                "help": {
+                  "concept": "A summary service combines tested model and storage behavior into one stable result.",
+                  "hint_1": "Reuse the two existing reporting helpers and count items whose is_in_stock() returns True.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided end-to-end summary demo.\nfrom storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nsummary = build_summary(items, 2)\nprint(summary[\"total_quantity\"])\nprint(\", \".join(summary[\"low_stock_names\"]))\nprint(summary[\"in_stock_count\"])\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided end-to-end summary demo.\nfrom storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nsummary = build_summary(items, 2)\nprint(summary[\"total_quantity\"])\nprint(\", \".join(summary[\"low_stock_names\"]))\nprint(summary[\"in_stock_count\"])\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "# Keep the model unchanged.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def total_quantity(items):\n    # TODO: return the combined quantity.\n    pass\n\ndef low_stock_names(items, threshold):\n    # TODO: return names at or below the threshold.\n    pass\n\ndef build_summary(items, threshold):\n    # TODO: return total_quantity, low_stock_names, and in_stock_count.\n    pass\n"
+                  },
+                  "storage_catalog_loader_py": {
+                    "content": "# Keep the loader unchanged.\nimport csv\nfrom models.catalog_item import CatalogItem\n\ndef load_items(path):\n    items = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            items.append(CatalogItem(row[\"name\"], row[\"category\"], int(row[\"quantity\"])))\n    return items\n"
+                  },
+                  "data_catalog_csv": {
+                    "content": "name,category,quantity\nNotebook,Office,4\nMarker,Office,0\nTape,Office,2\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "# TODO: assert the complete summary dictionary.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nsummary = build_summary(items, 2)\nprint(summary[\"total_quantity\"])\nprint(\", \".join(summary[\"low_stock_names\"]))\nprint(summary[\"in_stock_count\"])\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def total_quantity(items):\n    return sum(item.quantity for item in items)\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]\n\ndef build_summary(items, threshold):\n    return {\n        \"total_quantity\": total_quantity(items),\n        \"low_stock_names\": low_stock_names(items, threshold),\n        \"in_stock_count\": sum(1 for item in items if item.is_in_stock()),\n    }\n"
+                  },
+                  "storage_catalog_loader_py": {
+                    "content": "import csv\nfrom models.catalog_item import CatalogItem\n\ndef load_items(path):\n    items = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            items.append(CatalogItem(row[\"name\"], row[\"category\"], int(row[\"quantity\"])))\n    return items\n"
+                  },
+                  "data_catalog_csv": {
+                    "content": "name,category,quantity\nNotebook,Office,4\nMarker,Office,0\nTape,Office,2\n"
+                  },
+                  "tests_check_summary_py": {
+                    "content": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nassert build_summary(items, 2) == {\"total_quantity\": 9, \"low_stock_names\": [\"Tape\"], \"in_stock_count\": 3}\n"
+                  }
+                },
+                "solutionCode": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nsummary = build_summary(items, 2)\nprint(summary[\"total_quantity\"])\nprint(\", \".join(summary[\"low_stock_names\"]))\nprint(summary[\"in_stock_count\"])\n",
+                "checks": {
+                  "0": {
+                    "message": "Return all three summary values so main.py prints the expected report."
+                  }
+                },
+                "expectedOutput": "9\nTape\n3"
+              },
+              "project_step_final_regression": {
+                "title": "Milestone 6: finish the regression workspace",
+                "prompt": "Finish the cumulative quality workspace. Keep the validated model, CSV loader, and summary service working; add meaningful assertions in `tests/check_regression.py`; and complete `README.md` with the responsibility of each folder. The runnable demo must print the final summary and confirmation line.",
+                "hint": "Run the complete flow in the regression test: load, restock, summarize, and assert.",
+                "help": {
+                  "concept": "A production-ready handoff includes behavior, regression checks, and clear project documentation.",
+                  "hint_1": "Run the complete flow in the regression test: load, restock, summarize, and assert.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# TODO: after the report, print the exact confirmation line when the regression workspace is complete.\nfrom storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nsummary = build_summary(items, 2)\nprint(summary[\"total_quantity\"])\nprint(\", \".join(summary[\"low_stock_names\"]))\nprint(summary[\"in_stock_count\"])\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# TODO: after the report, print the exact confirmation line when the regression workspace is complete.\nfrom storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nsummary = build_summary(items, 2)\nprint(summary[\"total_quantity\"])\nprint(\", \".join(summary[\"low_stock_names\"]))\nprint(summary[\"in_stock_count\"])\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "# Keep the model unchanged.\nclass CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "# Keep reporting unchanged.\ndef total_quantity(items):\n    return sum(item.quantity for item in items)\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]\n\ndef build_summary(items, threshold):\n    return {\n        \"total_quantity\": total_quantity(items),\n        \"low_stock_names\": low_stock_names(items, threshold),\n        \"in_stock_count\": sum(1 for item in items if item.is_in_stock()),\n    }\n"
+                  },
+                  "storage_catalog_loader_py": {
+                    "content": "# Keep the loader unchanged.\nimport csv\nfrom models.catalog_item import CatalogItem\n\ndef load_items(path):\n    items = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            items.append(CatalogItem(row[\"name\"], row[\"category\"], int(row[\"quantity\"])))\n    return items\n"
+                  },
+                  "data_catalog_csv": {
+                    "content": "name,category,quantity\nNotebook,Office,4\nMarker,Office,0\nTape,Office,2\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "# TODO: assert the complete load, restock, and summary flow.\n"
+                  },
+                  "README_md": {
+                    "content": "# Catalog Quality Project\n\nTODO: explain models, services, storage, tests, and the runnable demo.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nsummary = build_summary(items, 2)\nprint(summary[\"total_quantity\"])\nprint(\", \".join(summary[\"low_stock_names\"]))\nprint(summary[\"in_stock_count\"])\nprint(\"regression checks passed\")\n"
+                  },
+                  "models_catalog_item_py": {
+                    "content": "class CatalogItem:\n    def __init__(self, name, category, quantity):\n        if quantity < 0:\n            raise ValueError(\"quantity cannot be negative\")\n        self.name = name\n        self.category = category\n        self.quantity = quantity\n\n    def is_in_stock(self):\n        return self.quantity > 0\n\n    def add_stock(self, amount):\n        if amount < 0:\n            raise ValueError(\"amount cannot be negative\")\n        self.quantity += amount\n        return self.quantity\n"
+                  },
+                  "services_reporting_py": {
+                    "content": "def total_quantity(items):\n    return sum(item.quantity for item in items)\n\ndef low_stock_names(items, threshold):\n    return [item.name for item in items if item.quantity <= threshold]\n\ndef build_summary(items, threshold):\n    return {\n        \"total_quantity\": total_quantity(items),\n        \"low_stock_names\": low_stock_names(items, threshold),\n        \"in_stock_count\": sum(1 for item in items if item.is_in_stock()),\n    }\n"
+                  },
+                  "storage_catalog_loader_py": {
+                    "content": "import csv\nfrom models.catalog_item import CatalogItem\n\ndef load_items(path):\n    items = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            items.append(CatalogItem(row[\"name\"], row[\"category\"], int(row[\"quantity\"])))\n    return items\n"
+                  },
+                  "data_catalog_csv": {
+                    "content": "name,category,quantity\nNotebook,Office,4\nMarker,Office,0\nTape,Office,2\n"
+                  },
+                  "tests_check_regression_py": {
+                    "content": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nassert build_summary(items, 2)[\"total_quantity\"] == 9\n"
+                  },
+                  "README_md": {
+                    "content": "# Catalog Quality Project\n\n- `models/` owns validated catalog state.\n- `services/` builds reports.\n- `storage/` loads CSV data.\n- `tests/` protects the full workflow.\n- `main.py` demonstrates the final result.\n"
+                  }
+                },
+                "solutionCode": "from storage.catalog_loader import load_items\nfrom services.reporting import build_summary\n\nitems = load_items(\"data/catalog.csv\")\nnext(item for item in items if item.name == \"Marker\").add_stock(3)\nsummary = build_summary(items, 2)\nprint(summary[\"total_quantity\"])\nprint(\", \".join(summary[\"low_stock_names\"]))\nprint(summary[\"in_stock_count\"])\nprint(\"regression checks passed\")\n",
+                "checks": {
+                  "0": {
+                    "message": "Keep the full report and print the regression confirmation line."
+                  }
+                },
+                "expectedOutput": "9\nTape\n3\nregression checks passed"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-10-testing-debugging-oop-projects": {
+        "module-10-oop-quality-project": {
+          "module-10-oop-quality-project-sketch0": {
+            "title": "Project brief: stabilize a catalog app before handoff",
+            "bodyMarkdown": "A teammate built a small catalog app, but the team does not trust it yet. Some methods work only for the happy path, some imports are fragile, and the report code is too hard to test.\n\nYour job is a **quality pass**, not a total rewrite. You will keep the app recognizable while making it safer.\n\nYou will practice the Module 10 skills in a real workflow:\n\n1. Add small assertion-based tests for model behavior.\n2. Fix state and import bugs that the tests reveal.\n3. Move messy report logic into a service.\n4. Add a final regression check so future changes do not break the app silently.\n\nThe lesson examples use smaller objects so the ideas are easy to see. This project applies those ideas to a catalog app that feels closer to a real code handoff."
+          }
+        }
+      }
+    }
+  }
+}

@@ -23,129 +23,120 @@
             "allowReveal": true,
             "try_refactoring_oop_services_sketch0": {
               "title": "Extract report formatting into a service",
-              "prompt": "The lesson used a lunch-order report to show when code should move out of `main.py`. Now practice with a book report service. Create `ReportService` and make `build_book_report(books)` return one formatted line per book.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Complete `ReportService.build_book_report(books)` in `services/report_service.py`. Return one `title: $price` line per book dictionary, preserving input order.",
+              "hint": "Build each line from `book[\"title\"]` and `book[\"price\"]`, then join the lines with `\\n`.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "concept": "A service method keeps reporting logic out of main.py and returns reusable data.",
+                "hint_1": "Build each line from `book[\"title\"]` and `book[\"price\"]`, then join the lines with `\\n`.",
+                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "# Run this provided service demo.\nfrom services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "# Run this provided service demo.\nfrom services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n"
                 },
                 "services_report_service_py": {
-                  "content": "# TODO: Update services/report_service.py to complete this step: Extract report formatting into a service.\nclass ReportService:\n    def __init__(self):\n        pass\n\n    def build_book_report(self, value):\n        pass"
+                  "content": "class ReportService:\n    def build_book_report(self, books):\n        # TODO: return one \"title: $price\" line per dictionary.\n        pass\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass ReportService:\n    def build_book_report(self, books):\n        return \"\\n\".join(f\"{get_field(book, 'title')}: ${get_field(book, 'price')}\" for book in books)\n"
+                  "content": "from services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n"
                 },
                 "services_report_service_py": {
-                  "content": "class ReportService:\n    def build_book_report(self, books):\n        lines = []\n        for book in books:\n            title = book['title'] if isinstance(book, dict) else book.title\n            price = book['price'] if isinstance(book, dict) else book.price\n            lines.append(f\"{title}: ${price}\")\n        return \"\\n\".join(lines)"
+                  "content": "class ReportService:\n    def build_book_report(self, books):\n        return \"\\n\".join(f\"{book['title']}: ${book['price']}\" for book in books)\n"
                 }
               },
-              "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass ReportService:\n    def build_book_report(self, books):\n        return \"\\n\".join(f\"{get_field(book, 'title')}: ${get_field(book, 'price')}\" for book in books)\n",
+              "solutionCode": "from services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n",
               "checks": {
                 "0": {
-                  "message": "Define a ReportService class in services/report_service.py."
+                  "message": "Define ReportService in its service file."
                 },
                 "1": {
-                  "message": "ReportService should be constructible with no arguments."
-                },
-                "2": {
-                  "message": "build_book_report should return one formatted line per book."
+                  "message": "Return both formatted lines."
                 }
-              }
+              },
+              "expectedOutput": "Python Basics: $12\nDebugging Guide: $18"
             },
             "try_refactoring_oop_services_sketch1": {
               "title": "Move total-price logic into CatalogService",
-              "prompt": "Continue the service refactor. Create `CatalogService.total_price(books)` so the service owns the total calculation instead of leaving that logic in `main.py`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Complete `CatalogService.total_price(books)` in `services/catalog_service.py`. Return the sum of the `price` values and do not print inside the service.",
+              "hint": "Use `sum(...)` over each dictionary's `price` value.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "concept": "Service methods should return results so callers decide how to display them.",
+                "hint_1": "Use `sum(...)` over each dictionary's `price` value.",
+                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "# Run this provided total-price demo.\nfrom services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "# Run this provided total-price demo.\nfrom services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n"
                 },
                 "services_catalog_service_py": {
-                  "content": "# TODO: Update services/catalog_service.py to complete this step: Move total-price logic into CatalogService.\nclass CatalogService:\n    def __init__(self):\n        pass\n\n    def total_price(self, value):\n        pass"
+                  "content": "class CatalogService:\n    def total_price(self, books):\n        # TODO: return the sum of every book price.\n        pass\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass CatalogService:\n    def total_price(self, books):\n        return sum(get_field(book, 'price') for book in books)\n"
+                  "content": "from services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n"
                 },
                 "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def total_price(self, books):\n        total = 0\n        for book in books:\n            total += book['price'] if isinstance(book, dict) else book.price\n        return total"
+                  "content": "class CatalogService:\n    def total_price(self, books):\n        return sum(book[\"price\"] for book in books)\n"
                 }
               },
-              "solutionCode": "def get_field(item, name):\n    if isinstance(item, dict):\n        return item.get(name)\n    return getattr(item, name)\n\nclass CatalogService:\n    def total_price(self, books):\n        return sum(get_field(book, 'price') for book in books)\n",
+              "solutionCode": "from services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n",
               "checks": {
                 "0": {
-                  "message": "Define a CatalogService class in services/catalog_service.py."
+                  "message": "Define CatalogService in the service file."
                 },
                 "1": {
-                  "message": "CatalogService should be constructible with no arguments."
+                  "message": "Return the correct total for a list of book dictionaries."
                 },
                 "2": {
-                  "message": "total_price should return the sum of all prices."
-                },
-                "3": {
-                  "message": "total_price should handle small lists and zero prices correctly."
-                },
-                "4": {
-                  "message": "The service method should return the total instead of printing from inside the method."
+                  "message": "Print the returned total from main.py."
                 }
-              }
+              },
+              "expectedOutput": "40"
             },
             "try_refactoring_oop_services_sketch2": {
               "title": "Refactor counting into a service method",
-              "prompt": "Finish the service pattern by adding `CatalogService.count_books(books)`. It should return the number of book dictionaries passed in, including `0` for an empty list.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Complete `CatalogService.count_books(books)` so it returns the number of book dictionaries, including `0` for an empty list.",
+              "hint": "Return `len(books)`.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
+                "concept": "A small service method can still make responsibilities explicit and easy to test.",
+                "hint_1": "Return `len(books)`.",
+                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
               },
-              "starterCode": "# Write your answer below",
+              "starterCode": "# Run this provided non-empty and empty-list demo.\nfrom services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n",
               "starterFiles": {
                 "main_py": {
-                  "content": "# Write your answer below"
+                  "content": "# Run this provided non-empty and empty-list demo.\nfrom services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n"
                 },
                 "services_catalog_service_py": {
-                  "content": "# TODO: Update services/catalog_service.py to complete this step: Refactor counting into a service method.\nclass CatalogService:\n    def __init__(self):\n        pass\n\n    def count_books(self, value):\n        pass"
+                  "content": "class CatalogService:\n    def count_books(self, books):\n        # TODO: return how many book dictionaries were supplied.\n        pass\n"
                 }
               },
               "solutionFiles": {
                 "main_py": {
-                  "content": "class CatalogService:\n    def count_books(self, books):\n        return len(books)\n"
+                  "content": "from services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n"
                 },
                 "services_catalog_service_py": {
-                  "content": "class CatalogService:\n    def count_books(self, books):\n        return len(books)"
+                  "content": "class CatalogService:\n    def count_books(self, books):\n        return len(books)\n"
                 }
               },
-              "solutionCode": "class CatalogService:\n    def count_books(self, books):\n        return len(books)\n",
+              "solutionCode": "from services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n",
               "checks": {
                 "0": {
-                  "message": "Define a CatalogService class in services/catalog_service.py."
+                  "message": "Return 2 for the provided two-book list."
                 },
                 "1": {
-                  "message": "CatalogService should be constructible with no arguments."
+                  "message": "Return 0 for an empty list."
                 },
                 "2": {
-                  "message": "count_books should return the number of objects in the list."
-                },
-                "3": {
-                  "message": "count_books should return 0 for an empty list."
+                  "message": "Print both results from main.py."
                 }
-              }
+              },
+              "expectedOutput": "2\n0"
             }
           },
           "practice": {
