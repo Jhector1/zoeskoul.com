@@ -77,6 +77,8 @@ describe("IdeEditorPane", () => {
                         allowRun: false,
                         showTerminal: true,
                         showTerminalDockToggle: false,
+                        showOpenTerminalButton: true,
+                        showRestartTerminalButton: true,
                         showThemeToggle: true,
                         showSqlDialectPicker: false,
                         enableWorkspaceTerminal: true,

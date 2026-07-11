@@ -1807,18 +1807,6 @@ function shouldUseSavedUserWorkspace(args: {
             : "";
 
     /**
-     * Most important stale-state guard:
-     * if the curriculum starter changed, old saved workspace must not override it.
-     */
-    if (
-        savedStarterHash &&
-        currentStarterHash &&
-        savedStarterHash !== currentStarterHash
-    ) {
-        return false;
-    }
-
-    /**
      * Saved states explicitly marked as starter/empty are not learner work.
      */
     if (
@@ -1829,10 +1817,23 @@ function shouldUseSavedUserWorkspace(args: {
         return false;
     }
 
+    const savedIsUserWorkspaceState = isUserWorkspaceState(args.savedState);
+
     /**
-     * Only trust real user/saved work after starter hash compatibility is checked.
+     * If the curriculum starter changed, reject passive/legacy starter snapshots,
+     * but do not reject explicit learner-owned work. Learner code must survive
+     * starter regeneration and course republish.
      */
-    if (isUserWorkspaceState(args.savedState)) {
+    if (
+        savedStarterHash &&
+        currentStarterHash &&
+        savedStarterHash !== currentStarterHash &&
+        !savedIsUserWorkspaceState
+    ) {
+        return false;
+    }
+
+    if (savedIsUserWorkspaceState) {
         return true;
     }
 

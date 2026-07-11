@@ -386,6 +386,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
 
         showEditorThemeToggle = true,
         showTerminalDockToggle = true,
+        showOpenTerminalButton = true,
+        showRestartTerminalButton = true,
         fixedTerminalDock,
         sqlSchemaSql,
         sqlSeedSql,
@@ -1324,8 +1326,19 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         showHeaderBar &&
         showEditor &&
         showTerminal;
+    const showOpenWorkspaceTerminalUI =
+        showHeaderBar &&
+        showOpenTerminalButton !== false &&
+        workspaceTerminalEnabled &&
+        !isWeb &&
+        lang !== "sql" &&
+        !terminalOnlyMode;
     const showRestartWorkspaceTerminalUI =
-        showHeaderBar && workspaceTerminalEnabled && !isWeb && lang !== "sql";
+        showHeaderBar &&
+        showRestartTerminalButton !== false &&
+        workspaceTerminalEnabled &&
+        !isWeb &&
+        lang !== "sql";
 
     const outerCls = cx(
         frame === "plain"
@@ -1401,6 +1414,32 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
         workspaceTerminalEnabled,
         workspaceTerminal: workspaceTerm,
     });
+
+
+    const openWorkspaceTerminalPane = useCallback(async () => {
+        setOutputTab("terminal");
+
+        if (isNarrowScreen && showEditor && showTerminal) {
+            setMobilePane("output");
+        }
+
+        if (!workspaceTerminalEnabled || disabled) {
+            return;
+        }
+
+        terminalAutoOpenRequestedKeyRef.current = terminalAutoOpenKey;
+        releaseTerminalAutoOpenClaim(terminalAutoOpenKey);
+
+        await workspaceTerm.open({ userInitiated: true });
+    }, [
+        disabled,
+        isNarrowScreen,
+        showEditor,
+        showTerminal,
+        terminalAutoOpenKey,
+        workspaceTerm,
+        workspaceTerminalEnabled,
+    ]);
 
     const outputModel: OutputSurfaceModel = useMemo(() => {
         if (isWeb) {
@@ -1625,6 +1664,8 @@ function CodeRunnerContent(props: CodeRunnerWithStdinProps) {
                                 setMobilePane("editor");
                             }
                         }}
+                        showOpenTerminal={showOpenWorkspaceTerminalUI}
+                        onOpenTerminal={openWorkspaceTerminalPane}
                         showRestartTerminal={showRestartWorkspaceTerminalUI}
                         onRestartTerminal={() =>
                             restartWorkspaceTerminalSession({

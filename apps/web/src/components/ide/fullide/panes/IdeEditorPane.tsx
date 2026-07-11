@@ -247,6 +247,12 @@ export default function IdeEditorPane({
                             showTerminalDockToggle={
                                 services.runner.showTerminalDockToggle && isDesktop
                             }
+                            showOpenTerminalButton={
+                                services.runner.showOpenTerminalButton && isDesktop
+                            }
+                            showRestartTerminalButton={
+                                services.runner.showRestartTerminalButton && isDesktop
+                            }
                             resetTerminalOnRun={!terminalWorkspaceOnly}
                             exerciseStateKey={exerciseStateKey}
                             editorModelKey={

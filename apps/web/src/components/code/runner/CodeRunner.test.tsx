@@ -354,14 +354,14 @@ describe("CodeRunner terminal-only mode", () => {
         );
     });
 
-    it("shows a restart terminal action for workspace terminal mode", () => {
+    it("shows open and restart terminal actions for workspace terminal mode", () => {
         const html = renderToStaticMarkup(
             <CodeRunner
                 language="bash"
                 code="echo hi"
                 onChangeCode={vi.fn()}
                 onChangeLanguage={vi.fn()}
-                showEditor={false}
+                showEditor
                 showTerminal
                 workspaceTerminal={{ enabled: true, workspaceKey: "linux:module:topic" }}
                 isAuthenticated
@@ -369,7 +369,29 @@ describe("CodeRunner terminal-only mode", () => {
             />,
         );
 
+        expect(html).toContain('aria-label="Open terminal"');
         expect(html).toContain('aria-label="Restart terminal"');
+    });
+
+    it("can hide open and restart terminal actions independently", () => {
+        const html = renderToStaticMarkup(
+            <CodeRunner
+                language="bash"
+                code="echo hi"
+                onChangeCode={vi.fn()}
+                onChangeLanguage={vi.fn()}
+                showEditor
+                showTerminal
+                workspaceTerminal={{ enabled: true, workspaceKey: "linux:module:topic" }}
+                isAuthenticated
+                showHeaderBar
+                showOpenTerminalButton={false}
+                showRestartTerminalButton={false}
+            />,
+        );
+
+        expect(html).not.toContain('aria-label="Open terminal"');
+        expect(html).not.toContain('aria-label="Restart terminal"');
     });
 
     it("restarts the workspace terminal by stopping and reopening the same session scope", async () => {

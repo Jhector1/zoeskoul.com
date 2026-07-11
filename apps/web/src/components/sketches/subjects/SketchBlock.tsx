@@ -15,6 +15,7 @@ import { cn, SKETCH_BTN, SKETCH_BTN_PRIMARY } from "@/components/sketches/_share
 import { SketchShell } from "@/components/sketches/_shared/shells";
 import SketchRenderer from "./SketchRenderer";
 import { useTaggedT } from "@/i18n/tagged";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 
 function mergeSpec(base: SketchSpec, patch?: Record<string, unknown>): SketchSpec {
     if (!patch) return base;
@@ -113,6 +114,8 @@ export default function SketchBlock(props: {
     useDebouncedEmit(state, (s) => s && emit(s), { enabled: Boolean(onStateChange), delayMs: 350 });
 
     const readOnly = locked || !prereqsMet;
+    const compactFooterControls =
+        learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
 
     if (!entry) {
         return (
@@ -123,40 +126,52 @@ export default function SketchBlock(props: {
         );
     }
 
-    const footer = (
-            <div className="flex flex-wrap items-center justify-between gap-2">
-            {markDoneDisabled && markDoneDisabledReason ? (
-                <div className="ui-sketch-muted font-extrabold">{markDoneDisabledReason}</div>
-            ) : !prereqsMet ? (
-                <div className="ui-sketch-muted font-extrabold">{ui.t("finishPrereqs")}</div>
-            ) : locked ? (
-                <div className="ui-sketch-muted font-extrabold">{ui.t("locked")}</div>
-            ) : (
-                <div className="ui-sketch-muted font-extrabold">{ui.t("autosave")}</div>
-            )}
+    const footerStatus = markDoneDisabled && markDoneDisabledReason ? (
+        <div className="ui-sketch-muted font-extrabold">{markDoneDisabledReason}</div>
+    ) : !prereqsMet ? (
+        <div className="ui-sketch-muted font-extrabold">{ui.t("finishPrereqs")}</div>
+    ) : locked ? (
+        <div className="ui-sketch-muted font-extrabold">{ui.t("locked")}</div>
+    ) : compactFooterControls ? null : (
+        <div className="ui-sketch-muted font-extrabold">{ui.t("autosave")}</div>
+    );
 
-            <div className="flex items-center gap-2">
+    const footerControls = !compactFooterControls || onMarkDone ? (
+        <div className="flex items-center gap-2">
+            {!compactFooterControls ? (
                 <button type="button" className={SKETCH_BTN} onClick={() => setConfirmReset(true)} disabled={readOnly}>
                     {ui.t("reset")}
                 </button>
+            ) : null}
 
-                {onMarkDone ? (
-                    <button
-                        type="button"
-                        className={cn(SKETCH_BTN_PRIMARY, done && "opacity-70")}
-                        onClick={onMarkDone}
-                        disabled={!prereqsMet || markDoneDisabled}
-                        data-flow-focus="1"
-                        title={markDoneDisabled ? markDoneDisabledReason : (markDoneTitle ?? ui.t("markReadTitle"))}
-                    >
-                        {done
-                            ? (markDoneDoneLabel ?? ui.t("markedRead"))
-                            : (markDoneLabel ?? ui.t("markRead"))}
-                    </button>
-                ) : null}
-            </div>
+            {onMarkDone ? (
+                <button
+                    type="button"
+                    className={cn(SKETCH_BTN_PRIMARY, done && "opacity-70")}
+                    onClick={onMarkDone}
+                    disabled={!prereqsMet || markDoneDisabled}
+                    data-flow-focus="1"
+                    title={markDoneDisabled ? markDoneDisabledReason : (markDoneTitle ?? ui.t("markReadTitle"))}
+                >
+                    {done
+                        ? (markDoneDoneLabel ?? ui.t("markedRead"))
+                        : (markDoneLabel ?? ui.t("markRead"))}
+                </button>
+            ) : null}
         </div>
-    );
+    ) : null;
+
+    const footer = footerStatus || footerControls ? (
+        <div
+            className={cn(
+                "flex flex-wrap items-center gap-2",
+                footerStatus ? "justify-between" : "justify-end",
+            )}
+        >
+            {footerStatus}
+            {footerControls}
+        </div>
+    ) : null;
 
     // CUSTOM
     if (entry.kind === "custom") {

@@ -20,6 +20,8 @@ describe("mergeLearningIdeConfigs", () => {
             {
                 layoutMode: "terminal_workspace",
                 terminalCwd: "/workspace/navigation-practice",
+                showOpenTerminalButton: false,
+                showRestartTerminalButton: false,
                 requires: {
                     terminal: true,
                 },
@@ -33,6 +35,8 @@ describe("mergeLearningIdeConfigs", () => {
             runnerBackend: "pty",
             layoutMode: "terminal_workspace",
             terminalCwd: "/workspace/navigation-practice",
+            showOpenTerminalButton: false,
+            showRestartTerminalButton: false,
             requires: {
                 files: true,
                 multiFile: true,
@@ -144,6 +148,8 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         expect(resolved.services.runner?.enableWorkspaceTerminal).toBe(true);
         expect(resolved.services.runner?.allowRun).toBe(true);
         expect(resolved.services.runner?.showTerminalDockToggle).toBe(true);
+        expect(resolved.services.runner?.showOpenTerminalButton).toBe(true);
+        expect(resolved.services.runner?.showRestartTerminalButton).toBe(true);
     });
 
     it("enables terminal and workspace terminal in terminal_workspace mode", () => {
@@ -158,6 +164,21 @@ describe("resolveFullIDEConfigFromLearningIde", () => {
         expect(resolved.services.runner?.enableWorkspaceTerminal).toBe(true);
         expect(resolved.services.runner?.allowRun).toBe(false);
         expect(resolved.services.runner?.showTerminalDockToggle).toBe(false);
+    });
+
+    it("respects explicit terminal action visibility overrides", () => {
+        const resolved = resolveFullIDEConfigFromLearningIde({
+            ideConfig: {
+                requires: {
+                    terminal: true,
+                },
+                showOpenTerminalButton: false,
+                showRestartTerminalButton: false,
+            },
+        });
+
+        expect(resolved.services.runner?.showOpenTerminalButton).toBe(false);
+        expect(resolved.services.runner?.showRestartTerminalButton).toBe(false);
     });
 
     it("respects an explicit terminalSessionScope override", () => {

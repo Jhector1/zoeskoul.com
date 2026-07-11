@@ -565,6 +565,40 @@ function hasSavedExerciseEditorContent(value: any) {
     );
 }
 
+function savedExerciseLooksLikeLearnerEditorWork(value: any, workspace: any) {
+    if (!hasSavedExerciseEditorContent(value)) return false;
+
+    /**
+     * User/saved owned work is allowed to survive starter regeneration. A
+     * starter hash mismatch means the authored starter changed; it should not
+     * erase a learner's saved answer.
+     */
+    if (isUserSavedState(value)) return true;
+
+    /**
+     * Passive starter snapshots are runtime bookkeeping, not learner work.
+     */
+    if (
+        value?.workspaceOrigin === "starter" ||
+        value?.workspaceOrigin === "empty" ||
+        value?.userEdited === false
+    ) {
+        return false;
+    }
+
+    /**
+     * Legacy saves may be missing userEdited/workspaceOrigin. If they carry a
+     * starterHash and the saved workspace content differs from that hash, treat
+     * it as edited learner work. If it matches, it is just an old starter.
+     */
+    const savedStarterHash =
+        typeof value?.starterHash === "string" ? value.starterHash : "";
+    if (workspace && savedStarterHash) {
+        return workspaceContentHash(workspace) !== savedStarterHash;
+    }
+
+    return Boolean(workspace);
+}
 
 function getSavedExerciseCode(value: any, workspace: any) {
     const workspaceCode = deriveEntryCode(workspace) ?? "";
@@ -1237,14 +1271,6 @@ export function useReviewProgress(args: {
                         existingExercise?.ideWorkspace,
                 });
 
-                /**
-                 * Important:
-                 * If the curriculum starter changed, do NOT restore old editor/workspace code.
-                 * But still hydrate saved progress fields like checked/correct/submitted.
-                 */
-                const shouldDropSavedWorkspace =
-                    !savedMatchesCurrentStarter && Boolean(existingExercise?.starterHash);
-
                 const savedMatchesExistingLanguage =
                     !existingExercise?.language ||
                     stateLanguageMatches(
@@ -1252,6 +1278,21 @@ export function useReviewProgress(args: {
                         existingExercise.language,
                         savedWorkspace,
                     );
+
+                const savedLooksLikeLearnerEditorWork =
+                    savedMatchesExistingLanguage &&
+                    savedExerciseLooksLikeLearnerEditorWork(saved, savedWorkspace);
+
+                /**
+                 * Important:
+                 * If the curriculum starter changed, drop passive starter snapshots,
+                 * but never drop real learner-owned editor/workspace content. Dropping
+                 * user/saved work here is what makes saved code fall back to starter.
+                 */
+                const shouldDropSavedWorkspace =
+                    !savedLooksLikeLearnerEditorWork &&
+                    !savedMatchesCurrentStarter &&
+                    Boolean(existingExercise?.starterHash);
 
                 const shouldHydrateEditorState =
                     savedHasEditorContent &&

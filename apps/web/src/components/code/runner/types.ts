@@ -134,6 +134,8 @@ export type CommonProps = {
 
     showEditorThemeToggle?: boolean;
     showTerminalDockToggle?: boolean;
+    showOpenTerminalButton?: boolean;
+    showRestartTerminalButton?: boolean;
     onBeforeRun?: BeforeRunFn;
     onRun?: OnRun;
     onTerminalEvidenceChange?: (evidence: TerminalEvidence) => void;

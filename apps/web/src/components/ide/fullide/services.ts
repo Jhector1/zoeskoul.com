@@ -21,6 +21,8 @@ export type FullIDERunnerServices = {
     allowRun: boolean;
     showTerminal: boolean;
     showTerminalDockToggle: boolean;
+    showOpenTerminalButton: boolean;
+    showRestartTerminalButton: boolean;
     showThemeToggle: boolean;
     showSqlDialectPicker: boolean;
     enableWorkspaceTerminal: boolean;
@@ -125,6 +127,8 @@ const WORKSPACE_PRESET: FullIDEServices = {
         allowRun: true,
         showTerminal: true,
         showTerminalDockToggle: true,
+        showOpenTerminalButton: true,
+        showRestartTerminalButton: true,
         showThemeToggle: false,
         showSqlDialectPicker: true,
         enableWorkspaceTerminal: true,
@@ -251,6 +255,8 @@ export function resolveFullIDEServices(args?: {
 
     if (!merged.runner.showTerminal) {
         merged.runner.showTerminalDockToggle = false;
+        merged.runner.showOpenTerminalButton = false;
+        merged.runner.showRestartTerminalButton = false;
         merged.runner.enableWorkspaceTerminal = false;
     }
 

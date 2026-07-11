@@ -83,6 +83,8 @@ export default function HeaderBar(props: {
 
     allowReset: boolean;
     onReset: () => void;
+    showOpenTerminal?: boolean;
+    onOpenTerminal?: () => void | Promise<void>;
     showRestartTerminal?: boolean;
     onRestartTerminal?: () => void | Promise<void>;
 
@@ -109,6 +111,8 @@ export default function HeaderBar(props: {
         onSwitchSqlDialect,
         allowReset,
         onReset,
+        showOpenTerminal,
+        onOpenTerminal,
         showRestartTerminal,
         onRestartTerminal,
         allowRun,
@@ -251,6 +255,22 @@ export default function HeaderBar(props: {
                             aria-label="Reset"
                         >
                             <IconText icon={<FiRefreshCw className="text-[13px]" />} text="Reset" />
+                        </button>
+                    </Tooltip>
+                ) : null}
+
+                {showOpenTerminal ? (
+                    <Tooltip tip="Open terminal">
+                        <button
+                            type="button"
+                            onClick={() => {
+                                void onOpenTerminal?.();
+                            }}
+                            disabled={disabled}
+                            className="ui-btn-ide-ghost"
+                            aria-label="Open terminal"
+                        >
+                            <IconText icon={<FiTerminal className="text-[13px]" />} text="Terminal" />
                         </button>
                     </Tooltip>
                 ) : null}

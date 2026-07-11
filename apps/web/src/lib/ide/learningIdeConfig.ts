@@ -34,6 +34,8 @@ export type LearningIdeConfig = {
     layoutMode?: LearningIdeLayoutMode;
     terminalSessionScope?: TerminalSessionScope;
     terminalCwd?: string;
+    showOpenTerminalButton?: boolean;
+    showRestartTerminalButton?: boolean;
     fileActions?: LearningIdeFileActions;
     sqlPane?: SqlPaneOptions;
 };
@@ -89,6 +91,12 @@ export function mergeLearningIdeConfigs(
                 ? { terminalSessionScope: config.terminalSessionScope }
                 : {}),
             ...(config.terminalCwd ? { terminalCwd: config.terminalCwd } : {}),
+            ...(typeof config.showOpenTerminalButton === "boolean"
+                ? { showOpenTerminalButton: config.showOpenTerminalButton }
+                : {}),
+            ...(typeof config.showRestartTerminalButton === "boolean"
+                ? { showRestartTerminalButton: config.showRestartTerminalButton }
+                : {}),
             ...(config.fileActions
                 ? { fileActions: { ...previousFileActions, ...config.fileActions } }
                 : {}),
@@ -160,6 +168,12 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
         runner: {
             terminalSessionScope,
             ...(terminalCwd ? { terminalCwd } : {}),
+            ...(typeof ideConfig?.showOpenTerminalButton === "boolean"
+                ? { showOpenTerminalButton: ideConfig.showOpenTerminalButton }
+                : {}),
+            ...(typeof ideConfig?.showRestartTerminalButton === "boolean"
+                ? { showRestartTerminalButton: ideConfig.showRestartTerminalButton }
+                : {}),
         },
         ...(wantsFiles || terminalWorkspaceMode
             ? {
@@ -194,6 +208,12 @@ export function resolveFullIDEConfigFromLearningIde(args?: {
                     // Run button. Editor + terminal exercises still need Run for
                     // PTY-backed code execution and workspace sync tests.
                     showTerminalDockToggle: !terminalWorkspaceMode,
+                    ...(typeof ideConfig?.showOpenTerminalButton === "boolean"
+                        ? { showOpenTerminalButton: ideConfig.showOpenTerminalButton }
+                        : {}),
+                    ...(typeof ideConfig?.showRestartTerminalButton === "boolean"
+                        ? { showRestartTerminalButton: ideConfig.showRestartTerminalButton }
+                        : {}),
                     allowRun: !terminalWorkspaceMode,
                     terminalSessionScope,
                     ...(terminalCwd ? { terminalCwd } : {}),
