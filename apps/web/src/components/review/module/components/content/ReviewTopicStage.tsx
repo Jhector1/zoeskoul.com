@@ -13,6 +13,7 @@ import type {
 import type { SubjectFinishState } from "../../types/subjectFinish.types";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import type { CompactQuizNavigationState } from "../../compactFlowNavigation";
 
 type Props = {
     leftCollapsedEff: boolean;
@@ -64,6 +65,7 @@ type Props = {
     onOpenCertificate: () => void;
     onActiveCardIndexChange?: (index: number) => void;
     onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
+    onCompactQuizNavigationChange?: (state: CompactQuizNavigationState | null) => void;
 };
 
 export default function ReviewTopicStage({
@@ -115,6 +117,7 @@ export default function ReviewTopicStage({
     onOpenCertificate,
     onActiveCardIndexChange,
     onNavigateToExerciseRoute,
+    onCompactQuizNavigationChange,
 
 
                                              onBeforeCardNavigate,
@@ -178,6 +181,7 @@ export default function ReviewTopicStage({
                     defaultToolLanguage={defaultToolLanguage}
                     onActiveCardIndexChange={onActiveCardIndexChange}
                     onNavigateToExerciseRoute={onNavigateToExerciseRoute}
+                    onCompactQuizNavigationChange={onCompactQuizNavigationChange}
                     onBeforeCardNavigate={onBeforeCardNavigate}
                     maxUnlockedCardIndex={maxUnlockedCardIndex}
                     progressiveLockMessage={progressiveLockMessage}

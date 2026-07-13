@@ -84,6 +84,19 @@ export default function ReviewModuleLayout({
             className="relative h-full w-full overflow-hidden bg-[radial-gradient(1200px_700px_at_20%_0%,#eafff5_0%,#ffffff_55%,#f6f7ff_100%)] text-neutral-900 dark:bg-[radial-gradient(1200px_700px_at_20%_0%,#151a2c_0%,#0b0d12_50%)] dark:text-white/90"
             aria-busy={busy}
         >
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+                {/* subtle decorative background image */}
+                <div
+                    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-[0.08] dark:opacity-[0.12]"
+                    style={{
+                        backgroundImage: "url('/images/ui/img_2.png')",
+                    }}
+                />
+
+                {/* soft readability veil */}
+                <div className="absolute inset-0 bg-white/18 dark:bg-black/28" />
+            </div>
+
             {!reduceMotion ? (
                 <div className="ui-reveal-mask" data-show={showMask ? "true" : "false"} />
             ) : null}
@@ -94,30 +107,32 @@ export default function ReviewModuleLayout({
                 label={navigationLabel}
             />
 
-            {overlays}
-            {mobileDrawer}
+            <div className="relative z-10 h-full w-full">
+                {overlays}
+                {mobileDrawer}
 
-            <ReviewSkeletonSwap
-                showSkeleton={showSkeleton}
-                reduceMotion={reduceMotion}
-                leftCollapsed={leftCollapsed}
-                rightCollapsed={rightCollapsed}
-                leftW={leftW}
-                rightW={rightW}
-            >
-                <div className="h-full w-full flex flex-col min-h-0">
-                    <div data-mobile-workspace-header="true" className="shrink-0">
-                        {header}
-                    </div>
-                    <div className="flex-1 min-h-0 w-full">
-                        <div className="h-full min-h-0 flex">
-                            {leftRail}
-                            {body}
-                            {rightRail}
+                <ReviewSkeletonSwap
+                    showSkeleton={showSkeleton}
+                    reduceMotion={reduceMotion}
+                    leftCollapsed={leftCollapsed}
+                    rightCollapsed={rightCollapsed}
+                    leftW={leftW}
+                    rightW={rightW}
+                >
+                    <div className="h-full w-full flex flex-col min-h-0">
+                        <div data-mobile-workspace-header="true" className="shrink-0">
+                            {header}
+                        </div>
+                        <div className="flex-1 min-h-0 w-full">
+                            <div className="h-full min-h-0 flex">
+                                {leftRail}
+                                {body}
+                                {rightRail}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </ReviewSkeletonSwap>
+                </ReviewSkeletonSwap>
+            </div>
         </div>
     );
 }

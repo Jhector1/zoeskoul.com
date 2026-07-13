@@ -52,6 +52,9 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.1",
+    "@fontsource/great-vibes": "5.2.8",
+    "@fontsource/inter": "5.2.8",
+    "@fontsource/playfair-display": "5.2.8",
     "@monaco-editor/react": "^4.7.0",
     "@next/env": "^16.2.1",
     "@prisma/client": "latest",

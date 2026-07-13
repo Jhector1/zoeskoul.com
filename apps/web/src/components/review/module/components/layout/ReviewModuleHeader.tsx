@@ -191,6 +191,7 @@ export default function ReviewModuleHeader({
         toolsUiEnabled &&
         toolsToggleAllowed &&
         (!compactModeActive || !showDesktopRight || rightCollapsed);
+    const showTopicArrowButtons = !compactModeActive;
 
     const resetMenuPortal =
         resetMenuOpen && resetMenuPlacement && typeof document !== "undefined"
@@ -330,31 +331,35 @@ export default function ReviewModuleHeader({
                             </div>
                         ) : null}
 
-                        <button
-                            type="button"
-                            onClick={onPrevTopic}
-                            className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                            disabled={!prevTopic?.id}
-                            title={!prevTopic?.id ? t("prevDisabledTitle") : t("prevTitle")}
-                        >
-                            ←
-                        </button>
+                        {showTopicArrowButtons ? (
+                            <>
+                                <button
+                                    type="button"
+                                    onClick={onPrevTopic}
+                                    className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                    disabled={!prevTopic?.id}
+                                    title={!prevTopic?.id ? t("prevDisabledTitle") : t("prevTitle")}
+                                >
+                                    ←
+                                </button>
 
-                        <button
-                            type="button"
-                            onClick={onNextTopic}
-                            className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
-                            disabled={!nextTopic?.id || (!unlockAll && !viewIsComplete)}
-                            title={
-                                !nextTopic?.id
-                                    ? t("nextDisabledTitle")
-                                    : !unlockAll && !viewIsComplete
-                                        ? t("nextLockedTitle")
-                                        : t("nextTitle")
-                            }
-                        >
-                            →
-                        </button>
+                                <button
+                                    type="button"
+                                    onClick={onNextTopic}
+                                    className="ui-btn ui-btn-secondary text-xs font-extrabold whitespace-nowrap"
+                                    disabled={!nextTopic?.id || (!unlockAll && !viewIsComplete)}
+                                    title={
+                                        !nextTopic?.id
+                                            ? t("nextDisabledTitle")
+                                            : !unlockAll && !viewIsComplete
+                                                ? t("nextLockedTitle")
+                                                : t("nextTitle")
+                                    }
+                                >
+                                    →
+                                </button>
+                            </>
+                        ) : null}
                     </div>
 
                     <div className="hidden sm:flex shrink-0 items-center gap-2">

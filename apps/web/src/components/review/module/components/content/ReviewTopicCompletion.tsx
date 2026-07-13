@@ -3,6 +3,7 @@
 import React from "react";
 import type { ReviewModule } from "@/lib/subjects/types";
 import SubjectFinishBanner from "../../components/finish/SubjectFinishBanner";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
 import type { SubjectFinishState } from "../../types/subjectFinish.types";
 
 type ReviewTopicCompletionViewTopic = Pick<
@@ -37,7 +38,10 @@ export default function ReviewTopicCompletion({
     subjectFinish,
     onOpenCertificate,
 }: Props) {
-    const showContinue = viewIsComplete && Boolean(onContinue);
+    const compactModeActive =
+        learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
+    const showContinue =
+        viewIsComplete && Boolean(onContinue) && !compactModeActive;
 
     return (
         <div className="mt-2 flex min-h-0 flex-1 flex-col gap-3">

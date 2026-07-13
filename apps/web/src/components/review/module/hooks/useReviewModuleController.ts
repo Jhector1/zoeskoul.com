@@ -27,7 +27,13 @@ import {useReviewScrollSync} from "./useReviewScrollSync";
 import {useReviewPanels} from "./useReviewPanels";
 
 import {prereqsMetForAnyQuizOrProject, isTopicComplete} from "../utils";
-import { getEmbeddedTryIt, isQuizLikeCard } from "../progressKeys";
+import {
+    canAutoMarkReadingCardDone,
+    getEmbeddedTryIt,
+    hasRequiredEmbeddedTryIt,
+    isCardDoneFromState,
+    isQuizLikeCard,
+} from "../progressKeys";
 import {
     getModuleProgress,
     getSidebarTopicItems,
@@ -37,6 +43,7 @@ import {
 } from "../selectors";
 import {
     buildQuizResetProgress,
+    buildMarkCardDoneProgress,
     buildModuleCompletedProgress,
     buildNormalizedTopicsProgress,
     buildTopicCompletedProgress,
@@ -47,6 +54,7 @@ import {
 
 import type {ReviewModulePageProps, HeaderGamificationVm} from "../types";
 import {useReviewRuntimeStore} from "../runtime/reviewRuntimeStore";
+import { mergeRuntimeIntoProgress } from "../runtime/runtimeProgressBridge";
 import {getCardStateKey} from "../runtime/exerciseKeys";
 import {
     buildReviewCardRouteTarget,
@@ -77,10 +85,118 @@ import {
 } from "./rightRailExerciseBinding";
 import { resolveActiveToolScopeKey } from "./activeToolScopeKey";
 import { resolveCompactAssignmentCtaVisibility } from "../assignmentCtaVisibility";
+import type { CompactQuizNavigationState } from "../compactFlowNavigation";
 import {
     resolveToolsRailVisibility,
     shouldDefaultCollapseToolsRailForCompactQuiz,
 } from "../toolsRailVisibility";
+
+function normalizeCompactNavKind(value: unknown) {
+    return String(value ?? "")
+        .trim()
+        .toLowerCase()
+        .replace(/[_-]+/g, " ");
+}
+
+function compactCardDestinationLabel(card: unknown) {
+    const record = (card && typeof card === "object" ? card : {}) as {
+        type?: unknown;
+        id?: unknown;
+        title?: unknown;
+        spec?: Record<string, unknown> | null;
+    };
+    const spec =
+        record.spec && typeof record.spec === "object"
+            ? record.spec
+            : {};
+    const kindText = [
+        record.type,
+        record.id,
+        record.title,
+        spec.uiKind,
+        spec.displayKind,
+        spec.mode,
+        spec.topic,
+        spec.section,
+    ]
+        .map(normalizeCompactNavKind)
+        .filter(Boolean)
+        .join(" ");
+
+    if (kindText.includes("capstone") || kindText.includes("final project")) {
+        return "Capstone";
+    }
+
+    if (record.type === "project") {
+        if (kindText.includes("module project")) return "Module project";
+        return "Project";
+    }
+
+    if (record.type === "quiz") return "Quiz";
+
+    if (hasRequiredEmbeddedTryIt(card as any)) return "Practice";
+
+    return "Next";
+}
+
+const REVIEW_ROUTE_HISTORY_STATE_KEY = "__zoeReviewRoute";
+
+function sameReviewResolvedRouteTarget(
+    left: ReviewResolvedRouteTarget | null | undefined,
+    right: ReviewResolvedRouteTarget | null | undefined,
+) {
+    if (left === right) return true;
+    if (!left || !right) return false;
+
+    return (
+        left.kind === right.kind &&
+        left.topicId === right.topicId &&
+        left.cardId === right.cardId &&
+        left.targetKind === right.targetKind &&
+        left.targetSlug === right.targetSlug &&
+        (left.kind !== "exercise" ||
+            right.kind !== "exercise" ||
+            left.exerciseStateKey === right.exerciseStateKey)
+    );
+}
+
+function buildReviewRouteHistoryState(
+    existingState: unknown,
+    args: {
+        href: string;
+        targetKey: string | null;
+        subjectSlug: string;
+        moduleSlug: string;
+    },
+) {
+    const base =
+        existingState && typeof existingState === "object" && !Array.isArray(existingState)
+            ? (existingState as Record<string, unknown>)
+            : {};
+
+    return {
+        ...base,
+        [REVIEW_ROUTE_HISTORY_STATE_KEY]: {
+            href: args.href,
+            targetKey: args.targetKey,
+            subjectSlug: args.subjectSlug,
+            moduleSlug: args.moduleSlug,
+        },
+    };
+}
+
+function readReviewRouteHistoryTargetKey() {
+    if (typeof window === "undefined") return null;
+
+    const state = window.history.state;
+    if (!state || typeof state !== "object") return null;
+
+    const reviewState = (state as Record<string, unknown>)[REVIEW_ROUTE_HISTORY_STATE_KEY];
+    if (!reviewState || typeof reviewState !== "object") return null;
+
+    const targetKey = (reviewState as Record<string, unknown>).targetKey;
+    return typeof targetKey === "string" && targetKey ? targetKey : null;
+}
 function lastExerciseIdSegment(value: unknown) {
     const raw = typeof value === "string" ? value.trim() : "";
     if (!raw) return "";
@@ -184,6 +300,8 @@ export function useReviewModuleController({
     const moduleSlug = params?.moduleSlug ?? "";
     const sectionSlug = (params as any)?.sectionSlug;
     const unlockAll = Boolean(canUnlockAll);
+    const compactModeActive =
+        learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
     const routeFamilyRef = useRef<"devReviewClone" | "standard">(
         pathname?.includes("/dev/e2e/review-module-clone/")
             ? "devReviewClone"
@@ -216,7 +334,10 @@ export function useReviewModuleController({
         },
         [catalogSlug, locale, moduleSlug, subjectSlug],
     );
-    const resolvedNavModes = useMemo(() => resolveFlowNavigationConfig(navigationMode), [navigationMode]);
+    const resolvedNavModes = useMemo(
+        () => resolveFlowNavigationConfig(navigationMode),
+        [navigationMode],
+    );
 
     const topics = Array.isArray(mod?.topics) ? mod.topics : [];
     const firstTopicId = topics[0]?.id ?? "";
@@ -443,16 +564,38 @@ export function useReviewModuleController({
          */
     }, []);
     useEffect(() => {
+        if (typeof window === "undefined") return;
+        if (!progressHydrated) return;
         if (!routeTarget) return;
         if (!routeTargetUnlocked) return;
 
         const normalizedPath = buildRoutePathForCurrentSurface(routeTarget);
-        const currentPath = typeof window !== "undefined" ? window.location.pathname : "";
+        const currentPath = window.location.pathname;
+        const targetKey = getTargetKeyForRouteTarget(targetRegistry, routeTarget);
+        const nextHistoryState = buildReviewRouteHistoryState(window.history.state, {
+            href: normalizedPath,
+            targetKey,
+            subjectSlug,
+            moduleSlug,
+        });
 
-        if (currentPath !== normalizedPath && typeof window !== "undefined") {
-            window.history.replaceState(window.history.state, "", normalizedPath);
+        if (currentPath !== normalizedPath) {
+            window.history.replaceState(nextHistoryState, "", normalizedPath);
+            return;
         }
-    }, [buildRoutePathForCurrentSurface, routeTarget, routeTargetUnlocked]);
+
+        if (readReviewRouteHistoryTargetKey() !== targetKey) {
+            window.history.replaceState(nextHistoryState, "", normalizedPath);
+        }
+    }, [
+        buildRoutePathForCurrentSurface,
+        moduleSlug,
+        progressHydrated,
+        routeTarget,
+        routeTargetUnlocked,
+        subjectSlug,
+        targetRegistry,
+    ]);
     useEffect(() => {
         if (typeof window === "undefined") return;
 
@@ -488,8 +631,11 @@ export function useReviewModuleController({
                 Boolean(nextTargetKey) &&
                 trustedProgressiveBypassTargetKeyRef.current === nextTargetKey;
 
+            const browserHistoryTargetKey = readReviewRouteHistoryTargetKey();
             const nextIsBrowserHistoryExercise =
-                nextResolved?.kind === "exercise" && Boolean(nextTargetKey);
+                nextResolved?.kind === "exercise" &&
+                Boolean(nextTargetKey) &&
+                browserHistoryTargetKey === nextTargetKey;
 
             if (nextIsBrowserHistoryExercise && nextTargetKey) {
                 trustedProgressiveBypassTargetKeyRef.current = nextTargetKey;
@@ -505,25 +651,27 @@ export function useReviewModuleController({
 
             if (!nextIsUnlocked && firstUnlockedRouteTarget) {
                 nextResolved = firstUnlockedRouteTarget;
+                const fallbackHref = buildRoutePathForCurrentSurface(firstUnlockedRouteTarget);
+                const fallbackTargetKey = getTargetKeyForRouteTarget(
+                    targetRegistry,
+                    firstUnlockedRouteTarget,
+                );
+
                 window.history.replaceState(
-                    window.history.state,
+                    buildReviewRouteHistoryState(window.history.state, {
+                        href: fallbackHref,
+                        targetKey: fallbackTargetKey,
+                        subjectSlug,
+                        moduleSlug,
+                    }),
                     "",
-                    buildRoutePathForCurrentSurface(firstUnlockedRouteTarget),
+                    fallbackHref,
                 );
                 showProgressiveLockMessage();
             }
 
             setRouteTarget((prev): ReviewResolvedRouteTarget | null => {
-                if (
-                    prev?.kind === nextResolved?.kind &&
-                    prev?.topicId === nextResolved?.topicId &&
-                    prev?.cardId === nextResolved?.cardId &&
-                    prev?.targetKind === nextResolved?.targetKind &&
-                    prev?.targetSlug === nextResolved?.targetSlug &&
-                    (prev?.kind !== "exercise" ||
-                        nextResolved?.kind !== "exercise" ||
-                        prev.exerciseStateKey === nextResolved.exerciseStateKey)
-                ) {
+                if (sameReviewResolvedRouteTarget(prev, nextResolved)) {
                     return prev;
                 }
 
@@ -774,7 +922,7 @@ export function useReviewModuleController({
 
             const bypassProgressiveLock = Boolean(options.bypassProgressiveLock);
 
-            const nextTargetKey = getTargetKeyForRouteTarget(targetRegistry, target);
+            let nextTargetKey = getTargetKeyForRouteTarget(targetRegistry, target);
 
             if (bypassProgressiveLock && nextTargetKey) {
                 trustedProgressiveBypassTargetKeyRef.current = nextTargetKey;
@@ -794,6 +942,7 @@ export function useReviewModuleController({
 
                 if (firstUnlockedRouteTarget && mode === "replace") {
                     target = firstUnlockedRouteTarget;
+                    nextTargetKey = getTargetKeyForRouteTarget(targetRegistry, target);
                 } else {
                     return;
                 }
@@ -809,10 +958,17 @@ export function useReviewModuleController({
                 await flushAll();
 
                 if (typeof window !== "undefined") {
+                    const nextHistoryState = buildReviewRouteHistoryState(window.history.state, {
+                        href,
+                        targetKey: nextTargetKey,
+                        subjectSlug,
+                        moduleSlug,
+                    });
+
                     if (mode === "replace") {
-                        window.history.replaceState(window.history.state, "", href);
+                        window.history.replaceState(nextHistoryState, "", href);
                     } else {
-                        window.history.pushState(window.history.state, "", href);
+                        window.history.pushState(nextHistoryState, "", href);
                     }
                 }
             } finally {
@@ -825,13 +981,44 @@ export function useReviewModuleController({
             finishRouteTransition,
             firstUnlockedRouteTarget,
             flushAll,
+            moduleSlug,
             progressHydrated,
             progressiveUnlock.unlockedTargetKeys,
             showProgressiveLockMessage,
+            subjectSlug,
             targetRegistry,
             unlockAll,
         ],
     );
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const syncVisibleRouteToAddressBar = () => {
+            const visibleTarget = routeTargetRef.current;
+            if (!visibleTarget) return;
+
+            const href = buildRoutePathForCurrentSurface(visibleTarget);
+            const targetKey = getTargetKeyForRouteTarget(targetRegistry, visibleTarget);
+            const nextHistoryState = buildReviewRouteHistoryState(window.history.state, {
+                href,
+                targetKey,
+                subjectSlug,
+                moduleSlug,
+            });
+
+            window.history.replaceState(nextHistoryState, "", href);
+        };
+
+        window.addEventListener("pagehide", syncVisibleRouteToAddressBar);
+        window.addEventListener("beforeunload", syncVisibleRouteToAddressBar);
+
+        return () => {
+            window.removeEventListener("pagehide", syncVisibleRouteToAddressBar);
+            window.removeEventListener("beforeunload", syncVisibleRouteToAddressBar);
+        };
+    }, [buildRoutePathForCurrentSurface, moduleSlug, subjectSlug, targetRegistry]);
+
     useEffect(() => {
         if (!progressHydrated) return;
         if (!targetRegistry) return;
@@ -954,7 +1141,37 @@ export function useReviewModuleController({
 
     const activeCardIndex = routeCardIndex >= 0 ? routeCardIndex : 0;
     const activeCard = viewCards[activeCardIndex] ?? null;
+    const compactQuizNavigationRef = useRef<CompactQuizNavigationState | null>(null);
+    const compactQuizNavigationSignatureRef = useRef<string>("none");
+    const [compactQuizNavigationVersion, setCompactQuizNavigationVersion] = useState(0);
+    const handleCompactQuizNavigationChange = useCallback((state: CompactQuizNavigationState | null) => {
+        const signature = state
+            ? [
+                state.cardId,
+                state.quizId,
+                state.activeIndex,
+                state.total,
+                state.canGoPrev ? 1 : 0,
+                state.canGoNext ? 1 : 0,
+                state.prevLabel ?? "",
+                state.nextLabel ?? "",
+            ].join(":")
+            : "none";
+
+        compactQuizNavigationRef.current = state;
+
+        if (compactQuizNavigationSignatureRef.current === signature) return;
+
+        compactQuizNavigationSignatureRef.current = signature;
+        setCompactQuizNavigationVersion((value) => value + 1);
+    }, []);
+    const compactQuizNavigation =
+        compactQuizNavigationVersion >= 0 &&
+        compactQuizNavigationRef.current?.cardId === activeCard?.id
+            ? compactQuizNavigationRef.current
+            : null;
     const [activeMobileWorkspaceTab, setActiveMobileWorkspaceTab] = useState<"lesson" | "code">("lesson");
+
     const runtimeExercises = useReviewRuntimeStore((s) => s.exercises);
 
     useEffect(() => {
@@ -1838,12 +2055,217 @@ export function useReviewModuleController({
     const hasActiveTopic = Boolean(viewTid);
     const isAtModuleEnd = !topicFlow.nextTopic?.id;
     const shouldHideModuleNavInCompactMode =
-        learnerUiFlags.compactLearnerUi &&
-        !learnerUiFlags.showDebugLearningUi &&
+        compactModeActive &&
         hasActiveTopic &&
         !viewIsComplete &&
         !moduleComplete &&
         !isAtModuleEnd;
+
+    const activeCardDone = activeCard ? isCardDoneFromState(activeCard, viewProg) : false;
+    const activeCardCanAdvance =
+        unlockAll ||
+        activeCardDone ||
+        (activeCard
+            ? !isQuizLikeCard(activeCard) && !hasRequiredEmbeddedTryIt(activeCard)
+            : false);
+    const hasPrevCard = activeCardIndex > 0;
+    const hasNextCard = activeCardIndex < Math.max(0, viewCards.length - 1);
+    const nextCard = hasNextCard ? viewCards[activeCardIndex + 1] ?? null : null;
+    const nextCardUnlocked =
+        unlockAll || activeCardIndex + 1 <= maxUnlockedCardIndex;
+    const canGoNextCard =
+        hasNextCard && activeCardCanAdvance && nextCardUnlocked;
+    const compactSinglePrevEnabled =
+        Boolean(compactQuizNavigation?.canGoPrev) ||
+        hasPrevCard ||
+        Boolean(topicFlow.prevTopic?.id) ||
+        Boolean(nav?.prevModuleId);
+    const compactSingleNextEnabled =
+        Boolean(compactQuizNavigation?.canGoNext) ||
+        canGoNextCard ||
+        (viewIsComplete && outroContinueEnabled) ||
+        (!navLoading &&
+            !navError &&
+            !nav?.nextModuleId &&
+            Boolean(subjectFinish?.atEndOfPublishedTrack) &&
+            Boolean(subjectFinish?.certificateEligible || subjectFinish?.certificateIssued));
+    const compactSinglePrevLabel =
+        compactQuizNavigation?.canGoPrev && compactQuizNavigation.prevLabel
+            ? compactQuizNavigation.prevLabel
+            : "Previous";
+    const compactSingleNextLabel = useMemo(() => {
+        if (nextLocked) return "Unlock next";
+
+        if (compactQuizNavigation?.canGoNext && compactQuizNavigation.nextLabel) {
+            return compactQuizNavigation.nextLabel;
+        }
+
+        if (canGoNextCard) {
+            return compactCardDestinationLabel(nextCard);
+        }
+
+        if (viewIsComplete && outroContinueEnabled) {
+            if (topicFlow.nextTopic?.id) return "Next topic";
+            if (nav?.nextModuleId) return "Next module";
+            if (
+                subjectFinish?.atEndOfPublishedTrack &&
+                (subjectFinish?.certificateEligible || subjectFinish?.certificateIssued)
+            ) {
+                return "View certificate";
+            }
+            return "Continue";
+        }
+
+        if (
+            !navLoading &&
+            !navError &&
+            !nav?.nextModuleId &&
+            subjectFinish?.atEndOfPublishedTrack &&
+            (subjectFinish?.certificateEligible || subjectFinish?.certificateIssued)
+        ) {
+            return "View certificate";
+        }
+
+        return "Next";
+    }, [
+        canGoNextCard,
+        compactQuizNavigation?.canGoNext,
+        compactQuizNavigation?.nextLabel,
+        nav?.nextModuleId,
+        navError,
+        navLoading,
+        nextCard,
+        nextLocked,
+        outroContinueEnabled,
+        subjectFinish?.atEndOfPublishedTrack,
+        subjectFinish?.certificateEligible,
+        subjectFinish?.certificateIssued,
+        topicFlow.nextTopic?.id,
+        viewIsComplete,
+    ]);
+
+    const persistBeforeUnifiedNavigation = useCallback(async () => {
+        await flushAll();
+
+        setProgress((prev) => {
+            const runtimeState = useReviewRuntimeStore.getState();
+            let next = mergeRuntimeIntoProgress(prev, runtimeState);
+
+            if (
+                activeCard &&
+                !isQuizLikeCard(activeCard) &&
+                canAutoMarkReadingCardDone(activeCard, (next as any)?.topics?.[viewTid])
+            ) {
+                next = buildMarkCardDoneProgress(next, viewTid, activeCard);
+            }
+
+            queueMicrotask(() => flushNow(next));
+            return next;
+        });
+    }, [activeCard, flushAll, flushNow, setProgress, viewTid]);
+
+    const navigateToTopicEdgeCard = useCallback((topicId: string | null | undefined, edge: "first" | "last") => {
+        if (!topicId) return false;
+
+        const topic = topics.find((item) => item.id === topicId) ?? null;
+        const cards = Array.isArray(topic?.cards) ? topic.cards : [];
+        const card = edge === "last" ? cards[cards.length - 1] : cards[0];
+
+        if (!topic || !card) return false;
+
+        void navigateToResolvedTarget(
+            buildReviewCardRouteTarget({
+                mod,
+                topicId: topic.id,
+                card,
+            }),
+        );
+        return true;
+    }, [mod, navigateToResolvedTarget, topics]);
+
+    const handleCompactSinglePrev = useCallback(async () => {
+        if (!compactSinglePrevEnabled) return;
+
+        await persistBeforeUnifiedNavigation();
+
+        const latestQuizNavigation = compactQuizNavigationRef.current;
+        if (latestQuizNavigation?.cardId === activeCard?.id && latestQuizNavigation.canGoPrev) {
+            latestQuizNavigation.onPrev();
+            return;
+        }
+
+        if (hasPrevCard) {
+            handleNavigateCardIndex(activeCardIndex - 1);
+            return;
+        }
+
+        if (navigateToTopicEdgeCard(topicFlow.prevTopic?.id, "last")) return;
+
+        if (nav?.prevModuleId) {
+            goModule(nav.prevModuleId);
+        }
+    }, [
+        activeCard?.id,
+        activeCardIndex,
+        compactSinglePrevEnabled,
+        goModule,
+        handleNavigateCardIndex,
+        hasPrevCard,
+        nav?.prevModuleId,
+        navigateToTopicEdgeCard,
+        persistBeforeUnifiedNavigation,
+        topicFlow.prevTopic?.id,
+    ]);
+
+    const handleCompactSingleNext = useCallback(async () => {
+        if (!compactSingleNextEnabled) return;
+
+        await persistBeforeUnifiedNavigation();
+
+        const latestQuizNavigation = compactQuizNavigationRef.current;
+        if (latestQuizNavigation?.cardId === activeCard?.id && latestQuizNavigation.canGoNext) {
+            latestQuizNavigation.onNext();
+            return;
+        }
+
+        if (canGoNextCard) {
+            handleNavigateCardIndex(activeCardIndex + 1);
+            return;
+        }
+
+        if (viewIsComplete && outroContinueEnabled) {
+            handleOutroContinue();
+            return;
+        }
+
+        if (
+            !navLoading &&
+            !navError &&
+            !nav?.nextModuleId &&
+            subjectFinish?.atEndOfPublishedTrack &&
+            (subjectFinish?.certificateEligible || subjectFinish?.certificateIssued)
+        ) {
+            handleOpenCertificate();
+        }
+    }, [
+        activeCard?.id,
+        activeCardIndex,
+        canGoNextCard,
+        compactSingleNextEnabled,
+        handleNavigateCardIndex,
+        handleOpenCertificate,
+        handleOutroContinue,
+        nav?.nextModuleId,
+        navError,
+        navLoading,
+        outroContinueEnabled,
+        persistBeforeUnifiedNavigation,
+        subjectFinish?.atEndOfPublishedTrack,
+        subjectFinish?.certificateEligible,
+        subjectFinish?.certificateIssued,
+        viewIsComplete,
+    ]);
+
 
     const routeOwnsExercise = routeTarget?.kind === "exercise";
     const routeCanUseBoundExercise = shouldRightRailUseBoundExercise({
@@ -2226,6 +2648,7 @@ export function useReviewModuleController({
             onOpenCertificate: handleOpenCertificate,
             onActiveCardIndexChange: handleNavigateCardIndex,
             onNavigateToExerciseRoute: handleNavigateToExerciseRoute,
+            onCompactQuizNavigationChange: handleCompactQuizNavigationChange,
             subjectRuntimeDefaults: topicStageRuntimeDefaults.subjectRuntimeDefaults,
             courseRuntimeDefaults: topicStageRuntimeDefaults.courseRuntimeDefaults,
             moduleRuntimeDefaults: topicStageRuntimeDefaults.moduleRuntimeDefaults,
@@ -2233,7 +2656,14 @@ export function useReviewModuleController({
             topicRuntimeDefaults: topicStageRuntimeDefaults.topicRuntimeDefaults,
         },
         moduleNav: {
-            show: !shouldHideModuleNavInCompactMode,
+            show: compactModeActive ? hasActiveTopic : !shouldHideModuleNavInCompactMode,
+            compactSingleAction: compactModeActive && hasActiveTopic,
+            singlePrevLabel: compactSinglePrevLabel,
+            singlePrevDisabled: !compactSinglePrevEnabled,
+            onSinglePrev: handleCompactSinglePrev,
+            singleNextLabel: compactSingleNextLabel,
+            singleNextDisabled: !compactSingleNextEnabled,
+            onSingleNext: handleCompactSingleNext,
             locale,
             subjectSlug,
             prevModuleId: nav?.prevModuleId ?? null,

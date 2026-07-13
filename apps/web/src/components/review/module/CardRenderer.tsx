@@ -21,6 +21,7 @@ import { FlowNavMode } from "@/components/review/navigation/FlowNavigator";
 import { useReviewRuntimeStore } from "@/components/review/module/runtime/reviewRuntimeStore";
 import { buildQuizBlockRuntimeDefaultsProps } from "@/components/review/module/runtime/cardRuntimeDefaults";
 import type { QuizResetTarget } from "@/components/review/module/actions";
+import type { CompactQuizNavigationState } from "@/components/review/module/compactFlowNavigation";
 import {
     getAssessmentDisplayKind,
     type AssessmentDisplayKind,
@@ -82,6 +83,7 @@ export default function CardRenderer(props: {
     routeExerciseId?: string | null;
     defaultToolLanguage?: string;
     onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
+    onCompactQuizNavigationChange?: (state: CompactQuizNavigationState | null) => void;
     /**
      * Dev preview / unlock-all mode: allow authors to move through every card
      * and mark reading/sketch cards complete without having to pass the embedded
@@ -123,6 +125,7 @@ export default function CardRenderer(props: {
         routeExerciseId,
         defaultToolLanguage = "python",
         onNavigateToExerciseRoute,
+        onCompactQuizNavigationChange,
     } = props;
 
     const ensureCard = useReviewRuntimeStore((s) => s.ensureCard);
@@ -286,6 +289,7 @@ export default function CardRenderer(props: {
                         {...runtimeDefaultsProps}
                         routeExerciseId={routeExerciseId}
                         onNavigateToExerciseRoute={onNavigateToExerciseRoute}
+                        onCompactNavigationStateChange={active ? onCompactQuizNavigationChange : undefined}
                     />
                 )}
             </div>
@@ -377,6 +381,7 @@ export default function CardRenderer(props: {
                             {...runtimeDefaultsProps}
                             routeExerciseId={routeExerciseId}
                             onNavigateToExerciseRoute={onNavigateToExerciseRoute}
+                            onCompactNavigationStateChange={active ? onCompactQuizNavigationChange : undefined}
                         />
                     )
                 ) : null}

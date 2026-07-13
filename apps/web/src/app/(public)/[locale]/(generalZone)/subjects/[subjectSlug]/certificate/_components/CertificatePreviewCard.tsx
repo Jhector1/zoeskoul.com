@@ -3,7 +3,8 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
-import {CERT_DISCLAIMER, ISSUER_NAME, ISSUER_TITLE} from "@/lib/certificates/policy";
+import { CERT_DISCLAIMER, ISSUER_NAME, ISSUER_TITLE } from "@/lib/certificates/policy";
+import { CERTIFICATE_COLORS, CERTIFICATE_DESIGN_WIDTH } from "@/lib/certificates/design";
 
 type CertificatePreviewCardProps = {
     eligible: boolean;
@@ -15,16 +16,17 @@ type CertificatePreviewCardProps = {
     appName?: string;
 };
 
-const GOLD = "#C9A227";
-const GOLD_DARK = "#B88B1D";
-const INK = "#0B1220";
-const SUB = "#334155";
-const MUTED = "#64748B";
-const LINE = "#D8DEE9";
-const WAVE = "#CBD5E1";
-const PAPER = "#FFFFFF";
-const SEAL_FILL = "#FFF8E1";
-
+const {
+    gold: GOLD,
+    goldDark: GOLD_DARK,
+    ink: INK,
+    sub: SUB,
+    muted: MUTED,
+    line: LINE,
+    wave: WAVE,
+    paper: PAPER,
+    sealFill: SEAL_FILL,
+} = CERTIFICATE_COLORS;
 
 export default function CertificatePreviewCard({
                                                    eligible,
@@ -40,7 +42,7 @@ export default function CertificatePreviewCard({
     const certificateIdLabel = certificateId ? t("certificateId", { id: certificateId }) : "";
 
     return (
-        <div className="mx-auto w-full max-w-[820px]">
+        <div className="mx-auto w-full" style={{ maxWidth: CERTIFICATE_DESIGN_WIDTH }}>
             <div
                 className={cn(
                     "relative overflow-hidden rounded-2xl border shadow-sm",

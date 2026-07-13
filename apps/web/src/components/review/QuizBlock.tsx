@@ -47,12 +47,14 @@ import { clearReviewWorkspaceDrafts } from "@/components/tools/panes/reviewWorks
 import FlowNavigator, {
   type FlowNavMode,
 } from "@/components/review/navigation/FlowNavigator";
+import type { CompactQuizNavigationState } from "@/components/review/module/compactFlowNavigation";
 import {
     computeReviewQuizCompletionSummary,
     resolveReviewCardAutoCompletionReason,
     resolveReviewFinalizedNavigationAction,
     shouldFinalizeReviewCardFromManualNext,
 } from "@/components/review/quiz/reviewQuizCompletion";
+import { resolveReviewQuizRestoreIndex } from "@/components/review/quiz/reviewQuizNavigation";
 import {
     buildReviewFinalizedActionConsumedPatch,
     findReviewPracticeCompletionForExercise,
@@ -387,6 +389,13 @@ function normalizePracticeRouteToken(value: string | null | undefined) {
     .toLowerCase();
 }
 
+function normalizeCompactQuizLabelPart(value: unknown) {
+  return String(value ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/[_-]+/g, " ");
+}
+
 function questionMatchesRouteExerciseId(
   q: ReviewQuestion,
   routeExerciseId: string | null | undefined,
@@ -625,6 +634,7 @@ export default function QuizBlock({
                                     topicRuntimeDefaults = null,
                                     onNavigateToExerciseRoute,
                                     onFinalize,
+                                    onCompactNavigationStateChange,
                                   }: {
   prereqsMet?: boolean;
   quizId: string;
@@ -657,6 +667,7 @@ export default function QuizBlock({
   sectionRuntimeDefaults?: unknown;
   topicRuntimeDefaults?: unknown;
   onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
+  onCompactNavigationStateChange?: (state: CompactQuizNavigationState | null) => void;
 }) {
   const initState = initialState ?? null;
 
@@ -1293,16 +1304,31 @@ export default function QuizBlock({
       [],
   );
 
-  const findCurrentActivityQuestionId = useCallback(() => {
-    for (let i = 0; i < questions.length; i++) {
-      const q = questions[i];
-      if (!isUnlocked(i)) break;
-      if (!isFlowDone(q)) return q.id;
+  const findCurrentActivityQuestionIndex = useCallback(() => {
+    let firstIncompleteUnlockedIndex = -1;
+    let lastUnlockedIndex = -1;
+
+    for (let index = 0; index < questions.length; index += 1) {
+      const question = questions[index];
+      if (!isUnlocked(index)) break;
+
+      lastUnlockedIndex = index;
+
+      if (firstIncompleteUnlockedIndex < 0 && !isFlowDone(question)) {
+        firstIncompleteUnlockedIndex = index;
+      }
     }
 
-    return questions[questions.length - 1]?.id ?? null;
+    return resolveReviewQuizRestoreIndex({
+      questionCount: questions.length,
+      routeExerciseIndex,
+      isCompleted,
+      firstIncompleteUnlockedIndex,
+      lastUnlockedIndex,
+    });
   }, [
     questions,
+    routeExerciseIndex,
     local.checkedById,
     local.answers,
     practiceBank.practice,
@@ -1314,12 +1340,9 @@ export default function QuizBlock({
     isCompleted,
   ]);
 
-  const findCurrentActivityQuestionIndex = useCallback(() => {
-    const qid = findCurrentActivityQuestionId();
-    if (!qid) return 0;
-    const idx = questions.findIndex((q) => q.id === qid);
-    return idx < 0 ? 0 : idx;
-  }, [findCurrentActivityQuestionId, questions]);
+  const findCurrentActivityQuestionId = useCallback(() => {
+    return questions[findCurrentActivityQuestionIndex()]?.id ?? null;
+  }, [findCurrentActivityQuestionIndex, questions]);
 
     useEffect(() => {
         setAwaitNextQid(null);
@@ -1399,7 +1422,7 @@ export default function QuizBlock({
 
     if (navigationMode === "slideshow") {
       restoreQuestionKeyRef.current = restoreKey;
-      setActiveIndex(routeExerciseIndex >= 0 ? routeExerciseIndex : findCurrentActivityQuestionIndex());
+      setActiveIndex(findCurrentActivityQuestionIndex());
       return;
     }
 
@@ -1665,20 +1688,8 @@ export default function QuizBlock({
     setActiveIndex(0);
   }
 
-  if (quizLoading || routeExercisePendingResolution) return <QuizBlockSkeleton />;
-
-  if (quizError) {
-    return <div className="ui-quiz-note-danger">{quizError}</div>;
-  }
-
-  if (!questions.length) {
-    return (
-        <div className="mt-2 ui-quiz-status-soft">
-          {ui.t("noQuestions", {}, "No questions.")}
-        </div>
-    );
-  }
-
+    const compactModeActive =
+        learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
 
     const activeQuestion = questions[activeIndex] ?? null;
 
@@ -1702,6 +1713,189 @@ export default function QuizBlock({
             : navigationMode === "slideshow" && hasNextQuestion && activeQuestionDone
             ? activeIndex + 1
             : -1;
+
+    const activeNextUnlockedIndex = activeQuestion
+        ? findNextUnlockedIndex(activeIndex)
+        : -1;
+    const activeQuestionIsLast = activeNextUnlockedIndex < 0;
+    const activeQuestionManualNextAvailable = Boolean(
+        activeQuestion &&
+        awaitNextQid === activeQuestion.id &&
+        prereqsMet &&
+        !locked &&
+        !isCompleted &&
+        isFlowDone(activeQuestion),
+    );
+    const activeQuestionAllQuestionsFlowDone = activeQuestion
+        ? questions.every((question) =>
+            question.id === activeQuestion.id ? activeQuestionDone : isFlowDone(question),
+        )
+        : false;
+    const activeQuestionCanFinalizeFlow = Boolean(
+        activeQuestion &&
+        activeQuestionDone &&
+        activeQuestionIsLast &&
+        shouldFinalizeReviewCardFromManualNext({
+            prereqsMet,
+            locked,
+            isCompleted,
+            isLast: true,
+            allQuestionsFlowDone: activeQuestionAllQuestionsFlowDone,
+        }),
+    );
+    const activeQuestionCanUseCompactNext = Boolean(
+        nextSlideIndex >= 0 ||
+        activeQuestionManualNextAvailable ||
+        activeQuestionCanFinalizeFlow,
+    );
+    const compactProjectKindText = [
+        (spec as { uiKind?: unknown; displayKind?: unknown; mode?: unknown } | null | undefined)?.uiKind,
+        (spec as { uiKind?: unknown; displayKind?: unknown; mode?: unknown } | null | undefined)?.displayKind,
+        (spec as { uiKind?: unknown; displayKind?: unknown; mode?: unknown } | null | undefined)?.mode,
+        quizId,
+        quizCardId,
+    ]
+        .map(normalizeCompactQuizLabelPart)
+        .filter(Boolean)
+        .join(" ");
+    const compactFlowKindLabel = isProjectQuestionFlow
+        ? compactProjectKindText.includes("capstone") || compactProjectKindText.includes("final project")
+            ? "capstone"
+            : "project"
+        : activeQuestion?.kind === "practice"
+            ? "practice"
+            : "quiz";
+    const compactNestedNextLabel = nextSlideIndex >= 0
+        ? "Next"
+        : activeQuestionCanFinalizeFlow
+            ? `Finish ${compactFlowKindLabel}`
+            : compactFlowKindLabel === "practice"
+                ? "Practice"
+                : compactFlowKindLabel === "quiz"
+                    ? "Quiz"
+                    : compactFlowKindLabel === "capstone"
+                        ? "Capstone"
+                        : "Project";
+
+    const handleCompactQuizPrev = useCallback(() => {
+        if (activeIndex <= 0) return;
+        setAwaitNextQid(null);
+        navigateToQuestionIndex(Math.max(0, activeIndex - 1));
+    }, [activeIndex, questions]);
+
+    const handleCompactQuizNext = useCallback(() => {
+        if (!activeQuestion) return;
+
+        setAwaitNextQid(null);
+
+        if (nextSlideIndex >= 0) {
+            const navigatedByRoute = navigateToQuestionIndex(nextSlideIndex);
+            if (!navigatedByRoute) {
+                const nextQ = questions[nextSlideIndex];
+                if (nextQ) focusPrimaryActionForQuestion(nextQ.id);
+            }
+            return;
+        }
+
+        if (!activeQuestionCanUseCompactNext) return;
+
+        if (activeQuestionCanFinalizeFlow) {
+            finalizeCardOnce();
+            return;
+        }
+
+        if (!activeQuestionManualNextAvailable) return;
+
+        if (!activeQuestionIsLast) {
+            advanceFrom(activeQuestion.id);
+            return;
+        }
+
+        if (isCompleted) {
+            scrollToFooter();
+            return;
+        }
+
+        const firstIncompleteIndex = questions.findIndex(
+            (question) => question.id !== activeQuestion.id && !isFlowDone(question),
+        );
+
+        if (firstIncompleteIndex >= 0) {
+            navigateToQuestionIndex(firstIncompleteIndex);
+            return;
+        }
+
+        scrollToFooter();
+    }, [
+        activeQuestion,
+        activeQuestionCanFinalizeFlow,
+        activeQuestionCanUseCompactNext,
+        activeQuestionIsLast,
+        activeQuestionManualNextAvailable,
+        finalizeCardOnce,
+        isCompleted,
+        nextSlideIndex,
+        questions,
+        scrollToFooter,
+    ]);
+
+    useEffect(() => {
+        if (!onCompactNavigationStateChange) return;
+
+        if (
+            quizLoading ||
+            routeExercisePendingResolution ||
+            quizError ||
+            !questions.length ||
+            navigationMode !== "slideshow"
+        ) {
+            onCompactNavigationStateChange(null);
+            return;
+        }
+
+        onCompactNavigationStateChange({
+            quizId,
+            cardId: quizCardId ?? quizId,
+            activeIndex,
+            total: questions.length,
+            canGoPrev: activeIndex > 0,
+            canGoNext: activeQuestionCanUseCompactNext,
+            prevLabel: "Previous",
+            nextLabel: compactNestedNextLabel,
+            onPrev: handleCompactQuizPrev,
+            onNext: handleCompactQuizNext,
+        });
+
+    }, [
+        activeIndex,
+        activeQuestionCanUseCompactNext,
+        compactNestedNextLabel,
+        handleCompactQuizNext,
+        handleCompactQuizPrev,
+        navigationMode,
+        onCompactNavigationStateChange,
+        questions.length,
+        quizCardId,
+        quizError,
+        quizId,
+        quizLoading,
+        routeExercisePendingResolution,
+    ]);
+
+  if (quizLoading || routeExercisePendingResolution) return <QuizBlockSkeleton />;
+
+  if (quizError) {
+    return <div className="ui-quiz-note-danger">{quizError}</div>;
+  }
+
+  if (!questions.length) {
+    return (
+        <div className="mt-2 ui-quiz-status-soft">
+          {ui.t("noQuestions", {}, "No questions.")}
+        </div>
+    );
+  }
+
   function renderQuestionItem(q: ReviewQuestion, idx: number) {
     const unlocked = isUnlocked(idx);
     const stablePracticeKey = getStablePracticeQuestionKey(q);
@@ -1873,7 +2067,7 @@ export default function QuizBlock({
               />
           )}
 
-          {showNext ? (
+          {showNext && !compactModeActive ? (
               <div className="mt-2 flex justify-end">
                 <button
                     type="button"
@@ -1905,6 +2099,7 @@ export default function QuizBlock({
             activeIndex={activeIndex}
             onActiveIndexChange={setActiveIndex}
             reduceMotion={reduceMotion}
+            showChrome={!compactModeActive}
             getKey={(q) => q.id}
             getProgressLabel={(index, total) =>
                 ui.t(
@@ -1931,7 +2126,7 @@ export default function QuizBlock({
             renderItem={renderQuestionItem}
         />
 
-        {!learnerUiFlags.compactLearnerUi || learnerUiFlags.showDebugLearningUi ? (
+        {!compactModeActive ? (
           <div ref={footerElRef}>
             <div className="ui-quiz-toggle-row">
               <label className="ui-quiz-toggle-label">

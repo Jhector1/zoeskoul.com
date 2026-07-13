@@ -16,6 +16,18 @@ type Props = {
     nextBillingHref?: string | null;
     canGoNext: boolean;
 
+    /**
+     * Compact learner mode uses one contextual bottom nav for card, quiz, topic,
+     * section/module, unlock, and certificate continuation.
+     */
+    compactSingleAction?: boolean;
+    singlePrevLabel?: string;
+    singlePrevDisabled?: boolean;
+    onSinglePrev?: () => void | Promise<void>;
+    singleNextLabel?: string;
+    singleNextDisabled?: boolean;
+    onSingleNext?: () => void | Promise<void>;
+
     showCertificateCta?: boolean;
     canGetCertificate: boolean;
     certificateLabel?: string;
@@ -33,6 +45,13 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
             nextLocked = false,
             nextBillingHref,
             canGoNext,
+            compactSingleAction = false,
+            singlePrevLabel,
+            singlePrevDisabled,
+            onSinglePrev,
+            singleNextLabel,
+            singleNextDisabled,
+            onSingleNext,
             showCertificateCta = false,
             canGetCertificate,
             certificateLabel = "Get certificate",
@@ -93,6 +112,16 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
 
         const showNextCta = Boolean(nextModuleId) && !showCertificateCta;
         const nextLabel = nextLocked ? "Unlock next" : t("buttons.nextModule");
+        const compactNextLabel = showCertificateCta
+            ? certificateLabel
+            : singleNextLabel ?? (nextLocked ? "Unlock next" : "Next");
+        const compactPrevLabel = singlePrevLabel ?? "Previous";
+        const compactPrevDisabled = Boolean(singlePrevDisabled);
+        const compactNextDisabled = showCertificateCta
+            ? !canGetCertificate
+            : nextLocked
+                ? false
+                : Boolean(singleNextDisabled);
 
         const showUnlockHint =
             !showCertificateCta &&
@@ -227,47 +256,93 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
 
                     <div className="ui-surface-floating rounded-2xl p-2">
                         <div className="flex flex-wrap items-center justify-end gap-2">
-                            <NavButton
-                                href={prevHref ?? ""}
-                                disabled={!prevHref}
-                                prefetch={Boolean(prevHref)}
-                                className={cn(
-                                    "ui-btn-secondary px-2.5",
-                                    !prevHref && "cursor-not-allowed opacity-50",
-                                )}
-                            >
-                                <span aria-hidden>←</span>
-                                <span>{t("buttons.prevModule")}</span>
-                            </NavButton>
+                            {compactSingleAction ? (
+                                <>
+                                    <NavButton
+                                        onClick={onSinglePrev}
+                                        disabled={compactPrevDisabled}
+                                        className={cn(
+                                            "ui-btn-secondary px-3",
+                                            compactPrevDisabled && "cursor-not-allowed opacity-50",
+                                        )}
+                                        loadingText="Loading…"
+                                    >
+                                        <span aria-hidden>←</span>
+                                        <span>{compactPrevLabel}</span>
+                                    </NavButton>
 
-                            {showCertificateCta ? (
-                                <NavButton
-                                    href={certificateHref}
-                                    disabled={!canGetCertificate}
-                                    prefetch={canGetCertificate}
-                                    className={cn(
-                                        canGetCertificate
-                                            ? "ui-btn-primary px-2.5"
-                                            : "ui-btn-secondary px-2.5 opacity-60 cursor-not-allowed",
-                                    )}
-                                >
-                                    <span>{certificateLabel}</span>
-                                    <span aria-hidden>→</span>
-                                </NavButton>
-                            ) : showNextCta ? (
-                                <NavButton
-                                    href={nextLocked ? unlockHref : nextModuleHref ?? ""}
-                                    disabled={!canGoNext}
-                                    prefetch={canGoNext}
-                                    className={cn(
-                                        nextLocked ? "ui-btn-premium px-2.5" : "ui-btn-primary px-2.5",
-                                        !canGoNext && "cursor-not-allowed opacity-60",
-                                    )}
-                                >
-                                    <span>{nextLabel}</span>
-                                    <span aria-hidden>→</span>
-                                </NavButton>
-                            ) : null}
+                                    <NavButton
+                                        href={
+                                            showCertificateCta
+                                                ? certificateHref
+                                                : nextLocked
+                                                    ? unlockHref
+                                                    : undefined
+                                        }
+                                        onClick={
+                                            showCertificateCta || nextLocked ? undefined : onSingleNext
+                                        }
+                                        disabled={compactNextDisabled}
+                                        prefetch={showCertificateCta && canGetCertificate}
+                                        className={cn(
+                                            showCertificateCta && !canGetCertificate
+                                                ? "ui-btn-secondary opacity-60 cursor-not-allowed"
+                                                : nextLocked
+                                                    ? "ui-btn-premium"
+                                                    : "ui-btn-primary",
+                                            "px-4",
+                                        )}
+                                        loadingText="Loading…"
+                                    >
+                                        <span>{compactNextLabel}</span>
+                                        <span aria-hidden>→</span>
+                                    </NavButton>
+                                </>
+                            ) : (
+                                <>
+                                    <NavButton
+                                        href={prevHref ?? ""}
+                                        disabled={!prevHref}
+                                        prefetch={Boolean(prevHref)}
+                                        className={cn(
+                                            "ui-btn-secondary px-2.5",
+                                            !prevHref && "cursor-not-allowed opacity-50",
+                                        )}
+                                    >
+                                        <span aria-hidden>←</span>
+                                        <span>{t("buttons.prevModule")}</span>
+                                    </NavButton>
+
+                                    {showCertificateCta ? (
+                                        <NavButton
+                                            href={certificateHref}
+                                            disabled={!canGetCertificate}
+                                            prefetch={canGetCertificate}
+                                            className={cn(
+                                                canGetCertificate
+                                                    ? "ui-btn-primary px-2.5"
+                                                    : "ui-btn-secondary px-2.5 opacity-60 cursor-not-allowed",
+                                            )}
+                                        >
+                                            <span>{certificateLabel}</span>
+                                            <span aria-hidden>→</span>
+                                        </NavButton>
+                                    ) : showNextCta ? (
+                                        <NavButton
+                                            href={nextLocked ? unlockHref : nextModuleHref ?? ""}
+                                            disabled={!canGoNext}
+                                            prefetch={canGoNext}
+                                            className={cn(
+                                                nextLocked ? "ui-btn-premium px-2.5" : "ui-btn-primary px-2.5",
+                                                !canGoNext && "cursor-not-allowed opacity-60",
+                                            )}
+                                        >
+                                            <span>{nextLabel}</span>
+                                            <span aria-hidden>→</span>
+                                        </NavButton>
+                                    ) : null}
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

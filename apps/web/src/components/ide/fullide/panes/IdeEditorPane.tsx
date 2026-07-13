@@ -238,6 +238,8 @@ export default function IdeEditorPane({
                             sqlSetupSql={sqlSetupSql}
                             sqlInitialTableSnapshots={sqlInitialTableSnapshots}
                             showLanguagePicker={false}
+                            showRestartTerminalButton={false}
+
                             showSqlDialectPicker={services.runner.showSqlDialectPicker}
                             allowReset={isDesktop && !learnerUiFlags.compactLearnerUi}
                             allowRun={services.runner.allowRun && !isWeb}
@@ -250,9 +252,9 @@ export default function IdeEditorPane({
                             showOpenTerminalButton={
                                 services.runner.showOpenTerminalButton && isDesktop
                             }
-                            showRestartTerminalButton={
-                                services.runner.showRestartTerminalButton && isDesktop
-                            }
+                            // showRestartTerminalButton={
+                            //     services.runner.showRestartTerminalButton && isDesktop
+                            // }
                             resetTerminalOnRun={!terminalWorkspaceOnly}
                             exerciseStateKey={exerciseStateKey}
                             editorModelKey={

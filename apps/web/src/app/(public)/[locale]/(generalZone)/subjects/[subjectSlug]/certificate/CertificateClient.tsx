@@ -172,6 +172,11 @@ export default function CertificateClient() {
                 throw new Error(data?.message ?? t("downloadFailed"));
             }
 
+            const contentType = r.headers.get("content-type") ?? "";
+            if (!contentType.toLowerCase().includes("application/pdf")) {
+                throw new Error(t("downloadFailed"));
+            }
+
             const blob = await r.blob();
             const url = window.URL.createObjectURL(blob);
 

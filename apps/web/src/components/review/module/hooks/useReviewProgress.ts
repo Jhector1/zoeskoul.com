@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback, type Dispatch, type SetStateAction } from "react";
 import type { ReviewProgressState, ReviewTopicProgress } from "@/lib/review/progressTypes";
 import {
     emptyReviewProgress,
@@ -653,6 +653,8 @@ function looksLikeBetterExerciseRestoreCandidate(existing: any, incoming: any) {
 
 type ReviewSaveStatus = "idle" | "saving" | "saved" | "error" | "conflict";
 
+type ReviewProgressSetter = Dispatch<SetStateAction<ReviewProgressState>>;
+
 export function useReviewProgress(args: {
     subjectSlug: string;
     moduleSlug: string;
@@ -714,8 +716,8 @@ export function useReviewProgress(args: {
         store.setTopicIds(activeTopicId, viewTopicId);
     }, [activeTopicId, viewTopicId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    const setProgressSafe = useCallback((updater: any) => {
-        setProgress((prev: any) => {
+    const setProgressSafe = useCallback<ReviewProgressSetter>((updater) => {
+        setProgress((prev) => {
             const next = typeof updater === "function" ? updater(prev) : updater;
             if (next === prev) {
                 progressRef.current = next;

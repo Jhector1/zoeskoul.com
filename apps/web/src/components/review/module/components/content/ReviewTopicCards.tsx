@@ -34,6 +34,8 @@ import {
 
 import { getCardStateKey } from "../../runtime/exerciseKeys";
 import { useDebouncedSketchState } from "../../hooks/useDebouncedSketchState";
+import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import type { CompactQuizNavigationState } from "../../compactFlowNavigation";
 
 const TOPIC_PANE_ANIM = {
   initial: { opacity: 0, y: 10 },
@@ -83,6 +85,7 @@ type Props = {
   onBeforeCardNavigate?: () => Promise<void> | void;
   onActiveCardIndexChange?: (index: number) => void;
   onNavigateToExerciseRoute?: (args: { cardId: string; exerciseId: string }) => Promise<void> | void;
+  onCompactQuizNavigationChange?: (state: CompactQuizNavigationState | null) => void;
 };
 
 export default function ReviewTopicCards({
@@ -121,6 +124,7 @@ export default function ReviewTopicCards({
   onActiveCardIndexChange,
   onNavigateToExerciseRoute,
   onBeforeCardNavigate,
+  onCompactQuizNavigationChange,
 }: Props) {
   const storeCards = useReviewRuntimeStore((s) => s.cards);
   const safeMaxUnlockedCardIndex = unlockAll
@@ -211,6 +215,9 @@ export default function ReviewTopicCards({
         : false);
   const hasNextCard = activeCardIndex < Math.max(0, viewCards.length - 1);
   const nextCardUnlocked = unlockAll || activeCardIndex + 1 <= safeMaxUnlockedCardIndex;
+  const compactModeActive =
+      learnerUiFlags.compactLearnerUi && !learnerUiFlags.showDebugLearningUi;
+
   return (
     <div className="flex min-h-0 shrink-0 flex-col">
       <AnimatePresence initial={false} mode="wait">
@@ -237,6 +244,7 @@ export default function ReviewTopicCards({
             activeIndex={activeCardIndex}
             onActiveIndexChange={handleNavigate}
             reduceMotion={reduceMotion}
+            showChrome={!compactModeActive}
             getKey={(card) => getCardStateKey({
               subjectSlug,
               moduleSlug,
@@ -294,6 +302,7 @@ export default function ReviewTopicCards({
                     routeExerciseId={routeExerciseId}
                     defaultToolLanguage={defaultToolLanguage}
                     onNavigateToExerciseRoute={onNavigateToExerciseRoute}
+                    onCompactQuizNavigationChange={cardIndex === activeCardIndex ? onCompactQuizNavigationChange : undefined}
                     unlockAll={unlockAll}
                     onSketchStateChange={(_sketchCardId, state) => {
                       sketch?.saveSketchDebounced?.(cardKey, state, false);
