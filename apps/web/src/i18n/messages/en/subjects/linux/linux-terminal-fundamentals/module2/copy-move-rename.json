@@ -89,7 +89,7 @@
             "exercises": {
               "copy-move-rename-try-it-1": {
                 "title": "Back up the attendee list",
-                "prompt": "Before registration opens, copy `attendee-list.txt` to `attendee-list-backup.txt`, then list the folder.",
+                "prompt": "Before registration opens, copy `attendee-list.txt` to `attendee-list-backup.txt`, then list the folder. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Read the source and destination paths from left to right before running the command.",
                 "help": {
                   "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
@@ -126,7 +126,7 @@
               },
               "copy-move-rename-try-it-2": {
                 "title": "Move a banner note to handoff",
-                "prompt": "The banner note is ready for the handoff team. Move `banner-note.txt` to `handoff/banner-note.txt`, then list `handoff`.",
+                "prompt": "The banner note is ready for the handoff team. Move `banner-note.txt` to `handoff/banner-note.txt`, then list `handoff`. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Read the source and destination paths from left to right before running the command.",
                 "help": {
                   "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
@@ -166,7 +166,7 @@
               },
               "copy-move-rename-try-it-3": {
                 "title": "Rename the approved schedule",
-                "prompt": "The schedule is approved. Rename `schedule-draft.txt` to `schedule-final.txt`, then list the folder.",
+                "prompt": "The schedule is approved. Rename `schedule-draft.txt` to `schedule-final.txt`, then list the folder. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Read the source and destination paths from left to right before running the command.",
                 "help": {
                   "concept": "`cp` preserves the source by creating a copy; `mv` relocates or renames the source.",
@@ -204,15 +204,15 @@
             },
             "try_copy_move_rename_sketch0": {
               "title": "Back up the attendee list",
-              "prompt": "Copy a different important file."
+              "prompt": "Copy a different important file. Press **Enter** after each command."
             },
             "try_copy_move_rename_sketch1": {
               "title": "Move a banner note to handoff",
-              "prompt": "Move a different file into handoff."
+              "prompt": "Move a different file into handoff. Press **Enter** after each command."
             },
             "try_copy_move_rename_sketch2": {
               "title": "Rename the approved schedule",
-              "prompt": "Rename a different approved draft."
+              "prompt": "Rename a different approved draft. Press **Enter** after each command."
             }
           }
         }

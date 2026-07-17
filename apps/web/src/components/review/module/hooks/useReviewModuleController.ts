@@ -85,7 +85,10 @@ import {
 } from "./rightRailExerciseBinding";
 import { resolveActiveToolScopeKey } from "./activeToolScopeKey";
 import { resolveCompactAssignmentCtaVisibility } from "../assignmentCtaVisibility";
-import type { CompactQuizNavigationState } from "../compactFlowNavigation";
+import {
+    isAtFinalModuleNavigationStep,
+    type CompactQuizNavigationState,
+} from "../compactFlowNavigation";
 import { shouldShowFinalCertificateCta } from "../certificateNavigation";
 import {
     resolveToolsRailVisibility,
@@ -2084,6 +2087,28 @@ export function useReviewModuleController({
     const hasPrevCard = activeCardIndex > 0;
     const hasNextCard = activeCardIndex < Math.max(0, viewCards.length - 1);
     const nextCard = hasNextCard ? viewCards[activeCardIndex + 1] ?? null : null;
+    const compactNavigationMatchesActiveCard =
+        compactQuizNavigation?.cardId === activeCard?.id;
+    const nestedNavigationIsStillLoading = Boolean(
+        activeCard &&
+        isQuizLikeCard(activeCard) &&
+        !viewIsComplete &&
+        !compactNavigationMatchesActiveCard,
+    );
+    const hasNextNestedStep = Boolean(
+        nestedNavigationIsStillLoading ||
+        (compactNavigationMatchesActiveCard && compactQuizNavigation?.canGoNext),
+    );
+    const atFinalModuleNavigationStep = isAtFinalModuleNavigationStep({
+        hasNextNestedStep,
+        hasNextCard,
+        hasNextTopic: Boolean(topicFlow.nextTopic?.id),
+    });
+    const compactSingleNextLocked = Boolean(
+        nextLocked &&
+        nav?.nextModuleId &&
+        atFinalModuleNavigationStep,
+    );
     const nextCardUnlocked =
         unlockAll || activeCardIndex + 1 <= maxUnlockedCardIndex;
     const canGoNextCard =
@@ -2119,8 +2144,6 @@ export function useReviewModuleController({
             ? compactQuizNavigation.prevLabel
             : "Previous";
     const compactSingleNextLabel = useMemo(() => {
-        if (nextLocked) return "Unlock next";
-
         if (compactQuizNavigation?.canGoNext && compactQuizNavigation.nextLabel) {
             return compactQuizNavigation.nextLabel;
         }
@@ -2129,9 +2152,12 @@ export function useReviewModuleController({
             return compactCardDestinationLabel(nextCard);
         }
 
+        if (atFinalModuleNavigationStep && nav?.nextModuleId) {
+            return compactSingleNextLocked ? "Unlock next" : "Next module";
+        }
+
         if (viewIsComplete && outroContinueEnabled) {
             if (topicFlow.nextTopic?.id) return "Next topic";
-            if (nav?.nextModuleId) return "Next module";
             return "Continue";
         }
 
@@ -2146,7 +2172,9 @@ export function useReviewModuleController({
         compactQuizNavigation?.nextLabel,
         certificateLabel,
         nextCard,
-        nextLocked,
+        atFinalModuleNavigationStep,
+        compactSingleNextLocked,
+        nav?.nextModuleId,
         outroContinueEnabled,
         showFinalCertificateCta,
         topicFlow.nextTopic?.id,
@@ -2669,7 +2697,9 @@ export function useReviewModuleController({
             onSinglePrev: handleCompactSinglePrev,
             singleNextLabel: compactSingleNextLabel,
             singleNextDisabled: !compactSingleNextEnabled,
+            singleNextLocked: compactSingleNextLocked,
             onSingleNext: handleCompactSingleNext,
+            showNextModuleCta: atFinalModuleNavigationStep,
             locale,
             subjectSlug,
             prevModuleId: nav?.prevModuleId ?? null,
@@ -2677,8 +2707,7 @@ export function useReviewModuleController({
             nextLocked,
             nextBillingHref,
             canGoNext:
-                Boolean(nav?.nextModuleId) &&
-                (nextLocked || canGoNextModule),
+                Boolean(nav?.nextModuleId) && canGoNextModule,
 
             showCertificateCta: showFinalCertificateCta,
 

@@ -105,7 +105,8 @@
     "Every technical sketch should read like a short book section: definition, command shape, worked example, workspace effect, common mistake or safety warning, and transition to practice.",
     "Exercise help must be command-specific and path-specific; do not use one generic Linux help template across unrelated commands.",
     "Final capstones use exactly one capstone section and one capstone topic with multiple cumulative steps.",
-    "The final Linux capstone must transfer the taught command set into a domain that is clearly different from the Module 2 notes organizer."
+    "The final Linux capstone must transfer the taught command set into a domain that is clearly different from the Module 2 notes organizer.",
+    "Every terminal-workspace exercise prompt must explicitly remind the learner to press Enter after typing each command so the terminal actually runs it."
   ],
   "assessmentAndDelivery": {
     "suggestedBeginnerRhythm": "Two short lessons per week, with one workspace project at the end of each module.",
@@ -510,7 +511,8 @@
       "Use per-exercise terminal workspaces for independent quiz/check exercises.",
       "Generate one standalone reading-only course-introduction sketch before the first technical sketch.",
       "Generate concept-specific help grounded in the exact command, path, and expected workspace result.",
-      "Keep the final capstone to one section, one topic, and five progressive steps using the Community Media Archive scenario."
+      "Keep the final capstone to one section, one topic, and five progressive steps using the Community Media Archive scenario.",
+      "Generate an explicit press-Enter reminder in every terminal-workspace exercise prompt."
     ]
   },
   "topicPolicies": {

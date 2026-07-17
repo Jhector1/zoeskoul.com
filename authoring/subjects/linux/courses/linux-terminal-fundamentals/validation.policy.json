@@ -57,7 +57,8 @@
       "Require one standalone course-introduction sketch before the first technical sketch.",
       "Reject generic help repeated across unrelated commands.",
       "Require final capstones to use exactly one section, one topic, and multiple progressive steps.",
-      "Require the capstone to use inspection, navigation, creation, writing, viewing, copying, moving, renaming, safe deletion, and final verification."
+      "Require the capstone to use inspection, navigation, creation, writing, viewing, copying, moving, renaming, safe deletion, and final verification.",
+      "Reject terminal-workspace prompts that do not tell the learner to press Enter after typing the command."
     ]
   }
 }

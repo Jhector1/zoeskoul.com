@@ -89,7 +89,7 @@
             "exercises": {
               "creating-folders-and-files-try-it-1": {
                 "title": "Create a volunteer desk folder",
-                "prompt": "The event team needs one place for volunteer notes. Create a folder named `volunteer-desk`, then list the current folder.",
+                "prompt": "The event team needs one place for volunteer notes. Create a folder named `volunteer-desk`, then list the current folder. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Create parent folders before files and copy every required path exactly.",
                 "help": {
                   "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
@@ -124,7 +124,7 @@
               },
               "creating-folders-and-files-try-it-2": {
                 "title": "Build an event pack",
-                "prompt": "Set up `event-pack/signs` and `event-pack/schedules`. One `mkdir -p` command or separate safe commands are both valid.",
+                "prompt": "Set up `event-pack/signs` and `event-pack/schedules`. One `mkdir -p` command or separate safe commands are both valid. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Create parent folders before files and copy every required path exactly.",
                 "help": {
                   "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
@@ -156,7 +156,7 @@
               },
               "creating-folders-and-files-try-it-3": {
                 "title": "Create planning board files",
-                "prompt": "You are starting inside `planning-board`. Create `tasks.txt` and `contacts.txt` with `touch`, then list the folder.",
+                "prompt": "You are starting inside `planning-board`. Create `tasks.txt` and `contacts.txt` with `touch`, then list the folder. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Create parent folders before files and copy every required path exactly.",
                 "help": {
                   "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
@@ -197,15 +197,15 @@
             },
             "try_creating_folders_and_files_sketch0": {
               "title": "Create a volunteer desk folder",
-              "prompt": "Create `volunteer-desk`."
+              "prompt": "Create `volunteer-desk`. Press **Enter** after each command."
             },
             "try_creating_folders_and_files_sketch1": {
               "title": "Build an event pack",
-              "prompt": "Create two nested event folders."
+              "prompt": "Create two nested event folders. Press **Enter** after each command."
             },
             "try_creating_folders_and_files_sketch2": {
               "title": "Create planning board files",
-              "prompt": "Create two files inside `planning-board`."
+              "prompt": "Create two files inside `planning-board`. Press **Enter** after each command."
             }
           }
         }

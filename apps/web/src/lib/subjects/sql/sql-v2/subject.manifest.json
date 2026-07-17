@@ -36,7 +36,7 @@
       "versioning": {
         "family": "sql",
         "version": 1,
-        "status": "ready",
+        "status": "active",
         "defaultForNewEnrollments": true,
         "supersedes": null,
         "supersededBy": null

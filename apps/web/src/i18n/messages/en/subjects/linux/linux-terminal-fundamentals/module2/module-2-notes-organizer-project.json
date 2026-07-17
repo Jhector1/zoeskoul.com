@@ -17,7 +17,7 @@
             "steps": {
               "module-2-notes-organizer-project-terminal-task-1": {
                 "title": "Create the notes workspace",
-                "prompt": "Create a clean notes organizer with `inbox`, `handoff`, and `archive` folders. Then list the top folder.",
+                "prompt": "Create a clean notes organizer with `inbox`, `handoff`, and `archive` folders. Then list the top folder. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Begin from the previous working step and add only the new workspace change named here.",
                 "help": {
                   "concept": "This project chains folder creation, writing, moving, reading, and one exact safe deletion.",
@@ -49,7 +49,7 @@
               },
               "module-2-notes-organizer-project-terminal-task-2": {
                 "title": "Write the first handoff notes",
-                "prompt": "Write `Substitute teacher handoff` to `class-notes-organizer/handoff/README.txt`, then append `Bring math worksheets`. Read the file with `cat`.",
+                "prompt": "Write `Substitute teacher handoff` to `class-notes-organizer/handoff/README.txt`, then append `Bring math worksheets`. Read the file with `cat`. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Begin from the previous working step and add only the new workspace change named here.",
                 "help": {
                   "concept": "This project chains folder creation, writing, moving, reading, and one exact safe deletion.",
@@ -87,7 +87,7 @@
               },
               "module-2-notes-organizer-project-terminal-task-3": {
                 "title": "Move notes and remove scratch",
-                "prompt": "Move `math.txt` and `history.txt` from `inbox` into `archive`. Remove only `tmp-scratch.txt`, then list the folders.",
+                "prompt": "Move `math.txt` and `history.txt` from `inbox` into `archive`. Remove only `tmp-scratch.txt`, then list the folders. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Begin from the previous working step and add only the new workspace change named here.",
                 "help": {
                   "concept": "This project chains folder creation, writing, moving, reading, and one exact safe deletion.",

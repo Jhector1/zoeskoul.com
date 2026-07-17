@@ -26,7 +26,11 @@ type Props = {
     onSinglePrev?: () => void | Promise<void>;
     singleNextLabel?: string;
     singleNextDisabled?: boolean;
+    singleNextLocked?: boolean;
     onSingleNext?: () => void | Promise<void>;
+
+    /** Show the module-level next CTA only at the actual module boundary. */
+    showNextModuleCta?: boolean;
 
     showCertificateCta?: boolean;
     canGetCertificate: boolean;
@@ -51,7 +55,9 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
             onSinglePrev,
             singleNextLabel,
             singleNextDisabled,
+            singleNextLocked = false,
             onSingleNext,
+            showNextModuleCta = true,
             showCertificateCta = false,
             canGetCertificate,
             certificateLabel = "Get certificate",
@@ -110,21 +116,21 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
             subjectSlug,
         )}/certificate`;
 
-        const showNextCta = Boolean(nextModuleId) && !showCertificateCta;
+        const showNextCta =
+            showNextModuleCta && Boolean(nextModuleId) && !showCertificateCta;
         const nextLabel = nextLocked ? "Unlock next" : t("buttons.nextModule");
         const compactNextLabel = showCertificateCta
             ? certificateLabel
-            : singleNextLabel ?? (nextLocked ? "Unlock next" : "Next");
+            : singleNextLabel ?? (singleNextLocked ? "Unlock next" : "Next");
         const compactPrevLabel = singlePrevLabel ?? "Previous";
         const compactPrevDisabled = Boolean(singlePrevDisabled);
         const compactNextDisabled = showCertificateCta
             ? !canGetCertificate
-            : nextLocked
-                ? false
-                : Boolean(singleNextDisabled);
+            : Boolean(singleNextDisabled);
 
         const showUnlockHint =
             !showCertificateCta &&
+            showNextModuleCta &&
             Boolean(nextModuleId) &&
             (nextLocked || !canGoNext);
         const showCertificateHint =
@@ -275,19 +281,21 @@ const ReviewModuleNavBar = React.forwardRef<HTMLDivElement, Props>(
                                         href={
                                             showCertificateCta
                                                 ? certificateHref
-                                                : nextLocked
+                                                : singleNextLocked
                                                     ? unlockHref
                                                     : undefined
                                         }
                                         onClick={
-                                            showCertificateCta || nextLocked ? undefined : onSingleNext
+                                            showCertificateCta || singleNextLocked
+                                                ? undefined
+                                                : onSingleNext
                                         }
                                         disabled={compactNextDisabled}
                                         prefetch={showCertificateCta && canGetCertificate}
                                         className={cn(
                                             showCertificateCta && !canGetCertificate
                                                 ? "ui-btn-secondary opacity-60 cursor-not-allowed"
-                                                : nextLocked
+                                                : singleNextLocked
                                                     ? "ui-btn-premium"
                                                     : "ui-btn-primary",
                                             "px-4",

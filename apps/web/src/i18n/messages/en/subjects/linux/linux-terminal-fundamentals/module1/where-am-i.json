@@ -89,7 +89,7 @@
             "exercises": {
               "where-am-i-try-it-1": {
                 "title": "Confirm the newsroom location",
-                "prompt": "The editor opened a newsroom workspace for you. Type `pwd` to confirm its full path.",
+                "prompt": "The editor opened a newsroom workspace for you. Type `pwd` to confirm its full path. After typing the command, press **Enter** so the terminal runs it.",
                 "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
                 "help": {
                   "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
@@ -126,7 +126,7 @@
               },
               "where-am-i-try-it-2": {
                 "title": "See what is on the art table",
-                "prompt": "You are at the art table. Type `ls` to see which supply notes are waiting here.",
+                "prompt": "You are at the art table. Type `ls` to see which supply notes are waiting here. After typing the command, press **Enter** so the terminal runs it.",
                 "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
                 "help": {
                   "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
@@ -166,7 +166,7 @@
               },
               "where-am-i-try-it-3": {
                 "title": "Orient yourself at the event desk",
-                "prompt": "Before touching the event desk files, type `pwd` and then `ls`. Read both results.",
+                "prompt": "Before touching the event desk files, type `pwd` and then `ls`. Read both results. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
                 "help": {
                   "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
@@ -210,15 +210,15 @@
             },
             "try_where_am_i_sketch0": {
               "title": "Confirm the newsroom location",
-              "prompt": "Print the newsroom path."
+              "prompt": "Print the newsroom path. Press **Enter** to run the command."
             },
             "try_where_am_i_sketch1": {
               "title": "See what is on the art table",
-              "prompt": "List the art table files."
+              "prompt": "List the art table files. Press **Enter** to run the command."
             },
             "try_where_am_i_sketch2": {
               "title": "Orient yourself at the event desk",
-              "prompt": "Check the event desk before editing."
+              "prompt": "Check the event desk before editing. Press **Enter** after each command."
             }
           }
         }

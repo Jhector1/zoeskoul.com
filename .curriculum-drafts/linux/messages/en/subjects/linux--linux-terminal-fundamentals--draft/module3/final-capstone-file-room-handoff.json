@@ -17,7 +17,7 @@
             "steps": {
               "final-capstone-file-room-handoff-terminal-task-1": {
                 "title": "Inspect and build the archive structure",
-                "prompt": "Inspect `media-archive`, enter it, and create `organized/photos`, `organized/documents`, `backup`, and `review`. Create the empty review marker `review/needs-review.txt`.",
+                "prompt": "Inspect `media-archive`, enter it, and create `organized/photos`, `organized/documents`, `backup`, and `review`. Create the empty review marker `review/needs-review.txt`. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
                 "help": {
                   "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
@@ -69,7 +69,7 @@
               },
               "final-capstone-file-room-handoff-terminal-task-2": {
                 "title": "Write the archive guide and review note",
-                "prompt": "In `media-archive`, write `organized/README.txt` with the three required guide lines and write `Check image names before publishing` into `review/needs-review.txt`. Use `>` for the first README line and `>>` for the next two lines.",
+                "prompt": "In `media-archive`, write `organized/README.txt` with the three required guide lines and write `Check image names before publishing` into `review/needs-review.txt`. Use `>` for the first README line and `>>` for the next two lines. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
                 "help": {
                   "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
@@ -121,7 +121,7 @@
               },
               "final-capstone-file-room-handoff-terminal-task-3": {
                 "title": "Move and rename the incoming records",
-                "prompt": "Move `inbox/photo-index.txt` to `organized/photos/index.txt`, move `inbox/release-forms.txt` to `organized/documents/release-forms.txt`, and move `inbox/shoot-notes.txt` to `review/shoot-notes.txt`. Verify the old and new locations.",
+                "prompt": "Move `inbox/photo-index.txt` to `organized/photos/index.txt`, move `inbox/release-forms.txt` to `organized/documents/release-forms.txt`, and move `inbox/shoot-notes.txt` to `review/shoot-notes.txt`. Verify the old and new locations. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
                 "help": {
                   "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
@@ -167,7 +167,7 @@
               },
               "final-capstone-file-room-handoff-terminal-task-4": {
                 "title": "Back up the index and remove the temporary import",
-                "prompt": "Copy `organized/photos/index.txt` to `backup/photo-index-backup.txt`. Then remove only `inbox/tmp-import.txt` and verify that the backup exists and the temporary file is gone.",
+                "prompt": "Copy `organized/photos/index.txt` to `backup/photo-index-backup.txt`. Then remove only `inbox/tmp-import.txt` and verify that the backup exists and the temporary file is gone. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
                 "help": {
                   "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
@@ -210,7 +210,7 @@
               },
               "final-capstone-file-room-handoff-terminal-task-5": {
                 "title": "Verify the archive and mark it ready",
-                "prompt": "Run a final verification with `pwd`, targeted `ls`, `cat organized/README.txt`, and `wc -l organized/photos/index.txt`. Then write `Media archive verified` to `organized/READY.txt` and display the marker.",
+                "prompt": "Run a final verification with `pwd`, targeted `ls`, `cat organized/README.txt`, and `wc -l organized/photos/index.txt`. Then write `Media archive verified` to `organized/READY.txt` and display the marker. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
                 "help": {
                   "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",

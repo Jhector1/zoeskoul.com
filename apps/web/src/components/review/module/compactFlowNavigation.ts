@@ -16,3 +16,23 @@ export type CompactQuizNavigationState = {
   onPrev: () => void;
   onNext: () => void;
 };
+export type CompactModuleBoundaryState = {
+  hasNextNestedStep: boolean;
+  hasNextCard: boolean;
+  hasNextTopic: boolean;
+};
+
+/**
+ * Module-level navigation belongs only at the true end of the current module.
+ * A nested quiz/project step, another card, or another topic must keep the
+ * contextual action inside the current module.
+ */
+export function isAtFinalModuleNavigationStep(
+  state: CompactModuleBoundaryState,
+): boolean {
+  return (
+    !state.hasNextNestedStep &&
+    !state.hasNextCard &&
+    !state.hasNextTopic
+  );
+}

@@ -89,7 +89,7 @@
             "exercises": {
               "writing-text-into-files-try-it-1": {
                 "title": "Print the morning briefing",
-                "prompt": "Print the line `Morning briefing` in the terminal with `echo`.",
+                "prompt": "Print the line `Morning briefing` in the terminal with `echo`. After typing the command, press **Enter** so the terminal runs it.",
                 "hint": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
                 "help": {
                   "concept": "`echo` produces text, `>` writes or replaces a file, and `>>` appends without removing earlier lines.",
@@ -121,7 +121,7 @@
               },
               "writing-text-into-files-try-it-2": {
                 "title": "Write a volunteer welcome note",
-                "prompt": "Create `welcome-note.txt` by writing `Welcome volunteers` into it with `echo` and `>`. Then read it with `cat`.",
+                "prompt": "Create `welcome-note.txt` by writing `Welcome volunteers` into it with `echo` and `>`. Then read it with `cat`. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
                 "help": {
                   "concept": "`echo` produces text, `>` writes or replaces a file, and `>>` appends without removing earlier lines.",
@@ -156,7 +156,7 @@
               },
               "writing-text-into-files-try-it-3": {
                 "title": "Add to the supply list",
-                "prompt": "The supply list already has one line. Append `Water bottles` to `supply-list.txt` with `>>`, then read the file with `cat`.",
+                "prompt": "The supply list already has one line. Append `Water bottles` to `supply-list.txt` with `>>`, then read the file with `cat`. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Choose `>` for the first complete line and `>>` only when existing content must remain.",
                 "help": {
                   "concept": "`echo` produces text, `>` writes or replaces a file, and `>>` appends without removing earlier lines.",
@@ -197,15 +197,15 @@
             },
             "try_writing_text_into_files_sketch0": {
               "title": "Print the morning briefing",
-              "prompt": "Use `echo` to print a new message."
+              "prompt": "Use `echo` to print a new message. Press **Enter** to run the command."
             },
             "try_writing_text_into_files_sketch1": {
               "title": "Write a volunteer welcome note",
-              "prompt": "Write a new line into `welcome-note.txt`."
+              "prompt": "Write a new line into `welcome-note.txt`. Press **Enter** after each command."
             },
             "try_writing_text_into_files_sketch2": {
               "title": "Add to the supply list",
-              "prompt": "Append a different line to a supply file."
+              "prompt": "Append a different line to a supply file. Press **Enter** after each command."
             }
           }
         }

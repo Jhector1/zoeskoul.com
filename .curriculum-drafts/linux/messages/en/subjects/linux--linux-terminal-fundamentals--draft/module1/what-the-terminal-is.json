@@ -93,7 +93,7 @@
             "exercises": {
               "what-terminal-is-try-it-1": {
                 "title": "Identify the welcome desk folder",
-                "prompt": "You opened the welcome desk workspace. Type `pwd` to print its full folder path.",
+                "prompt": "You opened the welcome desk workspace. Type `pwd` to print its full folder path. After typing the command, press **Enter** so the terminal runs it.",
                 "hint": "Separate the prompt from the command and read the response before continuing.",
                 "help": {
                   "concept": "The terminal follows a command → output → verification cycle.",
@@ -130,7 +130,7 @@
               },
               "what-terminal-is-try-it-2": {
                 "title": "Inspect the supply room",
-                "prompt": "Before changing anything in the supply room, type `ls` to see the files already there.",
+                "prompt": "Before changing anything in the supply room, type `ls` to see the files already there. After typing the command, press **Enter** so the terminal runs it.",
                 "hint": "Separate the prompt from the command and read the response before continuing.",
                 "help": {
                   "concept": "The terminal follows a command → output → verification cycle.",
@@ -170,7 +170,7 @@
               },
               "what-terminal-is-try-it-3": {
                 "title": "Use the first safe check",
-                "prompt": "A teammate left you at the check-in desk. Type `pwd`, then `ls`, before deciding what to do next.",
+                "prompt": "A teammate left you at the check-in desk. Type `pwd`, then `ls`, before deciding what to do next. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Separate the prompt from the command and read the response before continuing.",
                 "help": {
                   "concept": "The terminal follows a command → output → verification cycle.",
@@ -211,15 +211,15 @@
             },
             "try_what_the_terminal_is_sketch0": {
               "title": "Identify the welcome desk folder",
-              "prompt": "Ask the terminal where the welcome desk is."
+              "prompt": "Ask the terminal where the welcome desk is. Press **Enter** to run the command."
             },
             "try_what_the_terminal_is_sketch1": {
               "title": "Inspect the supply room",
-              "prompt": "List what is stored in the supply room."
+              "prompt": "List what is stored in the supply room. Press **Enter** to run the command."
             },
             "try_what_the_terminal_is_sketch2": {
               "title": "Use the first safe check",
-              "prompt": "Confirm your location, then inspect it."
+              "prompt": "Confirm your location, then inspect it. Press **Enter** after each command."
             }
           }
         }

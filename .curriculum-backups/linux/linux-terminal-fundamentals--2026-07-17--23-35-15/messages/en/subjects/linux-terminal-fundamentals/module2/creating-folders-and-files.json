@@ -1,0 +1,235 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "creating-folders-and-files": {
+          "label": "Creating Folders and Files",
+          "summary": "Create useful folder structures with mkdir, mkdir -p, and touch.",
+          "cards": {
+            "sketch0": {
+              "title": "Create one folder with `mkdir`"
+            },
+            "sketch1": {
+              "title": "Create nested folders with `mkdir -p`"
+            },
+            "sketch2": {
+              "title": "Create empty files with `touch`"
+            },
+            "quiz": {
+              "title": "Practice check"
+            }
+          },
+          "practice": {
+            "sc-mkdir-purpose": {
+              "title": "What `mkdir` creates",
+              "prompt": "What does `mkdir` create?",
+              "hint": "Create parent folders before files and copy every required path exactly.",
+              "help": {
+                "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
+                "hint_1": "Create parent folders before files and copy every required path exactly.",
+                "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: What does `mkdir` create?"
+              },
+              "options": {
+                "a": "A folder",
+                "b": "A printed file preview",
+                "c": "A deleted file",
+                "d": "A password"
+              }
+            },
+            "mc-mkdir-p-use": {
+              "title": "When `mkdir -p` helps",
+              "prompt": "When is `mkdir -p` useful?",
+              "hint": "Create parent folders before files and copy every required path exactly.",
+              "help": {
+                "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
+                "hint_1": "Create parent folders before files and copy every required path exactly.",
+                "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: When is `mkdir -p` useful?"
+              },
+              "options": {
+                "a": "When parent folders may not exist yet",
+                "b": "When creating nested folders",
+                "c": "When deleting a file",
+                "d": "When printing file text"
+              }
+            },
+            "sc-touch-purpose": {
+              "title": "What `touch` creates",
+              "prompt": "What does `touch notes.txt` do if `notes.txt` does not exist?",
+              "hint": "Create parent folders before files and copy every required path exactly.",
+              "help": {
+                "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
+                "hint_1": "Create parent folders before files and copy every required path exactly.",
+                "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: What does `touch notes.txt` do if `notes.txt` does not exist?"
+              },
+              "options": {
+                "a": "Creates an empty file",
+                "b": "Prints the file",
+                "c": "Moves the file",
+                "d": "Deletes the file"
+              }
+            },
+            "dr-folder-before-file": {
+              "title": "Folders before files",
+              "prompt": "Put the setup steps in a safe order.",
+              "hint": "Create parent folders before files and copy every required path exactly.",
+              "help": {
+                "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
+                "hint_1": "Create parent folders before files and copy every required path exactly.",
+                "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: Put the setup steps in a safe order."
+              },
+              "tokens": {
+                "t1": "Create the parent folder",
+                "t2": "Create files inside it",
+                "t3": "List the folder to check"
+              }
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "exercises": {
+              "creating-folders-and-files-try-it-1": {
+                "title": "Create a volunteer desk folder",
+                "prompt": "The event team needs one place for volunteer notes. Create a folder named `volunteer-desk`, then list the current folder.",
+                "hint": "Create parent folders before files and copy every required path exactly.",
+                "help": {
+                  "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
+                  "hint_1": "Create parent folders before files and copy every required path exactly.",
+                  "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: The event team needs one place for volunteer notes. Create a folder named `volunteer-desk`, then list the current folder."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `mkdir` to create the volunteer desk folder."
+                    },
+                    "1": {
+                      "message": "Use `ls` to confirm the folder exists."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                }
+              },
+              "creating-folders-and-files-try-it-2": {
+                "title": "Build an event pack",
+                "prompt": "Set up `event-pack/signs` and `event-pack/schedules`. One `mkdir -p` command or separate safe commands are both valid.",
+                "hint": "Create parent folders before files and copy every required path exactly.",
+                "help": {
+                  "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
+                  "hint_1": "Create parent folders before files and copy every required path exactly.",
+                  "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: Set up `event-pack/signs` and `event-pack/schedules`. One `mkdir -p` command or separate safe commands are both valid."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `mkdir` or `mkdir -p` to build the folders."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                }
+              },
+              "creating-folders-and-files-try-it-3": {
+                "title": "Create planning board files",
+                "prompt": "You are starting inside `planning-board`. Create `tasks.txt` and `contacts.txt` with `touch`, then list the folder.",
+                "hint": "Create parent folders before files and copy every required path exactly.",
+                "help": {
+                  "concept": "`mkdir` creates folders, `mkdir -p` creates missing parent paths, and `touch` creates an empty file.",
+                  "hint_1": "Create parent folders before files and copy every required path exactly.",
+                  "hint_2": "Use targeted `ls` commands to verify each new folder or file before checking the answer. The current task asks: You are starting inside `planning-board`. Create `tasks.txt` and `contacts.txt` with `touch`, then list the folder."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `touch` to create the two planning files."
+                    },
+                    "1": {
+                      "message": "Use `ls` to confirm both files are present."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "planning_board_readme_txt": {
+                    "content": "Planning board workspace\n"
+                  }
+                }
+              }
+            },
+            "try_creating_folders_and_files_sketch0": {
+              "title": "Create a volunteer desk folder",
+              "prompt": "Create `volunteer-desk`."
+            },
+            "try_creating_folders_and_files_sketch1": {
+              "title": "Build an event pack",
+              "prompt": "Create two nested event folders."
+            },
+            "try_creating_folders_and_files_sketch2": {
+              "title": "Create planning board files",
+              "prompt": "Create two files inside `planning-board`."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "creating-folders-and-files": {
+          "mkdir-one-folder": {
+            "title": "Create one folder with `mkdir`",
+            "bodyMarkdown": "`mkdir` creates a directory in the current location. The command shape is `mkdir folder-name`.\n\n```bash\nmkdir reading-list\nls\n```\n\nAfter the command, `reading-list` should appear in the listing. `mkdir` does not move you into the new folder, and it will not quietly replace a folder that already exists. Choose a clear name, create it once, and verify before building anything inside it."
+          },
+          "mkdir-p-nested": {
+            "title": "Create nested folders with `mkdir -p`",
+            "bodyMarkdown": "When a structure needs several levels, `mkdir -p` can create missing parent folders and the final folder in one command.\n\n```bash\nmkdir -p travel-pack/tickets travel-pack/maps\n```\n\nThis creates `travel-pack` first, then the two folders inside it. Without `-p`, a nested command fails when the parent does not exist. The option is helpful, but still verify the exact names with targeted `ls` commands so a spelling mistake does not become an unnoticed second folder."
+          },
+          "touch-files": {
+            "title": "Create empty files with `touch`",
+            "bodyMarkdown": "`touch` creates an empty file when the named file does not exist. It is useful for placeholders that will receive content later.\n\n```bash\ntouch research/links.txt\nls research\n```\n\nThe parent folder must already exist. If `research` is missing, create it before running `touch`. An empty file is still a real workspace item, so give it a meaningful name rather than creating anonymous clutter. The next lesson will replace or append text inside files with `echo` and redirection."
+          }
+        }
+      }
+    }
+  }
+}

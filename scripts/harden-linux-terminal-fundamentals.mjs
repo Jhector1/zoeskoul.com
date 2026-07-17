@@ -103,6 +103,7 @@ function updateCourseFile(file, { fullSpec }) {
       "Do not replace or rename the first technical sketch when adding the course introduction.",
       "Every technical sketch should read like a short book section: definition, command shape, worked example, workspace effect, common mistake or safety warning, and transition to practice.",
       "Exercise help must be command-specific and path-specific; do not use one generic Linux help template across unrelated commands.",
+      "Every terminal-workspace exercise prompt must explicitly remind the learner to press Enter after typing each command so the terminal actually runs it.",
       "Final capstones use exactly one capstone section and one capstone topic with multiple cumulative steps.",
       "The final Linux capstone must transfer the taught command set into a domain that is clearly different from the Module 2 notes organizer.",
     ]);
@@ -204,12 +205,155 @@ function updateCourseFile(file, { fullSpec }) {
     uniquePush(course.courseGenerationPolicy.notes, [
       "Generate one standalone reading-only course-introduction sketch before the first technical sketch.",
       "Generate concept-specific help grounded in the exact command, path, and expected workspace result.",
+      "Generate an explicit press-Enter reminder in every terminal-workspace exercise prompt.",
       "Keep the final capstone to one section, one topic, and five progressive steps using the Community Media Archive scenario.",
     ]);
   }
 
   writeJson(file, course);
   return true;
+}
+
+function listJsonFiles(directory) {
+  if (!fs.existsSync(directory)) return [];
+
+  const files = [];
+  const visit = (current) => {
+    for (const entry of fs.readdirSync(current, { withFileTypes: true })) {
+      const target = path.join(current, entry.name);
+      if (entry.isDirectory()) {
+        visit(target);
+      } else if (entry.name.endsWith(".json")) {
+        files.push(target);
+      }
+    }
+  };
+
+  visit(directory);
+  return files;
+}
+
+function resolveMessagePath(document, dottedPath) {
+  let current = document;
+  for (const segment of String(dottedPath ?? "").split(".")) {
+    if (!segment || !current || typeof current !== "object") return null;
+    current = current[segment];
+  }
+  return current ?? null;
+}
+
+function appendEnterReminder(prompt, reminder) {
+  if (typeof prompt !== "string") return prompt;
+  if (/press\s+(?:\*\*)?enter/i.test(prompt)) return prompt;
+  return `${prompt.trimEnd()} ${reminder}`;
+}
+
+function terminalReminderForExercise(exercise) {
+  const entryFile = (exercise.solutionFiles ?? []).find(
+    (file) => file?.isEntry || file?.entry || file?.path === "main.sh",
+  );
+  const solution = String(entryFile?.content ?? exercise.solutionCode ?? "");
+  const commandCount = solution
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line && !line.startsWith("#")).length;
+
+  return commandCount > 1
+    ? "Press **Enter** after each command and wait for its result before typing the next one."
+    : "After typing the command, press **Enter** so the terminal runs it.";
+}
+
+function ensureTerminalExerciseEnterReminders() {
+  const draftRoot = path.join(root, ".curriculum-drafts/linux");
+  const subjectRoot = path.join(
+    draftRoot,
+    "subjects/linux--linux-terminal-fundamentals--draft",
+  );
+  const messageRoot = path.join(
+    draftRoot,
+    "messages/en/subjects/linux--linux-terminal-fundamentals--draft",
+  );
+
+  if (!fs.existsSync(subjectRoot) || !fs.existsSync(messageRoot)) return;
+
+  const messageDocuments = listJsonFiles(messageRoot).map((file) => ({
+    file,
+    value: readJson(file),
+    dirty: false,
+  }));
+
+  const resolveAcrossMessages = (dottedPath) => {
+    for (const document of messageDocuments) {
+      const value = resolveMessagePath(document.value, dottedPath);
+      if (value !== null) return { document, value };
+    }
+    return null;
+  };
+
+  for (const bundleFile of listJsonFiles(subjectRoot).filter((file) =>
+    file.endsWith("topic.bundle.json"),
+  )) {
+    const bundle = readJson(bundleFile);
+
+    for (const exercise of bundle.exercises ?? []) {
+      const terminalWorkspace =
+        exercise?.kind === "code_input" &&
+        (exercise?.recipe?.mode === "terminal_workspace" ||
+          exercise?.ideConfig?.layoutMode === "terminal_workspace");
+      if (!terminalWorkspace || !exercise.messageBase) continue;
+
+      const resolvedExercise = resolveAcrossMessages(exercise.messageBase);
+      if (!resolvedExercise || typeof resolvedExercise.value?.prompt !== "string") {
+        throw new Error(
+          `Cannot find terminal prompt for ${exercise.id ?? exercise.messageBase}`,
+        );
+      }
+
+      const nextPrompt = appendEnterReminder(
+        resolvedExercise.value.prompt,
+        terminalReminderForExercise(exercise),
+      );
+      if (nextPrompt !== resolvedExercise.value.prompt) {
+        resolvedExercise.value.prompt = nextPrompt;
+        resolvedExercise.document.dirty = true;
+      }
+
+      for (const card of bundle.cards ?? []) {
+        const tryIt = card?.tryIt;
+        if (tryIt?.exerciseKey !== exercise.id || !tryIt?.promptKey) continue;
+
+        const promptPath = String(tryIt.promptKey);
+        const lastDot = promptPath.lastIndexOf(".");
+        if (lastDot < 0) continue;
+
+        const parent = resolveAcrossMessages(promptPath.slice(0, lastDot));
+        const key = promptPath.slice(lastDot + 1);
+        if (!parent || typeof parent.value?.[key] !== "string") {
+          throw new Error(`Cannot find Try It prompt ${promptPath}`);
+        }
+
+        const isMultiCommand = terminalReminderForExercise(exercise).startsWith(
+          "Press **Enter** after each command",
+        );
+        const nextTryItPrompt = appendEnterReminder(
+          parent.value[key],
+          isMultiCommand
+            ? "Press **Enter** after each command."
+            : "Press **Enter** to run the command.",
+        );
+        if (nextTryItPrompt !== parent.value[key]) {
+          parent.value[key] = nextTryItPrompt;
+          parent.document.dirty = true;
+        }
+      }
+    }
+  }
+
+  for (const document of messageDocuments) {
+    if (!document.dirty) continue;
+    writeJson(document.file, document.value);
+    changed.push(path.relative(root, document.file));
+  }
 }
 
 function removeOptionalDraftArtifacts() {
@@ -240,6 +384,7 @@ function removeOptionalDraftArtifacts() {
 
 const changed = [];
 removeOptionalDraftArtifacts();
+ensureTerminalExerciseEnterReminders();
 for (const name of ["course.spec.json", "course.plan.json"]) {
   const file = path.join(courseDir, name);
   if (updateCourseFile(file, { fullSpec: name === "course.spec.json" })) {
@@ -255,6 +400,7 @@ if (fs.existsSync(blueprintFile)) {
   uniquePush(blueprint.courseGenerationPolicy.notes, [
     "Prepend a standalone reading-only course welcome without replacing the first technical sketch.",
     "Use book-like technical prose and concept-specific help.",
+    "Remind learners to press Enter after each terminal command in every terminal-workspace exercise prompt.",
     "Keep the final capstone in one section and one topic with five cumulative Community Media Archive steps.",
   ]);
   writeJson(blueprintFile, blueprint);
@@ -269,6 +415,7 @@ if (fs.existsSync(validationFile)) {
   uniquePush(policy.rules.pedagogy, [
     "Require one standalone course-introduction sketch before the first technical sketch.",
     "Reject generic help repeated across unrelated commands.",
+    "Reject terminal-workspace prompts that do not tell the learner to press Enter after typing the command.",
     "Require final capstones to use exactly one section, one topic, and multiple progressive steps.",
     "Require the capstone to use inspection, navigation, creation, writing, viewing, copying, moving, renaming, safe deletion, and final verification.",
   ]);

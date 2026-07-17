@@ -89,7 +89,7 @@
             "exercises": {
               "safe-delete-with-rm-try-it-1": {
                 "title": "Inspect the print room first",
-                "prompt": "The print room has a test page and an event plan. Type `ls` first so you can read both names before deciding what is temporary.",
+                "prompt": "The print room has a test page and an event plan. Type `ls` first so you can read both names before deciding what is temporary. After typing the command, press **Enter** so the terminal runs it.",
                 "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
                 "help": {
                   "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
@@ -129,7 +129,7 @@
               },
               "safe-delete-with-rm-try-it-2": {
                 "title": "Remove one temporary label",
-                "prompt": "Remove only `temp-label.txt`, then type `ls` to confirm `display-plan.txt` is still there.",
+                "prompt": "Remove only `temp-label.txt`, then type `ls` to confirm `display-plan.txt` is still there. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
                 "help": {
                   "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
@@ -172,7 +172,7 @@
               },
               "safe-delete-with-rm-try-it-3": {
                 "title": "Set aside an uncertain note",
-                "prompt": "You are not sure whether `maybe-archive.txt` can be deleted. Create `review-later`, move the file into it, and list that folder.",
+                "prompt": "You are not sure whether `maybe-archive.txt` can be deleted. Create `review-later`, move the file into it, and list that folder. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Confirm the temporary file with `ls` or `cat`; do not add recursive flags or wildcards.",
                 "help": {
                   "concept": "`rm` permanently removes one named file, so inspection and an exact path are part of the skill.",
@@ -213,15 +213,15 @@
             },
             "try_safe_delete_with_rm_sketch0": {
               "title": "Inspect the print room first",
-              "prompt": "List a new folder before removing anything."
+              "prompt": "List a new folder before removing anything. Press **Enter** to run the command."
             },
             "try_safe_delete_with_rm_sketch1": {
               "title": "Remove one temporary label",
-              "prompt": "Delete a different temporary file."
+              "prompt": "Delete a different temporary file. Press **Enter** after each command."
             },
             "try_safe_delete_with_rm_sketch2": {
               "title": "Set aside an uncertain note",
-              "prompt": "Move an uncertain file instead of deleting it."
+              "prompt": "Move an uncertain file instead of deleting it. Press **Enter** after each command."
             }
           }
         }

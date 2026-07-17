@@ -1,0 +1,275 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-3-final-capstone": {
+        "final-capstone-file-room-handoff": {
+          "label": "Final Capstone: Community Media Archive",
+          "summary": "Organize and verify a community media archive with the full beginner terminal toolkit.",
+          "cards": {
+            "sketch0": {
+              "title": "A media archive ready for the next team"
+            },
+            "project": {
+              "title": "Build and verify the archive"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "final-capstone-file-room-handoff-terminal-task-1": {
+                "title": "Inspect and build the archive structure",
+                "prompt": "Inspect `media-archive`, enter it, and create `organized/photos`, `organized/documents`, `backup`, and `review`. Create the empty review marker `review/needs-review.txt`.",
+                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "help": {
+                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
+                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
+                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                },
+                "starterCode": "# Step 1: inspect media-archive, enter it, create the archive folders, and add review/needs-review.txt.\n",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `pwd` to confirm where you are."
+                    },
+                    "1": {
+                      "message": "Use `ls` to inspect before changing."
+                    },
+                    "2": {
+                      "message": "Create the handoff folders with `mkdir` or `mkdir -p`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_inbox_agenda_txt": {
+                    "content": "Community event agenda\n"
+                  },
+                  "community_file_room_inbox_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_inbox_venue_txt": {
+                    "content": "Venue note\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
+                  }
+                }
+              },
+              "final-capstone-file-room-handoff-terminal-task-2": {
+                "title": "Write the archive guide and review note",
+                "prompt": "In `media-archive`, write `organized/README.txt` with the three required guide lines and write `Check image names before publishing` into `review/needs-review.txt`. Use `>` for the first README line and `>>` for the next two lines.",
+                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "help": {
+                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
+                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
+                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                },
+                "starterCode": "# Step 2: write organized/README.txt and review/needs-review.txt, then read both files.\n",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Write the first README line with `>`."
+                    },
+                    "1": {
+                      "message": "Append the second README line with `>>`."
+                    },
+                    "2": {
+                      "message": "Read the README with `cat`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_inbox_agenda_txt": {
+                    "content": "Community event agenda\n"
+                  },
+                  "community_file_room_inbox_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_inbox_venue_txt": {
+                    "content": "Venue note\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
+                  }
+                }
+              },
+              "final-capstone-file-room-handoff-terminal-task-3": {
+                "title": "Move and rename the incoming records",
+                "prompt": "Move `inbox/photo-index.txt` to `organized/photos/index.txt`, move `inbox/release-forms.txt` to `organized/documents/release-forms.txt`, and move `inbox/shoot-notes.txt` to `review/shoot-notes.txt`. Verify the old and new locations.",
+                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "help": {
+                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
+                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
+                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                },
+                "starterCode": "# Step 3: move and rename the three incoming records into their final folders.\n",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `mv` to move the inbox files."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_inbox_agenda_txt": {
+                    "content": "Community event agenda\n"
+                  },
+                  "community_file_room_inbox_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_inbox_venue_txt": {
+                    "content": "Venue note\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
+                  }
+                }
+              },
+              "final-capstone-file-room-handoff-terminal-task-4": {
+                "title": "Back up the index and remove the temporary import",
+                "prompt": "Copy `organized/photos/index.txt` to `backup/photo-index-backup.txt`. Then remove only `inbox/tmp-import.txt` and verify that the backup exists and the temporary file is gone.",
+                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "help": {
+                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
+                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
+                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                },
+                "starterCode": "# Step 4: copy the photo index to backup, remove only inbox/tmp-import.txt, and verify both results.\n",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `cp` to create the backup."
+                    },
+                    "1": {
+                      "message": "Remove only the temporary scratch file."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_reports_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
+                  }
+                }
+              },
+              "final-capstone-file-room-handoff-terminal-task-5": {
+                "title": "Verify the archive and mark it ready",
+                "prompt": "Run a final verification with `pwd`, targeted `ls`, `cat organized/README.txt`, and `wc -l organized/photos/index.txt`. Then write `Media archive verified` to `organized/READY.txt` and display the marker.",
+                "hint": "Keep every earlier result, then make the one focused archive change required by this step.",
+                "help": {
+                  "concept": "The media-archive capstone combines inspection, creation, writing, moving, renaming, copying, safe deletion, and final verification.",
+                  "hint_1": "Keep every earlier result, then make the one focused archive change required by this step.",
+                  "hint_2": "Use targeted `ls`, `cat`, and `wc -l` checks so the final READY marker is supported by evidence."
+                },
+                "starterCode": "# Step 5: verify the complete archive, then create and display organized/READY.txt.\n",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `wc -l` to count the guest list."
+                    },
+                    "1": {
+                      "message": "Append the final README line with `>>`."
+                    },
+                    "2": {
+                      "message": "Create the ready marker with `touch`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_reports_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_handoff_readme_txt": {
+                    "content": "Community file room handoff\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-3-final-capstone": {
+        "final-capstone-file-room-handoff": {
+          "capstone-synopsis": {
+            "title": "Community file room handoff",
+            "bodyMarkdown": "A neighborhood media team has inherited a small archive after a community photo project. The incoming files are all in one inbox: a photo index, release forms, shoot notes, and one temporary import file. Your job is to turn that inbox into a verified archive another volunteer can understand without asking you what happened.\n\nAcross five cumulative steps, you will inspect the workspace, create an organized structure, write a README and review note, move and rename records, back up the photo index, remove the known temporary file, and perform a final verification with `pwd`, `ls`, `cat`, and `wc -l`.\n\nThis is not a larger copy of the notes project. It is a transfer task: you must choose the correct command for preservation, relocation, naming, cleanup, and evidence that the archive is ready."
+          }
+        }
+      }
+    }
+  }
+}

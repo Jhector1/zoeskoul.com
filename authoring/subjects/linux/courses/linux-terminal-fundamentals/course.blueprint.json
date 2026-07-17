@@ -51,7 +51,8 @@
       "Use per-exercise terminal workspaces for independent quiz/check exercises.",
       "Prepend a standalone reading-only course welcome without replacing the first technical sketch.",
       "Use book-like technical prose and concept-specific help.",
-      "Keep the final capstone in one section and one topic with five cumulative Community Media Archive steps."
+      "Keep the final capstone in one section and one topic with five cumulative Community Media Archive steps.",
+      "Remind learners to press Enter after each terminal command in every terminal-workspace exercise prompt."
     ]
   }
 }

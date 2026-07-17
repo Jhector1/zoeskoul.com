@@ -89,7 +89,7 @@
             "exercises": {
               "moving-around-try-it-1": {
                 "title": "Enter the newsletter folder",
-                "prompt": "The workspace has a `newsletter` folder. Move into it with `cd newsletter`, then use `pwd` to confirm.",
+                "prompt": "The workspace has a `newsletter` folder. Move into it with `cd newsletter`, then use `pwd` to confirm. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
                 "help": {
                   "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
@@ -129,7 +129,7 @@
               },
               "moving-around-try-it-2": {
                 "title": "Return from the returns folder",
-                "prompt": "You are starting inside `library-kit/returns`. Use `cd ..` to move back to `library-kit`, then type `pwd`.",
+                "prompt": "You are starting inside `library-kit/returns`. Use `cd ..` to move back to `library-kit`, then type `pwd`. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
                 "help": {
                   "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
@@ -169,7 +169,7 @@
               },
               "moving-around-try-it-3": {
                 "title": "Reach the museum signs folder",
-                "prompt": "Move into the signs folder with one relative path: `cd museum-tour/signs`. Then type `ls`.",
+                "prompt": "Move into the signs folder with one relative path: `cd museum-tour/signs`. Then type `ls`. Press **Enter** after each command and wait for its result before typing the next one.",
                 "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
                 "help": {
                   "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
@@ -210,15 +210,15 @@
             },
             "try_moving_around_sketch0": {
               "title": "Enter the newsletter folder",
-              "prompt": "Move into `newsletter` and confirm."
+              "prompt": "Move into `newsletter` and confirm. Press **Enter** after each command."
             },
             "try_moving_around_sketch1": {
               "title": "Return from the returns folder",
-              "prompt": "Move up from `returns` to `library-kit`."
+              "prompt": "Move up from `returns` to `library-kit`. Press **Enter** after each command."
             },
             "try_moving_around_sketch2": {
               "title": "Reach the museum signs folder",
-              "prompt": "Use one relative path to reach the signs."
+              "prompt": "Use one relative path to reach the signs. Press **Enter** after each command."
             }
           }
         }
