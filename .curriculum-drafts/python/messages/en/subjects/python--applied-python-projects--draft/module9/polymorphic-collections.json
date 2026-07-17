@@ -28,7 +28,7 @@
               "help": {
                 "concept": "A Python list can hold different object types. Polymorphism becomes useful because both objects provide the same `label()` method.",
                 "hint_1": "Create both objects inside the same list and keep the variable name `catalog`.",
-                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
               },
               "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\n# TODO: create catalog with the two requested objects. Do not print yet.\n",
               "starterFiles": {
@@ -73,7 +73,7 @@
               "help": {
                 "concept": "Polymorphism lets one loop use the same method name on different object types.",
                 "hint_1": "Use `for item in catalog:` and print `item.label()` inside the loop.",
-                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                "hint_2": "Review the file path, class or function name, and output requirements together."
               },
               "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\n# TODO: loop through catalog and print item.label() for each item.\n",
               "starterFiles": {
@@ -119,7 +119,7 @@
               "help": {
                 "concept": "A reusable helper can depend on the shared `label()` behavior without knowing whether an item is a Book or Movie.",
                 "hint_1": "Start with an empty list, append `item.label()` inside a loop, and return the finished list.",
-                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                "hint_2": "Use the requested file boundary as part of the solution contract."
               },
               "starterCode": "# Run this provided script after completing the helper.\nfrom models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_report import build_labels\n\ncatalog = [\n    Book(\"A Wrinkle in Time\"),\n    Movie(\"Up\"),\n]\n\nfor label in build_labels(catalog):\n    print(label)\n",
               "starterFiles": {
@@ -236,15 +236,15 @@
         "polymorphic-collections": {
           "sketch-0": {
             "title": "A mixed list works when the objects share a promise",
-            "bodyMarkdown": "Polymorphism sounds fancy, but the everyday idea is simple.\n\nThink about a TV remote. The power button works on different TVs because every TV agrees to understand the same button.\n\nIn Python, different objects can agree to answer the same method call:\n\n```python\nitems = [\n    DeliveryTruck(\"North route\"),\n    DeliveryBike(\"Campus route\"),\n]\n```\n\nThe objects are different kinds, but they both have `label()`. That shared method is the button the rest of the code can press."
+            "bodyMarkdown": "Polymorphism sounds fancy, but the everyday idea is simple.\n\nThink about a TV remote. The power button works on different TVs because every TV agrees to understand the same button.\n\nIn Python, different objects can agree to answer the same method call:\n\n```python\nitems = [\n    DeliveryTruck(\"North route\"),\n    DeliveryBike(\"Campus route\"),\n]\n```\n\nThe objects are different kinds, but they both have `label()`. That shared method is the button the rest of the code can press.\n\nA mixed collection is the practical test of polymorphism. If the loop needs type checks for every object, the shared contract is not doing enough work yet."
           },
           "sketch-1": {
             "title": "One loop can use the shared method",
-            "bodyMarkdown": "Once every object in the list has the same method name, the loop can stay simple:\n\n```python\nfor item in items:\n    print(item.label())\n```\n\nThe loop does not ask, \"Are you a truck or a bike?\" It just trusts that each object knows how to answer `label()`.\n\nThat is the heart of polymorphism: different objects, same method call, correct result for each object."
+            "bodyMarkdown": "Once every object in the list has the same method name, the loop can stay simple:\n\n```python\nfor item in items:\n    print(item.label())\n```\n\nThe loop does not ask, \"Are you a truck or a bike?\" It just trusts that each object knows how to answer `label()`.\n\nThat is the heart of polymorphism: different objects, same method call, correct result for each object.\n\nA mixed collection is the practical test of polymorphism. If the loop needs type checks for every object, the shared contract is not doing enough work yet."
           },
           "sketch-2": {
             "title": "A helper can depend on the shared behavior",
-            "bodyMarkdown": "The same idea works inside a helper function:\n\n```python\ndef build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n```\n\nThe helper does not care about the exact child class. It only cares that each object has the method it needs.\n\nThat keeps the code open to new child classes later without rewriting the loop every time."
+            "bodyMarkdown": "The same idea works inside a helper function:\n\n```python\ndef build_labels(items):\n    labels = []\n    for item in items:\n        labels.append(item.label())\n    return labels\n```\n\nThe helper does not care about the exact child class. It only cares that each object has the method it needs.\n\nThat keeps the code open to new child classes later without rewriting the loop every time.\n\nA mixed collection is the practical test of polymorphism. If the loop needs type checks for every object, the shared contract is not doing enough work yet."
           }
         }
       }

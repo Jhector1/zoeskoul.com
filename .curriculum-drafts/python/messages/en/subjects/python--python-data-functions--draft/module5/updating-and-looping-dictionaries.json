@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Dictionary Update Practice"
-            }
-          },
-          "projectSteps": {
-            "ci_update_score": {
-              "title": "Update one score and return the dictionary"
-            },
-            "ci_remove_key": {
-              "title": "Remove a key if it exists"
-            },
-            "ci_format_items": {
-              "title": "Build lines from dictionary pairs"
             }
           },
           "quiz": {
@@ -150,7 +136,7 @@
               "prompt": "Choose the missing method so the loop gets both keys and values.",
               "hint": "Use the dictionary method that returns key-value pairs.",
               "help": {
-                "concept": "The `.the missing term()` method returns each dictionary entry as a key-value pair, which can be unpacked into two loop variables.",
+                "concept": "Choose the dictionary method that yields key-value pairs so each pair can be unpacked into two loop variables.",
                 "hint_1": "Methods like `.keys()` and `.values()` give only one part each.",
                 "hint_2": "You need the method that matches `for key, value in ...`."
               },
@@ -165,11 +151,11 @@
             "ci-update-score": {
               "title": "Update one score and return the dictionary",
               "prompt": "Write `update_score(scores, name, new_score)` so it updates the existing entry for `name` or adds it if it is missing, then returns the `scores` dictionary.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Trace the code before choosing the option that matches its actual behavior.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Run the completed step and verify every output line before submitting it."
               },
               "starterCode": "def update_score(scores, name, new_score):\n    # update or add the score, then return the dictionary\n    pass",
               "solutionCode": "def update_score(scores, name, new_score):\n    scores[name] = new_score\n    return scores"
@@ -179,9 +165,9 @@
               "prompt": "Write `remove_item(data, key_name)` so it removes `key_name` from the dictionary when that key is present, then returns the dictionary.",
               "hint": "Read the task \"Remove a key if it exists\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
+                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
+                "hint_2": "Use the expected result as a final contract check after your implementation runs."
               },
               "starterCode": "def remove_item(data, key_name):\n    # remove the key when it is present, then return the dictionary\n    pass",
               "solutionCode": "def remove_item(data, key_name):\n    if key_name in data:\n        del data[key_name]\n    return data"
@@ -189,11 +175,11 @@
             "ci-format-items": {
               "title": "Build lines from dictionary pairs",
               "prompt": "Write `format_inventory(items)` so it builds and returns a list of strings in the format `\"name: count\"`, such as `\"pens: 3\"`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "def format_inventory(items):\n    # return a list like [\"pens: 3\", \"paper: 2\"]\n    result = []\n    \n    return result",
               "solutionCode": "def format_inventory(items):\n    result = []\n    for name, count in items.items():\n        result.append(f\"{name}: {count}\")\n    return result"
@@ -222,7 +208,7 @@
               "help": {
                 "concept": "Increase apples by 3.",
                 "hint_1": "Increase apples by 3, then print counts.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "counts = {'apples': 2, 'bananas': 1}\n\n# Increase apples by 3.\n# Then print counts.\n",
               "solutionCode": "counts = {'apples': 2, 'bananas': 1}\ncounts['apples'] += 3\nprint(counts)\n",
@@ -238,8 +224,8 @@
               "hint": "Loop through inventory and print lines like: pens: 3.",
               "help": {
                 "concept": "Loop through inventory and print lines like: pens: 3.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
+                "hint_2": "Print the required lines in order, with no extra commentary."
               },
               "starterCode": "inventory = {'pens': 3, 'markers': 2}\n\n# Loop through inventory and print lines like: pens: 3\n",
               "solutionCode": "inventory = {'pens': 3, 'markers': 2}\nfor item, count in inventory.items():\n    print(f'{item}: {count}')\n",
@@ -256,7 +242,7 @@
               "help": {
                 "concept": "Store each word's length in lengths.",
                 "hint_1": "Store each word's length in lengths, then print lengths.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "words = ['red', 'blue']\nlengths = {}\n\n# Store each word's length in lengths.\n# Then print lengths.\n",
               "solutionCode": "words = ['red', 'blue']\nlengths = {}\nfor word in words:\n    lengths[word] = len(word)\nprint(lengths)\n",
@@ -306,7 +292,7 @@
           },
           "dict-looping": {
             "title": "Looping through keys and values",
-            "bodyMarkdown": "You can loop through a dictionary to work with its data.\n\nIf you loop over the dictionary directly, you get its **keys**:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item in prices:\n    print(item)\n```\n\nThis prints the keys one at a time:\n\n```python\napple\nbanana\npear\n```\n\nIf you want both the key and the value together, use `.items()`:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item, price in prices.items():\n    print(item, price)\n```\n\nLine by line:\n\n- `prices.items()` gives each key-value pair.\n- `item, price` unpacks each pair into two variables.\n- `print(item, price)` shows both pieces of data.\n\nPossible output:\n\n```python\napple 2\nbanana 1\npear 3\n```"
+            "bodyMarkdown": "You can loop through a dictionary to work with its data.\n\nIf you loop over the dictionary directly, you get its **keys**:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item in prices:\n    print(item)\n```\n\nThis prints the keys one at a time:\n\n```python\napple\nbanana\npear\n```\n\nIf you want both the key and the value together, use `.items()`:\n\n```python\nprices = {\"apple\": 2, \"banana\": 1, \"pear\": 3}\n\nfor item, price in prices.items():\n    print(item, price)\n```\n\nFollow the execution: - `prices.items()` gives each key-value pair.\n- `item, price` unpacks each pair into two variables.\n- `print(item, price)` shows both pieces of data.\n\nPossible output:\n\n```python\napple 2\nbanana 1\npear 3\n```"
           },
           "dict-common-patterns": {
             "title": "Common dictionary patterns",

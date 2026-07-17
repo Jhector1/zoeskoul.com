@@ -228,15 +228,15 @@
         "methods-and-responsibility": {
           "sketch-0": {
             "title": "Instance methods work with one object",
-            "bodyMarkdown": "An **instance method** receives `self`. Use it when behavior reads or changes one object.\n\n```python\nclass Counter:\n    def __init__(self, value=0):\n        self.value = value\n\n    def increment(self):\n        self.value += 1\n        return self.value\n```\n\n`counter.increment()` updates that counter object."
+            "bodyMarkdown": "An **instance method** receives `self`. Use it when behavior reads or changes one object.\n\n```python\nclass Counter:\n    def __init__(self, value=0):\n        self.value = value\n\n    def increment(self):\n        self.value += 1\n        return self.value\n```\n\n`counter.increment()` updates that counter object.\n\nA method belongs on the object when it uses or protects that object’s state. Application-wide coordination belongs elsewhere; this distinction prevents one model from becoming responsible for the entire program."
           },
           "sketch-1": {
             "title": "Class methods work with the class",
-            "bodyMarkdown": "A **class method** receives `cls` instead of `self`. A common use is an alternative constructor.\n\n```python\nclass Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    @classmethod\n    def from_fahrenheit(cls, fahrenheit):\n        celsius = (fahrenheit - 32) * 5 / 9\n        return cls(celsius)\n```\n\n`Temperature.from_fahrenheit(68)` converts the input and returns a new Temperature object."
+            "bodyMarkdown": "A **class method** receives `cls` instead of `self`. A common use is an alternative constructor.\n\n```python\nclass Temperature:\n    def __init__(self, celsius):\n        self.celsius = celsius\n\n    @classmethod\n    def from_fahrenheit(cls, fahrenheit):\n        celsius = (fahrenheit - 32) * 5 / 9\n        return cls(celsius)\n```\n\n`Temperature.from_fahrenheit(68)` converts the input and returns a new Temperature object.\n\nA method belongs on the object when it uses or protects that object’s state. Application-wide coordination belongs elsewhere; this distinction prevents one model from becoming responsible for the entire program."
           },
           "sketch-2": {
             "title": "Static methods are related utilities",
-            "bodyMarkdown": "A **static method** receives neither `self` nor `cls`. Use it for logic that belongs near the class but does not need object or class state.\n\n```python\nclass Temperature:\n    @staticmethod\n    def is_valid(celsius):\n        return celsius >= -273.15\n```\n\nYou can call it as `Temperature.is_valid(20)`. Keep a method as an instance method when it needs `self`, a class method when it needs `cls`, and a static method when it needs neither."
+            "bodyMarkdown": "A **static method** receives neither `self` nor `cls`. Use it for logic that belongs near the class but does not need object or class state.\n\n```python\nclass Temperature:\n    @staticmethod\n    def is_valid(celsius):\n        return celsius >= -273.15\n```\n\nYou can call it as `Temperature.is_valid(20)`. Keep a method as an instance method when it needs `self`, a class method when it needs `cls`, and a static method when it needs neither.\n\nA method belongs on the object when it uses or protects that object’s state. Application-wide coordination belongs elsewhere; this distinction prevents one model from becoming responsible for the entire program."
           }
         }
       }

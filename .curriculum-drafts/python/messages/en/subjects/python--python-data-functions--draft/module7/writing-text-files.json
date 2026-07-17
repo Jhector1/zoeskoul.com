@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice writing and appending text files"
-            }
-          },
-          "projectSteps": {
-            "ci_write_greeting_file": {
-              "title": "Write and show a greeting"
-            },
-            "ci_overwrite_shopping_list": {
-              "title": "Overwrite a list with two lines"
-            },
-            "ci_append_log_entry": {
-              "title": "Append a new log entry"
             }
           },
           "quiz": {
@@ -168,9 +154,9 @@
               "prompt": "Write a greeting into `greeting.txt` using the input name in title case, then open `greeting.txt` and print its contents.\n\nFor example, if the input is `zoe`, your program should print:\n`Hello, Zoe!`.",
               "hint": "Use `input()` for the name, then write the formatted greeting into the file.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
+                "hint_1": "Extend the working implementation rather than replacing it with an unrelated solution.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "name = input()\n\n# Write Hello, NAME! to greeting.txt.\n# Then open greeting.txt and print its contents.\n",
               "solutionCode": "name = input().strip().title()\n\nwith open(\"greeting.txt\", \"w\") as file:\n    file.write(f\"Hello, {name}!\")\n\nwith open(\"greeting.txt\") as file:\n    print(file.read())\n",
@@ -188,9 +174,9 @@
               "prompt": "A shopping list needs to be rewritten from fresh input. Write both items to `shopping.txt`, one per line and in title case, then print the file contents.\n\nFor example, if the inputs are `bread` and `apples`, your program should print:\n`Bread`\n`Apples`.",
               "hint": "Opening a file with `\"w\"` replaces the old contents.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
+                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
+                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
               },
               "starterCode": "first_item = input()\nsecond_item = input()\n\n# Write both items to shopping.txt, one per line.\n# Then print the file contents.\n",
               "solutionCode": "first_item = input().strip().title()\nsecond_item = input().strip().title()\n\nwith open(\"shopping.txt\", \"w\") as file:\n    file.write(first_item + \"\\n\")\n    file.write(second_item + \"\\n\")\n\nwith open(\"shopping.txt\") as file:\n    print(file.read(), end=\"\")\n",
@@ -208,9 +194,9 @@
               "prompt": "The log already starts with one line. Append the new input entry to `log.txt` on a new line, then print the full file.\n\nFor example, if the input is `Checked sensors`, your program should print:\n`Start shift`\n`Checked sensors`.",
               "hint": "Opening a file with `\"a\"` keeps the old contents and adds new text at the end.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "entry = input()\n\n# Append the entry to log.txt on a new line, then print the full file.\n",
               "solutionCode": "entry = input().strip()\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"\\n\" + entry)\n\nwith open(\"log.txt\") as file:\n    print(file.read(), end=\"\")\n",
@@ -337,7 +323,7 @@
           },
           "sketch-append-mode-basics": {
             "title": "Append mode adds to the end",
-            "bodyMarkdown": "Append mode (`\"a\"`) keeps the existing text and adds new text at the end.\n\n```python\nwith open(\"log.txt\", \"w\") as file:\n    file.write(\"Start\\n\")\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"Next\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read())\n```\n\nLine by line:\n\n- The first `with open(..., \"w\")` creates the starting text.\n- The second `with open(..., \"a\")` adds another line without removing `Start`.\n- Reading the file back shows both lines.\n\nThe output becomes:\n\n```python\nStart\nNext\n```"
+            "bodyMarkdown": "Append mode (`\"a\"`) keeps the existing text and adds new text at the end.\n\n```python\nwith open(\"log.txt\", \"w\") as file:\n    file.write(\"Start\\n\")\n\nwith open(\"log.txt\", \"a\") as file:\n    file.write(\"Next\\n\")\n\nwith open(\"log.txt\") as file:\n    print(file.read())\n```\n\nFollow the execution: - The first `with open(..., \"w\")` creates the starting text.\n- The second `with open(..., \"a\")` adds another line without removing `Start`.\n- Reading the file back shows both lines.\n\nThe output becomes:\n\n```python\nStart\nNext\n```"
           },
           "sketch-newlines-and-verifying": {
             "title": "Use newline characters and verify what you wrote",

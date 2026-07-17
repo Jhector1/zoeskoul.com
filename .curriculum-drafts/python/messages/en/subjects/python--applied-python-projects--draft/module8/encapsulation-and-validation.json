@@ -228,15 +228,15 @@
         "encapsulation-and-validation": {
           "sketch-0": {
             "title": "Objects should protect their own state",
-            "bodyMarkdown": "Methods should not blindly accept every value.\n\nImagine a `Book` method that updates reading progress. A negative page count should not move progress backward by accident.\n\nThe same idea applies to any object with important state: the method should check the value before changing the object.\n\n```python\ndef read_pages(self, pages):\n    if pages > 0:\n        self.pages_read += pages\n    return self.pages_read\n```\n\nThe rule lives inside the method because the method is responsible for changing the object."
+            "bodyMarkdown": "Methods should not blindly accept every value.\n\nImagine a `Book` method that updates reading progress. A negative page count should not move progress backward by accident.\n\nThe same idea applies to any object with important state: the method should check the value before changing the object.\n\n```python\ndef read_pages(self, pages):\n    if pages > 0:\n        self.pages_read += pages\n    return self.pages_read\n```\n\nThe rule lives inside the method because the method is responsible for changing the object.\n\nEncapsulation is not secrecy for its own sake. It gives every state change one controlled path, making invalid balances, statuses, or measurements harder to create and easier to test."
           },
           "sketch-1": {
             "title": "Invalid changes should be ignored",
-            "bodyMarkdown": "Validation keeps the object trustworthy across many method calls.\n\n```python\nbook.read_pages(20)\nbook.read_pages(-5)\n```\n\nThe first call is valid, so it updates the object.\n\nThe second call is invalid, so the method leaves the object unchanged.\n\nThat is the core encapsulation idea for beginners: outside code asks for a change, but the object decides whether that change is safe."
+            "bodyMarkdown": "Validation keeps the object trustworthy across many method calls.\n\n```python\nbook.read_pages(20)\nbook.read_pages(-5)\n```\n\nThe first call is valid, so it updates the object.\n\nThe second call is invalid, so the method leaves the object unchanged.\n\nThat is the core encapsulation idea for beginners: outside code asks for a change, but the object decides whether that change is safe.\n\nEncapsulation is not secrecy for its own sake. It gives every state change one controlled path, making invalid balances, statuses, or measurements harder to create and easier to test."
           },
           "sketch-2": {
             "title": "A clean method reports a safe final state",
-            "bodyMarkdown": "After validation is inside the class, `main.py` can stay simple.\n\n```python\nbook.read_pages(20)\nbook.read_pages(-5)\nprint(book.summary())\n```\n\n`main.py` does not need to know every internal rule. It uses the object, and the object protects itself.\n\nThis is why validation and methods belong together: the method owns the behavior, and the object owns the state."
+            "bodyMarkdown": "After validation is inside the class, `main.py` can stay simple.\n\n```python\nbook.read_pages(20)\nbook.read_pages(-5)\nprint(book.summary())\n```\n\n`main.py` does not need to know every internal rule. It uses the object, and the object protects itself.\n\nThis is why validation and methods belong together: the method owns the behavior, and the object owns the state.\n\nEncapsulation is not secrecy for its own sake. It gives every state change one controlled path, making invalid balances, statuses, or measurements harder to create and easier to test."
           }
         }
       }

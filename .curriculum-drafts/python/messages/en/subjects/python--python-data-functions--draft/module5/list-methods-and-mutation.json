@@ -17,27 +17,13 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice List Mutation Programs"
-            }
-          },
-          "projectSteps": {
-            "ci_1": {
-              "title": "Add an item and print the list"
-            },
-            "ci_2": {
-              "title": "Remove a value and show the result"
-            },
-            "ci_3": {
-              "title": "Sort numbers from input"
             }
           },
           "quiz": {
             "sc-1": {
               "title": "Which method adds to the end?",
               "prompt": "Which list method adds one new item to the end of a list?",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -69,7 +55,7 @@
             "mc-1": {
               "title": "Methods that mutate a list",
               "prompt": "Which of these operations change the original list? Choose all that apply.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -151,7 +137,7 @@
               "prompt": "Choose the method name that sorts `scores` in place.",
               "hint": "This method puts list items in order and changes the list itself.",
               "help": {
-                "concept": "`the missing term()` is the built-in list method for ordering list items in place.",
+                "concept": "Choose the list method that rearranges the existing list into order instead of returning a separate sorted copy.",
                 "hint_1": "The blank should be a method that works directly on a list variable.",
                 "hint_2": "It is not a method for adding or removing items."
               },
@@ -166,11 +152,11 @@
             "ci-1": {
               "title": "Add an item and print the list",
               "prompt": "A pencil case already has `pen` and `pencil`. Read one more item from input, add it to `items`, and print the updated list.\n\nFor example, if the input is `eraser`, your program should print:\n`['pen', 'pencil', 'eraser']`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "item = input()\nitems = [\"pen\", \"pencil\"]\n\n# Add the input item to the list.\n# Then print the updated list.",
               "solutionCode": "item = input()\nitems = [\"pen\", \"pencil\"]\nitems.append(item)\nprint(items)",
@@ -183,11 +169,11 @@
             "ci-2": {
               "title": "Remove a value and show the result",
               "prompt": "The list `colors` starts as `['red', 'blue', 'green']`. Read one color from input, remove that value from the list, and print the updated list.\n\nFor example, if the input is `blue`, your program should print:\n`['red', 'green']`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "color = input()\ncolors = ['red', 'blue', 'green']\n\n# Remove the input color from the list.\n# Then print the updated list.",
               "solutionCode": "color = input()\ncolors = ['red', 'blue', 'green']\ncolors.remove(color)\nprint(colors)",
@@ -200,11 +186,11 @@
             "ci-3": {
               "title": "Sort numbers from input",
               "prompt": "Three quiz scores arrive out of order. Put the input numbers into `numbers`, sort the list from smallest to largest, and print the sorted list.\n\nFor example, if the inputs are `9`, `2`, and `5`, your program should print:\n`[2, 5, 9]`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\n\n# Sort the list.\n# Then print the sorted list.",
               "solutionCode": "a = int(input())\nb = int(input())\nc = int(input())\n\nnumbers = [a, b, c]\nnumbers.sort()\nprint(numbers)",
@@ -238,7 +224,7 @@
               "help": {
                 "concept": "Add 10 to the end of the list.",
                 "hint_1": "Add 10 to the end of the list, then print the updated list.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Do not add debugging text or labels beyond the lines required by the prompt."
               },
               "starterCode": "numbers = [3, 1, 2]\n\n# Add 10 to the end of the list.\n# Then print the updated list.\n",
               "solutionCode": "numbers = [3, 1, 2]\nnumbers.append(10)\nprint(numbers)\n",
@@ -255,7 +241,7 @@
               "help": {
                 "concept": "Remove 'banana'.",
                 "hint_1": "Remove 'banana' Then pop the last remaining item into last_item.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "fruits = ['apple', 'banana', 'cherry']\n\n# Remove 'banana'.\n# Pop the last remaining item into last_item.\n# Print fruits, then print last_item.\n",
               "solutionCode": "fruits = ['apple', 'banana', 'cherry']\nfruits.remove('banana')\nlast_item = fruits.pop()\nprint(fruits)\nprint(last_item)\n",
@@ -275,7 +261,7 @@
               "help": {
                 "concept": "Sort the list alphabetically.",
                 "hint_1": "Sort the list alphabetically, then print the sorted list.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Return to the output contract and remove any line the task did not request."
               },
               "starterCode": "names = ['Zoe', 'Ava', 'Mia']\n\n# Sort the list alphabetically.\n# Then print the sorted list.\n",
               "solutionCode": "names = ['Zoe', 'Ava', 'Mia']\nnames.sort()\nprint(names)\n",
@@ -319,7 +305,7 @@
           },
           "sketch-2": {
             "title": "Using append, remove, and pop",
-            "bodyMarkdown": "These three methods all change a list, but they do different jobs:\n\n- `append(value)` adds one item to the end.\n- `remove(value)` removes the first matching value.\n- `pop(index)` removes and returns the item at an index.\n\nWorked example:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfruits.remove(\"banana\")\nlast_item = fruits.pop(1)\nprint(fruits)\nprint(last_item)\n```\n\nLine by line:\n- The list starts as `['apple', 'banana', 'cherry']`.\n- `remove(\"banana\")` changes it to `['apple', 'cherry']`.\n- `pop(1)` removes the item at index `1`, which is `'cherry'`.\n- Now `fruits` becomes `['apple']`.\n- `last_item` stores the removed value `'cherry'`.\n\nSo the output is:\n\n```python\n['apple']\ncherry\n```"
+            "bodyMarkdown": "These three methods all change a list, but they do different jobs:\n\n- `append(value)` adds one item to the end.\n- `remove(value)` removes the first matching value.\n- `pop(index)` removes and returns the item at an index.\n\nWorked example:\n\n```python\nfruits = [\"apple\", \"banana\", \"cherry\"]\nfruits.remove(\"banana\")\nlast_item = fruits.pop(1)\nprint(fruits)\nprint(last_item)\n```\n\nFollow the execution: - The list starts as `['apple', 'banana', 'cherry']`.\n- `remove(\"banana\")` changes it to `['apple', 'cherry']`.\n- `pop(1)` removes the item at index `1`, which is `'cherry'`.\n- Now `fruits` becomes `['apple']`.\n- `last_item` stores the removed value `'cherry'`.\n\nSo the output is:\n\n```python\n['apple']\ncherry\n```"
           },
           "sketch-3": {
             "title": "Sorting lists and watching for common mistakes",

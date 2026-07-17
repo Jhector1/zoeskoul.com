@@ -1,0 +1,152 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "label": "Project: Class Notes Handoff",
+          "summary": "Build a notes workspace, write a handoff file, move notes, and remove only temporary scratch.",
+          "cards": {
+            "sketch0": {
+              "title": "Class notes handoff"
+            },
+            "project": {
+              "title": "Project steps"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module-2-notes-organizer-project-terminal-task-1": {
+                "title": "Create the notes workspace",
+                "prompt": "Create a clean notes organizer with `inbox`, `handoff`, and `archive` folders. Then list the top folder.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `mkdir` or `mkdir -p` to create the workspace folders."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                }
+              },
+              "module-2-notes-organizer-project-terminal-task-2": {
+                "title": "Write the first handoff notes",
+                "prompt": "Write `Substitute teacher handoff` to `class-notes-organizer/handoff/README.txt`, then append `Bring math worksheets`. Read the file with `cat`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `echo` with `>` to write the first line."
+                    },
+                    "1": {
+                      "message": "Use `>>` to append the second line."
+                    },
+                    "2": {
+                      "message": "Read the handoff file with `cat`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                }
+              },
+              "module-2-notes-organizer-project-terminal-task-3": {
+                "title": "Move notes and remove scratch",
+                "prompt": "Move `math.txt` and `history.txt` from `inbox` into `archive`. Remove only `tmp-scratch.txt`, then list the folders.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `mv` to move the notes into archive."
+                    },
+                    "1": {
+                      "message": "Remove only the temporary scratch file."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "class_notes_organizer_inbox_math_txt": {
+                    "content": "Math notes\n"
+                  },
+                  "class_notes_organizer_inbox_history_txt": {
+                    "content": "History notes\n"
+                  },
+                  "class_notes_organizer_inbox_tmp_scratch_txt": {
+                    "content": "scratch\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "module-2-notes-organizer-project": {
+          "project-synopsis": {
+            "title": "Class notes handoff",
+            "bodyMarkdown": "A substitute teacher needs a clean folder by the end of the day. In this project, you will build the folder structure, write a small README with `echo`, move notes into the right place, and remove one temporary scratch file safely."
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@
   "moduleSlug": "linux-module-3-final-capstone",
   "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-3-capstone",
   "prefix": "linux_module_3",
-  "minutes": 35,
+  "minutes": 95,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -117,96 +117,107 @@
           "entry": true
         },
         {
-          "path": "community-file-room/inbox/agenda.txt",
-          "content": "Community event agenda\n",
+          "path": "media-archive/inbox/photo-index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/guest-list.txt",
-          "content": "Guest list\n",
+          "path": "media-archive/inbox/release-forms.txt",
+          "content": "Release forms received\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/venue.txt",
-          "content": "Venue note\n",
+          "path": "media-archive/inbox/shoot-notes.txt",
+          "content": "Check captions and dates\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "pwd\nls community-file-room\nmkdir -p community-file-room/handoff\nmkdir -p community-file-room/reports\nmkdir -p community-file-room/archive\nmkdir -p community-file-room/backup\nls community-file-room\n",
+          "content": "pwd\nls media-archive\ncd media-archive\npwd\nmkdir -p organized/photos organized/documents backup review\ntouch review/needs-review.txt\nls organized review\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "community-file-room/inbox/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/inbox/photo-index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/shoot-notes.txt",
+          "content": "Check captions and dates\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
+          "path": "media-archive/review/needs-review.txt",
           "content": "",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFolders": [
-          "community-file-room/handoff",
-          "community-file-room/reports",
-          "community-file-room/archive",
-          "community-file-room/backup"
+          "media-archive/organized/photos",
+          "media-archive/organized/documents",
+          "media-archive/backup",
+          "media-archive/review"
+        ],
+        "requiredFiles": [
+          "media-archive/review/needs-review.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
             "pattern": "\\bpwd\\b",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.0.message"
+            "message": "Use the required capstone command for step 1: \\bpwd\\b."
           },
           {
             "pattern": "\\bls\\b",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.1.message"
+            "message": "Use the required capstone command for step 1: \\bls\\b."
+          },
+          {
+            "pattern": "(^|\\s)cd(\\s|$)",
+            "message": "Use the required capstone command for step 1: (^|\\s)cd(\\s|$)."
           },
           {
             "pattern": "(^|\\s)mkdir(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-1.terminalExpectations.requiredCommands.2.message"
+            "message": "Use the required capstone command for step 1: (^|\\s)mkdir(\\s|$)."
+          },
+          {
+            "pattern": "(^|\\s)touch(\\s|$)",
+            "message": "Use the required capstone command for step 1: (^|\\s)touch(\\s|$)."
           }
         ],
         "forbiddenCommands": [
@@ -241,53 +252,56 @@
             "entry": true
           },
           {
-            "path": "community-file-room/inbox/agenda.txt",
-            "content": "Community event agenda\n",
+            "path": "media-archive/inbox/photo-index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/inbox/guest-list.txt",
-            "content": "Guest list\n",
+            "path": "media-archive/inbox/release-forms.txt",
+            "content": "Release forms received\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/inbox/venue.txt",
-            "content": "Venue note\n",
+            "path": "media-archive/inbox/shoot-notes.txt",
+            "content": "Check captions and dates\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "temporary scratch\n",
+            "path": "media-archive/inbox/tmp-import.txt",
+            "content": "temporary import cache\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFolders": [
-            "community-file-room/handoff",
-            "community-file-room/reports",
-            "community-file-room/archive",
-            "community-file-room/backup"
+            "media-archive/organized/photos",
+            "media-archive/organized/documents",
+            "media-archive/backup",
+            "media-archive/review"
+          ],
+          "requiredFiles": [
+            "media-archive/review/needs-review.txt"
           ]
         },
         "fixtureFiles": [
           {
-            "path": "community-file-room/inbox/agenda.txt",
-            "content": "Community event agenda\n",
+            "path": "media-archive/inbox/photo-index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/inbox/guest-list.txt",
-            "content": "Guest list\n",
+            "path": "media-archive/inbox/release-forms.txt",
+            "content": "Release forms received\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/inbox/venue.txt",
-            "content": "Venue note\n",
+            "path": "media-archive/inbox/shoot-notes.txt",
+            "content": "Check captions and dates\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "temporary scratch\n",
+            "path": "media-archive/inbox/tmp-import.txt",
+            "content": "temporary import cache\n",
             "language": "bash"
           }
         ]
@@ -311,23 +325,23 @@
       },
       "fixtureFiles": [
         {
-          "path": "community-file-room/inbox/agenda.txt",
-          "content": "Community event agenda\n",
+          "path": "media-archive/inbox/photo-index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/guest-list.txt",
-          "content": "Guest list\n",
+          "path": "media-archive/inbox/release-forms.txt",
+          "content": "Release forms received\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/venue.txt",
-          "content": "Venue note\n",
+          "path": "media-archive/inbox/shoot-notes.txt",
+          "content": "Check captions and dates\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
           "language": "bash"
         }
       ]
@@ -349,42 +363,42 @@
           "entry": true
         },
         {
-          "path": "community-file-room/inbox/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/inbox/photo-index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/shoot-notes.txt",
+          "content": "Check captions and dates\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
+          "path": "media-archive/review/needs-review.txt",
           "content": "",
           "language": "bash"
         }
@@ -392,75 +406,80 @@
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "echo \"Community file room handoff\" > handoff/README.txt\necho \"Agenda, guest list, and venue notes prepared\" >> handoff/README.txt\ncat handoff/README.txt\n",
+          "content": "echo \"Community media archive\" > organized/README.txt\necho \"Photos go in organized/photos\" >> organized/README.txt\necho \"Documents go in organized/documents\" >> organized/README.txt\necho \"Check image names before publishing\" > review/needs-review.txt\ncat organized/README.txt\ncat review/needs-review.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "community-file-room/inbox/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/inbox/photo-index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/shoot-notes.txt",
+          "content": "Check captions and dates\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "community-file-room/handoff/README.txt"
+          "media-archive/organized/README.txt",
+          "media-archive/review/needs-review.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "^\\s*echo\\b(?:(?!>>).)*>\\s*(?:\\./)?(?:community-file-room/)?handoff/README\\.txt\\s*$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.0.message"
+            "pattern": "(^|\\s)echo(\\s|$)",
+            "message": "Use the required capstone command for step 2: (^|\\s)echo(\\s|$)."
           },
           {
-            "pattern": "^\\s*echo\\b.*>>\\s*(?:\\./)?(?:community-file-room/)?handoff/README\\.txt\\s*$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.1.message"
+            "pattern": ">",
+            "message": "Use the required capstone command for step 2: >."
           },
           {
-            "pattern": "(^|\\s)cat\\s+(?:\\./)?(?:community-file-room/)?handoff/README\\.txt(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-2.terminalExpectations.requiredCommands.2.message"
+            "pattern": ">>",
+            "message": "Use the required capstone command for step 2: >>."
+          },
+          {
+            "pattern": "(^|\\s)cat(\\s|$)",
+            "message": "Use the required capstone command for step 2: (^|\\s)cat(\\s|$)."
           }
         ],
         "forbiddenCommands": [
@@ -495,89 +514,90 @@
             "entry": true
           },
           {
-            "path": "community-file-room/inbox/agenda.txt",
-            "content": "Community event agenda\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/guest-list.txt",
-            "content": "Guest list\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/venue.txt",
-            "content": "Venue note\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "temporary scratch\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/.keep",
+            "path": "media-archive/backup/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/reports/.keep",
+            "path": "media-archive/inbox/photo-index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/release-forms.txt",
+            "content": "Release forms received\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/shoot-notes.txt",
+            "content": "Check captions and dates\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/tmp-import.txt",
+            "content": "temporary import cache\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/documents/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/archive/.keep",
+            "path": "media-archive/organized/photos/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backup/.keep",
+            "path": "media-archive/review/needs-review.txt",
             "content": "",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "community-file-room/handoff/README.txt"
+            "media-archive/organized/README.txt",
+            "media-archive/review/needs-review.txt"
           ]
         },
         "fixtureFiles": [
           {
-            "path": "community-file-room/inbox/agenda.txt",
-            "content": "Community event agenda\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/guest-list.txt",
-            "content": "Guest list\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/venue.txt",
-            "content": "Venue note\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "temporary scratch\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/.keep",
+            "path": "media-archive/backup/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/reports/.keep",
+            "path": "media-archive/inbox/photo-index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/release-forms.txt",
+            "content": "Release forms received\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/shoot-notes.txt",
+            "content": "Check captions and dates\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/tmp-import.txt",
+            "content": "temporary import cache\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/documents/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/archive/.keep",
+            "path": "media-archive/organized/photos/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backup/.keep",
+            "path": "media-archive/review/needs-review.txt",
             "content": "",
             "language": "bash"
           }
@@ -598,46 +618,46 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/community-file-room"
+        "terminalCwd": "/workspace/media-archive"
       },
       "fixtureFiles": [
         {
-          "path": "community-file-room/inbox/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/inbox/photo-index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/shoot-notes.txt",
+          "content": "Check captions and dates\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
+          "path": "media-archive/review/needs-review.txt",
           "content": "",
           "language": "bash"
         }
@@ -660,122 +680,126 @@
           "entry": true
         },
         {
-          "path": "community-file-room/inbox/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/inbox/photo-index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/shoot-notes.txt",
+          "content": "Check captions and dates\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir -p handoff reports\nmv inbox/agenda.txt handoff/agenda.txt\nmv inbox/venue.txt handoff/venue.txt\nmv inbox/guest-list.txt reports/guest-list.txt\nls handoff\nls reports\n",
+          "content": "ls inbox\nmv inbox/photo-index.txt organized/photos/index.txt\nmv inbox/release-forms.txt organized/documents/release-forms.txt\nmv inbox/shoot-notes.txt review/shoot-notes.txt\nls inbox organized/photos organized/documents review\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/documents/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
+          "path": "media-archive/organized/photos/index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/reports/guest-list.txt",
-          "content": "Guest list\n",
+          "path": "media-archive/review/shoot-notes.txt",
+          "content": "Check captions and dates\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "community-file-room/handoff/agenda.txt",
-          "community-file-room/handoff/venue.txt",
-          "community-file-room/reports/guest-list.txt"
+          "media-archive/organized/photos/index.txt",
+          "media-archive/organized/documents/release-forms.txt",
+          "media-archive/review/shoot-notes.txt"
         ],
         "forbiddenFiles": [
-          "community-file-room/inbox/agenda.txt",
-          "community-file-room/inbox/venue.txt",
-          "community-file-room/inbox/guest-list.txt"
+          "media-archive/inbox/photo-index.txt",
+          "media-archive/inbox/release-forms.txt",
+          "media-archive/inbox/shoot-notes.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
             "pattern": "(^|\\s)mv(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-3.terminalExpectations.requiredCommands.0.message"
+            "message": "Use the required capstone command for step 3: (^|\\s)mv(\\s|$)."
+          },
+          {
+            "pattern": "(^|\\s)ls(\\s|$)",
+            "message": "Use the required capstone command for step 3: (^|\\s)ls(\\s|$)."
           }
         ],
         "forbiddenCommands": [
@@ -810,107 +834,107 @@
             "entry": true
           },
           {
-            "path": "community-file-room/inbox/agenda.txt",
-            "content": "Community event agenda\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/guest-list.txt",
-            "content": "Guest list\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/venue.txt",
-            "content": "Venue note\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "temporary scratch\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/.keep",
+            "path": "media-archive/backup/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/reports/.keep",
+            "path": "media-archive/inbox/photo-index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/release-forms.txt",
+            "content": "Release forms received\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/shoot-notes.txt",
+            "content": "Check captions and dates\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/tmp-import.txt",
+            "content": "temporary import cache\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/README.txt",
+            "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/documents/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/archive/.keep",
+            "path": "media-archive/organized/photos/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backup/.keep",
-            "content": "",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/README.txt",
-            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+            "path": "media-archive/review/needs-review.txt",
+            "content": "Check image names before publishing\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "community-file-room/handoff/agenda.txt",
-            "community-file-room/handoff/venue.txt",
-            "community-file-room/reports/guest-list.txt"
+            "media-archive/organized/photos/index.txt",
+            "media-archive/organized/documents/release-forms.txt",
+            "media-archive/review/shoot-notes.txt"
           ],
           "forbiddenFiles": [
-            "community-file-room/inbox/agenda.txt",
-            "community-file-room/inbox/venue.txt",
-            "community-file-room/inbox/guest-list.txt"
+            "media-archive/inbox/photo-index.txt",
+            "media-archive/inbox/release-forms.txt",
+            "media-archive/inbox/shoot-notes.txt"
           ]
         },
         "fixtureFiles": [
           {
-            "path": "community-file-room/inbox/agenda.txt",
-            "content": "Community event agenda\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/guest-list.txt",
-            "content": "Guest list\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/venue.txt",
-            "content": "Venue note\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "temporary scratch\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/.keep",
+            "path": "media-archive/backup/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/reports/.keep",
+            "path": "media-archive/inbox/photo-index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/release-forms.txt",
+            "content": "Release forms received\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/shoot-notes.txt",
+            "content": "Check captions and dates\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/inbox/tmp-import.txt",
+            "content": "temporary import cache\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/README.txt",
+            "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/documents/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/archive/.keep",
+            "path": "media-archive/organized/photos/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backup/.keep",
-            "content": "",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/README.txt",
-            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+            "path": "media-archive/review/needs-review.txt",
+            "content": "Check image names before publishing\n",
             "language": "bash"
           }
         ]
@@ -930,52 +954,52 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/community-file-room"
+        "terminalCwd": "/workspace/media-archive"
       },
       "fixtureFiles": [
         {
-          "path": "community-file-room/inbox/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/inbox/photo-index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/shoot-notes.txt",
+          "content": "Check captions and dates\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         }
       ]
@@ -997,123 +1021,127 @@
           "entry": true
         },
         {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/documents/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
+          "path": "media-archive/organized/photos/index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/reports/guest-list.txt",
-          "content": "Guest list\n",
+          "path": "media-archive/review/shoot-notes.txt",
+          "content": "Check captions and dates\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "mkdir -p backup\ncp reports/guest-list.txt backup/guest-list-backup.txt\nrm inbox/tmp-scratch.txt\nls inbox\n",
+          "content": "cp organized/photos/index.txt backup/photo-index-backup.txt\nrm inbox/tmp-import.txt\nls backup inbox\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/backup/photo-index-backup.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/documents/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
+          "path": "media-archive/organized/photos/index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/reports/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/backup/guest-list-backup.txt",
-          "content": "Guest list\n",
+          "path": "media-archive/review/shoot-notes.txt",
+          "content": "Check captions and dates\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "community-file-room/reports/guest-list.txt",
-          "community-file-room/backup/guest-list-backup.txt"
+          "media-archive/backup/photo-index-backup.txt",
+          "media-archive/organized/photos/index.txt"
         ],
         "forbiddenFiles": [
-          "community-file-room/inbox/tmp-scratch.txt"
+          "media-archive/inbox/tmp-import.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
             "pattern": "(^|\\s)cp(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.0.message"
+            "message": "Use the required capstone command for step 4: (^|\\s)cp(\\s|$)."
           },
           {
             "pattern": "(^|\\s)rm(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-4.terminalExpectations.requiredCommands.1.message"
+            "message": "Use the required capstone command for step 4: (^|\\s)rm(\\s|$)."
+          },
+          {
+            "pattern": "(^|\\s)ls(\\s|$)",
+            "message": "Use the required capstone command for step 4: (^|\\s)ls(\\s|$)."
           }
         ],
         "forbiddenCommands": [
@@ -1148,104 +1176,104 @@
             "entry": true
           },
           {
-            "path": "community-file-room/handoff/.keep",
+            "path": "media-archive/backup/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/reports/.keep",
+            "path": "media-archive/inbox/tmp-import.txt",
+            "content": "temporary import cache\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/README.txt",
+            "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/documents/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/archive/.keep",
+            "path": "media-archive/organized/documents/release-forms.txt",
+            "content": "Release forms received\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/photos/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backup/.keep",
-            "content": "",
+            "path": "media-archive/organized/photos/index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "temporary scratch\n",
+            "path": "media-archive/review/needs-review.txt",
+            "content": "Check image names before publishing\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/README.txt",
-            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/agenda.txt",
-            "content": "Community event agenda\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/venue.txt",
-            "content": "Venue note\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/reports/guest-list.txt",
-            "content": "Guest list\n",
+            "path": "media-archive/review/shoot-notes.txt",
+            "content": "Check captions and dates\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "community-file-room/reports/guest-list.txt",
-            "community-file-room/backup/guest-list-backup.txt"
+            "media-archive/backup/photo-index-backup.txt",
+            "media-archive/organized/photos/index.txt"
           ],
           "forbiddenFiles": [
-            "community-file-room/inbox/tmp-scratch.txt"
+            "media-archive/inbox/tmp-import.txt"
           ]
         },
         "fixtureFiles": [
           {
-            "path": "community-file-room/handoff/.keep",
+            "path": "media-archive/backup/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/reports/.keep",
+            "path": "media-archive/inbox/tmp-import.txt",
+            "content": "temporary import cache\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/README.txt",
+            "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/documents/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/archive/.keep",
+            "path": "media-archive/organized/documents/release-forms.txt",
+            "content": "Release forms received\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/photos/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backup/.keep",
-            "content": "",
+            "path": "media-archive/organized/photos/index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/inbox/tmp-scratch.txt",
-            "content": "temporary scratch\n",
+            "path": "media-archive/review/needs-review.txt",
+            "content": "Check image names before publishing\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/README.txt",
-            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/agenda.txt",
-            "content": "Community event agenda\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/venue.txt",
-            "content": "Venue note\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/reports/guest-list.txt",
-            "content": "Guest list\n",
+            "path": "media-archive/review/shoot-notes.txt",
+            "content": "Check captions and dates\n",
             "language": "bash"
           }
         ]
@@ -1265,52 +1293,52 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/community-file-room"
+        "terminalCwd": "/workspace/media-archive"
       },
       "fixtureFiles": [
         {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/inbox/tmp-import.txt",
+          "content": "temporary import cache\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/documents/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
+          "path": "media-archive/organized/photos/index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/inbox/tmp-scratch.txt",
-          "content": "temporary scratch\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/reports/guest-list.txt",
-          "content": "Guest list\n",
+          "path": "media-archive/review/shoot-notes.txt",
+          "content": "Check captions and dates\n",
           "language": "bash"
         }
       ]
@@ -1332,129 +1360,143 @@
           "entry": true
         },
         {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/backup/photo-index-backup.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/documents/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
+          "path": "media-archive/organized/photos/index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/reports/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/backup/guest-list-backup.txt",
-          "content": "Guest list\n",
+          "path": "media-archive/review/shoot-notes.txt",
+          "content": "Check captions and dates\n",
           "language": "bash"
         }
       ],
       "solutionFiles": [
         {
           "path": "main.sh",
-          "content": "wc -l reports/guest-list.txt\necho \"Ready for pickup\" >> handoff/README.txt\ntouch handoff/READY.txt\ncat handoff/README.txt\n",
+          "content": "pwd\nls organized/photos organized/documents backup review\ncat organized/README.txt\nwc -l organized/photos/index.txt\necho \"Media archive verified\" > organized/READY.txt\ncat organized/READY.txt\n",
           "language": "bash",
           "isEntry": true,
           "entry": true
         },
         {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/backup/photo-index-backup.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/READY.txt",
+          "content": "Media archive verified\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/documents/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
+          "path": "media-archive/organized/photos/index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\nReady for pickup\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/READY.txt",
-          "content": "",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/reports/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/backup/guest-list-backup.txt",
-          "content": "Guest list\n",
+          "path": "media-archive/review/shoot-notes.txt",
+          "content": "Check captions and dates\n",
           "language": "bash"
         }
       ],
       "workspaceExpectations": {
         "requiredFiles": [
-          "community-file-room/handoff/README.txt",
-          "community-file-room/handoff/READY.txt"
+          "media-archive/organized/README.txt",
+          "media-archive/organized/photos/index.txt",
+          "media-archive/backup/photo-index-backup.txt",
+          "media-archive/organized/READY.txt"
         ]
       },
       "terminalExpectations": {
         "requiredCommands": [
           {
-            "pattern": "(^|\\s)wc\\s+-l\\s+(?:\\./)?(?:community-file-room/)?reports/guest-list\\.txt(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.0.message"
+            "pattern": "\\bpwd\\b",
+            "message": "Use the required capstone command for step 5: \\bpwd\\b."
           },
           {
-            "pattern": "^\\s*echo\\b.*>>\\s*(?:\\./)?(?:community-file-room/)?handoff/README\\.txt\\s*$",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.1.message"
+            "pattern": "(^|\\s)ls(\\s|$)",
+            "message": "Use the required capstone command for step 5: (^|\\s)ls(\\s|$)."
           },
           {
-            "pattern": "(^|\\s)touch(\\s|$)",
-            "message": "@:topics.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.final-capstone-file-room-handoff.finalCapstone.steps.final-capstone-file-room-handoff-terminal-task-5.terminalExpectations.requiredCommands.2.message"
+            "pattern": "(^|\\s)cat(\\s|$)",
+            "message": "Use the required capstone command for step 5: (^|\\s)cat(\\s|$)."
+          },
+          {
+            "pattern": "wc\\s+-l",
+            "message": "Use the required capstone command for step 5: wc\\s+-l."
+          },
+          {
+            "pattern": "(^|\\s)echo(\\s|$)",
+            "message": "Use the required capstone command for step 5: (^|\\s)echo(\\s|$)."
+          },
+          {
+            "pattern": ">",
+            "message": "Use the required capstone command for step 5: >."
           }
         ],
         "forbiddenCommands": [
@@ -1489,101 +1531,103 @@
             "entry": true
           },
           {
-            "path": "community-file-room/handoff/.keep",
+            "path": "media-archive/backup/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/reports/.keep",
+            "path": "media-archive/backup/photo-index-backup.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/README.txt",
+            "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/documents/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/archive/.keep",
+            "path": "media-archive/organized/documents/release-forms.txt",
+            "content": "Release forms received\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/photos/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backup/.keep",
-            "content": "",
+            "path": "media-archive/organized/photos/index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/README.txt",
-            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+            "path": "media-archive/review/needs-review.txt",
+            "content": "Check image names before publishing\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/agenda.txt",
-            "content": "Community event agenda\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/venue.txt",
-            "content": "Venue note\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/reports/guest-list.txt",
-            "content": "Guest list\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/backup/guest-list-backup.txt",
-            "content": "Guest list\n",
+            "path": "media-archive/review/shoot-notes.txt",
+            "content": "Check captions and dates\n",
             "language": "bash"
           }
         ],
         "workspaceExpectations": {
           "requiredFiles": [
-            "community-file-room/handoff/README.txt",
-            "community-file-room/handoff/READY.txt"
+            "media-archive/organized/README.txt",
+            "media-archive/organized/photos/index.txt",
+            "media-archive/backup/photo-index-backup.txt",
+            "media-archive/organized/READY.txt"
           ]
         },
         "fixtureFiles": [
           {
-            "path": "community-file-room/handoff/.keep",
+            "path": "media-archive/backup/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/reports/.keep",
+            "path": "media-archive/backup/photo-index-backup.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/README.txt",
+            "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/documents/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/archive/.keep",
+            "path": "media-archive/organized/documents/release-forms.txt",
+            "content": "Release forms received\n",
+            "language": "bash"
+          },
+          {
+            "path": "media-archive/organized/photos/.keep",
             "content": "",
             "language": "bash"
           },
           {
-            "path": "community-file-room/backup/.keep",
-            "content": "",
+            "path": "media-archive/organized/photos/index.txt",
+            "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/README.txt",
-            "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+            "path": "media-archive/review/needs-review.txt",
+            "content": "Check image names before publishing\n",
             "language": "bash"
           },
           {
-            "path": "community-file-room/handoff/agenda.txt",
-            "content": "Community event agenda\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/handoff/venue.txt",
-            "content": "Venue note\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/reports/guest-list.txt",
-            "content": "Guest list\n",
-            "language": "bash"
-          },
-          {
-            "path": "community-file-room/backup/guest-list-backup.txt",
-            "content": "Guest list\n",
+            "path": "media-archive/review/shoot-notes.txt",
+            "content": "Check captions and dates\n",
             "language": "bash"
           }
         ]
@@ -1603,52 +1647,52 @@
           "terminal": true
         },
         "terminalSessionScope": "exercise",
-        "terminalCwd": "/workspace/community-file-room"
+        "terminalCwd": "/workspace/media-archive"
       },
       "fixtureFiles": [
         {
-          "path": "community-file-room/handoff/.keep",
+          "path": "media-archive/backup/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/reports/.keep",
+          "path": "media-archive/backup/photo-index-backup.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/README.txt",
+          "content": "Community media archive\nPhotos go in organized/photos\nDocuments go in organized/documents\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/documents/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/archive/.keep",
+          "path": "media-archive/organized/documents/release-forms.txt",
+          "content": "Release forms received\n",
+          "language": "bash"
+        },
+        {
+          "path": "media-archive/organized/photos/.keep",
           "content": "",
           "language": "bash"
         },
         {
-          "path": "community-file-room/backup/.keep",
-          "content": "",
+          "path": "media-archive/organized/photos/index.txt",
+          "content": "IMG_001.jpg\nIMG_002.jpg\nIMG_003.jpg\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/README.txt",
-          "content": "Community file room handoff\nAgenda, guest list, and venue notes prepared\n",
+          "path": "media-archive/review/needs-review.txt",
+          "content": "Check image names before publishing\n",
           "language": "bash"
         },
         {
-          "path": "community-file-room/handoff/agenda.txt",
-          "content": "Community event agenda\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/handoff/venue.txt",
-          "content": "Venue note\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/reports/guest-list.txt",
-          "content": "Guest list\n",
-          "language": "bash"
-        },
-        {
-          "path": "community-file-room/backup/guest-list-backup.txt",
-          "content": "Guest list\n",
+          "path": "media-archive/review/shoot-notes.txt",
+          "content": "Check captions and dates\n",
           "language": "bash"
         }
       ]

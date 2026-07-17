@@ -23,11 +23,11 @@
             "sc-cat-use": {
               "title": "Best command for a short note",
               "prompt": "Which command prints a whole short file?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
+                "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: Which command prints a whole short file?"
               },
               "options": {
                 "a": "cat",
@@ -39,11 +39,11 @@
             "mc-preview-long-file": {
               "title": "Preview a long file",
               "prompt": "Which commands help preview a long file without reading every line?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
+                "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: Which commands help preview a long file without reading every line?"
               },
               "options": {
                 "a": "head",
@@ -55,11 +55,11 @@
             "sc-wc-lines": {
               "title": "Count lines",
               "prompt": "Which command counts lines in `names.txt`?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
+                "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: Which command counts lines in `names.txt`?"
               },
               "options": {
                 "a": "wc -l names.txt",
@@ -71,11 +71,11 @@
             "dr-inspect-file": {
               "title": "Inspect a file carefully",
               "prompt": "Put the file-inspection flow in order.",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
+                "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: Put the file-inspection flow in order."
               },
               "tokens": {
                 "t1": "Use `ls` to confirm the file name",
@@ -90,11 +90,11 @@
               "viewing-file-contents-try-it-1": {
                 "title": "Read a visitor welcome note",
                 "prompt": "You are at the visitor desk. Use `cat welcome-note.txt` to read the short note.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
+                  "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                  "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: You are at the visitor desk. Use `cat welcome-note.txt` to read the short note."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -127,11 +127,11 @@
               "viewing-file-contents-try-it-2": {
                 "title": "Preview a delivery log",
                 "prompt": "The dispatch folder has a longer `delivery-log.txt`. Use `head delivery-log.txt`, then `tail delivery-log.txt`.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
+                  "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                  "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: The dispatch folder has a longer `delivery-log.txt`. Use `head delivery-log.txt`, then `tail delivery-log.txt`."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -167,11 +167,11 @@
               "viewing-file-contents-try-it-3": {
                 "title": "Count meal requests",
                 "prompt": "The kitchen keeps one meal request per line. Use `wc -l meal-requests.txt` to count them.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Use the command named by the prompt on the provided file; no file creation is needed.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "`cat` reads a short file, `head` and `tail` preview its edges, and `wc -l` counts lines.",
+                  "hint_1": "Use the command named by the prompt on the provided file; no file creation is needed.",
+                  "hint_2": "Compare the displayed content or count with the task and avoid changing the fixture file. The current task asks: The kitchen keeps one meal request per line. Use `wc -l meal-requests.txt` to count them."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -225,15 +225,15 @@
         "viewing-file-contents": {
           "cat-whole-file": {
             "title": "Use `cat` for a small file",
-            "bodyMarkdown": "`cat` prints the whole file. It is best for short notes.\n\n```bash\ncat agenda.txt\n```\n\nIf the file is long, the output may be too much to read comfortably."
+            "bodyMarkdown": "`cat` prints an entire text file to the terminal. It is a good choice for a short recipe, note, or small configuration file.\n\n```bash\ncat recipe-card.txt\n```\n\nReading with `cat` does not modify the file. Check the file name carefully: if the path is wrong, the command reports that the file does not exist. For a long log, printing everything can bury the useful lines, so the next sketch introduces smaller previews."
           },
           "head-tail-preview": {
             "title": "Use `head` and `tail` for previews",
-            "bodyMarkdown": "`head` shows the beginning of a file. `tail` shows the end.\n\n```bash\nhead event-log.txt\ntail event-log.txt\n```\n\nThese are helpful when a file has many lines and you only need a quick check."
+            "bodyMarkdown": "`head` shows the beginning of a file, while `tail` shows the end. They are useful when a long file has a meaningful header or the newest entries appear last.\n\n```bash\nhead sensor-log.txt\ntail sensor-log.txt\n```\n\nBoth commands inspect without changing content. Keep the file path the same when comparing the first and last lines; otherwise you may believe one file is inconsistent when you actually opened two different files. Use a preview first, then `cat` only when the whole file is short enough to read."
           },
           "wc-line-count": {
             "title": "Use `wc -l` to count lines",
-            "bodyMarkdown": "`wc -l` counts lines in a file.\n\n```bash\nwc -l guest-list.txt\n```\n\nFor checklists, logs, and lists of names, line count is a fast way to confirm that the file is roughly the size you expect."
+            "bodyMarkdown": "`wc -l` counts the lines in a text file. It gives a quick size check for lists, logs, and line-based records.\n\n```bash\nwc -l reading-list.txt\n```\n\nThe output includes a number and usually the file name. A line count does not prove the content is correct, but it can reveal a missing or duplicated record before a handoff. Combine it with `head`, `tail`, or `cat` when you need both a quantity and a content check."
           }
         }
       }

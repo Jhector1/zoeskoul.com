@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Dictionary Basics Practice"
-            }
-          },
-          "projectSteps": {
-            "ci_make_dictionary": {
-              "title": "Return a simple dictionary"
-            },
-            "ci_get_score": {
-              "title": "Look up a value in a dictionary"
-            },
-            "ci_update_dictionary": {
-              "title": "Add or update a dictionary entry"
             }
           },
           "quiz": {
@@ -165,11 +151,11 @@
             "ci-make-dictionary": {
               "title": "Return a simple dictionary",
               "prompt": "Write `make_book(title, pages)` so it returns one dictionary describing the book. The dictionary should use the keys `\"title\"` and `\"pages\"`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Reject any choice that changes the named values, branch order, or output.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
               },
               "starterCode": "def make_book(title, pages):\n    # return a dictionary with keys \"title\" and \"pages\"\n    pass",
               "solutionCode": "def make_book(title, pages):\n    return {\"title\": title, \"pages\": pages}"
@@ -179,9 +165,9 @@
               "prompt": "Write `get_score(scores, name)` so it looks up `name` in the `scores` dictionary and returns that score.",
               "hint": "Read the task \"Look up a value in a dictionary\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
+                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
+                "hint_2": "Test the normal path and inspect the final output before completing the step."
               },
               "starterCode": "def get_score(scores, name):\n    # return the score for the given name\n    pass",
               "solutionCode": "def get_score(scores, name):\n    return scores[name]"
@@ -191,9 +177,9 @@
               "prompt": "Write `set_price(prices, item, amount)` so it updates the `prices` dictionary with the given item and amount, then returns the updated dictionary.",
               "hint": "Read the task \"Add or update a dictionary entry\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Test the normal path and inspect the final output before completing the step."
               },
               "starterCode": "def set_price(prices, item, amount):\n    # update the dictionary and return it\n    pass",
               "solutionCode": "def set_price(prices, item, amount):\n    prices[item] = amount\n    return prices"
@@ -224,8 +210,8 @@
               "hint": "Print the name from profile.",
               "help": {
                 "concept": "Print the name from profile.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Test this single step before combining it with later behavior.",
+                "hint_2": "Do not add debugging text or labels beyond the lines required by the prompt."
               },
               "starterCode": "profile = {'name': 'Ava', 'age': 12}\n\n# Print the name from profile.\n",
               "solutionCode": "profile = {'name': 'Ava', 'age': 12}\nprint(profile['name'])\n",
@@ -242,7 +228,7 @@
               "help": {
                 "concept": "Change age to 12.",
                 "hint_1": "Change age to 12, then print the profile dictionary.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Return to the output contract and remove any line the task did not request."
               },
               "starterCode": "profile = {'name': 'Mia', 'age': 11}\n\n# Change age to 12.\n# Then print the profile dictionary.\n",
               "solutionCode": "profile = {'name': 'Mia', 'age': 11}\nprofile['age'] = 12\nprint(profile)\n",
@@ -259,7 +245,7 @@
               "help": {
                 "concept": "Create a dictionary named scores with Ava: 92 and Mia: 85.",
                 "hint_1": "Create a dictionary named scores with Ava: 92 and Mia: 85, then print scores.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "# Create a dictionary named scores with Ava: 92 and Mia: 85.\n# Then print scores.\n",
               "solutionCode": "scores = {'Ava': 92, 'Mia': 85}\nprint(scores)\n",
@@ -305,7 +291,7 @@
         "dictionary-basics": {
           "dict-idea": {
             "title": "What a dictionary is",
-            "bodyMarkdown": "A **dictionary** stores data as **key-value pairs**. Each key helps you look up a value.\n\nThink of it like a labeled container:\n\n- `\"name\"` → `\"Ava\"`\n- `\"score\"` → `42`\n- `\"in_stock\"` → `True`\n\nIn Python, dictionaries use curly braces `{}`.\n\n```python\nstudent = {\n    \"name\": \"Ava\",\n    \"score\": 42,\n    \"in_stock\": True\n}\n\nprint(student)\n```\n\nThis creates one dictionary with three labeled pieces of information.\n\nLine by line:\n\n- `student = { ... }` creates the dictionary and stores it in `student`\n- `\"name\": \"Ava\"` means the key `\"name\"` has the value `\"Ava\"`\n- `\"score\": 42` means the key `\"score\"` has the value `42`\n- `print(student)` shows the whole dictionary in the output panel\n\nA dictionary is useful when each value has a clear label.\n\nWorked example:\n\n```python\nbook = {\n    \"title\": \"Python Basics\",\n    \"pages\": 120\n}\n\nprint(book[\"title\"])\n```\n\nThis prints `Python Basics` because the key `\"title\"` points to that value."
+            "bodyMarkdown": "A **dictionary** stores data as **key-value pairs**. Each key helps you look up a value.\n\nThink of it like a labeled container:\n\n- `\"name\"` → `\"Ava\"`\n- `\"score\"` → `42`\n- `\"in_stock\"` → `True`\n\nIn Python, dictionaries use curly braces `{}`.\n\n```python\nstudent = {\n    \"name\": \"Ava\",\n    \"score\": 42,\n    \"in_stock\": True\n}\n\nprint(student)\n```\n\nThis creates one dictionary with three labeled pieces of information.\n\nFollow the execution: - `student = { ... }` creates the dictionary and stores it in `student`\n- `\"name\": \"Ava\"` means the key `\"name\"` has the value `\"Ava\"`\n- `\"score\": 42` means the key `\"score\"` has the value `42`\n- `print(student)` shows the whole dictionary in the output panel\n\nA dictionary is useful when each value has a clear label.\n\nWorked example:\n\n```python\nbook = {\n    \"title\": \"Python Basics\",\n    \"pages\": 120\n}\n\nprint(book[\"title\"])\n```\n\nThis prints `Python Basics` because the key `\"title\"` points to that value."
           },
           "dict-lookup": {
             "title": "Looking up values by key",

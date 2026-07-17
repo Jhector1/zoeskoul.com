@@ -246,15 +246,15 @@
         "abstraction-with-base-interfaces": {
           "sketch-0": {
             "title": "Python can enforce a shared method contract",
-            "bodyMarkdown": "Python has no dedicated `interface` keyword. One clear way to describe a required method is an **abstract base class**.\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass NotificationChannel(ABC):\n    @abstractmethod\n    def message(self):\n        pass\n```\n\n`ABC` marks the class as abstract. `@abstractmethod` tells Python that concrete child classes must implement `message()`."
+            "bodyMarkdown": "Python has no dedicated `interface` keyword. One clear way to describe a required method is an **abstract base class**.\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass NotificationChannel(ABC):\n    @abstractmethod\n    def message(self):\n        pass\n```\n\n`ABC` marks the class as abstract. `@abstractmethod` tells Python that concrete child classes must implement `message()`.\n\nAn abstract method documents behavior that every concrete subclass must supply. It moves a hidden expectation into an explicit contract that fails early when a new subclass is incomplete."
           },
           "sketch-1": {
             "title": "Concrete children implement the abstract method",
-            "bodyMarkdown": "A child becomes concrete when it implements the required method.\n\n```python\nclass EmailChannel(NotificationChannel):\n    def message(self):\n        return \"Email message\"\n\nclass SmsChannel(NotificationChannel):\n    def message(self):\n        return \"SMS message\"\n```\n\nPython can create `EmailChannel()` and `SmsChannel()`. It refuses to create an incomplete child that still has an unimplemented abstract method."
+            "bodyMarkdown": "A child becomes concrete when it implements the required method.\n\n```python\nclass EmailChannel(NotificationChannel):\n    def message(self):\n        return \"Email message\"\n\nclass SmsChannel(NotificationChannel):\n    def message(self):\n        return \"SMS message\"\n```\n\nPython can create `EmailChannel()` and `SmsChannel()`. It refuses to create an incomplete child that still has an unimplemented abstract method.\n\nAn abstract method documents behavior that every concrete subclass must supply. It moves a hidden expectation into an explicit contract that fails early when a new subclass is incomplete."
           },
           "sketch-2": {
             "title": "Helpers can depend on shared behavior",
-            "bodyMarkdown": "A helper can work with any object that provides the expected method.\n\n```python\ndef collect_messages(channels):\n    return [channel.message() for channel in channels]\n```\n\nThe ABC enforces the contract for related classes. The helper then follows Python's duck-typing style: it calls `message()` without branching on exact class names."
+            "bodyMarkdown": "A helper can work with any object that provides the expected method.\n\n```python\ndef collect_messages(channels):\n    return [channel.message() for channel in channels]\n```\n\nThe ABC enforces the contract for related classes. The helper then follows Python's duck-typing style: it calls `message()` without branching on exact class names.\n\nAn abstract method documents behavior that every concrete subclass must supply. It moves a hidden expectation into an explicit contract that fails early when a new subclass is incomplete."
           }
         }
       }

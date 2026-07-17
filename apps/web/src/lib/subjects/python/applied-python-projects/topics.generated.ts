@@ -17,16 +17,12 @@ import inheritanceForSharedBehaviorJson from "./modules/module9/topics/inheritan
 import overridingAndSpecializationJson from "./modules/module9/topics/overriding-and-specialization/topic.bundle.json";
 import polymorphicCollectionsJson from "./modules/module9/topics/polymorphic-collections/topic.bundle.json";
 import abstractionWithBaseInterfacesJson from "./modules/module9/topics/abstraction-with-base-interfaces/topic.bundle.json";
-import module9CatalogPolymorphismProjectJson from "./modules/module9/topics/module-9-catalog-polymorphism-project/topic.bundle.json";
+import module9GreenhouseSensorProjectJson from "./modules/module9/topics/module-9-greenhouse-sensor-project/topic.bundle.json";
 import testingObjectStateJson from "./modules/module10/topics/testing-object-state/topic.bundle.json";
 import testingInheritanceAndPolymorphismJson from "./modules/module10/topics/testing-inheritance-and-polymorphism/topic.bundle.json";
 import debuggingImportsAndStateJson from "./modules/module10/topics/debugging-imports-and-state/topic.bundle.json";
 import refactoringOopServicesJson from "./modules/module10/topics/refactoring-oop-services/topic.bundle.json";
 import module10OopQualityProjectJson from "./modules/module10/topics/module-10-oop-quality-project/topic.bundle.json";
-import capstoneScopeAndArchitectureJson from "./modules/module11/topics/capstone-scope-and-architecture/topic.bundle.json";
-import capstoneDomainModelJson from "./modules/module11/topics/capstone-domain-model/topic.bundle.json";
-import capstoneStorageAndReportsJson from "./modules/module11/topics/capstone-storage-and-reports/topic.bundle.json";
-import capstoneTestsAndPolishJson from "./modules/module11/topics/capstone-tests-and-polish/topic.bundle.json";
 import module11FinalOopCapstoneJson from "./modules/module11/topics/module-11-final-oop-capstone/topic.bundle.json";
 
 
@@ -40,16 +36,12 @@ const inheritanceForSharedBehavior = inheritanceForSharedBehaviorJson as SlimTop
 const overridingAndSpecialization = overridingAndSpecializationJson as SlimTopicManifest;
 const polymorphicCollections = polymorphicCollectionsJson as SlimTopicManifest;
 const abstractionWithBaseInterfaces = abstractionWithBaseInterfacesJson as SlimTopicManifest;
-const module9CatalogPolymorphismProject = module9CatalogPolymorphismProjectJson as SlimTopicManifest;
+const module9GreenhouseSensorProject = module9GreenhouseSensorProjectJson as SlimTopicManifest;
 const testingObjectState = testingObjectStateJson as SlimTopicManifest;
 const testingInheritanceAndPolymorphism = testingInheritanceAndPolymorphismJson as SlimTopicManifest;
 const debuggingImportsAndState = debuggingImportsAndStateJson as SlimTopicManifest;
 const refactoringOopServices = refactoringOopServicesJson as SlimTopicManifest;
 const module10OopQualityProject = module10OopQualityProjectJson as SlimTopicManifest;
-const capstoneScopeAndArchitecture = capstoneScopeAndArchitectureJson as SlimTopicManifest;
-const capstoneDomainModel = capstoneDomainModelJson as SlimTopicManifest;
-const capstoneStorageAndReports = capstoneStorageAndReportsJson as SlimTopicManifest;
-const capstoneTestsAndPolish = capstoneTestsAndPolishJson as SlimTopicManifest;
 const module11FinalOopCapstone = module11FinalOopCapstoneJson as SlimTopicManifest;
 
 export const TOPIC_MANIFESTS: TopicManifestRefMap = {
@@ -63,15 +55,11 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "overriding-and-specialization": overridingAndSpecialization,
   "polymorphic-collections": polymorphicCollections,
   "abstraction-with-base-interfaces": abstractionWithBaseInterfaces,
-  "module-9-catalog-polymorphism-project": module9CatalogPolymorphismProject,
+  "module-9-greenhouse-sensor-project": module9GreenhouseSensorProject,
   "testing-object-state": testingObjectState,
   "testing-inheritance-and-polymorphism": testingInheritanceAndPolymorphism,
   "debugging-imports-and-state": debuggingImportsAndState,
   "refactoring-oop-services": refactoringOopServices,
   "module-10-oop-quality-project": module10OopQualityProject,
-  "capstone-scope-and-architecture": capstoneScopeAndArchitecture,
-  "capstone-domain-model": capstoneDomainModel,
-  "capstone-storage-and-reports": capstoneStorageAndReports,
-  "capstone-tests-and-polish": capstoneTestsAndPolish,
   "module-11-final-oop-capstone": module11FinalOopCapstone,
 };

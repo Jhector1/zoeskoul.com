@@ -1,0 +1,182 @@
+{
+  "subjects": {
+    "applied-python-projects": {
+      "title": "Applied Python Projects: Object-Oriented Apps",
+      "description": "Build maintainable Python applications across multiple files. You will model state with classes, protect that state with validation, share behavior through inheritance and abstraction, test object interactions, debug package boundaries, and finish with a complete neighborhood-pantry application that includes storage, reports, tests, and documentation.",
+      "moreComingSoon": ""
+    }
+  },
+  "modules": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "title": "Object-Oriented Foundations",
+        "description": "Model a small application with class files, constructors, state-changing methods, validation, and clear object responsibilities.",
+        "outcomes": [
+          "Define classes in dedicated model files and import them into main.py.",
+          "Use constructors, attributes, and methods to keep object behavior with object state.",
+          "Apply encapsulation with validation and helper/service files."
+        ],
+        "why": [
+          "Objects keep related state and behavior together instead of scattering rules across unrelated functions.",
+          "Strong class boundaries make the later inheritance and testing work easier to extend safely."
+        ]
+      },
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "title": "Inheritance, Polymorphism, and Abstraction",
+        "description": "Share behavior through base classes, specialize it through overrides, and let services work with mixed objects through a common contract.",
+        "outcomes": [
+          "Use inheritance to share behavior across related classes.",
+          "Override methods when subclasses need specialized behavior.",
+          "Use polymorphism and simple abstraction so services can work with mixed object types."
+        ],
+        "why": [
+          "Inheritance is useful only when it removes real duplication without hiding what each subclass owns.",
+          "Polymorphism lets a service depend on behavior rather than a growing chain of type checks."
+        ]
+      },
+      "python-10-testing-debugging-oop-projects": {
+        "title": "Testing and Debugging OOP Projects",
+        "description": "Verify object state and subclass behavior, trace import and mutation bugs, and refactor services without changing public behavior.",
+        "outcomes": [
+          "Write tests for object state changes, validation rules, and subclass overrides.",
+          "Debug import errors and object-state bugs in multifile workspaces.",
+          "Refactor main.py into model/service/test files while preserving behavior."
+        ],
+        "why": [
+          "Tests make state changes and validation rules visible before a refactor can silently break them.",
+          "Debugging package boundaries prepares you to maintain the larger capstone workspace with confidence."
+        ]
+      },
+      "python-11-oop-capstone-project": {
+        "title": "Final OOP Capstone Project",
+        "description": "Plan and deliver a neighborhood-pantry application with domain models, services, CSV storage, reports, tests, and a readable handoff.",
+        "outcomes": [
+          "Design a clear file architecture for a multifile OOP app.",
+          "Use all four OOP pillars in one working project.",
+          "Add storage, reporting, tests, and documentation to finish a polished capstone."
+        ],
+        "why": [
+          "The final project asks you to make architectural choices rather than copy one prescribed class at a time.",
+          "Finishing storage, tests, and documentation turns the object model into a production-shaped application."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "applied-python-projects": {
+      "python-8-object-oriented-foundations": {
+        "applied-python-projects-python-8-object-foundations": {
+          "title": "Object and Class Foundations",
+          "description": "Move from object vocabulary to real class files, instances, constructors, and state that belongs to each object.",
+          "weeks": null,
+          "bullets": [
+            "Thinking in Objects",
+            "Class Files and Instances",
+            "Constructors and Object State"
+          ]
+        },
+        "applied-python-projects-python-8-encapsulation-and-services": {
+          "title": "Methods and Validation",
+          "description": "Place behavior beside the state it changes and reject invalid operations before they can corrupt the object.",
+          "weeks": null,
+          "bullets": [
+            "Methods and Responsibility",
+            "Encapsulation and Validation"
+          ]
+        },
+        "applied-python-projects-python-8-module-project": {
+          "title": "Module Project",
+          "description": "Build an account tracker whose model protects balances while the runner coordinates the user-facing workflow.",
+          "weeks": null,
+          "bullets": [
+            "Module 8 Account Tracker Project"
+          ]
+        }
+      },
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "applied-python-projects-python-9-inheritance-and-overrides": {
+          "title": "Inheritance and Overrides",
+          "description": "Extract genuinely shared behavior into a base class, then override only the parts that differ for each sensor type.",
+          "weeks": null,
+          "bullets": [
+            "Inheritance for Shared Behavior",
+            "Overriding and Specialization"
+          ]
+        },
+        "applied-python-projects-python-9-polymorphism-and-abstraction": {
+          "title": "Polymorphism and Abstraction",
+          "description": "Use one method contract across mixed objects and make the base interface explicit when every subclass must provide the behavior.",
+          "weeks": null,
+          "bullets": [
+            "Polymorphic Collections",
+            "Abstraction With Base Interfaces"
+          ]
+        },
+        "applied-python-projects-python-9-module-project": {
+          "title": "Module Project",
+          "description": "Build a greenhouse monitor whose reporting service works with multiple sensor subclasses without type-specific branching.",
+          "weeks": null,
+          "bullets": [
+            "Module 9 Greenhouse Sensor Project"
+          ]
+        }
+      },
+      "python-10-testing-debugging-oop-projects": {
+        "applied-python-projects-python-10-testing-oop-behavior": {
+          "title": "Testing OOP Behavior",
+          "description": "Test what an object remembers after a method call and verify that subclass overrides still satisfy the shared contract.",
+          "weeks": null,
+          "bullets": [
+            "Testing Object State",
+            "Testing Inheritance and Polymorphism"
+          ]
+        },
+        "applied-python-projects-python-10-debugging-and-refactoring": {
+          "title": "Debugging and Refactoring",
+          "description": "Trace imports and shared state to their source, then move orchestration into services while tests protect behavior.",
+          "weeks": null,
+          "bullets": [
+            "Debugging Imports and State",
+            "Refactoring OOP Services"
+          ]
+        },
+        "applied-python-projects-python-10-module-project": {
+          "title": "Module Project",
+          "description": "Harden an animal-shelter intake app with regression tests, storage checks, and deliberate state transitions.",
+          "weeks": null,
+          "bullets": [
+            "Module 10 Animal Shelter Quality Project"
+          ]
+        }
+      },
+      "python-11-oop-capstone-project": {
+        "applied-python-projects-python-11-capstone-architecture": {
+          "title": "Capstone Architecture",
+          "description": "Translate the pantry brief into boundaries, responsibilities, and small model decisions before writing the complete application.",
+          "weeks": null,
+          "bullets": [
+            "Capstone Scope and Architecture",
+            "Capstone Domain Model"
+          ]
+        },
+        "applied-python-projects-python-11-capstone-services-and-polish": {
+          "title": "Capstone Services and Polish",
+          "description": "Connect domain objects to storage and reports, then verify the workflow with tests and explain it in the README.",
+          "weeks": null,
+          "bullets": [
+            "Capstone Storage and Reports",
+            "Capstone Tests and Polish"
+          ]
+        },
+        "applied-python-projects-python-11-final-capstone": {
+          "title": "Final Capstone",
+          "description": "Complete the Neighborhood Pantry Request Coordinator through cumulative, file-specific graded steps.",
+          "weeks": null,
+          "bullets": [
+            "Module 11 Final OOP Capstone"
+          ]
+        }
+      }
+    }
+  }
+}

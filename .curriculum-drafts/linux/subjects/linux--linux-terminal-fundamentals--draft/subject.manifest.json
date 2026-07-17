@@ -23,8 +23,7 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 3,
-        "isTerminalRelease": true,
-        "moreComingMessageKey": "subjects.linux--linux-terminal-fundamentals--draft.moreComingSoon"
+        "isTerminalRelease": true
       },
       "completionPolicy": {
         "requireAllPublishedModules": true,
@@ -71,9 +70,7 @@
       },
       "meta": {
         "estimatedMinutes": 75,
-        "prereqKeys": [
-          "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.title"
-        ],
+        "prereqKeys": [],
         "outcomeKeys": [
           "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.outcomes.0",
           "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.outcomes.1",
@@ -121,7 +118,7 @@
           "titleKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.title",
           "descriptionKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.description",
           "meta": {
-            "module": 2,
+            "module": 1,
             "weeksKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.weeks",
             "bulletKeys": [
               "sections.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.linux--linux-terminal-fundamentals--draft-linux-module-1-project.bullets.0"
@@ -173,7 +170,7 @@
       "meta": {
         "estimatedMinutes": 120,
         "prereqKeys": [
-          "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.title"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.title"
         ],
         "outcomeKeys": [
           "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.outcomes.0",
@@ -193,7 +190,7 @@
           "titleKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.title",
           "descriptionKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.description",
           "meta": {
-            "module": 1,
+            "module": 2,
             "weeksKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.weeks",
             "bulletKeys": [
               "sections.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.linux--linux-terminal-fundamentals--draft-linux-module-2-file-workflow.bullets.0",
@@ -216,7 +213,6 @@
             "creating-folders-and-files",
             "viewing-file-contents",
             "writing-text-into-files",
-
             "copy-move-rename",
             "safe-delete-with-rm"
           ]
@@ -279,7 +275,7 @@
       "meta": {
         "estimatedMinutes": 40,
         "prereqKeys": [
-          "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.title"
+          "modules.linux--linux-terminal-fundamentals--draft.linux-module-2-files-and-folders.title"
         ],
         "outcomeKeys": [
           "modules.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.outcomes.0",
@@ -299,7 +295,7 @@
           "titleKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.title",
           "descriptionKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.description",
           "meta": {
-            "module": 1,
+            "module": 3,
             "weeksKey": "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.weeks",
             "bulletKeys": [
               "sections.linux--linux-terminal-fundamentals--draft.linux-module-3-final-capstone.linux--linux-terminal-fundamentals--draft-linux-module-3-capstone.bullets.0"

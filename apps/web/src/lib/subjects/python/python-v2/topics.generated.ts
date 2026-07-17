@@ -34,6 +34,7 @@ import accumulatorsAndCountersJson from "./modules/module3/topics/accumulators-a
 import whileLoopBasicsJson from "./modules/module3/topics/while-loop-basics/topic.bundle.json";
 import breakAndContinueJson from "./modules/module3/topics/break-and-continue/topic.bundle.json";
 import loopDebuggingJson from "./modules/module3/topics/loop-debugging/topic.bundle.json";
+import module3ClubCheckInProjectJson from "./modules/module3/topics/module-3-club-check-in-project/topic.bundle.json";
 import miniGradebookCapstoneJson from "./modules/module4/topics/mini-gradebook-capstone/topic.bundle.json";
 
 
@@ -64,6 +65,7 @@ const accumulatorsAndCounters = accumulatorsAndCountersJson as SlimTopicManifest
 const whileLoopBasics = whileLoopBasicsJson as SlimTopicManifest;
 const breakAndContinue = breakAndContinueJson as SlimTopicManifest;
 const loopDebugging = loopDebuggingJson as SlimTopicManifest;
+const module3ClubCheckInProject = module3ClubCheckInProjectJson as SlimTopicManifest;
 const miniGradebookCapstone = miniGradebookCapstoneJson as SlimTopicManifest;
 
 export const TOPIC_MANIFESTS: TopicManifestRefMap = {
@@ -94,5 +96,6 @@ export const TOPIC_MANIFESTS: TopicManifestRefMap = {
   "while-loop-basics": whileLoopBasics,
   "break-and-continue": breakAndContinue,
   "loop-debugging": loopDebugging,
+  "module-3-club-check-in-project": module3ClubCheckInProject,
   "mini-gradebook-capstone": miniGradebookCapstone,
 };

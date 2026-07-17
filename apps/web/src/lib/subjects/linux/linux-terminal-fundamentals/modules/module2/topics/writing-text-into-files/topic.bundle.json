@@ -4,7 +4,7 @@
   "moduleSlug": "linux-module-2-files-and-folders",
   "sectionSlug": "linux-terminal-fundamentals-linux-module-2-file-workflow",
   "prefix": "linux_module_2",
-  "minutes": 18,
+  "minutes": 30,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",

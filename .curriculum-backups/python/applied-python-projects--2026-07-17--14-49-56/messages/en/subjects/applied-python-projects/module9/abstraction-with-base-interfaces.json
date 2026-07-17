@@ -1,0 +1,263 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "abstraction-with-base-interfaces": {
+          "label": "Abstract Base Classes and Interfaces",
+          "summary": "Use `ABC` and `@abstractmethod` to enforce a shared method, then write helpers that depend on that behavior.",
+          "cards": {
+            "sketch0": {
+              "title": "Define an abstract contract"
+            },
+            "sketch1": {
+              "title": "Implement the abstract method"
+            },
+            "sketch2": {
+              "title": "Program to shared behavior"
+            },
+            "quiz": {
+              "title": "Practice"
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "try_abstraction_with_base_interfaces_sketch0": {
+              "title": "Make CatalogItem an abstract base class",
+              "prompt": "In `models/catalog_item.py`, import `ABC` and `abstractmethod`, make `CatalogItem` inherit from `ABC`, and decorate `label(self)` with `@abstractmethod`. Keep the constructor that stores `title`. `main.py` checks that Python refuses to create an incomplete CatalogItem.",
+              "hint": "Use `class CatalogItem(ABC):` and place `@abstractmethod` directly above `label`.",
+              "help": {
+                "concept": "Python has no `interface` keyword. An abstract base class is one way to declare and enforce a shared method contract.",
+                "hint_1": "Import both names from `abc`.",
+                "hint_2": "An abstract method can use `pass`; concrete child classes must implement it."
+              },
+              "starterCode": "from models.catalog_item import CatalogItem\n\n# This should print only when CatalogItem is truly abstract.\ntry:\n    CatalogItem(\"Dune\")\nexcept TypeError:\n    print(\"CatalogItem is abstract\")\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\n# This should print only when CatalogItem is truly abstract.\ntry:\n    CatalogItem(\"Dune\")\nexcept TypeError:\n    print(\"CatalogItem is abstract\")\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "# TODO: import ABC and abstractmethod.\n\nclass CatalogItem:\n    def __init__(self, title):\n        self.title = title\n\n    # TODO: make label an abstract method.\n    def label(self):\n        pass\n"
+                },
+                "models_book_py": {
+                  "content": "# Book is used in the next step; leave it unchanged for now.\n"
+                }
+              },
+              "solutionCode": "from models.catalog_item import CatalogItem\n\ntry:\n    CatalogItem(\"Dune\")\nexcept TypeError:\n    print(\"CatalogItem is abstract\")\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\ntry:\n    CatalogItem(\"Dune\")\nexcept TypeError:\n    print(\"CatalogItem is abstract\")\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
+                },
+                "models_book_py": {
+                  "content": "# Book is used in the next step.\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Define CatalogItem in models/catalog_item.py."
+                },
+                "1": {
+                  "message": "CatalogItem should be abstract so Python refuses to instantiate it."
+                }
+              },
+              "expectedOutput": "CatalogItem is abstract"
+            },
+            "try_abstraction_with_base_interfaces_sketch1": {
+              "title": "Implement the abstract method in each child",
+              "prompt": "`CatalogItem` is now abstract. Complete `Book.label()` and `Movie.label()` so both child classes become concrete. Each constructor can reuse the parent constructor with `super().__init__(title)`. Run `main.py` to print `Book: Dune` and `Movie: Moana`.",
+              "hint": "A concrete child must implement every abstract method before Python can create it.",
+              "help": {
+                "concept": "`@abstractmethod` makes the requirement enforceable. A child that implements `label()` can be instantiated; an incomplete child cannot.",
+                "hint_1": "Call `super().__init__(title)` in each child constructor.",
+                "hint_2": "Return the correct prefix from each `label()` implementation."
+              },
+              "starterCode": "from models.book import Book\nfrom models.movie import Movie\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nfor item in items:\n    print(item.label())\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nfor item in items:\n    print(item.label())\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        # TODO: return Book: <title>.\n        pass\n"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        # TODO: return Movie: <title>.\n        pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nfor item in items:\n    print(item.label())\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nfor item in items:\n    print(item.label())\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Book.label() should return `Book: Dune`."
+                },
+                "1": {
+                  "message": "Movie.label() should return `Movie: Moana`."
+                },
+                "2": {
+                  "message": "Print both concrete labels."
+                }
+              },
+              "expectedOutput": "Book: Dune\nMovie: Moana"
+            },
+            "try_abstraction_with_base_interfaces_sketch2": {
+              "title": "Use a helper that trusts the interface",
+              "prompt": "Complete `show_labels(items)` in `services/catalog_view.py`. Return one string with each item's `label()` on its own line. The helper does not need `isinstance` checks; it depends only on the shared behavior. `main.py` is already wired to print the returned string.",
+              "hint": "Collect each `item.label()` result and join them with `\"\\n\"`.",
+              "help": {
+                "concept": "The ABC enforces the contract for this family of classes. The helper itself uses Python's duck-typing style: it only needs each object to provide `label()`.",
+                "hint_1": "Use `\"\\n\".join(...)` so there is no extra blank line.",
+                "hint_2": "Do not print inside the helper; return one string."
+              },
+              "starterCode": "# Run this provided script after completing show_labels.\nfrom models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nprint(show_labels(items))\n",
+              "starterFiles": {
+                "main_py": {
+                  "content": "# Run this provided script after completing show_labels.\nfrom models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nprint(show_labels(items))\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                },
+                "services_catalog_view_py": {
+                  "content": "def show_labels(items):\n    # TODO: return one string with each item.label() on its own line.\n    pass\n"
+                }
+              },
+              "solutionCode": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nprint(show_labels(items))\n",
+              "solutionFiles": {
+                "main_py": {
+                  "content": "from models.book import Book\nfrom models.movie import Movie\nfrom services.catalog_view import show_labels\n\nitems = [Book(\"Dune\"), Movie(\"Moana\")]\nprint(show_labels(items))\n"
+                },
+                "models_catalog_item_py": {
+                  "content": "from abc import ABC, abstractmethod\n\nclass CatalogItem(ABC):\n    def __init__(self, title):\n        self.title = title\n\n    @abstractmethod\n    def label(self):\n        pass\n"
+                },
+                "models_book_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Book(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Book: {self.title}\"\n"
+                },
+                "models_movie_py": {
+                  "content": "from models.catalog_item import CatalogItem\n\nclass Movie(CatalogItem):\n    def __init__(self, title):\n        super().__init__(title)\n\n    def label(self):\n        return f\"Movie: {self.title}\"\n"
+                },
+                "services_catalog_view_py": {
+                  "content": "def show_labels(items):\n    return \"\\n\".join(item.label() for item in items)\n"
+                }
+              },
+              "checks": {
+                "0": {
+                  "message": "Return both labels so main.py prints two lines."
+                }
+              },
+              "expectedOutput": "Book: Dune\nMovie: Moana"
+            }
+          },
+          "practice": {
+            "sc-interface-purpose": {
+              "title": "Why use an abstract base class?",
+              "prompt": "What does `ABC` with `@abstractmethod` add to this design?",
+              "hint": "Think about what Python checks before an object can be created.",
+              "help": {
+                "concept": "An abstract base class turns the shared method expectation into an enforceable contract.",
+                "hint_1": "Incomplete child classes cannot be instantiated.",
+                "hint_2": "Concrete children still provide their own behavior."
+              },
+              "options": {
+                "a": "Python prevents instantiation until the abstract method is implemented.",
+                "b": "Every child must return identical text.",
+                "c": "The parent class can no longer have a constructor.",
+                "d": "The helper must check every exact subclass."
+              }
+            },
+            "fb-interface-method-name": {
+              "title": "Add the abstract decorator",
+              "prompt": "Fill in the decorator that marks a required method.",
+              "hint": "Import it from Python's `abc` module.",
+              "help": {
+                "concept": "`@abstractmethod` marks a method that concrete subclasses must implement.",
+                "hint_1": "It begins with @.",
+                "hint_2": "The word combines abstract and method."
+              },
+              "template": "[blank1]\ndef label(self):\n    pass",
+              "choices": [
+                "@abstractmethod",
+                "@staticmethod",
+                "@classmethod",
+                "@property"
+              ]
+            },
+            "dr-interface-build-order": {
+              "title": "Order the ABC workflow",
+              "prompt": "Put these steps in a clear order.",
+              "hint": "Declare the contract before creating concrete child objects.",
+              "help": {
+                "concept": "Import the ABC tools, define the abstract parent, implement the method in children, then use the objects through shared behavior.",
+                "hint_1": "Imports come first.",
+                "hint_2": "The helper comes after concrete implementations exist."
+              },
+              "tokens": {
+                "t1": "Import `ABC` and `abstractmethod`",
+                "t2": "Define the abstract method on the base class",
+                "t3": "Implement the method in each concrete child",
+                "t4": "Call the shared method from a helper"
+              }
+            },
+            "sc-interface-helper-focus": {
+              "title": "Choose what the helper should care about",
+              "prompt": "When `show_labels(items)` loops through mixed objects, what should it focus on most?",
+              "hint": "Pick the shared contract, not the exact subclass.",
+              "help": {
+                "concept": "Good interface-based code depends on shared behavior instead of subclass-specific branches.",
+                "hint_1": "The helper should not care whether the object is a Book or Movie.",
+                "hint_2": "It only needs the shared method to exist."
+              },
+              "options": {
+                "a": "The order the subclasses were written in the file",
+                "b": "The exact subclass name for every object",
+                "c": "Whether each object supports `label()`",
+                "d": "How many times the constructor was called"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-9-inheritance-polymorphism-and-abstraction": {
+        "abstraction-with-base-interfaces": {
+          "sketch-0": {
+            "title": "Python can enforce a shared method contract",
+            "bodyMarkdown": "Python has no dedicated `interface` keyword. One clear way to describe a required method is an **abstract base class**.\n\n```python\nfrom abc import ABC, abstractmethod\n\nclass NotificationChannel(ABC):\n    @abstractmethod\n    def message(self):\n        pass\n```\n\n`ABC` marks the class as abstract. `@abstractmethod` tells Python that concrete child classes must implement `message()`."
+          },
+          "sketch-1": {
+            "title": "Concrete children implement the abstract method",
+            "bodyMarkdown": "A child becomes concrete when it implements the required method.\n\n```python\nclass EmailChannel(NotificationChannel):\n    def message(self):\n        return \"Email message\"\n\nclass SmsChannel(NotificationChannel):\n    def message(self):\n        return \"SMS message\"\n```\n\nPython can create `EmailChannel()` and `SmsChannel()`. It refuses to create an incomplete child that still has an unimplemented abstract method."
+          },
+          "sketch-2": {
+            "title": "Helpers can depend on shared behavior",
+            "bodyMarkdown": "A helper can work with any object that provides the expected method.\n\n```python\ndef collect_messages(channels):\n    return [channel.message() for channel in channels]\n```\n\nThe ABC enforces the contract for related classes. The helper then follows Python's duck-typing style: it calls `message()` without branching on exact class names."
+          }
+        }
+      }
+    }
+  }
+}

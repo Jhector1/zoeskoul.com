@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Refactor a larger task into reusable helpers"
-            }
-          },
-          "projectSteps": {
-            "ci_1": {
-              "title": "Extract a cleaning helper"
-            },
-            "ci_2": {
-              "title": "Build a summary with helpers"
-            },
-            "ci_3": {
-              "title": "Refactor repeated math into helpers"
             }
           },
           "quiz": {
@@ -152,7 +138,7 @@
               "prompt": "Choose the missing word that sends the computed value back from the function.",
               "hint": "Inside a function, one keyword sends a value back to the caller.",
               "help": {
-                "concept": "A helper function uses `the missing term` to send a result back so other code can store it, print it, or use it in another calculation.",
+                "concept": "A helper function should send its result back so other code can store, display, or combine that value.",
                 "hint_1": "`print` shows text in the output panel, but it does not send a reusable value back to the caller.",
                 "hint_2": "The missing word is the keyword used before an expression like `text.strip()` when the function should produce a value."
               },
@@ -169,9 +155,9 @@
               "prompt": "Write `clean_name(name)` so it returns the cleaned version of `name`. This helper should do the name-cleaning work instead of leaving it repeated elsewhere.",
               "hint": "Read the task \"Extract a cleaning helper\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Run the completed step and verify every output line before submitting it."
               },
               "starterCode": "def clean_name(name):\n    # return the cleaned version of name\n    pass",
               "solutionCode": "def clean_name(name):\n    return name.strip().title()"
@@ -181,9 +167,9 @@
               "prompt": "Split this job into two helpers. `word_count(text)` should return the number of words, and `summary(text)` should call that helper and return a string like `Words: 3`.",
               "hint": "Read the task \"Build a summary with helpers\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "def word_count(text):\n    # return the number of words\n    pass\n\n\ndef summary(text):\n    # return a string like: Words: 3\n    pass",
               "solutionCode": "def word_count(text):\n    return len(text.split())\n\n\ndef summary(text):\n    count = word_count(text)\n    return f\"Words: {count}\""
@@ -193,9 +179,9 @@
               "prompt": "Finish `double(number)` and `triple(number)`, then use those helper functions inside `combined_total(a, b)` instead of repeating the math there.",
               "hint": "Read the task \"Refactor repeated math into helpers\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
+                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
+                "hint_2": "Test the normal path and inspect the final output before completing the step."
               },
               "starterCode": "def double(number):\n    pass\n\n\ndef triple(number):\n    pass\n\n\ndef combined_total(a, b):\n    # use the helper functions here\n    pass",
               "solutionCode": "def double(number):\n    return number * 2\n\n\ndef triple(number):\n    return number * 3\n\n\ndef combined_total(a, b):\n    return double(a) + triple(b)"
@@ -218,8 +204,8 @@
               "hint": "Strip whitespace and lowercase the text.",
               "help": {
                 "concept": "Strip whitespace and lowercase the text.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
+                "hint_2": "Do not add debugging text or labels beyond the lines required by the prompt."
               },
               "starterCode": "def clean_text(text):\n    # Strip whitespace and lowercase the text.\n    pass\n\nprint(clean_text('  HELLO  '))\n",
               "solutionCode": "def clean_text(text):\n    return text.strip().lower()\n\nprint(clean_text('  HELLO  '))\n"
@@ -230,8 +216,8 @@
               "hint": "Return the first word from full_name.",
               "help": {
                 "concept": "Return the first word from full_name.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Make the focused edit, then verify how it changes the current output.",
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "def get_first_name(full_name):\n    # Return the first word from full_name.\n    pass\n\nprint(get_first_name('Ava Smith'))\n",
               "solutionCode": "def get_first_name(full_name):\n    return full_name.split()[0]\n\nprint(get_first_name('Ava Smith'))\n"
@@ -242,8 +228,8 @@
               "hint": "Return 'Badge: ' plus the cleaned name.",
               "help": {
                 "concept": "Return 'Badge: ' plus the cleaned name.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
+                "hint_2": "The grader compares output, so avoid additional prompts or diagnostic text."
               },
               "starterCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    # Return 'Badge: ' plus the cleaned name.\n    pass\n\nprint(badge('  ava  '))\n",
               "solutionCode": "def clean(text):\n    return text.strip().title()\n\ndef badge(name):\n    return 'Badge: ' + clean(name)\n\nprint(badge('  ava  '))\n",
@@ -287,7 +273,7 @@
           },
           "sketch-2": {
             "title": "Spotting repeated code",
-            "bodyMarkdown": "One common reason to refactor is repeated code. If two parts of a program do the same cleanup or calculation, that logic usually belongs in one helper function.\n\nBefore refactoring:\n\n```python\nfirst = input()\nsecond = input()\n\nfirst_clean = first.strip().lower()\nsecond_clean = second.strip().lower()\n\nprint(first_clean)\nprint(second_clean)\n```\n\nThis works, but the cleanup logic is repeated.\n\nAfter refactoring:\n\n```python\ndef clean_text(text):\n    return text.strip().lower()\n\nfirst = input()\nsecond = input()\n\nprint(clean_text(first))\nprint(clean_text(second))\n```\n\nLine by line:\n\n- `def clean_text(text):` creates a reusable helper.\n- `return text.strip().lower()` sends back cleaned text.\n- Each `print(clean_text(...))` call uses the same helper instead of copying the cleanup steps.\n\nNow if you want different cleanup later, you only change one function."
+            "bodyMarkdown": "One common reason to refactor is repeated code. If two parts of a program do the same cleanup or calculation, that logic usually belongs in one helper function.\n\nBefore refactoring:\n\n```python\nfirst = input()\nsecond = input()\n\nfirst_clean = first.strip().lower()\nsecond_clean = second.strip().lower()\n\nprint(first_clean)\nprint(second_clean)\n```\n\nThis works, but the cleanup logic is repeated.\n\nAfter refactoring:\n\n```python\ndef clean_text(text):\n    return text.strip().lower()\n\nfirst = input()\nsecond = input()\n\nprint(clean_text(first))\nprint(clean_text(second))\n```\n\nFollow the execution: - `def clean_text(text):` creates a reusable helper.\n- `return text.strip().lower()` sends back cleaned text.\n- Each `print(clean_text(...))` call uses the same helper instead of copying the cleanup steps.\n\nNow if you want different cleanup later, you only change one function."
           },
           "sketch-3": {
             "title": "Make each function do one clear job",

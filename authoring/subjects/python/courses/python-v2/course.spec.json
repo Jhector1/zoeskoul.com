@@ -648,6 +648,54 @@
               "practice": {
                 "tryIt": true,
                 "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A community tutoring program needs a dependable end-of-session gradebook report. The learner must turn a sequence of typed scores into a concise summary that a tutor can read immediately.",
+                "role": "Beginner Python developer preparing a tutor-facing gradebook handoff",
+                "workspace": "Browser Python editor with standard input and deterministic console output",
+                "deliverable": "One six-step cumulative Python program that reads a student and scores, tracks totals and the highest score, calculates an average, assigns a status, and prints the final report.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep one complete runnable main.py program in every step.",
+                  "Use the previous complete solution as the next starter program.",
+                  "Preserve every earlier requirement unless the current step explicitly replaces it.",
+                  "Use only input, variables, loops, accumulators, comparisons, conditionals, and f-strings taught in Python for Beginners.",
+                  "Read the authored input values instead of hardcoding the expected report.",
+                  "Finish with the exact deterministic report order required by the final step."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Read the Gradebook Header",
+                    "requirement": "Read the student name and score count, then print the two labeled header lines."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Add the Score Total",
+                    "requirement": "Preserve the header, read exactly count scores in a for loop, accumulate total, and print the total preview line."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Track the Highest Score",
+                    "requirement": "Keep the header and total logic, maintain a running highest score, and print the highest-score line."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Calculate the Average",
+                    "requirement": "Preserve the loop calculations, compute the average after the loop, and print it with one decimal place."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Choose the Status Line",
+                    "requirement": "Keep the complete preview report and add excellent, passing, or needs practice from the authored average thresholds."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Build the Final Gradebook Report",
+                    "requirement": "Polish the cumulative program into the exact final report, removing the preview-only Total line while preserving every calculation."
+                  }
+                ]
               }
             }
           ]

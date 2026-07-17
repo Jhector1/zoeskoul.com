@@ -17,27 +17,13 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Function Practice Project"
-            }
-          },
-          "projectSteps": {
-            "ci_make_greeting": {
-              "title": "Write a greeting function"
-            },
-            "ci_square_number": {
-              "title": "Return the square"
-            },
-            "ci_full_name": {
-              "title": "Combine first and last name"
             }
           },
           "quiz": {
             "sc-function-call": {
               "title": "Recognize a function call",
               "prompt": "Which line calls a function named `greet`?",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -53,7 +39,7 @@
             "sc-parameter-meaning": {
               "title": "Understand a parameter",
               "prompt": "In `def greet(name):`, what is `name`?",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Reject any choice that changes the named values, branch order, or output.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -167,9 +153,9 @@
               "prompt": "Write `make_greeting(name)` so it returns a greeting string for that name.",
               "hint": "Read the task \"Write a greeting function\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "def make_greeting(name):\n    # return a greeting string\n    pass",
               "solutionCode": "def make_greeting(name):\n    return \"Hello, \" + name"
@@ -177,11 +163,11 @@
             "ci-square-number": {
               "title": "Return the square",
               "prompt": "Write `square(number)` so it returns the square of `number`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Work through the operation in Python terms, then select the matching option.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
+                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
+                "hint_2": "Use the expected result as a final contract check after your implementation runs."
               },
               "starterCode": "def square(number):\n    # return the square of number\n    pass",
               "solutionCode": "def square(number):\n    return number * number"
@@ -189,11 +175,11 @@
             "ci-full-name": {
               "title": "Combine first and last name",
               "prompt": "Write `full_name(first, last)` so it returns the first and last name joined into one string.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Compare the options with the exact syntax and result required by the prompt.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
+                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "def full_name(first, last):\n    # return the full name as one string\n    pass",
               "solutionCode": "def full_name(first, last):\n    return first + \" \" + last"
@@ -225,7 +211,7 @@
               "help": {
                 "concept": "Define greet(name) so it returns 'Hello, ' + name.",
                 "hint_1": "Define greet(name) so it returns 'Hello, ' + name, then print greet('Ava').",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "The grader compares output, so avoid additional prompts or diagnostic text."
               },
               "starterCode": "# Define greet(name) so it returns 'Hello, ' + name.\n# Then print greet('Ava').\n",
               "solutionCode": "def greet(name):\n    return 'Hello, ' + name\n\nprint(greet('Ava'))\n"
@@ -236,8 +222,8 @@
               "hint": "Print square(5).",
               "help": {
                 "concept": "Print square(5).",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Apply one small change and inspect the new program state.",
+                "hint_2": "Print the required lines in order, with no extra commentary."
               },
               "starterCode": "def square(number):\n    return number * number\n\n# Print square(5).\n",
               "solutionCode": "def square(number):\n    return number * number\n\nprint(square(5))\n"
@@ -248,8 +234,8 @@
               "hint": "Print shout('go') and shout('team'), one per line.",
               "help": {
                 "concept": "Print shout('go') and shout('team'), one per line.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Make the focused edit, then verify how it changes the current output.",
+                "hint_2": "Use exact spelling and line order without extra printed explanations."
               },
               "starterCode": "def shout(text):\n    return text.upper()\n\n# Print shout('go') and shout('team'), one per line.\n",
               "solutionCode": "def shout(text):\n    return text.upper()\n\nprint(shout('go'))\nprint(shout('team'))\n"
@@ -288,7 +274,7 @@
           },
           "sketch-2": {
             "title": "Calling functions with arguments",
-            "bodyMarkdown": "Some functions need extra information to do their job. That information is passed in as **arguments**.\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name)\n\ngreet(\"Ava\")\ngreet(\"Leo\")\n```\n\nLine by line:\n\n- `def greet(name):` defines a function with one parameter, `name`\n- `greet(\"Ava\")` sends the value `\"Ava\"` into the function\n- Inside the function, `name` becomes `\"Ava\"`\n- Then `greet(\"Leo\")` runs the same code with a different value\n\nThe output is:\n\n```python\nHello, Ava\nHello, Leo\n```\n\nA parameter is the variable in the function definition. An argument is the value you pass when calling the function."
+            "bodyMarkdown": "Some functions need extra information to do their job. That information is passed in as **arguments**.\n\n```python\ndef greet(name):\n    print(\"Hello, \" + name)\n\ngreet(\"Ava\")\ngreet(\"Leo\")\n```\n\nFollow the execution: - `def greet(name):` defines a function with one parameter, `name`\n- `greet(\"Ava\")` sends the value `\"Ava\"` into the function\n- Inside the function, `name` becomes `\"Ava\"`\n- Then `greet(\"Leo\")` runs the same code with a different value\n\nThe output is:\n\n```python\nHello, Ava\nHello, Leo\n```\n\nA parameter is the variable in the function definition. An argument is the value you pass when calling the function."
           },
           "sketch-3": {
             "title": "Functions can return values",

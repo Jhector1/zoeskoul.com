@@ -7,7 +7,7 @@
   "workspaceProfileId": "browser-python-files-runner",
   "workspacePolicyId": "python-browser-workspace",
   "title": "Applied Python Projects: Object-Oriented Apps",
-  "description": "A cumulative multifile OOP course that teaches encapsulation, inheritance, polymorphism, abstraction, testing, and a final capstone.",
+  "description": "Build realistic multifile Python applications, then integrate the full OOP workflow in a Neighborhood Pantry Request Coordinator capstone.",
   "moduleOrder": [
     "python-8-object-oriented-foundations",
     "python-9-inheritance-polymorphism-and-abstraction",
@@ -613,167 +613,40 @@
       ]
     },
     {
-      "moduleSlug": "python-11-oop-capstone-project",
       "moduleNumber": 11,
+      "moduleSlug": "python-11-oop-capstone-project",
       "prefix": "py11",
       "role": "capstone",
       "title": "Final OOP Capstone Project",
-      "description": "Build and polish a smart task tracker that uses encapsulation, abstraction, inheritance, and polymorphism.",
-      "purpose": "Complete a portfolio-style multifile OOP app where every capstone step starts from the previous full solution.",
+      "description": "Deliver one cumulative OOP capstone that proves abstraction, encapsulation, inheritance, overriding, polymorphism, storage, reporting, testing, and documentation.",
+      "purpose": "Complete one portfolio-style multifile OOP application where every capstone milestone starts from the previous full solution.",
       "learningObjectives": [
-        "Design a clear file architecture for a multifile OOP app.",
-        "Use all four OOP pillars in one working project.",
-        "Add storage, reporting, tests, and documentation to finish a polished capstone."
+        "Design a clear file architecture for a multifile OOP application.",
+        "Use encapsulation, inheritance, and polymorphism in one coherent request-management domain.",
+        "Add CSV storage, services, reports, regression checks, and documentation to finish a polished capstone."
       ],
       "guidedExercises": [
-        "Plan model, service, data, report, and test files.",
-        "Build a BaseTask class plus BugTask and FeatureTask subclasses.",
-        "Generate reports, load data, test behavior, and document the finished app."
+        "Build the base pantry request model and starter data flow.",
+        "Add specialized food and hygiene request subclasses plus an encapsulated service.",
+        "Load CSV data, generate deterministic reports, add regression checks, and complete the README handoff."
       ],
       "quizFocus": [
-        "architecture",
+        "abstract base classes",
         "encapsulation",
         "inheritance",
+        "overriding",
         "polymorphism",
-        "abstraction",
-        "tests",
-        "reports"
+        "services",
+        "storage",
+        "reports",
+        "tests"
       ],
-      "moduleProject": "Complete a Smart Task Tracker capstone with models, services, storage, reports, tests, and README notes.",
-      "practiceDefaults": {
-        "tryIt": true,
-        "requiresTryIt": true,
-        "tryItPlacement": "all_sketches",
-        "runtimeMode": "editor_workspace",
-        "expectedPracticeKinds": [
-          "code_input"
-        ]
-      },
+      "moduleProject": "Complete one six-step Neighborhood Pantry Request Coordinator inside one capstone section and one capstone topic.",
       "sections": [
         {
-          "sectionSlug": "python-11-capstone-architecture",
-          "title": "Capstone Architecture",
-          "description": "Plan the app structure and build the core domain model.",
-          "practiceDefaults": {
-            "tryIt": true,
-            "requiresTryIt": true,
-            "tryItPlacement": "all_sketches",
-            "runtimeMode": "editor_workspace",
-            "expectedPracticeKinds": [
-              "code_input"
-            ]
-          },
-          "topics": [
-            {
-              "topicId": "capstone-scope-and-architecture",
-              "title": "Capstone Scope and Architecture",
-              "summary": "Choose a realistic scope and map the files before building the app.",
-              "minutes": 30,
-              "difficulty": "beginner",
-              "technical": true,
-              "learningGoals": [
-                "Plan files such as main.py, models/, services/, data/, reports/, tests/, and README.md.",
-                "Keep capstone scope small enough to finish but rich enough to show OOP design.",
-                "Identify where each OOP pillar will appear in the project."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "all_sketches",
-                "runtimeMode": "editor_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            },
-            {
-              "topicId": "capstone-domain-model",
-              "title": "Capstone Domain Model",
-              "summary": "Build the base task model and specialized task subclasses.",
-              "minutes": 35,
-              "difficulty": "beginner",
-              "technical": true,
-              "learningGoals": [
-                "Create models/base_task.py with validation and shared behavior.",
-                "Create specialized subclasses such as BugTask and FeatureTask.",
-                "Use polymorphic summary methods for mixed task lists."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "all_sketches",
-                "runtimeMode": "editor_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
-          "sectionSlug": "python-11-capstone-services-and-polish",
-          "title": "Capstone Services and Polish",
-          "description": "Add storage, reports, tests, polish, and documentation.",
-          "practiceDefaults": {
-            "tryIt": true,
-            "requiresTryIt": true,
-            "tryItPlacement": "all_sketches",
-            "runtimeMode": "editor_workspace",
-            "expectedPracticeKinds": [
-              "code_input"
-            ]
-          },
-          "topics": [
-            {
-              "topicId": "capstone-storage-and-reports",
-              "title": "Capstone Storage and Reports",
-              "summary": "Load task data and generate a summary report from task objects.",
-              "minutes": 35,
-              "difficulty": "beginner",
-              "technical": true,
-              "learningGoals": [
-                "Parse data/tasks.txt into task objects.",
-                "Write services/storage.py and services/reports.py.",
-                "Generate reports/summary.txt as runtime output, not a required starter file."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "all_sketches",
-                "runtimeMode": "editor_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            },
-            {
-              "topicId": "capstone-tests-and-polish",
-              "title": "Capstone Tests and Polish",
-              "summary": "Test the model and service layers, then document and polish the app.",
-              "minutes": 35,
-              "difficulty": "beginner",
-              "technical": true,
-              "learningGoals": [
-                "Write tests/check_models.py and tests/check_services.py.",
-                "Use regression checks to protect behavior across files.",
-                "Document how to run the finished capstone in README.md."
-              ],
-              "practice": {
-                "tryIt": true,
-                "requiresTryIt": true,
-                "tryItPlacement": "all_sketches",
-                "runtimeMode": "editor_workspace",
-                "expectedPracticeKinds": [
-                  "code_input"
-                ]
-              }
-            }
-          ]
-        },
-        {
           "sectionSlug": "python-11-final-capstone",
-          "title": "Final Capstone",
-          "description": "Complete the Smart Task Tracker through cumulative graded steps.",
+          "title": "Final OOP Capstone",
+          "description": "Complete one portfolio-ready OOP application through six cumulative milestones inside a single topic.",
           "role": "capstone",
           "practiceDefaults": {
             "tryIt": true,
@@ -788,15 +661,16 @@
           "topics": [
             {
               "topicId": "module-11-final-oop-capstone",
-              "title": "Module 11 Final OOP Capstone",
-              "summary": "Finish the Smart Task Tracker by chaining architecture, domain models, services, storage, tests, and polish into one runnable project.",
-              "minutes": 70,
-              "difficulty": "beginner",
+              "title": "Neighborhood Pantry Request Coordinator",
+              "summary": "Build one cumulative application with an abstract request contract, validated subclasses, a polymorphic service and report, CSV storage, regression tests, and final documentation.",
+              "minutes": 260,
+              "difficulty": "advanced",
               "technical": true,
               "learningGoals": [
-                "Use encapsulation, abstraction, inheritance, and polymorphism in one app.",
-                "Keep every capstone step cumulative with full solutionFiles.",
-                "Finish with a runnable project and README documentation."
+                "Use `ABC` and `@abstractmethod` to define the request interface.",
+                "Use validated properties, inheritance, overriding, and polymorphism in the domain model.",
+                "Keep service, storage, reporting, testing, and orchestration responsibilities separated.",
+                "Carry one complete multi-file workspace through all six capstone steps."
               ],
               "practice": {
                 "tryIt": true,
@@ -807,10 +681,69 @@
                   "code_input"
                 ],
                 "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A neighborhood pantry needs one dependable application for recording food and hygiene requests, marking fulfilled requests, loading existing requests from CSV, and producing a clear daily handoff report.",
+                "role": "Junior Python application developer completing a portfolio-ready community-service tool",
+                "workspace": "Browser multifile Python workspace with models/, services/, storage/, reports/, tests/, data/, main.py, and README.md",
+                "deliverable": "One six-step cumulative Neighborhood Pantry Request Coordinator with an abstract `PantryRequest` contract, validated concrete subclasses, a mixed polymorphic collection, encapsulated service behavior, CSV loading, deterministic reports, regression checks, and a documented final handoff.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "The capstone module must contain exactly one section and that section must contain exactly one topic.",
+                  "Keep every milestone runnable from main.py with complete starterFiles and solutionFiles.",
+                  "Use the previous full solutionFiles as the next milestone starter workspace.",
+                  "Define PantryRequest with ABC and @abstractmethod; the final project must not use a concrete-only base class.",
+                  "Use validated properties to protect household, priority, subtype details, and fulfillment state.",
+                  "Require FoodRequest and HygieneRequest to inherit from PantryRequest and override the abstract interface.",
+                  "Process a mixed request collection polymorphically through shared methods instead of type-specific report duplication.",
+                  "Keep collection changes inside PantryService, raw-row translation inside storage, and output composition inside reports.",
+                  "Add regression assertions that verify the abstract contract, validation failures, mixed-subclass behavior, service state changes, and deterministic output.",
+                  "Keep regression tests in tests/check_requests.py and run them from the final application without extra output.",
+                  "Finish with README documentation that explains abstraction, encapsulation, inheritance, overriding, polymorphism, and the run command."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Define the Abstract Request Contract",
+                    "requirement": "Create PantryRequest with ABC, @abstractmethod, validated properties, shared state behavior, a concrete summary(), and the first FoodRequest implementation."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Add a Second Subclass and Prove Polymorphism",
+                    "requirement": "Add HygieneRequest and process FoodRequest and HygieneRequest together through one shared interface in a mixed collection."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Encapsulate the Collection in PantryService",
+                    "requirement": "Protect request storage, validate additions, delegate state changes, count open requests, and build polymorphic summary lines."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Rebuild Domain Objects from CSV",
+                    "requirement": "Translate CSV rows into the correct concrete request objects while preserving validation and saved state."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Add Polymorphic Reporting and Regression Tests",
+                    "requirement": "Build type-agnostic reports and tests that prove the base class is abstract, invalid state is rejected, and mixed subclasses work together."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Complete the OOP Portfolio Handoff",
+                    "requirement": "Finish final orchestration and README documentation, run regression checks, print deterministic output, and end with the readiness line."
+                  }
+                ]
               }
             }
           ]
         }
+      ],
+      "learningGoals": [
+        "Define a real abstract base-class contract with `ABC` and `@abstractmethod`.",
+        "Protect shared state with validated properties and service-owned collection behavior.",
+        "Use inheritance, overriding, and polymorphism across a mixed request collection.",
+        "Integrate CSV storage, deterministic reports, regression tests, and README documentation."
       ]
     }
   ]

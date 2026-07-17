@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Mission Control App Builder"
-            }
-          },
-          "projectSteps": {
-            "q9": {
-              "title": "Create a name-cleaning module"
-            },
-            "q10": {
-              "title": "Add a badge module"
-            },
-            "q11": {
-              "title": "Build a mission report module"
             }
           },
           "quiz": {
@@ -168,9 +154,9 @@
               "prompt": "This project is starting a small helper package. Create a `tools` folder, add `tools/names.py`, and define `clean_name(text)` there. Then import `clean_name` from `tools.names` in `main.py`, clean the input name, and print it.\n\nFor example, if the input is `aVA`, your program should print:\n`Ava`.",
               "hint": "The required path is `tools/names.py`. The import line in `main.py` should be `from tools.names import clean_name`.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Test the normal path and inspect the final output before completing the step."
               },
               "starterCode": "# Create a folder named tools.\n# Inside it, create tools/names.py.\n# Define clean_name(text) in that file.\n\nraw_name = input()\n\n# Import clean_name from tools.names.\n# Print the cleaned name.\n",
               "solutionFiles": {
@@ -205,9 +191,9 @@
               "prompt": "The helper folder needs one more tool. Create `tools/badges.py`, import `make_badge` from `tools.badges`, clean the input name, build the badge text, and print it.\n\nFor example, if the inputs are `lina` and `artist`, your program should print:\n`ARTIST badge: Lina`.",
               "hint": "Create `tools/badges.py`, then import with `from tools.badges import make_badge`.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
+                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "from tools.names import clean_name\n\nraw_name = input()\nrole = input()\n\n# Create tools/badges.py.\n# Import make_badge from tools.badges.\n# Clean the name, build the badge, and print it.\n",
               "starterFiles": {
@@ -250,9 +236,9 @@
               "prompt": "Now connect the helper modules into one final report. Create `tools/reports.py`, import `mission_report` from `tools.reports`, and print the finished mission report.\n\nFor example, if the inputs are `zoe`, `scout`, and `18`, your program should print:\n`Mission report: SCOUT badge: Zoe has 18 points`.",
               "hint": "This step combines three files: `tools/names.py`, `tools/badges.py`, and your new `tools/reports.py`.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
+                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
+                "hint_2": "Test the normal path and inspect the final output before completing the step."
               },
               "starterCode": "from tools.names import clean_name\nfrom tools.badges import make_badge\n\nraw_name = input()\nrole = input()\npoints = int(input())\n\n# Create tools/reports.py.\n# Import mission_report from tools.reports.\n# Print the final mission report.\n",
               "starterFiles": {

@@ -1,0 +1,371 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-11-oop-capstone-project": {
+        "capstone-domain-model": {
+          "label": "Capstone Domain Model",
+          "summary": "Build the task objects that carry the tracker domain before adding storage or reports.",
+          "cards": {
+            "sketch0": {
+              "title": "Planning brief"
+            },
+            "project": {
+              "title": "Smart Task Tracker Domain Model Capstone"
+            }
+          },
+          "projectSteps": {
+            "try_capstone_domain_model_sketch0": {
+              "title": "Create the base task class"
+            },
+            "capstone_domain_model_step1_bug_task": {
+              "title": "Add the BugTask subclass"
+            },
+            "capstone_domain_model_step2_feature_task": {
+              "title": "Add the FeatureTask subclass with validation"
+            },
+            "capstone_domain_model_step3_task_service": {
+              "title": "Create a polymorphic task service"
+            },
+            "capstone_domain_model_step4_package_runner": {
+              "title": "Organize the models package and runner"
+            },
+            "capstone_domain_model_step5_final_domain_demo": {
+              "title": "Finish the domain model handoff demo"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "try_capstone_domain_model_sketch0": {
+                "title": "Create the shared BaseTask model",
+                "prompt": "In `models/base_task.py`, implement `BaseTask` with `title`, validated `priority`, and `completed` state. New tasks start incomplete. `mark_done()` sets completed to True, `is_open()` returns the opposite, and `summary()` raises NotImplementedError. The supplied main.py marks one task done and prints its state.",
+                "hint": "Validate before storing the fields, then mutate only `self.completed` in mark_done().",
+                "help": {
+                  "concept": "The base class owns shared state and behavior while leaving the concrete summary format to subclasses.",
+                  "hint_1": "Validate before storing the fields, then mutate only `self.completed` in mark_done().",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided BaseTask state demo.\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided BaseTask state demo.\nfrom models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    def __init__(self, title, priority=\"medium\", completed=False):\n        # TODO: validate and store title, priority, and completed.\n        pass\n\n    def mark_done(self):\n        # TODO: set completed to True and return it.\n        pass\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  }
+                },
+                "solutionCode": "from models.base_task import BaseTask\n\ntask = BaseTask(\"Draft roadmap\", \"high\")\ntask.mark_done()\nprint(task.title)\nprint(task.priority)\nprint(task.completed)\n",
+                "checks": {
+                  "0": {
+                    "message": "Store the shared task attributes."
+                  },
+                  "1": {
+                    "message": "A marked-done task should no longer be open."
+                  },
+                  "2": {
+                    "message": "Print the title, priority, and final completed state."
+                  }
+                },
+                "expectedOutput": "Draft roadmap\nhigh\nTrue"
+              },
+              "capstone_domain_model_step1_bug_task": {
+                "title": "Add the BugTask subclass",
+                "prompt": "Implement `BugTask` in `models/bug_task.py`. Inherit from BaseTask, use super() for shared fields, store severity, and return `BUG: <title> | priority=<priority> | severity=<severity> | done=<completed>` from summary().",
+                "hint": "Call super().__init__(...) before assigning severity.",
+                "help": {
+                  "concept": "Inheritance reuses shared state while overriding the behavior that differs.",
+                  "hint_1": "Call super().__init__(...) before assigning severity.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided before-and-after demo.\nfrom models.bug_task import BugTask\n\ntask = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(task.summary())\ntask.mark_done()\nprint(task.summary())\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided before-and-after demo.\nfrom models.bug_task import BugTask\n\ntask = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(task.summary())\ntask.mark_done()\nprint(task.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Keep BaseTask unchanged.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        # TODO: call super(), then store severity.\n        pass\n\n    def summary(self):\n        # TODO: return the required BUG summary.\n        pass\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.bug_task import BugTask\n\ntask = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(task.summary())\ntask.mark_done()\nprint(task.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  }
+                },
+                "solutionCode": "from models.bug_task import BugTask\n\ntask = BugTask(\"Fix login redirect\", \"high\", \"critical\")\nprint(task.summary())\ntask.mark_done()\nprint(task.summary())\n",
+                "checks": {
+                  "0": {
+                    "message": "Return the incomplete bug summary."
+                  },
+                  "1": {
+                    "message": "The inherited mark_done() behavior should update the summary."
+                  },
+                  "2": {
+                    "message": "Print both states."
+                  }
+                },
+                "expectedOutput": "BUG: Fix login redirect | priority=high | severity=critical | done=False\nBUG: Fix login redirect | priority=high | severity=critical | done=True"
+              },
+              "capstone_domain_model_step2_feature_task": {
+                "title": "Add FeatureTask with validation",
+                "prompt": "Implement `FeatureTask` in `models/feature_task.py`. Inherit from BaseTask, clamp estimate_points to at least 1, and return `FEATURE: <title> | priority=<priority> | points=<estimate_points> | done=<completed>`.",
+                "hint": "Use max(1, int(estimate_points)) after calling super().",
+                "help": {
+                  "concept": "A subclass can add its own validated state while keeping the shared lifecycle behavior.",
+                  "hint_1": "Use max(1, int(estimate_points)) after calling super().",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided validation demo.\nfrom models.feature_task import FeatureTask\n\ntask = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(task.summary())\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided validation demo.\nfrom models.feature_task import FeatureTask\n\ntask = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(task.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Keep BaseTask unchanged.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        # TODO: call super() and clamp estimate_points to at least 1.\n        pass\n\n    def summary(self):\n        # TODO: return the required FEATURE summary.\n        pass\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models.feature_task import FeatureTask\n\ntask = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(task.summary())\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  }
+                },
+                "solutionCode": "from models.feature_task import FeatureTask\n\ntask = FeatureTask(\"Add dark mode\", \"medium\", 0)\nprint(task.summary())\n",
+                "checks": {
+                  "0": {
+                    "message": "Clamp invalid estimates to 1."
+                  },
+                  "1": {
+                    "message": "Return the validated feature summary."
+                  },
+                  "2": {
+                    "message": "Print the summary."
+                  }
+                },
+                "expectedOutput": "FEATURE: Add dark mode | priority=medium | points=1 | done=False"
+              },
+              "capstone_domain_model_step3_task_service": {
+                "title": "Create a polymorphic task service",
+                "prompt": "Complete `build_report_lines(tasks)` in `services/task_service.py`. Return each task.summary() result in order. The supplied main.py passes a mixed BugTask and FeatureTask list.",
+                "hint": "Use one expression for every task; do not branch by concrete class.",
+                "help": {
+                  "concept": "Polymorphism lets a service work with the shared summary() contract.",
+                  "hint_1": "Use one expression for every task; do not branch by concrete class.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided mixed-task demo.\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n]\nfor line in build_report_lines(tasks):\n    print(line)\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided mixed-task demo.\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n]\nfor line in build_report_lines(tasks):\n    print(line)\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Starter guidance: Create a polymorphic task service. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "# Starter guidance: Create a polymorphic task service. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "# Starter guidance: Create a polymorphic task service. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(tasks):\n    # TODO: return task.summary() for every task in order.\n    pass\n\ndef count_open_tasks(tasks):\n    return sum(task.is_open() for task in tasks)\n\ndef mark_done_by_title(tasks, title):\n    for task in tasks:\n        if task.title == title:\n            task.mark_done()\n            return True\n    return False\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n]\nfor line in build_report_lines(tasks):\n    print(line)\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(tasks):\n    return [task.summary() for task in tasks]\n\ndef count_open_tasks(tasks):\n    return sum(task.is_open() for task in tasks)\n\ndef mark_done_by_title(tasks, title):\n    for task in tasks:\n        if task.title == title:\n            task.mark_done()\n            return True\n    return False\n"
+                  }
+                },
+                "solutionCode": "from models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n]\nfor line in build_report_lines(tasks):\n    print(line)\n",
+                "checks": {
+                  "0": {
+                    "message": "Return both polymorphic summary lines."
+                  }
+                },
+                "expectedOutput": "BUG: Fix login redirect | priority=high | severity=critical | done=False\nFEATURE: Add dark mode | priority=medium | points=3 | done=False"
+              },
+              "capstone_domain_model_step4_package_runner": {
+                "title": "Organize model package imports",
+                "prompt": "Complete `models/__init__.py` so main.py can import BaseTask, BugTask, and FeatureTask directly from models. Keep the three-task demo and mark only the bug task done.",
+                "hint": "Import each class in models/__init__.py and define __all__.",
+                "help": {
+                  "concept": "A package entry point keeps imports clean without copying class definitions into main.py.",
+                  "hint_1": "Import each class in models/__init__.py and define __all__.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided package-import demo.\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n    FeatureTask(\"Export CSV\", \"low\", 5),\n]\ntasks[0].mark_done()\nfor line in build_report_lines(tasks):\n    print(line)\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided package-import demo.\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n    FeatureTask(\"Export CSV\", \"low\", 5),\n]\ntasks[0].mark_done()\nfor line in build_report_lines(tasks):\n    print(line)\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Starter guidance: Organize model package imports. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "# Starter guidance: Organize model package imports. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "# Starter guidance: Organize model package imports. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "services_task_service_py": {
+                    "content": "# Starter guidance: Organize model package imports. Follow the prompt and edit the requested code below.\ndef build_report_lines(tasks):\n    return [task.summary() for task in tasks]\n\ndef count_open_tasks(tasks):\n    return sum(task.is_open() for task in tasks)\n\ndef mark_done_by_title(tasks, title):\n    for task in tasks:\n        if task.title == title:\n            task.mark_done()\n            return True\n    return False\n"
+                  },
+                  "models___init___py": {
+                    "content": "# TODO: export BaseTask, BugTask, and FeatureTask from this package.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n    FeatureTask(\"Export CSV\", \"low\", 5),\n]\ntasks[0].mark_done()\nfor line in build_report_lines(tasks):\n    print(line)\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(tasks):\n    return [task.summary() for task in tasks]\n\ndef count_open_tasks(tasks):\n    return sum(task.is_open() for task in tasks)\n\ndef mark_done_by_title(tasks, title):\n    for task in tasks:\n        if task.title == title:\n            task.mark_done()\n            return True\n    return False\n"
+                  }
+                },
+                "solutionCode": "from models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n    FeatureTask(\"Export CSV\", \"low\", 5),\n]\ntasks[0].mark_done()\nfor line in build_report_lines(tasks):\n    print(line)\n",
+                "checks": {
+                  "0": {
+                    "message": "Create the bug task through the package import."
+                  },
+                  "1": {
+                    "message": "Create both feature tasks through the package import."
+                  },
+                  "2": {
+                    "message": "Print all three summaries."
+                  }
+                },
+                "expectedOutput": "BUG: Fix login redirect | priority=high | severity=critical | done=True\nFEATURE: Add dark mode | priority=medium | points=3 | done=False\nFEATURE: Export CSV | priority=low | points=5 | done=False"
+              },
+              "capstone_domain_model_step5_final_domain_demo": {
+                "title": "Finish the domain-model handoff",
+                "prompt": "Complete `count_open_tasks(tasks)` in `services/task_service.py`. Count tasks through their inherited is_open() behavior. The final demo prints four summaries and `Open tasks: 2`.",
+                "hint": "Sum the boolean result of task.is_open() for every task.",
+                "help": {
+                  "concept": "The final domain layer combines encapsulation, inheritance, overriding, and polymorphism without duplicate classes.",
+                  "hint_1": "Sum the boolean result of task.is_open() for every task.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# Run this provided final domain demo.\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines, count_open_tasks\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    BugTask(\"Resolve crash on save\", \"high\", \"major\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n    FeatureTask(\"Export CSV\", \"low\", 5),\n]\ntasks[0].mark_done()\ntasks[3].mark_done()\nfor line in build_report_lines(tasks):\n    print(line)\nprint(f\"Open tasks: {count_open_tasks(tasks)}\")\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# Run this provided final domain demo.\nfrom models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines, count_open_tasks\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    BugTask(\"Resolve crash on save\", \"high\", \"major\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n    FeatureTask(\"Export CSV\", \"low\", 5),\n]\ntasks[0].mark_done()\ntasks[3].mark_done()\nfor line in build_report_lines(tasks):\n    print(line)\nprint(f\"Open tasks: {count_open_tasks(tasks)}\")\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Starter guidance: Finish the domain-model handoff. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "# Starter guidance: Finish the domain-model handoff. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "# Starter guidance: Finish the domain-model handoff. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(tasks):\n    return [task.summary() for task in tasks]\n\ndef count_open_tasks(tasks):\n    # TODO: count tasks whose is_open() method returns True.\n    pass\n\ndef mark_done_by_title(tasks, title):\n    for task in tasks:\n        if task.title == title:\n            task.mark_done()\n            return True\n    return False\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines, count_open_tasks\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    BugTask(\"Resolve crash on save\", \"high\", \"major\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n    FeatureTask(\"Export CSV\", \"low\", 5),\n]\ntasks[0].mark_done()\ntasks[3].mark_done()\nfor line in build_report_lines(tasks):\n    print(line)\nprint(f\"Open tasks: {count_open_tasks(tasks)}\")\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "services_task_service_py": {
+                    "content": "def build_report_lines(tasks):\n    return [task.summary() for task in tasks]\n\ndef count_open_tasks(tasks):\n    return sum(task.is_open() for task in tasks)\n\ndef mark_done_by_title(tasks, title):\n    for task in tasks:\n        if task.title == title:\n            task.mark_done()\n            return True\n    return False\n"
+                  }
+                },
+                "solutionCode": "from models import BugTask, FeatureTask\nfrom services.task_service import build_report_lines, count_open_tasks\n\ntasks = [\n    BugTask(\"Fix login redirect\", \"high\", \"critical\"),\n    BugTask(\"Resolve crash on save\", \"high\", \"major\"),\n    FeatureTask(\"Add dark mode\", \"medium\", 3),\n    FeatureTask(\"Export CSV\", \"low\", 5),\n]\ntasks[0].mark_done()\ntasks[3].mark_done()\nfor line in build_report_lines(tasks):\n    print(line)\nprint(f\"Open tasks: {count_open_tasks(tasks)}\")\n",
+                "checks": {
+                  "0": {
+                    "message": "New tasks should report as open."
+                  },
+                  "1": {
+                    "message": "Print four summaries and the open-task count."
+                  }
+                },
+                "expectedOutput": "BUG: Fix login redirect | priority=high | severity=critical | done=True\nBUG: Resolve crash on save | priority=high | severity=major | done=False\nFEATURE: Add dark mode | priority=medium | points=3 | done=False\nFEATURE: Export CSV | priority=low | points=5 | done=True\nOpen tasks: 2"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-11-oop-capstone-project": {
+        "capstone-domain-model": {
+          "capstone-domain-model-sketch-0": {
+            "title": "Capstone domain model: make the objects carry the app idea",
+            "bodyMarkdown": "A capstone app needs domain objects that mean something.\n\nIn a recipe planner, you might have a base `RecipeItem` and specialized items like `MealPrepTask` or `ShoppingTask`. Each object stores its own state and knows how to summarize itself.\n\nThe Smart Task Tracker applies the same idea to product-team work. A task has a title, status, points, and a summary. Subclasses can represent different kinds of work while sharing the same interface.\n\nBuild the model slowly: base class first, subclasses second, service layer only after the objects are clear."
+          }
+        }
+      }
+    }
+  }
+}

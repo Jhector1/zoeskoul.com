@@ -81,7 +81,7 @@
                   "content": "Ava,92\nMia,not-a-score\nZoe,87\n  leo  ,74\n"
                 }
               },
-              "solutionCode": "try:\n    with open(\"data/students.csv\") as file:\n        for line in file:\n            print(line.strip())\nexcept FileNotFoundError:\n    pass\n\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\n\ntry:\n    with open(\"data/students.csv\") as file:\n        first_row = file.readline()\n\n    print(clean_row(first_row))\nexcept FileNotFoundError:\n    pass\n"
+              "solutionCode": "with open(\"data/students.csv\") as file:\n    for line in file:\n        print(line.strip())\n\n\ndef clean_row(line):\n    name, score = line.strip().split(\",\")\n    return {\"name\": name.strip().title(), \"score\": int(score)}\n\n\nwith open(\"data/students.csv\") as file:\n    first_row = file.readline()\n\nprint(clean_row(first_row))\n"
             },
             "mp-3-skip-bad-rows": {
               "title": "Skip bad rows and collect records",

@@ -1,233 +1,6 @@
 {
   "topics": {
     "python--python-v2--draft": {
-      "python--python-v2--draft-3": {
-        "while-loop-basics": {
-          "label": "While Loop Basics",
-          "summary": "Repeat code until a condition becomes false.",
-          "cards": {
-            "sketch0": {
-              "title": "What a while loop does"
-            },
-            "sketch1": {
-              "title": "Conditions and loop state"
-            },
-            "sketch2": {
-              "title": "How to stop a while loop safely"
-            },
-            "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "While Loop Practice Set"
-            }
-          },
-          "projectSteps": {
-            "code_print_1_to_5": {
-              "title": "Print numbers 1 to 5"
-            },
-            "code_print_0_to_2": {
-              "title": "Print 0, 1, 2"
-            },
-            "code_countdown_3_to_1": {
-              "title": "Countdown from 3"
-            },
-            "code_repeat_word_3_times": {
-              "title": "Repeat a word three times"
-            },
-            "code_sum_1_to_4": {
-              "title": "Add numbers from 1 to 4"
-            }
-          },
-          "quiz": {
-            "sc_while_meaning": {
-              "title": "Meaning of a while loop",
-              "prompt": "What does a `while` loop do in Python?",
-              "hint": "Think about code that repeats only while a condition stays true.",
-              "help": {
-                "concept": "A `while` loop checks a condition before each repetition and keeps running the indented block while that condition is `True`.",
-                "hint_1": "Look for the choice that mentions repeating based on a condition, not a fixed number of times only.",
-                "hint_2": "A `while` loop can stop as soon as its condition becomes `False`."
-              },
-              "options": {
-                "a": "It repeats code while a condition is true.",
-                "b": "It runs code exactly one time.",
-                "c": "It stores text inside a variable.",
-                "d": "It skips all indented code."
-              }
-            },
-            "sc_infinite_loop_cause": {
-              "title": "Cause of an infinite loop",
-              "prompt": "Why can this loop run forever?\n\n```python\nx = 1\nwhile x < 5:\n    print(x)\n```",
-              "hint": "Check whether the value used in the condition ever changes.",
-              "help": {
-                "concept": "A `while` loop needs some changing state so the condition can eventually become `False`.",
-                "hint_1": "The condition uses `x < 5`. Ask whether `x` is updated inside the loop body.",
-                "hint_2": "If the loop variable never changes, the condition can stay true forever."
-              },
-              "options": {
-                "a": "Because `print(x)` makes the loop restart forever.",
-                "b": "Because `x` is too small to print.",
-                "c": "Because `x` never changes inside the loop.",
-                "d": "Because `while` loops always run forever."
-              }
-            },
-            "mc_parts_of_safe_while": {
-              "title": "Parts of a safe while loop",
-              "prompt": "Choose all parts that help a `while` loop stop correctly.",
-              "hint": "Think about what the loop checks and what changes each time.",
-              "help": {
-                "concept": "A safe `while` loop needs a condition and a loop variable or state update that moves the program toward making that condition false.",
-                "hint_1": "One correct idea is the condition itself. Another is changing a value inside the loop.",
-                "hint_2": "Look for choices about checking a condition and updating the variable used by that condition."
-              },
-              "options": {
-                "a": "A condition that can become false",
-                "b": "An update to the loop variable inside the loop",
-                "c": "A random comment above the loop",
-                "d": "A variable name written in all capital letters"
-              }
-            },
-            "mc_true_about_counter_loop": {
-              "title": "Tracing a counter loop",
-              "prompt": "Consider this code:\n\n```python\ncount = 2\nwhile count <= 4:\n    print(count)\n    count = count + 1\n```\n\nChoose all true statements.",
-              "hint": "Trace the values of `count`: start value, printed values, and stopping point.",
-              "help": {
-                "concept": "To trace a `while` loop, follow the loop variable through each repetition and check the condition before each run.",
-                "hint_1": "The loop starts at `2` and increases by `1` each time while the value is at most `4`.",
-                "hint_2": "The printed values are the values before the increment, and the loop stops after the variable grows past the limit."
-              },
-              "options": {
-                "a": "The loop prints 2, 3, and 4.",
-                "b": "The loop runs 3 times.",
-                "c": "The final value of `count` after the loop is 5.",
-                "d": "The loop prints 5."
-              }
-            },
-            "dr_trace_simple_loop": {
-              "title": "Order the loop steps",
-              "prompt": "Put these events in the correct order for this code:\n\n```python\nn = 1\nwhile n <= 2:\n    print(n)\n    n = n + 1\n```\n\nStart from the first thing that happens.",
-              "hint": "A `while` loop checks the condition before running the body each time.",
-              "help": {
-                "concept": "Execution order in a `while` loop is: set starting value, check condition, run body, update state, then check again.",
-                "hint_1": "The variable is assigned before the loop can test anything.",
-                "hint_2": "After printing, the loop updates `n`, then the condition is checked again."
-              },
-              "tokens": {
-                "t1": "Set `n` to 1",
-                "t2": "Check whether `n <= 2`",
-                "t3": "Print `n`",
-                "t4": "Increase `n` by 1"
-              }
-            },
-            "dr_build_countdown": {
-              "title": "Build a countdown loop",
-              "prompt": "Arrange these lines to make a loop that prints 3, 2, 1.",
-              "hint": "Start with the variable, then the `while` line, then the indented body.",
-              "help": {
-                "concept": "A working `while` loop needs initialization first, then the loop header, then indented statements inside the loop body.",
-                "hint_1": "The starting value should be set before the loop begins.",
-                "hint_2": "Inside the loop, print the current value before decreasing it."
-              },
-              "tokens": {
-                "t1": "n = 3",
-                "t2": "while n >= 1:",
-                "t3": "print(n)",
-                "t4": "n = n - 1"
-              }
-            },
-            "fb_condition_operator": {
-              "title": "Choose the comparison",
-              "prompt": "Fill in the blank to keep the loop running while `count` is less than 5.",
-              "hint": "You need the operator that means 'less than'.",
-              "help": {
-                "concept": "The loop condition uses a comparison operator to decide whether the loop should continue.",
-                "hint_1": "The phrase 'less than 5' matches a symbol used in comparisons.",
-                "hint_2": "Choose the symbol that is true for 1, 2, 3, and 4 when compared with 5."
-              },
-              "template": "while count [blank1] 5:",
-              "choices": [
-                "<",
-                ">",
-                "==",
-                "="
-              ]
-            },
-            "fb_update_counter": {
-              "title": "Complete the counter update",
-              "prompt": "Fill in the blank so the loop variable increases by 1 each time.",
-              "hint": "The new value should be the old value plus 1.",
-              "help": {
-                "concept": "Counter loops often update the loop variable by adding 1 so the condition can eventually become false.",
-                "hint_1": "The right side should use the current value of `count` and add one more.",
-                "hint_2": "Choose the expression that keeps counting upward one step at a time."
-              },
-              "template": "count = [blank1]",
-              "choices": [
-                "count + 1",
-                "count < 1",
-                "print(count)",
-                "while count"
-              ]
-            },
-            "code_print_1_to_5": {
-              "title": "Print numbers 1 to 5",
-              "prompt": "Write Python code that uses a `while` loop to print the numbers 1 through 5, each on its own line.",
-              "hint": "Read the task \"Print numbers 1 to 5\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print numbers 1 to 5\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "n = 1\n# TODO: use a while loop to print 1 to 5"
-            },
-            "code_print_0_to_2": {
-              "title": "Print 0, 1, 2",
-              "prompt": "Write Python code that uses a `while` loop to print `0`, `1`, and `2`, each on its own line.",
-              "hint": "Read the task \"Print 0, 1, 2\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Print 0, 1, 2\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "# TODO: print 0, 1, and 2 using a while loop"
-            },
-            "code_countdown_3_to_1": {
-              "title": "Countdown from 3",
-              "prompt": "Write Python code that uses a `while` loop to print `3`, `2`, and `1`, each on its own line.",
-              "hint": "This time the counter should go down, not up.",
-              "help": {
-                "concept": "A countdown loop starts at a larger number and decreases the counter until the condition becomes false.",
-                "hint_1": "Start with `3` and use a condition that still allows `1` to be printed.",
-                "hint_2": "After printing the current number, subtract 1 from the counter."
-              },
-              "starterCode": "n = 3\n# TODO: print 3, 2, 1 with a while loop"
-            },
-            "code_repeat_word_3_times": {
-              "title": "Repeat a word three times",
-              "prompt": "Write Python code that prints the word `Go` exactly 3 times, each on its own line, using a `while` loop.",
-              "hint": "Read the task \"Repeat a word three times\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Repeat a word three times\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "# TODO: print Go three times using a while loop"
-            },
-            "code_sum_1_to_4": {
-              "title": "Add numbers from 1 to 4",
-              "prompt": "Write Python code that uses a `while` loop to add the numbers 1 through 4 and then prints the total.",
-              "hint": "Read the task \"Add numbers from 1 to 4\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Add numbers from 1 to 4\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "total = 0\nn = 1\n# TODO: use a while loop to add 1 through 4 and print total"
-            }
-          }
-        }
-      },
       "python-v2-3": {
         "while-loop-basics": {
           "label": "While Loop Basics",
@@ -244,26 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "While Loop Practice Set"
-            }
-          },
-          "projectSteps": {
-            "code_print_1_to_5": {
-              "title": "Print numbers 1 to 5"
-            },
-            "code_print_0_to_2": {
-              "title": "Print 0, 1, 2"
-            },
-            "code_countdown_3_to_1": {
-              "title": "Countdown from 3"
-            },
-            "code_repeat_word_3_times": {
-              "title": "Repeat a word three times"
-            },
-            "code_sum_1_to_4": {
-              "title": "Add numbers from 1 to 4"
             }
           },
           "quiz": {
@@ -399,29 +152,29 @@
             },
             "code_print_1_to_5": {
               "title": "Print numbers 1 to 5",
-              "prompt": "Write Python code that uses a `while` loop to print the numbers 1 through 5, each on its own line.",
+              "prompt": "In `main.py`, write code that uses a `while` loop to print the numbers 1 through 5, each on its own line.",
               "hint": "Read the task \"Print numbers 1 to 5\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Print numbers 1 to 5\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "hint_1": "Use the named values and operations to generate the requested result.",
+                "hint_2": "Run once with the supplied input and check punctuation, spacing, and order."
               },
               "starterCode": "n = 1\n# TODO: use a while loop to print 1 to 5"
             },
             "code_print_0_to_2": {
               "title": "Print 0, 1, 2",
-              "prompt": "Write Python code that uses a `while` loop to print `0`, `1`, and `2`, each on its own line.",
+              "prompt": "Use Python to uses a `while` loop to print `0`, `1`, and `2`, each on its own line.",
               "hint": "Read the task \"Print 0, 1, 2\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Print 0, 1, 2\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "hint_1": "Complete the starter so the output follows the prompt exactly.",
+                "hint_2": "Execute the starter after your edit and inspect both values and line order."
               },
               "starterCode": "# TODO: print 0, 1, and 2 using a while loop"
             },
             "code_countdown_3_to_1": {
               "title": "Countdown from 3",
-              "prompt": "Write Python code that uses a `while` loop to print `3`, `2`, and `1`, each on its own line.",
+              "prompt": "Complete the program so it uses a `while` loop to print `3`, `2`, and `1`, each on its own line.",
               "hint": "This time the counter should go down, not up.",
               "help": {
                 "concept": "A countdown loop starts at a larger number and decreases the counter until the condition becomes false.",
@@ -432,23 +185,23 @@
             },
             "code_repeat_word_3_times": {
               "title": "Repeat a word three times",
-              "prompt": "Write Python code that prints the word `Go` exactly 3 times, each on its own line, using a `while` loop.",
+              "prompt": "In `main.py`, write code that prints the word `Go` exactly 3 times, each on its own line, using a `while` loop.",
               "hint": "Read the task \"Repeat a word three times\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Repeat a word three times\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "hint_1": "Translate the output contract into the necessary Python statements.",
+                "hint_2": "Run the code and compare each printed line with the expected result."
               },
               "starterCode": "# TODO: print Go three times using a while loop"
             },
             "code_sum_1_to_4": {
               "title": "Add numbers from 1 to 4",
-              "prompt": "Write Python code that uses a `while` loop to add the numbers 1 through 4 and then prints the total.",
+              "prompt": "In `main.py`, write code that uses a `while` loop to add the numbers 1 through 4 and then prints the total.",
               "hint": "Read the task \"Add numbers from 1 to 4\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Add numbers from 1 to 4\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "hint_1": "Build the requested behavior without printing extra labels or lines.",
+                "hint_2": "Execute the starter after your edit and inspect both values and line order."
               },
               "starterCode": "total = 0\nn = 1\n# TODO: use a while loop to add 1 through 4 and print total"
             }
@@ -459,35 +212,19 @@
   },
   "sketches": {
     "python--python-v2--draft": {
-      "python--python-v2--draft-3": {
-        "while-loop-basics": {
-          "while_intro": {
-            "title": "What a while loop does",
-            "bodyMarkdown": "A `while` loop repeats a block of code **as long as** its condition is `True`.\n\nHere is a simple example:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1\n```\n\nWalk through it:\n- `count` starts at `1`\n- The condition `count <= 3` is checked\n- If it is `True`, Python runs the indented block\n- `print(count)` shows the current value\n- `count = count + 1` changes the loop variable so the loop can move forward\n- When `count` becomes `4`, the condition is `False`, so the loop stops\n\nOutput:\n\n```python\n1\n2\n3\n```\n\nA `while` loop is useful when you want to keep going until something changes."
-          },
-          "loop_condition_state": {
-            "title": "Conditions and loop state",
-            "bodyMarkdown": "A `while` loop depends on two ideas:\n- a **condition** to test\n- a **variable that changes** inside the loop\n\nExample:\n\n```python\nenergy = 4\nwhile energy > 0:\n    print(\"Working\")\n    energy = energy - 1\nprint(\"Done\")\n```\n\nStep through it:\n- `energy = 4` sets the starting value\n- `while energy > 0:` means the loop runs only while `energy` is greater than `0`\n- `print(\"Working\")` runs each time through the loop\n- `energy = energy - 1` lowers the value\n- After `energy` reaches `0`, the loop ends\n- `print(\"Done\")` runs after the loop finishes\n\nThis is called tracing the loop's **state**: watching how the variable changes each time.\n\nWorked example trace:\n- Start: `energy = 4`\n- After 1st loop: `energy = 3`\n- After 2nd loop: `energy = 2`\n- After 3rd loop: `energy = 1`\n- After 4th loop: `energy = 0`\n- Stop"
-          },
-          "avoid_infinite_loops": {
-            "title": "How to stop a while loop safely",
-            "bodyMarkdown": "A common beginner mistake is forgetting to update the loop variable. If the condition never becomes `False`, the loop can run forever.\n\nProblem example:\n\n```python\nn = 1\nwhile n <= 3:\n    print(n)\n```\n\nThis loop never changes `n`, so `n <= 3` stays `True` forever.\n\nSafe version:\n\n```python\nn = 1\nwhile n <= 3:\n    print(n)\n    n = n + 1\n```\n\nWhy this works:\n- The loop starts with `n = 1`\n- Each time, `n` increases by `1`\n- Eventually `n` becomes `4`\n- Then `n <= 3` is `False`, so the loop stops\n\nA good safety question is: **What changes inside the loop, and when will the condition become false?**\n\nStep through it: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
-          }
-        }
-      },
       "python-v2-3": {
         "while-loop-basics": {
           "while_intro": {
             "title": "What a while loop does",
-            "bodyMarkdown": "A `while` loop repeats a block of code **as long as** its condition is `True`.\n\nHere is a simple example:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1\n```\n\nWalk through it:\n- `count` starts at `1`\n- The condition `count <= 3` is checked\n- If it is `True`, Python runs the indented block\n- `print(count)` shows the current value\n- `count = count + 1` changes the loop variable so the loop can move forward\n- When `count` becomes `4`, the condition is `False`, so the loop stops\n\nOutput:\n\n```python\n1\n2\n3\n```\n\nA `while` loop is useful when you want to keep going until something changes."
+            "bodyMarkdown": "A `while` loop repeats a block of code **as long as** its condition is `True`.\n\nHere is a simple example:\n\n```python\ncount = 1\nwhile count <= 3:\n    print(count)\n    count = count + 1\n```\n\nTrace the example: - `count` starts at `1`\n- The condition `count <= 3` is checked\n- If it is `True`, Python runs the indented block\n- `print(count)` shows the current value\n- `count = count + 1` changes the loop variable so the loop can move forward\n- When `count` becomes `4`, the condition is `False`, so the loop stops\n\nOutput:\n\n```python\n1\n2\n3\n```\n\nA `while` loop is useful when you want to keep going until something changes."
           },
           "loop_condition_state": {
             "title": "Conditions and loop state",
-            "bodyMarkdown": "A `while` loop depends on two ideas:\n- a **condition** to test\n- a **variable that changes** inside the loop\n\nExample:\n\n```python\nenergy = 4\nwhile energy > 0:\n    print(\"Working\")\n    energy = energy - 1\nprint(\"Done\")\n```\n\nStep through it:\n- `energy = 4` sets the starting value\n- `while energy > 0:` means the loop runs only while `energy` is greater than `0`\n- `print(\"Working\")` runs each time through the loop\n- `energy = energy - 1` lowers the value\n- After `energy` reaches `0`, the loop ends\n- `print(\"Done\")` runs after the loop finishes\n\nThis is called tracing the loop's **state**: watching how the variable changes each time.\n\nWorked example trace:\n- Start: `energy = 4`\n- After 1st loop: `energy = 3`\n- After 2nd loop: `energy = 2`\n- After 3rd loop: `energy = 1`\n- After 4th loop: `energy = 0`\n- Stop"
+            "bodyMarkdown": "A `while` loop depends on two ideas:\n- a **condition** to test\n- a **variable that changes** inside the loop\n\nExample:\n\n```python\nenergy = 4\nwhile energy > 0:\n    print(\"Working\")\n    energy = energy - 1\nprint(\"Done\")\n```\n\nRead the flow carefully: - `energy = 4` sets the starting value\n- `while energy > 0:` means the loop runs only while `energy` is greater than `0`\n- `print(\"Working\")` runs each time through the loop\n- `energy = energy - 1` lowers the value\n- After `energy` reaches `0`, the loop ends\n- `print(\"Done\")` runs after the loop finishes\n\nThis is called tracing the loop's **state**: watching how the variable changes each time.\n\nWorked example trace:\n- Start: `energy = 4`\n- After 1st loop: `energy = 3`\n- After 2nd loop: `energy = 2`\n- After 3rd loop: `energy = 1`\n- After 4th loop: `energy = 0`\n- Stop"
           },
           "avoid_infinite_loops": {
             "title": "How to stop a while loop safely",
-            "bodyMarkdown": "A common beginner mistake is forgetting to update the loop variable. If the condition never becomes `False`, the loop can run forever.\n\nProblem example:\n\n```python\nn = 1\nwhile n <= 3:\n    print(n)\n```\n\nThis loop never changes `n`, so `n <= 3` stays `True` forever.\n\nSafe version:\n\n```python\nn = 1\nwhile n <= 3:\n    print(n)\n    n = n + 1\n```\n\nWhy this works:\n- The loop starts with `n = 1`\n- Each time, `n` increases by `1`\n- Eventually `n` becomes `4`\n- Then `n <= 3` is `False`, so the loop stops\n\nA good safety question is: **What changes inside the loop, and when will the condition become false?**\n\nStep through it: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
+            "bodyMarkdown": "A common beginner mistake is forgetting to update the loop variable. If the condition never becomes `False`, the loop can run forever.\n\nProblem example:\n\n```python\nn = 1\nwhile n <= 3:\n    print(n)\n```\n\nThis loop never changes `n`, so `n <= 3` stays `True` forever.\n\nSafe version:\n\n```python\nn = 1\nwhile n <= 3:\n    print(n)\n    n = n + 1\n```\n\nWhy this works:\n- The loop starts with `n = 1`\n- Each time, `n` increases by `1`\n- Eventually `n` becomes `4`\n- Then `n <= 3` is `False`, so the loop stops\n\nA good safety question is: **What changes inside the loop, and when will the condition become false?**\n\nRead the flow carefully: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
           }
         }
       }

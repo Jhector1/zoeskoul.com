@@ -1,0 +1,248 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "moving-around": {
+          "label": "Moving Around with cd",
+          "summary": "Move between folders with cd, cd .., and simple relative paths.",
+          "cards": {
+            "sketch0": {
+              "title": "Use `cd` to enter a folder"
+            },
+            "sketch1": {
+              "title": "Use `cd ..` to go up one folder"
+            },
+            "sketch2": {
+              "title": "Use simple relative paths"
+            },
+            "quiz": {
+              "title": "Practice check"
+            }
+          },
+          "practice": {
+            "sc-cd-purpose": {
+              "title": "What `cd` does",
+              "prompt": "What does `cd` do?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "Changes the current folder",
+                "b": "Copies a file",
+                "c": "Deletes a file",
+                "d": "Prints file content"
+              }
+            },
+            "sc-parent-folder": {
+              "title": "Meaning of `..`",
+              "prompt": "In a path, what does `..` mean?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "The parent folder",
+                "b": "A hidden file",
+                "c": "The current file",
+                "d": "The root password"
+              }
+            },
+            "mc-check-after-cd": {
+              "title": "Check after moving",
+              "prompt": "Which commands can help confirm where you are after `cd`?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "ls",
+                "c": "rm",
+                "d": "sudo"
+              }
+            },
+            "dr-navigate-and-check": {
+              "title": "Move and confirm",
+              "prompt": "Put the navigation routine in order.",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "tokens": {
+                "t1": "Type `ls` to find a folder",
+                "t2": "Type `cd folder-name`",
+                "t3": "Type `pwd` or `ls` to confirm"
+              }
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "exercises": {
+              "moving-around-try-it-1": {
+                "title": "Enter the newsletter folder",
+                "prompt": "The workspace has a `newsletter` folder. Move into it with `cd newsletter`, then use `pwd` to confirm.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `cd newsletter` to enter the folder."
+                    },
+                    "1": {
+                      "message": "Use `pwd` to confirm where you landed."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "newsletter_brief_txt": {
+                    "content": "Community newsletter brief\n"
+                  }
+                }
+              },
+              "moving-around-try-it-2": {
+                "title": "Return from the returns folder",
+                "prompt": "You are starting inside `library-kit/returns`. Use `cd ..` to move back to `library-kit`, then type `pwd`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `cd ..` to go up one folder."
+                    },
+                    "1": {
+                      "message": "Use `pwd` to confirm the library-kit folder."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "library_kit_returns_today_txt": {
+                    "content": "Three books returned\n"
+                  }
+                }
+              },
+              "moving-around-try-it-3": {
+                "title": "Reach the museum signs folder",
+                "prompt": "Move into the signs folder with one relative path: `cd museum-tour/signs`. Then type `ls`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `cd museum-tour/signs` to enter the nested folder."
+                    },
+                    "1": {
+                      "message": "Use `ls` to inspect the signs folder."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "museum_tour_signs_labels_txt": {
+                    "content": "Entrance\nExit\n"
+                  }
+                }
+              }
+            },
+            "try_moving_around_sketch0": {
+              "title": "Enter the newsletter folder",
+              "prompt": "Move into `newsletter` and confirm."
+            },
+            "try_moving_around_sketch1": {
+              "title": "Return from the returns folder",
+              "prompt": "Move up from `returns` to `library-kit`."
+            },
+            "try_moving_around_sketch2": {
+              "title": "Reach the museum signs folder",
+              "prompt": "Use one relative path to reach the signs."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "moving-around": {
+          "cd-into-folder": {
+            "title": "Use `cd` to enter a folder",
+            "bodyMarkdown": "`cd` means change directory. A directory is a folder.\n\nIf `ls` shows a folder named `drafts`, you can enter it with:\n\n```bash\ncd drafts\n```\n\nAfter moving, type `pwd` or `ls` to confirm where you landed."
+          },
+          "cd-up-one-level": {
+            "title": "Use `cd ..` to go up one folder",
+            "bodyMarkdown": "The shortcut `..` means the parent folder, one level up.\n\n```bash\ncd ..\n```\n\nThis is useful when you entered the wrong folder or finished checking a folder and want to go back."
+          },
+          "relative-paths": {
+            "title": "Use simple relative paths",
+            "bodyMarkdown": "A relative path starts from where you are now. If you are in `club-hub` and there is a folder called `events/photos`, you can type:\n\n```bash\ncd events/photos\n```\n\nThat moves through two folders in one command. Keep using `pwd` and `ls` to stay oriented."
+          }
+        }
+      }
+    }
+  }
+}

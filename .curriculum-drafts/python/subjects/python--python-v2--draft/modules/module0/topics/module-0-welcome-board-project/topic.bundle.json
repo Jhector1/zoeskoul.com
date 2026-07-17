@@ -15,20 +15,20 @@
     "supportsPackageInstall": false
   },
   "topic": {
-    "labelKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.label",
-    "summaryKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.summary"
+    "labelKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.label",
+    "summaryKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.cards.sketch0.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.cards.sketch0.title",
       "sketchId": "sketch-1",
       "height": 420,
       "tryIt": {
         "id": "try-module-0-welcome-board-project-sketch0",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.tryIt.try_module_0_welcome_board_project_sketch0.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.tryIt.try_module_0_welcome_board_project_sketch0.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.tryIt.try_module_0_welcome_board_project_sketch0.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.tryIt.try_module_0_welcome_board_project_sketch0.prompt",
         "exerciseKey": "try-module-0-welcome-board-project-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -41,7 +41,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.cards.project.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.cards.project.title",
       "project": {
         "difficulty": "easy",
         "allowReveal": true,
@@ -50,7 +50,7 @@
         "steps": [
           {
             "id": "mp_1",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.projectSteps.mp_1.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.projectSteps.mp_1.title",
             "exerciseKey": "mp-1-print-event-title",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -59,7 +59,7 @@
           },
           {
             "id": "mp_2",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.projectSteps.mp_2.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.projectSteps.mp_2.title",
             "exerciseKey": "mp-2-print-agenda-lines",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -68,7 +68,7 @@
           },
           {
             "id": "mp_3",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.projectSteps.mp_3.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.projectSteps.mp_3.title",
             "exerciseKey": "mp-3-show-seat-count",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -77,7 +77,7 @@
           },
           {
             "id": "mp_4",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.projectSteps.mp_4.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.projectSteps.mp_4.title",
             "exerciseKey": "mp-4-build-full-welcome-board",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -92,24 +92,24 @@
     {
       "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.sketch-1.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.sketch-1.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.sketch-1.bodyMarkdown"
     }
   ],
   "exercises": [
     {
       "id": "try-module-0-welcome-board-project-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -118,11 +118,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.try-module-0-welcome-board-project-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -190,14 +190,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-1-print-event-title",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -206,11 +206,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-1-print-event-title.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -278,14 +278,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -294,11 +294,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-2-print-agenda-lines.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -366,14 +366,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -382,11 +382,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-3-show-seat-count.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -466,14 +466,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board",
+      "messageBase": "topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -482,11 +482,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-0.module-0-welcome-board-project.quiz.mp-4-build-full-welcome-board.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

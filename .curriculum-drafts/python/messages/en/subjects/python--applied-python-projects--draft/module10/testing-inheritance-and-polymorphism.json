@@ -224,15 +224,15 @@
         "testing-inheritance-and-polymorphism": {
           "testing-inheritance-and-polymorphism-sketch-0": {
             "title": "Test the contract, not every implementation detail",
-            "bodyMarkdown": "When classes share a method, tests should focus on the behavior promised by that method.\n\nImagine notification classes:\n\n```python\nemail = EmailNotification(\"Welcome\")\nassert email.message() == \"Email: Welcome\"\n```\n\nThe test does not need to inspect every line inside the class. It checks the result that callers depend on.\n\nThat makes the test useful even if the internal code changes later."
+            "bodyMarkdown": "When classes share a method, tests should focus on the behavior promised by that method.\n\nImagine notification classes:\n\n```python\nemail = EmailNotification(\"Welcome\")\nassert email.message() == \"Email: Welcome\"\n```\n\nThe test does not need to inspect every line inside the class. It checks the result that callers depend on.\n\nThat makes the test useful even if the internal code changes later.\n\nTest the shared behavior once at the appropriate level, then test only each subclass’s specialized contract. A polymorphic service test should pass a mixed collection and verify that no type-specific branch is required."
           },
           "testing-inheritance-and-polymorphism-sketch-1": {
             "title": "Test a mixed list through the shared method",
-            "bodyMarkdown": "Polymorphism matters most when a helper works with mixed objects.\n\n```python\nnotifications = [\n    EmailNotification(\"Welcome\"),\n    SmsNotification(\"Code sent\"),\n]\n\nmessages = [note.message() for note in notifications]\nassert messages == [\"Email: Welcome\", \"SMS: Code sent\"]\n```\n\nThe test proves one loop can trust the shared method name."
+            "bodyMarkdown": "Polymorphism matters most when a helper works with mixed objects.\n\n```python\nnotifications = [\n    EmailNotification(\"Welcome\"),\n    SmsNotification(\"Code sent\"),\n]\n\nmessages = [note.message() for note in notifications]\nassert messages == [\"Email: Welcome\", \"SMS: Code sent\"]\n```\n\nThe test proves one loop can trust the shared method name.\n\nTest the shared behavior once at the appropriate level, then test only each subclass’s specialized contract. A polymorphic service test should pass a mixed collection and verify that no type-specific branch is required."
           },
           "testing-inheritance-and-polymorphism-sketch-2": {
             "title": "Test edge cases near the shared behavior",
-            "bodyMarkdown": "A subclass should still behave clearly when the input is awkward.\n\n```python\nmessage = SmsNotification(\"\")\nassert message.message() == \"SMS: Untitled\"\n```\n\nThis kind of test protects the interface. It says, \"even when data is missing, this object still returns a predictable label.\""
+            "bodyMarkdown": "A subclass should still behave clearly when the input is awkward.\n\n```python\nmessage = SmsNotification(\"\")\nassert message.message() == \"SMS: Untitled\"\n```\n\nThis kind of test protects the interface. It says, \"even when data is missing, this object still returns a predictable label.\"\n\nTest the shared behavior once at the appropriate level, then test only each subclass’s specialized contract. A polymorphic service test should pass a mixed collection and verify that no type-specific branch is required."
           }
         }
       }

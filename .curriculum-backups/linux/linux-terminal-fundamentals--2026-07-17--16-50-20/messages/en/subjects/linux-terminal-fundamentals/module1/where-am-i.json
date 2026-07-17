@@ -1,0 +1,248 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "where-am-i": {
+          "label": "Where Am I? pwd and ls",
+          "summary": "Use pwd and ls together to understand your current location before touching files.",
+          "cards": {
+            "sketch0": {
+              "title": "`pwd` shows your current folder"
+            },
+            "sketch1": {
+              "title": "`ls` shows what is nearby"
+            },
+            "sketch2": {
+              "title": "Use `pwd` and `ls` as a pair"
+            },
+            "quiz": {
+              "title": "Practice check"
+            }
+          },
+          "practice": {
+            "sc-pwd-purpose": {
+              "title": "What `pwd` tells you",
+              "prompt": "Which command shows the full path to your current folder?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "ls",
+                "c": "cd",
+                "d": "touch"
+              }
+            },
+            "sc-ls-purpose": {
+              "title": "What `ls` shows",
+              "prompt": "Which command lists the files and folders in the current folder?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "mkdir",
+                "c": "ls",
+                "d": "rm"
+              }
+            },
+            "mc-inspection-commands": {
+              "title": "Commands that only inspect",
+              "prompt": "Choose the commands that inspect without creating, moving, or removing files.",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "pwd",
+                "b": "ls",
+                "c": "mv",
+                "d": "rm"
+              }
+            },
+            "dr-safe-check-order": {
+              "title": "A safe first check",
+              "prompt": "Put the safe first-check routine in order.",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "tokens": {
+                "t1": "Type `pwd`",
+                "t2": "Type `ls`",
+                "t3": "Choose the next command"
+              }
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "exercises": {
+              "where-am-i-try-it-1": {
+                "title": "Confirm the newsroom location",
+                "prompt": "The editor opened a newsroom workspace for you. Type `pwd` to confirm its full path.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `pwd` to print the newsroom path."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "newsroom_assignment_txt": {
+                    "content": "Draft the Saturday update\n"
+                  }
+                }
+              },
+              "where-am-i-try-it-2": {
+                "title": "See what is on the art table",
+                "prompt": "You are at the art table. Type `ls` to see which supply notes are waiting here.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `ls` to list the art table."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "art_table_brushes_txt": {
+                    "content": "Small brush\nLarge brush\n"
+                  },
+                  "art_table_paint_list_txt": {
+                    "content": "Blue\nYellow\n"
+                  }
+                }
+              },
+              "where-am-i-try-it-3": {
+                "title": "Orient yourself at the event desk",
+                "prompt": "Before touching the event desk files, type `pwd` and then `ls`. Read both results.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `pwd` to confirm the event desk path."
+                    },
+                    "1": {
+                      "message": "Use `ls` to inspect the event desk."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "event_desk_run_sheet_txt": {
+                    "content": "Doors open at 6:00\n"
+                  },
+                  "event_desk_contact_txt": {
+                    "content": "Call the coordinator\n"
+                  }
+                }
+              }
+            },
+            "try_where_am_i_sketch0": {
+              "title": "Confirm the newsroom location",
+              "prompt": "Print the newsroom path."
+            },
+            "try_where_am_i_sketch1": {
+              "title": "See what is on the art table",
+              "prompt": "List the art table files."
+            },
+            "try_where_am_i_sketch2": {
+              "title": "Orient yourself at the event desk",
+              "prompt": "Check the event desk before editing."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "where-am-i": {
+          "pwd-current-folder": {
+            "title": "`pwd` shows your current folder",
+            "bodyMarkdown": "You are always somewhere in the file system. `pwd` prints the full path to that current folder.\n\n```bash\npwd\n```\n\nPossible output:\n\n```bash\n/home/learner/newsletter\n```\n\nThat output means future commands will start from the `newsletter` folder unless you move somewhere else."
+          },
+          "ls-current-folder": {
+            "title": "`ls` shows what is nearby",
+            "bodyMarkdown": "After you know where you are, the next question is usually: what is here?\n\n```bash\nls\n```\n\nPossible output:\n\n```bash\ndrafts\nimages\ntodo.txt\n```\n\n`ls` lists the names in the current folder. It does not open or change them."
+          },
+          "pwd-ls-habit": {
+            "title": "Use `pwd` and `ls` as a pair",
+            "bodyMarkdown": "A strong beginner habit is:\n\n1. Type `pwd` to confirm your location.\n2. Type `ls` to inspect what is inside.\n3. Decide the next command after you understand the workspace.\n\nThis avoids accidental changes in the wrong folder."
+          }
+        }
+      }
+    }
+  }
+}

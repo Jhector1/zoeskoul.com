@@ -1,0 +1,448 @@
+{
+  "topicId": "module-5-workshop-schedule-project",
+  "subjectSlug": "python-data-functions",
+  "moduleSlug": "python-5-lists-tuples-and-dictionaries",
+  "sectionSlug": "python-data-functions-python-5-module-project",
+  "prefix": "py5",
+  "minutes": 34,
+  "topic": {
+    "labelKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.label",
+    "summaryKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-workshop-schedule-sketch0",
+        "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.title",
+        "promptKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.prompt",
+        "exerciseKey": "try-workshop-schedule-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "exercise1",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.projectSteps.exercise1.title",
+            "exerciseKey": "exercise1",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "exercise2",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.projectSteps.exercise2.title",
+            "exerciseKey": "exercise2",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "exercise3",
+            "titleKey": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.projectSteps.exercise3.title",
+            "exerciseKey": "exercise3",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.sketch-1.title",
+      "bodyKey": "sketches.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-workshop-schedule-sketch0",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "Python Basics — Room A\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bname\\s*,\\s*room\\s*=\\s*session\\b",
+            "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bname\\s*,\\s*room\\s*=\\s*session\\b",
+          "message": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.try-workshop-schedule-sketch0.sourceChecks.0.message"
+        }
+      ]
+    },
+    {
+      "id": "exercise1",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "create_schedule",
+            "args": [],
+            "expected": [
+              [
+                "Python Basics",
+                "Room A"
+              ],
+              [
+                "Data Lab",
+                "Room B"
+              ],
+              [
+                "Web Starter",
+                "Room C"
+              ]
+            ],
+            "expectedKind": "value"
+          }
+        ],
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise1.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "exercise2",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "build_room_lookup",
+            "args": [
+              [
+                [
+                  "Python Basics",
+                  "Room A"
+                ],
+                [
+                  "Data Lab",
+                  "Room B"
+                ]
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              [
+                "Python Basics",
+                "Room A"
+              ],
+              [
+                "Data Lab",
+                "Room B"
+              ]
+            ],
+            "expectedKind": "dict_entries"
+          }
+        ],
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise2.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    },
+    {
+      "id": "exercise3",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "semanticChecks": [
+          {
+            "type": "function_returns",
+            "functionName": "format_schedule",
+            "args": [
+              [
+                [
+                  "Python Basics",
+                  "Room A"
+                ],
+                [
+                  "Data Lab",
+                  "Room B"
+                ]
+              ]
+            ],
+            "argKinds": [
+              "value"
+            ],
+            "expected": [
+              "Python Basics — Room A",
+              "Data Lab — Room B"
+            ],
+            "expectedKind": "value"
+          }
+        ],
+        "solutionCode": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python-data-functions.python-5-lists-tuples-and-dictionaries.module-5-workshop-schedule-project.quiz.exercise3.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ]
+    }
+  ]
+}

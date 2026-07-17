@@ -2,75 +2,75 @@
   "subjects": {
     "python--python-v2--draft": {
       "title": "Python for Beginners",
-      "description": "This course teaches the core foundations of Python: running code, values, variables, input, strings, conditions, loops, and a final step-by-step beginner capstone.",
-      "moreComingSoon": "More Python for Beginners lessons are coming soon."
+      "description": "Begin with the first line of Python and grow one complete idea at a time. You will learn how programs display information, remember values, respond to input, make decisions, and repeat work. Each module ends with a connected build, and the final capstone combines the foundations into a clear, testable report program.",
+      "moreComingSoon": ""
     }
   },
   "modules": {
     "python--python-v2--draft": {
       "python-v2-0": {
         "title": "Getting Started with Python",
-        "description": "Help learners run Python, read simple programs, and build confidence with the basic syntax.",
+        "description": "Learn how Python reads a program, how values become output, and how error messages point back to the line that needs attention.",
         "outcomes": [
           "Run Python code in a beginner-friendly environment",
           "Explain how statements, expressions, and comments work",
           "Use print output to observe program behavior"
         ],
         "why": [
-          "Builds confidence with getting started with python.",
-          "Prepares learners for the next skills in the course."
+          "Running and reading tiny programs gives every later Python idea a concrete foundation.",
+          "You will leave this module able to observe what Python did instead of guessing what the code means."
         ]
       },
       "python-v2-1": {
         "title": "Variables, Input, and Strings",
-        "description": "Teach learners how programs remember values, accept user input, and produce readable text.",
+        "description": "Give programs memory and a voice by storing values, converting input, and shaping text for people to read.",
         "outcomes": [
           "Create and update variables",
           "Convert input values safely",
           "Build strings with common methods and f-strings"
         ],
         "why": [
-          "Builds confidence with variables, input, and strings.",
-          "Prepares learners for the next skills in the course."
+          "Variables and strings turn fixed demonstrations into programs that can respond to a real user.",
+          "Careful naming and formatting make later conditions, loops, and projects easier to reason about."
         ]
       },
       "python-v2-2": {
         "title": "Conditions and Logic",
-        "description": "Help learners make programs choose different paths using comparisons and conditionals.",
+        "description": "Teach a program to choose one clear path by ordering conditions, combining boolean rules, and handling special cases first.",
         "outcomes": [
           "Write if, elif, and else blocks",
           "Use comparison and boolean logic",
           "Design clear branching rules"
         ],
         "why": [
-          "Builds confidence with conditions and logic.",
-          "Prepares learners for the next skills in the course."
+          "Most useful programs do not respond the same way to every situation.",
+          "Clear branch order prevents overlapping rules and makes the final decision understandable to both the learner and the grader."
         ]
       },
       "python-v2-3": {
         "title": "Loops and Iteration",
-        "description": "Teach learners to repeat actions, process sequences, and control loop behavior.",
+        "description": "Repeat work safely with for and while loops, then control repetition with counters, accumulators, break, continue, and deliberate debugging.",
         "outcomes": [
           "Use for loops and while loops",
           "Trace loop state",
           "Apply break, continue, and range"
         ],
         "why": [
-          "Builds confidence with loops and iteration.",
-          "Prepares learners for the next skills in the course."
+          "Loops let one small block of code process many values without copying the same statements.",
+          "Tracing loop state prepares you to build reliable summaries instead of accidental infinite loops."
         ]
       },
       "python-v2-4": {
         "title": "Mini Gradebook Capstone",
-        "description": "Help learners finish with one smoother beginner project that combines input, loops, accumulators, comparisons, and polished output.",
+        "description": "Combine input, loops, running totals, comparisons, and formatted output in one polished beginner capstone.",
         "outcomes": [
           "Read a short sequence of inputs and summarize them in a report",
           "Track totals, averages, and running maximums in a loop",
           "Polish a beginner program into a final formatted result"
         ],
         "why": [
-          "Builds confidence with mini gradebook capstone.",
-          "Prepares learners for the next skills in the course."
+          "A capstone reveals whether separate syntax skills can work together as one understandable program.",
+          "The final report gives you a concrete artifact you can run, test, explain, and improve."
         ]
       }
     }
@@ -80,7 +80,7 @@
       "python-v2-0": {
         "python--python-v2--draft-python-v2-0-setup-and-first-programs": {
           "title": "Setup and First Programs",
-          "description": "Learn what python is used for, running python code, print, comments, and first errors through focused examples and practice.",
+          "description": "Meet Python as a language that executes statements in order, then use print output, comments, and first errors to observe that process.",
           "weeks": null,
           "bullets": [
             "What Python Is Used For",
@@ -90,7 +90,7 @@
         },
         "python--python-v2--draft-python-v2-0-values-and-expressions": {
           "title": "Values and Expressions",
-          "description": "Learn values, types, and literals, operators and expressions, reading error messages through focused examples and practice.",
+          "description": "Follow values through expressions and use the error type and line number as evidence when a program cannot finish.",
           "weeks": null,
           "bullets": [
             "Values, Types, and Literals",
@@ -100,7 +100,7 @@
         },
         "python--python-v2--draft-python-v2-0-module-project": {
           "title": "Module Project",
-          "description": "Learn module 0 welcome board project through focused examples and practice.",
+          "description": "Create a welcome board that grows from one reliable printed line into a small, polished first program.",
           "weeks": null,
           "bullets": [
             "Module 0 Welcome Board Project"
@@ -110,7 +110,7 @@
       "python-v2-1": {
         "python--python-v2--draft-python-v2-1-variables-and-assignment": {
           "title": "Variables and Assignment",
-          "description": "Learn naming and assigning variables, input and type conversion, common variable mistakes through focused examples and practice.",
+          "description": "Store information under clear names, accept typed input, and repair the common mistakes that confuse a variable with literal text.",
           "weeks": null,
           "bullets": [
             "Naming and Assigning Variables",
@@ -120,7 +120,7 @@
         },
         "python--python-v2--draft-python-v2-1-string-foundations": {
           "title": "String Foundations",
-          "description": "Learn string indexing and slicing, useful string methods, f-strings and formatting through focused examples and practice.",
+          "description": "Navigate text by position, transform it with methods, and combine values into readable messages with f-strings.",
           "weeks": null,
           "bullets": [
             "String Indexing and Slicing",
@@ -130,7 +130,7 @@
         },
         "python--python-v2--draft-python-v2-1-module-project": {
           "title": "Module Project",
-          "description": "Learn module 1 profile card project through focused examples and practice.",
+          "description": "Build a profile card whose data comes from variables and user input rather than hard-coded output.",
           "weeks": null,
           "bullets": [
             "Module 1 Profile Card Project"
@@ -140,7 +140,7 @@
       "python-v2-2": {
         "python--python-v2--draft-python-v2-2-conditional-basics": {
           "title": "Conditional Basics",
-          "description": "Learn if, elif, and else, comparisons and truth values, indentation and blocks through focused examples and practice.",
+          "description": "Read a condition as a question, understand its True or False result, and use indentation to show which statements belong to each path.",
           "weeks": null,
           "bullets": [
             "If, Elif, and Else",
@@ -150,7 +150,7 @@
         },
         "python--python-v2--draft-python-v2-2-combining-conditions": {
           "title": "Combining Conditions",
-          "description": "Learn and, or, and not, truthiness and empty values, checking special cases first through focused examples and practice.",
+          "description": "Combine rules carefully, recognize empty values, and place exceptional cases before broad ranges.",
           "weeks": null,
           "bullets": [
             "And, Or, and Not",
@@ -160,7 +160,7 @@
         },
         "python--python-v2--draft-python-v2-2-module-project": {
           "title": "Module Project",
-          "description": "Learn module 2 study checker project through focused examples and practice.",
+          "description": "Grow one study checker from a simple pass rule into an ordered decision system with clear special cases.",
           "weeks": null,
           "bullets": [
             "Module 2 Study Checker Project"
@@ -170,7 +170,7 @@
       "python-v2-3": {
         "python--python-v2--draft-python-v2-3-for-loops": {
           "title": "For Loops",
-          "description": "Learn for loops over text, range and counting patterns, accumulators and counters through focused examples and practice.",
+          "description": "Use for loops to visit text and numeric ranges while counters and accumulators remember what the loop has discovered.",
           "weeks": null,
           "bullets": [
             "For Loops Over Text",
@@ -180,19 +180,27 @@
         },
         "python--python-v2--draft-python-v2-3-while-loops": {
           "title": "While Loops",
-          "description": "Learn while loop basics, break and continue, loop debugging through focused examples and practice.",
+          "description": "Repeat until a condition changes, stop deliberately with break, skip one iteration with continue, and debug the state that controls the loop.",
           "weeks": null,
           "bullets": [
             "While Loop Basics",
             "Break and Continue",
             "Loop Debugging"
           ]
+        },
+        "python--python-v2--draft-python-v2-3-module-project": {
+          "title": "Module Project",
+          "description": "Build a club check-in tracker that combines for, while, counters, break, and continue in one connected program.",
+          "weeks": null,
+          "bullets": [
+            "Module 3 Club Check-In Project"
+          ]
         }
       },
       "python-v2-4": {
         "python--python-v2--draft-python-v2-4-capstone-project": {
           "title": "Final Project",
-          "description": "Learn mini gradebook capstone through focused examples and practice.",
+          "description": "Finish a gradebook report that reads several scores, tracks totals and a maximum, and prints one deterministic summary.",
           "weeks": null,
           "bullets": [
             "Mini Gradebook Capstone"

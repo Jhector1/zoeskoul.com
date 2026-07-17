@@ -32,9 +32,9 @@
       },
       {
         "moduleNumber": 4,
-        "title": "Class Roster Cleaner Capstone",
-        "coreSkill": "Pull lists, dictionaries, helper functions, files, and cleaning logic together into one final workflow.",
-        "outputFocus": "Build a class-roster cleaner that reads, cleans, summarizes, and writes a polished final report."
+        "title": "Community Event Registration Cleaner Capstone",
+        "coreSkill": "Pull collections, helper functions, files, exception handling, cleaning, summaries, and reports together in one final workflow.",
+        "outputFocus": "Build a community-event registration cleaner that reads messy CSV data, preserves valid registrations, summarizes seats by event, and writes deterministic reports."
       }
     ]
   },
@@ -665,23 +665,24 @@
       "prefix": "py8",
       "title": "Real-World Project",
       "role": "capstone",
-      "purpose": "Guide learners through a longer beginner data-cleaning project that combines lists, dictionaries, helper functions, files, and summaries.",
+      "purpose": "Guide learners through a longer beginner data-cleaning project that combines collections, helper modules, CSV files, validation, summaries, and output reports.",
       "learningObjectives": [
-        "Read and clean a structured file line by line",
-        "Refactor cleaning and summary logic into helper functions",
-        "Write final output files and summaries from one complete workflow"
+        "Read and clean a structured registration file line by line",
+        "Refactor cleaning, summary, and reporting logic into focused helper modules",
+        "Write deterministic cleaned data and summary files from one complete workflow"
       ],
       "guidedExercises": [
-        "Preview the roster file",
-        "Clean rows",
-        "Write final reports"
+        "Preview the registration export",
+        "Clean and validate registration rows",
+        "Write the final registration and summary reports"
       ],
       "quizFocus": [
-        "file workflow",
-        "cleaning logic",
-        "summary functions"
+        "CSV workflow",
+        "cleaning and validation",
+        "helper modules",
+        "deterministic summaries"
       ],
-      "moduleProject": "Build a class-roster cleaner that reads messy data, cleans valid rows, and writes polished final reports.",
+      "moduleProject": "Build a community-event registration cleaner that reads messy data, keeps valid rows, summarizes seat demand, and writes polished final reports.",
       "sections": [
         {
           "sectionSlug": "python-8-course-capstone",
@@ -689,19 +690,67 @@
           "role": "capstone",
           "topics": [
             {
-              "topicId": "class-roster-cleaner",
-              "title": "Class Roster Cleaner",
-              "summary": "Finish the course with a class-roster cleaner capstone that grows from a raw-file preview into a complete cleaned report workflow.",
-              "minutes": 36,
+              "topicId": "community-event-registration-cleaner",
+              "title": "Community Event Registration Cleaner",
+              "summary": "Finish the course with a six-step cleaner that turns a messy community-event registration export into validated records, event totals, and dependable output files.",
+              "minutes": 140,
               "technical": true,
               "learningGoals": [
-                "Carry one working project across several focused changes",
-                "Clean, summarize, and write structured file output",
-                "Finish with a polished final workflow"
+                "Carry one working CSV-cleaning project through six cumulative milestones",
+                "Separate cleaning, summary, and report behavior into focused helper modules",
+                "Finish with deterministic cleaned registrations and event summary output"
               ],
               "practice": {
                 "tryIt": true,
                 "projectFlow": "progressive"
+              },
+              "projectBrief": {
+                "scenario": "A community center receives a registration CSV with inconsistent names, mixed-case email addresses, and invalid seat counts. Staff need a trustworthy cleaned export and a concise event-demand summary before assigning rooms and volunteers.",
+                "role": "Junior Python data assistant preparing the registration handoff",
+                "workspace": "Browser multifile Python workspace with data/registrations.csv, main.py, tools/, and generated output/",
+                "deliverable": "One six-step cumulative registration-cleaning application that reads the provided CSV, validates and normalizes rows, moves logic into helper modules, summarizes seats by event, and writes final reports.",
+                "stepCountTarget": 6,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep every step runnable from main.py with the complete files required for that milestone.",
+                  "Use the previous complete solutionFiles as the next starter workspace.",
+                  "Preserve every earlier requirement unless the current step explicitly replaces it.",
+                  "Read data/registrations.csv from the provided workspace fixture; do not hardcode its rows in Python.",
+                  "Skip rows whose seat value cannot be converted to an integer without discarding valid registrations.",
+                  "Sort event names before printing or writing summaries so the final output is deterministic."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Preview the Registration File",
+                    "requirement": "Open data/registrations.csv and print every row with surrounding whitespace removed."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Clean One Registration Row",
+                    "requirement": "Add clean_row(line) that returns normalized name, event, integer seats, and lowercase email fields, then show the first cleaned record."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Skip Invalid Seat Counts",
+                    "requirement": "Process all data rows, collect valid dictionaries, and skip rows whose seats raise ValueError."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Move Cleaning into a Helper Module",
+                    "requirement": "Move clean_row(line) to tools/cleaning.py, import it in main.py, and preserve the valid records output."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Add Event Summary Functions",
+                    "requirement": "Create total_seats(records) and event_counts(records), then print total seats and sorted event counts."
+                  },
+                  {
+                    "step": 6,
+                    "title": "Write the Final Registration Reports",
+                    "requirement": "Add report helpers that write output/clean_registrations.csv and output/summary.txt, then print the same deterministic final summary."
+                  }
+                ]
               }
             }
           ]

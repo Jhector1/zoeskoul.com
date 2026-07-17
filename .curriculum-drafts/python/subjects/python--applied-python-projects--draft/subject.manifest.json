@@ -4,7 +4,7 @@
     "profileId": "python",
     "catalogSlug": "python",
     "genKey": "python_part1",
-    "order": 0,
+    "order": 2,
     "accessPolicy": "paid",
     "status": "active",
     "imagePublicId": null,
@@ -15,7 +15,7 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 4,
-        "isTerminalRelease": false,
+        "isTerminalRelease": true,
         "moreComingMessageKey": "subjects.python--applied-python-projects--draft.moreComingSoon"
       },
       "completionPolicy": {
@@ -60,9 +60,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 165,
+        "estimatedMinutes": 210,
         "prereqKeys": [
-          "modules.python--applied-python-projects--draft.python-7.title"
+          "modules.python--python-data-functions--draft.python-8-real-world-project.title"
         ],
         "outcomeKeys": [
           "modules.python--applied-python-projects--draft.python-8-object-oriented-foundations.outcomes.0",
@@ -185,9 +185,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 178,
+        "estimatedMinutes": 210,
         "prereqKeys": [
-          "modules.python--applied-python-projects--draft.python-8.title"
+          "modules.python--applied-python-projects--draft.python-8-object-oriented-foundations.title"
         ],
         "outcomeKeys": [
           "modules.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.outcomes.0",
@@ -278,7 +278,7 @@
             }
           },
           "topics": [
-            "module-9-catalog-polymorphism-project"
+            "module-9-greenhouse-sensor-project"
           ]
         }
       ]
@@ -309,9 +309,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 175,
+        "estimatedMinutes": 220,
         "prereqKeys": [
-          "modules.python--applied-python-projects--draft.python-9.title"
+          "modules.python--applied-python-projects--draft.python-9-inheritance-polymorphism-and-abstraction.title"
         ],
         "outcomeKeys": [
           "modules.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.outcomes.0",
@@ -434,9 +434,9 @@
         }
       },
       "meta": {
-        "estimatedMinutes": 205,
+        "estimatedMinutes": 260,
         "prereqKeys": [
-          "modules.python--applied-python-projects--draft.python-10.title"
+          "modules.python--applied-python-projects--draft.python-10-testing-debugging-oop-projects.title"
         ],
         "outcomeKeys": [
           "modules.python--applied-python-projects--draft.python-11-oop-capstone-project.outcomes.0",
@@ -450,62 +450,8 @@
       },
       "sections": [
         {
-          "slug": "python--applied-python-projects--draft-python-11-capstone-architecture",
-          "order": 1,
-          "titleKey": "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-architecture.title",
-          "descriptionKey": "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-architecture.description",
-          "meta": {
-            "module": 11,
-            "weeksKey": "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-architecture.weeks",
-            "bulletKeys": [
-              "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-architecture.bullets.0",
-              "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-architecture.bullets.1",
-              "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-architecture.bullets.2",
-              "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-architecture.bullets.3"
-            ]
-          },
-          "serviceDefaults": {
-            "requires": {
-              "files": true,
-              "multiFile": true,
-              "terminal": false
-            }
-          },
-          "topics": [
-            "capstone-scope-and-architecture",
-            "capstone-domain-model"
-          ]
-        },
-        {
-          "slug": "python--applied-python-projects--draft-python-11-capstone-services-and-polish",
-          "order": 2,
-          "titleKey": "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-services-and-polish.title",
-          "descriptionKey": "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-services-and-polish.description",
-          "meta": {
-            "module": 11,
-            "weeksKey": "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-services-and-polish.weeks",
-            "bulletKeys": [
-              "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-services-and-polish.bullets.0",
-              "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-services-and-polish.bullets.1",
-              "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-services-and-polish.bullets.2",
-              "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-capstone-services-and-polish.bullets.3"
-            ]
-          },
-          "serviceDefaults": {
-            "requires": {
-              "files": true,
-              "multiFile": true,
-              "terminal": false
-            }
-          },
-          "topics": [
-            "capstone-storage-and-reports",
-            "capstone-tests-and-polish"
-          ]
-        },
-        {
           "slug": "python--applied-python-projects--draft-python-11-final-capstone",
-          "order": 3,
+          "order": 1,
           "role": "capstone",
           "titleKey": "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-final-capstone.title",
           "descriptionKey": "sections.python--applied-python-projects--draft.python-11-oop-capstone-project.python--applied-python-projects--draft-python-11-final-capstone.description",

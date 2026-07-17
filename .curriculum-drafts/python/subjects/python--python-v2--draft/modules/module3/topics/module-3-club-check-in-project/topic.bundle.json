@@ -1,0 +1,588 @@
+{
+  "topicId": "module-3-club-check-in-project",
+  "subjectSlug": "python--python-v2--draft",
+  "moduleSlug": "python-v2-3",
+  "sectionSlug": "python--python-v2--draft-python-v2-3-module-project",
+  "prefix": "pyv2_3",
+  "minutes": 42,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": false,
+    "supportsFileSystem": false,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "topic": {
+    "labelKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.label",
+    "summaryKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.cards.sketch0.title",
+      "sketchId": "sketch-1",
+      "height": 420,
+      "tryIt": {
+        "id": "try-module-3-club-check-in-sketch0",
+        "titleKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.prompt",
+        "exerciseKey": "try-module-3-club-check-in-sketch0",
+        "difficulty": "easy",
+        "preferKind": "code_input",
+        "seedPolicy": "global",
+        "required": true,
+        "allowReveal": true,
+        "maxAttempts": null
+      }
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "mp_1",
+            "titleKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.projectSteps.mp_1.title",
+            "exerciseKey": "mp-1-check-in-three-members",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_2",
+            "titleKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.projectSteps.mp_2.title",
+            "exerciseKey": "mp-2-count-vip-members",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_3",
+            "titleKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.projectSteps.mp_3.title",
+            "exerciseKey": "mp-3-stop-on-done",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "mp_4",
+            "titleKey": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.projectSteps.mp_4.title",
+            "exerciseKey": "mp-4-finish-club-check-in",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "sketch-1",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.sketch-1.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.sketch-1.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-module-3-club-check-in-sketch0",
+      "kind": "code_input",
+      "purpose": "try_it",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "3\n2\n1\nOpen\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "range(3, 0, -1)",
+            "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "range(3, 0, -1)",
+          "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.try-module-3-club-check-in-sketch0.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "mp-1-check-in-three-members",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "tests": [
+          {
+            "stdin": "Ava\nMia\nZoe\n",
+            "stdout": "Checked in: Ava\nChecked in: Mia\nChecked in: Zoe\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Leo\nNoah\nIris\n",
+            "stdout": "Checked in: Leo\nChecked in: Noah\nChecked in: Iris\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "range(3)",
+            "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "range(3)",
+          "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-1-check-in-three-members.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "mp-2-count-vip-members",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "tests": [
+          {
+            "stdin": "VIP-Ava\nMia\nVIP-Zoe\n",
+            "stdout": "Checked in: VIP-Ava\nChecked in: Mia\nChecked in: VIP-Zoe\nVIP check-ins: 2\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "Leo\nNoah\nIris\n",
+            "stdout": "Checked in: Leo\nChecked in: Noah\nChecked in: Iris\nVIP check-ins: 0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "vip_count += 1",
+            "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "vip_count += 1",
+          "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-2-count-vip-members.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "mp-3-stop-on-done",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "tests": [
+          {
+            "stdin": "Ava\nMia\ndone\n",
+            "stdout": "Checked in: Ava\nChecked in: Mia\nTotal check-ins: 2\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "done\n",
+            "stdout": "Total check-ins: 0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "pattern": "\\bwhile\\s+True\\s*:",
+            "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.0.message"
+          },
+          {
+            "type": "source_contains",
+            "pattern": "break",
+            "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.1.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "pattern": "\\bwhile\\s+True\\s*:",
+          "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.0.message"
+        },
+        {
+          "type": "source_contains",
+          "pattern": "break",
+          "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-3-stop-on-done.sourceChecks.1.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    },
+    {
+      "id": "mp-4-finish-club-check-in",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in",
+      "language": "python",
+      "entryFilePath": "main.py",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.starterCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.starterCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "fixed_tests",
+        "language": "python",
+        "tests": [
+          {
+            "stdin": "VIP-Ava\n\nMia\nVIP-Zoe\ndone\n",
+            "stdout": "Checked in: VIP-Ava\nChecked in: Mia\nChecked in: VIP-Zoe\nTotal check-ins: 3\nVIP check-ins: 2\n",
+            "match": "exact"
+          },
+          {
+            "stdin": "\ndone\n",
+            "stdout": "Total check-ins: 0\nVIP check-ins: 0\n",
+            "match": "exact"
+          }
+        ],
+        "solutionCode": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.solutionCode",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "pattern": "continue",
+            "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.sourceChecks.0.message",
+            "normalizeWhitespace": true
+          },
+          {
+            "type": "source_contains",
+            "pattern": "break",
+            "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.sourceChecks.1.message",
+            "normalizeWhitespace": true
+          }
+        ]
+      },
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.solutionCode",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        }
+      ],
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "pattern": "continue",
+          "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.sourceChecks.0.message",
+          "normalizeWhitespace": true
+        },
+        {
+          "type": "source_contains",
+          "pattern": "break",
+          "message": "@:topics.python--python-v2--draft.python-v2-3.module-3-club-check-in-project.quiz.mp-4-finish-club-check-in.sourceChecks.1.message",
+          "normalizeWhitespace": true
+        }
+      ]
+    }
+  ]
+}

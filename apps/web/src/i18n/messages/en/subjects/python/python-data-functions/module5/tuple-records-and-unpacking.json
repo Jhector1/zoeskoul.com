@@ -1,0 +1,152 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "tuple-records-and-unpacking": {
+          "label": "Tuple Records and Unpacking",
+          "summary": "Use tuples when a small record should keep a fixed shape, then unpack each position into a meaningful name.",
+          "cards": {
+            "sketch0": {
+              "title": "A fixed record has a clear shape"
+            },
+            "sketch1": {
+              "title": "Unpack positions into names"
+            },
+            "quiz": {
+              "title": "Check your tuple understanding"
+            }
+          },
+          "quiz": {
+            "try-tuple-records-sketch0": {
+              "title": "Create a location tuple",
+              "prompt": "In `main.py`, create `location` as the tuple `(\"Austin\", \"TX\")`. Print the city from index 0 and the state from index 1 on separate lines.",
+              "hint": "Use parentheses for the fixed pair, then read each position with square brackets.",
+              "help": {
+                "concept": "A tuple stores an ordered record whose positions should not be changed after creation.",
+                "hint_1": "The first position uses index 0.",
+                "hint_2": "Print the two fields separately."
+              },
+              "starterCode": "# Create a fixed location record and print both fields.\n",
+              "solutionCode": "location = (\"Austin\", \"TX\")\nprint(location[0])\nprint(location[1])\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Create location as the required two-value tuple."
+                },
+                "1": {
+                  "message": "Read the first tuple position with location[0]."
+                }
+              }
+            },
+            "try-tuple-unpacking-sketch1": {
+              "title": "Unpack an event tuple",
+              "prompt": "The starter defines `event = (\"Workshop\", 24)`. Unpack it into `title` and `seats`, then print the two variables on separate lines.",
+              "hint": "Place both new names on the left side of one assignment.",
+              "help": {
+                "concept": "Tuple unpacking gives a meaningful name to each position in a fixed record.",
+                "hint_1": "The number of names must match the number of tuple values.",
+                "hint_2": "Print the unpacked variables, not hard-coded literals."
+              },
+              "starterCode": "event = (\"Workshop\", 24)\n# Unpack event into title and seats, then print both values.\n",
+              "solutionCode": "event = (\"Workshop\", 24)\ntitle, seats = event\nprint(title)\nprint(seats)\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Unpack event into title and seats in one assignment."
+                }
+              }
+            },
+            "sc-tuple-purpose": {
+              "title": "Choose the fixed record",
+              "prompt": "Which value is the best tuple when a coordinate should keep exactly two ordered positions?",
+              "options": {
+                "a": "[4, 9]",
+                "b": "(4, 9)",
+                "c": "{\"x\": 4, \"y\": 9}"
+              },
+              "hint": "Look for the ordered collection whose structure is intended to stay fixed.",
+              "help": {
+                "concept": "Tuples are useful for compact ordered records that should not be mutated.",
+                "hint_1": "Parentheses distinguish this literal from a list.",
+                "hint_2": "A dictionary names fields rather than relying on positions."
+              }
+            },
+            "mc-tuple-facts": {
+              "title": "Recognize tuple behavior",
+              "prompt": "Which statements about tuples are true?",
+              "options": {
+                "a": "Tuple positions use zero-based indexes.",
+                "b": "append() adds a value to an existing tuple.",
+                "c": "A tuple can be unpacked into multiple names.",
+                "d": "Tuples can contain only strings."
+              },
+              "hint": "Separate how a tuple is read from whether its structure can be mutated.",
+              "help": {
+                "concept": "Tuples are ordered and indexable, but they do not support list-style mutation methods.",
+                "hint_1": "Unpacking follows position order.",
+                "hint_2": "A tuple may hold values of different types."
+              }
+            },
+            "fb-tuple-index": {
+              "title": "Read the first tuple field",
+              "prompt": "Complete the expression that reads `\"North\"` from `direction = (\"North\", 12)`: `direction[___]`",
+              "options": {
+                "a": "0",
+                "b": "1",
+                "c": "-2 + 1"
+              },
+              "hint": "Tuple indexing begins at the same position as list and string indexing.",
+              "help": {
+                "concept": "Every Python sequence begins with the zero index.",
+                "hint_1": "The requested value is the first field.",
+                "hint_2": "Use the simplest direct index."
+              }
+            },
+            "dr-tuple-unpack": {
+              "title": "Build an unpacking assignment",
+              "prompt": "Arrange the tokens to unpack `record` into `name` and `score`.",
+              "tokens": {
+                "t1": "name",
+                "t2": ",",
+                "t3": "score",
+                "t4": "=",
+                "t5": "record"
+              },
+              "hint": "Put the target names on the left and the tuple variable on the right.",
+              "help": {
+                "concept": "Unpacking is one assignment with one target name per tuple position.",
+                "hint_1": "The comma separates the two target names.",
+                "hint_2": "The tuple variable appears after the equals sign."
+              }
+            }
+          },
+          "tryIt": {
+            "try_tuple_records_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Create and read a location tuple."
+            },
+            "try_tuple_unpacking_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "Unpack an event tuple into two names."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-5-lists-tuples-and-dictionaries": {
+        "tuple-records-and-unpacking": {
+          "sketch-1": {
+            "title": "A fixed record has a clear shape",
+            "bodyMarkdown": "A list is useful when a program expects items to grow, shrink, or change. A tuple communicates a different intention: these values form one ordered record whose shape should remain stable.\n\n```python\nrgb = (240, 128, 64)\nprint(rgb[0])\n```\n\nThe positions still use zero-based indexing, but methods such as `append()` are not available. That limitation is useful when the record represents something fixed, such as a coordinate, color, or date."
+          },
+          "sketch-2": {
+            "title": "Unpack positions into names",
+            "bodyMarkdown": "Indexes are compact, but named variables make the meaning of each field easier to read. Tuple unpacking assigns every position in one step.\n\n```python\nbook = (\"Kindred\", 1979)\ntitle, year = book\nprint(f\"{title} was published in {year}.\")\n```\n\nThe number of target names must match the number of tuple fields. Once unpacked, the rest of the program can work with `title` and `year` instead of remembering what positions 0 and 1 mean."
+          }
+        }
+      }
+    }
+  }
+}

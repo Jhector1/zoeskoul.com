@@ -1,0 +1,2149 @@
+{
+  "topicId": "capstone-tests-and-polish",
+  "subjectSlug": "applied-python-projects",
+  "moduleSlug": "python-11-oop-capstone-project",
+  "sectionSlug": "applied-python-projects-python-11-capstone-services-and-polish",
+  "prefix": "py11",
+  "minutes": 35,
+  "runtimeDefaults": {
+    "kind": "code",
+    "language": "python",
+    "supportsTerminal": false,
+    "supportsMultiFile": true,
+    "supportsFileSystem": true,
+    "supportsStdInStdOut": true,
+    "supportsPackageInstall": false
+  },
+  "serviceDefaults": {
+    "requires": {
+      "files": true,
+      "multiFile": true,
+      "terminal": false
+    }
+  },
+  "topic": {
+    "labelKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.label",
+    "summaryKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.summary"
+  },
+  "cards": [
+    {
+      "id": "sketch0",
+      "kind": "sketch",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.cards.sketch0.title",
+      "sketchId": "capstone-tests-and-polish-sketch0",
+      "height": 420
+    },
+    {
+      "id": "project",
+      "kind": "project",
+      "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.cards.project.title",
+      "project": {
+        "difficulty": "easy",
+        "allowReveal": true,
+        "preferKind": "code_input",
+        "displayKind": "capstone",
+        "uiKind": "capstone",
+        "maxAttempts": null,
+        "steps": [
+          {
+            "id": "try_capstone_tests_and_polish_sketch0",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.projectSteps.try_capstone_tests_and_polish_sketch0.title",
+            "exerciseKey": "try-capstone-tests-and-polish-sketch0",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null
+          },
+          {
+            "id": "capstone_tests_and_polish_step2_service_tests",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.projectSteps.capstone_tests_and_polish_step2_service_tests.title",
+            "exerciseKey": "capstone-tests-and-polish-step2-service-tests",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_tests_and_polish_step3_report_file",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.projectSteps.capstone_tests_and_polish_step3_report_file.title",
+            "exerciseKey": "capstone-tests-and-polish-step3-report-file",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_tests_and_polish_step4_readme",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.projectSteps.capstone_tests_and_polish_step4_readme.title",
+            "exerciseKey": "capstone-tests-and-polish-step4-readme",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_tests_and_polish_step5_final_polish",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.projectSteps.capstone_tests_and_polish_step5_final_polish.title",
+            "exerciseKey": "capstone-tests-and-polish-step5-final-polish",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          },
+          {
+            "id": "capstone_tests_and_polish_step6_final_handoff",
+            "titleKey": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.projectSteps.capstone_tests_and_polish_step6_final_handoff.title",
+            "exerciseKey": "capstone-tests-and-polish-step6-final-handoff",
+            "difficulty": "easy",
+            "preferKind": "code_input",
+            "seedPolicy": "global",
+            "maxAttempts": null,
+            "carryFromPrev": true
+          }
+        ]
+      }
+    }
+  ],
+  "sketches": [
+    {
+      "id": "capstone-tests-and-polish-sketch0",
+      "archetype": "paragraph",
+      "titleKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.capstone-tests-and-polish-sketch0.title",
+      "bodyKey": "sketches.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.capstone-tests-and-polish-sketch0.bodyMarkdown"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "try-capstone-tests-and-polish-sketch0",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.starterFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.solutionFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 1,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.try_capstone_tests_and_polish_sketch0.checks.0.message"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "model checks passed\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
+      }
+    },
+    {
+      "id": "capstone-tests-and-polish-step2-service-tests",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.starterFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.solutionFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 1,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step2_service_tests.checks.0.message"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "service checks passed\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
+      }
+    },
+    {
+      "id": "capstone-tests-and-polish-step3-report-file",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/report_file.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.reports_report_file_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/report_file.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.reports_report_file_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/report_file.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.starterFiles.reports_report_file_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/report_file.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.solutionFiles.reports_report_file_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 1,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step3_report_file.checks.0.message"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "report file checks passed\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
+      }
+    },
+    {
+      "id": "capstone-tests-and-polish-step4-readme",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/report_file.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.reports_report_file_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "README.md",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.README_md.content",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/report_file.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.reports_report_file_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "README.md",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.README_md.content",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/report_file.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.reports_report_file_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.starterFiles.README_md.content",
+            "language": "markdown",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/report_file.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.reports_report_file_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.solutionFiles.README_md.content",
+            "language": "markdown",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 1,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step4_readme.checks.0.message"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "README documents models, services, storage, reports, and tests\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
+      }
+    },
+    {
+      "id": "capstone-tests-and-polish-step5-final-polish",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/report_file.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.reports_report_file_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "README.md",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.README_md.content",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/report_file.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.reports_report_file_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "README.md",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.README_md.content",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/report_file.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.reports_report_file_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.README_md.content",
+            "language": "markdown",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.starterFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/report_file.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.reports_report_file_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.README_md.content",
+            "language": "markdown",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.solutionFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 6,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step5_final_polish.checks.0.message"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "SMART TASK TRACKER\nBUG: Fix login redirect | priority=high | severity=critical | done=True\nFEATURE: Add dark mode | priority=medium | points=3 | done=False\nFEATURE: Export CSV | priority=low | points=5 | done=True\nFEATURE: Add tests | priority=medium | points=2 | done=True\nOPEN: 1 | DONE: 3\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
+      }
+    },
+    {
+      "id": "capstone-tests-and-polish-step6-final-handoff",
+      "kind": "code_input",
+      "purpose": "project",
+      "weight": 1,
+      "messageBase": "topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff",
+      "language": "python",
+      "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterCode",
+      "starterFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/report_file.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.reports_report_file_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "README.md",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.README_md.content",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "solutionFiles": [
+        {
+          "path": "main.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.main_py.content",
+          "language": "python",
+          "isEntry": true,
+          "entry": true
+        },
+        {
+          "path": "models/base_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.models_base_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/bug_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.models_bug_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/feature_task.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.models_feature_task_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "models/__init__.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.models___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/summary.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.reports_summary_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/task_storage.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.storage_task_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/tracker_service.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.services_tracker_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "data/tasks.csv",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.data_tasks_csv.content",
+          "language": "text",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "reports/report_file.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.reports_report_file_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "README.md",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.README_md.content",
+          "language": "markdown",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/check_tasks.py",
+          "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.tests_check_tasks_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        }
+      ],
+      "workspace": {
+        "language": "python",
+        "entryFilePath": "main.py",
+        "starterCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterCode",
+        "starterFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/report_file.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.reports_report_file_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.README_md.content",
+            "language": "markdown",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.starterFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ]
+      },
+      "showExpectedExample": true,
+      "recipe": {
+        "type": "semantic",
+        "language": "python",
+        "solutionCode": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionCode",
+        "solutionFiles": [
+          {
+            "path": "main.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.main_py.content",
+            "language": "python",
+            "isEntry": true,
+            "entry": true
+          },
+          {
+            "path": "models/base_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.models_base_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/bug_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.models_bug_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/feature_task.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.models_feature_task_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "models/__init__.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.models___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/summary.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.reports_summary_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/task_storage.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.storage_task_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "services/tracker_service.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.services_tracker_service_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "data/tasks.csv",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.data_tasks_csv.content",
+            "language": "text",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "reports/report_file.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.reports_report_file_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.README_md.content",
+            "language": "markdown",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/check_tasks.py",
+            "content": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.solutionFiles.tests_check_tasks_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "semanticChecks": [
+          {
+            "type": "printed_line_count",
+            "path": "main.py",
+            "min": 7,
+            "message": "@:topics.applied-python-projects.python-11-oop-capstone-project.capstone-tests-and-polish.finalCapstone.steps.capstone_tests_and_polish_step6_final_handoff.checks.0.message"
+          }
+        ],
+        "tests": [
+          {
+            "stdin": "",
+            "stdout": "SMART TASK TRACKER\nBUG: Fix login redirect | priority=high | severity=critical | done=True\nFEATURE: Add dark mode | priority=medium | points=3 | done=True\nFEATURE: Export CSV | priority=low | points=5 | done=True\nFEATURE: Add tests | priority=medium | points=2 | done=True\nOPEN: 0 | DONE: 4\nall checks passed\n",
+            "match": "exact"
+          }
+        ],
+        "semanticFirst": true
+      }
+    }
+  ]
+}

@@ -234,15 +234,15 @@
         "constructors-and-object-state": {
           "sketch-0": {
             "title": "Instance variables belong to one object",
-            "bodyMarkdown": "`__init__` runs each time Python creates an object. Assignments on `self` become **instance variables**.\n\n```python\nclass Student:\n    def __init__(self, name):\n        self.name = name\n```\n\nEach `Student` receives its own `name`. Changing one student does not change another."
+            "bodyMarkdown": "`__init__` runs each time Python creates an object. Assignments on `self` become **instance variables**.\n\n```python\nclass Student:\n    def __init__(self, name):\n        self.name = name\n```\n\nEach `Student` receives its own `name`. Changing one student does not change another.\n\nA constructor establishes the conditions that must be true when an object first exists. Validate and assign that initial state once so later methods can rely on a dependable object instead of repeatedly checking half-built data."
           },
           "sketch-1": {
             "title": "Class variables hold shared class-level values",
-            "bodyMarkdown": "A **class variable** is written in the class body, outside every method.\n\n```python\nclass Student:\n    school_name = \"Zoeskoul\"\n\n    def __init__(self, name):\n        self.name = name\n```\n\n`Student.school_name` is shared at the class level. `student.name` belongs to one object. Use a class variable for information that is intentionally common to the whole class."
+            "bodyMarkdown": "A **class variable** is written in the class body, outside every method.\n\n```python\nclass Student:\n    school_name = \"Zoeskoul\"\n\n    def __init__(self, name):\n        self.name = name\n```\n\n`Student.school_name` is shared at the class level. `student.name` belongs to one object. Use a class variable for information that is intentionally common to the whole class.\n\nA constructor establishes the conditions that must be true when an object first exists. Validate and assign that initial state once so later methods can rely on a dependable object instead of repeatedly checking half-built data."
           },
           "sketch-2": {
             "title": "Mutable values usually belong on the instance",
-            "bodyMarkdown": "Be careful with lists and dictionaries. This creates one list shared by every object:\n\n```python\nclass Student:\n    courses = []  # shared list\n```\n\nFor a separate list per student, create it in `__init__`:\n\n```python\nclass Student:\n    def __init__(self, name):\n        self.name = name\n        self.courses = []\n```\n\nNow adding a course to one student does not change the others."
+            "bodyMarkdown": "Be careful with lists and dictionaries. This creates one list shared by every object:\n\n```python\nclass Student:\n    courses = []  # shared list\n```\n\nFor a separate list per student, create it in `__init__`:\n\n```python\nclass Student:\n    def __init__(self, name):\n        self.name = name\n        self.courses = []\n```\n\nNow adding a course to one student does not change the others.\n\nA constructor establishes the conditions that must be true when an object first exists. Validate and assign that initial state once so later methods can rely on a dependable object instead of repeatedly checking half-built data."
           }
         }
       }

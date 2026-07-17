@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Document and align function behavior"
-            }
-          },
-          "projectSteps": {
-            "ci_add_docstring": {
-              "title": "Add a matching docstring"
-            },
-            "ci_write_contract_function": {
-              "title": "Write a documented function with a clear contract"
-            },
-            "ci_fix_print_vs_return": {
-              "title": "Fix the contract mismatch"
             }
           },
           "quiz": {
@@ -133,8 +119,8 @@
               "prompt": "Choose the word that best completes the docstring.",
               "hint": "The sentence describes giving a value back to the caller.",
               "help": {
-                "concept": "Docstrings often use the word `the missing term` when a function sends a value back instead of printing it.",
-                "hint_1": "This blank should be a verb that matches `the missing term total` style behavior.",
+                "concept": "A docstring should describe the value sent back to the caller when the function does not merely print.",
+                "hint_1": "Choose the verb used in function documentation for a value sent back to the caller.",
                 "hint_2": "Pick the choice that means the function gives a result back to the caller."
               },
               "template": "`\"\"\"[blank1] the sum of two numbers.\"\"\"`",
@@ -167,9 +153,9 @@
               "prompt": "Add a docstring under `make_lower(text)` that clearly says what the function returns.",
               "hint": "Read the task \"Add a matching docstring\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "def make_lower(text):\n    # Add a docstring below.\n    return text.lower()",
               "solutionCode": "def make_lower(text):\n    \"\"\"Return the lowercase version of text.\"\"\"\n    return text.lower()"
@@ -179,9 +165,9 @@
               "prompt": "Write `repeat_word(word, times)` so it returns the repeated text, and add a docstring that explains that contract clearly.",
               "hint": "Read the task \"Write a documented function with a clear contract\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "def repeat_word(word, times):\n    # Add a docstring and return the repeated word.\n    pass",
               "solutionCode": "def repeat_word(word, times):\n    \"\"\"Return word repeated times times.\"\"\"\n    return word * times"
@@ -191,9 +177,9 @@
               "prompt": "The docstring says `total_price(price, tax)` should return the total, but the starter code prints it instead. Fix the function so its behavior matches the docstring.",
               "hint": "Read the task \"Fix the contract mismatch\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Run the completed step and verify every output line before submitting it."
               },
               "starterCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    print(price + tax)",
               "solutionCode": "def total_price(price, tax):\n    \"\"\"Return the total of price and tax.\"\"\"\n    return price + tax"
@@ -216,8 +202,8 @@
               "hint": "Add a docstring and return text stripped and title-cased.",
               "help": {
                 "concept": "Add a docstring and return text stripped and title-cased.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Make the focused edit, then verify how it changes the current output.",
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "def clean_name(text):\n    # Add a docstring and return text stripped and title-cased.\n    pass\n\nprint(clean_name('  ava  '))\n",
               "solutionCode": "def clean_name(text):\n    \"\"\"Return text stripped of extra space and converted to title case.\"\"\"\n    return text.strip().title()\n\nprint(clean_name('  ava  '))\n"
@@ -228,8 +214,8 @@
               "hint": "Finish the return statement.",
               "help": {
                 "concept": "Finish the return statement.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Complete this line before moving on, using the runner to confirm the result.",
+                "hint_2": "Do not add debugging text or labels beyond the lines required by the prompt."
               },
               "starterCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    # Finish the return statement.\n    pass\n\nprint(round(fahrenheit_to_celsius(32), 1))\n",
               "solutionCode": "def fahrenheit_to_celsius(temp):\n    \"\"\"Return Celsius for a Fahrenheit temperature.\"\"\"\n    return (temp - 32) * 5 / 9\n\nprint(round(fahrenheit_to_celsius(32), 1))\n"
@@ -240,8 +226,8 @@
               "hint": "Start with the first missing line.",
               "help": {
                 "concept": "Start with the first missing line.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Apply one small change and inspect the new program state.",
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    pass\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n",
               "solutionCode": "def is_valid_score(score):\n    \"\"\"Return True when score is between 0 and 100 inclusive.\"\"\"\n    return 0 <= score <= 100\n\nprint(is_valid_score(105))\nprint(is_valid_score(95))\n"
@@ -276,7 +262,7 @@
         "docstrings-and-function-contracts": {
           "docstrings-idea": {
             "title": "What a docstring and contract do",
-            "bodyMarkdown": "A **docstring** is a short string placed right under a function definition. It explains what the function does.\n\nA **function contract** describes the function's inputs and output:\n- what arguments it expects\n- what kind of value it returns\n- any important assumptions\n\nHere is a simple example:\n\n```python\ndef square(number):\n    \"\"\"Return the square of number.\"\"\"\n    return number * number\n```\n\nLine by line:\n- `def square(number):` defines a function named `square` with one parameter.\n- The triple-quoted string is the docstring.\n- `return number * number` sends the result back to the caller.\n\nIf you call `square(4)`, the function returns `16`.\n\nA good beginner-friendly contract might answer questions like:\n- Should `number` be an integer or float?\n- Does the function print something, or return something?\n- What comes back after the call?"
+            "bodyMarkdown": "A **docstring** is a short string placed right under a function definition. It explains what the function does.\n\nA **function contract** describes the function's inputs and output:\n- what arguments it expects\n- what kind of value it returns\n- any important assumptions\n\nHere is a simple example:\n\n```python\ndef square(number):\n    \"\"\"Return the square of number.\"\"\"\n    return number * number\n```\n\nFollow the execution: - `def square(number):` defines a function named `square` with one parameter.\n- The triple-quoted string is the docstring.\n- `return number * number` sends the result back to the caller.\n\nIf you call `square(4)`, the function returns `16`.\n\nA good beginner-friendly contract might answer questions like:\n- Should `number` be an integer or float?\n- Does the function print something, or return something?\n- What comes back after the call?"
           },
           "good-docstrings": {
             "title": "Writing clear docstrings",

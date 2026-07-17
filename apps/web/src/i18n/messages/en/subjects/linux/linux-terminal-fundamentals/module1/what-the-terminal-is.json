@@ -6,6 +6,9 @@
           "label": "What the Terminal Is",
           "summary": "Meet the terminal as a calm place to type commands, read output, and check before changing anything.",
           "cards": {
+            "course-introduction": {
+              "title": "Course introduction"
+            },
             "sketch0": {
               "title": "The terminal is a command conversation"
             },
@@ -23,11 +26,11 @@
             "sc-terminal-output": {
               "title": "What output means",
               "prompt": "In the terminal, what is output?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Separate the prompt from the command and read the response before continuing.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "The terminal follows a command → output → verification cycle.",
+                "hint_1": "Separate the prompt from the command and read the response before continuing.",
+                "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: In the terminal, what is output?"
               },
               "options": {
                 "a": "The text the terminal prints after a command",
@@ -39,11 +42,11 @@
             "mc-safe-inspection": {
               "title": "Safe first commands",
               "prompt": "Which commands are safe inspection commands in this course?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Separate the prompt from the command and read the response before continuing.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "The terminal follows a command → output → verification cycle.",
+                "hint_1": "Separate the prompt from the command and read the response before continuing.",
+                "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: Which commands are safe inspection commands in this course?"
               },
               "options": {
                 "a": "pwd",
@@ -55,11 +58,11 @@
             "dr-terminal-flow": {
               "title": "Order a terminal interaction",
               "prompt": "Put the parts of a simple terminal interaction in order.",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Separate the prompt from the command and read the response before continuing.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "The terminal follows a command → output → verification cycle.",
+                "hint_1": "Separate the prompt from the command and read the response before continuing.",
+                "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: Put the parts of a simple terminal interaction in order."
               },
               "tokens": {
                 "t1": "The prompt appears",
@@ -71,11 +74,11 @@
             "sc-before-changing": {
               "title": "Before changing files",
               "prompt": "What is the best first move in a new workspace?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Separate the prompt from the command and read the response before continuing.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "The terminal follows a command → output → verification cycle.",
+                "hint_1": "Separate the prompt from the command and read the response before continuing.",
+                "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: What is the best first move in a new workspace?"
               },
               "options": {
                 "a": "Inspect where you are and what is nearby",
@@ -91,11 +94,11 @@
               "what-terminal-is-try-it-1": {
                 "title": "Identify the welcome desk folder",
                 "prompt": "You opened the welcome desk workspace. Type `pwd` to print its full folder path.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Separate the prompt from the command and read the response before continuing.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "The terminal follows a command → output → verification cycle.",
+                  "hint_1": "Separate the prompt from the command and read the response before continuing.",
+                  "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: You opened the welcome desk workspace. Type `pwd` to print its full folder path."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -128,11 +131,11 @@
               "what-terminal-is-try-it-2": {
                 "title": "Inspect the supply room",
                 "prompt": "Before changing anything in the supply room, type `ls` to see the files already there.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Separate the prompt from the command and read the response before continuing.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "The terminal follows a command → output → verification cycle.",
+                  "hint_1": "Separate the prompt from the command and read the response before continuing.",
+                  "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: Before changing anything in the supply room, type `ls` to see the files already there."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -168,11 +171,11 @@
               "what-terminal-is-try-it-3": {
                 "title": "Use the first safe check",
                 "prompt": "A teammate left you at the check-in desk. Type `pwd`, then `ls`, before deciding what to do next.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Separate the prompt from the command and read the response before continuing.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "The terminal follows a command → output → verification cycle.",
+                  "hint_1": "Separate the prompt from the command and read the response before continuing.",
+                  "hint_2": "Use the requested safe inspection command and compare its output with the exact task. The current task asks: A teammate left you at the check-in desk. Type `pwd`, then `ls`, before deciding what to do next."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -227,17 +230,21 @@
     "linux-terminal-fundamentals": {
       "linux-module-1-terminal-navigation": {
         "what-the-terminal-is": {
+          "course-introduction": {
+            "title": "Welcome to Linux Terminal Fundamentals",
+            "bodyMarkdown": "This course is for learners who want to become comfortable working in a terminal without being asked to memorize a wall of commands. You do **not** need previous Linux or command-line experience. You only need to recognize ordinary files and folders and be willing to pause, read the screen, and check your work.\n\nThe terminal in this course runs inside a safe ZoeSkoul workspace. You will not administer a real computer, install software, use `sudo`, or write Bash scripts. Instead, you will practice the beginner skills that make later development work possible: locating yourself, inspecting folders, moving through paths, creating a clean structure, reading and writing text files, copying important files, moving and renaming them, and removing only clearly temporary files.\n\nThe course unfolds in three chapters. **Module 1** teaches inspection and navigation. **Module 2** teaches deliberate file operations and ends with a cumulative organizer project. **Module 3** is one final capstone in which you repair and verify a small media archive using the complete command set.\n\nKeep one rule beside you throughout the course: **inspect first, change second, verify last**. The first technical lesson begins next with the terminal as a command conversation."
+          },
           "terminal-command-output": {
             "title": "The terminal is a command conversation",
-            "bodyMarkdown": "When you open the terminal, you are not clicking folders. You are having a short text conversation with the computer.\n\nYou type a **command**, press Enter, and read the **output**. Some commands only answer a question. Other commands change files.\n\nA safe first habit is simple: inspect before you change. For a beginner, that means starting with commands like `pwd` and `ls` before creating, moving, or deleting anything."
+            "bodyMarkdown": "A terminal is a text-based way to ask the computer to do one clear job at a time. The exchange has a simple rhythm: you type a **command**, press Enter, and read the **output** before deciding what to do next.\n\n```bash\nls\n```\n\nThe command above asks, “What names are in this folder?” The terminal might answer with `drafts`, `images`, and `todo.txt`. Some successful commands print nothing, so silence does not always mean failure. The important habit is to read the prompt again and verify the workspace instead of typing several guesses in a row.\n\nIn the first module, commands mostly answer questions. Later commands will change files and folders, but the conversation stays the same: command, response, check."
           },
           "prompt-and-command": {
             "title": "Prompt, command, and output",
-            "bodyMarkdown": "The prompt is the small bit of text that appears before your cursor. It shows the terminal is ready.\n\nFor example, you might type:\n\n```bash\npwd\n```\n\nThen the terminal prints a path such as:\n\n```bash\n/home/learner/project\n```\n\nThe command is what you typed. The output is what the terminal printed back."
+            "bodyMarkdown": "The **prompt** is the small piece of text shown before the cursor. It may include a user name, folder name, or `$` symbol. It tells you the terminal is ready; it is **not** part of the command you type.\n\n```text\n[zoeskoul]~/project$ pwd\n/workspace/project\n```\n\nHere, `[zoeskoul]~/project$` is the prompt, `pwd` is the command, and `/workspace/project` is the output. A common beginner mistake is copying the prompt along with the command. Type only the command after the prompt. In the Try It, watch where your typing begins and separate what you enter from what the terminal prints."
           },
           "safe-first-steps": {
             "title": "Start with safe inspection",
-            "bodyMarkdown": "Some commands are safe because they only show information. In this course, `pwd` and `ls` are your first inspection tools.\n\n- `pwd` tells you where you are.\n- `ls` shows what is nearby.\n- Neither command creates, moves, or removes files.\n\nThat makes them good first moves when a workspace feels unfamiliar."
+            "bodyMarkdown": "Before changing a workspace, learn to inspect it. `pwd` prints your current location, and `ls` lists the names nearby. Neither command creates, moves, renames, or deletes anything.\n\n```bash\npwd\nls\n```\n\nUse them as a safety pair: first confirm **where** you are, then see **what** is there. If the location or file names are not what you expected, stop and investigate rather than continuing with a changing command. This “inspect first” habit is more valuable than speed. It protects you from performing the right command in the wrong folder."
           }
         }
       }

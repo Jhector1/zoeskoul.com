@@ -1,0 +1,254 @@
+{
+  "topics": {
+    "python-v2": {
+      "python-v2-0": {
+        "values-types-and-literals": {
+          "label": "Valè, Tip, ak Literal",
+          "summary": "Rekonèt strings, integers, ak floats kòm kalite valè pou debutan.",
+          "cards": {
+            "sketch0": {
+              "title": "Kisa yon valè ye"
+            },
+            "sketch1": {
+              "title": "Literal yo se valè ou tape dirèkteman"
+            },
+            "sketch2": {
+              "title": "Ekspresyon yo pwodui valè"
+            },
+            "quiz": {
+              "title": "Kesyonè"
+            },
+            "project": {
+              "title": "Pratike afiche ak li valè senp"
+            }
+          },
+          "projectSteps": {
+            "ci_print_literals": {
+              "title": "Afiche senk valè literal"
+            },
+            "ci_print_expression": {
+              "title": "Afiche rezilta ekspresyon yo"
+            },
+            "ci_read_and_print": {
+              "title": "Li tèks epi afiche li"
+            },
+            "ci_read_number_text": {
+              "title": "Li yon antre ki sanble ak yon nonb"
+            },
+            "ci_three_lines": {
+              "title": "Afiche valè melanje"
+            }
+          },
+          "quiz": {
+            "sc-string-literal": {
+              "title": "Chwazi literal string lan",
+              "prompt": "Ki opsyon ki se yon literal string Python?",
+              "hint": "Chèche valè ki ekri ak guillemets.",
+              "help": {
+                "concept": "Yon literal string se tèks ki ekri dirèkteman nan kòd epi ki antoure ak guillemets.",
+                "hint_1": "Nonb tankou `7` ak `3.5` pa strings sof si yo andedan guillemets.",
+                "hint_2": "Jwenn opsyon Python ta trete kòm tèks paske mak guillemets yo fè pati kòd la."
+              },
+              "options": {
+                "a": "7",
+                "b": "\"cat\"",
+                "c": "3.5",
+                "d": "cat"
+              }
+            },
+            "sc-float-value": {
+              "title": "Idantifye float la",
+              "prompt": "Ki valè ki se yon literal float nan Python?",
+              "hint": "Yon float anjeneral gen yon pwen desimal.",
+              "help": {
+                "concept": "Yon float se yon nonb ki gen yon pwen desimal, tankou `2.5` oswa `0.0`.",
+                "hint_1": "Pa chwazi yon valè ki nan guillemets, paske guillemets fè li tounen yon string.",
+                "hint_2": "Jwenn opsyon nimerik ki ekri ak yon pwen desimal epi san guillemets."
+              },
+              "options": {
+                "a": "\"3.0\"",
+                "b": "3",
+                "c": "3.5",
+                "d": "\"cat\""
+              }
+            },
+            "mc-boolean-values": {
+              "title": "Chwazi literal nonb yo",
+              "prompt": "Ki opsyon ki se literal nonb nan Python? Chwazi tout bon repons yo.",
+              "hint": "Nonb yo ekri san guillemets.",
+              "help": {
+                "concept": "Literal integer ak float yo se valè ki ekri dirèkteman nan kòd, tankou `7` ak `2.5`.",
+                "hint_1": "Tèks ki nan guillemets se yon string, pa yon nonb.",
+                "hint_2": "Chwazi valè Python ka trete kòm nonb touswit."
+              },
+              "options": {
+                "a": "7",
+                "b": "\"7\"",
+                "c": "2.5",
+                "d": "\"two\""
+              }
+            },
+            "mc-valid-literals": {
+              "title": "Chwazi literal valab pou debutan",
+              "prompt": "Ki opsyon ki se literal Python valab nan sijè sa a? Chwazi tout bon repons yo.",
+              "hint": "Sijè sa a konsantre sou strings, integers, ak floats.",
+              "help": {
+                "concept": "Strings, integers, ak floats tout ka ekri dirèkteman kòm literal.",
+                "hint_1": "Chwazi tèks ki nan guillemets, nonb antye, ak nonb desimal.",
+                "hint_2": "Pa chwazi yon mo ki pa fini oswa ki pa nan guillemets."
+              },
+              "options": {
+                "a": "\"hello\"",
+                "b": "42",
+                "c": "4.2",
+                "d": "hello"
+              }
+            },
+            "dr-type-order": {
+              "title": "Mete egzanp valè pou debutan yo nan lòd",
+              "prompt": "Ranje egzanp sa yo soti nan string rive nan integer, apre sa float, apre sa ekspresyon aritmetik, epi finalman lide rezilta ki afiche.",
+              "hint": "Kòmanse ak tèks ki nan guillemets, apre sa nonb antye, apre sa nonb desimal.",
+              "help": {
+                "concept": "Valè Python pou debutan yo gen ladan strings, integers, ak floats. Ekspresyon yo ka pwodui valè sa yo.",
+                "hint_1": "Yon string itilize guillemets.",
+                "hint_2": "Yon float gen yon pwen desimal."
+              },
+              "tokens": {
+                "t1": "\"cat\"",
+                "t2": "42",
+                "t3": "3.14",
+                "t4": "2 + 3",
+                "t5": "afiche rezilta a"
+              }
+            },
+            "dr-expression-steps": {
+              "title": "Mete etap lekti yo nan lòd",
+              "prompt": "Mete etap sa yo nan yon lòd ki lojik pou konprann `print(2 + 3)`.",
+              "hint": "Premye remake kòmand ekstèn nan, apre sa ekspresyon ki andedan li, epi apre sa rezilta a.",
+              "help": {
+                "concept": "Pou li yon enstriksyon print senp, idantifye apèl print la, evalye ekspresyon ki andedan an, epi apre sa detèmine sa ki parèt nan panèl rezilta a.",
+                "hint_1": "Aritmetik la fèt andedan parantèz yo anvan rezilta final la parèt.",
+                "hint_2": "Kòmanse pa rekonèt `print`, apre sa kalkile valè ki andedan an, epi fini ak rezilta ki parèt la."
+              },
+              "tokens": {
+                "t1": "Remake ke `print(...)` ap montre yon valè",
+                "t2": "Evalye `2 + 3`",
+                "t3": "Jwenn valè `5` la",
+                "t4": "Montre `5` nan panèl rezilta a"
+              }
+            },
+            "fb-none-literal": {
+              "title": "Konplete yon literal string",
+              "prompt": "Chwazi tèks ki konplete literal string lan.",
+              "hint": "Yon literal string itilize guillemets ozalantou tèks la.",
+              "help": {
+                "concept": "Yon string se tèks ki andedan guillemets.",
+                "hint_1": "Chwazi mo ki dwe ale andedan guillemets yo.",
+                "hint_2": "Kòd ki konplete a ta dwe afiche yon sèl mo."
+              },
+              "template": "print(\"[blank1]\")",
+              "choices": [
+                "hello",
+                "42",
+                "2.5",
+                "print"
+              ]
+            },
+            "fb-quoted-text": {
+              "title": "Konplete string lan",
+              "prompt": "Ranpli espas vid la pou kòd la afiche yon literal string.",
+              "hint": "Yon literal string bezwen guillemets ozalantou tèks la.",
+              "help": {
+                "concept": "Strings se valè tèks ki ekri andedan guillemets, tandiske mo ki pa nan guillemets pa literal string.",
+                "hint_1": "Chwazi opsyon kote lèt yo antoure ak mak guillemets.",
+                "hint_2": "Bon chwa a se tèks ki ekri dirèkteman nan kòd, pa yon nonb epi pa yon mo ki pa nan guillemets."
+              },
+              "template": "print([blank1])",
+              "choices": [
+                "hello",
+                "\"hello\"",
+                "5",
+                "3.5"
+              ]
+            },
+            "ci-print-literals": {
+              "title": "Afiche senk valè literal",
+              "prompt": "Ekri kòd Python ki afiche twa valè sa yo sou liy separe nan lòd sa a: string `\"Zoe\"` la, integer `7` la, ak float `2.5` la.",
+              "hint": "Sèvi ak yon liy `print()` pou chak valè.",
+              "help": {
+                "concept": "Egzèsis sa a verifye si ou ka afiche strings, integers, ak floats.",
+                "hint_1": "String lan bezwen guillemets. Integer ak float la pa bezwen guillemets.",
+                "hint_2": "Afiche chak valè sou pwòp liy pa li."
+              },
+              "starterCode": "# TODO: print the five values in order"
+            },
+            "ci-print-expression": {
+              "title": "Afiche rezilta ekspresyon yo",
+              "prompt": "Ekri kòd Python ki afiche rezilta `2 + 3` sou premye liy lan ak rezilta `1.5 + 2.5` sou dezyèm liy lan.",
+              "hint": "Mete chak ekspresyon andedan pwòp apèl `print(...)` pa li.",
+              "help": {
+                "concept": "Yon ekspresyon pwodui yon valè, epi `print(...)` montre valè sa a nan panèl rezilta a.",
+                "hint_1": "Premye ekspresyon an itilize integers, epi dezyèm nan itilize nonb desimal.",
+                "hint_2": "Ou bezwen de liy print, chak ladan yo gen yon ekspresyon adisyon."
+              },
+              "starterCode": "# TODO: print the two expression results"
+            },
+            "ci-read-and-print": {
+              "title": "Li tèks epi afiche li",
+              "prompt": "Ekri kòd Python ki li yon liy antre epi afiche li egzakteman jan li te antre a.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Egzèsis kodaj sa a verifye si pwogram nan pwodui rezilta yo mande a.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "# TODO: read one line and print it"
+            },
+            "ci-read-number-text": {
+              "title": "Li yon antre ki sanble ak yon nonb",
+              "prompt": "Ekri kòd Python ki li yon liy antre epi afiche `You typed:` apre sa antre egzak la sou menm liy lan. Trete antre a kòm tèks.",
+              "hint": "Sèvi ak eksplikasyon leson an ak fason kesyon sa a ekri pou redui repons lan.",
+              "help": {
+                "concept": "Tèks sipò sa a te korije paske fason li te ekri anvan an te revele repons lan twò dirèkteman.",
+                "hint_1": "Kòmanse ak egzanp leson an, apre sa retire chwa ki pa koresponn ak travay sa a.",
+                "hint_2": "Chwazi opsyon ki koresponn dirèkteman ak kesyon an san konte sou fason repons lan ekri."
+              },
+              "starterCode": "# TODO: read input and print it after the label"
+            },
+            "ci-three-lines": {
+              "title": "Afiche valè melanje",
+              "prompt": "Ekri kòd Python ki afiche twa liy: string `\"start\"` la, apre sa rezilta `4 + 1`, epi apre sa string `\"done\"` la.",
+              "hint": "Sèvi ak twa liy `print()`.",
+              "help": {
+                "concept": "Yon pwogram ka afiche diferan kalite valè youn apre lòt, tankou strings ak rezilta ekspresyon yo.",
+                "hint_1": "Sèvi ak yon enstriksyon `print()` pou chak liy rezilta.",
+                "hint_2": "Afiche tèks la an premye, apre sa nonb kalkile a, epi apre sa tèks final la."
+              },
+              "starterCode": "# TODO: print the required three lines"
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-v2": {
+      "python-v2-0": {
+        "values-types-and-literals": {
+          "values-basics": {
+            "title": "Valè yo gen tip",
+            "bodyMarkdown": "Yon **valè** se yon moso done Python ka travay avèk li. Lè ou ekri kòd tankou `print(5)` oswa `print(\"hello\")`, nonb `5` la ak tèks `\"hello\"` la se toude valè.\n\nNan sijè sa a, konsantre sou twa kalite valè ki fasil pou debutan:\n\n- `\"hello\"` → yon **string**\n- `5` → yon **integer**\n- `3.14` → yon **float**\n\nEgzanp:\n\n```python\nprint(\"Maya\")\nprint(12)\nprint(4.5)\n```\n\nRezilta:\n\n```text\nMaya\n12\n4.5\n```\n\nAnn pase ladan l:\n- `print(\"Maya\")` montre tèks.\n- `print(12)` montre yon nonb antye.\n- `print(4.5)` montre yon nonb desimal.\n\n**Fè prediksyon anvan ou lanse li:** Kisa k ap chanje si ou ranplase `12` pa `20`? Tape egzanp lan nan editè a, klike **Run**, epi verifye panèl rezilta a."
+          },
+          "literals-and-spelling": {
+            "title": "Literal yo se valè ki ekri dirèkteman",
+            "bodyMarkdown": "Yon **literal** se yon valè ki ekri dirèkteman nan kòd.\n\nEgzanp literal:\n\n- `\"cat\"`\n- `42`\n- `2.0`\n\nTout sa yo ekri egzakteman nan editè kòd la, kidonk yo se literal.\n\nEgzanp travay:\n\n```python\nprint(\"cat\")\nprint(42)\nprint(2.0)\n```\n\nGen kèk detay òtograf ki enpòtan:\n\n- Strings bezwen guillemets, tankou `\"cat\"`.\n- Integers **pa** itilize guillemets, tankou `42`.\n- Floats anjeneral gen yon pwen desimal, tankou `2.0`.\n\nSi ou ekri `\"42\"`, sa se tèks, pa yon nonb.\n\n**Fè prediksyon anvan ou lanse li:** Èske `print(\"42\")` ak `print(42)` ap sanble menm bagay nan panèl rezilta a? Eseye toude epi remake poukisa kòd la toujou trete yo yon fason diferan."
+          },
+          "expressions-intro": {
+            "title": "Ekspresyon yo pwodui valè",
+            "bodyMarkdown": "Yon **ekspresyon** se kòd Python ka evalye pou jwenn yon valè.\n\nPa egzanp:\n\n```python\nprint(2 + 3)\nprint(\"hi\" + \"!\")\nprint(10 / 2)\n```\n\nRezilta:\n\n```text\n5\nhi!\n5.0\n```\n\nAnn pase ladan l:\n- `2 + 3` pwodui integer `5` la.\n- `\"hi\" + \"!\"` pwodui string `\"hi!\"` la.\n- `10 / 2` pwodui float `5.0` la."
+          }
+        }
+      }
+    }
+  }
+}

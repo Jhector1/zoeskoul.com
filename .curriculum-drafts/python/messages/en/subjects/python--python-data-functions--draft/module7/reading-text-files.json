@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Reading text files practice"
-            }
-          },
-          "projectSteps": {
-            "ci_read_and_print": {
-              "title": "Print a file's contents"
-            },
-            "ci_first_line": {
-              "title": "Print only the first line"
-            },
-            "ci_count_lines": {
-              "title": "Count lines in a text file"
             }
           },
           "quiz": {
@@ -132,7 +118,7 @@
             "fb-read-call": {
               "title": "Complete the read call",
               "prompt": "Fill in the missing method name to read all text from an open file.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -168,9 +154,9 @@
               "prompt": "Open `data/message.txt`, read the file's contents, and print the text you find there.\n\nYour output should be exactly:\n`Hello from file reading!`.",
               "hint": "Read the task \"Print a file's contents\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Run the completed step and verify every output line before submitting it."
               },
               "starterCode": "with open(\"data/message.txt\", \"r\") as file:\n    # read the file and print its contents\n    pass",
               "solutionCode": "with open(\"data/message.txt\", \"r\") as file:\n    text = file.read()\n    print(text)",
@@ -185,9 +171,9 @@
               "prompt": "Open `data/notes.txt`, read only the first line, and print it without the ending newline character.\n\nYour output should be exactly:\n`Apples`.",
               "hint": "Read the task \"Print only the first line\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
+                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "with open(\"data/notes.txt\", \"r\") as file:\n    # read the first line only\n    # print it without the ending newline\n    pass",
               "solutionCode": "with open(\"data/notes.txt\", \"r\") as file:\n    first = file.readline().rstrip(\"\\n\")\n    print(first)",
@@ -202,9 +188,9 @@
               "prompt": "Open `data/list.txt`, count how many lines are in the file, and print that number.\n\nYour output should be exactly:\n`3`.",
               "hint": "Read the task \"Count lines in a text file\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "with open(\"data/list.txt\", \"r\") as file:\n    # count the lines and print the number\n    pass",
               "solutionCode": "with open(\"data/list.txt\", \"r\") as file:\n    lines = file.readlines()\n    print(len(lines))",

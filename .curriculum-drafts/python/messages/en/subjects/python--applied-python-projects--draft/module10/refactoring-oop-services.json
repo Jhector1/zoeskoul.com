@@ -28,7 +28,7 @@
               "help": {
                 "concept": "A service method keeps reporting logic out of main.py and returns reusable data.",
                 "hint_1": "Build each line from `book[\"title\"]` and `book[\"price\"]`, then join the lines with `\\n`.",
-                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                "hint_2": "Use the requested file boundary as part of the solution contract."
               },
               "starterCode": "# Run this provided service demo.\nfrom services.report_service import ReportService\n\nbooks = [\n    {\"title\": \"Python Basics\", \"price\": 12},\n    {\"title\": \"Debugging Guide\", \"price\": 18},\n]\nprint(ReportService().build_book_report(books))\n",
               "starterFiles": {
@@ -65,7 +65,7 @@
               "help": {
                 "concept": "Service methods should return results so callers decide how to display them.",
                 "hint_1": "Use `sum(...)` over each dictionary's `price` value.",
-                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                "hint_2": "Edit the file named in the prompt and verify each listed responsibility there."
               },
               "starterCode": "# Run this provided total-price demo.\nfrom services.catalog_service import CatalogService\n\nbooks = [{\"price\": 12}, {\"price\": 18}, {\"price\": 10}]\nprint(CatalogService().total_price(books))\n",
               "starterFiles": {
@@ -105,7 +105,7 @@
               "help": {
                 "concept": "A small service method can still make responsibilities explicit and easy to test.",
                 "hint_1": "Return `len(books)`.",
-                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
               },
               "starterCode": "# Run this provided non-empty and empty-list demo.\nfrom services.catalog_service import CatalogService\n\nservice = CatalogService()\nprint(service.count_books([{\"title\": \"Dune\"}, {\"title\": \"Beloved\"}]))\nprint(service.count_books([]))\n",
               "starterFiles": {
@@ -161,7 +161,7 @@
               "prompt": "Complete the sentence with the best word.",
               "hint": "The blank should name the file role that coordinates multiple objects.",
               "help": {
-                "concept": "List-wide orchestration and reporting usually belong in a the missing term module rather than in a single model object or in scattered code in main.py.",
+                "concept": "List-wide orchestration and reporting usually belong in a service module rather than in one model object or scattered main.py code.",
                 "hint_1": "Think about the module that combines data from several objects.",
                 "hint_2": "The correct choice is the layer that builds reports and totals from object lists."
               },
@@ -176,9 +176,9 @@
             "ci-refactor-discount-service": {
               "title": "Create a pricing service method",
               "prompt": "The catalog app now needs a separate pricing service. Complete `PricingService.discounted_total(books, percent)` in `services/pricing_service.py`. It should add all book prices, apply the percentage discount to the total, and return the discounted amount. For example, a 10 percent discount on a total of 50 should return 45.0.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice against the precise rule introduced in the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
               },
@@ -228,9 +228,9 @@
             "ci-refactor-summary-service": {
               "title": "Build a one-line catalog summary service",
               "prompt": "Complete `SummaryService.build_summary(books)` in `services/summary_service.py`. It should return a single string in this exact format: `Books: <count> | Total: $<sum>`. For example, two books priced 12 and 18 should produce `Books: 2 | Total: $30`. This combines two pieces of orchestration logic in one service method.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Look for the choice that satisfies both the syntax and behavior described.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Treat the starter and expected behavior as one contract; every required name and output should be accounted for.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
               },
@@ -279,9 +279,9 @@
             "ci-refactor-filter-service": {
               "title": "Move filtering logic into InventoryService",
               "prompt": "A catalog screen should show only affordable books. Complete `InventoryService.affordable_titles(books, max_price)` in `services/inventory_service.py`. Return a list of titles for every book whose price is less than or equal to `max_price`. This refactor moves filtering logic for a whole list into a service.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Translate the question into a Python rule before selecting an answer.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
               },
@@ -306,15 +306,15 @@
         "refactoring-oop-services": {
           "refactoring-oop-services-sketch-0": {
             "title": "Move report logic out of main.py",
-            "bodyMarkdown": "A crowded `main.py` usually mixes too many jobs: creating data, calculating values, formatting output, and printing.\n\nImagine a lunch-order app with report code directly in the script:\n\n```python\nfor order in orders:\n    print(f\"{order['name']}: ${order['price']}\")\n```\n\nThat is fine once, but it becomes hard to test and reuse. A service can own the report logic:\n\n```python\nclass LunchReportService:\n    def build_report(self, orders):\n        lines = []\n        for order in orders:\n            lines.append(f\"{order['name']}: ${order['price']}\")\n        return \"\\n\".join(lines)\n```\n\n`main.py` can then stay thin."
+            "bodyMarkdown": "A crowded `main.py` usually mixes too many jobs: creating data, calculating values, formatting output, and printing.\n\nImagine a lunch-order app with report code directly in the script:\n\n```python\nfor order in orders:\n    print(f\"{order['name']}: ${order['price']}\")\n```\n\nThat is fine once, but it becomes hard to test and reuse. A service can own the report logic:\n\n```python\nclass LunchReportService:\n    def build_report(self, orders):\n        lines = []\n        for order in orders:\n            lines.append(f\"{order['name']}: ${order['price']}\")\n        return \"\\n\".join(lines)\n```\n\n`main.py` can then stay thin.\n\nA refactor is successful when responsibilities move but observable behavior stays stable. Keep tests green while shifting list-wide coordination and reporting out of the model and into a service."
           },
           "refactoring-oop-services-sketch-1": {
             "title": "Give each service one clear responsibility",
-            "bodyMarkdown": "A service should have a focused job.\n\nFor example, one method can calculate the total price of orders:\n\n```python\nclass LunchReportService:\n    def total_price(self, orders):\n        total = 0\n        for order in orders:\n            total += order[\"price\"]\n        return total\n```\n\nThis keeps calculation logic in one place. It also makes the behavior easy to test without running the whole app."
+            "bodyMarkdown": "A service should have a focused job.\n\nFor example, one method can calculate the total price of orders:\n\n```python\nclass LunchReportService:\n    def total_price(self, orders):\n        total = 0\n        for order in orders:\n            total += order[\"price\"]\n        return total\n```\n\nThis keeps calculation logic in one place. It also makes the behavior easy to test without running the whole app.\n\nA refactor is successful when responsibilities move but observable behavior stays stable. Keep tests green while shifting list-wide coordination and reporting out of the model and into a service."
           },
           "refactoring-oop-services-sketch-2": {
             "title": "Keep the model, service, and main script separated",
-            "bodyMarkdown": "A clean OOP app usually separates jobs:\n\n- model classes store object state and object behavior\n- service classes handle app-level work like reports or totals\n- `main.py` wires the pieces together\n\nThat separation is not about adding files for fun. It is about making each file easier to read, test, and change."
+            "bodyMarkdown": "A clean OOP app usually separates jobs:\n\n- model classes store object state and object behavior\n- service classes handle app-level work like reports or totals\n- `main.py` wires the pieces together\n\nThat separation is not about adding files for fun. It is about making each file easier to read, test, and change.\n\nA refactor is successful when responsibilities move but observable behavior stays stable. Keep tests green while shifting list-wide coordination and reporting out of the model and into a service."
           }
         }
       }

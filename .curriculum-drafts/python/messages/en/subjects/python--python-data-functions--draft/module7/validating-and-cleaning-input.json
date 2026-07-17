@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Build cleaning helpers for messy input"
-            }
-          },
-          "projectSteps": {
-            "ci_clean_name": {
-              "title": "Write a name cleaning function"
-            },
-            "ci_parse_age": {
-              "title": "Parse an age safely"
-            },
-            "ci_clean_row": {
-              "title": "Validate and clean one row"
             }
           },
           "quiz": {
@@ -135,7 +121,7 @@
               "prompt": "Complete the code so it removes extra spaces around the name.",
               "hint": "Use the string method that trims spaces from both ends.",
               "help": {
-                "concept": "`the missing term()` removes leading and trailing whitespace from a string, which is a common first cleaning step.",
+                "concept": "Choose the string method that removes whitespace from both ends without changing internal spaces.",
                 "hint_1": "The missing value is a method name used like `name.[blank1]()` in Python.",
                 "hint_2": "It is the method that turns `'  Ava  '` into `'Ava'` without changing letters in the middle."
               },
@@ -169,9 +155,9 @@
               "prompt": "Write `clean_name(text)` so it returns a cleaned version of the name text.",
               "hint": "Read the task \"Write a name cleaning function\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "def clean_name(text):\n    # return the cleaned name\n    pass",
               "solutionCode": "def clean_name(text):\n    cleaned = text.strip()\n    return cleaned.title()"
@@ -181,9 +167,9 @@
               "prompt": "Write `parse_age(text)` so it returns an `int` for valid age text and `None` when the text cannot be used as an age.",
               "hint": "Read the task \"Parse an age safely\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "def parse_age(text):\n    # return an int or None\n    pass",
               "solutionCode": "def parse_age(text):\n    cleaned = text.strip()\n    try:\n        return int(cleaned)\n    except ValueError:\n        return None"
@@ -193,9 +179,9 @@
               "prompt": "Write `clean_row(row)` for rows shaped like `[name_text, score_text]`. Return a cleaned dictionary when both values are valid, or `None` when the row should be rejected.",
               "hint": "Read the task \"Validate and clean one row\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
+                "hint_2": "Test the normal path and inspect the final output before completing the step."
               },
               "starterCode": "def clean_row(row):\n    # row looks like [name_text, score_text]\n    # return a cleaned dictionary or None\n    pass",
               "solutionCode": "def clean_row(row):\n    name = row[0].strip()\n    score_text = row[1].strip()\n\n    if name == \"\":\n        return None\n\n    try:\n        score = int(score_text)\n    except ValueError:\n        return None\n\n    return {\"name\": name.title(), \"score\": score}"
@@ -226,8 +212,8 @@
               "hint": "Strip extra spaces, convert to title case, and print the result.",
               "help": {
                 "concept": "Strip extra spaces, convert to title case, and print the result.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Make the focused edit, then verify how it changes the current output.",
+                "hint_2": "Return to the output contract and remove any line the task did not request."
               },
               "starterCode": "raw = '  aVA smith  '\n\n# Strip extra spaces, convert to title case, and print the result.\n",
               "solutionCode": "raw = '  aVA smith  '\nclean = raw.strip().title()\nprint(clean)\n",
@@ -246,8 +232,8 @@
               "hint": "Convert score_text to int. Print 'valid' if it is from 0 to 100.",
               "help": {
                 "concept": "Convert score_text to int. Print 'valid' if it is from 0 to 100.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Run after the edit so the connection between the statement and its effect stays visible.",
+                "hint_2": "Return to the output contract and remove any line the task did not request."
               },
               "starterCode": "score_text = '92'\n\n# Convert score_text to int. Print 'valid' if it is from 0 to 100.\n",
               "solutionCode": "score_text = '92'\nscore = int(score_text)\nif 0 <= score <= 100:\n    print('valid')\nelse:\n    print('invalid')\n",
@@ -266,8 +252,8 @@
               "hint": "Print cleaned name:score lines like Ava:92.",
               "help": {
                 "concept": "Print cleaned name:score lines like Ava:92.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Test this single step before combining it with later behavior.",
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "rows = [' ava , 92 ', ' mia , 85 ']\n\n# Print cleaned name:score lines like Ava:92.\n",
               "solutionCode": "rows = [' ava , 92 ', ' mia , 85 ']\nfor row in rows:\n    name, score = row.split(',')\n    print(f'{name.strip().title()}:{score.strip()}')\n",
@@ -320,7 +306,7 @@
           },
           "missing-invalid": {
             "title": "Missing values vs invalid values",
-            "bodyMarkdown": "A missing value is absent or empty. An invalid value is present, but wrong for the rule you need.\n\nExample:\n\n```python\nrows = [\n    [\"Ava\", \"12\"],\n    [\"\", \"15\"],\n    [\"Leo\", \"ten\"]\n]\n```\n\nYou might read these rows like this:\n\n- `['Ava', '12']` → usable after conversion\n- `['', '15']` → missing name\n- `['Leo', 'ten']` → invalid age\n\nHere is a small checker:\n\n```python\nfor row in rows:\n    name = row[0].strip()\n    age_text = row[1].strip()\n\n    if name == \"\":\n        print(\"missing name\")\n    else:\n        try:\n            age = int(age_text)\n            print(name, age)\n        except ValueError:\n            print(\"invalid age\")\n```\n\nLine by line:\n\n- The loop checks one row at a time.\n- `strip()` cleans spaces before checking.\n- `if name == \"\"` catches an empty name.\n- `try` attempts the number conversion.\n- `except ValueError` handles text like `\"ten\"`."
+            "bodyMarkdown": "A missing value is absent or empty. An invalid value is present, but wrong for the rule you need.\n\nExample:\n\n```python\nrows = [\n    [\"Ava\", \"12\"],\n    [\"\", \"15\"],\n    [\"Leo\", \"ten\"]\n]\n```\n\nYou might read these rows like this:\n\n- `['Ava', '12']` → usable after conversion\n- `['', '15']` → missing name\n- `['Leo', 'ten']` → invalid age\n\nHere is a small checker:\n\n```python\nfor row in rows:\n    name = row[0].strip()\n    age_text = row[1].strip()\n\n    if name == \"\":\n        print(\"missing name\")\n    else:\n        try:\n            age = int(age_text)\n            print(name, age)\n        except ValueError:\n            print(\"invalid age\")\n```\n\nFollow the execution: - The loop checks one row at a time.\n- `strip()` cleans spaces before checking.\n- `if name == \"\"` catches an empty name.\n- `try` attempts the number conversion.\n- `except ValueError` handles text like `\"ten\"`."
           },
           "cleaning-functions": {
             "title": "Put cleaning rules in functions",

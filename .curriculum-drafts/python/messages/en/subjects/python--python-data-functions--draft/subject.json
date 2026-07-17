@@ -2,28 +2,28 @@
   "subjects": {
     "python--python-data-functions--draft": {
       "title": "Python Data and Functions",
-      "description": "Build practical Python skills with lists, tuples, dictionaries, functions, helper modules, files, exceptions, and simple data cleaning.",
-      "moreComingSoon": "More Python Data and Functions lessons are coming soon."
+      "description": "Move from small scripts to programs that organize real information. You will choose between lists, tuples, and dictionaries, design reusable functions, split work across helper modules, read and write files, recover from bad input, and finish with a multi-step data-cleaning capstone in a new community-event domain.",
+      "moreComingSoon": ""
     }
   },
   "modules": {
     "python--python-data-functions--draft": {
       "python-5-lists-tuples-and-dictionaries": {
         "title": "Lists, Tuples, and Dictionaries",
-        "description": "Teach learners how to organize multiple values and choose the right collection type.",
+        "description": "Organize related values with lists, protect fixed records with tuples, and retrieve named information with dictionaries.",
         "outcomes": [
           "Create and modify lists",
           "Use tuples for fixed grouped values",
           "Store key-value data in dictionaries"
         ],
         "why": [
-          "Builds confidence with lists, tuples, and dictionaries.",
-          "Prepares learners for the next skills in the course."
+          "Collection choice communicates whether data is ordered, fixed, or addressed by a meaningful key.",
+          "These structures become the shared vocabulary for functions, files, and every project that follows."
         ]
       },
       "python-6-functions-and-modularity": {
         "title": "Functions and Modularity",
-        "description": "Help learners organize code into reusable functions, helper modules, and simple imports with clear inputs and outputs.",
+        "description": "Turn repeated logic into focused functions, define clear inputs and return values, and move reusable work into helper files.",
         "outcomes": [
           "Define functions",
           "Use parameters and return values",
@@ -31,13 +31,13 @@
           "Use simple imports and helper modules"
         ],
         "why": [
-          "Builds confidence with functions and modularity.",
-          "Prepares learners for the next skills in the course."
+          "Functions make a program easier to test because each piece has one named responsibility.",
+          "Modules let a growing project reuse that logic without copying it into main.py."
         ]
       },
       "python-7-files-exceptions-and-data-cleaning": {
         "title": "Files, Exceptions, and Data Cleaning",
-        "description": "Teach learners how to read files, create/write files, import standard-library data tools, and handle messy data without crashing programs.",
+        "description": "Read information that survives beyond one run, clean imperfect values, handle expected failures, and write dependable output files.",
         "outcomes": [
           "Read text files",
           "Create and write text files",
@@ -46,21 +46,21 @@
           "Clean structured text data"
         ],
         "why": [
-          "Builds confidence with files, exceptions, and data cleaning.",
-          "Prepares learners for the next skills in the course."
+          "Real programs rarely receive perfectly formatted data or guaranteed file paths.",
+          "File and exception skills let a script become a resilient tool instead of a one-time demonstration."
         ]
       },
       "python-8-real-world-project": {
         "title": "Real-World Project",
-        "description": "Guide learners through a longer beginner data-cleaning project that combines lists, dictionaries, helper functions, files, and summaries.",
+        "description": "Transfer the course skills to a community-event registration cleaner with helper modules, validation, summaries, and written deliverables.",
         "outcomes": [
           "Read and clean a structured file line by line",
           "Refactor cleaning and summary logic into helper functions",
           "Write final output files and summaries from one complete workflow"
         ],
         "why": [
-          "Builds confidence with real-world project.",
-          "Prepares learners for the next skills in the course."
+          "A new domain proves that the techniques work beyond the examples used to teach them.",
+          "The capstone connects collections, functions, modules, files, exceptions, and reporting in one coherent workflow."
         ]
       }
     }
@@ -70,17 +70,18 @@
       "python-5-lists-tuples-and-dictionaries": {
         "python--python-data-functions--draft-python-5-list-basics": {
           "title": "List Basics",
-          "description": "Learn creating and indexing lists, list methods and mutation, looping through lists through focused examples and practice.",
+          "description": "Create ordered collections, change them deliberately, loop through every item, and contrast mutable lists with fixed tuple records.",
           "weeks": null,
           "bullets": [
             "Creating and Indexing Lists",
             "List Methods and Mutation",
-            "Looping Through Lists"
+            "Looping Through Lists",
+            "Tuple Records and Unpacking"
           ]
         },
         "python--python-data-functions--draft-python-5-dictionaries": {
           "title": "Dictionaries",
-          "description": "Learn dictionary basics, updating and looping dictionaries, nested data structures through focused examples and practice.",
+          "description": "Address information by meaningful keys, update entries safely, and combine dictionaries with nested lists and records.",
           "weeks": null,
           "bullets": [
             "Dictionary Basics",
@@ -90,17 +91,17 @@
         },
         "python--python-data-functions--draft-python-5-module-project": {
           "title": "Module Project",
-          "description": "Learn module 5 gradebook project through focused examples and practice.",
+          "description": "Build a workshop schedule from tuples, a list of sessions, and a dictionary lookup instead of returning to another gradebook.",
           "weeks": null,
           "bullets": [
-            "Module 5 Gradebook Project"
+            "Module 5 Workshop Schedule Project"
           ]
         }
       },
       "python-6-functions-and-modularity": {
         "python--python-data-functions--draft-python-6-function-basics": {
           "title": "Function Basics",
-          "description": "Learn defining and calling functions, parameters and return values, print vs return through focused examples and practice.",
+          "description": "Name a reusable operation, pass it the values it needs, and distinguish displaying a result from returning it to another part of the program.",
           "weeks": null,
           "bullets": [
             "Defining and Calling Functions",
@@ -110,7 +111,7 @@
         },
         "python--python-data-functions--draft-python-6-function-design": {
           "title": "Function Design",
-          "description": "Learn scope and local variables, decomposition and refactoring, using imports and helper files through focused examples and practice.",
+          "description": "Limit scope, split large tasks into helpers, document the contract, and move reusable logic into an importable module.",
           "weeks": null,
           "bullets": [
             "Scope and Local Variables",
@@ -121,7 +122,7 @@
         },
         "python--python-data-functions--draft-python-6-module-project": {
           "title": "Module Project",
-          "description": "Learn module 6 name badge package through focused examples and practice.",
+          "description": "Package a name-badge formatter across helper and entry files so each file owns one clear responsibility.",
           "weeks": null,
           "bullets": [
             "Module 6 Name Badge Package"
@@ -131,7 +132,7 @@
       "python-7-files-exceptions-and-data-cleaning": {
         "python--python-data-functions--draft-python-7-file-io": {
           "title": "File Input and Output",
-          "description": "Learn reading text files, writing text files, working with paths through focused examples and practice.",
+          "description": "Read and write text through explicit paths, then treat folders and filenames as part of the program contract.",
           "weeks": null,
           "bullets": [
             "Reading Text Files",
@@ -141,7 +142,7 @@
         },
         "python--python-data-functions--draft-python-7-exceptions-and-cleaning": {
           "title": "Exceptions and Cleaning",
-          "description": "Learn try/except basics, validating and cleaning input, simple csv processing through focused examples and practice.",
+          "description": "Recover from expected failures, normalize messy text, convert values safely, and process CSV rows one dependable step at a time.",
           "weeks": null,
           "bullets": [
             "Try/Except Basics",
@@ -151,7 +152,7 @@
         },
         "python--python-data-functions--draft-python-7-module-project": {
           "title": "Module Project",
-          "description": "Learn module 7 clean student records project through focused examples and practice.",
+          "description": "Clean a student-data file into a new output artifact while preserving valid rows and skipping malformed scores.",
           "weeks": null,
           "bullets": [
             "Module 7 Clean Student Records Project"
@@ -161,10 +162,10 @@
       "python-8-real-world-project": {
         "python--python-data-functions--draft-python-8-course-capstone": {
           "title": "Final Project",
-          "description": "Learn class roster cleaner through focused examples and practice.",
+          "description": "Deliver a community-event registration cleaner in a new domain, with modular cleaning, summaries, output files, and deterministic tests.",
           "weeks": null,
           "bullets": [
-            "Class Roster Cleaner"
+            "Community Event Registration Cleaner"
           ]
         }
       }

@@ -954,7 +954,7 @@
     {
       "id": "try-module-6-name-badge-package-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
       "messageBase": "topics.python--python-data-functions--draft.python-6-functions-and-modularity.module-6-name-badge-package.quiz.try-module-6-name-badge-package-sketch0",
       "language": "python",

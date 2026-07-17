@@ -4,7 +4,7 @@
   "moduleSlug": "linux-module-1-terminal-navigation",
   "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation",
   "prefix": "linux_module_1",
-  "minutes": 18,
+  "minutes": 30,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",

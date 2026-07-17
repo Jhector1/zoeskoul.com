@@ -6,20 +6,20 @@
   "prefix": "pyv2_2",
   "minutes": 20,
   "topic": {
-    "labelKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.label",
-    "summaryKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.summary"
+    "labelKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.label",
+    "summaryKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.cards.sketch0.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.cards.sketch0.title",
       "sketchId": "truthy-basics",
       "height": 420,
       "tryIt": {
         "id": "try-truthiness-and-empty-values-sketch0",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-string.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-string.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.prompt",
         "exerciseKey": "code-classify-string",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -32,13 +32,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.cards.sketch1.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.cards.sketch1.title",
       "sketchId": "numbers-and-none",
       "height": 420,
       "tryIt": {
         "id": "try-truthiness-and-empty-values-sketch1",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-number.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-number.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.prompt",
         "exerciseKey": "code-classify-number",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -51,13 +51,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.cards.sketch2.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.cards.sketch2.title",
       "sketchId": "using-truthiness-carefully",
       "height": 420,
       "tryIt": {
         "id": "try-truthiness-and-empty-values-sketch2",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-check-missing-word.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-check-missing-word.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.prompt",
         "exerciseKey": "code-check-missing-word",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -70,7 +70,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.cards.quiz.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -81,84 +81,26 @@
         "preferKind": null,
         "maxAttempts": null
       }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "code_classify_string",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.projectSteps.code_classify_string.title",
-            "exerciseKey": "code-classify-string",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_classify_number",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.projectSteps.code_classify_number.title",
-            "exerciseKey": "code-classify-number",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_check_missing_word",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.projectSteps.code_check_missing_word.title",
-            "exerciseKey": "code-check-missing-word",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_points_message",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.projectSteps.code_points_message.title",
-            "exerciseKey": "code-points-message",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_two_inputs_both_present",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.projectSteps.code_two_inputs_both_present.title",
-            "exerciseKey": "code-two-inputs-both-present",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
-      }
     }
   ],
   "sketches": [
     {
       "id": "truthy-basics",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.truthy-basics.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.truthy-basics.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.truthy-basics.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.truthy-basics.bodyMarkdown"
     },
     {
       "id": "numbers-and-none",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.numbers-and-none.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.numbers-and-none.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.numbers-and-none.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.numbers-and-none.bodyMarkdown"
     },
     {
       "id": "using-truthiness-carefully",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.using-truthiness-carefully.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.using-truthiness-carefully.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.using-truthiness-carefully.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.using-truthiness-carefully.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -167,7 +109,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.sc-falsy-empty-string",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.sc-falsy-empty-string",
       "optionIds": [
         "a",
         "b",
@@ -184,7 +126,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.sc-none-truthiness",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.sc-none-truthiness",
       "optionIds": [
         "a",
         "b",
@@ -201,7 +143,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.mc-falsy-values",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.mc-falsy-values",
       "optionIds": [
         "a",
         "b",
@@ -222,7 +164,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.mc-truthy-values",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.mc-truthy-values",
       "optionIds": [
         "a",
         "b",
@@ -242,7 +184,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.dr-check-empty-input-order",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.dr-check-empty-input-order",
       "tokenIds": [
         "t1",
         "t2",
@@ -266,7 +208,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.dr-check-none-order",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.dr-check-none-order",
       "tokenIds": [
         "t1",
         "t2",
@@ -290,7 +232,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.fb-zero-falsy",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.fb-zero-falsy",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -302,7 +244,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.fb-nonempty-string",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.fb-nonempty-string",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -312,11 +254,11 @@
     {
       "id": "code-classify-string",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-string",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -383,7 +325,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -401,11 +343,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-string.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -461,11 +403,11 @@
     {
       "id": "code-classify-number",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-number",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -538,7 +480,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -556,11 +498,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-classify-number.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -617,11 +559,11 @@
     {
       "id": "code-check-missing-word",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-check-missing-word",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -683,7 +625,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -701,11 +643,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.truthiness-and-empty-values.quiz.code-check-missing-word.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -750,311 +692,6 @@
           "type": "source_regex",
           "pattern": "\\bvalue\\b",
           "message": "Use the variable name `value` in your solution."
-        }
-      ]
-    },
-    {
-      "id": "code-points-message",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-points-message",
-      "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "0\n",
-            "stdout": "no points\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "14\n",
-            "stdout": "points recorded\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "points = int(input())\nif points:\n    print(\"points recorded\")\nelse:\n    print(\"no points\")",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "points = int(input())\nif points:\n    print(\"points recorded\")\nelse:\n    print(\"no points\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the input to an integer before doing the number work.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bpoints\\b",
-            "message": "Use the variable name `points` in your solution."
-          }
-        ]
-      },
-      "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "points = int(input())\nif points:\n    print(\"points recorded\")\nelse:\n    print(\"no points\")",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-points-message.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "points = int(input())\nif points:\n    print(\"points recorded\")\nelse:\n    print(\"no points\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the input to an integer before doing the number work.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bpoints\\b",
-          "message": "Use the variable name `points` in your solution."
-        }
-      ]
-    },
-    {
-      "id": "code-two-inputs-both-present",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present",
-      "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "Ava\nLee\n",
-            "stdout": "both present\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "Ava\n\n",
-            "stdout": "missing one\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "\n\n",
-            "stdout": "missing one\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "first = input()\nsecond = input()\nif first and second:\n    print(\"both present\")\nelse:\n    print(\"missing one\")",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "first = input()\nsecond = input()\nif first and second:\n    print(\"both present\")\nelse:\n    print(\"missing one\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\band\\b",
-            "message": "Use and to combine both conditions."
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bfirst\\b",
-            "message": "Use the variable name `first` in your solution."
-          }
-        ]
-      },
-      "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "first = input()\nsecond = input()\nif first and second:\n    print(\"both present\")\nelse:\n    print(\"missing one\")",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.truthiness-and-empty-values.quiz.code-two-inputs-both-present.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "first = input()\nsecond = input()\nif first and second:\n    print(\"both present\")\nelse:\n    print(\"missing one\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\band\\b",
-          "message": "Use and to combine both conditions."
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bfirst\\b",
-          "message": "Use the variable name `first` in your solution."
         }
       ]
     }

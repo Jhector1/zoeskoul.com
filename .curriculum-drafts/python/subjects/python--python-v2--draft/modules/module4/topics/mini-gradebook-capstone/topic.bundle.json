@@ -6,20 +6,20 @@
   "prefix": "pyv2_4",
   "minutes": 35,
   "topic": {
-    "labelKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.label",
-    "summaryKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.summary"
+    "labelKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.label",
+    "summaryKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.cards.sketch0.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.cards.sketch0.title",
       "sketchId": "sketch_gradebook_plan",
       "height": 420,
       "tryIt": {
         "id": "try-mini-gradebook-capstone-sketch0",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.tryIt.try_mini_gradebook_capstone_sketch0.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.tryIt.try_mini_gradebook_capstone_sketch0.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.tryIt.try_mini_gradebook_capstone_sketch0.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.tryIt.try_mini_gradebook_capstone_sketch0.prompt",
         "exerciseKey": "try-mini-gradebook-capstone-sketch0",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -32,7 +32,7 @@
     {
       "id": "project",
       "kind": "project",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.cards.project.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.cards.project.title",
       "project": {
         "difficulty": "medium",
         "displayKind": "capstone",
@@ -43,7 +43,7 @@
         "steps": [
           {
             "id": "cp_1",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.projectSteps.cp_1.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.projectSteps.cp_1.title",
             "exerciseKey": "cp-1-read-gradebook-header",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -52,7 +52,7 @@
           },
           {
             "id": "cp_2",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.projectSteps.cp_2.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.projectSteps.cp_2.title",
             "exerciseKey": "cp-2-add-score-total",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -61,7 +61,7 @@
           },
           {
             "id": "cp_3",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.projectSteps.cp_3.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.projectSteps.cp_3.title",
             "exerciseKey": "cp-3-track-highest-score",
             "difficulty": "easy",
             "preferKind": "code_input",
@@ -70,7 +70,7 @@
           },
           {
             "id": "cp_4",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.projectSteps.cp_4.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.projectSteps.cp_4.title",
             "exerciseKey": "cp-4-calculate-average",
             "difficulty": "medium",
             "preferKind": "code_input",
@@ -79,7 +79,7 @@
           },
           {
             "id": "cp_5",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.projectSteps.cp_5.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.projectSteps.cp_5.title",
             "exerciseKey": "cp-5-choose-status",
             "difficulty": "medium",
             "preferKind": "code_input",
@@ -88,7 +88,7 @@
           },
           {
             "id": "cp_6",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.projectSteps.cp_6.title",
+            "titleKey": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.projectSteps.cp_6.title",
             "exerciseKey": "capstone-mini-gradebook",
             "difficulty": "medium",
             "preferKind": "code_input",
@@ -103,24 +103,24 @@
     {
       "id": "sketch_gradebook_plan",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.sketch_gradebook_plan.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.sketch_gradebook_plan.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.sketch_gradebook_plan.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.sketch_gradebook_plan.bodyMarkdown"
     }
   ],
   "exercises": [
     {
       "id": "try-mini-gradebook-capstone-sketch0",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0",
+      "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -138,11 +138,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.try-mini-gradebook-capstone-sketch0.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -223,14 +223,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header",
+      "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -248,11 +248,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-1-read-gradebook-header.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -345,14 +345,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-2-add-score-total",
+      "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -370,11 +370,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-2-add-score-total.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -491,14 +491,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score",
+      "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -516,11 +516,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-3-track-highest-score.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -649,14 +649,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-4-calculate-average",
+      "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -674,11 +674,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-4-calculate-average.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -795,14 +795,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-5-choose-status",
+      "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -820,11 +820,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.cp-5-choose-status.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -972,14 +972,14 @@
       "kind": "code_input",
       "purpose": "project",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook",
+      "messageBase": "topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook",
       "language": "python",
       "entryFilePath": "main.py",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -997,11 +997,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-4.mini-gradebook-capstone.quiz.capstone-mini-gradebook.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true

@@ -28,7 +28,7 @@
               "help": {
                 "concept": "A multifile program must import from the module path that matches the workspace folders.",
                 "hint_1": "Use `from models.book import Book`.",
-                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
               },
               "starterCode": "# TODO: fix this import path.\nfrom book import Book\n\nbook = Book(\"The Hobbit\", \"Tolkien\")\nprint(book.summary())\n",
               "starterFiles": {
@@ -65,7 +65,7 @@
               "help": {
                 "concept": "Mutable default arguments are shared between calls. Creating the list inside the constructor gives each object independent state.",
                 "hint_1": "Use `books=None`, then create a new list inside the constructor.",
-                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                "hint_2": "Inspect the requested file and account for each requirement before running the workspace."
               },
               "starterCode": "# Run this provided two-object test after fixing the model.\nfrom models.reading_list import ReadingList\n\nfirst = ReadingList(\"Ava\")\nsecond = ReadingList(\"Noah\")\nfirst.add_book(\"Dune\")\nprint(first.count())\nprint(second.count())\n",
               "starterFiles": {
@@ -102,7 +102,7 @@
               "help": {
                 "concept": "Validate a requested state change before mutating the object.",
                 "hint_1": "Check `0 < amount <= self.quantity` before subtracting.",
-                "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                "hint_2": "Edit the file named in the prompt and verify each listed responsibility there."
               },
               "starterCode": "# Run this provided valid-and-invalid sale test.\nfrom models.stock_item import StockItem\n\nitem = StockItem(\"Pen\", 5)\nprint(item.sell(2))\nprint(item.sell(10))\n",
               "starterFiles": {
@@ -190,7 +190,7 @@
               "prompt": "Fill in the missing default value so the constructor avoids a shared mutable list.",
               "hint": "Use a non-mutable placeholder instead of `[]`.",
               "help": {
-                "concept": "Using `the missing term` as the default lets the constructor create a fresh list for each instance.",
+                "concept": "Use an immutable sentinel default, then create a new list inside the constructor so instances never share one mutable default.",
                 "hint_1": "The blank should not be a list literal.",
                 "hint_2": "Choose the special Python value commonly used to mean 'no value was passed'."
               },
@@ -205,11 +205,11 @@
             "q-debugging-imports-state-fill-2": {
               "title": "Complete the package import",
               "prompt": "Fill in the missing module name for this import from a `models` package.",
-              "hint": "Use the file name that contains the `the missing term` class.",
+              "hint": "Import from the module whose file actually defines the class named in the prompt.",
               "help": {
                 "concept": "In `from package.module import Name`, the module part is the file name without `.py`.",
-                "hint_1": "The class is `the missing term`, but the blank is for the module path part.",
-                "hint_2": "If the file is `models/the missing term.py`, the missing module name matches that file name."
+                "hint_1": "Separate the class name from the module path: the blank belongs to the file path portion of the import.",
+                "hint_2": "For a file inside models/, the module segment matches the Python filename without the .py extension."
               },
               "template": "from models.[blank1] import Book",
               "choices": [
@@ -238,9 +238,9 @@
             "ci-debugging-imports-and-state-4": {
               "title": "Fix a service import and keep the report working",
               "prompt": "A classroom catalog app has a report service that should import `CatalogItem` from the models package and format one line of text. Fix the broken import in `services/report_service.py` so `main.py` prints `Marker: 8`. Keep the existing function and class names.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Identify the concept being tested, then compare every option with that concept.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Focus on why Python reaches the result, not only on the final answer shown in the output.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
               },
@@ -270,9 +270,9 @@
             "ci-debugging-imports-and-state-6": {
               "title": "Fix a state-changing method in a task model",
               "prompt": "A project tracker has a `Task` class with a `complete()` method. Right now the method returns `True` but forgets to update the object's `done` attribute. Fix the method so the object's state changes correctly and repeated calls still leave it completed.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice against the precise rule introduced in the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Focus on why Python reaches the result, not only on the final answer shown in the output.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
               },
@@ -294,15 +294,15 @@
         "debugging-imports-and-state": {
           "debugging-imports-and-state-sketch-1": {
             "title": "Trace the import path before changing code randomly",
-            "bodyMarkdown": "Import errors are easier to fix when you read the path carefully.\n\nImagine this file layout:\n\n```text\nmodels/\n  shipment.py\nmain.py\n```\n\nIf `shipment.py` defines `class Shipment`, the import should name both the package path and the class:\n\n```python\nfrom models.shipment import Shipment\n```\n\nWhen an import breaks, check three things in order:\n\n1. Does the folder name match?\n2. Does the file name match?\n3. Does the class or function name inside the file match?\n\nDo that before rewriting the model."
+            "bodyMarkdown": "Import errors are easier to fix when you read the path carefully.\n\nImagine this file layout:\n\n```text\nmodels/\n  shipment.py\nmain.py\n```\n\nIf `shipment.py` defines `class Shipment`, the import should name both the package path and the class:\n\n```python\nfrom models.shipment import Shipment\n```\n\nWhen an import breaks, check three things in order:\n\n1. Does the folder name match?\n2. Does the file name match?\n3. Does the class or function name inside the file match?\n\nDo that before rewriting the model.\n\nImport failures and shared-state bugs often appear far from their cause. Trace the module path, constructor defaults, and object identity before changing application logic that may already be correct."
           },
           "debugging-imports-and-state-sketch-2": {
             "title": "Shared mutable defaults make objects leak state",
-            "bodyMarkdown": "A sneaky object bug happens when separate objects accidentally share one list.\n\n```python\nclass TeamRoster:\n    def __init__(self, players=[]):\n        self.players = players\n```\n\nThat default list is created once, so two rosters can accidentally point at the same list.\n\nSafer pattern:\n\n```python\nclass TeamRoster:\n    def __init__(self, players=None):\n        self.players = [] if players is None else players\n```\n\nNow each new object gets its own list unless a list is passed in intentionally."
+            "bodyMarkdown": "A sneaky object bug happens when separate objects accidentally share one list.\n\n```python\nclass TeamRoster:\n    def __init__(self, players=[]):\n        self.players = players\n```\n\nThat default list is created once, so two rosters can accidentally point at the same list.\n\nSafer pattern:\n\n```python\nclass TeamRoster:\n    def __init__(self, players=None):\n        self.players = [] if players is None else players\n```\n\nNow each new object gets its own list unless a list is passed in intentionally.\n\nImport failures and shared-state bugs often appear far from their cause. Trace the module path, constructor defaults, and object identity before changing application logic that may already be correct."
           },
           "debugging-imports-and-state-sketch-3": {
             "title": "Debug state by checking each change",
-            "bodyMarkdown": "When a method changes object state, inspect the state after each call.\n\n```python\nitem = VendingItem(\"Water\", 5)\nprint(item.quantity)\nitem.sell(2)\nprint(item.quantity)\nitem.sell(10)\nprint(item.quantity)\n```\n\nThis tells the story of the object: starting value, valid change, invalid change.\n\nIf the final value is wrong, the step-by-step checks show which method call caused the problem."
+            "bodyMarkdown": "When a method changes object state, inspect the state after each call.\n\n```python\nitem = VendingItem(\"Water\", 5)\nprint(item.quantity)\nitem.sell(2)\nprint(item.quantity)\nitem.sell(10)\nprint(item.quantity)\n```\n\nThis tells the story of the object: starting value, valid change, invalid change.\n\nIf the final value is wrong, the step-by-step checks show which method call caused the problem.\n\nImport failures and shared-state bugs often appear far from their cause. Trace the module path, constructor defaults, and object identity before changing application logic that may already be correct."
           }
         }
       }

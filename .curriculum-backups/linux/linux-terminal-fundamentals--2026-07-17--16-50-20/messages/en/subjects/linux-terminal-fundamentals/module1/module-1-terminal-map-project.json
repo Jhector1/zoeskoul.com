@@ -1,0 +1,180 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "module-1-terminal-map-project": {
+          "label": "Navigation Checkpoint: Campus Folder Tour",
+          "summary": "Use pwd, ls, and cd to inspect a prepared folder tree without changing it.",
+          "cards": {
+            "sketch0": {
+              "title": "Campus folder tour"
+            },
+            "project": {
+              "title": "Project steps"
+            }
+          },
+          "moduleProject": {
+            "steps": {
+              "module-1-terminal-map-project-terminal-task-1": {
+                "title": "Find the club hub",
+                "prompt": "The school club has a prepared folder tree. Use `ls`, enter `club-hub`, and use `pwd` to confirm you are inside it.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `ls` to inspect the starting folder."
+                    },
+                    "1": {
+                      "message": "Enter `club-hub` with `cd club-hub`."
+                    },
+                    "2": {
+                      "message": "Use `pwd` to confirm where you are."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "club_hub_newsletter_draft_txt": {
+                    "content": "Newsletter draft\n"
+                  },
+                  "club_hub_events_checklist_txt": {
+                    "content": "Event checklist\n"
+                  },
+                  "club_hub_archive_old_note_txt": {
+                    "content": "Old note\n"
+                  }
+                }
+              },
+              "module-1-terminal-map-project-terminal-task-2": {
+                "title": "Inspect the newsletter folder",
+                "prompt": "From the club hub, move into `newsletter`, list its contents, then move back up one folder.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Enter the newsletter folder."
+                    },
+                    "1": {
+                      "message": "Use `cd ..` to go back up."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "club_hub_newsletter_draft_txt": {
+                    "content": "Newsletter draft\n"
+                  },
+                  "club_hub_events_checklist_txt": {
+                    "content": "Event checklist\n"
+                  },
+                  "club_hub_archive_old_note_txt": {
+                    "content": "Old note\n"
+                  }
+                }
+              },
+              "module-1-terminal-map-project-terminal-task-3": {
+                "title": "End in the events folder",
+                "prompt": "Use what you learned to end inside `club-hub/events`. Run `pwd` and `ls` there so the next teammate knows you found the right place.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Move into the events folder."
+                    },
+                    "1": {
+                      "message": "Use `pwd` before finishing."
+                    },
+                    "2": {
+                      "message": "List the final folder."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "club_hub_newsletter_draft_txt": {
+                    "content": "Newsletter draft\n"
+                  },
+                  "club_hub_events_checklist_txt": {
+                    "content": "Event checklist\n"
+                  },
+                  "club_hub_archive_old_note_txt": {
+                    "content": "Old note\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-1-terminal-navigation": {
+        "module-1-terminal-map-project": {
+          "project-synopsis": {
+            "title": "Campus folder tour",
+            "bodyMarkdown": "The first project is a navigation checkpoint. You are helping a school club find the right folder before anyone edits files.\n\nYou will not create or delete anything yet. Your job is to move carefully, inspect each stop, and finish in the folder the next teammate needs."
+          }
+        }
+      }
+    }
+  }
+}

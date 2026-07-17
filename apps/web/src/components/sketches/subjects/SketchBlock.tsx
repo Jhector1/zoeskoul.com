@@ -16,6 +16,7 @@ import { SketchShell } from "@/components/sketches/_shared/shells";
 import SketchRenderer from "./SketchRenderer";
 import { useTaggedT } from "@/i18n/tagged";
 import { learnerUiFlags } from "@/lib/config/learnerUiFlags";
+import { getDistinctSketchShellTitle } from "./getDistinctSketchShellTitle";
 
 function mergeSpec(base: SketchSpec, patch?: Record<string, unknown>): SketchSpec {
     if (!patch) return base;
@@ -229,7 +230,12 @@ export default function SketchBlock(props: {
     const spec: SketchSpec = resolved?.spec;
     const s: SavedSketchState = state ?? defaultStateForSpec(spec);
 
-    const shellTitle = tt.resolve(title ?? spec.title);
+    const resolvedCardTitle = tt.resolve(title ?? null);
+    const resolvedContentTitle = tt.resolve(spec.title ?? null);
+    const shellTitle = getDistinctSketchShellTitle(
+        resolvedCardTitle,
+        resolvedContentTitle,
+    );
     const subtitle = tt.resolve(spec.subtitle ?? null);
     const rightMarkdown = tt.resolve(spec.hudMarkdown ?? null);
 

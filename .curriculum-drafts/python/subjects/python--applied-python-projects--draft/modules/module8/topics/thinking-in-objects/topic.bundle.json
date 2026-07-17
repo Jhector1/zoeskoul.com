@@ -27,6 +27,13 @@
   },
   "cards": [
     {
+      "id": "course-introduction",
+      "kind": "sketch",
+      "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.cards.course-introduction.title",
+      "sketchId": "course-introduction",
+      "height": 420
+    },
+    {
       "id": "sketch0",
       "kind": "sketch",
       "titleKey": "topics.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.cards.sketch0.title",
@@ -106,6 +113,12 @@
     }
   ],
   "sketches": [
+    {
+      "id": "course-introduction",
+      "archetype": "paragraph",
+      "titleKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.course-introduction.title",
+      "bodyKey": "sketches.python--applied-python-projects--draft.python-8-object-oriented-foundations.thinking-in-objects.course-introduction.bodyMarkdown"
+    },
     {
       "id": "sketch-0",
       "archetype": "paragraph",

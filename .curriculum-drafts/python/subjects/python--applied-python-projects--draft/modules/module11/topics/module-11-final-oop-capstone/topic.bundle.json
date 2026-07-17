@@ -4,7 +4,7 @@
   "moduleSlug": "python-11-oop-capstone-project",
   "sectionSlug": "applied-python-projects-python-11-final-capstone",
   "prefix": "py11",
-  "minutes": 70,
+  "minutes": 260,
   "runtimeDefaults": {
     "kind": "code",
     "language": "python",
@@ -38,7 +38,7 @@
       "kind": "project",
       "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.cards.project.title",
       "project": {
-        "difficulty": "easy",
+        "difficulty": "hard",
         "allowReveal": true,
         "preferKind": "code_input",
         "displayKind": "capstone",
@@ -49,7 +49,7 @@
             "id": "try_module_11_final_oop_capstone_sketch0",
             "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.try_module_11_final_oop_capstone_sketch0.title",
             "exerciseKey": "try-module-11-final-oop-capstone-sketch0",
-            "difficulty": "easy",
+            "difficulty": "hard",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null
@@ -58,7 +58,7 @@
             "id": "project_pantry_request_step_2_models",
             "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_pantry_request_step_2_models.title",
             "exerciseKey": "project-pantry-request-step-2-models",
-            "difficulty": "easy",
+            "difficulty": "hard",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null,
@@ -68,7 +68,7 @@
             "id": "project_pantry_request_step_3_service",
             "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_pantry_request_step_3_service.title",
             "exerciseKey": "project-pantry-request-step-3-service",
-            "difficulty": "easy",
+            "difficulty": "hard",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null,
@@ -78,7 +78,7 @@
             "id": "project_pantry_request_step_4_storage",
             "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_pantry_request_step_4_storage.title",
             "exerciseKey": "project-pantry-request-step-4-storage",
-            "difficulty": "easy",
+            "difficulty": "hard",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null,
@@ -88,7 +88,7 @@
             "id": "project_pantry_request_step_5_reports_tests",
             "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_pantry_request_step_5_reports_tests.title",
             "exerciseKey": "project-pantry-request-step-5-reports-tests",
-            "difficulty": "easy",
+            "difficulty": "hard",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null,
@@ -98,7 +98,7 @@
             "id": "project_pantry_request_step_6_final_handoff",
             "titleKey": "topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.projectSteps.project_pantry_request_step_6_final_handoff.title",
             "exerciseKey": "project-pantry-request-step-6-final-handoff",
-            "difficulty": "easy",
+            "difficulty": "hard",
             "preferKind": "code_input",
             "seedPolicy": "global",
             "maxAttempts": null,
@@ -141,23 +141,23 @@
           "entry": false
         },
         {
-          "path": "storage/request_storage.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage_request_storage_py.content",
+          "path": "models/food_request.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models_food_request_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
-          "path": "reports/summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports_summary_py.content",
+          "path": "models/hygiene_request.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models_hygiene_request_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
-          "path": "data/requests.csv",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.data_requests_csv.content",
-          "language": "text",
+          "path": "models/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models___init___py.content",
+          "language": "python",
           "isEntry": false,
           "entry": false
         }
@@ -178,23 +178,23 @@
           "entry": false
         },
         {
-          "path": "storage/request_storage.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage_request_storage_py.content",
+          "path": "models/food_request.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models_food_request_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
-          "path": "reports/summary.py",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports_summary_py.content",
+          "path": "models/hygiene_request.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models_hygiene_request_py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
         },
         {
-          "path": "data/requests.csv",
-          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.data_requests_csv.content",
-          "language": "text",
+          "path": "models/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models___init___py.content",
+          "language": "python",
           "isEntry": false,
           "entry": false
         }
@@ -219,29 +219,61 @@
             "entry": false
           },
           {
-            "path": "storage/request_storage.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.storage_request_storage_py.content",
+            "path": "models/food_request.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models_food_request_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
-            "path": "reports/summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.reports_summary_py.content",
+            "path": "models/hygiene_request.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models_hygiene_request_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
-            "path": "data/requests.csv",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.data_requests_csv.content",
-            "language": "text",
+            "path": "models/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.starterFiles.models___init___py.content",
+            "language": "python",
             "isEntry": false,
             "entry": false
           }
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "models/pantry_request.py",
+          "pattern": "from abc import ABC, abstractmethod",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.3.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/pantry_request.py",
+          "pattern": "class\\s+PantryRequest\\s*\\(\\s*ABC\\s*\\)",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.4.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "models/pantry_request.py",
+          "pattern": "@abstractmethod",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.5.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "models/pantry_request.py",
+          "pattern": "@property",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.6.message"
+        },
+        {
+          "type": "source_regex",
+          "path": "models/food_request.py",
+          "pattern": "class\\s+FoodRequest\\s*\\(\\s*PantryRequest\\s*\\)",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.7.message"
+        }
+      ],
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -262,56 +294,94 @@
             "entry": false
           },
           {
-            "path": "storage/request_storage.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.storage_request_storage_py.content",
+            "path": "models/food_request.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models_food_request_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
-            "path": "reports/summary.py",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.reports_summary_py.content",
+            "path": "models/hygiene_request.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models_hygiene_request_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
           },
           {
-            "path": "data/requests.csv",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.data_requests_csv.content",
-            "language": "text",
+            "path": "models/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.solutionFiles.models___init___py.content",
+            "language": "python",
             "isEntry": false,
             "entry": false
           }
         ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "models/pantry_request.py",
+            "pattern": "from abc import ABC, abstractmethod",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.3.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/pantry_request.py",
+            "pattern": "class\\s+PantryRequest\\s*\\(\\s*ABC\\s*\\)",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.4.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "models/pantry_request.py",
+            "pattern": "@abstractmethod",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.5.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "models/pantry_request.py",
+            "pattern": "@property",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.6.message"
+          },
+          {
+            "type": "source_regex",
+            "path": "models/food_request.py",
+            "pattern": "class\\s+FoodRequest\\s*\\(\\s*PantryRequest\\s*\\)",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.7.message"
+          }
+        ],
         "semanticChecks": [
           {
-            "type": "method_returns",
+            "type": "defines_class",
             "path": "models/pantry_request.py",
             "className": "PantryRequest",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.0.message"
+          },
+          {
+            "type": "method_returns",
+            "path": "models/food_request.py",
+            "className": "FoodRequest",
             "constructorArgs": [
               "Rivera family",
               "high",
-              false
+              "produce"
             ],
             "constructorArgKinds": [],
             "methodName": "summary",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "Rivera family | priority=high | fulfilled=False",
+            "expected": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False",
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.0.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.1.message"
           },
           {
             "type": "printed_line_count",
             "path": "main.py",
-            "min": 3,
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.1.message"
+            "min": 1,
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.try_module_11_final_oop_capstone_sketch0.checks.2.message"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "NEIGHBORHOOD PANTRY REQUESTS\nRivera family | priority=high | fulfilled=False\nMorgan family | priority=low | fulfilled=True\n",
+            "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\n",
             "match": "exact"
           }
         ],
@@ -443,6 +513,25 @@
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_regex",
+          "path": "models/hygiene_request.py",
+          "pattern": "class\\s+HygieneRequest\\s*\\(\\s*PantryRequest\\s*\\)",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.3.message"
+        },
+        {
+          "type": "uses_for_loop",
+          "path": "main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.4.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "main.py",
+          "pattern": "request.summary()",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.5.message"
+        }
+      ],
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -484,6 +573,25 @@
             "entry": false
           }
         ],
+        "sourceChecks": [
+          {
+            "type": "source_regex",
+            "path": "models/hygiene_request.py",
+            "pattern": "class\\s+HygieneRequest\\s*\\(\\s*PantryRequest\\s*\\)",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.3.message"
+          },
+          {
+            "type": "uses_for_loop",
+            "path": "main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.4.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "main.py",
+            "pattern": "request.summary()",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.5.message"
+          }
+        ],
         "semanticChecks": [
           {
             "type": "method_returns",
@@ -509,13 +617,13 @@
             "constructorArgs": [
               "Chen family",
               "medium",
-              5
+              3
             ],
             "constructorArgKinds": [],
             "methodName": "summary",
             "methodArgs": [],
             "methodArgKinds": [],
-            "expected": "HYGIENE: Chen family | priority=medium | units=5 | fulfilled=False",
+            "expected": "HYGIENE: Chen family | priority=medium | units=3 | fulfilled=False",
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_2_models.checks.1.message"
           },
@@ -529,7 +637,7 @@
         "tests": [
           {
             "stdin": "",
-            "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\nHYGIENE: Chen family | priority=medium | units=5 | fulfilled=False\n",
+            "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=False\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\n",
             "match": "exact"
           }
         ],
@@ -586,6 +694,13 @@
           "language": "python",
           "isEntry": false,
           "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.services___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
         }
       ],
       "solutionFiles": [
@@ -627,6 +742,13 @@
         {
           "path": "services/pantry_service.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.services_pantry_service_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "services/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.services___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -678,10 +800,43 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.starterFiles.services___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
           }
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "services/pantry_service.py",
+          "pattern": "self._requests",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.3.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "services/pantry_service.py",
+          "pattern": "@property",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.4.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "services/pantry_service.py",
+          "pattern": "request.mark_fulfilled()",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.5.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "services/pantry_service.py",
+          "pattern": "request.summary()",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.6.message"
+        }
+      ],
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -728,9 +883,48 @@
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "services/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.solutionFiles.services___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "services/pantry_service.py",
+            "pattern": "self._requests",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.3.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "services/pantry_service.py",
+            "pattern": "@property",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.4.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "services/pantry_service.py",
+            "pattern": "request.mark_fulfilled()",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.5.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "services/pantry_service.py",
+            "pattern": "request.summary()",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.6.message"
           }
         ],
         "semanticChecks": [
+          {
+            "type": "defines_class",
+            "path": "services/pantry_service.py",
+            "className": "PantryService",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.0.message"
+          },
           {
             "type": "method_returns",
             "path": "services/pantry_service.py",
@@ -742,19 +936,19 @@
             "methodArgKinds": [],
             "expected": 0,
             "expectedKind": "value",
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.0.message"
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.1.message"
           },
           {
             "type": "printed_line_count",
             "path": "main.py",
-            "min": 2,
-            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.1.message"
+            "min": 3,
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_3_service.checks.2.message"
           }
         ],
         "tests": [
           {
             "stdin": "",
-            "stdout": "HYGIENE: Chen family | priority=medium | units=3 | fulfilled=True\n0\n",
+            "stdout": "FOOD: Rivera family | priority=high | food=produce | fulfilled=True\nHYGIENE: Chen family | priority=medium | units=3 | fulfilled=False\nOPEN: 1\n",
             "match": "exact"
           }
         ],
@@ -813,8 +1007,22 @@
           "entry": false
         },
         {
+          "path": "services/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.services___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "storage/request_storage.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.storage_request_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -871,8 +1079,22 @@
           "entry": false
         },
         {
+          "path": "services/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.services___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "storage/request_storage.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.storage_request_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -933,8 +1155,22 @@
             "entry": false
           },
           {
+            "path": "services/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.services___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "storage/request_storage.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.storage_request_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.starterFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -949,6 +1185,34 @@
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "uses_import",
+          "path": "storage/request_storage.py",
+          "module": "models.food_request",
+          "importName": "FoodRequest",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.2.message"
+        },
+        {
+          "type": "uses_import",
+          "path": "storage/request_storage.py",
+          "module": "models.hygiene_request",
+          "importName": "HygieneRequest",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.3.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "storage/request_storage.py",
+          "pattern": "csv.DictReader",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.4.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "main.py",
+          "pattern": "request.summary()",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.5.message"
+        }
+      ],
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -997,8 +1261,22 @@
             "entry": false
           },
           {
+            "path": "services/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.services___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "storage/request_storage.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.storage_request_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.solutionFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1011,35 +1289,44 @@
             "entry": false
           }
         ],
+        "sourceChecks": [
+          {
+            "type": "uses_import",
+            "path": "storage/request_storage.py",
+            "module": "models.food_request",
+            "importName": "FoodRequest",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.2.message"
+          },
+          {
+            "type": "uses_import",
+            "path": "storage/request_storage.py",
+            "module": "models.hygiene_request",
+            "importName": "HygieneRequest",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.3.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "storage/request_storage.py",
+            "pattern": "csv.DictReader",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.4.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "main.py",
+            "pattern": "request.summary()",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.5.message"
+          }
+        ],
         "semanticChecks": [
           {
             "type": "function_returns",
             "path": "storage/request_storage.py",
-            "functionName": "load_requests",
+            "functionName": "parse_fulfilled",
             "args": [
-              "data/requests.csv"
+              "yes"
             ],
             "argKinds": [],
-            "expected": [
-              {
-                "household": "Rivera family",
-                "priority": "high",
-                "food_type": "produce",
-                "fulfilled": false
-              },
-              {
-                "household": "Chen family",
-                "priority": "medium",
-                "units": 3,
-                "fulfilled": false
-              },
-              {
-                "household": "Morgan family",
-                "priority": "low",
-                "units": 5,
-                "fulfilled": true
-              }
-            ],
+            "expected": true,
             "expectedKind": "value",
             "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_4_storage.checks.0.message"
           },
@@ -1112,8 +1399,22 @@
           "entry": false
         },
         {
+          "path": "services/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.services___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "storage/request_storage.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.storage_request_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1133,8 +1434,22 @@
           "entry": false
         },
         {
+          "path": "reports/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.reports___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "tests/check_requests.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests_check_requests_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1184,8 +1499,22 @@
           "entry": false
         },
         {
+          "path": "services/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.services___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "storage/request_storage.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.storage_request_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1205,8 +1534,22 @@
           "entry": false
         },
         {
+          "path": "reports/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.reports___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "tests/check_requests.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_requests_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "tests/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1260,8 +1603,22 @@
             "entry": false
           },
           {
+            "path": "services/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.services___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "storage/request_storage.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.storage_request_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1281,8 +1638,22 @@
             "entry": false
           },
           {
+            "path": "reports/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.reports___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "tests/check_requests.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests_check_requests_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.starterFiles.tests___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1290,6 +1661,32 @@
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "reports/summary.py",
+          "pattern": "request.summary()",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.1.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "reports/summary.py",
+          "pattern": "request.is_open()",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.2.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "tests/check_requests.py",
+          "pattern": "isabstract(PantryRequest)",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.3.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "tests/check_requests.py",
+          "pattern": "assert",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.4.message"
+        }
+      ],
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -1338,8 +1735,22 @@
             "entry": false
           },
           {
+            "path": "services/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.services___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "storage/request_storage.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.storage_request_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1359,11 +1770,51 @@
             "entry": false
           },
           {
+            "path": "reports/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.reports___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "tests/check_requests.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests_check_requests_py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "tests/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.solutionFiles.tests___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "reports/summary.py",
+            "pattern": "request.summary()",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.1.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "reports/summary.py",
+            "pattern": "request.is_open()",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.2.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "tests/check_requests.py",
+            "pattern": "isabstract(PantryRequest)",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.3.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "tests/check_requests.py",
+            "pattern": "assert",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_5_reports_tests.checks.4.message"
           }
         ],
         "semanticChecks": [
@@ -1436,8 +1887,22 @@
           "entry": false
         },
         {
+          "path": "services/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.services___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "storage/request_storage.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.storage_request_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1457,6 +1922,13 @@
           "entry": false
         },
         {
+          "path": "reports/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.reports___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "tests/check_requests.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.tests_check_requests_py.content",
           "language": "python",
@@ -1464,9 +1936,16 @@
           "entry": false
         },
         {
+          "path": "tests/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.tests___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "README.md",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.README_md.content",
-          "language": "text",
+          "language": "markdown",
           "isEntry": false,
           "entry": false
         }
@@ -1515,8 +1994,22 @@
           "entry": false
         },
         {
+          "path": "services/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.services___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "storage/request_storage.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.storage_request_storage_py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
+          "path": "storage/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.storage___init___py.content",
           "language": "python",
           "isEntry": false,
           "entry": false
@@ -1536,6 +2029,13 @@
           "entry": false
         },
         {
+          "path": "reports/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.reports___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "tests/check_requests.py",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests_check_requests_py.content",
           "language": "python",
@@ -1543,9 +2043,16 @@
           "entry": false
         },
         {
+          "path": "tests/__init__.py",
+          "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests___init___py.content",
+          "language": "python",
+          "isEntry": false,
+          "entry": false
+        },
+        {
           "path": "README.md",
           "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.README_md.content",
-          "language": "text",
+          "language": "markdown",
           "isEntry": false,
           "entry": false
         }
@@ -1598,8 +2105,22 @@
             "entry": false
           },
           {
+            "path": "services/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.services___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "storage/request_storage.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.storage_request_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1619,6 +2140,13 @@
             "entry": false
           },
           {
+            "path": "reports/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.reports___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "tests/check_requests.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.tests_check_requests_py.content",
             "language": "python",
@@ -1626,15 +2154,48 @@
             "entry": false
           },
           {
+            "path": "tests/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.tests___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "README.md",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.starterFiles.README_md.content",
-            "language": "text",
+            "language": "markdown",
             "isEntry": false,
             "entry": false
           }
         ]
       },
       "showExpectedExample": true,
+      "sourceChecks": [
+        {
+          "type": "source_contains",
+          "path": "README.md",
+          "pattern": "Abstraction",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.1.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "README.md",
+          "pattern": "Polymorphism",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.2.message"
+        },
+        {
+          "type": "source_contains",
+          "path": "README.md",
+          "pattern": "python main.py",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.3.message"
+        },
+        {
+          "type": "uses_call",
+          "path": "main.py",
+          "functionName": "run_checks",
+          "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.4.message"
+        }
+      ],
       "recipe": {
         "type": "semantic",
         "language": "python",
@@ -1683,8 +2244,22 @@
             "entry": false
           },
           {
+            "path": "services/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.services___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "storage/request_storage.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.storage_request_storage_py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
+            "path": "storage/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.storage___init___py.content",
             "language": "python",
             "isEntry": false,
             "entry": false
@@ -1704,6 +2279,13 @@
             "entry": false
           },
           {
+            "path": "reports/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.reports___init___py.content",
+            "language": "python",
+            "isEntry": false,
+            "entry": false
+          },
+          {
             "path": "tests/check_requests.py",
             "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests_check_requests_py.content",
             "language": "python",
@@ -1711,11 +2293,44 @@
             "entry": false
           },
           {
-            "path": "README.md",
-            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.README_md.content",
-            "language": "text",
+            "path": "tests/__init__.py",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.tests___init___py.content",
+            "language": "python",
             "isEntry": false,
             "entry": false
+          },
+          {
+            "path": "README.md",
+            "content": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.solutionFiles.README_md.content",
+            "language": "markdown",
+            "isEntry": false,
+            "entry": false
+          }
+        ],
+        "sourceChecks": [
+          {
+            "type": "source_contains",
+            "path": "README.md",
+            "pattern": "Abstraction",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.1.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "README.md",
+            "pattern": "Polymorphism",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.2.message"
+          },
+          {
+            "type": "source_contains",
+            "path": "README.md",
+            "pattern": "python main.py",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.3.message"
+          },
+          {
+            "type": "uses_call",
+            "path": "main.py",
+            "functionName": "run_checks",
+            "message": "@:topics.python--applied-python-projects--draft.python-11-oop-capstone-project.module-11-final-oop-capstone.finalCapstone.steps.project_pantry_request_step_6_final_handoff.checks.4.message"
           }
         ],
         "semanticChecks": [

@@ -6,20 +6,20 @@
   "prefix": "pyv2_2",
   "minutes": 18,
   "topic": {
-    "labelKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.label",
-    "summaryKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.summary"
+    "labelKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.label",
+    "summaryKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.cards.sketch0.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.cards.sketch0.title",
       "sketchId": "indentation-intro",
       "height": 420,
       "tryIt": {
         "id": "try-indentation-and-blocks-sketch0",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-basic-if-output.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-basic-if-output.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.prompt",
         "exerciseKey": "code-basic-if-output",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -32,13 +32,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.cards.sketch1.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.cards.sketch1.title",
       "sketchId": "same-indent-same-block",
       "height": 420,
       "tryIt": {
         "id": "try-indentation-and-blocks-sketch1",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-two-lines-in-block.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-two-lines-in-block.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.prompt",
         "exerciseKey": "code-two-lines-in-block",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -51,13 +51,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.cards.sketch2.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.cards.sketch2.title",
       "sketchId": "if-elif-else-blocks",
       "height": 420,
       "tryIt": {
         "id": "try-indentation-and-blocks-sketch2",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-elif-branches.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-elif-branches.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.prompt",
         "exerciseKey": "code-elif-branches",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -70,7 +70,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.cards.quiz.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -81,84 +81,26 @@
         "preferKind": null,
         "maxAttempts": null
       }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "code_basic_if_output",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.projectSteps.code_basic_if_output.title",
-            "exerciseKey": "code-basic-if-output",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_two_lines_in_block",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.projectSteps.code_two_lines_in_block.title",
-            "exerciseKey": "code-two-lines-in-block",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_elif_branches",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.projectSteps.code_elif_branches.title",
-            "exerciseKey": "code-elif-branches",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_special_case_first",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.projectSteps.code_special_case_first.title",
-            "exerciseKey": "code-special-case-first",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_nested_if_basic",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.projectSteps.code_nested_if_basic.title",
-            "exerciseKey": "code-nested-if-basic",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
-      }
     }
   ],
   "sketches": [
     {
       "id": "indentation-intro",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.indentation-intro.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.indentation-intro.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-2.indentation-and-blocks.indentation-intro.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-2.indentation-and-blocks.indentation-intro.bodyMarkdown"
     },
     {
       "id": "same-indent-same-block",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.same-indent-same-block.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.same-indent-same-block.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-2.indentation-and-blocks.same-indent-same-block.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-2.indentation-and-blocks.same-indent-same-block.bodyMarkdown"
     },
     {
       "id": "if-elif-else-blocks",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.if-elif-else-blocks.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.if-elif-else-blocks.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-2.indentation-and-blocks.if-elif-else-blocks.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-2.indentation-and-blocks.if-elif-else-blocks.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -167,7 +109,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.sc-indent-purpose",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.sc-indent-purpose",
       "optionIds": [
         "a",
         "b",
@@ -184,7 +126,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.sc-outside-block",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.sc-outside-block",
       "optionIds": [
         "a",
         "b",
@@ -201,7 +143,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.mc-same-block",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.mc-same-block",
       "optionIds": [
         "a",
         "b",
@@ -221,7 +163,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.mc-branch-blocks",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.mc-branch-blocks",
       "optionIds": [
         "a",
         "b",
@@ -241,7 +183,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.dr-if-else-structure",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.dr-if-else-structure",
       "tokenIds": [
         "t1",
         "t2",
@@ -263,7 +205,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.dr-two-line-block",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.dr-two-line-block",
       "tokenIds": [
         "t1",
         "t2",
@@ -283,7 +225,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.fb-indent-after-if",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.fb-indent-after-if",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -295,7 +237,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.fb-line-in-block",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.fb-line-in-block",
       "choiceCount": 3,
       "expected": {
         "kind": "fill_blank_choice",
@@ -305,11 +247,11 @@
     {
       "id": "code-basic-if-output",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-basic-if-output",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -377,7 +319,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -395,11 +337,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-basic-if-output.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -456,11 +398,11 @@
     {
       "id": "code-two-lines-in-block",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-two-lines-in-block",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -528,7 +470,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -546,11 +488,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-two-lines-in-block.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -607,11 +549,11 @@
     {
       "id": "code-elif-branches",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-elif-branches",
+      "messageBase": "topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-elif-branches",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -690,7 +632,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -708,11 +650,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-2.indentation-and-blocks.quiz.code-elif-branches.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -769,330 +711,6 @@
           "type": "source_regex",
           "pattern": "\\bn\\b",
           "message": "Use the variable name `n` in your solution."
-        }
-      ]
-    },
-    {
-      "id": "code-special-case-first",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-special-case-first",
-      "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "100\n",
-            "stdout": "perfect\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "75\n",
-            "stdout": "pass\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "40\n",
-            "stdout": "retry\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "score = int(input())\n\nif score == 100:\n    print(\"perfect\")\nelif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"retry\")",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "score = int(input())\n\nif score == 100:\n    print(\"perfect\")\nelif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"retry\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "elif ",
-            "message": "Use elif for the middle case in this exercise.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the input to an integer before doing the number work.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bscore\\b",
-            "message": "Use the variable name `score` in your solution."
-          }
-        ]
-      },
-      "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "score = int(input())\n\nif score == 100:\n    print(\"perfect\")\nelif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"retry\")",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-special-case-first.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "score = int(input())\n\nif score == 100:\n    print(\"perfect\")\nelif score >= 60:\n    print(\"pass\")\nelse:\n    print(\"retry\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "elif ",
-          "message": "Use elif for the middle case in this exercise.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the input to an integer before doing the number work.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bscore\\b",
-          "message": "Use the variable name `score` in your solution."
-        }
-      ]
-    },
-    {
-      "id": "code-nested-if-basic",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-nested-if-basic",
-      "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "10\n",
-            "stdout": "child\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "15\n",
-            "stdout": "teen\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "21\n",
-            "stdout": "adult\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "age = int(input())\n\nif age >= 13:\n    if age >= 18:\n        print(\"adult\")\n    else:\n        print(\"teen\")\nelse:\n    print(\"child\")",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "age = int(input())\n\nif age >= 13:\n    if age >= 18:\n        print(\"adult\")\n    else:\n        print(\"teen\")\nelse:\n    print(\"child\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "else:",
-            "message": "Include an else branch for the remaining case.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "int(",
-            "message": "Convert the input to an integer before doing the number work.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bage\\b",
-            "message": "Use the variable name `age` in your solution."
-          }
-        ]
-      },
-      "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "age = int(input())\n\nif age >= 13:\n    if age >= 18:\n        print(\"adult\")\n    else:\n        print(\"teen\")\nelse:\n    print(\"child\")",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-2.indentation-and-blocks.quiz.code-nested-if-basic.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "age = int(input())\n\nif age >= 13:\n    if age >= 18:\n        print(\"adult\")\n    else:\n        print(\"teen\")\nelse:\n    print(\"child\")",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "else:",
-          "message": "Include an else branch for the remaining case.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "int(",
-          "message": "Convert the input to an integer before doing the number work.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bage\\b",
-          "message": "Use the variable name `age` in your solution."
         }
       ]
     }

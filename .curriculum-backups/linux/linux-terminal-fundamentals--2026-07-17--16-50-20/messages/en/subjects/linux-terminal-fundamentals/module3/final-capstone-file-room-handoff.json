@@ -1,0 +1,275 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-3-final-capstone": {
+        "final-capstone-file-room-handoff": {
+          "label": "Final Capstone: Community File Room Handoff",
+          "summary": "Clean a small file room workspace with the full beginner terminal toolkit.",
+          "cards": {
+            "sketch0": {
+              "title": "Community file room handoff"
+            },
+            "project": {
+              "title": "Final capstone steps"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "final-capstone-file-room-handoff-terminal-task-1": {
+                "title": "Inspect and create the handoff area",
+                "prompt": "Inspect `community-file-room`, then create `handoff`, `reports`, `archive`, and `backup` folders.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `pwd` to confirm where you are."
+                    },
+                    "1": {
+                      "message": "Use `ls` to inspect before changing."
+                    },
+                    "2": {
+                      "message": "Create the handoff folders with `mkdir` or `mkdir -p`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_inbox_agenda_txt": {
+                    "content": "Community event agenda\n"
+                  },
+                  "community_file_room_inbox_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_inbox_venue_txt": {
+                    "content": "Venue note\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
+                  }
+                }
+              },
+              "final-capstone-file-room-handoff-terminal-task-2": {
+                "title": "Write the handoff README",
+                "prompt": "Write `Community file room handoff` to `handoff/README.txt`, then append `Agenda, guest list, and venue notes prepared`. Read it with `cat`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Write the first README line with `>`."
+                    },
+                    "1": {
+                      "message": "Append the second README line with `>>`."
+                    },
+                    "2": {
+                      "message": "Read the README with `cat`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_inbox_agenda_txt": {
+                    "content": "Community event agenda\n"
+                  },
+                  "community_file_room_inbox_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_inbox_venue_txt": {
+                    "content": "Venue note\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
+                  }
+                }
+              },
+              "final-capstone-file-room-handoff-terminal-task-3": {
+                "title": "Move files into clean folders",
+                "prompt": "Move `agenda.txt` and `venue.txt` into `handoff`. Move `guest-list.txt` into `reports`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `mv` to move the inbox files."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_inbox_agenda_txt": {
+                    "content": "Community event agenda\n"
+                  },
+                  "community_file_room_inbox_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_inbox_venue_txt": {
+                    "content": "Venue note\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
+                  }
+                }
+              },
+              "final-capstone-file-room-handoff-terminal-task-4": {
+                "title": "Back up the guest list and remove scratch",
+                "prompt": "Copy the guest list into `backup/guest-list-backup.txt`. Remove only `tmp-scratch.txt`, then list `inbox`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `cp` to create the backup."
+                    },
+                    "1": {
+                      "message": "Remove only the temporary scratch file."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_reports_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_inbox_tmp_scratch_txt": {
+                    "content": "temporary scratch\n"
+                  }
+                }
+              },
+              "final-capstone-file-room-handoff-terminal-task-5": {
+                "title": "Verify and mark ready",
+                "prompt": "Count the guest list lines with `wc -l`, append `Ready for pickup` to the README, and create `handoff/READY.txt`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this project step.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `wc -l` to count the guest list."
+                    },
+                    "1": {
+                      "message": "Append the final README line with `>>`."
+                    },
+                    "2": {
+                      "message": "Create the ready marker with `touch`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "community_file_room_reports_guest_list_txt": {
+                    "content": "Guest list\n"
+                  },
+                  "community_file_room_handoff_readme_txt": {
+                    "content": "Community file room handoff\n"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-3-final-capstone": {
+        "final-capstone-file-room-handoff": {
+          "capstone-synopsis": {
+            "title": "Community file room handoff",
+            "bodyMarkdown": "The community center has a messy file room before an event. Your job is to inspect first, build a clean handoff area, write a README, move files, back up the guest list, safely remove a scratch file, and mark the folder ready.\n\nThis capstone uses the whole course: `pwd`, `ls`, `cd`, `mkdir`, `touch`, `echo`, `>`, `>>`, `cat`, `wc -l`, `cp`, `mv`, and safe `rm`."
+          }
+        }
+      }
+    }
+  }
+}

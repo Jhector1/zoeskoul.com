@@ -263,6 +263,10 @@ pnpm curr:translate -- linux linux-terminal-fundamentals \
 
 
 
+cd /Users/admin/Documents/NextJSProject/zoeskoul.com && \
+for course in python-v2 python-data-functions applied-python-projects; do
+ RUN_DRAFT_CODE_INPUT_GOLDENS=1 pnpm curr:course -- draft-goldens python  "$course"
+done
 
 
 First:

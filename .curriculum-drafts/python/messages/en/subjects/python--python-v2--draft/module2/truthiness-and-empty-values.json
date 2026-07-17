@@ -1,235 +1,6 @@
 {
   "topics": {
     "python--python-v2--draft": {
-      "python--python-v2--draft-2": {
-        "truthiness-and-empty-values": {
-          "label": "Truthiness and Empty Values",
-          "summary": "Understand how empty strings, zero, and None behave in conditions.",
-          "cards": {
-            "sketch0": {
-              "title": "What truthy and falsy mean"
-            },
-            "sketch1": {
-              "title": "How numbers and None behave"
-            },
-            "sketch2": {
-              "title": "When truthiness is useful and when to be careful"
-            },
-            "quiz": {
-              "title": "Quiz"
-            },
-            "project": {
-              "title": "Truthiness Practice Project"
-            }
-          },
-          "projectSteps": {
-            "code_classify_string": {
-              "title": "Classify empty or non-empty text"
-            },
-            "code_classify_number": {
-              "title": "Classify zero or non-zero"
-            },
-            "code_check_missing_word": {
-              "title": "Check for a missing word marker"
-            },
-            "code_points_message": {
-              "title": "Print a message for points"
-            },
-            "code_two_inputs_both_present": {
-              "title": "Check whether both inputs have text"
-            }
-          },
-          "quiz": {
-            "sc-falsy-empty-string": {
-              "title": "Empty string in a condition",
-              "prompt": "What happens in Python when `text = \"\"` and the program checks `if text:`?",
-              "hint": "An empty string has a special truthiness value.",
-              "help": {
-                "concept": "Python treats empty strings as falsy, so `if text:` fails when `text` is `\"\"`.",
-                "hint_1": "Ask whether `\"\"` counts as having content.",
-                "hint_2": "The condition does not enter the `if` block for an empty string."
-              },
-              "options": {
-                "a": "The condition is treated as true",
-                "b": "The condition is treated as false",
-                "c": "Python raises an error",
-                "d": "Python converts it to the number 0 first"
-              }
-            },
-            "sc-none-truthiness": {
-              "title": "None in an if statement",
-              "prompt": "Which statement about `None` in a Python condition is correct?",
-              "hint": "Think about whether `None` behaves more like a present value or a missing value.",
-              "help": {
-                "concept": "In beginner Python, `None` is a falsy value and often represents missing or not-yet-set data.",
-                "hint_1": "If `value = None`, then `if value:` will not run its main block.",
-                "hint_2": "Choose the option that says Python treats `None` like false in conditions."
-              },
-              "options": {
-                "a": "`None` is always truthy",
-                "b": "`None` is falsy",
-                "c": "`None` becomes an empty string automatically",
-                "d": "`None` can only be used with numbers"
-              }
-            },
-            "mc-falsy-values": {
-              "title": "Pick the falsy values",
-              "prompt": "Which values are falsy in Python? Choose all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "options": {
-                "a": "0",
-                "b": "\"\"",
-                "c": "None",
-                "d": "\"hi\""
-              }
-            },
-            "mc-truthy-values": {
-              "title": "Pick the truthy values",
-              "prompt": "Which values are truthy in Python? Choose all that apply.",
-              "hint": "Non-empty text and non-zero numbers usually count as true.",
-              "help": {
-                "concept": "A non-empty string and any non-zero number are truthy, while `0`, `\"\"`, and `None` are falsy.",
-                "hint_1": "Check which options would make `if value:` run its block.",
-                "hint_2": "One correct answer is text with characters in it, and another is a number that is not zero."
-              },
-              "options": {
-                "a": "\"hello\"",
-                "b": "5",
-                "c": "0",
-                "d": "None"
-              }
-            },
-            "dr-check-empty-input-order": {
-              "title": "Order the empty-input check",
-              "prompt": "Arrange these lines to make a program that reads text and prints `Empty` when the input is an empty string, otherwise prints `Has text`.",
-              "hint": "Arrange the pieces in the order Python uses them.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "text = input()",
-                "t2": "if text:",
-                "t3": "print(\"Has text\")",
-                "t4": "else:",
-                "t5": "print(\"Empty\")"
-              }
-            },
-            "dr-check-none-order": {
-              "title": "Order the None check",
-              "prompt": "Arrange these lines to make a program that prints `Missing` when `value` is `None`, otherwise prints `Present`.",
-              "hint": "Arrange the pieces in the order Python uses them.",
-              "help": {
-                "concept": "The pieces should form a valid statement in a logical order.",
-                "hint_1": "Start with the piece that introduces the idea or action.",
-                "hint_2": "Place dependent pieces after the part they describe or complete."
-              },
-              "tokens": {
-                "t1": "value = None",
-                "t2": "if value is None:",
-                "t3": "print(\"Missing\")",
-                "t4": "else:",
-                "t5": "print(\"Present\")"
-              }
-            },
-            "fb-zero-falsy": {
-              "title": "Fill the missing value for zero",
-              "prompt": "Complete the sentence about truthiness.",
-              "hint": "Think about how Python treats zero in an `if` condition.",
-              "help": {
-                "concept": "The number `0` is one of the standard the missing term values in Python.",
-                "hint_1": "If `count = 0`, then `if count:` does not run the main block.",
-                "hint_2": "Choose the word that means Python treats the condition like false."
-              },
-              "template": "In Python, `0` is [blank1].",
-              "choices": [
-                "truthy",
-                "falsy",
-                "a string",
-                "None"
-              ]
-            },
-            "fb-nonempty-string": {
-              "title": "Fill the missing value for text",
-              "prompt": "Complete the sentence about strings in conditions.",
-              "hint": "A string with characters in it behaves differently from `\"\"`.",
-              "help": {
-                "concept": "A non-empty string is the missing term, while an empty string is falsy.",
-                "hint_1": "Imagine `name = \"Leo\"` inside `if name:`.",
-                "hint_2": "Choose the word that means the condition acts like true."
-              },
-              "template": "A non-empty string is [blank1] in Python conditions.",
-              "choices": [
-                "missing",
-                "falsy",
-                "truthy",
-                "zero"
-              ]
-            },
-            "code-classify-string": {
-              "title": "Classify empty or non-empty text",
-              "prompt": "Write Python code that reads one line of input. If the input is an empty string, print `empty`. Otherwise, print `not empty`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This coding exercise checks whether the program produces the requested output.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "text = input()\n# TODO: print \"empty\" if text is empty, otherwise print \"not empty\""
-            },
-            "code-classify-number": {
-              "title": "Classify zero or non-zero",
-              "prompt": "Write Python code that reads an integer. If the number is truthy, print `truthy number`. Otherwise, print `falsy number`.",
-              "hint": "Read the task \"Classify zero or non-zero\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Classify zero or non-zero\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "number = int(input())\n# TODO: print the correct message based on the number's truthiness"
-            },
-            "code-check-missing-word": {
-              "title": "Check for a missing word marker",
-              "prompt": "Write Python code that reads one line of input. If the input is exactly `None`, print `missing`. Otherwise, print `present`.",
-              "hint": "Read the task \"Check for a missing word marker\" and identify the required result.",
-              "help": {
-                "concept": "This coding exercise checks whether your code produces the requested result for: \"Check for a missing word marker\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
-              },
-              "starterCode": "value = input()\n# TODO: if the input text is exactly \"None\", print \"missing\"; otherwise print \"present\""
-            },
-            "code-points-message": {
-              "title": "Print a message for points",
-              "prompt": "Write Python code that reads an integer called `points`. If `points` is 0, print `no points`. Otherwise, print `points recorded`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "points = int(input())\n# TODO: print the correct message"
-            },
-            "code-two-inputs-both-present": {
-              "title": "Check whether both inputs have text",
-              "prompt": "Write Python code that reads two lines of input: `first` and `second`. If both are non-empty strings, print `both present`. Otherwise, print `missing one`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
-              "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
-              },
-              "starterCode": "first = input()\nsecond = input()\n# TODO: print \"both present\" only when both strings are non-empty"
-            }
-          }
-        }
-      },
       "python-v2-2": {
         "truthiness-and-empty-values": {
           "label": "Truthiness and Empty Values",
@@ -246,26 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Truthiness Practice Project"
-            }
-          },
-          "projectSteps": {
-            "code_classify_string": {
-              "title": "Classify empty or non-empty text"
-            },
-            "code_classify_number": {
-              "title": "Classify zero or non-zero"
-            },
-            "code_check_missing_word": {
-              "title": "Check for a missing word marker"
-            },
-            "code_points_message": {
-              "title": "Print a message for points"
-            },
-            "code_two_inputs_both_present": {
-              "title": "Check whether both inputs have text"
             }
           },
           "quiz": {
@@ -304,11 +55,11 @@
             "mc-falsy-values": {
               "title": "Pick the falsy values",
               "prompt": "Which values are falsy in Python? Choose all that apply.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice against the precise rule introduced in the lesson.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Explain the behavior to yourself in plain language before choosing or writing the Python syntax.",
+                "hint_1": "Check names, punctuation, and execution order rather than relying on wording that merely sounds familiar.",
+                "hint_2": "Work through the expression or control flow before selecting the option that matches Python’s behavior."
               },
               "options": {
                 "a": "0",
@@ -372,7 +123,7 @@
               "prompt": "Complete the sentence about truthiness.",
               "hint": "Think about how Python treats zero in an `if` condition.",
               "help": {
-                "concept": "The number `0` is one of the standard the missing term values in Python.",
+                "concept": "Python treats zero as false when it is used directly as a condition.",
                 "hint_1": "If `count = 0`, then `if count:` does not run the main block.",
                 "hint_2": "Choose the word that means Python treats the condition like false."
               },
@@ -389,7 +140,7 @@
               "prompt": "Complete the sentence about strings in conditions.",
               "hint": "A string with characters in it behaves differently from `\"\"`.",
               "help": {
-                "concept": "A non-empty string is the missing term, while an empty string is falsy.",
+                "concept": "Python treats a string containing at least one character as true and an empty string as false.",
                 "hint_1": "Imagine `name = \"Leo\"` inside `if name:`.",
                 "hint_2": "Choose the word that means the condition acts like true."
               },
@@ -403,56 +154,56 @@
             },
             "code-classify-string": {
               "title": "Classify empty or non-empty text",
-              "prompt": "Write Python code that reads one line of input. If the input is an empty string, print `empty`. Otherwise, print `not empty`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Create a focused solution that reads one line of input. If the input is an empty string, print `empty`. Otherwise, print `not empty`.",
+              "hint": "Translate the question into a Python rule before selecting an answer.",
               "help": {
-                "concept": "This coding exercise checks whether the program produces the requested output.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Correct syntax is only the start; the resulting output must also match.",
+                "hint_1": "Read the starter from top to bottom, identify the missing responsibility, and verify the result after your edit.",
+                "hint_2": "Check names, punctuation, and execution order rather than relying on wording that merely sounds familiar."
               },
               "starterCode": "text = input()\n# TODO: print \"empty\" if text is empty, otherwise print \"not empty\""
             },
             "code-classify-number": {
               "title": "Classify zero or non-zero",
-              "prompt": "Write Python code that reads an integer. If the number is truthy, print `truthy number`. Otherwise, print `falsy number`.",
+              "prompt": "Create a focused solution that reads an integer. If the number is truthy, print `truthy number`. Otherwise, print `falsy number`.",
               "hint": "Read the task \"Classify zero or non-zero\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Classify zero or non-zero\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "hint_1": "Use the named values and operations to generate the requested result.",
+                "hint_2": "Execute the starter after your edit and inspect both values and line order."
               },
               "starterCode": "number = int(input())\n# TODO: print the correct message based on the number's truthiness"
             },
             "code-check-missing-word": {
               "title": "Check for a missing word marker",
-              "prompt": "Write Python code that reads one line of input. If the input is exactly `None`, print `missing`. Otherwise, print `present`.",
+              "prompt": "Complete the program so it reads one line of input. If the input is exactly `None`, print `missing`. Otherwise, print `present`.",
               "hint": "Read the task \"Check for a missing word marker\" and identify the required result.",
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Check for a missing word marker\".",
-                "hint_1": "Write the code that creates exactly the requested output.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "hint_1": "Keep the solution focused on the specific result described in the task.",
+                "hint_2": "Execute the starter after your edit and inspect both values and line order."
               },
               "starterCode": "value = input()\n# TODO: if the input text is exactly \"None\", print \"missing\"; otherwise print \"present\""
             },
             "code-points-message": {
               "title": "Print a message for points",
-              "prompt": "Write Python code that reads an integer called `points`. If `points` is 0, print `no points`. Otherwise, print `points recorded`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Create a focused solution that reads an integer called `points`. If `points` is 0, print `no points`. Otherwise, print `points recorded`.",
+              "hint": "Look for the choice that satisfies both the syntax and behavior described.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Explain the behavior to yourself in plain language before choosing or writing the Python syntax.",
+                "hint_1": "Use the named file and expected behavior as a checklist; test one focused change before adding another.",
+                "hint_2": "Trace the code or rule in the prompt, then reject choices that conflict with Python syntax or runtime behavior."
               },
               "starterCode": "points = int(input())\n# TODO: print the correct message"
             },
             "code-two-inputs-both-present": {
               "title": "Check whether both inputs have text",
-              "prompt": "Write Python code that reads two lines of input: `first` and `second`. If both are non-empty strings, print `both present`. Otherwise, print `missing one`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "prompt": "Create a focused solution that reads two lines of input: `first` and `second`. If both are non-empty strings, print `both present`. Otherwise, print `missing one`.",
+              "hint": "Identify the concept being tested, then compare every option with that concept.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
-                "hint_1": "Start with the lesson example, then remove choices that do not match this task.",
-                "hint_2": "Choose the option that directly matches the question without relying on answer wording."
+                "concept": "Connect the prompt to the Python rule introduced in this lesson, then trace how that rule affects the program state.",
+                "hint_1": "Trace the current values before editing. Keep the working lines and add only the behavior the prompt requests.",
+                "hint_2": "Check names, punctuation, and execution order rather than relying on wording that merely sounds familiar."
               },
               "starterCode": "first = input()\nsecond = input()\n# TODO: print \"both present\" only when both strings are non-empty"
             }
@@ -463,35 +214,19 @@
   },
   "sketches": {
     "python--python-v2--draft": {
-      "python--python-v2--draft-2": {
-        "truthiness-and-empty-values": {
-          "truthy-basics": {
-            "title": "What truthy and falsy mean",
-            "bodyMarkdown": "In Python, an `if` condition does not always need `True` or `False` written directly. Many values are *treated like* true or false.\n\nA value is **truthy** if Python treats it like `True` in a condition. A value is **falsy** if Python treats it like `False`.\n\nCommon falsy values for beginners:\n- `0`\n- `\"\"` (an empty string)\n- `None`\n\nMany other values are truthy, such as:\n- `5`\n- `\"hello\"`\n- `-2`\n\nExample:\n\n```python\nname = \"\"\n\nif name:\n    print(\"You entered a name\")\nelse:\n    print(\"Name is empty\")\n```\n\nWalk through it:\n- `name` stores an empty string.\n- An empty string is falsy.\n- So the `else` block runs.\n- The output is `Name is empty`."
-          },
-          "numbers-and-none": {
-            "title": "How numbers and None behave",
-            "bodyMarkdown": "Numbers also have truthiness rules. For basic Python work:\n- `0` is falsy\n- non-zero numbers are truthy\n- `None` is falsy\n\nWorked example:\n\n```python\nscore = 0\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nStep through it:\n- `score = 0` stores zero.\n- In the `if score:` line, Python checks the truthiness of `score`.\n- Because `0` is falsy, the `if` block is skipped.\n- The `else` block prints `No score yet`.\n\nNow compare that with:\n\n```python\nscore = 7\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nThis time `7` is truthy, so `Score recorded` is printed.\n\n`None` often means “no value yet” or “missing value.”\n\n```python\nemail = None\n\nif email:\n    print(\"Email found\")\nelse:\n    print(\"No email found\")\n```\n\nBecause `None` is falsy, the program prints `No email found`."
-          },
-          "using-truthiness-carefully": {
-            "title": "When truthiness is useful and when to be careful",
-            "bodyMarkdown": "Truthiness is useful for quick checks, especially when you want to know whether a value is empty or missing.\n\nExample:\n\n```python\ncomment = input()\n\nif comment:\n    print(\"Thanks for your comment\")\nelse:\n    print(\"You entered nothing\")\n```\n\nThis works well because an empty input becomes an empty string, which is falsy.\n\nBut be careful: sometimes `0` is a real value, not a missing one.\n\n```python\nage = 0\n\nif age:\n    print(\"Age entered\")\nelse:\n    print(\"Age missing\")\n```\n\nThis prints `Age missing`, even though `0` is a real number. That means a plain truthiness check is not always the best choice.\n\nIf you specifically want to check for a missing value, compare with `None` instead of relying only on truthiness.\n\n```python\nage = 0\n\nif age is None:\n    print(\"Age missing\")\nelse:\n    print(\"Age entered\")\n```\n\nNow the program correctly treats `0` as an entered value.\n\nStep through it: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
-          }
-        }
-      },
       "python-v2-2": {
         "truthiness-and-empty-values": {
           "truthy-basics": {
             "title": "What truthy and falsy mean",
-            "bodyMarkdown": "In Python, an `if` condition does not always need `True` or `False` written directly. Many values are *treated like* true or false.\n\nA value is **truthy** if Python treats it like `True` in a condition. A value is **falsy** if Python treats it like `False`.\n\nCommon falsy values for beginners:\n- `0`\n- `\"\"` (an empty string)\n- `None`\n\nMany other values are truthy, such as:\n- `5`\n- `\"hello\"`\n- `-2`\n\nExample:\n\n```python\nname = \"\"\n\nif name:\n    print(\"You entered a name\")\nelse:\n    print(\"Name is empty\")\n```\n\nWalk through it:\n- `name` stores an empty string.\n- An empty string is falsy.\n- So the `else` block runs.\n- The output is `Name is empty`."
+            "bodyMarkdown": "In Python, an `if` condition does not always need `True` or `False` written directly. Many values are *treated like* true or false.\n\nA value is **truthy** if Python treats it like `True` in a condition. A value is **falsy** if Python treats it like `False`.\n\nCommon falsy values for beginners:\n- `0`\n- `\"\"` (an empty string)\n- `None`\n\nMany other values are truthy, such as:\n- `5`\n- `\"hello\"`\n- `-2`\n\nExample:\n\n```python\nname = \"\"\n\nif name:\n    print(\"You entered a name\")\nelse:\n    print(\"Name is empty\")\n```\n\nTrace the example: - `name` stores an empty string.\n- An empty string is falsy.\n- So the `else` block runs.\n- The output is `Name is empty`."
           },
           "numbers-and-none": {
             "title": "How numbers and None behave",
-            "bodyMarkdown": "Numbers also have truthiness rules. For basic Python work:\n- `0` is falsy\n- non-zero numbers are truthy\n- `None` is falsy\n\nWorked example:\n\n```python\nscore = 0\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nStep through it:\n- `score = 0` stores zero.\n- In the `if score:` line, Python checks the truthiness of `score`.\n- Because `0` is falsy, the `if` block is skipped.\n- The `else` block prints `No score yet`.\n\nNow compare that with:\n\n```python\nscore = 7\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nThis time `7` is truthy, so `Score recorded` is printed.\n\n`None` often means “no value yet” or “missing value.”\n\n```python\nemail = None\n\nif email:\n    print(\"Email found\")\nelse:\n    print(\"No email found\")\n```\n\nBecause `None` is falsy, the program prints `No email found`."
+            "bodyMarkdown": "Numbers also have truthiness rules. For basic Python work:\n- `0` is falsy\n- non-zero numbers are truthy\n- `None` is falsy\n\nWorked example:\n\n```python\nscore = 0\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nRead the flow carefully: - `score = 0` stores zero.\n- In the `if score:` line, Python checks the truthiness of `score`.\n- Because `0` is falsy, the `if` block is skipped.\n- The `else` block prints `No score yet`.\n\nNow compare that with:\n\n```python\nscore = 7\n\nif score:\n    print(\"Score recorded\")\nelse:\n    print(\"No score yet\")\n```\n\nThis time `7` is truthy, so `Score recorded` is printed.\n\n`None` often means “no value yet” or “missing value.”\n\n```python\nemail = None\n\nif email:\n    print(\"Email found\")\nelse:\n    print(\"No email found\")\n```\n\nBecause `None` is falsy, the program prints `No email found`."
           },
           "using-truthiness-carefully": {
             "title": "When truthiness is useful and when to be careful",
-            "bodyMarkdown": "Truthiness is useful for quick checks, especially when you want to know whether a value is empty or missing.\n\nExample:\n\n```python\ncomment = input()\n\nif comment:\n    print(\"Thanks for your comment\")\nelse:\n    print(\"You entered nothing\")\n```\n\nThis works well because an empty input becomes an empty string, which is falsy.\n\nBut be careful: sometimes `0` is a real value, not a missing one.\n\n```python\nage = 0\n\nif age:\n    print(\"Age entered\")\nelse:\n    print(\"Age missing\")\n```\n\nThis prints `Age missing`, even though `0` is a real number. That means a plain truthiness check is not always the best choice.\n\nIf you specifically want to check for a missing value, compare with `None` instead of relying only on truthiness.\n\n```python\nage = 0\n\nif age is None:\n    print(\"Age missing\")\nelse:\n    print(\"Age entered\")\n```\n\nNow the program correctly treats `0` as an entered value.\n\nStep through it: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
+            "bodyMarkdown": "Truthiness is useful for quick checks, especially when you want to know whether a value is empty or missing.\n\nExample:\n\n```python\ncomment = input()\n\nif comment:\n    print(\"Thanks for your comment\")\nelse:\n    print(\"You entered nothing\")\n```\n\nThis works well because an empty input becomes an empty string, which is falsy.\n\nBut be careful: sometimes `0` is a real value, not a missing one.\n\n```python\nage = 0\n\nif age:\n    print(\"Age entered\")\nelse:\n    print(\"Age missing\")\n```\n\nThis prints `Age missing`, even though `0` is a real number. That means a plain truthiness check is not always the best choice.\n\nIf you specifically want to check for a missing value, compare with `None` instead of relying only on truthiness.\n\n```python\nage = 0\n\nif age is None:\n    print(\"Age missing\")\nelse:\n    print(\"Age entered\")\n```\n\nNow the program correctly treats `0` as an entered value.\n\nRead the flow carefully: read each statement from top to bottom. Notice which names are created, which values are passed into built-in tools, and what output the code is meant to show."
           }
         }
       }

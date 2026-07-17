@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice local scope with small helper functions"
-            }
-          },
-          "projectSteps": {
-            "code_q1": {
-              "title": "Return a local calculation"
-            },
-            "code_q2": {
-              "title": "Use a parameter as a local name"
-            },
-            "code_q3": {
-              "title": "Compute with two local variables"
             }
           },
           "quiz": {
@@ -69,7 +55,7 @@
             "mc-q1": {
               "title": "Choose the local names",
               "prompt": "Which names are local in this code? Choose all that apply.\n\n```python\ntax = 5\n\ndef total(price):\n    fee = 2\n    final_price = price + fee + tax\n    return final_price\n```",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Reject any choice that changes the named values, branch order, or output.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -137,7 +123,7 @@
               "help": {
                 "concept": "A variable assigned inside a function becomes local to that function call.",
                 "hint_1": "The line is creating a new name inside the function body.",
-                "hint_2": "Pick the name that matches the sentence about making `the missing term` local."
+                "hint_2": "Match the blank to the variable described as belonging only to the function call."
               },
               "template": "def show_score():\n    [blank1] = 10\n    return score",
               "choices": [
@@ -154,7 +140,7 @@
               "help": {
                 "concept": "A parameter is a local name, so code inside the function should use that parameter name directly.",
                 "hint_1": "The function header already tells you the local name to use.",
-                "hint_2": "Match the blank to the name inside `def triple(the missing term):`."
+                "hint_2": "Look at the parameter position inside the function header and choose the same name used by the function body."
               },
               "template": "def triple(value):\n    return [blank1] * 3",
               "choices": [
@@ -167,11 +153,11 @@
             "code-q1": {
               "title": "Return a local calculation",
               "prompt": "Write `add_tax(price)` so it calculates `price + 5`, stores that result in a local variable named `total`, and then returns `total`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
+                "hint_2": "Run the completed step and verify every output line before submitting it."
               },
               "starterCode": "def add_tax(price):\n    # store the result in a local variable named total\n    # then return it\n    pass",
               "solutionCode": "def add_tax(price):\n    total = price + 5\n    return total",
@@ -192,9 +178,9 @@
               "prompt": "Write `make_label(word)` so it builds the finished string in a local variable named `label`, then returns `label`.",
               "hint": "Read the task \"Use a parameter as a local name\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
+                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "def make_label(word):\n    # create a local variable named label\n    # return the finished string\n    pass",
               "solutionCode": "def make_label(word):\n    label = \"Item: \" + word\n    return label",
@@ -215,9 +201,9 @@
               "prompt": "Write `rectangle_area(width, height)` so it computes the area, stores it in a local variable named `area`, and returns `area`.",
               "hint": "Read the task \"Compute with two local variables\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Test the normal path and inspect the final output before completing the step."
               },
               "starterCode": "def rectangle_area(width, height):\n    # create a local variable named area\n    # return the area\n    pass",
               "solutionCode": "def rectangle_area(width, height):\n    area = width * height\n    return area",
@@ -252,7 +238,7 @@
               "help": {
                 "concept": "Create local variable total = price + 2.",
                 "hint_1": "Create local variable total = price + 2 Then return total.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Print the required lines in order, with no extra commentary."
               },
               "starterCode": "def add_tax(price):\n    # Create local variable total = price + 2.\n    # Return total.\n    pass\n\nprint(add_tax(8))\n",
               "solutionCode": "def add_tax(price):\n    total = price + 2\n    return total\n\nprint(add_tax(8))\n"
@@ -263,8 +249,8 @@
               "hint": "Return 'Welcome, ' + person.",
               "help": {
                 "concept": "Return 'Welcome, ' + person.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Make the focused edit, then verify how it changes the current output.",
+                "hint_2": "Return to the output contract and remove any line the task did not request."
               },
               "starterCode": "name = 'Ava'\n\ndef welcome(person):\n    # Return 'Welcome, ' + person.\n    pass\n\nprint(welcome(name))\n",
               "solutionCode": "name = 'Ava'\n\ndef welcome(person):\n    return 'Welcome, ' + person\n\nprint(welcome(name))\n"
@@ -275,8 +261,8 @@
               "hint": "Return count plus one.",
               "help": {
                 "concept": "Return count plus one.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Apply one small change and inspect the new program state.",
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "count = 5\n\ndef add_one(count):\n    # Return count plus one.\n    pass\n\nprint(add_one(count))\nprint(count)\n",
               "solutionCode": "count = 5\n\ndef add_one(count):\n    return count + 1\n\nprint(add_one(count))\nprint(count)\n"
@@ -315,7 +301,7 @@
           },
           "inside-vs-outside": {
             "title": "Inside a function is different from outside",
-            "bodyMarkdown": "Code inside a function and code outside a function do not share every variable automatically.\n\n```python\ncity = \"Lima\"\n\ndef show_place():\n    country = \"Peru\"\n    print(city)\n    print(country)\n\nshow_place()\n```\n\nLine by line:\n\n- `city = \"Lima\"` is created outside the function.\n- Inside `show_place()`, a new local variable `country` is created.\n- `print(city)` works here because the function can read the outside variable.\n- `print(country)` also works here because `country` exists inside the function.\n- But `country` would not work outside the function, because it is local to `show_place()`.\n\nWorked example:\n\nIf you tried to use `country` after calling `show_place()`, Python would complain because that name only existed inside the function."
+            "bodyMarkdown": "Code inside a function and code outside a function do not share every variable automatically.\n\n```python\ncity = \"Lima\"\n\ndef show_place():\n    country = \"Peru\"\n    print(city)\n    print(country)\n\nshow_place()\n```\n\nFollow the execution: - `city = \"Lima\"` is created outside the function.\n- Inside `show_place()`, a new local variable `country` is created.\n- `print(city)` works here because the function can read the outside variable.\n- `print(country)` also works here because `country` exists inside the function.\n- But `country` would not work outside the function, because it is local to `show_place()`.\n\nWorked example:\n\nIf you tried to use `country` after calling `show_place()`, Python would complain because that name only existed inside the function."
           },
           "parameters-create-local-names": {
             "title": "Parameters are local too",

@@ -24,7 +24,7 @@
             "try_testing_object_state_sketch0": {
               "title": "Test a book's availability state",
               "prompt": "The lesson used a thermostat to explain state testing. Now practice with a library object. Complete the `Book` class so a new book starts available, and `checkout()` changes only that book's `available` state to `False`.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Match each choice against the precise rule introduced in the lesson.",
               "help": {
                 "concept": "A state test checks what the object stores before and after a method call. Here, `checkout()` should change `available` from True to False.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
@@ -60,11 +60,11 @@
             "try_testing_object_state_sketch1": {
               "title": "Test constructor validation for task priority",
               "prompt": "Practice validation with a task object. Complete `Task` so the constructor stores `name` and a safe `priority`. A negative priority should become `0`; a positive priority should stay as given.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Trace the relevant value or branch before deciding which option fits.",
               "help": {
                 "concept": "Validation is state protection. The constructor should not allow a negative priority to become object state.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "hint_2": "Test the change in the runner and correct any mismatch before checking the answer."
               },
               "starterCode": "# Write your answer below",
               "starterFiles": {
@@ -96,7 +96,7 @@
             "try_testing_object_state_sketch2": {
               "title": "Test repeated counter state changes",
               "prompt": "Practice a sequence of state changes with a counter. Complete `Counter` so it starts at `0`, and every `increment()` call increases `count` by one.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Translate the question into a Python rule before selecting an answer.",
               "help": {
                 "concept": "Some tests check a sequence, not just one call. The expected count should move from 0 to 1 to 2 after two increments.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
@@ -233,7 +233,7 @@
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix a broken return method after state changes\".",
                 "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "hint_2": "Use the output panel to verify the exact behavior before submitting."
               },
               "starterCode": "class Book:\n    def __init__(self, title):\n        self.title = title\n        self.available = True\n\n    def checkout(self):\n        self.available = False\n\n    def return_book(self):\n        self.available = False",
               "starterFiles": {
@@ -245,9 +245,9 @@
             "ci-testing-object-state-fix-wallet-validation": {
               "title": "Fix wallet validation so balance never starts negative",
               "prompt": "A budgeting app has a `Wallet` class in `models/wallet.py`. The constructor should store the given balance when it is zero or more, but negative starting balances should become `0`. The current code stores negative values by mistake. Fix the class so the provided tests in `tests/check_wallet.py` pass when you click Run.",
-              "hint": "Use the lesson explanation and the wording of this question to narrow the answer.",
+              "hint": "Trace the relevant value or branch before deciding which option fits.",
               "help": {
-                "concept": "This support text was repaired because the original wording revealed the answer too directly.",
+                "concept": "Use the code structure as evidence: identify the values created, the condition or operation applied, and the resulting behavior.",
                 "hint_1": "Compare the question to the lesson example and remove details that do not match the requested concept.",
                 "hint_2": "Use the class names, method names, and file targets from the prompt as your checklist."
               },
@@ -265,7 +265,7 @@
               "help": {
                 "concept": "This coding exercise checks whether your code produces the requested result for: \"Fix a method that updates score incorrectly\".",
                 "hint_1": "Use the statement or expression that matches the required behavior in `main.py`.",
-                "hint_2": "Click Run and compare the output panel with the expected result."
+                "hint_2": "Test the change in the runner and correct any mismatch before checking the answer."
               },
               "starterCode": "class Scoreboard:\n    def __init__(self):\n        self.score = 0\n\n    def add_points(self, points):\n        self.score = points",
               "starterFiles": {
@@ -285,15 +285,15 @@
         "testing-object-state": {
           "testing-object-state-sketch-0": {
             "title": "Test state before and after one method call",
-            "bodyMarkdown": "Object tests become easier when you ask one clear question: **what should change on this object?**\n\nImagine a thermostat object:\n\n```python\nthermostat = Thermostat(68)\nthermostat.raise_temp(2)\nassert thermostat.temperature == 70\n```\n\nThe test creates one object, calls one method, then checks the stored state.\n\nThat is stronger than only checking printed output because it proves the object itself changed correctly."
+            "bodyMarkdown": "Object tests become easier when you ask one clear question: **what should change on this object?**\n\nImagine a thermostat object:\n\n```python\nthermostat = Thermostat(68)\nthermostat.raise_temp(2)\nassert thermostat.temperature == 70\n```\n\nThe test creates one object, calls one method, then checks the stored state.\n\nThat is stronger than only checking printed output because it proves the object itself changed correctly.\n\nState tests should observe what is true before and after a method call. That makes the transition itself visible and protects against methods that print the right message without actually updating the object."
           },
           "testing-object-state-sketch-1": {
             "title": "Test validation by trying unsafe input",
-            "bodyMarkdown": "Validation tests should include values that the object must reject.\n\n```python\nthermostat = Thermostat(68)\nthermostat.lower_temp(-5)\nassert thermostat.temperature == 68\n```\n\nThe important check is that the bad input did **not** change the state.\n\nA good validation test usually has two parts:\n\n1. Try an invalid value.\n2. Confirm the object stayed safe."
+            "bodyMarkdown": "Validation tests should include values that the object must reject.\n\n```python\nthermostat = Thermostat(68)\nthermostat.lower_temp(-5)\nassert thermostat.temperature == 68\n```\n\nThe important check is that the bad input did **not** change the state.\n\nA good validation test usually has two parts:\n\n1. Try an invalid value.\n2. Confirm the object stayed safe.\n\nState tests should observe what is true before and after a method call. That makes the transition itself visible and protects against methods that print the right message without actually updating the object."
           },
           "testing-object-state-sketch-2": {
             "title": "Test a sequence when order matters",
-            "bodyMarkdown": "Some object bugs only appear after more than one method call.\n\n```python\nthermostat = Thermostat(68)\nthermostat.raise_temp(2)\nthermostat.lower_temp(1)\nassert thermostat.temperature == 69\n```\n\nThis kind of test proves the object keeps the right state across a sequence.\n\nWhen a method changes state, test the story: create the object, call methods in order, then check the final state."
+            "bodyMarkdown": "Some object bugs only appear after more than one method call.\n\n```python\nthermostat = Thermostat(68)\nthermostat.raise_temp(2)\nthermostat.lower_temp(1)\nassert thermostat.temperature == 69\n```\n\nThis kind of test proves the object keeps the right state across a sequence.\n\nWhen a method changes state, test the story: create the object, call methods in order, then check the final state.\n\nState tests should observe what is true before and after a method call. That makes the transition itself visible and protects against methods that print the right message without actually updating the object."
           }
         }
       }

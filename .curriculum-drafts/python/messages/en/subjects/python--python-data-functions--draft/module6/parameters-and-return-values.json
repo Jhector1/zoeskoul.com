@@ -14,20 +14,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice returning values from functions"
-            }
-          },
-          "projectSteps": {
-            "ci_make_label": {
-              "title": "Return a label string"
-            },
-            "ci_calculate_tip": {
-              "title": "Return a tip amount"
-            },
-            "ci_first_item": {
-              "title": "Return the first list item"
             }
           },
           "quiz": {
@@ -162,11 +148,11 @@
             "ci-make-label": {
               "title": "Return a label string",
               "prompt": "Write `make_label(item, count)` so it returns a label string like `Apples: 3`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
+                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
+                "hint_2": "Run the completed step and verify every output line before submitting it."
               },
               "starterCode": "def make_label(item, count):\n    # return a string like \"Apples: 3\"\n    pass",
               "solutionCode": "def make_label(item, count):\n    return item + \": \" + str(count)"
@@ -174,11 +160,11 @@
             "ci-calculate-tip": {
               "title": "Return a tip amount",
               "prompt": "Write `calculate_tip(bill, percent)` so it returns just the tip amount for that bill and percent.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
+                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "def calculate_tip(bill, percent):\n    # return the tip amount\n    pass",
               "solutionCode": "def calculate_tip(bill, percent):\n    return bill * percent / 100"
@@ -186,11 +172,11 @@
             "ci-first-item": {
               "title": "Return the first list item",
               "prompt": "Write `first_item(items)` so it returns the first element from the list.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "def first_item(items):\n    # return the first element from the list\n    pass",
               "solutionCode": "def first_item(items):\n    return items[0]"
@@ -213,8 +199,8 @@
               "hint": "Return the sum of a and b.",
               "help": {
                 "concept": "Return the sum of a and b.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Test this single step before combining it with later behavior.",
+                "hint_2": "Use exact spelling and line order without extra printed explanations."
               },
               "starterCode": "def add(a, b):\n    # Return the sum of a and b.\n    pass\n\nprint(add(3, 4))\n",
               "solutionCode": "def add(a, b):\n    return a + b\n\nprint(add(3, 4))\n"
@@ -225,8 +211,8 @@
               "hint": "Return first and last with one space between them.",
               "help": {
                 "concept": "Return first and last with one space between them.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Apply one small change and inspect the new program state.",
+                "hint_2": "The grader compares output, so avoid additional prompts or diagnostic text."
               },
               "starterCode": "def full_name(first, last):\n    # Return first and last with one space between them.\n    pass\n\nprint(full_name('Ava', 'Smith'))\n",
               "solutionCode": "def full_name(first, last):\n    return first + ' ' + last\n\nprint(full_name('Ava', 'Smith'))\n"

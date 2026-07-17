@@ -23,11 +23,11 @@
             "sc-cd-purpose": {
               "title": "What `cd` does",
               "prompt": "What does `cd` do?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
+                "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: What does `cd` do?"
               },
               "options": {
                 "a": "Changes the current folder",
@@ -39,11 +39,11 @@
             "sc-parent-folder": {
               "title": "Meaning of `..`",
               "prompt": "In a path, what does `..` mean?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
+                "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: In a path, what does `..` mean?"
               },
               "options": {
                 "a": "The parent folder",
@@ -55,11 +55,11 @@
             "mc-check-after-cd": {
               "title": "Check after moving",
               "prompt": "Which commands can help confirm where you are after `cd`?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
+                "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: Which commands can help confirm where you are after `cd`?"
               },
               "options": {
                 "a": "pwd",
@@ -71,11 +71,11 @@
             "dr-navigate-and-check": {
               "title": "Move and confirm",
               "prompt": "Put the navigation routine in order.",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
+                "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: Put the navigation routine in order."
               },
               "tokens": {
                 "t1": "Type `ls` to find a folder",
@@ -90,11 +90,11 @@
               "moving-around-try-it-1": {
                 "title": "Enter the newsletter folder",
                 "prompt": "The workspace has a `newsletter` folder. Move into it with `cd newsletter`, then use `pwd` to confirm.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
+                  "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                  "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: The workspace has a `newsletter` folder. Move into it with `cd newsletter`, then use `pwd` to confirm."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -130,11 +130,11 @@
               "moving-around-try-it-2": {
                 "title": "Return from the returns folder",
                 "prompt": "You are starting inside `library-kit/returns`. Use `cd ..` to move back to `library-kit`, then type `pwd`.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
+                  "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                  "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: You are starting inside `library-kit/returns`. Use `cd ..` to move back to `library-kit`, then type `pwd`."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -170,11 +170,11 @@
               "moving-around-try-it-3": {
                 "title": "Reach the museum signs folder",
                 "prompt": "Move into the signs folder with one relative path: `cd museum-tour/signs`. Then type `ls`.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Confirm the starting location with `pwd`, then follow the folder names in order.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "`cd` changes the current directory; `..` means one parent level and a relative path begins from the current directory.",
+                  "hint_1": "Confirm the starting location with `pwd`, then follow the folder names in order.",
+                  "hint_2": "Run `pwd` or `ls` after moving so the destination is proven rather than assumed. The current task asks: Move into the signs folder with one relative path: `cd museum-tour/signs`. Then type `ls`."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -231,15 +231,15 @@
         "moving-around": {
           "cd-into-folder": {
             "title": "Use `cd` to enter a folder",
-            "bodyMarkdown": "`cd` means change directory. A directory is a folder.\n\nIf `ls` shows a folder named `drafts`, you can enter it with:\n\n```bash\ncd drafts\n```\n\nAfter moving, type `pwd` or `ls` to confirm where you landed."
+            "bodyMarkdown": "`cd` means **change directory**. Use it when `ls` shows a folder you want to enter.\n\n```bash\nls\ncd drafts\npwd\n```\n\nIf `drafts` is inside the current folder, `cd drafts` makes it the new working directory. The command usually prints no success message, so verify with `pwd` or `ls`. A common mistake is trying to `cd` into a text file. Directories are places you can enter; files are content you inspect with commands introduced later."
           },
           "cd-up-one-level": {
             "title": "Use `cd ..` to go up one folder",
-            "bodyMarkdown": "The shortcut `..` means the parent folder, one level up.\n\n```bash\ncd ..\n```\n\nThis is useful when you entered the wrong folder or finished checking a folder and want to go back."
+            "bodyMarkdown": "The path `..` represents the **parent directory**, one level above the current folder. It is useful after you finish inspecting a child folder or realize you entered the wrong place.\n\n```bash\npwd\ncd ..\npwd\n```\n\nCompare the two paths. The second should be shorter by one folder name. Do not read `..` as “go home” or “start over”; it moves exactly one level. You can repeat `cd ..`, checking with `pwd` each time, instead of making a large jump you do not understand."
           },
           "relative-paths": {
             "title": "Use simple relative paths",
-            "bodyMarkdown": "A relative path starts from where you are now. If you are in `club-hub` and there is a folder called `events/photos`, you can type:\n\n```bash\ncd events/photos\n```\n\nThat moves through two folders in one command. Keep using `pwd` and `ls` to stay oriented."
+            "bodyMarkdown": "A **relative path** describes a location starting from where you are now. If you are in `club-hub` and `ls` shows an `events` folder, this command can enter a nested folder directly:\n\n```bash\ncd events/photos\n```\n\nThe slash separates one folder level from the next. Relative paths are concise, but they depend on the current directory. The same command can fail from a different location. Before using a multi-part path, confirm the starting point with `pwd`, inspect the first folder with `ls`, and verify the destination after moving."
           }
         }
       }

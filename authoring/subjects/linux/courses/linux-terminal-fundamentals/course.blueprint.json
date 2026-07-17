@@ -48,7 +48,10 @@
     "notes": [
       "Use shell_task terminal_workspace code_input items for Linux terminal practice.",
       "Use workspaceExpectations for file-tree checks and terminalExpectations for output/command checks.",
-      "Use per-exercise terminal workspaces for independent quiz/check exercises."
+      "Use per-exercise terminal workspaces for independent quiz/check exercises.",
+      "Prepend a standalone reading-only course welcome without replacing the first technical sketch.",
+      "Use book-like technical prose and concept-specific help.",
+      "Keep the final capstone in one section and one topic with five cumulative Community Media Archive steps."
     ]
   }
 }

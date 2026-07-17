@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice reading and writing with relative paths"
-            }
-          },
-          "projectSteps": {
-            "ci_read_nested_file": {
-              "title": "Read from a nested relative path"
-            },
-            "ci_copy_between_paths": {
-              "title": "Copy text to another relative path"
-            },
-            "ci_count_lines_in_folder": {
-              "title": "Count lines from a file path"
             }
           },
           "quiz": {
@@ -85,7 +71,7 @@
             "mc-open-path-examples": {
               "title": "Valid relative path examples",
               "prompt": "Choose all paths that are valid relative path examples for this lesson's workspace style.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Reject any choice that changes the named values, branch order, or output.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -131,7 +117,7 @@
             "fb-folder-part": {
               "title": "Complete the folder path",
               "prompt": "Fill in the missing folder name.",
-              "hint": "The file is inside the `the missing term` folder.",
+              "hint": "Read the complete relative path and include the folder that appears before the filename.",
               "help": {
                 "concept": "A relative path to a file inside a folder includes the folder name before the slash.",
                 "hint_1": "The missing part is the folder that contains `input.txt`.",
@@ -167,9 +153,9 @@
               "prompt": "Open `data/input.txt`, read the text from that relative path, and print it.\n\nYour output should be exactly:\n`Hello paths!`.",
               "hint": "Read the task \"Read from a nested relative path\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Use the expected result as a final contract check after your implementation runs."
               },
               "starterCode": "with open(\"data/input.txt\", \"r\") as file:\n    # read the text and print it\n    pass",
               "solutionCode": "with open(\"data/input.txt\", \"r\") as file:\n    text = file.read()\n\nprint(text)",
@@ -184,9 +170,9 @@
               "prompt": "Copy the text from `data/source.txt` into `data/copy.txt`, then print the copied text so we can confirm both files match.\n\nYour output should be exactly:\n`apple`\n`banana`.",
               "hint": "Read the task \"Copy text to another relative path\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
+                "hint_1": "Make the smallest cumulative edit that keeps prior behavior intact.",
+                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
               },
               "starterCode": "# Read from data/source.txt\n# Write the same text to data/copy.txt\n# Print the copied text",
               "solutionCode": "with open(\"data/source.txt\", \"r\") as source:\n    text = source.read()\n\nwith open(\"data/copy.txt\", \"w\") as target:\n    target.write(text)\n\nprint(text)",
@@ -207,9 +193,9 @@
               "prompt": "Open `data/items.txt`, count how many lines it contains, and print the result.\n\nYour output should be exactly:\n`3`.",
               "hint": "Read the task \"Count lines from a file path\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "with open(\"data/items.txt\", \"r\") as file:\n    # count the lines and print the result\n    pass",
               "solutionCode": "with open(\"data/items.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))",
@@ -353,7 +339,7 @@
           },
           "paths-folders-and-organization": {
             "title": "Folders help organize files clearly",
-            "bodyMarkdown": "Projects often keep files in folders so related data stays together. A path like `data/scores.txt` is easier to understand than a random file name with no structure.\n\nExample:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))\n```\n\nLine by line:\n\n- `open(\"data/scores.txt\", \"r\")` opens a file inside the `data` folder.\n- `readlines()` makes a list of lines from the file.\n- `len(lines)` counts how many lines were read.\n- `print(len(lines))` shows that count in the output panel.\n\nWorked example:\n\nIf `data/scores.txt` contains:\n\n```python\n90\n85\n100\n```\n\nthen `len(lines)` is `3`, so the output is:\n\n```python\n3\n```\n\nUsing folders also makes it easier to tell input files from output files, such as `data/input.txt` and `data/report.txt`."
+            "bodyMarkdown": "Projects often keep files in folders so related data stays together. A path like `data/scores.txt` is easier to understand than a random file name with no structure.\n\nExample:\n\n```python\nwith open(\"data/scores.txt\", \"r\") as file:\n    lines = file.readlines()\n\nprint(len(lines))\n```\n\nFollow the execution: - `open(\"data/scores.txt\", \"r\")` opens a file inside the `data` folder.\n- `readlines()` makes a list of lines from the file.\n- `len(lines)` counts how many lines were read.\n- `print(len(lines))` shows that count in the output panel.\n\nWorked example:\n\nIf `data/scores.txt` contains:\n\n```python\n90\n85\n100\n```\n\nthen `len(lines)` is `3`, so the output is:\n\n```python\n3\n```\n\nUsing folders also makes it easier to tell input files from output files, such as `data/input.txt` and `data/report.txt`."
           },
           "paths-safe-habits": {
             "title": "Use simple relative paths, not machine-specific ones",

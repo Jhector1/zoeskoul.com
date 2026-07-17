@@ -1,0 +1,615 @@
+{
+  "topics": {
+    "applied-python-projects": {
+      "python-11-oop-capstone-project": {
+        "capstone-tests-and-polish": {
+          "label": "Capstone Tests and Polish",
+          "summary": "Add assertions, final output polish, and README handoff notes so the capstone feels complete.",
+          "cards": {
+            "sketch0": {
+              "title": "Planning brief"
+            },
+            "project": {
+              "title": "Smart Task Tracker Final Polish"
+            }
+          },
+          "projectSteps": {
+            "try_capstone_tests_and_polish_sketch0": {
+              "title": "Add model assertions for task summaries"
+            },
+            "capstone_tests_and_polish_step2_service_tests": {
+              "title": "Add service assertions for counts and filtering"
+            },
+            "capstone_tests_and_polish_step3_report_file": {
+              "title": "Generate and save the tracker report"
+            },
+            "capstone_tests_and_polish_step4_readme": {
+              "title": "Write a README summary for the handoff"
+            },
+            "capstone_tests_and_polish_step5_final_polish": {
+              "title": "Add a final dashboard preview"
+            },
+            "capstone_tests_and_polish_step6_final_handoff": {
+              "title": "Complete the final capstone handoff run"
+            }
+          },
+          "finalCapstone": {
+            "steps": {
+              "try_capstone_tests_and_polish_sketch0": {
+                "title": "Add focused model checks",
+                "prompt": "Complete main.py with assertions that a new BugTask is open and a FeatureTask estimate of 0 becomes 1. Print `model checks passed` after both assertions.",
+                "hint": "Create both objects, assert their state, then print confirmation.",
+                "help": {
+                  "concept": "Focused tests prove validation and starting state before testing larger workflows.",
+                  "hint_1": "Create both objects, assert their state, then print confirmation.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# TODO: create the two tasks, add the required assertions, then print confirmation.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# TODO: create the two tasks, add the required assertions, then print confirmation.\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\ndef build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nimport csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "# Starter guidance: Add focused model checks. Follow the prompt and edit the requested code below.\nclass TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models import BugTask, FeatureTask\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Polish UI\", \"low\", 0)\nassert bug.is_open() is True\nassert feature.estimate_points == 1\nprint(\"model checks passed\")\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "import csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  }
+                },
+                "solutionCode": "from models import BugTask, FeatureTask\n\nbug = BugTask(\"Fix login\", \"high\", \"critical\")\nfeature = FeatureTask(\"Polish UI\", \"low\", 0)\nassert bug.is_open() is True\nassert feature.estimate_points == 1\nprint(\"model checks passed\")\n",
+                "checks": {
+                  "0": {
+                    "message": "Run both model assertions before confirmation."
+                  }
+                },
+                "expectedOutput": "model checks passed"
+              },
+              "capstone_tests_and_polish_step2_service_tests": {
+                "title": "Test the tracker service",
+                "prompt": "Add assertions for the initial open count, a successful mark_done call, and the updated open count. Print `service checks passed` only after all three assertions.",
+                "hint": "Use the loaded fixture so the expected counts are deterministic.",
+                "help": {
+                  "concept": "Service tests verify coordination behavior across several model objects.",
+                  "hint_1": "Use the loaded fixture so the expected counts are deterministic.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# TODO: add assertions for count_open_tasks() and mark_done(), then print confirmation.\nfrom services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# TODO: add assertions for count_open_tasks() and mark_done(), then print confirmation.\nfrom services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Starter guidance: Test the tracker service. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "# Starter guidance: Test the tracker service. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "# Starter guidance: Test the tracker service. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Starter guidance: Test the tracker service. Follow the prompt and edit the requested code below.\ndef build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "# Starter guidance: Test the tracker service. Follow the prompt and edit the requested code below.\nimport csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "# Starter guidance: Test the tracker service. Follow the prompt and edit the requested code below.\nclass TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\nassert service.count_open_tasks() == 2\nassert service.mark_done(\"Fix login redirect\") is True\nassert service.count_open_tasks() == 1\nprint(\"service checks passed\")\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "import csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  }
+                },
+                "solutionCode": "from services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\nassert service.count_open_tasks() == 2\nassert service.mark_done(\"Fix login redirect\") is True\nassert service.count_open_tasks() == 1\nprint(\"service checks passed\")\n",
+                "checks": {
+                  "0": {
+                    "message": "Run the service assertions before confirmation."
+                  }
+                },
+                "workspaceFiles": {
+                  "models_bug_task_py_0": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG | {self.title} | priority: {self.priority} | severity: {self.severity}\""
+                  },
+                  "models_feature_task_py_1": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, feature_area):\n        super().__init__(title, priority)\n        self.feature_area = feature_area\n\n    def summary(self):\n        return f\"FEATURE | {self.title} | priority: {self.priority} | feature: {self.feature_area}\""
+                  },
+                  "services_task_tracker_py_2": {
+                    "content": "class TaskTracker:\n    def __init__(self):\n        self.tasks = []\n\n    def add_task(self, task):\n        self.tasks.append(task)\n\n    def task_count(self):\n        return len(self.tasks)\n\n    def high_priority_titles(self):\n        titles = []\n        for task in self.tasks:\n            if task.get_priority() == \"high\":\n                titles.append(task.get_title())\n        return titles\n\n    def build_report(self):\n        lines = [\"SMART TASK TRACKER REPORT\"]\n        for task in self.tasks:\n            lines.append(task.summary())\n        return \"\\n\".join(lines)"
+                  }
+                },
+                "expectedOutput": "service checks passed"
+              },
+              "capstone_tests_and_polish_step3_report_file": {
+                "title": "Verify the saved report file",
+                "prompt": "Complete main.py so it saves the report, reads the file back, asserts the saved text equals the original report, and prints `report file checks passed`.",
+                "hint": "Read from the path returned by save_report and compare the full strings.",
+                "help": {
+                  "concept": "A file regression test checks the actual persisted deliverable, not placeholder lines.",
+                  "hint_1": "Read from the path returned by save_report and compare the full strings.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# TODO: save the report, read it back, assert equality, then print confirmation.\nfrom reports.report_file import save_report\nfrom reports.summary import build_summary\nfrom storage.task_storage import load_tasks\n\nreport = build_summary(load_tasks(\"data/tasks.csv\"))\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# TODO: save the report, read it back, assert equality, then print confirmation.\nfrom reports.report_file import save_report\nfrom reports.summary import build_summary\nfrom storage.task_storage import load_tasks\n\nreport = build_summary(load_tasks(\"data/tasks.csv\"))\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Starter guidance: Verify the saved report file. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "# Starter guidance: Verify the saved report file. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "# Starter guidance: Verify the saved report file. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Starter guidance: Verify the saved report file. Follow the prompt and edit the requested code below.\ndef build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "# Starter guidance: Verify the saved report file. Follow the prompt and edit the requested code below.\nimport csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "# Starter guidance: Verify the saved report file. Follow the prompt and edit the requested code below.\nclass TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  },
+                  "reports_report_file_py": {
+                    "content": "# Starter guidance: Verify the saved report file. Follow the prompt and edit the requested code below.\ndef save_report(path, report_text):\n    with open(path, \"w\") as file:\n        file.write(report_text)\n    return path\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from reports.report_file import save_report\nfrom reports.summary import build_summary\nfrom storage.task_storage import load_tasks\n\nreport = build_summary(load_tasks(\"data/tasks.csv\"))\npath = save_report(\"data/final_report.txt\", report)\nwith open(path) as file:\n    saved = file.read()\nassert saved == report\nprint(\"report file checks passed\")\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "import csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  },
+                  "reports_report_file_py": {
+                    "content": "def save_report(path, report_text):\n    with open(path, \"w\") as file:\n        file.write(report_text)\n    return path\n"
+                  }
+                },
+                "solutionCode": "from reports.report_file import save_report\nfrom reports.summary import build_summary\nfrom storage.task_storage import load_tasks\n\nreport = build_summary(load_tasks(\"data/tasks.csv\"))\npath = save_report(\"data/final_report.txt\", report)\nwith open(path) as file:\n    saved = file.read()\nassert saved == report\nprint(\"report file checks passed\")\n",
+                "checks": {
+                  "0": {
+                    "message": "Verify the saved file before printing confirmation."
+                  }
+                },
+                "workspaceFiles": {
+                  "models_bug_task_py_0": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity):\n        super().__init__(title, priority)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG | {self.title} | priority: {self.priority} | severity: {self.severity}\""
+                  },
+                  "models_feature_task_py_1": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, feature_area):\n        super().__init__(title, priority)\n        self.feature_area = feature_area\n\n    def summary(self):\n        return f\"FEATURE | {self.title} | priority: {self.priority} | feature: {self.feature_area}\""
+                  },
+                  "services_task_tracker_py_2": {
+                    "content": "class TaskTracker:\n    def __init__(self):\n        self.tasks = []\n\n    def add_task(self, task):\n        self.tasks.append(task)\n\n    def task_count(self):\n        return len(self.tasks)\n\n    def high_priority_titles(self):\n        titles = []\n        for task in self.tasks:\n            if task.get_priority() == \"high\":\n                titles.append(task.get_title())\n        return titles\n\n    def build_report(self):\n        lines = [\"SMART TASK TRACKER REPORT\"]\n        for task in self.tasks:\n            lines.append(task.summary())\n        return \"\\n\".join(lines)"
+                  },
+                  "reports_summary_txt_3": {
+                    "content": "# Package marker for imports."
+                  }
+                },
+                "expectedOutput": "report file checks passed"
+              },
+              "capstone_tests_and_polish_step4_readme": {
+                "title": "Document the complete project",
+                "prompt": "Finish README.md with the project purpose, each workspace folder, the OOP pillars used, and how to run main.py. Then keep the supplied confirmation output.",
+                "hint": "Explain responsibilities, not just filenames.",
+                "help": {
+                  "concept": "Good documentation makes the architecture and learning evidence visible to another developer.",
+                  "hint_1": "Explain responsibilities, not just filenames.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# TODO: keep this confirmation after README is complete.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# TODO: keep this confirmation after README is complete.\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Starter guidance: Document the complete project. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "# Starter guidance: Document the complete project. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "# Starter guidance: Document the complete project. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Starter guidance: Document the complete project. Follow the prompt and edit the requested code below.\ndef build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "# Starter guidance: Document the complete project. Follow the prompt and edit the requested code below.\nimport csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "# Starter guidance: Document the complete project. Follow the prompt and edit the requested code below.\nclass TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  },
+                  "reports_report_file_py": {
+                    "content": "# Starter guidance: Document the complete project. Follow the prompt and edit the requested code below.\ndef save_report(path, report_text):\n    with open(path, \"w\") as file:\n        file.write(report_text)\n    return path\n"
+                  },
+                  "README_md": {
+                    "content": "# Smart Task Tracker\n\nTODO: document models, services, storage, reports, tests, and how to run main.py.\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "print(\"README documents models, services, storage, reports, and tests\")\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "import csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  },
+                  "reports_report_file_py": {
+                    "content": "def save_report(path, report_text):\n    with open(path, \"w\") as file:\n        file.write(report_text)\n    return path\n"
+                  },
+                  "README_md": {
+                    "content": "# Smart Task Tracker\n\nSmart Task Tracker demonstrates encapsulation, inheritance, overriding, and polymorphism.\n\n- `models/` contains the task hierarchy.\n- `services/` manages task behavior.\n- `storage/` converts CSV rows into task objects.\n- `reports/` builds the final report.\n- `tests/` contains assertion-based regression checks.\n- `main.py` runs the complete project.\n"
+                  }
+                },
+                "solutionCode": "print(\"README documents models, services, storage, reports, and tests\")\n",
+                "checks": {
+                  "0": {
+                    "message": "Print the README completion confirmation."
+                  }
+                },
+                "workspaceFiles": {
+                  "reports_summary_txt_0": {
+                    "content": "# Package marker for imports."
+                  },
+                  "readme_md_1": {
+                    "content": "# Package marker for imports."
+                  }
+                },
+                "expectedOutput": "README documents models, services, storage, reports, and tests"
+              },
+              "capstone_tests_and_polish_step5_final_polish": {
+                "title": "Polish the final dashboard",
+                "prompt": "Keep the cumulative project working. Load the fixture, mark Fix login redirect done, add the completed Add tests feature, and print the exact final report with OPEN: 1 | DONE: 3.",
+                "hint": "Use TrackerService for state changes and build_summary for all output.",
+                "help": {
+                  "concept": "The polished demo proves all layers work together with real domain output.",
+                  "hint_1": "Use TrackerService for state changes and build_summary for all output.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# TODO: assemble the final service workflow and print the report.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# TODO: assemble the final service workflow and print the report.\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Starter guidance: Polish the final dashboard. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "# Starter guidance: Polish the final dashboard. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "# Starter guidance: Polish the final dashboard. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Starter guidance: Polish the final dashboard. Follow the prompt and edit the requested code below.\ndef build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "# Starter guidance: Polish the final dashboard. Follow the prompt and edit the requested code below.\nimport csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "# Starter guidance: Polish the final dashboard. Follow the prompt and edit the requested code below.\nclass TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  },
+                  "reports_report_file_py": {
+                    "content": "# Starter guidance: Polish the final dashboard. Follow the prompt and edit the requested code below.\ndef save_report(path, report_text):\n    with open(path, \"w\") as file:\n        file.write(report_text)\n    return path\n"
+                  },
+                  "README_md": {
+                    "content": "# Smart Task Tracker\n\nSmart Task Tracker demonstrates encapsulation, inheritance, overriding, and polymorphism.\n\n- `models/` contains the task hierarchy.\n- `services/` manages task behavior.\n- `storage/` converts CSV rows into task objects.\n- `reports/` builds the final report.\n- `tests/` contains assertion-based regression checks.\n- `main.py` runs the complete project.\n"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# Starter guidance: Polish the final dashboard. Follow the prompt and edit the requested code below.\nfrom services.tracker_service import TrackerService\nassert TrackerService().count_open_tasks() == 0\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models import FeatureTask\nfrom reports.summary import build_summary\nfrom services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\nservice.mark_done(\"Fix login redirect\")\nservice.add_task(FeatureTask(\"Add tests\", \"medium\", 2, True))\nprint(build_summary(service.tasks))\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "import csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  },
+                  "reports_report_file_py": {
+                    "content": "def save_report(path, report_text):\n    with open(path, \"w\") as file:\n        file.write(report_text)\n    return path\n"
+                  },
+                  "README_md": {
+                    "content": "# Smart Task Tracker\n\nSmart Task Tracker demonstrates encapsulation, inheritance, overriding, and polymorphism.\n\n- `models/` contains the task hierarchy.\n- `services/` manages task behavior.\n- `storage/` converts CSV rows into task objects.\n- `reports/` builds the final report.\n- `tests/` contains assertion-based regression checks.\n- `main.py` runs the complete project.\n"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "from services.tracker_service import TrackerService\nassert TrackerService().count_open_tasks() == 0\n"
+                  }
+                },
+                "solutionCode": "from models import FeatureTask\nfrom reports.summary import build_summary\nfrom services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\nservice.mark_done(\"Fix login redirect\")\nservice.add_task(FeatureTask(\"Add tests\", \"medium\", 2, True))\nprint(build_summary(service.tasks))\n",
+                "checks": {
+                  "0": {
+                    "message": "Print the heading, four tasks, and final totals."
+                  }
+                },
+                "workspaceFiles": {
+                  "reports_summary_txt_0": {
+                    "content": "# Package marker for imports."
+                  },
+                  "readme_md_1": {
+                    "content": "# Package marker for imports."
+                  }
+                },
+                "expectedOutput": "SMART TASK TRACKER\nBUG: Fix login redirect | priority=high | severity=critical | done=True\nFEATURE: Add dark mode | priority=medium | points=3 | done=False\nFEATURE: Export CSV | priority=low | points=5 | done=True\nFEATURE: Add tests | priority=medium | points=2 | done=True\nOPEN: 1 | DONE: 3"
+              },
+              "capstone_tests_and_polish_step6_final_handoff": {
+                "title": "Finish the tested project handoff",
+                "prompt": "Complete the final handoff: keep the report, mark both Fix login redirect and Add dark mode done, preserve meaningful tests and README.md, and print `all checks passed` after the final totals.",
+                "hint": "The final totals should be OPEN: 0 | DONE: 4 after both remaining tasks are completed.",
+                "help": {
+                  "concept": "A production-ready capstone is coherent, tested, documented, and reproducible.",
+                  "hint_1": "The final totals should be OPEN: 0 | DONE: 4 after both remaining tasks are completed.",
+                  "hint_2": "Check the named file and compare your code with each requirement in the prompt."
+                },
+                "starterCode": "# TODO: run the final workflow, print the report, then print the confirmation.\n",
+                "starterFiles": {
+                  "main_py": {
+                    "content": "# TODO: run the final workflow, print the report, then print the confirmation.\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "# Starter guidance: Finish the tested project handoff. Follow the prompt and edit the requested code below.\nclass BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "# Starter guidance: Finish the tested project handoff. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "# Starter guidance: Finish the tested project handoff. Follow the prompt and edit the requested code below.\nfrom models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "# Keep this package marker so imports work.\nfrom models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "# Starter guidance: Finish the tested project handoff. Follow the prompt and edit the requested code below.\ndef build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "# Starter guidance: Finish the tested project handoff. Follow the prompt and edit the requested code below.\nimport csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "# Starter guidance: Finish the tested project handoff. Follow the prompt and edit the requested code below.\nclass TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  },
+                  "reports_report_file_py": {
+                    "content": "# Starter guidance: Finish the tested project handoff. Follow the prompt and edit the requested code below.\ndef save_report(path, report_text):\n    with open(path, \"w\") as file:\n        file.write(report_text)\n    return path\n"
+                  },
+                  "README_md": {
+                    "content": "# Smart Task Tracker\n\nSmart Task Tracker demonstrates encapsulation, inheritance, overriding, and polymorphism.\n\n- `models/` contains the task hierarchy.\n- `services/` manages task behavior.\n- `storage/` converts CSV rows into task objects.\n- `reports/` builds the final report.\n- `tests/` contains assertion-based regression checks.\n- `main.py` runs the complete project.\n"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "# Starter guidance: Finish the tested project handoff. Follow the prompt and edit the requested code below.\nfrom services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\nassert service.count_open_tasks() == 2\nassert service.mark_done(\"Fix login redirect\") is True\nassert service.count_open_tasks() == 1\n"
+                  }
+                },
+                "solutionFiles": {
+                  "main_py": {
+                    "content": "from models import FeatureTask\nfrom reports.summary import build_summary\nfrom services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\nservice.mark_done(\"Fix login redirect\")\nservice.mark_done(\"Add dark mode\")\nservice.add_task(FeatureTask(\"Add tests\", \"medium\", 2, True))\nprint(build_summary(service.tasks))\nprint(\"all checks passed\")\n"
+                  },
+                  "models_base_task_py": {
+                    "content": "class BaseTask:\n    VALID_PRIORITIES = {\"low\", \"medium\", \"high\"}\n\n    def __init__(self, title, priority=\"medium\", completed=False):\n        if not title.strip():\n            raise ValueError(\"title is required\")\n        if priority not in self.VALID_PRIORITIES:\n            raise ValueError(\"priority must be low, medium, or high\")\n        self.title = title\n        self.priority = priority\n        self.completed = bool(completed)\n\n    def mark_done(self):\n        self.completed = True\n        return self.completed\n\n    def is_open(self):\n        return not self.completed\n\n    def summary(self):\n        raise NotImplementedError(\"Subclasses must implement summary()\")\n"
+                  },
+                  "models_bug_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass BugTask(BaseTask):\n    def __init__(self, title, priority, severity, completed=False):\n        super().__init__(title, priority, completed)\n        self.severity = severity\n\n    def summary(self):\n        return f\"BUG: {self.title} | priority={self.priority} | severity={self.severity} | done={self.completed}\"\n"
+                  },
+                  "models_feature_task_py": {
+                    "content": "from models.base_task import BaseTask\n\nclass FeatureTask(BaseTask):\n    def __init__(self, title, priority, estimate_points, completed=False):\n        super().__init__(title, priority, completed)\n        self.estimate_points = max(1, int(estimate_points))\n\n    def summary(self):\n        return f\"FEATURE: {self.title} | priority={self.priority} | points={self.estimate_points} | done={self.completed}\"\n"
+                  },
+                  "models___init___py": {
+                    "content": "from models.base_task import BaseTask\nfrom models.bug_task import BugTask\nfrom models.feature_task import FeatureTask\n\n__all__ = [\"BaseTask\", \"BugTask\", \"FeatureTask\"]\n"
+                  },
+                  "reports_summary_py": {
+                    "content": "def build_summary(tasks):\n    lines = [\"SMART TASK TRACKER\"]\n    lines.extend(task.summary() for task in tasks)\n    open_count = sum(task.is_open() for task in tasks)\n    lines.append(f\"OPEN: {open_count} | DONE: {len(tasks) - open_count}\")\n    return \"\\n\".join(lines)\n"
+                  },
+                  "storage_task_storage_py": {
+                    "content": "import csv\nfrom models import BugTask, FeatureTask\n\ndef load_tasks(path):\n    tasks = []\n    with open(path, newline=\"\") as file:\n        for row in csv.DictReader(file):\n            completed = row[\"completed\"].lower() == \"true\"\n            if row[\"kind\"] == \"bug\":\n                task = BugTask(row[\"title\"], row[\"priority\"], row[\"detail\"], completed)\n            elif row[\"kind\"] == \"feature\":\n                task = FeatureTask(row[\"title\"], row[\"priority\"], int(row[\"detail\"]), completed)\n            else:\n                raise ValueError(f\"unknown task kind: {row['kind']}\")\n            tasks.append(task)\n    return tasks\n"
+                  },
+                  "services_tracker_service_py": {
+                    "content": "class TrackerService:\n    def __init__(self, tasks=None):\n        self.tasks = list(tasks or [])\n\n    def add_task(self, task):\n        self.tasks.append(task)\n        return task\n\n    def mark_done(self, title):\n        for task in self.tasks:\n            if task.title == title:\n                task.mark_done()\n                return True\n        return False\n\n    def count_open_tasks(self):\n        return sum(task.is_open() for task in self.tasks)\n"
+                  },
+                  "data_tasks_csv": {
+                    "content": "kind,title,priority,detail,completed\nbug,Fix login redirect,high,critical,false\nfeature,Add dark mode,medium,3,false\nfeature,Export CSV,low,5,true\n"
+                  },
+                  "reports_report_file_py": {
+                    "content": "def save_report(path, report_text):\n    with open(path, \"w\") as file:\n        file.write(report_text)\n    return path\n"
+                  },
+                  "README_md": {
+                    "content": "# Smart Task Tracker\n\nSmart Task Tracker demonstrates encapsulation, inheritance, overriding, and polymorphism.\n\n- `models/` contains the task hierarchy.\n- `services/` manages task behavior.\n- `storage/` converts CSV rows into task objects.\n- `reports/` builds the final report.\n- `tests/` contains assertion-based regression checks.\n- `main.py` runs the complete project.\n"
+                  },
+                  "tests_check_tasks_py": {
+                    "content": "from services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\nassert service.count_open_tasks() == 2\nassert service.mark_done(\"Fix login redirect\") is True\nassert service.count_open_tasks() == 1\n"
+                  }
+                },
+                "solutionCode": "from models import FeatureTask\nfrom reports.summary import build_summary\nfrom services.tracker_service import TrackerService\nfrom storage.task_storage import load_tasks\n\nservice = TrackerService(load_tasks(\"data/tasks.csv\"))\nservice.mark_done(\"Fix login redirect\")\nservice.mark_done(\"Add dark mode\")\nservice.add_task(FeatureTask(\"Add tests\", \"medium\", 2, True))\nprint(build_summary(service.tasks))\nprint(\"all checks passed\")\n",
+                "checks": {
+                  "0": {
+                    "message": "Print the complete final report and confirmation."
+                  }
+                },
+                "workspaceFiles": {
+                  "reports_summary_txt_0": {
+                    "content": "# Package marker for imports."
+                  },
+                  "readme_md_1": {
+                    "content": "# Package marker for imports."
+                  }
+                },
+                "expectedOutput": "SMART TASK TRACKER\nBUG: Fix login redirect | priority=high | severity=critical | done=True\nFEATURE: Add dark mode | priority=medium | points=3 | done=True\nFEATURE: Export CSV | priority=low | points=5 | done=True\nFEATURE: Add tests | priority=medium | points=2 | done=True\nOPEN: 0 | DONE: 4\nall checks passed"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "applied-python-projects": {
+      "python-11-oop-capstone-project": {
+        "capstone-tests-and-polish": {
+          "capstone-tests-and-polish-sketch0": {
+            "title": "Capstone polish: prove the tracker is ready to hand off",
+            "bodyMarkdown": "Polish is not just prettier output. It is proof that the app still works after all the pieces come together.\n\nImagine handing off a volunteer schedule app. You would want a teammate to know:\n\n- what files matter\n- how to run it\n- what output to expect\n- which tests protect the important behavior\n\nThe Smart Task Tracker needs the same handoff care. Add focused assertions, generate the final report, and leave a clear README so another person can understand the project without reading every line first."
+          }
+        }
+      }
+    }
+  }
+}

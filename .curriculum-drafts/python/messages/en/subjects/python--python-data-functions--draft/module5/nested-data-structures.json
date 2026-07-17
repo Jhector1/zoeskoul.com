@@ -17,27 +17,13 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice nested data with functions"
-            }
-          },
-          "projectSteps": {
-            "code_1": {
-              "title": "Return all names"
-            },
-            "code_2": {
-              "title": "Count total stock"
-            },
-            "code_3": {
-              "title": "Find the highest score"
             }
           },
           "quiz": {
             "sc-1": {
               "title": "Choose the best structure",
               "prompt": "You want to store several products, and each product has a name and a price. Which structure is the best fit?",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -134,7 +120,7 @@
               "help": {
                 "concept": "After selecting one dictionary from a list, use the correct key name to read the needed value.",
                 "hint_1": "You already have the first record. Now choose the key that stores the numeric result.",
-                "hint_2": "The missing value should be the dictionary key for the the missing term, not the list index or variable name."
+                "hint_2": "Use the dictionary key that names the requested field, not a list index or an unrelated variable."
               },
               "template": "records[0][\"[blank1]\"]",
               "choices": [
@@ -164,11 +150,11 @@
             "code-1": {
               "title": "Return all names",
               "prompt": "Each item in `records` stores a person's data. Finish `get_names(records)` by adding every record's `\"name\"` value to the `names` list, then return `names`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "def get_names(records):\n    names = []\n    # add each record's name to names\n    return names",
               "solutionCode": "def get_names(records):\n    names = []\n    for record in records:\n        names.append(record[\"name\"])\n    return names"
@@ -176,11 +162,11 @@
             "code-2": {
               "title": "Count total stock",
               "prompt": "Finish `total_stock(items)` so it loops through the item dictionaries, adds each `\"stock\"` value into `total`, and returns the final total.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Compare the options with the exact syntax and result required by the prompt.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Treat the starter as the previous milestone: preserve it while implementing the next feature.",
+                "hint_1": "Retain the existing files and methods while completing the next responsibility.",
+                "hint_2": "Use the expected result as a final contract check after your implementation runs."
               },
               "starterCode": "def total_stock(items):\n    total = 0\n    # update total using each item's stock\n    return total",
               "solutionCode": "def total_stock(items):\n    total = 0\n    for item in items:\n        total += item[\"stock\"]\n    return total"
@@ -190,9 +176,9 @@
               "prompt": "Finish `highest_score(players)` so it compares each later player's `\"score\"` with `best` and returns the highest score in the list.",
               "hint": "Read the task \"Find the highest score\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    # compare later scores with best\n    return best",
               "solutionCode": "def highest_score(players):\n    best = players[0][\"score\"]\n    for player in players:\n        if player[\"score\"] > best:\n            best = player[\"score\"]\n    return best"
@@ -226,8 +212,8 @@
               "hint": "Print the first student's name.",
               "help": {
                 "concept": "Print the first student's name.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Apply one small change and inspect the new program state.",
+                "hint_2": "Print the required lines in order, with no extra commentary."
               },
               "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Print the first student's name.\n",
               "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nprint(students[0]['name'])\n",
@@ -246,8 +232,8 @@
               "hint": "Loop through students and print: name: score.",
               "help": {
                 "concept": "Loop through students and print: name: score.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Make the focused edit, then verify how it changes the current output.",
+                "hint_2": "Print the required lines in order, with no extra commentary."
               },
               "starterCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\n\n# Loop through students and print: name: score\n",
               "solutionCode": "students = [{'name': 'Ava', 'score': 92}, {'name': 'Mia', 'score': 85}]\nfor student in students:\n    print(f\"{student['name']}: {student['score']}\")\n",
@@ -270,7 +256,7 @@
               "help": {
                 "concept": "Add 'Mia' to the students list.",
                 "hint_1": "Add 'Mia' to the students list, then print course.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "course = {'title': 'Python', 'students': ['Ava']}\n\n# Add 'Mia' to the students list.\n# Then print course.\n",
               "solutionCode": "course = {'title': 'Python', 'students': ['Ava']}\ncourse['students'].append('Mia')\nprint(course)\n",
@@ -320,7 +306,7 @@
           },
           "sketch-2": {
             "title": "Reading values from nested containers",
-            "bodyMarkdown": "When data is nested, you read it one layer at a time.\n\n```python\nproduct = {\n    \"name\": \"Notebook\",\n    \"details\": {\n        \"price\": 4,\n        \"stock\": 12\n    }\n}\n\nprint(product[\"details\"][\"stock\"])\n```\n\nThis prints `12`.\n\nLine by line:\n\n- `product[\"details\"]` gets the inner dictionary.\n- `product[\"details\"][\"stock\"]` gets the `stock` value from that inner dictionary.\n\nYou can think of it as opening one box, then opening the smaller box inside it.\n\nWorked example: if you changed `\"stock\"` to `\"price\"`, the output would be `4`."
+            "bodyMarkdown": "When data is nested, you read it one layer at a time.\n\n```python\nproduct = {\n    \"name\": \"Notebook\",\n    \"details\": {\n        \"price\": 4,\n        \"stock\": 12\n    }\n}\n\nprint(product[\"details\"][\"stock\"])\n```\n\nThis prints `12`.\n\nFollow the execution: - `product[\"details\"]` gets the inner dictionary.\n- `product[\"details\"][\"stock\"]` gets the `stock` value from that inner dictionary.\n\nYou can think of it as opening one box, then opening the smaller box inside it.\n\nWorked example: if you changed `\"stock\"` to `\"price\"`, the output would be `4`."
           },
           "sketch-3": {
             "title": "Looping through a list of dictionaries",

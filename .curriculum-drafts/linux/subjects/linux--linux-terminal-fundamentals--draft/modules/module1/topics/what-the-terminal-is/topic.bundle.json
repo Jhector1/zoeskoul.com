@@ -4,7 +4,7 @@
   "moduleSlug": "linux-module-1-terminal-navigation",
   "sectionSlug": "linux--linux-terminal-fundamentals--draft-linux-module-1-orientation",
   "prefix": "linux_module_1",
-  "minutes": 18,
+  "minutes": 36,
   "runtimeDefaults": {
     "kind": "code",
     "language": "bash",
@@ -19,6 +19,13 @@
     "summaryKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.summary"
   },
   "cards": [
+    {
+      "id": "course-introduction",
+      "kind": "sketch",
+      "titleKey": "topics.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.cards.course-introduction.title",
+      "sketchId": "course-introduction",
+      "height": 520
+    },
     {
       "id": "sketch0",
       "kind": "sketch",
@@ -92,6 +99,12 @@
     }
   ],
   "sketches": [
+    {
+      "id": "course-introduction",
+      "archetype": "paragraph",
+      "titleKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.course-introduction.title",
+      "bodyKey": "sketches.linux--linux-terminal-fundamentals--draft.linux-module-1-terminal-navigation.what-the-terminal-is.course-introduction.bodyMarkdown"
+    },
     {
       "id": "terminal-command-output",
       "archetype": "paragraph",

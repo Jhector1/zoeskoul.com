@@ -6,20 +6,20 @@
   "prefix": "pyv2_3",
   "minutes": 24,
   "topic": {
-    "labelKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.label",
-    "summaryKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.summary"
+    "labelKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.label",
+    "summaryKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.cards.sketch0.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.cards.sketch0.title",
       "sketchId": "while_intro",
       "height": 420,
       "tryIt": {
         "id": "try-while-loop-basics-sketch0",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_1_to_5.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_1_to_5.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.prompt",
         "exerciseKey": "code_print_1_to_5",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -32,13 +32,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.cards.sketch1.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.cards.sketch1.title",
       "sketchId": "loop_condition_state",
       "height": 420,
       "tryIt": {
         "id": "try-while-loop-basics-sketch1",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_0_to_2.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_0_to_2.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.prompt",
         "exerciseKey": "code_print_0_to_2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -51,13 +51,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.cards.sketch2.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.cards.sketch2.title",
       "sketchId": "avoid_infinite_loops",
       "height": 420,
       "tryIt": {
         "id": "try-while-loop-basics-sketch2",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_countdown_3_to_1.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_countdown_3_to_1.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.prompt",
         "exerciseKey": "code_countdown_3_to_1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -70,7 +70,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.cards.quiz.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -81,84 +81,26 @@
         "preferKind": null,
         "maxAttempts": null
       }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "code_print_1_to_5",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.projectSteps.code_print_1_to_5.title",
-            "exerciseKey": "code_print_1_to_5",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_print_0_to_2",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.projectSteps.code_print_0_to_2.title",
-            "exerciseKey": "code_print_0_to_2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_countdown_3_to_1",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.projectSteps.code_countdown_3_to_1.title",
-            "exerciseKey": "code_countdown_3_to_1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_repeat_word_3_times",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.projectSteps.code_repeat_word_3_times.title",
-            "exerciseKey": "code_repeat_word_3_times",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_sum_1_to_4",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.projectSteps.code_sum_1_to_4.title",
-            "exerciseKey": "code_sum_1_to_4",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
-      }
     }
   ],
   "sketches": [
     {
       "id": "while_intro",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.while_intro.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.while_intro.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-3.while-loop-basics.while_intro.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-3.while-loop-basics.while_intro.bodyMarkdown"
     },
     {
       "id": "loop_condition_state",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.loop_condition_state.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.loop_condition_state.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-3.while-loop-basics.loop_condition_state.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-3.while-loop-basics.loop_condition_state.bodyMarkdown"
     },
     {
       "id": "avoid_infinite_loops",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.avoid_infinite_loops.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.avoid_infinite_loops.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-3.while-loop-basics.avoid_infinite_loops.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-3.while-loop-basics.avoid_infinite_loops.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -167,7 +109,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.sc_while_meaning",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.sc_while_meaning",
       "optionIds": [
         "a",
         "b",
@@ -184,7 +126,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.sc_infinite_loop_cause",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.sc_infinite_loop_cause",
       "optionIds": [
         "a",
         "b",
@@ -201,7 +143,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.mc_parts_of_safe_while",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.mc_parts_of_safe_while",
       "optionIds": [
         "a",
         "b",
@@ -221,7 +163,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.mc_true_about_counter_loop",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.mc_true_about_counter_loop",
       "optionIds": [
         "a",
         "b",
@@ -242,7 +184,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.dr_trace_simple_loop",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.dr_trace_simple_loop",
       "tokenIds": [
         "t1",
         "t2",
@@ -264,7 +206,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.dr_build_countdown",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.dr_build_countdown",
       "tokenIds": [
         "t1",
         "t2",
@@ -286,7 +228,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.fb_condition_operator",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.fb_condition_operator",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -298,7 +240,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.fb_update_counter",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.fb_update_counter",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -308,20 +250,15 @@
     {
       "id": "code_print_1_to_5",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_1_to_5",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_1_to_5",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
-          {
-            "stdin": "",
-            "stdout": "1\n2\n3\n4\n5\n",
-            "match": "exact"
-          },
           {
             "stdin": "",
             "stdout": "1\n2\n3\n4\n5\n",
@@ -357,7 +294,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -375,11 +312,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_1_to_5.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -413,20 +350,15 @@
     {
       "id": "code_print_0_to_2",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_0_to_2",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_0_to_2",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
-          {
-            "stdin": "",
-            "stdout": "0\n1\n2\n",
-            "match": "exact"
-          },
           {
             "stdin": "",
             "stdout": "0\n1\n2\n",
@@ -462,7 +394,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -480,11 +412,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_print_0_to_2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -518,20 +450,15 @@
     {
       "id": "code_countdown_3_to_1",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_countdown_3_to_1",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
         "tests": [
-          {
-            "stdin": "",
-            "stdout": "3\n2\n1\n",
-            "match": "exact"
-          },
           {
             "stdin": "",
             "stdout": "3\n2\n1\n",
@@ -567,7 +494,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -585,11 +512,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.while-loop-basics.quiz.code_countdown_3_to_1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -599,226 +526,6 @@
           {
             "path": "main.py",
             "content": "n = 3\nwhile n >= 1:\n    print(n)\n    n = n - 1",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "while ",
-          "message": "Use a while loop for this exercise.",
-          "normalizeWhitespace": true
-        }
-      ]
-    },
-    {
-      "id": "code_repeat_word_3_times",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_repeat_word_3_times",
-      "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "Go\nGo\nGo\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "Go\nGo\nGo\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "count = 1\nwhile count <= 3:\n    print(\"Go\")\n    count = count + 1",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "count = 1\nwhile count <= 3:\n    print(\"Go\")\n    count = count + 1",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "while ",
-            "message": "Use a while loop for this exercise.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\bcount\\b",
-            "message": "Use the variable name `count` in your solution."
-          }
-        ]
-      },
-      "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "count = 1\nwhile count <= 3:\n    print(\"Go\")\n    count = count + 1",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_repeat_word_3_times.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "count = 1\nwhile count <= 3:\n    print(\"Go\")\n    count = count + 1",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "while ",
-          "message": "Use a while loop for this exercise.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\bcount\\b",
-          "message": "Use the variable name `count` in your solution."
-        }
-      ]
-    },
-    {
-      "id": "code_sum_1_to_4",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_sum_1_to_4",
-      "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "",
-            "stdout": "10\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "",
-            "stdout": "10\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "total = 0\nn = 1\nwhile n <= 4:\n    total = total + n\n    n = n + 1\nprint(total)",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "total = 0\nn = 1\nwhile n <= 4:\n    total = total + n\n    n = n + 1\nprint(total)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "while ",
-            "message": "Use a while loop for this exercise.",
-            "normalizeWhitespace": true
-          }
-        ]
-      },
-      "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "total = 0\nn = 1\nwhile n <= 4:\n    total = total + n\n    n = n + 1\nprint(total)",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.while-loop-basics.quiz.code_sum_1_to_4.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "total = 0\nn = 1\nwhile n <= 4:\n    total = total + n\n    n = n + 1\nprint(total)",
             "language": "python",
             "isEntry": true,
             "entry": true

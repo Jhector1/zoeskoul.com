@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Practice safe integer conversion with try/except"
-            }
-          },
-          "projectSteps": {
-            "q9": {
-              "title": "Catch a bad integer input"
-            },
-            "q10": {
-              "title": "Add two inputs safely"
-            },
-            "q11": {
-              "title": "Count valid numbers"
             }
           },
           "quiz": {
@@ -53,7 +39,7 @@
             "q2": {
               "title": "Which error fits int conversion?",
               "prompt": "Which exception type should you catch when `int(user_text)` might fail because the text is not a valid integer?",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Work through the operation in Python terms, then select the matching option.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -168,11 +154,11 @@
             "q9": {
               "title": "Catch a bad integer input",
               "prompt": "A number scanner might receive invalid text. Convert the input inside a `try` block, then print either the formatted number or an invalid message.\n\nFor example, if the input is `27`, your program should print:\n`Number: 27`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Compare the options with the exact syntax and result required by the prompt.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
               "solutionCode": "text = input()\n\ntry:\n    number = int(text)\n    print(f\"Number: {number}\")\nexcept ValueError:\n    print(\"Invalid number\")",
@@ -188,11 +174,11 @@
             "q10": {
               "title": "Add two inputs safely",
               "prompt": "Two score entries arrive as text. Convert both values inside `try`, then print the sum or an invalid message if either value cannot be turned into an integer.\n\nFor example, if the inputs are `8` and `5`, your program should print:\n`Sum: 13`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Reject any choice that changes the named values, branch order, or output.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Each project step is cumulative, so the existing files remain part of the solution while one new requirement is added.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Use the expected result as a final contract check after your implementation runs."
               },
               "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
               "solutionCode": "first_text = input()\nsecond_text = input()\n\ntry:\n    first_number = int(first_text)\n    second_number = int(second_text)\n    print(f\"Sum: {first_number + second_number}\")\nexcept ValueError:\n    print(\"Invalid input\")",
@@ -208,11 +194,11 @@
             "q11": {
               "title": "Count valid numbers",
               "prompt": "A comma-separated list may contain bad entries. Loop through each part, try to convert it to `int`, count only the valid integers, and print the final count.\n\nFor example, if the input is `3,7,bad,10`, your program should print:\n`Valid count: 3`.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Compare the options with the exact syntax and result required by the prompt.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "Build on the supplied working version instead of restarting the project from an empty file.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Test the normal path and inspect the final output before completing the step."
               },
               "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
               "solutionCode": "parts = input().split(\",\")\nvalid_count = 0\n\nfor part in parts:\n    try:\n        int(part)\n        valid_count += 1\n    except ValueError:\n        pass\n\nprint(f\"Valid count: {valid_count}\")",
@@ -254,8 +240,8 @@
               "hint": "Try to convert text to int. Print 'bad number' if it fails.",
               "help": {
                 "concept": "Try to convert text to int. Print 'bad number' if it fails.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Apply one small change and inspect the new program state.",
+                "hint_2": "Return to the output contract and remove any line the task did not request."
               },
               "starterCode": "text = 'abc'\n\n# Try to convert text to int. Print 'bad number' if it fails.\n",
               "solutionCode": "text = 'abc'\ntry:\n    number = int(text)\n    print(number)\nexcept ValueError:\n    print('bad number')\n",
@@ -274,8 +260,8 @@
               "hint": "Convert text to int and print 'ok' only if conversion succeeds.",
               "help": {
                 "concept": "Convert text to int and print 'ok' only if conversion succeeds.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Add the requested statement and run the program to observe its effect.",
+                "hint_2": "Keep the output deterministic and limited to the requested values."
               },
               "starterCode": "text = '42'\n\n# Convert text to int and print 'ok' only if conversion succeeds.\n",
               "solutionCode": "text = '42'\ntry:\n    number = int(text)\nexcept ValueError:\n    print('bad number')\nelse:\n    print('ok')\n",
@@ -294,8 +280,8 @@
               "hint": "Print only the values that can be converted to int.",
               "help": {
                 "concept": "Print only the values that can be converted to int.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Test this single step before combining it with later behavior.",
+                "hint_2": "Return to the output contract and remove any line the task did not request."
               },
               "starterCode": "values = ['10', 'bad', '3']\n\n# Print only the values that can be converted to int.\n",
               "solutionCode": "values = ['10', 'bad', '3']\nfor value in values:\n    try:\n        print(int(value))\n    except ValueError:\n        pass\n",
@@ -345,7 +331,7 @@
           },
           "s2": {
             "title": "Only the risky line needs protection",
-            "bodyMarkdown": "A common beginner pattern is to put the risky conversion inside `try`, then handle the problem in `except`.\n\n```python\nuser_text = \"9a\"\n\ntry:\n    score = int(user_text)\n    print(\"Valid score:\", score)\nexcept ValueError:\n    print(\"Invalid score\")\n```\n\nLine by line:\n- `user_text` stores text.\n- `int(user_text)` is the risky step because some text cannot become an integer.\n- If conversion works, `print(\"Valid score:\", score)` runs.\n- If conversion fails, Python skips that print and runs the `except` block.\n\nThis is useful when cleaning messy input, such as numbers typed by a user or values read from text data."
+            "bodyMarkdown": "A common beginner pattern is to put the risky conversion inside `try`, then handle the problem in `except`.\n\n```python\nuser_text = \"9a\"\n\ntry:\n    score = int(user_text)\n    print(\"Valid score:\", score)\nexcept ValueError:\n    print(\"Invalid score\")\n```\n\nFollow the execution: - `user_text` stores text.\n- `int(user_text)` is the risky step because some text cannot become an integer.\n- If conversion works, `print(\"Valid score:\", score)` runs.\n- If conversion fails, Python skips that print and runs the `except` block.\n\nThis is useful when cleaning messy input, such as numbers typed by a user or values read from text data."
           },
           "s3": {
             "title": "Use exceptions to keep programs usable",

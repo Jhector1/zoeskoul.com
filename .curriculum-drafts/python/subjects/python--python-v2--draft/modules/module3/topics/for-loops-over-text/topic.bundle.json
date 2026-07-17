@@ -6,20 +6,20 @@
   "prefix": "pyv2_3",
   "minutes": 25,
   "topic": {
-    "labelKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.label",
-    "summaryKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.summary"
+    "labelKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.label",
+    "summaryKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.summary"
   },
   "cards": [
     {
       "id": "sketch0",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.cards.sketch0.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.cards.sketch0.title",
       "sketchId": "sketch-1",
       "height": 420,
       "tryIt": {
         "id": "try-for-loops-over-text-sketch0",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-1.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-1.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-1.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-1.prompt",
         "exerciseKey": "code-1",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -32,13 +32,13 @@
     {
       "id": "sketch1",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.cards.sketch1.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.cards.sketch1.title",
       "sketchId": "sketch-2",
       "height": 420,
       "tryIt": {
         "id": "try-for-loops-over-text-sketch1",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-2.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-2.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-2.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-2.prompt",
         "exerciseKey": "code-2",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -51,13 +51,13 @@
     {
       "id": "sketch2",
       "kind": "sketch",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.cards.sketch2.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.cards.sketch2.title",
       "sketchId": "sketch-3",
       "height": 420,
       "tryIt": {
         "id": "try-for-loops-over-text-sketch2",
-        "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-3.title",
-        "promptKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-3.prompt",
+        "titleKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-3.title",
+        "promptKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-3.prompt",
         "exerciseKey": "code-3",
         "difficulty": "easy",
         "preferKind": "code_input",
@@ -70,7 +70,7 @@
     {
       "id": "quiz",
       "kind": "quiz",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.cards.quiz.title",
+      "titleKey": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.cards.quiz.title",
       "quiz": {
         "difficulty": "easy",
         "n": 4,
@@ -81,84 +81,26 @@
         "preferKind": null,
         "maxAttempts": null
       }
-    },
-    {
-      "id": "project",
-      "kind": "project",
-      "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.cards.project.title",
-      "project": {
-        "difficulty": "easy",
-        "allowReveal": true,
-        "preferKind": "code_input",
-        "maxAttempts": null,
-        "steps": [
-          {
-            "id": "code_1",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.projectSteps.code_1.title",
-            "exerciseKey": "code-1",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_2",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.projectSteps.code_2.title",
-            "exerciseKey": "code-2",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_3",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.projectSteps.code_3.title",
-            "exerciseKey": "code-3",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_4",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.projectSteps.code_4.title",
-            "exerciseKey": "code-4",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          },
-          {
-            "id": "code_5",
-            "titleKey": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.projectSteps.code_5.title",
-            "exerciseKey": "code-5",
-            "difficulty": "easy",
-            "preferKind": "code_input",
-            "seedPolicy": "global",
-            "maxAttempts": null
-          }
-        ]
-      }
     }
   ],
   "sketches": [
     {
       "id": "sketch-1",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.sketch-1.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.sketch-1.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-3.for-loops-over-text.sketch-1.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-3.for-loops-over-text.sketch-1.bodyMarkdown"
     },
     {
       "id": "sketch-2",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.sketch-2.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.sketch-2.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-3.for-loops-over-text.sketch-2.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-3.for-loops-over-text.sketch-2.bodyMarkdown"
     },
     {
       "id": "sketch-3",
       "archetype": "paragraph",
-      "titleKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.sketch-3.title",
-      "bodyKey": "sketches.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.sketch-3.bodyMarkdown"
+      "titleKey": "sketches.python--python-v2--draft.python-v2-3.for-loops-over-text.sketch-3.title",
+      "bodyKey": "sketches.python--python-v2--draft.python-v2-3.for-loops-over-text.sketch-3.bodyMarkdown"
     }
   ],
   "exercises": [
@@ -167,7 +109,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.sc-1",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.sc-1",
       "optionIds": [
         "a",
         "b",
@@ -184,7 +126,7 @@
       "kind": "single_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.sc-2",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.sc-2",
       "optionIds": [
         "a",
         "b",
@@ -201,7 +143,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.mc-1",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.mc-1",
       "optionIds": [
         "a",
         "b",
@@ -221,7 +163,7 @@
       "kind": "multi_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.mc-2",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.mc-2",
       "optionIds": [
         "a",
         "b",
@@ -242,7 +184,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.dr-1",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.dr-1",
       "tokenIds": [
         "t1",
         "t2",
@@ -262,7 +204,7 @@
       "kind": "drag_reorder",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.dr-2",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.dr-2",
       "tokenIds": [
         "t1",
         "t2",
@@ -286,7 +228,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.fb-1",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.fb-1",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -298,7 +240,7 @@
       "kind": "fill_blank_choice",
       "purpose": "quiz",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.fb-2",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.fb-2",
       "choiceCount": 4,
       "expected": {
         "kind": "fill_blank_choice",
@@ -308,11 +250,11 @@
     {
       "id": "code-1",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-1",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-1",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-1.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -363,7 +305,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-1.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -381,11 +323,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-1.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-1.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-1.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -425,11 +367,11 @@
     {
       "id": "code-2",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-2",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-2",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-2.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -491,7 +433,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-2.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -509,11 +451,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-2.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-2.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-2.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -564,11 +506,11 @@
     {
       "id": "code-3",
       "kind": "code_input",
-      "purpose": "project",
+      "purpose": "try_it",
       "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-3",
+      "messageBase": "topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-3",
       "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-3.starterCode",
+      "starterCode": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
       "showExpectedExample": true,
       "recipe": {
         "type": "fixed_tests",
@@ -630,7 +572,7 @@
       "starterFiles": [
         {
           "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-3.starterCode",
+          "content": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
           "language": "python",
           "isEntry": true,
           "entry": true
@@ -648,11 +590,11 @@
       "workspace": {
         "language": "python",
         "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-3.starterCode",
+        "starterCode": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
         "starterFiles": [
           {
             "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-3.starterCode",
+            "content": "@:topics.python--python-v2--draft.python-v2-3.for-loops-over-text.quiz.code-3.starterCode",
             "language": "python",
             "isEntry": true,
             "entry": true
@@ -662,308 +604,6 @@
           {
             "path": "main.py",
             "content": "text = input()\nfor ch in text:\n    if ch in \"aeiou\":\n        print(ch)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "for ",
-          "message": "Use a for loop for this exercise.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\btext\\b",
-          "message": "Use the variable name `text` in your solution."
-        }
-      ]
-    },
-    {
-      "id": "code-4",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-4",
-      "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-4.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "Hi THERE!\n",
-            "stdout": "6\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "abc\n",
-            "stdout": "0\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "text = input()\ncount = 0\nfor ch in text:\n    if ch == ch.upper() and ch != ch.lower():\n        count = count + 1\nprint(count)",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "text = input()\ncount = 0\nfor ch in text:\n    if ch == ch.upper() and ch != ch.lower():\n        count = count + 1\nprint(count)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "for ",
-            "message": "Use a for loop for this exercise.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\band\\b",
-            "message": "Use and to combine both conditions."
-          },
-          {
-            "type": "source_contains",
-            "pattern": ".lower(",
-            "message": "Use .lower() to change the text to lowercase.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": ".upper(",
-            "message": "Use .upper() to change the text to uppercase.",
-            "normalizeWhitespace": true
-          }
-        ]
-      },
-      "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-4.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "text = input()\ncount = 0\nfor ch in text:\n    if ch == ch.upper() and ch != ch.lower():\n        count = count + 1\nprint(count)",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-4.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-4.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "text = input()\ncount = 0\nfor ch in text:\n    if ch == ch.upper() and ch != ch.lower():\n        count = count + 1\nprint(count)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ]
-      },
-      "sourceChecks": [
-        {
-          "type": "source_contains",
-          "pattern": "print(",
-          "message": "Use print(...) to show the required result.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "input(",
-          "message": "Read the needed value with input() instead of hard-coding the answer.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "for ",
-          "message": "Use a for loop for this exercise.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": "if ",
-          "message": "Use an if statement to choose the correct output.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_regex",
-          "pattern": "\\band\\b",
-          "message": "Use and to combine both conditions."
-        },
-        {
-          "type": "source_contains",
-          "pattern": ".lower(",
-          "message": "Use .lower() to change the text to lowercase.",
-          "normalizeWhitespace": true
-        },
-        {
-          "type": "source_contains",
-          "pattern": ".upper(",
-          "message": "Use .upper() to change the text to uppercase.",
-          "normalizeWhitespace": true
-        }
-      ]
-    },
-    {
-      "id": "code-5",
-      "kind": "code_input",
-      "purpose": "project",
-      "weight": 1,
-      "messageBase": "topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-5",
-      "language": "python",
-      "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-5.starterCode",
-      "showExpectedExample": true,
-      "recipe": {
-        "type": "fixed_tests",
-        "tests": [
-          {
-            "stdin": "a b c\n",
-            "stdout": "abc\n",
-            "match": "exact"
-          },
-          {
-            "stdin": "hi there\n",
-            "stdout": "hithere\n",
-            "match": "exact"
-          }
-        ],
-        "solutionCode": "text = input()\nresult = \"\"\nfor ch in text:\n    if ch != \" \":\n        result = result + ch\nprint(result)",
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "text = input()\nresult = \"\"\nfor ch in text:\n    if ch != \" \":\n        result = result + ch\nprint(result)",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "sourceChecks": [
-          {
-            "type": "source_contains",
-            "pattern": "print(",
-            "message": "Use print(...) to show the required result.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "input(",
-            "message": "Read the needed value with input() instead of hard-coding the answer.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "for ",
-            "message": "Use a for loop for this exercise.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_contains",
-            "pattern": "if ",
-            "message": "Use an if statement to choose the correct output.",
-            "normalizeWhitespace": true
-          },
-          {
-            "type": "source_regex",
-            "pattern": "\\btext\\b",
-            "message": "Use the variable name `text` in your solution."
-          }
-        ]
-      },
-      "entryFilePath": "main.py",
-      "starterFiles": [
-        {
-          "path": "main.py",
-          "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-5.starterCode",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "solutionFiles": [
-        {
-          "path": "main.py",
-          "content": "text = input()\nresult = \"\"\nfor ch in text:\n    if ch != \" \":\n        result = result + ch\nprint(result)",
-          "language": "python",
-          "isEntry": true,
-          "entry": true
-        }
-      ],
-      "workspace": {
-        "language": "python",
-        "entryFilePath": "main.py",
-        "starterCode": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-5.starterCode",
-        "starterFiles": [
-          {
-            "path": "main.py",
-            "content": "@:topics.python--python-v2--draft.python--python-v2--draft-3.for-loops-over-text.quiz.code-5.starterCode",
-            "language": "python",
-            "isEntry": true,
-            "entry": true
-          }
-        ],
-        "solutionFiles": [
-          {
-            "path": "main.py",
-            "content": "text = input()\nresult = \"\"\nfor ch in text:\n    if ch != \" \":\n        result = result + ch\nprint(result)",
             "language": "python",
             "isEntry": true,
             "entry": true

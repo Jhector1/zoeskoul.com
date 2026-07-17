@@ -1,0 +1,204 @@
+{
+  "subjects": {
+    "python-v2": {
+      "title": "Python pou Debitan",
+      "description": "Kou sa a anseye fondasyon prensipal Python yo: egzekite kòd, valè, varyab, antre, chèn karaktè, kondisyon, bouk, ak yon pwojè final etap pa etap pou debutan.",
+      "moreComingSoon": "Plis leson Python pou Debitan ap vini byento."
+    }
+  },
+  "modules": {
+    "python-v2": {
+      "python-v2-0": {
+        "title": "Kòmanse ak Python",
+        "description": "Ede elèv yo kouri Python, li pwogram senp, epi devlope konfyans ak sentaks debaz la.",
+        "outcomes": [
+          "Kouri kòd Python nan yon anviwònman ki fasil pou debutan",
+          "Eksplike kijan statements, expressions, ak comments mache",
+          "Sèvi ak rezilta print pou obsève konpòtman pwogram nan"
+        ],
+        "why": [
+          "Devlope konfyans nan kòmanse ak python.",
+          "Prepare elèv yo pou pwochen konpetans yo nan kou a."
+        ]
+      },
+      "python-v2-1": {
+        "title": "Varyab, Antre, ak Chèn Karaktè",
+        "description": "Anseye elèv yo kijan pwogram sonje valè, aksepte antre itilizatè, epi pwodui tèks ki fasil pou li.",
+        "outcomes": [
+          "Kreye epi mete varyab ajou",
+          "Konvèti valè antre yo an sekirite",
+          "Konstwi chèn karaktè ak metòd komen ak f-strings"
+        ],
+        "why": [
+          "Devlope konfyans nan varyab, antre, ak chèn karaktè.",
+          "Prepare elèv yo pou pwochen konpetans yo nan kou a."
+        ]
+      },
+      "python-v2-2": {
+        "title": "Kondisyon ak Lojik",
+        "description": "Ede elèv yo fè pwogram chwazi diferan chemen lè yo sèvi ak konparezon ak kondisyonèl.",
+        "outcomes": [
+          "Ekri blòk if, elif, ak else",
+          "Sèvi ak konparezon ak lojik boolean",
+          "Konsevwa règ branchman ki klè"
+        ],
+        "why": [
+          "Devlope konfyans nan kondisyon ak lojik.",
+          "Prepare elèv yo pou pwochen konpetans yo nan kou a."
+        ]
+      },
+      "python-v2-3": {
+        "title": "Bouk ak Iterasyon",
+        "description": "Anseye elèv yo repete aksyon, trete sekans, epi kontwole konpòtman bouk yo.",
+        "outcomes": [
+          "Sèvi ak bouk for ak bouk while",
+          "Swiv eta bouk la",
+          "Aplike break, continue, ak range"
+        ],
+        "why": [
+          "Devlope konfyans nan bouk ak iterasyon.",
+          "Prepare elèv yo pou pwochen konpetans yo nan kou a."
+        ]
+      },
+      "python-v2-4": {
+        "title": "Pwojè Final Mini Gradebook",
+        "description": "Ede elèv yo fini ak yon pwojè debutan ki pi byen òganize ki konbine antre, bouk, akimilatè, konparezon, ak rezilta byen prezante.",
+        "outcomes": [
+          "Li yon kout sekans antre epi rezime yo nan yon rapò",
+          "Swiv total, mwayèn, ak maksimòm k ap ogmante nan yon bouk",
+          "Amelyore yon pwogram debutan pou rive nan yon rezilta final byen fòmate"
+        ],
+        "why": [
+          "Devlope konfyans nan pwojè final mini gradebook la.",
+          "Prepare elèv yo pou pwochen konpetans yo nan kou a."
+        ]
+      }
+    }
+  },
+  "sections": {
+    "python-v2": {
+      "python-v2-0": {
+        "python-v2-python-v2-0-setup-and-first-programs": {
+          "title": "Konfigirasyon ak Premye Pwogram yo",
+          "description": "Aprann pou kisa python sèvi, kijan pou egzekite kòd python, print, comments, ak premye erè yo atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Pou Kisa Python Sèvi",
+            "Kouri Kòd Python",
+            "Print, Comments, ak Premye Erè yo"
+          ]
+        },
+        "python-v2-python-v2-0-values-and-expressions": {
+          "title": "Valè ak Ekspresyon",
+          "description": "Aprann valè, tip, ak literal, operators ak expressions, lekti mesaj erè yo atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Valè, Tip, ak Literal",
+            "Operators ak Expressions",
+            "Li Mesaj Erè yo"
+          ]
+        },
+        "python-v2-python-v2-0-module-project": {
+          "title": "Pwojè Modil",
+          "description": "Aprann pwojè tablo akèy modil 0 la atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Pwojè Tablo Akèy Modil 0"
+          ]
+        }
+      },
+      "python-v2-1": {
+        "python-v2-python-v2-1-variables-and-assignment": {
+          "title": "Varyab ak Asiyasyon",
+          "description": "Aprann bay non ak asiyen varyab, antre ak konvèsyon tip, erè komen sou varyab atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Bay Non ak Asiyen Varyab",
+            "Antre ak Konvèsyon Tip",
+            "Erè Komen sou Varyab"
+          ]
+        },
+        "python-v2-python-v2-1-string-foundations": {
+          "title": "Fondasyon Chèn Karaktè",
+          "description": "Aprann endèks ak koupe chèn karaktè, metòd itil pou chèn karaktè, f-strings ak fòmataj atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Endèks ak Koupe Chèn Karaktè",
+            "Metòd Itil pou Chèn Karaktè",
+            "F-Strings ak Fòmataj"
+          ]
+        },
+        "python-v2-python-v2-1-module-project": {
+          "title": "Pwojè Modil",
+          "description": "Aprann pwojè kat pwofil modil 1 an atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Pwojè Kat Pwofil Modil 1"
+          ]
+        }
+      },
+      "python-v2-2": {
+        "python-v2-python-v2-2-conditional-basics": {
+          "title": "Baz Kondisyonèl yo",
+          "description": "Aprann if, elif, ak else, konparezon ak valè verite, endantasyon ak blòk atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "If, Elif, ak Else",
+            "Konparezon ak Valè Verite",
+            "Endantasyon ak Blòk"
+          ]
+        },
+        "python-v2-python-v2-2-combining-conditions": {
+          "title": "Konbine Kondisyon yo",
+          "description": "Aprann and, or, ak not, truthiness ak valè vid, verifye ka espesyal yo an premye atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "And, Or, ak Not",
+            "Truthiness ak Valè Vid",
+            "Verifye Ka Espesyal yo an Premye"
+          ]
+        },
+        "python-v2-python-v2-2-module-project": {
+          "title": "Pwojè Modil",
+          "description": "Aprann pwojè verifikatè etid modil 2 a atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Pwojè Verifikatè Etid Modil 2"
+          ]
+        }
+      },
+      "python-v2-3": {
+        "python-v2-python-v2-3-for-loops": {
+          "title": "Bouk For",
+          "description": "Aprann bouk for sou tèks, range ak modèl konte, akimilatè ak kontè atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Bouk For sou Tèks",
+            "Range ak Modèl Konte",
+            "Akimilatè ak Kontè"
+          ]
+        },
+        "python-v2-python-v2-3-while-loops": {
+          "title": "Bouk While",
+          "description": "Aprann baz bouk while, break ak continue, debogaj bouk atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Baz Bouk While",
+            "Break ak Continue",
+            "Debogaj Bouk"
+          ]
+        }
+      },
+      "python-v2-4": {
+        "python-v2-python-v2-4-capstone-project": {
+          "title": "Pwojè Final",
+          "description": "Aprann mini gradebook capstone atravè egzanp ak pratik ki byen vize.",
+          "weeks": null,
+          "bullets": [
+            "Mini Gradebook Capstone"
+          ]
+        }
+      }
+    }
+  }
+}

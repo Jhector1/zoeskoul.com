@@ -42,23 +42,26 @@
             {
               "topicId": "what-the-terminal-is",
               "title": "What the Terminal Is",
-              "summary": "Understand the terminal as a place to type commands and see the computer respond.",
+              "summary": "Open with a standalone course welcome, then understand the terminal as a command conversation with a prompt, commands, output, and safe inspection habits.",
               "minutes": 15,
               "technical": true,
               "practice": {
                 "conceptualOnly": true,
-                "requiresTryIt": false,
+                "requiresTryIt": true,
                 "runtimeMode": "terminal_workspace",
                 "expectedPracticeKinds": [
                   "single_choice",
                   "multi_choice",
                   "fill_blank_choice"
                 ],
-                "tryIt": false,
-                "tryItPlacement": "none"
+                "tryIt": true,
+                "tryItPlacement": "none",
+                "terminalSessionScope": "exercise"
               },
               "learningGoals": [
-                "Understand the terminal as a place to type commands and see the computer respond."
+                "Understand who this course is for, what the safe terminal workspace contains, and how the three modules build on one another.",
+                "Explain the prompt, command, and output parts of a terminal exchange.",
+                "Use inspect first, change second, verify last as the course safety habit."
               ]
             },
             {
@@ -276,8 +279,8 @@
       "moduleSlug": "linux-module-3-final-capstone",
       "prefix": "linux_module_3",
       "role": "capstone",
-      "title": "Final Capstone: File Room Handoff",
-      "purpose": "Use the terminal to clean up a small real-world workspace and leave it ready for someone else.",
+      "title": "Final Capstone: Community Media Archive",
+      "purpose": "Prove that inspection, navigation, creation, writing, reading, copying, moving, renaming, safe deletion, and verification can be combined without step-by-step command coaching.",
       "learningObjectives": [
         "Inspect a workspace before changing it.",
         "Create a clean folder structure for a real task.",
@@ -294,22 +297,27 @@
         "reading workspace structure",
         "checking terminal results"
       ],
-      "moduleProject": "Prepare a clean event handoff folder with sorted files, a backup, a removed temporary file, and a ready marker.",
+      "moduleProject": "Prepare and verify a Community Media Archive through five cumulative terminal-workspace milestones.",
       "sections": [
         {
           "sectionSlug": "linux-module-3-capstone",
           "role": "capstone",
           "title": "Final Capstone",
-          "summary": "Clean up a small event workspace and leave a clear handoff for the next person.",
+          "summary": "Organize and verify a community media archive in one cumulative project topic.",
           "topics": [
             {
               "topicId": "final-capstone-file-room-handoff",
-              "title": "Capstone: File Room Handoff",
-              "summary": "Use the terminal to sort a messy event folder, protect important notes, remove temporary clutter, and mark the workspace ready.",
-              "minutes": 35,
+              "title": "Community Media Archive",
+              "summary": "Build, organize, protect, clean, and verify a media archive with the complete beginner terminal toolkit.",
+              "minutes": 95,
               "technical": true,
               "learningGoals": [
-                "Use the terminal to sort a messy event folder, protect important notes, remove temporary clutter, and mark the workspace ready."
+                "Inspect and navigate before making workspace changes.",
+                "Create nested folders and placeholder files with mkdir, mkdir -p, and touch.",
+                "Write and append guide text with echo, >, and >>, then inspect it with cat.",
+                "Move, rename, and copy important records with mv and cp.",
+                "Remove only the named temporary file with safe rm.",
+                "Verify the final structure with pwd, targeted ls, cat, and wc -l before marking it ready."
               ],
               "practice": {
                 "tryIt": true,
@@ -320,6 +328,49 @@
                 "projectFlow": "progressive",
                 "expectedPracticeKinds": [
                   "code_input"
+                ]
+              },
+              "projectBrief": {
+                "scenario": "A neighborhood media team inherited a small photo-project archive with an inbox containing a photo index, release forms, shoot notes, and one temporary import file. The next volunteer needs a verified structure that explains where every record belongs.",
+                "role": "Terminal workspace coordinator preparing a community media archive for the next volunteer",
+                "workspace": "One cumulative terminal-only workspace rooted at media-archive/ with inbox/, organized/, backup/, and review/ folders",
+                "deliverable": "One five-step Community Media Archive capstone that inspects the workspace, creates the structure, writes the guide, moves and renames records, backs up the photo index, removes only the temporary import, verifies the result, and creates organized/READY.txt.",
+                "stepCountTarget": 5,
+                "flow": "progressive",
+                "requirements": [
+                  "Keep the capstone in exactly one capstone section and one capstone topic.",
+                  "Carry the full working workspace from one step into the next.",
+                  "Use only commands taught in this course: pwd, ls, cd, mkdir, touch, echo, redirection, cat, head, tail, wc -l, cp, mv, and safe single-file rm.",
+                  "Require inspection before changes and a targeted verification pass after changes.",
+                  "Forbid sudo, recursive rm, chmod, chown, package installation, external networking, and commands not taught in the course.",
+                  "Keep every workspace path and expected result explicit and deterministic."
+                ],
+                "stepLadder": [
+                  {
+                    "step": 1,
+                    "title": "Inspect and Build the Archive Structure",
+                    "requirement": "Inspect media-archive, enter it, create organized/photos, organized/documents, backup, and review, then create review/needs-review.txt."
+                  },
+                  {
+                    "step": 2,
+                    "title": "Write the Archive Guide and Review Note",
+                    "requirement": "Use echo with > and >> to write organized/README.txt and add the review instruction to review/needs-review.txt, then verify both with cat."
+                  },
+                  {
+                    "step": 3,
+                    "title": "Move and Rename the Incoming Records",
+                    "requirement": "Move the photo index, release forms, and shoot notes into their final folders, renaming photo-index.txt to organized/photos/index.txt."
+                  },
+                  {
+                    "step": 4,
+                    "title": "Back Up the Index and Remove the Temporary Import",
+                    "requirement": "Copy organized/photos/index.txt to backup/photo-index-backup.txt, remove only inbox/tmp-import.txt, and verify both results."
+                  },
+                  {
+                    "step": 5,
+                    "title": "Verify the Archive and Mark It Ready",
+                    "requirement": "Use pwd, targeted ls, cat, and wc -l to verify the complete archive, then write and display organized/READY.txt."
+                  }
                 ]
               }
             }

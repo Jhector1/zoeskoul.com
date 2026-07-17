@@ -23,11 +23,11 @@
             "sc-pwd-purpose": {
               "title": "What `pwd` tells you",
               "prompt": "Which command shows the full path to your current folder?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
+                "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: Which command shows the full path to your current folder?"
               },
               "options": {
                 "a": "pwd",
@@ -39,11 +39,11 @@
             "sc-ls-purpose": {
               "title": "What `ls` shows",
               "prompt": "Which command lists the files and folders in the current folder?",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
+                "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: Which command lists the files and folders in the current folder?"
               },
               "options": {
                 "a": "pwd",
@@ -55,11 +55,11 @@
             "mc-inspection-commands": {
               "title": "Commands that only inspect",
               "prompt": "Choose the commands that inspect without creating, moving, or removing files.",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
+                "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: Choose the commands that inspect without creating, moving, or removing files."
               },
               "options": {
                 "a": "pwd",
@@ -71,11 +71,11 @@
             "dr-safe-check-order": {
               "title": "A safe first check",
               "prompt": "Put the safe first-check routine in order.",
-              "hint": "Use the lesson idea, not guesswork.",
+              "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
               "help": {
-                "concept": "Match the command to the job.",
-                "hint_1": "Read the exact task before choosing.",
-                "hint_2": "Eliminate commands that change more than the task asks for."
+                "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
+                "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: Put the safe first-check routine in order."
               },
               "tokens": {
                 "t1": "Type `pwd`",
@@ -90,11 +90,11 @@
               "where-am-i-try-it-1": {
                 "title": "Confirm the newsroom location",
                 "prompt": "The editor opened a newsroom workspace for you. Type `pwd` to confirm its full path.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
+                  "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                  "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: The editor opened a newsroom workspace for you. Type `pwd` to confirm its full path."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -127,11 +127,11 @@
               "where-am-i-try-it-2": {
                 "title": "See what is on the art table",
                 "prompt": "You are at the art table. Type `ls` to see which supply notes are waiting here.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
+                  "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                  "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: You are at the art table. Type `ls` to see which supply notes are waiting here."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -167,11 +167,11 @@
               "where-am-i-try-it-3": {
                 "title": "Orient yourself at the event desk",
                 "prompt": "Before touching the event desk files, type `pwd` and then `ls`. Read both results.",
-                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "hint": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
                 "help": {
-                  "concept": "This task checks the workspace you build, not one perfect command line.",
-                  "hint_1": "Create folders before putting files inside them.",
-                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                  "concept": "`pwd` confirms the current directory and `ls` reports the names inside it.",
+                  "hint_1": "Run `pwd` before interpreting a relative path, then use `ls` on the folder named in the task.",
+                  "hint_2": "Do not create or move files in an inspection task; verify location and names only. The current task asks: Before touching the event desk files, type `pwd` and then `ls`. Read both results."
                 },
                 "starterCode": "# Use the terminal for this task.",
                 "terminalExpectations": {
@@ -231,15 +231,15 @@
         "where-am-i": {
           "pwd-current-folder": {
             "title": "`pwd` shows your current folder",
-            "bodyMarkdown": "You are always somewhere in the file system. `pwd` prints the full path to that current folder.\n\n```bash\npwd\n```\n\nPossible output:\n\n```bash\n/home/learner/newsletter\n```\n\nThat output means future commands will start from the `newsletter` folder unless you move somewhere else."
+            "bodyMarkdown": "Every terminal command runs from a current directory—the folder where the terminal is presently working. `pwd` means **print working directory** and shows the full path to that location.\n\n```bash\npwd\n```\n\nPossible output:\n\n```text\n/workspace/newsletter\n```\n\nThat path tells you that a relative name such as `drafts` will be interpreted from `/workspace/newsletter`. If the path is not where you expected, do not compensate with guesses. Navigate deliberately, run `pwd` again, and continue only after the location makes sense."
           },
           "ls-current-folder": {
             "title": "`ls` shows what is nearby",
-            "bodyMarkdown": "After you know where you are, the next question is usually: what is here?\n\n```bash\nls\n```\n\nPossible output:\n\n```bash\ndrafts\nimages\ntodo.txt\n```\n\n`ls` lists the names in the current folder. It does not open or change them."
+            "bodyMarkdown": "After confirming your location, `ls` answers the next question: **what is in this folder?**\n\n```bash\nls\n```\n\nA newsroom folder might show:\n\n```text\nassignments  photos  schedule.txt\n```\n\n`ls` reports names; it does not open files or move into folders. A name without an extension can be a folder, while a name such as `schedule.txt` is usually a file. When a task mentions a path, compare its first part with the names shown by `ls` before typing the next command."
           },
           "pwd-ls-habit": {
             "title": "Use `pwd` and `ls` as a pair",
-            "bodyMarkdown": "A strong beginner habit is:\n\n1. Type `pwd` to confirm your location.\n2. Type `ls` to inspect what is inside.\n3. Decide the next command after you understand the workspace.\n\nThis avoids accidental changes in the wrong folder."
+            "bodyMarkdown": "Strong terminal work follows a small loop: **locate, inspect, act, verify**. At the beginning of a task, run `pwd` and `ls`. After a navigation command, run them again.\n\n```bash\npwd\nls\n# choose the next command\npwd\nls\n```\n\nThis may feel slower than immediately typing the command you remember, but it prevents the most common beginner error: changing the wrong folder. As the course introduces file operations, keep this inspection loop around every change. The commands will become more powerful, but the safety habit should stay simple."
           }
         }
       }

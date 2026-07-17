@@ -240,15 +240,15 @@
         "inheritance-for-shared-behavior": {
           "sketch-0": {
             "title": "Put shared setup in the parent",
-            "bodyMarkdown": "Inheritance is useful when related classes share state or behavior.\n\n```python\nclass Vehicle:\n    def __init__(self, make):\n        self.make = make\n```\n\nThe parent owns the setup every child needs. Child classes can add only what makes them different."
+            "bodyMarkdown": "Inheritance is useful when related classes share state or behavior.\n\n```python\nclass Vehicle:\n    def __init__(self, make):\n        self.make = make\n```\n\nThe parent owns the setup every child needs. Child classes can add only what makes them different.\n\nBefore introducing a parent class, identify behavior that is truly identical across the child types. Inheritance should remove meaningful duplication while leaving each subclass’s special state and output visible."
           },
           "sketch-1": {
             "title": "Use super() to run the parent constructor",
-            "bodyMarkdown": "When a child defines its own constructor, call the parent constructor for the shared part.\n\n```python\nclass ElectricCar(Vehicle):\n    def __init__(self, make, battery_level):\n        super().__init__(make)\n        self.battery_level = battery_level\n```\n\n`super().__init__(make)` runs the next constructor in Python's inheritance chain. The child avoids copying `self.make = make`."
+            "bodyMarkdown": "When a child defines its own constructor, call the parent constructor for the shared part.\n\n```python\nclass ElectricCar(Vehicle):\n    def __init__(self, make, battery_level):\n        super().__init__(make)\n        self.battery_level = battery_level\n```\n\n`super().__init__(make)` runs the next constructor in Python's inheritance chain. The child avoids copying `self.make = make`.\n\nBefore introducing a parent class, identify behavior that is truly identical across the child types. Inheritance should remove meaningful duplication while leaving each subclass’s special state and output visible."
           },
           "sketch-2": {
             "title": "A child can extend a parent method",
-            "bodyMarkdown": "A child can override a method and still build on the parent implementation.\n\n```python\nclass Vehicle:\n    def description(self):\n        return self.make\n\nclass ElectricCar(Vehicle):\n    def description(self):\n        base = super().description()\n        return f\"{base} - electric\"\n```\n\nThis keeps shared behavior in one place while the child adds its own detail."
+            "bodyMarkdown": "A child can override a method and still build on the parent implementation.\n\n```python\nclass Vehicle:\n    def description(self):\n        return self.make\n\nclass ElectricCar(Vehicle):\n    def description(self):\n        base = super().description()\n        return f\"{base} - electric\"\n```\n\nThis keeps shared behavior in one place while the child adds its own detail.\n\nBefore introducing a parent class, identify behavior that is truly identical across the child types. Inheritance should remove meaningful duplication while leaving each subclass’s special state and output visible."
           }
         }
       }

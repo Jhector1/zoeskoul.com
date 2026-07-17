@@ -17,20 +17,6 @@
             },
             "quiz": {
               "title": "Quiz"
-            },
-            "project": {
-              "title": "Loop Through Lists Practice"
-            }
-          },
-          "projectSteps": {
-            "ci_print_each_item": {
-              "title": "Print each item in a list"
-            },
-            "ci_double_list_function": {
-              "title": "Return a doubled list"
-            },
-            "ci_count_long_words": {
-              "title": "Count words longer than 4 letters"
             }
           },
           "quiz": {
@@ -83,7 +69,7 @@
             "mc-good-loop-names": {
               "title": "Choose clear loop variable names",
               "prompt": "For the list `scores = [88, 91, 76]`, which loop variable names are clear and appropriate? Choose all that apply.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Trace the code before choosing the option that matches its actual behavior.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -134,7 +120,7 @@
               "prompt": "Fill in the missing method name to add each changed item to the result list.",
               "hint": "Use the list method that adds one item to the end.",
               "help": {
-                "concept": "When building a new list in a loop, `the missing term()` adds one value at a time to the end of the list.",
+                "concept": "Choose the list method that adds one new value to the end during each iteration.",
                 "hint_1": "The method is called on the list you are building, like `result.method(value)`.",
                 "hint_2": "It is the common list method used in beginner loops to collect new values."
               },
@@ -149,7 +135,7 @@
             "fb-loop-keyword": {
               "title": "Complete the loop header",
               "prompt": "Fill in the missing keyword to start a loop over a list.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Use execution order as evidence instead of choosing by familiar wording.",
               "help": {
                 "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
                 "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
@@ -168,9 +154,9 @@
               "prompt": "A shelter roll call stores three animal names in `animals`. Loop through `animals` and print each name on its own line.\n\nFor example, if the inputs are `cat`, `dog`, and `fox`, your program should print:\n`cat`\n`dog`\n`fox`.",
               "hint": "Build the list from the three input values before the loop starts.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The starter captures the current project milestone; this task advances it by one focused capability.",
+                "hint_1": "Keep the behavior that already passes and integrate the new requirement beside it.",
+                "hint_2": "Execute the full workspace, then compare ordering, spelling, and values with the required result."
               },
               "starterCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\n# Loop through animals and print each one.\n",
               "solutionCode": "first = input()\nsecond = input()\nthird = input()\n\nanimals = [first, second, third]\n\nfor animal in animals:\n    print(animal)\n",
@@ -183,11 +169,11 @@
             "ci-double-list-function": {
               "title": "Return a doubled list",
               "prompt": "Write `double_numbers(numbers)` so it builds a new list containing each number doubled, then returns that new list.",
-              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "hint": "Check every option against the complete behavior described in the question.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "This step begins from a working project state and adds one clearly bounded responsibility.",
+                "hint_1": "The earlier behavior remains part of the contract, so add the new logic without removing it.",
+                "hint_2": "Run from the entry file and verify that the cumulative project still behaves as required."
               },
               "starterCode": "def double_numbers(numbers):\n    # build and return a new list\n    pass",
               "solutionCode": "def double_numbers(numbers):\n    result = []\n    for number in numbers:\n        result.append(number * 2)\n    return result"
@@ -197,9 +183,9 @@
               "prompt": "Write `count_long_words(words)` so it returns how many words in the list are longer than 4 letters.",
               "hint": "Read the task \"Count words longer than 4 letters\" and identify the required result.",
               "help": {
-                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
-                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
-                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+                "concept": "The workspace already represents the last successful step; extend it with only the behavior named here.",
+                "hint_1": "Preserve the previous milestone, changing only what the new feature requires.",
+                "hint_2": "Confirm the program reaches the expected behavior before asking the grader to evaluate it."
               },
               "starterCode": "def count_long_words(words):\n    # return the number of words longer than 4 letters\n    pass",
               "solutionCode": "def count_long_words(words):\n    count = 0\n    for word in words:\n        if len(word) > 4:\n            count += 1\n    return count"
@@ -227,8 +213,8 @@
               "hint": "Use a for loop to print each animal on its own line.",
               "help": {
                 "concept": "Use a for loop to print each animal on its own line.",
-                "hint_1": "Write the line for this step, then run the program to see what changes.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_1": "Run after the edit so the connection between the statement and its effect stays visible.",
+                "hint_2": "Use exact spelling and line order without extra printed explanations."
               },
               "starterCode": "animals = ['cat', 'dog', 'fox']\n\n# Use a for loop to print each animal on its own line.\n",
               "solutionCode": "animals = ['cat', 'dog', 'fox']\nfor animal in animals:\n    print(animal)\n",
@@ -245,7 +231,7 @@
               "help": {
                 "concept": "Add each score to total using a loop.",
                 "hint_1": "Add each score to total using a loop, then print total.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Return to the output contract and remove any line the task did not request."
               },
               "starterCode": "scores = [4, 6, 10]\ntotal = 0\n\n# Add each score to total using a loop.\n# Then print total.\n",
               "solutionCode": "scores = [4, 6, 10]\ntotal = 0\nfor score in scores:\n    total += score\nprint(total)\n",
@@ -265,7 +251,7 @@
               "help": {
                 "concept": "Loop through numbers and append each doubled value.",
                 "hint_1": "Loop through numbers and append each doubled value, then print doubled.",
-                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+                "hint_2": "Use exact spelling and line order without extra printed explanations."
               },
               "starterCode": "numbers = [1, 2, 3]\ndoubled = []\n\n# Loop through numbers and append each doubled value.\n# Then print doubled.\n",
               "solutionCode": "numbers = [1, 2, 3]\ndoubled = []\nfor number in numbers:\n    doubled.append(number * 2)\nprint(doubled)\n",
@@ -312,7 +298,7 @@
           },
           "loop-and-build": {
             "title": "Using a loop to build a new list",
-            "bodyMarkdown": "Loops are not only for printing. You can also use them to create a new list from an existing one.\n\nExample:\n\n```python\nnumbers = [1, 2, 3, 4]\ndoubled = []\n\nfor number in numbers:\n    doubled.append(number * 2)\n\nprint(doubled)\n```\n\nLine by line:\n\n- `numbers` is the original list.\n- `doubled = []` starts an empty list.\n- The loop takes each `number` from `numbers`.\n- `doubled.append(number * 2)` calculates a new value and adds it to the new list.\n- At the end, `doubled` becomes `[2, 4, 6, 8]`.\n\nThis pattern is very common:\n\n1. Start with an empty list.\n2. Loop through the original list.\n3. Change each item.\n4. Append the changed item to the new list."
+            "bodyMarkdown": "Loops are not only for printing. You can also use them to create a new list from an existing one.\n\nExample:\n\n```python\nnumbers = [1, 2, 3, 4]\ndoubled = []\n\nfor number in numbers:\n    doubled.append(number * 2)\n\nprint(doubled)\n```\n\nFollow the execution: - `numbers` is the original list.\n- `doubled = []` starts an empty list.\n- The loop takes each `number` from `numbers`.\n- `doubled.append(number * 2)` calculates a new value and adds it to the new list.\n- At the end, `doubled` becomes `[2, 4, 6, 8]`.\n\nThis pattern is very common:\n\n1. Start with an empty list.\n2. Loop through the original list.\n3. Change each item.\n4. Append the changed item to the new list."
           },
           "loop-variables": {
             "title": "Choosing clear loop variable names",

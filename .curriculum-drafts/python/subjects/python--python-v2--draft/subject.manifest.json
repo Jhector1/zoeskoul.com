@@ -15,7 +15,7 @@
     "meta": {
       "curriculum": {
         "plannedModuleCount": 5,
-        "isTerminalRelease": false,
+        "isTerminalRelease": true,
         "moreComingMessageKey": "subjects.python--python-v2--draft.moreComingSoon"
       },
       "completionPolicy": {
@@ -54,7 +54,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 130,
+        "estimatedMinutes": 165,
         "prereqKeys": [],
         "outcomeKeys": [
           "modules.python--python-v2--draft.python-v2-0.outcomes.0",
@@ -154,7 +154,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 159,
+        "estimatedMinutes": 190,
         "prereqKeys": [
           "modules.python--python-v2--draft.python-v2-0.title"
         ],
@@ -256,7 +256,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 154,
+        "estimatedMinutes": 190,
         "prereqKeys": [
           "modules.python--python-v2--draft.python-v2-1.title"
         ],
@@ -358,7 +358,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 136,
+        "estimatedMinutes": 210,
         "prereqKeys": [
           "modules.python--python-v2--draft.python-v2-2.title"
         ],
@@ -416,6 +416,24 @@
             "break-and-continue",
             "loop-debugging"
           ]
+        },
+        {
+          "slug": "python--python-v2--draft-python-v2-3-module-project",
+          "order": 3,
+          "role": "module_project",
+          "titleKey": "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-module-project.title",
+          "descriptionKey": "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-module-project.description",
+          "meta": {
+            "module": 3,
+            "weeksKey": "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-module-project.weeks",
+            "bulletKeys": [
+              "sections.python--python-v2--draft.python-v2-3.python--python-v2--draft-python-v2-3-module-project.bullets.0"
+            ]
+          },
+          "serviceDefaults": null,
+          "topics": [
+            "module-3-club-check-in-project"
+          ]
         }
       ]
     },
@@ -440,7 +458,7 @@
       },
       "serviceDefaults": null,
       "meta": {
-        "estimatedMinutes": 35,
+        "estimatedMinutes": 120,
         "prereqKeys": [
           "modules.python--python-v2--draft.python-v2-3.title"
         ],

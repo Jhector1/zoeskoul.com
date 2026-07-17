@@ -1,0 +1,235 @@
+{
+  "topics": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "writing-text-into-files": {
+          "label": "Writing Text into Files",
+          "summary": "Use echo, >, >>, and cat to put real text into files.",
+          "cards": {
+            "sketch0": {
+              "title": "`echo` prints text"
+            },
+            "sketch1": {
+              "title": "Use `>` to write or replace a file"
+            },
+            "sketch2": {
+              "title": "Use `>>` to add another line"
+            },
+            "quiz": {
+              "title": "Practice check"
+            }
+          },
+          "practice": {
+            "sc-echo-purpose": {
+              "title": "What `echo` does",
+              "prompt": "What does `echo \"Hello\"` do by itself?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "Prints Hello in the terminal",
+                "b": "Deletes a file",
+                "c": "Moves into a folder",
+                "d": "Counts lines"
+              }
+            },
+            "sc-write-symbol": {
+              "title": "Write or replace",
+              "prompt": "Which symbol writes output into a file and can replace existing content?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "`>`",
+                "b": "`>>`",
+                "c": "`..`",
+                "d": "`~`"
+              }
+            },
+            "sc-append-symbol": {
+              "title": "Append safely",
+              "prompt": "Which symbol adds output to the end of a file?",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "options": {
+                "a": "`>>`",
+                "b": "`>`",
+                "c": "cd",
+                "d": "pwd"
+              }
+            },
+            "dr-write-check-flow": {
+              "title": "Write and verify",
+              "prompt": "Put the file-writing routine in order.",
+              "hint": "Use the lesson idea, not guesswork.",
+              "help": {
+                "concept": "Match the command to the job.",
+                "hint_1": "Read the exact task before choosing.",
+                "hint_2": "Eliminate commands that change more than the task asks for."
+              },
+              "tokens": {
+                "t1": "Use `echo` with `>` to write the first line",
+                "t2": "Use `echo` with `>>` to add another line",
+                "t3": "Use `cat` to read the file"
+              }
+            }
+          },
+          "tryIt": {
+            "allowReveal": true,
+            "exercises": {
+              "writing-text-into-files-try-it-1": {
+                "title": "Print the morning briefing",
+                "prompt": "Print the line `Morning briefing` in the terminal with `echo`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `echo` to print `Morning briefing`."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                }
+              },
+              "writing-text-into-files-try-it-2": {
+                "title": "Write a volunteer welcome note",
+                "prompt": "Create `welcome-note.txt` by writing `Welcome volunteers` into it with `echo` and `>`. Then read it with `cat`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `echo` with `>` to write `welcome-note.txt`."
+                    },
+                    "1": {
+                      "message": "Use `cat welcome-note.txt` to read the file."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                }
+              },
+              "writing-text-into-files-try-it-3": {
+                "title": "Add to the supply list",
+                "prompt": "The supply list already has one line. Append `Water bottles` to `supply-list.txt` with `>>`, then read the file with `cat`.",
+                "hint": "Use the terminal. Check your work with `pwd`, `ls`, `cat`, or `find` before clicking Run.",
+                "help": {
+                  "concept": "This task checks the workspace you build, not one perfect command line.",
+                  "hint_1": "Create folders before putting files inside them.",
+                  "hint_2": "When you are unsure, inspect the folder first, then make the next small change."
+                },
+                "starterCode": "# Use the terminal for this task.",
+                "terminalExpectations": {
+                  "requiredCommands": {
+                    "0": {
+                      "message": "Use `>>` to append `Water bottles` to the supply list."
+                    },
+                    "1": {
+                      "message": "Use `cat supply-list.txt` to check the file."
+                    }
+                  },
+                  "forbiddenCommands": {
+                    "0": {
+                      "message": "Do not use sudo in this beginner workspace."
+                    },
+                    "1": {
+                      "message": "Do not use recursive rm in this course."
+                    },
+                    "2": {
+                      "message": "Permissions commands are not needed for this workspace."
+                    },
+                    "3": {
+                      "message": "Do not download anything for this exercise."
+                    }
+                  }
+                },
+                "starterFiles": {
+                  "supply_list_txt": {
+                    "content": "Name tags\n"
+                  }
+                }
+              }
+            },
+            "try_writing_text_into_files_sketch0": {
+              "title": "Print the morning briefing",
+              "prompt": "Use `echo` to print a new message."
+            },
+            "try_writing_text_into_files_sketch1": {
+              "title": "Write a volunteer welcome note",
+              "prompt": "Write a new line into `welcome-note.txt`."
+            },
+            "try_writing_text_into_files_sketch2": {
+              "title": "Add to the supply list",
+              "prompt": "Append a different line to a supply file."
+            }
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "linux-terminal-fundamentals": {
+      "linux-module-2-files-and-folders": {
+        "writing-text-into-files": {
+          "echo-prints-text": {
+            "title": "`echo` prints text",
+            "bodyMarkdown": "`echo` prints text in the terminal.\n\n```bash\necho \"Club checklist\"\n```\n\nThat line appears as output. By itself, `echo` does not save the text in a file."
+          },
+          "write-with-greater-than": {
+            "title": "Use `>` to write or replace a file",
+            "bodyMarkdown": "The `>` symbol sends output into a file.\n\n```bash\necho \"Club checklist\" > checklist.txt\ncat checklist.txt\n```\n\nBe careful: `>` replaces the file content if the file already has text."
+          },
+          "append-with-double-greater-than": {
+            "title": "Use `>>` to add another line",
+            "bodyMarkdown": "The `>>` symbol appends to the end of a file.\n\n```bash\necho \"Bring markers\" >> checklist.txt\ncat checklist.txt\n```\n\nUse `>>` when you want to keep the existing content and add one more line."
+          }
+        }
+      }
+    }
+  }
+}

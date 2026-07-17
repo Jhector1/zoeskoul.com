@@ -1,0 +1,358 @@
+{
+  "topics": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "try-except-basics": {
+          "label": "Try/Except Basics",
+          "summary": "Catch expected errors and keep programs usable.",
+          "cards": {
+            "sketch0": {
+              "title": "What try/except does"
+            },
+            "sketch1": {
+              "title": "Only the risky line needs protection"
+            },
+            "sketch2": {
+              "title": "Use exceptions to keep programs usable"
+            },
+            "quiz": {
+              "title": "Quiz"
+            },
+            "project": {
+              "title": "Practice safe integer conversion with try/except"
+            }
+          },
+          "projectSteps": {
+            "q9": {
+              "title": "Catch a bad integer input"
+            },
+            "q10": {
+              "title": "Add two inputs safely"
+            },
+            "q11": {
+              "title": "Count valid numbers"
+            }
+          },
+          "quiz": {
+            "q1": {
+              "title": "What happens after a caught conversion error?",
+              "prompt": "A program runs this pattern:\n\n```python\ntry:\n    number = int(text)\nexcept ValueError:\n    print(\"Bad number\")\n```\n\nIf `text` is `\"cat\"`, what happens?",
+              "hint": "Think about what `int()` does with text that is not a valid whole number.",
+              "help": {
+                "concept": "`except ValueError` handles failures from `int()` when text cannot be converted to an integer.",
+                "hint_1": "`int(\"cat\")` cannot produce a number, so Python raises a `ValueError`.",
+                "hint_2": "Because that specific error is caught, the program runs the `except` block instead of stopping immediately."
+              },
+              "options": {
+                "a": "The `except` block runs and prints `Bad number`",
+                "b": "The `try` block prints the converted number",
+                "c": "Python ignores the bad text and uses 0",
+                "d": "The program always stops before reaching `except`"
+              }
+            },
+            "q2": {
+              "title": "Which error fits int conversion?",
+              "prompt": "Which exception type should you catch when `int(user_text)` might fail because the text is not a valid integer?",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This question checks whether you can connect the prompt to the Python concept from the lesson.",
+                "hint_1": "Focus on what the blank or answer stands for: a value, a method, a key, an index, or a variable name.",
+                "hint_2": "Try each option in the sentence or code line and keep the one that makes the example work exactly as described."
+              },
+              "options": {
+                "a": "NameError",
+                "b": "ValueError",
+                "c": "IndexError",
+                "d": "SyntaxError"
+              }
+            },
+            "q3": {
+              "title": "Why use try/except here?",
+              "prompt": "Choose all true reasons to use `try/except` around `int(text)` when cleaning messy input.",
+              "hint": "Look for benefits related to handling bad numeric text safely.",
+              "help": {
+                "concept": "`try/except` is useful when some values may be invalid and you want the program to respond safely instead of crashing.",
+                "hint_1": "Think about what happens when one item is bad in a larger set of inputs.",
+                "hint_2": "Correct choices should mention graceful handling and continued program flow, not guaranteed conversion success."
+              },
+              "options": {
+                "a": "It lets the program handle invalid numeric text without crashing immediately",
+                "b": "It can show a fallback message when conversion fails",
+                "c": "It guarantees every string will become an integer",
+                "d": "It can help a loop continue processing later values after one bad value"
+              }
+            },
+            "q4": {
+              "title": "Which inputs would trigger ValueError?",
+              "prompt": "Choose all values that would raise `ValueError` in `int(value)`.",
+              "hint": "Pick the strings that are not valid whole-number text.",
+              "help": {
+                "concept": "`int()` accepts strings like `\"12\"` or `\"-3\"`, but rejects text with letters or decimal points in string form for plain integer conversion.",
+                "hint_1": "A minus sign with digits is still a valid integer string.",
+                "hint_2": "Look for values containing letters or a decimal point as text."
+              },
+              "options": {
+                "a": "\"18\"",
+                "b": "\"blue\"",
+                "c": "\"4.5\"",
+                "d": "\"-2\""
+              }
+            },
+            "q5": {
+              "title": "Order of execution when conversion fails",
+              "prompt": "Put these steps in the order they happen when `int(text)` raises `ValueError` inside a `try/except` block.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
+              "help": {
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
+              },
+              "tokens": {
+                "t1": "Python enters the `try` block",
+                "t2": "`int(text)` raises `ValueError`",
+                "t3": "The rest of the `try` block is skipped",
+                "t4": "The matching `except` block runs"
+              }
+            },
+            "q6": {
+              "title": "Build a basic try/except pattern",
+              "prompt": "Arrange these code pieces into a correct basic pattern that converts input text to an integer and handles bad input.",
+              "hint": "Arrange the code pieces in the order Python should run them.",
+              "help": {
+                "concept": "The pieces should form valid Python code in the order it should run.",
+                "hint_1": "Start with the line that sets up the Python action.",
+                "hint_2": "Place lines that depend on earlier values after those values exist."
+              },
+              "tokens": {
+                "t1": "try:",
+                "t2": "number = int(text)",
+                "t3": "print(number)",
+                "t4": "except ValueError:",
+                "t5": "print(\"Invalid input\")"
+              }
+            },
+            "q7": {
+              "title": "Name the catching keyword",
+              "prompt": "Complete the code keyword that handles the error after `try`.",
+              "hint": "Read the sentence around the blank and decide what role the missing word plays.",
+              "help": {
+                "concept": "The blank needs the exact Python word or symbol that makes the line do what the prompt describes.",
+                "hint_1": "Look at the code around the blank to decide whether you need a keyword, a value, a method, or a key.",
+                "hint_2": "Choose the option that makes the full line valid Python and gives the result the prompt asks for."
+              },
+              "template": "try:\n    number = int(text)\n[blank1] ValueError:\n    print(\"Bad input\")",
+              "choices": [
+                "except",
+                "return",
+                "while",
+                "import"
+              ]
+            },
+            "q8": {
+              "title": "Choose the risky conversion",
+              "prompt": "Fill in the expression that can raise `ValueError` when the text is not a valid integer.",
+              "hint": "Use the built-in conversion from text to integer.",
+              "help": {
+                "concept": "The risky step in this pattern is converting text with `int(...)`, because some strings are not valid integers.",
+                "hint_1": "The missing code should attempt to turn `user_text` into a whole number.",
+                "hint_2": "Choose the expression that calls Python's integer conversion function on the variable."
+              },
+              "template": "try:\n    number = [blank1]\n    print(number)\nexcept ValueError:\n    print(\"Invalid\")",
+              "choices": [
+                "int(user_text)",
+                "print(user_text)",
+                "len(user_text)",
+                "str(user_text)"
+              ]
+            },
+            "q9": {
+              "title": "Catch a bad integer input",
+              "prompt": "A number scanner might receive invalid text. Convert the input inside a `try` block, then print either the formatted number or an invalid message.\n\nFor example, if the input is `27`, your program should print:\n`Number: 27`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "text = input()\n\n# Convert the text to an integer inside try.\n# Print either the converted result or an invalid message.",
+              "solutionCode": "text = input()\n\ntry:\n    number = int(text)\n    print(f\"Number: {number}\")\nexcept ValueError:\n    print(\"Invalid number\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
+            },
+            "q10": {
+              "title": "Add two inputs safely",
+              "prompt": "Two score entries arrive as text. Convert both values inside `try`, then print the sum or an invalid message if either value cannot be turned into an integer.\n\nFor example, if the inputs are `8` and `5`, your program should print:\n`Sum: 13`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "first_text = input()\nsecond_text = input()\n\n# Convert both values inside try.\n# Print the sum or an invalid message.",
+              "solutionCode": "first_text = input()\nsecond_text = input()\n\ntry:\n    first_number = int(first_text)\n    second_number = int(second_text)\n    print(f\"Sum: {first_number + second_number}\")\nexcept ValueError:\n    print(\"Invalid input\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
+            },
+            "q11": {
+              "title": "Count valid numbers",
+              "prompt": "A comma-separated list may contain bad entries. Loop through each part, try to convert it to `int`, count only the valid integers, and print the final count.\n\nFor example, if the input is `3,7,bad,10`, your program should print:\n`Valid count: 3`.",
+              "hint": "Read the code or question carefully and choose the option that creates the exact behavior the prompt asks for.",
+              "help": {
+                "concept": "This project step is incremental: the starter code is a stable project state plus one new task to complete.",
+                "hint_1": "Do not delete working code from the previous step; add the new behavior requested in this step.",
+                "hint_2": "Run the program and compare the output to the expected example before checking your answer."
+              },
+              "starterCode": "parts = input().split(\",\")\nvalid_count = 0\n\n# Loop through each part.\n# Try to convert each one to int.\n# Count only the valid integers.\n# Print the final count.",
+              "solutionCode": "parts = input().split(\",\")\nvalid_count = 0\n\nfor part in parts:\n    try:\n        int(part)\n        valid_count += 1\n    except ValueError:\n        pass\n\nprint(f\"Valid count: {valid_count}\")",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through each part."
+                },
+                "1": {
+                  "message": "Use try/except around the int conversion."
+                },
+                "2": {
+                  "message": "Convert each value with int()."
+                }
+              }
+            },
+            "try-try-except-basics-checkpoint": {
+              "title": "Handle a bad number",
+              "prompt": "Read input and try to convert it to an integer. Print `Valid` if it works, otherwise print `Invalid`.",
+              "hint": "Use `try`, `except ValueError`.",
+              "help": {
+                "concept": "A `try/except` block handles errors without crashing the program.",
+                "hint_1": "Use `try`, `except ValueError`.",
+                "hint_2": "Run your code and compare the output with the expected result."
+              },
+              "starterCode": "text = input()\n\n# Print Valid for an integer, otherwise Invalid.\n",
+              "solutionCode": "text = input()\ntry:\n    int(text)\n    print(\"Valid\")\nexcept ValueError:\n    print(\"Invalid\")\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
+            },
+            "try-try-except-basics-sketch0": {
+              "title": "Catch a ValueError",
+              "prompt": "Catch the specific error caused by an invalid integer conversion.",
+              "hint": "Try to convert text to int. Print 'bad number' if it fails.",
+              "help": {
+                "concept": "Try to convert text to int. Print 'bad number' if it fails.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+              },
+              "starterCode": "text = 'abc'\n\n# Try to convert text to int. Print 'bad number' if it fails.\n",
+              "solutionCode": "text = 'abc'\ntry:\n    number = int(text)\n    print(number)\nexcept ValueError:\n    print('bad number')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
+            },
+            "try-try-except-basics-sketch1": {
+              "title": "Use else after try",
+              "prompt": "The `else` block runs when no exception happened.",
+              "hint": "Convert text to int and print 'ok' only if conversion succeeds.",
+              "help": {
+                "concept": "Convert text to int and print 'ok' only if conversion succeeds.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+              },
+              "starterCode": "text = '42'\n\n# Convert text to int and print 'ok' only if conversion succeeds.\n",
+              "solutionCode": "text = '42'\ntry:\n    number = int(text)\nexcept ValueError:\n    print('bad number')\nelse:\n    print('ok')\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Use a try block for the conversion."
+                },
+                "1": {
+                  "message": "Convert the text with int()."
+                }
+              }
+            },
+            "try-try-except-basics-sketch2": {
+              "title": "Keep looping after a bad value",
+              "prompt": "Use try/except inside the loop so one bad value does not stop the program.",
+              "hint": "Print only the values that can be converted to int.",
+              "help": {
+                "concept": "Print only the values that can be converted to int.",
+                "hint_1": "Write the line for this step, then run the program to see what changes.",
+                "hint_2": "When you run it, print only the value or lines the prompt asks for."
+              },
+              "starterCode": "values = ['10', 'bad', '3']\n\n# Print only the values that can be converted to int.\n",
+              "solutionCode": "values = ['10', 'bad', '3']\nfor value in values:\n    try:\n        print(int(value))\n    except ValueError:\n        pass\n",
+              "sourceChecks": {
+                "0": {
+                  "message": "Loop through values instead of typing 10 and 3 directly."
+                },
+                "1": {
+                  "message": "Use try/except around the int conversion."
+                },
+                "2": {
+                  "message": "Convert each value with int()."
+                }
+              }
+            }
+          },
+          "tryIt": {
+            "try_try_except_basics_checkpoint": {
+              "title": "Try it yourself",
+              "prompt": "Read input and try to convert it to an integer. Print `Valid` if it works, otherwise print `Invalid`."
+            },
+            "try_try_except_basics_sketch0": {
+              "title": "Try it yourself",
+              "prompt": "Catch the specific error caused by an invalid integer conversion."
+            },
+            "try_try_except_basics_sketch1": {
+              "title": "Try it yourself",
+              "prompt": "The `else` block runs when no exception happened."
+            },
+            "try_try_except_basics_sketch2": {
+              "title": "Try it yourself",
+              "prompt": "Use try/except inside the loop so one bad value does not stop the program."
+            },
+            "allowReveal": true
+          }
+        }
+      }
+    }
+  },
+  "sketches": {
+    "python-data-functions": {
+      "python-7-files-exceptions-and-data-cleaning": {
+        "try-except-basics": {
+          "s1": {
+            "title": "What try/except does",
+            "bodyMarkdown": "`try` lets your program attempt code that might fail. If an expected error happens, `except` runs instead of letting the whole program crash.\n\n```python\ntext = \"42\"\n\ntry:\n    number = int(text)\n    print(number + 1)\nexcept ValueError:\n    print(\"That was not a whole number.\")\n```\n\nStep by step:\n- `int(text)` tries to turn the string into an integer.\n- If `text` looks like a number, the `try` block keeps going.\n- If `text` cannot be converted, Python jumps to the `except ValueError` block.\n\nFor example, if `text` is `\"42\"`, the output is `43`.\nIf `text` is `\"apple\"`, the output is `That was not a whole number.`"
+          },
+          "s2": {
+            "title": "Only the risky line needs protection",
+            "bodyMarkdown": "A common beginner pattern is to put the risky conversion inside `try`, then handle the problem in `except`.\n\n```python\nuser_text = \"9a\"\n\ntry:\n    score = int(user_text)\n    print(\"Valid score:\", score)\nexcept ValueError:\n    print(\"Invalid score\")\n```\n\nLine by line:\n- `user_text` stores text.\n- `int(user_text)` is the risky step because some text cannot become an integer.\n- If conversion works, `print(\"Valid score:\", score)` runs.\n- If conversion fails, Python skips that print and runs the `except` block.\n\nThis is useful when cleaning messy input, such as numbers typed by a user or values read from text data."
+          },
+          "s3": {
+            "title": "Use exceptions to keep programs usable",
+            "bodyMarkdown": "Without `try/except`, one bad value can stop the whole program. With it, you can show a helpful message and continue.\n\n```python\nfirst = \"10\"\nsecond = \"oops\"\n\nfor item in [first, second]:\n    try:\n        value = int(item)\n        print(\"Clean value:\", value)\n    except ValueError:\n        print(\"Skipped bad value:\", item)\n```\n\nWhat happens:\n- The loop checks each text value.\n- `\"10\"` converts successfully, so it prints `Clean value: 10`.\n- `\"oops\"` raises `ValueError`, so it prints `Skipped bad value: oops`.\n- The program keeps going instead of stopping on the bad value."
+          }
+        }
+      }
+    }
+  }
+}
